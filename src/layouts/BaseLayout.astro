@@ -1,0 +1,11 @@
+---
+import '../styles/global.css';
+const { lang='tr', title, description, canonical, alternate } = Astro.props;
+const organization = {
+  '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
+  name:'CTSEG',url:'https://ctseg.com.tr',email:'info@ctseg.com.tr',
+  areaServed:['Türkiye','Europe','International']
+};
+const website = {'@context':'https://schema.org','@type':'WebSite','@id':`https://ctseg.com.tr/${lang}/#website`,url:`https://ctseg.com.tr/${lang}/`,name:'CTSEG',inLanguage:lang,publisher:{'@id':'https://ctseg.com.tr/#organization'}};
+---
+<!doctype html><html lang={lang}><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width"/><title>{title}</title><meta name="description" content={description}/><link rel="canonical" href={canonical}/><link rel="alternate" hreflang={lang} href={canonical}/><link rel="alternate" hreflang={lang==='tr'?'en':'tr'} href={alternate}/><link rel="alternate" hreflang="x-default" href="https://ctseg.com.tr/tr/"/><meta property="og:type" content="website"/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:site_name" content="CTSEG"/><meta name="twitter:card" content="summary_large_image"/><script type="application/ld+json" set:html={JSON.stringify([organization,website])}></script></head><body><slot/></body></html>
