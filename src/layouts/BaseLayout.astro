@@ -49,6 +49,13 @@ const schemas = [organization, website, ...(Array.isArray(schema) ? schema : [sc
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="CTSEG" />
     <meta name="twitter:card" content="summary_large_image" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B8BLQ7KK2T"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B8BLQ7KK2T');
+    </script>
     <script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
   </head>
   <body><slot /></body>
