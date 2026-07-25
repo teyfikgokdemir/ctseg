@@ -52,12 +52,10 @@ const schemas = [organization, website, ...(Array.isArray(schema) ? schema : [sc
         <button type="button" data-cookie-accept>Kabul et</button>
       </div>
     </aside>
-    <button class="cookie-settings" type="button" data-cookie-settings aria-label="Çerez tercihlerini aç">Çerezler</button>
     <script is:inline>
       (() => {
         const key='ctseg-consent-v1';
         const box=document.querySelector('[data-cookie-consent]');
-        const settings=document.querySelector('[data-cookie-settings]');
         const loadAnalytics=()=>{
           if(window.__ctsegAnalyticsLoaded)return;
           window.__ctsegAnalyticsLoaded=true;
@@ -70,12 +68,11 @@ const schemas = [organization, website, ...(Array.isArray(schema) ? schema : [sc
         const saved=localStorage.getItem(key); if(saved==='accepted')loadAnalytics(); else if(!saved)box.hidden=false;
         box.querySelector('[data-cookie-accept]').addEventListener('click',()=>apply('accepted'));
         box.querySelector('[data-cookie-reject]').addEventListener('click',()=>apply('rejected'));
-        settings.addEventListener('click',()=>box.hidden=false);
       })();
     </script>
   </body>
 </html>
 <style is:global>
 .cookie-consent{position:fixed;z-index:9999;left:1rem;right:1rem;bottom:1rem;max-width:980px;margin:auto;padding:1rem 1.1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;border:1px solid #313946;border-radius:16px;background:rgba(5,8,13,.97);color:#f5f7fa;box-shadow:0 20px 60px rgba(0,0,0,.45)}
-.cookie-consent[hidden]{display:none}.cookie-consent p{margin:.25rem 0;font-size:.9rem;color:#bbc3ce}.cookie-consent a{text-decoration:underline;font-size:.85rem}.cookie-actions{display:flex;gap:.6rem;flex:0 0 auto}.cookie-actions button,.cookie-settings{min-height:44px;padding:.65rem 1rem;border:1px solid #4b5563;border-radius:999px;background:#111827;color:#fff;font-weight:700;cursor:pointer}.cookie-actions [data-cookie-accept]{background:#ff3636;border-color:#ff3636;color:#160606}.cookie-settings{position:fixed;z-index:9998;right:1rem;bottom:1rem;font-size:.75rem;opacity:.78}@media(max-width:700px){.cookie-consent{align-items:stretch;flex-direction:column}.cookie-actions{width:100%}.cookie-actions button{flex:1}.cookie-settings{bottom:.65rem;right:.65rem}}
+.cookie-consent[hidden]{display:none}.cookie-consent p{margin:.25rem 0;font-size:.9rem;color:#bbc3ce}.cookie-consent a{text-decoration:underline;font-size:.85rem}.cookie-actions{display:flex;gap:.6rem;flex:0 0 auto}.cookie-actions button{min-height:44px;padding:.65rem 1rem;border:1px solid #4b5563;border-radius:999px;background:#111827;color:#fff;font-weight:700;cursor:pointer}.cookie-actions [data-cookie-accept]{background:#ff3636;border-color:#ff3636;color:#160606}@media(max-width:700px){.cookie-consent{align-items:stretch;flex-direction:column}.cookie-actions{width:100%}.cookie-actions button{flex:1}}
 </style>
