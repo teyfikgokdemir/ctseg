@@ -1,0 +1,10 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getPosts } from '../../../data/blog';
+const posts = getPosts('tr');
+---
+<BaseLayout lang="tr" title="CTSEG Blog | Stratejik Tedarik ve Uluslararası Ticaret" description="Stratejik tedarik, satın alma, tedarikçi seçimi, toplam maliyet ve uluslararası ticaret üzerine uygulamalı içerikler." canonical="https://ctseg.com.tr/tr/blog/" alternate="https://ctseg.com.tr/en/blog/">
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/tr/"><img src="/images/ctseg-logo-transparent.png" width="1063" height="342" alt="CTSEG" /></a><nav class="nav-links"><a href="/tr/">Ana Sayfa</a><a href="/tr/blog/">Blog</a><a class="lang" href="/en/blog/">EN</a></nav></div></header>
+<main class="blog-index"><section class="blog-hero"><div class="wrap"><p class="eyebrow">CTSEG Insights</p><h1>Stratejik tedarik ve ticaret rehberleri.</h1><p class="lead">Karar vericiler için açık, doğrulanabilir ve uygulanabilir içerikler.</p></div></section><section><div class="wrap blog-grid">{posts.map(post=><a class="blog-card" href={`/tr/blog/${post.slug}/`}><span>{post.readingTime}</span><h2>{post.title}</h2><p>{post.description}</p><strong>Yazıyı oku →</strong></a>)}</div></section></main>
+<footer><div class="wrap footer-grid"><img src="/images/ctseg-logo-transparent.png" alt="CTSEG" width="1063" height="342"/><p>© 2026 CTSEG.</p><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></div><nav class="wrap footer-legal"><a href="/tr/gizlilik-politikasi/">Gizlilik</a><a href="/tr/cerez-politikasi/">Çerezler</a><a href="/tr/kullanim-kosullari/">Koşullar</a><a href="/tr/kvkk/">KVKK</a></nav></footer>
+</BaseLayout>
