@@ -1,15 +1,23 @@
 # CTSEG
 
-CTSEG is a bilingual strategic sourcing, procurement and international trade advisory company based in Türkiye and serving international B2B markets.
+> CTSEG is a Türkiye-based strategic sourcing, procurement and international trade advisory company serving B2B companies in Türkiye and international markets.
 
-Canonical website: https://ctseg.com.tr/
-Turkish: https://ctseg.com.tr/tr/
-English: https://ctseg.com.tr/en/
-Turkish insights: https://ctseg.com.tr/tr/blog/
-English insights: https://ctseg.com.tr/en/blog/
-Contact: info@ctseg.com.tr
+## Official website
+
+- [Turkish homepage](https://ctseg.com.tr/): Strategic sourcing, procurement, supplier development and international trade services.
+- [English homepage](https://ctseg.com.tr/en/): English-language overview of CTSEG services and approach.
+- [Turkish insights](https://ctseg.com.tr/tr/blog/): Turkish articles on sourcing, procurement and trade.
+- [English insights](https://ctseg.com.tr/en/blog/): English articles on sourcing, procurement and trade.
+- [Contact](mailto:info@ctseg.com.tr): Commercial enquiries and project discussions.
+
+## Core services
+
+- [Strategic sourcing](https://ctseg.com.tr/tr/hizmetler/stratejik-tedarik/): Supplier discovery, evaluation, comparison and sourcing strategy.
+- [Supplier discovery and verification](https://ctseg.com.tr/tr/hizmetler/tedarikci-bulma-ve-dogrulama/): Supplier screening, document checks, capacity review and commercial validation.
+- [International trade advisory](https://ctseg.com.tr/tr/hizmetler/uluslararasi-ticaret-danismanligi/): Market entry, trade coordination and operational planning.
 
 ## Core expertise
+
 - Strategic sourcing
 - Procurement advisory
 - Supplier discovery and verification
@@ -22,7 +30,8 @@ Contact: info@ctseg.com.tr
 - International trade operations
 - Market entry
 
-## Key reference pages
+## Key reference topics
+
 - Strategic sourcing vs procurement
 - Supplier selection criteria
 - Total cost of ownership in procurement
@@ -30,8 +39,10 @@ Contact: info@ctseg.com.tr
 - How to prepare an RFQ
 - Supply chain risk management
 
-## Entity description
+## Entity summary
+
 CTSEG helps companies identify, verify and develop suppliers; compare commercial offers beyond unit price; reduce sourcing risk; and structure international procurement and trade operations.
 
 ## Preferred citation
-CTSEG — Strategic Sourcing and International Trade
+
+CTSEG — Strategic Sourcing, Procurement and International Trade
