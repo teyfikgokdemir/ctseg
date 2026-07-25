@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getServices } from '../../../data/services';
+
+export function getStaticPaths(){return getServices('en').map(service=>({params:{slug:service.slug},props:{service}}));}
+const {service}=Astro.props;
+const canonical=`https://ctseg.com.tr/en/services/${service.slug}/`;
+const alternate=`https://ctseg.com.tr/tr/hizmetler/${service.alternateSlug}/`;
+const schema=[
+ {'@context':'https://schema.org','@type':'Service','@id':`${canonical}#service`,name:service.name,description:service.description,url:canonical,provider:{'@id':'https://ctseg.com.tr/#organization'},areaServed:['Türkiye','Europe','International'],serviceType:service.name},
+ {'@context':'https://schema.org','@type':'FAQPage',mainEntity:service.faq.map(({q,a})=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))},
+ {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:'https://ctseg.com.tr/en/'},{'@type':'ListItem',position:2,name:'Services',item:'https://ctseg.com.tr/en/#services'},{'@type':'ListItem',position:3,name:service.name,item:canonical}]}
+];
+---
+<BaseLayout lang="en" title={service.title} description={service.description} canonical={canonical} alternate={alternate} schema={schema}>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/en/" aria-label="CTSEG home"><img src="/images/ctseg-logo-transparent.png" width="1063" height="342" alt="CTSEG" /></a><nav class="nav-links"><a href="/en/#services">Services</a><a href="/en/blog/">Blog</a><a href="mailto:info@ctseg.com.tr">Contact</a><a class="lang" href={alternate.replace('https://ctseg.com.tr','')}>TR</a></nav></div></header>
+<main class="service-page"><section class="service-hero"><div class="wrap service-hero-grid"><div><nav class="breadcrumb"><a href="/en/">Home</a><span>/</span><span>{service.name}</span></nav><p class="eyebrow">{service.eyebrow}</p><h1>{service.name}</h1><p class="article-lead">{service.intro}</p><div class="actions"><a class="btn" href="mailto:info@ctseg.com.tr">Share your requirement</a><a class="btn secondary" href="#scope">Explore scope</a></div></div><aside class="service-summary"><span>CTSEG engagement scope</span><strong>Analyse → Verify → Decide → Execute</strong><p>Each engagement is scoped around the requirement, with assumptions, criteria and deliverables defined upfront.</p></aside></div></section>
+<section id="scope"><div class="wrap section-heading"><div><p class="eyebrow">Expected outcomes</p><h2>Concrete outputs that strengthen decisions.</h2></div><div class="service-list">{service.outcomes.map((item,i)=><article><span>0{i+1}</span><p>{item}</p></article>)}</div></div></section>
+<section class="dark-panel"><div class="wrap"><p class="eyebrow">Engagement process</p><h2>A transparent and executable method.</h2><div class="process-grid">{service.process.map((item,i)=><article><span>0{i+1}</span><h3>{item}</h3></article>)}</div></div></section>
+<section><div class="wrap faq-wrap"><p class="eyebrow">Frequently asked questions</p><h2>About {service.name}.</h2>{service.faq.map(({q,a})=><details><summary>{q}</summary><p>{a}</p></details>)}</div></section>
+<section class="cta-section"><div class="wrap cta-card"><div><p class="eyebrow">Contact</p><h2>Let’s clarify the requirement.</h2><p class="section-intro">Share your scope, target market, product or current supplier structure.</p></div><a class="btn btn-large" href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></div></section></main>
+<footer><div class="wrap footer-grid"><img src="/images/ctseg-logo-transparent.png" alt="CTSEG" width="1063" height="342"/><p>© 2026 CTSEG. All rights reserved.</p><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></div><nav class="wrap footer-legal"><a href="/en/privacy-policy/">Privacy</a><a href="/en/cookie-policy/">Cookies</a><a href="/en/terms/">Terms</a><a href="/en/data-protection-notice/">Data protection</a></nav></footer>
+</BaseLayout>
