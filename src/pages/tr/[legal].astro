@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pages = {
+  'gizlilik-politikasi': {
+    title: 'Gizlilik Politikası',
+    description: 'CTSEG web sitesi gizlilik politikası.',
+    sections: [
+      ['Toplanan bilgiler', 'Web sitesini ziyaret ettiğinizde teknik günlük bilgileri, cihaz ve tarayıcı verileri ile bizimle iletişime geçtiğinizde paylaştığınız ad, e-posta adresi, şirket ve mesaj bilgileri işlenebilir.'],
+      ['Kullanım amaçları', 'Bilgiler; taleplere yanıt vermek, hizmetleri geliştirmek, güvenliği sağlamak, yasal yükümlülükleri yerine getirmek ve yalnızca gerekli olduğu ölçüde iletişim kurmak için kullanılır.'],
+      ['Paylaşım ve saklama', 'Kişisel veriler satılmaz. Veriler yalnızca altyapı, barındırma, güvenlik veya yasal zorunluluklar kapsamında yetkili hizmet sağlayıcılar ve kurumlarla paylaşılabilir; gerekli süre boyunca saklanır.'],
+      ['Haklarınız', 'Kişisel verilerinize ilişkin erişim, düzeltme, silme, işlemeyi kısıtlama ve itiraz taleplerinizi info@ctseg.com.tr adresine iletebilirsiniz.']
+    ]
+  },
+  'cerez-politikasi': {
+    title: 'Çerez Politikası',
+    description: 'CTSEG web sitesi çerez politikası.',
+    sections: [
+      ['Çerezler nedir?', 'Çerezler, web sitesinin çalışması ve tercihlerin hatırlanması için cihazınıza kaydedilebilen küçük metin dosyalarıdır.'],
+      ['Kullanılan çerezler', 'Site; zorunlu güvenlik ve oturum çerezleri kullanabilir. Analitik veya pazarlama çerezleri kullanılması halinde, zorunlu olmayan çerezler için uygun onay mekanizması sağlanır.'],
+      ['Tercihlerin yönetimi', 'Tarayıcı ayarlarınız üzerinden çerezleri silebilir veya engelleyebilirsiniz. Zorunlu çerezlerin engellenmesi bazı işlevlerin doğru çalışmasını etkileyebilir.']
+    ]
+  },
+  'kullanim-kosullari': {
+    title: 'Kullanım Koşulları',
+    description: 'CTSEG web sitesi kullanım koşulları.',
+    sections: [
+      ['Kapsam', 'Bu web sitesini kullanarak bu koşulları kabul etmiş olursunuz. Sitedeki bilgiler genel bilgilendirme amaçlıdır ve tek başına hukuki, mali veya ticari taahhüt oluşturmaz.'],
+      ['Fikri mülkiyet', 'CTSEG adı, logo, tasarım, metin ve diğer içerikler aksi belirtilmedikçe CTSEG’e aittir. Yazılı izin olmadan ticari amaçla çoğaltılamaz veya dağıtılamaz.'],
+      ['Sorumluluk', 'Bilgilerin güncel ve doğru tutulması hedeflenir; ancak eksiksizlik veya belirli bir amaca uygunluk garantisi verilmez. Dış bağlantıların içerik ve güvenliğinden ilgili üçüncü taraflar sorumludur.'],
+      ['Değişiklikler', 'Koşullar gerektiğinde güncellenebilir. Güncel sürüm bu sayfada yayımlandığı tarihten itibaren geçerlidir.']
+    ]
+  },
+  'kvkk': {
+    title: 'KVKK Aydınlatma Metni',
+    description: 'CTSEG kişisel verilerin işlenmesine ilişkin KVKK aydınlatma metni.',
+    sections: [
+      ['Veri sorumlusu ve iletişim', 'CTSEG web sitesi üzerinden işlenen kişisel veriler bakımından başvuru ve bilgi talepleri info@ctseg.com.tr adresine iletilebilir.'],
+      ['İşlenen veriler ve amaçlar', 'Kimlik, iletişim, şirket, talep ve teknik işlem güvenliği verileri; iletişim taleplerini yanıtlamak, iş ilişkisi kurmak, hizmet sunmak, güvenliği sağlamak ve hukuki yükümlülükleri yerine getirmek amacıyla işlenebilir.'],
+      ['Hukuki sebepler ve aktarım', 'Veriler; açık rıza, sözleşmenin kurulması veya ifası, hukuki yükümlülük, bir hakkın tesisi veya meşru menfaat hukuki sebeplerine dayanılarak işlenebilir. Gerekli olduğu ölçüde yetkili kurumlara ve hizmet sağlayıcılara aktarılabilir.'],
+      ['Başvuru hakları', '6698 sayılı Kanun’un 11. maddesi kapsamındaki haklarınıza ilişkin taleplerinizi, kimliğinizi doğrulamaya elverişli bilgilerle birlikte e-posta yoluyla iletebilirsiniz.']
+    ]
+  }
+} as const;
+
+export function getStaticPaths() {
+  return Object.keys(pages).map((legal) => ({ params: { legal } }));
+}
+
+const key = Astro.params.legal as keyof typeof pages;
+const page = pages[key];
+if (!page) return Astro.redirect('/tr/', 302);
+---
+<BaseLayout lang="tr" title={`${page.title} | CTSEG`} description={page.description} canonical={`https://ctseg.com.tr/tr/${key}/`} alternate={`https://ctseg.com.tr/en/${key === 'gizlilik-politikasi' ? 'privacy-policy' : key === 'cerez-politikasi' ? 'cookie-policy' : key === 'kullanim-kosullari' ? 'terms' : 'data-protection-notice'}/`}>
+  <header class="site-header"><div class="wrap nav"><a class="brand" href="/tr/" aria-label="CTSEG ana sayfa"><img src="/images/ctseg-logo-transparent.png" width="1063" height="342" alt="CTSEG" /></a><nav class="nav-links"><a href="/tr/">Ana Sayfa</a><a class="lang" href="/en/">EN</a></nav></div></header>
+  <main class="legal-page"><div class="wrap legal-wrap"><p class="eyebrow">Yasal bilgiler</p><h1>{page.title}</h1><p class="legal-updated">Son güncelleme: 25 Temmuz 2026</p>{page.sections.map(([heading, body]) => <section class="legal-section"><h2>{heading}</h2><p>{body}</p></section>)}<p class="legal-contact">Sorularınız için: <a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></p></div></main>
+</BaseLayout>
