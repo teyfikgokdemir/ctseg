@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getServices } from '../../../data/services';
+
+export function getStaticPaths(){return getServices('tr').map(service=>({params:{slug:service.slug},props:{service}}));}
+const {service}=Astro.props;
+const canonical=`https://ctseg.com.tr/tr/hizmetler/${service.slug}/`;
+const alternate=`https://ctseg.com.tr/en/services/${service.alternateSlug}/`;
+const schema=[
+ {'@context':'https://schema.org','@type':'Service','@id':`${canonical}#service`,name:service.name,description:service.description,url:canonical,provider:{'@id':'https://ctseg.com.tr/#organization'},areaServed:['Türkiye','Europe','International'],serviceType:service.name},
+ {'@context':'https://schema.org','@type':'FAQPage',mainEntity:service.faq.map(({q,a})=>({'@type':'Question',name:q,acceptedAnswer:{'@type':'Answer',text:a}}))},
+ {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Ana Sayfa',item:'https://ctseg.com.tr/tr/'},{'@type':'ListItem',position:2,name:'Hizmetler',item:'https://ctseg.com.tr/tr/#hizmetler'},{'@type':'ListItem',position:3,name:service.name,item:canonical}]}
+];
+---
+<BaseLayout lang="tr" title={service.title} description={service.description} canonical={canonical} alternate={alternate} schema={schema}>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/tr/" aria-label="CTSEG ana sayfa"><img src="/images/ctseg-logo-transparent.png" width="1063" height="342" alt="CTSEG" /></a><nav class="nav-links"><a href="/tr/#hizmetler">Hizmetler</a><a href="/tr/blog/">Blog</a><a href="mailto:info@ctseg.com.tr">İletişim</a><a class="lang" href={alternate.replace('https://ctseg.com.tr','')}>EN</a></nav></div></header>
+<main class="service-page"><section class="service-hero"><div class="wrap service-hero-grid"><div><nav class="breadcrumb"><a href="/tr/">Ana Sayfa</a><span>/</span><span>{service.name}</span></nav><p class="eyebrow">{service.eyebrow}</p><h1>{service.name}</h1><p class="article-lead">{service.intro}</p><div class="actions"><a class="btn" href="mailto:info@ctseg.com.tr">Projenizi paylaşın</a><a class="btn secondary" href="#kapsam">Kapsamı inceleyin</a></div></div><aside class="service-summary"><span>CTSEG çalışma kapsamı</span><strong>Analiz → Doğrulama → Karar → Uygulama</strong><p>Her proje ihtiyaca göre kapsamlandırılır; varsayımlar, kriterler ve çıktılar başlangıçta netleştirilir.</p></aside></div></section>
+<section id="kapsam"><div class="wrap section-heading"><div><p class="eyebrow">Beklenen çıktılar</p><h2>Kararı güçlendiren somut sonuçlar.</h2></div><div class="service-list">{service.outcomes.map((item,i)=><article><span>0{i+1}</span><p>{item}</p></article>)}</div></div></section>
+<section class="dark-panel"><div class="wrap"><p class="eyebrow">Çalışma süreci</p><h2>Şeffaf ve uygulanabilir bir yöntem.</h2><div class="process-grid">{service.process.map((item,i)=><article><span>0{i+1}</span><h3>{item}</h3></article>)}</div></div></section>
+<section><div class="wrap faq-wrap"><p class="eyebrow">Sık sorulan sorular</p><h2>{service.name} hakkında.</h2>{service.faq.map(({q,a})=><details><summary>{q}</summary><p>{a}</p></details>)}</div></section>
+<section class="cta-section"><div class="wrap cta-card"><div><p class="eyebrow">İletişim</p><h2>İhtiyacınızı birlikte netleştirelim.</h2><p class="section-intro">Kapsam, hedef pazar, ürün veya mevcut tedarik yapınızı paylaşın.</p></div><a class="btn btn-large" href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></div></section></main>
+<footer><div class="wrap footer-grid"><img src="/images/ctseg-logo-transparent.png" alt="CTSEG" width="1063" height="342"/><p>© 2026 CTSEG. Tüm hakları saklıdır.</p><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></div><nav class="wrap footer-legal"><a href="/tr/gizlilik-politikasi/">Gizlilik</a><a href="/tr/cerez-politikasi/">Çerezler</a><a href="/tr/kullanim-kosullari/">Koşullar</a><a href="/tr/kvkk/">KVKK</a></nav></footer>
+</BaseLayout>
