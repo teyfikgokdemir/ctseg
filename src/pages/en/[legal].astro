@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pages = {
+  'privacy-policy': {
+    title: 'Privacy Policy',
+    description: 'CTSEG website privacy policy.',
+    sections: [
+      ['Information we collect', 'When you visit the website, technical log information, device and browser data may be processed. When you contact us, we may process the name, email address, company and message information you provide.'],
+      ['How information is used', 'Information is used to respond to enquiries, improve services, maintain security, meet legal obligations and communicate only where necessary.'],
+      ['Sharing and retention', 'Personal data is not sold. It may be shared only with authorised infrastructure, hosting or security providers and public authorities where legally required, and retained only for as long as necessary.'],
+      ['Your rights', 'You may request access, correction, deletion, restriction or objection regarding your personal data by contacting info@ctseg.com.tr.']
+    ]
+  },
+  'cookie-policy': {
+    title: 'Cookie Policy',
+    description: 'CTSEG website cookie policy.',
+    sections: [
+      ['What cookies are', 'Cookies are small text files that may be stored on your device to enable website functionality and remember preferences.'],
+      ['Cookies used', 'The website may use essential security and session cookies. Where analytics or marketing cookies are introduced, an appropriate consent mechanism will be provided for non-essential cookies.'],
+      ['Managing preferences', 'You can delete or block cookies through your browser settings. Blocking essential cookies may affect parts of the website.']
+    ]
+  },
+  'terms': {
+    title: 'Terms of Use',
+    description: 'CTSEG website terms of use.',
+    sections: [
+      ['Scope', 'By using this website, you agree to these terms. Website content is provided for general information and does not by itself constitute legal, financial or commercial advice or a binding commitment.'],
+      ['Intellectual property', 'The CTSEG name, logo, design, text and other content belong to CTSEG unless stated otherwise. They may not be reproduced or distributed commercially without written permission.'],
+      ['Liability', 'Reasonable efforts are made to keep information accurate and current, but no guarantee is given regarding completeness or fitness for a particular purpose. Third parties remain responsible for external content and links.'],
+      ['Changes', 'These terms may be updated when necessary. The current version applies from the date it is published on this page.']
+    ]
+  },
+  'data-protection-notice': {
+    title: 'Data Protection Notice',
+    description: 'CTSEG notice regarding the processing of personal data.',
+    sections: [
+      ['Contact point', 'Questions and requests regarding personal data processed through the CTSEG website may be sent to info@ctseg.com.tr.'],
+      ['Data and purposes', 'Identity, contact, company, enquiry and technical security data may be processed to respond to requests, establish business relationships, deliver services, maintain security and comply with legal duties.'],
+      ['Legal grounds and transfers', 'Data may be processed where necessary for consent, contract formation or performance, legal obligations, legal claims or legitimate interests. It may be transferred to authorised providers and authorities only where necessary.'],
+      ['Requests', 'You may submit a data protection request by email together with sufficient information to verify your identity and understand the scope of your request.']
+    ]
+  }
+} as const;
+
+export function getStaticPaths() {
+  return Object.keys(pages).map((legal) => ({ params: { legal } }));
+}
+
+const key = Astro.params.legal as keyof typeof pages;
+const page = pages[key];
+if (!page) return Astro.redirect('/en/', 302);
+---
+<BaseLayout lang="en" title={`${page.title} | CTSEG`} description={page.description} canonical={`https://ctseg.com.tr/en/${key}/`} alternate={`https://ctseg.com.tr/tr/${key === 'privacy-policy' ? 'gizlilik-politikasi' : key === 'cookie-policy' ? 'cerez-politikasi' : key === 'terms' ? 'kullanim-kosullari' : 'kvkk'}/`}>
+  <header class="site-header"><div class="wrap nav"><a class="brand" href="/en/" aria-label="CTSEG home"><img src="/images/ctseg-logo-transparent.png" width="1063" height="342" alt="CTSEG" /></a><nav class="nav-links"><a href="/en/">Home</a><a class="lang" href="/tr/">TR</a></nav></div></header>
+  <main class="legal-page"><div class="wrap legal-wrap"><p class="eyebrow">Legal information</p><h1>{page.title}</h1><p class="legal-updated">Last updated: 25 July 2026</p>{page.sections.map(([heading, body]) => <section class="legal-section"><h2>{heading}</h2><p>{body}</p></section>)}<p class="legal-contact">Questions: <a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></p></div></main>
+</BaseLayout>
