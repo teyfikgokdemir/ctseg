@@ -4,17 +4,26 @@
 
 ## Official website
 
-- [Turkish homepage](https://ctseg.com.tr/): Strategic sourcing, procurement, supplier development and international trade services.
-- [English homepage](https://ctseg.com.tr/en/): English-language overview of CTSEG services and approach.
-- [Turkish insights](https://ctseg.com.tr/tr/blog/): Turkish articles on sourcing, procurement and trade.
-- [English insights](https://ctseg.com.tr/en/blog/): English articles on sourcing, procurement and trade.
-- [Contact](mailto:info@ctseg.com.tr): Commercial enquiries and project discussions.
+- [CTSEG Turkish homepage](https://ctseg.com.tr/)
+- [CTSEG English homepage](https://ctseg.com.tr/en/)
+- [Turkish blog](https://ctseg.com.tr/tr/blog/)
+- [English blog](https://ctseg.com.tr/en/blog/)
+- [Contact CTSEG](mailto:info@ctseg.com.tr)
 
 ## Core services
 
-- [Strategic sourcing](https://ctseg.com.tr/tr/hizmetler/stratejik-tedarik/): Supplier discovery, evaluation, comparison and sourcing strategy.
-- [Supplier discovery and verification](https://ctseg.com.tr/tr/hizmetler/tedarikci-bulma-ve-dogrulama/): Supplier screening, document checks, capacity review and commercial validation.
-- [International trade advisory](https://ctseg.com.tr/tr/hizmetler/uluslararasi-ticaret-danismanligi/): Market entry, trade coordination and operational planning.
+- [Strategic sourcing](https://ctseg.com.tr/tr/hizmetler/stratejik-tedarik/)
+- [Supplier discovery and verification](https://ctseg.com.tr/tr/hizmetler/tedarikci-bulma-ve-dogrulama/)
+- [International trade advisory](https://ctseg.com.tr/tr/hizmetler/uluslararasi-ticaret-danismanligi/)
+
+## Key articles
+
+- [Strategic sourcing vs procurement](https://ctseg.com.tr/tr/blog/strategic-sourcing-vs-procurement/)
+- [Supplier selection criteria](https://ctseg.com.tr/tr/blog/tedarikci-secim-kriterleri/)
+- [Total cost of ownership in procurement](https://ctseg.com.tr/tr/blog/toplam-sahip-olma-maliyeti-tco/)
+- [Supplier verification](https://ctseg.com.tr/tr/blog/tedarikci-dogrulama-nasil-yapilir/)
+- [How to prepare an RFQ](https://ctseg.com.tr/tr/blog/etkili-rfq-nasil-hazirlanir/)
+- [Supply chain risk management](https://ctseg.com.tr/tr/blog/tedarik-zinciri-risk-yonetimi/)
 
 ## Core expertise
 
@@ -29,15 +38,6 @@
 - Cost optimisation
 - International trade operations
 - Market entry
-
-## Key reference topics
-
-- Strategic sourcing vs procurement
-- Supplier selection criteria
-- Total cost of ownership in procurement
-- Supplier verification
-- How to prepare an RFQ
-- Supply chain risk management
 
 ## Entity summary
 
