@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { posts } from '../../../data/blog';
+export function getStaticPaths(){return posts.filter(p=>p.lang==='tr').map(post=>({params:{slug:post.slug},props:{post}}));}
+const { post } = Astro.props;
+const canonical=`https://ctseg.com.tr/tr/blog/${post.slug}/`;
+const schema={ '@context':'https://schema.org','@type':'BlogPosting',headline:post.title,description:post.description,datePublished:post.date,dateModified:post.updated,inLanguage:'tr-TR',mainEntityOfPage:canonical,author:{'@type':'Organization',name:'CTSEG',url:'https://ctseg.com.tr'},publisher:{'@type':'Organization',name:'CTSEG',url:'https://ctseg.com.tr'},about:['Strategic sourcing','Procurement','International trade'] };
+---
+<BaseLayout lang="tr" title={`${post.title} | CTSEG`} description={post.description} canonical={canonical} alternate="https://ctseg.com.tr/en/blog/">
+<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+<header class="site-header"><div class="wrap nav"><a class="brand" href="/tr/"><img src="/images/ctseg-logo-transparent.png" width="1063" height="342" alt="CTSEG" /></a><nav class="nav-links"><a href="/tr/">Ana Sayfa</a><a href="/tr/blog/">Blog</a><a class="lang" href="/en/blog/">EN</a></nav></div></header>
+<main class="article-page"><article class="wrap article-wrap"><nav class="breadcrumb"><a href="/tr/">Ana Sayfa</a><span>›</span><a href="/tr/blog/">Blog</a></nav><p class="eyebrow">CTSEG Insights · {post.readingTime}</p><h1>{post.title}</h1><p class="article-lead">{post.description}</p><div class="answer-box"><strong>Kısa cevap</strong><p>{post.answer}</p></div>{post.sections.map(section=><section class="article-section"><h2>{section.heading}</h2>{section.body.map(p=><p>{p}</p>)}</section>)}<aside class="article-cta"><h2>Tedarik kararınızı birlikte değerlendirelim.</h2><p>İhtiyacınızı, mevcut tedarik yapınızı veya yeni pazar hedefinizi paylaşın.</p><a class="btn" href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></aside></article></main>
+<footer><div class="wrap footer-grid"><img src="/images/ctseg-logo-transparent.png" alt="CTSEG" width="1063" height="342"/><p>© 2026 CTSEG.</p><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></div><nav class="wrap footer-legal"><a href="/tr/gizlilik-politikasi/">Gizlilik</a><a href="/tr/cerez-politikasi/">Çerezler</a><a href="/tr/kullanim-kosullari/">Koşullar</a><a href="/tr/kvkk/">KVKK</a></nav></footer>
+</BaseLayout>
