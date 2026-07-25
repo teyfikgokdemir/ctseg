@@ -1,13 +1,55 @@
 ---
 import '../styles/global.css';
 import '../styles/content.css';
+
 const { lang='tr', title, description, canonical, alternate, schema=[] } = Astro.props;
+const homeUrl = lang === 'tr' ? 'https://ctseg.com.tr/' : 'https://ctseg.com.tr/en/';
+const alternateLang = lang === 'tr' ? 'en' : 'tr';
+const alternateUrl = alternate ?? (lang === 'tr' ? 'https://ctseg.com.tr/en/' : 'https://ctseg.com.tr/');
+
 const organization = {
-  '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
-  name:'CTSEG',url:'https://ctseg.com.tr',email:'info@ctseg.com.tr',
+  '@context':'https://schema.org',
+  '@type':'Organization',
+  '@id':'https://ctseg.com.tr/#organization',
+  name:'CTSEG',
+  url:'https://ctseg.com.tr/',
+  email:'info@ctseg.com.tr',
   areaServed:['Türkiye','Europe','International']
 };
-const website = {'@context':'https://schema.org','@type':'WebSite','@id':`https://ctseg.com.tr/${lang}/#website`,url:`https://ctseg.com.tr/${lang}/`,name:'CTSEG',inLanguage:lang,publisher:{'@id':'https://ctseg.com.tr/#organization'}};
+
+const website = {
+  '@context':'https://schema.org',
+  '@type':'WebSite',
+  '@id':`${homeUrl}#website`,
+  url:homeUrl,
+  name:'CTSEG',
+  inLanguage:lang,
+  publisher:{'@id':'https://ctseg.com.tr/#organization'}
+};
+
 const schemas = [organization, website, ...(Array.isArray(schema) ? schema : [schema])];
 ---
-<!doctype html><html lang={lang}><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width"/><title>{title}</title><meta name="description" content={description}/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="shortcut icon" href="/favicon.svg"/><meta name="theme-color" content="#05080d"/><link rel="canonical" href={canonical}/><link rel="alternate" hreflang={lang} href={canonical}/><link rel="alternate" hreflang={lang==='tr'?'en':'tr'} href={alternate}/><link rel="alternate" hreflang="x-default" href="https://ctseg.com.tr/"/><meta property="og:type" content="website"/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:site_name" content="CTSEG"/><meta name="twitter:card" content="summary_large_image"/><script type="application/ld+json" set:html={JSON.stringify(schemas)}></script></head><body><slot/></body></html>
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="/favicon.svg" />
+    <meta name="theme-color" content="#05080d" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={lang} href={canonical} />
+    <link rel="alternate" hreflang={alternateLang} href={alternateUrl} />
+    <link rel="alternate" hreflang="x-default" href="https://ctseg.com.tr/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="CTSEG" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
+  </head>
+  <body><slot /></body>
+</html>
