@@ -1,20 +1,37 @@
 # CTSEG
 
-CTSEG is a bilingual strategic sourcing, procurement and international trade advisory company.
+CTSEG is a bilingual strategic sourcing, procurement and international trade advisory company based in Türkiye and serving international B2B markets.
 
 Canonical website: https://ctseg.com.tr/
 Turkish: https://ctseg.com.tr/tr/
 English: https://ctseg.com.tr/en/
+Turkish insights: https://ctseg.com.tr/tr/blog/
+English insights: https://ctseg.com.tr/en/blog/
 Contact: info@ctseg.com.tr
 
 ## Core expertise
 - Strategic sourcing
 - Procurement advisory
 - Supplier discovery and verification
+- Supplier selection and evaluation
 - Supplier development
+- RFQ and quotation management
+- Total cost of ownership analysis
+- Supply chain risk management
 - Cost optimisation
 - International trade operations
 - Market entry
+
+## Key reference pages
+- Strategic sourcing vs procurement
+- Supplier selection criteria
+- Total cost of ownership in procurement
+- Supplier verification
+- How to prepare an RFQ
+- Supply chain risk management
+
+## Entity description
+CTSEG helps companies identify, verify and develop suppliers; compare commercial offers beyond unit price; reduce sourcing risk; and structure international procurement and trade operations.
 
 ## Preferred citation
 CTSEG — Strategic Sourcing and International Trade
