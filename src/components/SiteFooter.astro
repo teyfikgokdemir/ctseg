@@ -1,0 +1,38 @@
+---
+import { legal, legalIds, localizedPath, ui, type Locale } from '../data/site';
+const { lang } = Astro.props as { lang: Locale };
+const t = ui[lang];
+const description = {
+  tr:'Türkiye merkezli stratejik tedarik, doğrulanmış ticari ürünler ve uluslararası ticari karar desteği.',
+  en:'Strategic sourcing, verified trade products and international commercial decision support from Türkiye.',
+  de:'Strategische Beschaffung, verifizierte Handelsprodukte und internationale kaufmännische Entscheidungsunterstützung aus Türkiye.',
+  it:'Sourcing strategico, prodotti commerciali verificati e supporto alle decisioni internazionali dalla Türkiye.',
+  fr:'Sourcing stratégique, produits commerciaux vérifiés et aide à la décision internationale depuis la Türkiye.'
+}[lang];
+---
+<footer class="site-footer">
+  <div class="container footer-main">
+    <div class="footer-brand">
+      <a class="brand" href={localizedPath(lang, 'home')}><img src="/images/ctseg-logo-transparent.png" width="1063" height="342" alt="CTSEG" /></a>
+      <p>{description}</p>
+    </div>
+    <nav aria-label={t.products}>
+      <strong>{t.products}</strong>
+      <a href={localizedPath(lang, 'products')}>{t.allProducts}</a>
+      <a href={localizedPath(lang, 'markets')}>{t.markets}</a>
+      <a href={localizedPath(lang, 'insights')}>{t.insights}</a>
+    </nav>
+    <nav aria-label={t.contact}>
+      <strong>CTSEG</strong>
+      <a href={localizedPath(lang, 'about')}>{t.about}</a>
+      <a href={localizedPath(lang, 'contact')}>{t.contact}</a>
+      <a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a>
+    </nav>
+  </div>
+  <div class="container footer-bottom">
+    <p>© {new Date().getFullYear()} CTSEG. {t.rights}</p>
+    <nav aria-label="Legal">
+      {legalIds.map((id) => <a href={localizedPath(lang, 'legal', id)}>{legal[id].titles[lang]}</a>)}
+    </nav>
+  </div>
+</footer>

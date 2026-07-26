@@ -1,48 +1,38 @@
 # CTSEG
 
-> CTSEG is a Türkiye-based strategic sourcing, procurement and international trade advisory company serving B2B companies in Türkiye and international markets.
+> CTSEG is a Türkiye-based strategic sourcing, verified trade-product and international trade advisory company for qualified B2B buyers.
 
-## Official website
+## Official multilingual entry points
 
-- [CTSEG Turkish homepage](https://ctseg.com.tr/)
-- [CTSEG English homepage](https://ctseg.com.tr/en/)
-- [Turkish blog](https://ctseg.com.tr/tr/blog/)
-- [English blog](https://ctseg.com.tr/en/blog/)
-- [Contact CTSEG](mailto:info@ctseg.com.tr)
+- [Türkçe](https://ctseg.com.tr/)
+- [English](https://ctseg.com.tr/en/)
+- [Deutsch](https://ctseg.com.tr/de/)
+- [Italiano](https://ctseg.com.tr/it/)
+- [Français](https://ctseg.com.tr/fr/)
 
-## Core services
+## Core sections
 
-- [Strategic sourcing](https://ctseg.com.tr/tr/hizmetler/stratejik-tedarik/)
-- [Supplier discovery and verification](https://ctseg.com.tr/tr/hizmetler/tedarikci-bulma-ve-dogrulama/)
-- [International trade advisory](https://ctseg.com.tr/tr/hizmetler/uluslararasi-ticaret-danismanligi/)
+- [Services](https://ctseg.com.tr/en/services/)
+- [Trade products](https://ctseg.com.tr/en/trade-products/)
+- [Markets](https://ctseg.com.tr/en/markets/)
+- [Insights](https://ctseg.com.tr/en/insights/)
+- [About CTSEG](https://ctseg.com.tr/en/about/)
+- [Contact](https://ctseg.com.tr/en/contact/)
 
-## Key articles
+## Expertise
 
-- [Strategic sourcing vs procurement](https://ctseg.com.tr/tr/blog/strategic-sourcing-vs-procurement/)
-- [Supplier selection criteria](https://ctseg.com.tr/tr/blog/tedarikci-secim-kriterleri/)
-- [Total cost of ownership in procurement](https://ctseg.com.tr/tr/blog/toplam-sahip-olma-maliyeti-tco/)
-- [Supplier verification](https://ctseg.com.tr/tr/blog/tedarikci-dogrulama-nasil-yapilir/)
-- [How to prepare an RFQ](https://ctseg.com.tr/tr/blog/etkili-rfq-nasil-hazirlanir/)
-- [Supply chain risk management](https://ctseg.com.tr/tr/blog/tedarik-zinciri-risk-yonetimi/)
+- Strategic sourcing and procurement decision support
+- Producer and supplier discovery, verification and due diligence
+- International trade advisory and market entry
+- Total cost of ownership and commercial risk analysis
+- B2B food ingredients and selected agricultural trade products
+- Origin transparency, COA and batch traceability
+- Aflatoxin, pesticide, moisture and target-market compliance assessment
 
-## Core expertise
+## Commercial and compliance policy
 
-- Strategic sourcing
-- Procurement advisory
-- Supplier discovery and verification
-- Supplier selection and evaluation
-- Supplier development
-- RFQ and quotation management
-- Total cost of ownership analysis
-- Supply chain risk management
-- Cost optimisation
-- International trade operations
-- Market entry
-
-## Entity summary
-
-CTSEG helps companies identify, verify and develop suppliers; compare commercial offers beyond unit price; reduce sourcing risk; and structure international procurement and trade operations.
+CTSEG does not publish unverified prices or stock claims. Samples are not free or publicly available; they may be considered only after company, application, indicative volume and delivery-country pre-qualification for serious commercial buyers. Actual origin must be declared transparently. CTSEG does not support origin concealment, deceptive relabelling or sanctions circumvention.
 
 ## Preferred citation
 
-CTSEG — Strategic Sourcing, Procurement and International Trade
+CTSEG — Strategic Sourcing, Verified Trade Products and International Trade

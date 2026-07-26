@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageContent from '../../components/PageContent.astro';
+import { insights, pageCopy, products, ui } from '../../data/site';
+import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, type RouteRecord } from '../../lib/routes';
+
+export function getStaticPaths() {
+  return getRouteRecords().map((record) => ({
+    params:{ lang:record.lang, path:record.path },
+    props:{ record }
+  }));
+}
+
+const { record } = Astro.props as { record: RouteRecord };
+const meta = getMeta(record);
+const schemas:any[] = [breadcrumbSchema(record, meta.title)];
+if (record.key === 'products' && record.id) {
+  const product = products[record.id as keyof typeof products];
+  schemas.push({
+    '@context':'https://schema.org','@type':'Product',
+    '@id':`${canonicalFor(record)}#product`,name:product.names[record.lang],
+    description:product.descriptions[record.lang],category:'B2B food ingredient',
+    image:`https://ctseg.com.tr${product.media.src}`,
+    countryOfOrigin:product.origin,brand:{'@type':'Brand',name:'CTSEG'},
+    additionalProperty:[
+      {'@type':'PropertyValue',name:ui[record.lang].origin,value:product.origin},
+      {'@type':'PropertyValue',name:'Commercial model',value:'Qualification and specification-led B2B assessment'}
+    ]
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'FAQPage',
+    mainEntity:[
+      {'@type':'Question',name:ui[record.lang].origin,acceptedAnswer:{'@type':'Answer',text:ui[record.lang].complianceText}},
+      {'@type':'Question',name:ui[record.lang].samplePolicy,acceptedAnswer:{'@type':'Answer',text:ui[record.lang].sampleText}}
+    ]
+  });
+}
+if (record.key === 'insights' && record.id) {
+  const insight = insights[record.id as keyof typeof insights];
+  schemas.push({
+    '@context':'https://schema.org','@type':'BlogPosting',headline:insight.titles[record.lang],
+    description:insight.descriptions[record.lang],datePublished:'2026-07-27',dateModified:'2026-07-27',
+    inLanguage:record.lang,mainEntityOfPage:canonicalFor(record),author:{'@id':'https://ctseg.com.tr/#organization'},
+    publisher:{'@id':'https://ctseg.com.tr/#organization'}
+  });
+}
+---
+<BaseLayout lang={record.lang} title={meta.title} description={meta.description} pageKey={record.key} pageId={record.id} canonical={canonicalFor(record)} schema={schemas}>
+  <PageContent record={record} />
+</BaseLayout>

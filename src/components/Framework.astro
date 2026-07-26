@@ -1,0 +1,8 @@
+---
+import { homeCopy, pageCopy, type Locale } from '../data/site';
+import ProcessRail from './ProcessRail.astro';
+const { lang } = Astro.props as { lang: Locale };
+const h = homeCopy[lang];
+const copy = pageCopy[lang];
+---
+<ProcessRail title={h.processTitle} steps={copy.framework} />

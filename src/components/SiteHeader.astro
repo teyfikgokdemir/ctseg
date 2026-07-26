@@ -1,0 +1,45 @@
+---
+import { locales, localeNames, localizedPath, sectionSlugs, ui, type Locale } from '../data/site';
+const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?: string; pageId?: string };
+const t = ui[lang];
+const home = localizedPath(lang, 'home');
+const nav = [
+  ['home', t.home], ['services', t.services], ['products', t.products], ['markets', t.markets],
+  ['insights', t.insights], ['about', t.about], ['contact', t.contact]
+];
+const switchPath = (target: Locale) => localizedPath(target, pageKey, pageId);
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href={home} aria-label={`CTSEG · ${t.home}`}>
+      <img src="/images/ctseg-logo-transparent.png" width="1063" height="342" alt="CTSEG" />
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-toggle>
+      <span class="sr-only">{t.menu}</span><span></span><span></span>
+    </button>
+    <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav>
+      {nav.map(([key, label]) => <a class:list={{ active: pageKey === key }} href={localizedPath(lang, key)}>{label}</a>)}
+      <div class="language-switcher">
+        <button type="button" aria-expanded="false" data-language-toggle>{lang.toUpperCase()} <span aria-hidden="true">⌄</span></button>
+        <div class="language-menu">
+          {locales.map((code) => <a lang={code} hreflang={code} class:list={{ active: code === lang }} href={switchPath(code)}>{code.toUpperCase()} · {localeNames[code]}</a>)}
+        </div>
+      </div>
+      <a class="button button-small nav-cta" href={localizedPath(lang, 'contact')}>{t.quote}</a>
+    </nav>
+  </div>
+</header>
+<script>
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const nav = document.querySelector('[data-primary-nav]');
+  const languageToggle = document.querySelector('[data-language-toggle]');
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    nav?.classList.toggle('open', !open);
+  });
+  languageToggle?.addEventListener('click', () => {
+    const open = languageToggle.getAttribute('aria-expanded') === 'true';
+    languageToggle.setAttribute('aria-expanded', String(!open));
+  });
+</script>
