@@ -1,2 +1,27 @@
+# Legacy CTSEG routes retained after the multilingual rebuild
 /tr / 301
 /tr/ / 301
+/en/terms/ /en/terms-of-use/ 301
+/tr/kvkk/ /tr/kvkk-aydinlatma-metni/ 301
+/en/trade-products/iranian-green-peeled-pistachio-kernels/ /en/trade-products/green-peeled-pistachio-kernels/ 301
+/de/gruene-geschaelte-iranische-pistazien/ /de/handelsprodukte/gruene-geschaelte-pistazienkerne/ 301
+/de/iranische-pistazienkerne/ /de/handelsprodukte/pistazienbruch-granulat/ 301
+/de/mazafati-datteln-grosshandel/ /de/handelsprodukte/mazafati-datteln/ 301
+/de/lebensmittelbeschaffung-aus-dem-iran/ /de/handelsprodukte/ 301
+/it/pistacchio-verde-sgusciato-iraniano/ /it/prodotti-commerciali/pistacchio-verde-sgusciato/ 301
+/it/granella-di-pistacchio-iraniano/ /it/prodotti-commerciali/granella-di-pistacchio/ 301
+/it/approvvigionamento-prodotti-alimentari-dall-iran/ /it/prodotti-commerciali/ 301
+/tr/blog/ /tr/icgoruler/ 301
+/tr/blog/stratejik-tedarik-ve-satin-alma-arasindaki-fark/ /tr/icgoruler/stratejik-tedarik-ve-satin-alma-farki/ 301
+/tr/blog/tedarikci-secim-kriterleri/ /tr/icgoruler/tedarikci-secim-kriterleri/ 301
+/tr/blog/toplam-sahip-olma-maliyeti-tco/ /tr/icgoruler/toplam-sahip-olma-maliyeti/ 301
+/tr/blog/tedarikci-dogrulama-nasil-yapilir/ /tr/icgoruler/tedarikci-riskini-dogrulama/ 301
+/tr/blog/rfq-nasil-hazirlanir/ /tr/icgoruler/etkili-rfq-nasil-hazirlanir/ 301
+/tr/blog/tedarik-zinciri-risk-yonetimi/ /tr/icgoruler/tedarik-zinciri-risk-yonetimi/ 301
+/en/blog/ /en/insights/ 301
+/en/blog/strategic-sourcing-vs-procurement/ /en/insights/strategic-sourcing-vs-procurement/ 301
+/en/blog/supplier-selection-criteria/ /en/insights/supplier-selection-criteria/ 301
+/en/blog/total-cost-of-ownership-procurement/ /en/insights/total-cost-of-ownership/ 301
+/en/blog/how-to-verify-a-supplier/ /en/insights/verifying-supplier-risk/ 301
+/en/blog/how-to-write-an-rfq/ /en/insights/how-to-write-an-effective-rfq/ 301
+/en/blog/supply-chain-risk-management/ /en/insights/supply-chain-risk-management/ 301

@@ -1,78 +1,86 @@
 ---
-import '../styles/global.css';
-import '../styles/content.css';
+import '../styles/site.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { locales, localizedPath, routeAlternates, ui, type Locale } from '../data/site';
 
-const { lang='tr', title, description, canonical, alternate, schema=[] } = Astro.props;
-const homeUrl = lang === 'tr' ? 'https://ctseg.com.tr/' : 'https://ctseg.com.tr/en/';
-const alternateLang = lang === 'tr' ? 'en' : 'tr';
-const alternateUrl = alternate ?? (lang === 'tr' ? 'https://ctseg.com.tr/en/' : 'https://ctseg.com.tr/');
-
+const {
+  lang='tr', title, description, pageKey='home', pageId, canonical,
+  schema=[], noindex=false
+} = Astro.props as {
+  lang: Locale; title: string; description: string; pageKey?: string; pageId?: string;
+  canonical?: string; schema?: any[] | any; noindex?: boolean;
+};
+const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
+const alternates = routeAlternates(pageKey, pageId);
+if (pageKey === 'home') alternates.tr = 'https://ctseg.com.tr/';
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
-  name:'CTSEG',url:'https://ctseg.com.tr/',email:'info@ctseg.com.tr',areaServed:['Türkiye','Europe','International']
+  name:'CTSEG',url:'https://ctseg.com.tr/',logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
+  email:'info@ctseg.com.tr',areaServed:['Türkiye','Europe','International'],
+  knowsAbout:['Strategic sourcing','Supplier verification','International trade','Food product sourcing']
 };
 const website = {
-  '@context':'https://schema.org','@type':'WebSite','@id':`${homeUrl}#website`,url:homeUrl,name:'CTSEG',inLanguage:lang,
-  publisher:{'@id':'https://ctseg.com.tr/#organization'}
+  '@context':'https://schema.org','@type':'WebSite','@id':'https://ctseg.com.tr/#website',
+  url:'https://ctseg.com.tr/',name:'CTSEG',publisher:{'@id':'https://ctseg.com.tr/#organization'},
+  inLanguage:locales
 };
-const schemas = [organization, website, ...(Array.isArray(schema) ? schema : [schema])];
+const webpage = {
+  '@context':'https://schema.org','@type':'WebPage','@id':`${canonicalUrl}#webpage`,
+  url:canonicalUrl,name:title,description,inLanguage:lang,
+  isPartOf:{'@id':'https://ctseg.com.tr/#website'},about:{'@id':'https://ctseg.com.tr/#organization'}
+};
+const extra = Array.isArray(schema) ? schema : [schema];
+const schemas = [organization, website, webpage, ...extra.filter(Boolean)];
+const cookieHref = localizedPath(lang, 'legal', 'cookies');
 ---
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-locale={lang}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <link rel="canonical" href={canonicalUrl} />
+    {locales.map((code) => <link rel="alternate" hreflang={code} href={alternates[code]} />)}
+    <link rel="alternate" hreflang="x-default" href={alternates.en} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="shortcut icon" href="/favicon.svg" />
-    <meta name="theme-color" content="#05080d" />
-    <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang={lang} href={canonical} />
-    <link rel="alternate" hreflang={alternateLang} href={alternateUrl} />
-    <link rel="alternate" hreflang="x-default" href="https://ctseg.com.tr/" />
+    <meta name="theme-color" content="#080b12" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="CTSEG" />
+    <meta property="og:locale" content={lang} />
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
   </head>
   <body>
-    <slot />
-    <aside class="cookie-consent" data-cookie-consent hidden aria-label="Çerez tercihleri">
-      <div>
-        <strong data-cookie-title>Çerez tercihleri</strong>
-        <p data-cookie-copy>Site performansını ölçmek için analitik çerezleri yalnızca izninizle kullanıyoruz. Zorunlu çerezler her zaman aktiftir.</p>
-        <a href={lang === 'tr' ? '/tr/cerez-politikasi/' : '/en/cookie-policy/'}>Detaylar</a>
-      </div>
-      <div class="cookie-actions">
-        <button type="button" data-cookie-reject>Reddet</button>
-        <button type="button" data-cookie-accept>Kabul et</button>
-      </div>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
+    <main id="main"><slot /></main>
+    <SiteFooter lang={lang} />
+    <aside class="cookie-consent" data-cookie-consent hidden aria-label={ui[lang].cookieTitle}>
+      <div><strong>{ui[lang].cookieTitle}</strong><p>{ui[lang].cookieCopy}</p><a href={cookieHref}>{ui[lang].details}</a></div>
+      <div class="cookie-actions"><button type="button" data-cookie-reject>{ui[lang].reject}</button><button type="button" class="accept" data-cookie-accept>{ui[lang].accept}</button></div>
     </aside>
     <script is:inline>
       (() => {
-        const key='ctseg-consent-v1';
+        const key='ctseg-consent-v2';
         const box=document.querySelector('[data-cookie-consent]');
-        const loadAnalytics=()=>{
+        if(!box)return;
+        const load=()=>{
           if(window.__ctsegAnalyticsLoaded)return;
-          window.__ctsegAnalyticsLoaded=true;
-          window.dataLayer=window.dataLayer||[];
-          window.gtag=function(){dataLayer.push(arguments)};
-          gtag('js',new Date()); gtag('config','G-B8BLQ7KK2T',{anonymize_ip:true});
-          const s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id=G-B8BLQ7KK2T'; document.head.appendChild(s);
+          window.__ctsegAnalyticsLoaded=true;window.dataLayer=window.dataLayer||[];
+          window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-B8BLQ7KK2T',{anonymize_ip:true});
+          const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-B8BLQ7KK2T';document.head.appendChild(s);
         };
-        const apply=(value)=>{localStorage.setItem(key,value);box.hidden=true;if(value==='accepted')loadAnalytics();};
-        const saved=localStorage.getItem(key); if(saved==='accepted')loadAnalytics(); else if(!saved)box.hidden=false;
-        box.querySelector('[data-cookie-accept]').addEventListener('click',()=>apply('accepted'));
-        box.querySelector('[data-cookie-reject]').addEventListener('click',()=>apply('rejected'));
+        const apply=(value)=>{localStorage.setItem(key,value);box.hidden=true;if(value==='accepted')load()};
+        const saved=localStorage.getItem(key);if(saved==='accepted')load();else if(!saved)box.hidden=false;
+        box.querySelector('[data-cookie-accept]')?.addEventListener('click',()=>apply('accepted'));
+        box.querySelector('[data-cookie-reject]')?.addEventListener('click',()=>apply('rejected'));
       })();
     </script>
   </body>
 </html>
-<style is:global>
-.cookie-consent{position:fixed;z-index:9999;left:1rem;right:1rem;bottom:1rem;max-width:980px;margin:auto;padding:1rem 1.1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;border:1px solid #313946;border-radius:16px;background:rgba(5,8,13,.97);color:#f5f7fa;box-shadow:0 20px 60px rgba(0,0,0,.45)}
-.cookie-consent[hidden]{display:none}.cookie-consent p{margin:.25rem 0;font-size:.9rem;color:#bbc3ce}.cookie-consent a{text-decoration:underline;font-size:.85rem}.cookie-actions{display:flex;gap:.6rem;flex:0 0 auto}.cookie-actions button{min-height:44px;padding:.65rem 1rem;border:1px solid #4b5563;border-radius:999px;background:#111827;color:#fff;font-weight:700;cursor:pointer}.cookie-actions [data-cookie-accept]{background:#ff3636;border-color:#ff3636;color:#160606}@media(max-width:700px){.cookie-consent{align-items:stretch;flex-direction:column}.cookie-actions{width:100%}.cookie-actions button{flex:1}}
-</style>

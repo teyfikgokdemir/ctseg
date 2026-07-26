@@ -1,0 +1,12 @@
+---
+import { homeCopy, pageCopy, type Locale } from '../data/site';
+const { lang } = Astro.props as { lang: Locale };
+const h = homeCopy[lang];
+const copy = pageCopy[lang];
+---
+<section class="section section-muted">
+  <div class="container">
+    <h2 class="section-title">{h.processTitle}</h2>
+    <div class="process-grid">{copy.framework.map((step:string,index:number) => <article><span>{String(index + 1).padStart(2,'0')}</span><h3>{step}</h3></article>)}</div>
+  </div>
+</section>

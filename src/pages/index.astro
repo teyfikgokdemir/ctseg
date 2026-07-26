@@ -1,4 +1,10 @@
 ---
-import TurkishHome from './tr/index.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageContent from '../components/PageContent.astro';
+import { getMeta } from '../lib/routes';
+const record = { lang:'tr' as const, key:'home' };
+const meta = getMeta(record);
 ---
-<TurkishHome />
+<BaseLayout lang="tr" title={meta.title} description={meta.description} pageKey="home" canonical="https://ctseg.com.tr/">
+  <PageContent record={record} />
+</BaseLayout>

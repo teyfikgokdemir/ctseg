@@ -1,0 +1,170 @@
+---
+import { getPosts } from '../data/blog';
+import PageHero from './PageHero.astro';
+import Framework from './Framework.astro';
+import {
+  homeCopy, insightIds, insights, legal, localizedPath, pageCopy, productIds, products,
+  serviceIds, services, ui, type Locale
+} from '../data/site';
+import type { RouteRecord } from '../lib/routes';
+
+const { record } = Astro.props as { record: RouteRecord };
+const { lang, key, id } = record;
+const t = ui[lang];
+const h = homeCopy[lang];
+const copy = pageCopy[lang];
+const service = id && key === 'services' ? services[id as keyof typeof services] : null;
+const product = id && key === 'products' ? products[id as keyof typeof products] : null;
+const insight = id && key === 'insights' ? insights[id as keyof typeof insights] : null;
+const legalPage = id && key === 'legal' ? legal[id as keyof typeof legal] : null;
+const postIndex:Record<string,number> = {'strategic-vs-procurement':0,'supplier-selection':1,'total-cost':2,'supplier-risk':3,rfq:4,'supply-chain-risk':5};
+const originalPost = insight && (lang === 'tr' || lang === 'en') && id in postIndex ? getPosts(lang).at(postIndex[id]) : null;
+const homeHref = localizedPath(lang, 'home');
+const sectionHref = (section:string) => localizedPath(lang, section);
+const indexLabel = (index:number) => String(index + 1).padStart(2,'0');
+const marketNames = {
+  tr:['Türkiye','Avrupa','Uluslararası'], en:['Türkiye','Europe','International'], de:['Türkiye','Europa','International'],
+  it:['Türkiye','Europa','Internazionale'], fr:['Türkiye','Europe','International']
+}[lang];
+const qualificationFields = {
+  tr:['Şirket / tüzel kişi','Ürün veya hizmet ihtiyacı','Tahmini hacim ve kullanım alanı','Teslim ülkesi ve hedef zamanlama'],
+  en:['Company / legal entity','Product or service requirement','Indicative volume and application','Delivery country and target timing'],
+  de:['Unternehmen / Rechtsträger','Produkt- oder Dienstleistungsbedarf','Richtmenge und Anwendung','Lieferland und Zieltermin'],
+  it:['Azienda / persona giuridica','Esigenza di prodotto o servizio','Volume indicativo e applicazione','Paese di consegna e tempistica'],
+  fr:['Entreprise / entité juridique','Besoin en produit ou service','Volume indicatif et usage','Pays de livraison et calendrier']
+}[lang];
+const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',fr:'Mentions légales'}[lang];
+const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',fr:'27 juillet 2026'}[lang];
+---
+{key === 'home' && (
+  <>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">{h.eyebrow}</p><h1>{h.title}</h1><p class="lead">{h.lead}</p>
+          <div class="actions"><a class="button" href={sectionHref('contact')}>{t.quote}</a><a class="button button-secondary" href={sectionHref('services')}>{t.services}</a></div>
+          <div class="trust-row">{h.trust.map((item:string) => <span>{item}</span>)}</div>
+        </div>
+        <aside class="signal-panel" aria-label={h.signal}>
+          <div class="signal-head"><span>{h.signal}</span><span class="live">{h.live}</span></div>
+          {h.signals.map((item:string[]) => <div class="signal-item"><small>{item[0]}</small><strong>{item[1]}</strong></div>)}
+          <p>{t.complianceText}</p>
+        </aside>
+      </div>
+    </section>
+    <section class="section section-muted"><div class="container">
+      <div class="section-head"><h2>{h.servicesTitle}</h2><p>{h.servicesLead}</p></div>
+      <div class="card-grid">{serviceIds.slice(0,3).map((serviceId,index) => <a class="card" href={localizedPath(lang,'services',serviceId)}><small>{indexLabel(index)}</small><h3>{services[serviceId].names[lang]}</h3><p>{services[serviceId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div>
+      <div class="actions"><a class="button button-secondary" href={sectionHref('services')}>{t.allServices}</a></div>
+    </div></section>
+    <section class="section"><div class="container">
+      <div class="section-head"><h2>{h.productsTitle}</h2><p>{h.productsLead}</p></div>
+      <div class="card-grid">{productIds.slice(0,6).map((productId,index) => <a class="card" href={localizedPath(lang,'products',productId)}><small>{indexLabel(index)}</small><h3>{products[productId].names[lang]}</h3><p>{copy.productDesc}</p><strong>{t.readMore} →</strong></a>)}</div>
+      <div class="actions"><a class="button button-secondary" href={sectionHref('products')}>{t.allProducts}</a></div>
+    </div></section>
+    <section class="section section-muted"><div class="container">
+      <div class="section-head"><h2>{h.marketsTitle}</h2><p>{h.marketsLead}</p></div>
+      <div class="process-grid">{h.process.map((step:string,index:number) => <article><span>{indexLabel(index)}</span><h3>{step}</h3></article>)}</div>
+    </div></section>
+    <section class="section"><div class="container"><div class="cta-card"><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.quote}</a></div></div></section>
+  </>
+)}
+
+{key === 'services' && !id && (
+  <>
+    <PageHero lang={lang} eyebrow={t.services} title={copy.servicesTitle} lead={copy.servicesLead} />
+    <section class="section"><div class="container card-grid">{serviceIds.map((serviceId,index) => <a class="card" href={localizedPath(lang,'services',serviceId)}><small>{indexLabel(index)}</small><h2>{services[serviceId].names[lang]}</h2><p>{services[serviceId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
+    <Framework lang={lang} />
+  </>
+)}
+
+{service && (
+  <>
+    <PageHero lang={lang} eyebrow={t.services} title={service.names[lang]} lead={service.descriptions[lang]} parentHref={sectionHref('services')} parentLabel={t.services} />
+    <section class="section"><div class="container content-grid">
+      <div class="prose">
+        <div class="content-block"><h2>{copy.framework[0]}</h2><p>{service.descriptions[lang]} {copy.aboutLead}</p><ul class="check-list">{copy.framework.map((item:string) => <li>{item}</li>)}</ul></div>
+        <div class="content-block faq"><h2>{t.faq}</h2><details open><summary>{copy.serviceFaq[0]}</summary><p>{copy.serviceFaq[1]}</p></details><details><summary>{copy.serviceFaq[2]}</summary><p>{copy.serviceFaq[3]}</p></details></div>
+      </div>
+      <aside class="side-panel"><p class="eyebrow">CTSEG</p><h2>{t.quote}</h2><p>{t.contactLead}</p><a class="button" href={sectionHref('contact')}>{t.contact}</a></aside>
+    </div></section>
+  </>
+)}
+
+{key === 'products' && !id && (
+  <>
+    <PageHero lang={lang} eyebrow={t.products} title={copy.productsTitle} lead={copy.productsLead} />
+    <section class="section"><div class="container">
+      <div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div>
+      <div class="card-grid" style="margin-top:34px">{productIds.map((productId,index) => <a class="card" href={localizedPath(lang,'products',productId)}><small>{indexLabel(index)}</small><h2>{products[productId].names[lang]}</h2><p>{copy.productDesc}</p><strong>{t.readMore} →</strong></a>)}</div>
+    </div></section>
+  </>
+)}
+
+{product && (
+  <>
+    <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={product.names[lang]} lead={copy.productDesc} parentHref={sectionHref('products')} parentLabel={t.products} />
+    <section class="section"><div class="container content-grid">
+      <div class="prose">
+        <div class="content-block"><h2>{t.applications}</h2><ul class="check-list">{copy.productUses.map((item:string) => <li>{item}</li>)}</ul></div>
+        <div class="content-block"><h2>{t.quality}</h2><ul class="check-list">{copy.productQuality.map((item:string) => <li>{item}</li>)}</ul><div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div></div>
+        <div class="content-block faq"><h2>{t.faq}</h2><details open><summary>{t.origin}</summary><p>{t.complianceText}</p></details><details><summary>{t.samplePolicy}</summary><p>{t.sampleText}</p></details></div>
+      </div>
+      <aside class="side-panel"><p class="eyebrow">{t.logistics}</p><h2>{t.quote}</h2><p>{t.contactLead}</p><p><strong>{t.samplePolicy}</strong><br/>{t.sampleText}</p><a class="button" href={sectionHref('contact')}>{t.quote}</a></aside>
+    </div></section>
+  </>
+)}
+
+{key === 'markets' && (
+  <>
+    <PageHero lang={lang} eyebrow={t.markets} title={copy.marketsTitle} lead={copy.marketsLead} />
+    <section class="section"><div class="container">
+      <div class="card-grid">{marketNames.map((market,index) => <article class="card"><small>{indexLabel(index)}</small><h2>{market}</h2><p>{copy.marketsLead}</p></article>)}</div>
+      <div class="process-grid">{copy.framework.map((step:string,index:number) => <article><span>{indexLabel(index)}</span><h3>{step}</h3></article>)}</div>
+    </div></section>
+  </>
+)}
+
+{key === 'insights' && !id && (
+  <>
+    <PageHero lang={lang} eyebrow={t.insights} title={copy.insightsTitle} lead={copy.insightsLead} />
+    <section class="section"><div class="container card-grid">{insightIds.map((insightId,index) => <a class="card" href={localizedPath(lang,'insights',insightId)}><small>{indexLabel(index)}</small><h2>{insights[insightId].titles[lang]}</h2><p>{insights[insightId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
+  </>
+)}
+
+{insight && (
+  <>
+    <PageHero lang={lang} eyebrow={t.insights} title={insight.titles[lang]} lead={insight.descriptions[lang]} parentHref={sectionHref('insights')} parentLabel={t.insights} />
+    <section class="section"><article class="container prose">
+      <div class="answer-box">{originalPost?.answer ?? insight.answers[lang]}</div>
+      {originalPost ? originalPost.sections.map((section) => <section class="content-block"><h2>{section.heading}</h2>{section.body.map((paragraph) => <p>{paragraph}</p>)}</section>) :
+        copy.framework.map((heading:string,index:number) => <section class="content-block"><h2>{heading}</h2><p>{insight.descriptions[lang]} {index === 1 ? t.complianceText : insight.answers[lang]}</p></section>)}
+      <div class="cta-card"><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.quote}</a></div>
+    </article></section>
+  </>
+)}
+
+{key === 'about' && (
+  <>
+    <PageHero lang={lang} eyebrow={t.about} title={copy.aboutTitle} lead={copy.aboutLead} />
+    <Framework lang={lang} />
+    <section class="section"><div class="container cta-card"><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.contact}</a></div></section>
+  </>
+)}
+
+{key === 'contact' && (
+  <>
+    <PageHero lang={lang} eyebrow={t.contact} title={copy.contactTitle} lead={t.contactLead} />
+    <section class="section"><div class="container content-grid">
+      <div class="prose"><div class="content-block"><h2>{t.logistics}</h2><p>{t.contactLead}</p><ul class="check-list">{qualificationFields.map((field) => <li>{field}</li>)}</ul></div><div class="origin-note"><strong>{t.samplePolicy}</strong><p>{t.sampleText}</p></div></div>
+      <aside class="side-panel"><p class="eyebrow">E-mail</p><h2>info@ctseg.com.tr</h2><p>Türkiye · Europe · International</p><a class="button" href="mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry">info@ctseg.com.tr</a></aside>
+    </div></section>
+  </>
+)}
+
+{legalPage && (
+  <>
+    <PageHero lang={lang} eyebrow={`CTSEG · ${legalLabel}`} title={legalPage.titles[lang]} lead={copy.legalIntro} />
+    <section class="section"><article class="container prose"><p class="eyebrow">{t.updated}: {updatedDate}</p>{copy.legalSections.map((section:string[]) => <section class="content-block"><h2>{section[0]}</h2><p>{section[1]}</p></section>)}</article></section>
+  </>
+)}

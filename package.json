@@ -6,10 +6,16 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "check:site": "node scripts/check-site.mjs",
+    "check:responsive": "node scripts/check-responsive.mjs",
+    "validate": "npm run build && npm run check:site && npm run check:responsive"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.2.1",
-    "astro": "^5.12.0"
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.1.3"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.62.0"
   }
 }
