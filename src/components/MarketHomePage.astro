@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GlobalChrome from './GlobalChrome.astro';
+const {lang,title,description,canonical,eyebrow,h1,lead,primaryLabel,secondaryLabel,primaryHref,secondaryHref,highlights=[]}=Astro.props;
+---
+<BaseLayout {lang} {title} {description} {canonical}>
+  <GlobalChrome {lang} />
+  <main class:list={['market-home',`market-${lang}`]}>
+    <section class="market-hero">
+      <div class="market-wrap">
+        <p class="market-eyebrow">{eyebrow}</p>
+        <h1>{h1}</h1>
+        <p class="market-lead">{lead}</p>
+        <div class="market-actions"><a class="market-btn" href={primaryHref}>{primaryLabel}</a><a class="market-btn secondary" href={secondaryHref}>{secondaryLabel}</a></div>
+      </div>
+    </section>
+    <section class="market-section"><div class="market-wrap"><div class="market-grid">{highlights.map(([title,copy,url])=><a href={url}><h2>{title}</h2><p>{copy}</p><span>↗</span></a>)}</div></div></section>
+  </main>
+</BaseLayout>
+<style>
+.market-home{--accent:#d7b56d;--accent2:#f3d99a;background:#070b11;color:#fff;min-height:100vh}.market-it{--accent:#169b62;--accent2:#ce2b37}.market-de{--accent:#ffce00;--accent2:#d71920}.market-fr{--accent:#0055a4;--accent2:#ef4135}.market-wrap{width:min(1160px,calc(100% - 40px));margin:auto}.market-hero{min-height:72svh;display:grid;align-items:center;padding:110px 0;background:radial-gradient(circle at 82% 14%,color-mix(in srgb,var(--accent) 20%,transparent),transparent 30rem),linear-gradient(145deg,#070b11,#101923)}.market-eyebrow{color:var(--accent);font-size:12px;font-weight:850;letter-spacing:.16em;text-transform:uppercase}.market-hero h1{max-width:1000px;margin:18px 0 24px;font-size:clamp(48px,7vw,94px);line-height:.98;letter-spacing:-.055em}.market-lead{max-width:820px;color:#b9c3cf;font-size:clamp(18px,2vw,24px);line-height:1.65}.market-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}.market-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;background:var(--accent);color:#fff;font-weight:850}.market-de .market-btn{color:#111}.market-btn.secondary{background:transparent;border:1px solid #36404d;color:#fff}.market-section{padding:90px 0;border-top:1px solid #252e39}.market-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.market-grid a{padding:28px;border:1px solid #2b3541;border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015))}.market-grid h2{font-size:25px}.market-grid p{color:#b7c1cd;line-height:1.7}.market-grid span{display:block;margin-top:22px;color:var(--accent);font-weight:900}@media(max-width:800px){.market-grid{grid-template-columns:1fr}.market-wrap{width:min(1160px,calc(100% - 24px))}.market-hero{min-height:auto;padding:88px 0}.market-section{padding:68px 0}}
+</style>
