@@ -59,7 +59,7 @@ const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it
     </div></section>
     <section class="section"><div class="container">
       <div class="section-head"><h2>{h.productsTitle}</h2><p>{h.productsLead}</p></div>
-      <div class="card-grid">{productIds.slice(0,6).map((productId,index) => <a class="card" href={localizedPath(lang,'products',productId)}><small>{indexLabel(index)}</small><h3>{products[productId].names[lang]}</h3><p>{copy.productDesc}</p><strong>{t.readMore} →</strong></a>)}</div>
+      <div class="card-grid">{productIds.slice(0,6).map((productId,index) => <a class="card" href={localizedPath(lang,'products',productId)}><small>{indexLabel(index)}</small><h3>{products[productId].names[lang]}</h3><p>{products[productId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div>
       <div class="actions"><a class="button button-secondary" href={sectionHref('products')}>{t.allProducts}</a></div>
     </div></section>
     <section class="section section-muted"><div class="container">
@@ -96,14 +96,14 @@ const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it
     <PageHero lang={lang} eyebrow={t.products} title={copy.productsTitle} lead={copy.productsLead} />
     <section class="section"><div class="container">
       <div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div>
-      <div class="card-grid" style="margin-top:34px">{productIds.map((productId,index) => <a class="card" href={localizedPath(lang,'products',productId)}><small>{indexLabel(index)}</small><h2>{products[productId].names[lang]}</h2><p>{copy.productDesc}</p><strong>{t.readMore} →</strong></a>)}</div>
+      <div class="card-grid" style="margin-top:34px">{productIds.map((productId,index) => <a class="card" href={localizedPath(lang,'products',productId)}><small>{indexLabel(index)}</small><h2>{products[productId].names[lang]}</h2><p>{products[productId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div>
     </div></section>
   </>
 )}
 
 {product && (
   <>
-    <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={product.names[lang]} lead={copy.productDesc} parentHref={sectionHref('products')} parentLabel={t.products} />
+    <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={product.names[lang]} lead={product.descriptions[lang]} parentHref={sectionHref('products')} parentLabel={t.products} />
     <section class="section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block"><h2>{t.applications}</h2><ul class="check-list">{copy.productUses.map((item:string) => <li>{item}</li>)}</ul></div>

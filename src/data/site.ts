@@ -209,7 +209,7 @@ export const productIds = [
 
 const productNames: Record<(typeof productIds)[number], Localized> = {
   'akbari-pistachio': { tr:'Akbari Antep Fıstığı', en:'Akbari Pistachios', de:'Akbari-Pistazien', it:'Pistacchi Akbari', fr:'Pistaches Akbari' },
-  'kaleghouchi-pistachio': { tr:'Kaleghouchi Antep Fıstığı', en:'Kaleghouchi Pistachios', de:'Kaleghouchi-Pistazien', it:'Pistacchi Kaleghouchi', fr:'Pistaches Kaleghouchi' },
+  'kaleghouchi-pistachio': { tr:'Kalleh Ghouchi Antep Fıstığı', en:'Kalleh Ghouchi Pistachios', de:'Kalleh-Ghouchi-Pistazien', it:'Pistacchi Kalleh Ghouchi', fr:'Pistaches Kalleh Ghouchi' },
   'fandoghi-pistachio': { tr:'Fandoghi Antep Fıstığı', en:'Fandoghi Pistachios', de:'Fandoghi-Pistazien', it:'Pistacchi Fandoghi', fr:'Pistaches Fandoghi' },
   'ahmad-aghaei-pistachio': { tr:'Ahmad Aghaei Antep Fıstığı', en:'Ahmad Aghaei Pistachios', de:'Ahmad-Aghaei-Pistazien', it:'Pistacchi Ahmad Aghaei', fr:'Pistaches Ahmad Aghaei' },
   'green-peeled-pistachio': { tr:'Yeşil Soyulmuş İç Fıstık', en:'Green Peeled Pistachio Kernels', de:'Grüne geschälte Pistazienkerne', it:'Pistacchio verde sgusciato', fr:'Pistaches vertes mondées' },
@@ -226,6 +226,135 @@ const productNames: Record<(typeof productIds)[number], Localized> = {
   'dried-mulberries': { tr:'Kurutulmuş Dut', en:'Dried Mulberries', de:'Getrocknete Maulbeeren', it:'Gelsi essiccati', fr:'Mûres blanches séchées' },
   zereshk: { tr:'Zereshk', en:'Zereshk Barberries', de:'Zereshk-Berberitzen', it:'Crespino Zereshk', fr:'Épine-vinette Zereshk' },
   'mixed-nuts': { tr:'Karışık Kuruyemiş ve Özel Ürünler', en:'Mixed Nuts & Specialities', de:'Nussmischungen und Spezialitäten', it:'Frutta secca mista e specialità', fr:'Mélanges de fruits à coque et spécialités' }
+};
+
+const productDescriptions: Record<(typeof productIds)[number], Localized> = {
+  'akbari-pistachio': {
+    tr:'Uzun ve iri taneli Akbari, seçkin görünümü ve dolgun yapısıyla premium perakende, ikram ve hediye segmentlerine yöneliktir.',
+    en:'Long, large Akbari kernels offer a distinguished appearance and full bite for premium retail, hospitality and gifting programmes.',
+    de:'Lange, große Akbari-Kerne bieten eine markante Optik und einen vollen Biss für Premiumhandel, Gastronomie und Geschenkprogramme.',
+    it:'I pistacchi Akbari, lunghi e di grande calibro, offrono un aspetto elegante e una consistenza piena per retail premium, horeca e confezioni regalo.',
+    fr:'Les pistaches Akbari, longues et de gros calibre, offrent une présentation raffinée et une texture généreuse pour le retail premium, l’hôtellerie et les coffrets.'
+  },
+  'kaleghouchi-pistachio': {
+    tr:'İri ve yuvarlak yapısıyla jumbo sınıfında konumlanan Kalleh Ghouchi, güçlü raf görünümü aranan kabuklu ürün programlarına uygundur.',
+    en:'Large and round Kalleh Ghouchi pistachios sit in the jumbo class, suited to in-shell programmes where shelf impact is a priority.',
+    de:'Große, runde Kalleh-Ghouchi-Pistazien gehören zur Jumbo-Klasse und eignen sich für Schalenware mit besonders starker Regalwirkung.',
+    it:'Grandi e rotondi, i Kalleh Ghouchi appartengono alla classe jumbo e sono adatti ai programmi in guscio che richiedono forte impatto a scaffale.',
+    fr:'Grosses et rondes, les Kalleh Ghouchi relèvent de la classe jumbo et conviennent aux programmes en coque recherchant un fort impact en rayon.'
+  },
+  'fandoghi-pistachio': {
+    tr:'Küçük ve yuvarlak Fandoghi, dengeli tane yapısı ve verimli paketleme avantajıyla yüksek hacimli ticari programlarda tercih edilir.',
+    en:'Small, round Fandoghi pistachios combine consistent sizing with efficient packing, making them a practical choice for high-volume trade.',
+    de:'Kleine, runde Fandoghi-Pistazien verbinden gleichmäßige Sortierung mit effizienter Verpackung und sind damit für großvolumigen Handel geeignet.',
+    it:'Piccoli e rotondi, i Fandoghi uniscono calibro uniforme ed efficienza di confezionamento, risultando adatti al commercio ad alto volume.',
+    fr:'Petites et rondes, les Fandoghi associent calibrage régulier et conditionnement efficace, un choix adapté aux échanges à fort volume.'
+  },
+  'ahmad-aghaei-pistachio': {
+    tr:'Uzun taneli ve açık kabuklu Ahmad Aghaei, tanınabilir görünümü, farklı kalibre seçenekleri ve ihracatta yaygın kullanımıyla öne çıkar.',
+    en:'Long Ahmad Aghaei pistachios are recognised for their light shells, export-ready presentation and broad availability across commercial grades.',
+    de:'Längliche Ahmad-Aghaei-Pistazien zeichnen sich durch helle Schalen, exportgerechte Präsentation und breite Verfügbarkeit in Handelskalibern aus.',
+    it:'I pistacchi Ahmad Aghaei si distinguono per forma allungata, guscio chiaro e ampia diffusione nei calibri destinati all’esportazione.',
+    fr:'Les Ahmad Aghaei se distinguent par leur forme allongée, leur coque claire et leur large diffusion dans les calibres destinés à l’export.'
+  },
+  'green-peeled-pistachio': {
+    tr:'Canlı yeşil rengi ve yoğun fıstık karakteriyle yeşil soyulmuş iç, pastacılık, dondurma, çikolata ve premium gıda üretimine yönelik bir hammaddedir.',
+    en:'With vivid green colour and concentrated pistachio character, peeled kernels are intended for pastry, gelato, chocolate and premium food production.',
+    de:'Mit leuchtend grüner Farbe und konzentriertem Pistazienprofil sind geschälte Kerne für Konditorei, Speiseeis, Schokolade und hochwertige Lebensmittel bestimmt.',
+    it:'Dal verde intenso e dal gusto concentrato, il pistacchio pelato è destinato a pasticceria, gelato, cioccolato e produzioni alimentari premium.',
+    fr:'D’un vert intense et au caractère aromatique concentré, les pistaches mondées sont destinées à la pâtisserie, aux glaces, au chocolat et aux fabrications premium.'
+  },
+  'pistachio-granules': {
+    tr:'Endüstriyel reçetelere yönelik kırık ve granül iç fıstık; 2–4 mm, 4–6 mm ve 6–8 mm kalibrasyonlarla kaplama, dolgu ve dekor uygulamalarına uyarlanır.',
+    en:'Pistachio crumb and granules support industrial coating, filling and decoration applications, with 2–4 mm, 4–6 mm and 6–8 mm calibrations.',
+    de:'Pistazienbruch und -granulat für industrielle Überzüge, Füllungen und Dekore ist in Kalibrierungen von 2–4 mm, 4–6 mm und 6–8 mm verfügbar.',
+    it:'Granella e pistacchio spezzato per coperture, farciture e decorazioni industriali sono disponibili nelle calibrature 2–4 mm, 4–6 mm e 6–8 mm.',
+    fr:'Éclats et granulés pour enrobages, fourrages et décors industriels sont proposés en calibrages 2–4 mm, 4–6 mm et 6–8 mm.'
+  },
+  'mazafati-dates': {
+    tr:'Yumuşak dokulu, koyu renkli ve doğal karamelsi karaktere sahip Mazafati hurması, soğuk zincir planlamalı perakende ve horeca programlarına uygundur.',
+    en:'Soft, dark Mazafati dates with a naturally caramel-like profile are suited to chilled retail and foodservice programmes with controlled handling.',
+    de:'Weiche, dunkle Mazafati-Datteln mit natürlicher Karamellnote eignen sich für gekühlte Handels- und Gastronomieprogramme mit kontrollierter Handhabung.',
+    it:'I datteri Mazafati, morbidi, scuri e naturalmente caramellati, sono indicati per programmi retail e horeca refrigerati con gestione controllata.',
+    fr:'Les dattes Mazafati, tendres, foncées et naturellement caramélisées, conviennent aux programmes retail et restauration sous chaîne du froid maîtrisée.'
+  },
+  'date-paste-syrup': {
+    tr:'Hurma ezmesi ve şurubu; fırıncılık, bar, sos ve dolgu reçetelerinde doğal tatlılık, bağlayıcılık ve renk sağlamak üzere spesifikasyona göre tedarik edilir.',
+    en:'Date paste and syrup are specified for natural sweetness, binding and colour in bakery, bar, sauce and filling formulations.',
+    de:'Dattelpaste und -sirup werden für natürliche Süße, Bindung und Farbe in Backwaren, Riegeln, Saucen und Füllungen spezifiziert.',
+    it:'Pasta e sciroppo di datteri apportano dolcezza naturale, legatura e colore a prodotti da forno, barrette, salse e farciture.',
+    fr:'La pâte et le sirop de dattes apportent douceur naturelle, liaison et couleur aux recettes de boulangerie, barres, sauces et fourrages.'
+  },
+  raisins: {
+    tr:'Kuru üzümler renk, tane boyu, nem ve kullanım amacına göre seçilerek fırıncılık, atıştırmalık ve endüstriyel karışım hatlarına hazırlanır.',
+    en:'Raisins are selected by colour, berry size, moisture and end use for bakery, snacking and industrial blending lines.',
+    de:'Rosinen werden nach Farbe, Beerengröße, Feuchte und Verwendungszweck für Backwaren, Snacks und industrielle Mischungen ausgewählt.',
+    it:'L’uva passa viene selezionata per colore, calibro, umidità e destinazione d’uso in panificazione, snack e miscele industriali.',
+    fr:'Les raisins secs sont sélectionnés selon la couleur, le calibre, l’humidité et l’usage pour la boulangerie, le snacking et les mélanges industriels.'
+  },
+  almonds: {
+    tr:'Bademler çeşit, kalibre, kabuk durumu ve işleme ihtiyacına göre perakende paketleme, draje, un ve bileşen üretimi için eşleştirilir.',
+    en:'Almonds are matched by variety, size, skin condition and processing requirement for retail packs, coating, milling and ingredient production.',
+    de:'Mandeln werden nach Sorte, Kaliber, Hautzustand und Verarbeitung für Handelspackungen, Dragierung, Vermahlung und Zutatenproduktion ausgewählt.',
+    it:'Le mandorle sono abbinate per varietà, calibro, presenza della pellicina e lavorazione a confezioni retail, ricoperture, farine e ingredienti.',
+    fr:'Les amandes sont définies par variété, calibre, état de la peau et transformation pour le conditionnement, l’enrobage, la mouture et les ingrédients.'
+  },
+  walnuts: {
+    tr:'Ceviz içi; renk sınıfı, yarım-parça oranı ve oksidasyon kontrolü temelinde unlu mamul, atıştırmalık ve premium karışım ihtiyaçlarına göre seçilir.',
+    en:'Walnut kernels are selected by colour grade, half-to-piece ratio and oxidation control for bakery, snacking and premium mix requirements.',
+    de:'Walnusskerne werden nach Farbklasse, Anteil ganzer Hälften und Oxidationskontrolle für Backwaren, Snacks und Premium-Mischungen ausgewählt.',
+    it:'I gherigli di noce sono selezionati per classe di colore, rapporto mezzi-pezzi e controllo dell’ossidazione per bakery, snack e mix premium.',
+    fr:'Les cerneaux sont sélectionnés selon la classe de couleur, le ratio moitiés-morceaux et la maîtrise de l’oxydation pour la pâtisserie, le snacking et les mélanges premium.'
+  },
+  'dried-apricots-kernels': {
+    tr:'Kuru kayısı ve kayısı çekirdeği, ürün tipi, renk, boy ve işleme niteliği ayrıştırılarak atıştırmalık ile gıda bileşeni projeleri için değerlendirilir.',
+    en:'Dried apricots and apricot kernels are assessed separately by type, colour, size and processing status for snack and food-ingredient projects.',
+    de:'Getrocknete Aprikosen und Aprikosenkerne werden getrennt nach Typ, Farbe, Größe und Verarbeitung für Snack- und Zutatenprojekte bewertet.',
+    it:'Albicocche secche e noccioli sono valutati separatamente per tipologia, colore, calibro e lavorazione in progetti snack e ingredienti.',
+    fr:'Abricots secs et amandons sont évalués séparément selon le type, la couleur, le calibre et la transformation pour les projets de snacking et d’ingrédients.'
+  },
+  'pumpkin-seeds': {
+    tr:'Kabak çekirdeği; kabuklu veya iç formu, kalibre, kavurma davranışı ve mikrobiyolojik gereksinime göre atıştırmalık ve bileşen hatlarına hazırlanır.',
+    en:'Pumpkin seeds are specified by in-shell or kernel format, size, roasting behaviour and microbiological requirement for snack and ingredient lines.',
+    de:'Kürbiskerne werden nach Schalen- oder Kernform, Kaliber, Röstverhalten und mikrobiologischen Anforderungen für Snack- und Zutatenlinien definiert.',
+    it:'I semi di zucca sono specificati per formato con o senza guscio, calibro, resa in tostatura e requisiti microbiologici per snack e ingredienti.',
+    fr:'Les graines de courge sont définies par format avec ou sans coque, calibre, comportement à la torréfaction et exigences microbiologiques pour snacks et ingrédients.'
+  },
+  'sunflower-seeds': {
+    tr:'Ay çekirdeği, iri atıştırmalık sınıfları ile iç ürün seçeneklerinde tane bütünlüğü, yabancı madde ve kavurma performansına göre sınıflandırılır.',
+    en:'Sunflower seeds are graded across large snack types and kernel options for seed integrity, foreign matter and roasting performance.',
+    de:'Sonnenblumenkerne werden als große Snackware oder geschälte Kerne nach Kornintegrität, Fremdbesatz und Röstleistung klassifiziert.',
+    it:'I semi di girasole, nei grandi calibri da snack o sgusciati, sono classificati per integrità, corpi estranei e resa in tostatura.',
+    fr:'Les graines de tournesol, en gros calibres de snacking ou décortiquées, sont classées selon l’intégrité, les corps étrangers et la tenue à la torréfaction.'
+  },
+  saffron: {
+    tr:'Safran; iplik bütünlüğü, renk gücü, aroma profili ve saflık analizleriyle premium gıda, horeca ve kontrollü paketleme projeleri için doğrulanır.',
+    en:'Saffron is verified for filament integrity, colouring strength, aroma profile and purity for premium food, hospitality and controlled packing projects.',
+    de:'Safran wird anhand von Fadenintegrität, Farbstärke, Aromaprofil und Reinheit für Premiumlebensmittel, Gastronomie und kontrollierte Abfüllung geprüft.',
+    it:'Lo zafferano è verificato per integrità degli stimmi, potere colorante, profilo aromatico e purezza per alimenti premium, horeca e confezionamento controllato.',
+    fr:'Le safran est contrôlé pour l’intégrité des filaments, le pouvoir colorant, le profil aromatique et la pureté pour l’alimentaire premium, l’hôtellerie et le conditionnement.'
+  },
+  'dried-mulberries': {
+    tr:'Kurutulmuş dut; doğal tatlılığı, açık rengi, tane bütünlüğü ve düşük yabancı madde hedefiyle sağlıklı atıştırmalık ve müsli uygulamalarına seçilir.',
+    en:'Dried mulberries are chosen for natural sweetness, light colour, fruit integrity and low foreign matter in healthy snacks and muesli applications.',
+    de:'Getrocknete Maulbeeren werden wegen natürlicher Süße, heller Farbe, Fruchtintegrität und geringem Fremdbesatz für Snacks und Müsli ausgewählt.',
+    it:'I gelsi essiccati sono scelti per dolcezza naturale, colore chiaro, integrità e basso contenuto di corpi estranei in snack salutistici e muesli.',
+    fr:'Les mûres blanches séchées sont choisies pour leur douceur naturelle, leur couleur claire, leur intégrité et leur faible teneur en corps étrangers dans les snacks et müeslis.'
+  },
+  zereshk: {
+    tr:'Zereshk, canlı kırmızı rengi ve belirgin ekşi profiliyle pilav, sos, garnitür ve özel gıda reçetelerinde kullanılan kurutulmuş bir berberis meyvesidir.',
+    en:'Zereshk is a dried barberry with vivid red colour and pronounced tartness for rice dishes, sauces, garnishes and speciality formulations.',
+    de:'Zereshk ist eine getrocknete Berberitze mit kräftig roter Farbe und markanter Säure für Reisgerichte, Saucen, Garnituren und Spezialrezepturen.',
+    it:'Lo Zereshk è un crespino essiccato dal rosso vivo e dall’acidità marcata, usato in riso, salse, guarnizioni e ricette speciali.',
+    fr:'Le Zereshk est une épine-vinette séchée, rouge vif et nettement acidulée, destinée aux riz, sauces, garnitures et recettes de spécialité.'
+  },
+  'mixed-nuts': {
+    tr:'Karışık kuruyemiş ve özel ürün reçeteleri; hedef tüketici, bileşen oranı, alerjen yönetimi, kavurma ve ambalaj formatına göre proje bazında geliştirilir.',
+    en:'Mixed-nut and speciality recipes are developed by project around target consumer, ingredient ratio, allergen control, roasting and pack format.',
+    de:'Nussmischungen und Spezialrezepturen werden projektspezifisch nach Zielgruppe, Zutatenanteil, Allergenmanagement, Röstung und Packungsformat entwickelt.',
+    it:'Mix di frutta secca e ricette speciali sono sviluppati su progetto in base a consumatore, proporzioni, gestione allergeni, tostatura e formato.',
+    fr:'Les mélanges de fruits à coque et recettes spéciales sont développés par projet selon la cible, les proportions, la gestion des allergènes, la torréfaction et le format.'
+  }
 };
 
 const productSlugs: Record<(typeof productIds)[number], Localized> = Object.fromEntries(
@@ -251,7 +380,7 @@ Object.assign(productSlugs['mixed-nuts'], {
 });
 
 export const products = Object.fromEntries(productIds.map((id) => [id, {
-  id, names: productNames[id], slugs: productSlugs[id],
+  id, names: productNames[id], descriptions: productDescriptions[id], slugs: productSlugs[id],
   origin: ['akbari-pistachio','kaleghouchi-pistachio','fandoghi-pistachio','ahmad-aghaei-pistachio','green-peeled-pistachio','pistachio-granules','mazafati-dates','date-paste-syrup','saffron','dried-mulberries','zereshk'].includes(id) ? 'Iran' : 'Türkiye / Iran / verified source'
 }])) as Record<(typeof productIds)[number], any>;
 
@@ -318,7 +447,6 @@ export const pageCopy: Record<Locale, any> = {
     contactTitle:'Ticari ihtiyacınızı net bir değerlendirmeyle başlatın.', insightsTitle:'Karar vericiler için uygulanabilir içgörüler.', insightsLead:'Tedarik, toplam maliyet, menşe, kalite ve ticari risk üzerine kısa, kanıta dayalı rehberler.',
     framework:['İhtiyaç ve spesifikasyon','Taraf ve belge doğrulaması','Kalite, maliyet ve risk karşılaştırması','Şeffaf karar ve uygulama kaydı'],
     serviceFaq:['Proje nasıl başlar?','Kapsam, hedef, ürün veya hizmet, pazar ve karar takvimi kısa bir ön görüşmeyle netleştirilir.','CTSEG tedarikçi adına mı hareket eder?','CTSEG görev kapsamını ve ticari rolünü açıkça beyan eder; değerlendirme kriterlerini belgeler.'],
-    productDesc:'B2B alıcılar için gerçek menşe, üretici ve parti belgeleri temelinde değerlendirilen ticari tedarik çözümü.',
     productUses:['Gıda üretimi ve endüstriyel uygulamalar','Toptan dağıtım ve özel marka','HORECA ve uzman perakende'],
     productQuality:['Aflatoksin ve pestisit gereklilikleri','Nem, mikrobiyoloji ve ürün spesifikasyonu','COA, parti kodu ve izlenebilirlik','Hedef pazar mevzuatına uygunluk'],
     legalIntro:'Bu metin CTSEG web sitesinin kullanımı ve ilgili veri işleme süreçleri hakkında şeffaf bilgi sağlar.',
@@ -332,7 +460,6 @@ export const pageCopy: Record<Locale, any> = {
     contactTitle:'Start your commercial requirement with a clear assessment.',insightsTitle:'Practical insight for decision-makers.',insightsLead:'Concise, evidence-led guidance on sourcing, total cost, origin, quality and commercial risk.',
     framework:['Requirement and specification','Counterparty and document verification','Quality, cost and risk comparison','Transparent decision and execution record'],
     serviceFaq:['How does a project start?','Scope, objective, product or service, market and decision timeline are clarified in a short qualification call.','Does CTSEG act for a supplier?','CTSEG declares its mandate and commercial role clearly and documents the assessment criteria.'],
-    productDesc:'A commercial sourcing solution assessed for B2B buyers on actual origin, producer and batch documentation.',
     productUses:['Food manufacturing and industrial applications','Wholesale distribution and private label','HORECA and specialist retail'],
     productQuality:['Aflatoxin and pesticide requirements','Moisture, microbiology and product specification','COA, batch code and traceability','Target-market regulatory fit'],
     legalIntro:'This notice provides transparent information about use of the CTSEG website and related data processing.',
@@ -346,7 +473,6 @@ export const pageCopy: Record<Locale, any> = {
     contactTitle:'Beginnen Sie Ihren Handelsbedarf mit einer klaren Bewertung.',insightsTitle:'Praktische Einblicke für Entscheider.',insightsLead:'Kompakte, evidenzbasierte Leitfäden zu Beschaffung, Gesamtkosten, Herkunft, Qualität und Handelsrisiko.',
     framework:['Bedarf und Spezifikation','Prüfung von Parteien und Dokumenten','Vergleich von Qualität, Kosten und Risiko','Transparenter Entscheidungs- und Umsetzungsnachweis'],
     serviceFaq:['Wie beginnt ein Projekt?','Umfang, Ziel, Produkt oder Dienstleistung, Markt und Zeitplan werden in einem kurzen Qualifikationsgespräch geklärt.','Handelt CTSEG im Namen eines Lieferanten?','CTSEG legt Mandat und kaufmännische Rolle offen und dokumentiert die Bewertungskriterien.'],
-    productDesc:'Eine B2B-Beschaffungslösung, bewertet auf Basis tatsächlicher Herkunft sowie Hersteller- und Chargendokumentation.',
     productUses:['Lebensmittelproduktion und industrielle Anwendungen','Großhandel und Eigenmarken','HORECA und Fachhandel'],
     productQuality:['Aflatoxin- und Pestizidanforderungen','Feuchte, Mikrobiologie und Produktspezifikation','COA, Chargencode und Rückverfolgbarkeit','Konformität mit dem Zielmarkt'],
     legalIntro:'Dieser Hinweis informiert transparent über die Nutzung der CTSEG-Website und die damit verbundene Datenverarbeitung.',
@@ -360,7 +486,6 @@ export const pageCopy: Record<Locale, any> = {
     contactTitle:'Avvia la tua esigenza commerciale con una valutazione chiara.',insightsTitle:'Approfondimenti pratici per decisori.',insightsLead:'Guide concise e basate su evidenze su sourcing, costo totale, origine, qualità e rischio commerciale.',
     framework:['Fabbisogno e specifica','Verifica di controparti e documenti','Confronto di qualità, costo e rischio','Registro trasparente di decisione ed esecuzione'],
     serviceFaq:['Come inizia un progetto?','Ambito, obiettivo, prodotto o servizio, mercato e tempi decisionali vengono chiariti in un breve colloquio di qualifica.','CTSEG opera per conto di un fornitore?','CTSEG dichiara chiaramente mandato e ruolo commerciale e documenta i criteri di valutazione.'],
-    productDesc:'Soluzione di approvvigionamento B2B valutata su origine effettiva e documentazione di produttore e lotto.',
     productUses:['Produzione alimentare e applicazioni industriali','Distribuzione all’ingrosso e private label','HORECA e retail specializzato'],
     productQuality:['Requisiti per aflatossine e pesticidi','Umidità, microbiologia e specifica prodotto','COA, codice lotto e tracciabilità','Conformità normativa al mercato target'],
     legalIntro:'La presente informativa fornisce informazioni trasparenti sull’uso del sito CTSEG e sul relativo trattamento dei dati.',
@@ -374,7 +499,6 @@ export const pageCopy: Record<Locale, any> = {
     contactTitle:'Démarrez votre besoin commercial par une évaluation claire.',insightsTitle:'Des analyses pratiques pour les décideurs.',insightsLead:'Des guides concis et fondés sur des preuves sur le sourcing, le coût total, l’origine, la qualité et le risque commercial.',
     framework:['Besoin et spécification','Vérification des parties et documents','Comparaison qualité, coût et risque','Traçabilité de la décision et de l’exécution'],
     serviceFaq:['Comment démarre un projet ?','Le périmètre, l’objectif, le produit ou service, le marché et le calendrier sont précisés lors d’un bref échange de qualification.','CTSEG agit-il pour un fournisseur ?','CTSEG déclare clairement son mandat et son rôle commercial, puis documente les critères d’évaluation.'],
-    productDesc:'Solution de sourcing B2B évaluée selon l’origine réelle et les documents du producteur et du lot.',
     productUses:['Fabrication alimentaire et applications industrielles','Distribution de gros et marque de distributeur','HORECA et commerce spécialisé'],
     productQuality:['Exigences aflatoxines et pesticides','Humidité, microbiologie et spécification produit','COA, code de lot et traçabilité','Conformité réglementaire au marché cible'],
     legalIntro:'Cette notice fournit une information transparente sur l’utilisation du site CTSEG et les traitements de données associés.',

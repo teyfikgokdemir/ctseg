@@ -19,7 +19,7 @@ if (record.key === 'products' && record.id) {
   schemas.push({
     '@context':'https://schema.org','@type':'Product',
     '@id':`${canonicalFor(record)}#product`,name:product.names[record.lang],
-    description:pageCopy[record.lang].productDesc,category:'B2B food ingredient',
+    description:product.descriptions[record.lang],category:'B2B food ingredient',
     countryOfOrigin:product.origin,brand:{'@type':'Brand',name:'CTSEG'},
     additionalProperty:[
       {'@type':'PropertyValue',name:ui[record.lang].origin,value:product.origin},

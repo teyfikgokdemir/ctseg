@@ -46,7 +46,7 @@ export function getMeta(record: RouteRecord) {
       'CTSEG propose sourcing stratégique, produits commerciaux vérifiés, vérification fournisseurs et solutions de commerce international.'
   };
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
-  if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} B2B | CTSEG`, description:`${products[id as keyof typeof products].names[lang]} — ${copy.productDesc}` };
+  if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} B2B | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
   if (key === 'insights' && id) return { title:`${insights[id as keyof typeof insights].titles[lang]} | CTSEG`, description:insights[id as keyof typeof insights].descriptions[lang] };
   if (key === 'legal' && id) return {
     title:`${legal[id as keyof typeof legal].titles[lang]} | CTSEG`,
