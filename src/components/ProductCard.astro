@@ -1,0 +1,17 @@
+---
+import { localizedPath, type Locale } from '../data/site';
+import ProductMedia from './ProductMedia.astro';
+const { product, productId, lang, index, featured=false } = Astro.props as {
+  product:any; productId:string; lang:Locale; index:number; featured?:boolean;
+};
+const label = String(index + 1).padStart(2,'0');
+---
+<a class:list={['product-card', { featured }]} href={localizedPath(lang,'products',productId)}>
+  <ProductMedia product={product} lang={lang} />
+  <div class="product-card-copy">
+    <span class="section-number">{label}</span>
+    <h2>{product.names[lang]}</h2>
+    <p>{product.descriptions[lang]}</p>
+    <span class="text-link" aria-hidden="true">↗</span>
+  </div>
+</a>

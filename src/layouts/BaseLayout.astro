@@ -2,7 +2,7 @@
 import '../styles/site.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { locales, localizedPath, routeAlternates, ui, type Locale } from '../data/site';
+import { locales, localizedPath, products, routeAlternates, ui, type Locale } from '../data/site';
 
 const {
   lang='tr', title, description, pageKey='home', pageId, canonical,
@@ -33,6 +33,9 @@ const webpage = {
 const extra = Array.isArray(schema) ? schema : [schema];
 const schemas = [organization, website, webpage, ...extra.filter(Boolean)];
 const cookieHref = localizedPath(lang, 'legal', 'cookies');
+const socialImage = pageKey === 'products' && pageId && products[pageId as keyof typeof products]
+  ? products[pageId as keyof typeof products].media.src
+  : '/images/ctseg-global-trade-hero-premium.webp';
 ---
 <!doctype html>
 <html lang={lang} data-locale={lang}>
@@ -53,6 +56,9 @@ const cookieHref = localizedPath(lang, 'legal', 'cookies');
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="CTSEG" />
     <meta property="og:locale" content={lang} />
+    <meta property="og:image" content={`https://ctseg.com.tr${socialImage}`} />
+    <meta property="og:image:width" content="1536" />
+    <meta property="og:image:height" content="1024" />
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
   </head>

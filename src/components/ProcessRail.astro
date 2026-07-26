@@ -1,0 +1,11 @@
+---
+const { title, steps } = Astro.props as { title?:string; steps:string[] };
+---
+<section class="process-section section">
+  <div class="container">
+    {title && <h2 class="section-title">{title}</h2>}
+    <ol class="process-rail">
+      {steps.map((step,index) => <li><span>{String(index + 1).padStart(2,'0')}</span><strong>{step}</strong></li>)}
+    </ol>
+  </div>
+</section>

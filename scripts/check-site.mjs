@@ -15,6 +15,7 @@ const htmlFiles = files.filter((file) => file.endsWith('.html'));
 const errors = [];
 let checkedLinks = 0;
 const pageRecords = [];
+let productSchemaPages = 0;
 const productCatalogs = new Set([
   'tr/ticari-urunler/index.html',
   'en/trade-products/index.html',
@@ -55,12 +56,26 @@ for (const file of htmlFiles) {
     errors.push(`${label}: incorrect html lang`);
   }
   if (productCatalogs.has(label)) {
-    const descriptions = [...html.matchAll(/<a class="card"[^>]*>[\s\S]*?<h2>[\s\S]*?<\/h2><p>(.*?)<\/p>/g)]
+    const descriptions = [...html.matchAll(/<a class="product-card[^"]*"[^>]*>[\s\S]*?<h2>[\s\S]*?<\/h2><p>(.*?)<\/p>/g)]
       .map((match) => match[1].replace(/<[^>]+>/g, '').trim());
     if (descriptions.length !== 18) errors.push(`${label}: expected 18 product-card descriptions, found ${descriptions.length}`);
     if (new Set(descriptions).size !== descriptions.length) errors.push(`${label}: duplicate product-card description`);
     if (!html.includes('Kalleh Ghouchi') && !html.includes('Kalleh-Ghouchi')) errors.push(`${label}: corrected Kalleh Ghouchi name missing`);
   }
+  const isHome = ['index.html','en/index.html','de/index.html','it/index.html','fr/index.html'].includes(label);
+  if (isHome && !html.includes('/images/ctseg-global-trade-hero-premium.webp')) errors.push(`${label}: premium homepage hero missing`);
+  if (html.includes('"@type":"Product"')) {
+    productSchemaPages++;
+    const schemaImage = html.match(/"@type":"Product"[\s\S]*?"image":"([^"]+)"/)?.[1];
+    if (!schemaImage || schemaImage.endsWith('/images/2.webp')) errors.push(`${label}: invalid Product schema image`);
+  }
+  for (const match of html.matchAll(/<img\b([^>]+)>/g)) {
+    const attributes = match[1];
+    const src = attributes.match(/\bsrc="([^"]+)"/)?.[1];
+    if (!/\bwidth="\d+"/.test(attributes) || !/\bheight="\d+"/.test(attributes)) errors.push(`${label}: image missing intrinsic dimensions`);
+    if (src?.startsWith('/images/') && !existsSync(join(root, src))) errors.push(`${label}: missing image file ${src}`);
+  }
+  if (html.includes('product-hero-media') && html.includes('src="/images/2.webp"')) errors.push(`${label}: 2.webp used as a product hero`);
   for (const match of html.matchAll(/href="([^"]+)"/g)) {
     let href = match[1];
     if (/^(#|mailto:|tel:|javascript:|data:)/.test(href)) continue;
@@ -77,6 +92,10 @@ for (const file of htmlFiles) {
     }
   }
 }
+if (productSchemaPages !== 90) errors.push(`expected 90 Product schema pages, found ${productSchemaPages}`);
+const css = files.filter((file) => file.endsWith('.css')).map((file) => readFileSync(file,'utf8')).join('\n');
+if (!css.includes(':focus-visible')) errors.push('compiled CSS: focus-visible treatment missing');
+if (!css.includes('prefers-reduced-motion:reduce')) errors.push('compiled CSS: reduced-motion treatment missing');
 
 const pagesByCanonical = new Map(pageRecords.map((page) => [page.canonical,page]));
 for (const page of pageRecords) {
@@ -98,4 +117,4 @@ if (errors.length) {
   for (const error of [...new Set(errors)]) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Site check passed: ${htmlFiles.length} HTML pages, ${checkedLinks} internal links, unique five-language product cards, reciprocal hreflang and complete metadata/chrome checks.`);
+console.log(`Site check passed: ${htmlFiles.length} HTML pages, ${checkedLinks} internal links, 90 product schemas with verified media, unique five-language product cards, reciprocal hreflang and complete metadata/chrome checks.`);

@@ -1,16 +1,22 @@
 ---
 import { localizedPath, ui, type Locale } from '../data/site';
-const { lang, eyebrow, title, lead, parentHref, parentLabel } = Astro.props as {
+import ProductMedia from './ProductMedia.astro';
+const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, ctaLabel, imageNote } = Astro.props as {
   lang: Locale; eyebrow: string; title: string; lead: string; parentHref?: string; parentLabel?: string;
+  product?:any; ctaHref?:string; ctaLabel?:string; imageNote?:string;
 };
 ---
-<section class="page-hero">
-  <div class="container">
-    <div class="breadcrumb">
-      <a href={localizedPath(lang,'home')}>{ui[lang].home}</a>
-      {parentHref && <><span>/</span><a href={parentHref}>{parentLabel}</a></>}
-      <span>/</span><span>{title}</span>
+<section class:list={['page-hero', { 'product-page-hero':product }]}>
+  <div class:list={['container', { 'page-hero-grid':product }]}>
+    <div class="page-hero-copy">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href={localizedPath(lang,'home')}>{ui[lang].home}</a>
+        {parentHref && <><span aria-hidden="true">/</span><a href={parentHref}>{parentLabel}</a></>}
+        <span aria-hidden="true">/</span><span aria-current="page">{title}</span>
+      </nav>
+      <p class="eyebrow">{eyebrow}</p><h1>{title}</h1><p class="lead">{lead}</p>
+      {ctaHref && ctaLabel && <div class="actions"><a class="button" href={ctaHref}>{ctaLabel}</a></div>}
     </div>
-    <p class="eyebrow">{eyebrow}</p><h1>{title}</h1><p class="lead">{lead}</p>
+    {product && <div><ProductMedia product={product} lang={lang} eager={true} className="product-hero-media" />{imageNote && <p class="media-note">{imageNote}</p>}</div>}
   </div>
 </section>

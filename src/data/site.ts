@@ -357,6 +357,27 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
   }
 };
 
+const productMedia: Record<(typeof productIds)[number], { src:string; width:number; height:number; position?:string; secondary?:string }> = {
+  'akbari-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, position:'center 54%' },
+  'kaleghouchi-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, position:'center 54%' },
+  'fandoghi-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, position:'center 54%' },
+  'ahmad-aghaei-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, position:'center 54%' },
+  'green-peeled-pistachio': { src:'/images/ctseg-green-peeled-pistachio-kernels-premium.webp', width:1536, height:1024 },
+  'pistachio-granules': { src:'/images/ctseg-pistachio-kernel-crumb-premium.webp', width:1536, height:1024 },
+  'mazafati-dates': { src:'/images/ctseg-mazafati-dates-authentic-premium.webp', width:1536, height:1024 },
+  'date-paste-syrup': { src:'/images/ctseg-date-paste-premium.webp', width:1536, height:1024, secondary:'/images/ctseg-date-syrup-premium.webp' },
+  raisins: { src:'/images/ctseg-iranian-golden-raisins-premium.webp', width:1536, height:1024 },
+  almonds: { src:'/images/ctseg-iranian-almonds-premium.webp', width:1536, height:1024 },
+  walnuts: { src:'/images/ctseg-iranian-walnuts-premium.webp', width:1536, height:1024 },
+  'dried-apricots-kernels': { src:'/images/ctseg-dried-apricots-premium.webp', width:1536, height:1024, secondary:'/images/ctseg-apricot-kernels-premium.webp' },
+  'pumpkin-seeds': { src:'/images/ctseg-pumpkin-seeds-premium.webp', width:1536, height:1024 },
+  'sunflower-seeds': { src:'/images/ctseg-sunflower-seeds-premium.webp', width:1536, height:1024 },
+  saffron: { src:'/images/ctseg-persian-red-gold-saffron-premium.webp', width:1535, height:1024 },
+  'dried-mulberries': { src:'/images/ctseg-iranian-dried-mulberries-premium.webp', width:1536, height:1024 },
+  zereshk: { src:'/images/ctseg-zereshk-dried-barberries-premium.webp', width:1536, height:1024 },
+  'mixed-nuts': { src:'/images/ctseg-mixed-nuts-premium.webp', width:1536, height:1024 }
+};
+
 const productSlugs: Record<(typeof productIds)[number], Localized> = Object.fromEntries(
   productIds.map((id) => [id, Object.fromEntries(locales.map((lang) => [lang, id]))])
 ) as any;
@@ -380,9 +401,55 @@ Object.assign(productSlugs['mixed-nuts'], {
 });
 
 export const products = Object.fromEntries(productIds.map((id) => [id, {
-  id, names: productNames[id], descriptions: productDescriptions[id], slugs: productSlugs[id],
+  id, names: productNames[id], descriptions: productDescriptions[id], media: productMedia[id], slugs: productSlugs[id],
   origin: ['akbari-pistachio','kaleghouchi-pistachio','fandoghi-pistachio','ahmad-aghaei-pistachio','green-peeled-pistachio','pistachio-granules','mazafati-dates','date-paste-syrup','saffron','dried-mulberries','zereshk'].includes(id) ? 'Iran' : 'Türkiye / Iran / verified source'
 }])) as Record<(typeof productIds)[number], any>;
+
+export const editorialCopy: Record<Locale, {
+  manifestoTitle:string; manifestoText:string; portfolioTitle:string; portfolioText:string;
+  marketsKicker:string; productImageNote:string;
+}> = {
+  tr:{
+    manifestoTitle:'Tedarik, tek bir ürün aramasından daha fazlasıdır.',
+    manifestoText:'CTSEG; üretici keşfi, doğrulama, kalite, toplam maliyet, menşe şeffaflığı, pazar uygunluğu ve ticari uygulamayı tek bir karar disiplini içinde birleştirir.',
+    portfolioTitle:'Bölgesel ürün ve tedarik evreni',
+    portfolioText:'Bu seçki, CTSEG’in kuruyemiş, kuru meyve ve seçili gıda kategorilerindeki daha geniş bölgesel araştırma ve tedarik evrenini temsil eder; görseldeki her ürün aktif katalog ürünü değildir.',
+    marketsKicker:'Menşe · dokümantasyon · mevzuat · teslim modeli',
+    productImageNote:'Görsel, ürün kategorisini temsil eder; çeşit özellikleri teknik tanım ve parti belgeleriyle doğrulanır.'
+  },
+  en:{
+    manifestoTitle:'Sourcing is more than a product search.',
+    manifestoText:'CTSEG brings producer discovery, verification, quality, total cost, origin transparency, market fit and commercial execution into one decision discipline.',
+    portfolioTitle:'A regional product and sourcing universe',
+    portfolioText:'This selection represents CTSEG’s wider regional research and sourcing universe across nuts, dried fruit and selected foods; not every item pictured is an active catalogue product.',
+    marketsKicker:'Origin · documentation · regulation · delivery model',
+    productImageNote:'The image represents the product category; varietal characteristics are verified through specification and batch documentation.'
+  },
+  de:{
+    manifestoTitle:'Beschaffung ist mehr als eine Produktsuche.',
+    manifestoText:'CTSEG verbindet Produzentensuche, Prüfung, Qualität, Gesamtkosten, Herkunftstransparenz, Markteignung und kommerzielle Umsetzung in einer Entscheidungsdisziplin.',
+    portfolioTitle:'Ein regionales Produkt- und Beschaffungsuniversum',
+    portfolioText:'Diese Auswahl steht für das breitere regionale Recherche- und Beschaffungsfeld von CTSEG bei Nüssen, Trockenfrüchten und ausgewählten Lebensmitteln; nicht jedes abgebildete Produkt gehört zum aktiven Katalog.',
+    marketsKicker:'Herkunft · Dokumentation · Regulierung · Liefermodell',
+    productImageNote:'Das Bild repräsentiert die Produktkategorie; Sortenmerkmale werden über Spezifikation und Chargendokumente geprüft.'
+  },
+  it:{
+    manifestoTitle:'L’approvvigionamento va oltre la ricerca di un prodotto.',
+    manifestoText:'CTSEG integra ricerca dei produttori, verifica, qualità, costo totale, trasparenza dell’origine, idoneità al mercato ed esecuzione commerciale in un’unica disciplina decisionale.',
+    portfolioTitle:'Un universo regionale di prodotti e sourcing',
+    portfolioText:'Questa selezione rappresenta il più ampio universo regionale di ricerca e approvvigionamento CTSEG tra frutta secca, essiccata e alimenti selezionati; non tutti gli articoli raffigurati appartengono al catalogo attivo.',
+    marketsKicker:'Origine · documentazione · normativa · modello di consegna',
+    productImageNote:'L’immagine rappresenta la categoria; le caratteristiche varietali sono verificate tramite specifica e documenti di lotto.'
+  },
+  fr:{
+    manifestoTitle:'Le sourcing ne se limite pas à rechercher un produit.',
+    manifestoText:'CTSEG réunit recherche de producteurs, vérification, qualité, coût total, transparence de l’origine, adéquation au marché et exécution commerciale dans une même discipline de décision.',
+    portfolioTitle:'Un univers régional de produits et de sourcing',
+    portfolioText:'Cette sélection illustre l’univers régional plus large étudié par CTSEG dans les fruits à coque, fruits secs et aliments sélectionnés ; tous les produits représentés ne figurent pas au catalogue actif.',
+    marketsKicker:'Origine · documentation · réglementation · modèle de livraison',
+    productImageNote:'L’image représente la catégorie du produit ; les caractéristiques variétales sont vérifiées par la spécification et les documents de lot.'
+  }
+};
 
 export const insightIds = ['strategic-vs-procurement','supplier-selection','supplier-risk','total-cost','rfq','supply-chain-risk','origin-compliance'] as const;
 export const insights: Record<(typeof insightIds)[number], { slugs: Localized; titles: Localized; descriptions: Localized; answers: Localized }> = {

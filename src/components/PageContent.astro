@@ -2,8 +2,12 @@
 import { getPosts } from '../data/blog';
 import PageHero from './PageHero.astro';
 import Framework from './Framework.astro';
+import PortfolioBanner from './PortfolioBanner.astro';
+import ProcessRail from './ProcessRail.astro';
+import ProductCard from './ProductCard.astro';
+import ProductMedia from './ProductMedia.astro';
 import {
-  homeCopy, insightIds, insights, legal, localizedPath, pageCopy, productIds, products,
+  editorialCopy, homeCopy, insightIds, insights, legal, localizedPath, pageCopy, productIds, products,
   serviceIds, services, ui, type Locale
 } from '../data/site';
 import type { RouteRecord } from '../lib/routes';
@@ -13,6 +17,7 @@ const { lang, key, id } = record;
 const t = ui[lang];
 const h = homeCopy[lang];
 const copy = pageCopy[lang];
+const editorial = editorialCopy[lang];
 const service = id && key === 'services' ? services[id as keyof typeof services] : null;
 const product = id && key === 'products' ? products[id as keyof typeof products] : null;
 const insight = id && key === 'insights' ? insights[id as keyof typeof insights] : null;
@@ -40,33 +45,34 @@ const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it
   <>
     <section class="hero">
       <div class="container hero-grid">
-        <div>
+        <div class="hero-copy">
           <p class="eyebrow">{h.eyebrow}</p><h1>{h.title}</h1><p class="lead">{h.lead}</p>
           <div class="actions"><a class="button" href={sectionHref('contact')}>{t.quote}</a><a class="button button-secondary" href={sectionHref('services')}>{t.services}</a></div>
-          <div class="trust-row">{h.trust.map((item:string) => <span>{item}</span>)}</div>
         </div>
-        <aside class="signal-panel" aria-label={h.signal}>
-          <div class="signal-head"><span>{h.signal}</span><span class="live">{h.live}</span></div>
-          {h.signals.map((item:string[]) => <div class="signal-item"><small>{item[0]}</small><strong>{item[1]}</strong></div>)}
-          <p>{t.complianceText}</p>
-        </aside>
+        <figure class="hero-visual">
+          <img src="/images/ctseg-global-trade-hero-premium.webp" width="1536" height="1024" alt="" loading="eager" fetchpriority="high" decoding="sync" />
+          <figcaption>{h.trust.map((item:string,index:number) => <span><small>{indexLabel(index)}</small>{item}</span>)}</figcaption>
+        </figure>
       </div>
     </section>
-    <section class="section section-muted"><div class="container">
-      <div class="section-head"><h2>{h.servicesTitle}</h2><p>{h.servicesLead}</p></div>
-      <div class="card-grid">{serviceIds.slice(0,3).map((serviceId,index) => <a class="card" href={localizedPath(lang,'services',serviceId)}><small>{indexLabel(index)}</small><h3>{services[serviceId].names[lang]}</h3><p>{services[serviceId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div>
-      <div class="actions"><a class="button button-secondary" href={sectionHref('services')}>{t.allServices}</a></div>
+    <section class="manifesto section"><div class="container manifesto-grid">
+      <span class="section-number">01</span>
+      <h2>{editorial.manifestoTitle}</h2>
+      <div><p>{editorial.manifestoText}</p><a class="text-link" href={sectionHref('services')}>{t.allServices} ↗</a></div>
     </div></section>
-    <section class="section"><div class="container">
+    <section class="section product-showcase"><div class="container">
       <div class="section-head"><h2>{h.productsTitle}</h2><p>{h.productsLead}</p></div>
-      <div class="card-grid">{productIds.slice(0,6).map((productId,index) => <a class="card" href={localizedPath(lang,'products',productId)}><small>{indexLabel(index)}</small><h3>{products[productId].names[lang]}</h3><p>{products[productId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div>
+      <div class="product-editorial-grid">{productIds.slice(0,6).map((productId,index) => <ProductCard product={products[productId]} productId={productId} lang={lang} index={index} featured={index === 0 || index === 3} />)}</div>
       <div class="actions"><a class="button button-secondary" href={sectionHref('products')}>{t.allProducts}</a></div>
     </div></section>
-    <section class="section section-muted"><div class="container">
+    <PortfolioBanner lang={lang} />
+    <ProcessRail title={h.processTitle} steps={h.process} />
+    <section class="markets-editorial section"><div class="container">
+      <p class="eyebrow">{editorial.marketsKicker}</p>
       <div class="section-head"><h2>{h.marketsTitle}</h2><p>{h.marketsLead}</p></div>
-      <div class="process-grid">{h.process.map((step:string,index:number) => <article><span>{indexLabel(index)}</span><h3>{step}</h3></article>)}</div>
+      <div class="market-line">{marketNames.map((market,index) => <div><span>{indexLabel(index)}</span><strong>{market}</strong></div>)}</div>
     </div></section>
-    <section class="section"><div class="container"><div class="cta-card"><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.quote}</a></div></div></section>
+    <section class="section"><div class="container"><div class="cta-statement"><p class="eyebrow">CTSEG</p><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.quote}</a></div></div></section>
   </>
 )}
 
@@ -94,20 +100,22 @@ const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it
 {key === 'products' && !id && (
   <>
     <PageHero lang={lang} eyebrow={t.products} title={copy.productsTitle} lead={copy.productsLead} />
-    <section class="section"><div class="container">
+    <PortfolioBanner lang={lang} />
+    <section class="section catalogue-section"><div class="container">
       <div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div>
-      <div class="card-grid" style="margin-top:34px">{productIds.map((productId,index) => <a class="card" href={localizedPath(lang,'products',productId)}><small>{indexLabel(index)}</small><h2>{products[productId].names[lang]}</h2><p>{products[productId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div>
+      <div class="catalogue-grid">{productIds.map((productId,index) => <ProductCard product={products[productId]} productId={productId} lang={lang} index={index} featured={index % 7 === 0 || index % 7 === 4} />)}</div>
     </div></section>
   </>
 )}
 
 {product && (
   <>
-    <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={product.names[lang]} lead={product.descriptions[lang]} parentHref={sectionHref('products')} parentLabel={t.products} />
-    <section class="section"><div class="container content-grid">
+    <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={product.names[lang]} lead={product.descriptions[lang]} parentHref={sectionHref('products')} parentLabel={t.products} product={product} ctaHref={sectionHref('contact')} ctaLabel={t.quote} imageNote={editorial.productImageNote} />
+    <section class="section product-detail-content"><div class="container content-grid">
       <div class="prose">
         <div class="content-block"><h2>{t.applications}</h2><ul class="check-list">{copy.productUses.map((item:string) => <li>{item}</li>)}</ul></div>
         <div class="content-block"><h2>{t.quality}</h2><ul class="check-list">{copy.productQuality.map((item:string) => <li>{item}</li>)}</ul><div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div></div>
+        <div class="content-block"><h2>{t.logistics}</h2><p>{t.contactLead}</p>{product.media.secondary && <ProductMedia product={product} lang={lang} secondary={true} className="secondary-product-media" />}</div>
         <div class="content-block faq"><h2>{t.faq}</h2><details open><summary>{t.origin}</summary><p>{t.complianceText}</p></details><details><summary>{t.samplePolicy}</summary><p>{t.sampleText}</p></details></div>
       </div>
       <aside class="side-panel"><p class="eyebrow">{t.logistics}</p><h2>{t.quote}</h2><p>{t.contactLead}</p><p><strong>{t.samplePolicy}</strong><br/>{t.sampleText}</p><a class="button" href={sectionHref('contact')}>{t.quote}</a></aside>
@@ -119,9 +127,9 @@ const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it
   <>
     <PageHero lang={lang} eyebrow={t.markets} title={copy.marketsTitle} lead={copy.marketsLead} />
     <section class="section"><div class="container">
-      <div class="card-grid">{marketNames.map((market,index) => <article class="card"><small>{indexLabel(index)}</small><h2>{market}</h2><p>{copy.marketsLead}</p></article>)}</div>
-      <div class="process-grid">{copy.framework.map((step:string,index:number) => <article><span>{indexLabel(index)}</span><h3>{step}</h3></article>)}</div>
+      <div class="market-line market-line-large">{marketNames.map((market,index) => <div><span>{indexLabel(index)}</span><strong>{market}</strong><p>{copy.marketsLead}</p></div>)}</div>
     </div></section>
+    <ProcessRail steps={copy.framework} />
   </>
 )}
 
@@ -136,10 +144,10 @@ const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it
   <>
     <PageHero lang={lang} eyebrow={t.insights} title={insight.titles[lang]} lead={insight.descriptions[lang]} parentHref={sectionHref('insights')} parentLabel={t.insights} />
     <section class="section"><article class="container prose">
-      <div class="answer-box">{originalPost?.answer ?? insight.answers[lang]}</div>
+      <p class="article-answer">{originalPost?.answer ?? insight.answers[lang]}</p>
       {originalPost ? originalPost.sections.map((section) => <section class="content-block"><h2>{section.heading}</h2>{section.body.map((paragraph) => <p>{paragraph}</p>)}</section>) :
         copy.framework.map((heading:string,index:number) => <section class="content-block"><h2>{heading}</h2><p>{insight.descriptions[lang]} {index === 1 ? t.complianceText : insight.answers[lang]}</p></section>)}
-      <div class="cta-card"><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.quote}</a></div>
+      <div class="cta-statement"><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.quote}</a></div>
     </article></section>
   </>
 )}
@@ -148,7 +156,7 @@ const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it
   <>
     <PageHero lang={lang} eyebrow={t.about} title={copy.aboutTitle} lead={copy.aboutLead} />
     <Framework lang={lang} />
-    <section class="section"><div class="container cta-card"><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.contact}</a></div></section>
+    <section class="section"><div class="container cta-statement"><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.contact}</a></div></section>
   </>
 )}
 

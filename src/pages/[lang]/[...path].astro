@@ -20,6 +20,7 @@ if (record.key === 'products' && record.id) {
     '@context':'https://schema.org','@type':'Product',
     '@id':`${canonicalFor(record)}#product`,name:product.names[record.lang],
     description:product.descriptions[record.lang],category:'B2B food ingredient',
+    image:`https://ctseg.com.tr${product.media.src}`,
     countryOfOrigin:product.origin,brand:{'@type':'Brand',name:'CTSEG'},
     additionalProperty:[
       {'@type':'PropertyValue',name:ui[record.lang].origin,value:product.origin},

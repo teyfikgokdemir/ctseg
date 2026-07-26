@@ -1,0 +1,17 @@
+---
+import { editorialCopy, type Locale } from '../data/site';
+const { lang } = Astro.props as { lang:Locale };
+const copy = editorialCopy[lang];
+---
+<section class="portfolio-banner section">
+  <div class="container portfolio-layout">
+    <figure class="portfolio-visual">
+      <img src="/images/2.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="" />
+    </figure>
+    <div class="portfolio-copy">
+      <p class="eyebrow">CTSEG · Portfolio</p>
+      <h2>{copy.portfolioTitle}</h2>
+      <p>{copy.portfolioText}</p>
+    </div>
+  </div>
+</section>

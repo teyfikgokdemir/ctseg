@@ -1,0 +1,20 @@
+---
+import type { Locale } from '../data/site';
+const { product, lang, eager=false, secondary=false, className='' } = Astro.props as {
+  product:any; lang:Locale; eager?:boolean; secondary?:boolean; className?:string;
+};
+const src = secondary && product.media.secondary ? product.media.secondary : product.media.src;
+const alt = secondary ? `${product.names[lang]} · 02` : product.names[lang];
+---
+<figure class:list={['product-media', className]}>
+  <img
+    src={src}
+    width={product.media.width}
+    height={product.media.height}
+    alt={alt}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : 'auto'}
+    decoding={eager ? 'sync' : 'async'}
+    style={product.media.position ? `object-position:${product.media.position}` : undefined}
+  />
+</figure>
