@@ -20,10 +20,9 @@ const switchPath = (target: Locale) => localizedPath(target, pageKey, pageId);
     <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav>
       {nav.map(([key, label]) => <a class:list={{ active: pageKey === key }} href={localizedPath(lang, key)}>{label}</a>)}
       <div class="language-switcher language-switcher-desktop">
-        <button type="button" aria-expanded="false" aria-controls="language-panel" data-language-toggle>
+        <button type="button" aria-expanded="false" aria-controls="language-panel" aria-label={t.language} data-language-toggle>
           <span class="locale-code">{lang.toUpperCase()}</span>
-          <span class="locale-name">{localeNames[lang]}</span>
-          <span class="locale-chevron" aria-hidden="true">⌄</span>
+          <span class="locale-chevron" aria-hidden="true"></span>
         </button>
         <div id="language-panel" class="language-menu" data-language-menu>
           {locales.map((code) => <a
