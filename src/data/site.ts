@@ -207,6 +207,20 @@ export const productIds = [
   'walnuts','dried-apricots-kernels','pumpkin-seeds','sunflower-seeds','saffron','dried-mulberries','zereshk','mixed-nuts'
 ] as const;
 
+export const homeProductIds = [
+  'akbari-pistachio','mazafati-dates','almonds','walnuts','saffron','zereshk'
+] as const;
+
+export type ProductMediaType = 'poster' | 'photo';
+type ProductMedia = {
+  src:string;
+  width:number;
+  height:number;
+  mediaType:ProductMediaType;
+  objectPosition?:string;
+  secondary?:string;
+};
+
 const productNames: Record<(typeof productIds)[number], Localized> = {
   'akbari-pistachio': { tr:'Akbari Antep Fıstığı', en:'Akbari Pistachios', de:'Akbari-Pistazien', it:'Pistacchi Akbari', fr:'Pistaches Akbari' },
   'kaleghouchi-pistachio': { tr:'Kalleh Ghouchi Antep Fıstığı', en:'Kalleh Ghouchi Pistachios', de:'Kalleh-Ghouchi-Pistazien', it:'Pistacchi Kalleh Ghouchi', fr:'Pistaches Kalleh Ghouchi' },
@@ -357,25 +371,25 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
   }
 };
 
-const productMedia: Record<(typeof productIds)[number], { src:string; width:number; height:number; position?:string; secondary?:string }> = {
-  'akbari-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, position:'center 54%' },
-  'kaleghouchi-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, position:'center 54%' },
-  'fandoghi-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, position:'center 54%' },
-  'ahmad-aghaei-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, position:'center 54%' },
-  'green-peeled-pistachio': { src:'/images/ctseg-green-peeled-pistachio-kernels-premium.webp', width:1536, height:1024 },
-  'pistachio-granules': { src:'/images/ctseg-pistachio-kernel-crumb-premium.webp', width:1536, height:1024 },
-  'mazafati-dates': { src:'/images/ctseg-mazafati-dates-authentic-premium.webp', width:1536, height:1024 },
-  'date-paste-syrup': { src:'/images/ctseg-date-paste-premium.webp', width:1536, height:1024, secondary:'/images/ctseg-date-syrup-premium.webp' },
-  raisins: { src:'/images/ctseg-iranian-golden-raisins-premium.webp', width:1536, height:1024 },
-  almonds: { src:'/images/ctseg-iranian-almonds-premium.webp', width:1536, height:1024 },
-  walnuts: { src:'/images/ctseg-iranian-walnuts-premium.webp', width:1536, height:1024 },
-  'dried-apricots-kernels': { src:'/images/ctseg-dried-apricots-premium.webp', width:1536, height:1024, secondary:'/images/ctseg-apricot-kernels-premium.webp' },
-  'pumpkin-seeds': { src:'/images/ctseg-pumpkin-seeds-premium.webp', width:1536, height:1024 },
-  'sunflower-seeds': { src:'/images/ctseg-sunflower-seeds-premium.webp', width:1536, height:1024 },
-  saffron: { src:'/images/ctseg-persian-red-gold-saffron-premium.webp', width:1535, height:1024 },
-  'dried-mulberries': { src:'/images/ctseg-iranian-dried-mulberries-premium.webp', width:1536, height:1024 },
-  zereshk: { src:'/images/ctseg-zereshk-dried-barberries-premium.webp', width:1536, height:1024 },
-  'mixed-nuts': { src:'/images/ctseg-mixed-nuts-premium.webp', width:1536, height:1024 }
+const productMedia: Record<(typeof productIds)[number], ProductMedia> = {
+  'akbari-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'kaleghouchi-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'fandoghi-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'ahmad-aghaei-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'green-peeled-pistachio': { src:'/images/ctseg-green-peeled-pistachio-kernels-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'pistachio-granules': { src:'/images/ctseg-pistachio-kernel-crumb-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'mazafati-dates': { src:'/images/ctseg-mazafati-dates-authentic-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'date-paste-syrup': { src:'/images/ctseg-date-paste-premium.webp', width:1536, height:1024, mediaType:'photo', objectPosition:'center 48%', secondary:'/images/ctseg-date-syrup-premium.webp' },
+  raisins: { src:'/images/ctseg-iranian-golden-raisins-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  almonds: { src:'/images/ctseg-iranian-almonds-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  walnuts: { src:'/images/ctseg-iranian-walnuts-premium.webp', width:1536, height:1024, mediaType:'photo', objectPosition:'center 52%' },
+  'dried-apricots-kernels': { src:'/images/ctseg-dried-apricots-premium.webp', width:1536, height:1024, mediaType:'photo', objectPosition:'center 50%', secondary:'/images/ctseg-apricot-kernels-premium.webp' },
+  'pumpkin-seeds': { src:'/images/ctseg-pumpkin-seeds-premium.webp', width:1536, height:1024, mediaType:'photo', objectPosition:'center 54%' },
+  'sunflower-seeds': { src:'/images/ctseg-sunflower-seeds-premium.webp', width:1536, height:1024, mediaType:'photo', objectPosition:'center 52%' },
+  saffron: { src:'/images/ctseg-persian-red-gold-saffron-premium.webp', width:1535, height:1024, mediaType:'poster' },
+  'dried-mulberries': { src:'/images/ctseg-iranian-dried-mulberries-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  zereshk: { src:'/images/ctseg-zereshk-dried-barberries-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'mixed-nuts': { src:'/images/ctseg-mixed-nuts-premium.webp', width:1536, height:1024, mediaType:'photo', objectPosition:'center 50%' }
 };
 
 const productSlugs: Record<(typeof productIds)[number], Localized> = Object.fromEntries(

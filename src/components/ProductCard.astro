@@ -1,13 +1,19 @@
 ---
 import { localizedPath, ui, type Locale } from '../data/site';
 import ProductMedia from './ProductMedia.astro';
-const { product, productId, lang, index, featured=false } = Astro.props as {
-  product:any; productId:string; lang:Locale; index:number; featured?:boolean;
+const { product, productId, lang, index, featured=false, displayRole='', family='' } = Astro.props as {
+  product:any; productId:string; lang:Locale; index:number; featured?:boolean; displayRole?:string; family?:string;
 };
 const label = String(index + 1).padStart(2,'0');
 const typographicVariety = ['kaleghouchi-pistachio','fandoghi-pistachio','ahmad-aghaei-pistachio'].includes(productId);
 ---
-<a class:list={['product-card', { featured, 'typographic-card':typographicVariety }]} href={localizedPath(lang,'products',productId)} data-product-card>
+<a
+  class:list={['product-card', displayRole && `product-card--${displayRole}`, { featured, 'typographic-card':typographicVariety }]}
+  href={localizedPath(lang,'products',productId)}
+  data-product-card
+  data-product-id={productId}
+  data-product-family={family || undefined}
+>
   {typographicVariety
     ? <div class="variety-panel"><span>{ui[lang].products}</span><strong>{product.names[lang]}</strong></div>
     : <ProductMedia product={product} lang={lang} />}
