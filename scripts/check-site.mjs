@@ -49,6 +49,10 @@ for (const file of htmlFiles) {
   if (!/<meta name="description" content="[^"]+"/.test(html)) errors.push(`${label}: missing description`);
   if (canonicalCount !== 1) errors.push(`${label}: expected one canonical, found ${canonicalCount}`);
   if (headerCount !== 1 || footerCount !== 1) errors.push(`${label}: header/footer count ${headerCount}/${footerCount}`);
+  if (html.includes('fonts.googleapis.com') || html.includes('fonts.gstatic.com')) errors.push(`${label}: external Google Fonts dependency remains`);
+  if (!html.includes('/fonts/dm-sans-latin-ext-variable.woff2') || !html.includes('/fonts/source-serif-4-latin-ext-variable.woff2')) {
+    errors.push(`${label}: local font preloads missing`);
+  }
   if (!label.startsWith('404') && !['tr','en','de','it','fr','x-default'].every((code) => hreflangs.includes(code))) {
     errors.push(`${label}: incomplete hreflang set`);
   }
@@ -71,7 +75,11 @@ for (const file of htmlFiles) {
     if (catalogueGroups.length !== 6 || new Set(catalogueGroups).size !== 6) errors.push(`${label}: expected six unique catalogue groups`);
   }
   const isHome = ['index.html','en/index.html','de/index.html','it/index.html','fr/index.html'].includes(label);
-  if (isHome && !html.includes('/images/ctseg-global-trade-hero-premium.webp')) errors.push(`${label}: premium homepage hero missing`);
+  if (isHome && !/class="hero-visual"[\s\S]*?srcset="[^"]*\/images\/generated\/ctseg-global-trade-hero-premium-640\.webp/.test(html)) {
+    errors.push(`${label}: responsive premium homepage hero missing`);
+  }
+  const imagePreloadCount = (html.match(/rel="preload" as="image"/g) || []).length;
+  if (imagePreloadCount !== (isHome ? 1 : 0)) errors.push(`${label}: unexpected responsive image preload count ${imagePreloadCount}`);
   if (isHome) {
     const showcase = html.match(/<div class="product-editorial-grid" data-home-showcase>([\s\S]*?)<\/div>\s*<div class="actions">/)?.[1] ?? '';
     const showcaseProducts = [...showcase.matchAll(/data-product-id="([^"]+)"/g)].map((match) => match[1]);
@@ -88,7 +96,7 @@ for (const file of htmlFiles) {
   if (!/class="locale-code">(?:TR|EN|DE|IT|FR)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger)) {
     errors.push(`${label}: desktop language trigger must show only the active locale code`);
   }
-  const portfolioImageCount = (html.match(/src="\/images\/2\.webp"/g) || []).length;
+  const portfolioImageCount = (html.match(/src="\/images\/generated\/2-\d+\.webp"/g) || []).length;
   if (portfolioImageCount !== (isHome ? 1 : 0)) errors.push(`${label}: unexpected 2.webp usage count ${portfolioImageCount}`);
   if (html.includes('contact-email-panel')) {
     contactEmailPanels++;
@@ -111,6 +119,12 @@ for (const file of htmlFiles) {
     const src = attributes.match(/\bsrc="([^"]+)"/)?.[1];
     if (!/\bwidth="\d+"/.test(attributes) || !/\bheight="\d+"/.test(attributes)) errors.push(`${label}: image missing intrinsic dimensions`);
     if (src?.startsWith('/images/') && !existsSync(join(root, src))) errors.push(`${label}: missing image file ${src}`);
+  }
+  for (const card of html.matchAll(/data-product-card[\s\S]*?<\/a>/g)) {
+    const image = card[0].match(/<img\b([^>]+)>/)?.[1];
+    if (image && (!/\bsrcset="[^"]+"/.test(image) || !/\bsizes="[^"]+"/.test(image) || !/\bloading="lazy"/.test(image))) {
+      errors.push(`${label}: product card image is not responsive and lazy`);
+    }
   }
   if (html.includes('product-hero-media') && html.includes('src="/images/2.webp"')) errors.push(`${label}: 2.webp used as a product hero`);
   for (const match of html.matchAll(/href="([^"]+)"/g)) {

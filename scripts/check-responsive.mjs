@@ -95,7 +95,7 @@ try {
   for (const testCase of cases) {
     const page = await browser.newPage({ viewport:{ width:testCase.width, height:testCase.height } });
     await page.goto(`http://127.0.0.1:4321${testCase.path}`, { waitUntil:'networkidle' });
-    await page.addStyleTag({ content:'*,*:before,*:after{animation:none!important;transition:none!important}.product-media img{transform:none!important}' });
+    await page.addStyleTag({ content:'*,*:before,*:after{animation:none!important;transition:none!important}.product-media img{transform:none!important}main>section{content-visibility:visible!important}' });
     await page.locator('[data-cookie-reject]').click();
     await page.evaluate(() => {
       document.documentElement.style.scrollBehavior='auto';

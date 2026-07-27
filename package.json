@@ -5,10 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "images:generate": "node scripts/generate-responsive-images.mjs",
+    "prebuild": "npm run images:generate",
     "build": "astro build",
     "preview": "astro preview",
     "check:site": "node scripts/check-site.mjs",
     "check:responsive": "node scripts/check-responsive.mjs",
+    "check:performance": "node scripts/check-performance.mjs",
+    "lighthouse:mobile": "node scripts/run-lighthouse.mjs",
     "validate": "npm run build && npm run check:site && npm run check:responsive"
   },
   "dependencies": {
@@ -16,6 +20,8 @@
     "astro": "^7.1.3"
   },
   "devDependencies": {
-    "playwright-core": "^1.62.0"
+    "lighthouse": "^13.4.1",
+    "playwright-core": "^1.62.0",
+    "sharp": "^0.35.3"
   }
 }

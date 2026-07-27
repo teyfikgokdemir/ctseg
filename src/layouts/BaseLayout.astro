@@ -3,6 +3,7 @@ import '../styles/site.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { locales, localizedPath, products, routeAlternates, ui, type Locale } from '../data/site';
+import { FEATURE_IMAGE_WIDTHS, HERO_IMAGE, generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
 
 const {
   lang='tr', title, description, pageKey='home', pageId, canonical,
@@ -36,12 +37,20 @@ const cookieHref = localizedPath(lang, 'legal', 'cookies');
 const socialImage = pageKey === 'products' && pageId && products[pageId as keyof typeof products]
   ? products[pageId as keyof typeof products].media.src
   : '/images/ctseg-global-trade-hero-premium.webp';
+const heroSizes = '(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(100vw - 36px), min(53vw,700px)';
+const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
 ---
 <!doctype html>
 <html lang={lang} data-locale={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      try {
+        const consent=localStorage.getItem('ctseg-consent-v2');
+        if(consent)document.documentElement.dataset.consent=consent;
+      } catch {}
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex,follow" />}
@@ -49,10 +58,16 @@ const socialImage = pageKey === 'products' && pageId && products[pageId as keyof
     {locales.map((code) => <link rel="alternate" hreflang={code} href={alternates[code]} />)}
     <link rel="alternate" hreflang="x-default" href={alternates.en} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" />
+    <link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
+    {pageKey === 'home' && !noindex && <link
+      rel="preload"
+      as="image"
+      href={generatedImageSrc(HERO_IMAGE,1280)}
+      imagesrcset={heroSrcset}
+      imagesizes={heroSizes}
+      fetchpriority="high"
+    />}
     <meta name="theme-color" content="#080b12" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -71,7 +86,7 @@ const socialImage = pageKey === 'products' && pageId && products[pageId as keyof
     <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
     <main id="main"><slot /></main>
     <SiteFooter lang={lang} />
-    <aside class="cookie-consent" data-cookie-consent hidden aria-label={ui[lang].cookieTitle}>
+    <aside class="cookie-consent" data-cookie-consent aria-label={ui[lang].cookieTitle}>
       <div><strong>{ui[lang].cookieTitle}</strong><p>{ui[lang].cookieCopy}</p><a href={cookieHref}>{ui[lang].details}</a></div>
       <div class="cookie-actions"><button type="button" data-cookie-reject>{ui[lang].reject}</button><button type="button" class="accept" data-cookie-accept>{ui[lang].accept}</button></div>
     </aside>
@@ -86,7 +101,7 @@ const socialImage = pageKey === 'products' && pageId && products[pageId as keyof
           window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-B8BLQ7KK2T',{anonymize_ip:true});
           const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-B8BLQ7KK2T';document.head.appendChild(s);
         };
-        const apply=(value)=>{localStorage.setItem(key,value);box.hidden=true;if(value==='accepted')load()};
+        const apply=(value)=>{localStorage.setItem(key,value);document.documentElement.dataset.consent=value;box.hidden=true;if(value==='accepted')load()};
         const saved=localStorage.getItem(key);if(saved==='accepted')load();else if(!saved)box.hidden=false;
         box.querySelector('[data-cookie-accept]')?.addEventListener('click',()=>apply('accepted'));
         box.querySelector('[data-cookie-reject]')?.addEventListener('click',()=>apply('rejected'));
