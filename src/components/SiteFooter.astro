@@ -11,6 +11,14 @@ const description = {
   it:'Sourcing strategico, prodotti commerciali verificati e supporto alle decisioni internazionali dalla Turchia.',
   fr:'Sourcing stratégique, produits commerciaux vérifiés et aide à la décision internationale depuis la Turquie.'
 }[lang];
+const year = new Date().getFullYear();
+const copyright = {
+  tr:`© ${year} CTSEG. Tüm hakları saklıdır.`,
+  en:`© ${year} CTSEG. All rights reserved.`,
+  de:`© ${year} CTSEG. Alle Rechte vorbehalten.`,
+  it:`© ${year} CTSEG. Tutti i diritti riservati.`,
+  fr:`© ${year} CTSEG. Tous droits réservés.`
+}[lang];
 ---
 <footer class="site-footer">
   <div class="container footer-main">
@@ -36,7 +44,7 @@ const description = {
     </nav>
   </div>
   <div class="container footer-bottom">
-    <p>© {new Date().getFullYear()} CTSEG. {t.rights}</p>
+    <p>{copyright}</p>
     <nav aria-label="Legal">
       {legalIds.map((id) => <a href={localizedPath(lang, 'legal', id)}>{legal[id].titles[lang]}</a>)}
     </nav>

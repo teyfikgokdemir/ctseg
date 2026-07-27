@@ -1,4 +1,5 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { join, relative, resolve } from 'node:path';
 
 const root = resolve('dist');
@@ -13,6 +14,35 @@ const walk = (dir) => readdirSync(dir, { withFileTypes:true }).flatMap((entry) =
 const files = walk(root);
 const htmlFiles = files.filter((file) => file.endsWith('.html'));
 const errors = [];
+const textExtensions = new Set(['.astro','.css','.html','.js','.json','.md','.mjs','.svg','.ts','.txt','.xml','.yaml','.yml']);
+const mojibakeFragments = [
+  'T\u00C3',
+  '\u00C4\u0178',
+  '\u00C4\u00B1',
+  '\u00C3\u00BC',
+  '\u00C3\u00B6',
+  '\u00C3\u00A7',
+  '\u00C5\u0178',
+  '\u00C2\u00A9',
+  '\uFFFD'
+];
+const utf8Decoder = new TextDecoder('utf-8', { fatal:true });
+const isTextFile = (file) => textExtensions.has(file.slice(file.lastIndexOf('.'))) || file.endsWith('_headers');
+const scanUtf8AndMojibake = (file, label) => {
+  let text;
+  try {
+    text = utf8Decoder.decode(readFileSync(file));
+  } catch {
+    errors.push(`${label}: file is not valid UTF-8`);
+    return;
+  }
+  for (const fragment of mojibakeFragments) {
+    if (text.includes(fragment)) errors.push(`${label}: forbidden mojibake sequence remains`);
+  }
+};
+const trackedFiles = execFileSync('git', ['ls-files'], { encoding:'utf8' }).trim().split(/\r?\n/).filter(Boolean);
+for (const file of trackedFiles.filter(isTextFile)) scanUtf8AndMojibake(resolve(file), `source ${file}`);
+for (const file of files.filter(isTextFile)) scanUtf8AndMojibake(file, `build ${relative(root, file).replaceAll('\\','/')}`);
 let checkedLinks = 0;
 const pageRecords = [];
 let productSchemaPages = 0;
@@ -71,6 +101,7 @@ for (const file of htmlFiles) {
   }
   const organizations = parsedSchemas.filter((schema) => schema?.['@type'] === 'Organization');
   const organization = organizations[0];
+  const isTurkishPage = label === 'index.html' || label.startsWith('tr/');
   if (!label.startsWith('404') && canonical && lang) pageRecords.push({ label, canonical, lang, alternates });
   if (titleCount !== 1) errors.push(`${label}: expected one title, found ${titleCount}`);
   if ((html.match(/<meta charset="UTF-8">/g) || []).length !== 1) errors.push(`${label}: expected exactly one UTF-8 charset declaration`);
@@ -82,6 +113,12 @@ for (const file of htmlFiles) {
     errors.push(`${label}: mojibake text remains`);
   }
   if (!html.includes(`<strong>${companyName}</strong>`)) errors.push(`${label}: localized footer company identity missing`);
+  if (isTurkishPage && !html.includes('Türkiye merkezli stratejik tedarik, doğrulanmış ticari ürünler ve uluslararası ticari karar desteği.')) {
+    errors.push(`${label}: exact Turkish footer description missing`);
+  }
+  if (isTurkishPage && !html.includes(`© ${new Date().getFullYear()} CTSEG. Tüm hakları saklıdır.`)) {
+    errors.push(`${label}: exact Turkish footer copyright missing`);
+  }
   if (organizations.length !== 1) errors.push(`${label}: expected one Organization schema, found ${organizations.length}`);
   if (organization && (
     organization.name !== companyName ||
