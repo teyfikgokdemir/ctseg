@@ -130,14 +130,6 @@ const verifiedLater = {
       <h2>{editorial.manifestoTitle}</h2>
       <div><p>{editorial.manifestoText}</p><a class="text-link" href={sectionHref('services')}>{t.allServices} ↗</a></div>
     </div></section>
-    <section class="section company-trust-band"><div class="container">
-      <div class="section-head"><h2>{completionHome.trustTitle}</h2><p>{company.name}</p></div>
-      <dl class="trust-facts">
-        <div><dt>01</dt><dd>{completionHome.established}</dd></div>
-        <div><dt>02</dt><dd>{completionHome.founder}</dd></div>
-        <div><dt>03</dt><dd>{completionHome.headquarters}</dd></div>
-      </dl>
-    </div></section>
     <section class="section trade-direction-section"><div class="container">
       <div class="section-head"><h2>{completionHome.tradeTitle}</h2><p>{completionHome.tradeLead}</p></div>
       <div class="trade-directions">
@@ -171,6 +163,14 @@ const verifiedLater = {
       <div><p class="eyebrow">CTSEG · {lang === 'tr' ? 'Temsili çalışma' : 'Representative work'}</p><h2>{completionHome.scenarioTitle}</h2><p>{completionHome.scenarioLead}</p></div>
       <aside class="side-panel"><a class="button button-secondary" href={scenarioHref} data-case-scenario-cta>{completionHome.scenarioCta}</a></aside>
     </div></section>}
+    <section class="section company-trust-band"><div class="container">
+      <div class="company-trust-heading"><h2>{completionHome.trustTitle}</h2><p>{company.name}</p></div>
+      <dl class="trust-facts">
+        <div><dt>01</dt><dd>{completionHome.established}</dd></div>
+        <div><dt>02</dt><dd>{completionHome.founder}</dd></div>
+        <div><dt>03</dt><dd>{completionHome.headquarters}</dd></div>
+      </dl>
+    </div></section>
     <section class="section"><div class="container"><div class="cta-statement"><p class="eyebrow">CTSEG</p><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.quote}</a></div></div></section>
   </>
 )}

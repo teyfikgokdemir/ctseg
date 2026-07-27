@@ -31,8 +31,8 @@ export const homeEnhancement: Localized<{
   scenarioTitle:string; scenarioLead:string; scenarioCta:string; commercialCta:string;
 }> = {
   tr:{
-    trustTitle:'Şirket bilgileri',established:'2022 yılında kuruldu',founder:'Kurucu: Teyfik Gökdemir',
-    headquarters:'Merkez: Fevzipaşa Caddesi, Fatih, İstanbul, Türkiye',
+    trustTitle:'Kurumsal kimlik',established:'2022 yılında kuruldu',founder:'Kurucu: Teyfik Gökdemir',
+    headquarters:'Merkez: Fatih, İstanbul, Türkiye',
     tradeTitle:'İki yönlü ticari koordinasyon',tradeLead:'CTSEG, doğrulanabilir menşe ve uygulanabilir ticari koşullar temelinde alıcılar ile tedarik pazarları arasında çalışır.',
     outbound:'Doğrulanmış İran menşeli ticari ürünlerin uluslararası alıcılar için değerlendirilmesi.',
     inbound:'İranlı işletmelerin Türkiye ve uygun uluslararası pazarlardan ürün, hammadde, ambalaj ve üretim girdisi tedarik etmesine destek.',
@@ -40,8 +40,8 @@ export const homeEnhancement: Localized<{
     scenarioCta:'Temsili senaryoları inceleyin',commercialCta:'Ticari Talep Gönder'
   },
   en:{
-    trustTitle:'Company information',established:'Established in 2022',founder:'Founder: Teyfik Gökdemir',
-    headquarters:'Headquarters: Fevzipaşa Caddesi, Fatih, Istanbul, Türkiye',
+    trustTitle:'Corporate identity',established:'Established in 2022',founder:'Founder: Teyfik Gökdemir',
+    headquarters:'Headquarters: Fatih, Istanbul, Türkiye',
     tradeTitle:'Two-way commercial coordination',tradeLead:'CTSEG works between buyers and supply markets through verifiable origin, defined requirements and executable commercial terms.',
     outbound:'Assessment of verified Iranian-origin trade products for international buyers.',
     inbound:'Support for Iranian businesses sourcing products, raw materials, packaging and production inputs from Türkiye and suitable international markets.',
@@ -49,8 +49,8 @@ export const homeEnhancement: Localized<{
     scenarioCta:'Review representative scenarios',commercialCta:'Request a Commercial Assessment'
   },
   de:{
-    trustTitle:'Unternehmensangaben',established:'Gegründet 2022',founder:'Gründer: Teyfik Gökdemir',
-    headquarters:'Hauptsitz: Fevzipaşa Caddesi, Fatih, Istanbul, Türkei',
+    trustTitle:'Unternehmensidentität',established:'Gegründet 2022',founder:'Gründer: Teyfik Gökdemir',
+    headquarters:'Hauptsitz: Fatih, Istanbul, Türkei',
     tradeTitle:'Handelskoordination in beide Richtungen',tradeLead:'CTSEG verbindet Käufer und Beschaffungsmärkte auf Grundlage prüfbarer Herkunft und umsetzbarer Konditionen.',
     outbound:'Bewertung verifizierter Handelsprodukte iranischen Ursprungs für internationale Käufer.',
     inbound:'Unterstützung iranischer Unternehmen bei der Beschaffung von Produkten, Rohstoffen, Verpackungen und Produktionsmitteln aus der Türkei und geeigneten internationalen Märkten.',
@@ -58,8 +58,8 @@ export const homeEnhancement: Localized<{
     scenarioCta:'Szenarien ansehen',commercialCta:'Kommerzielle Bewertung anfragen'
   },
   it:{
-    trustTitle:'Informazioni aziendali',established:'Fondata nel 2022',founder:'Fondatore: Teyfik Gökdemir',
-    headquarters:'Sede: Fevzipaşa Caddesi, Fatih, Istanbul, Turchia',
+    trustTitle:'Identità aziendale',established:'Fondata nel 2022',founder:'Fondatore: Teyfik Gökdemir',
+    headquarters:'Sede: Fatih, Istanbul, Turchia',
     tradeTitle:'Coordinamento commerciale bidirezionale',tradeLead:'CTSEG collega acquirenti e mercati di approvvigionamento sulla base di origine verificabile e condizioni commerciali realizzabili.',
     outbound:'Valutazione di prodotti commerciali verificati di origine iraniana per acquirenti internazionali.',
     inbound:'Supporto alle imprese iraniane nell’approvvigionamento di prodotti, materie prime, imballaggi e input produttivi dalla Turchia e da mercati internazionali idonei.',
@@ -67,8 +67,8 @@ export const homeEnhancement: Localized<{
     scenarioCta:'Esamina gli scenari',commercialCta:'Richiedi una valutazione commerciale'
   },
   fr:{
-    trustTitle:'Informations sur l’entreprise',established:'Fondée en 2022',founder:'Fondateur : Teyfik Gökdemir',
-    headquarters:'Siège : Fevzipaşa Caddesi, Fatih, Istanbul, Turquie',
+    trustTitle:'Identité de l’entreprise',established:'Fondée en 2022',founder:'Fondateur : Teyfik Gökdemir',
+    headquarters:'Siège : Fatih, Istanbul, Turquie',
     tradeTitle:'Coordination commerciale à double sens',tradeLead:'CTSEG relie acheteurs et marchés d’approvisionnement sur la base d’une origine vérifiable et de conditions réalisables.',
     outbound:'Évaluation de produits commerciaux vérifiés d’origine iranienne pour les acheteurs internationaux.',
     inbound:'Accompagnement des entreprises iraniennes pour leurs achats de produits, matières premières, emballages et intrants de production en Turquie et sur des marchés internationaux adaptés.',
