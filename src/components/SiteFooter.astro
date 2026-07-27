@@ -1,14 +1,23 @@
 ---
-import { legal, legalIds, localizedPath, ui, type Locale } from '../data/site';
+import { company, companyCopy, legal, legalIds, localizedPath, ui, type Locale } from '../data/site';
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 const { lang } = Astro.props as { lang: Locale };
 const t = ui[lang];
+const corporate = companyCopy[lang];
 const description = {
-  tr:'TÃ¼rkiye merkezli stratejik tedarik, doÄŸrulanmÄ±ÅŸ ticari Ã¼rÃ¼nler ve uluslararasÄ± ticari karar desteÄŸi.',
-  en:'Strategic sourcing, verified trade products and international commercial decision support from TÃ¼rkiye.',
-  de:'Strategische Beschaffung, verifizierte Handelsprodukte und internationale kaufmÃ¤nnische EntscheidungsunterstÃ¼tzung aus TÃ¼rkiye.',
-  it:'Sourcing strategico, prodotti commerciali verificati e supporto alle decisioni internazionali dalla TÃ¼rkiye.',
-  fr:'Sourcing stratÃ©gique, produits commerciaux vÃ©rifiÃ©s et aide Ã  la dÃ©cision internationale depuis la TÃ¼rkiye.'
+  tr:'Türkiye merkezli stratejik tedarik, doğrulanmış ticari ürünler ve uluslararası ticari karar desteği.',
+  en:'Strategic sourcing, verified trade products and international commercial decision support from Türkiye.',
+  de:'Strategische Beschaffung, verifizierte Handelsprodukte und internationale kaufmännische Entscheidungsunterstützung aus der Türkei.',
+  it:'Sourcing strategico, prodotti commerciali verificati e supporto alle decisioni internazionali dalla Turchia.',
+  fr:'Sourcing stratégique, produits commerciaux vérifiés et aide à la décision internationale depuis la Turquie.'
+}[lang];
+const year = new Date().getFullYear();
+const copyright = {
+  tr:`© ${year} CTSEG. Tüm hakları saklıdır.`,
+  en:`© ${year} CTSEG. All rights reserved.`,
+  de:`© ${year} CTSEG. Alle Rechte vorbehalten.`,
+  it:`© ${year} CTSEG. Tutti i diritti riservati.`,
+  fr:`© ${year} CTSEG. Tous droits réservés.`
 }[lang];
 ---
 <footer class="site-footer">
@@ -16,6 +25,10 @@ const description = {
     <div class="footer-brand">
       <a class="brand" href={localizedPath(lang, 'home')}><img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" loading="lazy" decoding="async" /></a>
       <p>{description}</p>
+      <div class="footer-company">
+        <strong>{company.name}</strong>
+        <span>{company.foundingYear} · {corporate.footerLocation}</span>
+      </div>
     </div>
     <nav aria-label={t.products}>
       <strong>{t.products}</strong>
@@ -31,7 +44,7 @@ const description = {
     </nav>
   </div>
   <div class="container footer-bottom">
-    <p>Â© {new Date().getFullYear()} CTSEG. {t.rights}</p>
+    <p>{copyright}</p>
     <nav aria-label="Legal">
       {legalIds.map((id) => <a href={localizedPath(lang, 'legal', id)}>{legal[id].titles[lang]}</a>)}
     </nav>

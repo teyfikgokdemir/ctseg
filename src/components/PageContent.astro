@@ -9,7 +9,7 @@ import ProductMedia from './ProductMedia.astro';
 import ResponsiveImage from './ResponsiveImage.astro';
 import { FEATURE_IMAGE_WIDTHS, HERO_IMAGE } from '../lib/responsive-images';
 import {
-  editorialCopy, homeCopy, homeProductIds, insightIds, insights, legal, localizedPath, pageCopy, productIds, products,
+  company, companyCopy, editorialCopy, homeCopy, homeProductIds, insightIds, insights, legal, localizedPath, pageCopy, productIds, products,
   serviceIds, services, ui, type Locale
 } from '../data/site';
 import type { RouteRecord } from '../lib/routes';
@@ -19,6 +19,7 @@ const { lang, key, id } = record;
 const t = ui[lang];
 const h = homeCopy[lang];
 const copy = pageCopy[lang];
+const corporate = companyCopy[lang];
 const editorial = editorialCopy[lang];
 const service = id && key === 'services' ? services[id as keyof typeof services] : null;
 const product = id && key === 'products' ? products[id as keyof typeof products] : null;
@@ -32,13 +33,6 @@ const indexLabel = (index:number) => String(index + 1).padStart(2,'0');
 const marketNames = {
   tr:['Türkiye','Avrupa','Uluslararası'], en:['Türkiye','Europe','International'], de:['Türkiye','Europa','International'],
   it:['Türkiye','Europa','Internazionale'], fr:['Türkiye','Europe','International']
-}[lang];
-const qualificationFields = {
-  tr:['Şirket / tüzel kişi','Ürün veya hizmet ihtiyacı','Tahmini hacim ve kullanım alanı','Teslim ülkesi ve hedef zamanlama'],
-  en:['Company / legal entity','Product or service requirement','Indicative volume and application','Delivery country and target timing'],
-  de:['Unternehmen / Rechtsträger','Produkt- oder Dienstleistungsbedarf','Richtmenge und Anwendung','Lieferland und Zieltermin'],
-  it:['Azienda / persona giuridica','Esigenza di prodotto o servizio','Volume indicativo e applicazione','Paese di consegna e tempistica'],
-  fr:['Entreprise / entité juridique','Besoin en produit ou service','Volume indicatif et usage','Pays de livraison et calendrier']
 }[lang];
 const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',fr:'Mentions légales'}[lang];
 const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',fr:'27 juillet 2026'}[lang];
@@ -227,6 +221,17 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
 {key === 'about' && (
   <>
     <PageHero lang={lang} eyebrow={t.about} title={copy.aboutTitle} lead={copy.aboutLead} />
+    <section class="section company-profile-section"><div class="container content-grid">
+      <div class="prose"><div class="content-block"><p class="eyebrow">{company.alternateName} · {company.foundingYear}</p><h2>{corporate.aboutHeading}</h2><p>{corporate.aboutBody}</p></div></div>
+      <aside class="company-card" aria-label={corporate.labels.name}>
+        <dl>
+          <div><dt>{corporate.labels.name}</dt><dd>{company.name}</dd></div>
+          <div><dt>{corporate.labels.founder}</dt><dd>{company.founder}</dd></div>
+          <div><dt>{corporate.labels.founded}</dt><dd>{company.foundingYear}</dd></div>
+          <div><dt>{corporate.labels.headquarters}</dt><dd>{corporate.headquarters}</dd></div>
+        </dl>
+      </aside>
+    </div></section>
     <Framework lang={lang} />
     <section class="section"><div class="container cta-statement"><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.contact}</a></div></section>
   </>
@@ -236,8 +241,15 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
   <>
     <PageHero lang={lang} eyebrow={t.contact} title={copy.contactTitle} lead={t.contactLead} compact={true} />
     <section class="section"><div class="container content-grid">
-      <div class="prose"><div class="content-block"><h2>{t.logistics}</h2><p>{t.contactLead}</p><ul class="check-list">{qualificationFields.map((field) => <li>{field}</li>)}</ul></div><div class="origin-note"><strong>{t.samplePolicy}</strong><p>{t.sampleText}</p></div></div>
-      <aside class="side-panel contact-email-panel"><p class="eyebrow">E-mail</p><h2><a class="contact-email-link" href="mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry">info@ctseg.com.tr</a></h2><p>Türkiye · Europe · International</p></aside>
+      <div class="company-card company-card--contact">
+        <dl>
+          <div><dt>{corporate.labels.name}</dt><dd>{company.name}</dd></div>
+          <div><dt>{corporate.labels.founder}</dt><dd>{company.founder}</dd></div>
+          <div><dt>{corporate.labels.founded}</dt><dd>{company.foundingYear}</dd></div>
+          <div><dt>{corporate.labels.headquarters}</dt><dd>{corporate.headquarters}</dd></div>
+        </dl>
+      </div>
+      <aside class="side-panel contact-email-panel"><p class="eyebrow">E-mail</p><h2><a class="contact-email-link" href="mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry">info@ctseg.com.tr</a></h2><p>{marketNames.join(' · ')}</p></aside>
     </div></section>
   </>
 )}
