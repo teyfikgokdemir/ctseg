@@ -108,6 +108,9 @@ const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
         const saved=localStorage.getItem(key);if(saved==='accepted')load();else if(!saved)box.hidden=false;
         box.querySelector('[data-cookie-accept]')?.addEventListener('click',()=>apply('accepted'));
         box.querySelector('[data-cookie-reject]')?.addEventListener('click',()=>apply('rejected'));
+        document.querySelectorAll('[data-fa-landing-link]').forEach((link)=>link.addEventListener('click',()=>{
+          if(typeof window.gtag==='function')window.gtag('event','fa_landing_referral_click',{source_language:document.documentElement.lang,page_type:'markets'});
+        }));
       })();
     </script>
   </body>

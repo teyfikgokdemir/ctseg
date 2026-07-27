@@ -19,6 +19,10 @@
 - [About CTSEG](https://ctseg.com.tr/en/about/)
 - [Contact](https://ctseg.com.tr/en/contact/)
 
+## Persian standalone resource
+
+- [تأمین بین‌المللی برای کسب‌وکارهای ایرانی](https://ctseg.com.tr/fa/tamin-beynolmelali-iran/) — Persian-language guidance and request preparation for compliant international sourcing. This is a standalone resource, not a full Persian site locale.
+
 ## Expertise
 
 - Strategic sourcing and procurement decision support

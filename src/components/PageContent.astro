@@ -196,6 +196,14 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
       <div class="market-line market-line-large">{marketNames.map((market,index) => <div><span>{indexLabel(index)}</span><strong>{market}</strong><p>{copy.marketsLead}</p></div>)}</div>
     </div></section>
     <ProcessRail steps={copy.framework} />
+    {lang === 'en' && (
+      <aside class="iran-sourcing-link container" aria-labelledby="iran-sourcing-title">
+        <p class="eyebrow">Persian resource</p>
+        <h2 id="iran-sourcing-title">International sourcing support for Iranian businesses</h2>
+        <p>CTSEG supports Iranian manufacturers, distributors, wholesalers and institutional buyers seeking verified products, materials and production inputs from Türkiye and suitable international markets.</p>
+        <a class="text-link" href="/fa/tamin-beynolmelali-iran/" hreflang="fa" data-fa-landing-link>View Persian page →</a>
+      </aside>
+    )}
   </>
 )}
 

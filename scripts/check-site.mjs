@@ -69,6 +69,8 @@ const productCatalogs = new Set([
   'it/prodotti-commerciali/index.html',
   'fr/produits-commerciaux/index.html'
 ]);
+const persianLandingLabel = 'fa/tamin-beynolmelali-iran/index.html';
+const persianLandingCanonical = 'https://ctseg.com.tr/fa/tamin-beynolmelali-iran/';
 
 const targetExists = (pathname) => {
   const clean = decodeURI(pathname).replace(/^\/+/, '').replace(/\/+$/, '');
@@ -102,7 +104,8 @@ for (const file of htmlFiles) {
   const organizations = parsedSchemas.filter((schema) => schema?.['@type'] === 'Organization');
   const organization = organizations[0];
   const isTurkishPage = label === 'index.html' || label.startsWith('tr/');
-  if (!label.startsWith('404') && canonical && lang) pageRecords.push({ label, canonical, lang, alternates });
+  const isPersianLanding = label === persianLandingLabel;
+  if (!label.startsWith('404') && canonical && ['tr','en','de','it','fr'].includes(lang)) pageRecords.push({ label, canonical, lang, alternates });
   if (titleCount !== 1) errors.push(`${label}: expected one title, found ${titleCount}`);
   if ((html.match(/<meta charset="UTF-8">/g) || []).length !== 1) errors.push(`${label}: expected exactly one UTF-8 charset declaration`);
   if (!/<meta name="description" content="[^"]+"/.test(html)) errors.push(`${label}: missing description`);
@@ -142,7 +145,7 @@ for (const file of htmlFiles) {
   if (!html.includes('/fonts/dm-sans-latin-ext-variable.woff2') || !html.includes('/fonts/source-serif-4-latin-ext-variable.woff2')) {
     errors.push(`${label}: local font preloads missing`);
   }
-  if (!label.startsWith('404') && !['tr','en','de','it','fr','x-default'].every((code) => hreflangs.includes(code))) {
+  if (!label.startsWith('404') && !isPersianLanding && !['tr','en','de','it','fr','x-default'].every((code) => hreflangs.includes(code))) {
     errors.push(`${label}: incomplete hreflang set`);
   }
   const expectedLang = label === 'index.html' ? 'tr' : label.split('/')[0];
@@ -168,7 +171,7 @@ for (const file of htmlFiles) {
     errors.push(`${label}: responsive premium homepage hero missing`);
   }
   const imagePreloadCount = (html.match(/rel="preload" as="image"/g) || []).length;
-  if (imagePreloadCount !== (isHome ? 1 : 0)) errors.push(`${label}: unexpected responsive image preload count ${imagePreloadCount}`);
+  if (imagePreloadCount !== (isHome || isPersianLanding ? 1 : 0)) errors.push(`${label}: unexpected responsive image preload count ${imagePreloadCount}`);
   if (isHome) {
     const showcase = html.match(/<div class="product-editorial-grid" data-home-showcase>([\s\S]*?)<\/div>\s*<div class="actions">/)?.[1] ?? '';
     const showcaseProducts = [...showcase.matchAll(/data-product-id="([^"]+)"/g)].map((match) => match[1]);
@@ -177,13 +180,55 @@ for (const file of htmlFiles) {
     if (showcaseProducts.filter((id) => id.includes('pistachio')).length !== 1) errors.push(`${label}: homepage showcase must contain one pistachio product`);
     if (new Set(showcaseFamilies).size < 5) errors.push(`${label}: homepage showcase must represent at least five product families`);
   }
-  const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
-  const mobileLocales = html.match(/class="mobile-locales"[\s\S]*?<\/div>\s*<\/div>/)?.[0] ?? '';
-  const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
-  if ((desktopLocales.match(/data-locale-option/g) || []).length !== 5) errors.push(`${label}: desktop locale panel must contain five languages`);
-  if ((mobileLocales.match(/data-locale-option/g) || []).length !== 5) errors.push(`${label}: mobile locale panel must contain five languages`);
-  if (!/class="locale-code">(?:TR|EN|DE|IT|FR)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger)) {
-    errors.push(`${label}: desktop language trigger must show only the active locale code`);
+  if (!isPersianLanding) {
+    const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
+    const mobileLocales = html.match(/class="mobile-locales"[\s\S]*?<\/div>\s*<\/div>/)?.[0] ?? '';
+    const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
+    if ((desktopLocales.match(/data-locale-option/g) || []).length !== 5) errors.push(`${label}: desktop locale panel must contain five languages`);
+    if ((mobileLocales.match(/data-locale-option/g) || []).length !== 5) errors.push(`${label}: mobile locale panel must contain five languages`);
+    if (!/class="locale-code">(?:TR|EN|DE|IT|FR)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger)) {
+      errors.push(`${label}: desktop language trigger must show only the active locale code`);
+    }
+  }
+  if (isPersianLanding) {
+    if (!html.includes('<html lang="fa" dir="rtl">')) errors.push(`${label}: Persian html lang/RTL declaration missing`);
+    if (canonical !== persianLandingCanonical) errors.push(`${label}: incorrect standalone canonical`);
+    if (html.includes('<link rel="alternate" hreflang=') || hreflangs.length < 1 || hreflangs.some((code) => code !== 'en')) {
+      errors.push(`${label}: standalone page must expose English navigation links without fake locale alternates`);
+    }
+    if ((html.match(/<h1\b/g) || []).length !== 1) errors.push(`${label}: expected one Persian H1`);
+    if ((html.match(/<details\b/g) || []).length !== 11) errors.push(`${label}: expected eleven visible Persian FAQs`);
+    for (const type of ['WebPage','Service','FAQPage','BreadcrumbList']) {
+      if (!parsedSchemas.some((schema) => schema?.['@type'] === type)) errors.push(`${label}: ${type} schema missing`);
+    }
+    if (!html.includes('data-fa-sourcing-form') || !html.includes('name="website"') || !html.includes('name="privacyConsent"') ||
+      !html.includes('id="fa-form-errors" role="alert"') || !html.includes('id="fa-form-fallback"')) {
+      errors.push(`${label}: accessible secure-fallback form controls missing`);
+    }
+    const fields = [...html.matchAll(/<(?:input|select|textarea)\b[^>]*\bid="([^"]+)"/g)]
+      .map((match) => match[1]).filter((id) => id !== 'website');
+    if (!fields.every((id) => new RegExp(`<label[^>]+for="${id}"`).test(html))) errors.push(`${label}: every user-facing form field must have an explicit label`);
+    if (!html.includes('form.dataset.startedAt=String(Date.now())') || !html.includes('10*1024*1024')) {
+      errors.push(`${label}: client-side minimum-time or upload-size guard missing`);
+    }
+    for (const eventName of ['fa_landing_view','fa_form_start','fa_form_submit_attempt','fa_form_submission_success','fa_email_cta_click','fa_english_link_click']) {
+      if (!html.includes(eventName)) errors.push(`${label}: analytics event ${eventName} missing`);
+    }
+    if (!html.includes('اما هنوز برای CTSEG ارسال نشده است') || !html.includes('Generated locally; not yet submitted.')) {
+      errors.push(`${label}: transparent no-backend fallback disclosure missing`);
+    }
+    for (const forbidden of ['تحریم‌ها را دور می‌زنیم','هر محصولی را به ایران ارسال می‌کنیم','پرداخت تضمینی','انتقال بانکی بدون مشکل','تحویل در هر شرایط','تضمین گمرک','تضمین مجوز واردات']) {
+      if (html.includes(forbidden)) errors.push(`${label}: prohibited commercial claim remains`);
+    }
+    if (/(?:Ana Sayfa|Hizmetler|Hakkımızda|İletişim|Teklif İste|Tüm hakları saklıdır)/.test(html)) {
+      errors.push(`${label}: Turkish interface placeholder remains in Persian content`);
+    }
+    if (/href="\/fa\/(?!tamin-beynolmelali-iran\/)/.test(html)) errors.push(`${label}: nonexistent Persian internal route linked`);
+    if (/data-language-toggle|data-locale-option|class="mobile-locales"/.test(html)) errors.push(`${label}: Persian page was incorrectly added to the global locale chrome`);
+    if (!html.includes('CTSEG Sanayi ve Ticaret Limited Şirketi') || !html.includes('Teyfik Gökdemir') ||
+      !html.includes('Fevzipaşa Caddesi، فاتح، استانبول، ترکیه')) {
+      errors.push(`${label}: company information block missing`);
+    }
   }
   const portfolioImageCount = (html.match(/src="\/images\/generated\/2-\d+\.webp\?v=[a-f0-9]+"/g) || []).length;
   if (portfolioImageCount !== (isHome ? 1 : 0)) errors.push(`${label}: unexpected 2.webp usage count ${portfolioImageCount}`);
@@ -234,6 +279,32 @@ for (const file of htmlFiles) {
 }
 if (productSchemaPages !== 90) errors.push(`expected 90 Product schema pages, found ${productSchemaPages}`);
 if (contactEmailPanels !== 5) errors.push(`expected five localized contact email panels, found ${contactEmailPanels}`);
+if (!existsSync(join(root, persianLandingLabel))) errors.push('standalone Persian landing page build output missing');
+const sitemapXml = files.filter((file) => /sitemap-\d+\.xml$/.test(file)).map((file) => readFileSync(file,'utf8')).join('\n');
+if (!sitemapXml.includes(`<loc>${persianLandingCanonical}</loc>`)) errors.push('Persian landing canonical missing from sitemap');
+const llms = readFileSync(join(root, 'llms.txt'), 'utf8');
+if (!llms.includes(persianLandingCanonical) || !llms.includes('standalone resource, not a full Persian site locale')) {
+  errors.push('llms.txt Persian standalone resource declaration missing');
+}
+const englishMarkets = readFileSync(join(root, 'en', 'markets', 'index.html'), 'utf8');
+if (!englishMarkets.includes('data-fa-landing-link') || !englishMarkets.includes('/fa/tamin-beynolmelali-iran/')) {
+  errors.push('English markets page Persian landing referral missing');
+}
+for (const file of htmlFiles) {
+  const label = relative(root, file).replaceAll('\\','/');
+  if ([persianLandingLabel,'en/markets/index.html'].includes(label)) continue;
+  if (readFileSync(file,'utf8').includes('href="/fa/tamin-beynolmelali-iran/"')) {
+    errors.push(`${label}: standalone Persian landing link leaked outside its approved English referral`);
+  }
+}
+for (const localizedMarkets of [
+  ['tr','pazarlar'],['de','maerkte'],['it','mercati'],['fr','marches']
+]) {
+  const localizedHtml = readFileSync(join(root, ...localizedMarkets, 'index.html'), 'utf8');
+  if (localizedHtml.includes('/fa/tamin-beynolmelali-iran/')) {
+    errors.push(`${localizedMarkets.join('/')}: Persian referral must remain English-only`);
+  }
+}
 const css = files.filter((file) => file.endsWith('.css')).map((file) => readFileSync(file,'utf8')).join('\n');
 const deploymentHeaders = readFileSync(join(root, '_headers'), 'utf8');
 for (const routePattern of ['/', '/*/', '/*.html']) {
@@ -276,4 +347,4 @@ if (errors.length) {
   for (const error of [...new Set(errors)]) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Site check passed: ${htmlFiles.length} HTML pages, ${checkedLinks} internal links, 90 product schemas with verified media, unique five-language product cards, reciprocal hreflang and complete metadata/chrome checks.`);
+console.log(`Site check passed: ${htmlFiles.length} HTML pages including the standalone Persian RTL resource, ${checkedLinks} internal links, 90 product schemas with verified media, reciprocal core-locale hreflang, sitemap/llms coverage and complete metadata/chrome checks.`);
