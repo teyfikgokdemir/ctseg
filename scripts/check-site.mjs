@@ -81,8 +81,12 @@ for (const file of htmlFiles) {
   }
   const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
   const mobileLocales = html.match(/class="mobile-locales"[\s\S]*?<\/div>\s*<\/div>/)?.[0] ?? '';
+  const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
   if ((desktopLocales.match(/data-locale-option/g) || []).length !== 5) errors.push(`${label}: desktop locale panel must contain five languages`);
   if ((mobileLocales.match(/data-locale-option/g) || []).length !== 5) errors.push(`${label}: mobile locale panel must contain five languages`);
+  if (!/class="locale-code">(?:TR|EN|DE|IT|FR)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger)) {
+    errors.push(`${label}: desktop language trigger must show only the active locale code`);
+  }
   const portfolioImageCount = (html.match(/src="\/images\/2\.webp"/g) || []).length;
   if (portfolioImageCount !== (isHome ? 1 : 0)) errors.push(`${label}: unexpected 2.webp usage count ${portfolioImageCount}`);
   if (html.includes('"@type":"Product"')) {
@@ -122,6 +126,9 @@ if (!css.includes(':focus-visible')) errors.push('compiled CSS: focus-visible tr
 if (!css.includes('prefers-reduced-motion:reduce')) errors.push('compiled CSS: reduced-motion treatment missing');
 if (!css.includes('.product-media--poster') || !css.includes('object-fit:contain') || !css.includes('.product-media--photo')) {
   errors.push('compiled CSS: poster/photo media treatment missing');
+}
+if (!css.includes('--header-height:88px') || !css.includes('.page-hero+.section') || !css.includes('.portfolio-visual img') || !css.includes('object-fit:contain')) {
+  errors.push('compiled CSS: final hero/header/portfolio regression guards missing');
 }
 const localeAtmospheres = [...css.matchAll(/html\[data-locale=(?:tr|en|de|it|fr)\]\{([^}]+)\}/g)].map((match) => match[1]);
 if (localeAtmospheres.length !== 5 || new Set(localeAtmospheres).size !== 5) errors.push('compiled CSS: five distinct locale atmospheres missing');

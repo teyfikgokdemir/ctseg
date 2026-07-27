@@ -1,12 +1,12 @@
 ---
 import { localizedPath, ui, type Locale } from '../data/site';
 import ProductMedia from './ProductMedia.astro';
-const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, ctaLabel, imageNote } = Astro.props as {
+const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, ctaLabel, imageNote, compact=false } = Astro.props as {
   lang: Locale; eyebrow: string; title: string; lead: string; parentHref?: string; parentLabel?: string;
-  product?:any; ctaHref?:string; ctaLabel?:string; imageNote?:string;
+  product?:any; ctaHref?:string; ctaLabel?:string; imageNote?:string; compact?:boolean;
 };
 ---
-<section class:list={['page-hero', { 'product-page-hero':product }]}>
+<section class:list={['page-hero', { 'product-page-hero':product, 'page-hero--compact':compact }]} data-page-hero>
   <div class:list={['container', { 'page-hero-grid':product }]}>
     <div class="page-hero-copy">
       <nav class="breadcrumb" aria-label="Breadcrumb">

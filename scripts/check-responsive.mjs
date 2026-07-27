@@ -51,15 +51,36 @@ try {
     { name:'desktop-it-catalogue', path:'/it/prodotti-commerciali/', width:1440, height:1000 },
     { name:'desktop-fr-home', path:'/fr/', width:1440, height:1000 },
     { name:'desktop-fr-catalogue', path:'/fr/produits-commerciaux/', width:1440, height:1000 },
+    { name:'wide-tr-home', path:'/', width:1600, height:1000 },
+    { name:'wide-tr-services', path:'/tr/hizmetler/', width:1600, height:1000 },
+    { name:'wide-tr-markets', path:'/tr/pazarlar/', width:1600, height:1000 },
+    { name:'wide-tr-insights', path:'/tr/icgoruler/', width:1600, height:1000 },
+    { name:'wide-tr-about', path:'/tr/hakkimizda/', width:1600, height:1000 },
+    { name:'wide-tr-contact', path:'/tr/iletisim/', width:1600, height:1000 },
+    { name:'wide-tr-catalogue', path:'/tr/ticari-urunler/', width:1600, height:1000 },
+    { name:'wide-de-home', path:'/de/', width:1600, height:1000 },
+    { name:'wide-de-locale-panel', path:'/de/', width:1600, height:1000, openLanguage:true },
+    { name:'wide-it-home', path:'/it/', width:1600, height:1000 },
+    { name:'wide-fr-home', path:'/fr/', width:1600, height:1000 },
     { name:'mobile-tr-home', path:'/', width:390, height:844 },
     { name:'mobile-en-home', path:'/en/', width:390, height:844 },
     { name:'mobile-it-home', path:'/it/', width:390, height:844 },
     { name:'mobile-fr-home', path:'/fr/', width:390, height:844 },
     { name:'mobile-tr-services', path:'/tr/hizmetler/', width:390, height:844 },
+    { name:'mobile-tr-markets', path:'/tr/pazarlar/', width:390, height:844 },
+    { name:'mobile-tr-insights', path:'/tr/icgoruler/', width:390, height:844 },
     { name:'mobile-tr-contact', path:'/tr/iletisim/', width:390, height:844 },
     { name:'mobile-tr-menu', path:'/', width:390, height:844, openMenu:true },
     { name:'mobile-fr-catalogue', path:'/fr/produits-commerciaux/', width:390, height:844 },
-    { name:'mobile-de-home', path:'/de/', width:390, height:844 }
+    { name:'mobile-de-home', path:'/de/', width:390, height:844 },
+    { name:'mobile430-tr-home', path:'/', width:430, height:932 },
+    { name:'mobile430-tr-services', path:'/tr/hizmetler/', width:430, height:932 },
+    { name:'mobile430-tr-markets', path:'/tr/pazarlar/', width:430, height:932 },
+    { name:'mobile430-tr-insights', path:'/tr/icgoruler/', width:430, height:932 },
+    { name:'mobile430-tr-contact', path:'/tr/iletisim/', width:430, height:932 },
+    { name:'mobile430-tr-menu', path:'/', width:430, height:932, openMenu:true },
+    { name:'mobile430-de-home', path:'/de/', width:430, height:932 },
+    { name:'mobile430-fr-home', path:'/fr/', width:430, height:932 }
   ];
   const failures = [];
   const localeAtmospheres = new Map();
@@ -115,6 +136,11 @@ try {
         const alternate=document.querySelector(`link[rel="alternate"][hreflang="${code}"]`);
         return alternate && new URL(link.href).pathname === new URL(alternate.href).pathname;
       })
+      ,desktopLocaleCodeOnly:(() => {
+        if (window.innerWidth <= 860) return true;
+        const trigger=document.querySelector('[data-language-toggle]');
+        return trigger?.textContent?.trim() === document.documentElement.lang.toUpperCase();
+      })()
       ,overflowNodes:[...document.querySelectorAll('body *')]
         .filter((element) => {
           const box=element.getBoundingClientRect();
@@ -151,6 +177,13 @@ try {
         const visualBox=visual?.getBoundingClientRect();
         const headerBox=header?.getBoundingClientRect();
         const firstBox=first?.getBoundingClientRect();
+        const pageHero=document.querySelector('[data-page-hero]');
+        const pageHeroBox=pageHero?.getBoundingClientRect();
+        const nextSection=pageHero?.nextElementSibling;
+        const nextContent=nextSection?.querySelector('.container > *') ?? nextSection?.querySelector('.container');
+        const nextContentBox=nextContent?.getBoundingClientRect();
+        const heroFocus=pageHero?.querySelector('.eyebrow,.breadcrumb,h1');
+        const heroFocusBox=heroFocus?.getBoundingClientRect();
         const lineHeight=heading ? Number.parseFloat(getComputedStyle(heading).lineHeight) : 0;
         const catalogueCards=[...document.querySelectorAll('.catalogue-grid [data-product-card]')];
         const cardImages=catalogueCards.map((card)=>card.querySelector('img')?.getAttribute('src')).filter(Boolean);
@@ -158,6 +191,8 @@ try {
         return {
           headingVisualOverlap:intersects(headingBox,visualBox),
           headerOverlap:Boolean(headerBox&&firstBox&&firstBox.top<headerBox.bottom-1),
+          heroChromeOverlap:intersects(headerBox,heroFocusBox),
+          pageHeroGap:pageHeroBox&&nextContentBox ? Math.round(nextContentBox.top-pageHeroBox.bottom) : null,
           headingLines:headingBox&&lineHeight ? Math.round(headingBox.height/lineHeight) : 0,
           cardOverflow:catalogueCards.some((card)=>card.getBoundingClientRect().right>window.innerWidth+1||card.getBoundingClientRect().left<-1),
           maxCardHeight:catalogueCards.reduce((max,card)=>Math.max(max,card.getBoundingClientRect().height),0),
@@ -165,6 +200,21 @@ try {
           duplicateDetailMedia:new Set(detailMedia).size!==detailMedia.length,
           posterFit:[...document.querySelectorAll('[data-media-type="poster"] img')].every((image)=>getComputedStyle(image).objectFit==='contain'),
           photoFit:[...document.querySelectorAll('[data-media-type="photo"] img')].every((image)=>getComputedStyle(image).objectFit==='cover'),
+          portfolioContain:[...document.querySelectorAll('.portfolio-visual img[src="/images/2.webp"]')].every((image)=>getComputedStyle(image).objectFit==='contain') &&
+            document.querySelectorAll('.portfolio-visual img[src="/images/2.webp"]').length <= 1,
+          marketTitleCentered:[...document.querySelectorAll('.market-line')].every((line)=>{
+            const cards=[...line.children];
+            const heights=cards.map((card)=>card.getBoundingClientRect().height);
+            return Math.max(...heights)-Math.min(...heights)<2 && cards.every((card)=>{
+              const title=card.querySelector('strong');
+              if(!title) return false;
+              const cardBox=card.getBoundingClientRect();
+              const titleBox=title.getBoundingClientRect();
+              return Math.abs((cardBox.left+cardBox.width/2)-(titleBox.left+titleBox.width/2))<2 &&
+                Math.abs((cardBox.top+cardBox.height/2)-(titleBox.top+titleBox.height/2))<3;
+            });
+          }),
+          compactHeroHeight:[...document.querySelectorAll('.page-hero--compact')].every((hero)=>hero.getBoundingClientRect().height < (window.innerWidth<=860 ? 500 : 600)),
           ctaAlignment:[...document.querySelectorAll('.cta-statement')].every((cta)=>{
             const heading=cta.querySelector('h2');
             const button=cta.querySelector('.button');
@@ -190,14 +240,17 @@ try {
     }));
     await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:!testCase.openMenu });
     localeAtmospheres.set(result.lang,result.localeAtmosphere);
-    const badLayout = result.layout.headingVisualOverlap || result.layout.headerOverlap || result.layout.cardOverflow ||
+    const gapLimit = testCase.width <= 860 ? 56 : 80;
+    const badLayout = result.layout.headingVisualOverlap || result.layout.headerOverlap || result.layout.heroChromeOverlap ||
+      (result.layout.pageHeroGap !== null && (result.layout.pageHeroGap < 20 || result.layout.pageHeroGap > gapLimit)) || result.layout.cardOverflow ||
       result.layout.repeatedAdjacentImage || result.layout.duplicateDetailMedia ||
-      !result.layout.posterFit || !result.layout.photoFit || !result.layout.ctaAlignment ||
+      !result.layout.posterFit || !result.layout.photoFit || !result.layout.portfolioContain ||
+      !result.layout.marketTitleCentered || !result.layout.compactHeroHeight || !result.layout.ctaAlignment ||
       (testCase.width <= 620 && result.layout.ctaMobileLines > 5) ||
       (testCase.width <= 620 && result.layout.headingLines > 6) ||
       (testCase.width >= 1100 && result.layout.maxCardHeight > 700) ||
       (result.layout.productCount > 0 && result.layout.productCount !== 18);
-    const badLocale = result.localeOptions !== 5 || result.activeDesktopLocale !== 1 || !result.localeRouteMatch ||
+    const badLocale = result.localeOptions !== 5 || result.activeDesktopLocale !== 1 || !result.localeRouteMatch || !result.desktopLocaleCodeOnly ||
       (testCase.openMenu && (result.visibleMobileLocales !== 5 || result.mobilePanelHeight < testCase.height * .7));
     if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu || !bodyScrollLocked || badLayout || badLocale) {
       failures.push(`${testCase.name}: ${JSON.stringify({...result,mobileMenu,bodyScrollLocked})}`);

@@ -222,7 +222,7 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
 
 {key === 'contact' && (
   <>
-    <PageHero lang={lang} eyebrow={t.contact} title={copy.contactTitle} lead={t.contactLead} />
+    <PageHero lang={lang} eyebrow={t.contact} title={copy.contactTitle} lead={t.contactLead} compact={true} />
     <section class="section"><div class="container content-grid">
       <div class="prose"><div class="content-block"><h2>{t.logistics}</h2><p>{t.contactLead}</p><ul class="check-list">{qualificationFields.map((field) => <li>{field}</li>)}</ul></div><div class="origin-note"><strong>{t.samplePolicy}</strong><p>{t.sampleText}</p></div></div>
       <aside class="side-panel"><p class="eyebrow">E-mail</p><h2>info@ctseg.com.tr</h2><p>Türkiye · Europe · International</p><a class="button" href="mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry">info@ctseg.com.tr</a></aside>
