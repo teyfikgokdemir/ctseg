@@ -15,6 +15,7 @@ const {
 const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
 const alternates = routeAlternates(pageKey, pageId);
 if (pageKey === 'home') alternates.tr = 'https://ctseg.com.tr/';
+const alternateCodes = ['how-we-work','scenarios','guides'].includes(pageKey) ? ['tr','en'] : locales;
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
   name:company.name,alternateName:company.alternateName,foundingDate:company.foundingYear,
@@ -58,7 +59,7 @@ const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex,follow" />}
     <link rel="canonical" href={canonicalUrl} />
-    {locales.map((code) => <link rel="alternate" hreflang={code} href={alternates[code]} />)}
+    {alternateCodes.map((code) => <link rel="alternate" hreflang={code} href={alternates[code as Locale]} />)}
     <link rel="alternate" hreflang="x-default" href={alternates.en} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
@@ -71,7 +72,7 @@ const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
       imagesizes={heroSizes}
       fetchpriority="high"
     />}
-    <meta name="theme-color" content="#080b12" />
+    <meta name="theme-color" content="#272923" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -110,6 +111,19 @@ const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
         box.querySelector('[data-cookie-reject]')?.addEventListener('click',()=>apply('rejected'));
         document.querySelectorAll('[data-fa-landing-link]').forEach((link)=>link.addEventListener('click',()=>{
           if(typeof window.gtag==='function')window.gtag('event','fa_landing_referral_click',{source_language:document.documentElement.lang,page_type:'markets'});
+        }));
+        document.querySelectorAll('[data-product-quote]').forEach((link)=>link.addEventListener('click',()=>{
+          const product=link.getAttribute('data-product-name');if(product)sessionStorage.setItem('ctseg-product-request',product);
+          if(typeof window.gtag==='function')window.gtag('event','product_quote_click',{source_language:document.documentElement.lang,page_type:'product'});
+        }));
+        document.querySelectorAll('[data-catalog-download]').forEach((link)=>link.addEventListener('click',()=>{
+          if(typeof window.gtag==='function')window.gtag('event','catalog_download',{source_language:document.documentElement.lang,catalog_language:link.getAttribute('data-catalog-language')});
+        }));
+        document.querySelectorAll('[data-how-we-work-cta]').forEach((link)=>link.addEventListener('click',()=>{
+          if(typeof window.gtag==='function')window.gtag('event','how_we_work_cta_click',{source_language:document.documentElement.lang});
+        }));
+        document.querySelectorAll('[data-case-scenario-cta]').forEach((link)=>link.addEventListener('click',()=>{
+          if(typeof window.gtag==='function')window.gtag('event','case_scenario_cta_click',{source_language:document.documentElement.lang});
         }));
       })();
     </script>

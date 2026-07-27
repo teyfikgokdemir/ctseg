@@ -1,3 +1,5 @@
+import { guideSlugs, specialSlugs, type GuideId } from './completion';
+
 export const locales = ['tr', 'en', 'de', 'it', 'fr'] as const;
 export type Locale = (typeof locales)[number];
 
@@ -155,7 +157,7 @@ export const homeCopy: Record<Locale, any> = {
     eyebrow: 'Strategic sourcing · international trade', title: 'Commercial confidence for complex sourcing decisions.',
     lead: 'We combine producer discovery, verification, quality, total cost and market fit in one disciplined decision process.',
     signal: 'CTSEG Signal Room', live: 'Active assessment', signals: [['SUPPLY', 'Producer and capacity'], ['QUALITY', 'COA and traceability'], ['MARKET', 'Compliance and delivery model']],
-    trust: ['Verified counterparties', 'Transparent origin', 'B2B decision discipline', 'Türkiye · Europe · International'],
+    trust: ['Verified counterparties', 'Transparent origin', 'B2B decision discipline', 'Türkiye · European markets · International markets'],
     servicesTitle: 'More than a purchasing list.', servicesLead: 'We structure the complete decision, from requirement and verification to quotation and implementation.',
     productsTitle: 'A verifiable trade product portfolio.', productsLead: 'Selected food products assessed transparently for origin, batch, quality parameters and delivery options.',
     marketsTitle: 'Executable connections across markets.', marketsLead: 'Türkiye-based sourcing and trade coordination extending into Europe and international markets.',
@@ -188,7 +190,7 @@ export const homeCopy: Record<Locale, any> = {
     eyebrow: 'Sourcing stratégique · commerce international', title: 'Plus de maîtrise dans vos décisions d’approvisionnement.',
     lead: 'Nous réunissons recherche de producteurs, vérification, qualité, coût total et adéquation au marché dans un processus décisionnel structuré.',
     signal: 'CTSEG Signal Room', live: 'Évaluation active', signals: [['SOURCING', 'Producteur et capacité'], ['QUALITÉ', 'COA et traçabilité'], ['MARCHÉ', 'Conformité et livraison']],
-    trust: ['Contreparties vérifiées', 'Origine transparente', 'Discipline de décision B2B', 'Türkiye · Europe · International'],
+    trust: ['Contreparties vérifiées', 'Origine transparente', 'Discipline de décision B2B', 'Turquie · Europe · International'],
     servicesTitle: 'Bien plus qu’une liste d’achats.', servicesLead: 'Nous structurons toute la décision, du besoin et de la vérification jusqu’à l’offre et l’exécution.',
     productsTitle: 'Un portefeuille commercial vérifiable.', productsLead: 'Produits alimentaires sélectionnés, évalués selon l’origine, le lot, la qualité et les options de livraison.',
     marketsTitle: 'Des connexions opérationnelles entre marchés.', marketsLead: 'Coordination du sourcing et du commerce depuis la Türkiye vers l’Europe et les marchés internationaux.',
@@ -644,6 +646,18 @@ export const pageCopy: Record<Locale, any> = {
 
 export function localizedPath(lang: Locale, key: string, id?: string): string {
   if (key === 'home') return lang === 'tr' ? '/' : `/${lang}/`;
+  if (key === 'how-we-work') {
+    if (lang === 'tr' || lang === 'en') return `/${lang}/${specialSlugs['how-we-work'][lang]}/`;
+    return localizedPath(lang,'services');
+  }
+  if (key === 'scenarios') {
+    if (lang === 'tr' || lang === 'en') return `/${lang}/${specialSlugs.scenarios[lang]}/`;
+    return localizedPath(lang,'about');
+  }
+  if (key === 'guides' && id) {
+    if (lang === 'tr' || lang === 'en') return `/${lang}/${sectionSlugs.insights[lang]}/${guideSlugs[id as GuideId][lang]}/`;
+    return localizedPath(lang,'insights');
+  }
   const section = sectionSlugs[key]?.[lang];
   if (key === 'services' && id) return `/${lang}/${section}/${services[id as keyof typeof services].slugs[lang]}/`;
   if (key === 'products' && id) return `/${lang}/${section}/${products[id as keyof typeof products].slugs[lang]}/`;

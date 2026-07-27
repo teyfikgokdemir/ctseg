@@ -2,6 +2,7 @@ import {
   insightIds, insights, legal, legalIds, locales, localizedPath, pageCopy, productIds, products,
   sectionSlugs, serviceIds, services, ui, type Locale
 } from '../data/site';
+import { guideIds, guides, guideSlugs, processPages, scenarioPages, specialSlugs } from '../data/completion';
 
 export type RouteRecord = {
   lang: Locale;
@@ -29,6 +30,13 @@ export function getRouteRecords(): RouteRecord[] {
     for (const id of legalIds) records.push({
       lang, path:legal[id].slugs[lang], key:'legal', id
     });
+    if (lang === 'tr' || lang === 'en') {
+      records.push({lang,path:specialSlugs['how-we-work'][lang],key:'how-we-work'});
+      records.push({lang,path:specialSlugs.scenarios[lang],key:'scenarios'});
+      for (const id of guideIds) records.push({
+        lang,path:`${sectionSlugs.insights[lang]}/${guideSlugs[id][lang]}`,key:'guides',id
+      });
+    }
   }
   return records;
 }
@@ -48,6 +56,12 @@ export function getMeta(record: RouteRecord) {
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
   if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} B2B | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
   if (key === 'insights' && id) return { title:`${insights[id as keyof typeof insights].titles[lang]} | CTSEG`, description:insights[id as keyof typeof insights].descriptions[lang] };
+  if (key === 'how-we-work' && (lang === 'tr' || lang === 'en')) return {title:`${processPages[lang].title} | CTSEG`,description:processPages[lang].description};
+  if (key === 'scenarios' && (lang === 'tr' || lang === 'en')) return {title:`${scenarioPages[lang].title} | CTSEG`,description:scenarioPages[lang].description};
+  if (key === 'guides' && id && (lang === 'tr' || lang === 'en')) {
+    const guide=guides[id as keyof typeof guides][lang];
+    return {title:`${guide.title} | CTSEG`,description:guide.description};
+  }
   if (key === 'legal' && id) return {
     title:`${legal[id as keyof typeof legal].titles[lang]} | CTSEG`,
     description:`${legal[id as keyof typeof legal].titles[lang]}. ${copy.legalIntro}`

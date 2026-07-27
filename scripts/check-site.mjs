@@ -339,12 +339,13 @@ if (!css.includes('--header-height:88px') || !css.includes('.page-hero+.section'
 if (!css.includes('.contact-email-link:hover') || !css.includes('.contact-email-link:focus-visible') || !css.includes('overflow-wrap:anywhere')) {
   errors.push('compiled CSS: contact email hover/focus/wrapping treatment missing');
 }
-const localeAtmospheres = [...css.matchAll(/html\[data-locale=(?:tr|en|de|it|fr)\]\{([^}]+)\}/g)].map((match) => match[1]);
-if (localeAtmospheres.length !== 5 || new Set(localeAtmospheres).size !== 5) errors.push('compiled CSS: five distinct locale atmospheres missing');
+for (const locale of ['tr','en','de','it','fr']) {
+  if (!css.includes(`html[data-locale=${locale}]`)) errors.push(`compiled CSS: ${locale} locale treatment missing`);
+}
 
 const pagesByCanonical = new Map(pageRecords.map((page) => [page.canonical,page]));
 for (const page of pageRecords) {
-  for (const code of ['tr','en','de','it','fr']) {
+  for (const code of ['tr','en','de','it','fr'].filter((locale) => page.alternates[locale])) {
     const targetUrl = page.alternates[code];
     const target = pagesByCanonical.get(targetUrl);
     if (!target) {

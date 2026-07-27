@@ -76,3 +76,14 @@ img{display:block;max-width:100%}
 @media(max-width:820px){.fa-container{width:min(var(--fa-max),calc(100% - 34px))}.fa-header-inner{padding-block:14px;align-items:flex-start}.fa-nav{justify-content:flex-end;flex-wrap:wrap;gap:10px 16px}.fa-nav .fa-nav-section{display:none}.fa-hero{padding:66px 0}.fa-hero-grid,.fa-section-head,.fa-definition-grid,.fa-compliance-grid,.fa-contact{grid-template-columns:1fr}.fa-hero-visual{max-width:680px}.fa-section{padding:74px 0}.fa-section-head{gap:20px}.fa-definition-grid,.fa-compliance-grid,.fa-contact{gap:38px}.fa-footer-main{grid-template-columns:1fr}.fa-footer-links{flex-wrap:wrap}}
 @media(max-width:560px){.fa-container{width:min(var(--fa-max),calc(100% - 26px))}.fa-header-inner{min-height:74px}.fa-brand img{width:126px}.fa-nav{font-size:.73rem}.fa-language{padding-inline-start:10px}.fa-hero{padding:48px 0 58px}.fa-hero h1{font-size:clamp(2.65rem,13vw,3.7rem)}.fa-lead{font-size:1rem}.fa-hero-visual:before{inset:-8px 28% 52% -8px}.fa-hero-visual figcaption{grid-template-columns:1fr}.fa-actions{display:grid}.fa-button{width:100%}.fa-section{padding:60px 0}.fa-section h2{font-size:clamp(2.2rem,11vw,3.1rem)}.fa-audience-grid,.fa-service-grid,.fa-process,.fa-form-grid,.fa-faq{grid-template-columns:1fr}.fa-card{min-height:auto}.fa-category{padding:26px 20px}.fa-category-heading{grid-template-columns:40px 1fr}.fa-request-note ul{columns:1}.fa-form{padding:24px 18px}.fa-company-facts div{grid-template-columns:1fr;gap:4px}.fa-cookie{align-items:stretch;flex-direction:column}.fa-cookie-actions button{flex:1}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Shared warm editorial direction, preserving the dedicated RTL structure. */
+:root{--fa-bg:#f2efe7;--fa-deep:#272923;--fa-surface:#e8e3d8;--fa-surface-2:#f2efe7;--fa-text:#22231f;--fa-muted:#6f7068;--fa-line:#d3cec1;--fa-strong:#aaa598;--fa-accent:#a95638;--fa-accent-soft:#c4775a;--fa-shadow:0 12px 28px rgba(34,35,31,.14)}
+html,body{background:#f2efe7;color:#22231f}
+.fa-header,.fa-footer,.fa-cookie{background:#272923;color:#f2efe7}.fa-nav{color:#c7c2b7}
+.fa-hero,.fa-compliance{background:#272923;color:#f2efe7}.fa-hero .fa-lead,.fa-compliance p{color:#c7c2b7}
+.fa-definition{background:#e8e3d8}.fa-category,.fa-form{background:#e8e3d8;box-shadow:none}
+.fa-card,.fa-category,.fa-form,.fa-boundaries,.fa-contact-box{border-color:#d3cec1}
+.fa-boundaries{background:#e8e3d8}.fa-field input,.fa-field select,.fa-field textarea{background:#f2efe7;color:#22231f;border-color:#aaa598;box-shadow:none}
+.fa-hero-visual{box-shadow:none}.fa-button{background:#a95638;border-color:#a95638;color:#f2efe7}.fa-button:hover{background:#8f452e;border-color:#8f452e}
+.fa-button-secondary{color:#f2efe7}.fa-form-alert{background:#f2efe7}.fa-cookie button{color:#f2efe7}

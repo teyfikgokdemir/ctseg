@@ -6,14 +6,15 @@
   "scripts": {
     "dev": "astro dev",
     "images:generate": "node scripts/generate-responsive-images.mjs",
-    "prebuild": "npm run images:generate",
+    "prebuild": "node scripts/clean-dist.mjs && npm run images:generate",
     "build": "astro build",
     "preview": "astro preview",
     "check:site": "node scripts/check-site.mjs",
+    "check:form": "node scripts/check-contact-function.mjs",
     "check:responsive": "node scripts/check-responsive.mjs",
     "check:performance": "node scripts/check-performance.mjs",
     "lighthouse:mobile": "node scripts/run-lighthouse.mjs",
-    "validate": "npm run build && npm run check:site && npm run check:responsive"
+    "validate": "npm run build && npm run check:site && npm run check:form && npm run check:responsive"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

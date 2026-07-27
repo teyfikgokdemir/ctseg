@@ -7,7 +7,11 @@ import ProcessRail from './ProcessRail.astro';
 import ProductCard from './ProductCard.astro';
 import ProductMedia from './ProductMedia.astro';
 import ResponsiveImage from './ResponsiveImage.astro';
+import CommercialRequestForm from './CommercialRequestForm.astro';
 import { FEATURE_IMAGE_WIDTHS, HERO_IMAGE } from '../lib/responsive-images';
+import {
+  aboutEnhancement, guides, homeEnhancement, marketsDetail, processPages, scenarioPages
+} from '../data/completion';
 import {
   company, companyCopy, editorialCopy, homeCopy, homeProductIds, insightIds, insights, legal, localizedPath, pageCopy, productIds, products,
   serviceIds, services, ui, type Locale
@@ -21,6 +25,9 @@ const h = homeCopy[lang];
 const copy = pageCopy[lang];
 const corporate = companyCopy[lang];
 const editorial = editorialCopy[lang];
+const completionHome = homeEnhancement[lang];
+const completionAbout = aboutEnhancement[lang];
+const completionMarkets = marketsDetail[lang];
 const service = id && key === 'services' ? services[id as keyof typeof services] : null;
 const product = id && key === 'products' ? products[id as keyof typeof products] : null;
 const insight = id && key === 'insights' ? insights[id as keyof typeof insights] : null;
@@ -74,6 +81,25 @@ const catalogueGroups = [
   }
 ];
 const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
+const processPage = (lang === 'tr' || lang === 'en') ? processPages[lang] : null;
+const scenarioPage = (lang === 'tr' || lang === 'en') ? scenarioPages[lang] : null;
+const guide = key === 'guides' && id && (lang === 'tr' || lang === 'en') ? guides[id as keyof typeof guides][lang] : null;
+const workHref = localizedPath(lang,'how-we-work');
+const scenarioHref = localizedPath(lang,'scenarios');
+const productCommercialLabels = {
+  tr:['Menşe','Ürün tipi / çeşit','Olası ambalaj','MOQ','Kalite ve analiz belgeleri','Numune','Private label','Teslim ve Incoterm','Termin','Depolama','Hedef kullanım','Teklif için gerekli bilgiler'],
+  en:['Origin','Product type / variety','Potential packaging','MOQ','Quality and analysis documents','Sample','Private label','Delivery and Incoterm','Lead time','Storage','Intended use','Information required for quotation'],
+  de:['Herkunft','Produkttyp / Sorte','Mögliche Verpackung','MOQ','Qualitäts- und Analysedokumente','Muster','Eigenmarke','Lieferung und Incoterm','Lieferzeit','Lagerung','Zielanwendung','Angaben für ein Angebot'],
+  it:['Origine','Tipo / varietà','Possibile imballaggio','MOQ','Documenti qualità e analisi','Campione','Private label','Consegna e Incoterm','Tempi','Stoccaggio','Uso previsto','Dati necessari per l’offerta'],
+  fr:['Origine','Type / variété','Emballage possible','MOQ','Documents qualité et analyses','Échantillon','Marque propre','Livraison et Incoterm','Délai','Stockage','Usage cible','Informations pour le devis']
+}[lang];
+const verifiedLater = {
+  tr:['Üretici ve sipariş yapısına göre doğrulanır','Teklif aşamasında teyit edilir','Parti bazında belge kontrolü yapılır','Talebe göre değerlendirilir','Üretici ve hedef pazara göre değerlendirilir'],
+  en:['Verified according to producer and order structure','Confirmed at quotation stage','Documents checked at batch level','Assessed on request','Assessed by producer and target market'],
+  de:['Nach Hersteller und Auftragsstruktur zu prüfen','In der Angebotsphase zu bestätigen','Dokumentenprüfung je Charge','Auf Anfrage zu bewerten','Nach Hersteller und Zielmarkt zu bewerten'],
+  it:['Da verificare secondo produttore e ordine','Da confermare in fase di offerta','Documenti verificati per lotto','Valutato su richiesta','Valutato per produttore e mercato target'],
+  fr:['À vérifier selon le producteur et la commande','À confirmer au stade du devis','Documents contrôlés par lot','Évalué sur demande','Évalué selon le producteur et le marché cible']
+}[lang];
 ---
 {key === 'home' && (
   <>
@@ -81,7 +107,7 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
       <div class="container hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">{h.eyebrow}</p><h1>{h.title}</h1><p class="lead">{h.lead}</p>
-          <div class="actions"><a class="button" href={sectionHref('contact')}>{t.quote}</a><a class="button button-secondary" href={sectionHref('services')}>{t.services}</a></div>
+          <div class="actions"><a class="button" href={sectionHref('contact')}>{completionHome.commercialCta}</a><a class="button button-secondary" href={sectionHref('services')}>{t.services}</a></div>
         </div>
         <figure class="hero-visual">
           <ResponsiveImage
@@ -104,6 +130,21 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
       <h2>{editorial.manifestoTitle}</h2>
       <div><p>{editorial.manifestoText}</p><a class="text-link" href={sectionHref('services')}>{t.allServices} ↗</a></div>
     </div></section>
+    <section class="section company-trust-band"><div class="container">
+      <div class="section-head"><h2>{completionHome.trustTitle}</h2><p>{company.name}</p></div>
+      <dl class="trust-facts">
+        <div><dt>01</dt><dd>{completionHome.established}</dd></div>
+        <div><dt>02</dt><dd>{completionHome.founder}</dd></div>
+        <div><dt>03</dt><dd>{completionHome.headquarters}</dd></div>
+      </dl>
+    </div></section>
+    <section class="section trade-direction-section"><div class="container">
+      <div class="section-head"><h2>{completionHome.tradeTitle}</h2><p>{completionHome.tradeLead}</p></div>
+      <div class="trade-directions">
+        <article><span>01</span><p>{completionHome.outbound}</p></article>
+        <article><span>02</span><p>{completionHome.inbound}</p></article>
+      </div>
+    </div></section>
     <section class="section product-showcase"><div class="container">
       <div class="section-head"><h2>{h.productsTitle}</h2><p>{h.productsLead}</p></div>
       <div class="product-editorial-grid" data-home-showcase>
@@ -120,11 +161,16 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
     </div></section>
     <PortfolioBanner lang={lang} />
     <ProcessRail title={h.processTitle} steps={h.process} />
+    {(lang === 'tr' || lang === 'en') && <div class="container process-detail-link"><a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a></div>}
     <section class="markets-editorial section"><div class="container">
       <p class="eyebrow">{editorial.marketsKicker}</p>
       <div class="section-head"><h2>{h.marketsTitle}</h2><p>{h.marketsLead}</p></div>
       <div class="market-line">{marketNames.map((market,index) => <div><span>{indexLabel(index)}</span><strong>{market}</strong></div>)}</div>
     </div></section>
+    {(lang === 'tr' || lang === 'en') && <section class="section scenario-teaser"><div class="container content-grid">
+      <div><p class="eyebrow">CTSEG · {lang === 'tr' ? 'Temsili çalışma' : 'Representative work'}</p><h2>{completionHome.scenarioTitle}</h2><p>{completionHome.scenarioLead}</p></div>
+      <aside class="side-panel"><a class="button button-secondary" href={scenarioHref} data-case-scenario-cta>{completionHome.scenarioCta}</a></aside>
+    </div></section>}
     <section class="section"><div class="container"><div class="cta-statement"><p class="eyebrow">CTSEG</p><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.quote}</a></div></div></section>
   </>
 )}
@@ -134,6 +180,7 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
     <PageHero lang={lang} eyebrow={t.services} title={copy.servicesTitle} lead={copy.servicesLead} />
     <section class="section"><div class="container card-grid">{serviceIds.map((serviceId,index) => <a class="card" href={localizedPath(lang,'services',serviceId)}><small>{indexLabel(index)}</small><h2>{services[serviceId].names[lang]}</h2><p>{services[serviceId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
     <Framework lang={lang} />
+    {(lang === 'tr' || lang === 'en') && <section class="section compact-link-section"><div class="container cta-statement"><h2>{processPage?.title}</h2><a class="button" href={workHref} data-how-we-work-cta>{lang === 'tr' ? 'Dokuz adımı inceleyin' : 'Review the nine stages'}</a></div></section>}
   </>
 )}
 
@@ -154,6 +201,10 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
   <>
     <PageHero lang={lang} eyebrow={t.products} title={copy.productsTitle} lead={copy.productsLead} />
     <section class="section catalogue-section"><div class="container">
+      {(lang === 'tr' || lang === 'en') && <div class="catalog-download">
+        <div><p class="eyebrow">PDF · 18 {lang === 'tr' ? 'ürün' : 'products'}</p><h2>{lang === 'tr' ? 'CTSEG Ticari Ürünler Kataloğu' : 'CTSEG Trade Products Catalogue'}</h2></div>
+        <a class="button button-secondary" href={lang === 'tr' ? '/downloads/ctseg-ticari-urunler-katalogu.pdf' : '/downloads/ctseg-trade-products-catalogue.pdf'} download data-catalog-download data-catalog-language={lang}>{lang === 'tr' ? 'Kataloğu indir' : 'Download catalogue'}</a>
+      </div>}
       <div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div>
       <div class="catalogue-directory">
         {catalogueGroups.map((group,groupIndex) => <div class="catalogue-group" data-catalogue-group={group.key}>
@@ -179,12 +230,25 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
     <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={product.names[lang]} lead={product.descriptions[lang]} parentHref={sectionHref('products')} parentLabel={t.products} product={product} ctaHref={sectionHref('contact')} ctaLabel={t.quote} imageNote={editorial.productImageNote} />
     <section class="section product-detail-content"><div class="container content-grid">
       <div class="prose">
+        <div class="content-block product-commercial-facts"><h2>{lang === 'tr' ? 'Ticari değerlendirme bilgileri' : lang === 'en' ? 'Commercial assessment information' : lang === 'de' ? 'Angaben zur kaufmännischen Bewertung' : lang === 'it' ? 'Informazioni per la valutazione commerciale' : 'Informations d’évaluation commerciale'}</h2>
+          <dl>{productCommercialLabels.map((label,index) => {
+            const values=[
+              product.origin,product.names[lang],verifiedLater[0],verifiedLater[1],verifiedLater[2],
+              verifiedLater[3],verifiedLater[4],verifiedLater[1],verifiedLater[1],verifiedLater[0],
+              copy.productUses.join(' · '),
+              lang === 'tr' ? 'Spesifikasyon, miktar, ambalaj, teslim yeri, hedef tarih ve belge beklentisi' :
+              lang === 'en' ? 'Specification, quantity, packaging, delivery point, target date and document requirements' :
+              verifiedLater[0]
+            ];
+            return <div><dt>{label}</dt><dd>{values[index]}</dd></div>;
+          })}</dl>
+        </div>
         <div class="content-block"><h2>{t.applications}</h2><ul class="check-list">{copy.productUses.map((item:string) => <li>{item}</li>)}</ul></div>
         <div class="content-block"><h2>{t.quality}</h2><ul class="check-list">{copy.productQuality.map((item:string) => <li>{item}</li>)}</ul><div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div></div>
         <div class="content-block"><h2>{t.logistics}</h2><p>{t.contactLead}</p>{product.media.secondary && <ProductMedia product={product} lang={lang} secondary={true} className="secondary-product-media" />}</div>
         <div class="content-block faq"><h2>{t.faq}</h2><details open><summary>{t.origin}</summary><p>{t.complianceText}</p></details><details><summary>{t.samplePolicy}</summary><p>{t.sampleText}</p></details></div>
       </div>
-      <aside class="side-panel"><p class="eyebrow">{t.logistics}</p><h2>{t.quote}</h2><p>{t.contactLead}</p><p><strong>{t.samplePolicy}</strong><br/>{t.sampleText}</p><a class="button" href={sectionHref('contact')}>{t.quote}</a></aside>
+      <aside class="side-panel"><p class="eyebrow">{t.logistics}</p><h2>{t.quote}</h2><p>{t.contactLead}</p><p><strong>{t.samplePolicy}</strong><br/>{t.sampleText}</p><a class="button" href={sectionHref('contact')} data-product-quote data-product-name={product.names[lang]}>{lang === 'tr' ? 'Bu ürün için teklif iste' : lang === 'en' ? 'Request commercial details' : t.quote}</a></aside>
     </div></section>
   </>
 )}
@@ -193,7 +257,7 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
   <>
     <PageHero lang={lang} eyebrow={t.markets} title={copy.marketsTitle} lead={copy.marketsLead} />
     <section class="section"><div class="container">
-      <div class="market-line market-line-large">{marketNames.map((market,index) => <div><span>{indexLabel(index)}</span><strong>{market}</strong><p>{copy.marketsLead}</p></div>)}</div>
+      <div class="market-role-grid">{completionMarkets.map((market,index) => <article><span>{indexLabel(index)}</span><h2>{market.title}</h2><ul>{market.items.map((item)=><li>{item}</li>)}</ul></article>)}</div>
     </div></section>
     <ProcessRail steps={copy.framework} />
     {lang === 'en' && (
@@ -211,6 +275,10 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
   <>
     <PageHero lang={lang} eyebrow={t.insights} title={copy.insightsTitle} lead={copy.insightsLead} />
     <section class="section"><div class="container card-grid">{insightIds.map((insightId,index) => <a class="card" href={localizedPath(lang,'insights',insightId)}><small>{indexLabel(index)}</small><h2>{insights[insightId].titles[lang]}</h2><p>{insights[insightId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
+    {(lang === 'tr' || lang === 'en') && <section class="section guide-directory"><div class="container">
+      <div class="section-head"><h2>{lang === 'tr' ? 'Satın alma rehberleri' : 'Sourcing guides'}</h2><p>{lang === 'tr' ? 'RFQ, kalite belgesi ve toplam maliyet için uygulanabilir kontrol listeleri.' : 'Practical checklists for RFQs, quality documents and total cost.'}</p></div>
+      <div class="card-grid">{Object.entries(guides).map(([guideId,item],index)=><a class="card" href={localizedPath(lang,'guides',guideId)}><small>{indexLabel(index)}</small><h3>{item[lang].title}</h3><p>{item[lang].description}</p><strong>{t.readMore} →</strong></a>)}</div>
+    </div></section>}
   </>
 )}
 
@@ -240,6 +308,15 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
         </dl>
       </aside>
     </div></section>
+    <section class="section about-detail-section"><div class="container content-grid">
+      <div class="prose">
+        <section class="content-block"><h2>{completionAbout.whoTitle}</h2><p>{completionAbout.who}</p></section>
+        <section class="content-block"><h2>{completionAbout.workTitle}</h2><ul class="check-list">{completionAbout.work.map((item)=><li>{item}</li>)}</ul></section>
+        <section class="content-block"><h2>{completionAbout.methodTitle}</h2><p>{completionAbout.method}</p>{(lang === 'tr' || lang === 'en') && <a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a>}</section>
+        <section class="content-block"><h2>{completionAbout.ethicsTitle}</h2><ul class="check-list">{completionAbout.ethics.map((item)=><li>{item}</li>)}</ul></section>
+      </div>
+      <aside class="founder-panel"><p class="eyebrow">{completionAbout.founderTitle}</p><h2>{company.founder}</h2><p>{completionAbout.founder}</p></aside>
+    </div></section>
     <Framework lang={lang} />
     <section class="section"><div class="container cta-statement"><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.contact}</a></div></section>
   </>
@@ -259,6 +336,52 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
       </div>
       <aside class="side-panel contact-email-panel"><p class="eyebrow">E-mail</p><h2><a class="contact-email-link" href="mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry">info@ctseg.com.tr</a></h2><p>{marketNames.join(' · ')}</p></aside>
     </div></section>
+    <section class="section commercial-form-section"><div class="container"><CommercialRequestForm lang={lang} /></div></section>
+    {(lang === 'tr' || lang === 'en') && <section class="section compact-link-section"><div class="container"><a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a></div></section>}
+  </>
+)}
+
+{key === 'how-we-work' && processPage && (
+  <>
+    <PageHero lang={lang} eyebrow="CTSEG" title={processPage.title} lead={processPage.description} />
+    <section class="section"><div class="container">
+      <ol class="detailed-process">{processPage.steps.map((step,index)=><li><span>{indexLabel(index)}</span><h2>{step}</h2></li>)}</ol>
+      <div class="role-boundary"><strong>{lang === 'tr' ? 'Rol ve sorumluluk sınırı' : 'Role and responsibility boundary'}</strong><p>{processPage.role}</p></div>
+    </div></section>
+    <section class="section answer-section"><div class="container">
+      <div class="section-head"><h2>{lang === 'tr' ? 'Doğrudan yanıtlar' : 'Direct answers'}</h2><p>{lang === 'tr' ? 'Tedarik ve ticari koordinasyon hakkında sık sorulan temel sorular.' : 'Core questions about sourcing and commercial coordination.'}</p></div>
+      <div class="answer-grid">{processPage.faq.map(([question,answer])=><article><h3>{question}</h3><p>{answer}</p></article>)}</div>
+      <div class="actions"><a class="button" href={sectionHref('contact')}>{completionHome.commercialCta}</a></div>
+    </div></section>
+  </>
+)}
+
+{key === 'scenarios' && scenarioPage && (
+  <>
+    <PageHero lang={lang} eyebrow="CTSEG" title={scenarioPage.title} lead={scenarioPage.description} />
+    <section class="section"><div class="container">
+      <div class="scenario-disclaimer">{scenarioPage.disclaimer}</div>
+      <div class="scenario-list">{scenarioPage.items.map((item,index)=><article>
+        <div class="scenario-heading"><span>{indexLabel(index)}</span><h2>{item[0]}</h2></div>
+        <dl>{scenarioPage.labels.map((label,valueIndex)=><div><dt>{label}</dt><dd>{item[valueIndex+1]}</dd></div>)}</dl>
+        <a class="text-link" href={sectionHref('contact')} data-case-scenario-cta>{completionHome.commercialCta} →</a>
+      </article>)}</div>
+    </div></section>
+  </>
+)}
+
+{key === 'guides' && guide && (
+  <>
+    <PageHero lang={lang} eyebrow={lang === 'tr' ? 'Satın alma rehberi' : 'Sourcing guide'} title={guide.title} lead={guide.description} />
+    <section class="section"><article class="container guide-article">
+      <div class="guide-meta"><span>{lang === 'tr' ? 'Yazar' : 'Author'}: Teyfik Gökdemir</span><span>{t.updated}: {updatedDate}</span></div>
+      <p class="article-answer">{guide.intro}</p>
+      <section class="content-block"><h2>{lang === 'tr' ? 'Kontrol listesi' : 'Checklist'}</h2><ul class="check-list">{guide.checklist.map((item)=><li>{item}</li>)}</ul></section>
+      <section class="content-block"><h2>{lang === 'tr' ? 'Karşılaştırma tablosu' : 'Comparison table'}</h2>
+        <div class="guide-table-wrap"><table><thead><tr>{guide.table[0].map((cell)=><th>{cell}</th>)}</tr></thead><tbody>{guide.table.slice(1).map((row)=><tr>{row.map((cell)=><td>{cell}</td>)}</tr>)}</tbody></table></div>
+      </section>
+      <div class="cta-statement"><h2>{guide.cta}</h2><a class="button" href={sectionHref('contact')}>{completionHome.commercialCta}</a></div>
+    </article></section>
   </>
 )}
 
