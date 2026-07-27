@@ -132,10 +132,11 @@ html[data-locale=de] .portfolio-copy h2{hyphens:auto;overflow-wrap:break-word}
 .market-line p{color:var(--muted)}
 .market-line-large>div{min-height:330px}
 
-.cta-statement{position:relative;padding:58px 0;border-top:1px solid var(--accent);border-bottom:1px solid var(--line);background:linear-gradient(90deg,color-mix(in srgb,var(--locale-wash) 80%,transparent),transparent)}
-.cta-statement h2{max-width:930px}
+.cta-statement{position:relative;display:flex;min-height:0;padding:50px clamp(18px,3vw,42px);flex-direction:column;align-items:center;justify-content:center;border-top:1px solid var(--accent);border-bottom:1px solid var(--line);background:linear-gradient(90deg,color-mix(in srgb,var(--locale-wash) 80%,transparent),transparent);text-align:center}
+.cta-statement .eyebrow{margin-inline:auto;text-align:center}
+.cta-statement h2{width:100%;max-width:960px;margin-inline:auto;text-align:center}
 html[data-locale=de] .cta-statement h2{hyphens:auto;overflow-wrap:break-word}
-.cta-statement .button{margin-top:35px}
+.cta-statement .button{align-self:center;margin-top:32px}
 
 .page-hero{position:relative;padding:88px 0 68px;border-bottom:1px solid var(--line);background:linear-gradient(115deg,var(--locale-wash),transparent 64%)}
 .page-hero:after{content:"";position:absolute;left:0;right:0;bottom:18px;border-bottom:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
@@ -224,7 +225,7 @@ html[data-locale=de] .page-hero h1,html[data-locale=it] .page-hero h1,html[data-
 }
 @media(max-width:620px){
   .container{width:min(var(--max),calc(100% - 26px))}
-  body{font-size:.95rem}.hero{padding:44px 0 58px}.hero h1,html[data-locale=de] .hero h1,html[data-locale=it] .hero h1,html[data-locale=fr] .hero h1{font-size:clamp(2.8rem,11vw,3.6rem);line-height:1;max-width:15ch}.hero-visual{width:100%;margin-top:8px}
+  body{font-size:.95rem}.hero{padding:44px 0 58px}.hero h1,html[data-locale=de] .hero h1,html[data-locale=it] .hero h1,html[data-locale=fr] .hero h1{font-size:clamp(2.8rem,11vw,3.6rem);line-height:1;max-width:15ch;overflow-wrap:break-word;hyphens:auto}.hero-visual{width:100%;margin-top:8px}
   .hero-visual img{max-height:300px}
   .hero-visual:before{inset:-9px 35% 50% -9px}.hero-visual figcaption{display:none}
   .section{padding:64px 0}.section h2,.section-title{font-size:clamp(2.1rem,10vw,2.9rem)}
@@ -236,7 +237,7 @@ html[data-locale=de] .page-hero h1,html[data-locale=it] .page-hero h1,html[data-
   .market-line{grid-template-columns:1fr}.market-line>div{border-right:0;border-bottom:1px solid var(--line)}
   .page-hero{padding:62px 0 50px}.page-hero h1,html[data-locale=de] .page-hero h1,html[data-locale=it] .page-hero h1,html[data-locale=fr] .page-hero h1{font-size:clamp(2.5rem,10.5vw,3.3rem);line-height:1;overflow-wrap:break-word;word-break:normal;hyphens:auto}.page-hero-grid{gap:26px}
   .card-grid,.check-list,.contact-cards,.footer-main{grid-template-columns:1fr}.card{min-height:245px}.card h2,.card h3{margin-top:30px}.content-block{padding:36px 0}.side-panel h2{overflow-wrap:anywhere}
-  .button{max-width:100%;padding-inline:18px}.cta-statement{padding:42px 0}.site-footer{padding-top:52px}.footer-main{gap:32px}.footer-main nav a,.footer-bottom{font-size:max(.82rem,13px)}.footer-bottom,.cookie-consent{align-items:stretch;flex-direction:column}.footer-bottom nav{justify-content:flex-start;gap:14px}.footer-bottom nav a{padding-block:4px}.cookie-actions button{flex:1}
+  .button{max-width:100%;padding-inline:18px}.cta-statement{padding:36px 16px}.cta-statement h2{max-width:18ch;font-size:clamp(2rem,9vw,2.75rem);line-height:1.02}.cta-statement .button{margin-top:30px}.site-footer{padding-top:52px}.footer-main{gap:32px}.footer-main nav a,.footer-bottom{font-size:max(.82rem,13px)}.footer-bottom,.cookie-consent{align-items:stretch;flex-direction:column}.footer-bottom nav{justify-content:flex-start;gap:14px}.footer-bottom nav a{padding-block:4px}.cookie-actions button{flex:1}
 }
 @media(prefers-reduced-motion:no-preference){
   .hero-copy,.hero-visual,.manifesto-grid,.product-card,.portfolio-layout{animation:editorial-reveal .7s both}

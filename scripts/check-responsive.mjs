@@ -52,6 +52,9 @@ try {
     { name:'desktop-fr-home', path:'/fr/', width:1440, height:1000 },
     { name:'desktop-fr-catalogue', path:'/fr/produits-commerciaux/', width:1440, height:1000 },
     { name:'mobile-tr-home', path:'/', width:390, height:844 },
+    { name:'mobile-en-home', path:'/en/', width:390, height:844 },
+    { name:'mobile-it-home', path:'/it/', width:390, height:844 },
+    { name:'mobile-fr-home', path:'/fr/', width:390, height:844 },
     { name:'mobile-tr-services', path:'/tr/hizmetler/', width:390, height:844 },
     { name:'mobile-tr-contact', path:'/tr/iletisim/', width:390, height:844 },
     { name:'mobile-tr-menu', path:'/', width:390, height:844, openMenu:true },
@@ -162,6 +165,25 @@ try {
           duplicateDetailMedia:new Set(detailMedia).size!==detailMedia.length,
           posterFit:[...document.querySelectorAll('[data-media-type="poster"] img')].every((image)=>getComputedStyle(image).objectFit==='contain'),
           photoFit:[...document.querySelectorAll('[data-media-type="photo"] img')].every((image)=>getComputedStyle(image).objectFit==='cover'),
+          ctaAlignment:[...document.querySelectorAll('.cta-statement')].every((cta)=>{
+            const heading=cta.querySelector('h2');
+            const button=cta.querySelector('.button');
+            if(!heading||!button) return false;
+            const ctaBox=cta.getBoundingClientRect();
+            const headingBox=heading.getBoundingClientRect();
+            const buttonBox=button.getBoundingClientRect();
+            const ctaCenter=ctaBox.left+ctaBox.width/2;
+            const headingCenter=headingBox.left+headingBox.width/2;
+            const buttonCenter=buttonBox.left+buttonBox.width/2;
+            const style=getComputedStyle(cta);
+            return Math.abs(ctaCenter-headingCenter)<2&&Math.abs(ctaCenter-buttonCenter)<2&&
+              headingBox.width<=982&&Math.abs(Number.parseFloat(style.paddingTop)-Number.parseFloat(style.paddingBottom))<1;
+          }),
+          ctaMobileLines:[...document.querySelectorAll('.cta-statement h2')].reduce((max,heading)=>{
+            const box=heading.getBoundingClientRect();
+            const lineHeight=Number.parseFloat(getComputedStyle(heading).lineHeight);
+            return Math.max(max,lineHeight?Math.round(box.height/lineHeight):0);
+          },0),
           productCount:catalogueCards.length
         };
       })()
@@ -170,7 +192,8 @@ try {
     localeAtmospheres.set(result.lang,result.localeAtmosphere);
     const badLayout = result.layout.headingVisualOverlap || result.layout.headerOverlap || result.layout.cardOverflow ||
       result.layout.repeatedAdjacentImage || result.layout.duplicateDetailMedia ||
-      !result.layout.posterFit || !result.layout.photoFit ||
+      !result.layout.posterFit || !result.layout.photoFit || !result.layout.ctaAlignment ||
+      (testCase.width <= 620 && result.layout.ctaMobileLines > 5) ||
       (testCase.width <= 620 && result.layout.headingLines > 6) ||
       (testCase.width >= 1100 && result.layout.maxCardHeight > 700) ||
       (result.layout.productCount > 0 && result.layout.productCount !== 18);
