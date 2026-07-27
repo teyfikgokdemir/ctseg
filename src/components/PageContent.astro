@@ -100,10 +100,9 @@ const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it
 {key === 'products' && !id && (
   <>
     <PageHero lang={lang} eyebrow={t.products} title={copy.productsTitle} lead={copy.productsLead} />
-    <PortfolioBanner lang={lang} />
     <section class="section catalogue-section"><div class="container">
       <div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div>
-      <div class="catalogue-grid">{productIds.map((productId,index) => <ProductCard product={products[productId]} productId={productId} lang={lang} index={index} featured={index % 7 === 0 || index % 7 === 4} />)}</div>
+      <div class="catalogue-grid">{productIds.map((productId,index) => <ProductCard product={products[productId]} productId={productId} lang={lang} index={index} />)}</div>
     </div></section>
   </>
 )}

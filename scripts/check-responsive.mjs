@@ -36,13 +36,19 @@ try {
   mkdirSync(output, { recursive:true });
   browser = await chromium.launch({ executablePath, headless:true });
   const cases = [
-    { name:'desktop-tr-home', path:'/', width:1440, height:1000 },
+    { name:'wide-tr-home', path:'/', width:1600, height:1000 },
     { name:'desktop-en-home', path:'/en/', width:1440, height:1000 },
+    { name:'desktop-de-home', path:'/de/', width:1280, height:800 },
+    { name:'compact-it-home', path:'/it/', width:1024, height:768 },
+    { name:'tablet-fr-home', path:'/fr/', width:820, height:1180 },
+    { name:'desktop-en-products', path:'/en/trade-products/', width:1440, height:1000 },
     { name:'tablet-de-products', path:'/de/handelsprodukte/', width:820, height:1180 },
-    { name:'mobile-fr-products', path:'/fr/produits-commerciaux/', width:390, height:844 },
-    { name:'mobile-it-product', path:'/it/prodotti-commerciali/pistacchio-verde-sgusciato/', width:390, height:844 },
-    { name:'desktop-tr-mazafati', path:'/tr/ticari-urunler/mazafati-hurmasi/', width:1440, height:1000 },
-    { name:'mobile-en-insight', path:'/en/insights/strategic-sourcing-vs-procurement/', width:390, height:844 }
+    { name:'mobile-fr-products', path:'/fr/produits-commerciaux/', width:430, height:932 },
+    { name:'mobile-de-long-product', path:'/de/handelsprodukte/getrocknete-aprikosen-aprikosenkerne/', width:390, height:844 },
+    { name:'small-it-product', path:'/it/prodotti-commerciali/pistacchio-verde-sgusciato/', width:360, height:800 },
+    { name:'desktop-tr-service', path:'/tr/hizmetler/tedarikci-bulma-ve-dogrulama/', width:1280, height:800 },
+    { name:'mobile-en-insight', path:'/en/insights/strategic-sourcing-vs-procurement/', width:390, height:844 },
+    { name:'mobile-fr-contact', path:'/fr/contact/', width:430, height:932 }
   ];
   const failures = [];
   for (const testCase of cases) {
@@ -82,9 +88,65 @@ try {
       lang:document.documentElement.lang
       ,images:[...document.images].every((image) => image.complete && image.naturalWidth > 0 && image.hasAttribute('width') && image.hasAttribute('height'))
       ,brokenImages:[...document.images].filter((image) => !image.complete || image.naturalWidth === 0 || !image.hasAttribute('width') || !image.hasAttribute('height')).map((image) => image.getAttribute('src'))
+      ,overflowNodes:[...document.querySelectorAll('body *')]
+        .filter((element) => {
+          const box=element.getBoundingClientRect();
+          return box.right>window.innerWidth+1||box.left<-1;
+        })
+        .slice(0,8)
+        .map((element) => {
+          const box=element.getBoundingClientRect();
+          return `${element.tagName.toLowerCase()}.${[...element.classList].join('.')}:${Math.round(box.left)}..${Math.round(box.right)}`;
+        })
+      ,overflowText:(() => {
+        const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+        const offenders=[];
+        while(walker.nextNode()){
+          const value=walker.currentNode.nodeValue?.trim();
+          if(!value) continue;
+          const range=document.createRange();
+          range.selectNodeContents(walker.currentNode);
+          const boxes=[...range.getClientRects()];
+          if(boxes.some((box)=>box.right>window.innerWidth+1||box.left<-1)){
+            offenders.push(`${walker.currentNode.parentElement?.tagName.toLowerCase()}:${value.slice(0,60)}`);
+          }
+          if(offenders.length===8) break;
+        }
+        return offenders;
+      })()
+      ,layout:(() => {
+        const intersects=(a,b)=>Boolean(a&&b&&a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top);
+        const heading=document.querySelector('.hero h1,.page-hero h1');
+        const visual=document.querySelector('.hero-visual,.product-hero-media');
+        const header=document.querySelector('.site-header');
+        const first=document.querySelector('main>section');
+        const headingBox=heading?.getBoundingClientRect();
+        const visualBox=visual?.getBoundingClientRect();
+        const headerBox=header?.getBoundingClientRect();
+        const firstBox=first?.getBoundingClientRect();
+        const lineHeight=heading ? Number.parseFloat(getComputedStyle(heading).lineHeight) : 0;
+        const catalogueCards=[...document.querySelectorAll('.catalogue-grid [data-product-card]')];
+        const cardImages=catalogueCards.map((card)=>card.querySelector('img')?.getAttribute('src')).filter(Boolean);
+        const detailMedia=[...document.querySelectorAll('[data-product-media] img')].map((image)=>image.getAttribute('src'));
+        return {
+          headingVisualOverlap:intersects(headingBox,visualBox),
+          headerOverlap:Boolean(headerBox&&firstBox&&firstBox.top<headerBox.bottom-1),
+          headingLines:headingBox&&lineHeight ? Math.round(headingBox.height/lineHeight) : 0,
+          cardOverflow:catalogueCards.some((card)=>card.getBoundingClientRect().right>window.innerWidth+1||card.getBoundingClientRect().left<-1),
+          maxCardHeight:catalogueCards.reduce((max,card)=>Math.max(max,card.getBoundingClientRect().height),0),
+          repeatedAdjacentImage:cardImages.some((src,index)=>index>0&&src===cardImages[index-1]),
+          duplicateDetailMedia:new Set(detailMedia).size!==detailMedia.length,
+          productCount:catalogueCards.length
+        };
+      })()
     }));
     await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:true });
-    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu) {
+    const badLayout = result.layout.headingVisualOverlap || result.layout.headerOverlap || result.layout.cardOverflow ||
+      result.layout.repeatedAdjacentImage || result.layout.duplicateDetailMedia ||
+      (testCase.width <= 620 && result.layout.headingLines > 6) ||
+      (testCase.width >= 1100 && result.layout.maxCardHeight > 700) ||
+      (result.layout.productCount > 0 && result.layout.productCount !== 18);
+    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu || badLayout) {
       failures.push(`${testCase.name}: ${JSON.stringify({...result,mobileMenu})}`);
     }
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);

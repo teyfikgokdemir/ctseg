@@ -61,13 +61,22 @@ for (const file of htmlFiles) {
     if (descriptions.length !== 18) errors.push(`${label}: expected 18 product-card descriptions, found ${descriptions.length}`);
     if (new Set(descriptions).size !== descriptions.length) errors.push(`${label}: duplicate product-card description`);
     if (!html.includes('Kalleh Ghouchi') && !html.includes('Kalleh-Ghouchi')) errors.push(`${label}: corrected Kalleh Ghouchi name missing`);
+    const cardBlocks = [...html.matchAll(/<a class="product-card[^"]*"[^>]*>[\s\S]*?<\/a>/g)].map((match) => match[0]);
+    const catalogueImages = cardBlocks
+      .map((card) => card.match(/<img[^>]+src="([^"]+)"/)?.[1])
+      .filter(Boolean);
+    if (new Set(catalogueImages).size !== catalogueImages.length) errors.push(`${label}: repeated catalogue image source`);
   }
   const isHome = ['index.html','en/index.html','de/index.html','it/index.html','fr/index.html'].includes(label);
   if (isHome && !html.includes('/images/ctseg-global-trade-hero-premium.webp')) errors.push(`${label}: premium homepage hero missing`);
+  const portfolioImageCount = (html.match(/src="\/images\/2\.webp"/g) || []).length;
+  if (portfolioImageCount !== (isHome ? 1 : 0)) errors.push(`${label}: unexpected 2.webp usage count ${portfolioImageCount}`);
   if (html.includes('"@type":"Product"')) {
     productSchemaPages++;
     const schemaImage = html.match(/"@type":"Product"[\s\S]*?"image":"([^"]+)"/)?.[1];
     if (!schemaImage || schemaImage.endsWith('/images/2.webp')) errors.push(`${label}: invalid Product schema image`);
+    const detailMedia = [...html.matchAll(/data-product-media="(?:primary|secondary)"[^>]*>[\s\S]*?<img[^>]+src="([^"]+)"/g)].map((match) => match[1]);
+    if (new Set(detailMedia).size !== detailMedia.length) errors.push(`${label}: duplicate primary/secondary product media`);
   }
   for (const match of html.matchAll(/<img\b([^>]+)>/g)) {
     const attributes = match[1];

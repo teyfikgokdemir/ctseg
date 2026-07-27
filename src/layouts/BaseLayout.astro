@@ -49,6 +49,10 @@ const socialImage = pageKey === 'products' && pageId && products[pageId as keyof
     {locales.map((code) => <link rel="alternate" hreflang={code} href={alternates[code]} />)}
     <link rel="alternate" hreflang="x-default" href={alternates.en} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" />
     <meta name="theme-color" content="#080b12" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
