@@ -43,6 +43,10 @@ try {
     { name:'desktop-tr-insights', path:'/tr/icgoruler/', width:1440, height:1000 },
     { name:'desktop-tr-about', path:'/tr/hakkimizda/', width:1440, height:1000 },
     { name:'desktop-tr-contact', path:'/tr/iletisim/', width:1440, height:1000 },
+    { name:'desktop-en-contact', path:'/en/contact/', width:1440, height:1000 },
+    { name:'desktop-de-contact', path:'/de/kontakt/', width:1440, height:1000 },
+    { name:'desktop-it-contact', path:'/it/contatti/', width:1440, height:1000 },
+    { name:'desktop-fr-contact', path:'/fr/contact/', width:1440, height:1000 },
     { name:'desktop-de-home', path:'/de/', width:1440, height:1000 },
     { name:'desktop-de-catalogue', path:'/de/handelsprodukte/', width:1440, height:1000 },
     { name:'desktop-de-locale-panel', path:'/de/', width:1440, height:1000, openLanguage:true },
@@ -70,6 +74,10 @@ try {
     { name:'mobile-tr-markets', path:'/tr/pazarlar/', width:390, height:844 },
     { name:'mobile-tr-insights', path:'/tr/icgoruler/', width:390, height:844 },
     { name:'mobile-tr-contact', path:'/tr/iletisim/', width:390, height:844 },
+    { name:'mobile-en-contact', path:'/en/contact/', width:390, height:844 },
+    { name:'mobile-de-contact', path:'/de/kontakt/', width:390, height:844 },
+    { name:'mobile-it-contact', path:'/it/contatti/', width:390, height:844 },
+    { name:'mobile-fr-contact', path:'/fr/contact/', width:390, height:844 },
     { name:'mobile-tr-menu', path:'/', width:390, height:844, openMenu:true },
     { name:'mobile-fr-catalogue', path:'/fr/produits-commerciaux/', width:390, height:844 },
     { name:'mobile-de-home', path:'/de/', width:390, height:844 },
@@ -111,6 +119,12 @@ try {
       if (!testCase.openMenu) await page.locator('[data-menu-toggle]').click();
     }
     if (testCase.openLanguage) await page.locator('[data-language-toggle]').click();
+    const contactEmailLink = page.locator('.contact-email-link');
+    if (await contactEmailLink.count()) {
+      await page.keyboard.press('Tab');
+      await contactEmailLink.focus();
+      await page.evaluate(() => window.scrollTo(0,0));
+    }
     const result = await page.evaluate(() => ({
       overflow:document.documentElement.scrollWidth - window.innerWidth,
       headers:document.querySelectorAll('header.site-header').length,
@@ -140,6 +154,22 @@ try {
         if (window.innerWidth <= 860) return true;
         const trigger=document.querySelector('[data-language-toggle]');
         return trigger?.textContent?.trim() === document.documentElement.lang.toUpperCase();
+      })()
+      ,contactEmail:(() => {
+        const panel=document.querySelector('.contact-email-panel');
+        if(!panel) return null;
+        const links=[...panel.querySelectorAll('.contact-email-link')];
+        const link=links[0];
+        const occurrences=(panel.textContent?.match(/info@ctseg\.com\.tr/g) ?? []).length;
+        const style=link ? getComputedStyle(link) : null;
+        const focusVisible=Boolean(link?.matches(':focus-visible') && style?.outlineStyle !== 'none' && style?.outlineWidth !== '0px');
+        return {
+          occurrences,
+          links:links.length,
+          href:link?.getAttribute('href'),
+          buttons:panel.querySelectorAll('.button').length,
+          focusVisible
+        };
       })()
       ,overflowNodes:[...document.querySelectorAll('body *')]
         .filter((element) => {
@@ -250,9 +280,12 @@ try {
       (testCase.width <= 620 && result.layout.headingLines > 6) ||
       (testCase.width >= 1100 && result.layout.maxCardHeight > 700) ||
       (result.layout.productCount > 0 && result.layout.productCount !== 18);
+    const badContactEmail = result.contactEmail && (result.contactEmail.occurrences !== 1 || result.contactEmail.links !== 1 ||
+      result.contactEmail.href !== 'mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry' ||
+      result.contactEmail.buttons !== 0 || !result.contactEmail.focusVisible);
     const badLocale = result.localeOptions !== 5 || result.activeDesktopLocale !== 1 || !result.localeRouteMatch || !result.desktopLocaleCodeOnly ||
       (testCase.openMenu && (result.visibleMobileLocales !== 5 || result.mobilePanelHeight < testCase.height * .7));
-    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu || !bodyScrollLocked || badLayout || badLocale) {
+    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu || !bodyScrollLocked || badLayout || badLocale || badContactEmail) {
       failures.push(`${testCase.name}: ${JSON.stringify({...result,mobileMenu,bodyScrollLocked})}`);
     }
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);

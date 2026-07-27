@@ -16,6 +16,7 @@ const errors = [];
 let checkedLinks = 0;
 const pageRecords = [];
 let productSchemaPages = 0;
+let contactEmailPanels = 0;
 const productCatalogs = new Set([
   'tr/ticari-urunler/index.html',
   'en/trade-products/index.html',
@@ -89,6 +90,14 @@ for (const file of htmlFiles) {
   }
   const portfolioImageCount = (html.match(/src="\/images\/2\.webp"/g) || []).length;
   if (portfolioImageCount !== (isHome ? 1 : 0)) errors.push(`${label}: unexpected 2.webp usage count ${portfolioImageCount}`);
+  if (html.includes('contact-email-panel')) {
+    contactEmailPanels++;
+    const panel = html.match(/<aside class="side-panel contact-email-panel">[\s\S]*?<\/aside>/)?.[0] ?? '';
+    if ((panel.match(/info@ctseg\.com\.tr/g) || []).length !== 2) errors.push(`${label}: contact panel must render one linked email address`);
+    if ((panel.match(/class="contact-email-link"/g) || []).length !== 1) errors.push(`${label}: expected one contact email link`);
+    if (!panel.includes('href="mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry"')) errors.push(`${label}: incorrect contact mailto`);
+    if (panel.includes('class="button"')) errors.push(`${label}: duplicate contact email button remains`);
+  }
   if (html.includes('"@type":"Product"')) {
     productSchemaPages++;
     const schemaImage = html.match(/"@type":"Product"[\s\S]*?"image":"([^"]+)"/)?.[1];
@@ -121,6 +130,7 @@ for (const file of htmlFiles) {
   }
 }
 if (productSchemaPages !== 90) errors.push(`expected 90 Product schema pages, found ${productSchemaPages}`);
+if (contactEmailPanels !== 5) errors.push(`expected five localized contact email panels, found ${contactEmailPanels}`);
 const css = files.filter((file) => file.endsWith('.css')).map((file) => readFileSync(file,'utf8')).join('\n');
 if (!css.includes(':focus-visible')) errors.push('compiled CSS: focus-visible treatment missing');
 if (!css.includes('prefers-reduced-motion:reduce')) errors.push('compiled CSS: reduced-motion treatment missing');
@@ -129,6 +139,9 @@ if (!css.includes('.product-media--poster') || !css.includes('object-fit:contain
 }
 if (!css.includes('--header-height:88px') || !css.includes('.page-hero+.section') || !css.includes('.portfolio-visual img') || !css.includes('object-fit:contain')) {
   errors.push('compiled CSS: final hero/header/portfolio regression guards missing');
+}
+if (!css.includes('.contact-email-link:hover') || !css.includes('.contact-email-link:focus-visible') || !css.includes('overflow-wrap:anywhere')) {
+  errors.push('compiled CSS: contact email hover/focus/wrapping treatment missing');
 }
 const localeAtmospheres = [...css.matchAll(/html\[data-locale=(?:tr|en|de|it|fr)\]\{([^}]+)\}/g)].map((match) => match[1]);
 if (localeAtmospheres.length !== 5 || new Set(localeAtmospheres).size !== 5) errors.push('compiled CSS: five distinct locale atmospheres missing');

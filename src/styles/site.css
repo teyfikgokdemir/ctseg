@@ -176,6 +176,9 @@ html[data-locale=de] .page-hero h1,html[data-locale=it] .page-hero h1,html[data-
 .side-panel{position:sticky;top:118px;padding:28px 0;border-top:1px solid var(--accent);background:transparent}
 .side-panel h2{font-family:'Source Serif 4',Georgia,serif;font-size:2.15rem;font-weight:500;line-height:1.05}
 .side-panel p{color:var(--muted)}
+.contact-email-link{display:inline;color:inherit;overflow-wrap:anywhere;transition:color .18s}
+.contact-email-link:hover,.contact-email-link:focus-visible{color:var(--accent-soft)}
+.contact-email-link:focus-visible{outline-color:var(--accent)}
 .origin-note{padding:22px 0 22px 28px;border-left:2px solid var(--accent);background:linear-gradient(90deg,color-mix(in srgb,var(--locale-wash) 75%,transparent),transparent)}
 .origin-note p{margin-bottom:0}
 .faq{max-width:900px}
@@ -240,7 +243,7 @@ html[data-locale=de] .page-hero h1,html[data-locale=it] .page-hero h1,html[data-
   .process-rail{grid-template-columns:1fr;margin-top:40px}.process-rail li{min-height:128px;border-right:0}.process-rail strong{margin-top:34px}
   .market-line{grid-template-columns:1fr}.market-line>div{min-height:170px;border-right:0;border-bottom:1px solid var(--line)}.market-line-large>div{min-height:250px}.market-line strong{left:18px;right:18px;font-size:clamp(2rem,11vw,3rem)}.market-line p{left:18px;right:18px;bottom:18px}
   .page-hero{padding:max(44px,calc(var(--header-height) * .65)) 0 24px}.page-hero+.section{padding-top:32px}.page-hero--compact{padding-top:42px;padding-bottom:18px}.page-hero--compact+.section{padding-top:24px}.product-page-hero{padding-bottom:44px}.page-hero h1,html[data-locale=de] .page-hero h1,html[data-locale=it] .page-hero h1,html[data-locale=fr] .page-hero h1{font-size:clamp(2.5rem,10.5vw,3.3rem);line-height:1;overflow-wrap:break-word;word-break:normal;hyphens:auto}.page-hero-grid{gap:26px}
-  .card-grid,.check-list,.contact-cards,.footer-main{grid-template-columns:1fr}.card{min-height:245px}.card h2,.card h3{margin-top:30px}.content-block{padding:36px 0}.side-panel h2{overflow-wrap:anywhere}
+  .card-grid,.check-list,.contact-cards,.footer-main{grid-template-columns:1fr}.card{min-height:245px}.card h2,.card h3{margin-top:30px}.content-block{padding:36px 0}.side-panel h2{overflow-wrap:anywhere}.contact-email-panel h2{font-size:clamp(1.9rem,9vw,2.15rem)}
   .button{max-width:100%;padding-inline:18px}.cta-statement{padding:36px 16px}.cta-statement h2{max-width:18ch;font-size:clamp(2rem,9vw,2.75rem);line-height:1.02}.cta-statement .button{margin-top:30px}.site-footer{padding-top:52px}.footer-main{gap:32px}.footer-main nav a,.footer-bottom{font-size:max(.82rem,13px)}.footer-bottom,.cookie-consent{align-items:stretch;flex-direction:column}.footer-bottom nav{justify-content:flex-start;gap:14px}.footer-bottom nav a{padding-block:4px}.cookie-actions button{flex:1}
 }
 @media(prefers-reduced-motion:no-preference){
