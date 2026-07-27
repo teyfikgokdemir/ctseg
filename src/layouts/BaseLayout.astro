@@ -18,7 +18,7 @@ if (pageKey === 'home') alternates.tr = 'https://ctseg.com.tr/';
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
   name:'CTSEG',url:'https://ctseg.com.tr/',logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
-  email:'info@ctseg.com.tr',areaServed:['Türkiye','Europe','International'],
+  email:'info@ctseg.com.tr',areaServed:['TÃ¼rkiye','Europe','International'],
   knowsAbout:['Strategic sourcing','Supplier verification','International trade','Food product sourcing']
 };
 const website = {
@@ -45,12 +45,6 @@ const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script is:inline>
-      try {
-        const consent=localStorage.getItem('ctseg-consent-v2');
-        if(consent)document.documentElement.dataset.consent=consent;
-      } catch {}
-    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex,follow" />}
@@ -86,7 +80,7 @@ const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
     <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
     <main id="main"><slot /></main>
     <SiteFooter lang={lang} />
-    <aside class="cookie-consent" data-cookie-consent aria-label={ui[lang].cookieTitle}>
+    <aside class="cookie-consent" data-cookie-consent hidden aria-label={ui[lang].cookieTitle}>
       <div><strong>{ui[lang].cookieTitle}</strong><p>{ui[lang].cookieCopy}</p><a href={cookieHref}>{ui[lang].details}</a></div>
       <div class="cookie-actions"><button type="button" data-cookie-reject>{ui[lang].reject}</button><button type="button" class="accept" data-cookie-accept>{ui[lang].accept}</button></div>
     </aside>
@@ -101,7 +95,7 @@ const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
           window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-B8BLQ7KK2T',{anonymize_ip:true});
           const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-B8BLQ7KK2T';document.head.appendChild(s);
         };
-        const apply=(value)=>{localStorage.setItem(key,value);document.documentElement.dataset.consent=value;box.hidden=true;if(value==='accepted')load()};
+        const apply=(value)=>{localStorage.setItem(key,value);box.hidden=true;if(value==='accepted')load()};
         const saved=localStorage.getItem(key);if(saved==='accepted')load();else if(!saved)box.hidden=false;
         box.querySelector('[data-cookie-accept]')?.addEventListener('click',()=>apply('accepted'));
         box.querySelector('[data-cookie-reject]')?.addEventListener('click',()=>apply('rejected'));
