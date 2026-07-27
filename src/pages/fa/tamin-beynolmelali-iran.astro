@@ -1,0 +1,381 @@
+---
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
+import { company } from '../../data/site';
+import { persianAudiences, persianCategories, persianFaqs, persianProcess, persianServices } from '../../data/persian-landing';
+import { FEATURE_IMAGE_WIDTHS, HERO_IMAGE, LOGO_IMAGE, generatedImageSrc, generatedImageSrcset } from '../../lib/responsive-images';
+import '../../styles/persian-landing.css';
+
+const canonical = 'https://ctseg.com.tr/fa/tamin-beynolmelali-iran/';
+const title = 'تأمین بین‌المللی کالا و مواد اولیه برای ایران | CTSEG';
+const description = 'CTSEG به شرکت‌های ایرانی برای تأمین روغن خوراکی، مواد غذایی، بسته‌بندی، مواد اولیه و کالاهای تجاری از ترکیه و بازارهای مناسب بین‌المللی کمک می‌کند.';
+const socialImage = 'https://ctseg.com.tr/images/ctseg-global-trade-hero-premium.webp';
+const organization = {
+  '@context':'https://schema.org',
+  '@type':'Organization',
+  '@id':'https://ctseg.com.tr/#organization',
+  name:company.name,
+  alternateName:company.alternateName,
+  foundingDate:company.foundingYear,
+  founder:{'@type':'Person','@id':'https://ctseg.com.tr/#founder',name:company.founder},
+  address:{
+    '@type':'PostalAddress',
+    streetAddress:company.streetAddress,
+    addressLocality:company.addressLocality,
+    addressRegion:company.addressRegion,
+    addressCountry:company.addressCountry
+  },
+  url:'https://ctseg.com.tr/',
+  logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
+  email:'info@ctseg.com.tr',
+  contactPoint:{
+    '@type':'ContactPoint',
+    contactType:'sales',
+    email:'info@ctseg.com.tr',
+    availableLanguage:['fa','en']
+  }
+};
+const webpage = {
+  '@context':'https://schema.org',
+  '@type':'WebPage',
+  '@id':`${canonical}#webpage`,
+  url:canonical,
+  name:title,
+  description,
+  inLanguage:'fa',
+  dateModified:'2026-07-27',
+  about:{'@id':'https://ctseg.com.tr/#organization'},
+  mainEntity:{'@id':`${canonical}#service`}
+};
+const service = {
+  '@context':'https://schema.org',
+  '@type':'Service',
+  '@id':`${canonical}#service`,
+  name:'خدمات تأمین بین‌المللی برای کسب‌وکارهای ایرانی',
+  description:'تحقیق محصول و تولیدکننده، راستی‌آزمایی تأمین‌کننده، RFQ، مقایسه پیشنهادها، بررسی مدارک و هماهنگی تجاری برای درخواست‌های واجد شرایط.',
+  provider:{'@id':'https://ctseg.com.tr/#organization'},
+  areaServed:['IR','TR','International'],
+  serviceType:'International sourcing and commercial coordination'
+};
+const faqSchema = {
+  '@context':'https://schema.org',
+  '@type':'FAQPage',
+  mainEntity:persianFaqs.map((item) => ({
+    '@type':'Question',
+    name:item.q,
+    acceptedAnswer:{'@type':'Answer',text:item.a}
+  }))
+};
+const breadcrumb = {
+  '@context':'https://schema.org',
+  '@type':'BreadcrumbList',
+  itemListElement:[
+    {'@type':'ListItem',position:1,name:'CTSEG',item:'https://ctseg.com.tr/'},
+    {'@type':'ListItem',position:2,name:'تأمین بین‌المللی برای ایران',item:canonical}
+  ]
+};
+const schemas = [organization, webpage, service, faqSchema, breadcrumb];
+const heroSrcset = generatedImageSrcset(HERO_IMAGE, FEATURE_IMAGE_WIDTHS);
+---
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" as="image" href={generatedImageSrc(HERO_IMAGE,1280)} imagesrcset={heroSrcset} imagesizes="(max-width:820px) calc(100vw - 34px), min(43vw,600px)" fetchpriority="high" />
+    <meta name="theme-color" content="#080b11" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="CTSEG" />
+    <meta property="og:locale" content="fa_IR" />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1536" />
+    <meta property="og:image:height" content="1024" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
+  </head>
+  <body>
+    <a class="fa-skip" href="#main">رفتن به محتوای اصلی</a>
+    <header class="fa-header">
+      <div class="fa-container fa-header-inner">
+        <a class="fa-brand" href={canonical} aria-label="CTSEG — صفحه تأمین بین‌المللی ایران">
+          <img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" decoding="async" />
+        </a>
+        <nav class="fa-nav" aria-label="راهنمای صفحه">
+          <a class="fa-nav-section" href="#sourcing">حوزه‌های تأمین</a>
+          <a class="fa-nav-section" href="#process">فرایند همکاری</a>
+          <a class="fa-nav-section" href="#faq">پرسش‌های متداول</a>
+          <a class="fa-language" href="/en/" hreflang="en" data-fa-english-link>English</a>
+          <a class="fa-button" href="#request-form">ثبت درخواست تأمین</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="fa-hero">
+        <div class="fa-container">
+          <nav aria-label="مسیر صفحه">
+            <span>CTSEG</span><span aria-hidden="true"> / </span><span>تأمین بین‌المللی برای ایران</span>
+          </nav>
+          <div class="fa-hero-grid">
+            <div>
+              <p class="fa-kicker">شریک تأمین و هماهنگی تجاری بین‌المللی</p>
+              <h1>راهکارهای تأمین بین‌المللی برای کسب‌وکارهای ایرانی</h1>
+              <p class="fa-lead">CTSEG به تولیدکنندگان، توزیع‌کنندگان، عمده‌فروشان، واردکنندگان و خریداران سازمانی ایرانی کمک می‌کند تا محصولات، مواد اولیه، بسته‌بندی و نهاده‌های تولید را از ترکیه و بازارهای بین‌المللی مناسب تأمین کنند.</p>
+              <p class="fa-hero-summary">CTSEG فرایند جست‌وجوی تأمین‌کننده، راستی‌آزمایی تولیدکننده، مقایسه پیشنهادها، بررسی مدارک کیفیت، ارزیابی شرایط تجاری و هماهنگی پیش از حمل را به یک مسیر تصمیم‌گیری روشن و قابل مدیریت تبدیل می‌کند.</p>
+              <div class="fa-actions">
+                <a class="fa-button" href="#request-form">ثبت درخواست تأمین</a>
+                <a class="fa-button fa-button-secondary" href="#contact">گفتگو درباره نیاز تجاری</a>
+              </div>
+            </div>
+            <figure class="fa-hero-visual">
+              <ResponsiveImage src={HERO_IMAGE} widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:820px) calc(100vw - 34px), min(43vw,600px)" width={1536} height={1024} alt="هماهنگی زنجیره تأمین و تجارت بین‌المللی" loading="eager" fetchpriority="high" decoding="async" />
+              <figcaption>
+                <span>تحقیق تولیدکننده</span>
+                <span>مقایسه پیشنهادها</span>
+                <span>هماهنگی پیش از حمل</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="fa-section fa-definition">
+        <div class="fa-container fa-definition-grid">
+          <div class="fa-definition-card">
+            <p class="fa-section-kicker">پاسخ کوتاه و روشن</p>
+            <h2>CTSEG چیست؟</h2>
+            <p>CTSEG یک شرکت مستقر در استانبول در حوزه تأمین بین‌المللی و هماهنگی تجاری است. این شرکت به کسب‌وکارهای ایرانی برای دسترسی به تولیدکنندگان و تأمین‌کنندگان در ترکیه و بازارهای بین‌المللی مناسب کمک می‌کند.</p>
+            <p>نقش CTSEG، ساختاردهی تحقیق، راستی‌آزمایی، مقایسه و هماهنگی تجاری است؛ CTSEG بانک، شرکت حمل‌ونقل، کارگزار گمرکی، مؤسسه حقوقی یا فروشنده مستقیم همه معاملات نیست.</p>
+          </div>
+          <dl class="fa-company-facts">
+            <div><dt>نام شرکت</dt><dd>{company.name}</dd></div>
+            <div><dt>سال تأسیس</dt><dd>{company.foundingYear}</dd></div>
+            <div><dt>بنیان‌گذار</dt><dd>{company.founder}</dd></div>
+            <div><dt>مرکز</dt><dd>Fevzipaşa Caddesi، فاتح، استانبول، ترکیه</dd></div>
+            <div><dt>آخرین به‌روزرسانی</dt><dd>۲۷ ژوئیه ۲۰۲۶</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="fa-section">
+        <div class="fa-container">
+          <div class="fa-section-head">
+            <div><p class="fa-section-kicker">مخاطبان خدمات</p><h2>برای خرید حرفه‌ای و نیاز واقعی کسب‌وکار</h2></div>
+            <p>همکاری پس از شناخت شرکت، محصول، مقدار، کاربرد، مقصد و چارچوب تجاری درخواست آغاز می‌شود.</p>
+          </div>
+          <div class="fa-grid fa-audience-grid">
+            {persianAudiences.map(([name,copy]) => <article class="fa-card"><h3>{name}</h3><p>{copy}</p></article>)}
+          </div>
+        </div>
+      </section>
+
+      <section class="fa-section" id="sourcing">
+        <div class="fa-container">
+          <div class="fa-section-head">
+            <div><p class="fa-section-kicker">حوزه‌های اولویت‌دار</p><h2>محصول، بسته‌بندی و نهاده تولید</h2></div>
+            <p>از خرید عمده از ترکیه تا تأمین مواد اولیه و بسته‌بندی، هر درخواست بر پایه مشخصات واقعی و امکان تجاری بررسی می‌شود.</p>
+          </div>
+          <div class="fa-category-list">
+            {persianCategories.map((category) => <article class="fa-category">
+              <div class="fa-category-heading"><span class="fa-category-number">{category.number}</span><h3>{category.title}</h3></div>
+              <p>{category.intro}</p>
+              <ul class="fa-chip-list">{category.items.map((item) => <li>{item}</li>)}</ul>
+              {'noteTitle' in category && <div class="fa-request-note"><strong>{category.noteTitle}</strong><ul>{category.noteItems?.map((item) => <li>{item}</li>)}</ul></div>}
+              {'caution' in category && <p class="fa-caution">{category.caution}</p>}
+            </article>)}
+          </div>
+        </div>
+      </section>
+
+      <section class="fa-section">
+        <div class="fa-container">
+          <div class="fa-section-head">
+            <div><p class="fa-section-kicker">دامنه خدمات</p><h2>از RFQ تا ارزیابی شرایط تجاری</h2></div>
+            <p>اصطلاحات RFQ، MOQ، COA، Incoterms و Private label در هر پروژه همراه با کاربرد تجاری آن‌ها توضیح و مستند می‌شوند.</p>
+          </div>
+          <div class="fa-grid fa-service-grid">{persianServices.map((item) => <div class="fa-service-item">{item}</div>)}</div>
+          <p class="fa-role"><strong>جایگاه CTSEG:</strong> شریک تأمین و هماهنگی تجاری بین‌المللی برای پروژه‌های واجد شرایط؛ نه ارائه‌دهنده تضمین بانکی، مجوز گمرکی یا موجودی نامحدود کالا.</p>
+        </div>
+      </section>
+
+      <section class="fa-section" id="process">
+        <div class="fa-container">
+          <div class="fa-section-head">
+            <div><p class="fa-section-kicker">فرایند همکاری</p><h2>شش مرحله برای تصمیم خرید شفاف</h2></div>
+            <p>هر مرحله خروجی مشخص دارد و ادامه فرایند به نتیجه ارزیابی مرحله پیشین وابسته است.</p>
+          </div>
+          <div class="fa-grid fa-process">{persianProcess.map(([heading,copy]) => <article class="fa-step"><h3>{heading}</h3><p>{copy}</p></article>)}</div>
+        </div>
+      </section>
+
+      <section class="fa-section fa-compliance">
+        <div class="fa-container fa-compliance-grid">
+          <div class="fa-compliance-copy">
+            <p class="fa-section-kicker">انطباق و شفافیت</p>
+            <h2>هر درخواست، ارزیابی مستقل خود را دارد</h2>
+            <p>تمام درخواست‌ها از نظر طبقه‌بندی کالا، طرف‌های معامله، مبدأ، مصرف نهایی، کانال پرداخت، مدل لجستیکی و مقررات تجاری جاری به‌صورت جداگانه ارزیابی می‌شوند.</p>
+            <p>CTSEG در دور زدن تحریم‌ها، پنهان‌کردن مبدأ، استفاده از اسناد گمراه‌کننده یا روش‌های پرداخت غیرمجاز واسطه‌گری نمی‌کند.</p>
+            <p>در موارد لازم باید از متخصص مستقل حقوقی، بانکی، گمرکی یا کنترل صادرات نظر گرفته شود.</p>
+          </div>
+          <aside class="fa-boundaries">
+            <h3>CTSEG چه کاری انجام نمی‌دهد؟</h3>
+            <ul>
+              <li>تضمین امکان ارسال هر کالا به ایران</li>
+              <li>تضمین پرداخت یا انتقال بانکی</li>
+              <li>تضمین ترخیص، مجوز واردات یا تحویل</li>
+              <li>تغییر یا پنهان‌کردن مبدأ و مصرف نهایی</li>
+              <li>جایگزینی نقش بانک، وکیل، حمل‌کننده یا کارگزار گمرکی</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="fa-section fa-form-section" id="request-form">
+        <div class="fa-container">
+          <p class="fa-section-kicker">درخواست تأمین</p>
+          <h2>اطلاعات لازم برای ارزیابی اولیه</h2>
+          <p class="fa-form-intro">این فرم به سامانه ذخیره‌سازی متصل نیست. پس از اعتبارسنجی، یک خلاصه RFQ فقط روی دستگاه شما ساخته و دانلود می‌شود. برای ارسال نهایی، فایل را همراه مدارک فنی از ایمیل سازمانی خود به CTSEG بفرستید.</p>
+          <form class="fa-form" id="fa-sourcing-form" novalidate data-fa-sourcing-form>
+            <div class="fa-honeypot" aria-hidden="true"><label for="website">وب‌سایت</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
+            <div class="fa-form-grid">
+              <div class="fa-field"><label for="full-name">نام و نام خانوادگی <span class="fa-required">*</span></label><input id="full-name" name="fullName" autocomplete="name" required /></div>
+              <div class="fa-field"><label for="company-name">نام شرکت <span class="fa-required">*</span></label><input id="company-name" name="companyName" autocomplete="organization" required /></div>
+              <div class="fa-field"><label for="job-title">سمت / عنوان شغلی</label><input id="job-title" name="jobTitle" autocomplete="organization-title" /></div>
+              <div class="fa-field"><label for="business-email">ایمیل سازمانی <span class="fa-required">*</span></label><input class="fa-ltr" id="business-email" name="businessEmail" type="email" autocomplete="email" inputmode="email" required /></div>
+              <div class="fa-field"><label for="phone">تلفن / WhatsApp</label><input class="fa-ltr" id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" /></div>
+              <div class="fa-field"><label for="city">شهر <span class="fa-required">*</span></label><input id="city" name="city" autocomplete="address-level2" required /></div>
+              <div class="fa-field"><label for="product">محصول مورد درخواست <span class="fa-required">*</span></label><input id="product" name="product" required /></div>
+              <div class="fa-field"><label for="quantity">مقدار سفارش <span class="fa-required">*</span></label><input id="quantity" name="quantity" required /></div>
+              <div class="fa-field fa-field-wide"><label for="specifications">مشخصات فنی محصول <span class="fa-required">*</span></label><textarea id="specifications" name="specifications" required></textarea></div>
+              <div class="fa-field"><label for="packaging">نوع بسته‌بندی</label><input id="packaging" name="packaging" placeholder="برای مثال PET، قوطی فلزی یا فله" /></div>
+              <div class="fa-field"><label for="delivery-city">شهر تحویل <span class="fa-required">*</span></label><input id="delivery-city" name="deliveryCity" autocomplete="address-level2" required /></div>
+              <div class="fa-field"><label for="target-date">تاریخ هدف تحویل</label><input class="fa-ltr" id="target-date" name="targetDate" type="date" /></div>
+              <div class="fa-field"><label for="origins">کشورهای مبدأ قابل قبول</label><input id="origins" name="acceptedOrigins" /></div>
+              <div class="fa-field"><label for="documents">مدارک و گواهی‌های مورد نیاز</label><input id="documents" name="documents" placeholder="برای مثال COA، گواهی مبدأ یا آنالیز محصول" /></div>
+              <div class="fa-field"><label for="incoterm">Incoterm ترجیحی</label><select class="fa-ltr" id="incoterm" name="incoterm"><option value="">انتخاب نشده</option><option>EXW</option><option>FCA</option><option>FOB</option><option>CFR</option><option>CIF</option><option>CPT</option><option>CIP</option><option>DAP</option></select></div>
+              <div class="fa-field fa-field-wide"><label for="additional-notes">توضیحات تکمیلی</label><textarea id="additional-notes" name="additionalNotes"></textarea></div>
+              <div class="fa-field fa-field-wide fa-attachment-note"><strong>فایل RFQ یا مدرک فنی</strong><small>برای حفاظت از اطلاعات، فایل در وب‌سایت دریافت نمی‌شود. پس از دانلود خلاصه درخواست، مدارک فنی را از ایمیل سازمانی خود به info@ctseg.com.tr پیوست کنید.</small></div>
+            </div>
+            <div class="fa-privacy"><input id="privacy-consent" name="privacyConsent" type="checkbox" required /><label for="privacy-consent">تأیید می‌کنم اطلاعات را برای ارزیابی این درخواست آماده کرده‌ام و <a href="/en/privacy-policy/" target="_blank" rel="noopener">اطلاعیه حریم خصوصی CTSEG</a> را مطالعه کرده‌ام. <span class="fa-required">*</span></label></div>
+            <div class="fa-form-alert" id="fa-form-errors" role="alert" aria-live="assertive" hidden></div>
+            <button class="fa-button" type="submit">ارسال درخواست تأمین</button>
+            <p class="fa-form-note">انتخاب این دکمه به معنی ارسال به سرور نیست؛ خلاصه درخواست روی دستگاه شما دانلود می‌شود و مرحله ارسال ایمیل به‌صورت روشن نمایش داده خواهد شد.</p>
+            <div class="fa-form-alert" id="fa-form-fallback" role="status" aria-live="polite" hidden>
+              <strong>خلاصه درخواست روی دستگاه شما آماده شد، اما هنوز برای CTSEG ارسال نشده است.</strong>
+              <p>فایل دانلودشده و هر مدرک فنی را از ایمیل سازمانی خود به <a class="fa-ltr" href="mailto:info@ctseg.com.tr?subject=Persian%20Sourcing%20Request%20-%20CTSEG" data-fa-email-link>info@ctseg.com.tr</a> پیوست و ارسال کنید. پس از دریافت، محصول، طرف‌ها و امکان‌پذیری تجاری بررسی و سپس با شما تماس گرفته می‌شود.</p>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="fa-section" id="faq">
+        <div class="fa-container">
+          <div class="fa-section-head"><div><p class="fa-section-kicker">پرسش و پاسخ</p><h2>پرسش‌های متداول درباره تأمین</h2></div><p>پاسخ‌های کوتاه برای آغاز یک درخواست دقیق و قابل ارزیابی.</p></div>
+          <div class="fa-faq">{persianFaqs.map((item,index) => <details open={index===0}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div>
+        </div>
+      </section>
+
+      <section class="fa-section" id="contact">
+        <div class="fa-container fa-contact">
+          <div><p class="fa-section-kicker">ارتباط مستقیم</p><h2>نیاز تجاری خود را با اطلاعات قابل بررسی مطرح کنید</h2><p>برای شروع، مشخصات شرکت، محصول، مقدار، مقصد و فایل RFQ را آماده کنید. از ارسال اطلاعات پرداخت، گذرواژه یا داده‌های غیرضروری خودداری کنید.</p></div>
+          <div class="fa-contact-box"><p>ایمیل تأییدشده CTSEG</p><a href="mailto:info@ctseg.com.tr?subject=Persian%20Sourcing%20Request%20-%20CTSEG" data-fa-email-link>info@ctseg.com.tr</a></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="fa-footer">
+      <div class="fa-container">
+        <div class="fa-footer-main">
+          <div class="fa-footer-company"><strong>{company.name}</strong><span>۲۰۲۲ · فاتح، استانبول، ترکیه</span></div>
+          <div class="fa-footer-links"><a href="/en/" hreflang="en" data-fa-english-link>English</a><a class="fa-ltr" href="mailto:info@ctseg.com.tr" data-fa-email-link>info@ctseg.com.tr</a></div>
+        </div>
+        <div class="fa-footer-bottom">© 2026 CTSEG. کلیه حقوق محفوظ است.</div>
+      </div>
+    </footer>
+
+    <aside class="fa-cookie" data-cookie-consent hidden aria-label="تنظیمات کوکی">
+      <div><strong>تنظیمات کوکی</strong><p>کوکی‌های تحلیلی فقط با رضایت شما فعال می‌شوند. کوکی‌های ضروری همواره فعال هستند.</p></div>
+      <div class="fa-cookie-actions"><button type="button" data-cookie-reject>رد</button><button type="button" class="accept" data-cookie-accept>پذیرش</button></div>
+    </aside>
+
+    <script is:inline>
+      (() => {
+        const consentKey='ctseg-consent-v2';
+        const consentBox=document.querySelector('[data-cookie-consent]');
+        let analyticsReady=false;
+        const track=(eventName)=>{if(analyticsReady&&typeof window.gtag==='function')window.gtag('event',eventName,{page_language:'fa',page_type:'persian_sourcing_landing'})};
+        const loadAnalytics=()=>{
+          if(window.__ctsegAnalyticsLoaded){analyticsReady=typeof window.gtag==='function';track('fa_landing_view');return}
+          window.__ctsegAnalyticsLoaded=true;window.dataLayer=window.dataLayer||[];
+          window.gtag=function(){dataLayer.push(arguments)};window.gtag('js',new Date());window.gtag('config','G-B8BLQ7KK2T',{anonymize_ip:true});
+          const script=document.createElement('script');script.async=true;script.src='https://www.googletagmanager.com/gtag/js?id=G-B8BLQ7KK2T';document.head.appendChild(script);
+          analyticsReady=true;track('fa_landing_view');
+        };
+        const applyConsent=(value)=>{localStorage.setItem(consentKey,value);if(consentBox)consentBox.hidden=true;if(value==='accepted')loadAnalytics()};
+        const savedConsent=localStorage.getItem(consentKey);
+        if(savedConsent==='accepted')loadAnalytics();else if(!savedConsent&&consentBox)consentBox.hidden=false;
+        consentBox?.querySelector('[data-cookie-accept]')?.addEventListener('click',()=>applyConsent('accepted'));
+        consentBox?.querySelector('[data-cookie-reject]')?.addEventListener('click',()=>applyConsent('rejected'));
+
+        document.querySelectorAll('[data-fa-email-link]').forEach((link)=>link.addEventListener('click',()=>track('fa_email_cta_click')));
+        document.querySelectorAll('[data-fa-english-link]').forEach((link)=>link.addEventListener('click',()=>track('fa_english_link_click')));
+        window.addEventListener('ctseg:fa-form-success',()=>track('fa_form_submission_success'));
+
+        const form=document.querySelector('[data-fa-sourcing-form]');
+        if(!(form instanceof HTMLFormElement))return;
+        form.dataset.startedAt=String(Date.now());
+        const errorBox=document.getElementById('fa-form-errors');
+        const fallbackBox=document.getElementById('fa-form-fallback');
+        let formStarted=false;
+        form.addEventListener('input',()=>{if(!formStarted){formStarted=true;track('fa_form_start')}},{once:false});
+        form.addEventListener('submit',(event)=>{
+          event.preventDefault();track('fa_form_submit_attempt');
+          if(errorBox)errorBox.hidden=true;if(fallbackBox)fallbackBox.hidden=true;
+          const honeypot=form.elements.namedItem('website');
+          const startedAt=Number(form.dataset.startedAt||Date.now());
+          if(honeypot instanceof HTMLInputElement&&honeypot.value.trim())return;
+          if(Date.now()-startedAt<3000){if(errorBox){errorBox.textContent='لطفاً چند لحظه صبر کنید و سپس دوباره تلاش کنید.';errorBox.hidden=false}return}
+          const fileInput=form.elements.namedItem('rfqFile');
+          if(fileInput instanceof HTMLInputElement&&fileInput.files?.[0]&&fileInput.files[0].size>10*1024*1024){
+            fileInput.setCustomValidity('حجم فایل باید کمتر از ۱۰ مگابایت باشد.');
+          }else if(fileInput instanceof HTMLInputElement){fileInput.setCustomValidity('')}
+          if(!form.checkValidity()){
+            form.reportValidity();
+            if(errorBox){errorBox.textContent='لطفاً فیلدهای الزامی و قالب اطلاعات را بررسی کنید.';errorBox.hidden=false}
+            return;
+          }
+          const labels={
+            fullName:'نام و نام خانوادگی',companyName:'نام شرکت',jobTitle:'سمت',businessEmail:'ایمیل سازمانی',phone:'تلفن / WhatsApp',
+            city:'شهر',product:'محصول',specifications:'مشخصات فنی',quantity:'مقدار سفارش',packaging:'نوع بسته‌بندی',
+            deliveryCity:'شهر تحویل',targetDate:'تاریخ هدف',acceptedOrigins:'مبدأهای قابل قبول',documents:'مدارک مورد نیاز',
+            incoterm:'Incoterm',additionalNotes:'توضیحات تکمیلی'
+          };
+          const data=new FormData(form);
+          const lines=['CTSEG - Persian Sourcing RFQ','Generated locally; not yet submitted.',''];
+          Object.entries(labels).forEach(([key,label])=>{const value=String(data.get(key)||'').trim();lines.push(`${label}: ${value||'-'}`)});
+          const file=fileInput instanceof HTMLInputElement?fileInput.files?.[0]:null;
+          lines.push(`نام فایل پیوست برای ارسال جداگانه: ${file?.name||'-'}`);
+          lines.push('Privacy consent: confirmed');
+          const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
+          const downloadUrl=URL.createObjectURL(blob);
+          const download=document.createElement('a');download.href=downloadUrl;download.download=`ctseg-sourcing-rfq-${new Date().toISOString().slice(0,10)}.txt`;
+          document.body.appendChild(download);download.click();download.remove();setTimeout(()=>URL.revokeObjectURL(downloadUrl),1000);
+          track('fa_form_fallback_ready');
+          if(fallbackBox){fallbackBox.hidden=false;fallbackBox.scrollIntoView({behavior:'smooth',block:'center'})}
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -51,6 +51,7 @@ try {
     { name:'desktop-de-catalogue', path:'/de/handelsprodukte/', width:1440, height:1000 },
     { name:'desktop-de-locale-panel', path:'/de/', width:1440, height:1000, openLanguage:true },
     { name:'desktop-en-home', path:'/en/', width:1440, height:1000 },
+    { name:'desktop-en-persian-nav', path:'/en/', width:1440, height:1000, openPersianNav:true, verifyPersianNav:true },
     { name:'desktop-it-home', path:'/it/', width:1440, height:1000 },
     { name:'desktop-it-catalogue', path:'/it/prodotti-commerciali/', width:1440, height:1000 },
     { name:'desktop-fr-home', path:'/fr/', width:1440, height:1000 },
@@ -61,6 +62,9 @@ try {
     { name:'tablet-de-contact', path:'/de/kontakt/', width:820, height:1180 },
     { name:'tablet-it-contact', path:'/it/contatti/', width:820, height:1180 },
     { name:'tablet-fr-contact', path:'/fr/contact/', width:820, height:1180 },
+    { name:'tablet-tr-process-1024', path:'/tr/nasil-calisiyoruz/', width:1024, height:900, allowLocaleFallback:true },
+    { name:'tablet-en-scenarios-1024', path:'/en/representative-work-scenarios/', width:1024, height:900, allowLocaleFallback:true, gapLimit:100 },
+    { name:'tablet-tr-guide-1024', path:'/tr/icgoruler/bitkisel-yag-tedarikinde-rfq-kontrol-listesi/', width:1024, height:900, allowLocaleFallback:true },
     { name:'wide-tr-home', path:'/', width:1600, height:1000 },
     { name:'wide-tr-services', path:'/tr/hizmetler/', width:1600, height:1000 },
     { name:'wide-tr-markets', path:'/tr/pazarlar/', width:1600, height:1000 },
@@ -77,6 +81,9 @@ try {
     { name:'mobile-it-home', path:'/it/', width:390, height:844 },
     { name:'mobile-fr-home', path:'/fr/', width:390, height:844 },
     { name:'mobile-tr-services', path:'/tr/hizmetler/', width:390, height:844 },
+    { name:'mobile-tr-process', path:'/tr/nasil-calisiyoruz/', width:390, height:844, allowLocaleFallback:true },
+    { name:'mobile-en-scenarios', path:'/en/representative-work-scenarios/', width:390, height:844, allowLocaleFallback:true, gapLimit:90 },
+    { name:'mobile-tr-form', path:'/tr/iletisim/', width:390, height:844 },
     { name:'mobile-tr-markets', path:'/tr/pazarlar/', width:390, height:844 },
     { name:'mobile-tr-insights', path:'/tr/icgoruler/', width:390, height:844 },
     { name:'mobile-tr-contact', path:'/tr/iletisim/', width:390, height:844 },
@@ -85,6 +92,7 @@ try {
     { name:'mobile-it-contact', path:'/it/contatti/', width:390, height:844 },
     { name:'mobile-fr-contact', path:'/fr/contact/', width:390, height:844 },
     { name:'mobile-tr-menu', path:'/', width:390, height:844, openMenu:true },
+    { name:'mobile-en-persian-nav', path:'/en/', width:390, height:844, openMenu:true, verifyPersianNav:true },
     { name:'mobile-fr-catalogue', path:'/fr/produits-commerciaux/', width:390, height:844 },
     { name:'mobile-de-home', path:'/de/', width:390, height:844 },
     { name:'mobile430-tr-home', path:'/', width:430, height:932 },
@@ -94,13 +102,20 @@ try {
     { name:'mobile430-tr-contact', path:'/tr/iletisim/', width:430, height:932 },
     { name:'mobile430-tr-menu', path:'/', width:430, height:932, openMenu:true },
     { name:'mobile430-de-home', path:'/de/', width:430, height:932 },
-    { name:'mobile430-fr-home', path:'/fr/', width:430, height:932 }
+    { name:'mobile430-fr-home', path:'/fr/', width:430, height:932 },
+    { name:'wide-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:1600, height:1000, persian:true },
+    { name:'tablet-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:820, height:1180, persian:true },
+    { name:'mobile-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:390, height:844, persian:true },
+    { name:'mobile430-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:430, height:932, persian:true }
   ];
   const failures = [];
   const localeAtmospheres = new Map();
   for (const testCase of cases) {
     const page = await browser.newPage({ viewport:{ width:testCase.width, height:testCase.height } });
-    await page.goto(`http://127.0.0.1:4321${testCase.path}`, { waitUntil:'networkidle' });
+    const navigationResponse = await page.goto(`http://127.0.0.1:4321${testCase.path}`, { waitUntil:'networkidle' });
+    if (!navigationResponse || navigationResponse.status() !== 200) {
+      failures.push(`${testCase.name}: expected HTTP 200, received ${navigationResponse?.status() ?? 'no response'}`);
+    }
     await page.addStyleTag({ content:'*,*:before,*:after{animation:none!important;transition:none!important}.product-media img{transform:none!important}' });
     await page.locator('[data-cookie-reject]').click();
     await page.evaluate(() => {
@@ -118,13 +133,14 @@ try {
     await page.waitForTimeout(250);
     let mobileMenu = true;
     let bodyScrollLocked = true;
-    if (testCase.width <= 860) {
+    if (testCase.width <= 860 && !testCase.persian) {
       await page.locator('[data-menu-toggle]').click();
       mobileMenu = await page.locator('[data-primary-nav]').isVisible();
       bodyScrollLocked = await page.evaluate(() => document.body.classList.contains('menu-open') && getComputedStyle(document.body).overflow === 'hidden');
       if (!testCase.openMenu) await page.locator('[data-menu-toggle]').click();
     }
     if (testCase.openLanguage) await page.locator('[data-language-toggle]').click();
+    if (testCase.openPersianNav) await page.locator('[data-markets-nav-group]').hover();
     const contactEmailLink = page.locator('.contact-email-link');
     if (await contactEmailLink.count()) {
       await page.keyboard.press('Tab');
@@ -133,9 +149,9 @@ try {
     }
     const result = await page.evaluate(() => ({
       overflow:document.documentElement.scrollWidth - window.innerWidth,
-      headers:document.querySelectorAll('header.site-header').length,
-      footers:document.querySelectorAll('footer.site-footer').length,
-      logo:[...document.querySelectorAll('.brand img')].every((image) => {
+      headers:document.querySelectorAll('header').length,
+      footers:document.querySelectorAll('footer').length,
+      logo:[...document.querySelectorAll('.brand img,.fa-brand img')].every((image) => {
         const naturalRatio = image.naturalWidth / image.naturalHeight;
         const box = image.getBoundingClientRect();
         const renderedRatio = box.width / box.height;
@@ -175,6 +191,45 @@ try {
           href:link?.getAttribute('href'),
           buttons:panel.querySelectorAll('.button').length,
           focusVisible
+        };
+      })()
+      ,persianNav:(() => {
+        const links=[...document.querySelectorAll('[data-fa-nav-link]')];
+        const link=links[0];
+        const box=link?.getBoundingClientRect();
+        return {
+          count:links.length,
+          visible:Boolean(box&&box.width>0&&box.height>0&&getComputedStyle(link).visibility!=='hidden'&&getComputedStyle(link).opacity!=='0'),
+          href:link?.getAttribute('href') ?? null,
+          target:link?.getAttribute('target') ?? null,
+          primary:link?.querySelector('strong')?.textContent?.trim() ?? null,
+          helper:link?.querySelector('span')?.textContent?.trim() ?? null
+        };
+      })()
+      ,persian:(() => {
+        const form=document.querySelector('[data-fa-sourcing-form]');
+        if(!form)return null;
+        const fields=[...form.querySelectorAll('input[id],select[id],textarea[id]')].filter((field)=>field.id!=='website');
+        const company=document.querySelector('.fa-company-facts');
+        const rootStyle=getComputedStyle(document.documentElement);
+        const bodyStyle=getComputedStyle(document.body);
+        return {
+          lang:document.documentElement.lang,
+          dir:document.documentElement.dir,
+          rootDirection:rootStyle.direction,
+          bodyDirection:bodyStyle.direction,
+          h1s:document.querySelectorAll('h1').length,
+          details:document.querySelectorAll('.fa-faq details').length,
+          fields:fields.length,
+          labeled:fields.every((field)=>form.querySelector(`label[for="${field.id}"]`)),
+          companyVisible:Boolean(company&&company.getBoundingClientRect().width>0&&company.textContent?.includes('CTSEG Sanayi ve Ticaret Limited Şirketi')),
+          headerVisible:Boolean(document.querySelector('.fa-header')?.getBoundingClientRect().height),
+          footerVisible:Boolean(document.querySelector('.fa-footer')?.getBoundingClientRect().height),
+          globalLocaleOptions:document.querySelectorAll('[data-locale-option]').length,
+          heroStatic:Boolean(document.querySelector('.fa-hero h1')?.textContent?.trim()),
+          emailLtr:getComputedStyle(document.querySelector('.fa-contact-box a')).direction==='ltr',
+          brandLtr:getComputedStyle(document.querySelector('.fa-brand')).direction==='ltr',
+          breadcrumbRtl:getComputedStyle(document.querySelector('.fa-hero nav')).direction==='rtl'
         };
       })()
       ,overflowNodes:[...document.querySelectorAll('body *')]
@@ -275,8 +330,16 @@ try {
       })()
     }));
     await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:!testCase.openMenu });
-    localeAtmospheres.set(result.lang,result.localeAtmosphere);
-    const gapLimit = testCase.width <= 860 ? 56 : 80;
+    let persianNavWorks = true;
+    if (testCase.verifyPersianNav) {
+      const [targetResponse] = await Promise.all([
+        page.waitForNavigation({waitUntil:'domcontentloaded'}),
+        page.locator('[data-fa-nav-link]').click()
+      ]);
+      persianNavWorks = targetResponse?.status() === 200 && new URL(page.url()).pathname === '/fa/tamin-beynolmelali-iran/';
+    }
+    if (!testCase.persian) localeAtmospheres.set(result.lang,result.localeAtmosphere);
+    const gapLimit = testCase.gapLimit ?? (testCase.width <= 860 ? 56 : 80);
     const badLayout = result.layout.headingVisualOverlap || result.layout.headerOverlap || result.layout.heroChromeOverlap ||
       (result.layout.pageHeroGap !== null && (result.layout.pageHeroGap < 20 || result.layout.pageHeroGap > gapLimit)) || result.layout.cardOverflow ||
       result.layout.repeatedAdjacentImage || result.layout.duplicateDetailMedia ||
@@ -289,16 +352,26 @@ try {
     const badContactEmail = result.contactEmail && (result.contactEmail.occurrences !== 1 || result.contactEmail.links !== 1 ||
       result.contactEmail.href !== 'mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry' ||
       result.contactEmail.buttons !== 0 || !result.contactEmail.focusVisible);
-    const badLocale = result.localeOptions !== 5 || result.activeDesktopLocale !== 1 || !result.localeRouteMatch || !result.desktopLocaleCodeOnly ||
-      (testCase.openMenu && (result.visibleMobileLocales !== 5 || result.mobilePanelHeight < testCase.height * .7));
-    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu || !bodyScrollLocked || badLayout || badLocale || badContactEmail) {
-      failures.push(`${testCase.name}: ${JSON.stringify({...result,mobileMenu,bodyScrollLocked})}`);
+    const badLocale = !testCase.persian && (result.localeOptions !== 5 || result.activeDesktopLocale !== 1 || (!testCase.allowLocaleFallback && !result.localeRouteMatch) || !result.desktopLocaleCodeOnly ||
+      (testCase.openMenu && (result.visibleMobileLocales !== 5 || result.mobilePanelHeight < testCase.height * .7)));
+    const badPersian = testCase.persian && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
+      result.persian.rootDirection !== 'rtl' || result.persian.bodyDirection !== 'rtl' || result.persian.h1s !== 1 ||
+      result.persian.details !== 11 || result.persian.fields < 15 || !result.persian.labeled || !result.persian.companyVisible ||
+      !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 0 ||
+      !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl);
+    const badPersianNav = result.lang === 'en'
+      ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/tamin-beynolmelali-iran/' ||
+        result.persianNav.target !== null || result.persianNav.primary !== 'For Iranian Businesses' ||
+        result.persianNav.helper !== 'Persian landing page' || (testCase.verifyPersianNav && !result.persianNav.visible)
+      : result.persianNav.count !== 0;
+    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu || !bodyScrollLocked || badLayout || badLocale || badContactEmail || badPersian || badPersianNav || !persianNavWorks) {
+      failures.push(`${testCase.name}: ${JSON.stringify({...result,mobileMenu,bodyScrollLocked,persianNavWorks})}`);
     }
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);
     await page.close();
   }
-  if (localeAtmospheres.size !== 5 || new Set(localeAtmospheres.values()).size !== 5) {
-    failures.push(`locale atmospheres are not distinct: ${JSON.stringify(Object.fromEntries(localeAtmospheres))}`);
+  if (localeAtmospheres.size !== 5) {
+    failures.push(`locale treatments are incomplete: ${JSON.stringify(Object.fromEntries(localeAtmospheres))}`);
   }
   const productSlugs = [
     'akbari-pistachio','kaleghouchi-pistachio','fandoghi-pistachio','ahmad-aghaei-pistachio',

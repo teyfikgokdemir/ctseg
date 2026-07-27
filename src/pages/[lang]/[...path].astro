@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageContent from '../../components/PageContent.astro';
 import { insights, pageCopy, products, ui } from '../../data/site';
+import { guides, processPages } from '../../data/completion';
 import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, type RouteRecord } from '../../lib/routes';
 
 export function getStaticPaths() {
@@ -41,6 +42,26 @@ if (record.key === 'insights' && record.id) {
     '@context':'https://schema.org','@type':'BlogPosting',headline:insight.titles[record.lang],
     description:insight.descriptions[record.lang],datePublished:'2026-07-27',dateModified:'2026-07-27',
     inLanguage:record.lang,mainEntityOfPage:canonicalFor(record),author:{'@id':'https://ctseg.com.tr/#organization'},
+    publisher:{'@id':'https://ctseg.com.tr/#organization'}
+  });
+}
+if (record.key === 'how-we-work' && (record.lang === 'tr' || record.lang === 'en')) {
+  const process=processPages[record.lang];
+  schemas.push({
+    '@context':'https://schema.org','@type':'HowTo',name:process.title,description:process.description,
+    step:process.steps.map((name,index)=>({'@type':'HowToStep',position:index+1,name}))
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'FAQPage',
+    mainEntity:process.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))
+  });
+}
+if (record.key === 'guides' && record.id && (record.lang === 'tr' || record.lang === 'en')) {
+  const guide=guides[record.id as keyof typeof guides][record.lang];
+  schemas.push({
+    '@context':'https://schema.org','@type':'Article',headline:guide.title,description:guide.description,
+    datePublished:'2026-07-27',dateModified:'2026-07-27',inLanguage:record.lang,
+    mainEntityOfPage:canonicalFor(record),author:{'@type':'Person',name:'Teyfik Gökdemir'},
     publisher:{'@id':'https://ctseg.com.tr/#organization'}
   });
 }

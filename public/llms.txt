@@ -18,6 +18,21 @@
 - [Insights](https://ctseg.com.tr/en/insights/)
 - [About CTSEG](https://ctseg.com.tr/en/about/)
 - [Contact](https://ctseg.com.tr/en/contact/)
+- [How we work](https://ctseg.com.tr/en/how-we-work/)
+- [Representative work scenarios](https://ctseg.com.tr/en/representative-work-scenarios/)
+
+## Practical sourcing guides
+
+- [Vegetable oil sourcing RFQ checklist](https://ctseg.com.tr/en/insights/vegetable-oil-sourcing-rfq-checklist/)
+- [Nuts and dried fruit quality and document check](https://ctseg.com.tr/en/insights/nuts-dried-fruit-quality-document-check/)
+- [Packaging, MOQ and total-cost comparison](https://ctseg.com.tr/en/insights/packaging-moq-total-cost-comparison/)
+- [Bitkisel yağ tedarikinde RFQ kontrol listesi](https://ctseg.com.tr/tr/icgoruler/bitkisel-yag-tedarikinde-rfq-kontrol-listesi/)
+- [Kuruyemiş ve kuru meyvede kalite ve belge kontrolü](https://ctseg.com.tr/tr/icgoruler/kuruyemis-kuru-meyve-kalite-belge-kontrolu/)
+- [Ambalaj, MOQ ve toplam maliyet karşılaştırması](https://ctseg.com.tr/tr/icgoruler/ambalaj-moq-toplam-maliyet-karsilastirmasi/)
+
+## Persian standalone resource
+
+- [تأمین بین‌المللی برای کسب‌وکارهای ایرانی](https://ctseg.com.tr/fa/tamin-beynolmelali-iran/) — Persian-language guidance and request preparation for compliant international sourcing. This is a standalone resource, not a full Persian site locale.
 
 ## Expertise
 
