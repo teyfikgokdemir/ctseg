@@ -7,6 +7,61 @@ export const localeNames: Record<Locale, string> = {
 
 type Localized<T = string> = Record<Locale, T>;
 
+export const company = {
+  name: 'CTSEG Sanayi ve Ticaret Limited Şirketi',
+  alternateName: 'CTSEG',
+  founder: 'Teyfik Gökdemir',
+  foundingYear: '2022',
+  streetAddress: 'Fevzipaşa Caddesi',
+  addressLocality: 'Fatih',
+  addressRegion: 'İstanbul',
+  addressCountry: 'TR'
+} as const;
+
+export const companyCopy: Record<Locale, {
+  aboutHeading: string;
+  aboutBody: string;
+  labels: { name: string; founder: string; founded: string; headquarters: string };
+  headquarters: string;
+  footerLocation: string;
+}> = {
+  tr: {
+    aboutHeading: 'İstanbul’dan uluslararası ticarete',
+    aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi, 2022 yılında Teyfik Gökdemir tarafından İstanbul’da kuruldu. CTSEG; stratejik tedarik, üretici ve tedarikçi doğrulaması, maliyet analizi, ticari ürün tedariği ve uluslararası ticaret süreçlerinde şirketlere destek verir.',
+    labels: { name: 'Şirket adı', founder: 'Kurucu', founded: 'Kuruluş yılı', headquarters: 'Merkez' },
+    headquarters: 'Fevzipaşa Caddesi, Fatih, İstanbul, Türkiye',
+    footerLocation: 'Fatih, İstanbul, Türkiye'
+  },
+  en: {
+    aboutHeading: 'From Istanbul to international trade',
+    aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi was founded in Istanbul in 2022 by Teyfik Gökdemir. CTSEG supports companies with strategic sourcing, manufacturer and supplier verification, cost analysis, trade product sourcing and international trade processes.',
+    labels: { name: 'Company name', founder: 'Founder', founded: 'Year established', headquarters: 'Headquarters' },
+    headquarters: 'Fevzipaşa Caddesi, Fatih, Istanbul, Türkiye',
+    footerLocation: 'Fatih, Istanbul, Türkiye'
+  },
+  de: {
+    aboutHeading: 'Von Istanbul in den internationalen Handel',
+    aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi wurde 2022 von Teyfik Gökdemir in Istanbul gegründet. CTSEG unterstützt Unternehmen bei strategischer Beschaffung, der Prüfung von Herstellern und Lieferanten, Kostenanalysen, der Beschaffung von Handelsprodukten und internationalen Handelsprozessen.',
+    labels: { name: 'Unternehmensname', founder: 'Gründer', founded: 'Gründungsjahr', headquarters: 'Hauptsitz' },
+    headquarters: 'Fevzipaşa Caddesi, Fatih, Istanbul, Türkei',
+    footerLocation: 'Fatih, Istanbul, Türkei'
+  },
+  it: {
+    aboutHeading: 'Da Istanbul al commercio internazionale',
+    aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi è stata fondata a Istanbul nel 2022 da Teyfik Gökdemir. CTSEG affianca le aziende nel sourcing strategico, nella verifica di produttori e fornitori, nell’analisi dei costi, nell’approvvigionamento di prodotti commerciali e nei processi di commercio internazionale.',
+    labels: { name: 'Nome dell’azienda', founder: 'Fondatore', founded: 'Anno di fondazione', headquarters: 'Sede' },
+    headquarters: 'Fevzipaşa Caddesi, Fatih, Istanbul, Turchia',
+    footerLocation: 'Fatih, Istanbul, Turchia'
+  },
+  fr: {
+    aboutHeading: 'D’Istanbul au commerce international',
+    aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi a été fondée à Istanbul en 2022 par Teyfik Gökdemir. CTSEG accompagne les entreprises dans le sourcing stratégique, la vérification des fabricants et fournisseurs, l’analyse des coûts, l’approvisionnement en produits commerciaux et les processus de commerce international.',
+    labels: { name: 'Nom de l’entreprise', founder: 'Fondateur', founded: 'Année de création', headquarters: 'Siège' },
+    headquarters: 'Fevzipaşa Caddesi, Fatih, Istanbul, Turquie',
+    footerLocation: 'Fatih, Istanbul, Turquie'
+  }
+};
+
 export const sectionSlugs: Record<string, Localized> = {
   services: { tr: 'hizmetler', en: 'services', de: 'dienstleistungen', it: 'servizi', fr: 'services' },
   products: { tr: 'ticari-urunler', en: 'trade-products', de: 'handelsprodukte', it: 'prodotti-commerciali', fr: 'produits-commerciaux' },

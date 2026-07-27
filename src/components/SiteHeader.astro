@@ -12,7 +12,7 @@ const switchPath = (target: Locale) => localizedPath(target, pageKey, pageId);
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href={home} aria-label={`CTSEG Â· ${t.home}`}>
+    <a class="brand" href={home} aria-label={`CTSEG · ${t.home}`}>
       <img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" decoding="async" />
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-toggle>
@@ -46,7 +46,7 @@ const switchPath = (target: Locale) => localizedPath(target, pageKey, pageId);
             href={switchPath(code)}
             aria-current={code === lang ? 'true' : undefined}
             data-locale-option
-          >{code.toUpperCase()}<span class="sr-only"> Â· {localeNames[code]}</span></a>)}
+          >{code.toUpperCase()}<span class="sr-only"> · {localeNames[code]}</span></a>)}
         </div>
       </div>
       <a class="button button-small nav-cta" href={localizedPath(lang, 'contact')}>{t.quote}</a>

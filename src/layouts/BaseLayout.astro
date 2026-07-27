@@ -2,7 +2,7 @@
 import '../styles/site.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { locales, localizedPath, products, routeAlternates, ui, type Locale } from '../data/site';
+import { company, locales, localizedPath, products, routeAlternates, ui, type Locale } from '../data/site';
 import { FEATURE_IMAGE_WIDTHS, HERO_IMAGE, generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
 
 const {
@@ -17,8 +17,17 @@ const alternates = routeAlternates(pageKey, pageId);
 if (pageKey === 'home') alternates.tr = 'https://ctseg.com.tr/';
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
-  name:'CTSEG',url:'https://ctseg.com.tr/',logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
-  email:'info@ctseg.com.tr',areaServed:['TÃ¼rkiye','Europe','International'],
+  name:company.name,alternateName:company.alternateName,foundingDate:company.foundingYear,
+  founder:{'@type':'Person',name:company.founder},
+  address:{
+    '@type':'PostalAddress',
+    streetAddress:company.streetAddress,
+    addressLocality:company.addressLocality,
+    addressRegion:company.addressRegion,
+    addressCountry:company.addressCountry
+  },
+  url:'https://ctseg.com.tr/',logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
+  email:'info@ctseg.com.tr',areaServed:['Türkiye','Europe','International'],
   knowsAbout:['Strategic sourcing','Supplier verification','International trade','Food product sourcing']
 };
 const website = {

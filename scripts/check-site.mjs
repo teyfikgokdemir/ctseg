@@ -17,6 +17,21 @@ let checkedLinks = 0;
 const pageRecords = [];
 let productSchemaPages = 0;
 let contactEmailPanels = 0;
+const companyName = 'CTSEG Sanayi ve Ticaret Limited Şirketi';
+const aboutPages = new Set([
+  'tr/hakkimizda/index.html',
+  'en/about/index.html',
+  'de/ueber-uns/index.html',
+  'it/chi-siamo/index.html',
+  'fr/a-propos/index.html'
+]);
+const contactPages = new Set([
+  'tr/iletisim/index.html',
+  'en/contact/index.html',
+  'de/kontakt/index.html',
+  'it/contatti/index.html',
+  'fr/contact/index.html'
+]);
 const productCatalogs = new Set([
   'tr/ticari-urunler/index.html',
   'en/trade-products/index.html',
@@ -44,11 +59,48 @@ for (const file of htmlFiles) {
   const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
   const lang = html.match(/<html lang="([^"]+)"/)?.[1];
   const alternates = Object.fromEntries([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
+  const jsonLdBlocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((match) => match[1]);
+  const parsedSchemas = [];
+  for (const block of jsonLdBlocks) {
+    try {
+      const value = JSON.parse(block);
+      parsedSchemas.push(...(Array.isArray(value) ? value : [value]));
+    } catch (error) {
+      errors.push(`${label}: invalid JSON-LD (${error.message})`);
+    }
+  }
+  const organizations = parsedSchemas.filter((schema) => schema?.['@type'] === 'Organization');
+  const organization = organizations[0];
   if (!label.startsWith('404') && canonical && lang) pageRecords.push({ label, canonical, lang, alternates });
   if (titleCount !== 1) errors.push(`${label}: expected one title, found ${titleCount}`);
+  if ((html.match(/<meta charset="UTF-8">/g) || []).length !== 1) errors.push(`${label}: expected exactly one UTF-8 charset declaration`);
   if (!/<meta name="description" content="[^"]+"/.test(html)) errors.push(`${label}: missing description`);
   if (canonicalCount !== 1) errors.push(`${label}: expected one canonical, found ${canonicalCount}`);
   if (headerCount !== 1 || footerCount !== 1) errors.push(`${label}: header/footer count ${headerCount}/${footerCount}`);
+  if (/CTSEG Koz\u006Detik|\bKoz\u006Detik\b/i.test(html)) errors.push(`${label}: prohibited company wording remains`);
+  if (/\u00C3|\u00C2|\u00E2[\u20AC\u201D\u2013\u2014\u2122\u0153]|\u00C4[\u0178\u00B1]|\u00C5[\u0178\u017E]|\uFFFD/.test(html)) {
+    errors.push(`${label}: mojibake text remains`);
+  }
+  if (!html.includes(`<strong>${companyName}</strong>`)) errors.push(`${label}: localized footer company identity missing`);
+  if (organizations.length !== 1) errors.push(`${label}: expected one Organization schema, found ${organizations.length}`);
+  if (organization && (
+    organization.name !== companyName ||
+    organization.alternateName !== 'CTSEG' ||
+    organization.foundingDate !== '2022' ||
+    organization.founder?.['@type'] !== 'Person' ||
+    organization.founder?.name !== 'Teyfik Gökdemir' ||
+    organization.address?.['@type'] !== 'PostalAddress' ||
+    organization.address?.streetAddress !== 'Fevzipaşa Caddesi' ||
+    organization.address?.addressLocality !== 'Fatih' ||
+    organization.address?.addressRegion !== 'İstanbul' ||
+    organization.address?.addressCountry !== 'TR'
+  )) errors.push(`${label}: Organization schema company identity is incomplete`);
+  if (aboutPages.has(label) && (!html.includes('company-profile-section') || !html.includes('Teyfik Gökdemir') || !html.includes('2022'))) {
+    errors.push(`${label}: localized company history section missing`);
+  }
+  if (contactPages.has(label) && (!html.includes('company-card--contact') || !html.includes('Fevzipaşa Caddesi') || !html.includes('Teyfik Gökdemir'))) {
+    errors.push(`${label}: localized company contact card missing`);
+  }
   if (html.includes('fonts.googleapis.com') || html.includes('fonts.gstatic.com')) errors.push(`${label}: external Google Fonts dependency remains`);
   if (!html.includes('/fonts/dm-sans-latin-ext-variable.woff2') || !html.includes('/fonts/source-serif-4-latin-ext-variable.woff2')) {
     errors.push(`${label}: local font preloads missing`);
@@ -146,6 +198,13 @@ for (const file of htmlFiles) {
 if (productSchemaPages !== 90) errors.push(`expected 90 Product schema pages, found ${productSchemaPages}`);
 if (contactEmailPanels !== 5) errors.push(`expected five localized contact email panels, found ${contactEmailPanels}`);
 const css = files.filter((file) => file.endsWith('.css')).map((file) => readFileSync(file,'utf8')).join('\n');
+const deploymentHeaders = readFileSync(join(root, '_headers'), 'utf8');
+for (const routePattern of ['/', '/*/', '/*.html']) {
+  const escaped = routePattern.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  if (!new RegExp(`(?:^|\\n)${escaped}\\r?\\n\\s+Content-Type: text/html; charset=utf-8(?:\\r?\\n|$)`).test(deploymentHeaders)) {
+    errors.push(`deployment headers: UTF-8 HTML rule missing for ${routePattern}`);
+  }
+}
 if (!css.includes(':focus-visible')) errors.push('compiled CSS: focus-visible treatment missing');
 if (!css.includes('prefers-reduced-motion:reduce')) errors.push('compiled CSS: reduced-motion treatment missing');
 if (!css.includes('.product-media--poster') || !css.includes('object-fit:contain') || !css.includes('.product-media--photo')) {
