@@ -1,0 +1,27 @@
+---
+import { generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
+
+const {
+  src, widths, sizes, width, height, alt='', loading='lazy', fetchpriority='auto',
+  decoding='async', class:className, style
+} = Astro.props as {
+  src:string; widths:readonly number[]; sizes:string; width:number; height:number; alt?:string;
+  loading?:'eager'|'lazy'; fetchpriority?:'high'|'low'|'auto'; decoding?:'sync'|'async'|'auto';
+  class?:string; style?:string;
+};
+const availableWidths = widths.filter((candidate) => candidate <= width);
+const fallbackWidth = availableWidths.at(-1) ?? widths[0];
+---
+<img
+  src={generatedImageSrc(src,fallbackWidth)}
+  srcset={generatedImageSrcset(src,availableWidths)}
+  sizes={sizes}
+  width={width}
+  height={height}
+  alt={alt}
+  loading={loading}
+  fetchpriority={fetchpriority}
+  decoding={decoding}
+  class={className}
+  style={style}
+/>

@@ -1,12 +1,23 @@
 ---
 import { editorialCopy, type Locale } from '../data/site';
+import ResponsiveImage from './ResponsiveImage.astro';
+import { FEATURE_IMAGE_WIDTHS, PORTFOLIO_IMAGE } from '../lib/responsive-images';
 const { lang } = Astro.props as { lang:Locale };
 const copy = editorialCopy[lang];
 ---
 <section class="portfolio-banner section">
   <div class="container portfolio-layout">
     <figure class="portfolio-visual">
-      <img src="/images/2.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="" />
+      <ResponsiveImage
+        src={PORTFOLIO_IMAGE}
+        widths={FEATURE_IMAGE_WIDTHS}
+        sizes="(max-width:860px) calc(100vw - 36px), min(67vw,930px)"
+        width={1536}
+        height={1024}
+        loading="lazy"
+        decoding="async"
+        alt=""
+      />
     </figure>
     <div class="portfolio-copy">
       <p class="eyebrow">CTSEG · Portfolio</p>

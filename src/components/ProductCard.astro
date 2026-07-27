@@ -6,6 +6,13 @@ const { product, productId, lang, index, featured=false, displayRole='', family=
 };
 const label = String(index + 1).padStart(2,'0');
 const typographicVariety = ['kaleghouchi-pistachio','fandoghi-pistachio','ahmad-aghaei-pistachio'].includes(productId);
+const catalogueSizes = '(max-width:620px) calc(100vw - 26px), (max-width:1100px) calc(50vw - 28px), min(33vw,420px)';
+const showcaseSizes = {
+  lead:'(max-width:860px) calc(100vw - 36px), min(67vw,850px)',
+  medium:'(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(50vw - 27px), min(50vw,630px)',
+  compact:'(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(50vw - 27px), min(33vw,420px)'
+} as Record<string,string>;
+const imageSizes = displayRole ? showcaseSizes[displayRole] : catalogueSizes;
 ---
 <a
   class:list={['product-card', displayRole && `product-card--${displayRole}`, { featured, 'typographic-card':typographicVariety }]}
@@ -16,7 +23,7 @@ const typographicVariety = ['kaleghouchi-pistachio','fandoghi-pistachio','ahmad-
 >
   {typographicVariety
     ? <div class="variety-panel"><span>{ui[lang].products}</span><strong>{product.names[lang]}</strong></div>
-    : <ProductMedia product={product} lang={lang} />}
+    : <ProductMedia product={product} lang={lang} sizes={imageSizes} />}
   <div class="product-card-copy">
     <span class="section-number">{label}</span>
     <h2>{product.names[lang]}</h2>

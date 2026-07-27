@@ -6,6 +6,8 @@ import PortfolioBanner from './PortfolioBanner.astro';
 import ProcessRail from './ProcessRail.astro';
 import ProductCard from './ProductCard.astro';
 import ProductMedia from './ProductMedia.astro';
+import ResponsiveImage from './ResponsiveImage.astro';
+import { FEATURE_IMAGE_WIDTHS, HERO_IMAGE } from '../lib/responsive-images';
 import {
   editorialCopy, homeCopy, homeProductIds, insightIds, insights, legal, localizedPath, pageCopy, productIds, products,
   serviceIds, services, ui, type Locale
@@ -88,7 +90,17 @@ const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
           <div class="actions"><a class="button" href={sectionHref('contact')}>{t.quote}</a><a class="button button-secondary" href={sectionHref('services')}>{t.services}</a></div>
         </div>
         <figure class="hero-visual">
-          <img src="/images/ctseg-global-trade-hero-premium.webp" width="1536" height="1024" alt="" loading="eager" fetchpriority="high" decoding="sync" />
+          <ResponsiveImage
+            src={HERO_IMAGE}
+            widths={FEATURE_IMAGE_WIDTHS}
+            sizes="(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(100vw - 36px), min(53vw,700px)"
+            width={1536}
+            height={1024}
+            alt=""
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
           <figcaption>{h.trust.map((item:string,index:number) => <span><small>{indexLabel(index)}</small>{item}</span>)}</figcaption>
         </figure>
       </div>

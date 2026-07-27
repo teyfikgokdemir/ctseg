@@ -1,3 +1,6 @@
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:400 700;font-display:swap;src:url('/fonts/dm-sans-latin-ext-variable.woff2') format('woff2')}
+@font-face{font-family:'Source Serif 4';font-style:normal;font-weight:500 600;font-display:swap;src:url('/fonts/source-serif-4-latin-ext-variable.woff2') format('woff2')}
+
 :root{
   --bg:#07090d;--bg-deep:#040609;--surface:#0d1117;--surface-soft:#11161d;--paper:#ece8df;
   --text:#f1eee7;--muted:#aba89f;--line:rgba(238,232,218,.16);--line-strong:rgba(238,232,218,.32);
@@ -172,7 +175,7 @@ html[data-locale=de] .page-hero h1,html[data-locale=it] .page-hero h1,html[data-
 .content-block:first-child{border-top:0;padding-top:0}
 .check-list{list-style:none;padding:0;margin:25px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px 28px}
 .check-list li{position:relative;padding:12px 0 12px 24px;border-bottom:1px solid var(--line);color:#cbc7be}
-.check-list li:before{content:"—";position:absolute;left:0;color:var(--accent-soft)}
+.check-list li:before{content:"â€”";position:absolute;left:0;color:var(--accent-soft)}
 .side-panel{position:sticky;top:118px;padding:28px 0;border-top:1px solid var(--accent);background:transparent}
 .side-panel h2{font-family:'Source Serif 4',Georgia,serif;font-size:2.15rem;font-weight:500;line-height:1.05}
 .side-panel p{color:var(--muted)}

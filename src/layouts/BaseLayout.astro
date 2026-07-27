@@ -3,6 +3,7 @@ import '../styles/site.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { locales, localizedPath, products, routeAlternates, ui, type Locale } from '../data/site';
+import { FEATURE_IMAGE_WIDTHS, HERO_IMAGE, generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
 
 const {
   lang='tr', title, description, pageKey='home', pageId, canonical,
@@ -17,7 +18,7 @@ if (pageKey === 'home') alternates.tr = 'https://ctseg.com.tr/';
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
   name:'CTSEG',url:'https://ctseg.com.tr/',logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
-  email:'info@ctseg.com.tr',areaServed:['Türkiye','Europe','International'],
+  email:'info@ctseg.com.tr',areaServed:['TÃ¼rkiye','Europe','International'],
   knowsAbout:['Strategic sourcing','Supplier verification','International trade','Food product sourcing']
 };
 const website = {
@@ -36,6 +37,8 @@ const cookieHref = localizedPath(lang, 'legal', 'cookies');
 const socialImage = pageKey === 'products' && pageId && products[pageId as keyof typeof products]
   ? products[pageId as keyof typeof products].media.src
   : '/images/ctseg-global-trade-hero-premium.webp';
+const heroSizes = '(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(100vw - 36px), min(53vw,700px)';
+const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
 ---
 <!doctype html>
 <html lang={lang} data-locale={lang}>
@@ -49,10 +52,16 @@ const socialImage = pageKey === 'products' && pageId && products[pageId as keyof
     {locales.map((code) => <link rel="alternate" hreflang={code} href={alternates[code]} />)}
     <link rel="alternate" hreflang="x-default" href={alternates.en} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" />
+    <link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
+    {pageKey === 'home' && !noindex && <link
+      rel="preload"
+      as="image"
+      href={generatedImageSrc(HERO_IMAGE,1280)}
+      imagesrcset={heroSrcset}
+      imagesizes={heroSizes}
+      fetchpriority="high"
+    />}
     <meta name="theme-color" content="#080b12" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />

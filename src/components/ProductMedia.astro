@@ -1,7 +1,9 @@
 ---
 import type { Locale } from '../data/site';
-const { product, lang, eager=false, secondary=false, className='' } = Astro.props as {
-  product:any; lang:Locale; eager?:boolean; secondary?:boolean; className?:string;
+import ResponsiveImage from './ResponsiveImage.astro';
+import { PRODUCT_IMAGE_WIDTHS } from '../lib/responsive-images';
+const { product, lang, eager=false, secondary=false, className='', sizes='(max-width:860px) calc(100vw - 36px), min(53vw,700px)' } = Astro.props as {
+  product:any; lang:Locale; eager?:boolean; secondary?:boolean; className?:string; sizes?:string;
 };
 const secondarySrc = product.media.secondary;
 const src = secondary ? secondarySrc : product.media.src;
@@ -10,14 +12,16 @@ const alt = secondary ? `${product.names[lang]} · 02` : product.names[lang];
 const mediaType = product.media.mediaType ?? 'photo';
 ---
 {shouldRender && <figure class:list={['product-media', `product-media--${mediaType}`, className]} data-product-media={secondary ? 'secondary' : 'primary'} data-media-type={mediaType}>
-  <img
+  <ResponsiveImage
     src={src}
+    widths={PRODUCT_IMAGE_WIDTHS}
+    sizes={sizes}
     width={product.media.width}
     height={product.media.height}
     alt={alt}
     loading={eager ? 'eager' : 'lazy'}
     fetchpriority={eager ? 'high' : 'auto'}
-    decoding={eager ? 'sync' : 'async'}
+    decoding="async"
     style={product.media.objectPosition ? `object-position:${product.media.objectPosition}` : undefined}
   />
 </figure>}
