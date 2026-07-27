@@ -19,7 +19,22 @@ const switchPath = (target: Locale) => localizedPath(target, pageKey, pageId);
       <span class="sr-only">{t.menu}</span><span></span><span></span>
     </button>
     <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav>
-      {nav.map(([key, label]) => <a class:list={{ active: pageKey === key }} href={localizedPath(lang, key)}>{label}</a>)}
+      {nav.map(([key, label]) => key === 'markets' && lang === 'en' ? (
+        <div class="nav-market-group" data-markets-nav-group>
+          <a class:list={['nav-market-parent',{ active: pageKey === key }]} href={localizedPath(lang, key)} data-markets-nav-link>{label}</a>
+          <div class="nav-market-menu" aria-label="Special market resources">
+            <a
+              class:list={['fa-market-nav-link',{ active: pageKey === 'iran-sourcing' }]}
+              href="/fa/tamin-beynolmelali-iran/"
+              data-fa-nav-link
+              data-fa-landing-link
+            >
+              <strong>For Iranian Businesses</strong>
+              <span>Persian landing page</span>
+            </a>
+          </div>
+        </div>
+      ) : <a class:list={{ active: pageKey === key }} href={localizedPath(lang, key)}>{label}</a>)}
       <div class="language-switcher language-switcher-desktop">
         <button type="button" aria-expanded="false" aria-controls="language-panel" aria-label={t.language} data-language-toggle>
           <span class="locale-code">{lang.toUpperCase()}</span>

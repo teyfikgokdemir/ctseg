@@ -292,9 +292,24 @@ if (!englishMarkets.includes('data-fa-landing-link') || !englishMarkets.includes
 }
 for (const file of htmlFiles) {
   const label = relative(root, file).replaceAll('\\','/');
-  if ([persianLandingLabel,'en/markets/index.html'].includes(label)) continue;
-  if (readFileSync(file,'utf8').includes('href="/fa/tamin-beynolmelali-iran/"')) {
-    errors.push(`${label}: standalone Persian landing link leaked outside its approved English referral`);
+  const html = readFileSync(file,'utf8');
+  const navLinks = [...html.matchAll(/<a\b([^>]*data-fa-nav-link[^>]*)>/g)].map((match) => match[1]);
+  const usesEnglishNavigation = /<html\b[^>]*\blang="en"/.test(html);
+  if (usesEnglishNavigation) {
+    if (navLinks.length !== 1) errors.push(`${label}: English navigation must contain one Persian landing link`);
+    const link = navLinks[0] ?? '';
+    if (!link.includes('href="/fa/tamin-beynolmelali-iran/"') || /\btarget=/.test(link)) {
+      errors.push(`${label}: English Persian landing navigation link target is incorrect`);
+    }
+    if (!html.includes('For Iranian Businesses') || !html.includes('Persian landing page')) {
+      errors.push(`${label}: English navigation landing-page labels missing`);
+    }
+  } else if (navLinks.length) {
+    errors.push(`${label}: Persian landing navigation link must remain English-only`);
+  }
+  const approved = label === persianLandingLabel || usesEnglishNavigation;
+  if (!approved && html.includes('href="/fa/tamin-beynolmelali-iran/"')) {
+    errors.push(`${label}: standalone Persian landing link leaked outside English navigation`);
   }
 }
 for (const localizedMarkets of [

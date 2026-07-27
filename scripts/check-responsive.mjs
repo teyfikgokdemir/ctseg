@@ -51,6 +51,7 @@ try {
     { name:'desktop-de-catalogue', path:'/de/handelsprodukte/', width:1440, height:1000 },
     { name:'desktop-de-locale-panel', path:'/de/', width:1440, height:1000, openLanguage:true },
     { name:'desktop-en-home', path:'/en/', width:1440, height:1000 },
+    { name:'desktop-en-persian-nav', path:'/en/', width:1440, height:1000, openPersianNav:true, verifyPersianNav:true },
     { name:'desktop-it-home', path:'/it/', width:1440, height:1000 },
     { name:'desktop-it-catalogue', path:'/it/prodotti-commerciali/', width:1440, height:1000 },
     { name:'desktop-fr-home', path:'/fr/', width:1440, height:1000 },
@@ -85,6 +86,7 @@ try {
     { name:'mobile-it-contact', path:'/it/contatti/', width:390, height:844 },
     { name:'mobile-fr-contact', path:'/fr/contact/', width:390, height:844 },
     { name:'mobile-tr-menu', path:'/', width:390, height:844, openMenu:true },
+    { name:'mobile-en-persian-nav', path:'/en/', width:390, height:844, openMenu:true, verifyPersianNav:true },
     { name:'mobile-fr-catalogue', path:'/fr/produits-commerciaux/', width:390, height:844 },
     { name:'mobile-de-home', path:'/de/', width:390, height:844 },
     { name:'mobile430-tr-home', path:'/', width:430, height:932 },
@@ -132,6 +134,7 @@ try {
       if (!testCase.openMenu) await page.locator('[data-menu-toggle]').click();
     }
     if (testCase.openLanguage) await page.locator('[data-language-toggle]').click();
+    if (testCase.openPersianNav) await page.locator('[data-markets-nav-group]').hover();
     const contactEmailLink = page.locator('.contact-email-link');
     if (await contactEmailLink.count()) {
       await page.keyboard.press('Tab');
@@ -182,6 +185,19 @@ try {
           href:link?.getAttribute('href'),
           buttons:panel.querySelectorAll('.button').length,
           focusVisible
+        };
+      })()
+      ,persianNav:(() => {
+        const links=[...document.querySelectorAll('[data-fa-nav-link]')];
+        const link=links[0];
+        const box=link?.getBoundingClientRect();
+        return {
+          count:links.length,
+          visible:Boolean(box&&box.width>0&&box.height>0&&getComputedStyle(link).visibility!=='hidden'&&getComputedStyle(link).opacity!=='0'),
+          href:link?.getAttribute('href') ?? null,
+          target:link?.getAttribute('target') ?? null,
+          primary:link?.querySelector('strong')?.textContent?.trim() ?? null,
+          helper:link?.querySelector('span')?.textContent?.trim() ?? null
         };
       })()
       ,persian:(() => {
@@ -308,6 +324,14 @@ try {
       })()
     }));
     await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:!testCase.openMenu });
+    let persianNavWorks = true;
+    if (testCase.verifyPersianNav) {
+      const [targetResponse] = await Promise.all([
+        page.waitForNavigation({waitUntil:'domcontentloaded'}),
+        page.locator('[data-fa-nav-link]').click()
+      ]);
+      persianNavWorks = targetResponse?.status() === 200 && new URL(page.url()).pathname === '/fa/tamin-beynolmelali-iran/';
+    }
     if (!testCase.persian) localeAtmospheres.set(result.lang,result.localeAtmosphere);
     const gapLimit = testCase.width <= 860 ? 56 : 80;
     const badLayout = result.layout.headingVisualOverlap || result.layout.headerOverlap || result.layout.heroChromeOverlap ||
@@ -329,8 +353,13 @@ try {
       result.persian.details !== 11 || result.persian.fields < 15 || !result.persian.labeled || !result.persian.companyVisible ||
       !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 0 ||
       !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl);
-    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu || !bodyScrollLocked || badLayout || badLocale || badContactEmail || badPersian) {
-      failures.push(`${testCase.name}: ${JSON.stringify({...result,mobileMenu,bodyScrollLocked})}`);
+    const badPersianNav = result.lang === 'en'
+      ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/tamin-beynolmelali-iran/' ||
+        result.persianNav.target !== null || result.persianNav.primary !== 'For Iranian Businesses' ||
+        result.persianNav.helper !== 'Persian landing page' || (testCase.verifyPersianNav && !result.persianNav.visible)
+      : result.persianNav.count !== 0;
+    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu || !bodyScrollLocked || badLayout || badLocale || badContactEmail || badPersian || badPersianNav || !persianNavWorks) {
+      failures.push(`${testCase.name}: ${JSON.stringify({...result,mobileMenu,bodyScrollLocked,persianNavWorks})}`);
     }
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);
     await page.close();
