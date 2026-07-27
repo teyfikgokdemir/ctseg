@@ -96,7 +96,7 @@ for (const file of htmlFiles) {
   if (!/class="locale-code">(?:TR|EN|DE|IT|FR)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger)) {
     errors.push(`${label}: desktop language trigger must show only the active locale code`);
   }
-  const portfolioImageCount = (html.match(/src="\/images\/generated\/2-\d+\.webp"/g) || []).length;
+  const portfolioImageCount = (html.match(/src="\/images\/generated\/2-\d+\.webp\?v=[a-f0-9]+"/g) || []).length;
   if (portfolioImageCount !== (isHome ? 1 : 0)) errors.push(`${label}: unexpected 2.webp usage count ${portfolioImageCount}`);
   if (html.includes('contact-email-panel')) {
     contactEmailPanels++;
@@ -118,7 +118,7 @@ for (const file of htmlFiles) {
     const attributes = match[1];
     const src = attributes.match(/\bsrc="([^"]+)"/)?.[1];
     if (!/\bwidth="\d+"/.test(attributes) || !/\bheight="\d+"/.test(attributes)) errors.push(`${label}: image missing intrinsic dimensions`);
-    if (src?.startsWith('/images/') && !existsSync(join(root, src))) errors.push(`${label}: missing image file ${src}`);
+    if (src?.startsWith('/images/') && !existsSync(join(root, src.split('?')[0]))) errors.push(`${label}: missing image file ${src}`);
   }
   for (const card of html.matchAll(/data-product-card[\s\S]*?<\/a>/g)) {
     const image = card[0].match(/<img\b([^>]+)>/)?.[1];
