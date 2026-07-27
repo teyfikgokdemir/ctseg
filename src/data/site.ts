@@ -87,7 +87,7 @@ export const ui: Record<Locale, any> = {
 export const homeCopy: Record<Locale, any> = {
   tr: {
     eyebrow: 'Stratejik tedarik · uluslararası ticaret', title: 'Karmaşık tedarik kararlarını ticari güvene dönüştürüyoruz.',
-    lead: 'CTSEG; üretici keşfi, doğrulama, toplam maliyet, kalite ve pazar uygunluğunu tek karar sistemi içinde birleştirir.',
+    lead: 'Üretici keşfi, doğrulama, kalite, toplam maliyet ve pazar uygunluğunu tek bir karar sürecinde birleştiriyoruz.',
     signal: 'CTSEG Signal Room', live: 'Aktif değerlendirme', signals: [['TEDARİK', 'Üretici ve kapasite'], ['KALİTE', 'COA ve izlenebilirlik'], ['PAZAR', 'Mevzuat ve teslim modeli']],
     trust: ['Doğrulanmış karşı taraflar', 'Şeffaf menşe', 'B2B karar disiplini', 'Türkiye · Avrupa · Uluslararası'],
     servicesTitle: 'Bir satın alma listesinden daha fazlası.', servicesLead: 'İhtiyaçtan doğrulamaya, tekliften uygulamaya kadar kararın tamamını yapılandırıyoruz.',
@@ -97,8 +97,8 @@ export const homeCopy: Record<Locale, any> = {
     ctaTitle: 'Bir sonraki tedarik kararınızı kanıta dayalı hale getirin.'
   },
   en: {
-    eyebrow: 'Strategic sourcing · international trade', title: 'We turn complex sourcing decisions into commercial confidence.',
-    lead: 'CTSEG combines producer discovery, verification, total cost, quality and market fit in one decision system.',
+    eyebrow: 'Strategic sourcing · international trade', title: 'Commercial confidence for complex sourcing decisions.',
+    lead: 'We combine producer discovery, verification, quality, total cost and market fit in one disciplined decision process.',
     signal: 'CTSEG Signal Room', live: 'Active assessment', signals: [['SUPPLY', 'Producer and capacity'], ['QUALITY', 'COA and traceability'], ['MARKET', 'Compliance and delivery model']],
     trust: ['Verified counterparties', 'Transparent origin', 'B2B decision discipline', 'Türkiye · Europe · International'],
     servicesTitle: 'More than a purchasing list.', servicesLead: 'We structure the complete decision, from requirement and verification to quotation and implementation.',
@@ -108,8 +108,8 @@ export const homeCopy: Record<Locale, any> = {
     ctaTitle: 'Make your next sourcing decision evidence-led.'
   },
   de: {
-    eyebrow: 'Strategische Beschaffung · internationaler Handel', title: 'Wir verwandeln komplexe Beschaffungsentscheidungen in kaufmännische Sicherheit.',
-    lead: 'CTSEG verbindet Produzentensuche, Verifizierung, Gesamtkosten, Qualität und Markteignung in einem Entscheidungssystem.',
+    eyebrow: 'Strategische Beschaffung · internationaler Handel', title: 'Mehr Sicherheit bei komplexen Beschaffungs\u00ADentscheidungen.',
+    lead: 'Wir verbinden Produzentensuche, Prüfung, Qualität, Gesamtkosten und Markteignung in einem strukturierten Entscheidungsprozess.',
     signal: 'CTSEG Signal Room', live: 'Aktive Bewertung', signals: [['BESCHAFFUNG', 'Produzent und Kapazität'], ['QUALITÄT', 'COA und Rückverfolgbarkeit'], ['MARKT', 'Konformität und Liefermodell']],
     trust: ['Verifizierte Geschäftspartner', 'Transparente Herkunft', 'B2B-Entscheidungsdisziplin', 'Türkiye · Europa · International'],
     servicesTitle: 'Mehr als eine Einkaufsliste.', servicesLead: 'Wir strukturieren die gesamte Entscheidung – vom Bedarf über die Prüfung bis zur Umsetzung.',
@@ -119,8 +119,8 @@ export const homeCopy: Record<Locale, any> = {
     ctaTitle: 'Treffen Sie Ihre nächste Beschaffungsentscheidung evidenzbasiert.'
   },
   it: {
-    eyebrow: 'Approvvigionamento strategico · commercio internazionale', title: 'Trasformiamo decisioni di approvvigionamento complesse in fiducia commerciale.',
-    lead: 'CTSEG unisce ricerca dei produttori, verifica, costo totale, qualità e idoneità al mercato in un unico sistema decisionale.',
+    eyebrow: 'Approvvigionamento strategico · commercio internazionale', title: 'Più sicurezza nelle decisioni di approvvigionamento.',
+    lead: 'Uniamo ricerca dei produttori, verifica, qualità, costo totale e idoneità al mercato in un unico processo decisionale.',
     signal: 'CTSEG Signal Room', live: 'Valutazione attiva', signals: [['FORNITURA', 'Produttore e capacità'], ['QUALITÀ', 'COA e tracciabilità'], ['MERCATO', 'Conformità e consegna']],
     trust: ['Controparti verificate', 'Origine trasparente', 'Disciplina decisionale B2B', 'Türkiye · Europa · Internazionale'],
     servicesTitle: 'Più di un elenco acquisti.', servicesLead: 'Strutturiamo l’intera decisione: dal fabbisogno e dalla verifica all’offerta e all’esecuzione.',
@@ -130,8 +130,8 @@ export const homeCopy: Record<Locale, any> = {
     ctaTitle: 'Rendi la prossima decisione di sourcing basata su evidenze.'
   },
   fr: {
-    eyebrow: 'Sourcing stratégique · commerce international', title: 'Nous transformons les décisions d’approvisionnement complexes en confiance commerciale.',
-    lead: 'CTSEG réunit recherche de producteurs, vérification, coût total, qualité et adéquation au marché dans un même système de décision.',
+    eyebrow: 'Sourcing stratégique · commerce international', title: 'Plus de maîtrise dans vos décisions d’approvisionnement.',
+    lead: 'Nous réunissons recherche de producteurs, vérification, qualité, coût total et adéquation au marché dans un processus décisionnel structuré.',
     signal: 'CTSEG Signal Room', live: 'Évaluation active', signals: [['SOURCING', 'Producteur et capacité'], ['QUALITÉ', 'COA et traçabilité'], ['MARCHÉ', 'Conformité et livraison']],
     trust: ['Contreparties vérifiées', 'Origine transparente', 'Discipline de décision B2B', 'Türkiye · Europe · International'],
     servicesTitle: 'Bien plus qu’une liste d’achats.', servicesLead: 'Nous structurons toute la décision, du besoin et de la vérification jusqu’à l’offre et l’exécution.',
@@ -206,6 +206,20 @@ export const productIds = [
   'green-peeled-pistachio','pistachio-granules','mazafati-dates','date-paste-syrup','raisins','almonds',
   'walnuts','dried-apricots-kernels','pumpkin-seeds','sunflower-seeds','saffron','dried-mulberries','zereshk','mixed-nuts'
 ] as const;
+
+export const homeProductIds = [
+  'akbari-pistachio','mazafati-dates','almonds','walnuts','saffron','zereshk'
+] as const;
+
+export type ProductMediaType = 'poster' | 'photo';
+type ProductMedia = {
+  src:string;
+  width:number;
+  height:number;
+  mediaType:ProductMediaType;
+  objectPosition?:string;
+  secondary?:string;
+};
 
 const productNames: Record<(typeof productIds)[number], Localized> = {
   'akbari-pistachio': { tr:'Akbari Antep Fıstığı', en:'Akbari Pistachios', de:'Akbari-Pistazien', it:'Pistacchi Akbari', fr:'Pistaches Akbari' },
@@ -357,25 +371,25 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
   }
 };
 
-const productMedia: Record<(typeof productIds)[number], { src:string; width:number; height:number; position?:string; secondary?:string }> = {
-  'akbari-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, position:'center 54%' },
-  'kaleghouchi-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, position:'center 54%' },
-  'fandoghi-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, position:'center 54%' },
-  'ahmad-aghaei-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, position:'center 54%' },
-  'green-peeled-pistachio': { src:'/images/ctseg-green-peeled-pistachio-kernels-premium.webp', width:1536, height:1024 },
-  'pistachio-granules': { src:'/images/ctseg-pistachio-kernel-crumb-premium.webp', width:1536, height:1024 },
-  'mazafati-dates': { src:'/images/ctseg-mazafati-dates-authentic-premium.webp', width:1536, height:1024 },
-  'date-paste-syrup': { src:'/images/ctseg-date-paste-premium.webp', width:1536, height:1024, secondary:'/images/ctseg-date-syrup-premium.webp' },
-  raisins: { src:'/images/ctseg-iranian-golden-raisins-premium.webp', width:1536, height:1024 },
-  almonds: { src:'/images/ctseg-iranian-almonds-premium.webp', width:1536, height:1024 },
-  walnuts: { src:'/images/ctseg-iranian-walnuts-premium.webp', width:1536, height:1024 },
-  'dried-apricots-kernels': { src:'/images/ctseg-dried-apricots-premium.webp', width:1536, height:1024, secondary:'/images/ctseg-apricot-kernels-premium.webp' },
-  'pumpkin-seeds': { src:'/images/ctseg-pumpkin-seeds-premium.webp', width:1536, height:1024 },
-  'sunflower-seeds': { src:'/images/ctseg-sunflower-seeds-premium.webp', width:1536, height:1024 },
-  saffron: { src:'/images/ctseg-persian-red-gold-saffron-premium.webp', width:1535, height:1024 },
-  'dried-mulberries': { src:'/images/ctseg-iranian-dried-mulberries-premium.webp', width:1536, height:1024 },
-  zereshk: { src:'/images/ctseg-zereshk-dried-barberries-premium.webp', width:1536, height:1024 },
-  'mixed-nuts': { src:'/images/ctseg-mixed-nuts-premium.webp', width:1536, height:1024 }
+const productMedia: Record<(typeof productIds)[number], ProductMedia> = {
+  'akbari-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'kaleghouchi-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'fandoghi-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'ahmad-aghaei-pistachio': { src:'/images/ctseg-iranian-pistachios-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'green-peeled-pistachio': { src:'/images/ctseg-green-peeled-pistachio-kernels-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'pistachio-granules': { src:'/images/ctseg-pistachio-kernel-crumb-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'mazafati-dates': { src:'/images/ctseg-mazafati-dates-authentic-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'date-paste-syrup': { src:'/images/ctseg-date-paste-premium.webp', width:1536, height:1024, mediaType:'photo', objectPosition:'center 48%', secondary:'/images/ctseg-date-syrup-premium.webp' },
+  raisins: { src:'/images/ctseg-iranian-golden-raisins-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  almonds: { src:'/images/ctseg-iranian-almonds-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  walnuts: { src:'/images/ctseg-iranian-walnuts-premium.webp', width:1536, height:1024, mediaType:'photo', objectPosition:'center 52%' },
+  'dried-apricots-kernels': { src:'/images/ctseg-dried-apricots-premium.webp', width:1536, height:1024, mediaType:'photo', objectPosition:'center 50%', secondary:'/images/ctseg-apricot-kernels-premium.webp' },
+  'pumpkin-seeds': { src:'/images/ctseg-pumpkin-seeds-premium.webp', width:1536, height:1024, mediaType:'photo', objectPosition:'center 54%' },
+  'sunflower-seeds': { src:'/images/ctseg-sunflower-seeds-premium.webp', width:1536, height:1024, mediaType:'photo', objectPosition:'center 52%' },
+  saffron: { src:'/images/ctseg-persian-red-gold-saffron-premium.webp', width:1535, height:1024, mediaType:'poster' },
+  'dried-mulberries': { src:'/images/ctseg-iranian-dried-mulberries-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  zereshk: { src:'/images/ctseg-zereshk-dried-barberries-premium.webp', width:1536, height:1024, mediaType:'poster' },
+  'mixed-nuts': { src:'/images/ctseg-mixed-nuts-premium.webp', width:1536, height:1024, mediaType:'photo', objectPosition:'center 50%' }
 };
 
 const productSlugs: Record<(typeof productIds)[number], Localized> = Object.fromEntries(

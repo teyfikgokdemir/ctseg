@@ -19,10 +19,34 @@ const switchPath = (target: Locale) => localizedPath(target, pageKey, pageId);
     </button>
     <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav>
       {nav.map(([key, label]) => <a class:list={{ active: pageKey === key }} href={localizedPath(lang, key)}>{label}</a>)}
-      <div class="language-switcher">
-        <button type="button" aria-expanded="false" data-language-toggle>{lang.toUpperCase()} <span aria-hidden="true">⌄</span></button>
-        <div class="language-menu">
-          {locales.map((code) => <a lang={code} hreflang={code} class:list={{ active: code === lang }} href={switchPath(code)}>{code.toUpperCase()} · {localeNames[code]}</a>)}
+      <div class="language-switcher language-switcher-desktop">
+        <button type="button" aria-expanded="false" aria-controls="language-panel" data-language-toggle>
+          <span class="locale-code">{lang.toUpperCase()}</span>
+          <span class="locale-name">{localeNames[lang]}</span>
+          <span class="locale-chevron" aria-hidden="true">⌄</span>
+        </button>
+        <div id="language-panel" class="language-menu" data-language-menu>
+          {locales.map((code) => <a
+            lang={code}
+            hreflang={code}
+            class:list={{ active: code === lang }}
+            href={switchPath(code)}
+            aria-current={code === lang ? 'true' : undefined}
+            data-locale-option
+          ><span>{code.toUpperCase()}</span><strong>{localeNames[code]}</strong><i aria-hidden="true"></i></a>)}
+        </div>
+      </div>
+      <div class="mobile-locales" aria-label={t.language}>
+        <span class="mobile-locales-label">{t.language}</span>
+        <div>
+          {locales.map((code) => <a
+            lang={code}
+            hreflang={code}
+            class:list={{ active: code === lang }}
+            href={switchPath(code)}
+            aria-current={code === lang ? 'true' : undefined}
+            data-locale-option
+          >{code.toUpperCase()}<span class="sr-only"> · {localeNames[code]}</span></a>)}
         </div>
       </div>
       <a class="button button-small nav-cta" href={localizedPath(lang, 'contact')}>{t.quote}</a>
@@ -33,13 +57,35 @@ const switchPath = (target: Locale) => localizedPath(target, pageKey, pageId);
   const toggle = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('[data-primary-nav]');
   const languageToggle = document.querySelector('[data-language-toggle]');
+  const languageMenu = document.querySelector('[data-language-menu]');
+  const closeNavigation = () => {
+    toggle?.setAttribute('aria-expanded', 'false');
+    nav?.classList.remove('open');
+    document.body.classList.remove('menu-open');
+  };
+  const closeLanguageMenu = () => {
+    languageToggle?.setAttribute('aria-expanded', 'false');
+    languageMenu?.classList.remove('open');
+  };
   toggle?.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!open));
     nav?.classList.toggle('open', !open);
+    document.body.classList.toggle('menu-open', !open);
   });
   languageToggle?.addEventListener('click', () => {
     const open = languageToggle.getAttribute('aria-expanded') === 'true';
     languageToggle.setAttribute('aria-expanded', String(!open));
+    languageMenu?.classList.toggle('open', !open);
+  });
+  document.querySelectorAll('[data-locale-option]').forEach((link) => link.addEventListener('click', closeNavigation));
+  document.addEventListener('click', (event) => {
+    if (!(event.target instanceof Node) || document.querySelector('.language-switcher')?.contains(event.target)) return;
+    closeLanguageMenu();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    closeLanguageMenu();
+    closeNavigation();
   });
 </script>

@@ -61,13 +61,37 @@ for (const file of htmlFiles) {
     if (descriptions.length !== 18) errors.push(`${label}: expected 18 product-card descriptions, found ${descriptions.length}`);
     if (new Set(descriptions).size !== descriptions.length) errors.push(`${label}: duplicate product-card description`);
     if (!html.includes('Kalleh Ghouchi') && !html.includes('Kalleh-Ghouchi')) errors.push(`${label}: corrected Kalleh Ghouchi name missing`);
+    const cardBlocks = [...html.matchAll(/<a class="product-card[^"]*"[^>]*>[\s\S]*?<\/a>/g)].map((match) => match[0]);
+    const catalogueImages = cardBlocks
+      .map((card) => card.match(/<img[^>]+src="([^"]+)"/)?.[1])
+      .filter(Boolean);
+    if (new Set(catalogueImages).size !== catalogueImages.length) errors.push(`${label}: repeated catalogue image source`);
+    const catalogueGroups = [...html.matchAll(/data-catalogue-group="([^"]+)"/g)].map((match) => match[1]);
+    if (catalogueGroups.length !== 6 || new Set(catalogueGroups).size !== 6) errors.push(`${label}: expected six unique catalogue groups`);
   }
   const isHome = ['index.html','en/index.html','de/index.html','it/index.html','fr/index.html'].includes(label);
   if (isHome && !html.includes('/images/ctseg-global-trade-hero-premium.webp')) errors.push(`${label}: premium homepage hero missing`);
+  if (isHome) {
+    const showcase = html.match(/<div class="product-editorial-grid" data-home-showcase>([\s\S]*?)<\/div>\s*<div class="actions">/)?.[1] ?? '';
+    const showcaseProducts = [...showcase.matchAll(/data-product-id="([^"]+)"/g)].map((match) => match[1]);
+    const showcaseFamilies = [...showcase.matchAll(/data-product-family="([^"]+)"/g)].map((match) => match[1]);
+    if (showcaseProducts.length !== 6) errors.push(`${label}: expected six homepage showcase products`);
+    if (showcaseProducts.filter((id) => id.includes('pistachio')).length !== 1) errors.push(`${label}: homepage showcase must contain one pistachio product`);
+    if (new Set(showcaseFamilies).size < 5) errors.push(`${label}: homepage showcase must represent at least five product families`);
+  }
+  const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
+  const mobileLocales = html.match(/class="mobile-locales"[\s\S]*?<\/div>\s*<\/div>/)?.[0] ?? '';
+  if ((desktopLocales.match(/data-locale-option/g) || []).length !== 5) errors.push(`${label}: desktop locale panel must contain five languages`);
+  if ((mobileLocales.match(/data-locale-option/g) || []).length !== 5) errors.push(`${label}: mobile locale panel must contain five languages`);
+  const portfolioImageCount = (html.match(/src="\/images\/2\.webp"/g) || []).length;
+  if (portfolioImageCount !== (isHome ? 1 : 0)) errors.push(`${label}: unexpected 2.webp usage count ${portfolioImageCount}`);
   if (html.includes('"@type":"Product"')) {
     productSchemaPages++;
     const schemaImage = html.match(/"@type":"Product"[\s\S]*?"image":"([^"]+)"/)?.[1];
     if (!schemaImage || schemaImage.endsWith('/images/2.webp')) errors.push(`${label}: invalid Product schema image`);
+    const detailMedia = [...html.matchAll(/data-product-media="(?:primary|secondary)"[^>]*>[\s\S]*?<img[^>]+src="([^"]+)"/g)].map((match) => match[1]);
+    if (new Set(detailMedia).size !== detailMedia.length) errors.push(`${label}: duplicate primary/secondary product media`);
+    if (!/data-product-media="primary" data-media-type="(?:poster|photo)"/.test(html)) errors.push(`${label}: primary product media type missing`);
   }
   for (const match of html.matchAll(/<img\b([^>]+)>/g)) {
     const attributes = match[1];
@@ -96,6 +120,11 @@ if (productSchemaPages !== 90) errors.push(`expected 90 Product schema pages, fo
 const css = files.filter((file) => file.endsWith('.css')).map((file) => readFileSync(file,'utf8')).join('\n');
 if (!css.includes(':focus-visible')) errors.push('compiled CSS: focus-visible treatment missing');
 if (!css.includes('prefers-reduced-motion:reduce')) errors.push('compiled CSS: reduced-motion treatment missing');
+if (!css.includes('.product-media--poster') || !css.includes('object-fit:contain') || !css.includes('.product-media--photo')) {
+  errors.push('compiled CSS: poster/photo media treatment missing');
+}
+const localeAtmospheres = [...css.matchAll(/html\[data-locale=(?:tr|en|de|it|fr)\]\{([^}]+)\}/g)].map((match) => match[1]);
+if (localeAtmospheres.length !== 5 || new Set(localeAtmospheres).size !== 5) errors.push('compiled CSS: five distinct locale atmospheres missing');
 
 const pagesByCanonical = new Map(pageRecords.map((page) => [page.canonical,page]));
 for (const page of pageRecords) {

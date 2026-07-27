@@ -37,14 +37,32 @@ try {
   browser = await chromium.launch({ executablePath, headless:true });
   const cases = [
     { name:'desktop-tr-home', path:'/', width:1440, height:1000 },
+    { name:'desktop-tr-services', path:'/tr/hizmetler/', width:1440, height:1000 },
+    { name:'desktop-tr-catalogue', path:'/tr/ticari-urunler/', width:1440, height:1000 },
+    { name:'desktop-tr-markets', path:'/tr/pazarlar/', width:1440, height:1000 },
+    { name:'desktop-tr-insights', path:'/tr/icgoruler/', width:1440, height:1000 },
+    { name:'desktop-tr-about', path:'/tr/hakkimizda/', width:1440, height:1000 },
+    { name:'desktop-tr-contact', path:'/tr/iletisim/', width:1440, height:1000 },
+    { name:'desktop-de-home', path:'/de/', width:1440, height:1000 },
+    { name:'desktop-de-catalogue', path:'/de/handelsprodukte/', width:1440, height:1000 },
+    { name:'desktop-de-locale-panel', path:'/de/', width:1440, height:1000, openLanguage:true },
     { name:'desktop-en-home', path:'/en/', width:1440, height:1000 },
-    { name:'tablet-de-products', path:'/de/handelsprodukte/', width:820, height:1180 },
-    { name:'mobile-fr-products', path:'/fr/produits-commerciaux/', width:390, height:844 },
-    { name:'mobile-it-product', path:'/it/prodotti-commerciali/pistacchio-verde-sgusciato/', width:390, height:844 },
-    { name:'desktop-tr-mazafati', path:'/tr/ticari-urunler/mazafati-hurmasi/', width:1440, height:1000 },
-    { name:'mobile-en-insight', path:'/en/insights/strategic-sourcing-vs-procurement/', width:390, height:844 }
+    { name:'desktop-it-home', path:'/it/', width:1440, height:1000 },
+    { name:'desktop-it-catalogue', path:'/it/prodotti-commerciali/', width:1440, height:1000 },
+    { name:'desktop-fr-home', path:'/fr/', width:1440, height:1000 },
+    { name:'desktop-fr-catalogue', path:'/fr/produits-commerciaux/', width:1440, height:1000 },
+    { name:'mobile-tr-home', path:'/', width:390, height:844 },
+    { name:'mobile-en-home', path:'/en/', width:390, height:844 },
+    { name:'mobile-it-home', path:'/it/', width:390, height:844 },
+    { name:'mobile-fr-home', path:'/fr/', width:390, height:844 },
+    { name:'mobile-tr-services', path:'/tr/hizmetler/', width:390, height:844 },
+    { name:'mobile-tr-contact', path:'/tr/iletisim/', width:390, height:844 },
+    { name:'mobile-tr-menu', path:'/', width:390, height:844, openMenu:true },
+    { name:'mobile-fr-catalogue', path:'/fr/produits-commerciaux/', width:390, height:844 },
+    { name:'mobile-de-home', path:'/de/', width:390, height:844 }
   ];
   const failures = [];
+  const localeAtmospheres = new Map();
   for (const testCase of cases) {
     const page = await browser.newPage({ viewport:{ width:testCase.width, height:testCase.height } });
     await page.goto(`http://127.0.0.1:4321${testCase.path}`, { waitUntil:'networkidle' });
@@ -64,11 +82,14 @@ try {
     await page.waitForFunction(() => [...document.images].every((image) => image.complete && image.naturalWidth > 0), undefined, { timeout:10000 });
     await page.waitForTimeout(250);
     let mobileMenu = true;
+    let bodyScrollLocked = true;
     if (testCase.width <= 860) {
       await page.locator('[data-menu-toggle]').click();
       mobileMenu = await page.locator('[data-primary-nav]').isVisible();
-      await page.locator('[data-menu-toggle]').click();
+      bodyScrollLocked = await page.evaluate(() => document.body.classList.contains('menu-open') && getComputedStyle(document.body).overflow === 'hidden');
+      if (!testCase.openMenu) await page.locator('[data-menu-toggle]').click();
     }
+    if (testCase.openLanguage) await page.locator('[data-language-toggle]').click();
     const result = await page.evaluate(() => ({
       overflow:document.documentElement.scrollWidth - window.innerWidth,
       headers:document.querySelectorAll('header.site-header').length,
@@ -82,12 +103,151 @@ try {
       lang:document.documentElement.lang
       ,images:[...document.images].every((image) => image.complete && image.naturalWidth > 0 && image.hasAttribute('width') && image.hasAttribute('height'))
       ,brokenImages:[...document.images].filter((image) => !image.complete || image.naturalWidth === 0 || !image.hasAttribute('width') || !image.hasAttribute('height')).map((image) => image.getAttribute('src'))
+      ,localeAtmosphere:[getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),getComputedStyle(document.documentElement).getPropertyValue('--locale-wash').trim()].join('|')
+      ,localeOptions:document.querySelectorAll('#language-panel [data-locale-option]').length
+      ,activeDesktopLocale:document.querySelectorAll('#language-panel [data-locale-option][aria-current="true"]').length
+      ,mobilePanelHeight:document.querySelector('[data-primary-nav]')?.getBoundingClientRect().height ?? 0
+      ,visibleMobileLocales:[...document.querySelectorAll('.mobile-locales [data-locale-option]')].filter((link) => {
+        const box=link.getBoundingClientRect(); return box.width>0&&box.height>0;
+      }).length
+      ,localeRouteMatch:[...document.querySelectorAll('[data-locale-option]')].every((link) => {
+        const code=link.getAttribute('hreflang');
+        const alternate=document.querySelector(`link[rel="alternate"][hreflang="${code}"]`);
+        return alternate && new URL(link.href).pathname === new URL(alternate.href).pathname;
+      })
+      ,overflowNodes:[...document.querySelectorAll('body *')]
+        .filter((element) => {
+          const box=element.getBoundingClientRect();
+          return box.right>window.innerWidth+1||box.left<-1;
+        })
+        .slice(0,8)
+        .map((element) => {
+          const box=element.getBoundingClientRect();
+          return `${element.tagName.toLowerCase()}.${[...element.classList].join('.')}:${Math.round(box.left)}..${Math.round(box.right)}`;
+        })
+      ,overflowText:(() => {
+        const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+        const offenders=[];
+        while(walker.nextNode()){
+          const value=walker.currentNode.nodeValue?.trim();
+          if(!value) continue;
+          const range=document.createRange();
+          range.selectNodeContents(walker.currentNode);
+          const boxes=[...range.getClientRects()];
+          if(boxes.some((box)=>box.right>window.innerWidth+1||box.left<-1)){
+            offenders.push(`${walker.currentNode.parentElement?.tagName.toLowerCase()}:${value.slice(0,60)}`);
+          }
+          if(offenders.length===8) break;
+        }
+        return offenders;
+      })()
+      ,layout:(() => {
+        const intersects=(a,b)=>Boolean(a&&b&&a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top);
+        const heading=document.querySelector('.hero h1,.page-hero h1');
+        const visual=document.querySelector('.hero-visual,.product-hero-media');
+        const header=document.querySelector('.site-header');
+        const first=document.querySelector('main>section');
+        const headingBox=heading?.getBoundingClientRect();
+        const visualBox=visual?.getBoundingClientRect();
+        const headerBox=header?.getBoundingClientRect();
+        const firstBox=first?.getBoundingClientRect();
+        const lineHeight=heading ? Number.parseFloat(getComputedStyle(heading).lineHeight) : 0;
+        const catalogueCards=[...document.querySelectorAll('.catalogue-grid [data-product-card]')];
+        const cardImages=catalogueCards.map((card)=>card.querySelector('img')?.getAttribute('src')).filter(Boolean);
+        const detailMedia=[...document.querySelectorAll('[data-product-media] img')].map((image)=>image.getAttribute('src'));
+        return {
+          headingVisualOverlap:intersects(headingBox,visualBox),
+          headerOverlap:Boolean(headerBox&&firstBox&&firstBox.top<headerBox.bottom-1),
+          headingLines:headingBox&&lineHeight ? Math.round(headingBox.height/lineHeight) : 0,
+          cardOverflow:catalogueCards.some((card)=>card.getBoundingClientRect().right>window.innerWidth+1||card.getBoundingClientRect().left<-1),
+          maxCardHeight:catalogueCards.reduce((max,card)=>Math.max(max,card.getBoundingClientRect().height),0),
+          repeatedAdjacentImage:cardImages.some((src,index)=>index>0&&src===cardImages[index-1]),
+          duplicateDetailMedia:new Set(detailMedia).size!==detailMedia.length,
+          posterFit:[...document.querySelectorAll('[data-media-type="poster"] img')].every((image)=>getComputedStyle(image).objectFit==='contain'),
+          photoFit:[...document.querySelectorAll('[data-media-type="photo"] img')].every((image)=>getComputedStyle(image).objectFit==='cover'),
+          ctaAlignment:[...document.querySelectorAll('.cta-statement')].every((cta)=>{
+            const heading=cta.querySelector('h2');
+            const button=cta.querySelector('.button');
+            if(!heading||!button) return false;
+            const ctaBox=cta.getBoundingClientRect();
+            const headingBox=heading.getBoundingClientRect();
+            const buttonBox=button.getBoundingClientRect();
+            const ctaCenter=ctaBox.left+ctaBox.width/2;
+            const headingCenter=headingBox.left+headingBox.width/2;
+            const buttonCenter=buttonBox.left+buttonBox.width/2;
+            const style=getComputedStyle(cta);
+            return Math.abs(ctaCenter-headingCenter)<2&&Math.abs(ctaCenter-buttonCenter)<2&&
+              headingBox.width<=982&&Math.abs(Number.parseFloat(style.paddingTop)-Number.parseFloat(style.paddingBottom))<1;
+          }),
+          ctaMobileLines:[...document.querySelectorAll('.cta-statement h2')].reduce((max,heading)=>{
+            const box=heading.getBoundingClientRect();
+            const lineHeight=Number.parseFloat(getComputedStyle(heading).lineHeight);
+            return Math.max(max,lineHeight?Math.round(box.height/lineHeight):0);
+          },0),
+          productCount:catalogueCards.length
+        };
+      })()
     }));
-    await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:true });
-    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu) {
-      failures.push(`${testCase.name}: ${JSON.stringify({...result,mobileMenu})}`);
+    await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:!testCase.openMenu });
+    localeAtmospheres.set(result.lang,result.localeAtmosphere);
+    const badLayout = result.layout.headingVisualOverlap || result.layout.headerOverlap || result.layout.cardOverflow ||
+      result.layout.repeatedAdjacentImage || result.layout.duplicateDetailMedia ||
+      !result.layout.posterFit || !result.layout.photoFit || !result.layout.ctaAlignment ||
+      (testCase.width <= 620 && result.layout.ctaMobileLines > 5) ||
+      (testCase.width <= 620 && result.layout.headingLines > 6) ||
+      (testCase.width >= 1100 && result.layout.maxCardHeight > 700) ||
+      (result.layout.productCount > 0 && result.layout.productCount !== 18);
+    const badLocale = result.localeOptions !== 5 || result.activeDesktopLocale !== 1 || !result.localeRouteMatch ||
+      (testCase.openMenu && (result.visibleMobileLocales !== 5 || result.mobilePanelHeight < testCase.height * .7));
+    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu || !bodyScrollLocked || badLayout || badLocale) {
+      failures.push(`${testCase.name}: ${JSON.stringify({...result,mobileMenu,bodyScrollLocked})}`);
     }
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);
+    await page.close();
+  }
+  if (localeAtmospheres.size !== 5 || new Set(localeAtmospheres.values()).size !== 5) {
+    failures.push(`locale atmospheres are not distinct: ${JSON.stringify(Object.fromEntries(localeAtmospheres))}`);
+  }
+  const productSlugs = [
+    'akbari-pistachio','kaleghouchi-pistachio','fandoghi-pistachio','ahmad-aghaei-pistachio',
+    'green-peeled-pistachio-kernels','pistachio-kernels-granules','mazafati-dates','date-paste-syrup',
+    'raisins','almonds','walnuts','dried-apricots-apricot-kernels','pumpkin-seeds','sunflower-seeds',
+    'saffron','dried-mulberries','zereshk','mixed-nuts-specialities'
+  ];
+  const mediaViewports = [
+    { name:'desktop', width:1440, height:1000 },
+    { name:'tablet', width:820, height:1180 },
+    { name:'mobile', width:390, height:844 }
+  ];
+  const mediaOutput = join(output,'product-media');
+  mkdirSync(mediaOutput,{recursive:true});
+  for (const viewport of mediaViewports) {
+    const page = await browser.newPage({ viewport:{width:viewport.width,height:viewport.height} });
+    for (const slug of productSlugs) {
+      await page.goto(`http://127.0.0.1:4321/en/trade-products/${slug}/`,{waitUntil:'domcontentloaded'});
+      await page.addStyleTag({content:'*,*:before,*:after{animation:none!important;transition:none!important}'});
+      await page.locator('.product-hero-media img').waitFor({state:'visible'});
+      await page.waitForFunction(() => {
+        const image=document.querySelector('.product-hero-media img');
+        return image?.complete && image.naturalWidth>0;
+      });
+      const media = await page.locator('.product-hero-media').evaluate((figure) => {
+        const image=figure.querySelector('img');
+        const type=figure.getAttribute('data-media-type');
+        const style=image ? getComputedStyle(image) : null;
+        return {
+          type,
+          fit:style?.objectFit,
+          position:image?.style.objectPosition ?? '',
+          overflow:document.documentElement.scrollWidth-window.innerWidth
+        };
+      });
+      if (!['poster','photo'].includes(media.type) || (media.type==='poster'&&media.fit!=='contain') ||
+        (media.type==='photo'&&(media.fit!=='cover'||!media.position)) || media.overflow>1) {
+        failures.push(`product media ${viewport.name}/${slug}: ${JSON.stringify(media)}`);
+      }
+      await page.locator('.product-hero-media').screenshot({path:join(mediaOutput,`${viewport.name}-${slug}.png`)});
+    }
     await page.close();
   }
   if (failures.length) {

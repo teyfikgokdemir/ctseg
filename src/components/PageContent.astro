@@ -7,7 +7,7 @@ import ProcessRail from './ProcessRail.astro';
 import ProductCard from './ProductCard.astro';
 import ProductMedia from './ProductMedia.astro';
 import {
-  editorialCopy, homeCopy, insightIds, insights, legal, localizedPath, pageCopy, productIds, products,
+  editorialCopy, homeCopy, homeProductIds, insightIds, insights, legal, localizedPath, pageCopy, productIds, products,
   serviceIds, services, ui, type Locale
 } from '../data/site';
 import type { RouteRecord } from '../lib/routes';
@@ -40,6 +40,44 @@ const qualificationFields = {
 }[lang];
 const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',fr:'Mentions légales'}[lang];
 const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',fr:'27 juillet 2026'}[lang];
+const showcaseRoles = ['lead','medium','medium','compact','compact','compact'];
+const productFamilies:Record<string,string> = {
+  'akbari-pistachio':'pistachio', 'mazafati-dates':'dates', almonds:'nuts',
+  walnuts:'nuts', saffron:'speciality', zereshk:'dried-fruit'
+};
+const catalogueGroups = [
+  {
+    key:'pistachio',
+    title:{tr:'Fıstık Çeşitleri',en:'Pistachio Varieties',de:'Pistaziensorten',it:'Varietà di pistacchio',fr:'Variétés de pistaches'}[lang],
+    ids:['akbari-pistachio','kaleghouchi-pistachio','green-peeled-pistachio','fandoghi-pistachio','pistachio-granules','ahmad-aghaei-pistachio']
+  },
+  {
+    key:'dates',
+    title:{tr:'Hurma ve Hurma Ürünleri',en:'Dates & Date Products',de:'Datteln & Dattelprodukte',it:'Datteri e derivati',fr:'Dattes et produits dérivés'}[lang],
+    ids:['mazafati-dates','date-paste-syrup']
+  },
+  {
+    key:'nuts',
+    title:{tr:'Kuruyemişler',en:'Nuts',de:'Nüsse',it:'Frutta a guscio',fr:'Fruits à coque'}[lang],
+    ids:['almonds','walnuts','mixed-nuts']
+  },
+  {
+    key:'dried-fruit',
+    title:{tr:'Kuru Meyveler',en:'Dried Fruits',de:'Trockenfrüchte',it:'Frutta essiccata',fr:'Fruits séchés'}[lang],
+    ids:['raisins','dried-apricots-kernels','dried-mulberries']
+  },
+  {
+    key:'seeds',
+    title:{tr:'Tohumlar',en:'Seeds',de:'Saaten',it:'Semi',fr:'Graines'}[lang],
+    ids:['pumpkin-seeds','sunflower-seeds']
+  },
+  {
+    key:'specialities',
+    title:{tr:'Safran ve Özel Ürünler',en:'Saffron & Specialities',de:'Safran & Spezialitäten',it:'Zafferano e specialità',fr:'Safran et spécialités'}[lang],
+    ids:['saffron','zereshk']
+  }
+];
+const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
 ---
 {key === 'home' && (
   <>
@@ -62,7 +100,16 @@ const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it
     </div></section>
     <section class="section product-showcase"><div class="container">
       <div class="section-head"><h2>{h.productsTitle}</h2><p>{h.productsLead}</p></div>
-      <div class="product-editorial-grid">{productIds.slice(0,6).map((productId,index) => <ProductCard product={products[productId]} productId={productId} lang={lang} index={index} featured={index === 0 || index === 3} />)}</div>
+      <div class="product-editorial-grid" data-home-showcase>
+        {homeProductIds.map((productId,index) => <ProductCard
+          product={products[productId]}
+          productId={productId}
+          lang={lang}
+          index={index}
+          displayRole={showcaseRoles[index]}
+          family={productFamilies[productId]}
+        />)}
+      </div>
       <div class="actions"><a class="button button-secondary" href={sectionHref('products')}>{t.allProducts}</a></div>
     </div></section>
     <PortfolioBanner lang={lang} />
@@ -100,10 +147,23 @@ const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it
 {key === 'products' && !id && (
   <>
     <PageHero lang={lang} eyebrow={t.products} title={copy.productsTitle} lead={copy.productsLead} />
-    <PortfolioBanner lang={lang} />
     <section class="section catalogue-section"><div class="container">
       <div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div>
-      <div class="catalogue-grid">{productIds.map((productId,index) => <ProductCard product={products[productId]} productId={productId} lang={lang} index={index} featured={index % 7 === 0 || index % 7 === 4} />)}</div>
+      <div class="catalogue-directory">
+        {catalogueGroups.map((group,groupIndex) => <div class="catalogue-group" data-catalogue-group={group.key}>
+          <div class="catalogue-group-heading">
+            <span>{String(groupIndex + 1).padStart(2,'0')}</span>
+            <h2>{group.title}</h2>
+          </div>
+          <div class="catalogue-grid">{group.ids.map((productId) => <ProductCard
+            product={products[productId as keyof typeof products]}
+            productId={productId}
+            lang={lang}
+            index={catalogueOrder.indexOf(productId)}
+            family={group.key}
+          />)}</div>
+        </div>)}
+      </div>
     </div></section>
   </>
 )}

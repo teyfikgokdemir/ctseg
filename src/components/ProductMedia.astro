@@ -3,10 +3,13 @@ import type { Locale } from '../data/site';
 const { product, lang, eager=false, secondary=false, className='' } = Astro.props as {
   product:any; lang:Locale; eager?:boolean; secondary?:boolean; className?:string;
 };
-const src = secondary && product.media.secondary ? product.media.secondary : product.media.src;
+const secondarySrc = product.media.secondary;
+const src = secondary ? secondarySrc : product.media.src;
+const shouldRender = Boolean(src) && (!secondary || secondarySrc !== product.media.src);
 const alt = secondary ? `${product.names[lang]} · 02` : product.names[lang];
+const mediaType = product.media.mediaType ?? 'photo';
 ---
-<figure class:list={['product-media', className]}>
+{shouldRender && <figure class:list={['product-media', `product-media--${mediaType}`, className]} data-product-media={secondary ? 'secondary' : 'primary'} data-media-type={mediaType}>
   <img
     src={src}
     width={product.media.width}
@@ -15,6 +18,6 @@ const alt = secondary ? `${product.names[lang]} · 02` : product.names[lang];
     loading={eager ? 'eager' : 'lazy'}
     fetchpriority={eager ? 'high' : 'auto'}
     decoding={eager ? 'sync' : 'async'}
-    style={product.media.position ? `object-position:${product.media.position}` : undefined}
+    style={product.media.objectPosition ? `object-position:${product.media.objectPosition}` : undefined}
   />
-</figure>
+</figure>}
