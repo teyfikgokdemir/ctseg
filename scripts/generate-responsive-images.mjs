@@ -77,5 +77,7 @@ if (previous[logoKey] === logoSignature && existsSync(logoOutput)) {
 }
 next[logoKey] = logoSignature;
 
-writeFileSync(manifestPath,`${JSON.stringify(next,null,2)}\n`);
+const nextManifest = `${JSON.stringify(next,null,2)}\n`;
+const currentManifest = existsSync(manifestPath) ? readFileSync(manifestPath,'utf8') : '';
+if (currentManifest !== nextManifest) writeFileSync(manifestPath,nextManifest);
 console.log(`Responsive image generation complete: ${created} created, ${skipped} unchanged, ${Object.keys(next).length} total.`);

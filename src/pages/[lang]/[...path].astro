@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageContent from '../../components/PageContent.astro';
-import { insights, pageCopy, products, ui } from '../../data/site';
+import { insights, products, services, ui } from '../../data/site';
 import { guides, processPages } from '../../data/completion';
+import { getPosts } from '../../data/blog';
 import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, type RouteRecord } from '../../lib/routes';
 
 export function getStaticPaths() {
@@ -15,6 +16,25 @@ export function getStaticPaths() {
 const { record } = Astro.props as { record: RouteRecord };
 const meta = getMeta(record);
 const schemas:any[] = [breadcrumbSchema(record, meta.title)];
+if (record.key === 'services' && record.id) {
+  const service = services[record.id as keyof typeof services];
+  schemas.push({
+    '@context':'https://schema.org','@type':'Service',
+    '@id':`${canonicalFor(record)}#service`,url:canonicalFor(record),
+    name:service.names[record.lang],description:service.descriptions[record.lang],
+    serviceType:service.names[record.lang],inLanguage:record.lang,
+    provider:{'@id':'https://ctseg.com.tr/#organization'},
+    areaServed:['Türkiye','Europe','International']
+  });
+}
+if (record.key === 'insights' && !record.id) {
+  schemas.push({
+    '@context':'https://schema.org','@type':'Blog',
+    '@id':`${canonicalFor(record)}#blog`,url:canonicalFor(record),
+    name:meta.title,description:meta.description,inLanguage:record.lang,
+    publisher:{'@id':'https://ctseg.com.tr/#organization'}
+  });
+}
 if (record.key === 'products' && record.id) {
   const product = products[record.id as keyof typeof products];
   schemas.push({
@@ -38,10 +58,17 @@ if (record.key === 'products' && record.id) {
 }
 if (record.key === 'insights' && record.id) {
   const insight = insights[record.id as keyof typeof insights];
+  const postIndex:Record<string,number> = {'strategic-vs-procurement':0,'supplier-selection':1,'total-cost':2,'supplier-risk':3,rfq:4,'supply-chain-risk':5};
+  const originalPost = (record.lang === 'tr' || record.lang === 'en') && record.id in postIndex
+    ? getPosts(record.lang).at(postIndex[record.id])
+    : null;
   schemas.push({
-    '@context':'https://schema.org','@type':'BlogPosting',headline:insight.titles[record.lang],
-    description:insight.descriptions[record.lang],datePublished:'2026-07-27',dateModified:'2026-07-27',
-    inLanguage:record.lang,mainEntityOfPage:canonicalFor(record),author:{'@id':'https://ctseg.com.tr/#organization'},
+    '@context':'https://schema.org','@type':'BlogPosting',
+    '@id':`${canonicalFor(record)}#article`,url:canonicalFor(record),headline:insight.titles[record.lang],
+    description:insight.descriptions[record.lang],
+    datePublished:originalPost?.date ?? '2026-07-27',dateModified:originalPost?.updated ?? '2026-07-27',
+    inLanguage:record.lang,mainEntityOfPage:{'@id':`${canonicalFor(record)}#webpage`},
+    author:{'@type':'Person',name:'Teyfik Gökdemir'},
     publisher:{'@id':'https://ctseg.com.tr/#organization'}
   });
 }
