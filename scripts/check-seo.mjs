@@ -28,7 +28,9 @@ const outputPath = (file) => {
 };
 const builtTargetExists = (pathname) => {
   const clean = decodeURI(pathname).replace(/^\/+|\/+$/g,'');
-  return clean ? existsSync(join(dist,clean,'index.html')) || existsSync(join(dist,`${clean}.html`)) : existsSync(join(dist,'index.html'));
+  return clean
+    ? existsSync(join(dist,clean)) || existsSync(join(dist,clean,'index.html')) || existsSync(join(dist,`${clean}.html`))
+    : existsSync(join(dist,'index.html'));
 };
 const addUnique = (map, value, label, kind, locale) => {
   const key = `${locale}\0${value}`;
@@ -130,6 +132,7 @@ for (const redirect of redirects) {
 const requiredRedirects = {
   '/tr':'/',
   '/tr/':'/',
+  '/sitemap.xml':'/sitemap-index.xml',
   '/en/services/supplier-sourcing-verification/':'/en/services/supplier-sourcing-and-verification/',
   '/en/blog/supply-chain-risk-management/':'/en/insights/supply-chain-risk-management/',
   '/en/blog/total-cost-of-ownership-procurement/':'/en/insights/total-cost-of-ownership/',
@@ -140,6 +143,7 @@ for (const [source,target] of Object.entries(requiredRedirects)) {
   const rule = redirectsBySource.get(source);
   if (!rule || rule.target !== target || rule.status !== '301') errors.push(`${source}: required one-hop legacy redirect is missing`);
 }
+if (sitemapUrls.includes(`${origin}/sitemap.xml`)) errors.push('/sitemap.xml: compatibility redirect must not appear in the sitemap');
 
 const requiredCanonicalPaths = [
   '/','/en/','/en/services/supplier-sourcing-and-verification/','/en/services/strategic-sourcing/',
