@@ -57,7 +57,7 @@ const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex,follow" />}
+    <meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large'} />
     <link rel="canonical" href={canonicalUrl} />
     {alternateCodes.map((code) => <link rel="alternate" hreflang={code} href={alternates[code as Locale]} />)}
     <link rel="alternate" hreflang="x-default" href={alternates.en} />
