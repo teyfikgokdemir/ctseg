@@ -41,7 +41,7 @@ const copyright = {
       <a href={localizedPath(lang, 'about')}>{t.about}</a>
       {(lang === 'tr' || lang === 'en') && <a href={localizedPath(lang,'how-we-work')}>{lang === 'tr' ? 'Nasıl çalışıyoruz?' : 'How we work'}</a>}
       <a href={localizedPath(lang, 'contact')}>{t.contact}</a>
-      <a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a>
+      <a href={`mailto:${company.email}`}>{company.email}</a>
     </nav>
   </div>
   <div class="container footer-bottom">

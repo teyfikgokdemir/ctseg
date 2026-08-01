@@ -1,118 +1,84 @@
 ---
-import { formCopy } from '../data/completion';
-import { localizedPath, type Locale } from '../data/site';
+import { localizedPath } from '../data/site';
+import { company } from '../data/site';
+import { contactCopy, emailHref, whatsappHref, type ContactLocale } from '../data/contact-experience';
 
-const { lang } = Astro.props as { lang:Locale };
-const copy = formCopy[lang];
-const intentCopy = {
-  tr:{label:'Ticari amacınız',buyer:'Tedarikçi arıyorum',producer:'Alıcı ve pazar arıyorum'},
-  en:{label:'Your commercial objective',buyer:'I need a supplier',producer:'I need buyers'},
-  de:{label:'Ihr Geschäftsziel',buyer:'Ich suche einen Lieferanten',producer:'Ich suche Käufer und Märkte'},
-  it:{label:'Il tuo obiettivo commerciale',buyer:'Cerco un fornitore',producer:'Cerco buyer e mercati'},
-  fr:{label:'Votre objectif commercial',buyer:'Je cherche un fournisseur',producer:'Je cherche des acheteurs'}
-}[lang];
-const names = ['name','company','email','phone','country','requestType','product','quantity','delivery','targetDate','message'];
-const types = ['text','text','email','tel','text','select','text','text','text','date','textarea'];
-const autocomplete = ['name','organization','email','tel','country-name','off','off','off','street-address','off','off'];
+const { lang } = Astro.props as { lang:ContactLocale };
+const copy = contactCopy[lang];
+const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal','privacy');
 ---
 <section class="commercial-form-panel" id="commercial-form" aria-labelledby="commercial-form-title">
   <div class="commercial-form-intro">
-    <p class="eyebrow">CTSEG · RFQ</p>
+    <p class="eyebrow">{copy.eyebrow}</p>
     <h2 id="commercial-form-title">{copy.title}</h2>
     <p>{copy.intro}</p>
+    <div class="direct-contact-cards" aria-label={copy.floatingLabel}>
+      <a class="direct-contact-card" href={whatsappHref(lang)} target="_blank" rel="noopener noreferrer" data-contact-whatsapp>
+        <span aria-hidden="true">WA</span><strong>{copy.whatsapp}</strong>
+      </a>
+      <a class="direct-contact-card" href={emailHref(lang)} data-contact-email>
+        <span aria-hidden="true">@</span><strong>{copy.email}</strong><small>{company.email}</small>
+      </a>
+      <a class="short-request-link" href="#commercial-request-fields">{copy.shortRequest} ↓</a>
+    </div>
   </div>
-  <form class="commercial-form" data-commercial-form data-lang={lang} action="/api/contact" method="post" novalidate>
+  <form class="commercial-form" id="commercial-request-fields" data-commercial-form data-lang={lang} action="/api/contact" method="post" novalidate>
     <input type="hidden" name="locale" value={lang} />
     <input type="hidden" name="startedAt" value="" data-started-at />
-    <div class="form-honeypot" aria-hidden="true">
-      <label>Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+    <div class="form-honeypot" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+    <div class="commercial-form-grid commercial-form-grid--core">
+      <label class="commercial-field commercial-field--wide"><span>{copy.intentLabel}</span><select name="intent" required data-commercial-intent><option value=""></option><option value="buyer_request">{copy.buyerIntent}</option><option value="supplier_market_entry">{copy.producerIntent}</option></select></label>
+      <label class="commercial-field"><span>{copy.name}</span><input type="text" name="name" autocomplete="name" maxlength="120" required /></label>
+      <label class="commercial-field"><span>{copy.company}</span><input type="text" name="company" autocomplete="organization" maxlength="160" required /></label>
+      <label class="commercial-field commercial-field--wide"><span>{copy.contact}</span><input type="text" name="emailOrPhone" autocomplete="email" maxlength="254" required data-contact-field /></label>
+      <label class="commercial-field commercial-field--wide"><span>{copy.message}</span><textarea name="message" maxlength="2000" rows="4" required></textarea></label>
     </div>
-    <div class="commercial-form-grid">
-      <label class="commercial-field commercial-field--wide">
-        <span>{intentCopy.label}</span>
-        <select name="intent" required data-commercial-intent>
-          <option value=""></option>
-          <option value="buyer_request">{intentCopy.buyer}</option>
-          <option value="supplier_market_entry">{intentCopy.producer}</option>
-        </select>
-      </label>
-      {names.map((name,index) => (
-        <label class:list={['commercial-field',{'commercial-field--wide':name === 'message'}]}>
-          <span>{copy.labels[index]}</span>
-          {types[index] === 'select' ? (
-            <select name={name} required>
-              <option value=""></option>
-              {copy.requestOptions.map((option) => <option value={option}>{option}</option>)}
-            </select>
-          ) : types[index] === 'textarea' ? (
-            <textarea name={name} maxlength="2000" rows="5"></textarea>
-          ) : (
-            <input
-              type={types[index]}
-              name={name}
-              autocomplete={autocomplete[index]}
-              maxlength={name === 'email' ? 254 : 160}
-              required={['name','company','email','country','product','delivery'].includes(name)}
-            />
-          )}
-        </label>
-      ))}
-    </div>
-    <label class="privacy-check">
-      <input type="checkbox" name="privacy" value="accepted" required />
-      <span>{copy.privacy} <a href={localizedPath(lang,'legal','privacy')}>{lang === 'tr' ? 'Gizlilik bildirimi' : lang === 'en' ? 'Privacy notice' : lang === 'de' ? 'Datenschutzhinweis' : lang === 'it' ? 'Informativa privacy' : 'Notice de confidentialité'}</a></span>
-    </label>
-    <div class="commercial-form-actions">
-      <button class="button" type="submit">{copy.submit}</button>
-      <a class="text-link" href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a>
-    </div>
+    <details class="commercial-details">
+      <summary>{copy.details}</summary>
+      <div class="commercial-form-grid">
+        <label class="commercial-field"><span>{copy.country}</span><input type="text" name="country" autocomplete="country-name" maxlength="100" /></label>
+        <label class="commercial-field"><span>{copy.product}</span><input type="text" name="product" maxlength="240" /></label>
+        <label class="commercial-field"><span>{copy.quantity}</span><input type="text" name="quantity" maxlength="120" /></label>
+        <label class="commercial-field"><span>{copy.delivery}</span><input type="text" name="delivery" autocomplete="street-address" maxlength="180" /></label>
+        <label class="commercial-field"><span>{copy.targetDate}</span><input type="date" name="targetDate" /></label>
+        <label class="commercial-field"><span>{copy.requirements}</span><input type="text" name="requirements" maxlength="500" /></label>
+      </div>
+    </details>
+    <label class="privacy-check"><input type="checkbox" name="privacy" value="accepted" required /><span>{copy.privacy} <a href={privacyHref}>{copy.privacyLink}</a></span></label>
+    <div class="commercial-form-actions"><button class="button" type="submit">{copy.submit}</button></div>
     <p class="form-status" data-form-status role="status" aria-live="polite"></p>
-    <div class="form-fallback" data-form-fallback hidden>
-      <p>{copy.fallback}</p>
-      <button type="button" class="button button-secondary" data-download-summary>{copy.download}</button>
-    </div>
+    <div class="form-fallback" data-form-fallback hidden><p>{copy.fallback}</p><button type="button" class="button button-secondary" data-download-summary>{copy.download}</button></div>
   </form>
 </section>
 
 <script define:vars={{ copy }}>
   (() => {
-    const form=document.querySelector('[data-commercial-form]');
-    if(!form)return;
-    const started=form.querySelector('[data-started-at]');
-    const status=form.querySelector('[data-form-status]');
-    const fallback=form.querySelector('[data-form-fallback]');
-    const download=form.querySelector('[data-download-summary]');
-    const product=form.elements.namedItem('product');
-    const intent=form.elements.namedItem('intent');
-    started.value=String(Date.now());
-    const savedProduct=sessionStorage.getItem('ctseg-product-request');
-    if(savedProduct&&product instanceof HTMLInputElement){product.value=savedProduct;sessionStorage.removeItem('ctseg-product-request')}
-    const requestedIntent=new URLSearchParams(location.search).get('intent');
-    if(intent instanceof HTMLSelectElement&&['buyer_request','supplier_market_entry'].includes(requestedIntent||''))intent.value=requestedIntent;
-    let startedTracked=false;
-    const track=(event)=>{if(typeof window.gtag==='function')window.gtag('event',event,{form_type:'commercial_assessment',source_language:document.documentElement.lang})};
-    form.addEventListener('focusin',()=>{if(!startedTracked){startedTracked=true;track('contact_form_start')}},{once:true});
-    const summary=()=>Array.from(new FormData(form).entries())
-      .filter(([key,value])=>!['website','startedAt','privacy','locale'].includes(key)&&String(value).trim())
-      .map(([key,value])=>`${key}: ${String(value).trim()}`).join('\n');
-    download?.addEventListener('click',()=>{
-      const blob=new Blob([`CTSEG commercial assessment request\n\n${summary()}\n`],{type:'text/plain;charset=utf-8'});
-      const url=URL.createObjectURL(blob);const link=document.createElement('a');
-      link.href=url;link.download='ctseg-commercial-request.txt';link.click();URL.revokeObjectURL(url);
-    });
-    form.addEventListener('submit',async(event)=>{
-      event.preventDefault();fallback.hidden=true;status.textContent='';
-      if(!form.reportValidity())return;
-      track('contact_form_submit_attempt');
-      const submit=form.querySelector('[type="submit"]');submit.disabled=true;
-      try{
-        const response=await fetch(form.action,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(form)))});
-        const result=await response.json().catch(()=>({}));
-        if(!response.ok)throw new Error(result.code||'request_failed');
-        status.textContent=copy.success;track('contact_form_success');form.reset();started.value=String(Date.now());
-      }catch{
-        status.textContent=`${copy.error} ${copy.fallback}`;fallback.hidden=false;track('contact_form_error');
-      }finally{submit.disabled=false}
+    document.querySelectorAll('[data-commercial-form]').forEach((form) => {
+      if(form.dataset.enhanced)return;form.dataset.enhanced='true';
+      const started=form.querySelector('[data-started-at]');
+      const status=form.querySelector('[data-form-status]');
+      const fallback=form.querySelector('[data-form-fallback]');
+      const download=form.querySelector('[data-download-summary]');
+      const product=form.elements.namedItem('product');
+      const intent=form.elements.namedItem('intent');
+      started.value=String(Date.now());
+      const savedProduct=sessionStorage.getItem('ctseg-product-request');
+      if(savedProduct&&product instanceof HTMLInputElement){product.value=savedProduct;sessionStorage.removeItem('ctseg-product-request')}
+      const requestedIntent=new URLSearchParams(location.search).get('intent');
+      if(intent instanceof HTMLSelectElement&&['buyer_request','supplier_market_entry'].includes(requestedIntent||''))intent.value=requestedIntent;
+      document.querySelectorAll('[data-fa-intent],[data-contact-intent]').forEach((link)=>link.addEventListener('click',()=>{const value=link.getAttribute('data-fa-intent')||link.getAttribute('data-contact-intent');if(intent instanceof HTMLSelectElement&&value)intent.value=value}));
+      let startedTracked=false;
+      const track=(event)=>{if(typeof window.gtag==='function')window.gtag('event',event,{form_type:'short_commercial_request',source_language:document.documentElement.lang})};
+      form.addEventListener('focusin',()=>{if(!startedTracked){startedTracked=true;track('contact_form_start')}},{once:true});
+      const summary=()=>Array.from(new FormData(form).entries()).filter(([key,value])=>!['website','startedAt','privacy','locale'].includes(key)&&String(value).trim()).map(([key,value])=>`${key}: ${String(value).trim()}`).join('\n');
+      download?.addEventListener('click',()=>{const blob=new Blob([`CTSEG short commercial request\n\n${summary()}\n`],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='ctseg-commercial-request.txt';link.click();URL.revokeObjectURL(url)});
+      form.addEventListener('submit',async(event)=>{
+        event.preventDefault();fallback.hidden=true;status.textContent='';if(!form.reportValidity())return;
+        track('contact_form_submit_attempt');const submit=form.querySelector('[type="submit"]');submit.disabled=true;
+        try{const response=await fetch(form.action,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(form)))});const result=await response.json().catch(()=>({}));if(!response.ok)throw new Error(result.code||'request_failed');status.textContent=copy.success;track('contact_form_success');window.dispatchEvent(new CustomEvent('ctseg:form-success'));if(document.documentElement.lang==='fa')window.dispatchEvent(new CustomEvent('ctseg:fa-form-success'));form.reset();started.value=String(Date.now())}
+        catch{status.textContent=`${copy.error} ${copy.fallback}`;fallback.hidden=false;track('contact_form_error')}
+        finally{submit.disabled=false}
+      });
     });
   })();
 </script>

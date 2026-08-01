@@ -151,13 +151,12 @@ for (const file of htmlFiles) {
   if (aboutPages.has(label) && (!html.includes('company-profile-section') || !html.includes('Teyfik Gökdemir') || !html.includes('2022'))) {
     errors.push(`${label}: localized company history section missing`);
   }
-  if (contactPages.has(label) && (!html.includes('company-card--contact') || !html.includes('Fevzipaşa Caddesi') || !html.includes('Teyfik Gökdemir'))) {
-    errors.push(`${label}: localized company contact card missing`);
-  }
   if (contactPages.has(label)) {
     const form = html.match(/<form class="commercial-form"[\s\S]*?<\/form>/)?.[0] ?? '';
     const firstVisibleControl = form.match(/<(?:input|select|textarea)\b[^>]*(?:name="(?!locale|startedAt|website)([^"]+)")[^>]*>/)?.[1];
     if (firstVisibleControl !== 'intent' || !form.includes('value="buyer_request"') || !form.includes('value="supplier_market_entry"')) errors.push(`${label}: stable trade intent must be the first visible form control`);
+    for (const field of ['name','company','emailOrPhone','message','privacy']) if (!form.includes(`name="${field}"`)) errors.push(`${label}: short form field ${field} missing`);
+    if (!html.includes('data-contact-whatsapp') || !html.includes('data-contact-email') || !html.includes('<details class="commercial-details">')) errors.push(`${label}: direct contact cards or optional details disclosure missing`);
   }
   if (html.includes('fonts.googleapis.com') || html.includes('fonts.gstatic.com')) errors.push(`${label}: external Google Fonts dependency remains`);
   if (!html.includes('/fonts/dm-sans-latin-ext-variable.woff2') || !html.includes('/fonts/source-serif-4-latin-ext-variable.woff2')) {
@@ -260,7 +259,8 @@ for (const file of htmlFiles) {
       if ((code === 'fa') !== tag.includes('aria-current="page"')) errors.push(`${label}: Persian locale active state is incorrect for ${code}`);
     }
     if ((html.match(/<h1\b/g) || []).length !== 1) errors.push(`${label}: expected one Persian H1`);
-    if ((html.match(/<details\b/g) || []).length !== 8) errors.push(`${label}: expected eight visible Persian FAQs`);
+    const visibleFaqBlock = html.match(/<div class="fa-faq">[\s\S]*?<\/div>/)?.[0] ?? '';
+    if ((visibleFaqBlock.match(/<details\b/g) || []).length !== 8) errors.push(`${label}: expected eight visible Persian FAQs`);
     for (const type of ['WebSite','WebPage','Service','FAQPage','BreadcrumbList']) {
       if (!parsedSchemas.some((schema) => schema?.['@type'] === type)) errors.push(`${label}: ${type} schema missing`);
     }
@@ -272,26 +272,14 @@ for (const file of htmlFiles) {
     if (!html.includes(`<title>${expectedPersianTitle}</title>`) || !html.includes(`<meta name="description" content="${expectedPersianDescription}">`)) {
       errors.push(`${label}: multisector Persian title or meta description missing`);
     }
-    if (!html.includes('<h1>نیازهای تجاری را به تأمین‌کنندگان، تولیدکنندگان و فرصت‌های مناسب بازارهای بین‌المللی متصل می‌کنیم.</h1>')) errors.push(`${label}: trade-matching Persian H1 missing`);
+    if (!html.includes('<h1>خریداران را به تولیدکنندگان و تأمین‌کنندگان مناسب متصل می‌کنیم.</h1>')) errors.push(`${label}: simplified trade-matching Persian H1 missing`);
     for (const term of ['خریداران','تأمین‌کنندگان','تولیدکنندگان','بازارهای مناسب بین‌المللی']) if (!persianServiceSchema?.description?.includes(term)) errors.push(`${label}: Service schema missing platform term (${term})`);
-    if (!html.includes('data-fa-sourcing-form') || !html.includes('name="website"') || !html.includes('name="privacyConsent"') ||
-      !html.includes('id="fa-form-errors" role="alert"') || !html.includes('id="fa-form-fallback"')) {
-      errors.push(`${label}: accessible secure-fallback form controls missing`);
-    }
-    const fields = [...html.matchAll(/<(?:input|select|textarea)\b[^>]*\bid="([^"]+)"/g)]
-      .map((match) => match[1]).filter((id) => id !== 'website');
-    if (!fields.every((id) => new RegExp(`<label[^>]+for="${id}"`).test(html))) errors.push(`${label}: every user-facing form field must have an explicit label`);
-    const expectedFields = ['commercial-intent','full-name','company-name','business-email','phone','country-city','product-group','target-market','short-message','privacy-consent'];
-    if (fields.length !== expectedFields.length || !expectedFields.every((id) => fields.includes(id))) {
-      errors.push(`${label}: first-contact form must contain intent, eight approved fields and privacy consent`);
-    }
-    for (const removedName of ['jobTitle','quantity','specifications','packaging','deliveryCity','targetDate','acceptedOrigins','documents','incoterm','additionalNotes','rfqFile']) {
-      if (html.includes(`name="${removedName}"`)) errors.push(`${label}: deferred form field remains (${removedName})`);
-    }
-    if (!html.includes('form.dataset.startedAt=String(Date.now())')) {
-      errors.push(`${label}: client-side minimum-time guard missing`);
-    }
-    for (const requiredCopy of ['برای تولیدکنندگان و صادرکنندگان ایرانی','چهار مسیر برای تأمین و توسعه بازار','ارسال محصول برای ارزیابی اولیه','اطلاعات تکمیلی مانند ظرفیت، قیمت، حداقل سفارش، بسته‌بندی و اسناد در مرحله ارزیابی بعدی درخواست خواهد شد.']) {
+    const persianForm = html.match(/<form class="commercial-form"[\s\S]*?<\/form>/)?.[0] ?? '';
+    for (const field of ['intent','name','company','emailOrPhone','message','privacy']) if (!persianForm.includes(`name="${field}"`)) errors.push(`${label}: Persian short-form field missing (${field})`);
+    for (const optional of ['country','product','quantity','delivery','targetDate','requirements']) if (!persianForm.includes(`name="${optional}"`)) errors.push(`${label}: Persian optional-detail field missing (${optional})`);
+    if (!persianForm.includes('action="/api/contact"') || !persianForm.includes('name="website"') || !persianForm.includes('name="startedAt"') || !html.includes('data-form-fallback')) errors.push(`${label}: secure server-backed form contract missing`);
+    if (!html.includes('started.value=String(Date.now())')) errors.push(`${label}: client-side timing value missing`);
+    for (const requiredCopy of ['برای تولیدکنندگان و صادرکنندگان ایرانی','چهار مسیر برای تأمین و توسعه بازار','درخواست خود را مطرح کنید','افزودن جزئیات (اختیاری)']) {
       if (!html.includes(requiredCopy)) errors.push(`${label}: strengthened Persian entry copy missing (${requiredCopy})`);
     }
     if ((html.match(/data-sector-card=/g) || []).length !== 4 || (html.match(/data-sector-cta/g) || []).length !== 4) {
@@ -315,9 +303,7 @@ for (const file of htmlFiles) {
     for (const eventName of ['fa_landing_view','fa_form_start','fa_form_submit_attempt','fa_form_submission_success','fa_email_cta_click','fa_english_link_click']) {
       if (!html.includes(eventName)) errors.push(`${label}: analytics event ${eventName} missing`);
     }
-    if (!html.includes('اما هنوز برای CTSEG ارسال نشده است') || !html.includes('Generated locally; not yet submitted.')) {
-      errors.push(`${label}: transparent no-backend fallback disclosure missing`);
-    }
+    if (!html.includes("fetch(form.action") || !html.includes("if(!response.ok)throw")) errors.push(`${label}: form submission must not report success before server acceptance`);
     const sensitivePersianPhrases = ['پرداخت از طریق CTSEG','بانک‌ها','کانال‌های مجاز','مسیر پرداخت','تشریفات گمرکی','کارگزار گمرکی','مجوز واردات','ارسال قانونی','حواله','انتقال وجه','انتقال بانکی','کانال پرداخت','تضمین بانکی','تحریم'];
     for (const forbidden of sensitivePersianPhrases) {
       if (html.includes(forbidden)) errors.push(`${label}: sensitive Persian trade phrase remains (${forbidden})`);
@@ -349,14 +335,7 @@ for (const file of htmlFiles) {
   }
   const portfolioImageCount = (html.match(/src="\/images\/generated\/2-\d+\.webp\?v=[a-f0-9]+"/g) || []).length;
   if (portfolioImageCount !== 0) errors.push(`${label}: product-catalogue portfolio visual must not appear in the trade-platform architecture`);
-  if (html.includes('contact-email-panel')) {
-    contactEmailPanels++;
-    const panel = html.match(/<aside class="side-panel contact-email-panel">[\s\S]*?<\/aside>/)?.[0] ?? '';
-    if ((panel.match(/info@ctseg\.com\.tr/g) || []).length !== 2) errors.push(`${label}: contact panel must render one linked email address`);
-    if ((panel.match(/class="contact-email-link"/g) || []).length !== 1) errors.push(`${label}: expected one contact email link`);
-    if (!panel.includes('href="mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry"')) errors.push(`${label}: incorrect contact mailto`);
-    if (panel.includes('class="button"')) errors.push(`${label}: duplicate contact email button remains`);
-  }
+  if (contactPages.has(label) && html.includes('data-contact-email')) contactEmailPanels++;
   if (html.includes('"@type":"Product"')) {
     productSchemaPages++;
     const schemaImage = html.match(/"@type":"Product"[\s\S]*?"image":"([^"]+)"/)?.[1];

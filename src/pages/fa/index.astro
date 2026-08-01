@@ -1,5 +1,7 @@
 ---
 import ResponsiveImage from '../../components/ResponsiveImage.astro';
+import CommercialRequestForm from '../../components/CommercialRequestForm.astro';
+import FloatingActions from '../../components/FloatingActions.astro';
 import { company } from '../../data/site';
 import { persianAudiences, persianCategories, persianFaqs, persianProcess, persianServices } from '../../data/persian-landing';
 import { FEATURE_IMAGE_WIDTHS, LOGO_IMAGE, generatedImageSrc, generatedImageSrcset } from '../../lib/responsive-images';
@@ -29,11 +31,11 @@ const organization = {
   },
   url:'https://ctseg.com.tr/',
   logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
-  email:'info@ctseg.com.tr',
+  email:company.email,
   contactPoint:{
     '@type':'ContactPoint',
     contactType:'sales',
-    email:'info@ctseg.com.tr',
+    email:company.email,
     availableLanguage:['fa','en']
   }
 };
@@ -168,8 +170,8 @@ const localeLinks = [
           <div class="fa-hero-grid">
             <div>
               <p class="fa-kicker">تطبیق تجاری بین‌المللی و هماهنگی بازرگانی</p>
-              <h1>نیازهای تجاری را به تأمین‌کنندگان، تولیدکنندگان و فرصت‌های مناسب بازارهای بین‌المللی متصل می‌کنیم.</h1>
-              <p class="fa-lead">CTSEG ساختاری مستقل برای هماهنگی تجاری است: به خریداران برای دسترسی به گزینه‌های قابل‌بررسی کمک می‌کند و آمادگی تولیدکنندگان ایرانی را برای ارتباط با خریداران در ترکیه، اروپا، آمریکا و دیگر بازارهای هدف می‌سنجد.</p>
+              <h1>خریداران را به تولیدکنندگان و تأمین‌کنندگان مناسب متصل می‌کنیم.</h1>
+              <p class="fa-lead">پژوهش محصول، ارزیابی تأمین‌کننده، یافتن خریدار و هماهنگی تجاری را در بازارهای بین‌المللی مدیریت می‌کنیم.</p>
               <p class="fa-hero-summary">CTSEG فرایند جست‌وجوی تأمین‌کننده، راستی‌آزمایی تولیدکننده، مقایسه پیشنهادها، بررسی مدارک کیفیت، ارزیابی شرایط تجاری و بررسی کلی گزینه‌های لجستیکی را به یک مسیر تصمیم‌گیری روشن و قابل مدیریت تبدیل می‌کند.</p>
               <div class="fa-actions">
                 <a class="fa-button" href="#request-form" data-fa-intent="buyer_request">به دنبال تأمین‌کننده هستم</a>
@@ -308,7 +310,7 @@ const localeLinks = [
         </div>
       </section>
 
-      <section class="fa-section fa-form-section" id="request-form">
+      {false && <section class="fa-section fa-form-section" id="request-form-legacy">
         <div class="fa-container">
           <p class="fa-section-kicker">ارزیابی اولیه محصول یا نیاز تأمین</p>
           <h2>اطلاعات لازم برای ارزیابی اولیه</h2>
@@ -338,6 +340,10 @@ const localeLinks = [
             </div>
           </form>
         </div>
+      </section>}
+
+      <section class="fa-section fa-form-section" id="request-form">
+        <div class="fa-container"><CommercialRequestForm lang="fa" /></div>
       </section>
 
       <section class="fa-section" id="faq">
@@ -364,6 +370,8 @@ const localeLinks = [
         <div class="fa-footer-bottom">© 2026 CTSEG. کلیه حقوق محفوظ است.</div>
       </div>
     </footer>
+
+    <FloatingActions lang="fa" />
 
     <aside class="fa-cookie" data-cookie-consent hidden aria-label="تنظیمات کوکی">
       <div><strong>تنظیمات کوکی</strong><p>کوکی‌های تحلیلی فقط با رضایت شما فعال می‌شوند. کوکی‌های ضروری همواره فعال هستند.</p></div>
