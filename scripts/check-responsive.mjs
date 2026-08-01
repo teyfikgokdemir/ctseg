@@ -147,11 +147,64 @@ try {
     await page.waitForTimeout(250);
     let mobileMenu = true;
     let bodyScrollLocked = true;
+    let persianMobileMenu = null;
     if (testCase.width <= 860 && !testCase.persian) {
       await page.locator('[data-menu-toggle]').click();
       mobileMenu = await page.locator('[data-primary-nav]').isVisible();
       bodyScrollLocked = await page.evaluate(() => document.body.classList.contains('menu-open') && getComputedStyle(document.body).overflow === 'hidden');
       if (!testCase.openMenu) await page.locator('[data-menu-toggle]').click();
+    }
+    if (testCase.persian && testCase.width <= 820) {
+      const toggle = page.locator('[data-fa-menu-toggle]');
+      const panel = page.locator('[data-fa-primary-nav]');
+      const initial = await page.evaluate(() => {
+        const toggle=document.querySelector('[data-fa-menu-toggle]');
+        const panel=document.querySelector('[data-fa-primary-nav]');
+        return {
+          toggleVisible:Boolean(toggle&&toggle.getBoundingClientRect().width>0&&toggle.getBoundingClientRect().height>0),
+          expanded:toggle?.getAttribute('aria-expanded'),
+          controls:toggle?.getAttribute('aria-controls'),
+          label:toggle?.getAttribute('aria-label'),
+          panelId:panel?.id
+        };
+      });
+      await toggle.focus();
+      await toggle.press('Enter');
+      await page.waitForTimeout(100);
+      const opened = await page.evaluate(async () => {
+        const panel=document.querySelector('[data-fa-primary-nav]');
+        const toggle=document.querySelector('[data-fa-menu-toggle]');
+        const links=[...document.querySelectorAll('[data-fa-mobile-nav-link]')];
+        const box=panel?.getBoundingClientRect();
+        const header=document.querySelector('.fa-header')?.getBoundingClientRect();
+        const hero=document.querySelector('.fa-hero')?.getBoundingClientRect();
+        const statuses=await Promise.all(links.map(async(link)=>{
+          try{return (await fetch(link.href,{redirect:'follow'})).status}catch{return 0}
+        }));
+        return {
+          visible:Boolean(box&&box.width>0&&box.height>0&&getComputedStyle(panel).visibility==='visible'),
+          expanded:toggle?.getAttribute('aria-expanded'),
+          bodyLocked:document.body.classList.contains('fa-menu-open')&&getComputedStyle(document.body).overflow==='hidden',
+          direction:panel?getComputedStyle(panel).direction:null,
+          withinViewport:Boolean(box&&box.left>=-1&&box.right<=window.innerWidth+1&&box.top>=0&&box.bottom<=window.innerHeight+1),
+          stickyHeader:getComputedStyle(document.querySelector('.fa-header')).position==='sticky',
+          headerClear:Boolean(header&&hero&&hero.top>=header.bottom-1),
+          focusedFirst:document.activeElement===links[0],
+          labels:links.map((link)=>link.textContent?.trim()),
+          hrefs:links.map((link)=>link.getAttribute('href')),
+          statuses,
+          localeCount:[...document.querySelectorAll('[data-fa-locale-switcher] [data-locale-option]')].filter((link)=>link.getBoundingClientRect().width>0).length
+        };
+      });
+      await page.locator('[data-fa-mobile-nav-link]').last().focus();
+      await page.keyboard.press('Tab');
+      const focusTrapped = await toggle.evaluate((element)=>document.activeElement===element);
+      await page.keyboard.press('Escape');
+      const escapeClosed = await page.evaluate(() => document.querySelector('[data-fa-menu-toggle]')?.getAttribute('aria-expanded')==='false'&&!document.body.classList.contains('fa-menu-open'));
+      await toggle.click();
+      await page.evaluate(() => document.querySelector('.fa-brand')?.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true})));
+      const outsideClosed = await page.evaluate(() => document.querySelector('[data-fa-menu-toggle]')?.getAttribute('aria-expanded')==='false'&&!document.body.classList.contains('fa-menu-open'));
+      persianMobileMenu={initial,opened,focusTrapped,escapeClosed,outsideClosed};
     }
     if (testCase.openLanguage) await page.locator('[data-language-toggle]').click();
     if (testCase.openPersianNav) await page.locator('[data-markets-nav-group]').hover();
@@ -410,13 +463,21 @@ try {
       (testCase.width <= 560 && (result.persian.heroMedia.imageHeight < 160 || result.persian.heroMedia.imageHeight > 210 || result.persian.heroMedia.visualHeight > 330 || result.persian.heroMedia.captionHeight > 120 || result.persian.heroMedia.captionRowMax > 42)) ||
       !result.persian.producerVisible || !result.persian.sectorsVisible ||
       !['/fa/sourcing/فرش-ایرانی/','/fa/sourcing/فرش-ابریشم-دستباف/','/fa/sourcing/تامین-عمده-منسوجات/'].every((path)=>result.persian.sectorPaths.includes(path)));
+    const expectedPersianMenuLabels=['صفحه اصلی','خدمات','محصولات','بازارها','درباره ما','تماس','درخواست بررسی'];
+    const expectedPersianMenuHrefs=['/fa/tamin-beynolmelali-iran/','#services','#sourcing','#markets','#about','#contact','#request-form'];
+    const badPersianMobileMenu = testCase.persian && testCase.width <= 820 && (!persianMobileMenu ||
+      !persianMobileMenu.initial.toggleVisible || persianMobileMenu.initial.expanded !== 'false' || persianMobileMenu.initial.controls !== persianMobileMenu.initial.panelId || !persianMobileMenu.initial.label ||
+      !persianMobileMenu.opened.visible || persianMobileMenu.opened.expanded !== 'true' || !persianMobileMenu.opened.bodyLocked || persianMobileMenu.opened.direction !== 'rtl' ||
+      !persianMobileMenu.opened.withinViewport || !persianMobileMenu.opened.stickyHeader || !persianMobileMenu.opened.headerClear || !persianMobileMenu.opened.focusedFirst || persianMobileMenu.opened.localeCount !== 6 ||
+      JSON.stringify(persianMobileMenu.opened.labels) !== JSON.stringify(expectedPersianMenuLabels) || JSON.stringify(persianMobileMenu.opened.hrefs) !== JSON.stringify(expectedPersianMenuHrefs) ||
+      !persianMobileMenu.opened.statuses.every((status)=>status===200) || !persianMobileMenu.focusTrapped || !persianMobileMenu.escapeClosed || !persianMobileMenu.outsideClosed);
     const badPersianNav = result.lang === 'en'
       ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/tamin-beynolmelali-iran/' ||
         result.persianNav.target !== null || result.persianNav.primary !== 'For Iranian Businesses' ||
         result.persianNav.helper !== 'Persian landing page' || (testCase.verifyPersianNav && !result.persianNav.visible)
       : result.persianNav.count !== 0;
-    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu || !bodyScrollLocked || badLayout || badLocale || badContactEmail || badPersian || badPersianNav || !persianNavWorks) {
-      failures.push(`${testCase.name}: ${JSON.stringify({...result,mobileMenu,bodyScrollLocked,persianNavWorks})}`);
+    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu || !bodyScrollLocked || badLayout || badLocale || badContactEmail || badPersian || badPersianMobileMenu || badPersianNav || !persianNavWorks) {
+      failures.push(`${testCase.name}: ${JSON.stringify({...result,mobileMenu,bodyScrollLocked,persianMobileMenu,persianNavWorks})}`);
     }
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);
     await page.close();
@@ -436,10 +497,15 @@ try {
       const page=await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
       const response=await page.goto(`http://127.0.0.1:4321${entry.path}`,{waitUntil:'domcontentloaded'});
       if(response?.status()!==200)failures.push(`global locale ${entry.lang}/${viewport.name}: HTTP ${response?.status()??'none'}`);
-      if(entry.lang!=='fa'){
-        const trigger=viewport.name==='desktop'?page.locator('[data-language-toggle]'):page.locator('[data-menu-toggle]');
+      if(entry.lang!=='fa'||viewport.name==='mobile'){
+        const trigger=entry.lang==='fa'
+          ? page.locator('[data-fa-menu-toggle]')
+          : viewport.name==='desktop'?page.locator('[data-language-toggle]'):page.locator('[data-menu-toggle]');
+        if(entry.lang==='fa')await page.waitForLoadState('networkidle');
         await trigger.focus();
         await trigger.press('Enter');
+        if(entry.lang==='fa')await page.waitForFunction(()=>document.querySelector('[data-fa-menu-toggle]')?.getAttribute('aria-expanded')==='true'&&[...document.querySelectorAll('[data-fa-locale-switcher] [data-locale-option]')].every((link)=>link.getBoundingClientRect().width>0));
+        await page.waitForTimeout(300);
       }
       const contract=await page.evaluate(({lang,targets,mobile})=>{
         const selector=lang==='fa'?'[data-locale-option]':mobile?'.mobile-locales [data-locale-option]':'#language-panel [data-locale-option]';

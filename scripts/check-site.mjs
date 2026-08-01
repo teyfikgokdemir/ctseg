@@ -299,6 +299,16 @@ for (const file of htmlFiles) {
     }
     if (/href="\/fa\/(?!tamin-beynolmelali-iran\/|sourcing\/)/.test(html)) errors.push(`${label}: nonexistent Persian internal route linked`);
     if (/data-language-toggle|class="mobile-locales"/.test(html)) errors.push(`${label}: Persian page must keep its dedicated locale chrome`);
+    const expectedPersianMobileLinks = [
+      ['/fa/tamin-beynolmelali-iran/','صفحه اصلی'],['#services','خدمات'],['#sourcing','محصولات'],['#markets','بازارها'],
+      ['#about','درباره ما'],['#contact','تماس'],['#request-form','درخواست بررسی']
+    ];
+    if (!html.includes('data-fa-menu-toggle') || !html.includes('aria-controls="fa-primary-nav"') || !html.includes('data-fa-primary-nav')) {
+      errors.push(`${label}: accessible Persian mobile navigation controls missing`);
+    }
+    for (const [href,text] of expectedPersianMobileLinks) {
+      if (!html.includes(`href="${href}"`) || !html.includes(`>${text}</a>`)) errors.push(`${label}: Persian mobile navigation link missing (${text})`);
+    }
     if (!html.includes('CTSEG Sanayi ve Ticaret Limited Şirketi') || !html.includes('Teyfik Gökdemir') ||
       !html.includes('Fevzipaşa Caddesi، فاتح، استانبول، ترکیه')) {
       errors.push(`${label}: company information block missing`);
