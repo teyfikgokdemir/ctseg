@@ -56,8 +56,6 @@ try {
     { name:'desktop-it-catalogue', path:'/it/prodotti-commerciali/', width:1440, height:1000 },
     { name:'desktop-fr-home', path:'/fr/', width:1440, height:1000 },
     { name:'desktop-fr-catalogue', path:'/fr/produits-commerciaux/', width:1440, height:1000 },
-    { name:'desktop-en-iranian-carpets', path:'/en/sourcing/iranian-carpets/', width:1440, height:1000, trade:true },
-    { name:'desktop-en-wholesale-textiles', path:'/en/sourcing/wholesale-textile-sourcing/', width:1440, height:1000, trade:true },
     { name:'tablet-tr-about', path:'/tr/hakkimizda/', width:820, height:1180 },
     { name:'tablet-tr-contact', path:'/tr/iletisim/', width:820, height:1180 },
     { name:'tablet-en-contact', path:'/en/contact/', width:820, height:1180 },
@@ -67,7 +65,6 @@ try {
     { name:'tablet-tr-process-1024', path:'/tr/nasil-calisiyoruz/', width:1024, height:900, allowLocaleFallback:true },
     { name:'tablet-en-scenarios-1024', path:'/en/representative-work-scenarios/', width:1024, height:900, allowLocaleFallback:true, gapLimit:100 },
     { name:'tablet-tr-guide-1024', path:'/tr/icgoruler/bitkisel-yag-tedarikinde-rfq-kontrol-listesi/', width:1024, height:900, allowLocaleFallback:true },
-    { name:'tablet-fa-wholesale-textiles', path:'/fa/sourcing/%D8%AA%D8%A7%D9%85%DB%8C%D9%86-%D8%B9%D9%85%D8%AF%D9%87-%D9%85%D9%86%D8%B3%D9%88%D8%AC%D8%A7%D8%AA/', width:820, height:1180, persian:true, trade:true },
     { name:'wide-tr-home', path:'/', width:1600, height:1000 },
     { name:'wide-tr-services', path:'/tr/hizmetler/', width:1600, height:1000 },
     { name:'wide-tr-markets', path:'/tr/pazarlar/', width:1600, height:1000 },
@@ -98,9 +95,6 @@ try {
     { name:'mobile-en-persian-nav', path:'/en/', width:390, height:844, openMenu:true, verifyPersianNav:true },
     { name:'mobile-fr-catalogue', path:'/fr/produits-commerciaux/', width:390, height:844 },
     { name:'mobile-de-home', path:'/de/', width:390, height:844 },
-    { name:'mobile-tr-iranian-carpets', path:'/tr/sourcing/iran-halisi/', width:390, height:844, trade:true },
-    { name:'mobile-en-silk-carpets', path:'/en/sourcing/hand-knotted-silk-carpets/', width:390, height:844, trade:true },
-    { name:'mobile-fa-iranian-carpets', path:'/fa/sourcing/%D9%81%D8%B1%D8%B4-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%DB%8C/', width:390, height:844, persian:true, trade:true },
     { name:'mobile430-tr-home', path:'/', width:430, height:932 },
     { name:'mobile430-tr-services', path:'/tr/hizmetler/', width:430, height:932 },
     { name:'mobile430-tr-markets', path:'/tr/pazarlar/', width:430, height:932 },
@@ -114,6 +108,17 @@ try {
     { name:'mobile-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:390, height:844, persian:true },
     { name:'mobile430-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:430, height:932, persian:true }
   ];
+  const sourcingLocales = ['tr','en','de','it','fr','fa'];
+  const sourcingFamilies = {
+    carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fr:'/fr/sourcing/tapis-persans/',fa:'/fa/sourcing/فرش-ایرانی/'},
+    silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fr:'/fr/sourcing/tapis-en-soie-noues-main/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/'},
+    textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fr:'/fr/sourcing/sourcing-textile-en-gros/',fa:'/fa/sourcing/تامین-عمده-منسوجات/'}
+  };
+  const sourcingAudiences = {
+    carpets:['کارگاه‌های فرش دستباف','تولیدکنندگان فرش ابریشم','تولیدکنندگان فرش ماشینی','صادرکنندگان فرش'],
+    silk:['کارگاه‌های فرش دستباف','تولیدکنندگان فرش ابریشم','تولیدکنندگان فرش ماشینی','صادرکنندگان فرش'],
+    textiles:['تولیدکنندگان پارچه','تولیدکنندگان حوله و حوله تن‌پوش','تولیدکنندگان منسوجات خانگی','تولیدکنندگان پوشاک','برندهای private label']
+  };
   const failures = [];
   const localeAtmospheres = new Map();
   for (const testCase of cases) {
@@ -140,7 +145,7 @@ try {
     await page.waitForTimeout(250);
     let mobileMenu = true;
     let bodyScrollLocked = true;
-    if (testCase.width <= 860 && !testCase.persian && !testCase.trade) {
+    if (testCase.width <= 860 && !testCase.persian) {
       await page.locator('[data-menu-toggle]').click();
       mobileMenu = await page.locator('[data-primary-nav]').isVisible();
       bodyScrollLocked = await page.evaluate(() => document.body.classList.contains('menu-open') && getComputedStyle(document.body).overflow === 'hidden');
@@ -359,14 +364,14 @@ try {
     const badContactEmail = result.contactEmail && (result.contactEmail.occurrences !== 1 || result.contactEmail.links !== 1 ||
       result.contactEmail.href !== 'mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry' ||
       result.contactEmail.buttons !== 0 || !result.contactEmail.focusVisible);
-    const badLocale = !testCase.persian && !testCase.trade && (result.localeOptions !== 5 || result.activeDesktopLocale !== 1 || (!testCase.allowLocaleFallback && !result.localeRouteMatch) || !result.desktopLocaleCodeOnly ||
+    const badLocale = !testCase.persian && (result.localeOptions !== 5 || result.activeDesktopLocale !== 1 || (!testCase.allowLocaleFallback && !result.localeRouteMatch) || !result.desktopLocaleCodeOnly ||
       (testCase.openMenu && (result.visibleMobileLocales !== 5 || result.mobilePanelHeight < testCase.height * .7)));
-    const badPersian = testCase.persian && !testCase.trade && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
+    const badPersian = testCase.persian && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
       result.persian.rootDirection !== 'rtl' || result.persian.bodyDirection !== 'rtl' || result.persian.h1s !== 1 ||
       result.persian.details !== 11 || result.persian.fields < 15 || !result.persian.labeled || !result.persian.companyVisible ||
       !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 0 ||
       !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl);
-    const badPersianNav = testCase.trade ? false : result.lang === 'en'
+    const badPersianNav = result.lang === 'en'
       ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/tamin-beynolmelali-iran/' ||
         result.persianNav.target !== null || result.persianNav.primary !== 'For Iranian Businesses' ||
         result.persianNav.helper !== 'Persian landing page' || (testCase.verifyPersianNav && !result.persianNav.visible)
@@ -377,6 +382,101 @@ try {
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);
     await page.close();
   }
+  const sourcingViewports = [
+    {name:'desktop',width:1440,height:1000},
+    {name:'mobile',width:390,height:844}
+  ];
+  let sourcingChecks = 0;
+  for (const [family,routes] of Object.entries(sourcingFamilies)) {
+    for (const lang of sourcingLocales) {
+      for (const viewport of sourcingViewports) {
+        sourcingChecks++;
+        const path = routes[lang];
+        const page = await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
+        const response = await page.goto(`http://127.0.0.1:4321${encodeURI(path)}`,{waitUntil:'networkidle'});
+        if (response?.status() !== 200) failures.push(`sourcing ${family}/${lang}/${viewport.name}: HTTP ${response?.status() ?? 'none'}`);
+        await page.addStyleTag({content:'*,*:before,*:after{animation:none!important;transition:none!important}'});
+        await page.evaluate(async()=>{
+          document.documentElement.style.scrollBehavior='auto';
+          for(let y=0;y<document.documentElement.scrollHeight;y+=window.innerHeight){window.scrollTo(0,y);await new Promise(resolve=>setTimeout(resolve,40));}
+          window.scrollTo(0,0);
+        });
+        const contract = await page.evaluate(({expectedLang,expectedPath,familyRoutes,audiences})=>{
+          const visible = (element) => {
+            if(!element)return false;
+            const box=element.getBoundingClientRect();
+            const style=getComputedStyle(element);
+            return box.width>0&&box.height>0&&style.visibility!=='hidden'&&style.display!=='none';
+          };
+          const links=[...document.querySelectorAll('[data-trade-locale]')];
+          const alternates=Object.fromEntries([...document.querySelectorAll('link[rel="alternate"][hreflang]')].map(link=>[link.hreflang,link.href]));
+          const expectedUrl=(path)=>`https://ctseg.com.tr${path}`;
+          const pathnameMatches=(url,path)=>decodeURI(new URL(url).pathname)===decodeURI(path);
+          const bodyText=document.body.innerText;
+          return {
+            htmlLang:document.documentElement.lang,
+            htmlDir:document.documentElement.dir,
+            rootDirection:getComputedStyle(document.documentElement).direction,
+            bodyDirection:getComputedStyle(document.body).direction,
+            activeLocales:links.filter(link=>link.getAttribute('aria-current')==='page').map(link=>link.dataset.tradeLocale),
+            localeCodes:links.map(link=>link.dataset.tradeLocale),
+            localeTargets:Object.fromEntries(links.map(link=>[link.dataset.tradeLocale,decodeURI(new URL(link.href).pathname)])),
+            localeTargetMatch:links.every(link=>pathnameMatches(link.href,familyRoutes[link.dataset.tradeLocale])),
+            canonical:document.querySelector('link[rel="canonical"]')?.href,
+            canonicalMatches:(()=>{const href=document.querySelector('link[rel="canonical"]')?.href;if(!href)return false;const url=new URL(href);return url.origin==='https://ctseg.com.tr'&&decodeURI(url.pathname)===decodeURI(expectedPath);})(),
+            hreflangCodes:Object.keys(alternates),
+            hreflangMatch:Object.entries(familyRoutes).every(([code,path])=>alternates[code]&&pathnameMatches(alternates[code],path)),
+            xDefaultMatches:alternates['x-default']===expectedUrl(familyRoutes.en),
+            h1s:document.querySelectorAll('h1').length,
+            headers:document.querySelectorAll('header').length,
+            footers:document.querySelectorAll('footer').length,
+            headerVisible:visible(document.querySelector('header')),
+            footerVisible:visible(document.querySelector('footer')),
+            menuToggleVisible:visible(document.querySelector('[data-trade-menu-toggle]')),
+            localeNavVisible:visible(document.querySelector('[data-trade-locale-nav]')),
+            overflow:document.documentElement.scrollWidth-window.innerWidth,
+            forbiddenPersianUi:['Skip to content','Language selection','Open language menu','CTSEG home','Submit a commercial enquiry','Related sourcing areas'].filter(text=>bodyText.includes(text)),
+            producerSection:visible(document.querySelector('[data-persian-producer-section]')),
+            producerCtas:document.querySelectorAll('[data-producer-cta]').length,
+            producerAudiences:audiences.filter(text=>bodyText.includes(text)),
+            producerHeading:bodyText.includes('برای تولیدکنندگان و صادرکنندگان ایرانی'),
+            expectedLang
+          };
+        },{expectedLang:lang,expectedPath:path,familyRoutes:routes,audiences:sourcingAudiences[family]});
+        const badDirection=lang==='fa'
+          ? contract.htmlDir!=='rtl'||contract.rootDirection!=='rtl'||contract.bodyDirection!=='rtl'
+          : contract.htmlDir!=='ltr'||contract.rootDirection!=='ltr'||contract.bodyDirection!=='ltr';
+        const badProducer=lang==='fa'
+          ? !contract.producerSection||contract.producerCtas!==5||contract.producerAudiences.length!==sourcingAudiences[family].length||!contract.producerHeading||contract.forbiddenPersianUi.length>0
+          : contract.producerSection||contract.producerCtas!==0;
+        if(viewport.name==='mobile'){
+          await page.locator('[data-trade-menu-toggle]').click();
+          const menu=await page.evaluate(()=>({
+            expanded:document.querySelector('[data-trade-menu-toggle]')?.getAttribute('aria-expanded'),
+            visible:(()=>{const el=document.querySelector('[data-trade-locale-nav]');if(!el)return false;const box=el.getBoundingClientRect();return box.width>0&&box.height>0&&getComputedStyle(el).visibility!=='hidden';})(),
+            bodyLocked:document.body.classList.contains('trade-menu-open')&&getComputedStyle(document.body).overflow==='hidden'
+          }));
+          if(menu.expanded!=='true'||!menu.visible||!menu.bodyLocked) failures.push(`sourcing ${family}/${lang}/mobile menu: ${JSON.stringify(menu)}`);
+        }
+        const switchStatuses=[];
+        for(const targetLang of sourcingLocales){
+          const switchResponse=await page.request.get(`http://127.0.0.1:4321${encodeURI(routes[targetLang])}`);
+          switchStatuses.push([targetLang,switchResponse.status()]);
+        }
+        const badSwitch=switchStatuses.some(([,status])=>status!==200);
+        if(contract.htmlLang!==lang||badDirection||contract.activeLocales.length!==1||contract.activeLocales[0]!==lang||
+          contract.localeCodes.length!==6||!sourcingLocales.every(code=>contract.localeCodes.includes(code))||!contract.localeTargetMatch||
+          !contract.canonicalMatches||!contract.hreflangMatch||!contract.xDefaultMatches||contract.h1s!==1||
+          contract.headers!==1||contract.footers!==1||!contract.headerVisible||!contract.footerVisible||contract.overflow>0||
+          (viewport.name==='desktop'&&!contract.localeNavVisible)||badProducer||badSwitch){
+          failures.push(`sourcing ${family}/${lang}/${viewport.name}: ${JSON.stringify({...contract,switchStatuses})}`);
+        }
+        console.log(`sourcing-${family}-${lang}-${viewport.name}: lang=${contract.htmlLang}, dir=${contract.rootDirection}, overflow=${contract.overflow}px, switches=${switchStatuses.map(item=>item[1]).join('/')}`);
+        await page.close();
+      }
+    }
+  }
+  if(sourcingChecks!==36) failures.push(`expected 36 sourcing viewport checks, ran ${sourcingChecks}`);
   if (localeAtmospheres.size !== 5) {
     failures.push(`locale treatments are incomplete: ${JSON.stringify(Object.fromEntries(localeAtmospheres))}`);
   }
