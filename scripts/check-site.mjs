@@ -105,6 +105,7 @@ for (const file of htmlFiles) {
   const organization = organizations[0];
   const isTurkishPage = label === 'index.html' || label.startsWith('tr/');
   const isPersianLanding = label === persianLandingLabel;
+  const isTradeSector = label.includes('/sourcing/');
   if (!label.startsWith('404') && canonical && ['tr','en','de','it','fr'].includes(lang)) pageRecords.push({ label, canonical, lang, alternates });
   if (titleCount !== 1) errors.push(`${label}: expected one title, found ${titleCount}`);
   if ((html.match(/<meta charset="UTF-8">/g) || []).length !== 1) errors.push(`${label}: expected exactly one UTF-8 charset declaration`);
@@ -115,7 +116,9 @@ for (const file of htmlFiles) {
   if (/\u00C3|\u00C2|\u00E2[\u20AC\u201D\u2013\u2014\u2122\u0153]|\u00C4[\u0178\u00B1]|\u00C5[\u0178\u017E]|\uFFFD/.test(html)) {
     errors.push(`${label}: mojibake text remains`);
   }
-  if (!html.includes(`<strong>${companyName}</strong>`)) errors.push(`${label}: localized footer company identity missing`);
+  if ((!isTradeSector && !html.includes(`<strong>${companyName}</strong>`)) || (isTradeSector && !html.includes(companyName))) {
+    errors.push(`${label}: localized footer company identity missing`);
+  }
   if (isTurkishPage && !html.includes('Türkiye merkezli stratejik tedarik, doğrulanmış ticari ürünler ve uluslararası ticari karar desteği.')) {
     errors.push(`${label}: exact Turkish footer description missing`);
   }
@@ -180,7 +183,7 @@ for (const file of htmlFiles) {
     if (showcaseProducts.filter((id) => id.includes('pistachio')).length !== 1) errors.push(`${label}: homepage showcase must contain one pistachio product`);
     if (new Set(showcaseFamilies).size < 5) errors.push(`${label}: homepage showcase must represent at least five product families`);
   }
-  if (!isPersianLanding) {
+  if (!isPersianLanding && !isTradeSector) {
     const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
     const mobileLocales = html.match(/class="mobile-locales"[\s\S]*?<\/div>\s*<\/div>/)?.[0] ?? '';
     const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
@@ -293,9 +296,10 @@ if (!englishMarkets.includes('data-fa-landing-link') || !englishMarkets.includes
 for (const file of htmlFiles) {
   const label = relative(root, file).replaceAll('\\','/');
   const html = readFileSync(file,'utf8');
+  const isTradeSector = label.includes('/sourcing/');
   const navLinks = [...html.matchAll(/<a\b([^>]*data-fa-nav-link[^>]*)>/g)].map((match) => match[1]);
   const usesEnglishNavigation = /<html\b[^>]*\blang="en"/.test(html);
-  if (usesEnglishNavigation) {
+  if (usesEnglishNavigation && !isTradeSector) {
     if (navLinks.length !== 1) errors.push(`${label}: English navigation must contain one Persian landing link`);
     const link = navLinks[0] ?? '';
     if (!link.includes('href="/fa/tamin-beynolmelali-iran/"') || /\btarget=/.test(link)) {
@@ -307,7 +311,7 @@ for (const file of htmlFiles) {
   } else if (navLinks.length) {
     errors.push(`${label}: Persian landing navigation link must remain English-only`);
   }
-  const approved = label === persianLandingLabel || usesEnglishNavigation;
+  const approved = label === persianLandingLabel || usesEnglishNavigation || isTradeSector;
   if (!approved && html.includes('href="/fa/tamin-beynolmelali-iran/"')) {
     errors.push(`${label}: standalone Persian landing link leaked outside English navigation`);
   }

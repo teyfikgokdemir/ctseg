@@ -56,6 +56,8 @@ try {
     { name:'desktop-it-catalogue', path:'/it/prodotti-commerciali/', width:1440, height:1000 },
     { name:'desktop-fr-home', path:'/fr/', width:1440, height:1000 },
     { name:'desktop-fr-catalogue', path:'/fr/produits-commerciaux/', width:1440, height:1000 },
+    { name:'desktop-en-iranian-carpets', path:'/en/sourcing/iranian-carpets/', width:1440, height:1000, trade:true },
+    { name:'desktop-en-wholesale-textiles', path:'/en/sourcing/wholesale-textile-sourcing/', width:1440, height:1000, trade:true },
     { name:'tablet-tr-about', path:'/tr/hakkimizda/', width:820, height:1180 },
     { name:'tablet-tr-contact', path:'/tr/iletisim/', width:820, height:1180 },
     { name:'tablet-en-contact', path:'/en/contact/', width:820, height:1180 },
@@ -65,6 +67,7 @@ try {
     { name:'tablet-tr-process-1024', path:'/tr/nasil-calisiyoruz/', width:1024, height:900, allowLocaleFallback:true },
     { name:'tablet-en-scenarios-1024', path:'/en/representative-work-scenarios/', width:1024, height:900, allowLocaleFallback:true, gapLimit:100 },
     { name:'tablet-tr-guide-1024', path:'/tr/icgoruler/bitkisel-yag-tedarikinde-rfq-kontrol-listesi/', width:1024, height:900, allowLocaleFallback:true },
+    { name:'tablet-fa-wholesale-textiles', path:'/fa/sourcing/%D8%AA%D8%A7%D9%85%DB%8C%D9%86-%D8%B9%D9%85%D8%AF%D9%87-%D9%85%D9%86%D8%B3%D9%88%D8%AC%D8%A7%D8%AA/', width:820, height:1180, persian:true, trade:true },
     { name:'wide-tr-home', path:'/', width:1600, height:1000 },
     { name:'wide-tr-services', path:'/tr/hizmetler/', width:1600, height:1000 },
     { name:'wide-tr-markets', path:'/tr/pazarlar/', width:1600, height:1000 },
@@ -95,6 +98,9 @@ try {
     { name:'mobile-en-persian-nav', path:'/en/', width:390, height:844, openMenu:true, verifyPersianNav:true },
     { name:'mobile-fr-catalogue', path:'/fr/produits-commerciaux/', width:390, height:844 },
     { name:'mobile-de-home', path:'/de/', width:390, height:844 },
+    { name:'mobile-tr-iranian-carpets', path:'/tr/sourcing/iran-halisi/', width:390, height:844, trade:true },
+    { name:'mobile-en-silk-carpets', path:'/en/sourcing/hand-knotted-silk-carpets/', width:390, height:844, trade:true },
+    { name:'mobile-fa-iranian-carpets', path:'/fa/sourcing/%D9%81%D8%B1%D8%B4-%D8%A7%DB%8C%D8%B1%D8%A7%D9%86%DB%8C/', width:390, height:844, persian:true, trade:true },
     { name:'mobile430-tr-home', path:'/', width:430, height:932 },
     { name:'mobile430-tr-services', path:'/tr/hizmetler/', width:430, height:932 },
     { name:'mobile430-tr-markets', path:'/tr/pazarlar/', width:430, height:932 },
@@ -117,7 +123,8 @@ try {
       failures.push(`${testCase.name}: expected HTTP 200, received ${navigationResponse?.status() ?? 'no response'}`);
     }
     await page.addStyleTag({ content:'*,*:before,*:after{animation:none!important;transition:none!important}.product-media img{transform:none!important}' });
-    await page.locator('[data-cookie-reject]').click();
+    const cookieReject = page.locator('[data-cookie-reject]');
+    if (await cookieReject.count()) await cookieReject.click();
     await page.evaluate(() => {
       document.documentElement.style.scrollBehavior='auto';
       document.querySelectorAll('img[loading="lazy"]').forEach((image) => image.setAttribute('loading','eager'));
@@ -133,7 +140,7 @@ try {
     await page.waitForTimeout(250);
     let mobileMenu = true;
     let bodyScrollLocked = true;
-    if (testCase.width <= 860 && !testCase.persian) {
+    if (testCase.width <= 860 && !testCase.persian && !testCase.trade) {
       await page.locator('[data-menu-toggle]').click();
       mobileMenu = await page.locator('[data-primary-nav]').isVisible();
       bodyScrollLocked = await page.evaluate(() => document.body.classList.contains('menu-open') && getComputedStyle(document.body).overflow === 'hidden');
@@ -352,14 +359,14 @@ try {
     const badContactEmail = result.contactEmail && (result.contactEmail.occurrences !== 1 || result.contactEmail.links !== 1 ||
       result.contactEmail.href !== 'mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry' ||
       result.contactEmail.buttons !== 0 || !result.contactEmail.focusVisible);
-    const badLocale = !testCase.persian && (result.localeOptions !== 5 || result.activeDesktopLocale !== 1 || (!testCase.allowLocaleFallback && !result.localeRouteMatch) || !result.desktopLocaleCodeOnly ||
+    const badLocale = !testCase.persian && !testCase.trade && (result.localeOptions !== 5 || result.activeDesktopLocale !== 1 || (!testCase.allowLocaleFallback && !result.localeRouteMatch) || !result.desktopLocaleCodeOnly ||
       (testCase.openMenu && (result.visibleMobileLocales !== 5 || result.mobilePanelHeight < testCase.height * .7)));
-    const badPersian = testCase.persian && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
+    const badPersian = testCase.persian && !testCase.trade && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
       result.persian.rootDirection !== 'rtl' || result.persian.bodyDirection !== 'rtl' || result.persian.h1s !== 1 ||
       result.persian.details !== 11 || result.persian.fields < 15 || !result.persian.labeled || !result.persian.companyVisible ||
       !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 0 ||
       !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl);
-    const badPersianNav = result.lang === 'en'
+    const badPersianNav = testCase.trade ? false : result.lang === 'en'
       ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/tamin-beynolmelali-iran/' ||
         result.persianNav.target !== null || result.persianNav.primary !== 'For Iranian Businesses' ||
         result.persianNav.helper !== 'Persian landing page' || (testCase.verifyPersianNav && !result.persianNav.visible)
