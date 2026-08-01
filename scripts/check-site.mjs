@@ -256,10 +256,12 @@ for (const file of htmlFiles) {
       if ((code === 'fa') !== tag.includes('aria-current="page"')) errors.push(`${label}: Persian locale active state is incorrect for ${code}`);
     }
     if ((html.match(/<h1\b/g) || []).length !== 1) errors.push(`${label}: expected one Persian H1`);
-    if ((html.match(/<details\b/g) || []).length !== 11) errors.push(`${label}: expected eleven visible Persian FAQs`);
+    if ((html.match(/<details\b/g) || []).length !== 8) errors.push(`${label}: expected eight visible Persian FAQs`);
     for (const type of ['WebPage','Service','FAQPage','BreadcrumbList']) {
       if (!parsedSchemas.some((schema) => schema?.['@type'] === type)) errors.push(`${label}: ${type} schema missing`);
     }
+    const persianFaqSchema = parsedSchemas.find((schema) => schema?.['@type'] === 'FAQPage');
+    if (!Array.isArray(persianFaqSchema?.mainEntity) || persianFaqSchema.mainEntity.length !== 8) errors.push(`${label}: FAQ schema must contain exactly eight questions`);
     if (!html.includes('data-fa-sourcing-form') || !html.includes('name="website"') || !html.includes('name="privacyConsent"') ||
       !html.includes('id="fa-form-errors" role="alert"') || !html.includes('id="fa-form-fallback"')) {
       errors.push(`${label}: accessible secure-fallback form controls missing`);
@@ -291,9 +293,15 @@ for (const file of htmlFiles) {
     if (!html.includes('اما هنوز برای CTSEG ارسال نشده است') || !html.includes('Generated locally; not yet submitted.')) {
       errors.push(`${label}: transparent no-backend fallback disclosure missing`);
     }
-    for (const forbidden of ['تحریم‌ها را دور می‌زنیم','هر محصولی را به ایران ارسال می‌کنیم','پرداخت تضمینی','انتقال بانکی بدون مشکل','تحویل در هر شرایط','تضمین گمرک','تضمین مجوز واردات']) {
-      if (html.includes(forbidden)) errors.push(`${label}: prohibited commercial claim remains`);
+    const sensitivePersianPhrases = ['پرداخت از طریق CTSEG','بانک‌ها','کانال‌های مجاز','مسیر پرداخت','تشریفات گمرکی','کارگزار گمرکی','مجوز واردات','ارسال قانونی','حواله','انتقال وجه','انتقال بانکی','کانال پرداخت','تضمین بانکی','تحریم'];
+    for (const forbidden of sensitivePersianPhrases) {
+      if (html.includes(forbidden)) errors.push(`${label}: sensitive Persian trade phrase remains (${forbidden})`);
     }
+    for (const removedQuestion of ['آیا پرداخت از طریق CTSEG انجام می‌شود؟','آیا هر محصولی را می‌توان به ایران ارسال کرد؟','آیا CTSEG حمل‌ونقل و تشریفات گمرکی را انجام می‌دهد؟']) {
+      if (html.includes(removedQuestion) || persianFaqSchema?.mainEntity?.some((item) => item?.name === removedQuestion)) errors.push(`${label}: removed Persian FAQ remains (${removedQuestion})`);
+    }
+    const generalComplianceNote = 'هر درخواست تجاری بر اساس نوع کالا، طرف‌های معامله و الزامات جاری به‌صورت جداگانه ارزیابی می‌شود.';
+    if (html.split(generalComplianceNote).length - 1 !== 1) errors.push(`${label}: neutral Persian compliance note must appear exactly once`);
     if (/(?:Ana Sayfa|Hizmetler|Hakkımızda|İletişim|Teklif İste|Tüm hakları saklıdır)/.test(html)) {
       errors.push(`${label}: Turkish interface placeholder remains in Persian content`);
     }
