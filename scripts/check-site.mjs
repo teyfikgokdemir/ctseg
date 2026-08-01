@@ -267,8 +267,23 @@ for (const file of htmlFiles) {
     const fields = [...html.matchAll(/<(?:input|select|textarea)\b[^>]*\bid="([^"]+)"/g)]
       .map((match) => match[1]).filter((id) => id !== 'website');
     if (!fields.every((id) => new RegExp(`<label[^>]+for="${id}"`).test(html))) errors.push(`${label}: every user-facing form field must have an explicit label`);
-    if (!html.includes('form.dataset.startedAt=String(Date.now())') || !html.includes('10*1024*1024')) {
-      errors.push(`${label}: client-side minimum-time or upload-size guard missing`);
+    const expectedFields = ['full-name','company-name','business-email','phone','country-city','product-group','target-market','short-message','privacy-consent'];
+    if (fields.length !== expectedFields.length || !expectedFields.every((id) => fields.includes(id))) {
+      errors.push(`${label}: first-contact form must contain exactly the eight approved fields plus privacy consent`);
+    }
+    for (const removedName of ['jobTitle','quantity','specifications','packaging','deliveryCity','targetDate','acceptedOrigins','documents','incoterm','additionalNotes','rfqFile']) {
+      if (html.includes(`name="${removedName}"`)) errors.push(`${label}: deferred form field remains (${removedName})`);
+    }
+    if (!html.includes('form.dataset.startedAt=String(Date.now())')) {
+      errors.push(`${label}: client-side minimum-time guard missing`);
+    }
+    for (const requiredCopy of ['برای تولیدکنندگان و صادرکنندگان ایرانی','فرش ایرانی و منسوجات عمده','ارسال محصول برای ارزیابی اولیه','اطلاعات تکمیلی مانند ظرفیت، قیمت، حداقل سفارش، بسته‌بندی و اسناد در مرحله ارزیابی بعدی درخواست خواهد شد.']) {
+      if (!html.includes(requiredCopy)) errors.push(`${label}: strengthened Persian entry copy missing (${requiredCopy})`);
+    }
+    const expectedSectorLinks = ['/fa/sourcing/فرش-ایرانی/','/fa/sourcing/فرش-ابریشم-دستباف/','/fa/sourcing/تامین-عمده-منسوجات/'];
+    for (const href of expectedSectorLinks) if (!html.includes(`href="${href}"`)) errors.push(`${label}: Persian entry sector link missing (${href})`);
+    if (!html.includes('/images/ctseg-iranian-carpets-editorial.webp') || !html.includes('/images/ctseg-wholesale-textiles-editorial.webp')) {
+      errors.push(`${label}: Persian entry editorial visuals missing`);
     }
     for (const eventName of ['fa_landing_view','fa_form_start','fa_form_submit_attempt','fa_form_submission_success','fa_email_cta_click','fa_english_link_click']) {
       if (!html.includes(eventName)) errors.push(`${label}: analytics event ${eventName} missing`);
@@ -282,7 +297,7 @@ for (const file of htmlFiles) {
     if (/(?:Ana Sayfa|Hizmetler|Hakkımızda|İletişim|Teklif İste|Tüm hakları saklıdır)/.test(html)) {
       errors.push(`${label}: Turkish interface placeholder remains in Persian content`);
     }
-    if (/href="\/fa\/(?!tamin-beynolmelali-iran\/)/.test(html)) errors.push(`${label}: nonexistent Persian internal route linked`);
+    if (/href="\/fa\/(?!tamin-beynolmelali-iran\/|sourcing\/)/.test(html)) errors.push(`${label}: nonexistent Persian internal route linked`);
     if (/data-language-toggle|class="mobile-locales"/.test(html)) errors.push(`${label}: Persian page must keep its dedicated locale chrome`);
     if (!html.includes('CTSEG Sanayi ve Ticaret Limited Şirketi') || !html.includes('Teyfik Gökdemir') ||
       !html.includes('Fevzipaşa Caddesi، فاتح، استانبول، ترکیه')) {
