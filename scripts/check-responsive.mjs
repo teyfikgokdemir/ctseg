@@ -106,6 +106,7 @@ try {
     { name:'desktop-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:1440, height:1000, persian:true },
     { name:'tablet-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:820, height:1180, persian:true },
     { name:'mobile320-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:320, height:800, persian:true },
+    { name:'mobile360-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:360, height:800, persian:true },
     { name:'mobile-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:390, height:844, persian:true },
     { name:'mobile430-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:430, height:932, persian:true }
   ];
@@ -225,6 +226,20 @@ try {
         if(!form)return null;
         const fields=[...form.querySelectorAll('input[id],select[id],textarea[id]')].filter((field)=>field.id!=='website');
         const company=document.querySelector('.fa-company-facts');
+        const heroVisual=document.querySelector('.fa-hero-visual');
+        const heroImage=heroVisual?.querySelector('img');
+        const heroCaption=heroVisual?.querySelector('figcaption');
+        const chips=[...document.querySelectorAll('.fa-chip-list li')];
+        const rgb=(value)=>value.match(/[\d.]+/g)?.slice(0,3).map(Number) ?? [0,0,0];
+        const luminance=(value)=>rgb(value).map((channel)=>{
+          const normalized=channel/255;
+          return normalized<=.04045?normalized/12.92:((normalized+.055)/1.055)**2.4;
+        }).reduce((sum,channel,index)=>sum+channel*[.2126,.7152,.0722][index],0);
+        const contrast=(foreground,background)=>{
+          const lighter=Math.max(luminance(foreground),luminance(background));
+          const darker=Math.min(luminance(foreground),luminance(background));
+          return (lighter+.05)/(darker+.05);
+        };
         const rootStyle=getComputedStyle(document.documentElement);
         const bodyStyle=getComputedStyle(document.body);
         return {
@@ -247,6 +262,17 @@ try {
           emailLtr:getComputedStyle(document.querySelector('.fa-contact-box a')).direction==='ltr',
           brandLtr:getComputedStyle(document.querySelector('.fa-brand')).direction==='ltr',
           breadcrumbRtl:getComputedStyle(document.querySelector('.fa-hero nav')).direction==='rtl',
+          heroMedia:{
+            imageNaturalWidth:heroImage?.naturalWidth ?? 0,
+            imageNaturalHeight:heroImage?.naturalHeight ?? 0,
+            imageHeight:heroImage?.getBoundingClientRect().height ?? 0,
+            visualHeight:heroVisual?.getBoundingClientRect().height ?? 0,
+            captionHeight:heroCaption?.getBoundingClientRect().height ?? 0,
+            captionRowMax:Math.max(0,...[...heroCaption?.querySelectorAll('span') ?? []].map((span)=>span.getBoundingClientRect().height)),
+            objectFit:heroImage ? getComputedStyle(heroImage).objectFit : null
+          },
+          chipCount:chips.length,
+          chipContrastMin:Math.min(...chips.map((chip)=>contrast(getComputedStyle(chip).color,getComputedStyle(chip.closest('.fa-category')).backgroundColor))),
           producerVisible:Boolean(document.querySelector('[data-persian-producer-entry]')?.getBoundingClientRect().height),
           sectorsVisible:Boolean(document.querySelector('[data-carpet-textile-entry]')?.getBoundingClientRect().height),
           sectorPaths:[...document.querySelectorAll('[data-carpet-textile-entry] .fa-sector-link')].map((link)=>decodeURI(new URL(link.href).pathname))
@@ -379,7 +405,10 @@ try {
       result.persian.details !== 11 || result.persian.fields !== 9 || !['full-name','company-name','business-email','phone','country-city','product-group','target-market','short-message','privacy-consent'].every((id)=>result.persian.fieldIds.includes(id)) || !result.persian.labeled || !result.persian.companyVisible ||
       !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 6 || result.persian.activeLocale !== 'fa' ||
       !['tr','en','de','it','fr','fa'].every((code)=>result.persian.localePaths[code]) ||
-      !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl || !result.persian.producerVisible || !result.persian.sectorsVisible ||
+      !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl || result.persian.chipCount < 1 || result.persian.chipContrastMin < 4.5 ||
+      result.persian.heroMedia.imageNaturalWidth < 1 || result.persian.heroMedia.imageNaturalHeight < 1 || result.persian.heroMedia.objectFit !== 'cover' ||
+      (testCase.width <= 560 && (result.persian.heroMedia.imageHeight < 160 || result.persian.heroMedia.imageHeight > 210 || result.persian.heroMedia.visualHeight > 330 || result.persian.heroMedia.captionHeight > 120 || result.persian.heroMedia.captionRowMax > 42)) ||
+      !result.persian.producerVisible || !result.persian.sectorsVisible ||
       !['/fa/sourcing/فرش-ایرانی/','/fa/sourcing/فرش-ابریشم-دستباف/','/fa/sourcing/تامین-عمده-منسوجات/'].every((path)=>result.persian.sectorPaths.includes(path)));
     const badPersianNav = result.lang === 'en'
       ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/tamin-beynolmelali-iran/' ||
