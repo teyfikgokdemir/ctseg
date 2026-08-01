@@ -2,13 +2,16 @@
 import ResponsiveImage from '../../components/ResponsiveImage.astro';
 import { company } from '../../data/site';
 import { persianAudiences, persianCategories, persianFaqs, persianProcess, persianServices } from '../../data/persian-landing';
-import { FEATURE_IMAGE_WIDTHS, HERO_IMAGE, LOGO_IMAGE, generatedImageSrc, generatedImageSrcset } from '../../lib/responsive-images';
+import { FEATURE_IMAGE_WIDTHS, LOGO_IMAGE, generatedImageSrc, generatedImageSrcset } from '../../lib/responsive-images';
+import { homeTradeVisualKeys, localizedTradeVisual } from '../../data/trade-visuals';
 import '../../styles/persian-landing.css';
 
 const canonical = 'https://ctseg.com.tr/fa/';
 const title = 'تطبیق تجاری و توسعه بازار بین‌المللی | CTSEG';
 const description = 'CTSEG خریداران ایرانی را به تأمین‌کنندگان قابل‌بررسی و تولیدکنندگان را به خریداران و بازارهای مناسب بین‌المللی در حوزه‌های غذایی، صنعتی، فرش و منسوجات متصل می‌کند.';
-const socialImage = 'https://ctseg.com.tr/images/ctseg-global-trade-hero-premium.webp';
+const heroVisual = localizedTradeVisual('global-trade-hero','fa');
+const sectorVisuals = homeTradeVisualKeys.map((key)=>localizedTradeVisual(key,'fa'));
+const socialImage = `https://ctseg.com.tr${heroVisual.source}`;
 const organization = {
   '@context':'https://schema.org',
   '@type':'Organization',
@@ -76,7 +79,7 @@ const breadcrumb = {
   ]
 };
 const schemas = [organization, website, webpage, service, faqSchema, breadcrumb];
-const heroSrcset = generatedImageSrcset(HERO_IMAGE, FEATURE_IMAGE_WIDTHS);
+const heroSrcset = generatedImageSrcset(heroVisual.source, FEATURE_IMAGE_WIDTHS);
 const localeLinks = [
   ['tr','/'],
   ['en','/en/'],
@@ -100,7 +103,7 @@ const localeLinks = [
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" as="image" href={generatedImageSrc(HERO_IMAGE,1280)} imagesrcset={heroSrcset} imagesizes="(max-width:820px) calc(100vw - 34px), min(43vw,600px)" fetchpriority="high" />
+    <link rel="preload" as="image" href={generatedImageSrc(heroVisual.source,1280)} imagesrcset={heroSrcset} imagesizes="(max-width:820px) calc(100vw - 34px), min(43vw,600px)" fetchpriority="high" />
     <meta name="theme-color" content="#080b11" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -174,7 +177,7 @@ const localeLinks = [
               </div>
             </div>
             <figure class="fa-hero-visual">
-              <ResponsiveImage src={HERO_IMAGE} widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:820px) calc(100vw - 34px), min(43vw,600px)" width={1536} height={1024} alt="هماهنگی زنجیره تأمین و تجارت بین‌المللی" loading="eager" fetchpriority="high" decoding="async" />
+              <ResponsiveImage src={heroVisual.source} widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:820px) calc(100vw - 34px), min(43vw,600px)" width={heroVisual.width} height={heroVisual.height} alt={heroVisual.altText} focalPosition={heroVisual.focalPosition} visualKey={heroVisual.key} loading="eager" fetchpriority="high" decoding="async" />
               <figcaption>
                 <span>تحقیق تولیدکننده</span>
                 <span>مقایسه پیشنهادها</span>
@@ -193,19 +196,19 @@ const localeLinks = [
           </div>
           <div class="fa-sector-grid">
             <article class="fa-sector-card" data-sector-card="food-oils">
-              <ResponsiveImage src="/images/ctseg-vegetable-oils-food-editorial.webp" widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:820px) calc(100vw - 34px), (max-width:1100px) 44vw, 560px" width={1536} height={1024} alt="نمای تحریریه‌ای از روغن گیاهی و مواد اولیه غذایی" loading="lazy" decoding="async" />
+              <ResponsiveImage src={sectorVisuals[0].source} widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:820px) calc(100vw - 34px), (max-width:1100px) 44vw, 560px" width={sectorVisuals[0].width} height={sectorVisuals[0].height} alt={sectorVisuals[0].altText} focalPosition={sectorVisuals[0].focalPosition} visualKey={sectorVisuals[0].key} loading="lazy" decoding="async" />
               <div><span class="fa-sector-number" dir="ltr">01</span><h3>روغن‌های گیاهی و کالاهای غذایی</h3><p>روغن آفتابگردان، روغن ذرت و سویا، کالاهای غذایی پایه و مواد اولیه صنایع غذایی؛ با بررسی محصول، تولیدکننده، بسته‌بندی، مقدار و پیشنهادها برای هر درخواست.</p><a class="fa-sector-link" href="#request-form" data-sector-cta>بررسی تأمین روغن و مواد غذایی <bdi dir="ltr" aria-hidden="true">↗</bdi></a></div>
             </article>
             <article class="fa-sector-card" data-sector-card="nuts-dried-fruit">
-              <ResponsiveImage src="/images/ctseg-mixed-nuts-premium.webp" widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:820px) calc(100vw - 34px), (max-width:1100px) 44vw, 560px" width={1536} height={1024} alt="نمای تحریریه‌ای از خشکبار، خرما و میوه‌های خشک" loading="lazy" decoding="async" />
+              <ResponsiveImage src={sectorVisuals[1].source} widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:820px) calc(100vw - 34px), (max-width:1100px) 44vw, 560px" width={sectorVisuals[1].width} height={sectorVisuals[1].height} alt={sectorVisuals[1].altText} focalPosition={sectorVisuals[1].focalPosition} visualKey={sectorVisuals[1].key} loading="lazy" decoding="async" />
               <div><span class="fa-sector-number" dir="ltr">02</span><h3>خشکبار، خرما و میوه‌های خشک</h3><p>پسته اکبری، کله‌قوچی، فندقی و احمدآقایی؛ خرمای مضافتی، سایر و زاهدی؛ کشمش، زعفران، زرشک، توت خشک، بادام و گردو برای ارزیابی بازار و ارتباط میان خریدار و تولیدکننده.</p><a class="fa-sector-link" href="#request-form" data-sector-cta>بررسی بازار خشکبار <bdi dir="ltr" aria-hidden="true">↗</bdi></a></div>
             </article>
             <article class="fa-sector-card" data-sector-card="carpets">
-              <ResponsiveImage src="/images/ctseg-iranian-carpets-editorial.webp" widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:820px) calc(100vw - 34px), (max-width:1100px) 44vw, 560px" width={1536} height={1024} alt="نمای تحریریه‌ای از فرش ایرانی و فرش ابریشم دستباف" loading="lazy" decoding="async" />
+              <ResponsiveImage src={sectorVisuals[2].source} widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:820px) calc(100vw - 34px), (max-width:1100px) 44vw, 560px" width={sectorVisuals[2].width} height={sectorVisuals[2].height} alt={sectorVisuals[2].altText} focalPosition={sectorVisuals[2].focalPosition} visualKey={sectorVisuals[2].key} loading="lazy" decoding="async" />
               <div><span class="fa-sector-number" dir="ltr">03</span><h3>فرش ایرانی و فرش ابریشم دستباف</h3><p>فرش دستباف، ابریشم، پشم، پشم‌وابریشم و ماشینی، کناره، قالیچه، ابعاد سفارشی و تأمین پروژه‌ای؛ با بررسی اصالت، مشخصات و توان اجرا.</p><a class="fa-sector-specialty" href="/fa/sourcing/فرش-ابریشم-دستباف/">حوزه تخصصی فرش ابریشم دستباف</a><a class="fa-sector-link" href="/fa/sourcing/فرش-ایرانی/" data-sector-cta>بررسی بازار فرش <bdi dir="ltr" aria-hidden="true">↗</bdi></a></div>
             </article>
             <article class="fa-sector-card" data-sector-card="textiles-inputs">
-              <ResponsiveImage src="/images/ctseg-wholesale-textiles-editorial.webp" widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:820px) calc(100vw - 34px), (max-width:1100px) 44vw, 560px" width={1536} height={1024} alt="نمای تحریریه‌ای از منسوجات، بسته‌بندی و نهاده‌های تولید" loading="lazy" decoding="async" />
+              <ResponsiveImage src={sectorVisuals[3].source} widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:820px) calc(100vw - 34px), (max-width:1100px) 44vw, 560px" width={sectorVisuals[3].width} height={sectorVisuals[3].height} alt={sectorVisuals[3].altText} focalPosition={sectorVisuals[3].focalPosition} visualKey={sectorVisuals[3].key} loading="lazy" decoding="async" />
               <div><span class="fa-sector-number" dir="ltr">04</span><h3>منسوجات، بسته‌بندی و نهاده‌های تولید</h3><p>منسوجات عمده و خانگی، بسته‌بندی PET و فلزی، برچسب، کارتن، مواد اولیه تولید و ورودی‌های فنی؛ با بررسی مشخصات، نمونه، کیفیت و پیشنهادها.</p><a class="fa-sector-link" href="/fa/sourcing/تامین-عمده-منسوجات/" data-sector-cta>بررسی تأمین منسوجات و نهاده‌ها <bdi dir="ltr" aria-hidden="true">↗</bdi></a></div>
             </article>
           </div>

@@ -3,14 +3,15 @@ import { generatedImageSrc, generatedImageSrcset } from '../lib/responsive-image
 
 const {
   src, widths, sizes, width, height, alt='', loading='lazy', fetchpriority='auto',
-  decoding='async', class:className, style
+  decoding='async', class:className, style, focalPosition, visualKey
 } = Astro.props as {
   src:string; widths:readonly number[]; sizes:string; width:number; height:number; alt?:string;
   loading?:'eager'|'lazy'; fetchpriority?:'high'|'low'|'auto'; decoding?:'sync'|'async'|'auto';
-  class?:string; style?:string;
+  class?:string; style?:string; focalPosition?:string; visualKey?:string;
 };
 const availableWidths = widths.filter((candidate) => candidate <= width);
 const fallbackWidth = availableWidths.at(-1) ?? widths[0];
+const imageStyle = [focalPosition ? `object-position:${focalPosition}` : '',style].filter(Boolean).join(';');
 ---
 <img
   src={generatedImageSrc(src,fallbackWidth)}
@@ -22,6 +23,7 @@ const fallbackWidth = availableWidths.at(-1) ?? widths[0];
   loading={loading}
   fetchpriority={fetchpriority}
   decoding={decoding}
+  data-trade-visual={visualKey}
   class={className}
-  style={style}
+  style={imageStyle || undefined}
 />

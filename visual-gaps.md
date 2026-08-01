@@ -1,0 +1,20 @@
+# CTSEG visual gaps
+
+Only licensed, source-verifiable editorial photography should fill these gaps. No listed image implies inventory, origin, capacity, or service-delivery guarantees.
+
+| Required visual | Page | Intended subject | Recommended aspect ratio | Minimum resolution | Suggested stock search phrase | Licensing requirement | Alt-text intent | Priority |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Commercial coordination hero and Open Graph crop | Six localized homepages and social sharing | Real product samples and documents being reviewed in a professional B2B setting; no staged handshake or branding | 3:2 master plus safe 1200×630 crop | 2400×1600 master | `commercial product sample review meeting` | Worldwide commercial web and social use; perpetual; model and property releases where applicable | Describe the visible sample-and-document review without claiming a CTSEG facility | Critical |
+| Buyer-side supplier assessment | Six localized homepages | Buyer specification, neutral samples and supplier comparison notes | 4:3 | 1600×1200 | `B2B supplier sample quality assessment documents` | Worldwide commercial web use; perpetual; model release if people are identifiable | Describe a buyer-side commercial sample assessment | High |
+| Producer market-readiness review | Six localized homepages | Producer capacity, specification sheet and packaging-readiness review | 4:3 | 1600×1200 | `manufacturer export readiness product specification review` | Worldwide commercial web use; perpetual; model and property releases | Describe production-readiness information under review | High |
+| Rice and grain quality assessment | Homepage sector support and future relevant sourcing content | Close-up rice or grain samples, grading or laboratory-style quality review | 3:2 | 1800×1200 | `commercial rice quality inspection close up` | Worldwide commercial web use; perpetual; identifiable origin must be documented before mentioning it | Describe only the visible rice or grain quality review | High |
+| Packaging and production inputs | Homepage sector card | PET, metal, carton and label samples arranged for technical comparison | 3:2 | 1800×1200 | `industrial packaging samples B2B` | Worldwide commercial web use; perpetual; trademarks absent or cleared | Describe neutral packaging samples being compared | Critical |
+| Industrial and project sourcing | Homepage support and future relevant sourcing content | Technical component, drawing and specification review in a real production context | 3:2 | 1800×1200 | `engineering component technical documentation review` | Worldwide commercial web use; perpetual; property and model releases as required | Describe technical components and documentation under review without supply guarantees | Medium |
+| Carpet weave and silk detail | Iranian carpet and hand-knotted silk carpet sourcing pages | Macro weave, knot and fibre inspection with neutral tools | 3:2 | 1800×1200 | `hand knotted silk carpet weave quality inspection` | Worldwide commercial web use; perpetual; provenance permission for identifiable work | Describe visible weave and material inspection without asserting origin | High |
+| Textile production and quality review | Wholesale textile sourcing page | Fabric swatches and textile quality inspection in a production setting | 3:2 | 1800×1200 | `textile fabric quality inspection factory` | Worldwide commercial web use; perpetual; model/property releases if applicable | Describe textile samples and visible quality checks | High |
+
+## Current intentional limitations
+
+- The existing global trade hero remains a temporary, hero-only asset so no empty or fabricated visual is introduced. It should be replaced by the critical commercial-coordination asset above.
+- The current textile visual accurately represents textile samples, but it does not independently prove packaging or industrial-input expertise. Its alt text remains limited to what is visible.
+- Specialist sourcing pages retain one verified sector hero each. Additional support and technical-detail imagery is deferred until the corresponding licensed assets are available.
