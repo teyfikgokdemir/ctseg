@@ -57,6 +57,16 @@ const copy = contactCopy[lang];
     outline:3px solid #a95638;
     outline-offset:3px;
   }
+  .floating-actions .floating-whatsapp{
+    background:#25d366!important;
+    border-color:#1fb85a!important;
+    color:#fff!important;
+    box-shadow:0 10px 28px rgba(37,211,102,.3)!important;
+  }
+  .floating-actions .floating-whatsapp:hover{
+    background:#1fbd5b!important;
+    border-color:#199c4b!important;
+  }
   .floating-actions svg{
     width:23px;
     height:23px;
@@ -66,7 +76,7 @@ const copy = contactCopy[lang];
     stroke-linecap:round;
     stroke-linejoin:round;
   }
-  .floating-actions .floating-whatsapp svg path:first-child{fill:currentColor;fill-opacity:.08}
+  .floating-actions .floating-whatsapp svg path:first-child{fill:currentColor;fill-opacity:.12}
   .floating-actions .back-to-top{
     opacity:0;
     visibility:hidden;
@@ -104,7 +114,7 @@ const copy = contactCopy[lang];
       if(actions.dataset.enhanced)return;actions.dataset.enhanced='true';
       const top=actions.querySelector('[data-back-to-top]');
       const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-      const update=()=>{const visible=scrollY>480;top.classList.toggle('visible',visible);top.setAttribute('aria-hidden',String(!visible));top.tabIndex=visible?0:-1};
+      const update=()=>{const visible=scrollY>180;top.classList.toggle('visible',visible);top.setAttribute('aria-hidden',String(!visible));top.tabIndex=visible?0:-1};
       update();addEventListener('scroll',update,{passive:true});
       top.addEventListener('click',()=>scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'}));
 
