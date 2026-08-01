@@ -181,6 +181,7 @@ try {
       }).length
       ,localeRouteMatch:[...document.querySelectorAll('[data-locale-option]')].every((link) => {
         const code=link.getAttribute('hreflang');
+        if(code==='fa')return new URL(link.href).pathname==='/fa/tamin-beynolmelali-iran/';
         const alternate=document.querySelector(`link[rel="alternate"][hreflang="${code}"]`);
         return alternate && new URL(link.href).pathname === new URL(alternate.href).pathname;
       })
@@ -238,6 +239,8 @@ try {
           headerVisible:Boolean(document.querySelector('.fa-header')?.getBoundingClientRect().height),
           footerVisible:Boolean(document.querySelector('.fa-footer')?.getBoundingClientRect().height),
           globalLocaleOptions:document.querySelectorAll('[data-locale-option]').length,
+          activeLocale:document.querySelector('[data-locale-option][aria-current="page"]')?.getAttribute('hreflang') ?? null,
+          localePaths:Object.fromEntries([...document.querySelectorAll('[data-locale-option]')].map((link)=>[link.getAttribute('hreflang'),new URL(link.href).pathname])),
           heroStatic:Boolean(document.querySelector('.fa-hero h1')?.textContent?.trim()),
           emailLtr:getComputedStyle(document.querySelector('.fa-contact-box a')).direction==='ltr',
           brandLtr:getComputedStyle(document.querySelector('.fa-brand')).direction==='ltr',
@@ -364,12 +367,13 @@ try {
     const badContactEmail = result.contactEmail && (result.contactEmail.occurrences !== 1 || result.contactEmail.links !== 1 ||
       result.contactEmail.href !== 'mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry' ||
       result.contactEmail.buttons !== 0 || !result.contactEmail.focusVisible);
-    const badLocale = !testCase.persian && (result.localeOptions !== 5 || result.activeDesktopLocale !== 1 || (!testCase.allowLocaleFallback && !result.localeRouteMatch) || !result.desktopLocaleCodeOnly ||
-      (testCase.openMenu && (result.visibleMobileLocales !== 5 || result.mobilePanelHeight < testCase.height * .7)));
+    const badLocale = !testCase.persian && (result.localeOptions !== 6 || result.activeDesktopLocale !== 1 || (!testCase.allowLocaleFallback && !result.localeRouteMatch) || !result.desktopLocaleCodeOnly ||
+      (testCase.openMenu && (result.visibleMobileLocales !== 6 || result.mobilePanelHeight < testCase.height * .7)));
     const badPersian = testCase.persian && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
       result.persian.rootDirection !== 'rtl' || result.persian.bodyDirection !== 'rtl' || result.persian.h1s !== 1 ||
       result.persian.details !== 11 || result.persian.fields < 15 || !result.persian.labeled || !result.persian.companyVisible ||
-      !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 0 ||
+      !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 6 || result.persian.activeLocale !== 'fa' ||
+      !['tr','en','de','it','fr','fa'].every((code)=>result.persian.localePaths[code]) ||
       !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl);
     const badPersianNav = result.lang === 'en'
       ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/tamin-beynolmelali-iran/' ||
@@ -382,6 +386,59 @@ try {
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);
     await page.close();
   }
+  const globalLocaleEntries = [
+    {lang:'tr',path:'/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/tamin-beynolmelali-iran/'}},
+    {lang:'en',path:'/en/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/tamin-beynolmelali-iran/'}},
+    {lang:'de',path:'/de/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/tamin-beynolmelali-iran/'}},
+    {lang:'it',path:'/it/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/tamin-beynolmelali-iran/'}},
+    {lang:'fr',path:'/fr/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/tamin-beynolmelali-iran/'}},
+    {lang:'fa',path:'/fa/tamin-beynolmelali-iran/',targets:{tr:'/tr/pazarlar/',en:'/en/markets/',de:'/de/maerkte/',it:'/it/mercati/',fr:'/fr/marches/',fa:'/fa/tamin-beynolmelali-iran/'}}
+  ];
+  let globalLocaleChecks=0;
+  for(const entry of globalLocaleEntries){
+    for(const viewport of [{name:'desktop',width:1440,height:1000},{name:'mobile',width:390,height:844}]){
+      globalLocaleChecks++;
+      const page=await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
+      const response=await page.goto(`http://127.0.0.1:4321${entry.path}`,{waitUntil:'domcontentloaded'});
+      if(response?.status()!==200)failures.push(`global locale ${entry.lang}/${viewport.name}: HTTP ${response?.status()??'none'}`);
+      if(entry.lang!=='fa'){
+        const trigger=viewport.name==='desktop'?page.locator('[data-language-toggle]'):page.locator('[data-menu-toggle]');
+        await trigger.focus();
+        await trigger.press('Enter');
+      }
+      const contract=await page.evaluate(({lang,targets,mobile})=>{
+        const selector=lang==='fa'?'[data-locale-option]':mobile?'.mobile-locales [data-locale-option]':'#language-panel [data-locale-option]';
+        const links=[...document.querySelectorAll(selector)];
+        const visible=(element)=>{if(!element)return false;const box=element.getBoundingClientRect();const style=getComputedStyle(element);return box.width>0&&box.height>0&&style.visibility!=='hidden'&&style.display!=='none'};
+        return{
+          lang:document.documentElement.lang,
+          direction:getComputedStyle(document.body).direction,
+          options:links.length,
+          active:links.filter(link=>link.getAttribute('aria-current')).map(link=>link.getAttribute('hreflang')),
+          paths:Object.fromEntries(links.map(link=>[link.getAttribute('hreflang'),new URL(link.href).pathname])),
+          targetsMatch:links.every(link=>new URL(link.href).pathname===targets[link.getAttribute('hreflang')]),
+          keyboardAccessible:links.every(link=>link.tabIndex>=0),
+          visibleOptions:links.filter(visible).length,
+          overflow:document.documentElement.scrollWidth-window.innerWidth,
+          canonical:document.querySelector('link[rel="canonical"]')?.href??null,
+          coreAlternates:lang==='fa'?true:['tr','en','de','it','fr','x-default'].every(code=>document.querySelector(`link[rel="alternate"][hreflang="${code}"]`))
+        };
+      },{lang:entry.lang,targets:entry.targets,mobile:viewport.name==='mobile'});
+      const statuses=[];
+      for(const [code,path] of Object.entries(entry.targets)){
+        const targetResponse=await page.request.get(`http://127.0.0.1:4321${encodeURI(path)}`);
+        statuses.push([code,targetResponse.status()]);
+      }
+      if(contract.lang!==entry.lang||contract.options!==6||contract.active.length!==1||contract.active[0]!==entry.lang||
+        !contract.targetsMatch||!contract.keyboardAccessible||contract.visibleOptions!==6||contract.overflow>1||!contract.canonical||
+        !contract.coreAlternates||statuses.some(([,status])=>status!==200)){
+        failures.push(`global locale ${entry.lang}/${viewport.name}: ${JSON.stringify({...contract,statuses})}`);
+      }
+      console.log(`global-locale-${entry.lang}-${viewport.name}: options=${contract.options}, active=${contract.active[0]}, overflow=${contract.overflow}px, targets=${statuses.map(item=>item[1]).join('/')}`);
+      await page.close();
+    }
+  }
+  if(globalLocaleChecks!==12)failures.push(`expected 12 global locale viewport checks, ran ${globalLocaleChecks}`);
   const sourcingViewports = [
     {name:'desktop',width:1440,height:1000},
     {name:'mobile',width:390,height:844}
