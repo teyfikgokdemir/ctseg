@@ -261,7 +261,17 @@ for (const file of htmlFiles) {
       if (!parsedSchemas.some((schema) => schema?.['@type'] === type)) errors.push(`${label}: ${type} schema missing`);
     }
     const persianFaqSchema = parsedSchemas.find((schema) => schema?.['@type'] === 'FAQPage');
+    const persianServiceSchema = parsedSchemas.find((schema) => schema?.['@type'] === 'Service');
     if (!Array.isArray(persianFaqSchema?.mainEntity) || persianFaqSchema.mainEntity.length !== 8) errors.push(`${label}: FAQ schema must contain exactly eight questions`);
+    const expectedPersianTitle = 'راهکارهای تأمین و توسعه بازار برای کسب‌وکارهای ایرانی | CTSEG';
+    const expectedPersianDescription = 'تأمین بین‌المللی روغن آفتابگردان و مواد غذایی، خشکبار و خرما، فرش ایرانی و ابریشم دستباف و منسوجات عمده؛ با تحقیق تأمین‌کننده و هماهنگی تجاری CTSEG.';
+    if (!html.includes(`<title>${expectedPersianTitle}</title>`) || !html.includes(`<meta name="description" content="${expectedPersianDescription}">`)) {
+      errors.push(`${label}: multisector Persian title or meta description missing`);
+    }
+    if (!html.includes('<h1>راهکارهای تأمین و توسعه بازار برای کسب‌وکارهای ایرانی</h1>')) errors.push(`${label}: multisector Persian H1 missing`);
+    for (const term of ['روغن‌های گیاهی','خشکبار','فرش ایرانی','فرش ابریشم دستباف','منسوجات عمده','بسته‌بندی','نهاده‌های تولید','راستی‌آزمایی تأمین‌کننده','هماهنگی تجاری']) {
+      if (!persianServiceSchema?.description?.includes(term)) errors.push(`${label}: Service schema missing multisector term (${term})`);
+    }
     if (!html.includes('data-fa-sourcing-form') || !html.includes('name="website"') || !html.includes('name="privacyConsent"') ||
       !html.includes('id="fa-form-errors" role="alert"') || !html.includes('id="fa-form-fallback"')) {
       errors.push(`${label}: accessible secure-fallback form controls missing`);
@@ -279,13 +289,26 @@ for (const file of htmlFiles) {
     if (!html.includes('form.dataset.startedAt=String(Date.now())')) {
       errors.push(`${label}: client-side minimum-time guard missing`);
     }
-    for (const requiredCopy of ['برای تولیدکنندگان و صادرکنندگان ایرانی','فرش ایرانی و منسوجات عمده','ارسال محصول برای ارزیابی اولیه','اطلاعات تکمیلی مانند ظرفیت، قیمت، حداقل سفارش، بسته‌بندی و اسناد در مرحله ارزیابی بعدی درخواست خواهد شد.']) {
+    for (const requiredCopy of ['برای تولیدکنندگان و صادرکنندگان ایرانی','چهار مسیر برای تأمین و توسعه بازار','ارسال محصول برای ارزیابی اولیه','اطلاعات تکمیلی مانند ظرفیت، قیمت، حداقل سفارش، بسته‌بندی و اسناد در مرحله ارزیابی بعدی درخواست خواهد شد.']) {
       if (!html.includes(requiredCopy)) errors.push(`${label}: strengthened Persian entry copy missing (${requiredCopy})`);
+    }
+    if ((html.match(/data-sector-card=/g) || []).length !== 4 || (html.match(/data-sector-cta/g) || []).length !== 4) {
+      errors.push(`${label}: exactly four equal multisector cards and primary CTAs required`);
+    }
+    const expectedSectorCopy = [
+      ['روغن‌های گیاهی و کالاهای غذایی','بررسی تأمین روغن و مواد غذایی'],
+      ['خشکبار، خرما و میوه‌های خشک','بررسی بازار خشکبار'],
+      ['فرش ایرانی و فرش ابریشم دستباف','بررسی بازار فرش'],
+      ['منسوجات، بسته‌بندی و نهاده‌های تولید','بررسی تأمین منسوجات و نهاده‌ها']
+    ];
+    for (const [heading,cta] of expectedSectorCopy) if (!html.includes(heading) || !html.includes(cta)) errors.push(`${label}: multisector card copy missing (${heading})`);
+    for (const product of ['پسته اکبری','کله‌قوچی','فندقی','احمدآقایی','خرمای مضافتی','سایر','زاهدی','کشمش','زعفران','زرشک','توت خشک','بادام','گردو']) {
+      if (!html.includes(product)) errors.push(`${label}: Persian nuts/date product coverage missing (${product})`);
     }
     const expectedSectorLinks = ['/fa/sourcing/فرش-ایرانی/','/fa/sourcing/فرش-ابریشم-دستباف/','/fa/sourcing/تامین-عمده-منسوجات/'];
     for (const href of expectedSectorLinks) if (!html.includes(`href="${href}"`)) errors.push(`${label}: Persian entry sector link missing (${href})`);
-    if (!html.includes('/images/ctseg-iranian-carpets-editorial.webp') || !html.includes('/images/ctseg-wholesale-textiles-editorial.webp')) {
-      errors.push(`${label}: Persian entry editorial visuals missing`);
+    for (const stem of ['ctseg-vegetable-oils-food-editorial','ctseg-mixed-nuts-premium','ctseg-iranian-carpets-editorial','ctseg-wholesale-textiles-editorial']) {
+      if (!html.includes(`/images/generated/${stem}-1536.webp`) || !html.includes(`${stem}-640.webp`)) errors.push(`${label}: responsive Persian sector visual missing (${stem})`);
     }
     for (const eventName of ['fa_landing_view','fa_form_start','fa_form_submit_attempt','fa_form_submission_success','fa_email_cta_click','fa_english_link_click']) {
       if (!html.includes(eventName)) errors.push(`${label}: analytics event ${eventName} missing`);
