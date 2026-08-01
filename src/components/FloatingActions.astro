@@ -4,9 +4,100 @@ const { lang } = Astro.props as { lang:ContactLocale };
 const copy = contactCopy[lang];
 ---
 <nav class="floating-actions" aria-label={copy.floatingLabel} data-floating-actions>
-  <a class="floating-action floating-whatsapp" href={whatsappHref(lang)} target="_blank" rel="noopener noreferrer" aria-label={copy.whatsapp} data-floating-whatsapp><span aria-hidden="true">WA</span></a>
-  <button class="floating-action back-to-top" type="button" aria-label={copy.backToTop} aria-hidden="true" tabindex="-1" data-back-to-top><span aria-hidden="true">↑</span></button>
+  <button class="floating-action back-to-top" type="button" aria-label={copy.backToTop} aria-hidden="true" tabindex="-1" data-back-to-top>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></svg>
+  </button>
+  <a class="floating-action floating-whatsapp" href={whatsappHref(lang)} target="_blank" rel="noopener noreferrer" aria-label={copy.whatsapp} data-floating-whatsapp>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.5L3 20.5l1.3-4.7A8.5 8.5 0 1 1 20.5 11.7Z"/>
+      <path d="M8.2 7.8c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .5.4l.8 1.9c.1.3.1.5-.1.7l-.6.7c-.2.2-.2.4 0 .7.6 1.1 1.5 2 2.6 2.6.3.2.5.2.7 0l.8-1c.2-.2.4-.3.7-.2l1.9.9c.3.1.4.3.4.5 0 .2-.1 1.1-.7 1.7-.5.6-1.3.9-2.1.9-1 0-2.8-.4-4.8-2.2-2.4-2.1-3.1-4.4-3.1-5.5 0-.7.2-1.2.4-1.6Z"/>
+    </svg>
+  </a>
 </nav>
+
+<style is:global>
+  .floating-actions{
+    --floating-cookie-offset:0px;
+    --floating-footer-offset:0px;
+    position:fixed!important;
+    inset-inline-end:max(18px,env(safe-area-inset-right))!important;
+    inset-inline-start:auto!important;
+    bottom:calc(24px + env(safe-area-inset-bottom) + var(--floating-cookie-offset) + var(--floating-footer-offset))!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center;
+    gap:10px;
+    z-index:45;
+    pointer-events:none;
+    transition:bottom .2s ease;
+  }
+  .floating-actions .floating-action{
+    width:52px!important;
+    height:52px!important;
+    min-width:52px;
+    min-height:52px;
+    display:grid!important;
+    place-items:center;
+    padding:0!important;
+    border:1px solid rgba(242,239,231,.2)!important;
+    border-radius:999px!important;
+    background:#272923!important;
+    color:#f2efe7!important;
+    box-shadow:0 10px 24px rgba(34,35,31,.22)!important;
+    cursor:pointer;
+    pointer-events:auto;
+    transition:transform .18s ease,background .18s ease,border-color .18s ease,opacity .18s ease;
+  }
+  .floating-actions .floating-action:hover{
+    transform:translateY(-2px);
+    background:#34372f!important;
+    border-color:#a95638!important;
+  }
+  .floating-actions .floating-action:focus-visible{
+    outline:3px solid #a95638;
+    outline-offset:3px;
+  }
+  .floating-actions svg{
+    width:23px;
+    height:23px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .floating-actions .floating-whatsapp svg path:first-child{fill:currentColor;fill-opacity:.08}
+  .floating-actions .back-to-top{
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(8px);
+    pointer-events:none;
+  }
+  .floating-actions .back-to-top.visible{
+    opacity:1;
+    visibility:visible;
+    transform:none;
+    pointer-events:auto;
+  }
+  @media(max-width:620px){
+    .floating-actions{
+      inset-inline-end:max(14px,env(safe-area-inset-right))!important;
+      bottom:calc(16px + env(safe-area-inset-bottom) + var(--floating-cookie-offset) + var(--floating-footer-offset))!important;
+      gap:8px;
+    }
+    .floating-actions .floating-action{
+      width:48px!important;
+      height:48px!important;
+      min-width:48px;
+      min-height:48px;
+    }
+    .floating-actions svg{width:21px;height:21px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .floating-actions,.floating-actions .floating-action{transition:none!important}
+  }
+</style>
+
 <script>
   (()=>{
     document.querySelectorAll('[data-floating-actions]').forEach((actions)=>{
@@ -16,9 +107,22 @@ const copy = contactCopy[lang];
       const update=()=>{const visible=scrollY>480;top.classList.toggle('visible',visible);top.setAttribute('aria-hidden',String(!visible));top.tabIndex=visible?0:-1};
       update();addEventListener('scroll',update,{passive:true});
       top.addEventListener('click',()=>scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'}));
+
       const cookie=document.querySelector('[data-cookie-consent],.fa-cookie');
-      const offset=()=>{const visible=cookie&&!cookie.hidden;actions.style.setProperty('--floating-cookie-offset',visible?`${cookie.getBoundingClientRect().height+24}px`:'0px')};
-      offset();if(cookie)new MutationObserver(offset).observe(cookie,{attributes:true,attributeFilter:['hidden']});addEventListener('resize',offset,{passive:true});
+      const updateCookieOffset=()=>{const visible=cookie&&!cookie.hidden;actions.style.setProperty('--floating-cookie-offset',visible?`${cookie.getBoundingClientRect().height+16}px`:'0px')};
+      updateCookieOffset();
+      if(cookie)new MutationObserver(updateCookieOffset).observe(cookie,{attributes:true,attributeFilter:['hidden']});
+
+      const footer=document.querySelector('.site-footer,footer');
+      const updateFooterOffset=()=>{
+        if(!footer){actions.style.setProperty('--floating-footer-offset','0px');return;}
+        const rect=footer.getBoundingClientRect();
+        const overlap=Math.max(0,innerHeight-rect.top+16);
+        actions.style.setProperty('--floating-footer-offset',`${overlap}px`);
+      };
+      updateFooterOffset();
+      addEventListener('scroll',updateFooterOffset,{passive:true});
+      addEventListener('resize',()=>{updateCookieOffset();updateFooterOffset()},{passive:true});
     });
   })();
 </script>
