@@ -120,10 +120,22 @@ const localeLinks = [
         <a class="fa-brand" href={canonical} aria-label="CTSEG — صفحه تأمین بین‌المللی ایران">
           <img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" decoding="async" />
         </a>
-        <nav class="fa-nav" aria-label="راهنمای صفحه">
+        <button class="fa-menu-toggle" type="button" aria-expanded="false" aria-controls="fa-primary-nav" aria-label="بازکردن منوی اصلی" data-fa-menu-toggle>
+          <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+        </button>
+        <div class="fa-menu-backdrop" data-fa-menu-backdrop hidden></div>
+        <nav class="fa-nav" id="fa-primary-nav" aria-label="راهنمای صفحه" data-fa-primary-nav>
           <a class="fa-nav-section" href="#sourcing">حوزه‌های تأمین</a>
           <a class="fa-nav-section" href="#process">فرایند همکاری</a>
           <a class="fa-nav-section" href="#faq">پرسش‌های متداول</a>
+          <div class="fa-mobile-nav-links">
+            <a href="/fa/tamin-beynolmelali-iran/" data-fa-mobile-nav-link>صفحه اصلی</a>
+            <a href="#services" data-fa-mobile-nav-link>خدمات</a>
+            <a href="#sourcing" data-fa-mobile-nav-link>محصولات</a>
+            <a href="#markets" data-fa-mobile-nav-link>بازارها</a>
+            <a href="#about" data-fa-mobile-nav-link>درباره ما</a>
+            <a href="#contact" data-fa-mobile-nav-link>تماس</a>
+          </div>
           <div class="fa-language" aria-label="انتخاب زبان" data-fa-locale-switcher>
             {localeLinks.map(([code,path]) => <a
               href={path}
@@ -134,7 +146,8 @@ const localeLinks = [
               data-locale-option
             >{code.toUpperCase()}</a>)}
           </div>
-          <a class="fa-button" href="#request-form">ثبت درخواست تأمین</a>
+          <a class="fa-button fa-desktop-cta" href="#request-form">ثبت درخواست تأمین</a>
+          <a class="fa-button fa-mobile-nav-cta" href="#request-form" data-fa-mobile-nav-link>درخواست بررسی</a>
         </nav>
       </div>
     </header>
@@ -168,7 +181,7 @@ const localeLinks = [
         </div>
       </section>
 
-      <section class="fa-section fa-definition">
+      <section class="fa-section fa-definition" id="about">
         <div class="fa-container fa-definition-grid">
           <div class="fa-definition-card">
             <p class="fa-section-kicker">پاسخ کوتاه و روشن</p>
@@ -186,7 +199,7 @@ const localeLinks = [
         </div>
       </section>
 
-      <section class="fa-section fa-producer-entry" data-persian-producer-entry>
+      <section class="fa-section fa-producer-entry" id="markets" data-persian-producer-entry>
         <div class="fa-container fa-producer-entry-grid">
           <div>
             <p class="fa-section-kicker">مسیر توسعه بازار</p>
@@ -222,7 +235,7 @@ const localeLinks = [
         </div>
       </section>
 
-      <section class="fa-section">
+      <section class="fa-section" id="services">
         <div class="fa-container">
           <div class="fa-section-head">
             <div><p class="fa-section-kicker">مخاطبان خدمات</p><h2>برای خرید حرفه‌ای و نیاز واقعی کسب‌وکار</h2></div>
@@ -358,6 +371,50 @@ const localeLinks = [
 
     <script is:inline>
       (() => {
+        const menuToggle=document.querySelector('[data-fa-menu-toggle]');
+        const menuPanel=document.querySelector('[data-fa-primary-nav]');
+        const menuBackdrop=document.querySelector('[data-fa-menu-backdrop]');
+        const mobileMenuQuery=window.matchMedia('(max-width: 820px)');
+        const menuIsOpen=()=>menuToggle?.getAttribute('aria-expanded')==='true';
+        const menuFocusable=()=>menuPanel instanceof HTMLElement
+          ? [...menuPanel.querySelectorAll('a[href],button:not([disabled])')].filter((item)=>item instanceof HTMLElement&&item.getClientRects().length)
+          : [];
+        const closeMenu=(restoreFocus=true)=>{
+          if(!(menuToggle instanceof HTMLButtonElement)||!(menuPanel instanceof HTMLElement))return;
+          menuToggle.setAttribute('aria-expanded','false');
+          menuToggle.setAttribute('aria-label','بازکردن منوی اصلی');
+          menuPanel.classList.remove('open');
+          document.body.classList.remove('fa-menu-open');
+          if(menuBackdrop instanceof HTMLElement)menuBackdrop.hidden=true;
+          if(restoreFocus&&mobileMenuQuery.matches)menuToggle.focus();
+        };
+        const openMenu=()=>{
+          if(!(menuToggle instanceof HTMLButtonElement)||!(menuPanel instanceof HTMLElement)||!mobileMenuQuery.matches)return;
+          menuToggle.setAttribute('aria-expanded','true');
+          menuToggle.setAttribute('aria-label','بستن منوی اصلی');
+          menuPanel.classList.add('open');
+          document.body.classList.add('fa-menu-open');
+          if(menuBackdrop instanceof HTMLElement)menuBackdrop.hidden=false;
+          menuFocusable()[0]?.focus();
+        };
+        menuToggle?.addEventListener('click',()=>menuIsOpen()?closeMenu():openMenu());
+        menuBackdrop?.addEventListener('click',()=>closeMenu());
+        menuPanel?.querySelectorAll('a[href]').forEach((link)=>link.addEventListener('click',()=>closeMenu(false)));
+        document.addEventListener('pointerdown',(event)=>{
+          if(!menuIsOpen()||!(event.target instanceof Node)||menuPanel?.contains(event.target)||menuToggle?.contains(event.target))return;
+          closeMenu();
+        });
+        document.addEventListener('keydown',(event)=>{
+          if(!menuIsOpen())return;
+          if(event.key==='Escape'){event.preventDefault();closeMenu();return}
+          if(event.key!=='Tab'||!(menuToggle instanceof HTMLButtonElement))return;
+          const focusable=[menuToggle,...menuFocusable()];
+          const first=focusable[0];const last=focusable.at(-1);
+          if(event.shiftKey&&document.activeElement===first){event.preventDefault();last?.focus()}
+          else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}
+        });
+        mobileMenuQuery.addEventListener('change',()=>closeMenu(false));
+
         const consentKey='ctseg-consent-v2';
         const consentBox=document.querySelector('[data-cookie-consent]');
         let analyticsReady=false;
