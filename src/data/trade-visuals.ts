@@ -1,6 +1,6 @@
-import type { Locale } from './site';
+import type { ActiveLocale } from './locales';
 
-export type TradeVisualLocale = Locale | 'fa';
+export type TradeVisualLocale = ActiveLocale;
 export type TradeVisualKey =
   | 'global-trade-hero'
   | 'food-oils'
@@ -35,7 +35,7 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       en:'Port and product samples representing international trade flows',
       de:'Hafen und Produktmuster als Darstellung internationaler Handelsströme',
       it:'Porto e campioni di prodotto che rappresentano i flussi commerciali internazionali',
-      fr:'Port et échantillons de produits illustrant les flux commerciaux internationaux',
+      ru:'Порт и образцы продукции как образ международной торговли',
       fa:'نمای بندر و نمونه‌های محصول به‌عنوان تصویری از جریان تجارت بین‌المللی'
     }
   },
@@ -48,7 +48,7 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       en:'Unbranded vegetable oil and food ingredient samples for commercial assessment',
       de:'Unmarkierte Pflanzenöl- und Lebensmittelrohstoffmuster für die kaufmännische Bewertung',
       it:'Campioni non marchiati di olio vegetale e ingredienti alimentari per la valutazione commerciale',
-      fr:'Échantillons sans marque d’huile végétale et d’ingrédients alimentaires pour évaluation commerciale',
+      ru:'Немаркированные образцы растительного масла и пищевых ингредиентов для оценки',
       fa:'نمونه‌های بدون نشان تجاری از روغن گیاهی و مواد اولیه غذایی برای ارزیابی تجاری'
     }
   },
@@ -61,7 +61,7 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       en:'Nut and dried fruit samples for quality and product-grade assessment',
       de:'Nuss- und Trockenfruchtmuster zur Bewertung von Qualität und Sortierung',
       it:'Campioni di frutta a guscio ed essiccata per valutare qualità e classificazione',
-      fr:'Échantillons de fruits à coque et séchés pour évaluer la qualité et le classement',
+      ru:'Образцы орехов и сухофруктов для оценки качества и сорта',
       fa:'نمونه‌های خشکبار و میوه خشک برای بررسی کیفیت و درجه‌بندی محصول'
     }
   },
@@ -74,7 +74,7 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       en:'Hand-knotted carpets representing material and weave assessment',
       de:'Handgeknüpfte Teppiche als Darstellung der Material- und Webartprüfung',
       it:'Tappeti annodati a mano per rappresentare la valutazione di materiali e tessitura',
-      fr:'Tapis noués main illustrant l’évaluation des matières et du tissage',
+      ru:'Ковры ручной работы для оценки материалов и качества плетения',
       fa:'فرش‌های دستباف به‌عنوان تصویری از بررسی مواد و کیفیت بافت'
     }
   },
@@ -87,7 +87,7 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       en:'Fabric, towel and textile samples on a commercial assessment table',
       de:'Stoff-, Handtuch- und Textilmuster auf einem Tisch zur kaufmännischen Bewertung',
       it:'Campioni di tessuto, asciugamani e prodotti tessili su un tavolo di valutazione commerciale',
-      fr:'Échantillons de tissus, serviettes et textiles sur une table d’évaluation commerciale',
+      ru:'Образцы тканей, полотенец и текстиля на столе для коммерческой оценки',
       fa:'نمونه‌های پارچه، حوله و منسوجات روی میز ارزیابی تجاری'
     }
   }

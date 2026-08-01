@@ -14,10 +14,11 @@
     "check:seo": "node scripts/check-seo.mjs",
     "check:form": "node scripts/check-contact-function.mjs",
     "check:responsive": "node scripts/check-responsive.mjs",
+    "check:locales": "node scripts/check-locale-contract.mjs",
     "check:images": "node scripts/check-images.mjs",
     "check:performance": "node scripts/check-performance.mjs",
     "lighthouse:mobile": "node scripts/run-lighthouse.mjs",
-    "validate": "npm run build && npm run check:site && npm run check:seo && npm run check:form && npm run check:images && npm run check:responsive"
+    "validate": "npm run build && npm run check:site && npm run check:seo && npm run check:form && npm run check:images && npm run check:locales && npm run check:responsive"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

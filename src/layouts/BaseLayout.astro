@@ -4,6 +4,7 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import FloatingActions from '../components/FloatingActions.astro';
 import { company, locales, localizedPath, products, routeAlternates, ui, type Locale } from '../data/site';
+import { activeLocales, localeDirection, localeOg } from '../data/locales';
 import { FEATURE_IMAGE_WIDTHS, generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
 import { localizedTradeVisual } from '../data/trade-visuals';
 
@@ -18,7 +19,8 @@ const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pag
 const alternates = routeAlternates(pageKey, pageId);
 if (pageKey === 'home') alternates.tr = 'https://ctseg.com.tr/';
 if (pageKey === 'home') alternates.fa = 'https://ctseg.com.tr/fa/';
-const alternateCodes = pageKey === 'home' ? [...locales,'fa'] : ['how-we-work','scenarios','guides'].includes(pageKey) ? ['tr','en'] : locales;
+if (pageKey === 'home') alternates.ru = 'https://ctseg.com.tr/ru/';
+const alternateCodes = pageKey === 'home' ? activeLocales : ['how-we-work','scenarios','guides'].includes(pageKey) ? ['tr','en'] : locales.filter((code) => code !== 'ru');
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
   name:company.name,alternateName:company.alternateName,foundingDate:company.foundingYear,
@@ -37,7 +39,7 @@ const organization = {
 const website = {
   '@context':'https://schema.org','@type':'WebSite','@id':'https://ctseg.com.tr/#website',
   url:'https://ctseg.com.tr/',name:'CTSEG',publisher:{'@id':'https://ctseg.com.tr/#organization'},
-  inLanguage:[...locales,'fa']
+  inLanguage:activeLocales
 };
 const webpage = {
   '@context':'https://schema.org','@type':'WebPage','@id':`${canonicalUrl}#webpage`,
@@ -46,7 +48,7 @@ const webpage = {
 };
 const extra = Array.isArray(schema) ? schema : [schema];
 const schemas = [organization, website, webpage, ...extra.filter(Boolean)];
-const cookieHref = localizedPath(lang, 'legal', 'cookies');
+const cookieHref = lang === 'ru' ? localizedPath('en', 'legal', 'cookies') : localizedPath(lang, 'legal', 'cookies');
 const homeHero = localizedTradeVisual('global-trade-hero',lang);
 const socialImage = pageKey === 'products' && pageId && products[pageId as keyof typeof products]
   ? products[pageId as keyof typeof products].media.src
@@ -55,7 +57,7 @@ const heroSizes = '(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(
 const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
 ---
 <!doctype html>
-<html lang={lang} data-locale={lang}>
+<html lang={lang} dir={localeDirection(lang)} data-locale={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -82,7 +84,7 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="CTSEG" />
-    <meta property="og:locale" content={lang} />
+    <meta property="og:locale" content={localeOg(lang)} />
     <meta property="og:image" content={`https://ctseg.com.tr${socialImage}`} />
     <meta property="og:image:width" content="1536" />
     <meta property="og:image:height" content="1024" />
@@ -93,7 +95,7 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">{lang === 'ru' ? 'Перейти к содержанию' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : 'Skip to content'}</a>
     <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
     <main id="main"><slot /></main>
     <SiteFooter lang={lang} />

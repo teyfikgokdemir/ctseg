@@ -23,6 +23,7 @@ await expectStatus(await onRequestPost(makeContext({...valid,intent:'unknown'},u
 await expectStatus(await onRequestPost(makeContext({...valid,emailOrPhone:''},undefined,{},'203.0.113.17')),400,'contact validation');
 await expectStatus(await onRequestPost(makeContext({...valid,emailOrPhone:'123'},undefined,{},'203.0.113.19')),400,'phone validation');
 await expectStatus(await onRequestPost(makeContext({...valid,intent:'supplier_market_entry',emailOrPhone:'+90 555 000 00 00'},undefined,{},'203.0.113.18')),503,'producer phone-only short form');
+await expectStatus(await onRequestPost(makeContext({...valid,locale:'ru',emailOrPhone:'buyer@example.test'},undefined,{},'203.0.113.19')),503,'Russian short form');
 await expectStatus(await onRequestPost(makeContext(valid,undefined,{},'203.0.113.13')),503,'missing email configuration');
 await expectStatus(await onRequestPost(makeContext({...valid,website:'bot.example'},undefined,{},'203.0.113.14')),200,'honeypot');
 

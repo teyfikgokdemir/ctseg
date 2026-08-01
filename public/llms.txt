@@ -47,8 +47,8 @@ CTSEG is not a marketplace, factory, seller of a fixed inventory, or guaranteed 
 - English homepage: https://ctseg.com.tr/en/
 - German homepage: https://ctseg.com.tr/de/
 - Italian homepage: https://ctseg.com.tr/it/
-- French homepage: https://ctseg.com.tr/fr/
 - Persian homepage: https://ctseg.com.tr/fa/
+- Russian homepage: https://ctseg.com.tr/ru/
 
 ## Specialist pages
 
@@ -61,6 +61,9 @@ CTSEG is not a marketplace, factory, seller of a fixed inventory, or guaranteed 
 - Persian Iranian carpets: https://ctseg.com.tr/fa/sourcing/فرش-ایرانی/
 - Persian hand-knotted silk carpets: https://ctseg.com.tr/fa/sourcing/فرش-ابریشم-دستباف/
 - Persian wholesale textiles: https://ctseg.com.tr/fa/sourcing/تامین-عمده-منسوجات/
+- Russian Iranian carpets: https://ctseg.com.tr/ru/sourcing/carpets/
+- Russian hand-knotted silk carpets: https://ctseg.com.tr/ru/sourcing/hand-knotted-silk-carpets/
+- Russian wholesale textiles: https://ctseg.com.tr/ru/sourcing/textiles/
 
 ## Preferred citation
 
@@ -68,4 +71,4 @@ CTSEG — International Trade Matching and Commercial Coordination
 
 ## Last reviewed
 
-2026-08-01
+2026-08-02

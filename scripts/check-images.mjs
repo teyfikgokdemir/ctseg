@@ -8,7 +8,7 @@ const root=fileURLToPath(new URL('..',import.meta.url));
 const dist=join(root,'dist');
 const failures=[];
 const expectedWidths=[640,768,960,1280,1536];
-const homeFiles=['index.html','en/index.html','de/index.html','it/index.html','fr/index.html','fa/index.html'];
+const homeFiles=['index.html','en/index.html','de/index.html','it/index.html','fa/index.html','ru/index.html'];
 
 const walk=(dir)=>readdirSync(dir,{withFileTypes:true}).flatMap((entry)=>{
   const path=join(dir,entry.name);

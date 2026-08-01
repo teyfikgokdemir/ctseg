@@ -6,6 +6,7 @@ import { company } from '../../data/site';
 import { persianAudiences, persianCategories, persianFaqs, persianProcess, persianServices } from '../../data/persian-landing';
 import { FEATURE_IMAGE_WIDTHS, LOGO_IMAGE, generatedImageSrc, generatedImageSrcset } from '../../lib/responsive-images';
 import { homeTradeVisualKeys, localizedTradeVisual } from '../../data/trade-visuals';
+import { activeLocaleRegistry } from '../../data/locales';
 import '../../styles/persian-landing.css';
 
 const canonical = 'https://ctseg.com.tr/fa/';
@@ -39,7 +40,7 @@ const organization = {
     availableLanguage:['fa','en']
   }
 };
-const website = {'@context':'https://schema.org','@type':'WebSite','@id':'https://ctseg.com.tr/#website',url:'https://ctseg.com.tr/',name:'CTSEG',publisher:{'@id':'https://ctseg.com.tr/#organization'},inLanguage:['tr','en','de','it','fr','fa']};
+const website = {'@context':'https://schema.org','@type':'WebSite','@id':'https://ctseg.com.tr/#website',url:'https://ctseg.com.tr/',name:'CTSEG',publisher:{'@id':'https://ctseg.com.tr/#organization'},inLanguage:['tr','en','de','it','fa','ru']};
 const webpage = {
   '@context':'https://schema.org',
   '@type':'WebPage',
@@ -82,14 +83,7 @@ const breadcrumb = {
 };
 const schemas = [organization, website, webpage, service, faqSchema, breadcrumb];
 const heroSrcset = generatedImageSrcset(heroVisual.source, FEATURE_IMAGE_WIDTHS);
-const localeLinks = [
-  ['tr','/'],
-  ['en','/en/'],
-  ['de','/de/'],
-  ['it','/it/'],
-  ['fr','/fr/'],
-  ['fa','/fa/']
-] as const;
+const localeLinks = activeLocaleRegistry.map(({code,prefix}) => [code,prefix] as const);
 ---
 <!doctype html>
 <html lang="fa" dir="rtl">

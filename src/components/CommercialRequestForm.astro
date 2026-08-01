@@ -5,7 +5,7 @@ import { contactCopy, emailHref, whatsappHref, type ContactLocale } from '../dat
 
 const { lang } = Astro.props as { lang:ContactLocale };
 const copy = contactCopy[lang];
-const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal','privacy');
+const privacyHref = lang === 'fa' ? '/fa/#privacy' : lang === 'ru' ? localizedPath('en','legal','privacy') : localizedPath(lang,'legal','privacy');
 ---
 <section class="commercial-form-panel" id="commercial-form" aria-labelledby="commercial-form-title">
   <div class="commercial-form-intro">
@@ -19,9 +19,10 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
       <a class="direct-contact-card" href={emailHref(lang)} data-contact-email>
         <span aria-hidden="true">@</span><strong>{copy.email}</strong><small>{company.email}</small>
       </a>
-      <a class="short-request-link" href="#commercial-request-fields">{copy.shortRequest} ↓</a>
     </div>
   </div>
+  <details class="commercial-form-disclosure">
+    <summary>{copy.formDisclosure}<span aria-hidden="true">＋</span></summary>
   <form class="commercial-form" id="commercial-request-fields" data-commercial-form data-lang={lang} action="/api/contact" method="post" novalidate>
     <input type="hidden" name="locale" value={lang} />
     <input type="hidden" name="startedAt" value="" data-started-at />
@@ -49,6 +50,7 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
     <p class="form-status" data-form-status role="status" aria-live="polite"></p>
     <div class="form-fallback" data-form-fallback hidden><p>{copy.fallback}</p><button type="button" class="button button-secondary" data-download-summary>{copy.download}</button></div>
   </form>
+  </details>
 </section>
 
 <script define:vars={{ copy }}>
@@ -66,7 +68,7 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
       if(savedProduct&&product instanceof HTMLInputElement){product.value=savedProduct;sessionStorage.removeItem('ctseg-product-request')}
       const requestedIntent=new URLSearchParams(location.search).get('intent');
       if(intent instanceof HTMLSelectElement&&['buyer_request','supplier_market_entry'].includes(requestedIntent||''))intent.value=requestedIntent;
-      document.querySelectorAll('[data-fa-intent],[data-contact-intent]').forEach((link)=>link.addEventListener('click',()=>{const value=link.getAttribute('data-fa-intent')||link.getAttribute('data-contact-intent');if(intent instanceof HTMLSelectElement&&value)intent.value=value}));
+      document.querySelectorAll('[data-fa-intent],[data-contact-intent],[data-trade-intent]').forEach((link)=>link.addEventListener('click',()=>{const value=link.getAttribute('data-fa-intent')||link.getAttribute('data-contact-intent')||link.getAttribute('data-trade-intent');if(intent instanceof HTMLSelectElement&&value)intent.value=value}));
       let startedTracked=false;
       const track=(event)=>{if(typeof window.gtag==='function')window.gtag('event',event,{form_type:'short_commercial_request',source_language:document.documentElement.lang})};
       form.addEventListener('focusin',()=>{if(!startedTracked){startedTracked=true;track('contact_form_start')}},{once:true});

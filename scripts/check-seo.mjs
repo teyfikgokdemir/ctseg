@@ -4,7 +4,7 @@ import { join, relative, resolve } from 'node:path';
 const dist = resolve('dist');
 const errors = [];
 const origin = 'https://ctseg.com.tr';
-const coreLocales = ['tr','en','de','it','fr'];
+const coreLocales = ['tr','en','de','it','fa','ru'];
 
 if (!existsSync(dist)) {
   console.error('dist/ not found. Run npm run build first.');
@@ -160,9 +160,9 @@ for (const pathname of requiredCanonicalPaths) {
 const serviceSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Service"'));
 const blogSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Blog"'));
 const blogPostingPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"BlogPosting"'));
-if (serviceSchemaPages.length !== 139) errors.push(`expected 139 Service schema pages including six homepages, sourcing and specification-led product assessments, found ${serviceSchemaPages.length}`);
-if (blogSchemaPages.length !== 5) errors.push(`expected 5 Blog schema pages, found ${blogSchemaPages.length}`);
-if (blogPostingPages.length !== 35) errors.push(`expected 35 BlogPosting pages, found ${blogPostingPages.length}`);
+if (serviceSchemaPages.length !== 116) errors.push(`expected 116 Service schema pages including six homepages, 18 sourcing pages and four-locale catalogue assessments, found ${serviceSchemaPages.length}`);
+if (blogSchemaPages.length !== 4) errors.push(`expected 4 Blog schema pages across the full-content locales, found ${blogSchemaPages.length}`);
+if (blogPostingPages.length !== 28) errors.push(`expected 28 BlogPosting pages across the full-content locales, found ${blogPostingPages.length}`);
 
 const deploymentHeaders = readFileSync(join(dist,'_headers'),'utf8');
 if (/X-Robots-Tag\s*:\s*(?:noindex|none)/i.test(deploymentHeaders)) errors.push('deployment headers contain a blocking X-Robots-Tag');
