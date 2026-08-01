@@ -15,7 +15,8 @@ const {
 const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
 const alternates = routeAlternates(pageKey, pageId);
 if (pageKey === 'home') alternates.tr = 'https://ctseg.com.tr/';
-const alternateCodes = ['how-we-work','scenarios','guides'].includes(pageKey) ? ['tr','en'] : locales;
+if (pageKey === 'home') alternates.fa = 'https://ctseg.com.tr/fa/';
+const alternateCodes = pageKey === 'home' ? [...locales,'fa'] : ['how-we-work','scenarios','guides'].includes(pageKey) ? ['tr','en'] : locales;
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
   name:company.name,alternateName:company.alternateName,foundingDate:company.foundingYear,
@@ -29,12 +30,12 @@ const organization = {
   },
   url:'https://ctseg.com.tr/',logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
   email:'info@ctseg.com.tr',areaServed:['Türkiye','Europe','International'],
-  knowsAbout:['Strategic sourcing','Supplier verification','International trade','Food product sourcing','Iranian carpets','Hand-knotted silk carpets','Wholesale textiles','Private label textile sourcing']
+  knowsAbout:['International trade matching','Commercial coordination','Buyer and supplier research','Supplier verification','Producer market entry','Food and agricultural sourcing','Textiles and home textiles','Packaging and industrial inputs','Iranian carpets','Hand-knotted silk carpets']
 };
 const website = {
   '@context':'https://schema.org','@type':'WebSite','@id':'https://ctseg.com.tr/#website',
   url:'https://ctseg.com.tr/',name:'CTSEG',publisher:{'@id':'https://ctseg.com.tr/#organization'},
-  inLanguage:locales
+  inLanguage:[...locales,'fa']
 };
 const webpage = {
   '@context':'https://schema.org','@type':'WebPage','@id':`${canonicalUrl}#webpage`,
@@ -83,6 +84,8 @@ const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
     <meta property="og:image:width" content="1536" />
     <meta property="og:image:height" content="1024" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
   </head>
   <body>

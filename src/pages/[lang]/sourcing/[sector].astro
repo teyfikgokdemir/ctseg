@@ -6,8 +6,8 @@ const {lang,id}=Astro.props as {lang:TradeLocale;id:TradeSectorId};
 const copy=tradeCopy[lang][id],ui=tradeUi[lang];
 const canonical=`https://ctseg.com.tr${pathForSector(lang,id)}`;
 const image=id==='wholesale-textiles'?'/images/ctseg-wholesale-textiles-editorial.webp':'/images/ctseg-iranian-carpets-editorial.webp';
-const contact={tr:'/tr/iletisim/',en:'/en/contact/',de:'/de/kontakt/',it:'/it/contatti/',fr:'/fr/contact/',fa:'/fa/tamin-beynolmelali-iran/#contact'}[lang];
-const home=lang==='tr'?'/':lang==='fa'?'/fa/tamin-beynolmelali-iran/':`/${lang}/`;
+const contact={tr:'/tr/iletisim/',en:'/en/contact/',de:'/de/kontakt/',it:'/it/contatti/',fr:'/fr/contact/',fa:'/fa/#contact'}[lang];
+const home=lang==='tr'?'/':lang==='fa'?'/fa/':`/${lang}/`;
 const producer=lang==='fa'?persianProducerCopy[id]:null;
 const metaDescription=producer?`${copy.description} ${producer.lead}`:copy.description;
 const chrome={
@@ -37,7 +37,7 @@ const schema=[
 {producer&&<section class="section producer-section" data-persian-producer-section><div class="container"><div class="producer-intro"><div><p class="eyebrow">CTSEG · توسعه بازار بین‌المللی</p><h2>{producer.title}</h2></div><p>{producer.lead}</p></div><div class="producer-grid"><div><h3>مسیر همکاری</h3><ul>{producer.services.map(item=><li>{item}</li>)}</ul></div><aside><h3>مخاطبان این همکاری</h3><ul>{producer.audiences.map(item=><li>{item}</li>)}</ul><p>{producer.markets}</p></aside></div><div class="producer-terms"><p>{producer.requirements}</p><p>{producer.role}</p><p><strong>{producer.priority}</strong></p></div><div class="producer-ctas" aria-label="اقدام‌های همکاری">{producer.ctas.map((label,index)=><a class:list={['button',{primary:index===0}]} href={contact} data-producer-cta>{label}</a>)}</div></div></section>}
 <section class="section related"><div class="container"><h2>{ui.related}</h2><div>{tradeSectorIds.filter(x=>x!==id).map(x=><a href={pathForSector(lang,x)}>{tradeCopy[lang][x].title}<span aria-hidden="true">→</span></a>)}</div></div></section>
 <section class="section trade-cta"><div class="container"><p class="eyebrow">RFQ · CTSEG</p><h2>{copy.cta}</h2><a class="button" href={contact}>{ui.contact}</a></div></section></main>
-<footer class="trade-footer"><div class="container"><div><strong>CTSEG Sanayi ve Ticaret Limited Şirketi</strong>{lang==='tr'&&<p>Türkiye merkezli stratejik tedarik, doğrulanmış ticari ürünler ve uluslararası ticari karar desteği.</p>}</div><span>{lang==='tr'?'© 2026 CTSEG. Tüm hakları saklıdır.':'© 2026 CTSEG'}</span><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></div></footer>
+<footer class="trade-footer"><div class="container"><div><strong>CTSEG Sanayi ve Ticaret Limited Şirketi</strong>{lang==='tr'&&<p>Türkiye merkezli uluslararası ticaret eşleştirme ve bağımsız ticari koordinasyon.</p>}</div><span>{lang==='tr'?'© 2026 CTSEG. Tüm hakları saklıdır.':'© 2026 CTSEG'}</span><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></div></footer>
 <script is:inline define:vars={{openLabel:chrome.menu,closeLabel:chrome.close}}>
   const tradeToggle=document.querySelector('[data-trade-menu-toggle]');
   const tradeNav=document.querySelector('[data-trade-locale-nav]');

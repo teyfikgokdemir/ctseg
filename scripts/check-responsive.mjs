@@ -103,12 +103,12 @@ try {
     { name:'mobile430-tr-menu', path:'/', width:430, height:932, openMenu:true },
     { name:'mobile430-de-home', path:'/de/', width:430, height:932 },
     { name:'mobile430-fr-home', path:'/fr/', width:430, height:932 },
-    { name:'desktop-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:1440, height:1000, persian:true },
-    { name:'tablet-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:820, height:1180, persian:true },
-    { name:'mobile320-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:320, height:800, persian:true },
-    { name:'mobile360-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:360, height:800, persian:true },
-    { name:'mobile-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:390, height:844, persian:true },
-    { name:'mobile430-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:430, height:932, persian:true }
+    { name:'desktop-fa-landing', path:'/fa/', width:1440, height:1000, persian:true },
+    { name:'tablet-fa-landing', path:'/fa/', width:820, height:1180, persian:true },
+    { name:'mobile320-fa-landing', path:'/fa/', width:320, height:800, persian:true },
+    { name:'mobile360-fa-landing', path:'/fa/', width:360, height:800, persian:true },
+    { name:'mobile-fa-landing', path:'/fa/', width:390, height:844, persian:true },
+    { name:'mobile430-fa-landing', path:'/fa/', width:430, height:932, persian:true }
   ];
   const sourcingLocales = ['tr','en','de','it','fr','fa'];
   const sourcingFamilies = {
@@ -236,7 +236,7 @@ try {
       }).length
       ,localeRouteMatch:[...document.querySelectorAll('[data-locale-option]')].every((link) => {
         const code=link.getAttribute('hreflang');
-        if(code==='fa')return new URL(link.href).pathname==='/fa/tamin-beynolmelali-iran/';
+        if(code==='fa')return new URL(link.href).pathname==='/fa/';
         const alternate=document.querySelector(`link[rel="alternate"][hreflang="${code}"]`);
         return alternate && new URL(link.href).pathname === new URL(alternate.href).pathname;
       })
@@ -424,16 +424,18 @@ try {
           compactHeroHeight:[...document.querySelectorAll('.page-hero--compact')].every((hero)=>hero.getBoundingClientRect().height < (window.innerWidth<=860 ? 500 : 600)),
           ctaAlignment:[...document.querySelectorAll('.cta-statement')].every((cta)=>{
             const heading=cta.querySelector('h2');
+            const actionGroup=cta.querySelector('.actions');
             const button=cta.querySelector('.button');
             if(!heading||!button) return false;
             const ctaBox=cta.getBoundingClientRect();
             const headingBox=heading.getBoundingClientRect();
-            const buttonBox=button.getBoundingClientRect();
+            const actionBox=(actionGroup||button).getBoundingClientRect();
             const ctaCenter=ctaBox.left+ctaBox.width/2;
             const headingCenter=headingBox.left+headingBox.width/2;
-            const buttonCenter=buttonBox.left+buttonBox.width/2;
+            const actionCenter=actionBox.left+actionBox.width/2;
             const style=getComputedStyle(cta);
-            return Math.abs(ctaCenter-headingCenter)<2&&Math.abs(ctaCenter-buttonCenter)<2&&
+            const buttonsFit=[...cta.querySelectorAll('.button')].every((item)=>{const box=item.getBoundingClientRect();return box.left>=ctaBox.left-1&&box.right<=ctaBox.right+1});
+            return Math.abs(ctaCenter-headingCenter)<2&&Math.abs(ctaCenter-actionCenter)<2&&buttonsFit&&
               headingBox.width<=982&&Math.abs(Number.parseFloat(style.paddingTop)-Number.parseFloat(style.paddingBottom))<1;
           }),
           ctaMobileLines:[...document.querySelectorAll('.cta-statement h2')].reduce((max,heading)=>{
@@ -452,7 +454,7 @@ try {
         page.waitForNavigation({waitUntil:'domcontentloaded'}),
         page.locator('[data-fa-nav-link]').click()
       ]);
-      persianNavWorks = targetResponse?.status() === 200 && new URL(page.url()).pathname === '/fa/tamin-beynolmelali-iran/';
+      persianNavWorks = targetResponse?.status() === 200 && new URL(page.url()).pathname === '/fa/';
     }
     if (!testCase.persian) localeAtmospheres.set(result.lang,result.localeAtmosphere);
     const gapLimit = testCase.gapLimit ?? (testCase.width <= 860 ? 56 : 80);
@@ -472,7 +474,7 @@ try {
       (testCase.openMenu && (result.visibleMobileLocales !== 6 || result.mobilePanelHeight < testCase.height * .7)));
     const badPersian = testCase.persian && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
       result.persian.rootDirection !== 'rtl' || result.persian.bodyDirection !== 'rtl' || result.persian.h1s !== 1 ||
-      result.persian.details !== 8 || result.persian.fields !== 9 || !['full-name','company-name','business-email','phone','country-city','product-group','target-market','short-message','privacy-consent'].every((id)=>result.persian.fieldIds.includes(id)) || !result.persian.labeled || !result.persian.companyVisible ||
+      result.persian.details !== 8 || result.persian.fields !== 10 || !['commercial-intent','full-name','company-name','business-email','phone','country-city','product-group','target-market','short-message','privacy-consent'].every((id)=>result.persian.fieldIds.includes(id)) || !result.persian.labeled || !result.persian.companyVisible ||
       !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 6 || result.persian.activeLocale !== 'fa' ||
       !['tr','en','de','it','fr','fa'].every((code)=>result.persian.localePaths[code]) ||
       !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl || result.persian.chipCount < 1 || result.persian.chipContrastMin < 4.5 ||
@@ -483,8 +485,8 @@ try {
       JSON.stringify(result.persian.sectorCtas.map((cta)=>cta.text)) !== JSON.stringify(['بررسی تأمین روغن و مواد غذایی','بررسی بازار خشکبار','بررسی بازار فرش','بررسی تأمین منسوجات و نهاده‌ها']) ||
       JSON.stringify(result.persian.sectorCtas.map((cta)=>cta.href)) !== JSON.stringify(['#request-form','#request-form','/fa/sourcing/فرش-ایرانی/','/fa/sourcing/تامین-عمده-منسوجات/']) ||
       !['/fa/sourcing/فرش-ایرانی/','/fa/sourcing/فرش-ابریشم-دستباف/','/fa/sourcing/تامین-عمده-منسوجات/'].every((path)=>result.persian.sectorPaths.includes(path)));
-    const expectedPersianMenuLabels=['صفحه اصلی','خدمات','محصولات','بازارها','درباره ما','تماس','درخواست بررسی'];
-    const expectedPersianMenuHrefs=['/fa/tamin-beynolmelali-iran/','#services','#sourcing','#markets','#about','#contact','#request-form'];
+    const expectedPersianMenuLabels=['صفحه اصلی','برای خریداران','برای تولیدکنندگان','حوزه‌ها','درباره ما','تماس','درخواست بررسی'];
+    const expectedPersianMenuHrefs=['/fa/','#services','#markets','#sectors','#about','#contact','#request-form'];
     const badPersianMobileMenu = testCase.persian && testCase.width <= 820 && (!persianMobileMenu ||
       !persianMobileMenu.initial.toggleVisible || persianMobileMenu.initial.expanded !== 'false' || persianMobileMenu.initial.controls !== persianMobileMenu.initial.panelId || !persianMobileMenu.initial.label ||
       !persianMobileMenu.opened.visible || persianMobileMenu.opened.expanded !== 'true' || !persianMobileMenu.opened.bodyLocked || persianMobileMenu.opened.direction !== 'rtl' ||
@@ -492,7 +494,7 @@ try {
       JSON.stringify(persianMobileMenu.opened.labels) !== JSON.stringify(expectedPersianMenuLabels) || JSON.stringify(persianMobileMenu.opened.hrefs) !== JSON.stringify(expectedPersianMenuHrefs) ||
       !persianMobileMenu.opened.statuses.every((status)=>status===200) || !persianMobileMenu.focusTrapped || !persianMobileMenu.escapeClosed || !persianMobileMenu.outsideClosed);
     const badPersianNav = result.lang === 'en'
-      ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/tamin-beynolmelali-iran/' ||
+      ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/' ||
         result.persianNav.target !== null || result.persianNav.primary !== 'For Iranian Businesses' ||
         result.persianNav.helper !== 'Persian landing page' || (testCase.verifyPersianNav && !result.persianNav.visible)
       : result.persianNav.count !== 0;
@@ -503,12 +505,12 @@ try {
     await page.close();
   }
   const globalLocaleEntries = [
-    {lang:'tr',path:'/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/tamin-beynolmelali-iran/'}},
-    {lang:'en',path:'/en/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/tamin-beynolmelali-iran/'}},
-    {lang:'de',path:'/de/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/tamin-beynolmelali-iran/'}},
-    {lang:'it',path:'/it/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/tamin-beynolmelali-iran/'}},
-    {lang:'fr',path:'/fr/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/tamin-beynolmelali-iran/'}},
-    {lang:'fa',path:'/fa/tamin-beynolmelali-iran/',targets:{tr:'/tr/pazarlar/',en:'/en/markets/',de:'/de/maerkte/',it:'/it/mercati/',fr:'/fr/marches/',fa:'/fa/tamin-beynolmelali-iran/'}}
+    {lang:'tr',path:'/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/'}},
+    {lang:'en',path:'/en/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/'}},
+    {lang:'de',path:'/de/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/'}},
+    {lang:'it',path:'/it/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/'}},
+    {lang:'fr',path:'/fr/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/'}},
+    {lang:'fa',path:'/fa/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/'}}
   ];
   let globalLocaleChecks=0;
   for(const entry of globalLocaleEntries){

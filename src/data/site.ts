@@ -83,7 +83,7 @@ export const ui: Record<Locale, any> = {
     cookieTitle: 'Çerez tercihleri', cookieCopy: 'Analitik çerezleri yalnızca izninizle kullanırız. Zorunlu çerezler her zaman aktiftir.',
     accept: 'Kabul et', reject: 'Reddet', rights: 'Tüm hakları saklıdır.',
     samplePolicy: 'Numune politikası', sampleText: 'Numuneler ücretsiz veya herkese açık değildir. Yalnızca şirket bilgisi, kullanım alanı, tahmini hacim ve teslim ülkesi doğrulanan ciddi ticari alıcılar için ön yeterlilik sonrasında değerlendirilebilir.',
-    complianceText: 'Gerçek menşe, üretici ve parti belgeleri şeffaf biçimde beyan edilir. Menşe gizleme, yanıltıcı yeniden etiketleme veya yaptırım aşma uygulamalarına aracılık edilmez.',
+    complianceText: 'Gerçek menşe, üretici ve parti belgeleri şeffaf biçimde beyan edilir. Menşe gizleme veya yanıltıcı yeniden etiketleme desteklenmez.',
     contactLead: 'Şirketinizi, ihtiyacınızı, tahmini hacmi ve teslim ülkesini paylaşın. Ekibimiz uygun ticari değerlendirme yolunu belirlesin.',
     emptyInsights: 'Bu dilde yayımlanmış içgörü bulunmamaktadır.'
   },
@@ -96,7 +96,7 @@ export const ui: Record<Locale, any> = {
     cookieTitle: 'Cookie preferences', cookieCopy: 'We use analytics cookies only with your consent. Essential cookies are always active.',
     accept: 'Accept', reject: 'Reject', rights: 'All rights reserved.',
     samplePolicy: 'Sample policy', sampleText: 'Samples are neither free nor publicly available. They may be considered after pre-qualification only for serious commercial buyers whose company, application, indicative volume and delivery country have been verified.',
-    complianceText: 'Actual origin, producer and batch documentation is declared transparently. CTSEG does not support origin concealment, deceptive relabelling or sanctions circumvention.',
+    complianceText: 'Actual origin, producer and batch documentation is declared transparently. CTSEG does not support origin concealment or deceptive relabelling.',
     contactLead: 'Share your company, requirement, indicative volume and delivery country. Our team will define the appropriate commercial assessment route.',
     emptyInsights: 'No insight has been published in this language.'
   },
@@ -109,7 +109,7 @@ export const ui: Record<Locale, any> = {
     cookieTitle: 'Cookie-Einstellungen', cookieCopy: 'Analyse-Cookies verwenden wir nur mit Ihrer Einwilligung. Notwendige Cookies sind immer aktiv.',
     accept: 'Akzeptieren', reject: 'Ablehnen', rights: 'Alle Rechte vorbehalten.',
     samplePolicy: 'Musterrichtlinie', sampleText: 'Muster sind weder kostenlos noch öffentlich verfügbar. Sie können erst nach einer Vorqualifizierung für ernsthafte gewerbliche Käufer geprüft werden, deren Unternehmen, Anwendung, Richtmenge und Lieferland verifiziert wurden.',
-    complianceText: 'Tatsächliche Herkunft, Hersteller- und Chargendokumente werden transparent offengelegt. CTSEG unterstützt weder Herkunftsverschleierung noch irreführende Umetikettierung oder Sanktionsumgehung.',
+    complianceText: 'Tatsächliche Herkunft, Hersteller- und Chargendokumente werden transparent offengelegt. CTSEG unterstützt weder Herkunftsverschleierung noch irreführende Umetikettierung.',
     contactLead: 'Teilen Sie uns Unternehmen, Bedarf, Richtmenge und Lieferland mit. Unser Team bestimmt den passenden kaufmännischen Prüfweg.',
     emptyInsights: 'In dieser Sprache wurden noch keine Einblicke veröffentlicht.'
   },
@@ -122,7 +122,7 @@ export const ui: Record<Locale, any> = {
     cookieTitle: 'Preferenze cookie', cookieCopy: 'Utilizziamo cookie analitici solo con il tuo consenso. I cookie necessari sono sempre attivi.',
     accept: 'Accetta', reject: 'Rifiuta', rights: 'Tutti i diritti riservati.',
     samplePolicy: 'Politica campioni', sampleText: 'I campioni non sono gratuiti né disponibili al pubblico. Possono essere valutati dopo la prequalifica esclusivamente per acquirenti commerciali seri, con azienda, applicazione, volume indicativo e Paese di consegna verificati.',
-    complianceText: 'L’origine effettiva, il produttore e i documenti di lotto sono dichiarati con trasparenza. CTSEG non facilita occultamento dell’origine, rietichettatura ingannevole o elusione delle sanzioni.',
+    complianceText: 'L’origine effettiva, il produttore e i documenti di lotto sono dichiarati con trasparenza. CTSEG non facilita occultamento dell’origine o rietichettatura ingannevole.',
     contactLead: 'Indica azienda, esigenza, volume indicativo e Paese di consegna. Il nostro team definirà il percorso di valutazione commerciale appropriato.',
     emptyInsights: 'Nessun approfondimento è stato pubblicato in questa lingua.'
   },
@@ -135,7 +135,7 @@ export const ui: Record<Locale, any> = {
     cookieTitle: 'Préférences de cookies', cookieCopy: 'Nous utilisons les cookies analytiques uniquement avec votre accord. Les cookies nécessaires restent actifs.',
     accept: 'Accepter', reject: 'Refuser', rights: 'Tous droits réservés.',
     samplePolicy: 'Politique d’échantillons', sampleText: 'Les échantillons ne sont ni gratuits ni accessibles au public. Ils peuvent être étudiés après préqualification uniquement pour des acheteurs professionnels sérieux dont l’entreprise, l’usage, le volume indicatif et le pays de livraison sont vérifiés.',
-    complianceText: 'L’origine réelle, le producteur et les documents de lot sont déclarés en toute transparence. CTSEG ne facilite ni dissimulation d’origine, ni réétiquetage trompeur, ni contournement de sanctions.',
+    complianceText: 'L’origine réelle, le producteur et les documents de lot sont déclarés en toute transparence. CTSEG ne facilite ni dissimulation d’origine ni réétiquetage trompeur.',
     contactLead: 'Précisez votre entreprise, votre besoin, le volume indicatif et le pays de livraison. Notre équipe définira le parcours d’évaluation commerciale adapté.',
     emptyInsights: 'Aucune analyse n’a encore été publiée dans cette langue.'
   }
