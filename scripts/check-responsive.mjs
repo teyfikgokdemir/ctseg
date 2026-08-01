@@ -55,6 +55,10 @@ try {
     { name:'desktop-it-home', path:'/it/', width:1440, height:1000 },
     { name:'desktop-it-catalogue', path:'/it/prodotti-commerciali/', width:1440, height:1000 },
     { name:'desktop-fr-home', path:'/fr/', width:1440, height:1000 },
+    { name:'wide1920-tr-home', path:'/', width:1920, height:1080 },
+    { name:'wide1920-fa-home', path:'/fa/', width:1920, height:1080, persian:true },
+    { name:'desktop1024-tr-home', path:'/', width:1024, height:900 },
+    { name:'desktop1024-fa-home', path:'/fa/', width:1024, height:900, persian:true },
     { name:'desktop-fr-catalogue', path:'/fr/produits-commerciaux/', width:1440, height:1000 },
     { name:'tablet-tr-about', path:'/tr/hakkimizda/', width:820, height:1180 },
     { name:'tablet-tr-contact', path:'/tr/iletisim/', width:820, height:1180 },
@@ -77,6 +81,8 @@ try {
     { name:'wide-it-home', path:'/it/', width:1600, height:1000 },
     { name:'wide-fr-home', path:'/fr/', width:1600, height:1000 },
     { name:'mobile-tr-home', path:'/', width:390, height:844 },
+    { name:'mobile320-tr-home', path:'/', width:320, height:800 },
+    { name:'mobile360-tr-home', path:'/', width:360, height:800 },
     { name:'mobile-en-home', path:'/en/', width:390, height:844 },
     { name:'mobile-it-home', path:'/it/', width:390, height:844 },
     { name:'mobile-fr-home', path:'/fr/', width:390, height:844 },
@@ -233,6 +239,18 @@ try {
         return {key:image.dataset.tradeVisual,naturalWidth:image.naturalWidth,naturalHeight:image.naturalHeight,width:box.width,height:box.height,alt:image.alt,src:image.currentSrc,srcset:Boolean(image.srcset),sizes:Boolean(image.sizes),dimensions:image.hasAttribute('width')&&image.hasAttribute('height'),objectFit:style.objectFit,objectPosition:style.objectPosition,loading:image.loading,fetchPriority:image.fetchPriority};
       })
       ,localeAtmosphere:[getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),getComputedStyle(document.documentElement).getPropertyValue('--locale-wash').trim()].join('|')
+      ,ux:(()=>{
+        const rgb=(value)=>value.match(/[\d.]+/g)?.slice(0,3).map(Number) ?? [0,0,0];
+        const lum=(value)=>rgb(value).map((c)=>{c/=255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4}).reduce((s,c,i)=>s+c*[.2126,.7152,.0722][i],0);
+        const ratio=(a,b)=>(Math.max(lum(a),lum(b))+.05)/(Math.min(lum(a),lum(b))+.05);
+        const opaqueBackground=(node)=>{for(let el=node;el;el=el.parentElement){const bg=getComputedStyle(el).backgroundColor;if(bg&& !/rgba?\([^)]*,\s*0(?:\.0+)?\)$/.test(bg))return bg}return getComputedStyle(document.body).backgroundColor};
+        const readable=[...document.querySelectorAll('main .section p,main .section li,.commercial-field>span')].map((el)=>{const style=getComputedStyle(el);const bg=opaqueBackground(el);return {contrast:ratio(style.color,bg),light:lum(bg)>.5}}).filter((x)=>x.light);
+        const h1=document.querySelector('main h1');const h1Box=h1?.getBoundingClientRect();const h1Line=h1?parseFloat(getComputedStyle(h1).lineHeight):0;
+        const headings=[...document.querySelectorAll('main h2')].map((h)=>h.getBoundingClientRect());
+        const form=document.querySelector('[data-commercial-form]');const disclosure=form?.querySelector('details');const core=['intent','name','company','emailOrPhone','message','privacy'];
+        const whatsapp=document.querySelector('[data-floating-whatsapp]');const email=document.querySelector('[data-contact-email]');const floating=[...document.querySelectorAll('.floating-action')];const back=document.querySelector('[data-back-to-top]');
+        return {h1Count:document.querySelectorAll('main h1').length,h1Lines:h1Box&&h1Line?Math.round(h1Box.height/h1Line):0,h1Within:Boolean(h1Box&&h1Box.left>=-1&&h1Box.right<=innerWidth+1),headingsWithin:headings.every((box)=>box.left>=-1&&box.right<=innerWidth+1),minLightContrast:readable.length?Math.min(...readable.map((x)=>x.contrast)):99,formCore:form?core.every((name)=>form.querySelector(`[name="${name}"]`)):true,detailsClosed:disclosure?!disclosure.open:true,whatsappValid:whatsapp?whatsapp.href.startsWith('https://wa.me/905456782655?text='):true,emailValid:email?email.href.startsWith('mailto:info@ctseg.com.tr?subject='):true,floatingCount:floating.length,floatingTargets:floating.every((el)=>{const b=el.getBoundingClientRect();return b.width>=44&&b.height>=44}),backInitiallyHidden:back?back.getAttribute('aria-hidden')==='true'&&back.tabIndex===-1:true,headerContract:(()=>{const header=document.querySelector('.site-header,.fa-header');if(!header)return false;const s=getComputedStyle(header);return s.position==='sticky'&&parseFloat(s.top)===0})()};
+      })()
       ,localeOptions:document.querySelectorAll('#language-panel [data-locale-option]').length
       ,activeDesktopLocale:document.querySelectorAll('#language-panel [data-locale-option][aria-current="true"]').length
       ,mobilePanelHeight:document.querySelector('[data-primary-nav]')?.getBoundingClientRect().height ?? 0
@@ -280,9 +298,10 @@ try {
         };
       })()
       ,persian:(() => {
-        const form=document.querySelector('[data-fa-sourcing-form]');
+        if(document.documentElement.lang!=='fa')return null;
+        const form=document.querySelector('[data-commercial-form]');
         if(!form)return null;
-        const fields=[...form.querySelectorAll('input[id],select[id],textarea[id]')].filter((field)=>field.id!=='website');
+        const fields=[...form.querySelectorAll('input[name],select[name],textarea[name]')].filter((field)=>!['locale','startedAt','website'].includes(field.name));
         const company=document.querySelector('.fa-company-facts');
         const heroVisual=document.querySelector('.fa-hero-visual');
         const heroImage=heroVisual?.querySelector('img');
@@ -310,8 +329,8 @@ try {
           h1s:document.querySelectorAll('h1').length,
           details:document.querySelectorAll('.fa-faq details').length,
           fields:fields.length,
-          fieldIds:fields.map((field)=>field.id),
-          labeled:fields.every((field)=>form.querySelector(`label[for="${field.id}"]`)),
+          fieldNames:fields.map((field)=>field.name),
+          labeled:fields.every((field)=>Boolean(field.closest('label'))),
           companyVisible:Boolean(company&&company.getBoundingClientRect().width>0&&company.textContent?.includes('CTSEG Sanayi ve Ticaret Limited Şirketi')),
           headerVisible:Boolean(document.querySelector('.fa-header')?.getBoundingClientRect().height),
           footerVisible:Boolean(document.querySelector('.fa-footer')?.getBoundingClientRect().height),
@@ -452,6 +471,7 @@ try {
         };
       })()
     }));
+    const dynamicUx=await page.evaluate(async()=>{window.scrollTo(0,Math.min(700,document.documentElement.scrollHeight-innerHeight));await new Promise((resolve)=>setTimeout(resolve,80));const back=document.querySelector('[data-back-to-top]');const header=document.querySelector('.site-header,.fa-header');const box=header?.getBoundingClientRect();const state={backVisible:back?back.getAttribute('aria-hidden')==='false'&&back.tabIndex===0:true,headerAtTop:header?Math.abs(box.top)<=1:true};window.scrollTo(0,0);return state});
     await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:!testCase.openMenu });
     let persianNavWorks = true;
     if (testCase.verifyPersianNav) {
@@ -479,7 +499,7 @@ try {
       (testCase.openMenu && (result.visibleMobileLocales !== 6 || result.mobilePanelHeight < testCase.height * .7)));
     const badPersian = testCase.persian && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
       result.persian.rootDirection !== 'rtl' || result.persian.bodyDirection !== 'rtl' || result.persian.h1s !== 1 ||
-      result.persian.details !== 8 || result.persian.fields !== 10 || !['commercial-intent','full-name','company-name','business-email','phone','country-city','product-group','target-market','short-message','privacy-consent'].every((id)=>result.persian.fieldIds.includes(id)) || !result.persian.labeled || !result.persian.companyVisible ||
+      result.persian.details !== 8 || result.persian.fields !== 12 || !['intent','name','company','emailOrPhone','message','privacy','country','product','quantity','delivery','targetDate','requirements'].every((name)=>result.persian.fieldNames.includes(name)) || !result.persian.labeled || !result.persian.companyVisible ||
       !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 6 || result.persian.activeLocale !== 'fa' ||
       !['tr','en','de','it','fr','fa'].every((code)=>result.persian.localePaths[code]) ||
       !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl || result.persian.chipCount < 1 || result.persian.chipContrastMin < 4.5 ||
@@ -504,11 +524,12 @@ try {
         result.persianNav.helper !== 'Persian landing page' || (testCase.verifyPersianNav && !result.persianNav.visible)
       : result.persianNav.count !== 0;
     const isHomepage=['/','/en/','/de/','/it/','/fr/','/fa/'].includes(testCase.path);
+    const badUx=(isHomepage&&(result.ux.h1Count!==1||!result.ux.h1Within||!result.ux.headingsWithin||result.ux.h1Lines>6||result.ux.floatingCount!==2||!result.ux.floatingTargets||!result.ux.backInitiallyHidden||!result.ux.whatsappValid||!dynamicUx.backVisible||!result.ux.headerContract||!dynamicUx.headerAtTop))||result.ux.minLightContrast<4.5||!result.ux.formCore||!result.ux.detailsClosed||!result.ux.emailValid;
     const badTradeImages=result.tradeVisuals.some((visual)=>visual.naturalWidth<1||visual.naturalHeight<1||visual.width<=0||visual.height<=0||!visual.alt||!visual.srcset||!visual.sizes||!visual.dimensions||visual.objectFit!=='cover'||!visual.objectPosition)||
       new Set(result.tradeVisuals.map((visual)=>visual.src)).size!==result.tradeVisuals.length||
       (isHomepage&&(result.tradeVisuals.length!==5||new Set(result.tradeVisuals.map((visual)=>visual.key)).size!==5||result.tradeVisuals.filter((visual)=>visual.fetchPriority==='high').length!==1));
-    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || badTradeImages || !mobileMenu || !bodyScrollLocked || badLayout || badLocale || badContactEmail || badPersian || badPersianMobileMenu || badPersianNav || !persianNavWorks) {
-      failures.push(`${testCase.name}: ${JSON.stringify({...result,mobileMenu,bodyScrollLocked,persianMobileMenu,persianNavWorks})}`);
+    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || badTradeImages || !mobileMenu || !bodyScrollLocked || badLayout || badLocale || badContactEmail || badPersian || badPersianMobileMenu || badPersianNav || badUx || !persianNavWorks) {
+      failures.push(`${testCase.name}: ${JSON.stringify({...result,dynamicUx,mobileMenu,bodyScrollLocked,persianMobileMenu,persianNavWorks})}`);
     }
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);
     await page.close();

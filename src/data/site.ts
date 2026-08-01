@@ -17,7 +17,10 @@ export const company = {
   streetAddress: 'Fevzipaşa Caddesi',
   addressLocality: 'Fatih',
   addressRegion: 'İstanbul',
-  addressCountry: 'TR'
+  addressCountry: 'TR',
+  email: 'info@ctseg.com.tr',
+  phone: '+90 545 678 26 55',
+  whatsapp: '905456782655'
 } as const;
 
 export const companyCopy: Record<Locale, {

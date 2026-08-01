@@ -5,10 +5,10 @@ const allowedOrigins = [
   /^http:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/
 ];
 const limits = {
-  locale:5,intent:40,name:120,company:160,email:254,phone:80,country:100,requestType:120,
-  product:240,quantity:120,delivery:180,targetDate:40,message:2000,website:80,startedAt:30,privacy:20
+  locale:5,intent:40,name:120,company:160,emailOrPhone:254,email:254,phone:80,country:100,
+  product:240,quantity:120,delivery:180,targetDate:40,requirements:500,message:2000,website:80,startedAt:30,privacy:20
 };
-const required = ['intent','name','company','email','country','requestType','product','delivery','privacy'];
+const required = ['intent','name','company','emailOrPhone','message','privacy'];
 
 const json = (body,status=200) => new Response(JSON.stringify(body),{
   status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}
@@ -45,7 +45,12 @@ export async function onRequestPost(context){
   if(data.website)return json({ok:true});
   if(required.some((key)=>!data[key]))return json({code:'missing_required_fields'},400);
   if(!['buyer_request','supplier_market_entry'].includes(data.intent))return json({code:'invalid_intent'},400);
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))return json({code:'invalid_email'},400);
+  const contact=data.emailOrPhone;
+  const email=contact.includes('@')?contact:data.email;
+  const phone=contact.includes('@')?data.phone:contact;
+  if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return json({code:'invalid_email'},400);
+  if(!email&&!phone)return json({code:'missing_contact'},400);
+  if(!email&&phone.replace(/\D/g,'').length<7)return json({code:'invalid_phone'},400);
   const startedAt=Number(data.startedAt);
   if(!Number.isFinite(startedAt)||Date.now()-startedAt<3500||Date.now()-startedAt>86400000)return json({code:'invalid_timing'},400);
   if(data.privacy!=='accepted')return json({code:'privacy_required'},400);
@@ -59,21 +64,21 @@ export async function onRequestPost(context){
     `Locale: ${data.locale}`,
     `Name: ${data.name}`,
     `Company: ${data.company}`,
-    `Email: ${data.email}`,
-    `Phone / WhatsApp: ${data.phone||'-'}`,
-    `Country: ${data.country}`,
-    `Request type: ${data.requestType}`,
-    `Product or service: ${data.product}`,
+    `Email: ${email||'-'}`,
+    `Phone: ${phone||'-'}`,
+    `Country: ${data.country||'-'}`,
+    `Product or service: ${data.product||'-'}`,
     `Estimated quantity: ${data.quantity||'-'}`,
     `Delivery: ${data.delivery}`,
     `Target date: ${data.targetDate||'-'}`,
-    `Additional details: ${data.message||'-'}`
+    `Quality or document requirements: ${data.requirements||'-'}`,
+    `Message: ${data.message}`
   ];
   const response=await fetch('https://api.resend.com/emails',{
     method:'POST',
     headers:{authorization:`Bearer ${apiKey}`,'content-type':'application/json'},
     body:JSON.stringify({
-      from,to:[to],reply_to:data.email,
+      from,to:[to],...(email?{reply_to:email}:{}),
       subject:`CTSEG commercial request - ${data.company}`,
       text:lines.join('\n')
     })

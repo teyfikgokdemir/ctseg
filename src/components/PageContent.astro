@@ -20,6 +20,7 @@ import {
 import type { RouteRecord } from '../lib/routes';
 import { pathForSector, tradeCopy, tradeSectorIds } from '../data/trade-sectors';
 import { tradePlatformCopy } from '../data/trade-platform';
+import { contactCopy } from '../data/contact-experience';
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
@@ -32,6 +33,7 @@ const completionHome = homeEnhancement[lang];
 const completionAbout = aboutEnhancement[lang];
 const completionMarkets = marketsDetail[lang];
 const platform = tradePlatformCopy[lang];
+const contact = contactCopy[lang];
 const homepageHero = localizedTradeVisual('global-trade-hero',lang);
 const homepageSectorVisuals = homeTradeVisualKeys.map((visualKey)=>localizedTradeVisual(visualKey,lang));
 const contactWithIntent = (intent:'buyer_request'|'supplier_market_entry') => `${sectionHref('contact')}?intent=${intent}#commercial-form`;
@@ -363,18 +365,7 @@ const verifiedLater = {
 
 {key === 'contact' && (
   <>
-    <PageHero lang={lang} eyebrow={t.contact} title={copy.contactTitle} lead={t.contactLead} compact={true} />
-    <section class="section"><div class="container content-grid">
-      <div class="company-card company-card--contact">
-        <dl>
-          <div><dt>{corporate.labels.name}</dt><dd>{company.name}</dd></div>
-          <div><dt>{corporate.labels.founder}</dt><dd>{company.founder}</dd></div>
-          <div><dt>{corporate.labels.founded}</dt><dd>{company.foundingYear}</dd></div>
-          <div><dt>{corporate.labels.headquarters}</dt><dd>{corporate.headquarters}</dd></div>
-        </dl>
-      </div>
-      <aside class="side-panel contact-email-panel"><p class="eyebrow">E-mail</p><h2><a class="contact-email-link" href="mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry">info@ctseg.com.tr</a></h2><p>{marketNames.join(' · ')}</p></aside>
-    </div></section>
+    <PageHero lang={lang} eyebrow={t.contact} title={contact.title} lead={contact.intro} compact={true} />
     <section class="section commercial-form-section"><div class="container"><CommercialRequestForm lang={lang} /></div></section>
     {(lang === 'tr' || lang === 'en') && <section class="section compact-link-section"><div class="container"><a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a></div></section>}
   </>
