@@ -53,30 +53,28 @@ const aboutPages = new Set([
   'tr/hakkimizda/index.html',
   'en/about/index.html',
   'de/ueber-uns/index.html',
-  'it/chi-siamo/index.html',
-  'fr/a-propos/index.html'
+  'it/chi-siamo/index.html'
 ]);
 const contactPages = new Set([
   'tr/iletisim/index.html',
   'en/contact/index.html',
   'de/kontakt/index.html',
   'it/contatti/index.html',
-  'fr/contact/index.html'
+  'index.html','en/index.html','de/index.html','it/index.html','ru/index.html','fa/index.html'
 ]);
 const productCatalogs = new Set([
   'tr/ticari-urunler/index.html',
   'en/trade-products/index.html',
   'de/handelsprodukte/index.html',
-  'it/prodotti-commerciali/index.html',
-  'fr/produits-commerciaux/index.html'
+  'it/prodotti-commerciali/index.html'
 ]);
 const persianLandingLabel = 'fa/index.html';
 const persianLandingCanonical = 'https://ctseg.com.tr/fa/';
-const tradeLocaleCodes = ['tr','en','de','it','fr','fa'];
+const tradeLocaleCodes = ['tr','en','de','it','fa','ru'];
 const tradeRouteFamilies = {
-  carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fr:'/fr/sourcing/tapis-persans/',fa:'/fa/sourcing/فرش-ایرانی/'},
-  silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fr:'/fr/sourcing/tapis-en-soie-noues-main/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/'},
-  textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fr:'/fr/sourcing/sourcing-textile-en-gros/',fa:'/fa/sourcing/تامین-عمده-منسوجات/'}
+  carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/'},
+  silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/'},
+  textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/'}
 };
 const tradeRecordsByLabel = new Map(Object.entries(tradeRouteFamilies).flatMap(([family,routes]) =>
   Object.entries(routes).map(([lang,pathname]) => [decodeURI(pathname).replace(/^\//,'') + 'index.html',{family,lang,pathname,routes}])
@@ -115,8 +113,9 @@ for (const file of htmlFiles) {
   const organization = organizations[0];
   const isTurkishPage = label === 'index.html' || label.startsWith('tr/');
   const isPersianLanding = label === persianLandingLabel;
+  const isHomepage = ['index.html','en/index.html','de/index.html','it/index.html','fa/index.html','ru/index.html'].includes(label);
   const tradeRecord = tradeRecordsByLabel.get(label);
-  if (!label.startsWith('404') && canonical && ['tr','en','de','it','fr'].includes(lang)) pageRecords.push({ label, canonical, lang, alternates });
+  if (!label.startsWith('404') && canonical && ['tr','en','de','it','ru'].includes(lang)) pageRecords.push({ label, canonical, lang, alternates });
   if (titleCount !== 1) errors.push(`${label}: expected one title, found ${titleCount}`);
   if ((html.match(/<meta charset="UTF-8">/g) || []).length !== 1) errors.push(`${label}: expected exactly one UTF-8 charset declaration`);
   if (!/<meta name="description" content="[^"]+"/.test(html)) errors.push(`${label}: missing description`);
@@ -157,16 +156,20 @@ for (const file of htmlFiles) {
     if (firstVisibleControl !== 'intent' || !form.includes('value="buyer_request"') || !form.includes('value="supplier_market_entry"')) errors.push(`${label}: stable trade intent must be the first visible form control`);
     for (const field of ['name','company','emailOrPhone','message','privacy']) if (!form.includes(`name="${field}"`)) errors.push(`${label}: short form field ${field} missing`);
     if (!html.includes('data-contact-whatsapp') || !html.includes('data-contact-email') || !html.includes('<details class="commercial-details">')) errors.push(`${label}: direct contact cards or optional details disclosure missing`);
+    const disclosure = html.match(/<details class="commercial-form-disclosure"[^>]*>/)?.[0] ?? '';
+    if (!disclosure || /\sopen(?:\s|>)/.test(disclosure)) errors.push(`${label}: detailed request form must be initially closed`);
+    if (html.indexOf('data-contact-whatsapp') > html.indexOf('commercial-form-disclosure') || html.indexOf('data-contact-email') > html.indexOf('commercial-form-disclosure')) errors.push(`${label}: WhatsApp and email must precede the form disclosure`);
   }
   if (html.includes('fonts.googleapis.com') || html.includes('fonts.gstatic.com')) errors.push(`${label}: external Google Fonts dependency remains`);
   if (!html.includes('/fonts/dm-sans-latin-ext-variable.woff2') || !html.includes('/fonts/source-serif-4-latin-ext-variable.woff2')) {
     errors.push(`${label}: local font preloads missing`);
   }
-  if (!label.startsWith('404') && !isPersianLanding && !['tr','en','de','it','fr','x-default'].every((code) => hreflangs.includes(code))) {
+  const requiredHreflangs = isHomepage || tradeRecord ? [...tradeLocaleCodes,'x-default'] : ['tr','en','de','it','x-default'];
+  if (!label.startsWith('404') && !requiredHreflangs.every((code) => hreflangs.includes(code))) {
     errors.push(`${label}: incomplete hreflang set`);
   }
   const expectedLang = label === 'index.html' ? 'tr' : label.split('/')[0];
-  if (['tr','en','de','it','fr'].includes(expectedLang) && !html.includes(`<html lang="${expectedLang}"`)) {
+  if (['tr','en','de','it','fa','ru'].includes(expectedLang) && !html.includes(`<html lang="${expectedLang}"`)) {
     errors.push(`${label}: incorrect html lang`);
   }
   if (productCatalogs.has(label)) {
@@ -183,15 +186,18 @@ for (const file of htmlFiles) {
     const catalogueGroups = [...html.matchAll(/data-catalogue-group="([^"]+)"/g)].map((match) => match[1]);
     if (catalogueGroups.length !== 6 || new Set(catalogueGroups).size !== 6) errors.push(`${label}: expected six unique catalogue groups`);
   }
-  const isHome = ['index.html','en/index.html','de/index.html','it/index.html','fr/index.html'].includes(label);
-  if (isHome && !/class="hero-visual"[\s\S]*?srcset="[^"]*\/images\/generated\/ctseg-global-trade-hero-premium-640\.webp/.test(html)) {
+  const isHome = ['index.html','en/index.html','de/index.html','it/index.html','fa/index.html','ru/index.html'].includes(label);
+  if (isHome && !/(?:class="hero-visual"|class="fa-hero-visual")[\s\S]*?srcset="[^"]*\/images\/generated\/ctseg-global-trade-hero-premium-640\.webp/.test(html)) {
     errors.push(`${label}: responsive premium homepage hero missing`);
   }
   const imagePreloadCount = (html.match(/rel="preload" as="image"/g) || []).length;
   if (imagePreloadCount !== (isHome || isPersianLanding ? 1 : 0)) errors.push(`${label}: unexpected responsive image preload count ${imagePreloadCount}`);
   if (isHome) {
-    if ((html.match(/data-trade-intent=/g) || []).length < 2 || !html.includes('intent=buyer_request') || !html.includes('intent=supplier_market_entry')) errors.push(`${label}: two stable trade-intent user flows missing`);
-    if ((html.match(/class="platform-sector-grid"/g) || []).length !== 1 || !html.includes('id="for-buyers"') || !html.includes('id="for-producers"')) errors.push(`${label}: trade-platform information architecture missing`);
+    const intentHooks=(html.match(/data-(?:trade|fa)-intent=/g) || []).length;
+    if (intentHooks < 2 || !html.includes('buyer_request') || !html.includes('supplier_market_entry')) errors.push(`${label}: two stable trade-intent user flows missing`);
+    const hasTradeArchitecture=((html.match(/class="platform-sector-grid"/g) || []).length === 1 && html.includes('id="for-buyers"') && html.includes('id="for-producers"'))
+      || (html.includes('data-persian-producer-entry') && html.includes('id="services"') && html.includes('id="sectors"'));
+    if (!hasTradeArchitecture) errors.push(`${label}: trade-platform information architecture missing`);
     if (alternates.fa !== 'https://ctseg.com.tr/fa/') errors.push(`${label}: Persian homepage hreflang missing`);
   }
   if (!isPersianLanding && !tradeRecord) {
@@ -200,7 +206,7 @@ for (const file of htmlFiles) {
     const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
     if ((desktopLocales.match(/data-locale-option/g) || []).length !== 6 || !desktopLocales.includes('href="/fa/"')) errors.push(`${label}: desktop locale panel must contain six languages and the Persian homepage`);
     if ((mobileLocales.match(/data-locale-option/g) || []).length !== 6 || !mobileLocales.includes('href="/fa/"')) errors.push(`${label}: mobile locale panel must contain six languages and the Persian homepage`);
-    if (!/class="locale-code">(?:TR|EN|DE|IT|FR)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger)) {
+    if (!/class="locale-code">(?:TR|EN|DE|IT|RU)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger)) {
       errors.push(`${label}: desktop language trigger must show only the active locale code`);
     }
   }
@@ -251,7 +257,7 @@ for (const file of htmlFiles) {
     for (const code of tradeLocaleCodes) if (!alternates[code]) errors.push(`${label}: reciprocal homepage hreflang ${code} missing`);
     if (alternates['x-default'] !== 'https://ctseg.com.tr/en/') errors.push(`${label}: Persian x-default must point to English homepage`);
     const persianLocaleTags = [...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].map((match) => match[0]);
-    const persianLocalePaths = {tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/'};
+    const persianLocalePaths = {tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'};
     if (persianLocaleTags.length !== 6) errors.push(`${label}: Persian header must expose six locale options`);
     for (const [code,path] of Object.entries(persianLocalePaths)) {
       const tag = persianLocaleTags.find((item) => item.includes(`hreflang="${code}"`)) ?? '';
@@ -279,7 +285,7 @@ for (const file of htmlFiles) {
     for (const optional of ['country','product','quantity','delivery','targetDate','requirements']) if (!persianForm.includes(`name="${optional}"`)) errors.push(`${label}: Persian optional-detail field missing (${optional})`);
     if (!persianForm.includes('action="/api/contact"') || !persianForm.includes('name="website"') || !persianForm.includes('name="startedAt"') || !html.includes('data-form-fallback')) errors.push(`${label}: secure server-backed form contract missing`);
     if (!html.includes('started.value=String(Date.now())')) errors.push(`${label}: client-side timing value missing`);
-    for (const requiredCopy of ['برای تولیدکنندگان و صادرکنندگان ایرانی','چهار مسیر برای تأمین و توسعه بازار','درخواست خود را مطرح کنید','افزودن جزئیات (اختیاری)']) {
+    for (const requiredCopy of ['برای تولیدکنندگان و صادرکنندگان ایرانی','چهار مسیر برای تأمین و توسعه بازار','درخواست تجاری خود را مطرح کنید','افزودن جزئیات (اختیاری)']) {
       if (!html.includes(requiredCopy)) errors.push(`${label}: strengthened Persian entry copy missing (${requiredCopy})`);
     }
     if ((html.match(/data-sector-card=/g) || []).length !== 4 || (html.match(/data-sector-cta/g) || []).length !== 4) {
@@ -397,8 +403,8 @@ for (const [sourceLabel, sourceRecord] of builtTradeRecords) {
   }
 }
 if (productSchemaPages !== 0) errors.push(`Product schema must not be used without a concrete offer; found ${productSchemaPages}`);
-if (productAssessmentServicePages !== 90) errors.push(`expected 90 specification-led product sourcing Service schemas, found ${productAssessmentServicePages}`);
-if (contactEmailPanels !== 5) errors.push(`expected five localized contact email panels, found ${contactEmailPanels}`);
+if (productAssessmentServicePages !== 72) errors.push(`expected 72 specification-led product sourcing Service schemas across the four full catalogue locales, found ${productAssessmentServicePages}`);
+if (contactEmailPanels !== 10) errors.push(`expected ten localized contact email panels across six homepages and four full contact pages, found ${contactEmailPanels}`);
 if (!existsSync(join(root, persianLandingLabel))) errors.push('standalone Persian landing page build output missing');
 const sitemapXml = files.filter((file) => /sitemap-\d+\.xml$/.test(file)).map((file) => readFileSync(file,'utf8')).join('\n');
 if (!sitemapXml.includes(`<loc>${persianLandingCanonical}</loc>`)) errors.push('Persian landing canonical missing from sitemap');
@@ -434,7 +440,7 @@ for (const file of htmlFiles) {
   }
 }
 for (const localizedMarkets of [
-  ['tr','pazarlar'],['de','maerkte'],['it','mercati'],['fr','marches']
+  ['tr','pazarlar'],['de','maerkte'],['it','mercati']
 ]) {
   const localizedHtml = readFileSync(join(root, ...localizedMarkets, 'index.html'), 'utf8');
   if (/<a\b[^>]*data-fa-landing-link/.test(localizedHtml)) {
@@ -460,13 +466,13 @@ if (!css.includes('--header-height:88px') || !css.includes('.page-hero+.section'
 if (!css.includes('.contact-email-link:hover') || !css.includes('.contact-email-link:focus-visible') || !css.includes('overflow-wrap:anywhere')) {
   errors.push('compiled CSS: contact email hover/focus/wrapping treatment missing');
 }
-for (const locale of ['tr','en','de','it','fr']) {
+for (const locale of ['tr','en','de','it','ru']) {
   if (!css.includes(`html[data-locale=${locale}]`)) errors.push(`compiled CSS: ${locale} locale treatment missing`);
 }
 
 const pagesByCanonical = new Map(pageRecords.map((page) => [page.canonical,page]));
 for (const page of pageRecords) {
-  for (const code of ['tr','en','de','it','fr'].filter((locale) => page.alternates[locale])) {
+  for (const code of ['tr','en','de','it','ru'].filter((locale) => page.alternates[locale])) {
     const targetUrl = page.alternates[code];
     const target = pagesByCanonical.get(targetUrl);
     if (!target) {
@@ -484,4 +490,4 @@ if (errors.length) {
   for (const error of [...new Set(errors)]) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Site check passed: ${htmlFiles.length} HTML pages, two stable intent flows, all 18 sourcing routes with explicit locale/canonical/hreflang/x-default/H1/chrome/Persian-content assertions and reciprocal six-locale counterparts, ${checkedLinks} internal links, 90 sourcing Service schemas without Product schema, sitemap/llms coverage and complete metadata checks.`);
+console.log(`Site check passed: ${htmlFiles.length} HTML pages, two stable intent flows, all 18 sourcing routes with explicit locale/canonical/hreflang/x-default/H1/chrome/Persian-content assertions and reciprocal six-locale counterparts, ${checkedLinks} internal links, 72 catalogue sourcing Service schemas without Product schema, sitemap/llms coverage and complete metadata checks.`);

@@ -15,6 +15,7 @@ export function getRouteRecords(): RouteRecord[] {
   const records: RouteRecord[] = [];
   for (const lang of locales) {
     if (lang !== 'tr') records.push({ lang, key:'home' });
+    if (lang === 'ru') continue;
     for (const key of ['services','products','markets','insights','about','contact']) {
       records.push({ lang, path:sectionSlugs[key][lang], key });
     }
@@ -46,12 +47,12 @@ export function getMeta(record: RouteRecord) {
   const copy = pageCopy[lang];
   const t = ui[lang];
   if (key === 'home') return {
-    title:`CTSEG | ${lang === 'tr' ? 'Uluslararası Ticaret Eşleştirme ve Koordinasyon' : lang === 'en' ? 'International Trade Matching & Coordination' : lang === 'de' ? 'Internationale Geschäftsanbahnung & Koordination' : lang === 'it' ? 'Matching Commerciale Internazionale' : 'Mise en Relation Commerciale Internationale'}`,
+    title:`CTSEG | ${lang === 'tr' ? 'Uluslararası Ticaret Eşleştirme ve Koordinasyon' : lang === 'en' ? 'International Trade Matching & Coordination' : lang === 'de' ? 'Internationale Geschäftsanbahnung & Koordination' : lang === 'it' ? 'Matching Commerciale Internazionale' : 'Международный сорсинг и коммерческая координация'}`,
     description: lang === 'tr' ? 'CTSEG, alıcıları doğrulanabilir tedarikçilerle; üreticileri uygun alıcılar ve uluslararası pazar fırsatlarıyla buluşturan ticari koordinasyon platformudur.' :
       lang === 'en' ? 'CTSEG connects buyers with verifiable suppliers and producers with suitable buyers and international market opportunities through independent commercial coordination.' :
       lang === 'de' ? 'CTSEG verbindet Einkäufer mit prüfbaren Lieferanten und Hersteller mit geeigneten Abnehmern und internationalen Marktchancen.' :
       lang === 'it' ? 'CTSEG collega acquirenti a fornitori verificabili e produttori a buyer e opportunità internazionali tramite coordinamento commerciale indipendente.' :
-      'CTSEG relie les acheteurs à des fournisseurs vérifiables et les producteurs à des acheteurs et marchés internationaux pertinents.'
+      'CTSEG помогает искать производителей и поставщиков, находить покупателей и координировать международные коммерческие процессы.'
   };
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
   if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} B2B | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };

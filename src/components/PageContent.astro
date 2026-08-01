@@ -36,13 +36,15 @@ const platform = tradePlatformCopy[lang];
 const contact = contactCopy[lang];
 const homepageHero = localizedTradeVisual('global-trade-hero',lang);
 const homepageSectorVisuals = homeTradeVisualKeys.map((visualKey)=>localizedTradeVisual(visualKey,lang));
-const contactWithIntent = (intent:'buyer_request'|'supplier_market_entry') => `${sectionHref('contact')}?intent=${intent}#commercial-form`;
+const contactWithIntent = (intent:'buyer_request'|'supplier_market_entry') => lang === 'ru'
+  ? '#commercial-form'
+  : `${sectionHref('contact')}?intent=${intent}#commercial-form`;
 const sectorEntry = {
   tr:{title:'İran halısı ve tekstil tedarik alanları',lead:'Üç uzmanlık alanını; ürün, üretici, numune, kalite, paketleme ve lojistik koşullarıyla birlikte inceleyin.'},
   en:{title:'Iranian carpet and textile sourcing',lead:'Explore three specialist areas through product, producer, sample, quality, packaging and logistics criteria.'},
   de:{title:'Beschaffung iranischer Teppiche und Textilien',lead:'Drei Fachbereiche mit Produkt-, Hersteller-, Muster-, Qualitäts-, Verpackungs- und Logistikkriterien.'},
   it:{title:'Sourcing di tappeti iraniani e tessili',lead:'Tre aree specialistiche valutate per prodotto, produttore, campioni, qualità, imballaggio e logistica.'},
-  fr:{title:'Sourcing de tapis iraniens et de textiles',lead:'Trois domaines spécialisés évalués selon le produit, le fabricant, les échantillons, la qualité, l’emballage et la logistique.'}
+  ru:{title:'Сорсинг иранских ковров и текстиля',lead:'Три профильных направления с оценкой продукта, производителя, образцов, качества и упаковки.'}
 }[lang];
 const service = id && key === 'services' ? services[id as keyof typeof services] : null;
 const detailedService = service && id && (lang === 'tr' || lang === 'en') && id in serviceDetails[lang]
@@ -58,10 +60,10 @@ const sectionHref = (section:string) => localizedPath(lang, section);
 const indexLabel = (index:number) => String(index + 1).padStart(2,'0');
 const marketNames = {
   tr:['Türkiye','Avrupa','Uluslararası'], en:['Türkiye','Europe','International'], de:['Türkiye','Europa','International'],
-  it:['Türkiye','Europa','Internazionale'], fr:['Türkiye','Europe','International']
+  it:['Türkiye','Europa','Internazionale'], ru:['Турция','Европа','Международные рынки']
 }[lang];
-const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',fr:'Mentions légales'}[lang];
-const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',fr:'27 juillet 2026'}[lang];
+const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',ru:'Правовая информация'}[lang];
+const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',ru:'27 июля 2026'}[lang];
 const showcaseRoles = ['lead','medium','medium','compact','compact','compact'];
 const productFamilies:Record<string,string> = {
   'akbari-pistachio':'pistachio', 'mazafati-dates':'dates', almonds:'nuts',
@@ -70,32 +72,32 @@ const productFamilies:Record<string,string> = {
 const catalogueGroups = [
   {
     key:'pistachio',
-    title:{tr:'Fıstık Çeşitleri',en:'Pistachio Varieties',de:'Pistaziensorten',it:'Varietà di pistacchio',fr:'Variétés de pistaches'}[lang],
+    title:{tr:'Fıstık Çeşitleri',en:'Pistachio Varieties',de:'Pistaziensorten',it:'Varietà di pistacchio',ru:'Variétés de pistaches'}[lang],
     ids:['akbari-pistachio','kaleghouchi-pistachio','green-peeled-pistachio','fandoghi-pistachio','pistachio-granules','ahmad-aghaei-pistachio']
   },
   {
     key:'dates',
-    title:{tr:'Hurma ve Hurma Ürünleri',en:'Dates & Date Products',de:'Datteln & Dattelprodukte',it:'Datteri e derivati',fr:'Dattes et produits dérivés'}[lang],
+    title:{tr:'Hurma ve Hurma Ürünleri',en:'Dates & Date Products',de:'Datteln & Dattelprodukte',it:'Datteri e derivati',ru:'Dattes et produits dérivés'}[lang],
     ids:['mazafati-dates','date-paste-syrup']
   },
   {
     key:'nuts',
-    title:{tr:'Kuruyemişler',en:'Nuts',de:'Nüsse',it:'Frutta a guscio',fr:'Fruits à coque'}[lang],
+    title:{tr:'Kuruyemişler',en:'Nuts',de:'Nüsse',it:'Frutta a guscio',ru:'Fruits à coque'}[lang],
     ids:['almonds','walnuts','mixed-nuts']
   },
   {
     key:'dried-fruit',
-    title:{tr:'Kuru Meyveler',en:'Dried Fruits',de:'Trockenfrüchte',it:'Frutta essiccata',fr:'Fruits séchés'}[lang],
+    title:{tr:'Kuru Meyveler',en:'Dried Fruits',de:'Trockenfrüchte',it:'Frutta essiccata',ru:'Fruits séchés'}[lang],
     ids:['raisins','dried-apricots-kernels','dried-mulberries']
   },
   {
     key:'seeds',
-    title:{tr:'Tohumlar',en:'Seeds',de:'Saaten',it:'Semi',fr:'Graines'}[lang],
+    title:{tr:'Tohumlar',en:'Seeds',de:'Saaten',it:'Semi',ru:'Graines'}[lang],
     ids:['pumpkin-seeds','sunflower-seeds']
   },
   {
     key:'specialities',
-    title:{tr:'Safran ve Özel Ürünler',en:'Saffron & Specialities',de:'Safran & Spezialitäten',it:'Zafferano e specialità',fr:'Safran et spécialités'}[lang],
+    title:{tr:'Safran ve Özel Ürünler',en:'Saffron & Specialities',de:'Safran & Spezialitäten',it:'Zafferano e specialità',ru:'Safran et spécialités'}[lang],
     ids:['saffron','zereshk']
   }
 ];
@@ -110,14 +112,14 @@ const productCommercialLabels = {
   en:['Origin','Product type / variety','Potential packaging','MOQ','Quality and analysis documents','Sample','Private label','Delivery and Incoterm','Lead time','Storage','Intended use','Information required for quotation'],
   de:['Herkunft','Produkttyp / Sorte','Mögliche Verpackung','MOQ','Qualitäts- und Analysedokumente','Muster','Eigenmarke','Lieferung und Incoterm','Lieferzeit','Lagerung','Zielanwendung','Angaben für ein Angebot'],
   it:['Origine','Tipo / varietà','Possibile imballaggio','MOQ','Documenti qualità e analisi','Campione','Private label','Consegna e Incoterm','Tempi','Stoccaggio','Uso previsto','Dati necessari per l’offerta'],
-  fr:['Origine','Type / variété','Emballage possible','MOQ','Documents qualité et analyses','Échantillon','Marque propre','Livraison et Incoterm','Délai','Stockage','Usage cible','Informations pour le devis']
+  ru:['Origine','Type / variété','Emballage possible','MOQ','Documents qualité et analyses','Échantillon','Marque propre','Livraison et Incoterm','Délai','Stockage','Usage cible','Informations pour le devis']
 }[lang];
 const verifiedLater = {
   tr:['Üretici ve sipariş yapısına göre doğrulanır','Teklif aşamasında teyit edilir','Parti bazında belge kontrolü yapılır','Talebe göre değerlendirilir','Üretici ve hedef pazara göre değerlendirilir'],
   en:['Verified according to producer and order structure','Confirmed at quotation stage','Documents checked at batch level','Assessed on request','Assessed by producer and target market'],
   de:['Nach Hersteller und Auftragsstruktur zu prüfen','In der Angebotsphase zu bestätigen','Dokumentenprüfung je Charge','Auf Anfrage zu bewerten','Nach Hersteller und Zielmarkt zu bewerten'],
   it:['Da verificare secondo produttore e ordine','Da confermare in fase di offerta','Documenti verificati per lotto','Valutato su richiesta','Valutato per produttore e mercato target'],
-  fr:['À vérifier selon le producteur et la commande','À confirmer au stade du devis','Documents contrôlés par lot','Évalué sur demande','Évalué selon le producteur et le marché cible']
+  ru:['À vérifier selon le producteur et la commande','À confirmer au stade du devis','Documents contrôlés par lot','Évalué sur demande','Évalué selon le producteur et le marché cible']
 }[lang];
 ---
 {key === 'home' && (
@@ -172,7 +174,7 @@ const verifiedLater = {
     </div></section>
     <ProcessRail title={platform.processTitle} steps={platform.process} />
     {(lang === 'tr' || lang === 'en') && <div class="container process-detail-link"><a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a></div>}
-    <section class="markets-editorial section"><div class="container">
+    <section class="markets-editorial section" id="markets"><div class="container">
       <p class="eyebrow">{editorial.marketsKicker}</p>
       <div class="section-head"><h2>{h.marketsTitle}</h2><p>{h.marketsLead}</p></div>
       <div class="market-line">{marketNames.map((market,index) => <div><span>{indexLabel(index)}</span><strong>{market}</strong></div>)}</div>
@@ -181,7 +183,7 @@ const verifiedLater = {
       <div><p class="eyebrow">CTSEG · {lang === 'tr' ? 'Temsili çalışma' : 'Representative work'}</p><h2>{completionHome.scenarioTitle}</h2><p>{completionHome.scenarioLead}</p></div>
       <aside class="side-panel"><a class="button button-secondary" href={scenarioHref} data-case-scenario-cta>{completionHome.scenarioCta}</a></aside>
     </div></section>}
-    <section class="section company-trust-band"><div class="container">
+    <section class="section company-trust-band" id="company"><div class="container">
       <div class="company-trust-heading"><h2>{completionHome.trustTitle}</h2><p>{company.name}</p></div>
       <dl class="trust-facts">
         <div><dt>01</dt><dd>{completionHome.established}</dd></div>
@@ -190,6 +192,7 @@ const verifiedLater = {
       </dl>
     </div></section>
     <section class="section"><div class="container"><div class="cta-statement"><p class="eyebrow">CTSEG</p><h2>{platform.pathsTitle}</h2><div class="actions"><a class="button" href={contactWithIntent('buyer_request')}>{platform.buyerCta}</a><a class="button button-secondary" href={contactWithIntent('supplier_market_entry')}>{platform.producerCta}</a></div></div></div></section>
+    <section class="section commercial-form-section" id="contact"><div class="container"><CommercialRequestForm lang={lang} /></div></section>
   </>
 )}
 

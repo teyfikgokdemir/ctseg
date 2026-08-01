@@ -1,12 +1,21 @@
 ---
-import { locales, localeNames, localizedPath, sectionSlugs, ui, type Locale } from '../data/site';
+import { localizedPath, ui, type Locale } from '../data/site';
+import { activeLocaleRegistry, type ActiveLocale } from '../data/locales';
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 import { tradePlatformCopy } from '../data/trade-platform';
 const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?: string; pageId?: string };
 const t = ui[lang];
 const home = localizedPath(lang, 'home');
 const p = tradePlatformCopy[lang];
-const nav = [
+const nav = lang === 'ru' ? [
+  ['services', t.services, `${home}#trade-paths`],
+  ['buyers', p.buyerTitle, `${home}#for-buyers`],
+  ['producers', p.producerTitle, `${home}#for-producers`],
+  ['sectors', p.sectorsTitle, `${home}#sectors`],
+  ['markets', t.markets, `${home}#markets`],
+  ['about', t.about, `${home}#company`],
+  ['contact', t.contact, `${home}#contact`]
+] : [
   ['services', t.services, localizedPath(lang,'services')],
   ['buyers', p.buyerTitle, `${home}#for-buyers`],
   ['producers', p.producerTitle, `${home}#for-producers`],
@@ -15,12 +24,9 @@ const nav = [
   ['about', t.about, localizedPath(lang,'about')],
   ['contact', t.contact, localizedPath(lang,'contact')]
 ];
-const switchPath = (target: Locale) => localizedPath(target, pageKey, pageId);
-const globalLocales = [...locales, 'fa'] as const;
-const globalLocaleNames = { ...localeNames, fa: 'فارسی' } as const;
-const globalSwitchPath = (target: Locale | 'fa') => target === 'fa'
-  ? '/fa/'
-  : switchPath(target);
+const globalLocales = activeLocaleRegistry.map((entry) => entry.code);
+const globalLocaleNames = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code,entry.label])) as Record<ActiveLocale,string>;
+const globalSwitchPath = (target: ActiveLocale) => target === 'fa' ? '/fa/' : target === 'ru' ? '/ru/' : localizedPath(target, pageKey, pageId);
 ---
 <header class="site-header">
   <div class="container header-inner">
@@ -76,7 +82,7 @@ const globalSwitchPath = (target: Locale | 'fa') => target === 'fa'
           >{code.toUpperCase()}<span class="sr-only"> · {globalLocaleNames[code]}</span></a>)}
         </div>
       </div>
-      <a class="button button-small nav-cta" href={localizedPath(lang, 'contact')}>{t.quote}</a>
+      <a class="button button-small nav-cta" href={lang === 'ru' ? '/ru/#contact' : localizedPath(lang, 'contact')}>{t.quote}</a>
     </nav>
   </div>
 </header>

@@ -46,7 +46,6 @@ try {
     { name:'desktop-en-contact', path:'/en/contact/', width:1440, height:1000 },
     { name:'desktop-de-contact', path:'/de/kontakt/', width:1440, height:1000 },
     { name:'desktop-it-contact', path:'/it/contatti/', width:1440, height:1000 },
-    { name:'desktop-fr-contact', path:'/fr/contact/', width:1440, height:1000 },
     { name:'desktop-de-home', path:'/de/', width:1440, height:1000 },
     { name:'desktop-de-catalogue', path:'/de/handelsprodukte/', width:1440, height:1000 },
     { name:'desktop-de-locale-panel', path:'/de/', width:1440, height:1000, openLanguage:true },
@@ -54,18 +53,15 @@ try {
     { name:'desktop-en-persian-nav', path:'/en/', width:1440, height:1000, openPersianNav:true, verifyPersianNav:true },
     { name:'desktop-it-home', path:'/it/', width:1440, height:1000 },
     { name:'desktop-it-catalogue', path:'/it/prodotti-commerciali/', width:1440, height:1000 },
-    { name:'desktop-fr-home', path:'/fr/', width:1440, height:1000 },
     { name:'wide1920-tr-home', path:'/', width:1920, height:1080 },
     { name:'wide1920-fa-home', path:'/fa/', width:1920, height:1080, persian:true },
     { name:'desktop1024-tr-home', path:'/', width:1024, height:900 },
     { name:'desktop1024-fa-home', path:'/fa/', width:1024, height:900, persian:true },
-    { name:'desktop-fr-catalogue', path:'/fr/produits-commerciaux/', width:1440, height:1000 },
     { name:'tablet-tr-about', path:'/tr/hakkimizda/', width:820, height:1180 },
     { name:'tablet-tr-contact', path:'/tr/iletisim/', width:820, height:1180 },
     { name:'tablet-en-contact', path:'/en/contact/', width:820, height:1180 },
     { name:'tablet-de-contact', path:'/de/kontakt/', width:820, height:1180 },
     { name:'tablet-it-contact', path:'/it/contatti/', width:820, height:1180 },
-    { name:'tablet-fr-contact', path:'/fr/contact/', width:820, height:1180 },
     { name:'tablet-tr-process-1024', path:'/tr/nasil-calisiyoruz/', width:1024, height:900, allowLocaleFallback:true },
     { name:'tablet-en-scenarios-1024', path:'/en/representative-work-scenarios/', width:1024, height:900, allowLocaleFallback:true, gapLimit:100 },
     { name:'tablet-tr-guide-1024', path:'/tr/icgoruler/bitkisel-yag-tedarikinde-rfq-kontrol-listesi/', width:1024, height:900, allowLocaleFallback:true },
@@ -79,13 +75,11 @@ try {
     { name:'wide-de-home', path:'/de/', width:1600, height:1000 },
     { name:'wide-de-locale-panel', path:'/de/', width:1600, height:1000, openLanguage:true },
     { name:'wide-it-home', path:'/it/', width:1600, height:1000 },
-    { name:'wide-fr-home', path:'/fr/', width:1600, height:1000 },
     { name:'mobile-tr-home', path:'/', width:390, height:844 },
     { name:'mobile320-tr-home', path:'/', width:320, height:800 },
     { name:'mobile360-tr-home', path:'/', width:360, height:800 },
     { name:'mobile-en-home', path:'/en/', width:390, height:844 },
     { name:'mobile-it-home', path:'/it/', width:390, height:844 },
-    { name:'mobile-fr-home', path:'/fr/', width:390, height:844 },
     { name:'mobile-tr-services', path:'/tr/hizmetler/', width:390, height:844 },
     { name:'mobile-tr-process', path:'/tr/nasil-calisiyoruz/', width:390, height:844, allowLocaleFallback:true },
     { name:'mobile-en-scenarios', path:'/en/representative-work-scenarios/', width:390, height:844, allowLocaleFallback:true, gapLimit:90 },
@@ -96,10 +90,8 @@ try {
     { name:'mobile-en-contact', path:'/en/contact/', width:390, height:844 },
     { name:'mobile-de-contact', path:'/de/kontakt/', width:390, height:844 },
     { name:'mobile-it-contact', path:'/it/contatti/', width:390, height:844 },
-    { name:'mobile-fr-contact', path:'/fr/contact/', width:390, height:844 },
     { name:'mobile-tr-menu', path:'/', width:390, height:844, openMenu:true },
     { name:'mobile-en-persian-nav', path:'/en/', width:390, height:844, openMenu:true, verifyPersianNav:true },
-    { name:'mobile-fr-catalogue', path:'/fr/produits-commerciaux/', width:390, height:844 },
     { name:'mobile-de-home', path:'/de/', width:390, height:844 },
     { name:'mobile430-tr-home', path:'/', width:430, height:932 },
     { name:'mobile430-tr-services', path:'/tr/hizmetler/', width:430, height:932 },
@@ -108,19 +100,26 @@ try {
     { name:'mobile430-tr-contact', path:'/tr/iletisim/', width:430, height:932 },
     { name:'mobile430-tr-menu', path:'/', width:430, height:932, openMenu:true },
     { name:'mobile430-de-home', path:'/de/', width:430, height:932 },
-    { name:'mobile430-fr-home', path:'/fr/', width:430, height:932 },
     { name:'desktop-fa-landing', path:'/fa/', width:1440, height:1000, persian:true },
     { name:'tablet-fa-landing', path:'/fa/', width:820, height:1180, persian:true },
     { name:'mobile320-fa-landing', path:'/fa/', width:320, height:800, persian:true },
     { name:'mobile360-fa-landing', path:'/fa/', width:360, height:800, persian:true },
     { name:'mobile-fa-landing', path:'/fa/', width:390, height:844, persian:true },
     { name:'mobile430-fa-landing', path:'/fa/', width:430, height:932, persian:true }
+    ,{ name:'mobile320-ru-home', path:'/ru/', width:320, height:800 }
+    ,{ name:'mobile360-ru-home', path:'/ru/', width:360, height:800 }
+    ,{ name:'mobile390-ru-home', path:'/ru/', width:390, height:844 }
+    ,{ name:'mobile430-ru-home', path:'/ru/', width:430, height:932 }
+    ,{ name:'tablet820-ru-home', path:'/ru/', width:820, height:1180 }
+    ,{ name:'desktop1024-ru-home', path:'/ru/', width:1024, height:900 }
+    ,{ name:'desktop1440-ru-home', path:'/ru/', width:1440, height:1000 }
+    ,{ name:'wide1920-ru-home', path:'/ru/', width:1920, height:1080 }
   ];
-  const sourcingLocales = ['tr','en','de','it','fr','fa'];
+  const sourcingLocales = ['tr','en','de','it','fa','ru'];
   const sourcingFamilies = {
-    carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fr:'/fr/sourcing/tapis-persans/',fa:'/fa/sourcing/فرش-ایرانی/'},
-    silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fr:'/fr/sourcing/tapis-en-soie-noues-main/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/'},
-    textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fr:'/fr/sourcing/sourcing-textile-en-gros/',fa:'/fa/sourcing/تامین-عمده-منسوجات/'}
+    carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/'},
+    silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/'},
+    textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/'}
   };
   const sourcingAudiences = {
     carpets:['کارگاه‌های فرش دستباف','تولیدکنندگان فرش ابریشم','تولیدکنندگان فرش ماشینی','صادرکنندگان فرش'],
@@ -495,13 +494,15 @@ try {
     const badContactEmail = result.contactEmail && (result.contactEmail.occurrences !== 1 || result.contactEmail.links !== 1 ||
       result.contactEmail.href !== 'mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry' ||
       result.contactEmail.buttons !== 0 || !result.contactEmail.focusVisible);
-    const badLocale = !testCase.persian && (result.localeOptions !== 6 || result.activeDesktopLocale !== 1 || (!testCase.allowLocaleFallback && !result.localeRouteMatch) || !result.desktopLocaleCodeOnly ||
+    const isHomepage=['/','/en/','/de/','/it/','/fa/','/ru/'].includes(testCase.path);
+    const allowsLocaleFallback=testCase.allowLocaleFallback || !isHomepage;
+    const badLocale = !testCase.persian && (result.localeOptions !== 6 || result.activeDesktopLocale !== 1 || (!allowsLocaleFallback && !result.localeRouteMatch) || !result.desktopLocaleCodeOnly ||
       (testCase.openMenu && (result.visibleMobileLocales !== 6 || result.mobilePanelHeight < testCase.height * .7)));
     const badPersian = testCase.persian && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
       result.persian.rootDirection !== 'rtl' || result.persian.bodyDirection !== 'rtl' || result.persian.h1s !== 1 ||
       result.persian.details !== 8 || result.persian.fields !== 12 || !['intent','name','company','emailOrPhone','message','privacy','country','product','quantity','delivery','targetDate','requirements'].every((name)=>result.persian.fieldNames.includes(name)) || !result.persian.labeled || !result.persian.companyVisible ||
       !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 6 || result.persian.activeLocale !== 'fa' ||
-      !['tr','en','de','it','fr','fa'].every((code)=>result.persian.localePaths[code]) ||
+      !['tr','en','de','it','fa','ru'].every((code)=>result.persian.localePaths[code]) ||
       !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl || result.persian.chipCount < 1 || result.persian.chipContrastMin < 4.5 ||
       result.persian.heroMedia.imageNaturalWidth < 1 || result.persian.heroMedia.imageNaturalHeight < 1 || result.persian.heroMedia.objectFit !== 'cover' ||
       (testCase.width <= 560 && (result.persian.heroMedia.imageHeight < 160 || result.persian.heroMedia.imageHeight > 210 || result.persian.heroMedia.visualHeight > 330 || result.persian.heroMedia.captionHeight > 120 || result.persian.heroMedia.captionRowMax > 42)) ||
@@ -523,7 +524,6 @@ try {
         result.persianNav.target !== null || result.persianNav.primary !== 'For Iranian Businesses' ||
         result.persianNav.helper !== 'Persian landing page' || (testCase.verifyPersianNav && !result.persianNav.visible)
       : result.persianNav.count !== 0;
-    const isHomepage=['/','/en/','/de/','/it/','/fr/','/fa/'].includes(testCase.path);
     const badUx=(isHomepage&&(result.ux.h1Count!==1||!result.ux.h1Within||!result.ux.headingsWithin||result.ux.h1Lines>6||result.ux.floatingCount!==2||!result.ux.floatingTargets||!result.ux.backInitiallyHidden||!result.ux.whatsappValid||!dynamicUx.backVisible||!result.ux.headerContract||!dynamicUx.headerAtTop))||result.ux.minLightContrast<4.5||!result.ux.formCore||!result.ux.detailsClosed||!result.ux.emailValid;
     const badTradeImages=result.tradeVisuals.some((visual)=>visual.naturalWidth<1||visual.naturalHeight<1||visual.width<=0||visual.height<=0||!visual.alt||!visual.srcset||!visual.sizes||!visual.dimensions||visual.objectFit!=='cover'||!visual.objectPosition)||
       new Set(result.tradeVisuals.map((visual)=>visual.src)).size!==result.tradeVisuals.length||
@@ -535,12 +535,12 @@ try {
     await page.close();
   }
   const globalLocaleEntries = [
-    {lang:'tr',path:'/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/'}},
-    {lang:'en',path:'/en/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/'}},
-    {lang:'de',path:'/de/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/'}},
-    {lang:'it',path:'/it/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/'}},
-    {lang:'fr',path:'/fr/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/'}},
-    {lang:'fa',path:'/fa/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fr:'/fr/',fa:'/fa/'}}
+    {lang:'tr',path:'/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'}},
+    {lang:'en',path:'/en/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'}},
+    {lang:'de',path:'/de/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'}},
+    {lang:'it',path:'/it/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'}},
+    {lang:'fa',path:'/fa/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'}},
+    {lang:'ru',path:'/ru/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'}}
   ];
   let globalLocaleChecks=0;
   for(const entry of globalLocaleEntries){
@@ -574,7 +574,7 @@ try {
           visibleOptions:links.filter(visible).length,
           overflow:document.documentElement.scrollWidth-window.innerWidth,
           canonical:document.querySelector('link[rel="canonical"]')?.href??null,
-          coreAlternates:lang==='fa'?true:['tr','en','de','it','fr','x-default'].every(code=>document.querySelector(`link[rel="alternate"][hreflang="${code}"]`))
+          coreAlternates:['tr','en','de','it','fa','ru','x-default'].every(code=>document.querySelector(`link[rel="alternate"][hreflang="${code}"]`))
         };
       },{lang:entry.lang,targets:entry.targets,mobile:viewport.name==='mobile'});
       const statuses=[];

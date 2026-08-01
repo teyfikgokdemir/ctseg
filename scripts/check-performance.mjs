@@ -38,7 +38,7 @@ const cases = [
   {name:'en-home',path:'/en/'},
   {name:'de-home',path:'/de/'},
   {name:'it-home',path:'/it/'},
-  {name:'fr-home',path:'/fr/'}
+  {name:'ru-home',path:'/ru/'}
 ];
 const viewports = [
   {name:'mobile-390',width:390,height:844,deviceScaleFactor:2},
