@@ -75,6 +75,14 @@ const breadcrumb = {
 };
 const schemas = [organization, webpage, service, faqSchema, breadcrumb];
 const heroSrcset = generatedImageSrcset(HERO_IMAGE, FEATURE_IMAGE_WIDTHS);
+const localeLinks = [
+  ['tr','/tr/pazarlar/'],
+  ['en','/en/markets/'],
+  ['de','/de/maerkte/'],
+  ['it','/it/mercati/'],
+  ['fr','/fr/marches/'],
+  ['fa','/fa/tamin-beynolmelali-iran/']
+] as const;
 ---
 <!doctype html>
 <html lang="fa" dir="rtl">
@@ -116,7 +124,16 @@ const heroSrcset = generatedImageSrcset(HERO_IMAGE, FEATURE_IMAGE_WIDTHS);
           <a class="fa-nav-section" href="#sourcing">حوزه‌های تأمین</a>
           <a class="fa-nav-section" href="#process">فرایند همکاری</a>
           <a class="fa-nav-section" href="#faq">پرسش‌های متداول</a>
-          <a class="fa-language" href="/en/" hreflang="en" data-fa-english-link>English</a>
+          <div class="fa-language" aria-label="انتخاب زبان" data-fa-locale-switcher>
+            {localeLinks.map(([code,path]) => <a
+              href={path}
+              lang={code}
+              hreflang={code}
+              aria-current={code === 'fa' ? 'page' : undefined}
+              data-fa-english-link={code === 'en' ? '' : undefined}
+              data-locale-option
+            >{code.toUpperCase()}</a>)}
+          </div>
           <a class="fa-button" href="#request-form">ثبت درخواست تأمین</a>
         </nav>
       </div>

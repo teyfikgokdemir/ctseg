@@ -49,7 +49,7 @@ for (const file of htmlFiles) {
   const lang = html.match(/<html lang="([^"]+)"/)?.[1] ?? '';
   const h1Count = (html.match(/<h1\b/g) || []).length;
   const expectedPath = outputPath(file);
-  const expectedCanonical = `${origin}${expectedPath}`;
+  const expectedCanonical = encodeURI(`${origin}${expectedPath}`);
 
   if (h1Count !== 1) errors.push(`${label}: expected one H1, found ${h1Count}`);
   if (!title) errors.push(`${label}: title is empty`);
@@ -158,7 +158,7 @@ for (const pathname of requiredCanonicalPaths) {
 const serviceSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Service"'));
 const blogSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Blog"'));
 const blogPostingPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"BlogPosting"'));
-if (serviceSchemaPages.length !== 26) errors.push(`expected 26 Service schema pages including Persian landing, found ${serviceSchemaPages.length}`);
+if (serviceSchemaPages.length !== 44) errors.push(`expected 44 Service schema pages including Persian landing and multilingual carpet/textile sourcing, found ${serviceSchemaPages.length}`);
 if (blogSchemaPages.length !== 5) errors.push(`expected 5 Blog schema pages, found ${blogSchemaPages.length}`);
 if (blogPostingPages.length !== 35) errors.push(`expected 35 BlogPosting pages, found ${blogPostingPages.length}`);
 

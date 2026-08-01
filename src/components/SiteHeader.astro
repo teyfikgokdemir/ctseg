@@ -9,6 +9,11 @@ const nav = [
   ['insights', t.insights], ['about', t.about], ['contact', t.contact]
 ];
 const switchPath = (target: Locale) => localizedPath(target, pageKey, pageId);
+const globalLocales = [...locales, 'fa'] as const;
+const globalLocaleNames = { ...localeNames, fa: 'فارسی' } as const;
+const globalSwitchPath = (target: Locale | 'fa') => target === 'fa'
+  ? '/fa/tamin-beynolmelali-iran/'
+  : switchPath(target);
 ---
 <header class="site-header">
   <div class="container header-inner">
@@ -41,27 +46,27 @@ const switchPath = (target: Locale) => localizedPath(target, pageKey, pageId);
           <span class="locale-chevron" aria-hidden="true"></span>
         </button>
         <div id="language-panel" class="language-menu" data-language-menu>
-          {locales.map((code) => <a
+          {globalLocales.map((code) => <a
             lang={code}
             hreflang={code}
             class:list={{ active: code === lang }}
-            href={switchPath(code)}
+            href={globalSwitchPath(code)}
             aria-current={code === lang ? 'true' : undefined}
             data-locale-option
-          ><span>{code.toUpperCase()}</span><strong>{localeNames[code]}</strong><i aria-hidden="true"></i></a>)}
+          ><span>{code.toUpperCase()}</span><strong>{globalLocaleNames[code]}</strong><i aria-hidden="true"></i></a>)}
         </div>
       </div>
       <div class="mobile-locales" aria-label={t.language}>
         <span class="mobile-locales-label">{t.language}</span>
         <div>
-          {locales.map((code) => <a
+          {globalLocales.map((code) => <a
             lang={code}
             hreflang={code}
             class:list={{ active: code === lang }}
-            href={switchPath(code)}
+            href={globalSwitchPath(code)}
             aria-current={code === lang ? 'true' : undefined}
             data-locale-option
-          >{code.toUpperCase()}<span class="sr-only"> · {localeNames[code]}</span></a>)}
+          >{code.toUpperCase()}<span class="sr-only"> · {globalLocaleNames[code]}</span></a>)}
         </div>
       </div>
       <a class="button button-small nav-cta" href={localizedPath(lang, 'contact')}>{t.quote}</a>

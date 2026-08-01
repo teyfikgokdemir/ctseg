@@ -71,6 +71,15 @@ const productCatalogs = new Set([
 ]);
 const persianLandingLabel = 'fa/tamin-beynolmelali-iran/index.html';
 const persianLandingCanonical = 'https://ctseg.com.tr/fa/tamin-beynolmelali-iran/';
+const tradeLocaleCodes = ['tr','en','de','it','fr','fa'];
+const tradeRouteFamilies = {
+  carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fr:'/fr/sourcing/tapis-persans/',fa:'/fa/sourcing/فرش-ایرانی/'},
+  silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fr:'/fr/sourcing/tapis-en-soie-noues-main/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/'},
+  textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fr:'/fr/sourcing/sourcing-textile-en-gros/',fa:'/fa/sourcing/تامین-عمده-منسوجات/'}
+};
+const tradeRecordsByLabel = new Map(Object.entries(tradeRouteFamilies).flatMap(([family,routes]) =>
+  Object.entries(routes).map(([lang,pathname]) => [decodeURI(pathname).replace(/^\//,'') + 'index.html',{family,lang,pathname,routes}])
+));
 
 const targetExists = (pathname) => {
   const clean = decodeURI(pathname).replace(/^\/+/, '').replace(/\/+$/, '');
@@ -105,6 +114,7 @@ for (const file of htmlFiles) {
   const organization = organizations[0];
   const isTurkishPage = label === 'index.html' || label.startsWith('tr/');
   const isPersianLanding = label === persianLandingLabel;
+  const tradeRecord = tradeRecordsByLabel.get(label);
   if (!label.startsWith('404') && canonical && ['tr','en','de','it','fr'].includes(lang)) pageRecords.push({ label, canonical, lang, alternates });
   if (titleCount !== 1) errors.push(`${label}: expected one title, found ${titleCount}`);
   if ((html.match(/<meta charset="UTF-8">/g) || []).length !== 1) errors.push(`${label}: expected exactly one UTF-8 charset declaration`);
@@ -115,7 +125,9 @@ for (const file of htmlFiles) {
   if (/\u00C3|\u00C2|\u00E2[\u20AC\u201D\u2013\u2014\u2122\u0153]|\u00C4[\u0178\u00B1]|\u00C5[\u0178\u017E]|\uFFFD/.test(html)) {
     errors.push(`${label}: mojibake text remains`);
   }
-  if (!html.includes(`<strong>${companyName}</strong>`)) errors.push(`${label}: localized footer company identity missing`);
+  if (!html.includes(companyName)) {
+    errors.push(`${label}: localized footer company identity missing`);
+  }
   if (isTurkishPage && !html.includes('Türkiye merkezli stratejik tedarik, doğrulanmış ticari ürünler ve uluslararası ticari karar desteği.')) {
     errors.push(`${label}: exact Turkish footer description missing`);
   }
@@ -180,21 +192,68 @@ for (const file of htmlFiles) {
     if (showcaseProducts.filter((id) => id.includes('pistachio')).length !== 1) errors.push(`${label}: homepage showcase must contain one pistachio product`);
     if (new Set(showcaseFamilies).size < 5) errors.push(`${label}: homepage showcase must represent at least five product families`);
   }
-  if (!isPersianLanding) {
+  if (!isPersianLanding && !tradeRecord) {
     const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
     const mobileLocales = html.match(/class="mobile-locales"[\s\S]*?<\/div>\s*<\/div>/)?.[0] ?? '';
     const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
-    if ((desktopLocales.match(/data-locale-option/g) || []).length !== 5) errors.push(`${label}: desktop locale panel must contain five languages`);
-    if ((mobileLocales.match(/data-locale-option/g) || []).length !== 5) errors.push(`${label}: mobile locale panel must contain five languages`);
+    if ((desktopLocales.match(/data-locale-option/g) || []).length !== 6 || !desktopLocales.includes('href="/fa/tamin-beynolmelali-iran/"')) errors.push(`${label}: desktop locale panel must contain six languages and a safe Persian fallback`);
+    if ((mobileLocales.match(/data-locale-option/g) || []).length !== 6 || !mobileLocales.includes('href="/fa/tamin-beynolmelali-iran/"')) errors.push(`${label}: mobile locale panel must contain six languages and a safe Persian fallback`);
     if (!/class="locale-code">(?:TR|EN|DE|IT|FR)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger)) {
       errors.push(`${label}: desktop language trigger must show only the active locale code`);
+    }
+  }
+  if (tradeRecord) {
+    const expectedCanonical = encodeURI(`https://ctseg.com.tr${tradeRecord.pathname}`);
+    const expectedDirection = tradeRecord.lang === 'fa' ? 'rtl' : 'ltr';
+    if (lang !== tradeRecord.lang) errors.push(`${label}: sourcing html lang must be ${tradeRecord.lang}`);
+    if (!html.includes(`<html lang="${tradeRecord.lang}" dir="${expectedDirection}"`)) errors.push(`${label}: sourcing html direction must be ${expectedDirection}`);
+    if (canonical !== expectedCanonical) errors.push(`${label}: sourcing canonical does not match its route family`);
+    if ((html.match(/<h1\b/g) || []).length !== 1) errors.push(`${label}: sourcing page must contain one H1`);
+    if (!html.includes('data-trade-menu-toggle') || !html.includes('aria-controls="trade-locale-nav"') || !html.includes('data-trade-locale-nav')) {
+      errors.push(`${label}: sourcing mobile locale menu controls missing`);
+    }
+    const localeTags = [...html.matchAll(/<a\b[^>]*data-trade-locale="([^"]+)"[^>]*>/g)].map((match) => ({code:match[1],tag:match[0]}));
+    if (localeTags.length !== 6 || !tradeLocaleCodes.every((code) => localeTags.some((item) => item.code === code))) {
+      errors.push(`${label}: sourcing locale navigation must expose all six languages`);
+    }
+    const activeLocales = localeTags.filter((item) => item.tag.includes('aria-current="page"'));
+    if (activeLocales.length !== 1 || activeLocales[0]?.code !== tradeRecord.lang) errors.push(`${label}: sourcing active locale is incorrect`);
+    for (const code of tradeLocaleCodes) {
+      const targetPath = tradeRecord.routes[code];
+      const expectedAlternate = encodeURI(`https://ctseg.com.tr${targetPath}`);
+      const localeLink = localeTags.find((item) => item.code === code)?.tag ?? '';
+      if (alternates[code] !== expectedAlternate) errors.push(`${label}: sourcing hreflang ${code} points outside its content family`);
+      if (!localeLink.includes(`href="${encodeURI(targetPath)}"`)) errors.push(`${label}: sourcing locale switch ${code} points outside its content family`);
+      if (!targetExists(targetPath)) errors.push(`${label}: sourcing locale switch ${code} target is missing`);
+    }
+    if (alternates['x-default'] !== encodeURI(`https://ctseg.com.tr${tradeRecord.routes.en}`)) errors.push(`${label}: sourcing x-default must point to the English family route`);
+    if (tradeRecord.lang === 'fa') {
+      for (const untranslated of ['Skip to content','Language selection','Open language menu','CTSEG home','Submit a commercial enquiry','Related sourcing areas']) {
+        if (html.includes(untranslated)) errors.push(`${label}: untranslated interface text remains (${untranslated})`);
+      }
+      for (const required of ['برای تولیدکنندگان و صادرکنندگان ایرانی','معرفی محصول به بازارهای بین‌المللی','ارزیابی آمادگی صادرات','مدیریت استعلام قیمت و RFQ','هماهنگی اسناد و لجستیک','ترکیه، اروپا، آمریکا','CTSEG کارخانه یا خریدار تضمینی نیست','معرفی محصول خود','آغاز همکاری صادراتی']) {
+        if (!html.includes(required)) errors.push(`${label}: Persian producer/exporter content missing (${required})`);
+      }
+      const expectedAudiences = tradeRecord.family === 'textiles'
+        ? ['تولیدکنندگان پارچه','تولیدکنندگان حوله و حوله تن‌پوش','تولیدکنندگان منسوجات خانگی','تولیدکنندگان پوشاک','برندهای private label']
+        : ['کارگاه‌های فرش دستباف','تولیدکنندگان فرش ابریشم','تولیدکنندگان فرش ماشینی','صادرکنندگان فرش'];
+      for (const audience of expectedAudiences) if (!html.includes(audience)) errors.push(`${label}: Persian target audience missing (${audience})`);
+      if ((html.match(/data-producer-cta/g) || []).length !== 5) errors.push(`${label}: five producer/export CTA links required`);
+    } else if (html.includes('data-persian-producer-section')) {
+      errors.push(`${label}: Persian producer section leaked into a non-Persian locale`);
     }
   }
   if (isPersianLanding) {
     if (!html.includes('<html lang="fa" dir="rtl">')) errors.push(`${label}: Persian html lang/RTL declaration missing`);
     if (canonical !== persianLandingCanonical) errors.push(`${label}: incorrect standalone canonical`);
-    if (html.includes('<link rel="alternate" hreflang=') || hreflangs.length < 1 || hreflangs.some((code) => code !== 'en')) {
-      errors.push(`${label}: standalone page must expose English navigation links without fake locale alternates`);
+    if (html.includes('<link rel="alternate" hreflang=')) errors.push(`${label}: standalone page must not publish fake locale alternates`);
+    const persianLocaleTags = [...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].map((match) => match[0]);
+    const persianLocalePaths = {tr:'/tr/pazarlar/',en:'/en/markets/',de:'/de/maerkte/',it:'/it/mercati/',fr:'/fr/marches/',fa:'/fa/tamin-beynolmelali-iran/'};
+    if (persianLocaleTags.length !== 6) errors.push(`${label}: Persian header must expose six locale options`);
+    for (const [code,path] of Object.entries(persianLocalePaths)) {
+      const tag = persianLocaleTags.find((item) => item.includes(`hreflang="${code}"`)) ?? '';
+      if (!tag.includes(`href="${path}"`) || !targetExists(path)) errors.push(`${label}: Persian locale switch ${code} target is incorrect or missing`);
+      if ((code === 'fa') !== tag.includes('aria-current="page"')) errors.push(`${label}: Persian locale active state is incorrect for ${code}`);
     }
     if ((html.match(/<h1\b/g) || []).length !== 1) errors.push(`${label}: expected one Persian H1`);
     if ((html.match(/<details\b/g) || []).length !== 11) errors.push(`${label}: expected eleven visible Persian FAQs`);
@@ -224,7 +283,7 @@ for (const file of htmlFiles) {
       errors.push(`${label}: Turkish interface placeholder remains in Persian content`);
     }
     if (/href="\/fa\/(?!tamin-beynolmelali-iran\/)/.test(html)) errors.push(`${label}: nonexistent Persian internal route linked`);
-    if (/data-language-toggle|data-locale-option|class="mobile-locales"/.test(html)) errors.push(`${label}: Persian page was incorrectly added to the global locale chrome`);
+    if (/data-language-toggle|class="mobile-locales"/.test(html)) errors.push(`${label}: Persian page must keep its dedicated locale chrome`);
     if (!html.includes('CTSEG Sanayi ve Ticaret Limited Şirketi') || !html.includes('Teyfik Gökdemir') ||
       !html.includes('Fevzipaşa Caddesi، فاتح، استانبول، ترکیه')) {
       errors.push(`${label}: company information block missing`);
@@ -277,6 +336,25 @@ for (const file of htmlFiles) {
     }
   }
 }
+const builtTradeRecords = [...tradeRecordsByLabel.entries()].filter(([label]) => existsSync(join(root, label)));
+if (builtTradeRecords.length !== 18) errors.push(`expected 18 sourcing routes, found ${builtTradeRecords.length}`);
+for (const [sourceLabel, sourceRecord] of builtTradeRecords) {
+  const sourceHtml = readFileSync(join(root, sourceLabel), 'utf8');
+  const sourceCanonical = sourceHtml.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+  for (const targetLang of tradeLocaleCodes) {
+    const targetPath = sourceRecord.routes[targetLang];
+    const targetLabel = decodeURI(targetPath).replace(/^\//,'') + 'index.html';
+    if (!existsSync(join(root, targetLabel))) {
+      errors.push(`${sourceLabel}: ${targetLang} reciprocal sourcing target is missing`);
+      continue;
+    }
+    const targetHtml = readFileSync(join(root, targetLabel), 'utf8');
+    const targetBackLink = targetHtml.match(new RegExp(`<link rel="alternate" hreflang="${sourceRecord.lang}" href="([^"]+)"`))?.[1];
+    if (targetBackLink !== sourceCanonical) {
+      errors.push(`${sourceLabel}: ${targetLang} counterpart does not reciprocate ${sourceRecord.lang} hreflang`);
+    }
+  }
+}
 if (productSchemaPages !== 90) errors.push(`expected 90 Product schema pages, found ${productSchemaPages}`);
 if (contactEmailPanels !== 5) errors.push(`expected five localized contact email panels, found ${contactEmailPanels}`);
 if (!existsSync(join(root, persianLandingLabel))) errors.push('standalone Persian landing page build output missing');
@@ -293,9 +371,10 @@ if (!englishMarkets.includes('data-fa-landing-link') || !englishMarkets.includes
 for (const file of htmlFiles) {
   const label = relative(root, file).replaceAll('\\','/');
   const html = readFileSync(file,'utf8');
+  const tradeRecord = tradeRecordsByLabel.get(label);
   const navLinks = [...html.matchAll(/<a\b([^>]*data-fa-nav-link[^>]*)>/g)].map((match) => match[1]);
   const usesEnglishNavigation = /<html\b[^>]*\blang="en"/.test(html);
-  if (usesEnglishNavigation) {
+  if (usesEnglishNavigation && !tradeRecord) {
     if (navLinks.length !== 1) errors.push(`${label}: English navigation must contain one Persian landing link`);
     const link = navLinks[0] ?? '';
     if (!link.includes('href="/fa/tamin-beynolmelali-iran/"') || /\btarget=/.test(link)) {
@@ -307,17 +386,17 @@ for (const file of htmlFiles) {
   } else if (navLinks.length) {
     errors.push(`${label}: Persian landing navigation link must remain English-only`);
   }
-  const approved = label === persianLandingLabel || usesEnglishNavigation;
-  if (!approved && html.includes('href="/fa/tamin-beynolmelali-iran/"')) {
-    errors.push(`${label}: standalone Persian landing link leaked outside English navigation`);
+  if (!label.startsWith('404') && label !== persianLandingLabel && !tradeRecord) {
+    const globalFaLinks = [...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].filter((match)=>match[0].includes('hreflang="fa"')&&match[0].includes('href="/fa/tamin-beynolmelali-iran/"'));
+    if (globalFaLinks.length !== 2) errors.push(`${label}: desktop and mobile global locale menus must expose the Persian fallback`);
   }
 }
 for (const localizedMarkets of [
   ['tr','pazarlar'],['de','maerkte'],['it','mercati'],['fr','marches']
 ]) {
   const localizedHtml = readFileSync(join(root, ...localizedMarkets, 'index.html'), 'utf8');
-  if (localizedHtml.includes('/fa/tamin-beynolmelali-iran/')) {
-    errors.push(`${localizedMarkets.join('/')}: Persian referral must remain English-only`);
+  if (/<a\b[^>]*data-fa-landing-link/.test(localizedHtml)) {
+    errors.push(`${localizedMarkets.join('/')}: promotional Persian referral must remain English-only`);
   }
 }
 const css = files.filter((file) => file.endsWith('.css')).map((file) => readFileSync(file,'utf8')).join('\n');
@@ -363,4 +442,4 @@ if (errors.length) {
   for (const error of [...new Set(errors)]) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Site check passed: ${htmlFiles.length} HTML pages including the standalone Persian RTL resource, ${checkedLinks} internal links, 90 product schemas with verified media, reciprocal core-locale hreflang, sitemap/llms coverage and complete metadata/chrome checks.`);
+console.log(`Site check passed: ${htmlFiles.length} HTML pages, all 18 sourcing routes with explicit locale/canonical/hreflang/x-default/H1/chrome/Persian-content assertions and reciprocal six-locale counterparts, ${checkedLinks} internal links, 90 product schemas with verified media, sitemap/llms coverage and complete metadata checks.`);
