@@ -455,7 +455,7 @@ try {
       (testCase.openMenu && (result.visibleMobileLocales !== 6 || result.mobilePanelHeight < testCase.height * .7)));
     const badPersian = testCase.persian && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
       result.persian.rootDirection !== 'rtl' || result.persian.bodyDirection !== 'rtl' || result.persian.h1s !== 1 ||
-      result.persian.details !== 11 || result.persian.fields !== 9 || !['full-name','company-name','business-email','phone','country-city','product-group','target-market','short-message','privacy-consent'].every((id)=>result.persian.fieldIds.includes(id)) || !result.persian.labeled || !result.persian.companyVisible ||
+      result.persian.details !== 8 || result.persian.fields !== 9 || !['full-name','company-name','business-email','phone','country-city','product-group','target-market','short-message','privacy-consent'].every((id)=>result.persian.fieldIds.includes(id)) || !result.persian.labeled || !result.persian.companyVisible ||
       !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 6 || result.persian.activeLocale !== 'fa' ||
       !['tr','en','de','it','fr','fa'].every((code)=>result.persian.localePaths[code]) ||
       !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl || result.persian.chipCount < 1 || result.persian.chipContrastMin < 4.5 ||

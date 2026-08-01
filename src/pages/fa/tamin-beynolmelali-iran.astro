@@ -7,7 +7,7 @@ import '../../styles/persian-landing.css';
 
 const canonical = 'https://ctseg.com.tr/fa/tamin-beynolmelali-iran/';
 const title = 'تأمین و توسعه بازار فرش ایرانی و منسوجات | CTSEG';
-const description = 'هماهنگی تجاری CTSEG برای خریداران بین‌المللی و تولیدکنندگان ایرانی در حوزه فرش ایرانی، فرش ابریشم دستباف و منسوجات عمده؛ از ارزیابی و RFQ تا نمونه و لجستیک.';
+const description = 'تحقیق و راستی‌آزمایی تأمین‌کننده، RFQ، مقایسه پیشنهادها و هماهنگی تجاری CTSEG برای فرش ایرانی، فرش ابریشم دستباف و منسوجات عمده.';
 const socialImage = 'https://ctseg.com.tr/images/ctseg-global-trade-hero-premium.webp';
 const organization = {
   '@context':'https://schema.org',
@@ -51,7 +51,7 @@ const service = {
   '@type':'Service',
   '@id':`${canonical}#service`,
   name:'تأمین و هماهنگی توسعه بازار برای فرش ایرانی و منسوجات',
-  description:'ارزیابی محصول و آمادگی صادرات، راستی‌آزمایی تولیدکننده، RFQ، نمونه، ارتباط با خریدار، بررسی مدارک و هماهنگی لجستیک برای درخواست‌های واجد شرایط.',
+  description:'تحقیق محصول و تولیدکننده، راستی‌آزمایی تأمین‌کننده، آماده‌سازی RFQ، مقایسه پیشنهادها، بررسی مدارک، هماهنگی نمونه و ارزیابی کلی گزینه‌های لجستیکی.',
   provider:{'@id':'https://ctseg.com.tr/#organization'},
   areaServed:['IR','TR','EU','US','International'],
   serviceType:'International sourcing and commercial coordination'
@@ -163,7 +163,7 @@ const localeLinks = [
               <p class="fa-kicker">شریک تأمین و هماهنگی تجاری بین‌المللی</p>
               <h1>راهکارهای تأمین بین‌المللی برای کسب‌وکارهای ایرانی</h1>
               <p class="fa-lead">CTSEG به تولیدکنندگان، توزیع‌کنندگان، عمده‌فروشان، واردکنندگان و خریداران سازمانی ایرانی کمک می‌کند تا محصولات، مواد اولیه، بسته‌بندی و نهاده‌های تولید را از ترکیه و بازارهای بین‌المللی مناسب تأمین کنند.</p>
-              <p class="fa-hero-summary">CTSEG فرایند جست‌وجوی تأمین‌کننده، راستی‌آزمایی تولیدکننده، مقایسه پیشنهادها، بررسی مدارک کیفیت، ارزیابی شرایط تجاری و هماهنگی پیش از حمل را به یک مسیر تصمیم‌گیری روشن و قابل مدیریت تبدیل می‌کند.</p>
+              <p class="fa-hero-summary">CTSEG فرایند جست‌وجوی تأمین‌کننده، راستی‌آزمایی تولیدکننده، مقایسه پیشنهادها، بررسی مدارک کیفیت، ارزیابی شرایط تجاری و بررسی کلی گزینه‌های لجستیکی را به یک مسیر تصمیم‌گیری روشن و قابل مدیریت تبدیل می‌کند.</p>
               <div class="fa-actions">
                 <a class="fa-button" href="#request-form">ثبت درخواست تأمین</a>
                 <a class="fa-button fa-button-secondary" href="#contact">گفتگو درباره نیاز تجاری</a>
@@ -174,7 +174,7 @@ const localeLinks = [
               <figcaption>
                 <span>تحقیق تولیدکننده</span>
                 <span>مقایسه پیشنهادها</span>
-                <span>هماهنگی پیش از حمل</span>
+                <span>ارزیابی گزینه‌های لجستیکی</span>
               </figcaption>
             </figure>
           </div>
@@ -187,7 +187,7 @@ const localeLinks = [
             <p class="fa-section-kicker">پاسخ کوتاه و روشن</p>
             <h2>CTSEG چیست؟</h2>
             <p>CTSEG یک شرکت مستقر در استانبول در حوزه تأمین بین‌المللی و هماهنگی تجاری است. این شرکت به کسب‌وکارهای ایرانی برای دسترسی به تولیدکنندگان و تأمین‌کنندگان در ترکیه و بازارهای بین‌المللی مناسب کمک می‌کند.</p>
-            <p>نقش CTSEG، ساختاردهی تحقیق، راستی‌آزمایی، مقایسه و هماهنگی تجاری است؛ CTSEG بانک، شرکت حمل‌ونقل، کارگزار گمرکی، مؤسسه حقوقی یا فروشنده مستقیم همه معاملات نیست.</p>
+            <p>نقش CTSEG تحقیق، راستی‌آزمایی، مقایسه پیشنهادها و هماهنگی تجاری است.</p>
           </div>
           <dl class="fa-company-facts">
             <div><dt>نام شرکت</dt><dd>{company.name}</dd></div>
@@ -272,7 +272,7 @@ const localeLinks = [
             <p>اصطلاحات RFQ، MOQ، COA، Incoterms و Private label در هر پروژه همراه با کاربرد تجاری آن‌ها توضیح و مستند می‌شوند.</p>
           </div>
           <div class="fa-grid fa-service-grid">{persianServices.map((item) => <div class="fa-service-item">{item}</div>)}</div>
-          <p class="fa-role"><strong>جایگاه CTSEG:</strong> شریک تأمین و هماهنگی تجاری بین‌المللی برای پروژه‌های واجد شرایط؛ نه ارائه‌دهنده تضمین بانکی، مجوز گمرکی یا موجودی نامحدود کالا.</p>
+          <p class="fa-role"><strong>جایگاه CTSEG:</strong> تحقیق محصول و تولیدکننده، راستی‌آزمایی، آماده‌سازی RFQ، مقایسه پیشنهادها و هماهنگی تجاری برای پروژه‌های واجد شرایط.</p>
         </div>
       </section>
 
@@ -287,24 +287,12 @@ const localeLinks = [
       </section>
 
       <section class="fa-section fa-compliance">
-        <div class="fa-container fa-compliance-grid">
+        <div class="fa-container">
           <div class="fa-compliance-copy">
-            <p class="fa-section-kicker">انطباق و شفافیت</p>
-            <h2>هر درخواست، ارزیابی مستقل خود را دارد</h2>
-            <p>تمام درخواست‌ها از نظر طبقه‌بندی کالا، طرف‌های معامله، مبدأ، مصرف نهایی، کانال پرداخت، مدل لجستیکی و مقررات تجاری جاری به‌صورت جداگانه ارزیابی می‌شوند.</p>
-            <p>CTSEG در دور زدن تحریم‌ها، پنهان‌کردن مبدأ، استفاده از اسناد گمراه‌کننده یا روش‌های پرداخت غیرمجاز واسطه‌گری نمی‌کند.</p>
-            <p>در موارد لازم باید از متخصص مستقل حقوقی، بانکی، گمرکی یا کنترل صادرات نظر گرفته شود.</p>
+            <p class="fa-section-kicker">یادداشت عمومی</p>
+            <h2>چارچوب ارزیابی تجاری</h2>
+            <p>هر درخواست تجاری بر اساس نوع کالا، طرف‌های معامله و الزامات جاری به‌صورت جداگانه ارزیابی می‌شود.</p>
           </div>
-          <aside class="fa-boundaries">
-            <h3>CTSEG چه کاری انجام نمی‌دهد؟</h3>
-            <ul>
-              <li>تضمین امکان ارسال هر کالا به ایران</li>
-              <li>تضمین پرداخت یا انتقال بانکی</li>
-              <li>تضمین ترخیص، مجوز واردات یا تحویل</li>
-              <li>تغییر یا پنهان‌کردن مبدأ و مصرف نهایی</li>
-              <li>جایگزینی نقش بانک، وکیل، حمل‌کننده یا کارگزار گمرکی</li>
-            </ul>
-          </aside>
         </div>
       </section>
 
@@ -348,7 +336,7 @@ const localeLinks = [
 
       <section class="fa-section" id="contact">
         <div class="fa-container fa-contact">
-          <div><p class="fa-section-kicker">ارتباط مستقیم</p><h2>نیاز تجاری خود را با اطلاعات قابل بررسی مطرح کنید</h2><p>برای شروع، مشخصات شرکت، محصول، مقدار، مقصد و فایل RFQ را آماده کنید. از ارسال اطلاعات پرداخت، گذرواژه یا داده‌های غیرضروری خودداری کنید.</p></div>
+          <div><p class="fa-section-kicker">ارتباط مستقیم</p><h2>نیاز تجاری خود را با اطلاعات قابل بررسی مطرح کنید</h2><p>برای شروع، مشخصات شرکت، محصول، مقدار، مقصد و فایل RFQ را آماده کنید. از ارسال گذرواژه یا داده‌های غیرضروری خودداری کنید.</p></div>
           <div class="fa-contact-box"><p>ایمیل تأییدشده CTSEG</p><a href="mailto:info@ctseg.com.tr?subject=Persian%20Sourcing%20Request%20-%20CTSEG" data-fa-email-link>info@ctseg.com.tr</a></div>
         </div>
       </section>
