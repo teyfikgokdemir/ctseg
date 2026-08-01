@@ -103,8 +103,9 @@ try {
     { name:'mobile430-tr-menu', path:'/', width:430, height:932, openMenu:true },
     { name:'mobile430-de-home', path:'/de/', width:430, height:932 },
     { name:'mobile430-fr-home', path:'/fr/', width:430, height:932 },
-    { name:'wide-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:1600, height:1000, persian:true },
+    { name:'desktop-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:1440, height:1000, persian:true },
     { name:'tablet-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:820, height:1180, persian:true },
+    { name:'mobile320-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:320, height:800, persian:true },
     { name:'mobile-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:390, height:844, persian:true },
     { name:'mobile430-fa-landing', path:'/fa/tamin-beynolmelali-iran/', width:430, height:932, persian:true }
   ];
@@ -234,6 +235,7 @@ try {
           h1s:document.querySelectorAll('h1').length,
           details:document.querySelectorAll('.fa-faq details').length,
           fields:fields.length,
+          fieldIds:fields.map((field)=>field.id),
           labeled:fields.every((field)=>form.querySelector(`label[for="${field.id}"]`)),
           companyVisible:Boolean(company&&company.getBoundingClientRect().width>0&&company.textContent?.includes('CTSEG Sanayi ve Ticaret Limited Şirketi')),
           headerVisible:Boolean(document.querySelector('.fa-header')?.getBoundingClientRect().height),
@@ -244,7 +246,10 @@ try {
           heroStatic:Boolean(document.querySelector('.fa-hero h1')?.textContent?.trim()),
           emailLtr:getComputedStyle(document.querySelector('.fa-contact-box a')).direction==='ltr',
           brandLtr:getComputedStyle(document.querySelector('.fa-brand')).direction==='ltr',
-          breadcrumbRtl:getComputedStyle(document.querySelector('.fa-hero nav')).direction==='rtl'
+          breadcrumbRtl:getComputedStyle(document.querySelector('.fa-hero nav')).direction==='rtl',
+          producerVisible:Boolean(document.querySelector('[data-persian-producer-entry]')?.getBoundingClientRect().height),
+          sectorsVisible:Boolean(document.querySelector('[data-carpet-textile-entry]')?.getBoundingClientRect().height),
+          sectorPaths:[...document.querySelectorAll('[data-carpet-textile-entry] .fa-sector-link')].map((link)=>decodeURI(new URL(link.href).pathname))
         };
       })()
       ,overflowNodes:[...document.querySelectorAll('body *')]
@@ -371,10 +376,11 @@ try {
       (testCase.openMenu && (result.visibleMobileLocales !== 6 || result.mobilePanelHeight < testCase.height * .7)));
     const badPersian = testCase.persian && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
       result.persian.rootDirection !== 'rtl' || result.persian.bodyDirection !== 'rtl' || result.persian.h1s !== 1 ||
-      result.persian.details !== 11 || result.persian.fields < 15 || !result.persian.labeled || !result.persian.companyVisible ||
+      result.persian.details !== 11 || result.persian.fields !== 9 || !['full-name','company-name','business-email','phone','country-city','product-group','target-market','short-message','privacy-consent'].every((id)=>result.persian.fieldIds.includes(id)) || !result.persian.labeled || !result.persian.companyVisible ||
       !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 6 || result.persian.activeLocale !== 'fa' ||
       !['tr','en','de','it','fr','fa'].every((code)=>result.persian.localePaths[code]) ||
-      !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl);
+      !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl || !result.persian.producerVisible || !result.persian.sectorsVisible ||
+      !['/fa/sourcing/فرش-ایرانی/','/fa/sourcing/فرش-ابریشم-دستباف/','/fa/sourcing/تامین-عمده-منسوجات/'].every((path)=>result.persian.sectorPaths.includes(path)));
     const badPersianNav = result.lang === 'en'
       ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/tamin-beynolmelali-iran/' ||
         result.persianNav.target !== null || result.persianNav.primary !== 'For Iranian Businesses' ||

@@ -18,6 +18,7 @@ import {
   serviceIds, services, ui, type Locale
 } from '../data/site';
 import type { RouteRecord } from '../lib/routes';
+import { pathForSector, tradeCopy, tradeSectorIds } from '../data/trade-sectors';
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
@@ -29,6 +30,13 @@ const editorial = editorialCopy[lang];
 const completionHome = homeEnhancement[lang];
 const completionAbout = aboutEnhancement[lang];
 const completionMarkets = marketsDetail[lang];
+const sectorEntry = {
+  tr:{title:'İran halısı ve tekstil tedarik alanları',lead:'Üç uzmanlık alanını; ürün, üretici, numune, kalite, paketleme ve lojistik koşullarıyla birlikte inceleyin.'},
+  en:{title:'Iranian carpet and textile sourcing',lead:'Explore three specialist areas through product, producer, sample, quality, packaging and logistics criteria.'},
+  de:{title:'Beschaffung iranischer Teppiche und Textilien',lead:'Drei Fachbereiche mit Produkt-, Hersteller-, Muster-, Qualitäts-, Verpackungs- und Logistikkriterien.'},
+  it:{title:'Sourcing di tappeti iraniani e tessili',lead:'Tre aree specialistiche valutate per prodotto, produttore, campioni, qualità, imballaggio e logistica.'},
+  fr:{title:'Sourcing de tapis iraniens et de textiles',lead:'Trois domaines spécialisés évalués selon le produit, le fabricant, les échantillons, la qualité, l’emballage et la logistique.'}
+}[lang];
 const service = id && key === 'services' ? services[id as keyof typeof services] : null;
 const detailedService = service && id && (lang === 'tr' || lang === 'en') && id in serviceDetails[lang]
   ? serviceDetails[lang][id as keyof typeof serviceDetails[typeof lang]]
@@ -139,6 +147,17 @@ const verifiedLater = {
       <div class="trade-directions">
         <article><span>01</span><p>{completionHome.outbound}</p></article>
         <article><span>02</span><p>{completionHome.inbound}</p></article>
+      </div>
+    </div></section>
+    <section class="section home-sector-entry" data-home-sector-entry><div class="container">
+      <div class="section-head"><h2>{sectorEntry.title}</h2><p>{sectorEntry.lead}</p></div>
+      <div class="home-sector-links">
+        {tradeSectorIds.map((sectorId,index) => <a href={pathForSector(lang,sectorId)}>
+          <span>{indexLabel(index)}</span>
+          <strong>{tradeCopy[lang][sectorId].scopeTitle}</strong>
+          <small>{tradeCopy[lang][sectorId].description}</small>
+          <bdi dir="ltr" aria-hidden="true">↗</bdi>
+        </a>)}
       </div>
     </div></section>
     <section class="section product-showcase"><div class="container">
