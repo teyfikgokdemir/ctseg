@@ -8,7 +8,8 @@ import ProductCard from './ProductCard.astro';
 import ProductMedia from './ProductMedia.astro';
 import ResponsiveImage from './ResponsiveImage.astro';
 import CommercialRequestForm from './CommercialRequestForm.astro';
-import { FEATURE_IMAGE_WIDTHS, HERO_IMAGE } from '../lib/responsive-images';
+import { FEATURE_IMAGE_WIDTHS } from '../lib/responsive-images';
+import { homeTradeVisualKeys, localizedTradeVisual } from '../data/trade-visuals';
 import {
   aboutEnhancement, guides, homeEnhancement, marketsDetail, processPages, scenarioPages
 } from '../data/completion';
@@ -31,6 +32,8 @@ const completionHome = homeEnhancement[lang];
 const completionAbout = aboutEnhancement[lang];
 const completionMarkets = marketsDetail[lang];
 const platform = tradePlatformCopy[lang];
+const homepageHero = localizedTradeVisual('global-trade-hero',lang);
+const homepageSectorVisuals = homeTradeVisualKeys.map((visualKey)=>localizedTradeVisual(visualKey,lang));
 const contactWithIntent = (intent:'buyer_request'|'supplier_market_entry') => `${sectionHref('contact')}?intent=${intent}#commercial-form`;
 const sectorEntry = {
   tr:{title:'İran halısı ve tekstil tedarik alanları',lead:'Üç uzmanlık alanını; ürün, üretici, numune, kalite, paketleme ve lojistik koşullarıyla birlikte inceleyin.'},
@@ -125,12 +128,14 @@ const verifiedLater = {
         </div>
         <figure class="hero-visual">
           <ResponsiveImage
-            src={HERO_IMAGE}
+            src={homepageHero.source}
             widths={FEATURE_IMAGE_WIDTHS}
             sizes="(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(100vw - 36px), min(53vw,700px)"
-            width={1536}
-            height={1024}
-            alt=""
+            width={homepageHero.width}
+            height={homepageHero.height}
+            alt={homepageHero.altText}
+            focalPosition={homepageHero.focalPosition}
+            visualKey={homepageHero.key}
             loading="eager"
             fetchpriority="high"
             decoding="async"
@@ -149,7 +154,13 @@ const verifiedLater = {
     <section class="section platform-sectors" id="sectors" data-platform-sectors><div class="container">
       <div class="section-head"><h2>{platform.sectorsTitle}</h2><p>{platform.sectorsLead}</p></div>
       <div class="platform-sector-grid">
-        {platform.sectors.map((sector,index) => <article><span>{indexLabel(index)}</span><h3>{sector.title}</h3><p>{sector.text}</p></article>)}
+        {platform.sectors.map((sector,index) => {
+          const visual=homepageSectorVisuals[index];
+          return <article data-sector-visual={visual.key}>
+            <ResponsiveImage src={visual.source} widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:620px) calc(100vw - 26px), (max-width:860px) 46vw, 25vw" width={visual.width} height={visual.height} alt={visual.altText} focalPosition={visual.focalPosition} visualKey={visual.key} loading="lazy" decoding="async" />
+            <div><span>{indexLabel(index)}</span><h3>{sector.title}</h3><p>{sector.text}</p></div>
+          </article>;
+        })}
       </div>
       <div class="specialist-routes"><a href={pathForSector(lang,'iranian-carpets')}>{tradeCopy[lang]['iranian-carpets'].scopeTitle} ↗</a><a href={pathForSector(lang,'silk-carpets')}>{tradeCopy[lang]['silk-carpets'].scopeTitle} ↗</a><a href={pathForSector(lang,'wholesale-textiles')}>{tradeCopy[lang]['wholesale-textiles'].scopeTitle} ↗</a></div>
     </div></section>

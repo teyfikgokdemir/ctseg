@@ -3,7 +3,8 @@ import '../styles/site.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { company, locales, localizedPath, products, routeAlternates, ui, type Locale } from '../data/site';
-import { FEATURE_IMAGE_WIDTHS, HERO_IMAGE, generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
+import { FEATURE_IMAGE_WIDTHS, generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
+import { localizedTradeVisual } from '../data/trade-visuals';
 
 const {
   lang='tr', title, description, pageKey='home', pageId, canonical,
@@ -45,11 +46,12 @@ const webpage = {
 const extra = Array.isArray(schema) ? schema : [schema];
 const schemas = [organization, website, webpage, ...extra.filter(Boolean)];
 const cookieHref = localizedPath(lang, 'legal', 'cookies');
+const homeHero = localizedTradeVisual('global-trade-hero',lang);
 const socialImage = pageKey === 'products' && pageId && products[pageId as keyof typeof products]
   ? products[pageId as keyof typeof products].media.src
-  : '/images/ctseg-global-trade-hero-premium.webp';
+  : homeHero.source;
 const heroSizes = '(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(100vw - 36px), min(53vw,700px)';
-const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
+const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
 ---
 <!doctype html>
 <html lang={lang} data-locale={lang}>
@@ -68,7 +70,7 @@ const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
     {pageKey === 'home' && !noindex && <link
       rel="preload"
       as="image"
-      href={generatedImageSrc(HERO_IMAGE,1280)}
+      href={generatedImageSrc(homeHero.source,1280)}
       imagesrcset={heroSrcset}
       imagesizes={heroSizes}
       fetchpriority="high"
@@ -83,6 +85,7 @@ const heroSrcset = generatedImageSrcset(HERO_IMAGE,FEATURE_IMAGE_WIDTHS);
     <meta property="og:image" content={`https://ctseg.com.tr${socialImage}`} />
     <meta property="og:image:width" content="1536" />
     <meta property="og:image:height" content="1024" />
+    {pageKey !== 'products' && <meta property="og:image:alt" content={homeHero.altText} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />

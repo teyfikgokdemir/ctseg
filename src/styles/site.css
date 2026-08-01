@@ -373,6 +373,9 @@ body{background:var(--bg);color:var(--text)}body:before{display:none}
 }
 .trade-paths-grid,.platform-sector-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line,#d7d6cd);border:1px solid var(--line,#d7d6cd)}
 .trade-paths-grid article,.platform-sector-grid article{background:var(--paper,#f4f1e8);padding:clamp(1.4rem,3vw,2.7rem)}
+.platform-sector-grid article{display:flex;min-width:0;flex-direction:column;padding:0;overflow:hidden}
+.platform-sector-grid article>img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;filter:saturate(.76) contrast(1.04)}
+.platform-sector-grid article>div{flex:1;padding:clamp(1.25rem,2.4vw,2rem)}
 .trade-paths-grid span,.platform-sector-grid span,.corridor-list span{font-size:.72rem;letter-spacing:.14em;color:var(--accent,#8c6a38)}
 .trade-paths-grid h3,.platform-sector-grid h3{font-family:var(--serif);font-size:clamp(1.45rem,2.5vw,2.15rem);margin:.8rem 0}
 .trade-paths-grid p,.platform-sector-grid p{max-width:54ch}

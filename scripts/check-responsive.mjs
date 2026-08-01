@@ -227,6 +227,11 @@ try {
       lang:document.documentElement.lang
       ,images:[...document.images].every((image) => image.complete && image.naturalWidth > 0 && image.hasAttribute('width') && image.hasAttribute('height'))
       ,brokenImages:[...document.images].filter((image) => !image.complete || image.naturalWidth === 0 || !image.hasAttribute('width') || !image.hasAttribute('height')).map((image) => image.getAttribute('src'))
+      ,tradeVisuals:[...document.querySelectorAll('img[data-trade-visual]')].map((image)=>{
+        const box=image.getBoundingClientRect();
+        const style=getComputedStyle(image);
+        return {key:image.dataset.tradeVisual,naturalWidth:image.naturalWidth,naturalHeight:image.naturalHeight,width:box.width,height:box.height,alt:image.alt,src:image.currentSrc,srcset:Boolean(image.srcset),sizes:Boolean(image.sizes),dimensions:image.hasAttribute('width')&&image.hasAttribute('height'),objectFit:style.objectFit,objectPosition:style.objectPosition,loading:image.loading,fetchPriority:image.fetchPriority};
+      })
       ,localeAtmosphere:[getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),getComputedStyle(document.documentElement).getPropertyValue('--locale-wash').trim()].join('|')
       ,localeOptions:document.querySelectorAll('#language-panel [data-locale-option]').length
       ,activeDesktopLocale:document.querySelectorAll('#language-panel [data-locale-option][aria-current="true"]').length
@@ -498,7 +503,11 @@ try {
         result.persianNav.target !== null || result.persianNav.primary !== 'For Iranian Businesses' ||
         result.persianNav.helper !== 'Persian landing page' || (testCase.verifyPersianNav && !result.persianNav.visible)
       : result.persianNav.count !== 0;
-    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || !mobileMenu || !bodyScrollLocked || badLayout || badLocale || badContactEmail || badPersian || badPersianMobileMenu || badPersianNav || !persianNavWorks) {
+    const isHomepage=['/','/en/','/de/','/it/','/fr/','/fa/'].includes(testCase.path);
+    const badTradeImages=result.tradeVisuals.some((visual)=>visual.naturalWidth<1||visual.naturalHeight<1||visual.width<=0||visual.height<=0||!visual.alt||!visual.srcset||!visual.sizes||!visual.dimensions||visual.objectFit!=='cover'||!visual.objectPosition)||
+      new Set(result.tradeVisuals.map((visual)=>visual.src)).size!==result.tradeVisuals.length||
+      (isHomepage&&(result.tradeVisuals.length!==5||new Set(result.tradeVisuals.map((visual)=>visual.key)).size!==5||result.tradeVisuals.filter((visual)=>visual.fetchPriority==='high').length!==1));
+    if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || badTradeImages || !mobileMenu || !bodyScrollLocked || badLayout || badLocale || badContactEmail || badPersian || badPersianMobileMenu || badPersianNav || !persianNavWorks) {
       failures.push(`${testCase.name}: ${JSON.stringify({...result,mobileMenu,bodyScrollLocked,persianMobileMenu,persianNavWorks})}`);
     }
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);
@@ -620,6 +629,7 @@ try {
             producerCtas:document.querySelectorAll('[data-producer-cta]').length,
             producerAudiences:audiences.filter(text=>bodyText.includes(text)),
             producerHeading:bodyText.includes('برای تولیدکنندگان و صادرکنندگان ایرانی'),
+            tradeVisual:(()=>{const image=document.querySelector('img[data-trade-visual]');const box=image?.getBoundingClientRect();const style=image?getComputedStyle(image):null;return {count:document.querySelectorAll('img[data-trade-visual]').length,naturalWidth:image?.naturalWidth??0,naturalHeight:image?.naturalHeight??0,width:box?.width??0,height:box?.height??0,alt:image?.alt??'',srcset:Boolean(image?.srcset),sizes:Boolean(image?.sizes),dimensions:Boolean(image?.hasAttribute('width')&&image?.hasAttribute('height')),objectFit:style?.objectFit,objectPosition:style?.objectPosition,fetchPriority:image?.fetchPriority};})(),
             expectedLang
           };
         },{expectedLang:lang,expectedPath:path,familyRoutes:routes,audiences:sourcingAudiences[family]});
@@ -647,7 +657,7 @@ try {
         if(contract.htmlLang!==lang||badDirection||contract.activeLocales.length!==1||contract.activeLocales[0]!==lang||
           contract.localeCodes.length!==6||!sourcingLocales.every(code=>contract.localeCodes.includes(code))||!contract.localeTargetMatch||
           !contract.canonicalMatches||!contract.hreflangMatch||!contract.xDefaultMatches||contract.h1s!==1||
-          contract.headers!==1||contract.footers!==1||!contract.headerVisible||!contract.footerVisible||contract.overflow>0||
+          contract.headers!==1||contract.footers!==1||!contract.headerVisible||!contract.footerVisible||contract.overflow>0||contract.tradeVisual.count!==1||contract.tradeVisual.naturalWidth<1||contract.tradeVisual.naturalHeight<1||contract.tradeVisual.width<=0||contract.tradeVisual.height<=0||!contract.tradeVisual.alt||!contract.tradeVisual.srcset||!contract.tradeVisual.sizes||!contract.tradeVisual.dimensions||contract.tradeVisual.objectFit!=='cover'||!contract.tradeVisual.objectPosition||contract.tradeVisual.fetchPriority!=='high'||
           (viewport.name==='desktop'&&!contract.localeNavVisible)||badProducer||badSwitch){
           failures.push(`sourcing ${family}/${lang}/${viewport.name}: ${JSON.stringify({...contract,switchStatuses})}`);
         }
