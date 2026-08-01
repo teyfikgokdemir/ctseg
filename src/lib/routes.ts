@@ -46,12 +46,12 @@ export function getMeta(record: RouteRecord) {
   const copy = pageCopy[lang];
   const t = ui[lang];
   if (key === 'home') return {
-    title:`CTSEG | ${lang === 'tr' ? 'Stratejik Tedarik ve Uluslararası Ticaret' : lang === 'en' ? 'Strategic Sourcing & International Trade' : lang === 'de' ? 'Strategische Beschaffung & Internationaler Handel' : lang === 'it' ? 'Approvvigionamento Strategico e Commercio Internazionale' : 'Sourcing Stratégique et Commerce International'}`,
-    description: lang === 'tr' ? 'CTSEG; stratejik tedarik, doğrulanmış ticari ürünler, tedarikçi doğrulama ve uluslararası ticaret çözümleri sunar.' :
-      lang === 'en' ? 'CTSEG delivers strategic sourcing, verified trade products, supplier verification and international trade solutions.' :
-      lang === 'de' ? 'CTSEG bietet strategische Beschaffung, verifizierte Handelsprodukte, Lieferantenprüfung und internationale Handelslösungen.' :
-      lang === 'it' ? 'CTSEG offre sourcing strategico, prodotti commerciali verificati, verifica fornitori e soluzioni di commercio internazionale.' :
-      'CTSEG propose sourcing stratégique, produits commerciaux vérifiés, vérification fournisseurs et solutions de commerce international.'
+    title:`CTSEG | ${lang === 'tr' ? 'Uluslararası Ticaret Eşleştirme ve Koordinasyon' : lang === 'en' ? 'International Trade Matching & Coordination' : lang === 'de' ? 'Internationale Geschäftsanbahnung & Koordination' : lang === 'it' ? 'Matching Commerciale Internazionale' : 'Mise en Relation Commerciale Internationale'}`,
+    description: lang === 'tr' ? 'CTSEG, alıcıları doğrulanabilir tedarikçilerle; üreticileri uygun alıcılar ve uluslararası pazar fırsatlarıyla buluşturan ticari koordinasyon platformudur.' :
+      lang === 'en' ? 'CTSEG connects buyers with verifiable suppliers and producers with suitable buyers and international market opportunities through independent commercial coordination.' :
+      lang === 'de' ? 'CTSEG verbindet Einkäufer mit prüfbaren Lieferanten und Hersteller mit geeigneten Abnehmern und internationalen Marktchancen.' :
+      lang === 'it' ? 'CTSEG collega acquirenti a fornitori verificabili e produttori a buyer e opportunità internazionali tramite coordinamento commerciale indipendente.' :
+      'CTSEG relie les acheteurs à des fournisseurs vérifiables et les producteurs à des acheteurs et marchés internationaux pertinents.'
   };
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
   if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} B2B | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
@@ -88,6 +88,20 @@ export function breadcrumbSchema(record: RouteRecord, title: string) {
     itemListElement:[
       {'@type':'ListItem',position:1,name:ui[record.lang].home,item:`https://ctseg.com.tr${home}`},
       {'@type':'ListItem',position:2,name:title,item:canonical}
+    ]
+  };
+}
+
+export function tradeMatchingServiceSchema(record:RouteRecord, title:string, description:string) {
+  return {
+    '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#trade-matching-service`,
+    name:title,description,url:canonicalFor(record),inLanguage:record.lang,
+    serviceType:'International trade matching and commercial coordination',
+    provider:{'@id':'https://ctseg.com.tr/#organization'},
+    areaServed:['Türkiye','Europe','Iran','United States','International'],
+    audience:[
+      {'@type':'BusinessAudience',name:'Buyers seeking suppliers'},
+      {'@type':'BusinessAudience',name:'Producers seeking buyers and international markets'}
     ]
   };
 }

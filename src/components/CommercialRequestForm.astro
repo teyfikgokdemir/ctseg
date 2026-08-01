@@ -4,11 +4,18 @@ import { localizedPath, type Locale } from '../data/site';
 
 const { lang } = Astro.props as { lang:Locale };
 const copy = formCopy[lang];
+const intentCopy = {
+  tr:{label:'Ticari amacınız',buyer:'Tedarikçi arıyorum',producer:'Alıcı ve pazar arıyorum'},
+  en:{label:'Your commercial objective',buyer:'I need a supplier',producer:'I need buyers'},
+  de:{label:'Ihr Geschäftsziel',buyer:'Ich suche einen Lieferanten',producer:'Ich suche Käufer und Märkte'},
+  it:{label:'Il tuo obiettivo commerciale',buyer:'Cerco un fornitore',producer:'Cerco buyer e mercati'},
+  fr:{label:'Votre objectif commercial',buyer:'Je cherche un fournisseur',producer:'Je cherche des acheteurs'}
+}[lang];
 const names = ['name','company','email','phone','country','requestType','product','quantity','delivery','targetDate','message'];
 const types = ['text','text','email','tel','text','select','text','text','text','date','textarea'];
 const autocomplete = ['name','organization','email','tel','country-name','off','off','off','street-address','off','off'];
 ---
-<section class="commercial-form-panel" aria-labelledby="commercial-form-title">
+<section class="commercial-form-panel" id="commercial-form" aria-labelledby="commercial-form-title">
   <div class="commercial-form-intro">
     <p class="eyebrow">CTSEG · RFQ</p>
     <h2 id="commercial-form-title">{copy.title}</h2>
@@ -21,6 +28,14 @@ const autocomplete = ['name','organization','email','tel','country-name','off','
       <label>Website<input name="website" tabindex="-1" autocomplete="off" /></label>
     </div>
     <div class="commercial-form-grid">
+      <label class="commercial-field commercial-field--wide">
+        <span>{intentCopy.label}</span>
+        <select name="intent" required data-commercial-intent>
+          <option value=""></option>
+          <option value="buyer_request">{intentCopy.buyer}</option>
+          <option value="supplier_market_entry">{intentCopy.producer}</option>
+        </select>
+      </label>
       {names.map((name,index) => (
         <label class:list={['commercial-field',{'commercial-field--wide':name === 'message'}]}>
           <span>{copy.labels[index]}</span>
@@ -68,9 +83,12 @@ const autocomplete = ['name','organization','email','tel','country-name','off','
     const fallback=form.querySelector('[data-form-fallback]');
     const download=form.querySelector('[data-download-summary]');
     const product=form.elements.namedItem('product');
+    const intent=form.elements.namedItem('intent');
     started.value=String(Date.now());
     const savedProduct=sessionStorage.getItem('ctseg-product-request');
     if(savedProduct&&product instanceof HTMLInputElement){product.value=savedProduct;sessionStorage.removeItem('ctseg-product-request')}
+    const requestedIntent=new URLSearchParams(location.search).get('intent');
+    if(intent instanceof HTMLSelectElement&&['buyer_request','supplier_market_entry'].includes(requestedIntent||''))intent.value=requestedIntent;
     let startedTracked=false;
     const track=(event)=>{if(typeof window.gtag==='function')window.gtag('event',event,{form_type:'commercial_assessment',source_language:document.documentElement.lang})};
     form.addEventListener('focusin',()=>{if(!startedTracked){startedTracked=true;track('contact_form_start')}},{once:true});

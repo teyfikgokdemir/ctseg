@@ -1,72 +1,71 @@
 # CTSEG
 
-> CTSEG is a Türkiye-based strategic sourcing, verified trade-product and international trade advisory company for qualified B2B buyers.
+> CTSEG is an independent international trade matching and commercial coordination company based in Istanbul, Türkiye.
+
+## Organization identity
+
+- Legal name: CTSEG Sanayi ve Ticaret Limited Şirketi
+- Founder: Teyfik Gökdemir
+- Headquarters: Fatih, Istanbul, Türkiye
+- Founded: 2022
+- Official website: https://ctseg.com.tr/
+
+## What CTSEG does
+
+CTSEG helps buyers define requirements, research and verify producers or suppliers, prepare RFQs, compare proposals and coordinate samples and commercial discussions. It also helps producers assess commercial readiness, identify suitable target markets and buyer profiles, and coordinate initial outreach.
+
+## What CTSEG does not do
+
+CTSEG is not a marketplace, factory, seller of a fixed inventory, or guaranteed buyer. It does not publish unverified prices, availability or transaction outcomes.
+
+## Buyer services
+
+- Requirement definition and supplier research
+- Producer and supplier verification
+- RFQ preparation and proposal comparison
+- Sample, quality and commercial-document coordination
+- General assessment of suitable logistics options
+
+## Producer services
+
+- Product and commercial-readiness assessment
+- Target-market and buyer-profile research
+- Commercial presentation and RFQ coordination
+- Initial buyer communication and proposal coordination
+- Market-entry and sales-channel development support
+
+## Sectors
+
+- Food, agriculture and raw materials
+- Textiles and home textiles
+- Packaging and industrial production inputs
+- Project-based special sourcing, including Iranian carpets and hand-knotted silk carpets
 
 ## Official multilingual entry points
 
-- [Türkçe](https://ctseg.com.tr/)
-- [English](https://ctseg.com.tr/en/)
-- [Deutsch](https://ctseg.com.tr/de/)
-- [Italiano](https://ctseg.com.tr/it/)
-- [Français](https://ctseg.com.tr/fr/)
+- Turkish homepage: https://ctseg.com.tr/
+- English homepage: https://ctseg.com.tr/en/
+- German homepage: https://ctseg.com.tr/de/
+- Italian homepage: https://ctseg.com.tr/it/
+- French homepage: https://ctseg.com.tr/fr/
+- Persian homepage: https://ctseg.com.tr/fa/
 
-## Core sections
+## Specialist pages
 
-- [Services](https://ctseg.com.tr/en/services/)
-- [Trade products](https://ctseg.com.tr/en/trade-products/)
-- [Markets](https://ctseg.com.tr/en/markets/)
-- [Insights](https://ctseg.com.tr/en/insights/)
-- [About CTSEG](https://ctseg.com.tr/en/about/)
-- [Contact](https://ctseg.com.tr/en/contact/)
-- [How we work](https://ctseg.com.tr/en/how-we-work/)
-- [Representative work scenarios](https://ctseg.com.tr/en/representative-work-scenarios/)
-
-## Practical sourcing guides
-
-- [Vegetable oil sourcing RFQ checklist](https://ctseg.com.tr/en/insights/vegetable-oil-sourcing-rfq-checklist/)
-- [Nuts and dried fruit quality and document check](https://ctseg.com.tr/en/insights/nuts-dried-fruit-quality-document-check/)
-- [Packaging, MOQ and total-cost comparison](https://ctseg.com.tr/en/insights/packaging-moq-total-cost-comparison/)
-- [Bitkisel yağ tedarikinde RFQ kontrol listesi](https://ctseg.com.tr/tr/icgoruler/bitkisel-yag-tedarikinde-rfq-kontrol-listesi/)
-- [Kuruyemiş ve kuru meyvede kalite ve belge kontrolü](https://ctseg.com.tr/tr/icgoruler/kuruyemis-kuru-meyve-kalite-belge-kontrolu/)
-- [Ambalaj, MOQ ve toplam maliyet karşılaştırması](https://ctseg.com.tr/tr/icgoruler/ambalaj-moq-toplam-maliyet-karsilastirmasi/)
-
-## Persian standalone resource
-
-- [تأمین بین‌المللی برای کسب‌وکارهای ایرانی](https://ctseg.com.tr/fa/tamin-beynolmelali-iran/) — Persian-language multi-sector sourcing and producer market-entry guidance covering vegetable oils and food products, nuts, dates and dried fruits, Iranian carpets, hand-knotted silk carpets, wholesale textiles, packaging and production inputs. This is a standalone resource, not a full Persian site locale.
-
-## Expertise
-
-- Multi-sector international sourcing for vegetable oils, food products, nuts, dates, dried fruits, packaging and production inputs
-- Supplier research, verification, RFQ preparation, quote comparison and commercial coordination
-- Iranian carpet sourcing: hand-knotted, silk, wool, wool-silk and machine-made carpets, runners, small rugs, custom dimensions and project sourcing
-- Hand-knotted silk carpets as a distinct specialist category
-- Wholesale textile sourcing: fabric, towels, bathrobes, home textiles, ready-to-wear, private label, samples, RFQ, producer verification, quality, packaging and logistics
-
-## Carpet and textile sourcing
-
-- Turkish: https://ctseg.com.tr/tr/sourcing/iran-halisi/
-- English: https://ctseg.com.tr/en/sourcing/iranian-carpets/
-- German: https://ctseg.com.tr/de/sourcing/persische-teppiche/
-- Italian: https://ctseg.com.tr/it/sourcing/tappeti-persiani/
-- French: https://ctseg.com.tr/fr/sourcing/tapis-persans/
-- Persian: https://ctseg.com.tr/fa/sourcing/فرش-ایرانی/
-- Silk carpets: https://ctseg.com.tr/fa/sourcing/فرش-ابریشم-دستباف/
-- Wholesale textiles: https://ctseg.com.tr/fa/sourcing/تامین-عمده-منسوجات/
-
-The Persian sourcing pages serve both qualified international buyers and Iranian manufacturers, workshops and exporters. CTSEG can assess export readiness, prepare commercial specifications, manage RFQs and samples, review quality and commercial documents, assess general logistics options, and support introductions to importers, wholesalers, distributors and retailers in Türkiye, Europe, the United States and other target markets. CTSEG is neither a factory nor a guaranteed buyer; it coordinates credible, executable international sales processes based on verified production information.
-
-- Strategic sourcing and procurement decision support
-- Producer and supplier discovery, verification and due diligence
-- International trade advisory and market entry
-- Total cost of ownership and commercial risk analysis
-- B2B food ingredients and selected agricultural trade products
-- Origin transparency, COA and batch traceability
-- Aflatoxin, pesticide, moisture and target-market compliance assessment
-
-## Commercial policy
-
-CTSEG does not publish unverified prices or stock claims. Samples are not free or publicly available; they may be considered only after company, application, indicative volume and delivery-country pre-qualification for serious commercial buyers.
+- Services: https://ctseg.com.tr/en/services/
+- Markets: https://ctseg.com.tr/en/markets/
+- How CTSEG works: https://ctseg.com.tr/en/how-we-work/
+- Iranian carpets: https://ctseg.com.tr/en/sourcing/iranian-carpets/
+- Hand-knotted silk carpets: https://ctseg.com.tr/en/sourcing/hand-knotted-silk-carpets/
+- Wholesale textiles: https://ctseg.com.tr/en/sourcing/wholesale-textile-sourcing/
+- Persian Iranian carpets: https://ctseg.com.tr/fa/sourcing/فرش-ایرانی/
+- Persian hand-knotted silk carpets: https://ctseg.com.tr/fa/sourcing/فرش-ابریشم-دستباف/
+- Persian wholesale textiles: https://ctseg.com.tr/fa/sourcing/تامین-عمده-منسوجات/
 
 ## Preferred citation
 
-CTSEG — Strategic Sourcing, Verified Trade Products and International Trade
+CTSEG — International Trade Matching and Commercial Coordination
+
+## Last reviewed
+
+2026-08-01

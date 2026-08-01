@@ -138,6 +138,7 @@ const requiredRedirects = {
   '/en/blog/total-cost-of-ownership-procurement/':'/en/insights/total-cost-of-ownership/',
   '/tr/blog/toplam-sahip-olma-maliyeti-tco/':'/tr/icgoruler/toplam-sahip-olma-maliyeti/',
   '/tr/kvkk/':'/tr/kvkk-aydinlatma-metni/'
+  ,'/fa/tamin-beynolmelali-iran/':'/fa/'
 };
 for (const [source,target] of Object.entries(requiredRedirects)) {
   const rule = redirectsBySource.get(source);
@@ -150,6 +151,7 @@ const requiredCanonicalPaths = [
   '/en/services/international-trade-advisory/','/en/cookie-policy/','/en/privacy-policy/',
   '/tr/hizmetler/uluslararasi-ticaret-danismanligi/','/tr/hizmetler/tedarikci-bulma-ve-dogrulama/',
   '/tr/hizmetler/stratejik-tedarik/'
+  ,'/fa/'
 ];
 for (const pathname of requiredCanonicalPaths) {
   if (!indexablePages.has(`${origin}${pathname}`)) errors.push(`${pathname}: required GSC canonical target is missing`);
@@ -158,7 +160,7 @@ for (const pathname of requiredCanonicalPaths) {
 const serviceSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Service"'));
 const blogSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Blog"'));
 const blogPostingPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"BlogPosting"'));
-if (serviceSchemaPages.length !== 44) errors.push(`expected 44 Service schema pages including Persian landing and multilingual carpet/textile sourcing, found ${serviceSchemaPages.length}`);
+if (serviceSchemaPages.length !== 139) errors.push(`expected 139 Service schema pages including six homepages, sourcing and specification-led product assessments, found ${serviceSchemaPages.length}`);
 if (blogSchemaPages.length !== 5) errors.push(`expected 5 Blog schema pages, found ${blogSchemaPages.length}`);
 if (blogPostingPages.length !== 35) errors.push(`expected 35 BlogPosting pages, found ${blogPostingPages.length}`);
 

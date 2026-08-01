@@ -5,10 +5,10 @@ const allowedOrigins = [
   /^http:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/
 ];
 const limits = {
-  locale:5,name:120,company:160,email:254,phone:80,country:100,requestType:120,
+  locale:5,intent:40,name:120,company:160,email:254,phone:80,country:100,requestType:120,
   product:240,quantity:120,delivery:180,targetDate:40,message:2000,website:80,startedAt:30,privacy:20
 };
-const required = ['name','company','email','country','requestType','product','delivery','privacy'];
+const required = ['intent','name','company','email','country','requestType','product','delivery','privacy'];
 
 const json = (body,status=200) => new Response(JSON.stringify(body),{
   status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}
@@ -44,6 +44,7 @@ export async function onRequestPost(context){
   const data=Object.fromEntries(Object.entries(limits).map(([key,max])=>[key,clean(raw[key],max)]));
   if(data.website)return json({ok:true});
   if(required.some((key)=>!data[key]))return json({code:'missing_required_fields'},400);
+  if(!['buyer_request','supplier_market_entry'].includes(data.intent))return json({code:'invalid_intent'},400);
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))return json({code:'invalid_email'},400);
   const startedAt=Number(data.startedAt);
   if(!Number.isFinite(startedAt)||Date.now()-startedAt<3500||Date.now()-startedAt>86400000)return json({code:'invalid_timing'},400);
@@ -54,6 +55,7 @@ export async function onRequestPost(context){
   if(!apiKey||!from)return json({code:'email_unavailable'},503);
   const lines=[
     'CTSEG commercial assessment request',
+    `Intent: ${data.intent}`,
     `Locale: ${data.locale}`,
     `Name: ${data.name}`,
     `Company: ${data.company}`,

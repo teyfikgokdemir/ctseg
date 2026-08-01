@@ -4,7 +4,7 @@ import PageContent from '../../components/PageContent.astro';
 import { insights, products, services, ui } from '../../data/site';
 import { guides, processPages } from '../../data/completion';
 import { getPosts } from '../../data/blog';
-import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, type RouteRecord } from '../../lib/routes';
+import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, tradeMatchingServiceSchema, type RouteRecord } from '../../lib/routes';
 
 export function getStaticPaths() {
   return getRouteRecords().map((record) => ({
@@ -16,6 +16,7 @@ export function getStaticPaths() {
 const { record } = Astro.props as { record: RouteRecord };
 const meta = getMeta(record);
 const schemas:any[] = [breadcrumbSchema(record, meta.title)];
+if (record.key === 'home') schemas.push(tradeMatchingServiceSchema(record,meta.title,meta.description));
 if (record.key === 'services' && record.id) {
   const service = services[record.id as keyof typeof services];
   schemas.push({
@@ -38,11 +39,11 @@ if (record.key === 'insights' && !record.id) {
 if (record.key === 'products' && record.id) {
   const product = products[record.id as keyof typeof products];
   schemas.push({
-    '@context':'https://schema.org','@type':'Product',
-    '@id':`${canonicalFor(record)}#product`,name:product.names[record.lang],
-    description:product.descriptions[record.lang],category:'B2B food ingredient',
+    '@context':'https://schema.org','@type':'Service',
+    '@id':`${canonicalFor(record)}#product-sourcing-service`,name:`${product.names[record.lang]} sourcing assessment`,
+    description:product.descriptions[record.lang],serviceType:'Specification-led B2B sourcing assessment',
     image:`https://ctseg.com.tr${product.media.src}`,
-    countryOfOrigin:product.origin,brand:{'@type':'Brand',name:'CTSEG'},
+    provider:{'@id':'https://ctseg.com.tr/#organization'},areaServed:['Türkiye','Europe','International'],
     additionalProperty:[
       {'@type':'PropertyValue',name:ui[record.lang].origin,value:product.origin},
       {'@type':'PropertyValue',name:'Commercial model',value:'Qualification and specification-led B2B assessment'}
