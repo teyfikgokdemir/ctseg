@@ -31,6 +31,10 @@ const productSources = [
 const jobs = [
   ...productSources.map((source) => ({ source, widths:productWidths, quality })),
   { source:'ctseg-global-trade-hero-premium.webp', widths:featureWidths, quality },
+  { source:'ctseg-vegetable-oils-food-editorial.webp', widths:featureWidths, quality },
+  { source:'ctseg-mixed-nuts-premium.webp', widths:featureWidths, quality },
+  { source:'ctseg-iranian-carpets-editorial.webp', widths:featureWidths, quality },
+  { source:'ctseg-wholesale-textiles-editorial.webp', widths:featureWidths, quality },
   { source:'2.webp', widths:featureWidths, quality }
 ];
 

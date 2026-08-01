@@ -282,6 +282,8 @@ try {
         const heroVisual=document.querySelector('.fa-hero-visual');
         const heroImage=heroVisual?.querySelector('img');
         const heroCaption=heroVisual?.querySelector('figcaption');
+        const sectorEntry=document.querySelector('[data-multisector-entry]');
+        const sectorCards=[...document.querySelectorAll('[data-multisector-entry] [data-sector-card]')];
         const chips=[...document.querySelectorAll('.fa-chip-list li')];
         const rgb=(value)=>value.match(/[\d.]+/g)?.slice(0,3).map(Number) ?? [0,0,0];
         const luminance=(value)=>rgb(value).map((channel)=>{
@@ -327,8 +329,23 @@ try {
           chipCount:chips.length,
           chipContrastMin:Math.min(...chips.map((chip)=>contrast(getComputedStyle(chip).color,getComputedStyle(chip.closest('.fa-category')).backgroundColor))),
           producerVisible:Boolean(document.querySelector('[data-persian-producer-entry]')?.getBoundingClientRect().height),
-          sectorsVisible:Boolean(document.querySelector('[data-carpet-textile-entry]')?.getBoundingClientRect().height),
-          sectorPaths:[...document.querySelectorAll('[data-carpet-textile-entry] .fa-sector-link')].map((link)=>decodeURI(new URL(link.href).pathname))
+          sectorsVisible:Boolean(sectorEntry?.getBoundingClientRect().height),
+          sectorInFirstForty:Boolean(sectorEntry && sectorEntry.offsetTop < document.body.scrollHeight * .4),
+          sectorCards:sectorCards.map((card)=>{
+            const image=card.querySelector('img');
+            const box=image?.getBoundingClientRect();
+            return {
+              key:card.getAttribute('data-sector-card'),
+              naturalWidth:image?.naturalWidth ?? 0,
+              naturalHeight:image?.naturalHeight ?? 0,
+              width:box?.width ?? 0,
+              height:box?.height ?? 0,
+              objectFit:image ? getComputedStyle(image).objectFit : null,
+              srcset:Boolean(image?.getAttribute('srcset'))
+            };
+          }),
+          sectorCtas:[...document.querySelectorAll('[data-multisector-entry] [data-sector-cta]')].map((link)=>({text:link.textContent?.replace('↗','').trim(),href:link.getAttribute('href')})),
+          sectorPaths:[...document.querySelectorAll('[data-multisector-entry] .fa-sector-link,[data-multisector-entry] .fa-sector-specialty')].map((link)=>decodeURI(new URL(link.href).pathname))
         };
       })()
       ,overflowNodes:[...document.querySelectorAll('body *')]
@@ -461,7 +478,10 @@ try {
       !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl || result.persian.chipCount < 1 || result.persian.chipContrastMin < 4.5 ||
       result.persian.heroMedia.imageNaturalWidth < 1 || result.persian.heroMedia.imageNaturalHeight < 1 || result.persian.heroMedia.objectFit !== 'cover' ||
       (testCase.width <= 560 && (result.persian.heroMedia.imageHeight < 160 || result.persian.heroMedia.imageHeight > 210 || result.persian.heroMedia.visualHeight > 330 || result.persian.heroMedia.captionHeight > 120 || result.persian.heroMedia.captionRowMax > 42)) ||
-      !result.persian.producerVisible || !result.persian.sectorsVisible ||
+      !result.persian.producerVisible || !result.persian.sectorsVisible || !result.persian.sectorInFirstForty || result.persian.sectorCards.length !== 4 ||
+      !result.persian.sectorCards.every((card)=>card.naturalWidth>0&&card.naturalHeight>0&&card.width>0&&card.height>0&&card.objectFit==='cover'&&card.srcset) ||
+      JSON.stringify(result.persian.sectorCtas.map((cta)=>cta.text)) !== JSON.stringify(['بررسی تأمین روغن و مواد غذایی','بررسی بازار خشکبار','بررسی بازار فرش','بررسی تأمین منسوجات و نهاده‌ها']) ||
+      JSON.stringify(result.persian.sectorCtas.map((cta)=>cta.href)) !== JSON.stringify(['#request-form','#request-form','/fa/sourcing/فرش-ایرانی/','/fa/sourcing/تامین-عمده-منسوجات/']) ||
       !['/fa/sourcing/فرش-ایرانی/','/fa/sourcing/فرش-ابریشم-دستباف/','/fa/sourcing/تامین-عمده-منسوجات/'].every((path)=>result.persian.sectorPaths.includes(path)));
     const expectedPersianMenuLabels=['صفحه اصلی','خدمات','محصولات','بازارها','درباره ما','تماس','درخواست بررسی'];
     const expectedPersianMenuHrefs=['/fa/tamin-beynolmelali-iran/','#services','#sourcing','#markets','#about','#contact','#request-form'];

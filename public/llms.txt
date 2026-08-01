@@ -32,10 +32,12 @@
 
 ## Persian standalone resource
 
-- [تأمین بین‌المللی برای کسب‌وکارهای ایرانی](https://ctseg.com.tr/fa/tamin-beynolmelali-iran/) — Persian-language buyer sourcing and producer market-entry guidance, with direct entry points for Iranian carpets, hand-knotted silk carpets and wholesale textiles. This is a standalone resource, not a full Persian site locale.
+- [تأمین بین‌المللی برای کسب‌وکارهای ایرانی](https://ctseg.com.tr/fa/tamin-beynolmelali-iran/) — Persian-language multi-sector sourcing and producer market-entry guidance covering vegetable oils and food products, nuts, dates and dried fruits, Iranian carpets, hand-knotted silk carpets, wholesale textiles, packaging and production inputs. This is a standalone resource, not a full Persian site locale.
 
 ## Expertise
 
+- Multi-sector international sourcing for vegetable oils, food products, nuts, dates, dried fruits, packaging and production inputs
+- Supplier research, verification, RFQ preparation, quote comparison and commercial coordination
 - Iranian carpet sourcing: hand-knotted, silk, wool, wool-silk and machine-made carpets, runners, small rugs, custom dimensions and project sourcing
 - Hand-knotted silk carpets as a distinct specialist category
 - Wholesale textile sourcing: fabric, towels, bathrobes, home textiles, ready-to-wear, private label, samples, RFQ, producer verification, quality, packaging and logistics
