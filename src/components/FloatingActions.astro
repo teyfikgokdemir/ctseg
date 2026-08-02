@@ -26,63 +26,120 @@ const copy = contactCopy[lang];
   .floating-actions .floating-whatsapp svg path:first-child{fill:currentColor;fill-opacity:.1}
   .floating-actions .back-to-top{opacity:0;visibility:hidden;transform:translateY(6px);pointer-events:none}
   .floating-actions .back-to-top.visible{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+
   .fa-trade-video{padding:72px 0;border-top:1px solid #d3cec1;background:#e8e3d8;color:#22231f}
   .fa-trade-video__inner{width:min(1220px,calc(100% - 48px));margin-inline:auto}
   .fa-trade-video__head{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.65fr);gap:48px;align-items:end;margin-bottom:30px}
   .fa-trade-video__head h2{margin:0;font-size:clamp(2.1rem,3.5vw,3.45rem);line-height:1.25}
   .fa-trade-video__head p{margin:0;color:#52544d}
   .fa-trade-video video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#272923;border:1px solid #c7c1b5}
+
   @media(max-width:820px){
     .floating-actions{inset-inline-end:max(16px,env(safe-area-inset-right))!important;bottom:calc(16px + env(safe-area-inset-bottom) + var(--floating-cookie-offset))!important;gap:7px}
     .floating-actions .floating-action{width:46px!important;height:46px!important;min-width:46px;min-height:46px}
     .floating-actions svg{width:20px;height:20px}
     body.fa-menu-open .floating-actions{display:none!important}
-    .fa-header{position:sticky!important;top:0!important;z-index:120!important}
-    .fa-menu-backdrop{position:fixed!important;z-index:118!important;inset:72px 0 0!important;background:rgba(5,7,11,.78)!important;backdrop-filter:blur(3px)}
-    .fa-nav{position:fixed!important;z-index:119!important;top:72px!important;right:0!important;left:auto!important;bottom:0!important;width:min(88vw,390px)!important;max-height:calc(100dvh - 72px)!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;overflow-y:auto!important;overscroll-behavior:contain;background:#272923!important;box-shadow:-18px 0 50px rgba(0,0,0,.42)!important;transform:translateX(105%)!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;padding:16px 20px calc(28px + env(safe-area-inset-bottom))!important}
-    .fa-nav.open{transform:translateX(0)!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+    body.fa-menu-open .fa-cookie{display:none!important}
+
+    .fa-header{position:sticky!important;top:0!important;z-index:120!important;backdrop-filter:none!important}
+    .fa-menu-backdrop[data-fa-mobile-portal]{position:fixed!important;z-index:118!important;inset:72px 0 0!important;display:block;background:rgba(5,7,11,.82)!important;backdrop-filter:blur(3px)}
+    .fa-menu-backdrop[data-fa-mobile-portal][hidden]{display:none!important}
+    .fa-nav[data-fa-mobile-portal]{position:fixed!important;z-index:119!important;top:72px!important;right:0!important;left:auto!important;bottom:0!important;width:min(88vw,390px)!important;height:calc(100dvh - 72px)!important;max-height:none!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;overflow-x:hidden!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:#272923!important;box-shadow:-18px 0 50px rgba(0,0,0,.42)!important;transform:translate3d(105%,0,0)!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;padding:16px 20px calc(28px + env(safe-area-inset-bottom))!important;transition:transform .24s ease,opacity .18s ease,visibility .18s ease!important}
+    .fa-nav[data-fa-mobile-portal].open{transform:translate3d(0,0,0)!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+    .fa-nav[data-fa-mobile-portal] .fa-nav-section,.fa-nav[data-fa-mobile-portal] .fa-desktop-cta{display:none!important}
     .fa-mobile-nav-links{display:grid!important}
     .fa-mobile-nav-links a{display:flex!important;min-height:54px!important;align-items:center!important;border-bottom:1px solid rgba(255,255,255,.13)!important;color:#f2efe7!important;font-size:1rem!important;font-weight:700!important}
-    .fa-language{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important;width:100%!important;margin-top:18px!important;padding-top:18px!important;border-top:1px solid rgba(255,255,255,.13)!important;border-inline-start:0!important}
-    .fa-language a{min-height:42px!important;border:1px solid rgba(255,255,255,.2)!important;color:#f2efe7!important}
+    .fa-language{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;width:100%!important;margin-top:18px!important;padding:18px 0 0!important;border-top:1px solid rgba(255,255,255,.13)!important;border-inline-start:0!important}
+    .fa-language a{min-width:0!important;min-height:42px!important;border:1px solid rgba(255,255,255,.2)!important;color:#f2efe7!important}
     .fa-mobile-nav-cta{display:inline-flex!important;width:100%!important;margin-top:14px!important}
     .fa-menu-toggle{position:relative!important;z-index:121!important;width:42px!important;height:42px!important;padding:9px!important}
     .fa-brand img{width:126px!important}
+
     .fa-trade-video{padding:58px 0}
     .fa-trade-video__inner{width:min(1220px,calc(100% - 34px))}
     .fa-trade-video__head{grid-template-columns:1fr;gap:14px}
   }
   @media(max-width:560px){.fa-trade-video__inner{width:min(1220px,calc(100% - 26px))}.fa-trade-video__head h2{font-size:clamp(1.95rem,9vw,2.5rem)}}
-  @media(prefers-reduced-motion:reduce){.floating-actions,.floating-actions .floating-action{transition:none!important}}
+  @media(prefers-reduced-motion:reduce){.floating-actions,.floating-actions .floating-action,.fa-nav[data-fa-mobile-portal]{transition:none!important}}
 </style>
 
 <script>
   (()=>{
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+
     document.querySelectorAll('[data-floating-actions]').forEach((actions)=>{
-      if(actions.dataset.enhanced)return;actions.dataset.enhanced='true';
+      if(actions.dataset.enhanced)return;
+      actions.dataset.enhanced='true';
       const top=actions.querySelector('[data-back-to-top]');
-      const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-      const update=()=>{const visible=scrollY>180;top.classList.toggle('visible',visible);top.setAttribute('aria-hidden',String(!visible));top.tabIndex=visible?0:-1};
-      update();addEventListener('scroll',update,{passive:true});
+      if(!(top instanceof HTMLButtonElement))return;
+      const update=()=>{
+        const visible=scrollY>180;
+        top.classList.toggle('visible',visible);
+        top.setAttribute('aria-hidden',String(!visible));
+        top.tabIndex=visible?0:-1;
+      };
+      update();
+      addEventListener('scroll',update,{passive:true});
       top.addEventListener('click',()=>scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'}));
       const cookie=document.querySelector('[data-cookie-consent],.fa-cookie');
-      const updateCookieOffset=()=>{const visible=cookie&&!cookie.hidden;actions.style.setProperty('--floating-cookie-offset',visible?`${cookie.getBoundingClientRect().height+16}px`:'0px')};
+      const updateCookieOffset=()=>{
+        const visible=cookie instanceof HTMLElement&&!cookie.hidden&&!document.body.classList.contains('fa-menu-open');
+        actions.style.setProperty('--floating-cookie-offset',visible?`${cookie.getBoundingClientRect().height+16}px`:'0px');
+      };
       updateCookieOffset();
-      if(cookie)new MutationObserver(updateCookieOffset).observe(cookie,{attributes:true,attributeFilter:['hidden']});
+      if(cookie)new MutationObserver(updateCookieOffset).observe(cookie,{attributes:true,attributeFilter:['hidden','class']});
+      new MutationObserver(updateCookieOffset).observe(document.body,{attributes:true,attributeFilter:['class']});
       addEventListener('resize',updateCookieOffset,{passive:true});
     });
 
-    if(document.documentElement.lang==='fa'&&!document.querySelector('[data-fa-trade-video]')){
+    if(document.documentElement.lang!=='fa')return;
+
+    const nav=document.querySelector('[data-fa-primary-nav]');
+    const backdrop=document.querySelector('[data-fa-menu-backdrop]');
+    const mobile=matchMedia('(max-width: 820px)');
+    const portalMobileMenu=()=>{
+      if(!(nav instanceof HTMLElement)||!(backdrop instanceof HTMLElement))return;
+      if(mobile.matches){
+        if(nav.parentElement!==document.body)document.body.append(nav);
+        if(backdrop.parentElement!==document.body)document.body.append(backdrop);
+        nav.dataset.faMobilePortal='';
+        backdrop.dataset.faMobilePortal='';
+      }else{
+        const headerInner=document.querySelector('.fa-header-inner');
+        if(headerInner instanceof HTMLElement){
+          if(backdrop.parentElement!==headerInner)headerInner.insertBefore(backdrop,nav.parentElement===headerInner?nav:null);
+          if(nav.parentElement!==headerInner)headerInner.append(nav);
+        }
+        nav.removeAttribute('data-fa-mobile-portal');
+        backdrop.removeAttribute('data-fa-mobile-portal');
+      }
+    };
+    portalMobileMenu();
+    mobile.addEventListener?.('change',portalMobileMenu);
+
+    if(!document.querySelector('[data-fa-trade-video]')){
       const process=document.querySelector('#process');
       if(process){
         const section=document.createElement('section');
         section.className='fa-trade-video';
         section.dataset.faTradeVideo='';
-        section.innerHTML=`<div class="fa-trade-video__inner"><div class="fa-trade-video__head"><div><p class="fa-section-kicker">هماهنگی تجاری در عمل</p><h2>از ارزیابی محصول تا هماهنگی تجاری</h2></div><p>نمونه‌ای تصویری از بررسی محصول، کنترل کیفیت، ارزیابی اسناد و هماهنگی مسیر تجاری.</p></div><video muted loop playsinline preload="metadata" poster="/videos/ctseg-trade-coordination-poster.jpg" aria-label="فرایند ارزیابی و هماهنگی تجاری CTSEG"><source src="/videos/ctseg-trade-coordination-1080p.webm" type="video/webm"><source src="/videos/ctseg-trade-coordination-1080p.mp4" type="video/mp4"></video></div>`;
+        section.setAttribute('aria-labelledby','fa-trade-video-title');
+        section.innerHTML=`<div class="fa-trade-video__inner"><div class="fa-trade-video__head"><div><p class="fa-section-kicker">هماهنگی تجاری در عمل</p><h2 id="fa-trade-video-title">از ارزیابی محصول تا هماهنگی تجاری</h2></div><p>نمونه‌ای تصویری از بررسی محصول، کنترل کیفیت، ارزیابی اسناد و هماهنگی مسیر تجاری.</p></div><video autoplay muted loop playsinline preload="metadata" poster="/videos/ctseg-trade-coordination-poster.jpg" aria-label="فرایند ارزیابی و هماهنگی تجاری CTSEG" controlslist="nodownload noplaybackrate" disablepictureinpicture><source src="/videos/ctseg-trade-coordination-1080p.mp4" type="video/mp4"><source src="/videos/ctseg-trade-coordination-1080p.webm" type="video/webm"></video></div>`;
         process.insertAdjacentElement('afterend',section);
         const video=section.querySelector('video');
-        if(video&&!reduced.matches){video.autoplay=true;video.play().catch(()=>{})}
-        reduced.addEventListener?.('change',(event)=>{if(!video)return;if(event.matches){video.pause();video.removeAttribute('autoplay')}else{video.autoplay=true;video.play().catch(()=>{})}});
+        if(video instanceof HTMLVideoElement){
+          video.muted=true;
+          video.defaultMuted=true;
+          const attemptPlay=()=>{
+            if(reduced.matches){video.pause();video.removeAttribute('autoplay');return}
+            video.autoplay=true;
+            video.play().then(()=>video.removeAttribute('controls')).catch(()=>video.setAttribute('controls',''));
+          };
+          attemptPlay();
+          video.addEventListener('loadedmetadata',attemptPlay,{once:true});
+          document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();else attemptPlay()});
+          reduced.addEventListener?.('change',attemptPlay);
+        }
       }
     }
   })();
