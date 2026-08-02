@@ -1,0 +1,65 @@
+---
+import type { Locale } from '../data/site';
+const { lang } = Astro.props as { lang: Locale };
+const copy = {
+  tr:{eyebrow:'CTSEG · Ticari koordinasyon',title:'Araştırmadan ticari eşleştirmeye',text:'Ürün, üretici, numune ve pazar değerlendirmesini tek bir ticari koordinasyon akışında bir araya getiriyoruz.',label:'CTSEG ticari araştırma ve koordinasyon süreci'},
+  en:{eyebrow:'CTSEG · Commercial coordination',title:'From research to commercial matching',text:'We bring product, producer, sample and market assessment together in one commercial coordination flow.',label:'CTSEG commercial research and coordination process'},
+  de:{eyebrow:'CTSEG · Handelskoordination',title:'Von der Recherche zur geschäftlichen Vermittlung',text:'Wir verbinden Produkt-, Hersteller-, Muster- und Marktbewertung in einem koordinierten Handelsprozess.',label:'CTSEG Prozess für Handelsrecherche und Koordination'},
+  it:{eyebrow:'CTSEG · Coordinamento commerciale',title:'Dalla ricerca all’abbinamento commerciale',text:'Riuniamo la valutazione di prodotti, produttori, campioni e mercati in un unico processo di coordinamento commerciale.',label:'Processo CTSEG di ricerca e coordinamento commerciale'},
+  fa:{eyebrow:'CTSEG · هماهنگی تجاری',title:'از بررسی تا تطبیق تجاری',text:'بررسی محصول، تولیدکننده، نمونه و بازار را در یک مسیر هماهنگ تجاری کنار هم قرار می‌دهیم.',label:'فرایند بررسی و هماهنگی تجاری CTSEG'},
+  ru:{eyebrow:'CTSEG · Коммерческая координация',title:'От исследования к коммерческому подбору',text:'Мы объединяем оценку продукции, производителей, образцов и рынков в единый процесс коммерческой координации.',label:'Процесс коммерческого исследования и координации CTSEG'}
+}[lang];
+---
+<section class="section trade-video-section" data-trade-video-section>
+  <div class="container trade-video-grid">
+    <div class="trade-video-copy">
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h2>{copy.title}</h2>
+      <p>{copy.text}</p>
+    </div>
+    <figure class="trade-video-frame">
+      <video
+        data-trade-video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/videos/ctseg-trade-coordination-poster.jpg"
+        aria-label={copy.label}
+      >
+        <source src="/videos/ctseg-trade-coordination-1080p.webm" type="video/webm" />
+        <source src="/videos/ctseg-trade-coordination-1080p.mp4" type="video/mp4" />
+      </video>
+    </figure>
+  </div>
+</section>
+
+<style is:global>
+  .trade-video-section{background:#272923;color:#f2efe7}
+  .trade-video-grid{display:grid;grid-template-columns:minmax(240px,.55fr) minmax(0,1.45fr);gap:clamp(34px,5vw,76px);align-items:center}
+  .trade-video-copy h2{margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:clamp(2.35rem,3.6vw,4.2rem);font-weight:500;line-height:1.02;letter-spacing:-.035em;text-wrap:balance}
+  .trade-video-copy>p:last-child{max-width:38ch;margin:24px 0 0;color:#c7c2b7;font-size:1.05rem}
+  .trade-video-frame{position:relative;margin:0;overflow:hidden;border:1px solid rgba(242,239,231,.2);background:#171914;aspect-ratio:16/9}
+  .trade-video-frame:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+  .trade-video-frame video{display:block;width:100%;height:100%;object-fit:cover;background:#171914}
+  @media(max-width:860px){.trade-video-grid{grid-template-columns:1fr}.trade-video-copy>p:last-child{max-width:58ch}}
+  @media(max-width:620px){.trade-video-section{padding-block:64px}.trade-video-copy h2{font-size:clamp(2rem,9vw,2.8rem)}.trade-video-frame{margin-inline:-13px;border-inline:0}}
+</style>
+
+<script>
+  (()=>{
+    const section=document.querySelector('[data-trade-video-section]');
+    const market=document.querySelector('.markets-editorial');
+    if(section&&market&&section.parentElement!==market.parentElement){market.parentElement?.insertBefore(section,market)}
+    else if(section&&market){market.parentElement?.insertBefore(section,market)}
+    const video=section?.querySelector('[data-trade-video]');
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    const apply=()=>{
+      if(!video)return;
+      if(reduced.matches){video.pause();video.removeAttribute('autoplay');video.currentTime=0}
+      else{video.setAttribute('autoplay','');video.play().catch(()=>{})}
+    };
+    apply();reduced.addEventListener?.('change',apply);
+  })();
+</script>
