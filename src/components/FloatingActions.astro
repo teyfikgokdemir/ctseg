@@ -18,94 +18,54 @@ const copy = contactCopy[lang];
 <style is:global>
   .floating-actions{
     --floating-cookie-offset:0px;
-    --floating-footer-offset:0px;
     position:fixed!important;
-    inset-inline-end:max(18px,env(safe-area-inset-right))!important;
+    inset-inline-end:max(24px,env(safe-area-inset-right))!important;
     inset-inline-start:auto!important;
-    bottom:calc(24px + env(safe-area-inset-bottom) + var(--floating-cookie-offset) + var(--floating-footer-offset))!important;
+    bottom:calc(24px + env(safe-area-inset-bottom) + var(--floating-cookie-offset))!important;
     display:flex!important;
     flex-direction:column!important;
     align-items:center;
-    gap:10px;
+    gap:8px;
     z-index:45;
     pointer-events:none;
     transition:bottom .2s ease;
   }
   .floating-actions .floating-action{
-    width:52px!important;
-    height:52px!important;
-    min-width:52px;
-    min-height:52px;
+    width:48px!important;
+    height:48px!important;
+    min-width:48px;
+    min-height:48px;
     display:grid!important;
     place-items:center;
     padding:0!important;
-    border:1px solid rgba(242,239,231,.2)!important;
+    border:1px solid rgba(242,239,231,.25)!important;
     border-radius:999px!important;
     background:#272923!important;
     color:#f2efe7!important;
-    box-shadow:0 10px 24px rgba(34,35,31,.22)!important;
+    box-shadow:0 5px 14px rgba(34,35,31,.16)!important;
     cursor:pointer;
     pointer-events:auto;
     transition:transform .18s ease,background .18s ease,border-color .18s ease,opacity .18s ease;
   }
-  .floating-actions .floating-action:hover{
-    transform:translateY(-2px);
-    background:#34372f!important;
-    border-color:#a95638!important;
-  }
-  .floating-actions .floating-action:focus-visible{
-    outline:3px solid #a95638;
-    outline-offset:3px;
-  }
+  .floating-actions .floating-action:hover{transform:translateY(-1px);background:#34372f!important;border-color:#a95638!important}
+  .floating-actions .floating-action:focus-visible{outline:3px solid #a95638;outline-offset:3px}
   .floating-actions .floating-whatsapp{
     background:#25d366!important;
-    border-color:#1fb85a!important;
+    border-color:#20b858!important;
     color:#fff!important;
-    box-shadow:0 10px 28px rgba(37,211,102,.3)!important;
+    box-shadow:0 5px 14px rgba(34,35,31,.18)!important;
   }
-  .floating-actions .floating-whatsapp:hover{
-    background:#1fbd5b!important;
-    border-color:#199c4b!important;
-  }
-  .floating-actions svg{
-    width:23px;
-    height:23px;
-    fill:none;
-    stroke:currentColor;
-    stroke-width:1.8;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-  }
-  .floating-actions .floating-whatsapp svg path:first-child{fill:currentColor;fill-opacity:.12}
-  .floating-actions .back-to-top{
-    opacity:0;
-    visibility:hidden;
-    transform:translateY(8px);
-    pointer-events:none;
-  }
-  .floating-actions .back-to-top.visible{
-    opacity:1;
-    visibility:visible;
-    transform:none;
-    pointer-events:auto;
-  }
+  .floating-actions .floating-whatsapp:hover{background:#20c45e!important;border-color:#1aa34d!important}
+  .floating-actions svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .floating-actions .floating-whatsapp svg path:first-child{fill:currentColor;fill-opacity:.1}
+  .floating-actions .back-to-top{opacity:0;visibility:hidden;transform:translateY(6px);pointer-events:none}
+  .floating-actions .back-to-top.visible{opacity:1;visibility:visible;transform:none;pointer-events:auto}
   @media(max-width:620px){
-    .floating-actions{
-      inset-inline-end:max(14px,env(safe-area-inset-right))!important;
-      bottom:calc(16px + env(safe-area-inset-bottom) + var(--floating-cookie-offset) + var(--floating-footer-offset))!important;
-      gap:8px;
-    }
-    .floating-actions .floating-action{
-      width:48px!important;
-      height:48px!important;
-      min-width:48px;
-      min-height:48px;
-    }
-    .floating-actions svg{width:21px;height:21px}
+    .floating-actions{inset-inline-end:max(16px,env(safe-area-inset-right))!important;bottom:calc(16px + env(safe-area-inset-bottom) + var(--floating-cookie-offset))!important;gap:7px}
+    .floating-actions .floating-action{width:46px!important;height:46px!important;min-width:46px;min-height:46px}
+    .floating-actions svg{width:20px;height:20px}
   }
-  @media(prefers-reduced-motion:reduce){
-    .floating-actions,.floating-actions .floating-action{transition:none!important}
-  }
+  @media(prefers-reduced-motion:reduce){.floating-actions,.floating-actions .floating-action{transition:none!important}}
 </style>
 
 <script>
@@ -117,22 +77,11 @@ const copy = contactCopy[lang];
       const update=()=>{const visible=scrollY>180;top.classList.toggle('visible',visible);top.setAttribute('aria-hidden',String(!visible));top.tabIndex=visible?0:-1};
       update();addEventListener('scroll',update,{passive:true});
       top.addEventListener('click',()=>scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'}));
-
       const cookie=document.querySelector('[data-cookie-consent],.fa-cookie');
       const updateCookieOffset=()=>{const visible=cookie&&!cookie.hidden;actions.style.setProperty('--floating-cookie-offset',visible?`${cookie.getBoundingClientRect().height+16}px`:'0px')};
       updateCookieOffset();
       if(cookie)new MutationObserver(updateCookieOffset).observe(cookie,{attributes:true,attributeFilter:['hidden']});
-
-      const footer=document.querySelector('.site-footer,footer');
-      const updateFooterOffset=()=>{
-        if(!footer){actions.style.setProperty('--floating-footer-offset','0px');return;}
-        const rect=footer.getBoundingClientRect();
-        const overlap=Math.max(0,innerHeight-rect.top+16);
-        actions.style.setProperty('--floating-footer-offset',`${overlap}px`);
-      };
-      updateFooterOffset();
-      addEventListener('scroll',updateFooterOffset,{passive:true});
-      addEventListener('resize',()=>{updateCookieOffset();updateFooterOffset()},{passive:true});
+      addEventListener('resize',updateCookieOffset,{passive:true});
     });
   })();
 </script>
