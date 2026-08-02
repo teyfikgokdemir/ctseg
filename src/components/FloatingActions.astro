@@ -96,20 +96,24 @@ const copy = contactCopy[lang];
 
     const nav=document.querySelector('[data-fa-primary-nav]');
     const backdrop=document.querySelector('[data-fa-menu-backdrop]');
+    const headerInner=document.querySelector('.fa-header-inner');
+    const navAnchor=document.createComment('fa-nav-anchor');
+    const backdropAnchor=document.createComment('fa-backdrop-anchor');
+    if(nav?.parentNode)nav.parentNode.insertBefore(navAnchor,nav);
+    if(backdrop?.parentNode)backdrop.parentNode.insertBefore(backdropAnchor,backdrop);
     const mobile=matchMedia('(max-width: 820px)');
     const portalMobileMenu=()=>{
       if(!(nav instanceof HTMLElement)||!(backdrop instanceof HTMLElement))return;
       if(mobile.matches){
-        if(nav.parentElement!==document.body)document.body.append(nav);
         if(backdrop.parentElement!==document.body)document.body.append(backdrop);
+        if(nav.parentElement!==document.body)document.body.append(nav);
         nav.dataset.faMobilePortal='';
         backdrop.dataset.faMobilePortal='';
       }else{
-        const headerInner=document.querySelector('.fa-header-inner');
-        if(headerInner instanceof HTMLElement){
-          if(backdrop.parentElement!==headerInner)headerInner.insertBefore(backdrop,nav.parentElement===headerInner?nav:null);
-          if(nav.parentElement!==headerInner)headerInner.append(nav);
-        }
+        if(backdropAnchor.parentNode)backdropAnchor.parentNode.insertBefore(backdrop,backdropAnchor.nextSibling);
+        else if(headerInner instanceof HTMLElement)headerInner.append(backdrop);
+        if(navAnchor.parentNode)navAnchor.parentNode.insertBefore(nav,navAnchor.nextSibling);
+        else if(headerInner instanceof HTMLElement)headerInner.append(nav);
         nav.removeAttribute('data-fa-mobile-portal');
         backdrop.removeAttribute('data-fa-mobile-portal');
       }
