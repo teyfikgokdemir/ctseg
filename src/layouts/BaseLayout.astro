@@ -3,6 +3,7 @@ import '../styles/site.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import FloatingActions from '../components/FloatingActions.astro';
+import TradeVideo from '../components/TradeVideo.astro';
 import { company, locales, localizedPath, products, routeAlternates, ui, type Locale } from '../data/site';
 import { activeLocales, localeDirection, localeOg } from '../data/locales';
 import { FEATURE_IMAGE_WIDTHS, generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
@@ -97,7 +98,7 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
   <body>
     <a class="skip-link" href="#main">{lang === 'ru' ? 'Перейти к содержанию' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : 'Skip to content'}</a>
     <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
-    <main id="main"><slot /></main>
+    <main id="main"><slot />{pageKey === 'home' && <TradeVideo lang={lang} />}</main>
     <SiteFooter lang={lang} />
     {pageKey === 'home' && <FloatingActions lang={lang} />}
     <aside class="cookie-consent" data-cookie-consent hidden aria-label={ui[lang].cookieTitle}>
