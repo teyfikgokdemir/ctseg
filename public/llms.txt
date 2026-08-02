@@ -1,4 +1,4 @@
-# CTSEG
+# CTSEG International Trade Matching and Commercial Coordination
 
 > CTSEG is an independent international trade matching and commercial coordination company based in Istanbul, Türkiye.
 
@@ -8,22 +8,22 @@
 - Founder: Teyfik Gökdemir
 - Headquarters: Fatih, Istanbul, Türkiye
 - Founded: 2022
-- Official website: https://ctseg.com.tr/
+- Official website: [ctseg.com.tr](https://ctseg.com.tr/)
 
 ## What CTSEG does
 
-CTSEG helps buyers define requirements, research and verify producers or suppliers, prepare RFQs, compare proposals and coordinate samples and commercial discussions. It also helps producers assess commercial readiness, identify suitable target markets and buyer profiles, and coordinate initial outreach.
+CTSEG helps buyers define requirements, research and verify producers or suppliers, prepare RFQs, compare proposals, and coordinate samples and commercial discussions. It also helps producers assess commercial readiness, identify suitable target markets and buyer profiles, and coordinate initial outreach.
 
 ## What CTSEG does not do
 
-CTSEG is not a marketplace, factory, seller of a fixed inventory, or guaranteed buyer. It does not publish unverified prices, availability or transaction outcomes.
+CTSEG is not a marketplace, factory, seller of a fixed inventory, or guaranteed buyer. It does not publish unverified prices, availability, or transaction outcomes.
 
 ## Buyer services
 
 - Requirement definition and supplier research
 - Producer and supplier verification
 - RFQ preparation and proposal comparison
-- Sample, quality and commercial-document coordination
+- Sample, quality, and commercial-document coordination
 - General assessment of suitable logistics options
 
 ## Producer services
@@ -36,34 +36,46 @@ CTSEG is not a marketplace, factory, seller of a fixed inventory, or guaranteed 
 
 ## Sectors
 
-- Food, agriculture and raw materials
+- Food, agriculture, and raw materials
 - Textiles and home textiles
 - Packaging and industrial production inputs
 - Project-based special sourcing, including Iranian carpets and hand-knotted silk carpets
 
 ## Official multilingual entry points
 
-- Turkish homepage: https://ctseg.com.tr/
-- English homepage: https://ctseg.com.tr/en/
-- German homepage: https://ctseg.com.tr/de/
-- Italian homepage: https://ctseg.com.tr/it/
-- Persian homepage: https://ctseg.com.tr/fa/
-- Russian homepage: https://ctseg.com.tr/ru/
+- [Turkish homepage](https://ctseg.com.tr/)
+- [English homepage](https://ctseg.com.tr/en/)
+- [German homepage](https://ctseg.com.tr/de/)
+- [Italian homepage](https://ctseg.com.tr/it/)
+- [Persian homepage](https://ctseg.com.tr/fa/)
+- [Russian homepage](https://ctseg.com.tr/ru/)
 
-## Specialist pages
+## Core pages
 
-- Services: https://ctseg.com.tr/en/services/
-- Markets: https://ctseg.com.tr/en/markets/
-- How CTSEG works: https://ctseg.com.tr/en/how-we-work/
-- Iranian carpets: https://ctseg.com.tr/en/sourcing/iranian-carpets/
-- Hand-knotted silk carpets: https://ctseg.com.tr/en/sourcing/hand-knotted-silk-carpets/
-- Wholesale textiles: https://ctseg.com.tr/en/sourcing/wholesale-textile-sourcing/
-- Persian Iranian carpets: https://ctseg.com.tr/fa/sourcing/فرش-ایرانی/
-- Persian hand-knotted silk carpets: https://ctseg.com.tr/fa/sourcing/فرش-ابریشم-دستباف/
-- Persian wholesale textiles: https://ctseg.com.tr/fa/sourcing/تامین-عمده-منسوجات/
-- Russian Iranian carpets: https://ctseg.com.tr/ru/sourcing/carpets/
-- Russian hand-knotted silk carpets: https://ctseg.com.tr/ru/sourcing/hand-knotted-silk-carpets/
-- Russian wholesale textiles: https://ctseg.com.tr/ru/sourcing/textiles/
+- [Services](https://ctseg.com.tr/en/services/)
+- [Markets](https://ctseg.com.tr/en/markets/)
+- [How CTSEG works](https://ctseg.com.tr/en/how-we-work/)
+- [Contact](https://ctseg.com.tr/en/contact/)
+- [Insights](https://ctseg.com.tr/en/insights/)
+
+## Specialist sourcing pages
+
+- [Iranian carpets](https://ctseg.com.tr/en/sourcing/iranian-carpets/)
+- [Hand-knotted silk carpets](https://ctseg.com.tr/en/sourcing/hand-knotted-silk-carpets/)
+- [Wholesale textiles](https://ctseg.com.tr/en/sourcing/wholesale-textile-sourcing/)
+- [Persian Iranian carpets](https://ctseg.com.tr/fa/sourcing/فرش-ایرانی/)
+- [Persian hand-knotted silk carpets](https://ctseg.com.tr/fa/sourcing/فرش-ابریشم-دستباف/)
+- [Persian wholesale textiles](https://ctseg.com.tr/fa/sourcing/تامین-عمده-منسوجات/)
+- [Russian Iranian carpets](https://ctseg.com.tr/ru/sourcing/carpets/)
+- [Russian hand-knotted silk carpets](https://ctseg.com.tr/ru/sourcing/hand-knotted-silk-carpets/)
+- [Russian wholesale textiles](https://ctseg.com.tr/ru/sourcing/textiles/)
+
+## Discovery and policy files
+
+- [XML sitemap index](https://ctseg.com.tr/sitemap-index.xml)
+- [Robots.txt](https://ctseg.com.tr/robots.txt)
+- [Privacy policy](https://ctseg.com.tr/en/privacy/)
+- [Terms of use](https://ctseg.com.tr/en/terms/)
 
 ## Preferred citation
 
