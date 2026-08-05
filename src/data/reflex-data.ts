@@ -1,13 +1,13 @@
-export type ReflexLocale = 'en' | 'tr' | 'de' | 'it' | 'fr' | 'fa' | 'sq' | 'mk' | 'sr';
+export type ReflexLocale = 'en' | 'tr' | 'de' | 'it' | 'ru' | 'fa' | 'sq' | 'mk' | 'sr';
 
-export const reflexLocales: ReflexLocale[] = ['en', 'tr', 'de', 'it', 'fr', 'fa', 'sq', 'mk', 'sr'];
+export const reflexLocales: ReflexLocale[] = ['en', 'tr', 'de', 'it', 'ru', 'fa', 'sq', 'mk', 'sr'];
 
 export const reflexLocaleNames: Record<ReflexLocale, string> = {
   en: 'English',
   tr: 'Türkçe',
   de: 'Deutsch',
   it: 'Italiano',
-  fr: 'Français',
+  ru: 'Русский',
   fa: 'فارسی',
   sq: 'Shqip',
   mk: 'Македонски',
@@ -25,7 +25,7 @@ export function reflexAlternates(): Record<ReflexLocale, string> {
     tr: 'https://ctseg.com.tr/medical/reflex-disposable-gloves/',
     de: 'https://ctseg.com.tr/de/medical/reflex-disposable-gloves/',
     it: 'https://ctseg.com.tr/it/medical/reflex-disposable-gloves/',
-    fr: 'https://ctseg.com.tr/fr/medical/reflex-disposable-gloves/',
+    ru: 'https://ctseg.com.tr/ru/medical/reflex-disposable-gloves/',
     fa: 'https://ctseg.com.tr/fa/medical/reflex-disposable-gloves/',
     sq: 'https://ctseg.com.tr/sq/medical/reflex-disposable-gloves/',
     mk: 'https://ctseg.com.tr/mk/medical/reflex-disposable-gloves/',
@@ -810,24 +810,24 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     }
   },
 
-  fr: {
-    metaTitle: 'Gants Jetables REFLEX B2B Sourcing | CTSEG Medical',
-    metaDescription: 'CTSEG fournit le portefeuille de gants jetables REFLEX (TPE, Examen, Vinyle, Copolymère) aux importateurs et distributeurs en Europe, dans les Balkans et dans le monde.',
-    eyebrow: 'Portefeuille Médical et de Protection',
-    heroTitle: 'Gants Jetables et d\'Examen REFLEX',
-    heroLead: 'Solutions à haute capacité de gants TPE, d\'examen, thermo vinyle et copolymère pour les importateurs et distributeurs internationaux.',
-    heroBadges: ['Certifié CE 2841 & ISO 9001', 'TPE 100% Recyclable', 'Agrée Contact Alimentaire et Médical', 'Support Logistique Export'],
-    ctaQuote: 'Demander un Devis',
-    ctaCatalog: 'Télécharger le Catalogue Officiel (PDF)',
-    ctaProducts: 'Voir les Produits',
+  ru: {
+    metaTitle: 'B2B поставка одноразовых перчаток REFLEX | CTSEG Medical Sourcing',
+    metaDescription: 'CTSEG поставляет ассортимент одноразовых перчаток REFLEX (TPE, смотровые, виниловые, кополимерные) международным импортерам и дистрибьюторам.',
+    eyebrow: 'Медицинский и защитный ассортимент',
+    heroTitle: 'Одноразовые и смотровые перчатки REFLEX',
+    heroLead: 'Высокопроизводительные решения для TPE, смотровых, термовиниловых и кополимерных перчаток для международных импортеров и дистрибьюторов.',
+    heroBadges: ['Сертификация CE 2841 и ISO 9001', '100% перерабатываемый TPE', 'Безопасно для пищевых продуктов', 'Экспортная логистика'],
+    ctaQuote: 'Запросить расчет',
+    ctaCatalog: 'Скачать официальный каталог (PDF)',
+    ctaProducts: 'Смотреть продукцию',
 
-    aboutEyebrow: 'Capacité de Production & Normes',
-    aboutTitle: 'Production à Grand Volume & Conformité aux Normes',
-    aboutText1: 'Fabriqué à Istanbul, en Turquie, REFLEX utilise des lignes de production automatisées de haute technologie fonctionnant 24/7. À partir de matières premières de qualité et de formulations TPE spécialisées, REFLEX produit des gants d\'examen médical et de protection industrielle.',
-    aboutText2: 'Les installations répondent aux normes des laboratoires accrédités avec les certifications CE 2841, EN ISO 374-1 Type C, EN 420+A1, EN ISO 374-5 (Protection contre les virus) et ISO 9001.',
-    aboutRoleTitle: 'Services Commerciaux CTSEG',
-    aboutRoleText: 'CTSEG agit en tant que partenaire commercial international pour les produits REFLEX. Nous assistons les importateurs et distributeurs avec la documentation d\'exportation, les certificats d\'analyse (COA) et la logistique de transport.',
-    aboutMarketsTitle: 'Marchés Cibles',
+    aboutEyebrow: 'Производственная мощность и стандарты',
+    aboutTitle: 'Крупносерийное производство и соответствие стандартам',
+    aboutText1: 'Произведенные в Стамбуле (Турция) перчатки REFLEX изготавливаются на автоматизированных высокотехнологичных линиях в режиме 24/7. REFLEX производит медицинские смотровые и гигиенические перчатки.',
+    aboutText2: 'Производственные мощности соответствуют стандартам аккредитованных лабораторий и имеют сертификаты CE 2841, EN ISO 374-1 Type C, EN 420+A1, EN ISO 374-5 и ISO 9001.',
+    aboutRoleTitle: 'Коммерческие услуги CTSEG',
+    aboutRoleText: 'CTSEG выступает в качестве международного торгового и закупочного партнера продукции REFLEX. Мы содействуем импортерам в подготовке экспортной документации, сертификатов анализа (COA) и логистическом сопровождении.',
+    aboutMarketsTitle: 'Целевые рынки',
     aboutMarketsList: ['Union Européenne & UK', 'Pays des Balkans', 'Moyen-Orient', 'Afrique du Nord', 'Importateurs Globaux'],
 
     categoriesTitle: 'Portefeuille de Produits REFLEX',

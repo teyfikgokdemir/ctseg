@@ -690,7 +690,7 @@ export function routeAlternates(key: string, id?: string) {
       en: 'https://ctseg.com.tr/en/medical/reflex-disposable-gloves/',
       de: 'https://ctseg.com.tr/de/medical/reflex-disposable-gloves/',
       it: 'https://ctseg.com.tr/it/medical/reflex-disposable-gloves/',
-      fr: 'https://ctseg.com.tr/fr/medical/reflex-disposable-gloves/',
+      ru: 'https://ctseg.com.tr/ru/medical/reflex-disposable-gloves/',
       fa: 'https://ctseg.com.tr/fa/medical/reflex-disposable-gloves/',
       sq: 'https://ctseg.com.tr/sq/medical/reflex-disposable-gloves/',
       mk: 'https://ctseg.com.tr/mk/medical/reflex-disposable-gloves/',
