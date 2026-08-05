@@ -28,8 +28,10 @@ const nav = lang === 'ru' ? [
 const globalLocales = activeLocaleRegistry.map((entry) => entry.code);
 const globalLocaleNames = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code,entry.label])) as Record<ActiveLocale,string>;
 const globalSwitchPath = (target: ActiveLocale) => {
+  if (target === 'fa') return '/fa/';
+  if (target === 'ru') return '/ru/';
   if (pageKey === 'medical') return reflexPath(target as any);
-  return target === 'fa' ? '/fa/' : target === 'ru' ? '/ru/' : localizedPath(target, pageKey, pageId);
+  return localizedPath(target, pageKey, pageId);
 };
 ---
 <header class="site-header">
@@ -59,7 +61,7 @@ const globalSwitchPath = (target: ActiveLocale) => {
       ) : <a class:list={{ active: pageKey === key }} href={href}>{label}</a>)}
       <div class="language-switcher language-switcher-desktop">
         <button type="button" aria-expanded="false" aria-controls="language-panel" aria-label={t.language} data-language-toggle>
-          <span class="locale-code">{(['tr','en','de','it','fr'].includes(lang) ? lang : 'en').toUpperCase()}</span>
+          <span class="locale-code">{(['tr','en','de','it','ru'].includes(lang) ? lang : 'en').toUpperCase()}</span>
           <span class="locale-chevron" aria-hidden="true"></span>
         </button>
         <div id="language-panel" class="language-menu" data-language-menu>

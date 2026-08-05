@@ -16,6 +16,6 @@ export const activeLocales = activeLocaleRegistry.map((entry) => entry.code) as 
 export const siteLocales = activeLocales.filter((code):code is SiteLocale => code !== 'fa');
 export const localeByCode = Object.fromEntries(localeRegistry.map((entry) => [entry.code,entry])) as Record<ActiveLocale,(typeof localeRegistry)[number]>;
 
-export const localeLabel = (code:ActiveLocale) => localeByCode[code].label;
-export const localeDirection = (code:ActiveLocale) => localeByCode[code].direction;
-export const localeOg = (code:ActiveLocale) => localeByCode[code].ogLocale;
+export const localeLabel = (code: string) => localeByCode[code as ActiveLocale]?.label ?? 'English';
+export const localeDirection = (code: string) => localeByCode[code as ActiveLocale]?.direction ?? 'ltr';
+export const localeOg = (code: string) => localeByCode[code as ActiveLocale]?.ogLocale ?? 'en_GB';
