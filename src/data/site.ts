@@ -650,8 +650,11 @@ export const pageCopy: Record<Locale, any> = {
   }
 };
 
-export function localizedPath(lang: Locale, key: string, id?: string): string {
-  if (key === 'home') return lang === 'tr' ? '/' : `/${lang}/`;
+export function localizedPath(lang: Locale | string, key: string, id?: string): string {
+  const safeLang = (locales as readonly string[]).includes(lang) ? (lang as Locale) : 'en';
+  const pathLang = key === 'medical' ? lang : safeLang;
+  if (key === 'home') return pathLang === 'tr' ? '/' : `/${pathLang}/`;
+  if (key === 'medical') return pathLang === 'tr' ? '/medical/reflex-disposable-gloves/' : `/${pathLang}/medical/reflex-disposable-gloves/`;
   if (lang === 'ru') {
     const homeAnchors: Record<string,string> = {
       services:'trade-paths', products:'sectors', markets:'markets', insights:'trade-paths',
@@ -661,25 +664,38 @@ export function localizedPath(lang: Locale, key: string, id?: string): string {
     return `/ru/#${homeAnchors[key] ?? 'contact'}`;
   }
   if (key === 'how-we-work') {
-    if (lang === 'tr' || lang === 'en') return `/${lang}/${specialSlugs['how-we-work'][lang]}/`;
-    return localizedPath(lang,'services');
+    if (pathLang === 'tr' || pathLang === 'en') return `/${pathLang}/${specialSlugs['how-we-work'][pathLang]}/`;
+    return localizedPath(safeLang,'services');
   }
   if (key === 'scenarios') {
-    if (lang === 'tr' || lang === 'en') return `/${lang}/${specialSlugs.scenarios[lang]}/`;
-    return localizedPath(lang,'about');
+    if (pathLang === 'tr' || pathLang === 'en') return `/${pathLang}/${specialSlugs.scenarios[pathLang]}/`;
+    return localizedPath(safeLang,'about');
   }
   if (key === 'guides' && id) {
-    if (lang === 'tr' || lang === 'en') return `/${lang}/${sectionSlugs.insights[lang]}/${guideSlugs[id as GuideId][lang]}/`;
-    return localizedPath(lang,'insights');
+    if (pathLang === 'tr' || pathLang === 'en') return `/${pathLang}/${sectionSlugs.insights[pathLang]}/${guideSlugs[id as GuideId][pathLang]}/`;
+    return localizedPath(safeLang,'insights');
   }
-  const section = sectionSlugs[key]?.[lang];
-  if (key === 'services' && id) return `/${lang}/${section}/${services[id as keyof typeof services].slugs[lang]}/`;
-  if (key === 'products' && id) return `/${lang}/${section}/${products[id as keyof typeof products].slugs[lang]}/`;
-  if (key === 'insights' && id) return `/${lang}/${section}/${insights[id as keyof typeof insights].slugs[lang]}/`;
-  if (key === 'legal' && id) return `/${lang}/${legal[id as keyof typeof legal].slugs[lang]}/`;
-  return `/${lang}/${section}/`;
+  const section = sectionSlugs[key]?.[pathLang as Locale] || sectionSlugs[key]?.en;
+  if (key === 'services' && id) return `/${pathLang}/${section}/${services[id as keyof typeof services]?.slugs[safeLang] || id}/`;
+  if (key === 'products' && id) return `/${pathLang}/${section}/${products[id as keyof typeof products]?.slugs[safeLang] || id}/`;
+  if (key === 'insights' && id) return `/${pathLang}/${section}/${insights[id as keyof typeof insights]?.slugs[safeLang] || id}/`;
+  if (key === 'legal' && id) return `/${pathLang}/${legal[id as keyof typeof legal]?.slugs[safeLang] || id}/`;
+  return `/${pathLang}/${section}/`;
 }
 
 export function routeAlternates(key: string, id?: string) {
+  if (key === 'medical') {
+    return {
+      tr: 'https://ctseg.com.tr/medical/reflex-disposable-gloves/',
+      en: 'https://ctseg.com.tr/en/medical/reflex-disposable-gloves/',
+      de: 'https://ctseg.com.tr/de/medical/reflex-disposable-gloves/',
+      it: 'https://ctseg.com.tr/it/medical/reflex-disposable-gloves/',
+      fr: 'https://ctseg.com.tr/fr/medical/reflex-disposable-gloves/',
+      fa: 'https://ctseg.com.tr/fa/medical/reflex-disposable-gloves/',
+      sq: 'https://ctseg.com.tr/sq/medical/reflex-disposable-gloves/',
+      mk: 'https://ctseg.com.tr/mk/medical/reflex-disposable-gloves/',
+      sr: 'https://ctseg.com.tr/sr/medical/reflex-disposable-gloves/'
+    } as Record<string, string>;
+  }
   return Object.fromEntries(locales.map((lang) => [lang, `https://ctseg.com.tr${localizedPath(lang, key, id)}`])) as Localized;
 }

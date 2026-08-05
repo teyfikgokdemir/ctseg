@@ -18,10 +18,11 @@ const {
 };
 const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
 const alternates = routeAlternates(pageKey, pageId);
-if (pageKey === 'home') alternates.tr = 'https://ctseg.com.tr/';
 if (pageKey === 'home') alternates.fa = 'https://ctseg.com.tr/fa/';
 if (pageKey === 'home') alternates.ru = 'https://ctseg.com.tr/ru/';
-const alternateCodes = pageKey === 'home' ? activeLocales : ['how-we-work','scenarios','guides'].includes(pageKey) ? ['tr','en'] : locales.filter((code) => code !== 'ru');
+const alternateCodes = pageKey === 'medical'
+  ? ['tr','en','de','it','fr','fa','sq','mk','sr']
+  : (pageKey === 'home' ? activeLocales : ['how-we-work','scenarios','guides'].includes(pageKey) ? ['tr','en'] : locales.filter((code) => code !== 'ru'));
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
   name:company.name,alternateName:company.alternateName,foundingDate:company.foundingYear,
@@ -49,7 +50,8 @@ const webpage = {
 };
 const extra = Array.isArray(schema) ? schema : [schema];
 const schemas = [organization, website, webpage, ...extra.filter(Boolean)];
-const cookieHref = lang === 'ru' ? localizedPath('en', 'legal', 'cookies') : localizedPath(lang, 'legal', 'cookies');
+const t = ui[lang] || ui.en;
+const cookieHref = lang === 'ru' ? localizedPath('en', 'legal', 'cookies') : localizedPath(lang in ui ? lang : 'en', 'legal', 'cookies');
 const homeHero = localizedTradeVisual('global-trade-hero',lang);
 const socialImage = pageKey === 'products' && pageId && products[pageId as keyof typeof products]
   ? products[pageId as keyof typeof products].media.src
@@ -101,9 +103,9 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <main id="main"><slot />{pageKey === 'home' && <TradeVideo lang={lang} />}</main>
     <SiteFooter lang={lang} />
     {pageKey === 'home' && <FloatingActions lang={lang} />}
-    <aside class="cookie-consent" data-cookie-consent hidden aria-label={ui[lang].cookieTitle}>
-      <div><strong>{ui[lang].cookieTitle}</strong><p>{ui[lang].cookieCopy}</p><a href={cookieHref}>{ui[lang].details}</a></div>
-      <div class="cookie-actions"><button type="button" data-cookie-reject>{ui[lang].reject}</button><button type="button" class="accept" data-cookie-accept>{ui[lang].accept}</button></div>
+    <aside class="cookie-consent" data-cookie-consent hidden aria-label={t.cookieTitle}>
+      <div><strong>{t.cookieTitle}</strong><p>{t.cookieCopy}</p><a href={cookieHref}>{t.details}</a></div>
+      <div class="cookie-actions"><button type="button" data-cookie-reject>{t.reject}</button><button type="button" class="accept" data-cookie-accept>{t.accept}</button></div>
     </aside>
     <script is:inline>
       (() => {

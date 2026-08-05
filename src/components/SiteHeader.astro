@@ -1,12 +1,13 @@
 ---
 import { localizedPath, ui, type Locale } from '../data/site';
 import { activeLocaleRegistry, type ActiveLocale } from '../data/locales';
+import { reflexPath } from '../data/reflex-data';
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 import { tradePlatformCopy } from '../data/trade-platform';
 const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?: string; pageId?: string };
-const t = ui[lang];
+const t = ui[lang] || ui.en;
 const home = localizedPath(lang, 'home');
-const p = tradePlatformCopy[lang];
+const p = tradePlatformCopy[lang] || tradePlatformCopy.en;
 const nav = lang === 'ru' ? [
   ['services', t.services, `${home}#trade-paths`],
   ['buyers', p.buyerTitle, `${home}#for-buyers`],
@@ -26,7 +27,10 @@ const nav = lang === 'ru' ? [
 ];
 const globalLocales = activeLocaleRegistry.map((entry) => entry.code);
 const globalLocaleNames = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code,entry.label])) as Record<ActiveLocale,string>;
-const globalSwitchPath = (target: ActiveLocale) => target === 'fa' ? '/fa/' : target === 'ru' ? '/ru/' : localizedPath(target, pageKey, pageId);
+const globalSwitchPath = (target: ActiveLocale) => {
+  if (pageKey === 'medical') return reflexPath(target as any);
+  return target === 'fa' ? '/fa/' : target === 'ru' ? '/ru/' : localizedPath(target, pageKey, pageId);
+};
 ---
 <header class="site-header">
   <div class="container header-inner">
@@ -55,7 +59,7 @@ const globalSwitchPath = (target: ActiveLocale) => target === 'fa' ? '/fa/' : ta
       ) : <a class:list={{ active: pageKey === key }} href={href}>{label}</a>)}
       <div class="language-switcher language-switcher-desktop">
         <button type="button" aria-expanded="false" aria-controls="language-panel" aria-label={t.language} data-language-toggle>
-          <span class="locale-code">{lang.toUpperCase()}</span>
+          <span class="locale-code">{(['tr','en','de','it','fr'].includes(lang) ? lang : 'en').toUpperCase()}</span>
           <span class="locale-chevron" aria-hidden="true"></span>
         </button>
         <div id="language-panel" class="language-menu" data-language-menu>

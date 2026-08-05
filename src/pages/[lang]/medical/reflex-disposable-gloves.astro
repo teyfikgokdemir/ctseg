@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ReflexPageContent from '../../../components/ReflexPageContent.astro';
+import { reflexData, reflexAlternates, reflexLocales, reflexPath, type ReflexLocale } from '../../../data/reflex-data';
+
+export function getStaticPaths() {
+  // Non-Turkish locales
+  return reflexLocales
+    .filter((loc) => loc !== 'tr')
+    .map((lang) => ({
+      params: { lang },
+      props: { lang }
+    }));
+}
+
+const { lang } = Astro.props as { lang: ReflexLocale };
+const data = reflexData[lang] || reflexData.en;
+const alternates = reflexAlternates();
+const canonical = `https://ctseg.com.tr${reflexPath(lang)}`;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `https://ctseg.com.tr/${lang}/` },
+      { '@type': 'ListItem', position: 2, name: 'Medical & Hygiene', item: canonical }
+    ]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalWebPage',
+    '@id': `${canonical}#medical-page`,
+    name: 'REFLEX Disposable Gloves Portfolio',
+    description: data.metaDescription,
+    aspect: 'Medical & Protective Gloves Portfolio',
+    image: 'https://ctseg.com.tr/images/reflex-tpe-gloves-hero.webp'
+  }
+];
+---
+
+<BaseLayout
+  lang={lang as any}
+  title={data.metaTitle}
+  description={data.metaDescription}
+  pageKey="medical"
+  canonical={canonical}
+  schema={schema}
+>
+  <ReflexPageContent lang={lang} />
+</BaseLayout>

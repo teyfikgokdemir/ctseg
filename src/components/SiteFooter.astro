@@ -1,24 +1,37 @@
 ---
 import { company, companyCopy, legal, legalIds, localizedPath, ui, type Locale } from '../data/site';
+import { reflexPath } from '../data/reflex-data';
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 const { lang } = Astro.props as { lang: Locale };
-const t = ui[lang];
-const corporate = companyCopy[lang];
-const description = {
+const t = ui[lang] || ui.en;
+const corporate = companyCopy[lang] || companyCopy.en;
+const year = new Date().getFullYear();
+const descriptionMap: Record<string, string> = {
   tr:'Türkiye merkezli uluslararası ticaret eşleştirme ve bağımsız ticari koordinasyon.',
   en:'International trade matching and independent commercial coordination from Türkiye.',
   de:'Internationale Geschäftsanbahnung und unabhängige Handelskoordination aus der Türkiye.',
   it:'Matching commerciale internazionale e coordinamento indipendente dalla Türkiye.',
-  ru:'Международный сорсинг и независимая коммерческая координация из Турции.'
-}[lang];
-const year = new Date().getFullYear();
-const copyright = {
+  fr:'Sourcing stratégique, produits commerciaux vérifiés et aide à la décision internationale depuis la Turquie.',
+  ru:'Международный сорсинг и независимая коммерческая координация из Турции.',
+  fa:'تأمین استراتژیک، محصولات تجاری معتبر و پشتیبانی تصمیم‌گیری تجاری بین‌المللی از ترکیه.',
+  sq:'Sourcing strategjik, produkte tregtare të verifikuara dhe mbështetje për vendimmarrje tregtare ndërkombëtare nga Turqia.',
+  mk:'Стратешка набавка, верификувани трговски производи и меѓународна поддршка за трговски одлуки од Турција.',
+  sr:'Strateška nabavka, verifikovani trgovinski proizvodi i međunarodna podrška za trgovinske odluke iz Turske.'
+};
+const description = descriptionMap[lang] || descriptionMap.en;
+const copyrightMap: Record<string, string> = {
   tr:`© ${year} CTSEG. Tüm hakları saklıdır.`,
   en:`© ${year} CTSEG. All rights reserved.`,
   de:`© ${year} CTSEG. Alle Rechte vorbehalten.`,
   it:`© ${year} CTSEG. Tutti i diritti riservati.`,
-  ru:`© ${year} CTSEG. Все права защищены.`
-}[lang];
+  fr:`© ${year} CTSEG. Tous droits réservés.`,
+  ru:`© ${year} CTSEG. Все права защищены.`,
+  fa:`© ${year} CTSEG. تمامی حقوق محفوظ است.`,
+  sq:`© ${year} CTSEG. Të gjitha të drejtat të rezervuara.`,
+  mk:`© ${year} CTSEG. Сите права се задржани.`,
+  sr:`© ${year} CTSEG. Sva prava zadržana.`
+};
+const copyright = copyrightMap[lang] || copyrightMap.en;
 ---
 <footer class="site-footer">
   <div class="container footer-main">
@@ -33,6 +46,7 @@ const copyright = {
     <nav aria-label={t.products}>
       <strong>{t.products}</strong>
       <a href={lang === 'ru' ? '/ru/#sectors' : localizedPath(lang, 'products')}>{t.allProducts}</a>
+      <a href={reflexPath(lang as any)}>REFLEX Medical Gloves</a>
       <a href={lang === 'ru' ? '/ru/#markets' : localizedPath(lang, 'markets')}>{t.markets}</a>
       {lang !== 'ru' && <a href={localizedPath(lang, 'insights')}>{t.insights}</a>}
     </nav>

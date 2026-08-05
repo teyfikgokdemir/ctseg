@@ -1,0 +1,869 @@
+---
+import { reflexData, reflexPath, type ReflexLocale } from '../data/reflex-data';
+
+const { lang = 'en' } = Astro.props as { lang?: string };
+const currentLang = (['en', 'tr', 'fa', 'sq', 'mk', 'sr'].includes(lang) ? lang : 'en') as ReflexLocale;
+const data = reflexData[currentLang] || reflexData.en;
+const isRtl = currentLang === 'fa';
+const reflexUrl = reflexPath(currentLang);
+---
+
+<div class="reflex-page" dir={isRtl ? 'rtl' : 'ltr'}>
+  <!-- 1. Hero Section -->
+  <section class="reflex-hero-section">
+    <div class="container reflex-hero-grid">
+      <div class="reflex-hero-text">
+        <nav class="reflex-breadcrumbs" aria-label="Breadcrumbs">
+          <a href={currentLang === 'tr' ? '/' : `/${currentLang}/`}>CTSEG</a>
+          <span aria-hidden="true">/</span>
+          <span class="current">Medical & Hygiene</span>
+        </nav>
+
+        <span class="eyebrow reflex-eyebrow-hero">{data.eyebrow}</span>
+        <h1 class="reflex-h1">{data.heroTitle}</h1>
+        <p class="lead reflex-hero-lead">{data.heroLead}</p>
+
+        <div class="reflex-hero-badges-grid">
+          {data.heroBadges.map((badge) => (
+            <div class="reflex-hero-badge-item">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              <span>{badge}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="actions reflex-hero-actions">
+          <a class="button" href="#rfq-form" data-product-quote="REFLEX Disposable Gloves">
+            {data.ctaQuote}
+          </a>
+          <a class="button button-secondary" href="/documents/reflex-medical-catalogue.pdf" download="REFLEX-Medical-Catalogue.pdf" data-catalog-download data-catalog-language={currentLang}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            {data.ctaCatalog}
+          </a>
+        </div>
+      </div>
+
+      <figure class="reflex-hero-figure">
+        <img
+          src="/images/reflex-tpe-gloves-hero.webp"
+          width="1200"
+          height="850"
+          alt="REFLEX TPE Disposable Gloves Hero"
+          loading="eager"
+          decoding="async"
+          class="reflex-hero-media"
+        />
+        <figcaption class="reflex-media-caption">
+          <strong>REFLEX® TPE & Medical Disposable Gloves</strong> · ISO 9001, CE 2841 & EN ISO 374 Certified
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 2. About REFLEX (Manufacturing & CTSEG International Sourcing Role) -->
+  <section class="section reflex-about-section">
+    <div class="container content-grid">
+      <div class="prose">
+        <span class="eyebrow">{data.aboutEyebrow}</span>
+        <h2>{data.aboutTitle}</h2>
+        <p>{data.aboutText1}</p>
+        <p>{data.aboutText2}</p>
+
+        <div class="reflex-role-card">
+          <h3>{data.aboutRoleTitle}</h3>
+          <p>{data.aboutRoleText}</p>
+          <div class="reflex-disclaimer-note">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            <span>CTSEG acts as an independent international sourcing and export partner, facilitating trade, export clearance, quality compliance, and logistics support.</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side-panel">
+        <div class="reflex-markets-card">
+          <h3>{data.aboutMarketsTitle}</h3>
+          <ul>
+            {data.aboutMarketsList.map((market) => (
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+                <span>{market}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="reflex-facility-media-box">
+            <img
+              src="/images/reflex-manufacturing-facility.webp"
+              width="680"
+              height="750"
+              alt="REFLEX Production Facility in Esenyurt, Istanbul"
+              loading="lazy"
+              decoding="async"
+            />
+            <small>Automated packaging & production facility in Esenyurt, Istanbul</small>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 3. Product Categories -->
+  <section class="section reflex-categories-section" id="product-categories">
+    <div class="container">
+      <div class="section-head">
+        <h2>{data.categoriesTitle}</h2>
+        <p>{data.categoriesLead}</p>
+      </div>
+
+      <div class="reflex-products-grid">
+        {data.categories.map((cat) => (
+          <article class="reflex-product-card" id={cat.id}>
+            <figure class="reflex-card-image-box">
+              <img
+                src={cat.image}
+                width="640"
+                height="450"
+                alt={cat.name}
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="reflex-card-badges">
+                {cat.badges.map((b) => (
+                  <span class="reflex-card-badge">{b}</span>
+                ))}
+              </div>
+            </figure>
+
+            <div class="reflex-card-content">
+              <h3>{cat.name}</h3>
+              <p class="reflex-card-subtitle">{cat.subtitle}</p>
+              <p class="reflex-card-desc">{cat.description}</p>
+
+              <dl class="reflex-spec-list">
+                <div>
+                  <dt>Material:</dt>
+                  <dd>{cat.material}</dd>
+                </div>
+                <div>
+                  <dt>Variants:</dt>
+                  <dd>{cat.variants}</dd>
+                </div>
+                <div>
+                  <dt>Packing:</dt>
+                  <dd>{cat.packing}</dd>
+                </div>
+              </dl>
+
+              <div class="reflex-card-actions">
+                <a class="button button-small" href="#rfq-form" data-product-quote={cat.name}>
+                  Request Price
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Sector Applications -->
+  <section class="section reflex-applications-section">
+    <div class="container">
+      <div class="section-head">
+        <h2>{data.applicationsTitle}</h2>
+        <p>{data.applicationsLead}</p>
+      </div>
+
+      <div class="reflex-app-grid">
+        {data.applications.map((app) => (
+          <article class="reflex-app-card">
+            <figure class="reflex-app-fig">
+              <img
+                src={app.image}
+                width="600"
+                height="420"
+                alt={app.title}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <div class="reflex-app-body">
+              <h3>{app.title}</h3>
+              <p>{app.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Product Gallery -->
+  <section class="section reflex-gallery-section">
+    <div class="container">
+      <div class="section-head">
+        <h2>{data.galleryTitle}</h2>
+        <p>{data.galleryLead}</p>
+      </div>
+
+      <div class="reflex-gallery-grid">
+        {data.galleryItems.map((item) => (
+          <figure class="reflex-gallery-card">
+            <img
+              src={item.image}
+              width="600"
+              height="420"
+              alt={item.title}
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              <span class="tag">{item.tag}</span>
+              <h4>{item.title}</h4>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Catalogue Download Section -->
+  <section class="section reflex-download-banner">
+    <div class="container">
+      <div class="reflex-download-box">
+        <div class="reflex-download-text">
+          <h2>{data.downloadTitle}</h2>
+          <p>{data.downloadLead}</p>
+          <small class="reflex-pdf-notice">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            {data.pdfNotice}
+          </small>
+        </div>
+
+        <div class="reflex-download-action">
+          <a class="button button-large" href="/documents/reflex-medical-catalogue.pdf" download="REFLEX-Medical-Catalogue.pdf" data-catalog-download data-catalog-language={currentLang}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            {data.downloadButton}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Request for Quotation (RFQ) Section -->
+  <section class="section reflex-rfq-section" id="rfq-form">
+    <div class="container">
+      <div class="reflex-rfq-grid">
+        <div class="reflex-rfq-info">
+          <span class="eyebrow">B2B Commercial Assessment</span>
+          <h2>{data.rfqTitle}</h2>
+          <p>{data.rfqLead}</p>
+
+          <div class="reflex-rfq-features">
+            <div class="reflex-rfq-feat">
+              <strong>Direct Export Logistics</strong>
+              <span>FOB Istanbul, CIF Europe/Balkans/Middle East/North Africa.</span>
+            </div>
+            <div class="reflex-rfq-feat">
+              <strong>Batch Compliance Documents</strong>
+              <span>Certificate of Analysis (COA), CE 2841, EN ISO 374 declared per batch.</span>
+            </div>
+            <div class="reflex-rfq-feat">
+              <strong>Commercial Verification</strong>
+              <span>CTSEG conducts specification checks and volume-based pricing alignment.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reflex-rfq-form-card">
+          <form class="reflex-rfq-form" data-reflex-rfq-form>
+            <div class="form-group">
+              <label for="rfq-name">{data.formLabels.name} *</label>
+              <input type="text" id="rfq-name" name="name" required placeholder="John Doe / Purchasing Dept" />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="rfq-email">{data.formLabels.email} *</label>
+                <input type="email" id="rfq-email" name="email" required placeholder="purchasing@company.com" />
+              </div>
+              <div class="form-group">
+                <label for="rfq-phone">{data.formLabels.phone}</label>
+                <input type="tel" id="rfq-phone" name="phone" placeholder="+44 7000 000000" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="rfq-company">{data.formLabels.company} *</label>
+                <input type="text" id="rfq-company" name="company" required placeholder="MedSupplies Ltd (Importer / Wholesaler)" />
+              </div>
+              <div class="form-group">
+                <label for="rfq-country">{data.formLabels.country} *</label>
+                <input type="text" id="rfq-country" name="country" required placeholder="Germany / Albania / Iraq / Egypt" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="rfq-product">{data.formLabels.product}</label>
+                <select id="rfq-product" name="product">
+                  <option value="REFLEX TPE Hybrid Gloves">FLEX Hi-Tech Hybrid TPE Gloves</option>
+                  <option value="MEDILEX Examination Gloves">MEDILEX Medical Examination Gloves</option>
+                  <option value="WINLYEX Extra Thermo Vinyl">WINLYEX Extra Thermo Vinyl Gloves</option>
+                  <option value="SLIMFIT Copolymer Gloves">SLIMFIT Copolymer Sensitive Gloves</option>
+                  <option value="WINLYEX Powder Free Gloves">WINLYEX Powder-Free Gloves</option>
+                  <option value="FLOREX Multipurpose Gloves">FLOREX Multi-Purpose Gloves</option>
+                  <option value="FLEX Kids Disposable Gloves">FLEX Kids Transparent Gloves</option>
+                  <option value="Full REFLEX Portfolio">Full REFLEX Product Portfolio</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="rfq-volume">{data.formLabels.volume} *</label>
+                <input type="text" id="rfq-volume" name="volume" required placeholder="e.g. 10 Pallets / 1 FCL Container" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="rfq-notes">{data.formLabels.notes}</label>
+              <textarea id="rfq-notes" name="notes" rows="3" placeholder="Specify Incoterms (FOB/CIF), required delivery dates or custom parameters..."></textarea>
+            </div>
+
+            <button type="submit" class="button button-large button-block">
+              {data.formLabels.submit}
+            </button>
+
+            <p class="form-success-msg" id="rfq-success-msg" hidden>
+              ✓ {data.formLabels.successMessage}
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const prefillProduct = sessionStorage.getItem('ctseg-product-request');
+    if (prefillProduct) {
+      const select = document.getElementById('rfq-product');
+      if (select) {
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].text.toLowerCase().includes(prefillProduct.toLowerCase())) {
+            select.selectedIndex = i;
+            break;
+          }
+        }
+      }
+    }
+
+    const form = document.querySelector('[data-reflex-rfq-form]');
+    const successMsg = document.getElementById('rfq-success-msg');
+    
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        console.log('REFLEX RFQ Submission:', Object.fromEntries(formData));
+
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'rfq_submission', {
+            product: formData.get('product'),
+            country: formData.get('country')
+          });
+        }
+
+        if (successMsg) {
+          successMsg.hidden = false;
+          form.reset();
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .reflex-page {
+    color: #f3f4f6;
+  }
+  .reflex-hero-section {
+    padding: 3.5rem 0 4.5rem;
+    background: radial-gradient(circle at top right, rgba(226, 185, 108, 0.08) 0%, transparent 60%), #171914;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .reflex-hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+  .reflex-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: #9ca3af;
+    margin-bottom: 1rem;
+  }
+  .reflex-breadcrumbs a {
+    color: #d1d5db;
+    text-decoration: none;
+  }
+  .reflex-breadcrumbs a:hover {
+    color: #e2b96c;
+  }
+  .reflex-eyebrow-hero {
+    color: #e2b96c;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .reflex-h1 {
+    font-size: clamp(2.25rem, 4vw, 3.25rem);
+    font-family: var(--font-heading, 'Source Serif 4', Georgia, serif);
+    line-height: 1.15;
+    color: #ffffff;
+    margin-bottom: 1.25rem;
+  }
+  .reflex-hero-lead {
+    font-size: 1.1875rem;
+    line-height: 1.65;
+    color: #d1d5db;
+    margin-bottom: 2rem;
+  }
+  .reflex-hero-badges-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.875rem;
+    margin-bottom: 2.25rem;
+  }
+  .reflex-hero-badge-item {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: 0.875rem;
+    color: #e5e7eb;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.625rem 0.875rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .reflex-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .reflex-hero-figure {
+    margin: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #141612;
+  }
+  .reflex-hero-media {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .reflex-media-caption {
+    padding: 0.875rem 1.25rem;
+    background: rgba(15, 17, 13, 0.95);
+    font-size: 0.8125rem;
+    color: #9ca3af;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .reflex-about-section {
+    background: #1d1f19;
+  }
+  .reflex-role-card {
+    margin-top: 2rem;
+    background: rgba(226, 185, 108, 0.06);
+    border: 1px solid rgba(226, 185, 108, 0.2);
+    padding: 1.75rem;
+    border-radius: 0.75rem;
+  }
+  .reflex-disclaimer-note {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.8125rem;
+    color: #e5e7eb;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+  }
+  .reflex-markets-card {
+    background: #141612;
+    padding: 1.75rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .reflex-markets-card h3 {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+  }
+  .reflex-markets-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.75rem 0;
+  }
+  .reflex-markets-card li {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.875rem;
+    color: #d1d5db;
+  }
+  .reflex-facility-media-box {
+    margin-top: 1.25rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .reflex-facility-media-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .reflex-facility-media-box small {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    background: rgba(0, 0, 0, 0.6);
+    color: #9ca3af;
+    font-size: 0.75rem;
+  }
+
+  .reflex-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+  .reflex-product-card {
+    background: #141612;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.875rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .reflex-product-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(226, 185, 108, 0.4);
+  }
+  .reflex-card-image-box {
+    margin: 0;
+    position: relative;
+    background: #0f110d;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .reflex-card-image-box img {
+    width: 100%;
+    height: 230px;
+    object-fit: contain;
+    display: block;
+    padding: 1rem;
+  }
+  .reflex-card-badges {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+  .reflex-card-badge {
+    background: rgba(15, 17, 13, 0.85);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(226, 185, 108, 0.3);
+    color: #e2b96c;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  .reflex-card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .reflex-card-content h3 {
+    font-size: 1.25rem;
+    margin: 0 0 0.25rem 0;
+    color: #ffffff;
+  }
+  .reflex-card-subtitle {
+    color: #e2b96c;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    margin-bottom: 0.875rem;
+  }
+  .reflex-card-desc {
+    color: #9ca3af;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+  }
+  .reflex-spec-list {
+    margin: auto 0 1.25rem 0;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: grid;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+  }
+  .reflex-spec-list div {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .reflex-spec-list dt {
+    color: #6b7280;
+  }
+  .reflex-spec-list dd {
+    color: #d1d5db;
+    margin: 0;
+    text-align: right;
+    font-weight: 500;
+  }
+
+  .reflex-app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .reflex-app-card {
+    background: #141612;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+  .reflex-app-fig {
+    margin: 0;
+    background: #0f110d;
+  }
+  .reflex-app-fig img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+  .reflex-app-body {
+    padding: 1.25rem;
+  }
+  .reflex-app-body h3 {
+    font-size: 1.125rem;
+    margin: 0 0 0.5rem 0;
+    color: #ffffff;
+  }
+  .reflex-app-body p {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .reflex-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .reflex-gallery-card {
+    margin: 0;
+    background: #141612;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .reflex-gallery-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+  .reflex-gallery-card figcaption {
+    padding: 1rem;
+  }
+  .reflex-gallery-card .tag {
+    color: #e2b96c;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  .reflex-gallery-card h4 {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: #ffffff;
+  }
+
+  .reflex-download-banner {
+    background: linear-gradient(135deg, rgba(226, 185, 108, 0.12) 0%, rgba(20, 22, 18, 0.95) 100%);
+    border-top: 1px solid rgba(226, 185, 108, 0.2);
+    border-bottom: 1px solid rgba(226, 185, 108, 0.2);
+    padding: 4rem 0;
+  }
+  .reflex-download-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+  .reflex-download-text h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.875rem;
+  }
+  .reflex-download-text p {
+    color: #d1d5db;
+    margin: 0 0 0.875rem 0;
+    max-width: 680px;
+  }
+  .reflex-pdf-notice {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #9ca3af;
+    font-size: 0.8125rem;
+  }
+
+  .reflex-rfq-section {
+    background: #171914;
+  }
+  .reflex-rfq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+  .reflex-rfq-info h2 {
+    font-size: 2.25rem;
+    margin: 0.5rem 0 1rem 0;
+  }
+  .reflex-rfq-info p {
+    color: #d1d5db;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  .reflex-rfq-features {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .reflex-rfq-feat {
+    background: #141612;
+    padding: 1.25rem;
+    border-radius: 0.625rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .reflex-rfq-feat strong {
+    display: block;
+    color: #ffffff;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+  .reflex-rfq-feat span {
+    color: #9ca3af;
+    font-size: 0.875rem;
+  }
+
+  .reflex-rfq-form-card {
+    background: #141612;
+    padding: 2.25rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .reflex-rfq-form {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .form-group label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #d1d5db;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: #0f110d;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-family: inherit;
+    font-size: 0.9375rem;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #e2b96c;
+  }
+  .form-success-msg {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #4ade80;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+  }
+  .button-block {
+    width: 100%;
+  }
+
+  @media (max-width: 960px) {
+    .reflex-hero-grid,
+    .reflex-download-box,
+    .reflex-rfq-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .reflex-hero-badges-grid,
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
