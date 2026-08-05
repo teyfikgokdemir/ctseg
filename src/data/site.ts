@@ -82,7 +82,7 @@ export const sectionSlugs: Record<string, Localized> = {
 export const ui: Record<Locale, any> = {
   tr: {
     home: 'Ana Sayfa', services: 'Hizmetler', products: 'Ticari Ürünler', markets: 'Pazarlar', insights: 'İçgörüler',
-    about: 'Hakkımızda', contact: 'İletişim', quote: 'Teklif İste', menu: 'Menüyü aç', close: 'Menüyü kapat',
+    about: 'Hakkımızda', contact: 'İletişim', quote: 'Teklif İste', menu: 'Menüyü aç', close: 'Menüyü kapat', medicalLabel: 'REFLEX Medikal',
     language: 'Dil seçimi', readMore: 'İncele', allProducts: 'Tüm ürünleri görüntüle', allServices: 'Tüm hizmetleri görüntüle',
     origin: 'Menşe şeffaflığı', quality: 'Kalite ve uyum', logistics: 'Ticari değerlendirme', applications: 'Kullanım alanları',
     faq: 'Sık sorulan sorular', related: 'İlgili çözümler', updated: 'Son güncelleme', details: 'Detaylar',
@@ -95,7 +95,7 @@ export const ui: Record<Locale, any> = {
   },
   en: {
     home: 'Home', services: 'Services', products: 'Trade Products', markets: 'Markets', insights: 'Insights',
-    about: 'About', contact: 'Contact', quote: 'Request a Quote', menu: 'Open menu', close: 'Close menu',
+    about: 'About', contact: 'Contact', quote: 'Request a Quote', menu: 'Open menu', close: 'Close menu', medicalLabel: 'REFLEX Medical',
     language: 'Language selection', readMore: 'Explore', allProducts: 'View all products', allServices: 'View all services',
     origin: 'Origin transparency', quality: 'Quality & compliance', logistics: 'Commercial assessment', applications: 'Applications',
     faq: 'Frequently asked questions', related: 'Related solutions', updated: 'Last updated', details: 'Details',
@@ -108,7 +108,7 @@ export const ui: Record<Locale, any> = {
   },
   de: {
     home: 'Startseite', services: 'Dienstleistungen', products: 'Handelsprodukte', markets: 'Märkte', insights: 'Einblicke',
-    about: 'Über uns', contact: 'Kontakt', quote: 'Angebot anfragen', menu: 'Menü öffnen', close: 'Menü schließen',
+    about: 'Über uns', contact: 'Kontakt', quote: 'Angebot anfragen', menu: 'Menü öffnen', close: 'Menü schließen', medicalLabel: 'REFLEX Medizin',
     language: 'Sprachauswahl', readMore: 'Entdecken', allProducts: 'Alle Produkte ansehen', allServices: 'Alle Dienstleistungen ansehen',
     origin: 'Transparente Herkunft', quality: 'Qualität & Konformität', logistics: 'Kaufmännische Bewertung', applications: 'Anwendungen',
     faq: 'Häufig gestellte Fragen', related: 'Verwandte Lösungen', updated: 'Letzte Aktualisierung', details: 'Details',
@@ -121,7 +121,7 @@ export const ui: Record<Locale, any> = {
   },
   it: {
     home: 'Home', services: 'Servizi', products: 'Prodotti commerciali', markets: 'Mercati', insights: 'Approfondimenti',
-    about: 'Chi siamo', contact: 'Contatti', quote: 'Richiedi un’offerta', menu: 'Apri menu', close: 'Chiudi menu',
+    about: 'Chi siamo', contact: 'Contatti', quote: 'Richiedi un’offerta', menu: 'Apri menu', close: 'Chiudi menu', medicalLabel: 'REFLEX Medicale',
     language: 'Selezione lingua', readMore: 'Scopri', allProducts: 'Vedi tutti i prodotti', allServices: 'Vedi tutti i servizi',
     origin: 'Trasparenza dell’origine', quality: 'Qualità e conformità', logistics: 'Valutazione commerciale', applications: 'Applicazioni',
     faq: 'Domande frequenti', related: 'Soluzioni correlate', updated: 'Ultimo aggiornamento', details: 'Dettagli',
@@ -134,7 +134,7 @@ export const ui: Record<Locale, any> = {
   },
   ru: {
     home: 'Главная', services: 'Услуги', products: 'Направления', markets: 'Рынки', insights: 'Материалы',
-    about: 'О компании', contact: 'Контакты', quote: 'Отправить запрос', menu: 'Открыть меню', close: 'Закрыть меню',
+    about: 'О компании', contact: 'Контакты', quote: 'Отправить запрос', menu: 'Открыть меню', close: 'Закрыть меню', medicalLabel: 'REFLEX Медицина',
     language: 'Выбор языка', readMore: 'Подробнее', allProducts: 'Все направления', allServices: 'Все услуги',
     origin: 'Прозрачность происхождения', quality: 'Качество и соответствие', logistics: 'Коммерческая оценка', applications: 'Применение',
     faq: 'Частые вопросы', related: 'Связанные решения', updated: 'Обновлено', details: 'Подробнее',

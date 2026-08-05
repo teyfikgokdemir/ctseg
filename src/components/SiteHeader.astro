@@ -1,18 +1,22 @@
 ---
 import { localizedPath, ui, type Locale } from '../data/site';
 import { activeLocaleRegistry, type ActiveLocale } from '../data/locales';
-import { reflexPath } from '../data/reflex-data';
+import { reflexPath, type ReflexLocale } from '../data/reflex-data';
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 import { tradePlatformCopy } from '../data/trade-platform';
 const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?: string; pageId?: string };
 const t = ui[lang] || ui.en;
 const home = localizedPath(lang, 'home');
 const p = tradePlatformCopy[lang] || tradePlatformCopy.en;
+const safeReflexLang = (['en','tr','de','it','ru','fa','sq','mk','sr'].includes(lang) ? lang : 'en') as ReflexLocale;
+const reflexUrl = reflexPath(safeReflexLang);
+
 const nav = lang === 'ru' ? [
   ['services', t.services, `${home}#trade-paths`],
   ['buyers', p.buyerTitle, `${home}#for-buyers`],
   ['producers', p.producerTitle, `${home}#for-producers`],
   ['sectors', p.sectorsTitle, `${home}#sectors`],
+  ['medical', t.medicalLabel || 'REFLEX Medical', reflexUrl],
   ['markets', t.markets, `${home}#markets`],
   ['about', t.about, `${home}#company`],
   ['contact', t.contact, `${home}#contact`]
@@ -21,6 +25,7 @@ const nav = lang === 'ru' ? [
   ['buyers', p.buyerTitle, `${home}#for-buyers`],
   ['producers', p.producerTitle, `${home}#for-producers`],
   ['sectors', p.sectorsTitle, `${home}#sectors`],
+  ['medical', t.medicalLabel || 'REFLEX Medical', reflexUrl],
   ['markets', t.markets, localizedPath(lang,'markets')],
   ['about', t.about, localizedPath(lang,'about')],
   ['contact', t.contact, localizedPath(lang,'contact')]
@@ -29,8 +34,8 @@ const globalLocales = activeLocaleRegistry.map((entry) => entry.code);
 const globalLocaleNames = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code,entry.label])) as Record<ActiveLocale,string>;
 const globalSwitchPath = (target: ActiveLocale) => {
   if (target === 'fa') return '/fa/';
-  if (target === 'ru') return '/ru/';
   if (pageKey === 'medical') return reflexPath(target as any);
+  if (target === 'ru') return '/ru/';
   return localizedPath(target, pageKey, pageId);
 };
 ---
