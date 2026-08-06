@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, resolve } from 'node:path';
 import { chromium } from 'playwright-core';
@@ -124,13 +124,41 @@ try {
 }
 
 const generated = resolve('public/images/generated');
-const generatedWebps = Object.keys(JSON.parse(readFileSync(join(generated,'manifest.json'),'utf8')));
-if (generatedWebps.length!==96) failures.push(`expected 96 generated image variants, found ${generatedWebps.length}`);
-for (const key of generatedWebps) {
-  const [source,width] = key.split(':');
-  const stem = source.replace(/\.(webp|png)$/,'');
-  const output = source.endsWith('.png') ? 'ctseg-logo-transparent-320.webp' : `${stem}-${width}.webp`;
-  if (!existsSync(join(generated,output))) failures.push(`missing generated image ${output}`);
+const manifestPath = join(generated, 'manifest.json');
+if (!existsSync(manifestPath)) {
+  failures.push('missing manifest.json in public/images/generated');
+} else {
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  const manifestKeys = Object.keys(manifest);
+  const expectedFiles = new Set(['manifest.json']);
+
+  for (const key of manifestKeys) {
+    const [source, width] = key.split(':');
+    const stem = source.replace(/\.(webp|png)$/, '');
+    const filename = source.endsWith('.png') ? 'ctseg-logo-transparent-320.webp' : `${stem}-${width}.webp`;
+    expectedFiles.add(filename);
+    if (!existsSync(join(generated, filename))) {
+      failures.push(`missing generated image referenced in manifest: ${filename}`);
+    }
+  }
+
+  const diskFiles = readdirSync(generated);
+  for (const file of diskFiles) {
+    if (!expectedFiles.has(file)) {
+      failures.push(`orphaned generated image file on disk: ${file}`);
+    }
+  }
+}
+
+const siteReferencedGeneratedImages = new Set(
+  reports.flatMap((r) => [...r.requestedImages.map((i) => i.url), ...r.selectedSources])
+    .filter((url) => url.startsWith('/images/generated/'))
+    .map((url) => url.replace('/images/generated/', '').split('?')[0])
+);
+for (const filename of siteReferencedGeneratedImages) {
+  if (!existsSync(join(generated, filename))) {
+    failures.push(`site referenced generated image missing on disk: ${filename}`);
+  }
 }
 const headers = readFileSync('public/_headers','utf8');
 if (!/\/images\/generated\/\*[\s\S]*max-age=31536000,\s*immutable/.test(headers)) failures.push('generated image immutable cache header missing');

@@ -5,6 +5,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import FloatingActions from '../components/FloatingActions.astro';
 import TradeVideo from '../components/TradeVideo.astro';
 import { company, locales, localizedPath, products, routeAlternates, ui, type Locale } from '../data/site';
+import type { ReflexLocale } from '../data/reflex-data';
 import { activeLocales, localeDirection, localeOg } from '../data/locales';
 import { FEATURE_IMAGE_WIDTHS, generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
 import { localizedTradeVisual } from '../data/trade-visuals';
@@ -13,7 +14,7 @@ const {
   lang='tr', title, description, pageKey='home', pageId, canonical,
   schema=[], noindex=false
 } = Astro.props as {
-  lang: Locale; title: string; description: string; pageKey?: string; pageId?: string;
+  lang: Locale | ReflexLocale; title: string; description: string; pageKey?: string; pageId?: string;
   canonical?: string; schema?: any[] | any; noindex?: boolean;
 };
 const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
@@ -76,7 +77,6 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     {pageKey === 'home' && !noindex && <link
       rel="preload"
       as="image"
-      href={generatedImageSrc(homeHero.source,1280)}
       imagesrcset={heroSrcset}
       imagesizes={heroSizes}
       fetchpriority="high"

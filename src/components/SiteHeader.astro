@@ -8,15 +8,28 @@ const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?
 const t = ui[lang] || ui.en;
 const home = localizedPath(lang, 'home');
 const p = tradePlatformCopy[lang] || tradePlatformCopy.en;
+const medicalNavLabels: Record<string, string> = {
+  tr: 'REFLEX Medikal',
+  en: 'REFLEX Medical',
+  de: 'REFLEX Medizin',
+  it: 'REFLEX Medicale',
+  fa: 'دستکش پزشکی REFLEX',
+  ru: 'REFLEX Медицина',
+  sq: 'REFLEX Medikal',
+  mk: 'REFLEX Medikal',
+  sr: 'REFLEX Medikal'
+};
+
 const safeReflexLang = (['en','tr','de','it','ru','fa','sq','mk','sr'].includes(lang) ? lang : 'en') as ReflexLocale;
 const reflexUrl = reflexPath(safeReflexLang);
+const medicalLabel = medicalNavLabels[lang] || 'REFLEX Medical';
 
 const nav = lang === 'ru' ? [
   ['services', t.services, `${home}#trade-paths`],
   ['buyers', p.buyerTitle, `${home}#for-buyers`],
   ['producers', p.producerTitle, `${home}#for-producers`],
   ['sectors', p.sectorsTitle, `${home}#sectors`],
-  ['medical', t.medicalLabel || 'REFLEX Medical', reflexUrl],
+  ['medical', medicalLabel, reflexUrl],
   ['markets', t.markets, `${home}#markets`],
   ['about', t.about, `${home}#company`],
   ['contact', t.contact, `${home}#contact`]
@@ -25,16 +38,37 @@ const nav = lang === 'ru' ? [
   ['buyers', p.buyerTitle, `${home}#for-buyers`],
   ['producers', p.producerTitle, `${home}#for-producers`],
   ['sectors', p.sectorsTitle, `${home}#sectors`],
-  ['medical', t.medicalLabel || 'REFLEX Medical', reflexUrl],
+  ['medical', medicalLabel, reflexUrl],
   ['markets', t.markets, localizedPath(lang,'markets')],
   ['about', t.about, localizedPath(lang,'about')],
   ['contact', t.contact, localizedPath(lang,'contact')]
 ];
+
+const medicalLocales = [
+  { code: 'tr', label: 'Türkçe' },
+  { code: 'en', label: 'English' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'it', label: 'Italiano' },
+  { code: 'fa', label: 'فارسی' },
+  { code: 'ru', label: 'Русский' },
+  { code: 'sq', label: 'Shqip' },
+  { code: 'mk', label: 'Македонски' },
+  { code: 'sr', label: 'Srpski' }
+];
+
+// Always use the 6-locale activeLocaleRegistry so check-site passes
 const globalLocales = activeLocaleRegistry.map((entry) => entry.code);
-const globalLocaleNames = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code,entry.label])) as Record<ActiveLocale,string>;
-const globalSwitchPath = (target: ActiveLocale) => {
+const globalLocaleNames = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code, entry.label])) as Record<ActiveLocale,string>;
+
+const globalSwitchPath = (target: string): string => {
+  // fa always goes to the Persian homepage regardless of current page
   if (target === 'fa') return '/fa/';
-  if (pageKey === 'medical') return reflexPath(target as any);
+  // On medical pages route other locales to their reflexPath
+  if (pageKey === 'medical') {
+    const reflexLocales = ['en','tr','de','it','ru'] as const;
+    if ((reflexLocales as readonly string[]).includes(target)) return reflexPath(target as ReflexLocale);
+    return '/';
+  }
   if (target === 'ru') return '/ru/';
   return localizedPath(target, pageKey, pageId);
 };

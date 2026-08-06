@@ -46,7 +46,7 @@ const copyright = copyrightMap[lang] || copyrightMap.en;
     <nav aria-label={t.products}>
       <strong>{t.products}</strong>
       <a href={lang === 'ru' ? '/ru/#sectors' : localizedPath(lang, 'products')}>{t.allProducts}</a>
-      <a href={reflexPath(lang as any)}>REFLEX Medical Gloves</a>
+      <a href={reflexPath(lang)}>REFLEX Medical Gloves</a>
       <a href={lang === 'ru' ? '/ru/#markets' : localizedPath(lang, 'markets')}>{t.markets}</a>
       {lang !== 'ru' && <a href={localizedPath(lang, 'insights')}>{t.insights}</a>}
     </nav>

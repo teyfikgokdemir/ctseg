@@ -457,7 +457,7 @@ const productMedia: Record<(typeof productIds)[number], ProductMedia> = {
 
 const productSlugs: Record<(typeof productIds)[number], Localized> = Object.fromEntries(
   productIds.map((id) => [id, Object.fromEntries(locales.map((lang) => [lang, id]))])
-) as any;
+) as Record<(typeof productIds)[number], Localized>;
 Object.assign(productSlugs['green-peeled-pistachio'], {
   tr:'yesil-soyulmus-ic-fistik', en:'green-peeled-pistachio-kernels', de:'gruene-geschaelte-pistazienkerne', it:'pistacchio-verde-sgusciato', ru:'pistaches-vertes-mondees'
 });

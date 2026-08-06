@@ -2,7 +2,7 @@
 import { reflexData, reflexPath, type ReflexLocale } from '../data/reflex-data';
 
 const { lang = 'en' } = Astro.props as { lang?: string };
-const currentLang = (['en', 'tr', 'fa', 'sq', 'mk', 'sr'].includes(lang) ? lang : 'en') as ReflexLocale;
+const currentLang = (['en', 'tr', 'de', 'it', 'ru', 'fa', 'sq', 'mk', 'sr'].includes(lang) ? lang : 'en') as ReflexLocale;
 const data = reflexData[currentLang] || reflexData.en;
 const isRtl = currentLang === 'fa';
 const reflexUrl = reflexPath(currentLang);
@@ -16,7 +16,7 @@ const reflexUrl = reflexPath(currentLang);
         <nav class="reflex-breadcrumbs" aria-label="Breadcrumbs">
           <a href={currentLang === 'tr' ? '/' : `/${currentLang}/`}>CTSEG</a>
           <span aria-hidden="true">/</span>
-          <span class="current">Medical & Hygiene</span>
+          <span class="current">{data.eyebrow}</span>
         </nav>
 
         <span class="eyebrow reflex-eyebrow-hero">{data.eyebrow}</span>
@@ -36,7 +36,7 @@ const reflexUrl = reflexPath(currentLang);
         </div>
 
         <div class="actions reflex-hero-actions">
-          <a class="button" href="#rfq-form" data-product-quote="REFLEX Disposable Gloves">
+          <a class="button" href="#rfq-form" data-product-quote={data.heroTitle}>
             {data.ctaQuote}
           </a>
           <a class="button button-secondary" href="/documents/reflex-medical-catalogue.pdf" download="REFLEX-Medical-Catalogue.pdf" data-catalog-download data-catalog-language={currentLang}>
@@ -52,10 +52,10 @@ const reflexUrl = reflexPath(currentLang);
 
       <figure class="reflex-hero-figure">
         <img
-          src="/images/reflex-tpe-gloves-hero.webp"
+          src="/images/reflex/reflex-slider1.jpg"
           width="1200"
           height="850"
-          alt="REFLEX TPE Disposable Gloves Hero"
+          alt={data.heroTitle}
           loading="eager"
           decoding="async"
           class="reflex-hero-media"
@@ -106,7 +106,7 @@ const reflexUrl = reflexPath(currentLang);
 
           <div class="reflex-facility-media-box">
             <img
-              src="/images/reflex-manufacturing-facility.webp"
+              src="/images/reflex/resizer (1).jpg"
               width="680"
               height="750"
               alt="REFLEX Production Facility in Esenyurt, Istanbul"
@@ -221,14 +221,19 @@ const reflexUrl = reflexPath(currentLang);
       <div class="reflex-gallery-grid">
         {data.galleryItems.map((item) => (
           <figure class="reflex-gallery-card">
-            <img
-              src={item.image}
-              width="600"
-              height="420"
-              alt={item.title}
-              loading="lazy"
-              decoding="async"
-            />
+            <picture>
+              {item.imageMobile && (
+                <source media="(max-width: 768px)" srcset={item.imageMobile} />
+              )}
+              <img
+                src={item.image}
+                width="600"
+                height="420"
+                alt={item.title}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <figcaption>
               <span class="tag">{item.tag}</span>
               <h4>{item.title}</h4>
@@ -384,7 +389,6 @@ const reflexUrl = reflexPath(currentLang);
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         const formData = new FormData(form);
-        console.log('REFLEX RFQ Submission:', Object.fromEntries(formData));
 
         if (typeof window.gtag === 'function') {
           window.gtag('event', 'rfq_submission', {

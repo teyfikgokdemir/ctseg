@@ -2,7 +2,7 @@
 import { reflexData, reflexPath, type ReflexLocale } from '../data/reflex-data';
 
 const { lang = 'en' } = Astro.props as { lang?: string };
-const currentLang = (['en', 'tr', 'fa', 'sq', 'mk', 'sr'].includes(lang) ? lang : 'en') as ReflexLocale;
+const currentLang = (['en', 'tr', 'de', 'it', 'ru', 'fa', 'sq', 'mk', 'sr'].includes(lang) ? lang : 'en') as ReflexLocale;
 const data = reflexData[currentLang] || reflexData.en;
 const reflexUrl = reflexPath(currentLang);
 const isRtl = currentLang === 'fa';
@@ -17,11 +17,11 @@ const isRtl = currentLang === 'fa';
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             <path d="m9 12 2 2 4-4"/>
           </svg>
-          Featured Medical Brand
+          {data.eyebrow}
         </span>
-        <h2 class="reflex-title">REFLEX Disposable Gloves</h2>
+        <h2 class="reflex-title">{data.heroTitle}</h2>
         <p class="lead reflex-lead">
-          CTSEG supplies the REFLEX product portfolio to international importers, distributors and institutional buyers, providing sourcing, export documentation, quality coordination and international logistics support.
+          {data.heroLead}
         </p>
         
         <div class="reflex-badges">
@@ -32,7 +32,7 @@ const isRtl = currentLang === 'fa';
 
         <div class="actions reflex-actions">
           <a class="button" href={reflexUrl} data-reflex-view-products>
-            View Products →
+            {data.ctaProducts} →
           </a>
           <a class="button button-secondary" href="/documents/reflex-medical-catalogue.pdf" download="REFLEX-Medical-Catalogue.pdf" data-catalog-download data-catalog-language={currentLang}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -40,20 +40,20 @@ const isRtl = currentLang === 'fa';
               <polyline points="7 10 12 15 17 10"/>
               <line x1="12" y1="15" x2="12" y2="3"/>
             </svg>
-            Download Catalogue
+            {data.ctaCatalog}
           </a>
-          <a class="button button-secondary" href={`${reflexUrl}#rfq-form`} data-product-quote="REFLEX Disposable Gloves">
-            Request a Quote
+          <a class="button button-secondary" href={`${reflexUrl}#rfq-form`} data-product-quote={data.heroTitle}>
+            {data.ctaQuote}
           </a>
         </div>
       </div>
 
       <figure class="reflex-featured-visual">
         <img
-          src="/images/reflex-tpe-gloves-hero.webp"
+          src="/images/reflex/reflex-slider1.jpg"
           width="1200"
           height="850"
-          alt="REFLEX Disposable Gloves Medical Portfolio"
+          alt={data.heroTitle}
           loading="lazy"
           decoding="async"
           class="reflex-hero-img"

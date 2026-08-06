@@ -20,11 +20,10 @@ const copy = {
     <figure class="trade-video-frame">
       <video
         data-trade-video
-        autoplay
         muted
         loop
         playsinline
-        preload="metadata"
+        preload="none"
         poster="/videos/ctseg-trade-coordination-poster.jpg"
         aria-label={copy.label}
       >
@@ -53,13 +52,22 @@ const copy = {
     const market=document.querySelector('.markets-editorial');
     if(section&&market&&section.parentElement!==market.parentElement){market.parentElement?.insertBefore(section,market)}
     else if(section&&market){market.parentElement?.insertBefore(section,market)}
-    const video=section?.querySelector('[data-trade-video]');
+    const video=section?.querySelector('[data-trade-video]') as HTMLVideoElement | null;
+    if(!video)return;
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-    const apply=()=>{
-      if(!video)return;
-      if(reduced.matches){video.pause();video.removeAttribute('autoplay');video.currentTime=0}
-      else{video.setAttribute('autoplay','');video.play().catch(()=>{})}
-    };
-    apply();reduced.addEventListener?.('change',apply);
+    if('IntersectionObserver' in window){
+      const observer=new IntersectionObserver((entries)=>{
+        entries.forEach((entry)=>{
+          if(entry.isIntersecting && !reduced.matches){
+            video.play().catch(()=>{});
+          }else{
+            video.pause();
+          }
+        });
+      },{rootMargin:'100px'});
+      observer.observe(video);
+    }else if(!reduced.matches){
+      video.play().catch(()=>{});
+    }
   })();
 </script>
