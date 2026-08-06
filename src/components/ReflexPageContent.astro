@@ -1,11 +1,40 @@
 ---
 import { reflexData, reflexPath, type ReflexLocale } from '../data/reflex-data';
+import ProductVideoSection from './ProductVideoSection.astro';
 
 const { lang = 'en' } = Astro.props as { lang?: string };
 const currentLang = (['en', 'tr', 'de', 'it', 'ru', 'fa', 'sq', 'mk', 'sr'].includes(lang) ? lang : 'en') as ReflexLocale;
 const data = reflexData[currentLang] || reflexData.en;
 const isRtl = currentLang === 'fa';
 const reflexUrl = reflexPath(currentLang);
+
+const categoryVideoMap: Record<string, { video: string; poster: string; title: string }> = {
+  'flex-hitech': {
+    video: '/videos/Commercial_for_Reflex_Glove_Flex.mp4',
+    poster: '/images/reflex/reflex-cat3.jpg',
+    title: 'FLEX Hi-Tech Commercial Video'
+  },
+  'medilex-exam': {
+    video: '/videos/Medical_commercial_prompt_for_gloves.mp4',
+    poster: '/images/reflex/reflex-cat6.jpg',
+    title: 'MEDILEX Examination Commercial Video'
+  },
+  'winlyex-thermo-vinyl': {
+    video: '/videos/Commercial_for_Winlyex_Extra_gloves_202608062333.mp4',
+    poster: '/images/reflex/reflex-cat5.jpg',
+    title: 'WINLYEX Extra Thermo Commercial Video'
+  },
+  'slimfit-copolymer': {
+    video: '/videos/Reflex_Slimfit_Glove_commercial.mp4',
+    poster: '/images/reflex/reflex-cat8.jpg',
+    title: 'SLIMFIT Copolymer Commercial Video'
+  },
+  'winlyex-powder-free': {
+    video: '/videos/Commercial_for_Winlyex_Extra_gloves_202608062333.mp4',
+    poster: '/images/reflex/reflex-cat4.jpg',
+    title: 'WINLYEX Powder Free Commercial Video'
+  }
+};
 ---
 
 <div class="reflex-page" dir={isRtl ? 'rtl' : 'ltr'}>
@@ -120,6 +149,18 @@ const reflexUrl = reflexPath(currentLang);
     </div>
   </section>
 
+  <!-- Featured Commercial Presentation Video -->
+  <ProductVideoSection
+    videoSrc="/videos/Commercial_prompt_for_disposable_gloves.mp4"
+    posterSrc="/images/reflex/resizer.jpg"
+    kicker="PRODUCT VIDEO"
+    heading="See the product in real commercial use."
+    description="Commercial presentation prepared for international distributors, wholesalers, healthcare institutions and procurement professionals."
+    lang={currentLang}
+    controls={true}
+    muted={false}
+  />
+
   <!-- 3. Product Categories -->
   <section class="section reflex-categories-section" id="product-categories">
     <div class="container">
@@ -166,6 +207,20 @@ const reflexUrl = reflexPath(currentLang);
                   <dd>{cat.packing}</dd>
                 </div>
               </dl>
+
+              {categoryVideoMap[cat.id] && (
+                <div class="reflex-card-video-box">
+                  <video
+                    src={categoryVideoMap[cat.id].video}
+                    poster={categoryVideoMap[cat.id].poster}
+                    controls
+                    playsinline
+                    preload="metadata"
+                    aria-label={`${cat.name} Commercial Presentation Video`}
+                    class="reflex-card-video"
+                  ></video>
+                </div>
+              )}
 
               <div class="reflex-card-actions">
                 <a class="button button-small" href="#rfq-form" data-product-quote={cat.name}>
@@ -856,6 +911,23 @@ const reflexUrl = reflexPath(currentLang);
   }
   .button-block {
     width: 100%;
+  }
+
+  .reflex-card-video-box {
+    margin: 1.25rem 0;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16 / 9;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .reflex-card-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0.75rem;
   }
 
   @media (max-width: 960px) {

@@ -1,0 +1,132 @@
+---
+export interface Props {
+  videoSrc: string;
+  posterSrc?: string;
+  kicker?: string;
+  heading?: string;
+  description?: string;
+  lang?: string;
+  autoPlay?: boolean;
+  controls?: boolean;
+  muted?: boolean;
+  loop?: boolean;
+  aspectRatio?: string;
+}
+
+const {
+  videoSrc,
+  posterSrc,
+  kicker = 'PRODUCT VIDEO',
+  heading = 'See the product in real commercial use.',
+  description = 'Commercial presentation prepared for international distributors, wholesalers, healthcare institutions and procurement professionals.',
+  lang = 'en',
+  autoPlay = false,
+  controls = true,
+  muted = false,
+  loop = false,
+  aspectRatio = '16 / 9'
+} = Astro.props;
+
+const isRtl = lang === 'fa';
+---
+
+<section class="section product-video-section" dir={isRtl ? 'rtl' : 'ltr'}>
+  <div class="container product-video-container">
+    <div class="product-video-header">
+      <span class="eyebrow product-video-kicker">{kicker}</span>
+      <h3 class="product-video-heading">{heading}</h3>
+    </div>
+
+    <figure class="product-video-wrapper" style={`aspect-ratio: ${aspectRatio};`}>
+      <video
+        src={videoSrc}
+        poster={posterSrc}
+        controls={controls}
+        autoplay={autoPlay}
+        muted={muted || autoPlay}
+        loop={loop || autoPlay}
+        playsinline
+        preload="metadata"
+        aria-label={`${kicker}: ${heading}`}
+        class="product-video-element"
+      ></video>
+    </figure>
+
+    <p class="product-video-caption">
+      {description}
+    </p>
+  </div>
+</section>
+
+<style>
+  .product-video-section {
+    padding: 3.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(13, 17, 23, 0.6) 0%, rgba(7, 9, 13, 0.9) 100%);
+  }
+
+  .product-video-container {
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .product-video-header {
+    margin-bottom: 1.75rem;
+  }
+
+  .product-video-kicker {
+    display: inline-block;
+    color: var(--accent-soft, #e2b96c);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-video-heading {
+    font-family: var(--font-heading, 'Source Serif 4', Georgia, serif);
+    font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+    font-weight: 500;
+    color: var(--text, #f1eee7);
+    margin: 0;
+    line-height: 1.25;
+  }
+
+  .product-video-wrapper {
+    margin: 0 0 1.5rem 0;
+    position: relative;
+    border-radius: 0.875rem;
+    overflow: hidden;
+    background: #07090d;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .product-video-element {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0.875rem;
+  }
+
+  .product-video-caption {
+    margin: 0 auto;
+    max-width: 700px;
+    color: var(--muted, #aba89f);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    .product-video-section {
+      padding: 2.5rem 0;
+    }
+    .product-video-header {
+      margin-bottom: 1.25rem;
+    }
+  }
+</style>

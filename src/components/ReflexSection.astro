@@ -49,15 +49,19 @@ const isRtl = currentLang === 'fa';
       </div>
 
       <figure class="reflex-featured-visual">
-        <img
-          src="/images/reflex/reflex-slider1.jpg"
+        <video
+          src="/videos/Commercial_for_Reflex_Glove_Flex.mp4"
+          poster="/images/reflex/reflex-slider1.jpg"
           width="1200"
           height="850"
-          alt={data.heroTitle}
-          loading="lazy"
-          decoding="async"
-          class="reflex-hero-img"
-        />
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-label={`${data.heroTitle} - Featured Commercial Video`}
+          class="reflex-hero-video"
+        ></video>
         <figcaption class="reflex-visual-caption">
           <span><strong>CE 2841 & ISO 9001</strong> · Premium Medical & Hygiene Disposable Gloves</span>
         </figcaption>
@@ -141,15 +145,16 @@ const isRtl = currentLang === 'fa';
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: #141612;
   }
-  .reflex-hero-img {
+  .reflex-hero-video {
     width: 100%;
     height: auto;
+    aspect-ratio: 1200 / 850;
     display: block;
     object-fit: cover;
     transition: transform 0.4s ease;
   }
-  .reflex-featured-visual:hover .reflex-hero-img {
-    transform: scale(1.02);
+  .reflex-featured-visual:hover .reflex-hero-video {
+    transform: scale(1.01);
   }
   .reflex-visual-caption {
     position: absolute;
