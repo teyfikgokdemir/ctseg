@@ -30,11 +30,81 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
     title: 'SLIMFIT Copolymer Commercial Video'
   },
   'winlyex-powder-free': {
-    video: '/videos/Commercial_for_Winlyex_Extra_gloves_202608062333.mp4',
+    video: '/videos/Commercial_for_Winlyex_Extra_gloves_202608062333 (1).mp4',
     poster: '/images/reflex/reflex-cat4.jpg',
     title: 'WINLYEX Powder Free Commercial Video'
   }
 };
+
+const localizedHeroTitle = {
+  tr: 'Medikal, Endüstriyel ve Gıda Kullanımı için REFLEX Tek Kullanımlık Eldiven Tedariği',
+  en: 'REFLEX Disposable Gloves for Medical, Industrial and Food Applications',
+  fa: 'تأمین عمده دستکش‌های یک‌بارمصرف REFLEX برای کاربردهای پزشکی، صنعتی و غذایی',
+  de: 'REFLEX Einweg-Handschuhe für Medizin, Industrie und Lebensmittelverarbeitung',
+  it: 'Guanti Monouso REFLEX per Applicazioni Mediche, Industriali e Alimentari',
+  ru: 'Одноразовые Перчатки REFLEX для Медицинских, Промышленных и Пищевых Целей',
+  sq: 'Doreza me Një Përdorim REFLEX për Aplikime Mjekësore, Industriale dhe Ushqimore',
+  mk: 'REFLEX Ракавици за Еднократна Употреба за Медицинска, Индустриска и Прехранбена Примена',
+  sr: 'REFLEX Rukavice za Jednokratnu Upotrebu za Medicinsku, Industrijsku i Prehrambenu Primenu'
+}[currentLang] || 'REFLEX Disposable Gloves for Medical, Industrial and Food Applications';
+
+const localizedHeroLead = {
+  tr: 'CTSEG; uluslararası distribütörler, sağlık kuruluşları ve kurumsal alıcılar için yüksek üretim kapasiteli nitril muayene eldivenleri, latekssiz TPE, termo vinil ve kopolimer tek kullanımlık eldiven portföyünü toplu ihracat ve kalite dokümantasyonu ile sunar.',
+  en: 'CTSEG provides bulk export supply of high-capacity nitrile examination gloves, latex-free TPE, thermo vinyl, and copolymer disposable gloves backed by batch quality documentation for international distributors, healthcare institutions, and industrial procurement buyers.',
+  fa: 'CTSEG خدمات تأمین و صادرات عمده دستکش‌های معاینه نیتریل، TPE بدون لاتکس، ترمو وینیل و کدوپلیمر یک‌بارمصرف را همراه با اسناد کیفیت محموله برای توزیع‌کنندگان بین‌المللی، مراکز درمانی و خریداران شرکتی ارائه می‌دهد.',
+  de: 'CTSEG bietet Großhandelslieferungen von hochkapazitiven Nitril-Untersuchungshandschuhen, latexfreiem TPE, Thermo-Vinyl und Copolyester-Einweghandschuhen mit chargenbezogener Qualitätsdokumentation für internationale Händler und Industrieunternehmen.',
+  it: 'CTSEG fornisce forniture all’ingrosso di guanti da esame in nitrile, TPE senza lattice, termo-vinile e copolimero con documentazione di qualità per distributori internazionali e istituzioni sanitarie.',
+  ru: 'CTSEG осуществляет оптовые экспортные поставки нитриловых смотровых перчаток, TPE без латекса, термовинила и кополимерных перчаток с документами качества для международных дистрибьюторов и медицинских учреждений.',
+  sq: 'CTSEG ofron furnizim me shumicë të dorezave ekzaminuese nitril, TPE pa lateks, termo vinil dhe kopolimer me dokumentacion cilësie për shpërndarësit ndërkombëtarë.',
+  mk: 'CTSEG обезбедува прехранбени и медицински ракавици од нитрил, TPE без латекс, термо винил и кополимер за меѓународни дистрибутери.',
+  sr: 'CTSEG obezbeđuje masovno snabdevanje nitrilnim preglednim rukavicama, TPE bez lateksa, termo vinilom i kopolimernim rukavicama sa kvalitetnom dokumentacijom za međunarodne kupce.'
+}[currentLang] || data.heroLead;
+
+const heroTrustBadges = {
+  tr: ['Export Supply', 'Bulk Orders', 'Private Label Options', 'Quality Documentation'],
+  en: ['Export Supply', 'Bulk Orders', 'Private Label Options', 'Quality Documentation'],
+  fa: ['صادرات و lojistik', 'سفارشات عمده B2B', 'گزینه‌های برند اختصاصی', 'اسناد و COA محموله'],
+  de: ['Export-Lieferung', 'Großbestellungen', 'Private-Label-Optionen', 'Qualitätsdokumentation'],
+  it: ['Fornitura Export', 'Ordini all’Ingrosso', 'Opzioni Private Label', 'Documentazione di Qualità'],
+  ru: ['Экспортные Поставки', 'Оптовые Заказы', 'Private Label', 'Документы Качества'],
+  sq: ['Furnizim Eksporti', 'Porosi me Shumicë', 'Opsione Private Label', 'Dokumentacion Cilësie'],
+  mk: ['Извозно Снабдување', 'Големи Нарачки', 'Опции за Private Label', 'Документација за Квалитет'],
+  sr: ['Izvozno Snabdevanje', 'Velike Narudžbe', 'Opcije Private Label', 'Dokumentacija Kvaliteta']
+}[currentLang];
+
+const capacityCardsData = [
+  {
+    title: { tr: 'Üretim Kapasitesi', en: 'Production Capacity', fa: 'ظرفیت تولید' }[currentLang] || 'Production Capacity',
+    desc: { tr: 'İstanbul Esenyurt tesislerinde 7/24 otomatik hat üretimi.', en: '24/7 automated high-volume production facility in Esenyurt, Istanbul.', fa: 'تولید ۲۴/۷ در خطوط اتوماتیک در استانبول.' }[currentLang] || '24/7 automated high-volume production facility in Esenyurt, Istanbul.'
+  },
+  {
+    title: { tr: 'Uluslararası Pazarlar', en: 'Global Markets', fa: 'بازارهای بین‌المللی' }[currentLang] || 'Global Markets',
+    desc: { tr: 'AB, İngiltere, Balkanlar, Orta Doğu ve Kuzey Afrika ihracat desteği.', en: 'Direct export logistics to EU, UK, Balkans, Middle East & North Africa.', fa: 'صادرات به اروپا، بریتانیا، بالکان، خاورمیانه و شمال آفریقا.' }[currentLang] || 'Direct export logistics to EU, UK, Balkans, Middle East & North Africa.'
+  },
+  {
+    title: { tr: 'Ürün Çeşitliliği', en: 'Product Range', fa: 'سبد کامل محصولات' }[currentLang] || 'Product Range',
+    desc: { tr: 'TPE, Nitril hibrit, Termo Vinil, Kopolimer ve Muayene eldivenleri.', en: 'Nitrile-hybrid, TPE, Thermo Vinyl, Copolymer & Medical Examination series.', fa: 'دستکش‌های TPE، هیبرید نیتریل، ترمو وینیل، کدوپلیمر و معاینه.' }[currentLang] || 'Nitrile-hybrid, TPE, Thermo Vinyl, Copolymer & Medical Examination series.'
+  },
+  {
+    title: { tr: 'Ambalaj Seçenekleri', en: 'Packaging Options', fa: 'گزینه‌های بسته‌بندی' }[currentLang] || 'Packaging Options',
+    desc: { tr: 'Dispanser kutu, private label üretimi ve ihracat koli standartları.', en: 'Custom dispenser boxes, private-label branding & master carton packaging.', fa: 'جعبه‌های دیسپنسر، برند اختصاصی private label و کارتن‌های صادراتی.' }[currentLang] || 'Custom dispenser boxes, private-label branding & master carton packaging.'
+  }
+];
+
+const qualityCardsData = [
+  {
+    title: { tr: 'Kalite Kontrol', en: 'Quality Control', fa: 'کنترل کیفیت محموله' }[currentLang] || 'Quality Control',
+    desc: { tr: 'Parti bazlı COA analizi, AQL delik testi ve fiziksel mukavemet kontrolleri.', en: 'Batch-level Certificate of Analysis (COA), AQL pinhole testing and tensile strength checks.', fa: 'ارزیابی COA، تست AQL و مقاومت فیزیکی در سطح هر محموله.' }[currentLang] || 'Batch-level Certificate of Analysis (COA), AQL pinhole testing and tensile strength checks.'
+  },
+  {
+    title: { tr: 'Ürün Tutarlılığı', en: 'Product Consistency', fa: 'ثبات کیفیت تولید' }[currentLang] || 'Product Consistency',
+    desc: { tr: 'Otomatik hat üretimi ile standart et kalınlığı ve bariyer performansı.', en: 'Automated line production ensuring uniform wall thickness and reliable barrier performance.', fa: 'خطوط اتوماتیک برای ضخامت یکنواخت و عملکرد bariyer قابل‌اعتماد.' }[currentLang] || 'Automated line production ensuring uniform wall thickness and reliable barrier performance.'
+  },
+  {
+    title: { tr: 'Uluslararası Tedarik Standartları', en: 'International Supply Standards', fa: 'استانداردهای تأمین بین‌المللی' }[currentLang] || 'International Supply Standards',
+    desc: { tr: 'AB ve uluslararası ithalatçı gereksinimlerine uygun ihracat ve lojistik dokümantasyonu.', en: 'Full export documentation, Incoterms logistics (FOB, CIF, DAP), and compliance tracking.', fa: 'اسناد کامل صادراتی، Incoterms (FOB, CIF, DAP) و پیگیری انطباق.' }[currentLang] || 'Full export documentation, Incoterms logistics (FOB, CIF, DAP), and compliance tracking.'
+  }
+];
 ---
 
 <div class="reflex-page" dir={isRtl ? 'rtl' : 'ltr'}>
@@ -48,14 +118,14 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
           <span class="current">{data.eyebrow}</span>
         </nav>
 
-        <span class="eyebrow reflex-eyebrow-hero">{data.eyebrow}</span>
-        <h1 class="reflex-h1">{data.heroTitle}</h1>
-        <p class="lead reflex-hero-lead">{data.heroLead}</p>
+        <span class="eyebrow reflex-eyebrow-hero">INTERNATIONAL B2B GLOVE SUPPLIER</span>
+        <h1 class="reflex-h1">{localizedHeroTitle}</h1>
+        <p class="lead reflex-hero-lead">{localizedHeroLead}</p>
 
         <div class="reflex-hero-badges-grid">
-          {data.heroBadges.map((badge) => (
+          {heroTrustBadges.map((badge) => (
             <div class="reflex-hero-badge-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5">
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                 <polyline points="22 4 12 14.01 9 11.01"/>
               </svg>
@@ -65,8 +135,8 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
         </div>
 
         <div class="actions reflex-hero-actions">
-          <a class="button" href="#rfq-form" data-product-quote={data.heroTitle}>
-            {data.ctaQuote}
+          <a class="button" href="#rfq-form" data-product-quote={localizedHeroTitle}>
+            {data.ctaQuote} →
           </a>
           <a class="button button-secondary" href="/documents/reflex-medical-catalogue.pdf" download="REFLEX-Medical-Catalogue.pdf" data-catalog-download data-catalog-language={currentLang}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -76,6 +146,9 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
             </svg>
             {data.ctaCatalog}
           </a>
+          <a class="button button-secondary" href="#product-categories">
+            {data.ctaProducts}
+          </a>
         </div>
       </div>
 
@@ -84,19 +157,19 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
           src="/images/reflex/reflex-slider1.jpg"
           width="1200"
           height="850"
-          alt={data.heroTitle}
+          alt="REFLEX Disposable Gloves Bulk Supplier Packaging and Production"
           loading="eager"
           decoding="async"
           class="reflex-hero-media"
         />
         <figcaption class="reflex-media-caption">
-          <strong>REFLEX® TPE & Medical Disposable Gloves</strong> · ISO 9001, CE 2841 & EN ISO 374 Certified
+          <strong>CE 2841 & ISO 9001</strong> · Premium Disposable Gloves Bulk Export & Commercial Supply
         </figcaption>
       </figure>
     </div>
   </section>
 
-  <!-- 2. About REFLEX (Manufacturing & CTSEG International Sourcing Role) -->
+  <!-- 2. Manufacturing Capacity & B2B Supplier Section -->
   <section class="section reflex-about-section">
     <div class="container content-grid">
       <div class="prose">
@@ -121,18 +194,6 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
 
       <aside class="side-panel">
         <div class="reflex-markets-card">
-          <h3>{data.aboutMarketsTitle}</h3>
-          <ul>
-            {data.aboutMarketsList.map((market) => (
-              <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2">
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-                </svg>
-                <span>{market}</span>
-              </li>
-            ))}
-          </ul>
-
           <div class="reflex-facility-media-box">
             <img
               src="/images/reflex/resizer (1).jpg"
@@ -144,28 +205,37 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
             />
             <small>Automated packaging & production facility in Esenyurt, Istanbul</small>
           </div>
+
+          <div class="reflex-capacity-grid">
+            {capacityCardsData.map((card) => (
+              <div class="reflex-capacity-card">
+                <strong>{card.title}</strong>
+                <span>{card.desc}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </aside>
     </div>
   </section>
 
-  <!-- Featured Commercial Presentation Video -->
+  <!-- 3. Featured Commercial Demonstration Video -->
   <ProductVideoSection
     videoSrc="/videos/Commercial_prompt_for_disposable_gloves.mp4"
     posterSrc="/images/reflex/resizer.jpg"
     kicker="PRODUCT VIDEO"
-    heading="See the product in real commercial use."
-    description="Commercial presentation prepared for international distributors, wholesalers, healthcare institutions and procurement professionals."
+    heading="REFLEX Disposable Gloves Product Demonstration"
+    description="Explore REFLEX glove quality, applications and commercial usage scenarios prepared for international distributors, wholesalers, healthcare institutions and procurement professionals."
     lang={currentLang}
     controls={true}
     muted={false}
   />
 
-  <!-- 3. Product Categories -->
+  <!-- 4. Product Portfolio Cards -->
   <section class="section reflex-categories-section" id="product-categories">
     <div class="container">
       <div class="section-head">
-        <h2>{data.categoriesTitle}</h2>
+        <h2>REFLEX Disposable Gloves Product Portfolio</h2>
         <p>{data.categoriesLead}</p>
       </div>
 
@@ -199,11 +269,11 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
                   <dd>{cat.material}</dd>
                 </div>
                 <div>
-                  <dt>Variants:</dt>
+                  <dt>Variants / Colors:</dt>
                   <dd>{cat.variants}</dd>
                 </div>
                 <div>
-                  <dt>Packing:</dt>
+                  <dt>Packaging:</dt>
                   <dd>{cat.packing}</dd>
                 </div>
               </dl>
@@ -216,7 +286,7 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
                     controls
                     playsinline
                     preload="metadata"
-                    aria-label={`${cat.name} Commercial Presentation Video`}
+                    aria-label={`${cat.name} Product Video`}
                     class="reflex-card-video"
                   ></video>
                 </div>
@@ -224,7 +294,7 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
 
               <div class="reflex-card-actions">
                 <a class="button button-small" href="#rfq-form" data-product-quote={cat.name}>
-                  Request Price
+                  Request Commercial Quotation
                 </a>
               </div>
             </div>
@@ -234,11 +304,11 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
     </div>
   </section>
 
-  <!-- 4. Sector Applications -->
+  <!-- 5. Sector Applications (GEO / AIO / SEO Optimized) -->
   <section class="section reflex-applications-section">
     <div class="container">
       <div class="section-head">
-        <h2>{data.applicationsTitle}</h2>
+        <h2>Disposable Gloves for Healthcare, Food and Industrial Applications</h2>
         <p>{data.applicationsLead}</p>
       </div>
 
@@ -265,7 +335,32 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
     </div>
   </section>
 
-  <!-- 5. Product Gallery -->
+  <!-- 6. Quality Control & International Standards Section -->
+  <section class="section reflex-quality-section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Quality Control & International Supply Standards</h2>
+        <p>Rigorous batch testing and compliance documentation to ensure reliable B2B delivery across global markets.</p>
+      </div>
+
+      <div class="reflex-quality-grid">
+        {qualityCardsData.map((qc) => (
+          <div class="reflex-quality-card">
+            <div class="reflex-quality-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            </div>
+            <h3>{qc.title}</h3>
+            <p>{qc.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Product Gallery -->
   <section class="section reflex-gallery-section">
     <div class="container">
       <div class="section-head">
@@ -299,7 +394,7 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
     </div>
   </section>
 
-  <!-- 6. Catalogue Download Section -->
+  <!-- 8. Catalogue Download Section -->
   <section class="section reflex-download-banner">
     <div class="container">
       <div class="reflex-download-box">
@@ -329,14 +424,36 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
     </div>
   </section>
 
-  <!-- 7. Request for Quotation (RFQ) Section -->
+  <!-- 9. Request for Commercial Quotation (RFQ) Section -->
   <section class="section reflex-rfq-section" id="rfq-form">
     <div class="container">
       <div class="reflex-rfq-grid">
         <div class="reflex-rfq-info">
           <span class="eyebrow">B2B Commercial Assessment</span>
-          <h2>{data.rfqTitle}</h2>
+          <h2>Request a Commercial Quotation for Bulk Supply</h2>
           <p>{data.rfqLead}</p>
+
+          <div class="reflex-rfq-trust-box">
+            <h4 class="reflex-rfq-trust-heading">Request a quotation for bulk supply</h4>
+            <ul class="reflex-rfq-trust-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Product specifications & COA documentation</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Custom packaging & private-label options</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Export terms (FOB Istanbul, CIF, DAP)</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Production lead time & shipment schedules</span>
+              </li>
+            </ul>
+          </div>
 
           <div class="reflex-rfq-features">
             <div class="reflex-rfq-feat">
@@ -355,66 +472,61 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
         </div>
 
         <div class="reflex-rfq-form-card">
-          <form class="reflex-rfq-form" data-reflex-rfq-form>
-            <div class="form-group">
-              <label for="rfq-name">{data.formLabels.name} *</label>
-              <input type="text" id="rfq-name" name="name" required placeholder="John Doe / Purchasing Dept" />
-            </div>
+          <form class="reflex-form" action="https://formspree.io/f/xvovbgyp" method="POST">
+            <input type="hidden" name="form_type" value="reflex_b2b_rfq" />
+            <input type="hidden" name="locale" value={currentLang} />
 
             <div class="form-row">
+              <div class="form-group">
+                <label for="rfq-name">{data.formLabels.name} *</label>
+                <input type="text" id="rfq-name" name="name" required placeholder="Full Name" />
+              </div>
               <div class="form-group">
                 <label for="rfq-email">{data.formLabels.email} *</label>
-                <input type="email" id="rfq-email" name="email" required placeholder="purchasing@company.com" />
+                <input type="email" id="rfq-email" name="email" required placeholder="company@domain.com" />
               </div>
+            </div>
+
+            <div class="form-row">
               <div class="form-group">
                 <label for="rfq-phone">{data.formLabels.phone}</label>
-                <input type="tel" id="rfq-phone" name="phone" placeholder="+44 7000 000000" />
+                <input type="tel" id="rfq-phone" name="phone" placeholder="+1 234 567 890" />
               </div>
-            </div>
-
-            <div class="form-row">
               <div class="form-group">
                 <label for="rfq-company">{data.formLabels.company} *</label>
-                <input type="text" id="rfq-company" name="company" required placeholder="MedSupplies Ltd (Importer / Wholesaler)" />
-              </div>
-              <div class="form-group">
-                <label for="rfq-country">{data.formLabels.country} *</label>
-                <input type="text" id="rfq-country" name="country" required placeholder="Germany / Albania / Iraq / Egypt" />
+                <input type="text" id="rfq-company" name="company" required placeholder="Company Name" />
               </div>
             </div>
 
             <div class="form-row">
+              <div class="form-group">
+                <label for="rfq-country">{data.formLabels.country} *</label>
+                <input type="text" id="rfq-country" name="country" required placeholder="Target Delivery Country" />
+              </div>
               <div class="form-group">
                 <label for="rfq-product">{data.formLabels.product}</label>
                 <select id="rfq-product" name="product">
-                  <option value="REFLEX TPE Hybrid Gloves">FLEX Hi-Tech Hybrid TPE Gloves</option>
-                  <option value="MEDILEX Examination Gloves">MEDILEX Medical Examination Gloves</option>
-                  <option value="WINLYEX Extra Thermo Vinyl">WINLYEX Extra Thermo Vinyl Gloves</option>
-                  <option value="SLIMFIT Copolymer Gloves">SLIMFIT Copolymer Sensitive Gloves</option>
-                  <option value="WINLYEX Powder Free Gloves">WINLYEX Powder-Free Gloves</option>
-                  <option value="FLOREX Multipurpose Gloves">FLOREX Multi-Purpose Gloves</option>
-                  <option value="FLEX Kids Disposable Gloves">FLEX Kids Transparent Gloves</option>
-                  <option value="Full REFLEX Portfolio">Full REFLEX Product Portfolio</option>
+                  <option value="all">REFLEX Full Gloves Portfolio</option>
+                  {data.categories.map((c) => (
+                    <option value={c.id}>{c.name}</option>
+                  ))}
                 </select>
               </div>
-              <div class="form-group">
-                <label for="rfq-volume">{data.formLabels.volume} *</label>
-                <input type="text" id="rfq-volume" name="volume" required placeholder="e.g. 10 Pallets / 1 FCL Container" />
-              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="rfq-volume">{data.formLabels.volume}</label>
+              <input type="text" id="rfq-volume" name="volume" placeholder="e.g. 500 Master Cartons / 10,000 Boxes" />
             </div>
 
             <div class="form-group">
               <label for="rfq-notes">{data.formLabels.notes}</label>
-              <textarea id="rfq-notes" name="notes" rows="3" placeholder="Specify Incoterms (FOB/CIF), required delivery dates or custom parameters..."></textarea>
+              <textarea id="rfq-notes" name="notes" rows="4" placeholder="Specify sizes, destination port, target delivery date, or private label requirements..."></textarea>
             </div>
 
             <button type="submit" class="button button-large button-block">
               {data.formLabels.submit}
             </button>
-
-            <p class="form-success-msg" id="rfq-success-msg" hidden>
-              ✓ {data.formLabels.successMessage}
-            </p>
           </form>
         </div>
       </div>
@@ -422,57 +534,21 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
   </section>
 </div>
 
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const prefillProduct = sessionStorage.getItem('ctseg-product-request');
-    if (prefillProduct) {
-      const select = document.getElementById('rfq-product');
-      if (select) {
-        for (let i = 0; i < select.options.length; i++) {
-          if (select.options[i].text.toLowerCase().includes(prefillProduct.toLowerCase())) {
-            select.selectedIndex = i;
-            break;
-          }
-        }
-      }
-    }
-
-    const form = document.querySelector('[data-reflex-rfq-form]');
-    const successMsg = document.getElementById('rfq-success-msg');
-    
-    if (form) {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const formData = new FormData(form);
-
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', 'rfq_submission', {
-            product: formData.get('product'),
-            country: formData.get('country')
-          });
-        }
-
-        if (successMsg) {
-          successMsg.hidden = false;
-          form.reset();
-        }
-      });
-    }
-  });
-</script>
-
 <style>
   .reflex-page {
-    color: #f3f4f6;
+    background-color: var(--bg, #0b0d09);
+    color: var(--text, #f1eee7);
   }
+
+  /* 1. Hero Section */
   .reflex-hero-section {
-    padding: 3.5rem 0 4.5rem;
-    background: radial-gradient(circle at top right, rgba(226, 185, 108, 0.08) 0%, transparent 60%), #171914;
+    padding: 3.5rem 0 4.5rem 0;
+    background: linear-gradient(180deg, rgba(20, 22, 18, 0.9) 0%, rgba(11, 13, 9, 1) 100%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
   .reflex-hero-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: 1.05fr 0.95fr;
     gap: 3.5rem;
     align-items: center;
   }
@@ -481,129 +557,126 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
     align-items: center;
     gap: 0.5rem;
     font-size: 0.8125rem;
-    color: #9ca3af;
+    color: var(--muted, #aba89f);
     margin-bottom: 1rem;
   }
   .reflex-breadcrumbs a {
-    color: #d1d5db;
+    color: var(--muted, #aba89f);
     text-decoration: none;
   }
   .reflex-breadcrumbs a:hover {
     color: #e2b96c;
   }
   .reflex-eyebrow-hero {
+    display: inline-block;
     color: #e2b96c;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    font-size: 0.875rem;
-    display: block;
     margin-bottom: 0.75rem;
   }
   .reflex-h1 {
-    font-size: clamp(2.25rem, 4vw, 3.25rem);
+    font-size: clamp(2.1rem, 3.8vw, 3.1rem);
     font-family: var(--font-heading, 'Source Serif 4', Georgia, serif);
-    line-height: 1.15;
+    line-height: 1.2;
     color: #ffffff;
     margin-bottom: 1.25rem;
+    font-weight: 600;
   }
   .reflex-hero-lead {
-    font-size: 1.1875rem;
+    font-size: 1.125rem;
     line-height: 1.65;
     color: #d1d5db;
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
   }
   .reflex-hero-badges-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0.875rem;
-    margin-bottom: 2.25rem;
+    margin-bottom: 2rem;
   }
   .reflex-hero-badge-item {
     display: flex;
     align-items: center;
     gap: 0.625rem;
-    font-size: 0.875rem;
-    color: #e5e7eb;
-    background: rgba(255, 255, 255, 0.04);
-    padding: 0.625rem 0.875rem;
+    background: rgba(226, 185, 108, 0.08);
+    border: 1px solid rgba(226, 185, 108, 0.25);
+    padding: 0.5rem 0.875rem;
     border-radius: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #f3e5c8;
   }
   .reflex-hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    align-items: center;
   }
+
   .reflex-hero-figure {
     margin: 0;
+    position: relative;
     border-radius: 1rem;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     background: #141612;
   }
   .reflex-hero-media {
     width: 100%;
     height: auto;
+    aspect-ratio: 1200 / 850;
     display: block;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .reflex-hero-figure:hover .reflex-hero-media {
+    transform: scale(1.015);
   }
   .reflex-media-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 0.875rem 1.25rem;
-    background: rgba(15, 17, 13, 0.95);
+    background: rgba(15, 17, 13, 0.88);
+    backdrop-filter: blur(8px);
+    color: #e5e7eb;
     font-size: 0.8125rem;
-    color: #9ca3af;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
+  /* 2. Manufacturing Capacity & B2B Supplier Section */
   .reflex-about-section {
-    background: #1d1f19;
+    padding: 4.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
   .reflex-role-card {
     margin-top: 2rem;
-    background: rgba(226, 185, 108, 0.06);
-    border: 1px solid rgba(226, 185, 108, 0.2);
-    padding: 1.75rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 0.75rem;
+  }
+  .reflex-role-card h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+    color: #e2b96c;
   }
   .reflex-disclaimer-note {
-    margin-top: 1rem;
     display: flex;
     gap: 0.75rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     font-size: 0.8125rem;
-    color: #e5e7eb;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-  }
-  .reflex-markets-card {
-    background: #141612;
-    padding: 1.75rem;
-    border-radius: 0.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-  .reflex-markets-card h3 {
-    margin-top: 0;
-    margin-bottom: 1.25rem;
-    font-size: 1.25rem;
-  }
-  .reflex-markets-card ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1.75rem 0;
-  }
-  .reflex-markets-card li {
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    font-size: 0.875rem;
-    color: #d1d5db;
+    color: #9ca3af;
   }
   .reflex-facility-media-box {
-    margin-top: 1.25rem;
-    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.75rem;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
@@ -611,15 +684,43 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
     width: 100%;
     height: auto;
     display: block;
+    object-fit: cover;
   }
   .reflex-facility-media-box small {
     display: block;
     padding: 0.5rem 0.75rem;
-    background: rgba(0, 0, 0, 0.6);
+    background: #141612;
     color: #9ca3af;
     font-size: 0.75rem;
   }
+  .reflex-capacity-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .reflex-capacity-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  .reflex-capacity-card strong {
+    display: block;
+    color: #e2b96c;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+  }
+  .reflex-capacity-card span {
+    font-size: 0.78125rem;
+    color: #d1d5db;
+    line-height: 1.4;
+    display: block;
+  }
 
+  /* 4. Product Portfolio Cards (Requirement 5) */
+  .reflex-categories-section {
+    padding: 4.5rem 0;
+  }
   .reflex-products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -627,12 +728,13 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
     margin-top: 2.5rem;
   }
   .reflex-product-card {
-    background: #141612;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #161914;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 0.875rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
     transition: transform 0.3s ease, border-color 0.3s ease;
   }
   .reflex-product-card:hover {
@@ -642,15 +744,15 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
   .reflex-card-image-box {
     margin: 0;
     position: relative;
-    background: #0f110d;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: #0d0f0b;
+    aspect-ratio: 640 / 450;
+    overflow: hidden;
   }
   .reflex-card-image-box img {
     width: 100%;
-    height: 230px;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
     display: block;
-    padding: 1rem;
   }
   .reflex-card-badges {
     position: absolute;
@@ -661,65 +763,95 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
     gap: 0.375rem;
   }
   .reflex-card-badge {
-    background: rgba(15, 17, 13, 0.85);
-    backdrop-filter: blur(4px);
+    background: rgba(15, 17, 13, 0.88);
+    backdrop-filter: blur(6px);
     border: 1px solid rgba(226, 185, 108, 0.3);
-    color: #e2b96c;
-    padding: 0.25rem 0.625rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
+    color: #f3e5c8;
+    font-size: 0.71875rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
     font-weight: 500;
   }
   .reflex-card-content {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex: 1;
   }
   .reflex-card-content h3 {
-    font-size: 1.25rem;
-    margin: 0 0 0.25rem 0;
+    font-size: 1.2rem;
     color: #ffffff;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
   }
   .reflex-card-subtitle {
-    color: #e2b96c;
     font-size: 0.8125rem;
+    color: #e2b96c;
     font-weight: 500;
-    margin-bottom: 0.875rem;
+    margin-bottom: 0.75rem;
   }
   .reflex-card-desc {
-    color: #9ca3af;
     font-size: 0.875rem;
-    line-height: 1.5;
+    line-height: 1.55;
+    color: #d1d5db;
     margin-bottom: 1.25rem;
   }
   .reflex-spec-list {
-    margin: auto 0 1.25rem 0;
-    padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    display: grid;
+    margin: 0 0 1.25rem 0;
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
-    font-size: 0.8125rem;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 0.875rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
   }
   .reflex-spec-list div {
     display: flex;
     justify-content: space-between;
-    gap: 0.5rem;
+    font-size: 0.8125rem;
   }
   .reflex-spec-list dt {
-    color: #6b7280;
-  }
-  .reflex-spec-list dd {
-    color: #d1d5db;
-    margin: 0;
-    text-align: right;
+    color: #9ca3af;
     font-weight: 500;
   }
+  .reflex-spec-list dd {
+    color: #ffffff;
+    font-weight: 600;
+    margin: 0;
+    text-align: right;
+  }
+  .reflex-card-actions {
+    margin-top: auto;
+    padding-top: 0.75rem;
+  }
+  .reflex-card-video-box {
+    margin: 1rem 0;
+    border-radius: 0.625rem;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16 / 9;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .reflex-card-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
+  /* 5. Sector Applications (GEO / AIO) */
+  .reflex-applications-section {
+    padding: 4.5rem 0;
+    background: rgba(255, 255, 255, 0.015);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
   .reflex-app-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.5rem;
+    gap: 1.75rem;
     margin-top: 2.5rem;
   }
   .reflex-app-card {
@@ -730,45 +862,82 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
   }
   .reflex-app-fig {
     margin: 0;
-    background: #0f110d;
+    aspect-ratio: 600 / 420;
+    overflow: hidden;
   }
   .reflex-app-fig img {
     width: 100%;
-    height: 180px;
+    height: 100%;
     object-fit: cover;
-    display: block;
   }
   .reflex-app-body {
     padding: 1.25rem;
   }
   .reflex-app-body h3 {
-    font-size: 1.125rem;
-    margin: 0 0 0.5rem 0;
+    font-size: 1.05rem;
     color: #ffffff;
+    margin-bottom: 0.5rem;
   }
   .reflex-app-body p {
-    font-size: 0.875rem;
-    color: #9ca3af;
+    font-size: 0.84rem;
+    color: #d1d5db;
     line-height: 1.5;
     margin: 0;
   }
 
+  /* 6. Quality Control Section (Requirement 8) */
+  .reflex-quality-section {
+    padding: 4.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .reflex-quality-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+  .reflex-quality-card {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.75rem;
+    border-radius: 0.75rem;
+  }
+  .reflex-quality-icon {
+    margin-bottom: 1rem;
+  }
+  .reflex-quality-card h3 {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+  }
+  .reflex-quality-card p {
+    font-size: 0.875rem;
+    color: #d1d5db;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* 7. Gallery Section */
+  .reflex-gallery-section {
+    padding: 4.5rem 0;
+  }
   .reflex-gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 1.5rem;
     margin-top: 2.5rem;
   }
   .reflex-gallery-card {
     margin: 0;
     background: #141612;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 0.75rem;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.08);
   }
   .reflex-gallery-card img {
     width: 100%;
-    height: 200px;
+    height: auto;
+    aspect-ratio: 600 / 420;
     object-fit: cover;
     display: block;
   }
@@ -776,102 +945,129 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
     padding: 1rem;
   }
   .reflex-gallery-card .tag {
+    display: inline-block;
     color: #e2b96c;
-    font-size: 0.75rem;
+    font-size: 0.71875rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    display: block;
     margin-bottom: 0.25rem;
   }
   .reflex-gallery-card h4 {
-    margin: 0;
     font-size: 0.9375rem;
     color: #ffffff;
+    margin: 0;
   }
 
+  /* 8. Download Banner */
   .reflex-download-banner {
-    background: linear-gradient(135deg, rgba(226, 185, 108, 0.12) 0%, rgba(20, 22, 18, 0.95) 100%);
+    padding: 3.5rem 0;
+    background: linear-gradient(180deg, rgba(226, 185, 108, 0.06) 0%, rgba(15, 17, 13, 0.9) 100%);
     border-top: 1px solid rgba(226, 185, 108, 0.2);
     border-bottom: 1px solid rgba(226, 185, 108, 0.2);
-    padding: 4rem 0;
   }
   .reflex-download-box {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     gap: 2rem;
   }
   .reflex-download-text h2 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.875rem;
+    font-size: 1.75rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
   }
   .reflex-download-text p {
     color: #d1d5db;
-    margin: 0 0 0.875rem 0;
-    max-width: 680px;
+    margin-bottom: 0.75rem;
   }
   .reflex-pdf-notice {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: #9ca3af;
+    color: #e2b96c;
     font-size: 0.8125rem;
   }
 
+  /* 9. RFQ Section (Requirement 9) */
   .reflex-rfq-section {
-    background: #171914;
+    padding: 4.5rem 0;
   }
   .reflex-rfq-grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 0.95fr 1.05fr;
     gap: 3.5rem;
     align-items: start;
   }
   .reflex-rfq-info h2 {
-    font-size: 2.25rem;
-    margin: 0.5rem 0 1rem 0;
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
   }
   .reflex-rfq-info p {
     color: #d1d5db;
-    font-size: 1.0625rem;
     line-height: 1.6;
+    margin-bottom: 1.75rem;
+  }
+  .reflex-rfq-trust-box {
+    background: rgba(226, 185, 108, 0.06);
+    border: 1px solid rgba(226, 185, 108, 0.25);
+    padding: 1.25rem;
+    border-radius: 0.75rem;
     margin-bottom: 2rem;
   }
+  .reflex-rfq-trust-heading {
+    font-size: 0.9375rem;
+    color: #e2b96c;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+  .reflex-rfq-trust-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .reflex-rfq-trust-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.84rem;
+    color: #f3e5c8;
+  }
   .reflex-rfq-features {
-    display: grid;
-    gap: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
   .reflex-rfq-feat {
-    background: #141612;
-    padding: 1.25rem;
-    border-radius: 0.625rem;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding-left: 1rem;
+    border-left: 2px solid #e2b96c;
   }
   .reflex-rfq-feat strong {
     display: block;
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 0.9375rem;
     margin-bottom: 0.25rem;
   }
   .reflex-rfq-feat span {
+    font-size: 0.8125rem;
     color: #9ca3af;
-    font-size: 0.875rem;
   }
 
   .reflex-rfq-form-card {
     background: #141612;
-    padding: 2.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  .reflex-rfq-form {
-    display: grid;
-    gap: 1.25rem;
+    padding: 2.25rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
   }
   .form-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    margin-bottom: 1.25rem;
   }
   .form-row {
     display: grid;
@@ -900,40 +1096,14 @@ const categoryVideoMap: Record<string, { video: string; poster: string; title: s
     outline: none;
     border-color: #e2b96c;
   }
-  .form-success-msg {
-    margin-top: 1rem;
-    padding: 1rem;
-    background: rgba(34, 197, 94, 0.15);
-    border: 1px solid rgba(34, 197, 94, 0.3);
-    color: #4ade80;
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-  }
   .button-block {
     width: 100%;
   }
 
-  .reflex-card-video-box {
-    margin: 1.25rem 0;
-    border-radius: 0.75rem;
-    overflow: hidden;
-    background: #000;
-    aspect-ratio: 16 / 9;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  .reflex-card-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 0.75rem;
-  }
-
   @media (max-width: 960px) {
     .reflex-hero-grid,
-    .reflex-download-box,
-    .reflex-rfq-grid {
+    .reflex-rfq-grid,
+    .reflex-download-box {
       grid-template-columns: 1fr;
       gap: 2.5rem;
     }

@@ -119,8 +119,8 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     metaDescription: 'CTSEG, REFLEX tek kullanımlık eldiven portföyünü (TPE, Muayene, Vinil, Kopolimer) Avrupa, Balkanlar ve uluslararası pazarlara tedarik etmektedir.',
     eyebrow: 'Medikal ve Koruyucu Eldiven Portföyü',
     heroTitle: 'REFLEX Tek Kullanımlık ve Muayene Eldivenleri',
-    heroLead: 'Uluslararası ithalatçılar ve kurumsal alıcılar için yüksek üretim kapasiteli TPE, muayene, termo vinil ve kopolimer eldiven çözümleri.',
-    heroBadges: ['CE 2841 & ISO 9001 Sertifikalı', '%100 Geri Dönüştürülebilir TPE', 'Gıda & Medikal Kullanıma Uygun', 'İhracat ve Lojistik Desteği'],
+    heroLead: 'CTSEG; uluslararası distribütörler, sağlık kuruluşları ve kurumsal alıcılar için yüksek üretim kapasiteli nitril muayene eldivenleri, latekssiz TPE, termo vinil ve kopolimer tek kullanımlık eldiven portföyünü toplu ihracat ve kalite dokümantasyonu ile sunar.',
+    heroBadges: ['CE 2841 & ISO 9001', 'Geri Dönüştürülebilir TPE', 'Gıda & Medikal Uygun', 'İhracat & Lojistik'],
     ctaQuote: 'Teklif Alın',
     ctaCatalog: 'Kataloğu İndir (PDF)',
     ctaProducts: 'Ürünleri İnceleyin',
@@ -201,7 +201,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'Esnek Polimer Karışımı',
         variants: 'Şeffaf, Mavi, Siyah, Krem | Bedenler: S, M, L/XL',
         packing: '100 Adet / Kutu, 20 Kutu / Koli',
-        image: '/images/reflex-florex-multipurpose-gloves.webp',
+        image: '/images/reflex/reflex-cat5.jpg',
         badges: ['Yumuşak Doku', 'Genel Kullanım', 'Ekonomik']
       },
       {
@@ -212,7 +212,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'Latekssiz TPE',
         variants: 'Şeffaf | Standart Çocuk Boyutu (3-9 Yaş)',
         packing: '50 Adet / Kutu, 40 Kutu / Koli',
-        image: '/images/reflex-kids-disposable-gloves.webp',
+        image: '/images/reflex/reflex-cat3.jpg',
         badges: ['Çocuklara Özel', '3-9 Yaş', 'Gıdaya Uygun']
       }
     ],
@@ -297,8 +297,8 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     metaTitle: 'B2B REFLEX Disposable Gloves Sourcing | CTSEG Medical',
     metaDescription: 'CTSEG supplies the REFLEX disposable glove portfolio (TPE, Examination, Vinyl, Copolymer) to importers and distributors across Europe, the Balkans and global markets.',
     eyebrow: 'Medical & Protective Gloves Portfolio',
-    heroTitle: 'REFLEX Disposable & Examination Gloves',
-    heroLead: 'High-capacity TPE, examination, thermo vinyl and copolymer glove solutions for international importers and institutional buyers.',
+    heroTitle: 'REFLEX Disposable Gloves for Medical, Industrial and Food Applications',
+    heroLead: 'CTSEG provides bulk export supply of high-capacity nitrile examination gloves, latex-free TPE, thermo vinyl, and copolymer disposable gloves backed by batch quality documentation for international distributors, healthcare institutions, and industrial procurement buyers.',
     heroBadges: ['CE 2841 & ISO 9001 Certified', '100% Recyclable TPE', 'Food & Medical Grade Safe', 'Export & Logistics Support'],
     ctaQuote: 'Request a Quote',
     ctaCatalog: 'Download Official Catalogue (PDF)',
@@ -380,7 +380,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'Elastic Polymer Blend',
         variants: 'Clear, Blue, Black, Cream | Sizes: S, M, L/XL',
         packing: '100 pcs / box, 20 boxes / carton',
-        image: '/images/reflex-florex-multipurpose-gloves.webp',
+        image: '/images/reflex/reflex-cat5.jpg',
         badges: ['Soft Texture', 'Multi-Surface', 'Economical']
       },
       {
@@ -391,7 +391,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'Latex-Free TPE',
         variants: 'Clear | Standard Kids Size (Ages 3-9)',
         packing: '50 pcs / box, 40 boxes / carton',
-        image: '/images/reflex-kids-disposable-gloves.webp',
+        image: '/images/reflex/reflex-cat3.jpg',
         badges: ['For Children', 'Ages 3-9', 'Food Safe']
       }
     ],
@@ -559,7 +559,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'Elastische Polymermischung',
         variants: 'Transparent, Blau, Schwarz, Creme | Größen: S, M, L/XL',
         packing: '100 Stk. / Box, 20 Boxen / Karton',
-        image: '/images/reflex-florex-multipurpose-gloves.webp',
+        image: '/images/reflex/reflex-cat5.jpg',
         badges: ['Weiche Textur', 'Mehrzweck', 'Wirtschaftlich']
       },
       {
@@ -570,7 +570,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'Latexfreies TPE',
         variants: 'Transparent | Standard-Kindergröße (3-9 Jahre)',
         packing: '50 Stk. / Box, 40 Boxen / Karton',
-        image: '/images/reflex-kids-disposable-gloves.webp',
+        image: '/images/reflex/reflex-cat3.jpg',
         badges: ['Für Kinder', '3-9 Jahre', 'Lebensmittelecht']
       }
     ],
@@ -738,7 +738,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'Miscela di Polimeri Elastici',
         variants: 'Trasparente, Blu, Nero, Crema | Taglie: S, M, L/XL',
         packing: '100 pz / scatola, 20 scatole / cartone',
-        image: '/images/reflex-florex-multipurpose-gloves.webp',
+        image: '/images/reflex/reflex-cat5.jpg',
         badges: ['Texture Morbida', 'Multisuperficie', 'Economico']
       },
       {
@@ -749,7 +749,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE Senza Lattice',
         variants: 'Trasparente | Taglia Standard Bambino (3-9 Anni)',
         packing: '50 pz / scatola, 40 scatole / cartone',
-        image: '/images/reflex-kids-disposable-gloves.webp',
+        image: '/images/reflex/reflex-cat3.jpg',
         badges: ['Per Bambini', '3-9 Anni', 'Uso Alimentare']
       }
     ],
@@ -834,8 +834,8 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     metaTitle: 'تأمین عمده دستکش‌های یک‌بارمصرف REFLEX | صادرات CTSEG Medical',
     metaDescription: 'شرکت CTSEG سبد کامل دستکش‌های یک‌بارمصرف REFLEX (TPE، معاینه، وینیل، کوپلیمر) را برای واردکنندگان و توزیع‌کنندگان بین‌المللی تأمین می‌کند.',
     eyebrow: 'سبد دستکش‌های پزشکی و حفاظتی',
-    heroTitle: 'دستکش‌های یک‌بارمصرف و معاینه REFLEX',
-    heroLead: 'راهکارهای تولید با ظرفیت بالای دستکش‌های TPE، معاینه پزشکی، ترمو وینیل و کوپلیمر برای واردکنندگان و خریداران عمده.',
+    heroTitle: 'تأمین عمده دستکش‌های یک‌بارمصرف REFLEX برای کاربردهای پزشکی، صنعتی و غذایی',
+    heroLead: 'CTSEG خدمات تأمین و صادرات عمده دستکش‌های معاینه نیتریل، TPE بدون لاتکس، ترمو وینیل و کدوپلیمر یک‌بارمصرف را همراه با اسناد کیفیت محموله برای توزیع‌کنندگان بین‌المللی، مراکز درمانی و خریداران شرکتی ارائه می‌دهد.',
     heroBadges: ['دارای گواهی CE 2841 و ISO 9001', 'TPE ۱۰۰٪ قابل بازیافت', 'مورد تأیید بهداشتی و غذایی', 'پشتیبانی صادرات و لوگستیک'],
     ctaQuote: 'درخواست استعلام قیمت',
     ctaCatalog: 'دانلود کاتالوگ رسمی (PDF)',
@@ -917,7 +917,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'ترکیب پلیمر کشسان',
         variants: 'شفاف، آبی، مشکی، کرم | سایزها: S, M, L/XL',
         packing: '۱۰۰ عدد در جعبه، ۲۰ جعبه در کارتن',
-        image: '/images/reflex-florex-multipurpose-gloves.webp',
+        image: '/images/reflex/reflex-cat5.jpg',
         badges: ['بافت نرم', 'چندسطحی', 'مقرون‌به‌صرفه']
       },
       {
@@ -928,7 +928,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE بدون لاتکس',
         variants: 'شفاف | سایز استاندارد کودک (۳ تا ۹ سال)',
         packing: '۵۰ عدد در جعبه، ۴۰ جعبه در کارتن',
-        image: '/images/reflex-kids-disposable-gloves.webp',
+        image: '/images/reflex/reflex-cat3.jpg',
         badges: ['مخصوص کودکان', '۳ تا ۹ سال', 'مناسب مواد غذایی']
       }
     ],
@@ -1096,7 +1096,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'Эластичная полимерная смесь',
         variants: 'Прозрачный, Синий, Черный, Бежевый | Размеры: S, M, L/XL',
         packing: '100 шт. / коробка, 20 коробок / упаковка',
-        image: '/images/reflex-florex-multipurpose-gloves.webp',
+        image: '/images/reflex/reflex-cat5.jpg',
         badges: ['Мягкая текстура', 'Универсальные', 'Экономичные']
       },
       {
@@ -1107,7 +1107,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE без латекса',
         variants: 'Прозрачный | Стандартный детский размер (3-9 лет)',
         packing: '50 шт. / коробка, 40 коробок / упаковка',
-        image: '/images/reflex-kids-disposable-gloves.webp',
+        image: '/images/reflex/reflex-cat3.jpg',
         badges: ['Для детей', '3-9 лет', 'Пищевой стандарт']
       }
     ],
@@ -1275,7 +1275,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'Përzierje Polimeri Elastik',
         variants: 'Transparente, E Kaltër, E Zezë, Krem | Madhësitë: S, M, L/XL',
         packing: '100 copë / kuti, 20 kuti / karton',
-        image: '/images/reflex-florex-multipurpose-gloves.webp',
+        image: '/images/reflex/reflex-cat5.jpg',
         badges: ['Strukturë e Butë', 'Shumë sipërfaqe', 'Ekonomike']
       },
       {
@@ -1286,7 +1286,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE Pa Lateks',
         variants: 'Transparente | Madhësi Standarde Fëmijësh (3-9 Vjeç)',
         packing: '50 copë / kuti, 40 kuti / karton',
-        image: '/images/reflex-kids-disposable-gloves.webp',
+        image: '/images/reflex/reflex-cat3.jpg',
         badges: ['Për Fëmijë', '3-9 Vjeç', 'Për Ushqim']
       }
     ],
@@ -1454,7 +1454,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'Еластична Полимерна Мешавина',
         variants: 'Проѕирна, Сина, Црна, Крем | Големини: S, M, L/XL',
         packing: '100 парчиња / кутија, 20 кутии / картон',
-        image: '/images/reflex-florex-multipurpose-gloves.webp',
+        image: '/images/reflex/reflex-cat5.jpg',
         badges: ['Мека Текстура', 'За Повеќе Површини', 'Економични']
       },
       {
@@ -1465,7 +1465,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE Без Латекс',
         variants: 'Проѕирна | Стандардна Детска Големина (3-9 Години)',
         packing: '50 парчиња / кутија, 40 кутии / картон',
-        image: '/images/reflex-kids-disposable-gloves.webp',
+        image: '/images/reflex/reflex-cat3.jpg',
         badges: ['За Деца', '3-9 Години', 'За Храна']
       }
     ],
@@ -1633,7 +1633,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'Elastična Polimerna Mešavina',
         variants: 'Providna, Plava, Crna, Krem | Veličine: S, M, L/XL',
         packing: '100 kom. / kutija, 20 kutija / karton',
-        image: '/images/reflex-florex-multipurpose-gloves.webp',
+        image: '/images/reflex/reflex-cat5.jpg',
         badges: ['Meka Tekstura', 'Više Površina', 'Ekonomične']
       },
       {
@@ -1644,7 +1644,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE Bez Lateksa',
         variants: 'Providna | Standardna Dečija Veličina (3-9 Godina)',
         packing: '50 kom. / kutija, 40 kutija / karton',
-        image: '/images/reflex-kids-disposable-gloves.webp',
+        image: '/images/reflex/reflex-cat3.jpg',
         badges: ['Za Decu', '3-9 Godina', 'Za Hranu']
       }
     ],
