@@ -239,7 +239,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
       {
         title: 'Ev, Bahçe ve Genel Temizlik',
         description: 'Profesyonel temizlik, tarım ve bakım işlerinde uzun ömürlü ve dayanıklı koruma.',
-        image: '/images/reflex-app-gardening-home.webp'
+        image: '/images/reflex/reflex-cat4.jpg'
       }
     ],
 
@@ -418,7 +418,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
       {
         title: 'Home, Gardening & Cleaning',
         description: 'Durable protection for commercial cleaning, agriculture and facility maintenance.',
-        image: '/images/reflex-app-gardening-home.webp'
+        image: '/images/reflex/reflex-cat4.jpg'
       }
     ],
 
@@ -597,7 +597,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
       {
         title: 'Haushalt, Garten & Reinigung',
         description: 'Strapazierfähiger Schutz für gewerbliche Reinigung, Landwirtschaft und Wartung.',
-        image: '/images/reflex-app-gardening-home.webp'
+        image: '/images/reflex/reflex-cat4.jpg'
       }
     ],
 
@@ -776,7 +776,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
       {
         title: 'Casa, Giardinaggio e Pulizia',
         description: 'Protezione resistente per pulizia professionale, agricoltura e manutenzione.',
-        image: '/images/reflex-app-gardening-home.webp'
+        image: '/images/reflex/reflex-cat4.jpg'
       }
     ],
 
@@ -955,7 +955,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
       {
         title: 'نظافت خانگی و صنعتی',
         description: 'محافظت با دوام برای نظافت حرفه‌ای، امور کشاورزی و نگهداری تاسیسات.',
-        image: '/images/reflex-app-gardening-home.webp'
+        image: '/images/reflex/reflex-cat4.jpg'
       }
     ],
 
@@ -1134,7 +1134,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
       {
         title: 'Дом, сад и уборка',
         description: 'Прочная защита для профессиональной уборки, сельского хозяйства и обслуживания.',
-        image: '/images/reflex-app-gardening-home.webp'
+        image: '/images/reflex/reflex-cat4.jpg'
       }
     ],
 
@@ -1313,7 +1313,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
       {
         title: 'Shtëpi, Kopshtari dhe Pastrim',
         description: 'Mbrojtje e qëndrueshme për pastrim profesional, bujqësi dhe mirëmbajtje.',
-        image: '/images/reflex-app-gardening-home.webp'
+        image: '/images/reflex/reflex-cat4.jpg'
       }
     ],
 
@@ -1492,7 +1492,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
       {
         title: 'Дом, Градинарство и Чистење',
         description: 'Издржлива заштита за професионално чистење, земјоделство и одржување.',
-        image: '/images/reflex-app-gardening-home.webp'
+        image: '/images/reflex/reflex-cat4.jpg'
       }
     ],
 
@@ -1671,7 +1671,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
       {
         title: 'Dom, Baštovanstvo i Čišćenje',
         description: 'Izdržljiva zaštita za profesionalno čišćenje, poljoprivredu i održavanje.',
-        image: '/images/reflex-app-gardening-home.webp'
+        image: '/images/reflex/reflex-cat4.jpg'
       }
     ],
 
