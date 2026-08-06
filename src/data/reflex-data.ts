@@ -120,7 +120,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     eyebrow: 'Medikal ve Koruyucu Eldiven Portföyü',
     heroTitle: 'REFLEX Tek Kullanımlık ve Muayene Eldivenleri',
     heroLead: 'CTSEG; uluslararası distribütörler, sağlık kuruluşları ve kurumsal alıcılar için yüksek üretim kapasiteli nitril muayene eldivenleri, latekssiz TPE, termo vinil ve kopolimer tek kullanımlık eldiven portföyünü toplu ihracat ve kalite dokümantasyonu ile sunar.',
-    heroBadges: ['CE 2841 & ISO 9001', 'Geri Dönüştürülebilir TPE', 'Gıda & Medikal Uygun', 'İhracat & Lojistik'],
+    heroBadges: ['CE 2841 & ISO 9001', 'Geri Dönüşümlü TPE', 'Gıda & Medikal Uygun', 'İhracat & Lojistik'],
     ctaQuote: 'Teklif Alın',
     ctaCatalog: 'Kataloğu İndir (PDF)',
     ctaProducts: 'Ürünleri İnceleyin',
