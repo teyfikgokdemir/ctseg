@@ -72,6 +72,7 @@ const productFamilies:Record<string,string> = {
   'akbari-pistachio':'pistachio', 'mazafati-dates':'dates', almonds:'nuts',
   walnuts:'nuts', saffron:'speciality', zereshk:'dried-fruit'
 };
+const faProductIds = ['sunflower-seeds','mazafati-dates','akbari-pistachio','saffron'];
 const catalogueGroups = [
   {
     key:'pistachio',
@@ -103,11 +104,14 @@ const catalogueGroups = [
     title:{tr:'Safran ve Özel Ürünler',en:'Saffron & Specialities',de:'Safran & Spezialitäten',it:'Zafferano e specialità',ru:'Safran et spécialités',fa:'زعفران و محصولات خاص'}[lang],
     ids:['saffron','zereshk']
   }
-];
+].map((group) => ({
+  ...group,
+  ids: lang === 'fa' ? group.ids.filter((id) => faProductIds.includes(id)) : group.ids
+})).filter((group) => group.ids.length > 0);
 const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
 const processPage = (lang === 'tr' || lang === 'en') ? processPages[lang] : null;
 const scenarioPage = (lang === 'tr' || lang === 'en') ? scenarioPages[lang] : null;
-const guide = key === 'guides' && id && (lang === 'tr' || lang === 'en') ? guides[id as keyof typeof guides][lang] : null;
+const guide = key === 'guides' && id ? (guides[id as keyof typeof guides]?.[(lang === 'tr' || lang === 'en') ? lang : 'en'] || null) : null;
 const workHref = localizedPath(lang,'how-we-work');
 const scenarioHref = localizedPath(lang,'scenarios');
 const productCommercialLabels = {
@@ -205,7 +209,7 @@ const verifiedLater = {
 {key === 'services' && !id && (
   <>
     <PageHero lang={lang} eyebrow={t.services} title={copy.servicesTitle} lead={copy.servicesLead} />
-    <section class="section"><div class="container card-grid">{serviceIds.map((serviceId,index) => <a class="card" href={localizedPath(lang,'services',serviceId)}><small>{indexLabel(index)}</small><h2>{services[serviceId].names[lang]}</h2><p>{services[serviceId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
+    <section class="section"><div class="container card-grid">{(lang === 'fa' ? ['strategic-sourcing','supplier-verification','trade-advisory'] as const : serviceIds).map((serviceId,index) => <a class="card" href={localizedPath(lang,'services',serviceId)}><small>{indexLabel(index)}</small><h2>{services[serviceId].names[lang]}</h2><p>{services[serviceId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
     <Framework lang={lang} />
     {(lang === 'tr' || lang === 'en') && <section class="section compact-link-section"><div class="container cta-statement"><h2>{processPage?.title}</h2><a class="button" href={workHref} data-how-we-work-cta>{lang === 'tr' ? 'Dokuz adımı inceleyin' : 'Review the nine stages'}</a></div></section>}
   </>
@@ -320,10 +324,10 @@ const verifiedLater = {
 {key === 'insights' && !id && (
   <>
     <PageHero lang={lang} eyebrow={t.insights} title={copy.insightsTitle} lead={copy.insightsLead} />
-    <section class="section"><div class="container card-grid">{insightIds.map((insightId,index) => <a class="card" href={localizedPath(lang,'insights',insightId)}><small>{indexLabel(index)}</small><h2>{insights[insightId].titles[lang]}</h2><p>{insights[insightId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
-    {(lang === 'tr' || lang === 'en') && <section class="section guide-directory"><div class="container">
-      <div class="section-head"><h2>{lang === 'tr' ? 'Satın alma rehberleri' : 'Sourcing guides'}</h2><p>{lang === 'tr' ? 'RFQ, kalite belgesi ve toplam maliyet için uygulanabilir kontrol listeleri.' : 'Practical checklists for RFQs, quality documents and total cost.'}</p></div>
-      <div class="card-grid">{Object.entries(guides).map(([guideId,item],index)=><a class="card" href={localizedPath(lang,'guides',guideId)}><small>{indexLabel(index)}</small><h3>{item[lang].title}</h3><p>{item[lang].description}</p><strong>{t.readMore} →</strong></a>)}</div>
+    <section class="section"><div class="container card-grid">{(lang === 'fa' ? ['supplier-risk'] as const : insightIds).map((insightId,index) => <a class="card" href={localizedPath(lang,'insights',insightId)}><small>{indexLabel(index)}</small><h2>{insights[insightId].titles[lang]}</h2><p>{insights[insightId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
+    {(lang === 'tr' || lang === 'en' || lang === 'fa') && <section class="section guide-directory"><div class="container">
+      <div class="section-head"><h2>{lang === 'tr' ? 'Satın alma rehberleri' : lang === 'fa' ? 'راهنماهای تأمین B2B' : 'Sourcing guides'}</h2><p>{lang === 'tr' ? 'RFQ, kalite belgesi ve toplam maliyet için uygulanabilir kontrol listeleri.' : lang === 'fa' ? 'چک‌لیست‌های کاربردی برای RFQ و ارزیابی تأمین.' : 'Practical checklists for RFQs, quality documents and total cost.'}</p></div>
+      <div class="card-grid">{(lang === 'fa' ? [['vegetable-oil-rfq', guides['vegetable-oil-rfq']]] as const : Object.entries(guides)).map(([guideId,item],index)=><a class="card" href={localizedPath(lang,'guides',guideId)}><small>{indexLabel(index)}</small><h3>{item[lang === 'fa' ? 'en' : lang].title}</h3><p>{item[lang === 'fa' ? 'en' : lang].description}</p><strong>{t.readMore} →</strong></a>)}</div>
     </div></section>}
   </>
 )}

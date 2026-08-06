@@ -263,7 +263,7 @@ export const services: Record<(typeof serviceIds)[number], { slugs: Localized; n
       en:'Structuring commercial model, Incoterms, documentation, logistics, counterparty and execution risk together.',
       de:'Gemeinsame Strukturierung von Handelsmodell, Incoterms, Dokumentation, Logistik und Ausführungsrisiken.',
       it:'Strutturazione integrata di modello commerciale, Incoterms, documenti, logistica e rischi di esecuzione.',
-      ru:'Structuration conjoint du modèle commercial, des Incoterms, documents, flux logistiques et risques d’exécution.',
+      ru:'Structuration conjointe du modèle commercial, des Incoterms, documents, flux logistiques et risques d’exécution.',
       fa:'ساختاردهی یکپارچه مدل تجاری، Incoterms، اسناد، لجستیک و ریسک‌های اجرایی.'
     }
   },
@@ -303,35 +303,27 @@ export const homeProductIds = [
   'akbari-pistachio','mazafati-dates','almonds','walnuts','saffron','zereshk'
 ] as const;
 
-export type ProductMediaType = 'poster' | 'photo';
-type ProductMedia = {
-  src:string;
-  width:number;
-  height:number;
-  mediaType:ProductMediaType;
-  objectPosition?:string;
-  secondary?:string;
-};
+
 
 const productNames: Record<(typeof productIds)[number], Localized> = {
-  'akbari-pistachio': { tr:'Akbari Antep Fıstığı', en:'Akbari Pistachios', de:'Akbari-Pistazien', it:'Pistacchi Akbari', ru:'Pistaches Akbari' },
-  'kaleghouchi-pistachio': { tr:'Kalleh Ghouchi Antep Fıstığı', en:'Kalleh Ghouchi Pistachios', de:'Kalleh-Ghouchi-Pistazien', it:'Pistacchi Kalleh Ghouchi', ru:'Pistaches Kalleh Ghouchi' },
-  'fandoghi-pistachio': { tr:'Fandoghi Antep Fıstığı', en:'Fandoghi Pistachios', de:'Fandoghi-Pistazien', it:'Pistacchi Fandoghi', ru:'Pistaches Fandoghi' },
-  'ahmad-aghaei-pistachio': { tr:'Ahmad Aghaei Antep Fıstığı', en:'Ahmad Aghaei Pistachios', de:'Ahmad-Aghaei-Pistazien', it:'Pistacchi Ahmad Aghaei', ru:'Pistaches Ahmad Aghaei' },
-  'green-peeled-pistachio': { tr:'Yeşil Soyulmuş İç Fıstık', en:'Green Peeled Pistachio Kernels', de:'Grüne geschälte Pistazienkerne', it:'Pistacchio verde sgusciato', ru:'Pistaches vertes mondées' },
-  'pistachio-granules': { tr:'Kırık ve Granül İç Fıstık', en:'Broken & Granulated Pistachio Kernels', de:'Pistazienbruch und -granulat', it:'Granella e pistacchio spezzato', ru:'Éclats et granulés de pistache' },
-  'mazafati-dates': { tr:'Mazafati Hurması', en:'Mazafati Dates', de:'Mazafati-Datteln', it:'Datteri Mazafati', ru:'Dattes Mazafati' },
-  'date-paste-syrup': { tr:'Hurma Ezmesi ve Şurubu', en:'Date Paste & Syrup', de:'Dattelpaste und -sirup', it:'Pasta e sciroppo di datteri', ru:'Pâte et sirop de dattes' },
-  raisins: { tr:'Kuru Üzüm', en:'Raisins', de:'Rosinen', it:'Uva passa', ru:'Raisins secs' },
-  almonds: { tr:'Badem', en:'Almonds', de:'Mandeln', it:'Mandorle', ru:'Amandes' },
-  walnuts: { tr:'Ceviz', en:'Walnuts', de:'Walnüsse', it:'Noci', ru:'Noix' },
-  'dried-apricots-kernels': { tr:'Kuru Kayısı ve Kayısı Çekirdeği', en:'Dried Apricots & Apricot Kernels', de:'Getrocknete Aprikosen und Aprikosenkerne', it:'Albicocche secche e noccioli', ru:'Abricots secs et amandons' },
-  'pumpkin-seeds': { tr:'Kabak Çekirdeği', en:'Pumpkin Seeds', de:'Kürbiskerne', it:'Semi di zucca', ru:'Graines de courge' },
-  'sunflower-seeds': { tr:'Ay Çekirdeği', en:'Sunflower Seeds', de:'Sonnenblumenkerne', it:'Semi di girasole', ru:'Graines de tournesol' },
-  saffron: { tr:'Safran', en:'Saffron', de:'Safran', it:'Zafferano', ru:'Safran' },
-  'dried-mulberries': { tr:'Kurutulmuş Dut', en:'Dried Mulberries', de:'Getrocknete Maulbeeren', it:'Gelsi essiccati', ru:'Mûres blanches séchées' },
-  zereshk: { tr:'Zereshk', en:'Zereshk Barberries', de:'Zereshk-Berberitzen', it:'Crespino Zereshk', ru:'Épine-vinette Zereshk' },
-  'mixed-nuts': { tr:'Karışık Kuruyemiş ve Özel Ürünler', en:'Mixed Nuts & Specialities', de:'Nussmischungen und Spezialitäten', it:'Frutta secca mista e specialità', ru:'Mélanges de fruits à coque et spécialités' }
+  'akbari-pistachio': { tr:'Akbari Antep Fıstığı', en:'Akbari Pistachios', de:'Akbari-Pistazien', it:'Pistacchi Akbari', ru:'Pistaches Akbari', fa:'پسته اکبری' },
+  'kaleghouchi-pistachio': { tr:'Kalleh Ghouchi Antep Fıstığı', en:'Kalleh Ghouchi Pistachios', de:'Kalleh-Ghouchi-Pistazien', it:'Pistacchi Kalleh Ghouchi', ru:'Pistaches Kalleh Ghouchi', fa:'پسته کله‌قوچی' },
+  'fandoghi-pistachio': { tr:'Fandoghi Antep Fıstığı', en:'Fandoghi Pistachios', de:'Fandoghi-Pistazien', it:'Pistacchi Fandoghi', ru:'Pistaches Fandoghi', fa:'پسته فندقی' },
+  'ahmad-aghaei-pistachio': { tr:'Ahmad Aghaei Antep Fıstığı', en:'Ahmad Aghaei Pistachios', de:'Ahmad-Aghaei-Pistazien', it:'Pistacchi Ahmad Aghaei', ru:'Pistaches Ahmad Aghaei', fa:'پسته احمدآقایی' },
+  'green-peeled-pistachio': { tr:'Yeşil Soyulmuş İç Fıstık', en:'Green Peeled Pistachio Kernels', de:'Grüne geschälte Pistazienkerne', it:'Pistacchio verde sgusciato', ru:'Pistaches vertes mondées', fa:'مغز پسته کال سبز' },
+  'pistachio-granules': { tr:'Kırık ve Granül İç Fıstık', en:'Broken & Granulated Pistachio Kernels', de:'Pistazienbruch und -granulat', it:'Granella e pistacchio spezzato', ru:'Éclats et granulés de pistache', fa:'خلال و دندانه مغز پسته' },
+  'mazafati-dates': { tr:'Mazafati Hurması', en:'Mazafati Dates', de:'Mazafati-Datteln', it:'Datteri Mazafati', ru:'Dattes Mazafati', fa:'خرمای مضافتی' },
+  'date-paste-syrup': { tr:'Hurma Ezmesi ve Şurubu', en:'Date Paste & Syrup', de:'Dattelpaste und -sirup', it:'Pasta e sciroppo di datteri', ru:'Pâte et sirop de dattes', fa:'خمیر و شیره خرما' },
+  raisins: { tr:'Kuru Üzüm', en:'Raisins', de:'Rosinen', it:'Uva passa', ru:'Raisins secs', fa:'کشمش' },
+  almonds: { tr:'Badem', en:'Almonds', de:'Mandeln', it:'Mandorle', ru:'Amandes', fa:'بادام' },
+  walnuts: { tr:'Ceviz', en:'Walnuts', de:'Walnüsse', it:'Noci', ru:'Noix', fa:'گردو' },
+  'dried-apricots-kernels': { tr:'Kuru Kayısı ve Kayısı Çekirdeği', en:'Dried Apricots & Apricot Kernels', de:'Getrocknete Aprikosen und Aprikosenkerne', it:'Albicocche secche e noccioli', ru:'Abricots secs et amandons', fa:'برگه زردآلو و هسته زردآلو' },
+  'pumpkin-seeds': { tr:'Kabak Çekirdeği', en:'Pumpkin Seeds', de:'Kürbiskerne', it:'Semi di zucca', ru:'Graines de courge', fa:'تخمه کدو' },
+  'sunflower-seeds': { tr:'Ay Çekirdeği', en:'Sunflower Seeds', de:'Sonnenblumenkerne', it:'Semi di girasole', ru:'Graines de tournesol', fa:'تخمه آفتابگردان' },
+  saffron: { tr:'Safran', en:'Saffron', de:'Safran', it:'Zafferano', ru:'Safran', fa:'زعفران' },
+  'dried-mulberries': { tr:'Kurutulmuş Dut', en:'Dried Mulberries', de:'Getrocknete Maulbeeren', it:'Gelsi essiccati', ru:'Mûres blanches séchées', fa:'توت خشک' },
+  zereshk: { tr:'Zereshk', en:'Zereshk Barberries', de:'Zereshk-Berberitzen', it:'Crespino Zereshk', ru:'Épine-vinette Zereshk', fa:'زرشک' },
+  'mixed-nuts': { tr:'Karışık Kuruyemiş ve Özel Ürünler', en:'Mixed Nuts & Specialities', de:'Nussmischungen und Spezialitäten', it:'Frutta secca mista e specialità', ru:'Mélanges de fruits à coque et spécialités', fa:'آجیل مخلوط و محصولات خاص' }
 };
 
 const productDescriptions: Record<(typeof productIds)[number], Localized> = {
@@ -340,105 +332,120 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Long, large Akbari kernels offer a distinguished appearance and full bite for premium retail, hospitality and gifting programmes.',
     de:'Lange, große Akbari-Kerne bieten eine markante Optik und einen vollen Biss für Premiumhandel, Gastronomie und Geschenkprogramme.',
     it:'I pistacchi Akbari, lunghi e di grande calibro, offrono un aspetto elegante e una consistenza piena per retail premium, horeca e confezioni regalo.',
-    ru:'Les pistaches Akbari, longues et de gros calibre, offrent une présentation raffinée et une texture généreuse pour le retail premium, l’hôtellerie et les coffrets.'
+    ru:'Les pistaches Akbari, longues et de gros calibre, offrent une présentation raffinée et une texture généreuse pour le retail premium, l’hôtellerie et les coffrets.',
+    fa:'پسته کشیده و درشت اکبری با ظاهر لوکس و مغز پر، گزینه‌ای ایده‌آل برای بسته‌بندی‌های پریمیوم، صادرات و بازار خرده‌فروشی تخصصی است.'
   },
   'kaleghouchi-pistachio': {
     tr:'İri ve yuvarlak yapısıyla jumbo sınıfında konumlanan Kalleh Ghouchi, güçlü raf görünümü aranan kabuklu ürün programlarına uygundur.',
     en:'Large and round Kalleh Ghouchi pistachios sit in the jumbo class, suited to in-shell programmes where shelf impact is a priority.',
     de:'Große, runde Kalleh-Ghouchi-Pistazien gehören zur Jumbo-Klasse und eignen sich für Schalenware mit besonders starker Regalwirkung.',
     it:'Grandi e rotondi, i Kalleh Ghouchi appartengono alla classe jumbo e sono adatti ai programmi in guscio che richiedono forte impatto a scaffale.',
-    ru:'Grosses et rondes, les Kalleh Ghouchi relèvent de la classe jumbo et conviennent aux programmes en coque recherchant un fort impact en rayon.'
+    ru:'Grosses et rondes, les Kalleh Ghouchi relèvent de la classe jumbo et conviennent aux programmes en coque recherchant un fort impact en rayon.',
+    fa:'پسته گرد و درشت کله‌قوچی در رده جامبو قرار داشته و برای برنامه‌های فروش با پوست با ظاهر قوی رف مناسب است.'
   },
   'fandoghi-pistachio': {
     tr:'Küçük ve yuvarlak Fandoghi, dengeli tane yapısı ve verimli paketleme avantajıyla yüksek hacimli ticari programlarda tercih edilir.',
     en:'Small, round Fandoghi pistachios combine consistent sizing with efficient packing, making them a practical choice for high-volume trade.',
     de:'Kleine, runde Fandoghi-Pistazien verbinden gleichmäßige Sortierung mit effizienter Verpackung und sind damit für großvolumigen Handel geeignet.',
     it:'Piccoli e rotondi, i Fandoghi uniscono calibro uniforme ed efficienza di confezionamento, risultando adatti al commercio ad alto volume.',
-    ru:'Petites et rondes, les Fandoghi associent calibrage régulier et conditionnement efficace, un choix adapté aux échanges à fort volume.'
+    ru:'Petites et rondes, les Fandoghi associent calibrage régulier et conditionnement efficace, un choix adapté aux échanges à fort volume.',
+    fa:'پسته فندقی با اندازه یکدست و بسته بندی مقرون‌به‌صرفه، انتخابی استاندارد برای برنامه‌های تجاری با حجم بالا است.'
   },
   'ahmad-aghaei-pistachio': {
     tr:'Uzun taneli ve açık kabuklu Ahmad Aghaei, tanınabilir görünümü, farklı kalibre seçenekleri ve ihracatta yaygın kullanımıyla öne çıkar.',
     en:'Long Ahmad Aghaei pistachios are recognised for their light shells, export-ready presentation and broad availability across commercial grades.',
     de:'Längliche Ahmad-Aghaei-Pistazien zeichnen sich durch helle Schalen, exportgerechte Präsentation und breite Verfügbarkeit in Handelskalibern aus.',
     it:'I pistacchi Ahmad Aghaei si distinguono per forma allungata, guscio chiaro e ampia diffusione nei calibri destinati all’esportazione.',
-    ru:'Les Ahmad Aghaei se distinguent par leur forme allongée, leur coque claire et leur large diffusion dans les calibres destinés à l’export.'
+    ru:'Les Ahmad Aghaei se distinguent par leur forme allongée, leur coque claire et leur large diffusion dans les calibres destinés à l’export.',
+    fa:'پسته احمدآقایی با پوست روشن و ظاهر بازارپسند، از محبوب‌ترین ارقام برای برنامه‌های صادراتی و بازارهای بین‌المللی است.'
   },
   'green-peeled-pistachio': {
     tr:'Canlı yeşil rengi ve yoğun fıstık karakteriyle yeşil soyulmuş iç, pastacılık, dondurma, çikolata ve premium gıda üretimine yönelik bir hammaddedir.',
     en:'With vivid green colour and concentrated pistachio character, peeled kernels are intended for pastry, gelato, chocolate and premium food production.',
     de:'Mit leuchtend grüner Farbe und konzentriertem Pistazienprofil sind geschälte Kerne für Konditorei, Speiseeis, Schokolade und hochwertige Lebensmittel bestimmt.',
     it:'Dal verde intenso e dal gusto concentrato, il pistacchio pelato è destinato a pasticceria, gelato, cioccolato e produzioni alimentari premium.',
-    ru:'D’un vert intense et au caractère aromatique concentré, les pistaches mondées sont destinées à la pâtisserie, aux glaces, au chocolat et aux fabrications premium.'
+    ru:'D’un vert intense et au caractère aromatique concentré, les pistaches mondées sont destinées à la pâtisserie, aux glaces, au chocolat et aux fabrications premium.',
+    fa:'مغز پسته کال سبز با رنگ سبز درخشان و طعم غلیظ، ماده اولیه تخصصی برای شیرینی‌پزی، شکلات‌سازی، بستنی و صنایع غذایی لوکس است.'
   },
   'pistachio-granules': {
     tr:'Endüstriyel reçetelere yönelik kırık ve granül iç fıstık; 2–4 mm, 4–6 mm ve 6–8 mm kalibrasyonlarla kaplama, dolgu ve dekor uygulamalarına uyarlanır.',
     en:'Pistachio crumb and granules support industrial coating, filling and decoration applications, with 2–4 mm, 4–6 mm and 6–8 mm calibrations.',
     de:'Pistazienbruch und -granulat für industrielle Überzüge, Füllungen und Dekore ist in Kalibrierungen von 2–4 mm, 4–6 mm und 6–8 mm verfügbar.',
     it:'Granella e pistacchio spezzato per coperture, farciture e decorazioni industriali sono disponibili nelle calibrature 2–4 mm, 4–6 mm e 6–8 mm.',
-    ru:'Éclats et granulés pour enrobages, fourrages et décors industriels sont proposés en calibrages 2–4 mm, 4–6 mm et 6–8 mm.'
+    ru:'Éclats et granulés pour enrobages, fourrages et décors industriels sont proposés en calibrages 2–4 mm, 4–6 mm et 6–8 mm.',
+    fa:'خلال و دندانه مغز پسته در سایزهای ۲ تا ۸ میلی‌متر برای کاربردهای صنعتی، روکش، مغز شکلات و تزیینات مواد غذایی عرضه می‌شود.'
   },
   'mazafati-dates': {
     tr:'Yumuşak dokulu, koyu renkli ve doğal karamelsi karaktere sahip Mazafati hurması, soğuk zincir planlamalı perakende ve horeca programlarına uygundur.',
     en:'Soft, dark Mazafati dates with a naturally caramel-like profile are suited to chilled retail and foodservice programmes with controlled handling.',
     de:'Weiche, dunkle Mazafati-Datteln mit natürlicher Karamellnote eignen sich für gekühlte Handels- und Gastronomieprogramme mit kontrollierter Handhabung.',
     it:'I datteri Mazafati, morbidi, scuri e naturalmente caramellati, sono indicati per programmi retail e horeca refrigerati con gestione controllata.',
-    ru:'Les dattes Mazafati, tendres, foncées et naturellement caramélisées, conviennent aux programmes retail et restauration sous chaîne du froid maîtrisée.'
+    ru:'Les dattes Mazafati, tendres, foncées et naturellement caramélisées, conviennent aux programmes retail et restauration sous chaîne du froid maîtrisée.',
+    fa:'خرمای مضافتی با بافت نرم، رنگ تیره و طعم کاراملی طبیعی، ارزیابی و تأمین شده برای بازارهای خرده‌فروشی و توزیع عمده.'
   },
   'date-paste-syrup': {
     tr:'Hurma ezmesi ve şurubu; fırıncılık, bar, sos ve dolgu reçetelerinde doğal tatlılık, bağlayıcılık ve renk sağlamak üzere spesifikasyona göre tedarik edilir.',
     en:'Date paste and syrup are specified for natural sweetness, binding and colour in bakery, bar, sauce and filling formulations.',
     de:'Dattelpaste und -sirup werden für natürliche Süße, Bindung und Farbe in Backwaren, Riegeln, Saucen und Füllungen spezifiziert.',
     it:'Pasta e sciroppo di datteri apportano dolcezza naturale, legatura e colore a prodotti da forno, barrette, salse e farciture.',
-    ru:'La pâte et le sirop de dattes apportent douceur naturelle, liaison et couleur aux recettes de boulangerie, barres, sauces et fourrages.'
+    ru:'La pâte et le sirop de dattes apportent douceur naturelle, liaison et couleur aux recettes de boulangerie, barres, sauces et fourrages.',
+    fa:'خمیر و شیره خرما به عنوان شیرین‌کننده طبیعی، طعم‌دهنده و ماده پیونددهنده در صنایع شیرینی، شکلات و نانوایی استفاده می‌شود.'
   },
   raisins: {
     tr:'Kuru üzümler renk, tane boyu, nem ve kullanım amacına göre seçilerek fırıncılık, atıştırmalık ve endüstriyel karışım hatlarına hazırlanır.',
     en:'Raisins are selected by colour, berry size, moisture and end use for bakery, snacking and industrial blending lines.',
     de:'Rosinen werden nach Farbe, Beerengröße, Feuchte und Verwendungszweck für Backwaren, Snacks und industrielle Mischungen ausgewählt.',
     it:'L’uva passa viene selezionata per colore, calibro, umidità e destinazione d’uso in panificazione, snack e miscele industriali.',
-    ru:'Les raisins secs sont sélectionnés selon la couleur, le calibre, l’humidité et l’usage pour la boulangerie, le snacking et les mélanges industriels.'
+    ru:'Les raisins secs sont sélectionnés selon la couleur, le calibre, l’humidité et l’usage pour la boulangerie, le snacking et les mélanges industriels.',
+    fa:'کشمش‌های منتخب بر اساس رنگ، رطوبت و اندازه‌گیری فنی برای خطوط بسته‌بندی، خشکبار و صنایع نانوایی ارائه می‌شوند.'
   },
   almonds: {
     tr:'Bademler çeşit, kalibre, kabuk durumu ve işleme ihtiyacına göre perakende paketleme, draje, un ve bileşen üretimi için eşleştirilir.',
     en:'Almonds are matched by variety, size, skin condition and processing requirement for retail packs, coating, milling and ingredient production.',
     de:'Mandeln werden nach Sorte, Kaliber, Hautzustand und Verarbeitung für Handelspackungen, Dragierung, Vermahlung und Zutatenproduktion ausgewählt.',
     it:'Le mandorle sono abbinate per varietà, calibro, presenza della pellicina e lavorazione a confezioni retail, ricoperture, farine e ingredienti.',
-    ru:'Les amandes sont définies par variété, calibre, état de la peau et transformation pour le conditionnement, l’enrobage, la mouture et les ingrédients.'
+    ru:'Les amandes sont définies par variété, calibre, état de la peau et transformation pour le conditionnement, l’enrobage, la mouture et les ingrédients.',
+    fa:'بادام‌های درختی بر اساس واریته، سایز و نوع فرآوری برای مصارف خشکبار، پودر بادام و روکش‌های صنعتی ارزیابی می‌شوند.'
   },
   walnuts: {
     tr:'Ceviz içi; renk sınıfı, yarım-parça oranı ve oksidasyon kontrolü temelinde unlu mamul, atıştırmalık ve premium karışım ihtiyaçlarına göre seçilir.',
     en:'Walnut kernels are selected by colour grade, half-to-piece ratio and oxidation control for bakery, snacking and premium mix requirements.',
     de:'Walnusskerne werden nach Farbklasse, Anteil ganzer Hälften und Oxidationskontrolle für Backwaren, Snacks und Premium-Mischungen ausgewählt.',
     it:'I gherigli di noce sono selezionati per classe di colore, rapporto mezzi-pezzi e controllo dell’ossidazione per bakery, snack e mix premium.',
-    ru:'Les cerneaux sont sélectionnés selon la classe de couleur, le ratio moitiés-morceaux et la maîtrise de l’oxydation pour la pâtisserie, le snacking et les mélanges premium.'
+    ru:'Les cerneaux sont sélectionnés selon la classe de couleur, le ratio moitiés-morceaux et la maîtrise de l’oxydation pour la pâtisserie, le snacking et les mélanges premium.',
+    fa:'مغز گردو بر اساس درجه رنگ، درصد دوپر و کنترل اکسیداسیون برای گروه‌های خشکبار و صنایع شیرینی انتخاب می‌شود.'
   },
   'dried-apricots-kernels': {
     tr:'Kuru kayısı ve kayısı çekirdeği, ürün tipi, renk, boy ve işleme niteliği ayrıştırılarak atıştırmalık ile gıda bileşeni projeleri için değerlendirilir.',
     en:'Dried apricots and apricot kernels are assessed separately by type, colour, size and processing status for snack and food-ingredient projects.',
     de:'Getrocknete Aprikosen und Aprikosenkerne werden getrennt nach Typ, Farbe, Größe und Verarbeitung für Snack- und Zutatenprojekte bewertet.',
     it:'Albicocche secche e noccioli sono valutati separatamente per tipologia, colore, calibro e lavorazione in progetti snack e ingredienti.',
-    ru:'Abricots secs et amandons sont évalués séparément selon le type, la couleur, le calibre et la transformation pour les projets de snacking et d’ingrédients.'
+    ru:'Abricots secs et amandons sont évalués séparément selon le type, la couleur, le calibre et la transformation pour les projets de snacking et d’ingrédients.',
+    fa:'برگه زردآلو و هسته زردآلو با ارزیابی مجزای پارامترهای کیفی، گوگرد و رطوبت برای صادرات و مصارف صنعتی عرضه می‌شوند.'
   },
   'pumpkin-seeds': {
     tr:'Kabak çekirdeği; kabuklu veya iç formu, kalibre, kavurma davranışı ve mikrobiyolojik gereksinime göre atıştırmalık ve bileşen hatlarına hazırlanır.',
     en:'Pumpkin seeds are specified by in-shell or kernel format, size, roasting behaviour and microbiological requirement for snack and ingredient lines.',
     de:'Kürbiskerne werden nach Schalen- oder Kernform, Kaliber, Röstverhalten und mikrobiologischen Anforderungen für Snack- und Zutatenlinien definiert.',
     it:'I semi di zucca sono specificati per formato con o senza guscio, calibro, resa in tostatura e requisiti microbiologici per snack e ingredienti.',
-    ru:'Les graines de courge sont définies par format avec ou sans coque, calibre, comportement à la torréfaction et exigences microbiologiques pour snacks et ingrédients.'
+    ru:'Les graines de courge sont définies par format avec ou sans coque, calibre, comportement à la torréfaction et exigences microbiologiques pour snacks et ingrédients.',
+    fa:'تخمه کدو به صورت با پوست یا مغز شده بر اساس سایز، بو دادن و پارامترهای میکروبیولوژی ارزیابی می‌شود.'
   },
   'sunflower-seeds': {
     tr:'Ay çekirdeği, iri atıştırmalık sınıfları ile iç ürün seçeneklerinde tane bütünlüğü, yabancı madde ve kavurma performansına göre sınıflandırılır.',
     en:'Sunflower seeds are graded across large snack types and kernel options for seed integrity, foreign matter and roasting performance.',
     de:'Sonnenblumenkerne werden als große Snackware oder geschälte Kerne nach Kornintegrität, Fremdbesatz und Röstleistung klassifiziert.',
     it:'I semi di girasole, nei grandi calibri da snack o sgusciati, sono classificati per integrità, corpi estranei e resa in tostatura.',
-    ru:'Les graines de tournesol, en gros calibres de snacking ou décortiquées, sont classées selon l’intégrité, les corps étrangers et la tenue à la torréfaction.'
+    ru:'Les graines de tournesol, en gros calibres de snacking ou décortiquées, sont classées selon l’intégrité, les corps étrangers et la tenue à la torréfaction.',
+    fa:'تخمه آفتابگردان با درجه‌بندی کیفی شفاف، رطوبت مشخص و عملکرد مناسب در بو دادن برای برنامه‌های عمده B2B ارزیابی می‌شود.'
   },
   saffron: {
     tr:'Safran; iplik bütünlüğü, renk gücü, aroma profili ve saflık analizleriyle premium gıda, horeca ve kontrollü paketleme projeleri için doğrulanır.',
     en:'Saffron is verified for filament integrity, colouring strength, aroma profile and purity for premium food, hospitality and controlled packing projects.',
     de:'Safran wird anhand von Fadenintegrität, Farbstärke, Aromaprofil und Reinheit für Premiumlebensmittel, Gastronomie und kontrollierte Abfüllung geprüft.',
     it:'Lo zafferano è verificato per integrità degli stimmi, potere colorante, profilo aromatico e purezza per alimenti premium, horeca e confezionamento controllato.',
-    ru:'Le safran est contrôlé pour l’intégrité des filaments, le pouvoir colorant, le profil aromatique et la pureté pour l’alimentaire premium, l’hôtellerie et le conditionnement.'
+    ru:'Le safran est contrôlé pour l’intégrité des filaments, le pouvoir colorant, le profil aromatique et la pureté pour l’alimentaire premium, l’hôtellerie et le conditionnement.',
+    fa:'زعفران ممتاز ایران با سنجش قدرت رنگ‌دهی، عطر خالص، سلامت رشته‌ها و آنالیز آزمایشگاهی برای صادرات ارزیابی می‌شود.'
   },
   'dried-mulberries': {
     tr:'Kurutulmuş dut; doğal tatlılığı, açık rengi, tane bütünlüğü ve düşük yabancı madde hedefiyle sağlıklı atıştırmalık ve müsli uygulamalarına seçilir.',

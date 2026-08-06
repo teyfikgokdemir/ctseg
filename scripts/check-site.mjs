@@ -403,7 +403,7 @@ for (const [sourceLabel, sourceRecord] of builtTradeRecords) {
   }
 }
 if (productSchemaPages !== 0) errors.push(`Product schema must not be used without a concrete offer; found ${productSchemaPages}`);
-if (productAssessmentServicePages !== 72) errors.push(`expected 72 specification-led product sourcing Service schemas across the four full catalogue locales, found ${productAssessmentServicePages}`);
+if (productAssessmentServicePages !== 76) errors.push(`expected 76 specification-led product sourcing Service schemas across the four full catalogue locales and targeted Persian products, found ${productAssessmentServicePages}`);
 if (contactEmailPanels !== 10) errors.push(`expected ten localized contact email panels across six homepages and four full contact pages, found ${contactEmailPanels}`);
 if (!existsSync(join(root, persianLandingLabel))) errors.push('standalone Persian landing page build output missing');
 const sitemapXml = files.filter((file) => /sitemap-\d+\.xml$/.test(file)).map((file) => readFileSync(file,'utf8')).join('\n');
