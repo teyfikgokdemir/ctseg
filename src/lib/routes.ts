@@ -15,6 +15,27 @@ export function getRouteRecords(): RouteRecord[] {
   const records: RouteRecord[] = [];
   for (const lang of locales) {
     if (lang !== 'tr') records.push({ lang, key:'home' });
+    if (lang === 'fa') {
+      // 1. Products hub & targeted product pages
+      records.push({ lang, path:sectionSlugs.products[lang], key:'products' });
+      for (const id of ['sunflower-seeds','mazafati-dates','akbari-pistachio','saffron'] as const) {
+        records.push({ lang, path:`${sectionSlugs.products[lang]}/${products[id].slugs[lang]}`, key:'products', id });
+      }
+      // 2. 3 targeted service pages
+      records.push({ lang, path:sectionSlugs.services[lang], key:'services' });
+      for (const id of ['strategic-sourcing','supplier-verification','trade-advisory'] as const) {
+        records.push({ lang, path:`${sectionSlugs.services[lang]}/${services[id].slugs[lang]}`, key:'services', id });
+      }
+      // 3. Insights hub & 2 targeted guide articles
+      records.push({ lang, path:sectionSlugs.insights[lang], key:'insights' });
+      records.push({ lang, path:`${sectionSlugs.insights[lang]}/${insights['supplier-risk'].slugs[lang]}`, key:'insights', id:'supplier-risk' });
+      records.push({ lang, path:`${sectionSlugs.insights[lang]}/${guideSlugs['vegetable-oil-rfq'][lang]}`, key:'guides', id:'vegetable-oil-rfq' });
+      // 4. Persian legal pages
+      for (const id of legalIds) {
+        records.push({ lang, path:legal[id].slugs[lang], key:'legal', id });
+      }
+      continue;
+    }
     if (lang === 'ru') continue;
     for (const key of ['services','products','markets','insights','about','contact']) {
       records.push({ lang, path:sectionSlugs[key][lang], key });
@@ -47,11 +68,12 @@ export function getMeta(record: RouteRecord) {
   const copy = pageCopy[lang];
   const t = ui[lang];
   if (key === 'home') return {
-    title:`CTSEG | ${lang === 'tr' ? 'Uluslararası Ticaret Eşleştirme ve Koordinasyon' : lang === 'en' ? 'International Trade Matching & Coordination' : lang === 'de' ? 'Internationale Geschäftsanbahnung & Koordination' : lang === 'it' ? 'Matching Commerciale Internazionale' : 'Международный сорсинг и коммерческая координация'}`,
+    title:`CTSEG | ${lang === 'tr' ? 'Uluslararası Ticaret Eşleştirme ve Koordinasyon' : lang === 'en' ? 'International Trade Matching & Coordination' : lang === 'de' ? 'Internationale Geschäftsanbahnung & Koordination' : lang === 'it' ? 'Matching Commerciale Internazionale' : lang === 'fa' ? 'تطبیق تجاری و توسعه بازار بین‌المللی' : 'Международный сорсинг и коммерческая координация'}`,
     description: lang === 'tr' ? 'CTSEG, alıcıları doğrulanabilir tedarikçilerle; üreticileri uygun alıcılar ve uluslararası pazar fırsatlarıyla buluşturan ticari koordinasyon platformudur.' :
       lang === 'en' ? 'CTSEG connects buyers with verifiable suppliers and producers with suitable buyers and international market opportunities through independent commercial coordination.' :
       lang === 'de' ? 'CTSEG verbindet Einkäufer mit prüfbaren Lieferanten und Hersteller mit geeigneten Abnehmern und internationalen Marktchancen.' :
       lang === 'it' ? 'CTSEG collega acquirenti a fornitori verificabili e produttori a buyer e opportunità internazionali tramite coordinamento commerciale indipendente.' :
+      lang === 'fa' ? 'CTSEG خریداران را به تأمین‌کنندگان قابل‌بررسی و تولیدکنندگان را به خریداران و بازارهای مناسب بین‌المللی متصل می‌کند.' :
       'CTSEG помогает искать производителей и поставщиков, находить покупателей и координировать международные коммерческие процессы.'
   };
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
@@ -59,8 +81,9 @@ export function getMeta(record: RouteRecord) {
   if (key === 'insights' && id) return { title:`${insights[id as keyof typeof insights].titles[lang]} | CTSEG`, description:insights[id as keyof typeof insights].descriptions[lang] };
   if (key === 'how-we-work' && (lang === 'tr' || lang === 'en')) return {title:`${processPages[lang].title} | CTSEG`,description:processPages[lang].description};
   if (key === 'scenarios' && (lang === 'tr' || lang === 'en')) return {title:`${scenarioPages[lang].title} | CTSEG`,description:scenarioPages[lang].description};
-  if (key === 'guides' && id && (lang === 'tr' || lang === 'en')) {
-    const guide=guides[id as keyof typeof guides][lang];
+  if (key === 'guides' && id) {
+    const guideLang = (lang === 'tr' || lang === 'en') ? lang : 'en';
+    const guide = guides[id as keyof typeof guides]?.[guideLang] || { title: 'Guide', description: 'Commercial guide' };
     return {title:`${guide.title} | CTSEG`,description:guide.description};
   }
   if (key === 'legal' && id) return {

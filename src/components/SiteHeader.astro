@@ -37,11 +37,11 @@ const nav = lang === 'ru' ? [
   ['services', t.services, localizedPath(lang,'services')],
   ['buyers', p.buyerTitle, `${home}#for-buyers`],
   ['producers', p.producerTitle, `${home}#for-producers`],
-  ['sectors', p.sectorsTitle, `${home}#sectors`],
+  ['sectors', p.sectorsTitle, localizedPath(lang,'products')],
   ['medical', medicalLabel, reflexUrl],
-  ['markets', t.markets, localizedPath(lang,'markets')],
-  ['about', t.about, localizedPath(lang,'about')],
-  ['contact', t.contact, localizedPath(lang,'contact')]
+  ['markets', t.markets, lang === 'fa' ? `${home}#markets` : localizedPath(lang,'markets')],
+  ['about', t.about, lang === 'fa' ? `${home}#company` : localizedPath(lang,'about')],
+  ['contact', t.contact, lang === 'fa' ? `${home}#contact` : localizedPath(lang,'contact')]
 ];
 
 const medicalLocales = [
@@ -61,11 +61,10 @@ const globalLocales = activeLocaleRegistry.map((entry) => entry.code);
 const globalLocaleNames = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code, entry.label])) as Record<ActiveLocale,string>;
 
 const globalSwitchPath = (target: string): string => {
-  // fa always goes to the Persian homepage regardless of current page
   if (target === 'fa') return '/fa/';
-  // On medical pages route other locales to their reflexPath
+  // On medical pages route locales to their reflexPath
   if (pageKey === 'medical') {
-    const reflexLocales = ['en','tr','de','it','ru'] as const;
+    const reflexLocales = ['en','tr','de','it','ru','fa'] as const;
     if ((reflexLocales as readonly string[]).includes(target)) return reflexPath(target as ReflexLocale);
     return '/';
   }

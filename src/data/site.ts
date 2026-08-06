@@ -71,12 +71,12 @@ export const companyCopy: Record<Locale, {
 };
 
 export const sectionSlugs: Record<string, Localized> = {
-  services: { tr: 'hizmetler', en: 'services', de: 'dienstleistungen', it: 'servizi', ru: 'services' },
-  products: { tr: 'ticari-urunler', en: 'trade-products', de: 'handelsprodukte', it: 'prodotti-commerciali', ru: 'products' },
-  markets: { tr: 'pazarlar', en: 'markets', de: 'maerkte', it: 'mercati', ru: 'markets' },
-  insights: { tr: 'icgoruler', en: 'insights', de: 'einblicke', it: 'approfondimenti', ru: 'insights' },
-  about: { tr: 'hakkimizda', en: 'about', de: 'ueber-uns', it: 'chi-siamo', ru: 'about' },
-  contact: { tr: 'iletisim', en: 'contact', de: 'kontakt', it: 'contatti', ru: 'contact' }
+  services: { tr: 'hizmetler', en: 'services', de: 'dienstleistungen', it: 'servizi', ru: 'services', fa: 'services' },
+  products: { tr: 'ticari-urunler', en: 'trade-products', de: 'handelsprodukte', it: 'prodotti-commerciali', ru: 'products', fa: 'trade-products' },
+  markets: { tr: 'pazarlar', en: 'markets', de: 'maerkte', it: 'mercati', ru: 'markets', fa: 'markets' },
+  insights: { tr: 'icgoruler', en: 'insights', de: 'einblicke', it: 'approfondimenti', ru: 'insights', fa: 'insights' },
+  about: { tr: 'hakkimizda', en: 'about', de: 'ueber-uns', it: 'chi-siamo', ru: 'about', fa: 'about' },
+  contact: { tr: 'iletisim', en: 'contact', de: 'kontakt', it: 'contatti', ru: 'contact', fa: 'contact' }
 };
 
 export const ui: Record<Locale, any> = {
@@ -144,6 +144,19 @@ export const ui: Record<Locale, any> = {
     complianceText: 'Фактическое происхождение, производитель и документы на партию указываются прозрачно. CTSEG не поддерживает сокрытие происхождения или вводящую в заблуждение маркировку.',
     contactLead: 'Расскажите о компании, задаче, ориентировочном объёме и целевом рынке. Мы предложим подходящий формат коммерческой оценки.',
     emptyInsights: 'На русском языке материалов пока нет.'
+  },
+  fa: {
+    home: 'صفحه اصلی', services: 'خدمات', products: 'محصولات تجاری', markets: 'بازارها', insights: 'تحلیل‌ها',
+    about: 'درباره ما', contact: 'تماس', quote: 'درخواست استعلام', menu: 'باز کردن منو', close: 'بستن منو', medicalLabel: 'دستکش پزشکی REFLEX',
+    language: 'انتخاب زبان', readMore: 'بررسی', allProducts: 'مشاهده همه محصولات', allServices: 'مشاهده همه خدمات',
+    origin: 'شفافیت مبدأ', quality: 'کیفیت و انطباق', logistics: 'ارزیابی تجاری', applications: 'کاربردها',
+    faq: 'پرسش‌های متداول', related: 'راهکارهای مرتبط', updated: 'آخرین بروزرسانی', details: 'جزئیات',
+    cookieTitle: 'تنظیمات کوکی', cookieCopy: 'ما کوکی‌های تحلیلی را تنها با رضایت شما استفاده می‌کنیم. کوکی‌های ضروری همواره فعال هستند.',
+    accept: 'پذیرش', reject: 'رد', rights: 'تمامی حقوق محفوظ است.',
+    samplePolicy: 'سیاست نمونه‌گیری', sampleText: 'نمونه‌ها رایگان یا عمومی نیستند. بررسی نمونه تنها پس از ارزیابی اولیه برای خریداران جدی تجاری صورت می‌پذیرد.',
+    complianceText: 'مبدأ واقعی، اطلاعات تولیدکننده و اسناد محموله به‌صورت شفاف اعلام می‌شوند. CTSEG از پنهان‌سازی مبدأ یا برچسب‌گذاری گمراه‌کننده پشتیبانی نمی‌کند.',
+    contactLead: 'مشخصات شرکت، نیاز تجاری، حجم تخمینی و کشور مقصد را ارسال کنید تا تیم ما مسیر مناسب ارزیابی تجاری را مشخص کند.',
+    emptyInsights: 'هنوز تحلیلی به زبان فارسی منتشر نشده است.'
   }
 };
 
@@ -202,64 +215,80 @@ export const homeCopy: Record<Locale, any> = {
     marketsTitle: 'Практичные связи между рынками.', marketsLead: 'Координация из Турции для Европы, Ирана и других подходящих международных рынков.',
     processTitle: 'Контролируемый процесс в четыре шага', process: ['Определить задачу', 'Исследовать рынок и стороны', 'Сравнить коммерческие параметры', 'Согласовать следующие шаги'],
     ctaTitle: 'Обсудите с нами вашу следующую коммерческую задачу.'
+  },
+  fa: {
+    eyebrow: 'تأمین استراتژیک · تجارت بین‌المللی', title: 'اطمینان تجاری برای تصمیم‌های پیچیده تأمین.',
+    lead: 'شناسایی تولیدکننده، ارزیابی اعتبار، کیفیت، هزینه کل و انطباق با بازار را در یک فرآیند تصمیم‌گیری منسجم ترکیب می‌کنیم.',
+    signal: 'اتاق سیگنال CTSEG', live: 'ارزیابی فعال', signals: [['تأمین', 'تولیدکننده و ظرفیت'], ['کیفیت', 'COA و قابلیت ردگیری'], ['بازار', 'انطباق و مدل تحویل']],
+    trust: ['طرف‌های تجاری تأییدشده', 'مبدأ شفاف', 'انضباط تصمیم‌گیری B2B', 'ترکیه · بازارهای اروپا · بین‌المللی'],
+    servicesTitle: 'فراتر از یک لیست خرید.', servicesLead: 'تصمیم‌گیری کامل را از نیاز و ارزیابی تا استعلام قیمت و اجرا ساختاردهی می‌کنیم.',
+    productsTitle: 'سبد محصولات تجاری قابل‌بررسی.', productsLead: 'محصولات غذایی منتخب با ارزیابی شفاف مبدأ، پارت، پارامترهای کیفی و گزینه‌های تحویل.',
+    marketsTitle: 'ارتباطات عملیاتی میان بازارها.', marketsLead: 'هماهنگی تأمین و تجارت مبتنی بر ترکیه، با گسترش به بازارهای اروپا و بین‌المللی.',
+    processTitle: 'پیشرفت کنترل‌شده در چهار مرحله', process: ['تعریف نیاز تجاری', 'ارزیابی بازار و طرف‌ها', 'مقایسه تصویر کامل تجاری', 'پایش اجرا و عملکرد'],
+    ctaTitle: 'تصمیم بعدی تأمین خود را مبتنی بر شواهد بگیرید.'
   }
 };
 
 export const serviceIds = ['strategic-sourcing', 'supplier-verification', 'trade-advisory', 'tco', 'market-entry'] as const;
 export const services: Record<(typeof serviceIds)[number], { slugs: Localized; names: Localized; descriptions: Localized }> = {
   'strategic-sourcing': {
-    slugs: { tr:'stratejik-tedarik', en:'strategic-sourcing', de:'strategische-beschaffung', it:'approvvigionamento-strategico', ru:'sourcing-strategique' },
-    names: { tr:'Stratejik Tedarik', en:'Strategic Sourcing', de:'Strategische Beschaffung', it:'Approvvigionamento strategico', ru:'Sourcing stratégique' },
+    slugs: { tr:'stratejik-tedarik', en:'strategic-sourcing', de:'strategische-beschaffung', it:'approvvigionamento-strategico', ru:'sourcing-strategique', fa:'strategic-sourcing' },
+    names: { tr:'Stratejik Tedarik', en:'Strategic Sourcing', de:'Strategische Beschaffung', it:'Approvvigionamento strategico', ru:'Sourcing stratégique', fa:'تأمین استراتژیک' },
     descriptions: {
       tr:'Tedarik pazarı analizi, RFQ, doğrulama, teklif karşılaştırma ve performans planıyla sürdürülebilir kararlar.',
       en:'Sustainable decisions through supply-market analysis, RFQ, verification, bid comparison and performance planning.',
       de:'Nachhaltige Entscheidungen durch Beschaffungsmarktanalyse, RFQ, Prüfung, Angebotsvergleich und Leistungsplanung.',
       it:'Decisioni sostenibili con analisi del mercato di fornitura, RFQ, verifica, confronto offerte e piano prestazioni.',
-      ru:'Des décisions durables grâce à l’analyse du marché fournisseurs, au RFQ, à la vérification et au suivi de performance.'
+      ru:'Des décisions durables grâce à l’analyse du marché fournisseurs, au RFQ, à la vérification et au suivi de performance.',
+      fa:'تصمیم‌گیری پایدار از طریق تحلیل بازار تأمین، RFQ، اعتباربرسنجی، مقایسه پیشنهادات و برنامه‌ریزی عملکرد.'
     }
   },
   'supplier-verification': {
-    slugs: { tr:'tedarikci-bulma-ve-dogrulama', en:'supplier-sourcing-and-verification', de:'lieferantensuche-und-pruefung', it:'ricerca-e-verifica-fornitori', ru:'recherche-et-verification-fournisseurs' },
-    names: { tr:'Tedarikçi Bulma ve Doğrulama', en:'Supplier Sourcing & Verification', de:'Lieferantensuche & -prüfung', it:'Ricerca e verifica fornitori', ru:'Recherche et vérification fournisseurs' },
+    slugs: { tr:'tedarikci-bulma-ve-dogrulama', en:'supplier-sourcing-and-verification', de:'lieferantensuche-und-pruefung', it:'ricerca-e-verifica-fornitori', ru:'recherche-et-verification-fournisseurs', fa:'supplier-sourcing-and-verification' },
+    names: { tr:'Tedarikçi Bulma ve Doğrulama', en:'Supplier Sourcing & Verification', de:'Lieferantensuche & -prüfung', it:'Ricerca e verifica fornitori', ru:'Recherche et vérification fournisseurs', fa:'شناسایی و اعتباربرسنجی تأمین‌کننده' },
     descriptions: {
       tr:'Üretici keşfi, şirket, kapasite, belge, referans ve ticari şartların çapraz doğrulaması.',
       en:'Producer discovery and cross-verification of company, capacity, documents, references and commercial terms.',
       de:'Produzentensuche und Gegenprüfung von Unternehmen, Kapazität, Dokumenten, Referenzen und Konditionen.',
       it:'Ricerca produttori e verifica incrociata di azienda, capacità, documenti, referenze e condizioni commerciali.',
-      ru:'Recherche de producteurs et vérification croisée de l’entreprise, des capacités, documents, références et conditions.'
+      ru:'Recherche de producteurs et vérification croisée de l’entreprise, des capacités, documents, références et conditions.',
+      fa:'شناسایی تولیدکننده و ارزیابی تقاطعی شرکت، ظرفیت، اسناد، سوابق و شرایط تجاری.'
     }
   },
   'trade-advisory': {
-    slugs: { tr:'uluslararasi-ticaret-danismanligi', en:'international-trade-advisory', de:'internationale-handelsberatung', it:'consulenza-commercio-internazionale', ru:'conseil-commerce-international' },
-    names: { tr:'Uluslararası Ticaret Danışmanlığı', en:'International Trade Advisory', de:'Internationale Handelsberatung', it:'Consulenza commercio internazionale', ru:'Conseil en commerce international' },
+    slugs: { tr:'uluslararasi-ticaret-danismanligi', en:'international-trade-advisory', de:'internationale-handelsberatung', it:'consulenza-commercio-internazionale', ru:'conseil-commerce-international', fa:'international-trade-advisory' },
+    names: { tr:'Uluslararası Ticaret Danışmanlığı', en:'International Trade Advisory', de:'Internationale Handelsberatung', it:'Consulenza commercio internazionale', ru:'Conseil en commerce international', fa:'مشاوره تجارت بین‌الملل' },
     descriptions: {
       tr:'Ticari model, Incoterms, belge, lojistik, karşı taraf ve uygulama risklerini birlikte yapılandırma.',
       en:'Structuring commercial model, Incoterms, documentation, logistics, counterparty and execution risk together.',
       de:'Gemeinsame Strukturierung von Handelsmodell, Incoterms, Dokumentation, Logistik und Ausführungsrisiken.',
       it:'Strutturazione integrata di modello commerciale, Incoterms, documenti, logistica e rischi di esecuzione.',
-      ru:'Structuration conjointe du modèle commercial, des Incoterms, documents, flux logistiques et risques d’exécution.'
+      ru:'Structuration conjoint du modèle commercial, des Incoterms, documents, flux logistiques et risques d’exécution.',
+      fa:'ساختاردهی یکپارچه مدل تجاری، Incoterms، اسناد، لجستیک و ریسک‌های اجرایی.'
     }
   },
   tco: {
-    slugs: { tr:'maliyet-optimizasyonu-tco', en:'cost-optimisation-tco', de:'kostenoptimierung-tco', it:'ottimizzazione-costi-tco', ru:'optimisation-couts-tco' },
-    names: { tr:'Maliyet Optimizasyonu ve TCO', en:'Cost Optimisation & TCO', de:'Kostenoptimierung & TCO', it:'Ottimizzazione costi e TCO', ru:'Optimisation des coûts et TCO' },
+    slugs: { tr:'maliyet-optimizasyonu-tco', en:'cost-optimisation-tco', de:'kostenoptimierung-tco', it:'ottimizzazione-costi-tco', ru:'optimisation-couts-tco', fa:'cost-optimisation-tco' },
+    names: { tr:'Maliyet Optimizasyonu ve TCO', en:'Cost Optimisation & TCO', de:'Kostenoptimierung & TCO', it:'Ottimizzazione costi e TCO', ru:'Optimisation des coûts et TCO', fa:'بهینه‌سازی هزینه و TCO' },
     descriptions: {
       tr:'Birim fiyatın ötesinde lojistik, kalite, stok, finansman, gecikme ve risk maliyetlerini görünür kılma.',
       en:'Making logistics, quality, inventory, finance, delay and risk costs visible beyond unit price.',
       de:'Transparenz über Logistik-, Qualitäts-, Bestands-, Finanzierungs-, Verzögerungs- und Risikokosten.',
       it:'Visibilità su logistica, qualità, scorte, finanza, ritardi e rischio oltre il prezzo unitario.',
-      ru:'Visibilité sur la logistique, la qualité, les stocks, le financement, les délais et les risques au-delà du prix unitaire.'
+      ru:'Visibilité sur la logistique, la qualité, les stocks, le financement, les délais et les risques au-delà du prix unitaire.',
+      fa:'شفاف‌سازی هزینه‌های لجستیک، کیفیت، موجودی، مالی و ریسک فراتر از قیمت واحد.'
     }
   },
   'market-entry': {
-    slugs: { tr:'pazar-girisi', en:'market-entry', de:'markteintritt', it:'ingresso-nel-mercato', ru:'entree-sur-le-marche' },
-    names: { tr:'Pazar Girişi', en:'Market Entry', de:'Markteintritt', it:'Ingresso nel mercato', ru:'Entrée sur le marché' },
+    slugs: { tr:'pazar-girisi', en:'market-entry', de:'markteintritt', it:'ingresso-nel-mercato', ru:'entree-sur-le-marche', fa:'market-entry' },
+    names: { tr:'Pazar Girişi', en:'Market Entry', de:'Markteintritt', it:'Ingresso nel mercato', ru:'Entrée sur le marché', fa:'ورود به بازار' },
     descriptions: {
       tr:'Hedef pazar, kanal, partner, uygunluk ve ilk ticari uygulama için kanıta dayalı yol haritası.',
       en:'An evidence-led roadmap for target market, channel, partner, compliance and first commercial execution.',
       de:'Evidenzbasierter Fahrplan für Zielmarkt, Kanal, Partner, Konformität und erste Umsetzung.',
       it:'Roadmap basata su evidenze per mercato, canale, partner, conformità e prima esecuzione commerciale.',
-      ru:'Feuille de route fondée sur des preuves pour le marché, le canal, le partenaire, la conformité et la première exécution.'
+      ru:'Feuille de route fondée sur des preuves pour le marché, le canal, le partenaire, la conformité et la première exécution.',
+      fa:'نقشه راه مبتنی بر شواهد برای بازار هدف، کانال توزیع، شریک تجاری، انطباق و اجرای اولیه.'
     }
   }
 };
@@ -525,6 +554,14 @@ export const editorialCopy: Record<Locale, {
     portfolioText:'Подборка показывает более широкий круг исследований CTSEG по орехам, сухофруктам и отдельным пищевым категориям; изображения не означают наличие товара на складе.',
     marketsKicker:'Происхождение · документы · требования · коммерческая модель',
     productImageNote:'Изображение представляет категорию; характеристики проверяются по спецификации и документам на партию.'
+  },
+  fa:{
+    manifestoTitle:'تأمین فراتر از جستجوی ساده یک کالا است.',
+    manifestoText:'CTSEG شناسایی تولیدکننده، اعتباربرسنجی، کیفیت، هزینه کل، شفافیت مبدأ و اجرای تجاری را در یک انضباط تصمیم‌گیری واحد ترکیب می‌کند.',
+    portfolioTitle:'سبد منطقه‌ای کالا و تأمین',
+    portfolioText:'این انتخاب نشان‌دهنده حوزه‌های وسیع‌تر تحقیق و تأمین CTSEG در خشکبار، میوه‌های خشک و کالاهای اساسی است.',
+    marketsKicker:'مبدأ · اسناد · قوانین · مدل تحویل',
+    productImageNote:'تصویر نشان‌دهنده دسته‌بندی محصول است؛ ویژگی‌های فنی از طریق مشخصات و اسناد محموله اعتبارسنجی می‌شوند.'
   }
 };
 
@@ -543,10 +580,10 @@ export const insights: Record<(typeof insightIds)[number], { slugs: Localized; t
     answers:{tr:'Doğru tedarikçi en düşük fiyatı veren değil; kalite, kapasite, termin, mevzuat, iletişim ve toplam maliyet ihtiyacını sürdürülebilir karşılayandır.',en:'The right supplier is not the lowest bidder, but the one that sustainably meets quality, capacity, lead-time, compliance, communication and total-cost needs.',de:'Der richtige Lieferant ist nicht der billigste, sondern erfüllt Qualität, Kapazität, Lieferzeit, Konformität, Kommunikation und Gesamtkosten nachhaltig.',it:'Il fornitore giusto non è il più economico, ma quello che soddisfa in modo sostenibile qualità, capacità, tempi, conformità, comunicazione e costo totale.',ru:'Le bon fournisseur n’est pas le moins cher, mais celui qui répond durablement aux exigences de qualité, capacité, délais, conformité, communication et coût total.'}
   },
   'supplier-risk': {
-    slugs:{tr:'tedarikci-riskini-dogrulama',en:'verifying-supplier-risk',de:'lieferantenrisiko-pruefen',it:'verificare-rischio-fornitore',ru:'verifier-risque-fournisseur'},
-    titles:{tr:'Tedarikçi riski nasıl doğrulanır?',en:'How to verify supplier risk',de:'Wie lässt sich Lieferantenrisiko prüfen?',it:'Come verificare il rischio fornitore',ru:'Comment vérifier le risque fournisseur ?'},
-    descriptions:{tr:'Şirket, kapasite, kalite ve ticari riskleri sipariş öncesinde görünür kılan doğrulama çerçevesi.',en:'A verification framework that exposes company, capacity, quality and commercial risk before ordering.',de:'Ein Prüfrahmen, der Unternehmens-, Kapazitäts-, Qualitäts- und Handelsrisiken vor der Bestellung sichtbar macht.',it:'Un quadro di verifica che rende visibili rischi aziendali, produttivi, qualitativi e commerciali prima dell’ordine.',ru:'Un cadre de vérification qui rend visibles les risques liés à l’entreprise, aux capacités, à la qualité et au commerce avant commande.'},
-    answers:{tr:'Kayıt, sahiplik, üretim kapasitesi, kalite sistemi, referans, banka bilgisi ve sözleşme yetkisi bağımsız kaynaklarla çapraz kontrol edilmelidir.',en:'Registration, ownership, production capacity, quality systems, references, bank details and signing authority should be cross-checked through independent sources.',de:'Register, Eigentum, Produktionskapazität, Qualitätssysteme, Referenzen, Bankdaten und Zeichnungsbefugnis müssen unabhängig gegengeprüft werden.',it:'Registrazione, proprietà, capacità produttiva, sistemi qualità, referenze, coordinate bancarie e poteri di firma vanno verificati con fonti indipendenti.',ru:'Immatriculation, propriété, capacité, système qualité, références, coordonnées bancaires et pouvoir de signature doivent être recoupés.'}
+    slugs:{tr:'tedarikci-riskini-dogrulama',en:'verifying-supplier-risk',de:'lieferantenrisiko-pruefen',it:'verificare-rischio-fornitore',ru:'verifier-risque-fournisseur',fa:'verifying-supplier-risk'},
+    titles:{tr:'Tedarikçi riski nasıl doğrulanır?',en:'How to verify supplier risk',de:'Wie lässt sich Lieferantenrisiko prüfen?',it:'Come verificare il rischio fornitore',ru:'Comment vérifier le risque fournisseur ?',fa:'ارزیابی و اعتبارسنجی ریسک تأمین‌کننده'},
+    descriptions:{tr:'Şirket, kapasite, kalite ve ticari riskleri sipariş öncesinde görünür kılan doğrulama çerçevesi.',en:'A verification framework that exposes company, capacity, quality and commercial risk before ordering.',de:'Ein Prüfrahmen, der Unternehmens-, Kapazitäts-, Qualitäts- und Handelsrisiken vor der Bestellung sichtbar macht.',it:'Un quadro di verifica che rende visibili rischi aziendali, produttivi, qualitativi e commerciali prima dell’ordine.',ru:'Un cadre de vérification qui rend visibles les risques liés à l’entreprise, aux capacités, à la qualité et au commerce avant commande.',fa:'چارچوب اعتبارسنجی مستقل برای ارزیابی ریسک‌های حقوقی، ظرفیت تولید، کیفیت و شرایط تجاری قبل از ثبت سفارش.'},
+    answers:{tr:'Kayıt, sahiplik, üretim kapasitesi, kalite sistemi, referans, banka bilgisi ve sözleşme yetkisi bağımsız kaynaklarla çapraz kontrol edilmelidir.',en:'Registration, ownership, production capacity, quality systems, references, bank details and signing authority should be cross-checked through independent sources.',de:'Register, Eigentum, Produktionskapazität, Qualitätssysteme, Referenzen, Bankdaten und Zeichnungsbefugnis müssen unabhängig gegengeprüft werden.',it:'Registrazione, proprietà, capacità produttiva, sistemi qualità, referenze, coordinate bancarie e poteri di firma vanno verificati con fonti indipendenti.',ru:'Immatriculation, propriété, capacité, système qualité, références, coordonnées bancaires et pouvoir de signature doivent être recoupés.',fa:'اطلاعات ثبتی، مالکیت، ظرفیت تولید، سیستم‌های کیفیت، حساب‌های بانکی و اختیارات امضا باید از طریق منابع مستقل استعلام شوند.'}
   },
   'total-cost': {
     slugs:{tr:'toplam-sahip-olma-maliyeti',en:'total-cost-of-ownership',de:'gesamtbetriebskosten-tco',it:'costo-totale-di-possesso',ru:'cout-total-de-possession'},
@@ -576,10 +613,10 @@ export const insights: Record<(typeof insightIds)[number], { slugs: Localized; t
 
 export const legalIds = ['privacy', 'cookies', 'terms', 'data-protection'] as const;
 export const legal: Record<(typeof legalIds)[number], { slugs: Localized; titles: Localized }> = {
-  privacy: { slugs:{tr:'gizlilik-politikasi',en:'privacy-policy',de:'datenschutzerklaerung',it:'informativa-privacy',ru:'politique-de-confidentialite'}, titles:{tr:'Gizlilik Politikası',en:'Privacy Policy',de:'Datenschutzerklärung',it:'Informativa sulla privacy',ru:'Politique de confidentialité'} },
-  cookies: { slugs:{tr:'cerez-politikasi',en:'cookie-policy',de:'cookie-richtlinie',it:'politica-cookie',ru:'politique-cookies'}, titles:{tr:'Çerez Politikası',en:'Cookie Policy',de:'Cookie-Richtlinie',it:'Politica sui cookie',ru:'Politique relative aux cookies'} },
-  terms: { slugs:{tr:'kullanim-kosullari',en:'terms-of-use',de:'nutzungsbedingungen',it:'termini-di-utilizzo',ru:'conditions-utilisation'}, titles:{tr:'Kullanım Koşulları',en:'Terms of Use',de:'Nutzungsbedingungen',it:'Termini di utilizzo',ru:'Conditions d’utilisation'} },
-  'data-protection': { slugs:{tr:'kvkk-aydinlatma-metni',en:'data-protection-notice',de:'hinweise-zum-datenschutz',it:'informativa-protezione-dati',ru:'notice-protection-donnees'}, titles:{tr:'KVKK Aydınlatma Metni',en:'Data Protection Notice',de:'Hinweise zum Datenschutz',it:'Informativa sulla protezione dei dati',ru:'Notice sur la protection des données'} }
+  privacy: { slugs:{tr:'gizlilik-politikasi',en:'privacy-policy',de:'datenschutzerklaerung',it:'informativa-privacy',ru:'politique-de-confidentialite',fa:'privacy'}, titles:{tr:'Gizlilik Politikası',en:'Privacy Policy',de:'Datenschutzerklärung',it:'Informativa sulla privacy',ru:'Politique de confidentialité',fa:'حریم خصوصی'} },
+  cookies: { slugs:{tr:'cerez-politikasi',en:'cookie-policy',de:'cookie-richtlinie',it:'politica-cookie',ru:'politique-cookies',fa:'cookies'}, titles:{tr:'Çerez Politikası',en:'Cookie Policy',de:'Cookie-Richtlinie',it:'Politica sui cookie',ru:'Politique relative aux cookies',fa:'سیاست کوکی'} },
+  terms: { slugs:{tr:'kullanim-kosullari',en:'terms-of-use',de:'nutzungsbedingungen',it:'termini-di-utilizzo',ru:'conditions-utilisation',fa:'terms'}, titles:{tr:'Kullanım Koşulları',en:'Terms of Use',de:'Nutzungsbedingungen',it:'Termini di utilizzo',ru:'Conditions d’utilisation',fa:'شرایط استفاده'} },
+  'data-protection': { slugs:{tr:'kvkk-aydinlatma-metni',en:'data-protection-notice',de:'hinweise-zum-datenschutz',it:'informativa-protezione-dati',ru:'notice-protection-donnees',fa:'data-protection'}, titles:{tr:'KVKK Aydınlatma Metni',en:'Data Protection Notice',de:'Hinweise zum Datenschutz',it:'Informativa sulla protezione dei dati',ru:'Notice sur la protection des données',fa:'حفاظت از داده‌ها'} }
 };
 
 export const pageCopy: Record<Locale, any> = {
@@ -647,6 +684,19 @@ export const pageCopy: Record<Locale, any> = {
     productQuality:['Exigences aflatoxines et pesticides','Humidité, microbiologie et spécification produit','COA, code de lot et traçabilité','Conformité réglementaire au marché cible'],
     legalIntro:'Cette notice fournit une information transparente sur l’utilisation du site CTSEG et les traitements de données associés.',
     legalSections:[['Périmètre et responsabilité','CTSEG veille à l’exactitude des informations institutionnelles et commerciales. Les demandes de contact et de protection des données peuvent être envoyées à info@ctseg.com.tr.'],['Informations et finalités','Lors d’un contact, nous pouvons traiter nom, entreprise, e-mail, téléphone, demande et besoin commercial, ainsi que des journaux techniques limités pour la sécurité. Ces données servent à répondre, évaluer une relation, protéger le site et respecter la loi.'],['Partage, conservation et sécurité','Les informations ne sont partagées qu’avec les prestataires nécessaires d’hébergement, e-mail, support et conseil juridique ou les autorités compétentes, conformément au droit applicable. Elles sont supprimées ou anonymisées après leur finalité et les délais légaux.'],['Droits et contact','Pour exercer vos droits d’accès, rectification, effacement, opposition et autres droits, écrivez à info@ctseg.com.tr en précisant suffisamment votre identité et votre demande.']]
+  },
+  fa:{
+    servicesTitle:'تخصص برای هر مرحله از تصمیم تأمین.',servicesLead:'استراتژی، اعتباربرسنجی، تحلیل تجاری و اجرا را در یک انضباط تصمیم‌گیری واحد ترکیب می‌کنیم.',
+    productsTitle:'سبد محصولات تجاری',productsLead:'یک سبد واحد در هر بازار بر اساس مبدأ شفاف، کیفیت محموله و شرایط تجاری قابل‌بررسی ارزیابی می‌شود.',
+    marketsTitle:'از ترکیه به اروپا و بازارهای بین‌المللی.',marketsLead:'واقعیت‌های تولید داخلی را با قوانین بازار هدف، انتظارات خریدار و مدل‌های تحویل قابل‌اجرا تطبیق می‌دهیم.',
+    aboutTitle:'شریک تصمیم‌گیری مستقل برای کاهش عدم‌قطعیت در تجارت.',aboutLead:'CTSEG بر اساس شواهد، شفافیت و قابلیت اجرا در پروژه‌های تأمین استراتژیک و تجارت بین‌الملل عمل می‌کند.',
+    contactTitle:'نیاز تجاری خود را با یک ارزیابی شفاف آغاز کنید.',insightsTitle:'تحلیل‌های کاربردی برای تصمیم‌گیرندگان.',insightsLead:'راهنماهای مختصر و مبتنی بر شواهد درباره تأمین، هزینه کل، مبدأ، کیفیت و ریسک تجاری.',
+    framework:['تعریف نیاز و مشخصات','اعتباربرسنجی طرف‌ها و اسناد','مقایسه کیفیت، هزینه و ریسک','ثبت شفاف تصمیم و اجرا'],
+    serviceFaq:['پروژه چگونه آغاز می‌شود؟','دامنه، هدف، محصول یا خدمت، بازار و جدول زمانی در یک گفتگو کوتاهی تعیین می‌شوند.','آیا CTSEG به عنوان نماینده تأمین‌کننده عمل می‌کند؟','CTSEG نقش تجاری خود را به‌طور شفاف اعلام کرده و معیارهای ارزیابی را مستند می‌سازد.'],
+    productUses:['تولید صنایع غذایی و کاربردهای صنعتی','توزیع عمده و برند اختصاصی','HORECA و خرده‌فروشی تخصصی'],
+    productQuality:['الزامات آفلاتوکسین و سموم','رطوبت، میکروبیولوژی و مشخصات فنی','COA، کد محموله و قابلیت ردگیری','انطباق با قوانین بازار هدف'],
+    legalIntro:'این اطلاعیه اطلاعات شفافی درباره استفاده از وب‌سایت CTSEG و فرآیندهای پردازش داده ارائه می‌دهد.',
+    legalSections:[['دامنه و مسئولیت','CTSEG برای حفظ دقت اطلاعات شرکتی و تجاری این وب‌سایت تلاش می‌کند. درخواست‌های تماس به info@ctseg.com.tr ارسال شوند.'],['اطلاعات و اهداف','هنگام تماس، اطلاعات نام، شرکت، ایمیل، تلفن و نیاز تجاری پردازش می‌شوند.'],['اشتراک‌گذاری و امنیت','اطلاعات تنها با ارائه‌دهندگان خدمات میزبانی، ایمیل و حقوقی ضروری به اشتراک گذاشته می‌شود.'],['حقوق و تماس','برای اعمال حقوق دسترسی، اصلاح یا حذف داده‌ها به info@ctseg.com.tr ایمیل بزنید.']]
   }
 };
 
@@ -663,6 +713,12 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
     if (key === 'legal' && id) return localizedPath('en','legal',id);
     return `/ru/#${homeAnchors[key] ?? 'contact'}`;
   }
+  if (lang === 'fa') {
+    const homeAnchors: Record<string,string> = {
+      markets:'markets', about:'company', contact:'contact', 'how-we-work':'trade-paths', scenarios:'company'
+    };
+    if (homeAnchors[key]) return `/fa/#${homeAnchors[key]}`;
+  }
   if (key === 'how-we-work') {
     if (pathLang === 'tr' || pathLang === 'en') return `/${pathLang}/${specialSlugs['how-we-work'][pathLang]}/`;
     return localizedPath(safeLang,'services');
@@ -672,7 +728,7 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
     return localizedPath(safeLang,'about');
   }
   if (key === 'guides' && id) {
-    if (pathLang === 'tr' || pathLang === 'en') return `/${pathLang}/${sectionSlugs.insights[pathLang]}/${guideSlugs[id as GuideId][pathLang]}/`;
+    if (pathLang === 'tr' || pathLang === 'en' || pathLang === 'fa') return `/${pathLang}/${sectionSlugs.insights[pathLang]}/${guideSlugs[id as GuideId][pathLang as 'tr'|'en'] || guideSlugs[id as GuideId]['en']}/`;
     return localizedPath(safeLang,'insights');
   }
   const section = sectionSlugs[key]?.[pathLang as Locale] || sectionSlugs[key]?.en;
@@ -697,5 +753,23 @@ export function routeAlternates(key: string, id?: string) {
       sr: 'https://ctseg.com.tr/sr/medical/reflex-disposable-gloves/'
     } as Record<string, string>;
   }
-  return Object.fromEntries(locales.map((lang) => [lang, `https://ctseg.com.tr${localizedPath(lang, key, id)}`])) as Localized;
+  const result: Record<string, string> = {};
+  for (const lang of locales) {
+    if (lang === 'fa') {
+      const supportedFa = (key === 'home') ||
+        (key === 'products' && (!id || ['sunflower-seeds','mazafati-dates','akbari-pistachio','saffron'].includes(id))) ||
+        (key === 'services' && (!id || ['strategic-sourcing','supplier-verification','trade-advisory'].includes(id))) ||
+        (key === 'insights' && (!id || id === 'supplier-risk')) ||
+        (key === 'guides' && id === 'vegetable-oil-rfq') ||
+        (key === 'legal' && Boolean(id));
+      if (supportedFa) {
+        result[lang] = `https://ctseg.com.tr${localizedPath(lang, key, id)}`;
+      } else {
+        result[lang] = `https://ctseg.com.tr${localizedPath('fa', key)}`;
+      }
+    } else {
+      result[lang] = `https://ctseg.com.tr${localizedPath(lang, key, id)}`;
+    }
+  }
+  return result as Localized;
 }

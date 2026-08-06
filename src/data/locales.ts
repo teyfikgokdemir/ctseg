@@ -8,12 +8,12 @@ export const localeRegistry = [
 ] as const;
 
 export type ActiveLocale = (typeof localeRegistry)[number]['code'];
-export type SiteLocale = Exclude<ActiveLocale,'fa'>;
+export type SiteLocale = ActiveLocale;
 export type LocaleDirection = (typeof localeRegistry)[number]['direction'];
 
 export const activeLocaleRegistry = localeRegistry.filter((entry) => entry.active).sort((a,b) => a.order-b.order);
 export const activeLocales = activeLocaleRegistry.map((entry) => entry.code) as ActiveLocale[];
-export const siteLocales = activeLocales.filter((code):code is SiteLocale => code !== 'fa');
+export const siteLocales = activeLocales;
 export const localeByCode = Object.fromEntries(localeRegistry.map((entry) => [entry.code,entry])) as Record<ActiveLocale,(typeof localeRegistry)[number]>;
 
 export const localeLabel = (code: string) => localeByCode[code as ActiveLocale]?.label ?? 'English';

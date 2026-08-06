@@ -84,8 +84,9 @@ if (record.key === 'how-we-work' && (record.lang === 'tr' || record.lang === 'en
     mainEntity:process.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))
   });
 }
-if (record.key === 'guides' && record.id && (record.lang === 'tr' || record.lang === 'en')) {
-  const guide=guides[record.id as keyof typeof guides][record.lang];
+if (record.key === 'guides' && record.id) {
+  const guideLang = (record.lang === 'tr' || record.lang === 'en') ? record.lang : 'en';
+  const guide = guides[record.id as keyof typeof guides]?.[guideLang] || { title: 'Guide', description: 'Commercial guide' };
   schemas.push({
     '@context':'https://schema.org','@type':'Article',headline:guide.title,description:guide.description,
     datePublished:'2026-07-27',dateModified:'2026-07-27',inLanguage:record.lang,

@@ -10,18 +10,21 @@ export const specialSlugs = {
 export const guideIds = ['vegetable-oil-rfq','nuts-quality-documents','packaging-moq-tco'] as const;
 export type GuideId = (typeof guideIds)[number];
 
-export const guideSlugs: Record<GuideId, Record<'tr'|'en',string>> = {
+export const guideSlugs: Record<GuideId, Record<'tr'|'en'|'fa',string>> = {
   'vegetable-oil-rfq': {
     tr:'bitkisel-yag-tedarikinde-rfq-kontrol-listesi',
-    en:'vegetable-oil-sourcing-rfq-checklist'
+    en:'vegetable-oil-sourcing-rfq-checklist',
+    fa:'vegetable-oil-sourcing-rfq-checklist'
   },
   'nuts-quality-documents': {
     tr:'kuruyemis-kuru-meyve-kalite-belge-kontrolu',
-    en:'nuts-dried-fruit-quality-document-check'
+    en:'nuts-dried-fruit-quality-document-check',
+    fa:'nuts-dried-fruit-quality-document-check'
   },
   'packaging-moq-tco': {
     tr:'ambalaj-moq-toplam-maliyet-karsilastirmasi',
-    en:'packaging-moq-total-cost-comparison'
+    en:'packaging-moq-total-cost-comparison',
+    fa:'packaging-moq-total-cost-comparison'
   }
 };
 
@@ -74,6 +77,15 @@ export const homeEnhancement: Localized<{
     inbound:'Поддержка иранских компаний при поиске продукции, сырья, упаковки и производственных материалов в Турции и на подходящих международных рынках.',
     scenarioTitle:'Примеры коммерческих решений',scenarioLead:'Сценарии показывают критерии, этапы работы и возможные коммерческие результаты без обещаний гарантированного исхода.',
     scenarioCta:'Посмотреть примеры',commercialCta:'Запросить коммерческую оценку'
+  },
+  fa:{
+    trustTitle:'هویت شرکتی',established:'تأسیس شده در سال ۲۰۲۲',founder:'بنیان‌گذار: توفیق گوکدمیر',
+    headquarters:'دفتر مرکزی: فاتح، استانبول، ترکیه',
+    tradeTitle:'هماهنگی تجاری دوطرفه',tradeLead:'CTSEG میان خریداران و بازارهای تأمین بر اساس مبدأ قابل‌بررسی و شرایط تجاری قابل‌اجرا فعالیت می‌کند.',
+    outbound:'ارزیابی کالاهای تجاری معتبر ایرانی برای خریداران بین‌المللی.',
+    inbound:'پشتیبانی از کسب‌وکارهای ایرانی برای تأمین کالا، مواد اولیه، بسته‌بندی و نهاده‌های تولید از ترکیه و بازارهای بین‌المللی مناسب.',
+    scenarioTitle:'سناریوهای نمونه برای تصمیم‌گیری',scenarioLead:'سه سناریوی مشخص معیارهای کاری و خروجی‌های تجاری قابل ساختاردهی توسط CTSEG را نشان می‌دهند.',
+    scenarioCta:'بررسی سناریوهای نمونه',commercialCta:'درخواست ارزیابی تجاری'
   }
 };
 
@@ -115,6 +127,13 @@ export const aboutEnhancement: Localized<{
     methodTitle:'Notre méthode',method:'Nous définissons le besoin, étudions le marché, vérifions les parties et documents, comparons les offres sur des critères communs et coordonnons un flux de commande et de documents réalisable.',
     ethicsTitle:'Indépendance et limites éthiques',ethics:['Aucune dissimulation d’origine ni réétiquetage trompeur.','Aucune facilitation de documents mensongers.','Aucune garantie commerciale non vérifiée.','L’adéquation de la partie, du produit et de l’opération est évaluée au cas par cas.'],
     founderTitle:'Fondateur',founder:'Teyfik Gökdemir a fondé CTSEG à Istanbul en 2022. Seules des informations vérifiées sont présentées, sans biographie ni résultat inventé.'
+  },
+  fa:{
+    whoTitle:'CTSEG چیست؟',who:'CTSEG یک شرکت تأمین استراتژیک و هماهنگی تجاری بین‌المللی مستقر در استانبول است. بازار، طرف‌های تجاری، کالا، هزینه و شرایط اجرا را در یک چارچوب تصمیم‌گیری منسجم ارزیابی می‌کند.',
+    workTitle:'فعالیت‌های ما',work:['شناسایی تولیدکننده و تأمین‌کننده','اعتباربرسنجی تأمین‌کنندگان و طرف‌ها','آماده‌سازی RFQ و مقایسه پیشنهادات','ارزیابی هزینه و هزینه کل مالکیت (TCO)','هماهنگی نمونه‌ها و اسناد کیفی','پشتیبانی از تصمیمات تجاری بین‌المللی','پیش‌ارزیابی ورود به بازار','هماهنگی تأمین کالاهای تجاری'],
+    methodTitle:'روش کار ما',method:'ما نیاز را تعریف می‌کنیم، بازار را بررسی می‌کنیم، اسناد و طرف‌ها را اعتبارسنجی می‌کنیم، پیشنهادات را مقایسه می‌کنیم و جریان سفارش و اسناد قابل‌اجرا را هماهنگ می‌سازیم.',
+    ethicsTitle:'استقلال و مرزهای اخلاقی',ethics:['مبدأ پنهان نمی‌شود و برچسب‌گذاری گمراه‌کننده صورت نمی‌گیرد.','هیچ اسناد گمراه‌کننده‌ای واسطه‌گری نمی‌شود.','ضمانت‌های تجاری تأییدنشده ارائه نمی‌شود.','تناسب طرف، کالا و معامله به‌صورت موردی ارزیابی می‌شود.'],
+    founderTitle:'بنیان‌گذار',founder:'توفیق گوکدمیر CTSEG را در سال ۲۰۲۲ در استانبول تأسیس کرد. در اینجا تنها اطلاعات شرکتی تأییدشده ارائه می‌شود.'
   }
 };
 
@@ -129,7 +148,8 @@ export const marketsDetail: Localized<{title:string;items:string[]}[]> = {
   en:marketData('Türkiye',['Manufacturer discovery','Export-ready supplier research','Capacity and price comparison','Sample and document coordination','Packaging and private-label options','Access to production and supply networks'],'Europe',['Importer expectations','Product and document transparency','Traceability','Packaging and labelling requirements','Quality and conformity controls','Institutional-buyer coordination'],'International',['Country-specific sourcing research','Counterparty verification','Origin and end-use assessment','Logistics option comparison','Payment and commercial feasibility pre-assessment','Suitable third-country sources']),
   de:marketData('Türkei',['Herstellersuche','Recherche exportfähiger Lieferanten','Kapazitäts- und Preisvergleich','Muster- und Dokumentenkoordination','Verpackungs- und Eigenmarkenoptionen','Zugang zu Produktionsnetzwerken'],'Europa',['Erwartungen der Importeure','Produkt- und Dokumententransparenz','Rückverfolgbarkeit','Verpackungs- und Kennzeichnungsvorgaben','Qualitäts- und Konformitätskontrollen','Koordination institutioneller Käufer'],'International',['Länderspezifische Beschaffungsrecherche','Prüfung der Gegenpartei','Herkunfts- und Endverwendungsprüfung','Vergleich logistischer Optionen','Vorprüfung von Zahlung und Machbarkeit','Geeignete Drittlandquellen']),
   it:marketData('Turchia',['Ricerca produttori','Ricerca di fornitori pronti all’export','Confronto capacità e prezzi','Coordinamento campioni e documenti','Opzioni packaging e private label','Accesso a reti produttive'],'Europa',['Aspettative degli importatori','Trasparenza di prodotto e documenti','Tracciabilità','Requisiti di imballaggio ed etichettatura','Controlli qualità e conformità','Coordinamento con buyer istituzionali'],'Internazionale',['Ricerca per paese','Verifica della controparte','Valutazione origine e uso finale','Confronto opzioni logistiche','Pre-valutazione pagamenti e fattibilità','Fonti idonee in paesi terzi']),
-  ru:marketData('Turquie',['Recherche de fabricants','Recherche de fournisseurs prêts à exporter','Comparaison capacité-prix','Coordination des échantillons et documents','Options emballage et marque propre','Accès aux réseaux de production'],'Europe',['Attentes des importateurs','Transparence produit-document','Traçabilité','Exigences d’emballage et d’étiquetage','Contrôles qualité et conformité','Coordination avec les acheteurs institutionnels'],'International',['Recherche par pays','Vérification des contreparties','Évaluation origine et usage final','Comparaison des options logistiques','Pré-évaluation paiement et faisabilité','Sources adaptées dans des pays tiers'])
+  ru:marketData('Turquie',['Recherche de fabricants','Recherche de fournisseurs prêts à exporter','Comparaison capacité-prix','Coordination des échantillons et documents','Options emballage et marque propre','Accès aux réseaux de production'],'Europe',['Attentes des importateurs','Transparence produit-document','Traçabilité','Exigences d’emballage et d’étiquetage','Contrôles qualité et conformité','Coordination avec les acheteurs institutionnels'],'International',['Recherche par pays','Vérification des contreparties','Évaluation origine et usage final','Comparaison des options logistiques','Pré-évaluation paiement et faisabilité','Sources adaptées dans des pays tiers']),
+  fa:marketData('ترکیه',['شناسایی تولیدکننده','تحقیق درباره تأمین‌کنندگان آماده صادرات','مقایسه ظرفیت و قیمت','هماهنگی نمونه و اسناد','گزینه‌های بسته‌بندی و برند اختصاصی','دسترسی به شبکه‌های تولید و تأمین'],'اروپا',['تعریف انتظارات واردکنندگان','شفافیت کالا و اسناد','قابلیت ردگیری','الزامات بسته‌بندی و برچسب‌گذاری','کنترل‌های کیفیت و انطباق','مدل همکاری با خریداران شرکتی'],'بین‌المللی',['تحقیق تأمین بر اساس کشور','اعتباربرسنجی طرف‌های تجاری','ارزیابی مبدأ و مصرف نهایی','مقایسه گزینه‌های لجستیک','پیش‌ارزیابی پرداخت و امکان‌پذیری تجاری','منابع مناسب در کشور ثالث'])
 };
 
 export const processPages = {

@@ -46,7 +46,8 @@ const sectorEntry = {
   en:{title:'Iranian carpet and textile sourcing',lead:'Explore three specialist areas through product, producer, sample, quality, packaging and logistics criteria.'},
   de:{title:'Beschaffung iranischer Teppiche und Textilien',lead:'Drei Fachbereiche mit Produkt-, Hersteller-, Muster-, Qualitäts-, Verpackungs- und Logistikkriterien.'},
   it:{title:'Sourcing di tappeti iraniani e tessili',lead:'Tre aree specialistiche valutate per prodotto, produttore, campioni, qualità, imballaggio e logistica.'},
-  ru:{title:'Сорсинг иранских ковров и текстиля',lead:'Три профильных направления с оценкой продукта, производителя, образцов, качества и упаковки.'}
+  ru:{title:'Сорсинг иранских ковров и текстиля',lead:'Три профильных направления с оценкой продукта, производителя, образцов, качества и упаковки.'},
+  fa:{title:'حوزه‌های تأمین فرش و منسوجات ایرانی',lead:'سه حوزه تخصصی را همراه با معیارهای محصول، تولیدکننده، نمونه، کیفیت، بسته‌بندی و لجستیک بررسی کنید.'}
 }[lang];
 const service = id && key === 'services' ? services[id as keyof typeof services] : null;
 const detailedService = service && id && (lang === 'tr' || lang === 'en') && id in serviceDetails[lang]
@@ -62,10 +63,10 @@ const sectionHref = (section:string) => localizedPath(lang, section);
 const indexLabel = (index:number) => String(index + 1).padStart(2,'0');
 const marketNames = {
   tr:['Türkiye','Avrupa','Uluslararası'], en:['Türkiye','Europe','International'], de:['Türkiye','Europa','International'],
-  it:['Türkiye','Europa','Internazionale'], ru:['Турция','Европа','Международные рынки']
+  it:['Türkiye','Europa','Internazionale'], ru:['Турция','Европа','Международные рынки'], fa:['ترکیه','اروپا','بین‌المللی']
 }[lang];
-const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',ru:'Правовая информация'}[lang];
-const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',ru:'27 июля 2026'}[lang];
+const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',ru:'Правовая информация',fa:'حقوقی'}[lang];
+const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',ru:'27 июля 2026',fa:'۲۷ ژوئیه ۲۰۲۶'}[lang];
 const showcaseRoles = ['lead','medium','medium','compact','compact','compact'];
 const productFamilies:Record<string,string> = {
   'akbari-pistachio':'pistachio', 'mazafati-dates':'dates', almonds:'nuts',
@@ -74,32 +75,32 @@ const productFamilies:Record<string,string> = {
 const catalogueGroups = [
   {
     key:'pistachio',
-    title:{tr:'Fıstık Çeşitleri',en:'Pistachio Varieties',de:'Pistaziensorten',it:'Varietà di pistacchio',ru:'Variétés de pistaches'}[lang],
+    title:{tr:'Fıstık Çeşitleri',en:'Pistachio Varieties',de:'Pistaziensorten',it:'Varietà di pistacchio',ru:'Variétés de pistaches',fa:'انواع پسته'}[lang],
     ids:['akbari-pistachio','kaleghouchi-pistachio','green-peeled-pistachio','fandoghi-pistachio','pistachio-granules','ahmad-aghaei-pistachio']
   },
   {
     key:'dates',
-    title:{tr:'Hurma ve Hurma Ürünleri',en:'Dates & Date Products',de:'Datteln & Dattelprodukte',it:'Datteri e derivati',ru:'Dattes et produits dérivés'}[lang],
+    title:{tr:'Hurma ve Hurma Ürünleri',en:'Dates & Date Products',de:'Datteln & Dattelprodukte',it:'Datteri e derivati',ru:'Dattes et produits dérivés',fa:'خرما و فرآورده‌های خرما'}[lang],
     ids:['mazafati-dates','date-paste-syrup']
   },
   {
     key:'nuts',
-    title:{tr:'Kuruyemişler',en:'Nuts',de:'Nüsse',it:'Frutta a guscio',ru:'Fruits à coque'}[lang],
+    title:{tr:'Kuruyemişler',en:'Nuts',de:'Nüsse',it:'Frutta a guscio',ru:'Fruits à coque',fa:'خشکبار و مغزها'}[lang],
     ids:['almonds','walnuts','mixed-nuts']
   },
   {
     key:'dried-fruit',
-    title:{tr:'Kuru Meyveler',en:'Dried Fruits',de:'Trockenfrüchte',it:'Frutta essiccata',ru:'Fruits séchés'}[lang],
+    title:{tr:'Kuru Meyveler',en:'Dried Fruits',de:'Trockenfrüchte',it:'Frutta essiccata',ru:'Fruits séchés',fa:'میوه‌های خشک'}[lang],
     ids:['raisins','dried-apricots-kernels','dried-mulberries']
   },
   {
     key:'seeds',
-    title:{tr:'Tohumlar',en:'Seeds',de:'Saaten',it:'Semi',ru:'Graines'}[lang],
+    title:{tr:'Tohumlar',en:'Seeds',de:'Saaten',it:'Semi',ru:'Graines',fa:'تخمه‌ها و دانه‌ها'}[lang],
     ids:['pumpkin-seeds','sunflower-seeds']
   },
   {
     key:'specialities',
-    title:{tr:'Safran ve Özel Ürünler',en:'Saffron & Specialities',de:'Safran & Spezialitäten',it:'Zafferano e specialità',ru:'Safran et spécialités'}[lang],
+    title:{tr:'Safran ve Özel Ürünler',en:'Saffron & Specialities',de:'Safran & Spezialitäten',it:'Zafferano e specialità',ru:'Safran et spécialités',fa:'زعفران و محصولات خاص'}[lang],
     ids:['saffron','zereshk']
   }
 ];
@@ -114,14 +115,16 @@ const productCommercialLabels = {
   en:['Origin','Product type / variety','Potential packaging','MOQ','Quality and analysis documents','Sample','Private label','Delivery and Incoterm','Lead time','Storage','Intended use','Information required for quotation'],
   de:['Herkunft','Produkttyp / Sorte','Mögliche Verpackung','MOQ','Qualitäts- und Analysedokumente','Muster','Eigenmarke','Lieferung und Incoterm','Lieferzeit','Lagerung','Zielanwendung','Angaben für ein Angebot'],
   it:['Origine','Tipo / varietà','Possibile imballaggio','MOQ','Documenti qualità e analisi','Campione','Private label','Consegna e Incoterm','Tempi','Stoccaggio','Uso previsto','Dati necessari per l’offerta'],
-  ru:['Origine','Type / variété','Emballage possible','MOQ','Documents qualité et analyses','Échantillon','Marque propre','Livraison et Incoterm','Délai','Stockage','Usage cible','Informations pour le devis']
+  ru:['Origine','Type / variété','Emballage possible','MOQ','Documents qualité et analyses','Échantillon','Marque propre','Livraison et Incoterm','Délai','Stockage','Usage cible','Informations pour le devis'],
+  fa:['مبدأ','نوع / واریته محصول','بسته‌بندی احتمالی','حداقل سفارش MOQ','اسناد کیفیت و آزمایشگاهی','نمونه','برند اختصاصی','تحویل و Incoterms','زمان تحویل','شرایط نگهداری','کاربرد هدف','اطلاعات مورد نیاز برای استعلام']
 }[lang];
 const verifiedLater = {
   tr:['Üretici ve sipariş yapısına göre doğrulanır','Teklif aşamasında teyit edilir','Parti bazında belge kontrolü yapılır','Talebe göre değerlendirilir','Üretici ve hedef pazara göre değerlendirilir'],
   en:['Verified according to producer and order structure','Confirmed at quotation stage','Documents checked at batch level','Assessed on request','Assessed by producer and target market'],
   de:['Nach Hersteller und Auftragsstruktur zu prüfen','In der Angebotsphase zu bestätigen','Dokumentenprüfung je Charge','Auf Anfrage zu bewerten','Nach Hersteller und Zielmarkt zu bewerten'],
   it:['Da verificare secondo produttore e ordine','Da confermare in fase di offerta','Documenti verificati per lotto','Valutato su richiesta','Valutato per produttore e mercato target'],
-  ru:['À vérifier selon le producteur et la commande','À confirmer au stade du devis','Documents contrôlés par lot','Évalué sur demande','Évalué selon le producteur et le marché cible']
+  ru:['À vérifier selon le producteur et la commande','À confirmer au stade du devis','Documents contrôlés par lot','Évalué sur demande','Évalué selon le producteur et le marché cible'],
+  fa:['بر اساس تولیدکننده و ساختار سفارش ارزیابی می‌شود','در مرحله استعلام قیمت تأیید می‌شود','بررسی اسناد در سطح محموله انجام می‌شود','بر اساس درخواست بررسی می‌شود','بر اساس تولیدکننده و بازار هدف ارزیابی می‌شود']
 }[lang];
 ---
 {key === 'home' && (
