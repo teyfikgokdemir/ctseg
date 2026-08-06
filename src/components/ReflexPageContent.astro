@@ -622,14 +622,19 @@ const qualityCardsData = [
     overflow: hidden;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    background: #141612;
+    background: #0b0d09;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .reflex-hero-media {
     width: 100%;
-    height: auto;
+    height: 100%;
     aspect-ratio: 1200 / 850;
     display: block;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
+    background: #0b0d09;
     transition: transform 0.4s ease;
   }
   .reflex-hero-figure:hover .reflex-hero-media {
