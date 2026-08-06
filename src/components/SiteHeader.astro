@@ -39,9 +39,9 @@ const nav = lang === 'ru' ? [
   ['producers', p.producerTitle, `${home}#for-producers`],
   ['sectors', p.sectorsTitle, localizedPath(lang,'products')],
   ['medical', medicalLabel, reflexUrl],
-  ['markets', t.markets, lang === 'fa' ? `${home}#markets` : localizedPath(lang,'markets')],
-  ['about', t.about, lang === 'fa' ? `${home}#company` : localizedPath(lang,'about')],
-  ['contact', t.contact, lang === 'fa' ? `${home}#contact` : localizedPath(lang,'contact')]
+  ['markets', t.markets, localizedPath(lang,'markets')],
+  ['about', t.about, localizedPath(lang,'about')],
+  ['contact', t.contact, localizedPath(lang,'contact')]
 ];
 
 const medicalLocales = [
@@ -81,7 +81,7 @@ const globalSwitchPath = (target: string): string => {
       <span class="sr-only">{t.menu}</span><span></span><span></span>
     </button>
     <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav>
-      {nav.map(([key, label, href]) => key === 'markets' && lang === 'en' ? (
+      {nav.map(([key, label, href]) => key === 'markets' && (lang === 'en' || lang === 'fa') ? (
         <div class="nav-market-group" data-markets-nav-group>
           <a class:list={['nav-market-parent',{ active: pageKey === key }]} href={href} data-markets-nav-link>{label}</a>
           <div class="nav-market-menu" aria-label="Special market resources">
@@ -91,15 +91,15 @@ const globalSwitchPath = (target: string): string => {
               data-fa-nav-link
               data-fa-landing-link
             >
-              <strong>For Iranian Businesses</strong>
-              <span>Persian landing page</span>
+              <strong>{lang === 'fa' ? 'برای کسب‌وکارهای ایرانی' : 'For Iranian Businesses'}</strong>
+              <span>{lang === 'fa' ? 'پشتیبانی تجارت بین‌المللی' : 'Persian landing page'}</span>
             </a>
           </div>
         </div>
       ) : <a class:list={{ active: pageKey === key }} href={href}>{label}</a>)}
       <div class="language-switcher language-switcher-desktop">
         <button type="button" aria-expanded="false" aria-controls="language-panel" aria-label={t.language} data-language-toggle>
-          <span class="locale-code">{(['tr','en','de','it','ru'].includes(lang) ? lang : 'en').toUpperCase()}</span>
+          <span class="locale-code">{(['tr','en','de','it','fa','ru'].includes(lang) ? lang : 'en').toUpperCase()}</span>
           <span class="locale-chevron" aria-hidden="true"></span>
         </button>
         <div id="language-panel" class="language-menu" data-language-menu>

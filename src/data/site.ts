@@ -5,7 +5,7 @@ export const locales = siteLocales;
 export type Locale = SiteLocale;
 
 export const localeNames: Record<Locale, string> = {
-  tr: localeByCode.tr.label, en: localeByCode.en.label, de: localeByCode.de.label, it: localeByCode.it.label, ru: localeByCode.ru.label
+  tr: localeByCode.tr.label, en: localeByCode.en.label, de: localeByCode.de.label, it: localeByCode.it.label, fa: localeByCode.fa.label, ru: localeByCode.ru.label
 };
 
 export { activeLocales };
@@ -67,6 +67,13 @@ export const companyCopy: Record<Locale, {
     labels: { name: 'Компания', founder: 'Основатель', founded: 'Год основания', headquarters: 'Главный офис' },
     headquarters: 'Fevzipaşa Caddesi, Fatih, Стамбул, Турция',
     footerLocation: 'Фатих, Стамбул, Турция'
+  },
+  fa: {
+    aboutHeading: 'از استانبول به تجارت بین‌المللی',
+    aboutBody: 'شرکت CTSEG Sanayi ve Ticaret Limited Şirketi در سال ۲۰۲۲ توسط توفیق گوکدمیر در استانبول تأسیس شد. CTSEG به شرکت‌ها در زمینه تأمین استراتژیک، ارزیابی تولیدکنندگان و تأمین‌کنندگان، تحلیل هزینه‌ها، تأمین کالاهای تجاری و فرآیندهای تجارت بین‌المللی کمک می‌کند.',
+    labels: { name: 'نام شرکت', founder: 'بنیان‌گذار', founded: 'سال تأسیس', headquarters: 'دفتر مرکزی' },
+    headquarters: 'خیابان فوزی‌پاشا، فاتح، استانبول، ترکیه',
+    footerLocation: 'فاتح، استانبول، ترکیه'
   }
 };
 
@@ -452,21 +459,24 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Dried mulberries are chosen for natural sweetness, light colour, fruit integrity and low foreign matter in healthy snacks and muesli applications.',
     de:'Getrocknete Maulbeeren werden wegen natürlicher Süße, heller Farbe, Fruchtintegrität und geringem Fremdbesatz für Snacks und Müsli ausgewählt.',
     it:'I gelsi essiccati sono scelti per dolcezza naturale, colore chiaro, integrità e basso contenuto di corpi estranei in snack salutistici e muesli.',
-    ru:'Les mûres blanches séchées sont choisies pour leur douceur naturelle, leur couleur claire, leur intégrité et leur faible teneur en corps étrangers dans les snacks et müeslis.'
+    ru:'Les mûres blanches séchées sont choisies pour leur douceur naturelle, leur couleur claire, leur intégrité et leur faible teneur en corps étrangers dans les snacks et müeslis.',
+    fa:'توت خشک ایران با شیرینی طبیعی، رنگ روشن، یکنواختی دانه‌ها و میزان پایین مواد خارجی برای کاربردهای صنعتی و دسته‌بندی خشکبار انتخاب می‌شود.'
   },
   zereshk: {
     tr:'Zereshk, canlı kırmızı rengi ve belirgin ekşi profiliyle pilav, sos, garnitür ve özel gıda reçetelerinde kullanılan kurutulmuş bir berberis meyvesidir.',
     en:'Zereshk is a dried barberry with vivid red colour and pronounced tartness for rice dishes, sauces, garnishes and speciality formulations.',
     de:'Zereshk ist eine getrocknete Berberitze mit kräftig roter Farbe und markanter Säure für Reisgerichte, Saucen, Garnituren und Spezialrezepturen.',
     it:'Lo Zereshk è un crespino essiccato dal rosso vivo e dall’acidità marcata, usato in riso, salse, guarnizioni e ricette speciali.',
-    ru:'Le Zereshk est une épine-vinette séchée, rouge vif et nettement acidulée, destinée aux riz, sauces, garnitures et recettes de spécialité.'
+    ru:'Le Zereshk est une épine-vinette séchée, rouge vif et nettement acidulée, destinée aux riz, sauces, garnitures et recettes de spécialité.',
+    fa:'زرشک ارگانیک با رنگ قرمز شفاف و طعم ترش مشخص برای مصرف تجاری، صنایع غذایی، بسته‌بندی تخصصی و صادرات ارزیابی می‌شود.'
   },
   'mixed-nuts': {
     tr:'Karışık kuruyemiş ve özel ürün reçeteleri; hedef tüketici, bileşen oranı, alerjen yönetimi, kavurma ve ambalaj formatına göre proje bazında geliştirilir.',
     en:'Mixed-nut and speciality recipes are developed by project around target consumer, ingredient ratio, allergen control, roasting and pack format.',
     de:'Nussmischungen und Spezialrezepturen werden projektspezifisch nach Zielgruppe, Zutatenanteil, Allergenmanagement, Röstung und Packungsformat entwickelt.',
     it:'Mix di frutta secca e ricette speciali sono sviluppati su progetto in base a consumatore, proporzioni, gestione allergeni, tostatura e formato.',
-    ru:'Les mélanges de fruits à coque et recettes spéciales sont développés par projet selon la cible, les proportions, la gestion des allergènes, la torréfaction et le format.'
+    ru:'Les mélanges de fruits à coque et recettes spéciales sont développés par projet selon la cible, les proportions, la gestion des allergènes, la torréfaction et le format.',
+    fa:'فرمولاسیون و بسته‌بندی ترکیبی خشکبار بر اساس درصد اجزا، کنترل حساسیت‌زاها، فرآوری و فرمت بسته‌بندی به‌صورت سفارشی توسعه می‌یابد.'
   }
 };
 
@@ -575,16 +585,16 @@ export const editorialCopy: Record<Locale, {
 export const insightIds = ['strategic-vs-procurement','supplier-selection','supplier-risk','total-cost','rfq','supply-chain-risk','origin-compliance'] as const;
 export const insights: Record<(typeof insightIds)[number], { slugs: Localized; titles: Localized; descriptions: Localized; answers: Localized }> = {
   'strategic-vs-procurement': {
-    slugs:{tr:'stratejik-tedarik-ve-satin-alma-farki',en:'strategic-sourcing-vs-procurement',de:'strategische-beschaffung-vs-einkauf',it:'sourcing-strategico-vs-acquisti',ru:'sourcing-strategique-vs-achats'},
-    titles:{tr:'Stratejik tedarik ve satın alma arasındaki fark',en:'Strategic sourcing vs procurement',de:'Strategische Beschaffung vs. Einkauf',it:'Sourcing strategico e acquisti a confronto',ru:'Sourcing stratégique et achats : quelle différence ?'},
-    descriptions:{tr:'Kapsam, maliyet, risk, tedarikçi yönetimi ve karar süreci açısından stratejik tedarik ile satın alma karşılaştırması.',en:'A comparison of strategic sourcing and procurement across scope, cost, risk, supplier management and decisions.',de:'Vergleich von strategischer Beschaffung und Einkauf nach Umfang, Kosten, Risiko, Lieferantenmanagement und Entscheidung.',it:'Confronto tra sourcing strategico e acquisti per ambito, costo, rischio, gestione fornitori e decisioni.',ru:'Comparaison du sourcing stratégique et des achats selon le périmètre, le coût, le risque, les fournisseurs et la décision.'},
-    answers:{tr:'Satın alma işlemi yürütür; stratejik tedarik ise talep, pazar, toplam maliyet, risk, müzakere ve performansı uzun vadeli bir karar sistemi içinde yönetir.',en:'Procurement executes the purchase; strategic sourcing manages demand, markets, total cost, risk, negotiation and performance as a long-term decision system.',de:'Der Einkauf führt die Bestellung aus; strategische Beschaffung steuert Bedarf, Markt, Gesamtkosten, Risiko, Verhandlung und Leistung langfristig.',it:'Gli acquisti eseguono la transazione; il sourcing strategico governa fabbisogno, mercato, costo totale, rischio, negoziazione e prestazioni nel lungo periodo.',ru:'Les achats exécutent la transaction ; le sourcing stratégique pilote besoin, marché, coût total, risque, négociation et performance sur le long terme.'}
+    slugs:{tr:'stratejik-tedarik-ve-satin-alma-farki',en:'strategic-sourcing-vs-procurement',de:'strategische-beschaffung-vs-einkauf',it:'sourcing-strategico-vs-acquisti',ru:'sourcing-strategique-vs-achats',fa:'strategic-sourcing-vs-procurement'},
+    titles:{tr:'Stratejik tedarik ve satın alma arasındaki fark',en:'Strategic sourcing vs procurement',de:'Strategische Beschaffung vs. Einkauf',it:'Sourcing strategico e acquisti a confronto',ru:'Sourcing stratégique et achats : quelle différence ?',fa:'تفاوت تأمین استراتژیک و خرید'},
+    descriptions:{tr:'Kapsam, maliyet, risk, tedarikçi yönetimi ve karar süreci açısından stratejik tedarik ile satın alma karşılaştırması.',en:'A comparison of strategic sourcing and procurement across scope, cost, risk, supplier management and decisions.',de:'Vergleich von strategischer Beschaffung und Einkauf nach Umfang, Kosten, Risiko, Lieferantenmanagement und Entscheidung.',it:'Confronto tra sourcing strategico e acquisti per ambito, costo, rischio, gestione fornitori e decisioni.',ru:'Comparaison du sourcing stratégique et des achats selon le périmètre, le coût, le risque, les fournisseurs et la décision.',fa:'مقایسه تأمین استراتژیک و خرید از نظر دامنه، هزینه، ریسک، مدیریت تأمین‌کننده و فرآیند تصمیم‌گیری.'},
+    answers:{tr:'Satın alma işlemi yürütür; stratejik tedarik ise talep, pazar, toplam maliyet, risk, müzakere ve performansı uzun vadeli bir karar sistemi içinde yönetir.',en:'Procurement executes the purchase; strategic sourcing manages demand, markets, total cost, risk, negotiation and performance as a long-term decision system.',de:'Der Einkauf führt die Bestellung aus; strategische Beschaffung steuert Bedarf, Markt, Gesamtkosten, Risiko, Verhandlung und Leistung langfristig.',it:'Gli acquisti eseguono la transazione; il sourcing strategico governa fabbisogno, mercato, costo totale, rischio, negoziazione e prestazioni nel lungo periodo.',ru:'Les achats exécutent la transaction ; le sourcing stratégique pilote besoin, marché, coût total, risque, négociation et performance sur le long terme.',fa:'خرید، عملیات سفارش را اجرا می‌کند؛ تأمین استراتژیک تقاضا، بازار، هزینه کل، ریسک و عملکرد را در یک سیستم مدیریت می‌کند.'}
   },
   'supplier-selection': {
-    slugs:{tr:'tedarikci-secim-kriterleri',en:'supplier-selection-criteria',de:'kriterien-lieferantenauswahl',it:'criteri-selezione-fornitori',ru:'criteres-selection-fournisseurs'},
-    titles:{tr:'Tedarikçi seçim kriterleri',en:'Supplier selection criteria',de:'Kriterien für die Lieferantenauswahl',it:'Criteri di selezione dei fornitori',ru:'Critères de sélection des fournisseurs'},
-    descriptions:{tr:'Fiyatın ötesinde kalite, kapasite, termin, finansal dayanıklılık, uyum ve toplam maliyetle tedarikçi değerlendirme.',en:'Supplier evaluation beyond price: quality, capacity, lead time, financial resilience, compliance and total cost.',de:'Lieferantenbewertung jenseits des Preises: Qualität, Kapazität, Lieferzeit, Finanzkraft, Konformität und Gesamtkosten.',it:'Valutazione oltre il prezzo: qualità, capacità, tempi, solidità finanziaria, conformità e costo totale.',ru:'Évaluer au-delà du prix : qualité, capacité, délais, solidité financière, conformité et coût total.'},
-    answers:{tr:'Doğru tedarikçi en düşük fiyatı veren değil; kalite, kapasite, termin, mevzuat, iletişim ve toplam maliyet ihtiyacını sürdürülebilir karşılayandır.',en:'The right supplier is not the lowest bidder, but the one that sustainably meets quality, capacity, lead-time, compliance, communication and total-cost needs.',de:'Der richtige Lieferant ist nicht der billigste, sondern erfüllt Qualität, Kapazität, Lieferzeit, Konformität, Kommunikation und Gesamtkosten nachhaltig.',it:'Il fornitore giusto non è il più economico, ma quello che soddisfa in modo sostenibile qualità, capacità, tempi, conformità, comunicazione e costo totale.',ru:'Le bon fournisseur n’est pas le moins cher, mais celui qui répond durablement aux exigences de qualité, capacité, délais, conformité, communication et coût total.'}
+    slugs:{tr:'tedarikci-secim-kriterleri',en:'supplier-selection-criteria',de:'kriterien-lieferantenauswahl',it:'criteri-selezione-fornitori',ru:'criteres-selection-fournisseurs',fa:'supplier-selection-criteria'},
+    titles:{tr:'Tedarikçi seçim kriterleri',en:'Supplier selection criteria',de:'Kriterien für die Lieferantenauswahl',it:'Criteri di selezione dei fornitori',ru:'Critères de sélection des fournisseurs',fa:'معیارهای انتخاب تأمین‌کننده'},
+    descriptions:{tr:'Fiyatın ötesinde kalite, kapasite, termin, finansal dayanıklılık, uyum ve toplam maliyetle tedarikçi değerlendirme.',en:'Supplier evaluation beyond price: quality, capacity, lead time, financial resilience, compliance and total cost.',de:'Lieferantenbewertung jenseits des Preises: Qualität, Kapazität, Lieferzeit, Finanzkraft, Konformität und Gesamtkosten.',it:'Valutazione oltre il prezzo: qualità, capacità, tempi, solidità finanziaria, conformità e costo totale.',ru:'Évaluer au-delà du prix : qualité, capacité, délais, solidité financière, conformité et coût total.',fa:'ارزیابی تأمین‌کننده فراتر از قیمت: کیفیت، ظرفیت، زمان تحویل، پایداری مالی، انطباق و هزینه کل.'},
+    answers:{tr:'Doğru tedarikçi en düşük fiyatı veren değil; kalite, kapasite, termin, mevzuat, iletişim ve toplam maliyet ihtiyacını sürdürülebilir karşılayandır.',en:'The right supplier is not the lowest bidder, but the one that sustainably meets quality, capacity, lead-time, compliance, communication and total-cost needs.',de:'Der richtige Lieferant ist nicht der billigste, sondern erfüllt Qualität, Kapazität, Lieferzeit, Konformität, Kommunikation und Gesamtkosten nachhaltig.',it:'Il fornitore giusto non è il più economico, ma quello che soddisfa in modo sostenibile qualità, capacità, tempi, conformità, comunicazione e costo totale.',ru:'Le bon fournisseur n’est pas le moins cher, mais celui qui répond durablement aux exigences de qualité, capacité, délais, conformité, communication et coût total.',fa:'تأمین‌کننده مناسب ارزان‌ترین ارائه‌دهنده نیست، بلکه گزینه‌ای است که نیازهای کیفی، ظرفیت و انطباق را به صورت پایدار برآورده می‌سازد.'}
   },
   'supplier-risk': {
     slugs:{tr:'tedarikci-riskini-dogrulama',en:'verifying-supplier-risk',de:'lieferantenrisiko-pruefen',it:'verificare-rischio-fornitore',ru:'verifier-risque-fournisseur',fa:'verifying-supplier-risk'},
@@ -593,28 +603,28 @@ export const insights: Record<(typeof insightIds)[number], { slugs: Localized; t
     answers:{tr:'Kayıt, sahiplik, üretim kapasitesi, kalite sistemi, referans, banka bilgisi ve sözleşme yetkisi bağımsız kaynaklarla çapraz kontrol edilmelidir.',en:'Registration, ownership, production capacity, quality systems, references, bank details and signing authority should be cross-checked through independent sources.',de:'Register, Eigentum, Produktionskapazität, Qualitätssysteme, Referenzen, Bankdaten und Zeichnungsbefugnis müssen unabhängig gegengeprüft werden.',it:'Registrazione, proprietà, capacità produttiva, sistemi qualità, referenze, coordinate bancarie e poteri di firma vanno verificati con fonti indipendenti.',ru:'Immatriculation, propriété, capacité, système qualité, références, coordonnées bancaires et pouvoir de signature doivent être recoupés.',fa:'اطلاعات ثبتی، مالکیت، ظرفیت تولید، سیستم‌های کیفیت، حساب‌های بانکی و اختیارات امضا باید از طریق منابع مستقل استعلام شوند.'}
   },
   'total-cost': {
-    slugs:{tr:'toplam-sahip-olma-maliyeti',en:'total-cost-of-ownership',de:'gesamtbetriebskosten-tco',it:'costo-totale-di-possesso',ru:'cout-total-de-possession'},
-    titles:{tr:'Toplam sahip olma maliyeti neden önemlidir?',en:'Why total cost of ownership matters',de:'Warum Gesamtbetriebskosten entscheidend sind',it:'Perché conta il costo totale di possesso',ru:'Pourquoi le coût total de possession compte'},
-    descriptions:{tr:'Birim fiyatın ötesinde lojistik, kalite, stok, finansman ve risk maliyetlerini karşılaştırma.',en:'Comparing logistics, quality, inventory, finance and risk costs beyond unit price.',de:'Vergleich von Logistik-, Qualitäts-, Bestands-, Finanzierungs- und Risikokosten jenseits des Stückpreises.',it:'Confronto di logistica, qualità, scorte, finanza e rischio oltre il prezzo unitario.',ru:'Comparer logistique, qualité, stocks, financement et risques au-delà du prix unitaire.'},
-    answers:{tr:'En düşük birim fiyat her zaman en iyi teklif değildir; navlun, hata, gecikme, finansman ve tedarik kesintisi gerçek kararı değiştirebilir.',en:'The lowest unit price is not always the best offer; freight, defects, delays, finance and disruption can change the decision.',de:'Der niedrigste Stückpreis ist nicht immer das beste Angebot; Fracht, Fehler, Verzögerungen, Finanzierung und Ausfälle verändern die Entscheidung.',it:'Il prezzo unitario più basso non è sempre l’offerta migliore: trasporto, difetti, ritardi, finanza e interruzioni cambiano la decisione.',ru:'Le prix unitaire le plus bas n’est pas toujours la meilleure offre : transport, défauts, délais, financement et ruptures changent la décision.'}
+    slugs:{tr:'toplam-sahip-olma-maliyeti',en:'total-cost-of-ownership',de:'gesamtbetriebskosten-tco',it:'costo-totale-di-possesso',ru:'cout-total-de-possession',fa:'total-cost-of-ownership'},
+    titles:{tr:'Toplam sahip olma maliyeti neden önemlidir?',en:'Why total cost of ownership matters',de:'Warum Gesamtbetriebskosten entscheidend sind',it:'Perché conta il costo totale di possesso',ru:'Pourquoi le coût total de possession compte',fa:'چرا هزینه کل مالکیت (TCO) اهمیت دارد؟'},
+    descriptions:{tr:'Birim fiyatın ötesinde lojistik, kalite, stok, finansman ve risk maliyetlerini karşılaştırma.',en:'Comparing logistics, quality, inventory, finance and risk costs beyond unit price.',de:'Vergleich von Logistik-, Qualitäts-, Bestands-, Finanzierungs- und Risikokosten jenseits des Stückpreises.',it:'Confronto di logistica, qualità, scorte, finanza e rischio oltre il prezzo unitario.',ru:'Comparer logistique, qualité, stocks, financement et risques au-delà du prix unitaire.',fa:'مقایسه هزینه‌های لجستیک، کیفیت، موجودی، مالی و ریسک فراتر از قیمت واحد.'},
+    answers:{tr:'En düşük birim fiyat her zaman en iyi teklif değildir; navlun, hata, gecikme, finansman ve tedarik kesintisi gerçek kararı değiştirebilir.',en:'The lowest unit price is not always the best offer; freight, defects, delays, finance and disruption can change the decision.',de:'Der niedrigste Stückpreis ist nicht immer das beste Angebot; Fracht, Fehler, Verzögerungen, Finanzierung und Ausfälle verändern die Entscheidung.',it:'Il prezzo unitario più basso non è sempre l’offerta migliore: trasporto, difetti, ritardi, finanza e interruzioni cambiano la decisione.',ru:'Le prix unitaire le plus bas n’est pas toujours la meilleure offre : transport, défauts, délais, financement et ruptures changent la décision.',fa:'کمترین قیمت واحد همواره بهترین پیشنهاد نیست؛ هزینه‌های حمل، ضایعات، تأخیر و ریسک بر تصمیم نهایی تأثیر می‌گذارند.'}
   },
   rfq: {
-    slugs:{tr:'etkili-rfq-nasil-hazirlanir',en:'how-to-write-an-effective-rfq',de:'wirksame-rfq-erstellen',it:'come-preparare-rfq-efficace',ru:'comment-rediger-rfq-efficace'},
-    titles:{tr:'Etkili RFQ nasıl hazırlanır?',en:'How to write an effective RFQ',de:'Wie erstellt man eine wirksame RFQ?',it:'Come preparare una RFQ efficace',ru:'Comment rédiger une RFQ efficace ?'},
-    descriptions:{tr:'Karşılaştırılabilir teklifler için spesifikasyon, miktar, kalite, teslim, ödeme ve belge alanlarını doğru yapılandırma.',en:'Structuring specifications, quantity, quality, delivery, payment and documentation for comparable quotations.',de:'Spezifikation, Menge, Qualität, Lieferung, Zahlung und Dokumentation für vergleichbare Angebote strukturieren.',it:'Strutturare specifiche, quantità, qualità, consegna, pagamento e documenti per offerte comparabili.',ru:'Structurer spécifications, quantité, qualité, livraison, paiement et documents pour obtenir des offres comparables.'},
-    answers:{tr:'Etkili bir RFQ; teknik tanım, miktar, kalite standardı, teslim yeri, Incoterms, ödeme koşulu, termin, belge ihtiyacı ve teklif son tarihini açıkça tanımlar.',en:'An effective RFQ clearly defines specifications, quantity, quality standards, delivery point, Incoterms, payment, lead time, documents and quotation deadline.',de:'Eine wirksame RFQ definiert Spezifikation, Menge, Qualitätsstandard, Lieferort, Incoterms, Zahlung, Lieferzeit, Dokumente und Angebotsfrist.',it:'Una RFQ efficace definisce specifiche, quantità, standard qualità, luogo di consegna, Incoterms, pagamento, tempi, documenti e scadenza.',ru:'Une RFQ efficace précise spécifications, quantité, norme qualité, lieu de livraison, Incoterms, paiement, délai, documents et date limite.'}
+    slugs:{tr:'etkili-rfq-nasil-hazirlanir',en:'how-to-write-an-effective-rfq',de:'wirksame-rfq-erstellen',it:'come-preparare-rfq-efficace',ru:'comment-rediger-rfq-efficace',fa:'how-to-write-an-effective-rfq'},
+    titles:{tr:'Etkili RFQ nasıl hazırlanır?',en:'How to write an effective RFQ',de:'Wie erstellt man eine wirksame RFQ?',it:'Come preparare una RFQ efficace',ru:'Comment rédiger une RFQ efficace ?',fa:'چگونه یک RFQ موثر بنویسیم؟'},
+    descriptions:{tr:'Karşılaştırılabilir teklifler için spesifikasyon, miktar, kalite, teslim, ödeme ve belge alanlarını doğru yapılandırma.',en:'Structuring specifications, quantity, quality, delivery, payment and documentation for comparable quotations.',de:'Spezifikation, Menge, Qualität, Lieferung, Zahlung und Dokumentation für vergleichbare Angebote strukturieren.',it:'Strutturare specifiche, quantità, qualità, consegna, pagamento e documenti per offerte comparabili.',ru:'Structurer spécifications, quantité, qualité, livraison, paiement et documents pour obtenir des offres comparables.',fa:'ساختاردهی مشخصات، مقدار، کیفیت، تحویل، پرداخت و اسناد برای دریافت پیشنهادات قابل مقایسه.'},
+    answers:{tr:'Etkili bir RFQ; teknik tanım, miktar, kalite standardı, teslim yeri, Incoterms, ödeme koşulu, termin, belge ihtiyacı ve teklif son tarihini açıkça tanımlar.',en:'An effective RFQ clearly defines specifications, quantity, quality standards, delivery point, Incoterms, payment, lead time, documents and quotation deadline.',de:'Eine wirksame RFQ definiert Spezifikation, Menge, Qualitätsstandard, Lieferort, Incoterms, Zahlung, Lieferzeit, Dokumente und Angebotsfrist.',it:'Una RFQ efficace definisce specifiche, quantità, standard qualità, luogo di consegna, Incoterms, pagamento, tempi, documenti e scadenza.',ru:'Une RFQ efficace précise spécifications, quantité, norme qualité, lieu de livraison, Incoterms, paiement, délai, documents et date limite.',fa:'یک RFQ موثر مشخصات فنی، میزان سفارش، استاندارد کیفیت، شرایط تحویل، Incoterms و زمان استعلام را به‌طور شفاف تعریف می‌کند.'}
   },
   'supply-chain-risk': {
-    slugs:{tr:'tedarik-zinciri-risk-yonetimi',en:'supply-chain-risk-management',de:'risikomanagement-lieferkette',it:'gestione-rischio-catena-fornitura',ru:'gestion-risque-chaine-approvisionnement'},
-    titles:{tr:'Tedarik zinciri risk yönetimi',en:'Supply chain risk management',de:'Risikomanagement in der Lieferkette',it:'Gestione del rischio nella catena di fornitura',ru:'Gestion des risques de la chaîne d’approvisionnement'},
-    descriptions:{tr:'Tek kaynak, kalite, kapasite, lojistik, kur ve mevzuat risklerini puanlama ve azaltma rehberi.',en:'A guide to scoring and reducing single-source, quality, capacity, logistics, currency and regulatory risk.',de:'Leitfaden zur Bewertung und Reduzierung von Einzelquellen-, Qualitäts-, Kapazitäts-, Logistik-, Währungs- und Regulierungsrisiken.',it:'Guida per valutare e ridurre rischi di fonte unica, qualità, capacità, logistica, valuta e normativa.',ru:'Guide pour évaluer et réduire les risques de source unique, qualité, capacité, logistique, change et réglementation.'},
-    answers:{tr:'Kritik ürünler, tedarikçiler ve rotalar olasılık ve etkiye göre puanlanmalı; alternatif kaynaklar, performans göstergeleri ve yanıt planları oluşturulmalıdır.',en:'Critical products, suppliers and routes should be scored by probability and impact, with alternative sources, performance indicators and response plans.',de:'Kritische Produkte, Lieferanten und Routen sind nach Wahrscheinlichkeit und Auswirkung zu bewerten; Alternativquellen, Kennzahlen und Reaktionspläne sind festzulegen.',it:'Prodotti, fornitori e rotte critici vanno classificati per probabilità e impatto, predisponendo fonti alternative, indicatori e piani di risposta.',ru:'Produits, fournisseurs et itinéraires critiques doivent être notés selon probabilité et impact, avec sources alternatives, indicateurs et plans de réponse.'}
+    slugs:{tr:'tedarik-zinciri-risk-yonetimi',en:'supply-chain-risk-management',de:'risikomanagement-lieferkette',it:'gestione-rischio-catena-fornitura',ru:'gestion-risque-chaine-approvisionnement',fa:'supply-chain-risk-management'},
+    titles:{tr:'Tedarik zinciri risk yönetimi',en:'Supply chain risk management',de:'Risikomanagement in der Lieferkette',it:'Gestione del rischio nella catena di fornitura',ru:'Gestion des risques de la chaîne d’approvisionnement',fa:'مدیریت ریسک زنجیره تأمین'},
+    descriptions:{tr:'Tek kaynak, kalite, kapasite, lojistik, kur ve mevzuat risklerini puanlama ve azaltma rehberi.',en:'A guide to scoring and reducing single-source, quality, capacity, logistics, currency and regulatory risk.',de:'Leitfaden zur Bewertung und Reduzierung von Einzelquellen-, Qualitäts-, Kapazitäts-, Logistik-, Währungs- und Regulierungsrisiken.',it:'Guida per valutare e ridurre rischi di fonte unica, qualità, capacità, logistica, valuta e normativa.',ru:'Guide pour évaluer et réduire les risques de source unique, qualité, capacité, logistique, change et réglementation.',fa:'راهنمای ارزیابی و کاهش ریسک‌های تک‌منبعی، کیفیت، ظرفیت، لجستیک و قوانین.'},
+    answers:{tr:'Kritik ürünler, tedarikçiler ve rotalar olasılık ve etkiye göre puanlanmalı; alternatif kaynaklar, performans göstergeleri ve yanıt planları oluşturulmalıdır.',en:'Critical products, suppliers and routes should be scored by probability and impact, with alternative sources, performance indicators and response plans.',de:'Kritische Produkte, Lieferanten und Routen sind nach Wahrscheinlichkeit und Auswirkung zu bewerten; Alternativquellen, Kennzahlen und Reaktionspläne sind festzulegen.',it:'Prodotti, fornitori e rotte critici vanno classificati per probabilità e impatto, predisponendo fonti alternative, indicatori e piani di risposta.',ru:'Produits, fournisseurs et itinéraires critiques doivent être notés selon probabilité et impact, avec sources alternatives, indicateurs et plans de réponse.',fa:'محصولات و مسیرهای حساس باید بر اساس احتمال و اثرگذاری رتبه‌بندی شوند و برنامه‌های جایگزین تدوین گردند.'}
   },
   'origin-compliance': {
-    slugs:{tr:'gida-tedarikinde-mense-ve-uyum',en:'origin-and-compliance-in-food-sourcing',de:'herkunft-und-konformitaet-lebensmittel',it:'origine-conformita-approvvigionamento-alimentare',ru:'origine-conformite-sourcing-alimentaire'},
-    titles:{tr:'Gıda tedariğinde menşe ve uyum',en:'Origin and compliance in food sourcing',de:'Herkunft und Konformität in der Lebensmittelbeschaffung',it:'Origine e conformità nel sourcing alimentare',ru:'Origine et conformité dans le sourcing alimentaire'},
-    descriptions:{tr:'Gerçek menşe, parti izlenebilirliği, COA, aflatoksin, pestisit ve hedef pazar uygunluğu için temel kontroller.',en:'Core controls for actual origin, batch traceability, COA, aflatoxin, pesticides and target-market compliance.',de:'Kernprüfungen für tatsächliche Herkunft, Chargenrückverfolgung, COA, Aflatoxin, Pestizide und Zielmarktkonformität.',it:'Controlli essenziali su origine effettiva, tracciabilità lotto, COA, aflatossine, pesticidi e conformità al mercato.',ru:'Contrôles essentiels de l’origine réelle, traçabilité des lots, COA, aflatoxines, pesticides et conformité au marché.'},
-    answers:{tr:'Menşe ticari evrak, üretici ve parti düzeyinde açıkça beyan edilmeli; hedef pazar limitleri sevkiyat öncesinde doğrulanmalıdır.',en:'Origin should be declared clearly at commercial-document, producer and batch level; target-market limits must be verified before shipment.',de:'Die Herkunft ist in Handelsdokumenten sowie auf Hersteller- und Chargenebene offenzulegen; Zielmarktgrenzen sind vor Versand zu prüfen.',it:'L’origine va dichiarata nei documenti commerciali e a livello di produttore e lotto; i limiti del mercato vanno verificati prima della spedizione.',ru:'L’origine doit être déclarée dans les documents commerciaux, au niveau du producteur et du lot ; les seuils du marché cible doivent être vérifiés avant expédition.'}
+    slugs:{tr:'gida-tedarikinde-mense-ve-uyum',en:'origin-and-compliance-in-food-sourcing',de:'herkunft-und-konformitaet-lebensmittel',it:'origine-conformita-approvvigionamento-alimentare',ru:'origine-conformite-sourcing-alimentaire',fa:'origin-and-compliance-in-food-sourcing'},
+    titles:{tr:'Gıda tedariğinde menşe ve uyum',en:'Origin and compliance in food sourcing',de:'Herkunft und Konformität in der Lebensmittelbeschaffung',it:'Origine e conformità nel sourcing alimentare',ru:'Origine et conformité dans le sourcing alimentaire',fa:'مبدأ و انطباق در تأمین مواد غذایی'},
+    descriptions:{tr:'Gerçek menşe, parti izlenebilirliği, COA, aflatoksin, pestisit ve hedef pazar uygunluğu için temel kontroller.',en:'Core controls for actual origin, batch traceability, COA, aflatoxin, pesticides and target-market compliance.',de:'Kernprüfungen für tatsächliche Herkunft, Chargenrückverfolgung, COA, Aflatoxin, Pestizide und Zielmarktkonformität.',it:'Controlli essenziali su origine effettiva, tracciabilità lotto, COA, aflatossine, pesticidi e conformità al mercato.',ru:'Contrôles essentiels de l’origine réelle, traçabilité des lots, COA, aflatoxines, pesticides et conformité au marché.',fa:'کنترل‌های کلیدی برای مبدأ واقعی، قابلیت ردگیری محموله، اسناد COA، آفلاتوکسین و انطباق با بازار هدف.'},
+    answers:{tr:'Menşe ticari evrak, üretici ve parti düzeyinde açıkça beyan edilmeli; hedef pazar limitleri sevkiyat öncesinde doğrulanmalıdır.',en:'Origin should be declared clearly at commercial-document, producer and batch level; target-market limits must be verified before shipment.',de:'Die Herkunft ist in Handelsdokumenten sowie auf Hersteller- und Chargenebene offenzulegen; Zielmarktgrenzen sind vor Versand zu prüfen.',it:'L’origine va dichiarata nei documenti commerciali e a livello di produttore e lotto; i limiti del mercato vanno verificati prima della spedizione.',ru:'L’origine doit être declared dans les documents commerciaux, au niveau du producteur et du lot ; les seuils du marché cible doivent être vérifiés avant expédition.',fa:'مبدأ کالا باید در اسناد تجاری و سطح محموله شفاف اعلام شود و الزامات بازار هدف قبل از حمل اعتبارسنجی گردد.'}
   }
 };
 
@@ -720,12 +730,6 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
     if (key === 'legal' && id) return localizedPath('en','legal',id);
     return `/ru/#${homeAnchors[key] ?? 'contact'}`;
   }
-  if (lang === 'fa') {
-    const homeAnchors: Record<string,string> = {
-      markets:'markets', about:'company', contact:'contact', 'how-we-work':'trade-paths', scenarios:'company'
-    };
-    if (homeAnchors[key]) return `/fa/#${homeAnchors[key]}`;
-  }
   if (key === 'how-we-work') {
     if (pathLang === 'tr' || pathLang === 'en') return `/${pathLang}/${specialSlugs['how-we-work'][pathLang]}/`;
     return localizedPath(safeLang,'services');
@@ -760,23 +764,5 @@ export function routeAlternates(key: string, id?: string) {
       sr: 'https://ctseg.com.tr/sr/medical/reflex-disposable-gloves/'
     } as Record<string, string>;
   }
-  const result: Record<string, string> = {};
-  for (const lang of locales) {
-    if (lang === 'fa') {
-      const supportedFa = (key === 'home') ||
-        (key === 'products' && (!id || ['sunflower-seeds','mazafati-dates','akbari-pistachio','saffron'].includes(id))) ||
-        (key === 'services' && (!id || ['strategic-sourcing','supplier-verification','trade-advisory'].includes(id))) ||
-        (key === 'insights' && (!id || id === 'supplier-risk')) ||
-        (key === 'guides' && id === 'vegetable-oil-rfq') ||
-        (key === 'legal' && Boolean(id));
-      if (supportedFa) {
-        result[lang] = `https://ctseg.com.tr${localizedPath(lang, key, id)}`;
-      } else {
-        result[lang] = `https://ctseg.com.tr${localizedPath('fa', key)}`;
-      }
-    } else {
-      result[lang] = `https://ctseg.com.tr${localizedPath(lang, key, id)}`;
-    }
-  }
-  return result as Localized;
+  return Object.fromEntries(locales.map((lang) => [lang, `https://ctseg.com.tr${localizedPath(lang, key, id)}`])) as Localized;
 }

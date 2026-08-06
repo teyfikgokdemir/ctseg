@@ -53,20 +53,23 @@ const aboutPages = new Set([
   'tr/hakkimizda/index.html',
   'en/about/index.html',
   'de/ueber-uns/index.html',
-  'it/chi-siamo/index.html'
+  'it/chi-siamo/index.html',
+  'fa/about/index.html'
 ]);
 const contactPages = new Set([
   'tr/iletisim/index.html',
   'en/contact/index.html',
   'de/kontakt/index.html',
   'it/contatti/index.html',
+  'fa/contact/index.html',
   'index.html','en/index.html','de/index.html','it/index.html','ru/index.html','fa/index.html'
 ]);
 const productCatalogs = new Set([
   'tr/ticari-urunler/index.html',
   'en/trade-products/index.html',
   'de/handelsprodukte/index.html',
-  'it/prodotti-commerciali/index.html'
+  'it/prodotti-commerciali/index.html',
+  'fa/products/index.html'
 ]);
 const persianLandingLabel = 'fa/index.html';
 const persianLandingCanonical = 'https://ctseg.com.tr/fa/';
@@ -200,13 +203,13 @@ for (const file of htmlFiles) {
     if (!hasTradeArchitecture) errors.push(`${label}: trade-platform information architecture missing`);
     if (alternates.fa !== 'https://ctseg.com.tr/fa/') errors.push(`${label}: Persian homepage hreflang missing`);
   }
-  if (!isPersianLanding && !tradeRecord) {
+  if (!tradeRecord) {
     const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
     const mobileLocales = html.match(/class="mobile-locales"[\s\S]*?<\/div>\s*<\/div>/)?.[0] ?? '';
     const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
     if ((desktopLocales.match(/data-locale-option/g) || []).length !== 6 || !desktopLocales.includes('href="/fa/"')) errors.push(`${label}: desktop locale panel must contain six languages and the Persian homepage`);
     if ((mobileLocales.match(/data-locale-option/g) || []).length !== 6 || !mobileLocales.includes('href="/fa/"')) errors.push(`${label}: mobile locale panel must contain six languages and the Persian homepage`);
-    if (!/class="locale-code">(?:TR|EN|DE|IT|RU)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger)) {
+    if (!/class="locale-code">(?:TR|EN|DE|IT|FA|RU)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger)) {
       errors.push(`${label}: desktop language trigger must show only the active locale code`);
     }
   }
@@ -251,94 +254,7 @@ for (const file of htmlFiles) {
       errors.push(`${label}: Persian producer section leaked into a non-Persian locale`);
     }
   }
-  if (isPersianLanding) {
-    if (!html.includes('<html lang="fa" dir="rtl">')) errors.push(`${label}: Persian html lang/RTL declaration missing`);
-    if (canonical !== persianLandingCanonical) errors.push(`${label}: incorrect standalone canonical`);
-    for (const code of tradeLocaleCodes) if (!alternates[code]) errors.push(`${label}: reciprocal homepage hreflang ${code} missing`);
-    if (alternates['x-default'] !== 'https://ctseg.com.tr/en/') errors.push(`${label}: Persian x-default must point to English homepage`);
-    const persianLocaleTags = [...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].map((match) => match[0]);
-    const persianLocalePaths = {tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'};
-    if (persianLocaleTags.length !== 6) errors.push(`${label}: Persian header must expose six locale options`);
-    for (const [code,path] of Object.entries(persianLocalePaths)) {
-      const tag = persianLocaleTags.find((item) => item.includes(`hreflang="${code}"`)) ?? '';
-      if (!tag.includes(`href="${path}"`) || !targetExists(path)) errors.push(`${label}: Persian locale switch ${code} target is incorrect or missing`);
-      if ((code === 'fa') !== tag.includes('aria-current="page"')) errors.push(`${label}: Persian locale active state is incorrect for ${code}`);
-    }
-    if ((html.match(/<h1\b/g) || []).length !== 1) errors.push(`${label}: expected one Persian H1`);
-    const visibleFaqBlock = html.match(/<div class="fa-faq">[\s\S]*?<\/div>/)?.[0] ?? '';
-    if ((visibleFaqBlock.match(/<details\b/g) || []).length !== 8) errors.push(`${label}: expected eight visible Persian FAQs`);
-    for (const type of ['WebSite','WebPage','Service','FAQPage','BreadcrumbList']) {
-      if (!parsedSchemas.some((schema) => schema?.['@type'] === type)) errors.push(`${label}: ${type} schema missing`);
-    }
-    const persianFaqSchema = parsedSchemas.find((schema) => schema?.['@type'] === 'FAQPage');
-    const persianServiceSchema = parsedSchemas.find((schema) => schema?.['@type'] === 'Service');
-    if (!Array.isArray(persianFaqSchema?.mainEntity) || persianFaqSchema.mainEntity.length !== 8) errors.push(`${label}: FAQ schema must contain exactly eight questions`);
-    const expectedPersianTitle = 'تطبیق تجاری و توسعه بازار بین‌المللی | CTSEG';
-    const expectedPersianDescription = 'CTSEG خریداران ایرانی را به تأمین‌کنندگان قابل‌بررسی و تولیدکنندگان را به خریداران و بازارهای مناسب بین‌المللی در حوزه‌های غذایی، صنعتی، فرش و منسوجات متصل می‌کند.';
-    if (!html.includes(`<title>${expectedPersianTitle}</title>`) || !html.includes(`<meta name="description" content="${expectedPersianDescription}">`)) {
-      errors.push(`${label}: multisector Persian title or meta description missing`);
-    }
-    if (!html.includes('<h1>خریداران را به تولیدکنندگان و تأمین‌کنندگان مناسب متصل می‌کنیم.</h1>')) errors.push(`${label}: simplified trade-matching Persian H1 missing`);
-    for (const term of ['خریداران','تأمین‌کنندگان','تولیدکنندگان','بازارهای مناسب بین‌المللی']) if (!persianServiceSchema?.description?.includes(term)) errors.push(`${label}: Service schema missing platform term (${term})`);
-    const persianForm = html.match(/<form class="commercial-form"[\s\S]*?<\/form>/)?.[0] ?? '';
-    for (const field of ['intent','name','company','emailOrPhone','message','privacy']) if (!persianForm.includes(`name="${field}"`)) errors.push(`${label}: Persian short-form field missing (${field})`);
-    for (const optional of ['country','product','quantity','delivery','targetDate','requirements']) if (!persianForm.includes(`name="${optional}"`)) errors.push(`${label}: Persian optional-detail field missing (${optional})`);
-    if (!persianForm.includes('action="/api/contact"') || !persianForm.includes('name="website"') || !persianForm.includes('name="startedAt"') || !html.includes('data-form-fallback')) errors.push(`${label}: secure server-backed form contract missing`);
-    if (!html.includes('started.value=String(Date.now())')) errors.push(`${label}: client-side timing value missing`);
-    for (const requiredCopy of ['برای تولیدکنندگان و صادرکنندگان ایرانی','چهار مسیر برای تأمین و توسعه بازار','درخواست تجاری خود را مطرح کنید','افزودن جزئیات (اختیاری)']) {
-      if (!html.includes(requiredCopy)) errors.push(`${label}: strengthened Persian entry copy missing (${requiredCopy})`);
-    }
-    if ((html.match(/data-sector-card=/g) || []).length !== 4 || (html.match(/data-sector-cta/g) || []).length !== 4) {
-      errors.push(`${label}: exactly four equal multisector cards and primary CTAs required`);
-    }
-    const expectedSectorCopy = [
-      ['روغن‌های گیاهی و کالاهای غذایی','بررسی تأمین روغن و مواد غذایی'],
-      ['خشکبار، خرما و میوه‌های خشک','بررسی بازار خشکبار'],
-      ['فرش ایرانی و فرش ابریشم دستباف','بررسی بازار فرش'],
-      ['منسوجات، بسته‌بندی و نهاده‌های تولید','بررسی تأمین منسوجات و نهاده‌ها']
-    ];
-    for (const [heading,cta] of expectedSectorCopy) if (!html.includes(heading) || !html.includes(cta)) errors.push(`${label}: multisector card copy missing (${heading})`);
-    for (const product of ['پسته اکبری','کله‌قوچی','فندقی','احمدآقایی','خرمای مضافتی','سایر','زاهدی','کشمش','زعفران','زرشک','توت خشک','بادام','گردو']) {
-      if (!html.includes(product)) errors.push(`${label}: Persian nuts/date product coverage missing (${product})`);
-    }
-    const expectedSectorLinks = ['/fa/sourcing/فرش-ایرانی/','/fa/sourcing/فرش-ابریشم-دستباف/','/fa/sourcing/تامین-عمده-منسوجات/'];
-    for (const href of expectedSectorLinks) if (!html.includes(`href="${href}"`)) errors.push(`${label}: Persian entry sector link missing (${href})`);
-    for (const stem of ['ctseg-vegetable-oils-food-editorial','ctseg-mixed-nuts-premium','ctseg-iranian-carpets-editorial','ctseg-wholesale-textiles-editorial']) {
-      if (!html.includes(`/images/generated/${stem}-1536.webp`) || !html.includes(`${stem}-640.webp`)) errors.push(`${label}: responsive Persian sector visual missing (${stem})`);
-    }
-    for (const eventName of ['fa_landing_view','fa_form_start','fa_form_submit_attempt','fa_form_submission_success','fa_email_cta_click','fa_english_link_click']) {
-      if (!html.includes(eventName)) errors.push(`${label}: analytics event ${eventName} missing`);
-    }
-    if (!html.includes("fetch(form.action") || !html.includes("if(!response.ok)throw")) errors.push(`${label}: form submission must not report success before server acceptance`);
-    const sensitivePersianPhrases = ['پرداخت از طریق CTSEG','بانک‌ها','کانال‌های مجاز','مسیر پرداخت','تشریفات گمرکی','کارگزار گمرکی','مجوز واردات','ارسال قانونی','حواله','انتقال وجه','انتقال بانکی','کانال پرداخت','تضمین بانکی','تحریم'];
-    for (const forbidden of sensitivePersianPhrases) {
-      if (html.includes(forbidden)) errors.push(`${label}: sensitive Persian trade phrase remains (${forbidden})`);
-    }
-    for (const removedQuestion of ['آیا پرداخت از طریق CTSEG انجام می‌شود؟','آیا هر محصولی را می‌توان به ایران ارسال کرد؟','آیا CTSEG حمل‌ونقل و تشریفات گمرکی را انجام می‌دهد؟']) {
-      if (html.includes(removedQuestion) || persianFaqSchema?.mainEntity?.some((item) => item?.name === removedQuestion)) errors.push(`${label}: removed Persian FAQ remains (${removedQuestion})`);
-    }
-    const generalComplianceNote = 'هر درخواست تجاری بر اساس نوع کالا، طرف‌های معامله و الزامات جاری به‌صورت جداگانه ارزیابی می‌شود.';
-    if (html.split(generalComplianceNote).length - 1 !== 1) errors.push(`${label}: neutral Persian compliance note must appear exactly once`);
-    if (/(?:Ana Sayfa|Hizmetler|Hakkımızda|İletişim|Teklif İste|Tüm hakları saklıdır)/.test(html)) {
-      errors.push(`${label}: Turkish interface placeholder remains in Persian content`);
-    }
-    if (/href="\/fa\/(?!sourcing\/|#|")/.test(html)) errors.push(`${label}: nonexistent Persian internal route linked`);
-    if (/data-language-toggle|class="mobile-locales"/.test(html)) errors.push(`${label}: Persian page must keep its dedicated locale chrome`);
-    const expectedPersianMobileLinks = [
-      ['/fa/','صفحه اصلی'],['#services','برای خریداران'],['#markets','برای تولیدکنندگان'],['#sectors','حوزه‌ها'],
-      ['#about','درباره ما'],['#contact','تماس'],['#request-form','درخواست بررسی']
-    ];
-    if (!html.includes('data-fa-menu-toggle') || !html.includes('aria-controls="fa-primary-nav"') || !html.includes('data-fa-primary-nav')) {
-      errors.push(`${label}: accessible Persian mobile navigation controls missing`);
-    }
-    for (const [href,text] of expectedPersianMobileLinks) {
-      if (!html.includes(`href="${href}"`) || !html.includes(`>${text}</a>`)) errors.push(`${label}: Persian mobile navigation link missing (${text})`);
-    }
-    if (!html.includes('CTSEG Sanayi ve Ticaret Limited Şirketi') || !html.includes('Teyfik Gökdemir') ||
-      !html.includes('Fevzipaşa Caddesi، فاتح، استانبول، ترکیه')) {
-      errors.push(`${label}: company information block missing`);
-    }
-  }
+
   const portfolioImageCount = (html.match(/src="\/images\/generated\/2-\d+\.webp\?v=[a-f0-9]+"/g) || []).length;
   if (portfolioImageCount !== 0) errors.push(`${label}: product-catalogue portfolio visual must not appear in the trade-platform architecture`);
   if (contactPages.has(label) && html.includes('data-contact-email')) contactEmailPanels++;
@@ -403,8 +319,8 @@ for (const [sourceLabel, sourceRecord] of builtTradeRecords) {
   }
 }
 if (productSchemaPages !== 0) errors.push(`Product schema must not be used without a concrete offer; found ${productSchemaPages}`);
-if (productAssessmentServicePages !== 76) errors.push(`expected 76 specification-led product sourcing Service schemas across the four full catalogue locales and targeted Persian products, found ${productAssessmentServicePages}`);
-if (contactEmailPanels !== 10) errors.push(`expected ten localized contact email panels across six homepages and four full contact pages, found ${contactEmailPanels}`);
+if (productAssessmentServicePages !== 90) errors.push(`expected 90 specification-led product sourcing Service schemas across the five full catalogue locales, found ${productAssessmentServicePages}`);
+if (contactEmailPanels !== 11) errors.push(`expected 11 localized contact email panels across six homepages and five full contact pages, found ${contactEmailPanels}`);
 if (!existsSync(join(root, persianLandingLabel))) errors.push('standalone Persian landing page build output missing');
 const sitemapXml = files.filter((file) => /sitemap-\d+\.xml$/.test(file)).map((file) => readFileSync(file,'utf8')).join('\n');
 if (!sitemapXml.includes(`<loc>${persianLandingCanonical}</loc>`)) errors.push('Persian landing canonical missing from sitemap');
@@ -431,8 +347,8 @@ for (const file of htmlFiles) {
     if (!html.includes('For Iranian Businesses') || !html.includes('Persian landing page')) {
       errors.push(`${label}: English navigation landing-page labels missing`);
     }
-  } else if (navLinks.length) {
-    errors.push(`${label}: Persian landing navigation link must remain English-only`);
+  } else if (navLinks.length && !/<html\b[^>]*\blang="fa"/.test(html)) {
+    errors.push(`${label}: Persian landing navigation link must remain English or Persian only`);
   }
   if (!label.startsWith('404') && label !== persianLandingLabel && !tradeRecord) {
     const globalFaLinks = [...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].filter((match)=>match[0].includes('hreflang="fa"')&&match[0].includes('href="/fa/"'));

@@ -15,27 +15,6 @@ export function getRouteRecords(): RouteRecord[] {
   const records: RouteRecord[] = [];
   for (const lang of locales) {
     if (lang !== 'tr') records.push({ lang, key:'home' });
-    if (lang === 'fa') {
-      // 1. Products hub & targeted product pages
-      records.push({ lang, path:sectionSlugs.products[lang], key:'products' });
-      for (const id of ['sunflower-seeds','mazafati-dates','akbari-pistachio','saffron'] as const) {
-        records.push({ lang, path:`${sectionSlugs.products[lang]}/${products[id].slugs[lang]}`, key:'products', id });
-      }
-      // 2. 3 targeted service pages
-      records.push({ lang, path:sectionSlugs.services[lang], key:'services' });
-      for (const id of ['strategic-sourcing','supplier-verification','trade-advisory'] as const) {
-        records.push({ lang, path:`${sectionSlugs.services[lang]}/${services[id].slugs[lang]}`, key:'services', id });
-      }
-      // 3. Insights hub & 2 targeted guide articles
-      records.push({ lang, path:sectionSlugs.insights[lang], key:'insights' });
-      records.push({ lang, path:`${sectionSlugs.insights[lang]}/${insights['supplier-risk'].slugs[lang]}`, key:'insights', id:'supplier-risk' });
-      records.push({ lang, path:`${sectionSlugs.insights[lang]}/${guideSlugs['vegetable-oil-rfq'][lang]}`, key:'guides', id:'vegetable-oil-rfq' });
-      // 4. Persian legal pages
-      for (const id of legalIds) {
-        records.push({ lang, path:legal[id].slugs[lang], key:'legal', id });
-      }
-      continue;
-    }
     if (lang === 'ru') continue;
     for (const key of ['services','products','markets','insights','about','contact']) {
       records.push({ lang, path:sectionSlugs[key][lang], key });

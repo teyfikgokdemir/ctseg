@@ -160,9 +160,9 @@ for (const pathname of requiredCanonicalPaths) {
 const serviceSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Service"'));
 const blogSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Blog"'));
 const blogPostingPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"BlogPosting"'));
-if (serviceSchemaPages.length !== 123) errors.push(`expected 123 Service schema pages including homepages, sourcing pages, full catalogue assessments, and targeted Persian pages, found ${serviceSchemaPages.length}`);
+if (serviceSchemaPages.length !== 139) errors.push(`expected 139 Service schema pages including homepages, sourcing pages, full catalogue assessments, and full service pages, found ${serviceSchemaPages.length}`);
 if (blogSchemaPages.length !== 5) errors.push(`expected 5 Blog schema pages across full-content and Persian locales, found ${blogSchemaPages.length}`);
-if (blogPostingPages.length !== 29) errors.push(`expected 29 BlogPosting pages across full-content and Persian locales, found ${blogPostingPages.length}`);
+if (blogPostingPages.length !== 35) errors.push(`expected 35 BlogPosting pages across all 5 full-content locales, found ${blogPostingPages.length}`);
 
 const deploymentHeaders = readFileSync(join(dist,'_headers'),'utf8');
 if (/X-Robots-Tag\s*:\s*(?:noindex|none)/i.test(deploymentHeaders)) errors.push('deployment headers contain a blocking X-Robots-Tag');

@@ -176,6 +176,18 @@ export const processPages = {
       ['What information is needed for a quotation?','Comparable quotations require a product or service definition, technical specification, estimated quantity, packaging expectation, delivery country and city, target date, documentation needs and preferred commercial terms. Missing inputs often lead suppliers to quote different scopes, making unit-price and total landed cost comparisons unreliable.'],
       ['Who determines the MOQ?','CTSEG does not set the minimum order quantity. MOQ is determined by the supplier according to the product, production line, packaging format, private-label work and shipment model. During quotation assessment, CTSEG can compare the commercial basis of the MOQ and identify feasible alternative order structures.']
     ]
+  },
+  fa:{
+    title:'چگونه کار می‌کنیم؟',description:'نه مرحله کنترل‌شده از تعریف نیاز تجاری تا ارزیابی پس از تحویل.',
+    role:'CTSEG خدمات تحقیق، اعتباربرسنجی، مقایسه و هماهنگی تجاری ارائه می‌دهد؛ فروشنده مستقیم یا ضامن اجرایی نیست.',
+    steps:['تعریف نیاز تجاری','پیش‌ارزیابی امکان‌پذیری تجاری','تحقیق بازار و تأمین‌کنندگان','اعتباربرسنجی تأمین‌کنندگان','RFQ و مقایسه پیشنهادات','ارزیابی نمونه و کیفیت','مذاکره تجاری','هماهنگی سفارش و اسناد','ارزیابی پس از تحویل'],
+    faq:[
+      ['CTSEG چیست؟','CTSEG یک شرکت تأمین استراتژیک و هماهنگی تجاری بین‌المللی مستقر در استانبول است.'],
+      ['CTSEG چگونه کار می‌کند؟','کار با شفاف‌سازی نیاز و معیارهای تصمیم‌گیری آغاز می‌شود.'],
+      ['اعتباربرسنجی تأمین‌کننده چیست؟','بررسی ساختاریافته ثبت شرکت، آدرس، ظرفیت تولید و اسناد.'],
+      ['چه اطلاعاتی برای استعلام قیمت لازم است؟','مشخصات فنی، مقدار تخمینی، بسته‌بندی، کشور مقصد و شرایط تحویل.'],
+      ['چه کسی MOQ را تعیین می‌کند؟','حداقل سفارش توسط تولیدکننده تعیین می‌شود، نه CTSEG.']
+    ]
   }
 };
 
@@ -198,6 +210,16 @@ export const scenarioPages = {
       ['Iranian-origin pistachio comparison for a European food importer','Create a qualified variety and supplier shortlist','Variety, size, origin, batch documents, quality parameters, packaging, lead time and total landed cost','Desk-based producer and document verification; quotation normalisation through a common RFQ','Comparison matrix, open-information register and sample-assessment plan','Buyer selects parties for sampling and commercial negotiation'],
       ['5-litre sunflower oil research for an Iranian institutional buyer','Research feasible PET or tin-packed supply','Oil specification, packaging, labelling, MOQ, payment, delivery model and producer capability','Source screening in Türkiye and suitable markets; comparison of requirements and commercial terms','Verifiable shortlist, RFQ table and explicit risk register','Buyer selects a feasible packaging and quotation structure'],
       ['Packaging supplier comparison for a manufacturer','Select a suitable packaging format and supply model','Material, print, tooling, MOQ, unit cost, waste, lead time, freight and inventory impact','Convert the technical requirement into a common format and model total-cost scenarios','Bid comparison, TCO view and supplier-verification questions','Manufacturer decides whether to progress to sample, production trial or negotiation']
+    ]
+  },
+  fa:{
+    title:'سناریوهای نمونه برای تصمیم‌گیری',description:'سه سناریوی تجاری برای توضیح روش تصمیم‌گیری CTSEG بدون ارائه مشتریان ساختگی.',
+    disclaimer:'این سناریوها جنبه توضیحی دارند و شرکت‌های ذکرشده ارجاع مستقیم مشتریان واقعی نیستند.',
+    labels:['نیاز','معیارهای ارزیابی‌شده','رویکرد CTSEG','خروجی تجاری ساختاریافته','مرحله تصمیم‌گیری'],
+    items:[
+      ['مقایسه پسته ایرانی برای واردکننده مواد غذایی در اروپا','ایجاد فهرست کوتاه از واریته و تأمین‌کننده مناسب','واریته، سایز، مبدأ، اسناد محموله، پارامترهای کیفی و هزینه کل تحویل','اعتباربرسنجی تولیدکننده و اسناد؛ نرمال‌سازی پیشنهادات از طریق RFQ مشترک','ماتریس مقایسه و طرح ارزیابی نمونه','خریدار طرف‌های تجاری را برای نمونه‌گیری و مذاکره انتخاب می‌کند'],
+      ['تحقیق روغن آفتابگردان ۵ لیتری برای خریدار شرکتی','تحقیق منابع مناسب در بسته‌بندی PET یا teneke','مشخصات روغن، بسته‌بندی، برچسب‌گذاری، MOQ، ödeme و مدل تحویل','غربالگری منابع در ترکیه و بازارهای مناسب; مقایسه الزامات','فهرست کوتاه قابل‌بررسی، جدول RFQ و ریسک‌های مشخص','خریدار ساختار بسته‌بندی و پیشنهاد قابل‌اجرا را انتخاب می‌کند'],
+      ['مقایسه تأمین‌کننده بسته‌بندی برای تولیدکننده','انتخاب فرمت بسته‌بندی و مدل تأمین مناسب','مواد، چاپ، قالب، MOQ، قیمت واحد، ضایعات و navlun','تبدیل نیاز فنی به فرمت مشترک و مدل‌سازی سناریوهای هزینه کل','مقایسه پیشنهادات، نمای TCO و سوالات اعتباربرسنجی','تولیدکننده درباره نمونه، تولید آزمایشی یا مذاکره تصمیم می‌گیرد']
     ]
   }
 };
