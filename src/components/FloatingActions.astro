@@ -16,16 +16,16 @@ const copy = contactCopy[lang];
 </nav>
 
 <style is:global>
-  .floating-actions{--floating-cookie-offset:0px;position:fixed!important;inset-inline-end:max(24px,env(safe-area-inset-right))!important;inset-inline-start:auto!important;bottom:calc(24px + env(safe-area-inset-bottom) + var(--floating-cookie-offset))!important;display:flex!important;flex-direction:column!important;align-items:center;gap:8px;z-index:45;pointer-events:none;transition:bottom .2s ease}
-  .floating-actions .floating-action{width:48px!important;height:48px!important;min-width:48px;min-height:48px;display:grid!important;place-items:center;padding:0!important;border:1px solid rgba(242,239,231,.25)!important;border-radius:999px!important;background:#272923!important;color:#f2efe7!important;box-shadow:0 5px 14px rgba(34,35,31,.16)!important;cursor:pointer;pointer-events:auto;transition:transform .18s ease,background .18s ease,border-color .18s ease,opacity .18s ease}
-  .floating-actions .floating-action:hover{transform:translateY(-1px);background:#34372f!important;border-color:#a95638!important}
-  .floating-actions .floating-action:focus-visible{outline:3px solid #a95638;outline-offset:3px}
-  .floating-actions .floating-whatsapp{background:#25d366!important;border-color:#20b858!important;color:#fff!important;box-shadow:0 5px 14px rgba(34,35,31,.18)!important}
+  .floating-actions{--floating-cookie-offset:0px;position:fixed!important;inset-inline-end:max(20px,env(safe-area-inset-right))!important;inset-inline-start:auto!important;bottom:calc(20px + env(safe-area-inset-bottom) + var(--floating-cookie-offset))!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:10px!important;z-index:95!important;pointer-events:none!important;transition:bottom .2s ease!important}
+  .floating-actions .floating-action{position:relative!important;inset:auto!important;width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;display:grid!important;place-items:center!important;padding:0!important;border:1px solid rgba(242,239,231,.25)!important;border-radius:50%!important;background:#272923!important;color:#f2efe7!important;box-shadow:0 6px 20px rgba(0,0,0,.28)!important;cursor:pointer!important;pointer-events:auto!important;transition:transform .18s ease,background .18s ease,border-color .18s ease,opacity .18s ease,visibility .18s ease!important}
+  .floating-actions .floating-action:hover{transform:translateY(-2px) scale(1.04)!important;background:#34372f!important;border-color:#a95638!important}
+  .floating-actions .floating-action:focus-visible{outline:3px solid #a95638!important;outline-offset:3px!important}
+  .floating-actions .floating-whatsapp{background:#25d366!important;border-color:#20b858!important;color:#fff!important;box-shadow:0 6px 20px rgba(37,211,102,.35)!important}
   .floating-actions .floating-whatsapp:hover{background:#20c45e!important;border-color:#1aa34d!important}
-  .floating-actions svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .floating-actions .floating-whatsapp svg path:first-child{fill:currentColor;fill-opacity:.1}
-  .floating-actions .back-to-top{opacity:0;visibility:hidden;transform:translateY(6px);pointer-events:none}
-  .floating-actions .back-to-top.visible{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+  .floating-actions svg{width:22px!important;height:22px!important;fill:none!important;stroke:currentColor!important;stroke-width:2!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+  .floating-actions .floating-whatsapp svg path:first-child{fill:currentColor!important;fill-opacity:.15!important}
+  .floating-actions .back-to-top{opacity:0!important;visibility:hidden!important;transform:translateY(8px)!important;pointer-events:none!important;display:none!important}
+  .floating-actions .back-to-top.visible{opacity:1!important;visibility:visible!important;transform:translateY(0)!important;pointer-events:auto!important;display:grid!important}
 
   .fa-trade-video{padding:72px 0;border-top:1px solid #d3cec1;background:#e8e3d8;color:#22231f}
   .fa-trade-video__inner{width:min(1220px,calc(100% - 48px));margin-inline:auto}
