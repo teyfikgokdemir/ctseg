@@ -246,10 +246,11 @@ const qualityCardsData = [
         <p>{data.categoriesLead}</p>
       </div>
 
-      <div class="reflex-products-grid">
-        {data.categories.map((cat) => (
-          <article class="reflex-product-card" id={cat.id}>
+      <div class="reflex-products-grid" data-reflex-product-grid>
+        {data.categories.map((cat, index) => (
+          <article class:list={['reflex-product-card', { 'reflex-product-card--lead': index === 0 }]} id={cat.id} data-reflex-product-card>
             <figure class="reflex-card-image-box">
+              <span class="reflex-card-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
               <img
                 src={cat.image}
                 width="640"
@@ -258,50 +259,56 @@ const qualityCardsData = [
                 loading="lazy"
                 decoding="async"
               />
-              <div class="reflex-card-badges">
-                {cat.badges.map((b) => (
-                  <span class="reflex-card-badge">{b}</span>
-                ))}
-              </div>
             </figure>
 
             <div class="reflex-card-content">
-              <h3>{cat.name}</h3>
-              <p class="reflex-card-subtitle">{cat.subtitle}</p>
+              <div class="reflex-card-heading">
+                <p class="reflex-card-subtitle">{cat.subtitle}</p>
+                <h3>{cat.name}</h3>
+              </div>
               <p class="reflex-card-desc">{cat.description}</p>
+
+              <div class="reflex-card-badges" aria-label={`${cat.name} product highlights`}>
+                {cat.badges.slice(0, 3).map((badge) => (
+                  <span class="reflex-card-badge">{badge}</span>
+                ))}
+              </div>
 
               <dl class="reflex-spec-list">
                 <div>
-                  <dt>{ui.material}:</dt>
+                  <dt>{ui.material}</dt>
                   <dd>{cat.material}</dd>
                 </div>
                 <div>
-                  <dt>{ui.variants}:</dt>
+                  <dt>{ui.variants}</dt>
                   <dd>{cat.variants}</dd>
                 </div>
                 <div>
-                  <dt>{ui.packaging}:</dt>
+                  <dt>{ui.packaging}</dt>
                   <dd>{cat.packing}</dd>
                 </div>
               </dl>
 
               {categoryVideoMap[cat.id] && (
-                <div class="reflex-card-video-box">
-                  <video
-                    src={categoryVideoMap[cat.id].video}
-                    poster={categoryVideoMap[cat.id].poster}
-                    controls
-                    playsinline
-                    preload="metadata"
-                    aria-label={`${cat.name} Product Video`}
-                    class="reflex-card-video"
-                  ></video>
-                </div>
+                <details class="reflex-card-film">
+                  <summary>{ui.videoTitle}</summary>
+                  <div class="reflex-card-video-box">
+                    <video
+                      src={categoryVideoMap[cat.id].video}
+                      poster={categoryVideoMap[cat.id].poster}
+                      controls
+                      playsinline
+                      preload="metadata"
+                      aria-label={`${cat.name} Product Video`}
+                      class="reflex-card-video"
+                    ></video>
+                  </div>
+                </details>
               )}
 
               <div class="reflex-card-actions">
                 <a class="button button-small" href="#rfq-form" data-product-quote={cat.name}>
-                  {ui.quote}
+                  <span>{ui.quote}</span><span aria-hidden="true">→</span>
                 </a>
               </div>
             </div>
@@ -763,133 +770,183 @@ const qualityCardsData = [
     display: block;
   }
 
-  /* 4. Product Portfolio Cards (Requirement 5) */
-  .reflex-categories-section {
-    padding: 4.5rem 0;
-  }
+  /* 4. Product Portfolio Cards — premium B2B catalogue system */
+  .reflex-categories-section { padding: clamp(4.5rem,8vw,7.5rem) 0; }
   .reflex-products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 2rem;
-    margin-top: 2.5rem;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: clamp(1rem,2vw,1.7rem);
+    margin-top: clamp(2.3rem,4vw,3.6rem);
   }
   .reflex-product-card {
-    background: #161914;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 0.875rem;
-    overflow: hidden;
     display: flex;
+    min-width: 0;
     flex-direction: column;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    border: 1px solid rgba(226,185,108,.3);
+    border-radius: 1.1rem;
+    overflow: hidden;
+    background: linear-gradient(155deg,#1b1d18 0%,#10120f 100%);
+    box-shadow: 0 16px 36px rgba(0,0,0,.22);
+    transition: transform .3s ease,border-color .3s ease,box-shadow .3s ease;
   }
+  .reflex-product-card--lead { grid-column: span 2; }
   .reflex-product-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(226, 185, 108, 0.4);
+    transform: translateY(-5px);
+    border-color: rgba(226,185,108,.78);
+    box-shadow: 0 26px 52px rgba(0,0,0,.32);
   }
   .reflex-card-image-box {
-    margin: 0;
     position: relative;
-    background: #0b0d09;
-    aspect-ratio: 640 / 450;
+    display: grid;
+    min-height: 244px;
+    margin: 0;
+    padding: clamp(.8rem,1.6vw,1.35rem);
+    place-items: center;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-bottom: 1px solid rgba(226,185,108,.22);
+    background: radial-gradient(circle at 80% 12%,rgba(226,185,108,.16),transparent 34%),linear-gradient(145deg,#f7f4ee,#d9d6cf);
+  }
+  .reflex-product-card--lead .reflex-card-image-box { min-height: clamp(290px,29vw,380px); }
+  .reflex-card-image-box::after {
+    position: absolute;
+    inset: 12px;
+    border: 1px solid rgba(34,35,31,.14);
+    border-radius: .7rem;
+    content: '';
+    pointer-events: none;
   }
   .reflex-card-image-box img {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 100%;
+    max-height: 330px;
     object-fit: contain;
     object-position: center;
-    display: block;
-    background: #0b0d09;
+    filter: drop-shadow(0 16px 19px rgba(34,35,31,.18));
+    transition: transform .45s ease,filter .45s ease;
   }
-  .reflex-card-badges {
+  .reflex-product-card:hover .reflex-card-image-box img { transform: scale(1.028);filter:drop-shadow(0 20px 24px rgba(34,35,31,.25)); }
+  .reflex-card-index {
     position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.375rem;
-  }
-  .reflex-card-badge {
-    background: rgba(15, 17, 13, 0.88);
-    backdrop-filter: blur(6px);
-    border: 1px solid rgba(226, 185, 108, 0.3);
-    color: #f3e5c8;
-    font-size: 0.71875rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.375rem;
-    font-weight: 500;
+    z-index: 2;
+    top: 1rem;
+    left: 1rem;
+    color: #5d574e;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .18em;
   }
   .reflex-card-content {
-    padding: 1.5rem;
     display: flex;
-    flex-direction: column;
+    min-height: 0;
     flex: 1;
+    flex-direction: column;
+    padding: clamp(1.25rem,2.15vw,1.9rem);
   }
+  .reflex-card-heading { padding-bottom: 1rem; border-bottom: 1px solid rgba(226,185,108,.22); }
   .reflex-card-content h3 {
-    font-size: 1.2rem;
-    color: #ffffff;
-    margin-bottom: 0.25rem;
-    font-weight: 600;
+    margin: .25rem 0 0;
+    color: #f7f4ee;
+    font-family: var(--font-heading,'Source Serif 4',Georgia,serif);
+    font-size: clamp(1.55rem,2.3vw,2.3rem);
+    font-weight: 500;
+    line-height: 1.02;
   }
   .reflex-card-subtitle {
-    font-size: 0.8125rem;
+    margin: 0;
     color: #e2b96c;
-    font-weight: 500;
-    margin-bottom: 0.75rem;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
   }
   .reflex-card-desc {
-    font-size: 0.875rem;
-    line-height: 1.55;
-    color: #d1d5db;
-    margin-bottom: 1.25rem;
+    min-height: 4.8em;
+    margin: 1rem 0 0;
+    color: #d9d6cf;
+    font-size: .9rem;
+    line-height: 1.6;
+  }
+  .reflex-card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin: 1.1rem 0;
+  }
+  .reflex-card-badge {
+    padding: .34rem .54rem;
+    border: 1px solid rgba(226,185,108,.3);
+    border-radius: 999px;
+    color: #f3e5c8;
+    background: rgba(226,185,108,.08);
+    font-size: .66rem;
+    font-weight: 700;
+    line-height: 1.25;
   }
   .reflex-spec-list {
-    margin: 0 0 1.25rem 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    background: rgba(0, 0, 0, 0.25);
-    padding: 0.875rem;
-    border-radius: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 0;
+    margin: 0;
+    border-top: 1px solid rgba(255,255,255,.12);
+    border-bottom: 1px solid rgba(255,255,255,.12);
   }
-  .reflex-spec-list div {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8125rem;
-  }
+  .reflex-spec-list div { min-width: 0; padding: .78rem .65rem .78rem 0; }
+  .reflex-spec-list div + div { padding-left: .65rem; border-left: 1px solid rgba(255,255,255,.12); }
   .reflex-spec-list dt {
-    color: #9ca3af;
-    font-weight: 500;
+    color: #a9a59b;
+    font-size: .61rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
   }
   .reflex-spec-list dd {
-    color: #ffffff;
+    margin: .34rem 0 0;
+    color: #f7f4ee;
+    font-size: .76rem;
     font-weight: 600;
-    margin: 0;
-    text-align: right;
+    line-height: 1.38;
+    overflow-wrap: anywhere;
   }
-  .reflex-card-actions {
-    margin-top: auto;
-    padding-top: 0.75rem;
+  .reflex-card-film { margin-top: 1rem; border-bottom: 1px solid rgba(255,255,255,.12); }
+  .reflex-card-film summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 42px;
+    color: #e2b96c;
+    cursor: pointer;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
   }
+  .reflex-card-film summary::after { content: '+'; font-size: 1.1rem; line-height: 1; }
+  .reflex-card-film[open] summary::after { content: '−'; }
   .reflex-card-video-box {
-    margin: 1rem 0;
-    border-radius: 0.625rem;
+    margin: 0 0 1rem;
     overflow: hidden;
+    border: 1px solid rgba(226,185,108,.3);
+    border-radius: .65rem;
     background: #000;
     aspect-ratio: 16 / 9;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .reflex-card-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+  .reflex-card-video { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .reflex-card-actions { display: flex; margin-top: auto; padding-top: 1.25rem; }
+  .reflex-card-actions .button { width: 100%; justify-content:space-between; gap:1rem; background:#e2b96c; border-color:#e2b96c; color:#171914!important; }
+  .reflex-card-actions .button:hover,.reflex-card-actions .button:focus-visible { background:#f3e5c8; border-color:#f3e5c8; }
+  @media (max-width: 960px) {
+    .reflex-products-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .reflex-product-card--lead { grid-column: span 2; }
+  }
+  @media (max-width: 620px) {
+    .reflex-products-grid { grid-template-columns: 1fr; }
+    .reflex-product-card--lead { grid-column: auto; }
+    .reflex-product-card--lead .reflex-card-image-box,.reflex-card-image-box { min-height: 250px; }
+    .reflex-spec-list { grid-template-columns: 1fr; }
+    .reflex-spec-list div,.reflex-spec-list div + div { padding: .7rem 0; border-left: 0; }
+    .reflex-spec-list div + div { border-top: 1px solid rgba(255,255,255,.12); }
   }
 
   /* 5. Sector Applications (GEO / AIO) */
