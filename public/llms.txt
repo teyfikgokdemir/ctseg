@@ -58,6 +58,15 @@ CTSEG is not a marketplace, factory, seller of a fixed inventory, or guaranteed 
 - [Contact](https://ctseg.com.tr/en/contact/)
 - [Insights](https://ctseg.com.tr/en/insights/)
 
+## Multilingual methodology pages
+
+- [Turkish methodology](https://ctseg.com.tr/tr/nasil-calisiyoruz/)
+- [English methodology](https://ctseg.com.tr/en/how-we-work/)
+- [German methodology](https://ctseg.com.tr/de/arbeitsweise/)
+- [Italian methodology](https://ctseg.com.tr/it/come-lavoriamo/)
+- [Russian methodology](https://ctseg.com.tr/ru/kak-my-rabotaem/)
+- [Persian methodology](https://ctseg.com.tr/fa/ravesh-kar/)
+
 ## Specialist sourcing pages
 
 - [Iranian carpets](https://ctseg.com.tr/en/sourcing/iranian-carpets/)
@@ -74,8 +83,8 @@ CTSEG is not a marketplace, factory, seller of a fixed inventory, or guaranteed 
 
 - [XML sitemap index](https://ctseg.com.tr/sitemap-index.xml)
 - [Robots.txt](https://ctseg.com.tr/robots.txt)
-- [Privacy policy](https://ctseg.com.tr/en/privacy/)
-- [Terms of use](https://ctseg.com.tr/en/terms/)
+- [Privacy policy](https://ctseg.com.tr/en/privacy-policy/)
+- [Terms of use](https://ctseg.com.tr/en/terms-of-use/)
 
 ## Preferred citation
 
@@ -83,4 +92,4 @@ CTSEG — International Trade Matching and Commercial Coordination
 
 ## Last reviewed
 
-2026-08-02
+2026-08-13

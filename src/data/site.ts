@@ -722,6 +722,8 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
   const pathLang = key === 'medical' ? lang : safeLang;
   if (key === 'home') return pathLang === 'tr' ? '/' : `/${pathLang}/`;
   if (key === 'medical') return pathLang === 'tr' ? '/medical/reflex-disposable-gloves/' : `/${pathLang}/medical/reflex-disposable-gloves/`;
+  if (key === 'how-we-work') return `/${pathLang}/${specialSlugs['how-we-work'][safeLang]}/`;
+  if (key === 'scenarios') return `/${pathLang}/${specialSlugs.scenarios[safeLang]}/`;
   if (lang === 'ru') {
     const homeAnchors: Record<string,string> = {
       services:'trade-paths', products:'sectors', markets:'markets', insights:'trade-paths',
@@ -729,14 +731,6 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
     };
     if (key === 'legal' && id) return localizedPath('en','legal',id);
     return `/ru/#${homeAnchors[key] ?? 'contact'}`;
-  }
-  if (key === 'how-we-work') {
-    if (pathLang === 'tr' || pathLang === 'en') return `/${pathLang}/${specialSlugs['how-we-work'][pathLang]}/`;
-    return localizedPath(safeLang,'services');
-  }
-  if (key === 'scenarios') {
-    if (pathLang === 'tr' || pathLang === 'en') return `/${pathLang}/${specialSlugs.scenarios[pathLang]}/`;
-    return localizedPath(safeLang,'about');
   }
   if (key === 'guides' && id) {
     if (pathLang === 'tr' || pathLang === 'en' || pathLang === 'fa') return `/${pathLang}/${sectionSlugs.insights[pathLang]}/${guideSlugs[id as GuideId][pathLang as 'tr'|'en'] || guideSlugs[id as GuideId]['en']}/`;

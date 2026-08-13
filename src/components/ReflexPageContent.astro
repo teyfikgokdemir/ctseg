@@ -1,10 +1,12 @@
 ---
 import { reflexData, reflexPath, type ReflexLocale } from '../data/reflex-data';
+import { reflexUi } from '../data/reflex-ui';
 import ProductVideoSection from './ProductVideoSection.astro';
 
 const { lang = 'en' } = Astro.props as { lang?: string };
 const currentLang = (['en', 'tr', 'de', 'it', 'ru', 'fa', 'sq', 'mk', 'sr'].includes(lang) ? lang : 'en') as ReflexLocale;
 const data = reflexData[currentLang] || reflexData.en;
+const ui = reflexUi[currentLang] || reflexUi.en;
 const isRtl = currentLang === 'fa';
 const reflexUrl = reflexPath(currentLang);
 
@@ -123,7 +125,7 @@ const qualityCardsData = [
           <span class="current">{data.eyebrow}</span>
         </nav>
 
-        <span class="eyebrow reflex-eyebrow-hero">INTERNATIONAL B2B GLOVE SUPPLIER</span>
+        <span class="eyebrow reflex-eyebrow-hero">{ui.heroEyebrow}</span>
         <h1 class="reflex-h1">{localizedHeroTitle}</h1>
         <p class="lead reflex-hero-lead">{localizedHeroLead}</p>
 
@@ -192,7 +194,7 @@ const qualityCardsData = [
               <line x1="12" y1="16" x2="12" y2="12"/>
               <line x1="12" y1="8" x2="12.01" y2="8"/>
             </svg>
-            <span>CTSEG acts as an independent international sourcing and export partner, facilitating trade, export clearance, quality compliance, and logistics support.</span>
+            <span>{ui.roleScope}</span>
           </div>
         </div>
       </div>
@@ -228,9 +230,9 @@ const qualityCardsData = [
   <ProductVideoSection
     videoSrc="/videos/Commercial_prompt_for_disposable_gloves.mp4"
     posterSrc="/images/reflex/resizer.jpg"
-    kicker="PRODUCT VIDEO"
-    heading="REFLEX Disposable Gloves Product Demonstration"
-    description="Explore REFLEX glove quality, applications and commercial usage scenarios prepared for international distributors, wholesalers, healthcare institutions and procurement professionals."
+    kicker={ui.videoKicker}
+    heading={ui.videoTitle}
+    description={ui.videoDescription}
     lang={currentLang}
     controls={true}
     muted={false}
@@ -240,7 +242,7 @@ const qualityCardsData = [
   <section class="section reflex-categories-section" id="product-categories">
     <div class="container">
       <div class="section-head">
-        <h2>REFLEX Disposable Gloves Product Portfolio</h2>
+        <h2>{ui.portfolioTitle}</h2>
         <p>{data.categoriesLead}</p>
       </div>
 
@@ -270,15 +272,15 @@ const qualityCardsData = [
 
               <dl class="reflex-spec-list">
                 <div>
-                  <dt>Material:</dt>
+                  <dt>{ui.material}:</dt>
                   <dd>{cat.material}</dd>
                 </div>
                 <div>
-                  <dt>Variants / Colors:</dt>
+                  <dt>{ui.variants}:</dt>
                   <dd>{cat.variants}</dd>
                 </div>
                 <div>
-                  <dt>Packaging:</dt>
+                  <dt>{ui.packaging}:</dt>
                   <dd>{cat.packing}</dd>
                 </div>
               </dl>
@@ -299,7 +301,7 @@ const qualityCardsData = [
 
               <div class="reflex-card-actions">
                 <a class="button button-small" href="#rfq-form" data-product-quote={cat.name}>
-                  Request Commercial Quotation
+                  {ui.quote}
                 </a>
               </div>
             </div>
@@ -313,7 +315,7 @@ const qualityCardsData = [
   <section class="section reflex-applications-section">
     <div class="container">
       <div class="section-head">
-        <h2>Disposable Gloves for Healthcare, Food and Industrial Applications</h2>
+        <h2>{ui.applicationsTitle}</h2>
         <p>{data.applicationsLead}</p>
       </div>
 
@@ -344,8 +346,8 @@ const qualityCardsData = [
   <section class="section reflex-quality-section">
     <div class="container">
       <div class="section-head">
-        <h2>Quality Control & International Supply Standards</h2>
-        <p>Rigorous batch testing and compliance documentation to ensure reliable B2B delivery across global markets.</p>
+        <h2>{ui.qualityTitle}</h2>
+        <p>{ui.qualityLead}</p>
       </div>
 
       <div class="reflex-quality-grid">
@@ -372,6 +374,11 @@ const qualityCardsData = [
         <h2>{data.galleryTitle}</h2>
         <p>{data.galleryLead}</p>
       </div>
+
+      <aside class="reflex-document-scope" aria-label={ui.documentTitle}>
+        <strong>{ui.documentTitle}</strong>
+        <p>{ui.documentText}</p>
+      </aside>
 
       <div class="reflex-gallery-grid">
         {data.galleryItems.map((item) => (
@@ -434,44 +441,44 @@ const qualityCardsData = [
     <div class="container">
       <div class="reflex-rfq-grid">
         <div class="reflex-rfq-info">
-          <span class="eyebrow">B2B Commercial Assessment</span>
-          <h2>Request a Commercial Quotation for Bulk Supply</h2>
+          <span class="eyebrow">{ui.rfqEyebrow}</span>
+          <h2>{ui.rfqTitle}</h2>
           <p>{data.rfqLead}</p>
 
           <div class="reflex-rfq-trust-box">
-            <h4 class="reflex-rfq-trust-heading">Request a quotation for bulk supply</h4>
+            <h4 class="reflex-rfq-trust-heading">{ui.rfqTrustTitle}</h4>
             <ul class="reflex-rfq-trust-list">
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Product specifications & COA documentation</span>
+                <span>{ui.trustItems[0]}</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Custom packaging & private-label options</span>
+                <span>{ui.trustItems[1]}</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Export terms (FOB Istanbul, CIF, DAP)</span>
+                <span>{ui.trustItems[2]}</span>
               </li>
               <li>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>Production lead time & shipment schedules</span>
+                <span>{ui.trustItems[3]}</span>
               </li>
             </ul>
           </div>
 
           <div class="reflex-rfq-features">
             <div class="reflex-rfq-feat">
-              <strong>Direct Export Logistics</strong>
-              <span>FOB Istanbul, CIF Europe/Balkans/Middle East/North Africa.</span>
+              <strong>{ui.logisticsTitle}</strong>
+              <span>{ui.logisticsText}</span>
             </div>
             <div class="reflex-rfq-feat">
-              <strong>Batch Compliance Documents</strong>
-              <span>Certificate of Analysis (COA), CE 2841, EN ISO 374 declared per batch.</span>
+              <strong>{ui.documentsTitle}</strong>
+              <span>{ui.documentsText}</span>
             </div>
             <div class="reflex-rfq-feat">
-              <strong>Commercial Verification</strong>
-              <span>CTSEG conducts specification checks and volume-based pricing alignment.</span>
+              <strong>{ui.verificationTitle}</strong>
+              <span>{ui.verificationText}</span>
             </div>
           </div>
         </div>
@@ -948,6 +955,9 @@ const qualityCardsData = [
     line-height: 1.6;
     margin: 0;
   }
+
+  .reflex-document-scope{margin:0 0 2rem;padding:1.1rem 1.25rem;border-inline-start:3px solid #b58b45;background:rgba(181,139,69,.1)}
+  .reflex-document-scope strong{display:block;margin-bottom:.35rem}.reflex-document-scope p{margin:0;color:inherit;opacity:.86}
 
   /* 7. Gallery Section */
   .reflex-gallery-section {
