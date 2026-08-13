@@ -79,6 +79,24 @@ CTSEG is not a marketplace, factory, seller of a fixed inventory, or guaranteed 
 - [Russian hand-knotted silk carpets](https://ctseg.com.tr/ru/sourcing/hand-knotted-silk-carpets/)
 - [Russian wholesale textiles](https://ctseg.com.tr/ru/sourcing/textiles/)
 
+## Commercial decision solutions
+
+These answer-first solution families are available in Turkish, English, German, Italian, Russian, and Persian with reciprocal hreflang references.
+
+- [Supplier sourcing and verification in Türkiye](https://ctseg.com.tr/en/solutions/supplier-sourcing-verification-turkiye/)
+- [Private-label manufacturer research](https://ctseg.com.tr/en/solutions/private-label-manufacturer-research/)
+- [International RFQ and bid comparison](https://ctseg.com.tr/en/solutions/international-rfq-bid-comparison/)
+- [Food origin and batch-document sourcing assessment](https://ctseg.com.tr/en/solutions/food-origin-batch-document-sourcing-assessment/)
+
+## Russian content hubs
+
+- [Russian services](https://ctseg.com.tr/ru/uslugi/)
+- [Russian trade products](https://ctseg.com.tr/ru/tovary/)
+- [Russian markets](https://ctseg.com.tr/ru/rynki/)
+- [Russian insights](https://ctseg.com.tr/ru/materialy/)
+- [Russian company profile](https://ctseg.com.tr/ru/o-kompanii/)
+- [Russian contact](https://ctseg.com.tr/ru/kontakty/)
+
 ## Discovery and policy files
 
 - [XML sitemap index](https://ctseg.com.tr/sitemap-index.xml)

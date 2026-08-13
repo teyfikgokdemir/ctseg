@@ -6,7 +6,8 @@ const allowedOrigins = [
 ];
 const limits = {
   locale:5,intent:40,name:120,company:160,emailOrPhone:254,email:254,phone:80,country:100,
-  product:240,quantity:120,delivery:180,targetDate:40,requirements:500,message:2000,website:80,startedAt:30,privacy:20
+  product:240,quantity:120,delivery:180,targetDate:40,requirements:500,message:2000,website:80,startedAt:30,privacy:20,
+  pagePath:200,landingPath:200,referrerHost:160,utmSource:100,utmMedium:100,utmCampaign:120,utmContent:120,utmTerm:120,clickId:160
 };
 const required = ['intent','name','company','emailOrPhone','message','privacy'];
 
@@ -72,7 +73,16 @@ export async function onRequestPost(context){
     `Delivery: ${data.delivery}`,
     `Target date: ${data.targetDate||'-'}`,
     `Quality or document requirements: ${data.requirements||'-'}`,
-    `Message: ${data.message}`
+    `Message: ${data.message}`,
+    '',
+    'Attribution (first touch)',
+    `Submission page: ${data.pagePath||'-'}`,
+    `Landing page: ${data.landingPath||'-'}`,
+    `Referrer host: ${data.referrerHost||'-'}`,
+    `UTM source / medium: ${data.utmSource||'-'} / ${data.utmMedium||'-'}`,
+    `UTM campaign: ${data.utmCampaign||'-'}`,
+    `UTM content / term: ${data.utmContent||'-'} / ${data.utmTerm||'-'}`,
+    `Ad click ID: ${data.clickId||'-'}`
   ];
   const response=await fetch('https://api.resend.com/emails',{
     method:'POST',

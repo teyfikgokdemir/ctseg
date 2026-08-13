@@ -3,6 +3,7 @@ import {
   sectionSlugs, serviceIds, services, ui, type Locale
 } from '../data/site';
 import { guideIds, guides, guideSlugs, processPages, scenarioPages, specialSlugs } from '../data/completion';
+import { searchLandingIds, searchLandings, searchLandingPath } from '../data/search-landings';
 
 export type RouteRecord = {
   lang: Locale;
@@ -17,7 +18,9 @@ export function getRouteRecords(): RouteRecord[] {
     if (lang !== 'tr') records.push({ lang, key:'home' });
     records.push({lang,path:specialSlugs['how-we-work'][lang],key:'how-we-work'});
     records.push({lang,path:specialSlugs.scenarios[lang],key:'scenarios'});
-    if (lang === 'ru') continue;
+    for (const id of searchLandingIds) records.push({
+      lang,path:searchLandingPath(lang,id).replace(`/${lang}/`,'').replace(/^\//,'').replace(/\/$/,''),key:'search-landing',id
+    });
     for (const key of ['services','products','markets','insights','about','contact']) {
       records.push({ lang, path:sectionSlugs[key][lang], key });
     }
@@ -60,6 +63,10 @@ export function getMeta(record: RouteRecord) {
   if (key === 'insights' && id) return { title:`${insights[id as keyof typeof insights].titles[lang]} | CTSEG`, description:insights[id as keyof typeof insights].descriptions[lang] };
   if (key === 'how-we-work') return {title:`${processPages[lang].title} | CTSEG`,description:processPages[lang].description};
   if (key === 'scenarios') return {title:`${scenarioPages[lang].title} | CTSEG`,description:scenarioPages[lang].description};
+  if (key === 'search-landing' && id) {
+    const landing=searchLandings[id as keyof typeof searchLandings].content[lang];
+    return {title:`${landing.title} | CTSEG`,description:landing.description};
+  }
   if (key === 'guides' && id) {
     const guideLang = (lang === 'tr' || lang === 'en') ? lang : 'en';
     const guide = guides[id as keyof typeof guides]?.[guideLang] || { title: 'Guide', description: 'Commercial guide' };

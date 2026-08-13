@@ -78,12 +78,12 @@ export const companyCopy: Record<Locale, {
 };
 
 export const sectionSlugs: Record<string, Localized> = {
-  services: { tr: 'hizmetler', en: 'services', de: 'dienstleistungen', it: 'servizi', ru: 'services', fa: 'services' },
-  products: { tr: 'ticari-urunler', en: 'trade-products', de: 'handelsprodukte', it: 'prodotti-commerciali', ru: 'products', fa: 'trade-products' },
-  markets: { tr: 'pazarlar', en: 'markets', de: 'maerkte', it: 'mercati', ru: 'markets', fa: 'markets' },
-  insights: { tr: 'icgoruler', en: 'insights', de: 'einblicke', it: 'approfondimenti', ru: 'insights', fa: 'insights' },
-  about: { tr: 'hakkimizda', en: 'about', de: 'ueber-uns', it: 'chi-siamo', ru: 'about', fa: 'about' },
-  contact: { tr: 'iletisim', en: 'contact', de: 'kontakt', it: 'contatti', ru: 'contact', fa: 'contact' }
+  services: { tr: 'hizmetler', en: 'services', de: 'dienstleistungen', it: 'servizi', ru: 'uslugi', fa: 'services' },
+  products: { tr: 'ticari-urunler', en: 'trade-products', de: 'handelsprodukte', it: 'prodotti-commerciali', ru: 'tovary', fa: 'trade-products' },
+  markets: { tr: 'pazarlar', en: 'markets', de: 'maerkte', it: 'mercati', ru: 'rynki', fa: 'markets' },
+  insights: { tr: 'icgoruler', en: 'insights', de: 'einblicke', it: 'approfondimenti', ru: 'materialy', fa: 'insights' },
+  about: { tr: 'hakkimizda', en: 'about', de: 'ueber-uns', it: 'chi-siamo', ru: 'o-kompanii', fa: 'about' },
+  contact: { tr: 'iletisim', en: 'contact', de: 'kontakt', it: 'contatti', ru: 'kontakty', fa: 'contact' }
 };
 
 export const ui: Record<Locale, any> = {
@@ -239,62 +239,62 @@ export const homeCopy: Record<Locale, any> = {
 export const serviceIds = ['strategic-sourcing', 'supplier-verification', 'trade-advisory', 'tco', 'market-entry'] as const;
 export const services: Record<(typeof serviceIds)[number], { slugs: Localized; names: Localized; descriptions: Localized }> = {
   'strategic-sourcing': {
-    slugs: { tr:'stratejik-tedarik', en:'strategic-sourcing', de:'strategische-beschaffung', it:'approvvigionamento-strategico', ru:'sourcing-strategique', fa:'strategic-sourcing' },
-    names: { tr:'Stratejik Tedarik', en:'Strategic Sourcing', de:'Strategische Beschaffung', it:'Approvvigionamento strategico', ru:'Sourcing stratégique', fa:'تأمین استراتژیک' },
+    slugs: { tr:'stratejik-tedarik', en:'strategic-sourcing', de:'strategische-beschaffung', it:'approvvigionamento-strategico', ru:'strategicheskiy-sorsing', fa:'strategic-sourcing' },
+    names: { tr:'Stratejik Tedarik', en:'Strategic Sourcing', de:'Strategische Beschaffung', it:'Approvvigionamento strategico', ru:'Стратегический сорсинг', fa:'تأمین استراتژیک' },
     descriptions: {
       tr:'Tedarik pazarı analizi, RFQ, doğrulama, teklif karşılaştırma ve performans planıyla sürdürülebilir kararlar.',
       en:'Sustainable decisions through supply-market analysis, RFQ, verification, bid comparison and performance planning.',
       de:'Nachhaltige Entscheidungen durch Beschaffungsmarktanalyse, RFQ, Prüfung, Angebotsvergleich und Leistungsplanung.',
       it:'Decisioni sostenibili con analisi del mercato di fornitura, RFQ, verifica, confronto offerte e piano prestazioni.',
-      ru:'Des décisions durables grâce à l’analyse du marché fournisseurs, au RFQ, à la vérification et au suivi de performance.',
+      ru:'Устойчивые решения благодаря анализу рынка поставщиков, подготовке RFQ, верификации и мониторингу производительности.',
       fa:'تصمیم‌گیری پایدار از طریق تحلیل بازار تأمین، RFQ، اعتباربرسنجی، مقایسه پیشنهادات و برنامه‌ریزی عملکرد.'
     }
   },
   'supplier-verification': {
-    slugs: { tr:'tedarikci-bulma-ve-dogrulama', en:'supplier-sourcing-and-verification', de:'lieferantensuche-und-pruefung', it:'ricerca-e-verifica-fornitori', ru:'recherche-et-verification-fournisseurs', fa:'supplier-sourcing-and-verification' },
-    names: { tr:'Tedarikçi Bulma ve Doğrulama', en:'Supplier Sourcing & Verification', de:'Lieferantensuche & -prüfung', it:'Ricerca e verifica fornitori', ru:'Recherche et vérification fournisseurs', fa:'شناسایی و اعتباربرسنجی تأمین‌کننده' },
+    slugs: { tr:'tedarikci-bulma-ve-dogrulama', en:'supplier-sourcing-and-verification', de:'lieferantensuche-und-pruefung', it:'ricerca-e-verifica-fornitori', ru:'poisk-i-verifikatsiya-postavshchikov', fa:'supplier-sourcing-and-verification' },
+    names: { tr:'Tedarikçi Bulma ve Doğrulama', en:'Supplier Sourcing & Verification', de:'Lieferantensuche & -prüfung', it:'Ricerca e verifica fornitori', ru:'Поиск и верификация поставщиков', fa:'شناسایی و اعتباربرسنجی تأمین‌کننده' },
     descriptions: {
       tr:'Üretici keşfi, şirket, kapasite, belge, referans ve ticari şartların çapraz doğrulaması.',
       en:'Producer discovery and cross-verification of company, capacity, documents, references and commercial terms.',
       de:'Produzentensuche und Gegenprüfung von Unternehmen, Kapazität, Dokumenten, Referenzen und Konditionen.',
       it:'Ricerca produttori e verifica incrociata di azienda, capacità, documenti, referenze e condizioni commerciali.',
-      ru:'Recherche de producteurs et vérification croisée de l’entreprise, des capacités, documents, références et conditions.',
+      ru:'Поиск производителей и перекрёстная проверка компании, мощностей, документов, рекомендаций и коммерческих условий.',
       fa:'شناسایی تولیدکننده و ارزیابی تقاطعی شرکت، ظرفیت، اسناد، سوابق و شرایط تجاری.'
     }
   },
   'trade-advisory': {
-    slugs: { tr:'uluslararasi-ticaret-danismanligi', en:'international-trade-advisory', de:'internationale-handelsberatung', it:'consulenza-commercio-internazionale', ru:'conseil-commerce-international', fa:'international-trade-advisory' },
-    names: { tr:'Uluslararası Ticaret Danışmanlığı', en:'International Trade Advisory', de:'Internationale Handelsberatung', it:'Consulenza commercio internazionale', ru:'Conseil en commerce international', fa:'مشاوره تجارت بین‌الملل' },
+    slugs: { tr:'uluslararasi-ticaret-danismanligi', en:'international-trade-advisory', de:'internationale-handelsberatung', it:'consulenza-commercio-internazionale', ru:'konsultatsii-po-mezhdunarodnoy-torgovle', fa:'international-trade-advisory' },
+    names: { tr:'Uluslararası Ticaret Danışmanlığı', en:'International Trade Advisory', de:'Internationale Handelsberatung', it:'Consulenza commercio internazionale', ru:'Консультации по международной торговле', fa:'مشاوره تجارت بین‌الملل' },
     descriptions: {
       tr:'Ticari model, Incoterms, belge, lojistik, karşı taraf ve uygulama risklerini birlikte yapılandırma.',
       en:'Structuring commercial model, Incoterms, documentation, logistics, counterparty and execution risk together.',
       de:'Gemeinsame Strukturierung von Handelsmodell, Incoterms, Dokumentation, Logistik und Ausführungsrisiken.',
       it:'Strutturazione integrata di modello commerciale, Incoterms, documenti, logistica e rischi di esecuzione.',
-      ru:'Structuration conjointe du modèle commercial, des Incoterms, documents, flux logistiques et risques d’exécution.',
+      ru:'Структурирование торговой модели, Incoterms, документации, логистики и рисков исполнения.',
       fa:'ساختاردهی یکپارچه مدل تجاری، Incoterms، اسناد، لجستیک و ریسک‌های اجرایی.'
     }
   },
   tco: {
-    slugs: { tr:'maliyet-optimizasyonu-tco', en:'cost-optimisation-tco', de:'kostenoptimierung-tco', it:'ottimizzazione-costi-tco', ru:'optimisation-couts-tco', fa:'cost-optimisation-tco' },
-    names: { tr:'Maliyet Optimizasyonu ve TCO', en:'Cost Optimisation & TCO', de:'Kostenoptimierung & TCO', it:'Ottimizzazione costi e TCO', ru:'Optimisation des coûts et TCO', fa:'بهینه‌سازی هزینه و TCO' },
+    slugs: { tr:'maliyet-optimizasyonu-tco', en:'cost-optimisation-tco', de:'kostenoptimierung-tco', it:'ottimizzazione-costi-tco', ru:'optimizatsiya-zatrat-tco', fa:'cost-optimisation-tco' },
+    names: { tr:'Maliyet Optimizasyonu ve TCO', en:'Cost Optimisation & TCO', de:'Kostenoptimierung & TCO', it:'Ottimizzazione costi e TCO', ru:'Оптимизация затрат и TCO', fa:'بهینه‌سازی هزینه و TCO' },
     descriptions: {
       tr:'Birim fiyatın ötesinde lojistik, kalite, stok, finansman, gecikme ve risk maliyetlerini görünür kılma.',
       en:'Making logistics, quality, inventory, finance, delay and risk costs visible beyond unit price.',
       de:'Transparenz über Logistik-, Qualitäts-, Bestands-, Finanzierungs-, Verzögerungs- und Risikokosten.',
       it:'Visibilità su logistica, qualità, scorte, finanza, ritardi e rischio oltre il prezzo unitario.',
-      ru:'Visibilité sur la logistique, la qualité, les stocks, le financement, les délais et les risques au-delà du prix unitaire.',
+      ru:'Прозрачность логистики, качества, запасов, финансирования, сроков и рисков помимо цены за единицу.',
       fa:'شفاف‌سازی هزینه‌های لجستیک، کیفیت، موجودی، مالی و ریسک فراتر از قیمت واحد.'
     }
   },
   'market-entry': {
-    slugs: { tr:'pazar-girisi', en:'market-entry', de:'markteintritt', it:'ingresso-nel-mercato', ru:'entree-sur-le-marche', fa:'market-entry' },
-    names: { tr:'Pazar Girişi', en:'Market Entry', de:'Markteintritt', it:'Ingresso nel mercato', ru:'Entrée sur le marché', fa:'ورود به بازار' },
+    slugs: { tr:'pazar-girisi', en:'market-entry', de:'markteintritt', it:'ingresso-nel-mercato', ru:'vyhod-na-rynok', fa:'market-entry' },
+    names: { tr:'Pazar Girişi', en:'Market Entry', de:'Markteintritt', it:'Ingresso nel mercato', ru:'Выход на рынок', fa:'ورود به بازار' },
     descriptions: {
       tr:'Hedef pazar, kanal, partner, uygunluk ve ilk ticari uygulama için kanıta dayalı yol haritası.',
       en:'An evidence-led roadmap for target market, channel, partner, compliance and first commercial execution.',
       de:'Evidenzbasierter Fahrplan für Zielmarkt, Kanal, Partner, Konformität und erste Umsetzung.',
       it:'Roadmap basata su evidenze per mercato, canale, partner, conformità e prima esecuzione commerciale.',
-      ru:'Feuille de route fondée sur des preuves pour le marché, le canal, le partenaire, la conformité et la première exécution.',
+      ru:'Дорожная карта, основанная на доказательствах, для выбора рынка, канала, партнёра, соответствия и первой коммерческой реализации.',
       fa:'نقشه راه مبتنی بر شواهد برای بازار هدف، کانال توزیع، شریک تجاری، انطباق و اجرای اولیه.'
     }
   }
@@ -313,24 +313,24 @@ export const homeProductIds = [
 
 
 const productNames: Record<(typeof productIds)[number], Localized> = {
-  'akbari-pistachio': { tr:'Akbari Antep Fıstığı', en:'Akbari Pistachios', de:'Akbari-Pistazien', it:'Pistacchi Akbari', ru:'Pistaches Akbari', fa:'پسته اکبری' },
-  'kaleghouchi-pistachio': { tr:'Kalleh Ghouchi Antep Fıstığı', en:'Kalleh Ghouchi Pistachios', de:'Kalleh-Ghouchi-Pistazien', it:'Pistacchi Kalleh Ghouchi', ru:'Pistaches Kalleh Ghouchi', fa:'پسته کله‌قوچی' },
-  'fandoghi-pistachio': { tr:'Fandoghi Antep Fıstığı', en:'Fandoghi Pistachios', de:'Fandoghi-Pistazien', it:'Pistacchi Fandoghi', ru:'Pistaches Fandoghi', fa:'پسته فندقی' },
-  'ahmad-aghaei-pistachio': { tr:'Ahmad Aghaei Antep Fıstığı', en:'Ahmad Aghaei Pistachios', de:'Ahmad-Aghaei-Pistazien', it:'Pistacchi Ahmad Aghaei', ru:'Pistaches Ahmad Aghaei', fa:'پسته احمدآقایی' },
-  'green-peeled-pistachio': { tr:'Yeşil Soyulmuş İç Fıstık', en:'Green Peeled Pistachio Kernels', de:'Grüne geschälte Pistazienkerne', it:'Pistacchio verde sgusciato', ru:'Pistaches vertes mondées', fa:'مغز پسته کال سبز' },
-  'pistachio-granules': { tr:'Kırık ve Granül İç Fıstık', en:'Broken & Granulated Pistachio Kernels', de:'Pistazienbruch und -granulat', it:'Granella e pistacchio spezzato', ru:'Éclats et granulés de pistache', fa:'خلال و دندانه مغز پسته' },
-  'mazafati-dates': { tr:'Mazafati Hurması', en:'Mazafati Dates', de:'Mazafati-Datteln', it:'Datteri Mazafati', ru:'Dattes Mazafati', fa:'خرمای مضافتی' },
-  'date-paste-syrup': { tr:'Hurma Ezmesi ve Şurubu', en:'Date Paste & Syrup', de:'Dattelpaste und -sirup', it:'Pasta e sciroppo di datteri', ru:'Pâte et sirop de dattes', fa:'خمیر و شیره خرما' },
-  raisins: { tr:'Kuru Üzüm', en:'Raisins', de:'Rosinen', it:'Uva passa', ru:'Raisins secs', fa:'کشمش' },
-  almonds: { tr:'Badem', en:'Almonds', de:'Mandeln', it:'Mandorle', ru:'Amandes', fa:'بادام' },
-  walnuts: { tr:'Ceviz', en:'Walnuts', de:'Walnüsse', it:'Noci', ru:'Noix', fa:'گردو' },
-  'dried-apricots-kernels': { tr:'Kuru Kayısı ve Kayısı Çekirdeği', en:'Dried Apricots & Apricot Kernels', de:'Getrocknete Aprikosen und Aprikosenkerne', it:'Albicocche secche e noccioli', ru:'Abricots secs et amandons', fa:'برگه زردآلو و هسته زردآلو' },
-  'pumpkin-seeds': { tr:'Kabak Çekirdeği', en:'Pumpkin Seeds', de:'Kürbiskerne', it:'Semi di zucca', ru:'Graines de courge', fa:'تخمه کدو' },
-  'sunflower-seeds': { tr:'Ay Çekirdeği', en:'Sunflower Seeds', de:'Sonnenblumenkerne', it:'Semi di girasole', ru:'Graines de tournesol', fa:'تخمه آفتابگردان' },
-  saffron: { tr:'Safran', en:'Saffron', de:'Safran', it:'Zafferano', ru:'Safran', fa:'زعفران' },
-  'dried-mulberries': { tr:'Kurutulmuş Dut', en:'Dried Mulberries', de:'Getrocknete Maulbeeren', it:'Gelsi essiccati', ru:'Mûres blanches séchées', fa:'توت خشک' },
-  zereshk: { tr:'Zereshk', en:'Zereshk Barberries', de:'Zereshk-Berberitzen', it:'Crespino Zereshk', ru:'Épine-vinette Zereshk', fa:'زرشک' },
-  'mixed-nuts': { tr:'Karışık Kuruyemiş ve Özel Ürünler', en:'Mixed Nuts & Specialities', de:'Nussmischungen und Spezialitäten', it:'Frutta secca mista e specialità', ru:'Mélanges de fruits à coque et spécialités', fa:'آجیل مخلوط و محصولات خاص' }
+  'akbari-pistachio': { tr:'Akbari Antep Fıstığı', en:'Akbari Pistachios', de:'Akbari-Pistazien', it:'Pistacchi Akbari', ru:'Фисташки Акбари', fa:'پسته اکبری' },
+  'kaleghouchi-pistachio': { tr:'Kalleh Ghouchi Antep Fıstığı', en:'Kalleh Ghouchi Pistachios', de:'Kalleh-Ghouchi-Pistazien', it:'Pistacchi Kalleh Ghouchi', ru:'Фисташки Каллех Гучи', fa:'پسته کله‌قوچی' },
+  'fandoghi-pistachio': { tr:'Fandoghi Antep Fıstığı', en:'Fandoghi Pistachios', de:'Fandoghi-Pistazien', it:'Pistacchi Fandoghi', ru:'Фисташки Фандоги', fa:'پسته فندقی' },
+  'ahmad-aghaei-pistachio': { tr:'Ahmad Aghaei Antep Fıstığı', en:'Ahmad Aghaei Pistachios', de:'Ahmad-Aghaei-Pistazien', it:'Pistacchi Ahmad Aghaei', ru:'Фисташки Ахмад-Агаи', fa:'پسته احمدآقایی' },
+  'green-peeled-pistachio': { tr:'Yeşil Soyulmuş İç Fıstık', en:'Green Peeled Pistachio Kernels', de:'Grüne geschälte Pistazienkerne', it:'Pistacchio verde sgusciato', ru:'Очищенные зелёные ядра фисташек', fa:'مغز پسته کال سبز' },
+  'pistachio-granules': { tr:'Kırık ve Granül İç Fıstık', en:'Broken & Granulated Pistachio Kernels', de:'Pistazienbruch und -granulat', it:'Granella e pistacchio spezzato', ru:'Крошка и гранулы фисташек', fa:'خلال و دندانه مغز پسته' },
+  'mazafati-dates': { tr:'Mazafati Hurması', en:'Mazafati Dates', de:'Mazafati-Datteln', it:'Datteri Mazafati', ru:'Финики Мазафати', fa:'خرمای مضافتی' },
+  'date-paste-syrup': { tr:'Hurma Ezmesi ve Şurubu', en:'Date Paste & Syrup', de:'Dattelpaste und -sirup', it:'Pasta e sciroppo di datteri', ru:'Паста и сироп из фиников', fa:'خمیر و شیره خرما' },
+  raisins: { tr:'Kuru Üzüm', en:'Raisins', de:'Rosinen', it:'Uva passa', ru:'Изюм', fa:'کشمش' },
+  almonds: { tr:'Badem', en:'Almonds', de:'Mandeln', it:'Mandorle', ru:'Миндаль', fa:'بادام' },
+  walnuts: { tr:'Ceviz', en:'Walnuts', de:'Walnüsse', it:'Noci', ru:'Грецкие орехи', fa:'گردو' },
+  'dried-apricots-kernels': { tr:'Kuru Kayısı ve Kayısı Çekirdeği', en:'Dried Apricots & Apricot Kernels', de:'Getrocknete Aprikosen und Aprikosenkerne', it:'Albicocche secche e noccioli', ru:'Сушёные абрикосы и ядра', fa:'برگه زردآلو و هسته زردآلو' },
+  'pumpkin-seeds': { tr:'Kabak Çekirdeği', en:'Pumpkin Seeds', de:'Kürbiskerne', it:'Semi di zucca', ru:'Тыквенные семечки', fa:'تخمه کدو' },
+  'sunflower-seeds': { tr:'Ay Çekirdeği', en:'Sunflower Seeds', de:'Sonnenblumenkerne', it:'Semi di girasole', ru:'Подсолнечные семечки', fa:'تخمه آفتابگردان' },
+  saffron: { tr:'Safran', en:'Saffron', de:'Safran', it:'Zafferano', ru:'Шафран', fa:'زعفران' },
+  'dried-mulberries': { tr:'Kurutulmuş Dut', en:'Dried Mulberries', de:'Getrocknete Maulbeeren', it:'Gelsi essiccati', ru:'Сушёные шелковицы', fa:'توت خشک' },
+  zereshk: { tr:'Zereshk', en:'Zereshk Barberries', de:'Zereshk-Berberitzen', it:'Crespino Zereshk', ru:'Зерешк (барбарис)', fa:'زرشک' },
+  'mixed-nuts': { tr:'Karışık Kuruyemiş ve Özel Ürünler', en:'Mixed Nuts & Specialities', de:'Nussmischungen und Spezialitäten', it:'Frutta secca mista e specialità', ru:'Ассорти орехов и специализированные продукты', fa:'آجیل مخلوط و محصولات خاص' }
 };
 
 const productDescriptions: Record<(typeof productIds)[number], Localized> = {
@@ -339,7 +339,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Long, large Akbari kernels offer a distinguished appearance and full bite for premium retail, hospitality and gifting programmes.',
     de:'Lange, große Akbari-Kerne bieten eine markante Optik und einen vollen Biss für Premiumhandel, Gastronomie und Geschenkprogramme.',
     it:'I pistacchi Akbari, lunghi e di grande calibro, offrono un aspetto elegante e una consistenza piena per retail premium, horeca e confezioni regalo.',
-    ru:'Les pistaches Akbari, longues et de gros calibre, offrent une présentation raffinée et une texture généreuse pour le retail premium, l’hôtellerie et les coffrets.',
+    ru:'Длинные крупные фисташки Акбари с изысканным видом и плотной мякотью подходят для премиального ритейла, HORECA и подарочных наборов.',
     fa:'پسته کشیده و درشت اکبری با ظاهر لوکس و مغز پر، گزینه‌ای ایده‌آل برای بسته‌بندی‌های پریمیوم، صادرات و بازار خرده‌فروشی تخصصی است.'
   },
   'kaleghouchi-pistachio': {
@@ -347,7 +347,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Large and round Kalleh Ghouchi pistachios sit in the jumbo class, suited to in-shell programmes where shelf impact is a priority.',
     de:'Große, runde Kalleh-Ghouchi-Pistazien gehören zur Jumbo-Klasse und eignen sich für Schalenware mit besonders starker Regalwirkung.',
     it:'Grandi e rotondi, i Kalleh Ghouchi appartengono alla classe jumbo e sono adatti ai programmi in guscio che richiedono forte impatto a scaffale.',
-    ru:'Grosses et rondes, les Kalleh Ghouchi relèvent de la classe jumbo et conviennent aux programmes en coque recherchant un fort impact en rayon.',
+    ru:'Крупные округлые фисташки Kalleh Ghouchi относятся к категории jumbo и подходят для программ в скорлупе, где важна презентация на полке.',
     fa:'پسته گرد و درشت کله‌قوچی در رده جامبو قرار داشته و برای برنامه‌های فروش با پوست با ظاهر قوی رف مناسب است.'
   },
   'fandoghi-pistachio': {
@@ -355,7 +355,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Small, round Fandoghi pistachios combine consistent sizing with efficient packing, making them a practical choice for high-volume trade.',
     de:'Kleine, runde Fandoghi-Pistazien verbinden gleichmäßige Sortierung mit effizienter Verpackung und sind damit für großvolumigen Handel geeignet.',
     it:'Piccoli e rotondi, i Fandoghi uniscono calibro uniforme ed efficienza di confezionamento, risultando adatti al commercio ad alto volume.',
-    ru:'Petites et rondes, les Fandoghi associent calibrage régulier et conditionnement efficace, un choix adapté aux échanges à fort volume.',
+    ru:'Небольшие округлые Fandoghi с равномерным калибром и эффективной упаковкой — практичный выбор для торговли большими объёмами.',
     fa:'پسته فندقی با اندازه یکدست و بسته بندی مقرون‌به‌صرفه، انتخابی استاندارد برای برنامه‌های تجاری با حجم بالا است.'
   },
   'ahmad-aghaei-pistachio': {
@@ -363,7 +363,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Long Ahmad Aghaei pistachios are recognised for their light shells, export-ready presentation and broad availability across commercial grades.',
     de:'Längliche Ahmad-Aghaei-Pistazien zeichnen sich durch helle Schalen, exportgerechte Präsentation und breite Verfügbarkeit in Handelskalibern aus.',
     it:'I pistacchi Ahmad Aghaei si distinguono per forma allungata, guscio chiaro e ampia diffusione nei calibri destinati all’esportazione.',
-    ru:'Les Ahmad Aghaei se distinguent par leur forme allongée, leur coque claire et leur large diffusion dans les calibres destinés à l’export.',
+    ru:'Удлинённые фисташки Ahmad Aghaei отличаются светлой скорлупой, узнаваемым видом и широкой представленностью в торговых калибрах, востребованы в экспортных программах.',
     fa:'پسته احمدآقایی با پوست روشن و ظاهر بازارپسند، از محبوب‌ترین ارقام برای برنامه‌های صادراتی و بازارهای بین‌المللی است.'
   },
   'green-peeled-pistachio': {
@@ -371,7 +371,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'With vivid green colour and concentrated pistachio character, peeled kernels are intended for pastry, gelato, chocolate and premium food production.',
     de:'Mit leuchtend grüner Farbe und konzentriertem Pistazienprofil sind geschälte Kerne für Konditorei, Speiseeis, Schokolade und hochwertige Lebensmittel bestimmt.',
     it:'Dal verde intenso e dal gusto concentrato, il pistacchio pelato è destinato a pasticceria, gelato, cioccolato e produzioni alimentari premium.',
-    ru:'D’un vert intense et au caractère aromatique concentré, les pistaches mondées sont destinées à la pâtisserie, aux glaces, au chocolat et aux fabrications premium.',
+    ru:'Очищенные зелёные ядра с насыщенным цветом и выраженным фисташковым вкусом предназначены для кондитерских изделий, мороженого, шоколада и премиального пищевого производства.',
     fa:'مغز پسته کال سبز با رنگ سبز درخشان و طعم غلیظ، ماده اولیه تخصصی برای شیرینی‌پزی، شکلات‌سازی، بستنی و صنایع غذایی لوکس است.'
   },
   'pistachio-granules': {
@@ -379,7 +379,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Pistachio crumb and granules support industrial coating, filling and decoration applications, with 2–4 mm, 4–6 mm and 6–8 mm calibrations.',
     de:'Pistazienbruch und -granulat für industrielle Überzüge, Füllungen und Dekore ist in Kalibrierungen von 2–4 mm, 4–6 mm und 6–8 mm verfügbar.',
     it:'Granella e pistacchio spezzato per coperture, farciture e decorazioni industriali sono disponibili nelle calibrature 2–4 mm, 4–6 mm e 6–8 mm.',
-    ru:'Éclats et granulés pour enrobages, fourrages et décors industriels sont proposés en calibrages 2–4 mm, 4–6 mm et 6–8 mm.',
+    ru:'Крошка и гранулы фисташек для промышленных покрытий, начинок и декора доступны в калибрах 2–4 мм, 4–6 мм и 6–8 мм.',
     fa:'خلال و دندانه مغز پسته در سایزهای ۲ تا ۸ میلی‌متر برای کاربردهای صنعتی، روکش، مغز شکلات و تزیینات مواد غذایی عرضه می‌شود.'
   },
   'mazafati-dates': {
@@ -387,7 +387,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Soft, dark Mazafati dates with a naturally caramel-like profile are suited to chilled retail and foodservice programmes with controlled handling.',
     de:'Weiche, dunkle Mazafati-Datteln mit natürlicher Karamellnote eignen sich für gekühlte Handels- und Gastronomieprogramme mit kontrollierter Handhabung.',
     it:'I datteri Mazafati, morbidi, scuri e naturalmente caramellati, sono indicati per programmi retail e horeca refrigerati con gestione controllata.',
-    ru:'Les dattes Mazafati, tendres, foncées et naturellement caramélisées, conviennent aux programmes retail et restauration sous chaîne du froid maîtrisée.',
+    ru:'Мазафати — мягкие тёмные финики с естественным карамельным профилем, подходят для охлаждаемого ритейла и HORECA при контролируемой обработке.',
     fa:'خرمای مضافتی با بافت نرم، رنگ تیره و طعم کاراملی طبیعی، ارزیابی و تأمین شده برای بازارهای خرده‌فروشی و توزیع عمده.'
   },
   'date-paste-syrup': {
@@ -395,7 +395,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Date paste and syrup are specified for natural sweetness, binding and colour in bakery, bar, sauce and filling formulations.',
     de:'Dattelpaste und -sirup werden für natürliche Süße, Bindung und Farbe in Backwaren, Riegeln, Saucen und Füllungen spezifiziert.',
     it:'Pasta e sciroppo di datteri apportano dolcezza naturale, legatura e colore a prodotti da forno, barrette, salse e farciture.',
-    ru:'La pâte et le sirop de dattes apportent douceur naturelle, liaison et couleur aux recettes de boulangerie, barres, sauces et fourrages.',
+    ru:'Паста и сироп из фиников придают натуральную сладость, связывающие свойства и цвет в рецептурах выпечки, батончиков, соусов и начинок.',
     fa:'خمیر و شیره خرما به عنوان شیرین‌کننده طبیعی، طعم‌دهنده و ماده پیونددهنده در صنایع شیرینی، شکلات و نانوایی استفاده می‌شود.'
   },
   raisins: {
@@ -403,7 +403,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Raisins are selected by colour, berry size, moisture and end use for bakery, snacking and industrial blending lines.',
     de:'Rosinen werden nach Farbe, Beerengröße, Feuchte und Verwendungszweck für Backwaren, Snacks und industrielle Mischungen ausgewählt.',
     it:'L’uva passa viene selezionata per colore, calibro, umidità e destinazione d’uso in panificazione, snack e miscele industriali.',
-    ru:'Les raisins secs sont sélectionnés selon la couleur, le calibre, l’humidité et l’usage pour la boulangerie, le snacking et les mélanges industriels.',
+    ru:'Изюм отбирается по цвету, калибру, влажности и назначению для выпечки, снеков и промышленных смесей.',
     fa:'کشمش‌های منتخب بر اساس رنگ، رطوبت و اندازه‌گیری فنی برای خطوط بسته‌بندی، خشکبار و صنایع نانوایی ارائه می‌شوند.'
   },
   almonds: {
@@ -411,7 +411,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Almonds are matched by variety, size, skin condition and processing requirement for retail packs, coating, milling and ingredient production.',
     de:'Mandeln werden nach Sorte, Kaliber, Hautzustand und Verarbeitung für Handelspackungen, Dragierung, Vermahlung und Zutatenproduktion ausgewählt.',
     it:'Le mandorle sono abbinate per varietà, calibro, presenza della pellicina e lavorazione a confezioni retail, ricoperture, farine e ingredienti.',
-    ru:'Les amandes sont définies par variété, calibre, état de la peau et transformation pour le conditionnement, l’enrobage, la mouture et les ingrédients.',
+    ru:'Миндаль подбирается по сорту, калибру, состоянию кожицы и требованиям переработки для розничной упаковки, глазирования, помола и производства ингредиентов.',
     fa:'بادام‌های درختی بر اساس واریته، سایز و نوع فرآوری برای مصارف خشکبار، پودر بادام و روکش‌های صنعتی ارزیابی می‌شوند.'
   },
   walnuts: {
@@ -419,7 +419,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Walnut kernels are selected by colour grade, half-to-piece ratio and oxidation control for bakery, snacking and premium mix requirements.',
     de:'Walnusskerne werden nach Farbklasse, Anteil ganzer Hälften und Oxidationskontrolle für Backwaren, Snacks und Premium-Mischungen ausgewählt.',
     it:'I gherigli di noce sono selezionati per classe di colore, rapporto mezzi-pezzi e controllo dell’ossidazione per bakery, snack e mix premium.',
-    ru:'Les cerneaux sont sélectionnés selon la classe de couleur, le ratio moitiés-morceaux et la maîtrise de l’oxydation pour la pâtisserie, le snacking et les mélanges premium.',
+    ru:'Грецкие орехи отбираются по классу цвета, соотношению половинок и контролю окисления для выпечки, снеков и премиальных смесей.',
     fa:'مغز گردو بر اساس درجه رنگ، درصد دوپر و کنترل اکسیداسیون برای گروه‌های خشکبار و صنایع شیرینی انتخاب می‌شود.'
   },
   'dried-apricots-kernels': {
@@ -427,7 +427,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Dried apricots and apricot kernels are assessed separately by type, colour, size and processing status for snack and food-ingredient projects.',
     de:'Getrocknete Aprikosen und Aprikosenkerne werden getrennt nach Typ, Farbe, Größe und Verarbeitung für Snack- und Zutatenprojekte bewertet.',
     it:'Albicocche secche e noccioli sono valutati separatamente per tipologia, colore, calibro e lavorazione in progetti snack e ingredienti.',
-    ru:'Abricots secs et amandons sont évalués séparément selon le type, la couleur, le calibre et la transformation pour les projets de snacking et d’ingrédients.',
+    ru:'Сушёные абрикосы и ядра оцениваются раздельно по типу, цвету, калибру и степени обработки для проектов снеков и пищевых ингредиентов.',
     fa:'برگه زردآلو و هسته زردآلو با ارزیابی مجزای پارامترهای کیفی، گوگرد و رطوبت برای صادرات و مصارف صنعتی عرضه می‌شوند.'
   },
   'pumpkin-seeds': {
@@ -435,7 +435,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Pumpkin seeds are specified by in-shell or kernel format, size, roasting behaviour and microbiological requirement for snack and ingredient lines.',
     de:'Kürbiskerne werden nach Schalen- oder Kernform, Kaliber, Röstverhalten und mikrobiologischen Anforderungen für Snack- und Zutatenlinien definiert.',
     it:'I semi di zucca sono specificati per formato con o senza guscio, calibro, resa in tostatura e requisiti microbiologici per snack e ingredienti.',
-    ru:'Les graines de courge sont définies par format avec ou sans coque, calibre, comportement à la torréfaction et exigences microbiologiques pour snacks et ingrédients.',
+    ru:'Тыквенные семечки определяются по формату (в кожуре или ядро), калибру, поведению при обжарке и микробиологическим требованиям для снеков и ингредиентов.',
     fa:'تخمه کدو به صورت با پوست یا مغز شده بر اساس سایز، بو دادن و پارامترهای میکروبیولوژی ارزیابی می‌شود.'
   },
   'sunflower-seeds': {
@@ -443,7 +443,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Sunflower seeds are graded across large snack types and kernel options for seed integrity, foreign matter and roasting performance.',
     de:'Sonnenblumenkerne werden als große Snackware oder geschälte Kerne nach Kornintegrität, Fremdbesatz und Röstleistung klassifiziert.',
     it:'I semi di girasole, nei grandi calibri da snack o sgusciati, sono classificati per integrità, corpi estranei e resa in tostatura.',
-    ru:'Les graines de tournesol, en gros calibres de snacking ou décortiquées, sont classées selon l’intégrité, les corps étrangers et la tenue à la torréfaction.',
+    ru:'Подсолнечные семечки классифицируются по целостности зерна, наличию посторонних примесей и поведению при обжарке для крупных калибров снеков и очищенных ядер.',
     fa:'تخمه آفتابگردان با درجه‌بندی کیفی شفاف، رطوبت مشخص و عملکرد مناسب در بو دادن برای برنامه‌های عمده B2B ارزیابی می‌شود.'
   },
   saffron: {
@@ -451,7 +451,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Saffron is verified for filament integrity, colouring strength, aroma profile and purity for premium food, hospitality and controlled packing projects.',
     de:'Safran wird anhand von Fadenintegrität, Farbstärke, Aromaprofil und Reinheit für Premiumlebensmittel, Gastronomie und kontrollierte Abfüllung geprüft.',
     it:'Lo zafferano è verificato per integrità degli stimmi, potere colorante, profilo aromatico e purezza per alimenti premium, horeca e confezionamento controllato.',
-    ru:'Le safran est contrôlé pour l’intégrité des filaments, le pouvoir colorant, le profil aromatique et la pureté pour l’alimentaire premium, l’hôtellerie et le conditionnement.',
+    ru:'Шафран проверяется по целостности нитей, силе окрашивания, ароматическому профилю и чистоте для премиальной продукции, HORECA и контролируемой фасовки.',
     fa:'زعفران ممتاز ایران با سنجش قدرت رنگ‌دهی، عطر خالص، سلامت رشته‌ها و آنالیز آزمایشگاهی برای صادرات ارزیابی می‌شود.'
   },
   'dried-mulberries': {
@@ -459,7 +459,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Dried mulberries are chosen for natural sweetness, light colour, fruit integrity and low foreign matter in healthy snacks and muesli applications.',
     de:'Getrocknete Maulbeeren werden wegen natürlicher Süße, heller Farbe, Fruchtintegrität und geringem Fremdbesatz für Snacks und Müsli ausgewählt.',
     it:'I gelsi essiccati sono scelti per dolcezza naturale, colore chiaro, integrità e basso contenuto di corpi estranei in snack salutistici e muesli.',
-    ru:'Les mûres blanches séchées sont choisies pour leur douceur naturelle, leur couleur claire, leur intégrité et leur faible teneur en corps étrangers dans les snacks et müeslis.',
+    ru:'Сушёные шелковицы выбираются за натуральную сладость, светлый цвет, целостность ягод и низкое содержание посторонних примесей для здоровых снеков и мюсли.',
     fa:'توت خشک ایران با شیرینی طبیعی، رنگ روشن، یکنواختی دانه‌ها و میزان پایین مواد خارجی برای کاربردهای صنعتی و دسته‌بندی خشکبار انتخاب می‌شود.'
   },
   zereshk: {
@@ -467,7 +467,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Zereshk is a dried barberry with vivid red colour and pronounced tartness for rice dishes, sauces, garnishes and speciality formulations.',
     de:'Zereshk ist eine getrocknete Berberitze mit kräftig roter Farbe und markanter Säure für Reisgerichte, Saucen, Garnituren und Spezialrezepturen.',
     it:'Lo Zereshk è un crespino essiccato dal rosso vivo e dall’acidità marcata, usato in riso, salse, guarnizioni e ricette speciali.',
-    ru:'Le Zereshk est une épine-vinette séchée, rouge vif et nettement acidulée, destinée aux riz, sauces, garnitures et recettes de spécialité.',
+    ru:'Зерешк — сушёная ягода барбариса, ярко-красная и с выраженной кислинкой, используется в рисовых блюдах, соусах, гарнирах и специализированных рецептурах.',
     fa:'زرشک ارگانیک با رنگ قرمز شفاف و طعم ترش مشخص برای مصرف تجاری، صنایع غذایی، بسته‌بندی تخصصی و صادرات ارزیابی می‌شود.'
   },
   'mixed-nuts': {
@@ -475,7 +475,7 @@ const productDescriptions: Record<(typeof productIds)[number], Localized> = {
     en:'Mixed-nut and speciality recipes are developed by project around target consumer, ingredient ratio, allergen control, roasting and pack format.',
     de:'Nussmischungen und Spezialrezepturen werden projektspezifisch nach Zielgruppe, Zutatenanteil, Allergenmanagement, Röstung und Packungsformat entwickelt.',
     it:'Mix di frutta secca e ricette speciali sono sviluppati su progetto in base a consumatore, proporzioni, gestione allergeni, tostatura e formato.',
-    ru:'Les mélanges de fruits à coque et recettes spéciales sont développés par projet selon la cible, les proportions, la gestion des allergènes, la torréfaction et le format.',
+    ru:'Смеси орехов и специальные рецептуры разрабатываются по проекту с учётом целевой аудитории, доли ингредиентов, управления аллергенами, обжарки и формата упаковки.',
     fa:'فرمولاسیون و بسته‌بندی ترکیبی خشکبار بر اساس درصد اجزا، کنترل حساسیت‌زاها، فرآوری و فرمت بسته‌بندی به‌صورت سفارشی توسعه می‌یابد.'
   }
 };
@@ -505,22 +505,22 @@ const productSlugs: Record<(typeof productIds)[number], Localized> = Object.from
   productIds.map((id) => [id, Object.fromEntries(locales.map((lang) => [lang, id]))])
 ) as Record<(typeof productIds)[number], Localized>;
 Object.assign(productSlugs['green-peeled-pistachio'], {
-  tr:'yesil-soyulmus-ic-fistik', en:'green-peeled-pistachio-kernels', de:'gruene-geschaelte-pistazienkerne', it:'pistacchio-verde-sgusciato', ru:'pistaches-vertes-mondees'
+  tr:'yesil-soyulmus-ic-fistik', en:'green-peeled-pistachio-kernels', de:'gruene-geschaelte-pistazienkerne', it:'pistacchio-verde-sgusciato', ru:'ochishchennye-zelenye-yadra-fistash'
 });
 Object.assign(productSlugs['pistachio-granules'], {
-  tr:'kirik-granul-ic-fistik', en:'pistachio-kernels-granules', de:'pistazienbruch-granulat', it:'granella-di-pistacchio', ru:'eclats-granules-pistache'
+  tr:'kirik-granul-ic-fistik', en:'pistachio-kernels-granules', de:'pistazienbruch-granulat', it:'granella-di-pistacchio', ru:'kroshka-granuly-fistash'
 });
 Object.assign(productSlugs['mazafati-dates'], {
-  tr:'mazafati-hurmasi', en:'mazafati-dates', de:'mazafati-datteln', it:'datteri-mazafati', ru:'dattes-mazafati'
+  tr:'mazafati-hurmasi', en:'mazafati-dates', de:'mazafati-datteln', it:'datteri-mazafati', ru:'finiki-mazafati'
 });
 Object.assign(productSlugs['date-paste-syrup'], {
-  tr:'hurma-ezmesi-surubu', en:'date-paste-syrup', de:'dattelpaste-sirup', it:'pasta-sciroppo-datteri', ru:'pate-sirop-dattes'
+  tr:'hurma-ezmesi-surubu', en:'date-paste-syrup', de:'dattelpaste-sirup', it:'pasta-sciroppo-datteri', ru:'pasta-i-sirop-iz-finikov'
 });
 Object.assign(productSlugs['dried-apricots-kernels'], {
-  tr:'kuru-kayisi-kayisi-cekirdegi', en:'dried-apricots-apricot-kernels', de:'getrocknete-aprikosen-aprikosenkerne', it:'albicocche-secche-noccioli', ru:'abricots-secs-amandons'
+  tr:'kuru-kayisi-kayisi-cekirdegi', en:'dried-apricots-apricot-kernels', de:'getrocknete-aprikosen-aprikosenkerne', it:'albicocche-secche-noccioli', ru:'sushenye-abrikosy-i-yadra'
 });
 Object.assign(productSlugs['mixed-nuts'], {
-  tr:'karisik-kuruyemis-ozel-urunler', en:'mixed-nuts-specialities', de:'nussmischungen-spezialitaeten', it:'frutta-secca-mista-specialita', ru:'melanges-fruits-a-coque-specialites'
+  tr:'karisik-kuruyemis-ozel-urunler', en:'mixed-nuts-specialities', de:'nussmischungen-spezialitaeten', it:'frutta-secca-mista-specialita', ru:'assorti-orehov-i-specialnosti'
 });
 
 export const products = Object.fromEntries(productIds.map((id) => [id, {
@@ -585,55 +585,55 @@ export const editorialCopy: Record<Locale, {
 export const insightIds = ['strategic-vs-procurement','supplier-selection','supplier-risk','total-cost','rfq','supply-chain-risk','origin-compliance'] as const;
 export const insights: Record<(typeof insightIds)[number], { slugs: Localized; titles: Localized; descriptions: Localized; answers: Localized }> = {
   'strategic-vs-procurement': {
-    slugs:{tr:'stratejik-tedarik-ve-satin-alma-farki',en:'strategic-sourcing-vs-procurement',de:'strategische-beschaffung-vs-einkauf',it:'sourcing-strategico-vs-acquisti',ru:'sourcing-strategique-vs-achats',fa:'strategic-sourcing-vs-procurement'},
-    titles:{tr:'Stratejik tedarik ve satın alma arasındaki fark',en:'Strategic sourcing vs procurement',de:'Strategische Beschaffung vs. Einkauf',it:'Sourcing strategico e acquisti a confronto',ru:'Sourcing stratégique et achats : quelle différence ?',fa:'تفاوت تأمین استراتژیک و خرید'},
-    descriptions:{tr:'Kapsam, maliyet, risk, tedarikçi yönetimi ve karar süreci açısından stratejik tedarik ile satın alma karşılaştırması.',en:'A comparison of strategic sourcing and procurement across scope, cost, risk, supplier management and decisions.',de:'Vergleich von strategischer Beschaffung und Einkauf nach Umfang, Kosten, Risiko, Lieferantenmanagement und Entscheidung.',it:'Confronto tra sourcing strategico e acquisti per ambito, costo, rischio, gestione fornitori e decisioni.',ru:'Comparaison du sourcing stratégique et des achats selon le périmètre, le coût, le risque, les fournisseurs et la décision.',fa:'مقایسه تأمین استراتژیک و خرید از نظر دامنه، هزینه، ریسک، مدیریت تأمین‌کننده و فرآیند تصمیم‌گیری.'},
-    answers:{tr:'Satın alma işlemi yürütür; stratejik tedarik ise talep, pazar, toplam maliyet, risk, müzakere ve performansı uzun vadeli bir karar sistemi içinde yönetir.',en:'Procurement executes the purchase; strategic sourcing manages demand, markets, total cost, risk, negotiation and performance as a long-term decision system.',de:'Der Einkauf führt die Bestellung aus; strategische Beschaffung steuert Bedarf, Markt, Gesamtkosten, Risiko, Verhandlung und Leistung langfristig.',it:'Gli acquisti eseguono la transazione; il sourcing strategico governa fabbisogno, mercato, costo totale, rischio, negoziazione e prestazioni nel lungo periodo.',ru:'Les achats exécutent la transaction ; le sourcing stratégique pilote besoin, marché, coût total, risque, négociation et performance sur le long terme.',fa:'خرید، عملیات سفارش را اجرا می‌کند؛ تأمین استراتژیک تقاضا، بازار، هزینه کل، ریسک و عملکرد را در یک سیستم مدیریت می‌کند.'}
+    slugs:{tr:'stratejik-tedarik-ve-satin-alma-farki',en:'strategic-sourcing-vs-procurement',de:'strategische-beschaffung-vs-einkauf',it:'sourcing-strategico-vs-acquisti',ru:'strategicheskiy-sorsing-i-zakupki',fa:'strategic-sourcing-vs-procurement'},
+    titles:{tr:'Stratejik tedarik ve satın alma arasındaki fark',en:'Strategic sourcing vs procurement',de:'Strategische Beschaffung vs. Einkauf',it:'Sourcing strategico e acquisti a confronto',ru:'Стратегический сорсинг и закупки: в чём отличие?',fa:'تفاوت تأمین استراتژیک و خرید'},
+    descriptions:{tr:'Kapsam, maliyet, risk, tedarikçi yönetimi ve karar süreci açısından stratejik tedarik ile satın alma karşılaştırması.',en:'A comparison of strategic sourcing and procurement across scope, cost, risk, supplier management and decisions.',de:'Vergleich von strategischer Beschaffung und Einkauf nach Umfang, Kosten, Risiko, Lieferantenmanagement und Entscheidung.',it:'Confronto tra sourcing strategico e acquisti per ambito, costo, rischio, gestione fornitori e decisioni.',ru:'Сравнение стратегического сорсинга и закупок по объёму, стоимости, риску, работе с поставщиками и процессу принятия решений.',fa:'مقایسه تأمین استراتژیک و خرید از نظر دامنه، هزینه، ریسک، مدیریت تأمین‌کننده و فرآیند تصمیم‌گیری.'},
+    answers:{tr:'Satın alma işlemi yürütür; stratejik tedarik ise talep, pazar, toplam maliyet, risk, müzakere ve performansı uzun vadeli bir karar sistemi içinde yönetir.',en:'Procurement executes the purchase; strategic sourcing manages demand, markets, total cost, risk, negotiation and performance as a long-term decision system.',de:'Der Einkauf führt die Bestellung aus; strategische Beschaffung steuert Bedarf, Markt, Gesamtkosten, Risiko, Verhandlung und Leistung langfristig.',it:'Gli acquisti eseguono la transazione; il sourcing strategico governa fabbisogno, mercato, costo totale, rischio, negoziazione e prestazioni nel lungo periodo.',ru:'Закупки выполняют покупку; стратегический сорсинг управляет спросом, рынком, совокупной стоимостью, риском, переговорами и показателями эффективности в долгосрочной перспективе.',fa:'خرید، عملیات سفارش را اجرا می‌کند؛ تأمین استراتژیک تقاضا، بازار، هزینه کل، ریسک و عملکرد را در یک سیستم مدیریت می‌کند.'}
   },
   'supplier-selection': {
-    slugs:{tr:'tedarikci-secim-kriterleri',en:'supplier-selection-criteria',de:'kriterien-lieferantenauswahl',it:'criteri-selezione-fornitori',ru:'criteres-selection-fournisseurs',fa:'supplier-selection-criteria'},
-    titles:{tr:'Tedarikçi seçim kriterleri',en:'Supplier selection criteria',de:'Kriterien für die Lieferantenauswahl',it:'Criteri di selezione dei fornitori',ru:'Critères de sélection des fournisseurs',fa:'معیارهای انتخاب تأمین‌کننده'},
-    descriptions:{tr:'Fiyatın ötesinde kalite, kapasite, termin, finansal dayanıklılık, uyum ve toplam maliyetle tedarikçi değerlendirme.',en:'Supplier evaluation beyond price: quality, capacity, lead time, financial resilience, compliance and total cost.',de:'Lieferantenbewertung jenseits des Preises: Qualität, Kapazität, Lieferzeit, Finanzkraft, Konformität und Gesamtkosten.',it:'Valutazione oltre il prezzo: qualità, capacità, tempi, solidità finanziaria, conformità e costo totale.',ru:'Évaluer au-delà du prix : qualité, capacité, délais, solidité financière, conformité et coût total.',fa:'ارزیابی تأمین‌کننده فراتر از قیمت: کیفیت، ظرفیت، زمان تحویل، پایداری مالی، انطباق و هزینه کل.'},
-    answers:{tr:'Doğru tedarikçi en düşük fiyatı veren değil; kalite, kapasite, termin, mevzuat, iletişim ve toplam maliyet ihtiyacını sürdürülebilir karşılayandır.',en:'The right supplier is not the lowest bidder, but the one that sustainably meets quality, capacity, lead-time, compliance, communication and total-cost needs.',de:'Der richtige Lieferant ist nicht der billigste, sondern erfüllt Qualität, Kapazität, Lieferzeit, Konformität, Kommunikation und Gesamtkosten nachhaltig.',it:'Il fornitore giusto non è il più economico, ma quello che soddisfa in modo sostenibile qualità, capacità, tempi, conformità, comunicazione e costo totale.',ru:'Le bon fournisseur n’est pas le moins cher, mais celui qui répond durablement aux exigences de qualité, capacité, délais, conformité, communication et coût total.',fa:'تأمین‌کننده مناسب ارزان‌ترین ارائه‌دهنده نیست، بلکه گزینه‌ای است که نیازهای کیفی، ظرفیت و انطباق را به صورت پایدار برآورده می‌سازد.'}
+    slugs:{tr:'tedarikci-secim-kriterleri',en:'supplier-selection-criteria',de:'kriterien-lieferantenauswahl',it:'criteri-selezione-fornitori',ru:'kriterii-vybora-postavshchikov',fa:'supplier-selection-criteria'},
+    titles:{tr:'Tedarikçi seçim kriterleri',en:'Supplier selection criteria',de:'Kriterien für die Lieferantenauswahl',it:'Criteri di selezione dei fornitori',ru:'Критерии выбора поставщиков',fa:'معیارهای انتخاب تأمین‌کننده'},
+    descriptions:{tr:'Fiyatın ötesinde kalite, kapasite, termin, finansal dayanıklılık, uyum ve toplam maliyetle tedarikçi değerlendirme.',en:'Supplier evaluation beyond price: quality, capacity, lead time, financial resilience, compliance and total cost.',de:'Lieferantenbewertung jenseits des Preises: Qualität, Kapazität, Lieferzeit, Finanzkraft, Konformität und Gesamtkosten.',it:'Valutazione oltre il prezzo: qualità, capacità, tempi, solidità finanziaria, conformità e costo totale.',ru:'Оценка поставщика не только по цене: качество, мощность, сроки, финансовая устойчивость, соответствие требованиям и совокупная стоимость.',fa:'ارزیابی تأمین‌کننده فراتر از قیمت: کیفیت، ظرفیت، زمان تحویل، پایداری مالی، انطباق و هزینه کل.'},
+    answers:{tr:'Doğru tedarikçi en düşük fiyatı veren değil; kalite, kapasite, termin, mevzuat, iletişim ve toplam maliyet ihtiyacını sürdürülebilir karşılayandır.',en:'The right supplier is not the lowest bidder, but the one that sustainably meets quality, capacity, lead-time, compliance, communication and total-cost needs.',de:'Der richtige Lieferant ist nicht der billigste, sondern erfüllt Qualität, Kapazität, Lieferzeit, Konformität, Kommunikation und Gesamtkosten nachhaltig.',it:'Il fornitore giusto non è il più economico, ma quello che soddisfa in modo sostenibile qualità, capacità, tempi, conformità, comunicazione e costo totale.',ru:'Подходящий поставщик — не самый дешёвый, а тот, кто устойчиво выполняет требования по качеству, мощности, срокам, соответствию, коммуникации и совокупной стоимости.',fa:'تأمین‌کننده مناسب ارزان‌ترین ارائه‌دهنده نیست، بلکه گزینه‌ای است که نیازهای کیفی، ظرفیت و انطباق را به صورت پایدار برآورده می‌سازد.'}
   },
   'supplier-risk': {
-    slugs:{tr:'tedarikci-riskini-dogrulama',en:'verifying-supplier-risk',de:'lieferantenrisiko-pruefen',it:'verificare-rischio-fornitore',ru:'verifier-risque-fournisseur',fa:'verifying-supplier-risk'},
-    titles:{tr:'Tedarikçi riski nasıl doğrulanır?',en:'How to verify supplier risk',de:'Wie lässt sich Lieferantenrisiko prüfen?',it:'Come verificare il rischio fornitore',ru:'Comment vérifier le risque fournisseur ?',fa:'ارزیابی و اعتبارسنجی ریسک تأمین‌کننده'},
-    descriptions:{tr:'Şirket, kapasite, kalite ve ticari riskleri sipariş öncesinde görünür kılan doğrulama çerçevesi.',en:'A verification framework that exposes company, capacity, quality and commercial risk before ordering.',de:'Ein Prüfrahmen, der Unternehmens-, Kapazitäts-, Qualitäts- und Handelsrisiken vor der Bestellung sichtbar macht.',it:'Un quadro di verifica che rende visibili rischi aziendali, produttivi, qualitativi e commerciali prima dell’ordine.',ru:'Un cadre de vérification qui rend visibles les risques liés à l’entreprise, aux capacités, à la qualité et au commerce avant commande.',fa:'چارچوب اعتبارسنجی مستقل برای ارزیابی ریسک‌های حقوقی، ظرفیت تولید، کیفیت و شرایط تجاری قبل از ثبت سفارش.'},
-    answers:{tr:'Kayıt, sahiplik, üretim kapasitesi, kalite sistemi, referans, banka bilgisi ve sözleşme yetkisi bağımsız kaynaklarla çapraz kontrol edilmelidir.',en:'Registration, ownership, production capacity, quality systems, references, bank details and signing authority should be cross-checked through independent sources.',de:'Register, Eigentum, Produktionskapazität, Qualitätssysteme, Referenzen, Bankdaten und Zeichnungsbefugnis müssen unabhängig gegengeprüft werden.',it:'Registrazione, proprietà, capacità produttiva, sistemi qualità, referenze, coordinate bancarie e poteri di firma vanno verificati con fonti indipendenti.',ru:'Immatriculation, propriété, capacité, système qualité, références, coordonnées bancaires et pouvoir de signature doivent être recoupés.',fa:'اطلاعات ثبتی، مالکیت، ظرفیت تولید، سیستم‌های کیفیت، حساب‌های بانکی و اختیارات امضا باید از طریق منابع مستقل استعلام شوند.'}
+    slugs:{tr:'tedarikci-riskini-dogrulama',en:'verifying-supplier-risk',de:'lieferantenrisiko-pruefen',it:'verificare-rischio-fornitore',ru:'proverka-riska-postavshchika',fa:'verifying-supplier-risk'},
+    titles:{tr:'Tedarikçi riski nasıl doğrulanır?',en:'How to verify supplier risk',de:'Wie lässt sich Lieferantenrisiko prüfen?',it:'Come verificare il rischio fornitore',ru:'Как проверить риск поставщика?',fa:'ارزیابی و اعتبارسنجی ریسک تأمین‌کننده'},
+    descriptions:{tr:'Şirket, kapasite, kalite ve ticari riskleri sipariş öncesinde görünür kılan doğrulama çerçevesi.',en:'A verification framework that exposes company, capacity, quality and commercial risk before ordering.',de:'Ein Prüfrahmen, der Unternehmens-, Kapazitäts-, Qualitäts- und Handelsrisiken vor der Bestellung sichtbar macht.',it:'Un quadro di verifica che rende visibili rischi aziendali, produttivi, qualitativi e commerciali prima dell’ordine.',ru:'Рамка верификации, выявляющая риски компании, мощностей, качества и коммерческие риски до размещения заказа.',fa:'چارچوب اعتبارسنجی مستقل برای ارزیابی ریسک‌های حقوقی، ظرفیت تولید، کیفیت و شرایط تجاری قبل از ثبت سفارش.'},
+    answers:{tr:'Kayıt, sahiplik, üretim kapasitesi, kalite sistemi, referans, banka bilgisi ve sözleşme yetkisi bağımsız kaynaklarla çapraz kontrol edilmelidir.',en:'Registration, ownership, production capacity, quality systems, references, bank details and signing authority should be cross-checked through independent sources.',de:'Register, Eigentum, Produktionskapazität, Qualitätssysteme, Referenzen, Bankdaten und Zeichnungsbefugnis müssen unabhängig gegengeprüft werden.',it:'Registrazione, proprietà, capacità produttiva, sistemi qualità, referenze, coordinate bancarie e poteri di firma vanno verificati con fonti indipendenti.',ru:'Регистрационные данные, собственность, мощности, система качества, рекомендации, банковские реквизиты и полномочия на подписание должны быть сопоставлены и проверены.',fa:'اطلاعات ثبتی، مالکیت، ظرفیت تولید، سیستم‌های کیفیت، حساب‌های بانکی و اختیارات امضا باید از طریق منابع مستقل استعلام شوند.'}
   },
   'total-cost': {
-    slugs:{tr:'toplam-sahip-olma-maliyeti',en:'total-cost-of-ownership',de:'gesamtbetriebskosten-tco',it:'costo-totale-di-possesso',ru:'cout-total-de-possession',fa:'total-cost-of-ownership'},
-    titles:{tr:'Toplam sahip olma maliyeti neden önemlidir?',en:'Why total cost of ownership matters',de:'Warum Gesamtbetriebskosten entscheidend sind',it:'Perché conta il costo totale di possesso',ru:'Pourquoi le coût total de possession compte',fa:'چرا هزینه کل مالکیت (TCO) اهمیت دارد؟'},
-    descriptions:{tr:'Birim fiyatın ötesinde lojistik, kalite, stok, finansman ve risk maliyetlerini karşılaştırma.',en:'Comparing logistics, quality, inventory, finance and risk costs beyond unit price.',de:'Vergleich von Logistik-, Qualitäts-, Bestands-, Finanzierungs- und Risikokosten jenseits des Stückpreises.',it:'Confronto di logistica, qualità, scorte, finanza e rischio oltre il prezzo unitario.',ru:'Comparer logistique, qualité, stocks, financement et risques au-delà du prix unitaire.',fa:'مقایسه هزینه‌های لجستیک، کیفیت، موجودی، مالی و ریسک فراتر از قیمت واحد.'},
-    answers:{tr:'En düşük birim fiyat her zaman en iyi teklif değildir; navlun, hata, gecikme, finansman ve tedarik kesintisi gerçek kararı değiştirebilir.',en:'The lowest unit price is not always the best offer; freight, defects, delays, finance and disruption can change the decision.',de:'Der niedrigste Stückpreis ist nicht immer das beste Angebot; Fracht, Fehler, Verzögerungen, Finanzierung und Ausfälle verändern die Entscheidung.',it:'Il prezzo unitario più basso non è sempre l’offerta migliore: trasporto, difetti, ritardi, finanza e interruzioni cambiano la decisione.',ru:'Le prix unitaire le plus bas n’est pas toujours la meilleure offre : transport, défauts, délais, financement et ruptures changent la décision.',fa:'کمترین قیمت واحد همواره بهترین پیشنهاد نیست؛ هزینه‌های حمل، ضایعات، تأخیر و ریسک بر تصمیم نهایی تأثیر می‌گذارند.'}
+    slugs:{tr:'toplam-sahip-olma-maliyeti',en:'total-cost-of-ownership',de:'gesamtbetriebskosten-tco',it:'costo-totale-di-possesso',ru:'stoimost-polnogo-vladeniya-tco',fa:'total-cost-of-ownership'},
+    titles:{tr:'Toplam sahip olma maliyeti neden önemlidir?',en:'Why total cost of ownership matters',de:'Warum Gesamtbetriebskosten entscheidend sind',it:'Perché conta il costo totale di possesso',ru:'Почему важна совокупная стоимость владения (TCO)?',fa:'چرا هزینه کل مالکیت (TCO) اهمیت دارد؟'},
+    descriptions:{tr:'Birim fiyatın ötesinde lojistik, kalite, stok, finansman ve risk maliyetlerini karşılaştırma.',en:'Comparing logistics, quality, inventory, finance and risk costs beyond unit price.',de:'Vergleich von Logistik-, Qualitäts-, Bestands-, Finanzierungs- und Risikokosten jenseits des Stückpreises.',it:'Confronto di logistica, qualità, scorte, finanza e rischio oltre il prezzo unitario.',ru:'Сравнивать логистику, качество, запасы, финансирование и риски сверх цены за единицу.',fa:'مقایسه هزینه‌های لجستیک، کیفیت، موجودی، مالی و ریسک فراتر از قیمت واحد.'},
+    answers:{tr:'En düşük birim fiyat her zaman en iyi teklif değildir; navlun, hata, gecikme, finansman ve tedarik kesintisi gerçek kararı değiştirebilir.',en:'The lowest unit price is not always the best offer; freight, defects, delays, finance and disruption can change the decision.',de:'Der niedrigste Stückpreis ist nicht immer das beste Angebot; Fracht, Fehler, Verzögerungen, Finanzierung und Ausfälle verändern die Entscheidung.',it:'Il prezzo unitario più basso non è sempre l’offerta migliore: trasporto, difetti, ritardi, finanza e interruzioni cambiano la decisione.',ru:'Самая низкая цена за единицу не всегда означает лучшее предложение: фрахт, дефекты, задержки, финансирование и перебои могут изменить решение.',fa:'کمترین قیمت واحد همواره بهترین پیشنهاد نیست؛ هزینه‌های حمل، ضایعات، تأخیر و ریسک بر تصمیم نهایی تأثیر می‌گذارند.'}
   },
   rfq: {
-    slugs:{tr:'etkili-rfq-nasil-hazirlanir',en:'how-to-write-an-effective-rfq',de:'wirksame-rfq-erstellen',it:'come-preparare-rfq-efficace',ru:'comment-rediger-rfq-efficace',fa:'how-to-write-an-effective-rfq'},
-    titles:{tr:'Etkili RFQ nasıl hazırlanır?',en:'How to write an effective RFQ',de:'Wie erstellt man eine wirksame RFQ?',it:'Come preparare una RFQ efficace',ru:'Comment rédiger une RFQ efficace ?',fa:'چگونه یک RFQ موثر بنویسیم؟'},
-    descriptions:{tr:'Karşılaştırılabilir teklifler için spesifikasyon, miktar, kalite, teslim, ödeme ve belge alanlarını doğru yapılandırma.',en:'Structuring specifications, quantity, quality, delivery, payment and documentation for comparable quotations.',de:'Spezifikation, Menge, Qualität, Lieferung, Zahlung und Dokumentation für vergleichbare Angebote strukturieren.',it:'Strutturare specifiche, quantità, qualità, consegna, pagamento e documenti per offerte comparabili.',ru:'Structurer spécifications, quantité, qualité, livraison, paiement et documents pour obtenir des offres comparables.',fa:'ساختاردهی مشخصات، مقدار، کیفیت، تحویل، پرداخت و اسناد برای دریافت پیشنهادات قابل مقایسه.'},
-    answers:{tr:'Etkili bir RFQ; teknik tanım, miktar, kalite standardı, teslim yeri, Incoterms, ödeme koşulu, termin, belge ihtiyacı ve teklif son tarihini açıkça tanımlar.',en:'An effective RFQ clearly defines specifications, quantity, quality standards, delivery point, Incoterms, payment, lead time, documents and quotation deadline.',de:'Eine wirksame RFQ definiert Spezifikation, Menge, Qualitätsstandard, Lieferort, Incoterms, Zahlung, Lieferzeit, Dokumente und Angebotsfrist.',it:'Una RFQ efficace definisce specifiche, quantità, standard qualità, luogo di consegna, Incoterms, pagamento, tempi, documenti e scadenza.',ru:'Une RFQ efficace précise spécifications, quantité, norme qualité, lieu de livraison, Incoterms, paiement, délai, documents et date limite.',fa:'یک RFQ موثر مشخصات فنی، میزان سفارش، استاندارد کیفیت، شرایط تحویل، Incoterms و زمان استعلام را به‌طور شفاف تعریف می‌کند.'}
+    slugs:{tr:'etkili-rfq-nasil-hazirlanir',en:'how-to-write-an-effective-rfq',de:'wirksame-rfq-erstellen',it:'come-preparare-rfq-efficace',ru:'kak-sostavit-effektivnyi-rfq',fa:'how-to-write-an-effective-rfq'},
+    titles:{tr:'Etkili RFQ nasıl hazırlanır?',en:'How to write an effective RFQ',de:'Wie erstellt man eine wirksame RFQ?',it:'Come preparare una RFQ efficace',ru:'Как составить эффективный RFQ?',fa:'چگونه یک RFQ موثر بنویسیم؟'},
+    descriptions:{tr:'Karşılaştırılabilir teklifler için spesifikasyon, miktar, kalite, teslim, ödeme ve belge alanlarını doğru yapılandırma.',en:'Structuring specifications, quantity, quality, delivery, payment and documentation for comparable quotations.',de:'Spezifikation, Menge, Qualität, Lieferung, Zahlung und Dokumentation für vergleichbare Angebote strukturieren.',it:'Strutturare specifiche, quantità, qualità, consegna, pagamento e documenti per offerte comparabili.',ru:'Структурировать спецификации, количество, качество, условия доставки, оплаты и документацию для получения сопоставимых предложений.',fa:'ساختاردهی مشخصات، مقدار، کیفیت، تحویل، پرداخت و اسناد برای دریافت پیشنهادات قابل مقایسه.'},
+    answers:{tr:'Etkili bir RFQ; teknik tanım, miktar, kalite standardı, teslim yeri, Incoterms, ödeme koşulu, termin, belge ihtiyacı ve teklif son tarihini açıkça tanımlar.',en:'An effective RFQ clearly defines specifications, quantity, quality standards, delivery point, Incoterms, payment, lead time, documents and quotation deadline.',de:'Eine wirksame RFQ definiert Spezifikation, Menge, Qualitätsstandard, Lieferort, Incoterms, Zahlung, Lieferzeit, Dokumente und Angebotsfrist.',it:'Una RFQ efficace definisce specifiche, quantità, standard qualità, luogo di consegna, Incoterms, pagamento, tempi, documenti e scadenza.',ru:'Эффективный RFQ чётко определяет спецификации, количество, стандарт качества, место доставки, Incoterms, оплату, срок, документы и крайний срок подачи предложений.',fa:'یک RFQ موثر مشخصات فنی، میزان سفارش، استاندارد کیفیت، شرایط تحویل، Incoterms و زمان استعلام را به‌طور شفاف تعریف می‌کند.'}
   },
   'supply-chain-risk': {
-    slugs:{tr:'tedarik-zinciri-risk-yonetimi',en:'supply-chain-risk-management',de:'risikomanagement-lieferkette',it:'gestione-rischio-catena-fornitura',ru:'gestion-risque-chaine-approvisionnement',fa:'supply-chain-risk-management'},
-    titles:{tr:'Tedarik zinciri risk yönetimi',en:'Supply chain risk management',de:'Risikomanagement in der Lieferkette',it:'Gestione del rischio nella catena di fornitura',ru:'Gestion des risques de la chaîne d’approvisionnement',fa:'مدیریت ریسک زنجیره تأمین'},
-    descriptions:{tr:'Tek kaynak, kalite, kapasite, lojistik, kur ve mevzuat risklerini puanlama ve azaltma rehberi.',en:'A guide to scoring and reducing single-source, quality, capacity, logistics, currency and regulatory risk.',de:'Leitfaden zur Bewertung und Reduzierung von Einzelquellen-, Qualitäts-, Kapazitäts-, Logistik-, Währungs- und Regulierungsrisiken.',it:'Guida per valutare e ridurre rischi di fonte unica, qualità, capacità, logistica, valuta e normativa.',ru:'Guide pour évaluer et réduire les risques de source unique, qualité, capacité, logistique, change et réglementation.',fa:'راهنمای ارزیابی و کاهش ریسک‌های تک‌منبعی، کیفیت، ظرفیت، لجستیک و قوانین.'},
-    answers:{tr:'Kritik ürünler, tedarikçiler ve rotalar olasılık ve etkiye göre puanlanmalı; alternatif kaynaklar, performans göstergeleri ve yanıt planları oluşturulmalıdır.',en:'Critical products, suppliers and routes should be scored by probability and impact, with alternative sources, performance indicators and response plans.',de:'Kritische Produkte, Lieferanten und Routen sind nach Wahrscheinlichkeit und Auswirkung zu bewerten; Alternativquellen, Kennzahlen und Reaktionspläne sind festzulegen.',it:'Prodotti, fornitori e rotte critici vanno classificati per probabilità e impatto, predisponendo fonti alternative, indicatori e piani di risposta.',ru:'Produits, fournisseurs et itinéraires critiques doivent être notés selon probabilité et impact, avec sources alternatives, indicateurs et plans de réponse.',fa:'محصولات و مسیرهای حساس باید بر اساس احتمال و اثرگذاری رتبه‌بندی شوند و برنامه‌های جایگزین تدوین گردند.'}
+    slugs:{tr:'tedarik-zinciri-risk-yonetimi',en:'supply-chain-risk-management',de:'risikomanagement-lieferkette',it:'gestione-rischio-catena-fornitura',ru:'upravlenie-riskami-cepochki-postavok',fa:'supply-chain-risk-management'},
+    titles:{tr:'Tedarik zinciri risk yönetimi',en:'Supply chain risk management',de:'Risikomanagement in der Lieferkette',it:'Gestione del rischio nella catena di fornitura',ru:'Управление рисками цепочки поставок',fa:'مدیریت ریسک زنجیره تأمین'},
+    descriptions:{tr:'Tek kaynak, kalite, kapasite, lojistik, kur ve mevzuat risklerini puanlama ve azaltma rehberi.',en:'A guide to scoring and reducing single-source, quality, capacity, logistics, currency and regulatory risk.',de:'Leitfaden zur Bewertung und Reduzierung von Einzelquellen-, Qualitäts-, Kapazitäts-, Logistik-, Währungs- und Regulierungsrisiken.',it:'Guida per valutare e ridurre rischi di fonte unica, qualità, capacità, logistica, valuta e normativa.',ru:'Руководство по оценке и снижению рисков: единственный источник, качество, мощности, логистика, валютные и регуляторные риски.',fa:'راهنمای ارزیابی و کاهش ریسک‌های تک‌منبعی، کیفیت، ظرفیت، لجستیک و قوانین.'},
+    answers:{tr:'Kritik ürünler, tedarikçiler ve rotalar olasılık ve etkiye göre puanlanmalı; alternatif kaynaklar, performans göstergeleri ve yanıt planları oluşturulmalıdır.',en:'Critical products, suppliers and routes should be scored by probability and impact, with alternative sources, performance indicators and response plans.',de:'Kritische Produkte, Lieferanten und Routen sind nach Wahrscheinlichkeit und Auswirkung zu bewerten; Alternativquellen, Kennzahlen und Reaktionspläne sind festzulegen.',it:'Prodotti, fornitori e rotte critici vanno classificati per probabilità e impatto, predisponendo fonti alternative, indicatori e piani di risposta.',ru:'Критические продукты, поставщики и маршруты должны оцениваться по вероятности и влиянию; определять альтернативные источники, показатели эффективности и планы реагирования.',fa:'محصولات و مسیرهای حساس باید بر اساس احتمال و اثرگذاری رتبه‌بندی شوند و برنامه‌های جایگزین تدوین گردند.'}
   },
   'origin-compliance': {
-    slugs:{tr:'gida-tedarikinde-mense-ve-uyum',en:'origin-and-compliance-in-food-sourcing',de:'herkunft-und-konformitaet-lebensmittel',it:'origine-conformita-approvvigionamento-alimentare',ru:'origine-conformite-sourcing-alimentaire',fa:'origin-and-compliance-in-food-sourcing'},
-    titles:{tr:'Gıda tedariğinde menşe ve uyum',en:'Origin and compliance in food sourcing',de:'Herkunft und Konformität in der Lebensmittelbeschaffung',it:'Origine e conformità nel sourcing alimentare',ru:'Origine et conformité dans le sourcing alimentaire',fa:'مبدأ و انطباق در تأمین مواد غذایی'},
-    descriptions:{tr:'Gerçek menşe, parti izlenebilirliği, COA, aflatoksin, pestisit ve hedef pazar uygunluğu için temel kontroller.',en:'Core controls for actual origin, batch traceability, COA, aflatoxin, pesticides and target-market compliance.',de:'Kernprüfungen für tatsächliche Herkunft, Chargenrückverfolgung, COA, Aflatoxin, Pestizide und Zielmarktkonformität.',it:'Controlli essenziali su origine effettiva, tracciabilità lotto, COA, aflatossine, pesticidi e conformità al mercato.',ru:'Contrôles essentiels de l’origine réelle, traçabilité des lots, COA, aflatoxines, pesticides et conformité au marché.',fa:'کنترل‌های کلیدی برای مبدأ واقعی، قابلیت ردگیری محموله، اسناد COA، آفلاتوکسین و انطباق با بازار هدف.'},
-    answers:{tr:'Menşe ticari evrak, üretici ve parti düzeyinde açıkça beyan edilmeli; hedef pazar limitleri sevkiyat öncesinde doğrulanmalıdır.',en:'Origin should be declared clearly at commercial-document, producer and batch level; target-market limits must be verified before shipment.',de:'Die Herkunft ist in Handelsdokumenten sowie auf Hersteller- und Chargenebene offenzulegen; Zielmarktgrenzen sind vor Versand zu prüfen.',it:'L’origine va dichiarata nei documenti commerciali e a livello di produttore e lotto; i limiti del mercato vanno verificati prima della spedizione.',ru:'L’origine doit être declared dans les documents commerciaux, au niveau du producteur et du lot ; les seuils du marché cible doivent être vérifiés avant expédition.',fa:'مبدأ کالا باید در اسناد تجاری و سطح محموله شفاف اعلام شود و الزامات بازار هدف قبل از حمل اعتبارسنجی گردد.'}
+    slugs:{tr:'gida-tedarikinde-mense-ve-uyum',en:'origin-and-compliance-in-food-sourcing',de:'herkunft-und-konformitaet-lebensmittel',it:'origine-conformita-approvvigionamento-alimentare',ru:'proiskhozhdenie-i-sootvetstvie',fa:'origin-and-compliance-in-food-sourcing'},
+    titles:{tr:'Gıda tedariğinde menşe ve uyum',en:'Origin and compliance in food sourcing',de:'Herkunft und Konformität in der Lebensmittelbeschaffung',it:'Origine e conformità nel sourcing alimentare',ru:'Происхождение и соответствие при сорсинге пищевых продуктов',fa:'مبدأ و انطباق در تأمین مواد غذایی'},
+    descriptions:{tr:'Gerçek menşe, parti izlenebilirliği, COA, aflatoksin, pestisit ve hedef pazar uygunluğu için temel kontroller.',en:'Core controls for actual origin, batch traceability, COA, aflatoxin, pesticides and target-market compliance.',de:'Kernprüfungen für tatsächliche Herkunft, Chargenrückverfolgung, COA, Aflatoxin, Pestizide und Zielmarktkonformität.',it:'Controlli essenziali su origine effettiva, tracciabilità lotto, COA, aflatossine, pesticidi e conformità al mercato.',ru:'Основные проверки реального происхождения, прослеживаемости партий, COA, афлатоксинов, пестицидов и соответствия целевому рынку.',fa:'کنترل‌های کلیدی برای مبدأ واقعی، قابلیت ردگیری محموله، اسناد COA، آفلاتوکسین و انطباق با بازار هدف.'},
+    answers:{tr:'Menşe ticari evrak, üretici ve parti düzeyinde açıkça beyan edilmeli; hedef pazar limitleri sevkiyat öncesinde doğrulanmalıdır.',en:'Origin should be declared clearly at commercial-document, producer and batch level; target-market limits must be verified before shipment.',de:'Die Herkunft ist in Handelsdokumenten sowie auf Hersteller- und Chargenebene offenzulegen; Zielmarktgrenzen sind vor Versand zu prüfen.',it:'L’origine va dichiarata nei documenti commerciali e a livello di produttore e lotto; i limiti del mercato vanno verificati prima della spedizione.',ru:'Происхождение должно быть указано в коммерческих документах, на уровне производителя и партии; пределы и нормативы целевого рынка необходимо проверить до отправки.',fa:'مبدأ کالا باید در اسناد تجاری و سطح محموله شفاف اعلام شود و الزامات بازار هدف قبل از حمل اعتبارسنجی گردد.'}
   }
 };
 
 export const legalIds = ['privacy', 'cookies', 'terms', 'data-protection'] as const;
 export const legal: Record<(typeof legalIds)[number], { slugs: Localized; titles: Localized }> = {
-  privacy: { slugs:{tr:'gizlilik-politikasi',en:'privacy-policy',de:'datenschutzerklaerung',it:'informativa-privacy',ru:'politique-de-confidentialite',fa:'privacy'}, titles:{tr:'Gizlilik Politikası',en:'Privacy Policy',de:'Datenschutzerklärung',it:'Informativa sulla privacy',ru:'Politique de confidentialité',fa:'حریم خصوصی'} },
-  cookies: { slugs:{tr:'cerez-politikasi',en:'cookie-policy',de:'cookie-richtlinie',it:'politica-cookie',ru:'politique-cookies',fa:'cookies'}, titles:{tr:'Çerez Politikası',en:'Cookie Policy',de:'Cookie-Richtlinie',it:'Politica sui cookie',ru:'Politique relative aux cookies',fa:'سیاست کوکی'} },
-  terms: { slugs:{tr:'kullanim-kosullari',en:'terms-of-use',de:'nutzungsbedingungen',it:'termini-di-utilizzo',ru:'conditions-utilisation',fa:'terms'}, titles:{tr:'Kullanım Koşulları',en:'Terms of Use',de:'Nutzungsbedingungen',it:'Termini di utilizzo',ru:'Conditions d’utilisation',fa:'شرایط استفاده'} },
-  'data-protection': { slugs:{tr:'kvkk-aydinlatma-metni',en:'data-protection-notice',de:'hinweise-zum-datenschutz',it:'informativa-protezione-dati',ru:'notice-protection-donnees',fa:'data-protection'}, titles:{tr:'KVKK Aydınlatma Metni',en:'Data Protection Notice',de:'Hinweise zum Datenschutz',it:'Informativa sulla protezione dei dati',ru:'Notice sur la protection des données',fa:'حفاظت از داده‌ها'} }
+  privacy: { slugs:{tr:'gizlilik-politikasi',en:'privacy-policy',de:'datenschutzerklaerung',it:'informativa-privacy',ru:'politika-konfidentsialnosti',fa:'privacy'}, titles:{tr:'Gizlilik Politikası',en:'Privacy Policy',de:'Datenschutzerklärung',it:'Informativa sulla privacy',ru:'Политика конфиденциальности',fa:'حریم خصوصی'} },
+  cookies: { slugs:{tr:'cerez-politikasi',en:'cookie-policy',de:'cookie-richtlinie',it:'politica-cookie',ru:'politika-cookie',fa:'cookies'}, titles:{tr:'Çerez Politikası',en:'Cookie Policy',de:'Cookie-Richtlinie',it:'Politica sui cookie',ru:'Политика в отношении cookie',fa:'سیاست کوکی'} },
+  terms: { slugs:{tr:'kullanim-kosullari',en:'terms-of-use',de:'nutzungsbedingungen',it:'termini-di-utilizzo',ru:'usloviya-ispolzovaniya',fa:'terms'}, titles:{tr:'Kullanım Koşulları',en:'Terms of Use',de:'Nutzungsbedingungen',it:'Termini di utilizzo',ru:'Условия использования',fa:'شرایط استفاده'} },
+  'data-protection': { slugs:{tr:'kvkk-aydinlatma-metni',en:'data-protection-notice',de:'hinweise-zum-datenschutz',it:'informativa-protezione-dati',ru:'uvedomlenie-o-zashhite-dannykh',fa:'data-protection'}, titles:{tr:'KVKK Aydınlatma Metni',en:'Data Protection Notice',de:'Hinweise zum Datenschutz',it:'Informativa sulla protezione dei dati',ru:'Уведомление о защите данных',fa:'حفاظت از داده‌ها'} }
 };
 
 export const pageCopy: Record<Locale, any> = {
@@ -690,17 +690,17 @@ export const pageCopy: Record<Locale, any> = {
     legalSections:[['Ambito e responsabilità','CTSEG si impegna a mantenere accurate le informazioni aziendali e commerciali. Le richieste di contatto e protezione dati possono essere inviate a info@ctseg.com.tr.'],['Informazioni e finalità','In caso di contatto possiamo trattare nome, azienda, e-mail, telefono, richiesta ed esigenza commerciale, oltre a registri tecnici limitati per la sicurezza. Servono a rispondere, valutare la relazione, proteggere il sito e adempiere obblighi legali.'],['Condivisione, conservazione e sicurezza','Le informazioni sono condivise solo con fornitori necessari di hosting, e-mail, supporto e servizi legali o autorità competenti, nel rispetto della legge. Sono cancellate o anonimizzate quando finalità e termini terminano.'],['Diritti e contatto','Per accesso, rettifica, cancellazione, opposizione e altri diritti, scrivi a info@ctseg.com.tr con dati sufficienti a identificare te e la richiesta.']]
   },
   ru:{
-    servicesTitle:'Une expertise pour chaque étape de la décision d’approvisionnement.',servicesLead:'Nous réunissons stratégie, vérification, analyse commerciale et exécution dans une discipline de décision unique.',
-    productsTitle:'Portefeuille de produits commerciaux',productsLead:'Le même catalogue est évalué sur chaque marché selon l’origine, la qualité par lot et des conditions commerciales vérifiables.',
-    marketsTitle:'De la Türkiye vers l’Europe et les marchés internationaux.',marketsLead:'Nous alignons la réalité productive locale avec la réglementation, les attentes des acheteurs et des modèles de livraison réalisables.',
-    aboutTitle:'Un partenaire de décision indépendant qui réduit l’incertitude commerciale.',aboutLead:'CTSEG agit selon les principes de preuve, transparence et faisabilité dans le sourcing stratégique et le commerce international.',
-    contactTitle:'Démarrez votre besoin commercial par une évaluation claire.',insightsTitle:'Des analyses pratiques pour les décideurs.',insightsLead:'Des guides concis et fondés sur des preuves sur le sourcing, le coût total, l’origine, la qualité et le risque commercial.',
-    framework:['Besoin et spécification','Vérification des parties et documents','Comparaison qualité, coût et risque','Traçabilité de la décision et de l’exécution'],
-    serviceFaq:['Comment démarre un projet ?','Le périmètre, l’objectif, le produit ou service, le marché et le calendrier sont précisés lors d’un bref échange de qualification.','CTSEG agit-il pour un fournisseur ?','CTSEG déclare clairement son mandat et son rôle commercial, puis documente les critères d’évaluation.'],
-    productUses:['Fabrication alimentaire et applications industrielles','Distribution de gros et marque de distributeur','HORECA et commerce spécialisé'],
-    productQuality:['Exigences aflatoxines et pesticides','Humidité, microbiologie et spécification produit','COA, code de lot et traçabilité','Conformité réglementaire au marché cible'],
-    legalIntro:'Cette notice fournit une information transparente sur l’utilisation du site CTSEG et les traitements de données associés.',
-    legalSections:[['Périmètre et responsabilité','CTSEG veille à l’exactitude des informations institutionnelles et commerciales. Les demandes de contact et de protection des données peuvent être envoyées à info@ctseg.com.tr.'],['Informations et finalités','Lors d’un contact, nous pouvons traiter nom, entreprise, e-mail, téléphone, demande et besoin commercial, ainsi que des journaux techniques limités pour la sécurité. Ces données servent à répondre, évaluer une relation, protéger le site et respecter la loi.'],['Partage, conservation et sécurité','Les informations ne sont partagées qu’avec les prestataires nécessaires d’hébergement, e-mail, support et conseil juridique ou les autorités compétentes, conformément au droit applicable. Elles sont supprimées ou anonymisées après leur finalité et les délais légaux.'],['Droits et contact','Pour exercer vos droits d’accès, rectification, effacement, opposition et autres droits, écrivez à info@ctseg.com.tr en précisant suffisamment votre identité et votre demande.']]
+    servicesTitle:'Экспертная поддержка на каждом этапе процесса сорсинга.',servicesLead:'Мы объединяем стратегию, верификацию, коммерческий анализ и исполнение в единую дисциплину принятия решений.',
+    productsTitle:'Портфель коммерческих продуктов',productsLead:'Тот же каталог оценивается в каждом рынке по происхождению, качеству по партиям и проверяемым коммерческим условиям.',
+    marketsTitle:'Из Турции в Европу и на международные рынки.',marketsLead:'Мы сопоставляем локальные производственные реалии с регуляциями целевого рынка, ожиданиями покупателей и выполнимыми моделями доставки.',
+    aboutTitle:'Независимый партнёр для принятия решений, снижающий неопределённость в торговле.',aboutLead:'CTSEG действует на основе доказательств, прозрачности и выполнимости в стратегическом сорсинге и международной торговле.',
+    contactTitle:'Начните коммерческий запрос с понятной оценки.',insightsTitle:'Практические материалы для лиц, принимающих решения.',insightsLead:'Краткие руководства на основе доказательств по сорсингу, совокупной стоимости, происхождению, качеству и коммерческим рискам.',
+    framework:['Потребность и спецификация','Проверка сторон и документов','Сравнение качества, стоимости и риска','Фиксация решения и исполнения'],
+    serviceFaq:['Как начинается проект?','Объём, цель, продукт или услуга, рынок и график уточняются в коротком квалификационном звонке.','Действует ли CTSEG от имени поставщика?','CTSEG чётко декларирует объём мандата и свою коммерческую роль; критерии оценки документируются.'],
+    productUses:['Пищевая промышленность и промышленные применения','Оптовая дистрибуция и собственные торговые марки','HORECA и специализированная розница'],
+    productQuality:['Требования по афлатоксинам и пестицидам','Влажность, микробиология и спецификация продукта','COA, код партии и прослеживаемость','Соответствие регуляциям целевого рынка'],
+    legalIntro:'Это уведомление предоставляет прозрачную информацию об использовании сайта CTSEG и связанных процессах обработки данных.',
+    legalSections:[['Область применения и ответственность','CTSEG стремится поддерживать точность корпоративной и коммерческой информации на этом сайте. Запросы по контакту и защите данных можно направлять на info@ctseg.com.tr.'],['Обрабатываемые данные и цели','При обращении мы можем обрабатывать имя, компанию, e‑mail, телефон, запрос и коммерческие потребности, а также ограниченные технические журналы для безопасности. Эти данные используются для ответа на запрос, оценки делового взаимодействия, защиты сайта и выполнения юридических обязательств.'],['Передача, хранение и безопасность','Информация передаётся только необходимым провайдерам хостинга, электронной почты, технической поддержки и юридическим услугам либо компетентным органам в соответствии с применимым законодательством. По окончании цели обработки и по истечении сроков хранения данные удаляются или анонимизируются.'],['Права и контакт','Чтобы реализовать права на доступ, исправление, удаление, возражение и другие права, напишите на info@ctseg.com.tr, указав достаточные данные для идентификации и описание запроса.']]
   },
   fa:{
     servicesTitle:'تخصص برای هر مرحله از تصمیم تأمین.',servicesLead:'استراتژی، اعتباربرسنجی، تحلیل تجاری و اجرا را در یک انضباط تصمیم‌گیری واحد ترکیب می‌کنیم.',
@@ -724,14 +724,6 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
   if (key === 'medical') return pathLang === 'tr' ? '/medical/reflex-disposable-gloves/' : `/${pathLang}/medical/reflex-disposable-gloves/`;
   if (key === 'how-we-work') return `/${pathLang}/${specialSlugs['how-we-work'][safeLang]}/`;
   if (key === 'scenarios') return `/${pathLang}/${specialSlugs.scenarios[safeLang]}/`;
-  if (lang === 'ru') {
-    const homeAnchors: Record<string,string> = {
-      services:'trade-paths', products:'sectors', markets:'markets', insights:'trade-paths',
-      about:'company', contact:'contact', 'how-we-work':'trade-paths', scenarios:'company', guides:'trade-paths'
-    };
-    if (key === 'legal' && id) return localizedPath('en','legal',id);
-    return `/ru/#${homeAnchors[key] ?? 'contact'}`;
-  }
   if (key === 'guides' && id) {
     if (pathLang === 'tr' || pathLang === 'en' || pathLang === 'fa') return `/${pathLang}/${sectionSlugs.insights[pathLang]}/${guideSlugs[id as GuideId][pathLang as 'tr'|'en'] || guideSlugs[id as GuideId]['en']}/`;
     return localizedPath(safeLang,'insights');

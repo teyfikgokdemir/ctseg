@@ -6,6 +6,13 @@ const errors=[];
 const active=['tr','en','de','it','fa','ru'];
 const homes={tr:'index.html',en:'en/index.html',de:'de/index.html',it:'it/index.html',fa:'fa/index.html',ru:'ru/index.html'};
 const ruSourcing=['ru/sourcing/carpets/index.html','ru/sourcing/hand-knotted-silk-carpets/index.html','ru/sourcing/textiles/index.html'];
+const ruCore=[
+  'ru/uslugi/index.html','ru/tovary/index.html','ru/rynki/index.html','ru/materialy/index.html','ru/o-kompanii/index.html','ru/kontakty/index.html',
+  'ru/uslugi/strategicheskiy-sorsing/index.html','ru/uslugi/poisk-i-verifikatsiya-postavshchikov/index.html',
+  'ru/resheniya/poisk-proverka-postavshchikov-turciya/index.html','ru/resheniya/poisk-proizvoditelya-chastnoy-marki/index.html',
+  'ru/resheniya/mezhdunarodnyi-rfq-sravnenie-predlozheniy/index.html','ru/resheniya/proiskhozhdenie-pishchevyh-produktov-dokumenty-partii/index.html',
+  'ru/politika-konfidentsialnosti/index.html','ru/politika-cookie/index.html','ru/usloviya-ispolzovaniya/index.html','ru/uvedomlenie-o-zashhite-dannykh/index.html'
+];
 const read=(path)=>readFileSync(join(dist,path),'utf8');
 
 if(!existsSync(dist))throw new Error('dist/ not found; run build first');
@@ -41,10 +48,27 @@ for(const path of ruSourcing){
   for(const block of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g))try{JSON.parse(block[1])}catch{errors.push(`${path}: invalid schema JSON`)}
 }
 
+for(const path of ruCore){
+  if(!existsSync(join(dist,path))){errors.push(`${path}: Russian parity route missing`);continue}
+  const html=read(path);
+  if(!html.includes('<html lang="ru" dir="ltr"'))errors.push(`${path}: Russian lang/direction incorrect`);
+  for(const code of [...active,'x-default'])if(!html.includes(`hreflang="${code}"`))errors.push(`${path}: hreflang ${code} missing`);
+}
+const walk=(dir)=>readdirSync(dir,{withFileTypes:true}).flatMap((entry)=>entry.isDirectory()?walk(join(dir,entry.name)):[join(dir,entry.name)]);
+const ruHtml=walk(join(dist,'ru')).filter((path)=>path.endsWith('.html'));
+if(ruHtml.length!==51)errors.push(`expected 51 indexable Russian HTML pages, found ${ruHtml.length}`);
+const frenchLeak=/\b(?:Accueil|Français|fournisseurs?|produits?|marchés?|données|confidentialité|conditions|utilisation|recherche|approvisionnement|conformité|origine|demander|offre|politique|notre|votre|avec|pour|dans|sur|une|des|les)\b/i;
+for(const path of ruHtml){
+  const visibleText=readFileSync(path,'utf8').replace(/<script[\s\S]*?<\/script>/gi,'').replace(/<style[\s\S]*?<\/style>/gi,'').replace(/<[^>]+>/g,' ');
+  const leak=visibleText.match(frenchLeak)?.[0];
+  if(leak)errors.push(`${path.slice(dist.length+1)}: French marker remains (${leak})`);
+}
+
 const sitemapFiles=readdirSync(dist).filter((name)=>name.startsWith('sitemap-')&&name.endsWith('.xml'));
 const sitemap=sitemapFiles.map((name)=>readFileSync(join(dist,name),'utf8')).join('\n');
 if(!sitemap.includes('https://ctseg.com.tr/ru/'))errors.push('Russian homepage missing from sitemap');
 for(const path of ruSourcing)if(!sitemap.includes(`https://ctseg.com.tr/${path.replace(/index\.html$/,'')}`))errors.push(`${path}: missing from sitemap`);
+for(const path of ruCore)if(!sitemap.includes(`https://ctseg.com.tr/${path.replace(/index\.html$/,'')}`))errors.push(`${path}: missing from sitemap`);
 if(sitemap.includes('https://ctseg.com.tr/fr/'))errors.push('French URL remains in sitemap');
 
 const redirects=readFileSync(join(dist,'_redirects'),'utf8');
@@ -62,4 +86,4 @@ for(const rule of requiredRedirects){
 }
 
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log('Locale contract passed: 6 active locales, Russian homepage + 3 sourcing routes, French cleanup and one-hop redirects.');
+console.log('Locale contract passed: 6 active locales, 51-page Russian parity, 24 localized solution landings, French cleanup and one-hop redirects.');
