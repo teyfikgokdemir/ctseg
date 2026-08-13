@@ -33,7 +33,7 @@ const organization = {
   founder:{'@type':'Person',name:company.founder},
   address:{
     '@type':'PostalAddress',
-    streetAddress:company.streetAddress,
+    ...(company.streetAddress ? {streetAddress:company.streetAddress} : {}),
     addressLocality:company.addressLocality,
     addressRegion:company.addressRegion,
     addressCountry:company.addressCountry

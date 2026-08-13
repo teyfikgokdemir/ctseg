@@ -148,8 +148,8 @@ for (const file of htmlFiles) {
     organization.founder?.['@type'] !== 'Person' ||
     organization.founder?.name !== 'Teyfik Gökdemir' ||
     organization.address?.['@type'] !== 'PostalAddress' ||
-    organization.address?.streetAddress !== 'Fevzipaşa Caddesi' ||
-    organization.address?.addressLocality !== 'Fatih' ||
+    Object.prototype.hasOwnProperty.call(organization.address ?? {}, 'streetAddress') ||
+    organization.address?.addressLocality !== 'Tuzla' ||
     organization.address?.addressRegion !== 'İstanbul' ||
     organization.address?.addressCountry !== 'TR'
   )) errors.push(`${label}: Organization schema company identity is incomplete`);

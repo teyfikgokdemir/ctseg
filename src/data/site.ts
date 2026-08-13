@@ -17,8 +17,8 @@ export const company = {
   alternateName: 'CTSEG',
   founder: 'Teyfik Gökdemir',
   foundingYear: '2022',
-  streetAddress: 'Fevzipaşa Caddesi',
-  addressLocality: 'Fatih',
+  streetAddress: '',
+  addressLocality: 'Tuzla',
   addressRegion: 'İstanbul',
   addressCountry: 'TR',
   email: 'info@ctseg.com.tr',
@@ -37,43 +37,43 @@ export const companyCopy: Record<Locale, {
     aboutHeading: 'İstanbul’dan uluslararası ticarete',
     aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi, 2022 yılında Teyfik Gökdemir tarafından İstanbul’da kuruldu. CTSEG; stratejik tedarik, üretici ve tedarikçi doğrulaması, maliyet analizi, ticari ürün tedariği ve uluslararası ticaret süreçlerinde şirketlere destek verir.',
     labels: { name: 'Şirket adı', founder: 'Kurucu', founded: 'Kuruluş yılı', headquarters: 'Merkez' },
-    headquarters: 'Fevzipaşa Caddesi, Fatih, İstanbul, Türkiye',
-    footerLocation: 'Fatih, İstanbul, Türkiye'
+    headquarters: 'Tuzla, İstanbul, Türkiye',
+    footerLocation: 'Tuzla, İstanbul, Türkiye'
   },
   en: {
     aboutHeading: 'From Istanbul to international trade',
     aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi was founded in Istanbul in 2022 by Teyfik Gökdemir. CTSEG supports companies with strategic sourcing, manufacturer and supplier verification, cost analysis, trade product sourcing and international trade processes.',
     labels: { name: 'Company name', founder: 'Founder', founded: 'Year established', headquarters: 'Headquarters' },
-    headquarters: 'Fevzipaşa Caddesi, Fatih, Istanbul, Türkiye',
-    footerLocation: 'Fatih, Istanbul, Türkiye'
+    headquarters: 'Tuzla, Istanbul, Türkiye',
+    footerLocation: 'Tuzla, Istanbul, Türkiye'
   },
   de: {
     aboutHeading: 'Von Istanbul in den internationalen Handel',
     aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi wurde 2022 von Teyfik Gökdemir in Istanbul gegründet. CTSEG unterstützt Unternehmen bei strategischer Beschaffung, der Prüfung von Herstellern und Lieferanten, Kostenanalysen, der Beschaffung von Handelsprodukten und internationalen Handelsprozessen.',
     labels: { name: 'Unternehmensname', founder: 'Gründer', founded: 'Gründungsjahr', headquarters: 'Hauptsitz' },
-    headquarters: 'Fevzipaşa Caddesi, Fatih, Istanbul, Türkei',
-    footerLocation: 'Fatih, Istanbul, Türkei'
+    headquarters: 'Tuzla, Istanbul, Türkei',
+    footerLocation: 'Tuzla, Istanbul, Türkei'
   },
   it: {
     aboutHeading: 'Da Istanbul al commercio internazionale',
     aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi è stata fondata a Istanbul nel 2022 da Teyfik Gökdemir. CTSEG affianca le aziende nel sourcing strategico, nella verifica di produttori e fornitori, nell’analisi dei costi, nell’approvvigionamento di prodotti commerciali e nei processi di commercio internazionale.',
     labels: { name: 'Nome dell’azienda', founder: 'Fondatore', founded: 'Anno di fondazione', headquarters: 'Sede' },
-    headquarters: 'Fevzipaşa Caddesi, Fatih, Istanbul, Turchia',
-    footerLocation: 'Fatih, Istanbul, Turchia'
+    headquarters: 'Tuzla, Istanbul, Turchia',
+    footerLocation: 'Tuzla, Istanbul, Turchia'
   },
   ru: {
     aboutHeading: 'Из Стамбула — на международные рынки',
     aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi основана Тейфиком Гёкдемиром в Стамбуле в 2022 году. Компания помогает с международным сорсингом, проверкой производителей и поставщиков, поиском покупателей и коммерческой координацией.',
     labels: { name: 'Компания', founder: 'Основатель', founded: 'Год основания', headquarters: 'Главный офис' },
-    headquarters: 'Fevzipaşa Caddesi, Fatih, Стамбул, Турция',
-    footerLocation: 'Фатих, Стамбул, Турция'
+    headquarters: 'Tuzla, Стамбул, Турция',
+    footerLocation: 'Тузла, Стамбул, Турция'
   },
   fa: {
     aboutHeading: 'از استانبول به تجارت بین‌المللی',
     aboutBody: 'شرکت CTSEG Sanayi ve Ticaret Limited Şirketi در سال ۲۰۲۲ توسط توفیق گوکدمیر در استانبول تأسیس شد. CTSEG به شرکت‌ها در زمینه تأمین استراتژیک، ارزیابی تولیدکنندگان و تأمین‌کنندگان، تحلیل هزینه‌ها، تأمین کالاهای تجاری و فرآیندهای تجارت بین‌المللی کمک می‌کند.',
     labels: { name: 'نام شرکت', founder: 'بنیان‌گذار', founded: 'سال تأسیس', headquarters: 'دفتر مرکزی' },
-    headquarters: 'خیابان فوزی‌پاشا، فاتح، استانبول، ترکیه',
-    footerLocation: 'فاتح، استانبول، ترکیه'
+    headquarters: 'توزلا، استانبول، ترکیه',
+    footerLocation: 'توزلا، استانبول، ترکیه'
   }
 };
 

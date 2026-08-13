@@ -62,7 +62,7 @@ copy = {
         "origin":"Origin","use":"Commercial use","pack":"Packaging is confirmed at quotation stage according to producer, order structure and target market.",
         "docs":"Quality and document requirements are verified by producer and shipment lot. Samples, COA, traceability and target-market fit are assessed for the specific transaction.",
         "contact":"Commercial assessment","company":"CTSEG Sanayi ve Ticaret Limited Şirketi","founded":"Established 2022 - Founder: Teyfik Gökdemir",
-        "address":"Fevzipaşa Caddesi, Fatih, Istanbul, Türkiye","web":"ctseg.com.tr - info@ctseg.com.tr",
+        "address":"Tuzla, Istanbul, Türkiye","web":"ctseg.com.tr - info@ctseg.com.tr",
         "note":"Commercial note","category_index":0,"name_index":2,"origin_index":4,"desc_index":6
     },
     "tr": {
@@ -72,7 +72,7 @@ copy = {
         "origin":"Menşe","use":"Ticari kullanım","pack":"Ambalaj bilgisi; üretici, sipariş yapısı ve hedef pazara göre teklif aşamasında teyit edilir.",
         "docs":"Kalite ve belge gereksinimleri üretici ve sevk partisi bazında doğrulanır. Numune, COA, izlenebilirlik ve hedef pazar uygunluğu işlem özelinde değerlendirilir.",
         "contact":"Ticari değerlendirme","company":"CTSEG Sanayi ve Ticaret Limited Şirketi","founded":"Kuruluş: 2022 - Kurucu: Teyfik Gökdemir",
-        "address":"Fevzipaşa Caddesi, Fatih, İstanbul, Türkiye","web":"ctseg.com.tr - info@ctseg.com.tr",
+        "address":"Tuzla, İstanbul, Türkiye","web":"ctseg.com.tr - info@ctseg.com.tr",
         "note":"Ticari not","category_index":1,"name_index":3,"origin_index":5,"desc_index":7
     }
 }
