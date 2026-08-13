@@ -565,16 +565,19 @@ const qualityCardsData = [
   }
   .reflex-page .section-head p,
   .reflex-page .prose > p { color: #d1d5db; }
-  .reflex-page .button-secondary {
-    border-color: rgba(243,229,200,.72);
+  .reflex-page .button-secondary,
+  .reflex-hero-actions .button-secondary {
+    border-color: rgba(243, 229, 200, 0.72);
     background: transparent;
     color: #f7f4ee !important;
   }
   .reflex-page .button-secondary:hover,
-  .reflex-page .button-secondary:focus-visible {
+  .reflex-page .button-secondary:focus-visible,
+  .reflex-hero-actions .button-secondary:hover,
+  .reflex-hero-actions .button-secondary:focus-visible {
     border-color: #e2b96c;
-    background: rgba(226,185,108,.12);
-    color: #fff !important;
+    background: rgba(226, 185, 108, 0.12);
+    color: #ffffff !important;
   }
 
   /* 1. Hero Section */
