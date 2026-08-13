@@ -39,6 +39,16 @@ if (record.key === 'insights' && !record.id) {
 if (record.key === 'products' && record.id) {
   const product = products[record.id as keyof typeof products];
   schemas.push({
+    '@context':'https://schema.org','@type':'Product',
+    '@id':`${canonicalFor(record)}#product`,url:canonicalFor(record),
+    name:product.names[record.lang],description:product.descriptions[record.lang],image:`https://ctseg.com.tr${product.media.src}`,
+    category:'B2B trade product',inLanguage:record.lang,
+    additionalProperty:[
+      {'@type':'PropertyValue',name:ui[record.lang].origin,value:product.origin},
+      {'@type':'PropertyValue',name:'Assessment status',value:'Specification, availability, MOQ, documents and commercial terms verified on request'}
+    ]
+  });
+  schemas.push({
     '@context':'https://schema.org','@type':'Service',
     '@id':`${canonicalFor(record)}#product-sourcing-service`,name:`${product.names[record.lang]} sourcing assessment`,
     description:product.descriptions[record.lang],serviceType:'Specification-led B2B sourcing assessment',
@@ -73,7 +83,7 @@ if (record.key === 'insights' && record.id) {
     publisher:{'@id':'https://ctseg.com.tr/#organization'}
   });
 }
-if (record.key === 'how-we-work' && (record.lang === 'tr' || record.lang === 'en')) {
+if (record.key === 'how-we-work') {
   const process=processPages[record.lang];
   schemas.push({
     '@context':'https://schema.org','@type':'HowTo',name:process.title,description:process.description,

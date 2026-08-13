@@ -318,7 +318,7 @@ for (const [sourceLabel, sourceRecord] of builtTradeRecords) {
     }
   }
 }
-if (productSchemaPages !== 0) errors.push(`Product schema must not be used without a concrete offer; found ${productSchemaPages}`);
+if (productSchemaPages !== 90) errors.push(`expected 90 Product schemas with verifiable specification semantics, found ${productSchemaPages}`);
 if (productAssessmentServicePages !== 90) errors.push(`expected 90 specification-led product sourcing Service schemas across the five full catalogue locales, found ${productAssessmentServicePages}`);
 if (contactEmailPanels !== 11) errors.push(`expected 11 localized contact email panels across six homepages and five full contact pages, found ${contactEmailPanels}`);
 if (!existsSync(join(root, persianLandingLabel))) errors.push('standalone Persian landing page build output missing');
@@ -382,7 +382,7 @@ if (!css.includes('--header-height:88px') || !css.includes('.page-hero+.section'
 if (!css.includes('.contact-email-link:hover') || !css.includes('.contact-email-link:focus-visible') || !css.includes('overflow-wrap:anywhere')) {
   errors.push('compiled CSS: contact email hover/focus/wrapping treatment missing');
 }
-for (const locale of ['tr','en','de','it','ru']) {
+for (const locale of ['tr','en','de','it','ru','fa']) {
   if (!css.includes(`html[data-locale=${locale}]`)) errors.push(`compiled CSS: ${locale} locale treatment missing`);
 }
 
@@ -406,4 +406,4 @@ if (errors.length) {
   for (const error of [...new Set(errors)]) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Site check passed: ${htmlFiles.length} HTML pages, two stable intent flows, all 18 sourcing routes with explicit locale/canonical/hreflang/x-default/H1/chrome/Persian-content assertions and reciprocal six-locale counterparts, ${checkedLinks} internal links, 72 catalogue sourcing Service schemas without Product schema, sitemap/llms coverage and complete metadata checks.`);
+console.log(`Site check passed: ${htmlFiles.length} HTML pages, two stable intent flows, all 18 sourcing routes with explicit locale/canonical/hreflang/x-default/H1/chrome/Persian-content assertions and reciprocal six-locale counterparts, ${checkedLinks} internal links, 90 Product + 90 catalogue sourcing Service schemas, sitemap/llms coverage and complete metadata checks.`);

@@ -2,10 +2,16 @@ import type { Locale } from './site';
 
 type Localized<T> = Record<Locale, T>;
 
-export const specialSlugs = {
-  'how-we-work': { tr:'nasil-calisiyoruz', en:'how-we-work' },
-  scenarios: { tr:'temsili-calisma-senaryolari', en:'representative-work-scenarios' }
-} as const;
+export const specialSlugs: Record<'how-we-work'|'scenarios', Record<Locale,string>> = {
+  'how-we-work': {
+    tr:'nasil-calisiyoruz', en:'how-we-work', de:'arbeitsweise', it:'come-lavoriamo',
+    ru:'kak-my-rabotaem', fa:'ravesh-kar'
+  },
+  scenarios: {
+    tr:'temsili-calisma-senaryolari', en:'representative-work-scenarios', de:'repraesentative-arbeitsszenarien',
+    it:'scenari-di-lavoro-rappresentativi', ru:'primery-kommercheskih-scenariev', fa:'senaryo-haye-nemune'
+  }
+};
 
 export const guideIds = ['vegetable-oil-rfq','nuts-quality-documents','packaging-moq-tco'] as const;
 export type GuideId = (typeof guideIds)[number];
@@ -177,6 +183,43 @@ export const processPages = {
       ['Who determines the MOQ?','CTSEG does not set the minimum order quantity. MOQ is determined by the supplier according to the product, production line, packaging format, private-label work and shipment model. During quotation assessment, CTSEG can compare the commercial basis of the MOQ and identify feasible alternative order structures.']
     ]
   },
+
+  de:{
+    title:'Wie wir arbeiten',description:'Neun kontrollierte Schritte von der Definition des Beschaffungsbedarfs bis zur Bewertung nach der Lieferung.',
+    role:'CTSEG übernimmt Recherche, Prüfung, Vergleich und kommerzielle Koordination; CTSEG ist weder Produktverkäufer noch Garantiegeber.',
+    steps:['Bedarf definieren','Kommerzielle Machbarkeit vorprüfen','Markt- und Lieferantenrecherche','Lieferantenprüfung','RFQ und Angebotsvergleich','Muster- und Qualitätsbewertung','Kommerzielle Verhandlung','Bestell- und Dokumentenkoordination','Bewertung nach der Lieferung'],
+    faq:[
+      ['Was ist CTSEG?','CTSEG ist ein in Istanbul ansässiges Unternehmen für strategische Beschaffung und internationale Handelskoordination. Es unterstützt Unternehmen dabei, Anforderungen zu definieren, geeignete Märkte und Lieferanten zu recherchieren, Gegenparteien zu prüfen und Angebote nachvollziehbar zu vergleichen.'],
+      ['Wie arbeitet CTSEG?','Ein Projekt beginnt mit der Definition von Bedarf und Entscheidungskriterien. Danach folgen Marktrecherche, Lieferantenprüfung, RFQ-Vorbereitung und Angebotsvergleich. Muster, Qualitätsdokumente und Verhandlungsgrundlagen können bei Bedarf koordiniert werden.'],
+      ['Was bedeutet Lieferantenprüfung?','Geprüft werden unter anderem Unternehmensregistrierung, Anschrift, bevollmächtigte Personen, Produktions- oder Lieferfähigkeit, Qualitätsansatz, Dokumente, Referenzen und kommerzielle Bedingungen. Nicht belegbare Angaben werden ausdrücklich als offen gekennzeichnet.'],
+      ['Welche Angaben werden für ein Angebot benötigt?','Erforderlich sind Produkt- oder Leistungsbeschreibung, technische Spezifikation, Menge, Verpackung, Lieferort, Zieltermin, Dokumentenanforderungen und bevorzugte Handelsbedingungen.'],
+      ['Wer bestimmt die Mindestbestellmenge?','Die MOQ wird vom Lieferanten anhand von Produkt, Produktionslinie, Verpackung, Private Label und Versandmodell festgelegt. CTSEG vergleicht die kommerzielle Grundlage und mögliche Alternativen.']
+    ]
+  },
+  it:{
+    title:'Come lavoriamo',description:'Nove fasi controllate dalla definizione dell’esigenza commerciale alla valutazione post-consegna.',
+    role:'CTSEG svolge ricerca, verifica, confronto e coordinamento commerciale; non è il venditore del prodotto né un soggetto garante.',
+    steps:['Definizione dell’esigenza','Pre-valutazione della fattibilità','Ricerca di mercato e fornitori','Verifica del fornitore','RFQ e confronto offerte','Valutazione campioni e qualità','Negoziazione commerciale','Coordinamento ordine e documenti','Valutazione post-consegna'],
+    faq:[
+      ['Che cos’è CTSEG?','CTSEG è una società con sede a Istanbul che opera nel sourcing strategico e nel coordinamento commerciale internazionale, aiutando le imprese a definire requisiti, verificare controparti e confrontare offerte.'],
+      ['Come lavora CTSEG?','L’incarico inizia con requisiti e criteri decisionali chiari; seguono ricerca, verifica, RFQ e confronto economico. Quando necessario vengono coordinati campioni, documenti qualità e dati per la negoziazione.'],
+      ['Che cos’è la verifica del fornitore?','È un controllo strutturato di registrazione societaria, sede, soggetti autorizzati, capacità, qualità, documenti, referenze e condizioni commerciali. Le informazioni non dimostrabili restano esplicitamente aperte.'],
+      ['Quali informazioni servono per un’offerta?','Descrizione, specifiche tecniche, quantità, imballaggio, destinazione, data obiettivo, documenti richiesti e condizioni commerciali preferite.'],
+      ['Chi determina il MOQ?','Il MOQ è definito dal fornitore in base a prodotto, linea, imballaggio, private label e spedizione; CTSEG ne confronta le basi e le alternative praticabili.']
+    ]
+  },
+  ru:{
+    title:'Как мы работаем',description:'Девять контролируемых этапов — от определения коммерческой потребности до оценки после поставки.',
+    role:'CTSEG выполняет исследование, проверку, сравнение и коммерческую координацию; компания не является продавцом товара или гарантирующей организацией.',
+    steps:['Определение потребности','Предварительная оценка реализуемости','Исследование рынка и поставщиков','Проверка поставщика','RFQ и сравнение предложений','Оценка образцов и качества','Коммерческие переговоры','Координация заказа и документов','Оценка после поставки'],
+    faq:[
+      ['Что такое CTSEG?','CTSEG — стамбульская компания по стратегическому сорсингу и международной коммерческой координации. Она помогает формулировать требования, исследовать рынки, проверять контрагентов и сравнивать предложения.'],
+      ['Как работает CTSEG?','Работа начинается с определения требований и критериев решения. Затем проводятся исследование рынка, проверка поставщиков, подготовка RFQ и сравнение предложений; при необходимости координируются образцы и документы качества.'],
+      ['Что такое проверка поставщика?','Это структурированная проверка регистрации, адреса, уполномоченных лиц, производственных возможностей, подхода к качеству, документов, рекомендаций и коммерческих условий. Неподтверждённые сведения отмечаются как открытые.'],
+      ['Какие данные нужны для предложения?','Нужны описание и спецификация, объём, упаковка, место поставки, целевая дата, требования к документам и предпочтительные коммерческие условия.'],
+      ['Кто определяет MOQ?','Минимальный объём определяет поставщик с учётом товара, линии, упаковки, private label и модели отгрузки. CTSEG помогает сравнить основания и альтернативы.']
+    ]
+  },
   fa:{
     title:'چگونه کار می‌کنیم؟',description:'نه مرحله کنترل‌شده از تعریف نیاز تجاری تا ارزیابی پس از تحویل.',
     role:'CTSEG خدمات تحقیق، اعتباربرسنجی، مقایسه و هماهنگی تجاری ارائه می‌دهد؛ فروشنده مستقیم یا ضامن اجرایی نیست.',
@@ -210,6 +253,37 @@ export const scenarioPages = {
       ['Iranian-origin pistachio comparison for a European food importer','Create a qualified variety and supplier shortlist','Variety, size, origin, batch documents, quality parameters, packaging, lead time and total landed cost','Desk-based producer and document verification; quotation normalisation through a common RFQ','Comparison matrix, open-information register and sample-assessment plan','Buyer selects parties for sampling and commercial negotiation'],
       ['5-litre sunflower oil research for an Iranian institutional buyer','Research feasible PET or tin-packed supply','Oil specification, packaging, labelling, MOQ, payment, delivery model and producer capability','Source screening in Türkiye and suitable markets; comparison of requirements and commercial terms','Verifiable shortlist, RFQ table and explicit risk register','Buyer selects a feasible packaging and quotation structure'],
       ['Packaging supplier comparison for a manufacturer','Select a suitable packaging format and supply model','Material, print, tooling, MOQ, unit cost, waste, lead time, freight and inventory impact','Convert the technical requirement into a common format and model total-cost scenarios','Bid comparison, TCO view and supplier-verification questions','Manufacturer decides whether to progress to sample, production trial or negotiation']
+    ]
+  },
+
+  de:{
+    title:'Repräsentative Arbeitsszenarien',description:'Drei kommerzielle Szenarien erläutern den Entscheidungsansatz von CTSEG, ohne erfundene Kundenreferenzen darzustellen.',
+    disclaimer:'Diese Szenarien dienen ausschließlich der Erläuterung der CTSEG-Methode. Die beschriebenen Unternehmen und Ergebnisse sind keine realen Kundenreferenzen oder abgeschlossenen Projekte.',
+    labels:['Bedarf','Bewertete Kriterien','CTSEG-Ansatz','Kommerzielles Ergebnis','Entscheidungsstufe'],
+    items:[
+      ['Iranische Pistazien für einen europäischen Lebensmittelimporteur','Qualifizierte Sorten- und Lieferantenauswahl','Sorte, Größe, Herkunft, Chargendokumente, Qualität, Verpackung, Lieferzeit und Gesamtkosten','Desktop-Prüfung von Produzent und Dokumenten; Angebotsnormalisierung über eine gemeinsame RFQ','Vergleichsmatrix, offene Informationspunkte und Musterbewertungsplan','Auswahl der Parteien für Muster und Verhandlung'],
+      ['5-Liter-Sonnenblumenöl für einen institutionellen Käufer','Recherche geeigneter PET- oder Blechgebinde','Spezifikation, Verpackung, Kennzeichnung, MOQ, Zahlung, Lieferung und Kapazität','Quellenprüfung in Türkiye und geeigneten Märkten; Vergleich der Konditionen','Prüfbare Shortlist, RFQ-Tabelle und offenes Risikoregister','Auswahl einer umsetzbaren Verpackungs- und Angebotsstruktur'],
+      ['Verpackungslieferanten für einen Hersteller','Auswahl von Format und Liefermodell','Material, Druck, Werkzeug, MOQ, Stückpreis, Ausschuss, Lieferzeit, Fracht und Lagerwirkung','Technische Anforderungen vereinheitlichen und Gesamtkostenszenarien modellieren','Angebotsvergleich, TCO-Sicht und Prüffragen','Entscheidung über Muster, Testproduktion oder Verhandlung']
+    ]
+  },
+  it:{
+    title:'Scenari di lavoro rappresentativi',description:'Tre scenari commerciali spiegano il metodo decisionale CTSEG senza presentare referenze clienti inventate.',
+    disclaimer:'Gli scenari illustrano il metodo CTSEG. Aziende e risultati descritti non sono referenze reali né risultati già conseguiti.',
+    labels:['Esigenza','Criteri valutati','Approccio CTSEG','Output commerciale','Fase decisionale'],
+    items:[
+      ['Pistacchi iraniani per un importatore alimentare europeo','Creare una rosa qualificata di varietà e fornitori','Varietà, calibro, origine, documenti di lotto, qualità, packaging, tempi e costo consegnato','Verifica documentale di produttore e documenti; normalizzazione con RFQ comune','Matrice di confronto, registro informazioni aperte e piano campioni','Il buyer seleziona le controparti per campioni e negoziazione'],
+      ['Olio di girasole da 5 litri per un buyer istituzionale','Ricerca di fornitura in PET o latta','Specifica, packaging, etichetta, MOQ, pagamento, consegna e capacità','Screening in Türkiye e mercati idonei; confronto di requisiti e condizioni','Shortlist verificabile, tabella RFQ e rischi espliciti','Scelta della struttura di packaging e offerta sostenibile'],
+      ['Confronto fornitori di imballaggio','Selezionare formato e modello di fornitura','Materiale, stampa, attrezzaggio, MOQ, prezzo, scarti, tempi, trasporto e stock','Uniformare il fabbisogno e modellare scenari di costo totale','Confronto offerte, vista TCO e domande di verifica','Decisione su campione, prova produttiva o negoziazione']
+    ]
+  },
+  ru:{
+    title:'Примеры коммерческих сценариев',description:'Три сценария показывают подход CTSEG к принятию решений без вымышленных клиентских рекомендаций.',
+    disclaimer:'Сценарии приведены только для объяснения метода CTSEG. Указанные компании и результаты не являются реальными клиентскими кейсами.',
+    labels:['Потребность','Критерии оценки','Подход CTSEG','Коммерческий результат','Этап решения'],
+    items:[
+      ['Иранские фисташки для европейского импортёра','Сформировать квалифицированный список сортов и поставщиков','Сорт, размер, происхождение, документы партии, качество, упаковка, срок и полная стоимость','Кабинетная проверка производителя и документов; единый RFQ','Матрица сравнения, список открытых данных и план образцов','Покупатель выбирает стороны для образцов и переговоров'],
+      ['Подсолнечное масло 5 л для корпоративного покупателя','Исследовать поставки в PET или жестяной таре','Спецификация, упаковка, этикетка, MOQ, оплата, доставка и мощность','Поиск в Türkiye и подходящих рынках; сравнение требований и условий','Проверяемый список, таблица RFQ и явные риски','Выбор реализуемой структуры упаковки и предложения'],
+      ['Сравнение поставщиков упаковки','Выбрать формат и модель поставки','Материал, печать, оснастка, MOQ, цена, отходы, срок, перевозка и запас','Привести требования к единому формату и смоделировать совокупную стоимость','Сравнение предложений, TCO и вопросы проверки','Решение об образце, пробной партии или переговорах']
     ]
   },
   fa:{

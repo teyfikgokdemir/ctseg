@@ -23,7 +23,9 @@ if (pageKey === 'home') alternates.fa = 'https://ctseg.com.tr/fa/';
 if (pageKey === 'home') alternates.ru = 'https://ctseg.com.tr/ru/';
 const alternateCodes = pageKey === 'medical'
   ? ['tr','en','de','it','ru','fa','sq','mk','sr']
-  : (pageKey === 'home' ? activeLocales : ['how-we-work','scenarios','guides'].includes(pageKey) ? ['tr','en'] : locales.filter((code) => code !== 'ru'));
+  : (pageKey === 'home' || ['how-we-work','scenarios'].includes(pageKey)
+    ? activeLocales
+    : pageKey === 'guides' ? ['tr','en'] : locales.filter((code) => code !== 'ru'));
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
   name:company.name,alternateName:company.alternateName,foundingDate:company.foundingYear,

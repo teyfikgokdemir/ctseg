@@ -15,6 +15,8 @@ export function getRouteRecords(): RouteRecord[] {
   const records: RouteRecord[] = [];
   for (const lang of locales) {
     if (lang !== 'tr') records.push({ lang, key:'home' });
+    records.push({lang,path:specialSlugs['how-we-work'][lang],key:'how-we-work'});
+    records.push({lang,path:specialSlugs.scenarios[lang],key:'scenarios'});
     if (lang === 'ru') continue;
     for (const key of ['services','products','markets','insights','about','contact']) {
       records.push({ lang, path:sectionSlugs[key][lang], key });
@@ -32,8 +34,6 @@ export function getRouteRecords(): RouteRecord[] {
       lang, path:legal[id].slugs[lang], key:'legal', id
     });
     if (lang === 'tr' || lang === 'en') {
-      records.push({lang,path:specialSlugs['how-we-work'][lang],key:'how-we-work'});
-      records.push({lang,path:specialSlugs.scenarios[lang],key:'scenarios'});
       for (const id of guideIds) records.push({
         lang,path:`${sectionSlugs.insights[lang]}/${guideSlugs[id][lang]}`,key:'guides',id
       });
@@ -58,8 +58,8 @@ export function getMeta(record: RouteRecord) {
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
   if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} B2B | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
   if (key === 'insights' && id) return { title:`${insights[id as keyof typeof insights].titles[lang]} | CTSEG`, description:insights[id as keyof typeof insights].descriptions[lang] };
-  if (key === 'how-we-work' && (lang === 'tr' || lang === 'en')) return {title:`${processPages[lang].title} | CTSEG`,description:processPages[lang].description};
-  if (key === 'scenarios' && (lang === 'tr' || lang === 'en')) return {title:`${scenarioPages[lang].title} | CTSEG`,description:scenarioPages[lang].description};
+  if (key === 'how-we-work') return {title:`${processPages[lang].title} | CTSEG`,description:processPages[lang].description};
+  if (key === 'scenarios') return {title:`${scenarioPages[lang].title} | CTSEG`,description:scenarioPages[lang].description};
   if (key === 'guides' && id) {
     const guideLang = (lang === 'tr' || lang === 'en') ? lang : 'en';
     const guide = guides[id as keyof typeof guides]?.[guideLang] || { title: 'Guide', description: 'Commercial guide' };

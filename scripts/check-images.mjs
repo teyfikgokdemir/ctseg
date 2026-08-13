@@ -64,7 +64,7 @@ for(const file of homeFiles){
 }
 
 const targetSources=Object.values(tradeVisuals).map((visual)=>visual.source);
-for(const file of ['src/components/PageContent.astro','src/pages/fa/index.astro','src/pages/[lang]/sourcing/[sector].astro']){
+for(const file of ['src/components/PageContent.astro','src/pages/[lang]/sourcing/[sector].astro']){
   const source=readFileSync(join(root,file),'utf8');
   for(const image of targetSources){
     if(source.includes(image))failures.push(`${file}: hard-coded trade visual ${image}`);

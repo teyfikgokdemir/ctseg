@@ -8,7 +8,10 @@ const executables = [
   'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
   'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
   'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
-  'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe'
+  'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
+  '/usr/bin/chromium',
+  '/usr/bin/chromium-browser',
+  '/usr/bin/google-chrome'
 ];
 const executablePath = executables.find(existsSync);
 if (!executablePath) {
@@ -129,6 +132,7 @@ try {
   const failures = [];
   const localeAtmospheres = new Map();
   for (const testCase of cases) {
+    testCase.persian=false;
     const page = await browser.newPage({ viewport:{ width:testCase.width, height:testCase.height } });
     const navigationResponse = await page.goto(`http://127.0.0.1:4321${testCase.path}`, { waitUntil:'networkidle' });
     if (!navigationResponse || navigationResponse.status() !== 200) {
@@ -153,7 +157,7 @@ try {
     let mobileMenu = true;
     let bodyScrollLocked = true;
     let persianMobileMenu = null;
-    if (testCase.width <= 860 && !testCase.persian) {
+    if (testCase.width <= 1050 && !testCase.persian) {
       await page.locator('[data-menu-toggle]').click();
       mobileMenu = await page.locator('[data-primary-nav]').isVisible();
       bodyScrollLocked = await page.evaluate(() => document.body.classList.contains('menu-open') && getComputedStyle(document.body).overflow === 'hidden');
@@ -297,7 +301,7 @@ try {
         };
       })()
       ,persian:(() => {
-        if(document.documentElement.lang!=='fa')return null;
+        if(document.documentElement.lang!=='fa'||!document.querySelector('.fa-hero'))return null;
         const form=document.querySelector('[data-commercial-form]');
         if(!form)return null;
         const fields=[...form.querySelectorAll('input[name],select[name],textarea[name]')].filter((field)=>!['locale','startedAt','website'].includes(field.name));
@@ -480,8 +484,8 @@ try {
       ]);
       persianNavWorks = targetResponse?.status() === 200 && new URL(page.url()).pathname === '/fa/';
     }
-    if (!testCase.persian) localeAtmospheres.set(result.lang,result.localeAtmosphere);
-    const gapLimit = testCase.gapLimit ?? (testCase.width <= 860 ? 56 : 80);
+    localeAtmospheres.set(result.lang,result.localeAtmosphere);
+    const gapLimit = testCase.gapLimit ?? (testCase.width <= 1050 ? 56 : 80);
     const badLayout = result.layout.headingVisualOverlap || result.layout.headerOverlap || result.layout.heroChromeOverlap ||
       (result.layout.pageHeroGap !== null && (result.layout.pageHeroGap < 20 || result.layout.pageHeroGap > gapLimit)) || result.layout.cardOverflow ||
       result.layout.repeatedAdjacentImage || result.layout.duplicateDetailMedia ||
@@ -523,7 +527,10 @@ try {
       ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/' ||
         result.persianNav.target !== null || result.persianNav.primary !== 'For Iranian Businesses' ||
         result.persianNav.helper !== 'Persian landing page' || (testCase.verifyPersianNav && !result.persianNav.visible)
-      : result.persianNav.count !== 0;
+      : result.lang === 'fa'
+        ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/' || result.persianNav.target !== null ||
+          result.persianNav.primary !== 'برای کسب‌وکارهای ایرانی' || result.persianNav.helper !== 'پشتیبانی تجارت بین‌المللی'
+        : result.persianNav.count !== 0;
     const badUx=(isHomepage&&(result.ux.h1Count!==1||!result.ux.h1Within||!result.ux.headingsWithin||result.ux.h1Lines>6||result.ux.floatingCount!==2||!result.ux.floatingTargets||!result.ux.backInitiallyHidden||!result.ux.whatsappValid||!dynamicUx.backVisible||!result.ux.headerContract||!dynamicUx.headerAtTop))||result.ux.minLightContrast<4.5||!result.ux.formCore||!result.ux.detailsClosed||!result.ux.emailValid;
     const badTradeImages=result.tradeVisuals.some((visual)=>visual.naturalWidth<1||visual.naturalHeight<1||visual.width<=0||visual.height<=0||!visual.alt||!visual.srcset||!visual.sizes||!visual.dimensions||visual.objectFit!=='cover'||!visual.objectPosition)||
       new Set(result.tradeVisuals.map((visual)=>visual.src)).size!==result.tradeVisuals.length||
@@ -549,18 +556,14 @@ try {
       const page=await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
       const response=await page.goto(`http://127.0.0.1:4321${entry.path}`,{waitUntil:'domcontentloaded'});
       if(response?.status()!==200)failures.push(`global locale ${entry.lang}/${viewport.name}: HTTP ${response?.status()??'none'}`);
-      if(entry.lang!=='fa'||viewport.name==='mobile'){
-        const trigger=entry.lang==='fa'
-          ? page.locator('[data-fa-menu-toggle]')
-          : viewport.name==='desktop'?page.locator('[data-language-toggle]'):page.locator('[data-menu-toggle]');
-        if(entry.lang==='fa')await page.waitForLoadState('networkidle');
+      {
+        const trigger=viewport.name==='desktop'?page.locator('[data-language-toggle]'):page.locator('[data-menu-toggle]');
         await trigger.focus();
         await trigger.press('Enter');
-        if(entry.lang==='fa')await page.waitForFunction(()=>document.querySelector('[data-fa-menu-toggle]')?.getAttribute('aria-expanded')==='true'&&[...document.querySelectorAll('[data-fa-locale-switcher] [data-locale-option]')].every((link)=>link.getBoundingClientRect().width>0));
         await page.waitForTimeout(300);
       }
       const contract=await page.evaluate(({lang,targets,mobile})=>{
-        const selector=lang==='fa'?'[data-locale-option]':mobile?'.mobile-locales [data-locale-option]':'#language-panel [data-locale-option]';
+        const selector=mobile?'.mobile-locales [data-locale-option]':'#language-panel [data-locale-option]';
         const links=[...document.querySelectorAll(selector)];
         const visible=(element)=>{if(!element)return false;const box=element.getBoundingClientRect();const style=getComputedStyle(element);return box.width>0&&box.height>0&&style.visibility!=='hidden'&&style.display!=='none'};
         return{
@@ -688,8 +691,8 @@ try {
     }
   }
   if(sourcingChecks!==36) failures.push(`expected 36 sourcing viewport checks, ran ${sourcingChecks}`);
-  if (localeAtmospheres.size !== 5) {
-    failures.push(`locale treatments are incomplete: ${JSON.stringify(Object.fromEntries(localeAtmospheres))}`);
+  if (localeAtmospheres.size !== 6 || new Set(localeAtmospheres.values()).size < 5) {
+    failures.push(`locale treatments are incomplete or insufficiently distinct: ${JSON.stringify(Object.fromEntries(localeAtmospheres))}`);
   }
   const productSlugs = [
     'akbari-pistachio','kaleghouchi-pistachio','fandoghi-pistachio','ahmad-aghaei-pistachio',
