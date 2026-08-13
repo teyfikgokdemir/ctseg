@@ -45,25 +45,23 @@ const copyright = copyrightMap[lang] || copyrightMap.en;
     </div>
     <nav aria-label={t.products}>
       <strong>{t.products}</strong>
-      <a href={lang === 'ru' ? '/ru/#sectors' : localizedPath(lang, 'products')}>{t.allProducts}</a>
+      <a href={localizedPath(lang, 'products')}>{t.allProducts}</a>
       <a href={reflexPath(lang)}>REFLEX Medical Gloves</a>
-      <a href={lang === 'ru' ? '/ru/#markets' : localizedPath(lang, 'markets')}>{t.markets}</a>
-      {lang !== 'ru' && <a href={localizedPath(lang, 'insights')}>{t.insights}</a>}
+      <a href={localizedPath(lang, 'markets')}>{t.markets}</a>
+      <a href={localizedPath(lang, 'insights')}>{t.insights}</a>
     </nav>
     <nav aria-label={t.contact}>
       <strong>CTSEG</strong>
-      <a href={lang === 'ru' ? '/ru/#company' : localizedPath(lang, 'about')}>{t.about}</a>
+      <a href={localizedPath(lang, 'about')}>{t.about}</a>
       {(lang === 'tr' || lang === 'en' || lang === 'fa') && <a href={localizedPath(lang,'how-we-work')}>{lang === 'tr' ? 'Nasıl çalışıyoruz?' : lang === 'fa' ? 'چگونه کار می‌کنیم؟' : 'How we work'}</a>}
-      <a href={lang === 'ru' ? '/ru/#contact' : localizedPath(lang, 'contact')}>{t.contact}</a>
+      <a href={localizedPath(lang, 'contact')}>{t.contact}</a>
       <a href={`mailto:${company.email}`}>{company.email}</a>
     </nav>
   </div>
   <div class="container footer-bottom">
     <p>{copyright}</p>
     <nav aria-label="Legal">
-      {lang === 'ru'
-        ? <><a href={localizedPath('en','legal','privacy')}>Конфиденциальность</a><a href={localizedPath('en','legal','cookies')}>Политика cookie</a><a href={localizedPath('en','legal','terms')}>Условия использования</a><a href={localizedPath('en','legal','data-protection')}>Защита данных</a></>
-        : legalIds.map((id) => <a href={localizedPath(lang, 'legal', id)}>{legal[id].titles[lang]}</a>)}
+      {legalIds.map((id) => <a href={localizedPath(lang, 'legal', id)}>{legal[id].titles[lang]}</a>)}
     </nav>
   </div>
 </footer>

@@ -1,0 +1,1139 @@
+import type { Locale } from './site';
+
+export type SearchLandingId = 'turkiye-supplier-sourcing' | 'private-label-manufacturer' | 'rfq-bid-comparison' | 'food-origin-compliance';
+export type SearchLandingContent = {
+  eyebrow:string; title:string; description:string; answerTitle:string; directAnswer:string;
+  audienceTitle:string; audience:string; criteriaTitle:string; criteria:readonly string[];
+  processTitle:string; process:readonly string[]; evidenceTitle:string; evidence:string;
+  serviceType:string; ctaTitle:string; ctaText:string; ctaLabel:string;
+  faq:readonly {question:string;answer:string}[];
+};
+
+export const searchLandingIds = [
+  "turkiye-supplier-sourcing",
+  "private-label-manufacturer",
+  "rfq-bid-comparison",
+  "food-origin-compliance"
+] as const satisfies readonly SearchLandingId[];
+
+export const searchLandingIndexCopy = {
+  "en": {
+    "title": "Solutions for specific commercial decisions",
+    "lead": "Focused pages for companies that need a supplier, manufacturer, comparable RFQ or documented food-sourcing assessment."
+  },
+  "tr": {
+    "title": "Belirli ticari kararlar için çözümler",
+    "lead": "Tedarikçi, üretici, karşılaştırılabilir RFQ veya belgelenmiş gıda tedarik değerlendirmesi ihtiyacı olan şirketler için odaklanmış sayfalar."
+  },
+  "de": {
+    "title": "Lösungen für spezifische kommerzielle Entscheidungen",
+    "lead": "Fokussierte Seiten für Unternehmen, die einen Lieferanten, Hersteller, vergleichbare RFQ oder eine dokumentierte Bewertung der Lebensmittelbeschaffung benötigen."
+  },
+  "it": {
+    "title": "Soluzioni per decisioni commerciali specifiche",
+    "lead": "Pagine dedicate per aziende che necessitano di un fornitore, un produttore, RFQ comparabili o una valutazione documentata delle forniture alimentari."
+  },
+  "ru": {
+    "title": "Решения для конкретных коммерческих задач",
+    "lead": "Специализированные материалы для компаний, которым требуется поставщик или производитель, сопоставимый RFQ либо документированная оценка закупок пищевой продукции."
+  },
+  "fa": {
+    "title": "راهکار برای تصمیم‌گیری‌های تجاری مشخص",
+    "lead": "صفحات متمرکز برای شرکت‌هایی که به یک تأمین‌کننده، تولیدکننده، RFQ قابل مقایسه یا ارزیابی مستند تدارکات مواد غذایی نیاز دارند."
+  }
+} as Record<Locale,{title:string;lead:string}>;
+
+export const searchLandings = {
+  "turkiye-supplier-sourcing": {
+    "content": {
+      "en": {
+        "eyebrow": "Türkiye · supplier sourcing",
+        "title": "Supplier sourcing and verification in Türkiye",
+        "description": "Structured research and evidence-led verification of manufacturers and suppliers in Türkiye for defined B2B requirements.",
+        "answerTitle": "How do you find and verify a supplier in Türkiye?",
+        "directAnswer": "CTSEG first defines the product, volume, quality, document and delivery criteria. It then researches suitable candidates in Türkiye and cross-checks company registration, activity, capacity, references, documents and commercial terms. Findings, open questions and recommended next checks are reported without presenting verification as an unconditional guarantee.",
+        "audienceTitle": "Who this solution is for",
+        "audience": "B2B buyers entering the Turkish supply market, replacing a current source, building a second source or independently reviewing candidates before a material order.",
+        "criteriaTitle": "Core assessment criteria",
+        "criteria": [
+          "Legal company identity and authorised contacts",
+          "Relevant production or supply capability",
+          "Quality, traceability and requested documents",
+          "MOQ, lead time, Incoterms, payment and delivery conditions"
+        ],
+        "processTitle": "Assessment process",
+        "process": [
+          "Define the requirement and exclusion criteria",
+          "Research and screen manufacturer or supplier candidates",
+          "Cross-check evidence and clarify inconsistencies",
+          "Deliver a shortlist, risk notes and recommended next steps"
+        ],
+        "evidenceTitle": "Evidence and responsibility boundary",
+        "evidence": "The review records evidence available at the time of assessment and identifies missing checks. Samples, audits, laboratory tests, legal review or authorised specialist advice may still be required depending on product and transaction risk.",
+        "serviceType": "Supplier sourcing and verification in Türkiye",
+        "ctaTitle": "Define your supplier requirement",
+        "ctaText": "Share the product, specification, estimated volume, delivery country and required documents for an initial commercial assessment.",
+        "ctaLabel": "Request supplier assessment",
+        "faq": [
+          {
+            "question": "Does supplier verification guarantee future performance?",
+            "answer": "No. Verification reduces uncertainty and records available evidence, but it cannot guarantee future quality, delivery or commercial conduct."
+          },
+          {
+            "question": "Can CTSEG compare several candidates?",
+            "answer": "Yes. Candidates can be evaluated against the same product, quality, capacity, document and commercial criteria so differences remain visible."
+          },
+          {
+            "question": "What information is needed to start?",
+            "answer": "Provide the product or service, specification, estimated quantity, target delivery point, timing and any mandatory quality or document requirements."
+          }
+        ]
+      },
+      "tr": {
+        "eyebrow": "Türkiye · tedarikçi tespiti",
+        "title": "Türkiye'de tedarikçi bulma ve doğrulama",
+        "description": "Belirlenmiş B2B gereksinimleri için Türkiye'deki üretici ve tedarikçilerin yapılandırılmış araştırması ve kanıta dayalı doğrulaması.",
+        "answerTitle": "Türkiye'de tedarikçi nasıl bulunur ve doğrulanır?",
+        "directAnswer": "CTSEG önce ürün, hacim, kalite, belge ve teslimat kriterlerini tanımlar. Ardından Türkiye'de uygun adayları araştırır; ticari kayıt, faaliyet alanı, kapasite, referanslar, belgeler ve ticari koşulları çapraz kontrol eder. Bulgular, açık sorular ve önerilen ek kontroller rapor edilir; doğrulama koşulsuz bir garanti olarak sunulmaz.",
+        "audienceTitle": "Bu çözüm kimler içindir",
+        "audience": "Türk tedarik pazarına giren, mevcut bir kaynağı değiştiren, ikinci bir kaynak kuran veya önemli bir sipariş öncesi adayları bağımsız olarak gözden geçirmek isteyen B2B alıcılar.",
+        "criteriaTitle": "Temel değerlendirme kriterleri",
+        "criteria": [
+          "Yasal şirket kimliği ve yetkili iletişimler",
+          "İlgili üretim veya tedarik kapasitesi",
+          "Kalite, izlenebilirlik ve talep edilen belgeler",
+          "MOQ, teslim süresi, Incoterms, ödeme ve teslim şartları"
+        ],
+        "processTitle": "Değerlendirme süreci",
+        "process": [
+          "Gereksinimi ve hariç tutma kriterlerini tanımlayın",
+          "Üretici veya tedarikçi adaylarını araştırın ve ön eleme yapın",
+          "Kanıtları çapraz kontrol edin ve tutarsızlıkları netleştirin",
+          "Kısa liste, risk notları ve önerilen sonraki adımları teslim edin"
+        ],
+        "evidenceTitle": "Kanıtlar ve sorumluluk sınırı",
+        "evidence": "İnceleme değerlendirme anında mevcut kanıtları kaydeder ve eksik kontrolleri belirtir. Ürüne ve işlem riskine bağlı olarak numuneler, denetimler, laboratuvar testleri, hukuki inceleme veya yetkili uzman görüşü gerekebilir.",
+        "serviceType": "Türkiye'de tedarikçi bulma ve doğrulama",
+        "ctaTitle": "Tedarikçi gereksiniminizi tanımlayın",
+        "ctaText": "İlk ticari değerlendirme için ürün, spesifikasyon, tahmini hacim, teslimat ülkesi ve gerekli belgeleri paylaşın.",
+        "ctaLabel": "Tedarikçi değerlendirmesi isteyin",
+        "faq": [
+          {
+            "question": "Tedarikçi doğrulaması gelecekteki performansı garanti eder mi?",
+            "answer": "Hayır. Doğrulama belirsizliği azaltır ve mevcut kanıtları kayıt altına alır, ancak gelecekteki kalite, teslimat veya ticari davranışı garanti edemez."
+          },
+          {
+            "question": "CTSEG birkaç adayı karşılaştırabilir mi?",
+            "answer": "Evet. Adaylar aynı ürün, kalite, kapasite, belge ve ticari kriterlere göre değerlendirilerek farkların görünür kalması sağlanır."
+          },
+          {
+            "question": "Başlamak için hangi bilgiler gerekli?",
+            "answer": "Ürün veya hizmet, spesifikasyon, tahmini miktar, hedef teslim noktası, zamanlama ve zorunlu kalite veya belge gereksinimlerini sağlayın."
+          }
+        ]
+      },
+      "de": {
+        "eyebrow": "Türkei · Lieferantensuche",
+        "title": "Lieferantensuche und Verifizierung in Türkiye",
+        "description": "Strukturierte Recherche und evidenzbasierte Verifizierung von Herstellern und Lieferanten in Türkiye für definierte B2B-Anforderungen.",
+        "answerTitle": "Wie findet und prüft man einen Lieferanten in Türkiye?",
+        "directAnswer": "CTSEG definiert zunächst Produkt, Menge, Qualitäts-, Dokumenten- und Lieferkriterien. Anschließend recherchiert es geeignete Kandidaten in Türkiye und überprüft Handelsregister, Tätigkeitsfeld, Kapazität, Referenzen, Dokumente und kommerzielle Bedingungen. Ergebnisse, offene Fragen und empfohlene weitere Prüfungen werden berichtet; die Verifizierung wird nicht als bedingungslose Garantie dargestellt.",
+        "audienceTitle": "Für wen diese Lösung gedacht ist",
+        "audience": "B2B-Einkäufer, die in den türkischen Beschaffungsmarkt eintreten, eine bestehende Quelle ersetzen, eine Zweitquelle aufbauen oder Kandidaten vor einer kaufmännisch bedeutenden Bestellung unabhängig prüfen möchten.",
+        "criteriaTitle": "Kernkriterien der Bewertung",
+        "criteria": [
+          "Rechtliche Firmenidentität und autorisierte Kontakte",
+          "Relevante Produktions- oder Lieferkapazität",
+          "Qualität, Rückverfolgbarkeit und angeforderte Dokumente",
+          "MOQ, Vorlaufzeit, Incoterms, Zahlungs- und Lieferbedingungen"
+        ],
+        "processTitle": "Bewertungsprozess",
+        "process": [
+          "Anforderung und Ausschlusskriterien definieren",
+          "Hersteller- oder Lieferantenkandidaten recherchieren und sichten",
+          "Belege prüfen und Unstimmigkeiten klären",
+          "Eine Shortlist, Risikohinweise und empfohlene nächste Schritte liefern"
+        ],
+        "evidenceTitle": "Belege und Verantwortungsgrenze",
+        "evidence": "Die Prüfung dokumentiert die zum Bewertungszeitpunkt verfügbaren Belege und benennt fehlende Prüfungen. Proben, Audits, Laboranalysen, rechtliche Prüfungen oder fachliche Gutachten können je nach Produkt und Transaktionsrisiko weiterhin erforderlich sein.",
+        "serviceType": "Lieferantensuche und Verifizierung in Türkiye",
+        "ctaTitle": "Definieren Sie Ihre Lieferantenanforderung",
+        "ctaText": "Teilen Sie Produkt, Spezifikation, geschätztes Volumen, Lieferland und benötigte Dokumente für eine erste kommerzielle Bewertung mit.",
+        "ctaLabel": "Lieferantenbewertung anfordern",
+        "faq": [
+          {
+            "question": "Gewährleistet die Lieferantenverifizierung die zukünftige Leistung?",
+            "answer": "Nein. Verifizierung verringert Unsicherheit und dokumentiert verfügbare Belege, kann jedoch keine zukünftige Qualität, Lieferung oder kommerzielles Verhalten garantieren."
+          },
+          {
+            "question": "Kann CTSEG mehrere Kandidaten vergleichen?",
+            "answer": "Ja. Kandidaten können nach denselben Produkt-, Qualitäts-, Kapazitäts-, Dokumenten- und kommerziellen Kriterien bewertet werden, sodass Unterschiede sichtbar bleiben."
+          },
+          {
+            "question": "Welche Informationen werden zum Start benötigt?",
+            "answer": "Bitte Produkt oder Dienstleistung, Spezifikation, geschätzte Menge, Ziel-Lieferpunkt, Zeitrahmen und alle zwingenden Qualitäts- oder Dokumentanforderungen angeben."
+          }
+        ]
+      },
+      "it": {
+        "eyebrow": "Turchia · ricerca fornitori",
+        "title": "Ricerca e verifica fornitori in Türkiye",
+        "description": "Ricerca strutturata e verifica basata su evidenze di produttori e fornitori in Türkiye per requisiti B2B definiti.",
+        "answerTitle": "Come trovare e verificare un fornitore in Türkiye?",
+        "directAnswer": "CTSEG definisce innanzitutto prodotto, volume, criteri di qualità, documentazione e consegna. Poi ricerca i candidati idonei in Türkiye e verifica registrazione aziendale, attività, capacità, referenze, documenti e termini commerciali. I risultati, le questioni aperte e i controlli successivi consigliati vengono riportati; la verifica non è presentata come garanzia incondizionata.",
+        "audienceTitle": "A chi è rivolta questa soluzione",
+        "audience": "Acquirenti B2B che entrano nel mercato di approvvigionamento turco, sostituiscono una fonte esistente, costruiscono una seconda fonte o rivedono autonomamente i candidati prima di un ordine significativo.",
+        "criteriaTitle": "Criteri principali di valutazione",
+        "criteria": [
+          "Identità legale dell’azienda e contatti autorizzati",
+          "Capacità produttiva o di fornitura rilevante",
+          "Qualità, tracciabilità e documenti richiesti",
+          "MOQ, tempi di consegna, Incoterms, termini di pagamento e condizioni di resa"
+        ],
+        "processTitle": "Processo di valutazione",
+        "process": [
+          "Definire il requisito e i criteri di esclusione",
+          "Ricercare e selezionare candidati produttori o fornitori",
+          "Verificare le evidenze e chiarire le incongruenze",
+          "Fornire una shortlist, note sui rischi e i passi successivi consigliati"
+        ],
+        "evidenceTitle": "Evidenze e limiti di responsabilità",
+        "evidence": "La revisione registra le evidenze disponibili al momento della valutazione e individua i controlli mancanti. A seconda del prodotto e del rischio della transazione possono essere necessari campioni, audit, test di laboratorio, revisione legale o consulenze specialistiche autorizzate.",
+        "serviceType": "Ricerca e verifica fornitori in Türkiye",
+        "ctaTitle": "Definite il requisito per il fornitore",
+        "ctaText": "Condividete prodotto, specifica, volume stimato, paese di consegna e documenti richiesti per una prima valutazione commerciale.",
+        "ctaLabel": "Richiedi valutazione fornitore",
+        "faq": [
+          {
+            "question": "La verifica del fornitore garantisce la performance futura?",
+            "answer": "No. La verifica riduce l’incertezza e registra le evidenze disponibili, ma non può garantire qualità, consegne o comportamenti commerciali futuri."
+          },
+          {
+            "question": "CTSEG può confrontare più candidati?",
+            "answer": "Sì. I candidati possono essere valutati sugli stessi criteri di prodotto, qualità, capacità, documenti e condizioni commerciali per mantenere visibili le differenze."
+          },
+          {
+            "question": "Quali informazioni servono per iniziare?",
+            "answer": "Fornire prodotto o servizio, specifica, quantità stimata, punto di consegna previsto, tempistiche e eventuali requisiti di qualità o documentazione obbligatori."
+          }
+        ]
+      },
+      "ru": {
+        "eyebrow": "Türkiye · поиск поставщика",
+        "title": "Поиск и верификация поставщика в Türkiye",
+        "description": "Структурированное исследование и проверка производителей и поставщиков в Türkiye на основе имеющихся доказательств для определённых B2B-требований.",
+        "answerTitle": "Как найти и проверить поставщика в Türkiye?",
+        "directAnswer": "CTSEG сначала определяет продукт, объём, критерии качества, документы и условия поставки. Затем выполняется поиск подходящих кандидатов в Türkiye и перекрёстная проверка регистрации компании, направления деятельности, мощности, рекомендаций, документов и коммерческих условий. Результаты, открытые вопросы и рекомендованные дальнейшие проверки фиксируются; проверка не представляется как безусловная гарантия.",
+        "audienceTitle": "Для кого это решение",
+        "audience": "B2B-покупатели, выходящие на турецкий рынок поставок, меняющие текущий источник, формирующие второй источник или самостоятельно оценивающие кандидатов перед существенным заказом.",
+        "criteriaTitle": "Основные критерии оценки",
+        "criteria": [
+          "Юридическая идентичность компании и уполномоченные контакты",
+          "Соответствующие производственные или поставочные мощности",
+          "Качество, прослеживаемость и требуемые документы",
+          "MOQ, срок поставки, Incoterms, условия оплаты и доставки"
+        ],
+        "processTitle": "Процесс оценки",
+        "process": [
+          "Определить требование и критерии исключения",
+          "Исследовать и отобрать кандидатов-производителей или поставщиков",
+          "Перепроверить доказательства и прояснить несоответствия",
+          "Предоставить шорт-лист, заметки о рисках и рекомендованные следующие шаги"
+        ],
+        "evidenceTitle": "Доказательства и границы ответственности",
+        "evidence": "Обзор фиксирует доказательства, доступные на момент оценки, и указывает отсутствующие проверки. В зависимости от продукта и рискa сделки могут потребоваться образцы, аудиты, лабораторные испытания, юридическая экспертиза или заключение уполномоченного специалиста.",
+        "serviceType": "Поиск и верификация поставщика в Türkiye",
+        "ctaTitle": "Определите требование к поставщику",
+        "ctaText": "Поделитесь информацией о продукте, спецификации, предполагаемом объёме, стране поставки и необходимых документах для первичной коммерческой оценки.",
+        "ctaLabel": "Запросить оценку поставщика",
+        "faq": [
+          {
+            "question": "Гарантирует ли верификация поставщика будущую работоспособность?",
+            "answer": "Нет. Верификация снижает неопределённость и фиксирует доступные доказательства, но не может гарантировать будущие качество, поставки или коммерческое поведение."
+          },
+          {
+            "question": "Может ли CTSEG сравнить нескольких кандидатов?",
+            "answer": "Да. Кандидаты могут быть оценены по одинаковым критериям продукта, качества, мощности, документов и коммерческих условий, чтобы различия оставались видимыми."
+          },
+          {
+            "question": "Какая информация нужна для начала?",
+            "answer": "Предоставьте информацию о продукте или услуге, спецификации, предполагаемом объёме, целевой точке поставки, сроках и любых обязательных требованиях к качеству или документам."
+          }
+        ]
+      },
+      "fa": {
+        "eyebrow": "ترکیه · شناسایی تأمین‌کننده",
+        "title": "یافتن و راستی‌آزمایی تأمین‌کننده در Türkiye",
+        "description": "تحقیق ساختاریافته و راستی‌آزمایی مبتنی بر شواهد دربارهٔ تولیدکنندگان و تأمین‌کنندگان در Türkiye برای نیازهای مشخص B2B.",
+        "answerTitle": "چطور یک تأمین‌کننده در Türkiye پیدا و راستی‌آزمایی کنیم؟",
+        "directAnswer": "CTSEG ابتدا محصول، حجم، معیارهای کیفیت، اسناد و شرایط تحویل را تعریف می‌کند. سپس نامزدهای مناسب در Türkiye را بررسی و ثبت شرکت، فعالیت، ظرفیت، مراجع، اسناد و شرایط تجاری را تطبیق می‌دهد. یافته‌ها، سوالات باز و بررسی‌های بعدی پیشنهادی گزارش می‌شوند؛ راستی‌آزمایی به‌عنوان تضمین مطلق ارائه نمی‌شود.",
+        "audienceTitle": "این راهکار مناسب چه کسانی است",
+        "audience": "خریداران B2B که وارد بازار تأمین ترکیه می‌شوند، منبع فعلی را جایگزین می‌کنند، منبع ثانوی ایجاد می‌کنند یا پیش از ثبت سفارش مهم به‌طور مستقل نامزدها را بازبینی می‌کنند.",
+        "criteriaTitle": "معیارهای اصلی ارزیابی",
+        "criteria": [
+          "هویت حقوقی شرکت و ارتباطات مجاز",
+          "قابلیت تولید یا تامین مرتبط",
+          "کیفیت، ردیابی و اسناد درخواستی",
+          "MOQ، زمان تحویل، Incoterms، شرایط پرداخت و تحویل"
+        ],
+        "processTitle": "فرآیند ارزیابی",
+        "process": [
+          "نیازمندی و معیارهای حذف را تعریف کنید",
+          "نامزدهای تولیدکننده یا تأمین‌کننده را پژوهش و غربال کنید",
+          "شواهد را بررسی و ناسازگاری‌ها را روشن کنید",
+          "فهرست کوتاه، یادداشت‌های ریسک و مراحل پیشنهادی بعدی را ارائه دهید"
+        ],
+        "evidenceTitle": "شواهد و محدوده مسئولیت",
+        "evidence": "بازبینی شواهد موجود در زمان ارزیابی را ثبت و بررسی‌های ناقص را مشخص می‌کند. بسته به محصول و ریسک معامله ممکن است نمونه‌ها، بازرسی‌ها، آزمایشگاه، بررسی حقوقی یا نظر تخصصی مجاز لازم باشد.",
+        "serviceType": "یافتن و راستی‌آزمایی تأمین‌کننده در Türkiye",
+        "ctaTitle": "نیاز تأمین‌کننده‌تان را تعریف کنید",
+        "ctaText": "برای ارزیابی تجاری اولیه، محصول، مشخصات، حجم تخمینی، کشور تحویل و اسناد موردنیاز را ارسال کنید.",
+        "ctaLabel": "درخواست ارزیابی تأمین‌کننده",
+        "faq": [
+          {
+            "question": "آیا راستی‌آزمایی تأمین‌کننده عملکرد آینده را تضمین می‌کند؟",
+            "answer": "خیر. راستی‌آزمایی عدم‌قطعیت را کاهش و شواهد موجود را ثبت می‌کند، اما نمی‌تواند کیفیت، تحویل یا رفتار تجاری آینده را تضمین کند."
+          },
+          {
+            "question": "آیا CTSEG می‌تواند چند نامزد را مقایسه کند؟",
+            "answer": "بله. نامزدها می‌توانند بر اساس یکسان بودن محصول، کیفیت، ظرفیت، اسناد و معیارهای تجاری ارزیابی شوند تا تفاوت‌ها قابل مشاهده بمانند."
+          },
+          {
+            "question": "برای شروع چه اطلاعاتی لازم است؟",
+            "answer": "محصول یا خدمت، مشخصات، مقدار تخمینی، نقطه تحویل هدف، زمان‌بندی و هرگونه الزام کیفیت یا سند را ارائه دهید."
+          }
+        ]
+      }
+    },
+    "paths": {
+      "tr": "/tr/cozumler/turkiyede-tedarikci-bulma-dogrulama/",
+      "en": "/en/solutions/supplier-sourcing-verification-turkiye/",
+      "de": "/de/loesungen/lieferantensuche-pruefung-tuerkei/",
+      "it": "/it/soluzioni/ricerca-verifica-fornitori-turchia/",
+      "ru": "/ru/resheniya/poisk-proverka-postavshchikov-turciya/",
+      "fa": "/fa/solutions/supplier-sourcing-verification-turkiye/"
+    }
+  },
+  "private-label-manufacturer": {
+    "content": {
+      "en": {
+        "eyebrow": "Private label · manufacturer research",
+        "title": "Private-label manufacturer research and qualification",
+        "description": "Manufacturer research structured around product specification, MOQ, packaging, labelling, documents, capacity and target-market requirements.",
+        "answerTitle": "How do you assess a private-label manufacturer?",
+        "directAnswer": "A private-label project should be assessed as a complete operating model, not only as a product quote. CTSEG structures the requirement, researches suitable manufacturers and compares product capability, MOQ, packaging, artwork, quality documents, lead time, commercial terms and responsibilities before a shortlist is proposed.",
+        "audienceTitle": "Who this solution is for",
+        "audience": "Brands, distributors and B2B buyers developing a new private-label line, changing a contract manufacturer or testing whether a product concept is commercially feasible.",
+        "criteriaTitle": "Core assessment criteria",
+        "criteria": [
+          "Product formula, specification and permitted tolerances",
+          "MOQ by product, packaging format and artwork variation",
+          "Quality system, testing, traceability and target-market documents",
+          "Tooling, sampling, production lead time, ownership and change control"
+        ],
+        "processTitle": "Assessment process",
+        "process": [
+          "Translate the concept into a comparable manufacturer brief",
+          "Research and pre-screen relevant production capabilities",
+          "Coordinate RFQ, samples and document questions where applicable",
+          "Compare commercial feasibility, risks and next-stage requirements"
+        ],
+        "evidenceTitle": "Evidence and responsibility boundary",
+        "evidence": "Packaging visuals, certificates and sample statements are not treated as final proof. Product, producer, formula, artwork, market claims and batch documents must be confirmed for the actual project before production or sale.",
+        "serviceType": "Private-label manufacturer research and qualification",
+        "ctaTitle": "Prepare a manufacturer brief",
+        "ctaText": "Share the product concept, target market, expected volume, packaging format and required launch window.",
+        "ctaLabel": "Request manufacturer research",
+        "faq": [
+          {
+            "question": "Can CTSEG promise a specific MOQ?",
+            "answer": "No. MOQ depends on the manufacturer, formulation, production line, packaging, artwork and order structure and must be confirmed in the RFQ."
+          },
+          {
+            "question": "Is a sample enough to approve a manufacturer?",
+            "answer": "No. A sample is one input. Company evidence, capacity, quality controls, documents, repeatability and commercial conditions should also be reviewed."
+          },
+          {
+            "question": "Can packaging and labelling be included?",
+            "answer": "Yes. Packaging format, artwork responsibilities, label information, language versions and target-market requirements can be included in the comparison scope."
+          }
+        ]
+      },
+      "tr": {
+        "eyebrow": "Özel etiket · üretici araştırması",
+        "title": "Özel etiket üretici araştırması ve yeterlilik değerlendirmesi",
+        "description": "Ürün spesifikasyonu, MOQ, ambalaj, etiketleme, belgeler, kapasite ve hedef pazar gereksinimlerine göre yapılandırılmış üretici araştırması.",
+        "answerTitle": "Özel etiket üreticisi nasıl değerlendirilir?",
+        "directAnswer": "Özel etiket projesi yalnızca bir ürün teklifi olarak değil, eksiksiz bir işletme modeli olarak değerlendirilmelidir. CTSEG gereksinimi yapılandırır, uygun üreticileri araştırır ve ürün kabiliyeti, MOQ, ambalaj, artwork, kalite belgeleri, teslim süresi, ticari şartlar ve sorumlulukları karşılaştırdıktan sonra bir kısa liste önerir.",
+        "audienceTitle": "Bu çözüm kimler içindir",
+        "audience": "Yeni bir özel etiket hattı geliştiren markalar, distribütörler ve B2B alıcılar; sözleşmeli üreticiyi değiştiren veya bir ürün konseptinin ticari olarak uygulanabilir olup olmadığını test eden taraflar.",
+        "criteriaTitle": "Temel değerlendirme kriterleri",
+        "criteria": [
+          "Ürün formülasyonu, spesifikasyonu ve izin verilen toleranslar",
+          "Ürün, ambalaj formatı ve artwork varyasyonuna göre MOQ",
+          "Kalite sistemi, testler, izlenebilirlik ve hedef-pazar belgeleri",
+          "Kalıplama, numune alma, üretim teslim süresi, mülkiyet ve değişiklik kontrolü"
+        ],
+        "processTitle": "Değerlendirme süreci",
+        "process": [
+          "Konsepti karşılaştırılabilir bir üretici briefine çevirin",
+          "İlgili üretim kapasitelerini araştırın ve ön eleme yapın",
+          "Uygulanabilir olduğunda RFQ, numuneler ve belge sorularını koordine edin",
+          "Ticari uygulanabilirliği, riskleri ve sonraki aşama gereksinimlerini karşılaştırın"
+        ],
+        "evidenceTitle": "Kanıtlar ve sorumluluk sınırı",
+        "evidence": "Ambalaj görselleri, sertifikalar ve numune beyanları nihai kanıt olarak değerlendirilmez. Ürün, üretici, formül, artwork, pazar iddiaları ve parti belgeleri gerçek proje için üretim veya satış öncesi doğrulanmalıdır.",
+        "serviceType": "Özel etiket üretici araştırması ve yeterlilik değerlendirmesi",
+        "ctaTitle": "Bir üretici brief’i hazırlayın",
+        "ctaText": "Ürün konseptini, hedef pazarı, beklenen hacmi, ambalaj formatını ve istenen lansman zamanını paylaşın.",
+        "ctaLabel": "Üretici araştırması isteyin",
+        "faq": [
+          {
+            "question": "CTSEG belirli bir MOQ taahhüt edebilir mi?",
+            "answer": "Hayır. MOQ üreticiye, formülasyona, üretim hattına, ambalaja, artwork’e ve sipariş yapısına bağlıdır ve RFQ'da doğrulanmalıdır."
+          },
+          {
+            "question": "Bir üreticiyi onaylamak için numune yeterli midir?",
+            "answer": "Hayır. Numune bir girdidir. Şirket kanıtı, kapasite, kalite kontrolleri, belgeler, tekrarlanabilirlik ve ticari koşullar da incelenmelidir."
+          },
+          {
+            "question": "Ambalaj ve etiketleme dahil edilebilir mi?",
+            "answer": "Evet. Ambalaj formatı, artwork sorumlulukları, etiket bilgileri, dil versiyonları ve hedef pazar gereksinimleri karşılaştırma kapsamına dahil edilebilir."
+          }
+        ]
+      },
+      "de": {
+        "eyebrow": "Private Label · Herstellerrecherche",
+        "title": "Herstellerrecherche und Qualifikation für Private Label",
+        "description": "Herstellerrecherche, strukturiert nach Produktspezifikation, MOQ, Verpackung, Kennzeichnung, Dokumentenlage, Kapazität und Zielmarktanforderungen.",
+        "answerTitle": "Wie bewertet man einen Private-Label-Hersteller?",
+        "directAnswer": "Ein Private-Label-Projekt sollte als vollständiges Betriebsmodell bewertet werden, nicht nur als Produktangebot. CTSEG strukturiert die Anforderung, recherchiert geeignete Hersteller und vergleicht Produktfähigkeit, MOQ, Verpackung, Artwork, Qualitätsdokumente, Lieferzeit, kommerzielle Bedingungen und Verantwortlichkeiten, bevor eine Shortlist vorgeschlagen wird.",
+        "audienceTitle": "Für wen diese Lösung gedacht ist",
+        "audience": "Marken, Händler und B2B-Einkäufer, die eine neue Private-Label-Linie entwickeln, einen Lohnhersteller wechseln oder prüfen, ob ein Produktkonzept kommerziell realisierbar ist.",
+        "criteriaTitle": "Kernkriterien der Bewertung",
+        "criteria": [
+          "Produktformel, Spezifikation und zulässige Toleranzen",
+          "MOQ nach Produkt, Verpackungsformat und Artwork-Varianten",
+          "Qualitätssystem, Prüfungen, Rückverfolgbarkeit und Zielmarkt-Dokumente",
+          "Werkzeuge, Musterserien, Produktionsvorlaufzeiten, Eigentum und Änderungssteuerung"
+        ],
+        "processTitle": "Bewertungsprozess",
+        "process": [
+          "Konzept in ein vergleichbares Herstellerbriefing übersetzen",
+          "Relevante Produktionskapazitäten recherchieren und vorsortieren",
+          "RFQ, Muster und Dokumentenfragen koordinieren, wo anwendbar",
+          "Kommerzielle Machbarkeit, Risiken und Anforderungen für die nächste Phase vergleichen"
+        ],
+        "evidenceTitle": "Belege und Verantwortungsgrenze",
+        "evidence": "Verpackungsvisuals, Zertifikate und Musterangaben gelten nicht als abschließender Nachweis. Produkt, Produzent, Rezeptur, Artwork, Marktangaben und Chargendokumente müssen für das konkrete Projekt vor Produktion oder Verkauf bestätigt werden.",
+        "serviceType": "Herstellerrecherche und Qualifikation für Private Label",
+        "ctaTitle": "Erstellen Sie ein Herstellerbriefing",
+        "ctaText": "Teilen Sie Konzept, Zielmarkt, erwartetes Volumen, Verpackungsformat und gewünschten Launch-Zeitraum mit.",
+        "ctaLabel": "Herstellerrecherche anfragen",
+        "faq": [
+          {
+            "question": "Kann CTSEG ein spezifisches MOQ zusagen?",
+            "answer": "Nein. Das MOQ hängt vom Hersteller, der Formulierung, der Produktionslinie, der Verpackung, dem Artwork und der Bestellstruktur ab und muss im RFQ bestätigt werden."
+          },
+          {
+            "question": "Reicht eine Probe, um einen Hersteller freizugeben?",
+            "answer": "Nein. Eine Probe ist ein Input. Unternehmensnachweise, Kapazität, Qualitätskontrollen, Dokumente, Reproduzierbarkeit und kommerzielle Bedingungen sollten ebenfalls geprüft werden."
+          },
+          {
+            "question": "Können Verpackung und Kennzeichnung einbezogen werden?",
+            "answer": "Ja. Verpackungsformat, Artwork-Verantwortlichkeiten, Etikettenangaben, Sprachversionen und Zielmarktanforderungen können in den Vergleich aufgenommen werden."
+          }
+        ]
+      },
+      "it": {
+        "eyebrow": "Private label · ricerca produttore",
+        "title": "Ricerca e qualificazione del produttore per private label",
+        "description": "Ricerca di produttori strutturata su specifica prodotto, MOQ, imballaggio, etichettatura, documenti, capacità e requisiti del mercato target.",
+        "answerTitle": "Come si valuta un produttore per private label?",
+        "directAnswer": "Un progetto private label va valutato come un modello operativo completo, non solo come un preventivo di prodotto. CTSEG struttura il requisito, ricerca produttori idonei e confronta capacità di prodotto, MOQ, imballaggio, artwork, documenti di qualità, tempi di consegna, termini commerciali e responsabilità prima di proporre una shortlist.",
+        "audienceTitle": "A chi è rivolta questa soluzione",
+        "audience": "Brand, distributori e acquirenti B2B che sviluppano una nuova linea private label, cambiano un produttore a contratto o valutano la fattibilità commerciale di un concept di prodotto.",
+        "criteriaTitle": "Criteri principali di valutazione",
+        "criteria": [
+          "Formula prodotto, specifica e tolleranze ammesse",
+          "MOQ per prodotto, formato di imballaggio e variazioni artwork",
+          "Sistema qualità, test, tracciabilità e documenti per il mercato target",
+          "Stampi, campionatura, tempi di produzione, proprietà e controllo delle modifiche"
+        ],
+        "processTitle": "Processo di valutazione",
+        "process": [
+          "Trasformare il concept in un brief comparabile per il produttore",
+          "Ricercare e preselezionare capacità produttive rilevanti",
+          "Coordinare RFQ, campioni e richieste documentali dove applicabile",
+          "Confrontare fattibilità commerciale, rischi e requisiti per la fase successiva"
+        ],
+        "evidenceTitle": "Evidenze e limiti di responsabilità",
+        "evidence": "Visual packaging, certificati e dichiarazioni sui campioni non sono considerati prova definitiva. Prodotto, produttore, formula, artwork, dichiarazioni di mercato e documenti di lotto devono essere confermati per il progetto reale prima della produzione o vendita.",
+        "serviceType": "Ricerca e qualificazione produttore private label",
+        "ctaTitle": "Preparate un brief per il produttore",
+        "ctaText": "Condividete concept di prodotto, mercato target, volume previsto, formato di imballaggio e finestra di lancio desiderata.",
+        "ctaLabel": "Richiedi ricerca produttore",
+        "faq": [
+          {
+            "question": "CTSEG può garantire un MOQ specifico?",
+            "answer": "No. Il MOQ dipende dal produttore, dalla formulazione, dalla linea produttiva, dall’imballaggio, dall’artwork e dalla struttura dell’ordine e deve essere confermato nell’RFQ."
+          },
+          {
+            "question": "Un campione è sufficiente per approvare un produttore?",
+            "answer": "No. Un campione è un input. Vanno valutate anche evidenze aziendali, capacità, controlli qualità, documentazione, ripetibilità e condizioni commerciali."
+          },
+          {
+            "question": "Si possono includere imballaggio ed etichettatura?",
+            "answer": "Sì. Formato di imballaggio, responsabilità artwork, informazioni sull’etichetta, versioni linguistiche e requisiti del mercato target possono essere inclusi nell’ambito di confronto."
+          }
+        ]
+      },
+      "ru": {
+        "eyebrow": "Private label · исследование производителя",
+        "title": "Исследование и квалификация производителя для собственной торговой марки (СТМ)",
+        "description": "Исследование производителей, структурированное по спецификации продукта, MOQ, упаковке, маркировке, документам, мощности и требованиям целевого рынка.",
+        "answerTitle": "Как оценить производителя собственной торговой марки?",
+        "directAnswer": "Проект собственной торговой марки следует оценивать как полную операционную модель, а не только как ценовое предложение по продукту. CTSEG формирует требования, анализирует подходящих производителей и сравнивает производственные возможности, MOQ, упаковку, дизайн и оформление, документацию по качеству, сроки и коммерческие условия, прежде чем предложить финальный перечень.",
+        "audienceTitle": "Для кого это решение",
+        "audience": "Бренды, дистрибьюторы и B2B‑покупатели, которые разрабатывают новую линейку собственной торговой марки (СТМ), меняют контрактного производителя или проверяют коммерческую осуществимость продуктовой концепции.",
+        "criteriaTitle": "Ключевые критерии оценки",
+        "criteria": [
+          "Формула продукта, спецификация и допустимые допуски",
+          "MOQ по продукту, формату упаковки и вариантам artwork",
+          "Система качества, тестирование, прослеживаемость и документы для целевого рынка",
+          "Оборудование, отбор образцов, время производства, право собственности и контроль изменений"
+        ],
+        "processTitle": "Процесс оценки",
+        "process": [
+          "Перевести концепт в сопоставимое техническое задание для производителя",
+          "Исследовать и предварительно отобрать релевантные производственные мощности",
+          "Координировать RFQ, образцы и вопросы по документам, где применимо",
+          "Сравнить коммерческую реализуемость, риски и требования для следующего этапа"
+        ],
+        "evidenceTitle": "Доказательства и границы ответственности",
+        "evidence": "Визуалы упаковки, сертификаты и заявления по образцам не считаются окончательным подтверждением. Продукт, производитель, формула, artwork, рыночные утверждения и партийные документы должны быть подтверждены для конкретного проекта перед производством или продажей.",
+        "serviceType": "Исследование и квалификация производителя для собственной торговой марки (СТМ)",
+        "ctaTitle": "Подготовьте бриф для производителя",
+        "ctaText": "Поделитесь концептом продукта, целевым рынком, ожидаемым объёмом, форматом упаковки и бажаними сроками запуска.",
+        "ctaLabel": "Запросить исследование производителя",
+        "faq": [
+          {
+            "question": "Может ли CTSEG гарантировать конкретный MOQ?",
+            "answer": "Нет. MOQ зависит от производителя, формулы, производственной линии, упаковки, artwork и структуры заказа и должен быть подтверждён в RFQ."
+          },
+          {
+            "question": "Достаточно ли образца для утверждения производителя?",
+            "answer": "Нет. Образец — это один из входных данных. Следует также проверить данные о компании, мощностях, системах качества, документации, воспроизводимости и коммерческих условиях."
+          },
+          {
+            "question": "Можно ли включить упаковку и маркировку?",
+            "answer": "Да. Формат упаковки, ответственность за artwork, информация на этикетке, языковые версии и требования целевого рынка можно включить в область сравнения."
+          }
+        ]
+      },
+      "fa": {
+        "eyebrow": "برند خصوصی · پژوهش تولیدکننده",
+        "title": "پژوهش و صلاحیت‌سنجی تولیدکننده برای برند خصوصی",
+        "description": "پژوهش تولیدکننده که حول مشخصات محصول، MOQ، بسته‌بندی، برچسب‌گذاری، مدارک، ظرفیت و نیازهای بازار هدف ساختاربندی شده است.",
+        "answerTitle": "چگونه یک تولیدکننده برند خصوصی را ارزیابی می‌کنید؟",
+        "directAnswer": "پروژهٔ برند خصوصی باید به‌عنوان یک مدل عملیاتی کامل ارزیابی شود، نه صرفاً یک پیشنهاد قیمتی محصول. CTSEG نیازمندی را ساختاربندی می‌کند، تولیدکنندگان مناسب را تحقیق می‌کند و توانایی محصول، MOQ، بسته‌بندی، artwork، مدارک کیفیت، زمان تولید، شرایط تجاری و مسئولیت‌ها را مقایسه می‌نماید و سپس فهرست کوتاهی پیشنهاد می‌کند.",
+        "audienceTitle": "این راهکار مناسب چه کسانی است",
+        "audience": "برندها، توزیع‌کنندگان و خریداران B2B که یک خط برند خصوصی جدید توسعه می‌دهند، تولیدکننده قراردادی را تغییر می‌دهند یا بررسی می‌کنند که آیا یک مفهوم محصول از نظر تجاری قابل اجراست یا نه.",
+        "criteriaTitle": "معیارهای اصلی ارزیابی",
+        "criteria": [
+          "فرمول محصول، مشخصات و تلرانس‌های مجاز",
+          "MOQ بر پایه محصول، قالب بسته‌بندی و تغییرات artwork",
+          "سیستم کیفیت، تست‌ها، ردیابی و مدارک بازار هدف",
+          "ابزارسازی، نمونه‌گیری، زمان تولید، مالکیت و کنترل تغییرات"
+        ],
+        "processTitle": "فرآیند ارزیابی",
+        "process": [
+          "تبدیل مفهوم به یک brief سازگار برای تولیدکننده",
+          "تحقیق و پیش‌غربال ظرفیت‌های تولید مرتبط",
+          "هماهنگی RFQ، نمونه‌ها و سوالات مدارکی در صورت نیاز",
+          "مقایسهٔ امکان‌سنجی تجاری، ریسک‌ها و نیازهای مرحلهٔ بعدی"
+        ],
+        "evidenceTitle": "شواهد و مرز مسئولیت",
+        "evidence": "تصاویر بسته‌بندی، گواهی‌ها و بیانیه‌های نمونه به‌عنوان مدرک نهایی تلقی نمی‌شوند. محصول، تولیدکننده، فرمول، artwork، ادعاهای بازاری و مدارک بچ باید برای پروژهٔ واقعی قبل از تولید یا فروش تأیید شوند.",
+        "serviceType": "پژوهش و صلاحیت‌سنجی تولیدکننده برند خصوصی",
+        "ctaTitle": "یک brief تولیدکننده آماده کنید",
+        "ctaText": "مفهوم محصول، بازار هدف، حجم مورد انتظار، قالب بسته‌بندی و بازهٔ راه‌اندازی موردنظر را ارسال کنید.",
+        "ctaLabel": "درخواست پژوهش تولیدکننده",
+        "faq": [
+          {
+            "question": "آیا CTSEG می‌تواند MOQ مشخصی را تضمین کند؟",
+            "answer": "خیر. MOQ به تولیدکننده، فرمول، خط تولید، بسته‌بندی، artwork و ساختار سفارش بستگی دارد و باید در RFQ تأیید شود."
+          },
+          {
+            "question": "آیا یک نمونه برای تأیید تولیدکننده کافی است؟",
+            "answer": "خیر. نمونه یکی از ورودی‌هاست. باید شواهد شرکتی، ظرفیت، کنترل‌های کیفیت، مدارک، قابلیت تکرار و شرایط تجاری نیز بررسی شوند."
+          },
+          {
+            "question": "آیا بسته‌بندی و برچسب‌گذاری قابل گنجاندن هستند؟",
+            "answer": "بله. قالب بسته‌بندی، مسئولیت‌های artwork، اطلاعات برچسب، نسخه‌های زبانی و نیازهای بازار هدف می‌توانند در دامنه مقایسه گنجانده شوند."
+          }
+        ]
+      }
+    },
+    "paths": {
+      "tr": "/tr/cozumler/ozel-markali-uretici-arastirmasi/",
+      "en": "/en/solutions/private-label-manufacturer-research/",
+      "de": "/de/loesungen/private-label-herstellerrecherche/",
+      "it": "/it/soluzioni/ricerca-produttore-marchio-privato/",
+      "ru": "/ru/resheniya/poisk-proizvoditelya-chastnoy-marki/",
+      "fa": "/fa/solutions/private-label-manufacturer-research/"
+    }
+  },
+  "rfq-bid-comparison": {
+    "content": {
+      "en": {
+        "eyebrow": "RFQ · comparable offers",
+        "title": "International RFQ preparation and bid comparison",
+        "description": "A controlled RFQ structure that makes supplier offers comparable across specification, quality, MOQ, delivery, payment, documents and total cost.",
+        "answerTitle": "How do you make international supplier quotations comparable?",
+        "directAnswer": "Comparable bids require one agreed requirement and one response structure. CTSEG defines the technical and commercial fields, prepares the RFQ, records clarifications and normalises offers across price basis, MOQ, Incoterms, lead time, payment, quality documents, logistics and open risk before presenting a decision view.",
+        "audienceTitle": "Who this solution is for",
+        "audience": "Procurement, operations and management teams that receive incomplete or differently structured quotations and need a transparent basis for negotiation and selection.",
+        "criteriaTitle": "Core comparison criteria",
+        "criteria": [
+          "Technical specification, included scope and exclusions",
+          "Unit basis, currency, MOQ, price breaks and payment terms",
+          "Incoterms, logistics assumptions, lead time and validity",
+          "Quality documents, samples, warranties, exceptions and total-cost drivers"
+        ],
+        "processTitle": "Assessment process",
+        "process": [
+          "Confirm requirement, decision criteria and bidder instructions",
+          "Issue the RFQ and control supplier clarifications",
+          "Normalise commercial and technical responses",
+          "Report comparison, exceptions, risks and negotiation priorities"
+        ],
+        "evidenceTitle": "Evidence and responsibility boundary",
+        "evidence": "A comparison is only as reliable as the requirement and evidence supplied. Unconfirmed assumptions, conditional prices and missing documents are kept visible rather than converted into false certainty.",
+        "serviceType": "International RFQ preparation and bid comparison",
+        "ctaTitle": "Make your offers comparable",
+        "ctaText": "Share the requirement, current quotations or bidder list and the decision deadline for an initial scope review.",
+        "ctaLabel": "Request RFQ assessment",
+        "faq": [
+          {
+            "question": "Is the lowest unit price always the best bid?",
+            "answer": "No. Freight, defects, delay, payment, inventory, compliance and supply-continuity risk can materially change the commercial result."
+          },
+          {
+            "question": "Can existing quotations be normalised?",
+            "answer": "Yes, if the underlying assumptions can be identified. Missing or conditional fields are flagged and clarification questions are prepared."
+          },
+          {
+            "question": "Does CTSEG make the final supplier decision?",
+            "answer": "CTSEG structures evidence and comparison. The buyer retains the final decision, approval and contractual responsibility."
+          }
+        ]
+      },
+      "tr": {
+        "eyebrow": "RFQ · karşılaştırılabilir teklifler",
+        "title": "Uluslararası RFQ hazırlığı ve teklif karşılaştırması",
+        "description": "Teknik, kalite, MOQ, teslimat, ödeme, belgeler ve toplam maliyet açısından tedarikçi tekliflerini karşılaştırılabilir kılan kontrollü RFQ yapısı.",
+        "answerTitle": "Uluslararası tedarikçi tekliflerini nasıl karşılaştırılabilir hale getirirsiniz?",
+        "directAnswer": "Karşılaştırılabilir teklifler için tek bir üzerinde anlaşılmış gereksinim ve tek bir cevap yapısı gerekir. CTSEG teknik ve ticari alanları tanımlar, RFQ'yi hazırlar, açıklamaları kaydeder ve fiyat bazı, MOQ, Incoterms, teslim süresi, ödeme, kalite belgeleri, lojistik ve açık riskler açısından teklifleri normalleştirir; ardından karar görüşünü sunar.",
+        "audienceTitle": "Bu çözüm kimler içindir",
+        "audience": "Eksik veya farklı yapıda teklifler alan ve müzakere ile seçim için şeffaf bir dayanak arayan tedarik, operasyon ve yönetim ekipleri.",
+        "criteriaTitle": "Temel karşılaştırma kriterleri",
+        "criteria": [
+          "Teknik spesifikasyon, dahil olan kapsam ve dışlamalar",
+          "Birim esas, para birimi, MOQ, fiyat kademeleri ve ödeme koşulları",
+          "Incoterms, lojistik varsayımları, teslim süresi ve geçerlilik",
+          "Kalite belgeleri, numuneler, garantiler, istisnalar ve toplam maliyete etki eden unsurlar"
+        ],
+        "processTitle": "Değerlendirme süreci",
+        "process": [
+          "Gereksinimi, karar kriterlerini ve teklifçi talimatlarını doğrulayın",
+          "RFQ'yi yayınlayın ve tedarikçi açıklamalarını yönetin",
+          "Ticari ve teknik yanıtları normalleştirin",
+          "Karşılaştırma, istisnalar, riskler ve müzakere önceliklerini raporlayın"
+        ],
+        "evidenceTitle": "Kanıtlar ve sorumluluk sınırı",
+        "evidence": "Bir karşılaştırma, gereksinim ve sağlanan kanıt kadar güvenilirdir. Doğrulanmamış varsayımlar, koşullu fiyatlar ve eksik belgeler sahte kesinliğe dönüştürülmek yerine görünür tutulur.",
+        "serviceType": "Uluslararası RFQ hazırlığı ve teklif karşılaştırması",
+        "ctaTitle": "Tekliflerinizi karşılaştırılabilir hale getirin",
+        "ctaText": "İlk kapsam incelemesi için gereksinimi, mevcut teklifleri veya teklifçi listesini ve karar tarihini paylaşın.",
+        "ctaLabel": "RFQ değerlendirmesi isteyin",
+        "faq": [
+          {
+            "question": "Her zaman en düşük birim fiyat en iyi teklif midir?",
+            "answer": "Hayır. Navlun, kusurlar, gecikme, ödeme, stok, uyum ve tedarik devamlılığı riski ticari sonucu önemli ölçüde değiştirebilir."
+          },
+          {
+            "question": "Mevcut teklifler normalleştirilebilir mi?",
+            "answer": "Evet, temel varsayımlar tespit edilebilirse. Eksik veya koşullu alanlar işaretlenir ve açıklama soruları hazırlanır."
+          },
+          {
+            "question": "CTSEG nihai tedarikçi kararını veriyor mu?",
+            "answer": "Hayır. CTSEG kanıtları ve karşılaştırmayı yapılandırır. Nihai karar, onay ve sözleşme sorumluluğu alıcıya aittir."
+          }
+        ]
+      },
+      "de": {
+        "eyebrow": "RFQ · vergleichbare Angebote",
+        "title": "Internationale RFQ-Vorbereitung und Angebotsvergleich",
+        "description": "Eine kontrollierte RFQ-Struktur, die Lieferantenangebote in Spezifikation, Qualität, MOQ, Lieferung, Zahlung, Dokumentenstand und Total Cost vergleichbar macht.",
+        "answerTitle": "Wie machen Sie internationale Lieferantenangebote vergleichbar?",
+        "directAnswer": "Vergleichbare Angebote erfordern eine vereinbarte Anforderung und eine einheitliche Antwortstruktur. CTSEG definiert die technischen und kommerziellen Felder, bereitet die RFQ vor, protokolliert Klarstellungen und normalisiert Angebote über Preisbasis, MOQ, Incoterms, Lieferzeit, Zahlung, Qualitätsdokumente, Logistik und offene Risiken, bevor eine Entscheidungsübersicht präsentiert wird.",
+        "audienceTitle": "Für wen diese Lösung gedacht ist",
+        "audience": "Beschaffungs-, Betriebs- und Managementteams, die unvollständige oder unterschiedlich strukturierte Angebote erhalten und eine transparente Basis für Verhandlung und Auswahl benötigen.",
+        "criteriaTitle": "Kernvergleichskriterien",
+        "criteria": [
+          "Technische Spezifikation, eingeschlossener Umfang und Ausschlüsse",
+          "Einheitenbasis, Währung, MOQ, Preisstaffeln und Zahlungsbedingungen",
+          "Incoterms, logistische Annahmen, Lieferzeit und Gültigkeit",
+          "Qualitätsdokumente, Muster, Garantien, Ausnahmen und Total-Cost-Treiber"
+        ],
+        "processTitle": "Bewertungsprozess",
+        "process": [
+          "Anforderung, Entscheidungskriterien und Bieterinstruktionen bestätigen",
+          "RFQ ausgeben und Lieferantenklärungen steuern",
+          "Kommerzielle und technische Antworten normalisieren",
+          "Vergleich, Ausnahmen, Risiken und Verhandlungsprioritäten berichten"
+        ],
+        "evidenceTitle": "Belege und Verantwortungsgrenze",
+        "evidence": "Ein Vergleich ist nur so zuverlässig wie die Anforderung und die gelieferten Belege. Unbestätigte Annahmen, Konditionalpreise und fehlende Dokumente werden sichtbar gehalten, statt in falsche Sicherheit umgewandelt zu werden.",
+        "serviceType": "Internationale RFQ-Vorbereitung und Angebotsvergleich",
+        "ctaTitle": "Machen Sie Ihre Angebote vergleichbar",
+        "ctaText": "Teilen Sie die Anforderung, aktuelle Angebote oder die Bieterliste und die Entscheidungsfrist für eine erste Scope-Überprüfung.",
+        "ctaLabel": "RFQ-Bewertung anfordern",
+        "faq": [
+          {
+            "question": "Ist der niedrigste Stückpreis immer das beste Angebot?",
+            "answer": "Nein. Fracht, Mängel, Verzögerungen, Zahlung, Inventar, Compliance und Versorgungskontinuität können das kommerzielle Ergebnis deutlich verändern."
+          },
+          {
+            "question": "Können bestehende Angebote normalisiert werden?",
+            "answer": "Ja, wenn die zugrundeliegenden Annahmen identifiziert werden können. Fehlende oder bedingte Felder werden gekennzeichnet und Klärungsfragen vorbereitet."
+          },
+          {
+            "question": "Trifft CTSEG die finale Lieferantenentscheidung?",
+            "answer": "CTSEG strukturiert Belege und Vergleich. Die finale Entscheidung, Freigabe und vertragliche Verantwortung verbleiben beim Käufer."
+          }
+        ]
+      },
+      "it": {
+        "eyebrow": "RFQ · offerte comparabili",
+        "title": "Preparazione internazionale RFQ e confronto offerte",
+        "description": "Una struttura RFQ controllata che rende le offerte dei fornitori comparabili su specifica, qualità, MOQ, consegna, pagamento, documenti e costo totale.",
+        "answerTitle": "Come rendere comparabili le quotazioni internazionali dei fornitori?",
+        "directAnswer": "Offerte comparabili richiedono un requisito concordato e un’unica struttura di risposta. CTSEG definisce i campi tecnici e commerciali, prepara la RFQ, registra chiarimenti e normalizza le offerte su base di prezzo, MOQ, Incoterms, tempi di consegna, pagamento, documenti di qualità, logistica e rischi aperti prima di presentare un quadro decisionale.",
+        "audienceTitle": "A chi è rivolta questa soluzione",
+        "audience": "Team di procurement, operations e management che ricevono quotazioni incomplete o strutturate diversamente e necessitano di una base trasparente per negoziazione e selezione.",
+        "criteriaTitle": "Criteri principali di confronto",
+        "criteria": [
+          "Specificazione tecnica, ambito incluso ed esclusioni",
+          "Base per unità, valuta, MOQ, scaglioni di prezzo e condizioni di pagamento",
+          "Incoterms, ipotesi logistiche, tempi di consegna e validità",
+          "Documenti di qualità, campioni, garanzie, eccezioni e driver di costo totale"
+        ],
+        "processTitle": "Processo di valutazione",
+        "process": [
+          "Confermare requisito, criteri decisionali e istruzioni per i bidder",
+          "Emettere la RFQ e gestire i chiarimenti dei fornitori",
+          "Normalizzare risposte commerciali e tecniche",
+          "Riportare confronto, eccezioni, rischi e priorità di negoziazione"
+        ],
+        "evidenceTitle": "Evidenze e limiti di responsabilità",
+        "evidence": "Un confronto è affidabile solo quanto il requisito e le evidenze fornite. Assunzioni non confermate, prezzi condizionali e documenti mancanti sono mantenuti visibili invece di trasformarsi in falsa certezza.",
+        "serviceType": "Preparazione RFQ internazionale e confronto offerte",
+        "ctaTitle": "Rendete comparabili le vostre offerte",
+        "ctaText": "Condividete il requisito, le quotazioni correnti o la lista dei bidder e la scadenza decisionale per una prima revisione dell’ambito.",
+        "ctaLabel": "Richiedi valutazione RFQ",
+        "faq": [
+          {
+            "question": "Il prezzo unitario più basso è sempre la migliore offerta?",
+            "answer": "No. Trasporto, difetti, ritardi, pagamento, inventario, conformità e rischio di continuità di fornitura possono modificare sensibilmente l'esito commerciale."
+          },
+          {
+            "question": "È possibile normalizzare quotazioni esistenti?",
+            "answer": "Sì, se è possibile identificare le assunzioni di base. Campi mancanti o condizionali vengono segnalati e vengono preparate domande di chiarimento."
+          },
+          {
+            "question": "CTSEG prende la decisione finale sul fornitore?",
+            "answer": "CTSEG struttura evidenze e confronto. La decisione finale, l'approvazione e la responsabilità contrattuale restano in capo all'acquirente."
+          }
+        ]
+      },
+      "ru": {
+        "eyebrow": "RFQ · сопоставимые предложения",
+        "title": "Подготовка международного RFQ и сравнение заявок",
+        "description": "Контролируемая структура RFQ, которая делает предложения поставщиков сопоставимыми по спецификации, качеству, MOQ, доставке, оплате, документам и полной стоимости.",
+        "answerTitle": "Как сделать международные коммерческие предложения сопоставимыми?",
+        "directAnswer": "Сопоставимые заявки требуют единых согласованных требований и единой структуры ответа. CTSEG определяет технические и коммерческие поля, готовит RFQ, фиксирует уточнения и нормализует предложения по ценовой базе, MOQ, Incoterms, срокам, оплате, качественным документам, логистике и открытым рискам, прежде чем представить обзор для решения.",
+        "audienceTitle": "Для кого это решение",
+        "audience": "Команды закупок, операций и руководства, которые получают неполные или по-разному структурированные предложения и нуждаются в прозрачной базе для переговоров и выбора.",
+        "criteriaTitle": "Ключевые критерии сравнения",
+        "criteria": [
+          "Техническая спецификация, включённый объём и исключения",
+          "Единичная база, валюта, MOQ, ценовые уровни и условия оплаты",
+          "Incoterms, логистические допущения, сроки и срок действия",
+          "Качественные документы, образцы, гарантии, исключения и драйверы полной стоимости"
+        ],
+        "processTitle": "Процесс оценки",
+        "process": [
+          "Подтвердить требование, критерии решения и инструкции для претендентов",
+          "Разослать RFQ и контролировать уточнения от поставщиков",
+          "Нормализовать коммерческие и технические ответы",
+          "Предоставить отчёт сравнения, исключений, рисков и приоритетов для переговоров"
+        ],
+        "evidenceTitle": "Доказательства и границы ответственности",
+        "evidence": "Сравнение надёжно лишь настолько, насколько надёжны требование и предоставленные доказательства. Неподтверждённые допущения, условные цены и отсутствующие документы остаются видимыми, а не превращаются в ложную уверенность.",
+        "serviceType": "Подготовка международного RFQ и сравнение заявок",
+        "ctaTitle": "Сделайте свои предложения сопоставимыми",
+        "ctaText": "Поделитесь требованием, текущими предложениями или списком претендентов и сроком принятия решения для первичного обзора объёма работ.",
+        "ctaLabel": "Запросить оценку RFQ",
+        "faq": [
+          {
+            "question": "Всегда ли самая низкая цена за единицу — лучший выбор?",
+            "answer": "Нет. Фрахт, дефекты, задержки, оплата, запасы, соответствие требованиям и риск непрерывности поставок могут существенно изменить коммерческий результат."
+          },
+          {
+            "question": "Можно ли нормализовать существующие предложения?",
+            "answer": "Да, если можно идентифицировать базовые допущения. Отсутствующие или условные поля помечаются, и готовятся вопросы для уточнения."
+          },
+          {
+            "question": "Принимает ли CTSEG окончательное решение по поставщику?",
+            "answer": "CTSEG структурирует доказательства и сравнение. Окончательное решение, утверждение и договорная ответственность остаются за покупателем."
+          }
+        ]
+      },
+      "fa": {
+        "eyebrow": "RFQ · پیشنهادات قابل مقایسه",
+        "title": "تهیه بین‌المللی RFQ و مقایسه پیشنهادها",
+        "description": "یک ساختار RFQ کنترل‌شده که پیشنهادهای تأمین‌کنندگان را از نظر مشخصات، کیفیت، MOQ، تحویل، پرداخت، مدارک و هزینه کل قابل مقایسه می‌کند.",
+        "answerTitle": "چگونه پیشنهادهای بین‌المللی تأمین‌کنندگان را قابل مقایسه کنیم؟",
+        "directAnswer": "پیشنهادهای قابل مقایسه نیاز به یک الزام مورد توافق و یک ساختار پاسخ واحد دارند. CTSEG فیلدهای فنی و تجاری را تعریف می‌کند، RFQ را آماده می‌سازد، توضیحات را ثبت می‌کند و پیشنهادها را از نظر پایه قیمت، MOQ، Incoterms، زمان تحویل، پرداخت، مدارک کیفیت، لجستیک و ریسک‌های باز نرمال‌سازی می‌کند و سپس دیدگاه تصمیم‌گیری را ارائه می‌دهد.",
+        "audienceTitle": "این راهکار مناسب چه کسانی است",
+        "audience": "تیم‌های خرید، عملیات و مدیریت که پیشنهادهای ناتمام یا ساختاربندی‌شده متفاوت دریافت می‌کنند و به مبنایی شفاف برای مذاکره و انتخاب نیاز دارند.",
+        "criteriaTitle": "معیارهای اصلی مقایسه",
+        "criteria": [
+          "مشخصه فنی، دامنه شامل و موارد مستثنی",
+          "پایه واحد، ارز، MOQ، پلکان‌های قیمت و شرایط پرداخت",
+          "Incoterms، فروض لجستیکی، زمان تحویل و اعتبار",
+          "مدارک کیفیت، نمونه‌ها، تضمین‌ها، استثناها و عوامل تعیین‌کننده هزینهٔ کل"
+        ],
+        "processTitle": "فرآیند ارزیابی",
+        "process": [
+          "نیازمندی، معیارهای تصمیم‌گیری و دستورالعمل‌های شرکت‌کنندگان را تأیید کنید",
+          "RFQ را صادر و توضیحات تأمین‌کنندگان را کنترل کنید",
+          "پاسخ‌های تجاری و فنی را نرمال‌سازی کنید",
+          "مقایسه، استثناها، ریسک‌ها و اولویت‌های مذاکره را گزارش دهید"
+        ],
+        "evidenceTitle": "شواهد و مرز مسئولیت",
+        "evidence": "یک مقایسه تنها به اندازهٔ نیازمندی و شواهد ارائه‌شده قابل اتکا است. فروض تأییدنشده، قیمت‌های مشروط و مدارک ناقص نمایان نگه داشته می‌شوند تا به اطمینان کاذب تبدیل نشوند.",
+        "serviceType": "تهیه بین‌المللی RFQ و مقایسه پیشنهادها",
+        "ctaTitle": "پیشنهادهای خود را قابل مقایسه کنید",
+        "ctaText": "برای بررسی اولیه دامنه، نیازمندی، پیشنهادهای فعلی یا لیست شرکت‌کنندگان و مهلت تصمیم‌گیری را ارسال کنید.",
+        "ctaLabel": "درخواست ارزیابی RFQ",
+        "faq": [
+          {
+            "question": "آیا همیشه پایین‌ترین قیمت واحد بهترین پیشنهاد است؟",
+            "answer": "خیر. حمل‌ونقل، معیوبی‌ها، تأخیر، پرداخت، موجودی، تطابق و ریسک تداوم عرضه می‌توانند نتیجهٔ تجاری را به‌طور چشمگیری تغییر دهند."
+          },
+          {
+            "question": "آیا می‌توان پیشنهادهای موجود را نرمال‌سازی کرد؟",
+            "answer": "بله، اگر فروض زیرین قابل شناسایی باشند. فیلدهای ناقص یا مشروط نشانه‌گذاری و سوالات شفاف‌سازی تهیه می‌شوند."
+          },
+          {
+            "question": "آیا CTSEG تصمیم نهایی تأمین‌کننده را می‌گیرد؟",
+            "answer": "خیر. CTSEG شواهد و مقایسه را ساختاربندی می‌کند. تصمیم نهایی، تصویب و مسئولیت قراردادی با خریدار است."
+          }
+        ]
+      }
+    },
+    "paths": {
+      "tr": "/tr/cozumler/uluslararasi-rfq-teklif-karsilastirma/",
+      "en": "/en/solutions/international-rfq-bid-comparison/",
+      "de": "/de/loesungen/internationaler-rfq-angebotsvergleich/",
+      "it": "/it/soluzioni/rfq-internazionale-confronto-offerte/",
+      "ru": "/ru/resheniya/mezhdunarodnyi-rfq-sravnenie-predlozheniy/",
+      "fa": "/fa/solutions/international-rfq-bid-comparison/"
+    }
+  },
+  "food-origin-compliance": {
+    "content": {
+      "en": {
+        "eyebrow": "Food sourcing · origin and batch evidence",
+        "title": "Food origin, batch documentation and sourcing assessment",
+        "description": "Evidence-led assessment of origin, producer, specification, traceability, quality documents and target-market requirements for B2B food sourcing.",
+        "answerTitle": "What should be checked when sourcing food internationally?",
+        "directAnswer": "International food sourcing should identify the actual producer and origin, define the product and batch specification, review traceability and quality documents, and compare target-market requirements before shipment. CTSEG coordinates the commercial evidence and keeps unverified claims, missing tests and specialist approvals explicit.",
+        "audienceTitle": "Who this solution is for",
+        "audience": "Importers, distributors, food manufacturers, HORECA suppliers and private-label buyers assessing nuts, dried fruit, ingredients or other selected food categories.",
+        "criteriaTitle": "Core assessment criteria",
+        "criteria": [
+          "Actual producer, country of origin and batch traceability",
+          "Product grade, variety, processing, moisture and microbiological specification",
+          "COA and relevant contaminant, pesticide or aflatoxin evidence where required",
+          "Packaging, labelling, storage, transport and target-market responsibilities"
+        ],
+        "processTitle": "Assessment process",
+        "process": [
+          "Define product, use, destination and mandatory evidence",
+          "Research suitable sources and confirm declared origin",
+          "Review specification, documents and commercial conditions",
+          "Record gaps, required specialist checks and shipment decisions"
+        ],
+        "evidenceTitle": "Evidence and responsibility boundary",
+        "evidence": "Requirements vary by product, origin, destination and intended use. CTSEG does not replace accredited laboratories, competent authorities, customs, legal or food-safety specialists; their approval must be obtained where required.",
+        "serviceType": "Food sourcing origin and batch documentation assessment",
+        "ctaTitle": "Define the food-sourcing evidence",
+        "ctaText": "Share the product, origin or source region, intended use, destination, volume and required documents.",
+        "ctaLabel": "Request food-sourcing assessment",
+        "faq": [
+          {
+            "question": "Does a COA prove every target-market requirement?",
+            "answer": "No. The test scope, method, laboratory, batch identity, limits and destination requirements must all be checked."
+          },
+          {
+            "question": "Can origin be assumed from a product name or image?",
+            "answer": "No. Origin should be supported by producer, batch and commercial documentation and must not be concealed or misleadingly relabelled."
+          },
+          {
+            "question": "Who confirms legal and food-safety compliance?",
+            "answer": "Competent authorities and authorised legal, customs, laboratory or food-safety specialists should confirm regulated requirements where applicable."
+          }
+        ]
+      },
+      "tr": {
+        "eyebrow": "Gıda tedariki · menşe ve parti belgesi",
+        "title": "Gıda menşei, parti dokümantasyonu ve tedarik değerlendirmesi",
+        "description": "B2B gıda tedariki için menşe, üretici, spesifikasyon, izlenebilirlik, kalite belgeleri ve hedef pazar gereksinimlerinin kanıta dayalı değerlendirmesi.",
+        "answerTitle": "Uluslararası gıda tedarikinde neler kontrol edilmelidir?",
+        "directAnswer": "Uluslararası gıda tedariki gerçek üreticiyi ve menşeyi belirlemeli, ürün ve parti spesifikasyonunu tanımlamalı, izlenebilirlik ve kalite belgelerini incelemeli ve sevkiyat öncesi hedef pazar gereksinimleriyle karşılaştırmalıdır. CTSEG ticari kanıtları koordine eder ve doğrulanmamış iddiaları, eksik testleri ve uzman onaylarını açıkça belirtir.",
+        "audienceTitle": "Bu çözüm kimler içindir",
+        "audience": "İthalatçılar, distribütörler, gıda üreticileri, HORECA tedarikçileri ve yemiş, kuru meyve, hammaddeler veya seçili diğer gıda kategorilerini değerlendiren özel etiket alıcıları.",
+        "criteriaTitle": "Temel değerlendirme kriterleri",
+        "criteria": [
+          "Gerçek üretici, menşe ülke ve parti izlenebilirliği",
+          "Ürün sınıfı, çeşit, işleme, nem ve mikrobiyolojik spesifikasyon",
+          "Gerekliyse COA ve ilgili kontaminant, pestisit veya aflatoksin kanıtı",
+          "Ambalaj, etiketleme, depolama, taşıma ve hedef-pazar sorumlulukları"
+        ],
+        "processTitle": "Değerlendirme süreci",
+        "process": [
+          "Ürünü, kullanımını, varış noktasını ve zorunlu kanıtı tanımlayın",
+          "Uygun kaynakları araştırın ve beyan edilen menşeyi doğrulayın",
+          "Spesifikasyonu, belgeleri ve ticari koşulları inceleyin",
+          "Boşlukları, gerekli uzman kontrollerini ve sevkiyat kararlarını kaydedin"
+        ],
+        "evidenceTitle": "Kanıtlar ve sorumluluk sınırı",
+        "evidence": "Gereksinimler ürün, menşe, varış yeri ve kullanım amacına göre değişir. CTSEG akredite laboratuvarların, yetkili makamların, gümrük veya gıda güvenliği uzmanlarının yerini almaz; gerektiğinde onların onayı alınmalıdır.",
+        "serviceType": "Gıda tedariki menşei ve parti dokümantasyonu değerlendirmesi",
+        "ctaTitle": "Gıda-tedarik kanıtlarını tanımlayın",
+        "ctaText": "Ürünü, menşe veya kaynak bölgesini, kullanım amacını, varış yerini, hacmi ve gerekli belgeleri paylaşın.",
+        "ctaLabel": "Gıda-tedarik değerlendirmesi isteyin",
+        "faq": [
+          {
+            "question": "Bir COA her hedef-pazar gereksinimini kanıtlar mı?",
+            "answer": "Hayır. Test kapsamı, yöntem, laboratuvar, parti kimliği, limitler ve varış yeri gereksinimleri hepsi kontrol edilmelidir."
+          },
+          {
+            "question": "Menşei bir ürün adı veya görselinden varsayılabilir mi?",
+            "answer": "Hayır. Menşei üretici, parti ve ticari belgelerle desteklenmeli; yanıltıcı etiketleme veya gizleme kabul edilemez."
+          },
+          {
+            "question": "Yasal ve gıda güvenliği uygunluğunu kim doğrular?",
+            "answer": "Düzenlenen gereksinimler için yetkili makamlar ile yetkili hukuki, gümrük, laboratuvar veya gıda güvenliği uzmanları onay vermelidir."
+          }
+        ]
+      },
+      "de": {
+        "eyebrow": "Lebensmittelbeschaffung · Herkunft und Chargendokumente",
+        "title": "Herkunft, Chargendokumentation und Beschaffungsbewertung für Lebensmittel",
+        "description": "Evidenzbasierte Bewertung von Herkunft, Produzent, Spezifikation, Rückverfolgbarkeit, Qualitätsdokumenten und Zielmarktanforderungen für B2B-Lebensmittelbeschaffung.",
+        "answerTitle": "Was ist bei internationaler Lebensmittelbeschaffung zu prüfen?",
+        "directAnswer": "Internationale Lebensmittelbeschaffung sollte den tatsächlichen Produzenten und die Herkunft identifizieren, Produkt- und Chargenspezifikation definieren, Rückverfolgbarkeit und Qualitätsdokumente prüfen und Zielmarktanforderungen vor dem Versand vergleichen. CTSEG koordiniert die kommerziellen Nachweise und hält nicht verifizierte Angaben, fehlende Tests und fachliche Genehmigungen ausdrücklich sichtbar.",
+        "audienceTitle": "Für wen diese Lösung gedacht ist",
+        "audience": "Importeure, Händler, Lebensmittelhersteller, HORECA-Lieferanten und Private-Label-Einkäufer, die Nüsse, Trockenfrüchte, Zutaten oder andere ausgewählte Lebensmittelkategorien bewerten.",
+        "criteriaTitle": "Kernkriterien der Bewertung",
+        "criteria": [
+          "Tatsächlicher Produzent, Herkunftsland und Chargenrückverfolgbarkeit",
+          "Produktklasse, Sorte, Verarbeitung, Feuchte- und mikrobiologische Spezifikation",
+          "COA und relevante Nachweise zu Kontaminanten, Pestiziden oder Aflatoxinen, wo erforderlich",
+          "Verpackung, Kennzeichnung, Lagerung, Transport und Zielmarktverantwortlichkeiten"
+        ],
+        "processTitle": "Bewertungsprozess",
+        "process": [
+          "Produkt, Verwendungszweck, Bestimmungsort und erforderliche Nachweise definieren",
+          "Geeignete Quellen recherchieren und deklarierte Herkunft bestätigen",
+          "Spezifikation, Dokumente und kommerzielle Bedingungen prüfen",
+          "Lücken, erforderliche Fachprüfungen und Versandentscheidungen dokumentieren"
+        ],
+        "evidenceTitle": "Belege und Verantwortungsgrenze",
+        "evidence": "Anforderungen variieren nach Produkt, Herkunft, Bestimmungsort und Verwendungszweck. CTSEG ersetzt nicht akkreditierte Labore, zuständige Behörden, Zoll oder lebensmittelsicherheitsrechtliche Spezialisten; deren Genehmigung ist erforderlichenfalls einzuholen.",
+        "serviceType": "Bewertung Herkunft und Chargendokumentation für Lebensmittelbeschaffung",
+        "ctaTitle": "Definieren Sie die Nachweise für die Lebensmittelbeschaffung",
+        "ctaText": "Teilen Sie Produkt, Herkunft oder Quellregion, Verwendungszweck, Bestimmungsort, Volumen und erforderliche Dokumente für eine erste Prüfung.",
+        "ctaLabel": "Bewertung Lebensmittelbeschaffung anfordern",
+        "faq": [
+          {
+            "question": "Beweist ein COA alle Anforderungen des Zielmarktes?",
+            "answer": "Nein. Prüfumfang, Methode, Labor, Chargenidentität, Grenzwerte und Bestimmungslandanforderungen müssen alle geprüft werden."
+          },
+          {
+            "question": "Kann Herkunft aus Produktname oder Bild angenommen werden?",
+            "answer": "Nein. Herkunft sollte durch Produzent-, Chargen- und Handelsdokumente belegt sein und darf nicht irreführend umetikettiert oder verschleiert werden."
+          },
+          {
+            "question": "Wer bestätigt die rechtliche und lebensmittelsicherheitsbezogene Konformität?",
+            "answer": "Zuständige Behörden sowie autorisierte juristische, zoll- oder lebensmittelsicherheitsrelevante Spezialisten sollten regulierte Anforderungen dort bestätigen, wo es nötig ist."
+          }
+        ]
+      },
+      "it": {
+        "eyebrow": "Approvvigionamento alimentare · origine e documenti lotto",
+        "title": "Origine alimentare, documentazione di lotto e valutazione di approvvigionamento",
+        "description": "Valutazione basata su evidenze di origine, produttore, specifica, tracciabilità, documenti di qualità e requisiti del mercato target per approvvigionamento alimentare B2B.",
+        "answerTitle": "Cosa va verificato nel sourcing internazionale di alimenti?",
+        "directAnswer": "Il sourcing internazionale di alimenti dovrebbe identificare il produttore reale e l’origine, definire la specifica di prodotto e lotto, esaminare tracciabilità e documenti di qualità e confrontare i requisiti del mercato target prima della spedizione. CTSEG coordina le evidenze commerciali e mantiene esplicite le dichiarazioni non verificate, i test mancanti e le approvazioni specialistiche.",
+        "audienceTitle": "A chi è rivolta questa soluzione",
+        "audience": "Importatori, distributori, produttori alimentari, fornitori HORECA e acquirenti private-label che valutano noci, frutta secca, ingredienti o altre categorie alimentari selezionate.",
+        "criteriaTitle": "Criteri principali di valutazione",
+        "criteria": [
+          "Produttore effettivo, paese d’origine e tracciabilità di lotto",
+          "Grado del prodotto, varietà, processo, umidità e specifica microbiologica",
+          "COA e prove pertinenti su contaminanti, pesticidi o aflatossine ove richiesto",
+          "Imballaggio, etichettatura, stoccaggio, trasporto e responsabilità verso il mercato di destinazione"
+        ],
+        "processTitle": "Processo di valutazione",
+        "process": [
+          "Definire prodotto, uso, destinazione e evidenze obbligatorie",
+          "Ricercare fonti idonee e confermare l’origine dichiarata",
+          "Rivedere specifica, documenti e condizioni commerciali",
+          "Registrare lacune, controlli specialistici necessari e decisioni sulla spedizione"
+        ],
+        "evidenceTitle": "Evidenze e limiti di responsabilità",
+        "evidence": "I requisiti variano per prodotto, origine, destinazione e uso previsto. CTSEG non sostituisce laboratori accreditati, autorità competenti, dogana o specialisti in materia di sicurezza alimentare; è necessario ottenere le loro approvazioni quando richiesto.",
+        "serviceType": "Valutazione origine e documentazione lotto per approvvigionamento alimentare",
+        "ctaTitle": "Definite le evidenze per l'approvvigionamento alimentare",
+        "ctaText": "Condividete il prodotto, l'origine o la regione di provenienza, l'uso previsto, la destinazione, il volume e i documenti richiesti per una prima valutazione.",
+        "ctaLabel": "Richiedi valutazione per l'approvvigionamento alimentare",
+        "faq": [
+          {
+            "question": "Un COA dimostra tutti i requisiti del mercato di destinazione?",
+            "answer": "No. Ambito dei test, metodo, laboratorio, identità della partita, limiti e requisiti della destinazione devono essere tutti verificati."
+          },
+          {
+            "question": "Si può presumere l'origine dal nome del prodotto o da un'immagine?",
+            "answer": "No. L'origine deve essere supportata da documenti del produttore, documentazione di partita e documenti commerciali; non deve essere nascosta né etichettata in modo fuorviante."
+          },
+          {
+            "question": "Chi conferma la conformità legale e la sicurezza alimentare?",
+            "answer": "Le autorità competenti e gli specialisti autorizzati in ambito legale, doganale, laboratoristico o della sicurezza alimentare devono confermare i requisiti regolamentari quando applicabile."
+          }
+        ]
+      },
+      "ru": {
+        "eyebrow": "Снабжение продуктами · происхождение и документация по партиям",
+        "title": "Происхождение продукта, документация партий и оценка источников поставок",
+        "description": "Оценка на основе доказательств происхождения, производителя, спецификации, прослеживаемости, документов качества и требований целевого рынка для B2B-поставок продуктов.",
+        "answerTitle": "Что нужно проверять при международной закупке продовольствия?",
+        "directAnswer": "Международная закупка продуктов должна идентифицировать фактического производителя и происхождение, определить спецификацию продукта и партии, проверить прослеживаемость и документы качества и сравнить требования целевого рынка до отгрузки. CTSEG координирует коммерческие доказательства и явно фиксирует непроверенные утверждения, отсутствующие тесты и необходимость экспертных подтверждений.",
+        "audienceTitle": "Для кого это решение",
+        "audience": "Импортёры, дистрибьюторы, пищевые производители, поставщики HORECA и покупатели собственной торговой марки (СТМ), оценивающие орехи, сухофрукты, ингредиенты или другие выбранные категории пищевой продукции.",
+        "criteriaTitle": "Ключевые критерии оценки",
+        "criteria": [
+          "Фактический производитель, страна происхождения и прослеживаемость партии",
+          "Класс продукта, сорт, обработка, влажность и микробиологическая спецификация",
+          "COA и соответствующие доказательства по загрязнителям, пестицидам или афлатоксинам при необходимости",
+          "Упаковка, маркировка, хранение, транспорт и обязанности относительно целевого рынка"
+        ],
+        "processTitle": "Процесс оценки",
+        "process": [
+          "Определить продукт, назначение, пункт назначения и обязательные доказательства",
+          "Исследовать подходящие источники и подтвердить заявленное происхождение",
+          "Проверить спецификацию, документы и коммерческие условия",
+          "Задокументировать пробелы, необходимые специализированные проверки и решение по отгрузке"
+        ],
+        "evidenceTitle": "Доказательства и границы ответственности",
+        "evidence": "Требования отличаются в зависимости от продукта, происхождения, пункта назначения и предполагаемого использования. CTSEG не заменяет аккредитованные лаборатории, компетентные органы, таможню или специалистов по безопасности пищевых продуктов; их подтверждения должны быть получены там, где это необходимо.",
+        "serviceType": "Оценка происхождения и документации партий для закупок продовольствия",
+        "ctaTitle": "Определите доказательства для закупки продуктов",
+        "ctaText": "Поделитесь информацией о продукте, регионе происхождения или источнике, назначении, пункте назначения, объёме и необходимых документах.",
+        "ctaLabel": "Запросить оценку подбора поставщиков для пищевой продукции",
+        "faq": [
+          {
+            "question": "Подтверждает ли COA соответствие всем требованиям целевого рынка?",
+            "answer": "Нет. Объём тестирования, метод, лаборатория, идентичность партии, пределы и требования пункта назначения должны быть проверены."
+          },
+          {
+            "question": "Можно ли предположить происхождение по названию продукта или изображению?",
+            "answer": "Нет. Происхождение должно подтверждаться документами производителя, партии и коммерческими документами и не должно быть скрыто или вводяще перенесено этикеткой."
+          },
+          {
+            "question": "Кто подтверждает юридическое и пищебезопасное соответствие?",
+            "answer": "Компетентные органы и уполномоченные юридические, таможенные, лабораторные или специалисты по безопасности пищевых продуктов должны подтверждать регулируемые требования там, где это применимо."
+          }
+        ]
+      },
+      "fa": {
+        "eyebrow": "تهیه مواد غذایی · منشأ و اسناد بچ",
+        "title": "منشأ غذایی، مستندات بچ و ارزیابی منابع تأمین",
+        "description": "ارزیابی مبتنی بر شواهد از منشأ، تولیدکننده، مشخصات، ردیابی، مدارک کیفیت و الزامات بازار هدف برای تأمین مواد غذایی B2B.",
+        "answerTitle": "در تهیه بین‌المللی غذا چه مواردی باید کنترل شود؟",
+        "directAnswer": "تأمین بین‌المللی غذا باید تولیدکننده و منشأ واقعی را شناسایی کند، مشخصات محصول و بچ را تعریف کند، ردیابی و مدارک کیفیت را بررسی کند و پیش از ارسال با الزامات بازار هدف مقایسه نماید. CTSEG شواهد تجاری را هماهنگ می‌کند و ادعاهای راستی‌آزمایی‌نشده، تست‌های ناقص و نیاز به تاییدهای تخصصی را صریحاً مشخص نگه می‌دارد.",
+        "audienceTitle": "این راهکار مناسب چه کسانی است",
+        "audience": "واردکنندگان، توزیع‌کنندگان، تولیدکنندگان مواد غذایی، تأمین‌کنندگان HORECA و خریداران private-label که آجیل‌ها، میوه‌های خشک، مواد اولیه یا سایر دسته‌های انتخابی غذایی را ارزیابی می‌کنند.",
+        "criteriaTitle": "معیارهای اصلی ارزیابی",
+        "criteria": [
+          "تولیدکننده واقعی، کشور منشأ و ردیابی بچ",
+          "درجه محصول، واریته، فرآوری، رطوبت و مشخصه میکروبیولوژیک",
+          "COA و شواهد مرتبط آلودگی‌ها، آفت‌کش‌ها یا آفلاتوکسین در صورت نیاز",
+          "بسته‌بندی، برچسب‌گذاری، نگهداری، حمل‌ونقل و مسئولیت‌های مربوط به بازار هدف"
+        ],
+        "processTitle": "فرآیند ارزیابی",
+        "process": [
+          "محصول، کاربرد، مقصد و مدارک اجباری را تعریف کنید",
+          "منابع مناسب را تحقیق و منشأ اعلام‌شده را تأیید کنید",
+          "مشخصه، مدارک و شرایط تجاری را بازبینی کنید",
+          "شکاف‌ها، بررسی‌های تخصصی مورد نیاز و تصمیمات ارسال را ثبت کنید"
+        ],
+        "evidenceTitle": "شواهد و محدوده مسئولیت",
+        "evidence": "نیازمندی‌ها با توجه به محصول، منشأ، مقصد و کاربرد متفاوت است. CTSEG جایگزین آزمایشگاه‌های معتبر، مراجع ذی‌صلاح، گمرک یا متخصصان ایمنی غذایی نمی‌شود؛ در صورت نیاز باید تأیید آن‌ها اخذ گردد.",
+        "serviceType": "ارزیابی منشأ و مستندات بچ برای تأمین غذایی",
+        "ctaTitle": "شواهد موردنیاز sourcing غذایی را تعریف کنید",
+        "ctaText": "محصول، منشأ یا منطقه منبع، کاربرد موردنظر، مقصد، حجم و مدارک لازم را ارسال کنید.",
+        "ctaLabel": "درخواست ارزیابی sourcing غذایی",
+        "faq": [
+          {
+            "question": "آیا یک COA همهٔ الزامات بازار هدف را اثبات می‌کند؟",
+            "answer": "خیر. دامنه تست، روش، آزمایشگاه، هویت بچ، حد مجازها و الزامات مقصد همگی باید بررسی شوند."
+          },
+          {
+            "question": "آیا می‌توان منشأ را از نام محصول یا تصویر حدس زد؟",
+            "answer": "خیر. منشأ باید توسط مدارک تولیدکننده، بچ و مدارک تجاری پشتیبانی شود و نباید مخفی یا به‌صورت گمراه‌کننده برچسب‌گذاری شود."
+          },
+          {
+            "question": "چه کسی انطباق حقوقی و ایمنی غذایی را تأیید می‌کند؟",
+            "answer": "مراجع ذی‌صلاح و متخصصان مجاز حقوقی، گمرکی، آزمایشگاهی یا ایمنی غذایی باید الزامات مقرراتی را در صورت لزوم تأیید کنند."
+          }
+        ]
+      }
+    },
+    "paths": {
+      "tr": "/tr/cozumler/gida-mense-parti-belge-tedarik-degerlendirmesi/",
+      "en": "/en/solutions/food-origin-batch-document-sourcing-assessment/",
+      "de": "/de/loesungen/lebensmittel-herkunft-chargendokumente-beschaffung/",
+      "it": "/it/soluzioni/origine-alimenti-documenti-lotto-approvvigionamento/",
+      "ru": "/ru/resheniya/proiskhozhdenie-pishchevyh-produktov-dokumenty-partii/",
+      "fa": "/fa/solutions/food-origin-batch-document-sourcing-assessment/"
+    }
+  }
+} as unknown as Record<SearchLandingId,{
+  paths:Record<Locale,string>;
+  content:Record<Locale,SearchLandingContent>;
+}>;
+
+export function searchLandingPath(lang:Locale,id:SearchLandingId):string {
+  return searchLandings[id].paths[lang];
+}
+
+export function searchLandingAlternates(id:string):Record<Locale,string> {
+  const landing=searchLandings[id as SearchLandingId];
+  return Object.fromEntries(Object.entries(landing.paths).map(([lang,path])=>[lang,`https://ctseg.com.tr${path}`])) as Record<Locale,string>;
+}

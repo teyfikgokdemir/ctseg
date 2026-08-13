@@ -10,7 +10,9 @@ const makeContext = (body, origin='https://preview.ctseg.pages.dev', env={}, ip=
 });
 const valid = {
   locale:'en',intent:'buyer_request',name:'Test Buyer',company:'Example Trade Ltd',emailOrPhone:'buyer@example.test',
-  message:'Please assess this sourcing request.',privacy:'accepted',startedAt:String(Date.now()-5000),website:''
+  message:'Please assess this sourcing request.',privacy:'accepted',startedAt:String(Date.now()-5000),website:'',
+  pagePath:'/en/contact/',landingPath:'/en/services/strategic-sourcing/',referrerHost:'www.google.com',
+  utmSource:'google',utmMedium:'organic',utmCampaign:'supplier-search',utmContent:'',utmTerm:'',clickId:''
 };
 const expectStatus = async (response,status,label) => {
   if(response.status!==status)throw new Error(`${label}: expected ${status}, received ${response.status}`);
@@ -49,5 +51,7 @@ try{
 if(outbound?.url!=='https://api.resend.com/emails')throw new Error('email provider endpoint mismatch');
 if(!outbound?.body?.text||outbound.body.html)throw new Error('email payload must be plain text');
 if(!outbound.body.text.includes('Intent: supplier_market_entry'))throw new Error('stable producer intent missing from email payload');
+if(!outbound.body.text.includes('Landing page: /en/services/strategic-sourcing/'))throw new Error('first-touch landing attribution missing from email payload');
+if(!outbound.body.text.includes('UTM source / medium: google / organic'))throw new Error('UTM attribution missing from email payload');
 
 console.log('Contact function check passed: method, origin, validation, honeypot, configuration fallback and Resend delivery.');

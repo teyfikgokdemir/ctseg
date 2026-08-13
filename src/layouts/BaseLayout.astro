@@ -9,6 +9,7 @@ import type { ReflexLocale } from '../data/reflex-data';
 import { activeLocales, localeDirection, localeOg } from '../data/locales';
 import { FEATURE_IMAGE_WIDTHS, generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
 import { localizedTradeVisual } from '../data/trade-visuals';
+import { searchLandingAlternates } from '../data/search-landings';
 
 const {
   lang='tr', title, description, pageKey='home', pageId, canonical,
@@ -18,14 +19,14 @@ const {
   canonical?: string; schema?: any[] | any; noindex?: boolean;
 };
 const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
-const alternates = routeAlternates(pageKey, pageId);
+const alternates = pageKey === 'search-landing' && pageId ? searchLandingAlternates(pageId) : routeAlternates(pageKey, pageId);
 if (pageKey === 'home') alternates.fa = 'https://ctseg.com.tr/fa/';
 if (pageKey === 'home') alternates.ru = 'https://ctseg.com.tr/ru/';
 const alternateCodes = pageKey === 'medical'
   ? ['tr','en','de','it','ru','fa','sq','mk','sr']
   : (pageKey === 'home' || ['how-we-work','scenarios'].includes(pageKey)
     ? activeLocales
-    : pageKey === 'guides' ? ['tr','en'] : locales.filter((code) => code !== 'ru'));
+    : pageKey === 'guides' ? ['tr','en'] : locales);
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
   name:company.name,alternateName:company.alternateName,foundingDate:company.foundingYear,
@@ -54,7 +55,7 @@ const webpage = {
 const extra = Array.isArray(schema) ? schema : [schema];
 const schemas = [organization, website, webpage, ...extra.filter(Boolean)];
 const t = ui[lang] || ui.en;
-const cookieHref = lang === 'ru' ? localizedPath('en', 'legal', 'cookies') : localizedPath(lang in ui ? lang : 'en', 'legal', 'cookies');
+const cookieHref = localizedPath(lang in ui ? lang : 'en', 'legal', 'cookies');
 const homeHero = localizedTradeVisual('global-trade-hero',lang);
 const socialImage = pageKey === 'products' && pageId && products[pageId as keyof typeof products]
   ? products[pageId as keyof typeof products].media.src
@@ -114,6 +115,31 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
         const key='ctseg-consent-v2';
         const box=document.querySelector('[data-cookie-consent]');
         if(!box)return;
+        const attributionKey='ctseg-attribution-v1';
+        const attribution=(()=>{
+          try{
+            const saved=sessionStorage.getItem(attributionKey);
+            if(saved)return JSON.parse(saved);
+            const query=new URLSearchParams(location.search);
+            const referrerHost=document.referrer?new URL(document.referrer).hostname:'';
+            const value={
+              landing_path:location.pathname,
+              referrer_host:referrerHost&&referrerHost!==location.hostname?referrerHost:'',
+              utm_source:(query.get('utm_source')||'').slice(0,100),
+              utm_medium:(query.get('utm_medium')||'').slice(0,100),
+              utm_campaign:(query.get('utm_campaign')||'').slice(0,120),
+              utm_content:(query.get('utm_content')||'').slice(0,120),
+              utm_term:(query.get('utm_term')||'').slice(0,120),
+              click_id:(query.get('gclid')||query.get('msclkid')||'').slice(0,160)
+            };
+            sessionStorage.setItem(attributionKey,JSON.stringify(value));return value;
+          }catch{return {landing_path:location.pathname}}
+        })();
+        window.__ctsegAttribution=attribution;
+        window.ctsegTrack=(event,parameters={})=>{
+          if(typeof window.gtag!=='function')return;
+          window.gtag('event',event,{page_language:document.documentElement.lang,page_path:location.pathname,...attribution,...parameters});
+        };
         const load=()=>{
           if(window.__ctsegAnalyticsLoaded)return;
           window.__ctsegAnalyticsLoaded=true;window.dataLayer=window.dataLayer||[];
@@ -125,21 +151,27 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
         box.querySelector('[data-cookie-accept]')?.addEventListener('click',()=>apply('accepted'));
         box.querySelector('[data-cookie-reject]')?.addEventListener('click',()=>apply('rejected'));
         document.querySelectorAll('[data-fa-landing-link]').forEach((link)=>link.addEventListener('click',()=>{
-          if(typeof window.gtag==='function')window.gtag('event','fa_landing_referral_click',{source_language:document.documentElement.lang,page_type:'markets'});
+          window.ctsegTrack('fa_landing_referral_click',{page_type:'markets'});
         }));
         document.querySelectorAll('[data-product-quote]').forEach((link)=>link.addEventListener('click',()=>{
           const product=link.getAttribute('data-product-name');if(product)sessionStorage.setItem('ctseg-product-request',product);
-          if(typeof window.gtag==='function')window.gtag('event','product_quote_click',{source_language:document.documentElement.lang,page_type:'product'});
+          window.ctsegTrack('product_quote_click',{page_type:'product'});
         }));
         document.querySelectorAll('[data-catalog-download]').forEach((link)=>link.addEventListener('click',()=>{
-          if(typeof window.gtag==='function')window.gtag('event','catalog_download',{source_language:document.documentElement.lang,catalog_language:link.getAttribute('data-catalog-language')});
+          window.ctsegTrack('catalog_download',{catalog_language:link.getAttribute('data-catalog-language')});
         }));
         document.querySelectorAll('[data-how-we-work-cta]').forEach((link)=>link.addEventListener('click',()=>{
-          if(typeof window.gtag==='function')window.gtag('event','how_we_work_cta_click',{source_language:document.documentElement.lang});
+          window.ctsegTrack('how_we_work_cta_click');
         }));
         document.querySelectorAll('[data-case-scenario-cta]').forEach((link)=>link.addEventListener('click',()=>{
-          if(typeof window.gtag==='function')window.gtag('event','case_scenario_cta_click',{source_language:document.documentElement.lang});
+          window.ctsegTrack('case_scenario_cta_click');
         }));
+        document.querySelectorAll('[data-trade-intent],[data-contact-intent],[data-fa-intent]').forEach((link)=>link.addEventListener('click',()=>{
+          window.ctsegTrack('trade_intent_click',{trade_intent:link.getAttribute('data-trade-intent')||link.getAttribute('data-contact-intent')||link.getAttribute('data-fa-intent')||''});
+        }));
+        document.querySelectorAll('[data-contact-whatsapp]').forEach((link)=>link.addEventListener('click',()=>window.ctsegTrack('direct_contact_click',{contact_channel:'whatsapp'})));
+        document.querySelectorAll('[data-contact-email]').forEach((link)=>link.addEventListener('click',()=>window.ctsegTrack('direct_contact_click',{contact_channel:'email'})));
+        document.querySelectorAll('[data-locale-option]').forEach((link)=>link.addEventListener('click',()=>window.ctsegTrack('language_change',{target_locale:link.getAttribute('hreflang')||''})));
       })();
     </script>
   </body>

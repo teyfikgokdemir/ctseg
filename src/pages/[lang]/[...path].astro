@@ -4,6 +4,7 @@ import PageContent from '../../components/PageContent.astro';
 import { insights, products, services, ui } from '../../data/site';
 import { guides, processPages } from '../../data/completion';
 import { getPosts } from '../../data/blog';
+import { searchLandings } from '../../data/search-landings';
 import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, tradeMatchingServiceSchema, type RouteRecord } from '../../lib/routes';
 
 export function getStaticPaths() {
@@ -92,6 +93,19 @@ if (record.key === 'how-we-work') {
   schemas.push({
     '@context':'https://schema.org','@type':'FAQPage',
     mainEntity:process.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))
+  });
+}
+if (record.key === 'search-landing' && record.id) {
+  const landing=searchLandings[record.id as keyof typeof searchLandings].content[record.lang];
+  schemas.push({
+    '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#service`,
+    url:canonicalFor(record),name:landing.title,description:landing.description,inLanguage:record.lang,
+    serviceType:landing.serviceType,provider:{'@id':'https://ctseg.com.tr/#organization'},
+    areaServed:['Türkiye','Europe','Iran','International'],audience:{'@type':'BusinessAudience',name:landing.audienceTitle}
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'FAQPage',
+    mainEntity:landing.faq.map((item)=>({'@type':'Question',name:item.question,acceptedAnswer:{'@type':'Answer',text:item.answer}}))
   });
 }
 if (record.key === 'guides' && record.id) {

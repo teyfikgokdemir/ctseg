@@ -4,6 +4,7 @@ import { activeLocaleRegistry, type ActiveLocale } from '../data/locales';
 import { reflexPath, type ReflexLocale } from '../data/reflex-data';
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 import { tradePlatformCopy } from '../data/trade-platform';
+import { searchLandingPath, type SearchLandingId } from '../data/search-landings';
 const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?: string; pageId?: string };
 const t = ui[lang] || ui.en;
 const home = localizedPath(lang, 'home');
@@ -27,16 +28,7 @@ const methodLabel: Record<Locale,string> = {
   tr:'Yöntem', en:'Method', de:'Arbeitsweise', it:'Metodo', ru:'Метод', fa:'روش کار'
 };
 
-const nav = lang === 'ru' ? [
-  ['services', t.services, `${home}#trade-paths`],
-  ['buyers', p.buyerTitle, `${home}#for-buyers`],
-  ['producers', p.producerTitle, `${home}#for-producers`],
-  ['method', methodLabel[lang], localizedPath(lang,'how-we-work')],
-  ['medical', medicalLabel, reflexUrl],
-  ['markets', t.markets, `${home}#markets`],
-  ['about', t.about, `${home}#company`],
-  ['contact', t.contact, `${home}#contact`]
-] : [
+const nav = [
   ['services', t.services, localizedPath(lang,'services')],
   ['buyers', p.buyerTitle, `${home}#for-buyers`],
   ['producers', p.producerTitle, `${home}#for-producers`],
@@ -64,6 +56,7 @@ const globalLocales = activeLocaleRegistry.map((entry) => entry.code);
 const globalLocaleNames = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code, entry.label])) as Record<ActiveLocale,string>;
 
 const globalSwitchPath = (target: string): string => {
+  if (pageKey === 'search-landing' && pageId) return searchLandingPath(target as Locale,pageId as SearchLandingId);
   if (target === 'fa') return '/fa/';
   // On medical pages route locales to their reflexPath
   if (pageKey === 'medical') {
@@ -71,7 +64,6 @@ const globalSwitchPath = (target: string): string => {
     if ((reflexLocales as readonly string[]).includes(target)) return reflexPath(target as ReflexLocale);
     return '/';
   }
-  if (target === 'ru') return '/ru/';
   return localizedPath(target, pageKey, pageId);
 };
 ---
@@ -129,7 +121,7 @@ const globalSwitchPath = (target: string): string => {
           >{code.toUpperCase()}<span class="sr-only"> · {globalLocaleNames[code]}</span></a>)}
         </div>
       </div>
-      <a class="button button-small nav-cta" href={lang === 'ru' ? '/ru/#contact' : localizedPath(lang, 'contact')}>{t.quote}</a>
+      <a class="button button-small nav-cta" href={localizedPath(lang, 'contact')}>{t.quote}</a>
     </nav>
   </div>
 </header>
