@@ -548,8 +548,26 @@ const qualityCardsData = [
 
 <style>
   .reflex-page {
-    background-color: var(--bg, #0b0d09);
-    color: var(--text, #f1eee7);
+    background-color: #0b0d09;
+    color: #f7f4ee;
+  }
+  .reflex-page .section {
+    background: #0b0d09;
+    color: #f7f4ee;
+    border-color: rgba(255,255,255,.1);
+  }
+  .reflex-page .section-head p,
+  .reflex-page .prose > p { color: #d1d5db; }
+  .reflex-page .button-secondary {
+    border-color: rgba(243,229,200,.72);
+    background: transparent;
+    color: #f7f4ee !important;
+  }
+  .reflex-page .button-secondary:hover,
+  .reflex-page .button-secondary:focus-visible {
+    border-color: #e2b96c;
+    background: rgba(226,185,108,.12);
+    color: #fff !important;
   }
 
   /* 1. Hero Section */
@@ -558,6 +576,8 @@ const qualityCardsData = [
     background: linear-gradient(180deg, rgba(20, 22, 18, 0.9) 0%, rgba(11, 13, 9, 1) 100%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
+  .reflex-hero-grid > *,
+  .reflex-rfq-grid > * { min-width: 0; }
   .reflex-hero-grid {
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
@@ -1034,6 +1054,39 @@ const qualityCardsData = [
   .reflex-rfq-section {
     padding: 4.5rem 0;
   }
+  .reflex-page .reflex-rfq-section {
+    background: #f2efe7;
+    color: #22231f;
+    border-color: #d3cec1;
+  }
+  .reflex-page .reflex-rfq-info h2 { color: #22231f; }
+  .reflex-page .reflex-rfq-info p { color: #575952; }
+  .reflex-page .reflex-rfq-trust-box {
+    background: #e8e3d8;
+    border-color: #c7c1b4;
+  }
+  .reflex-page .reflex-rfq-trust-heading { color: #7c3e2b; }
+  .reflex-page .reflex-rfq-trust-list li { color: #4f514b; }
+  .reflex-page .reflex-rfq-feat { border-color: #8f452e; }
+  .reflex-page .reflex-rfq-feat strong { color: #22231f; }
+  .reflex-page .reflex-rfq-feat span { color: #575952; }
+  .reflex-page .reflex-rfq-form-card {
+    background: #fffaf5;
+    border-color: #c7c1b4;
+    box-shadow: 0 18px 40px rgba(34,35,31,.12);
+  }
+  .reflex-page .reflex-rfq-form-card,
+  .reflex-page .reflex-rfq-form-card form,
+  .reflex-page .form-group { min-width: 0; max-width: 100%; }
+  .reflex-page .form-group label { color: #4f514b; }
+  .reflex-page .form-group input,
+  .reflex-page .form-group select,
+  .reflex-page .form-group textarea {
+    background: #fff;
+    border-color: #aaa598;
+    color: #22231f;
+    max-width: 100%;
+  }
   .reflex-rfq-grid {
     display: grid;
     grid-template-columns: 0.95fr 1.05fr;
@@ -1143,6 +1196,7 @@ const qualityCardsData = [
   }
 
   @media (max-width: 960px) {
+    .reflex-rfq-form-card { padding: 1.25rem; }
     .reflex-hero-grid,
     .reflex-rfq-grid,
     .reflex-download-box {

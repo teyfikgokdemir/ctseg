@@ -306,7 +306,8 @@ body{background:var(--bg);color:var(--text)}body:before{display:none}
 .hero .eyebrow,.page-hero .eyebrow,.portfolio-section .eyebrow,.process-section .eyebrow,.site-footer .eyebrow,.cta-statement .eyebrow{color:var(--accent-on-dark)}
 .hero .button,.page-hero .button,.portfolio-section .button,.process-section .button,.site-footer .button{background:var(--accent-on-dark);border-color:var(--accent-on-dark);color:#171914!important}
 .hero .lead,.page-hero .lead{color:#c7c2b7}
-.hero .button-secondary,.page-hero .button-secondary,.site-footer .button-secondary{border-color:rgba(242,239,231,.4);color:#f2efe7!important}
+.hero .button-secondary,.page-hero .button-secondary,.portfolio-section .button-secondary,.process-section .button-secondary,.site-footer .button-secondary,.cta-statement .button-secondary{border-color:rgba(242,239,231,.58);background:transparent;color:#f2efe7!important}
+.hero .button-secondary:hover,.page-hero .button-secondary:hover,.portfolio-section .button-secondary:hover,.process-section .button-secondary:hover,.site-footer .button-secondary:hover,.cta-statement .button-secondary:hover{border-color:var(--accent-on-dark);background:rgba(242,239,231,.08);color:#fff!important}
 .hero-visual img{filter:saturate(.82) contrast(1.02)}.hero-visual figcaption span{color:#e8e3d8}
 .section{border-color:#d3cec1;background:#f2efe7}.section-muted,.manifesto,.company-trust-band,.guide-directory{background:#e8e3d8}
 .manifesto-grid>div p,.prose p{color:#4f514b}.manifesto{background:#e8e3d8}
