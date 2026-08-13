@@ -146,7 +146,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE (Termoplastik Elastomer)',
         variants: 'Siyah, Mavi, Şeffaf | Bedenler: S, M, L, XL',
         packing: '100 Adet / Kutu, 20 Kutu / Koli',
-        image: '/images/reflex/reflex-cat3.jpg',
+        image: '/images/reflex/flex-hi-tech-main.jpg',
         badges: ['Lateks İçermez', 'Pudrasız', 'Gıdaya Uygun']
       },
       {
@@ -325,7 +325,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE (Thermoplastic Elastomer)',
         variants: 'Black, Blue, Clear | Sizes: S, M, L, XL',
         packing: '100 pcs / box, 20 boxes / carton',
-        image: '/images/reflex/reflex-cat3.jpg',
+        image: '/images/reflex/flex-hi-tech-main.jpg',
         badges: ['Latex Free', 'Powder Free', 'Food Safe']
       },
       {
@@ -504,7 +504,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE (Thermoplastisches Elastomer)',
         variants: 'Schwarz, Blau, Transparent | Größen: S, M, L, XL',
         packing: '100 Stk. / Box, 20 Boxen / Karton',
-        image: '/images/reflex/reflex-cat3.jpg',
+        image: '/images/reflex/flex-hi-tech-main.jpg',
         badges: ['Latexfrei', 'Puderfrei', 'Lebensmittelecht']
       },
       {
@@ -683,7 +683,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE (Elastomero Termoplastico)',
         variants: 'Nero, Blu, Bianco | Taglie: S, M, L, XL',
         packing: '100 pz / scatola, 20 scatole / cartone',
-        image: '/images/reflex/reflex-cat3.jpg',
+        image: '/images/reflex/flex-hi-tech-main.jpg',
         badges: ['Senza Lattice', 'Senza Polvere', 'Uso Alimentare']
       },
       {
@@ -862,7 +862,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE (الاستومر ترموپلاستیک)',
         variants: 'مشکی، آبی، شفاف | سایزها: S, M, L, XL',
         packing: '۱۰۰ عدد در جعبه، ۲۰ جعبه در کارتن',
-        image: '/images/reflex/reflex-cat3.jpg',
+        image: '/images/reflex/flex-hi-tech-main.jpg',
         badges: ['بدون لاتکس', 'بدون پودر', 'مناسب صنایع غذایی']
       },
       {
@@ -1041,7 +1041,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE (Термопластичный эластомер)',
         variants: 'Черный, Синий, Прозрачный | Размеры: S, M, L, XL',
         packing: '100 шт. / коробка, 20 коробок / упаковка',
-        image: '/images/reflex/reflex-cat3.jpg',
+        image: '/images/reflex/flex-hi-tech-main.jpg',
         badges: ['Без латекса', 'Без пудры', 'Пищевой стандарт']
       },
       {
@@ -1220,7 +1220,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE (Elastomer Termoplastik)',
         variants: 'E Zezë, E Kaltër, Transparente | Madhësitë: S, M, L, XL',
         packing: '100 copë / kuti, 20 kuti / karton',
-        image: '/images/reflex/reflex-cat3.jpg',
+        image: '/images/reflex/flex-hi-tech-main.jpg',
         badges: ['Pa Lateks', 'Pa Pluhur', 'Për Ushqim']
       },
       {
@@ -1399,7 +1399,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE (Термопластичен Еластомер)',
         variants: 'Црна, Сина, Проѕирна | Големини: S, M, L, XL',
         packing: '100 парчиња / кутија, 20 кутии / картон',
-        image: '/images/reflex/reflex-cat3.jpg',
+        image: '/images/reflex/flex-hi-tech-main.jpg',
         badges: ['Без Латекс', 'Без Пудра', 'За Храна']
       },
       {
@@ -1578,7 +1578,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         material: 'TPE (Termoplastični Elastomer)',
         variants: 'Crna, Plava, Providna | Veličine: S, M, L, XL',
         packing: '100 kom. / kutija, 20 kutija / karton',
-        image: '/images/reflex/reflex-cat3.jpg',
+        image: '/images/reflex/flex-hi-tech-main.jpg',
         badges: ['Bez Lateksa', 'Bez Pudera', 'Za Hranu']
       },
       {
