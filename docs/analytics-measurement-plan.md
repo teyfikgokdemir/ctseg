@@ -4,7 +4,7 @@ Updated: 2026-08-13
 
 ## Purpose
 
-Measure which language, landing page, channel and commercial intent produces qualified CTSEG enquiries without sending personal or free-text form data to analytics.
+Measure which language, landing page, channel, commercial intent, trade direction and product family produce qualified CTSEG enquiries without sending personal or free-text form data to analytics.
 
 ## Consent boundary
 
@@ -18,10 +18,10 @@ Measure which language, landing page, channel and commercial intent produces qua
 
 | Event | Trigger | Main parameters | Recommended use |
 |---|---|---|---|
-| `generate_lead` | Contact form delivered successfully | `trade_intent`, `form_type`, `page_language`, `page_path`, first-touch attribution | Primary key event |
+| `generate_lead` | Contact form delivered successfully | `trade_intent`, `trade_direction`, `product_family`, `form_type`, page and first-touch attribution | Primary key event |
 | `contact_form_success` | Contact form delivered successfully | Same as above | Diagnostic continuity |
-| `contact_form_start` | First focus inside the form | `trade_intent`, `form_type` | Funnel start |
-| `contact_form_open` | Detailed request panel opened | `trade_intent`, `form_type` | Intent depth |
+| `contact_form_start` | First focus inside the form | `trade_intent`, `trade_direction`, `product_family`, `form_type` | Funnel start |
+| `contact_form_open` | Detailed request panel opened | `trade_intent`, `trade_direction`, `product_family`, `form_type` | Intent depth |
 | `form_fallback_download` | Visitor downloads the request summary | `trade_intent`, `form_type` | Delivery fallback monitoring |
 | `direct_contact_click` | WhatsApp or email card clicked | `contact_channel` | Assisted conversion |
 | `trade_intent_click` | Buyer/producer or commercial-intent CTA clicked | `trade_intent` | Intent-path analysis |
@@ -49,13 +49,13 @@ Every event also receives these bounded global parameters when available:
 
 1. In **Admin → Events / Key events**, mark `generate_lead` as the primary key event.
 2. Keep `contact_form_success` as a diagnostic event; do not count both as separate business leads in executive reporting.
-3. Register event-scoped custom dimensions for `trade_intent`, `contact_channel`, `catalog_language`, `target_locale`, `page_language` and `landing_path`.
+3. Register event-scoped custom dimensions for `trade_intent`, `trade_direction`, `product_family`, `contact_channel`, `catalog_language`, `target_locale`, `page_language` and `landing_path`.
 4. Build a funnel exploration:
    - `trade_intent_click` or `product_quote_click`
    - `contact_form_open`
    - `contact_form_start`
    - `generate_lead`
-5. Build an acquisition table using session source/medium and campaign, broken down by `landing_path`, `page_language` and `trade_intent`.
+5. Build an acquisition table using session source/medium and campaign, broken down by `landing_path`, `page_language`, `trade_intent`, `trade_direction` and `product_family`.
 6. Exclude internal team traffic through GA4 internal-traffic rules before interpreting conversion rates.
 7. Validate in DebugView with one accepted-consent session and one rejected-consent session.
 

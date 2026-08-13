@@ -5,11 +5,13 @@ const allowedOrigins = [
   /^http:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/
 ];
 const limits = {
-  locale:5,intent:40,name:120,company:160,emailOrPhone:254,email:254,phone:80,country:100,
-  product:240,quantity:120,delivery:180,targetDate:40,requirements:500,message:2000,website:80,startedAt:30,privacy:20,
+  locale:5,intent:40,tradeDirection:40,productFamily:40,name:120,company:160,emailOrPhone:254,email:254,phone:80,originMarket:100,destinationMarket:100,
+  product:240,quantity:120,packaging:160,incoterm:30,delivery:180,targetDate:40,requirements:500,message:2000,website:80,startedAt:30,privacy:20,
   pagePath:200,landingPath:200,referrerHost:160,utmSource:100,utmMedium:100,utmCampaign:120,utmContent:120,utmTerm:120,clickId:160
 };
-const required = ['intent','name','company','emailOrPhone','message','privacy'];
+const required = ['intent','tradeDirection','productFamily','name','company','emailOrPhone','message','privacy'];
+const tradeDirections = ['export_from_turkiye','import_to_turkiye','cross_border_sourcing','market_entry','other'];
+const productFamilies = ['vegetable_oils','nuts_dried_fruit','reflex_gloves','biofuel_feedstock','other'];
 
 const json = (body,status=200) => new Response(JSON.stringify(body),{
   status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}
@@ -46,6 +48,8 @@ export async function onRequestPost(context){
   if(data.website)return json({ok:true});
   if(required.some((key)=>!data[key]))return json({code:'missing_required_fields'},400);
   if(!['buyer_request','supplier_market_entry'].includes(data.intent))return json({code:'invalid_intent'},400);
+  if(!tradeDirections.includes(data.tradeDirection))return json({code:'invalid_trade_direction'},400);
+  if(!productFamilies.includes(data.productFamily))return json({code:'invalid_product_family'},400);
   const contact=data.emailOrPhone;
   const email=contact.includes('@')?contact:data.email;
   const phone=contact.includes('@')?data.phone:contact;
@@ -62,15 +66,20 @@ export async function onRequestPost(context){
   const lines=[
     'CTSEG commercial assessment request',
     `Intent: ${data.intent}`,
+    `Trade direction: ${data.tradeDirection}`,
+    `Product family: ${data.productFamily}`,
     `Locale: ${data.locale}`,
     `Name: ${data.name}`,
     `Company: ${data.company}`,
     `Email: ${email||'-'}`,
     `Phone: ${phone||'-'}`,
-    `Country: ${data.country||'-'}`,
+    `Origin or dispatch market: ${data.originMarket||'-'}`,
+    `Target market: ${data.destinationMarket||'-'}`,
     `Product or service: ${data.product||'-'}`,
     `Estimated quantity: ${data.quantity||'-'}`,
-    `Delivery: ${data.delivery}`,
+    `Packaging or presentation: ${data.packaging||'-'}`,
+    `Preferred Incoterm: ${data.incoterm||'-'}`,
+    `Delivery: ${data.delivery||'-'}`,
     `Target date: ${data.targetDate||'-'}`,
     `Quality or document requirements: ${data.requirements||'-'}`,
     `Message: ${data.message}`,

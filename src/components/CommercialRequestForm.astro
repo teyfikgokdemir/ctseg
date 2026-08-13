@@ -2,9 +2,11 @@
 import { localizedPath } from '../data/site';
 import { company } from '../data/site';
 import { contactCopy, emailHref, whatsappHref, type ContactLocale } from '../data/contact-experience';
+import { contactQualification } from '../data/contact-qualification';
 
 const { lang } = Astro.props as { lang:ContactLocale };
 const copy = contactCopy[lang];
+const qualification = contactQualification[lang];
 const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal','privacy');
 ---
 <section class="commercial-form-panel" id="commercial-form" aria-labelledby="commercial-form-title">
@@ -37,7 +39,9 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
     <input type="hidden" name="clickId" value="" data-attribution="click_id" />
     <div class="form-honeypot" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
     <div class="commercial-form-grid commercial-form-grid--core">
-      <label class="commercial-field commercial-field--wide"><span>{copy.intentLabel}</span><select name="intent" required data-commercial-intent><option value=""></option><option value="buyer_request">{copy.buyerIntent}</option><option value="supplier_market_entry">{copy.producerIntent}</option></select></label>
+      <label class="commercial-field"><span>{copy.intentLabel}</span><select name="intent" required data-commercial-intent><option value=""></option><option value="buyer_request">{copy.buyerIntent}</option><option value="supplier_market_entry">{copy.producerIntent}</option></select></label>
+      <label class="commercial-field"><span>{qualification.tradeDirection}</span><select name="tradeDirection" required data-trade-direction><option value=""></option>{qualification.tradeDirections.map((option)=><option value={option.value}>{option.label}</option>)}</select></label>
+      <label class="commercial-field commercial-field--wide"><span>{qualification.productFamily}</span><select name="productFamily" required data-product-family><option value=""></option>{qualification.productFamilies.map((option)=><option value={option.value}>{option.label}</option>)}</select></label>
       <label class="commercial-field"><span>{copy.name}</span><input type="text" name="name" autocomplete="name" maxlength="120" required /></label>
       <label class="commercial-field"><span>{copy.company}</span><input type="text" name="company" autocomplete="organization" maxlength="160" required /></label>
       <label class="commercial-field commercial-field--wide"><span>{copy.contact}</span><input type="text" name="emailOrPhone" autocomplete="email" maxlength="254" required data-contact-field /></label>
@@ -46,12 +50,15 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
     <details class="commercial-details">
       <summary>{copy.details}</summary>
       <div class="commercial-form-grid">
-        <label class="commercial-field"><span>{copy.country}</span><input type="text" name="country" autocomplete="country-name" maxlength="100" /></label>
+        <label class="commercial-field"><span>{qualification.originMarket}</span><input type="text" name="originMarket" autocomplete="country-name" maxlength="100" /></label>
+        <label class="commercial-field"><span>{qualification.destinationMarket}</span><input type="text" name="destinationMarket" maxlength="100" /></label>
         <label class="commercial-field"><span>{copy.product}</span><input type="text" name="product" maxlength="240" /></label>
         <label class="commercial-field"><span>{copy.quantity}</span><input type="text" name="quantity" maxlength="120" /></label>
+        <label class="commercial-field"><span>{qualification.packaging}</span><input type="text" name="packaging" maxlength="160" /></label>
+        <label class="commercial-field"><span>{qualification.incoterm}</span><input type="text" name="incoterm" maxlength="30" /></label>
         <label class="commercial-field"><span>{copy.delivery}</span><input type="text" name="delivery" autocomplete="street-address" maxlength="180" /></label>
         <label class="commercial-field"><span>{copy.targetDate}</span><input type="date" name="targetDate" /></label>
-        <label class="commercial-field"><span>{copy.requirements}</span><input type="text" name="requirements" maxlength="500" /></label>
+        <label class="commercial-field commercial-field--wide"><span>{copy.requirements}</span><input type="text" name="requirements" maxlength="500" /></label>
       </div>
     </details>
     <label class="privacy-check"><input type="checkbox" name="privacy" value="accepted" required /><span>{copy.privacy} <a href={privacyHref}>{copy.privacyLink}</a></span></label>
@@ -72,16 +79,23 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
       const download=form.querySelector('[data-download-summary]');
       const product=form.elements.namedItem('product');
       const intent=form.elements.namedItem('intent');
+      const tradeDirection=form.elements.namedItem('tradeDirection');
+      const productFamily=form.elements.namedItem('productFamily');
       started.value=String(Date.now());
       const attribution=window.__ctsegAttribution||{landing_path:location.pathname};
       form.querySelectorAll('[data-attribution]').forEach((input)=>{input.value=input.dataset.attribution==='page_path'?location.pathname:(attribution[input.dataset.attribution]||'')});
       const savedProduct=sessionStorage.getItem('ctseg-product-request');
       if(savedProduct&&product instanceof HTMLInputElement){product.value=savedProduct;sessionStorage.removeItem('ctseg-product-request')}
-      const requestedIntent=new URLSearchParams(location.search).get('intent');
+      const requestParams=new URLSearchParams(location.search);
+      const requestedIntent=requestParams.get('intent');
+      const requestedDirection=requestParams.get('direction');
+      const requestedFamily=requestParams.get('category');
       if(intent instanceof HTMLSelectElement&&['buyer_request','supplier_market_entry'].includes(requestedIntent||''))intent.value=requestedIntent;
+      if(tradeDirection instanceof HTMLSelectElement&&['export_from_turkiye','import_to_turkiye','cross_border_sourcing','market_entry','other'].includes(requestedDirection||''))tradeDirection.value=requestedDirection;
+      if(productFamily instanceof HTMLSelectElement&&['vegetable_oils','nuts_dried_fruit','reflex_gloves','biofuel_feedstock','other'].includes(requestedFamily||''))productFamily.value=requestedFamily;
       document.querySelectorAll('[data-fa-intent],[data-contact-intent],[data-trade-intent]').forEach((link)=>link.addEventListener('click',()=>{const value=link.getAttribute('data-fa-intent')||link.getAttribute('data-contact-intent')||link.getAttribute('data-trade-intent');if(intent instanceof HTMLSelectElement&&value)intent.value=value}));
       let startedTracked=false;
-      const track=(event,parameters={})=>window.ctsegTrack?.(event,{form_type:'short_commercial_request',trade_intent:intent instanceof HTMLSelectElement?intent.value:'',...parameters});
+      const track=(event,parameters={})=>window.ctsegTrack?.(event,{form_type:'qualified_commercial_request',trade_intent:intent instanceof HTMLSelectElement?intent.value:'',trade_direction:tradeDirection instanceof HTMLSelectElement?tradeDirection.value:'',product_family:productFamily instanceof HTMLSelectElement?productFamily.value:'',...parameters});
       form.addEventListener('focusin',()=>{if(!startedTracked){startedTracked=true;track('contact_form_start')}},{once:true});
       const summary=()=>Array.from(new FormData(form).entries()).filter(([key,value])=>!['website','startedAt','privacy','locale','pagePath','landingPath','referrerHost','utmSource','utmMedium','utmCampaign','utmContent','utmTerm','clickId'].includes(key)&&String(value).trim()).map(([key,value])=>`${key}: ${String(value).trim()}`).join('\n');
       download?.addEventListener('click',()=>{track('form_fallback_download');const blob=new Blob([`CTSEG short commercial request\n\n${summary()}\n`],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='ctseg-commercial-request.txt';link.click();URL.revokeObjectURL(url)});

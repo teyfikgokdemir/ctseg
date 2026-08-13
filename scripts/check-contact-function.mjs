@@ -9,7 +9,7 @@ const makeContext = (body, origin='https://preview.ctseg.pages.dev', env={}, ip=
   env
 });
 const valid = {
-  locale:'en',intent:'buyer_request',name:'Test Buyer',company:'Example Trade Ltd',emailOrPhone:'buyer@example.test',
+  locale:'en',intent:'buyer_request',tradeDirection:'cross_border_sourcing',productFamily:'vegetable_oils',name:'Test Buyer',company:'Example Trade Ltd',emailOrPhone:'buyer@example.test',
   message:'Please assess this sourcing request.',privacy:'accepted',startedAt:String(Date.now()-5000),website:'',
   pagePath:'/en/contact/',landingPath:'/en/services/strategic-sourcing/',referrerHost:'www.google.com',
   utmSource:'google',utmMedium:'organic',utmCampaign:'supplier-search',utmContent:'',utmTerm:'',clickId:''
@@ -22,6 +22,8 @@ await expectStatus(onRequest(),405,'unsupported method');
 await expectStatus(await onRequestPost(makeContext(valid,'https://evil.example',{},'203.0.113.11')),403,'origin validation');
 await expectStatus(await onRequestPost(makeContext({...valid,emailOrPhone:'invalid@'},undefined,{},'203.0.113.12')),400,'email validation');
 await expectStatus(await onRequestPost(makeContext({...valid,intent:'unknown'},undefined,{},'203.0.113.16')),400,'intent validation');
+await expectStatus(await onRequestPost(makeContext({...valid,tradeDirection:'unknown'},undefined,{},'203.0.113.21')),400,'trade direction validation');
+await expectStatus(await onRequestPost(makeContext({...valid,productFamily:'unknown'},undefined,{},'203.0.113.22')),400,'product family validation');
 await expectStatus(await onRequestPost(makeContext({...valid,emailOrPhone:''},undefined,{},'203.0.113.17')),400,'contact validation');
 await expectStatus(await onRequestPost(makeContext({...valid,emailOrPhone:'123'},undefined,{},'203.0.113.19')),400,'phone validation');
 await expectStatus(await onRequestPost(makeContext({...valid,intent:'supplier_market_entry',emailOrPhone:'+90 555 000 00 00'},undefined,{},'203.0.113.18')),503,'producer phone-only short form');
@@ -51,7 +53,9 @@ try{
 if(outbound?.url!=='https://api.resend.com/emails')throw new Error('email provider endpoint mismatch');
 if(!outbound?.body?.text||outbound.body.html)throw new Error('email payload must be plain text');
 if(!outbound.body.text.includes('Intent: supplier_market_entry'))throw new Error('stable producer intent missing from email payload');
+if(!outbound.body.text.includes('Trade direction: cross_border_sourcing'))throw new Error('trade direction missing from email payload');
+if(!outbound.body.text.includes('Product family: vegetable_oils'))throw new Error('product family missing from email payload');
 if(!outbound.body.text.includes('Landing page: /en/services/strategic-sourcing/'))throw new Error('first-touch landing attribution missing from email payload');
 if(!outbound.body.text.includes('UTM source / medium: google / organic'))throw new Error('UTM attribution missing from email payload');
 
-console.log('Contact function check passed: method, origin, validation, honeypot, configuration fallback and Resend delivery.');
+console.log('Contact function check passed: method, origin, qualification validation, honeypot, configuration fallback and Resend delivery.');

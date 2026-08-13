@@ -1,0 +1,149 @@
+import type { ActiveLocale } from './locales';
+
+export type QualificationOption = { value: string; label: string };
+
+export type ContactQualification = {
+  tradeDirection: string;
+  productFamily: string;
+  originMarket: string;
+  destinationMarket: string;
+  packaging: string;
+  incoterm: string;
+  tradeDirections: QualificationOption[];
+  productFamilies: QualificationOption[];
+};
+
+export const contactQualification: Record<ActiveLocale, ContactQualification> = {
+  tr: {
+    tradeDirection: 'Ticaret yönü',
+    productFamily: 'Ürün grubu',
+    originMarket: 'Menşe veya çıkış ülkesi',
+    destinationMarket: 'Hedef ülke veya pazar',
+    packaging: 'Ambalaj veya sunum biçimi',
+    incoterm: 'Tercih edilen teslim şekli / Incoterm',
+    tradeDirections: [
+      { value: 'export_from_turkiye', label: 'Türkiye’den ihracat' },
+      { value: 'import_to_turkiye', label: 'Türkiye’ye ithalat' },
+      { value: 'cross_border_sourcing', label: 'Sınır ötesi tedarik' },
+      { value: 'market_entry', label: 'Pazara giriş ve alıcı geliştirme' },
+      { value: 'other', label: 'Diğer ticari değerlendirme' },
+    ],
+    productFamilies: [
+      { value: 'vegetable_oils', label: 'Bitkisel yağlar ve gıda' },
+      { value: 'nuts_dried_fruit', label: 'Kuruyemiş ve kuru meyve' },
+      { value: 'reflex_gloves', label: 'Tek kullanımlık eldivenler' },
+      { value: 'biofuel_feedstock', label: 'Biyoyakıt ve enerji hammaddesi' },
+      { value: 'other', label: 'Diğer ürün veya hizmet' },
+    ],
+  },
+  en: {
+    tradeDirection: 'Trade direction',
+    productFamily: 'Product family',
+    originMarket: 'Country of origin or dispatch',
+    destinationMarket: 'Target country or market',
+    packaging: 'Packaging or presentation format',
+    incoterm: 'Preferred delivery basis / Incoterm',
+    tradeDirections: [
+      { value: 'export_from_turkiye', label: 'Exporting from Türkiye' },
+      { value: 'import_to_turkiye', label: 'Importing into Türkiye' },
+      { value: 'cross_border_sourcing', label: 'Cross-border sourcing' },
+      { value: 'market_entry', label: 'Market entry and buyer development' },
+      { value: 'other', label: 'Other commercial assessment' },
+    ],
+    productFamilies: [
+      { value: 'vegetable_oils', label: 'Vegetable oils and food' },
+      { value: 'nuts_dried_fruit', label: 'Nuts and dried fruit' },
+      { value: 'reflex_gloves', label: 'Disposable gloves' },
+      { value: 'biofuel_feedstock', label: 'Biofuel and energy feedstock' },
+      { value: 'other', label: 'Other product or service' },
+    ],
+  },
+  de: {
+    tradeDirection: 'Handelsrichtung',
+    productFamily: 'Produktgruppe',
+    originMarket: 'Ursprungs- oder Versandland',
+    destinationMarket: 'Zielmarkt oder Zielland',
+    packaging: 'Verpackungs- oder Angebotsform',
+    incoterm: 'Bevorzugte Lieferkondition / Incoterm',
+    tradeDirections: [
+      { value: 'export_from_turkiye', label: 'Export aus der Türkei' },
+      { value: 'import_to_turkiye', label: 'Import in die Türkei' },
+      { value: 'cross_border_sourcing', label: 'Grenzüberschreitende Beschaffung' },
+      { value: 'market_entry', label: 'Markteintritt und Käuferentwicklung' },
+      { value: 'other', label: 'Andere kommerzielle Bewertung' },
+    ],
+    productFamilies: [
+      { value: 'vegetable_oils', label: 'Pflanzenöle und Lebensmittel' },
+      { value: 'nuts_dried_fruit', label: 'Nüsse und Trockenfrüchte' },
+      { value: 'reflex_gloves', label: 'Einweghandschuhe' },
+      { value: 'biofuel_feedstock', label: 'Biokraftstoff und Energierohstoffe' },
+      { value: 'other', label: 'Anderes Produkt oder Dienstleistung' },
+    ],
+  },
+  it: {
+    tradeDirection: 'Direzione commerciale',
+    productFamily: 'Famiglia di prodotto',
+    originMarket: 'Paese di origine o spedizione',
+    destinationMarket: 'Paese o mercato di destinazione',
+    packaging: 'Formato di imballaggio o presentazione',
+    incoterm: 'Resa preferita / Incoterm',
+    tradeDirections: [
+      { value: 'export_from_turkiye', label: 'Esportazione dalla Turchia' },
+      { value: 'import_to_turkiye', label: 'Importazione in Turchia' },
+      { value: 'cross_border_sourcing', label: 'Sourcing transfrontaliero' },
+      { value: 'market_entry', label: 'Ingresso nel mercato e sviluppo buyer' },
+      { value: 'other', label: 'Altra valutazione commerciale' },
+    ],
+    productFamilies: [
+      { value: 'vegetable_oils', label: 'Oli vegetali e alimentari' },
+      { value: 'nuts_dried_fruit', label: 'Frutta a guscio e secca' },
+      { value: 'reflex_gloves', label: 'Guanti monouso' },
+      { value: 'biofuel_feedstock', label: 'Biocarburanti e materie prime energetiche' },
+      { value: 'other', label: 'Altro prodotto o servizio' },
+    ],
+  },
+  ru: {
+    tradeDirection: 'Направление торговли',
+    productFamily: 'Товарная группа',
+    originMarket: 'Страна происхождения или отправки',
+    destinationMarket: 'Целевая страна или рынок',
+    packaging: 'Формат упаковки или представления',
+    incoterm: 'Предпочтённое условие поставки / Incoterm',
+    tradeDirections: [
+      { value: 'export_from_turkiye', label: 'Экспорт из Турции' },
+      { value: 'import_to_turkiye', label: 'Импорт в Турцию' },
+      { value: 'cross_border_sourcing', label: 'Трансграничный сорсинг' },
+      { value: 'market_entry', label: 'Выход на рынок и развитие покупателей' },
+      { value: 'other', label: 'Другая коммерческая оценка' },
+    ],
+    productFamilies: [
+      { value: 'vegetable_oils', label: 'Растительные масла и продукты питания' },
+      { value: 'nuts_dried_fruit', label: 'Орехи и сухофрукты' },
+      { value: 'reflex_gloves', label: 'Одноразовые перчатки' },
+      { value: 'biofuel_feedstock', label: 'Биотопливо и энергетическое сырьё' },
+      { value: 'other', label: 'Другой товар или услуга' },
+    ],
+  },
+  fa: {
+    tradeDirection: 'جهت تجارت',
+    productFamily: 'گروه محصول',
+    originMarket: 'کشور مبدأ یا ارسال',
+    destinationMarket: 'کشور یا بازار هدف',
+    packaging: 'نوع بسته‌بندی یا ارائه',
+    incoterm: 'شرط تحویل ترجیحی / Incoterm',
+    tradeDirections: [
+      { value: 'export_from_turkiye', label: 'صادرات از ترکیه' },
+      { value: 'import_to_turkiye', label: 'واردات به ترکیه' },
+      { value: 'cross_border_sourcing', label: 'تأمین فرامرزی' },
+      { value: 'market_entry', label: 'ورود به بازار و توسعه خریدار' },
+      { value: 'other', label: 'ارزیابی تجاری دیگر' },
+    ],
+    productFamilies: [
+      { value: 'vegetable_oils', label: 'روغن‌های گیاهی و مواد غذایی' },
+      { value: 'nuts_dried_fruit', label: 'خشکبار و میوه خشک' },
+      { value: 'reflex_gloves', label: 'دستکش‌های یک‌بارمصرف' },
+      { value: 'biofuel_feedstock', label: 'سوخت زیستی و مواد اولیه انرژی' },
+      { value: 'other', label: 'محصول یا خدمت دیگر' },
+    ],
+  },
+};

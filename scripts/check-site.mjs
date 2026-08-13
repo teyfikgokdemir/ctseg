@@ -160,7 +160,8 @@ for (const file of htmlFiles) {
     const form = html.match(/<form class="commercial-form"[\s\S]*?<\/form>/)?.[0] ?? '';
     const firstVisibleControl = form.match(/<select\b[^>]*name="([^"]+)"/)?.[1];
     if (firstVisibleControl !== 'intent' || !form.includes('value="buyer_request"') || !form.includes('value="supplier_market_entry"')) errors.push(`${label}: stable trade intent must be the first visible form control`);
-    for (const field of ['name','company','emailOrPhone','message','privacy']) if (!form.includes(`name="${field}"`)) errors.push(`${label}: short form field ${field} missing`);
+    for (const field of ['tradeDirection','productFamily','name','company','emailOrPhone','message','privacy']) if (!form.includes(`name="${field}"`)) errors.push(`${label}: qualified short form field ${field} missing`);
+    for (const field of ['originMarket','destinationMarket','packaging','incoterm']) if (!form.includes(`name="${field}"`)) errors.push(`${label}: commercial detail field ${field} missing`);
     if (!html.includes('data-contact-whatsapp') || !html.includes('data-contact-email') || !html.includes('<details class="commercial-details">')) errors.push(`${label}: direct contact cards or optional details disclosure missing`);
     const disclosure = html.match(/<details class="commercial-form-disclosure"[^>]*>/)?.[0] ?? '';
     if (!disclosure || /\sopen(?:\s|>)/.test(disclosure)) errors.push(`${label}: detailed request form must be initially closed`);
