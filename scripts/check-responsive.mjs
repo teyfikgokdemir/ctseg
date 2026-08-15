@@ -248,7 +248,7 @@ try {
         const rgb=(value)=>value.match(/[\d.]+/g)?.slice(0,3).map(Number) ?? [0,0,0];
         const lum=(value)=>rgb(value).map((c)=>{c/=255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4}).reduce((s,c,i)=>s+c*[.2126,.7152,.0722][i],0);
         const ratio=(a,b)=>(Math.max(lum(a),lum(b))+.05)/(Math.min(lum(a),lum(b))+.05);
-        const opaqueBackground=(node)=>{for(let el=node;el;el=el.parentElement){const bg=getComputedStyle(el).backgroundColor;if(bg&& !/rgba?\([^)]*,\s*0(?:\.0+)?\)$/.test(bg))return bg}return getComputedStyle(document.body).backgroundColor};
+        const opaqueBackground=(node)=>{const transparent=/^(?:transparent|rgba?\([^)]*,\s*0(?:\.0+)?\))$/;for(let el=node;el;el=el.parentElement){const bg=getComputedStyle(el).backgroundColor;if(bg&&!transparent.test(bg))return bg}const rootBg=getComputedStyle(document.documentElement).backgroundColor;const bodyBg=getComputedStyle(document.body).backgroundColor;return !transparent.test(bodyBg)?bodyBg:!transparent.test(rootBg)?rootBg:'rgb(255, 255, 255)'};
         const readable=[...document.querySelectorAll('main .section p,main .section li,.commercial-field>span')].map((el)=>{const style=getComputedStyle(el);const bg=opaqueBackground(el);return {contrast:ratio(style.color,bg),light:lum(bg)>.5}}).filter((x)=>x.light);
         const h1=document.querySelector('main h1');const h1Box=h1?.getBoundingClientRect();const h1Line=h1?parseFloat(getComputedStyle(h1).lineHeight):0;
         const headings=[...document.querySelectorAll('main h2')].map((h)=>h.getBoundingClientRect());
