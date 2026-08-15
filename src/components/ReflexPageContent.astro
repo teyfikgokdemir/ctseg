@@ -10,6 +10,14 @@ const ui = reflexUi[currentLang] || reflexUi.en;
 const isRtl = currentLang === 'fa';
 const reflexUrl = reflexPath(currentLang);
 const rfqPrivacyHref = currentLang === 'tr' ? '/tr/gizlilik-politikasi/' : currentLang === 'en' ? '/en/privacy-policy/' : '/en/privacy-policy/';
+const rfqExtra = ({
+  tr: { incoterm: 'Teslim şekli / Incoterm', targetDate: 'Hedef teslim tarihi' },
+  en: { incoterm: 'Delivery basis / Incoterm', targetDate: 'Target delivery date' },
+  de: { incoterm: 'Lieferbedingung / Incoterm', targetDate: 'Gewünschtes Lieferdatum' },
+  it: { incoterm: 'Resa / Incoterm', targetDate: 'Data di consegna prevista' },
+  ru: { incoterm: 'Условия поставки / Incoterm', targetDate: 'Целевая дата поставки' },
+  fa: { incoterm: 'شرایط تحویل / Incoterm', targetDate: 'تاریخ هدف تحویل' }
+}[currentLang as 'tr' | 'en' | 'de' | 'it' | 'ru' | 'fa'] || { incoterm: 'Delivery basis / Incoterm', targetDate: 'Target delivery date' });
 const rfqPrivacy = ({
   tr: { label: 'Bilgilerimin bu teklif talebinin değerlendirilmesi için işlenmesini kabul ediyorum.', link: 'Gizlilik bildirimi', error: 'Talep gönderilemedi. Lütfen tekrar deneyin veya e-posta ile ulaşın.' },
   en: { label: 'I agree that my information may be processed to assess this quotation request.', link: 'Privacy notice', error: 'The request could not be sent. Please try again or contact us by email.' },
@@ -77,8 +85,8 @@ const localizedHeroLead = {
 }[currentLang] || data.heroLead;
 
 const heroTrustBadges = {
-  tr: ['Export Supply', 'Bulk Orders', 'Private Label Options', 'Quality Documentation'],
-  en: ['Export Supply', 'Bulk Orders', 'Private Label Options', 'Quality Documentation'],
+  tr: ['Ürün bazında doğrulama', 'Parti belge incelemesi', 'Toplu B2B tedarik', 'İhracat koordinasyonu'],
+  en: ['Product-specific verification', 'Batch document review', 'Bulk B2B supply', 'Export coordination'],
   fa: ['صادرات و lojistik', 'سفارشات عمده B2B', 'گزینه‌های برند اختصاصی', 'اسناد و COA محموله'],
   de: ['Export-Lieferung', 'Großbestellungen', 'Private-Label-Optionen', 'Qualitätsdokumentation'],
   it: ['Fornitura Export', 'Ordini all’Ingrosso', 'Opzioni Private Label', 'Documentazione di Qualità'],
@@ -90,8 +98,8 @@ const heroTrustBadges = {
 
 const capacityCardsData = [
   {
-    title: { tr: 'Üretim Kapasitesi', en: 'Production Capacity', fa: 'ظرفیت تولید' }[currentLang] || 'Production Capacity',
-    desc: { tr: 'İstanbul Esenyurt tesislerinde 7/24 otomatik hat üretimi.', en: '24/7 automated high-volume production facility in Esenyurt, Istanbul.', fa: 'تولید ۲۴/۷ در خطوط اتوماتیک در استانبول.' }[currentLang] || '24/7 automated high-volume production facility in Esenyurt, Istanbul.'
+    title: { tr: 'Üretim kapasitesi', en: 'Production capacity', fa: 'ظرفیت تولید' }[currentLang] || 'Production capacity',
+    desc: { tr: 'Seçilen ürün, üretici ve parti için talep üzerine doğrulanır.', en: 'Verified on request for the selected product, producer and batch.', fa: 'برای محصول و محموله منتخب بر اساس درخواست بررسی می‌شود.' }[currentLang] || 'Verified on request for the selected product, producer and batch.'
   },
   {
     title: { tr: 'Uluslararası Pazarlar', en: 'Global Markets', fa: 'بازارهای بین‌المللی' }[currentLang] || 'Global Markets',
@@ -179,7 +187,7 @@ const qualityCardsData = [
           class="reflex-hero-media"
         />
         <figcaption class="reflex-media-caption">
-          <strong>CE 2841 & ISO 9001</strong> · Premium Disposable Gloves Bulk Export & Commercial Supply
+          <strong>Product-specific documentation</strong> · Bulk export and commercial supply subject to verification
         </figcaption>
       </figure>
     </div>
@@ -548,6 +556,17 @@ const qualityCardsData = [
             <div class="form-group">
               <label for="rfq-volume">{data.formLabels.volume}</label>
               <input type="text" id="rfq-volume" name="quantity" maxlength="120" placeholder="e.g. 500 Master Cartons / 10,000 Boxes" />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="rfq-incoterm">{rfqExtra.incoterm}</label>
+                <input type="text" id="rfq-incoterm" name="incoterm" maxlength="30" placeholder="FOB, CIF or DAP" />
+              </div>
+              <div class="form-group">
+                <label for="rfq-target-date">{rfqExtra.targetDate}</label>
+                <input type="date" id="rfq-target-date" name="targetDate" />
+              </div>
             </div>
 
             <div class="form-group">

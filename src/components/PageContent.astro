@@ -33,6 +33,14 @@ const copy = pageCopy[lang];
 const corporate = companyCopy[lang];
 const editorial = editorialCopy[lang];
 const completionHome = homeEnhancement[lang];
+const operationalTrust = {
+  tr:{title:'Talep sonrası ne olur?',lead:'Her ticari talep, kapsamı ve belge gereksinimleri netleştirildikten sonra uygun değerlendirme yoluna alınır.',steps:['İhtiyaç ve hedef pazar netleştirilir','Ürün, taraf ve mevcut belge kapsamı incelenir','Uygulanabilir sonraki adımlar ve eksik bilgiler paylaşılır','Teklif, numune ve koordinasyon kapsamı taraflarla teyit edilir'],cta:'Çalışma yöntemini inceleyin'},
+  en:{title:'What happens after a request?',lead:'Each commercial request is routed to the right assessment path after its scope and documentation needs are clarified.',steps:['Requirement and target market are clarified','Product, counterparty and available documents are reviewed','Feasible next steps and missing inputs are shared','Quotation, sample and coordination scope are confirmed with the parties'],cta:'Review how we work'},
+  de:{title:'Was passiert nach einer Anfrage?',lead:'Jede Anfrage wird nach Klärung von Umfang und Dokumentationsbedarf dem passenden Bewertungsweg zugeordnet.',steps:['Bedarf und Zielmarkt werden geklärt','Produkt, Gegenpartei und vorhandene Unterlagen werden geprüft','Machbare nächste Schritte und fehlende Angaben werden mitgeteilt','Angebots-, Muster- und Koordinationsumfang wird bestätigt'],cta:'Arbeitsweise ansehen'},
+  it:{title:'Cosa succede dopo una richiesta?',lead:'Ogni richiesta viene indirizzata al percorso di valutazione corretto dopo aver chiarito ambito e documentazione necessaria.',steps:['Si chiariscono esigenza e mercato target','Si esaminano prodotto, controparte e documenti disponibili','Si condividono passaggi successivi e dati mancanti','Si confermano offerta, campioni e perimetro di coordinamento'],cta:'Scopri come lavoriamo'},
+  ru:{title:'Что происходит после запроса?',lead:'После уточнения объёма и требований к документам запрос направляется по подходящему пути оценки.',steps:['Уточняются потребность и целевой рынок','Проверяются продукт, контрагент и доступные документы','Сообщаются возможные следующие шаги и недостающие данные','Подтверждаются предложение, образцы и объём координации'],cta:'Посмотреть метод работы'},
+  fa:{title:'پس از ارسال درخواست چه اتفاقی می‌افتد؟',lead:'پس از روشن شدن دامنه درخواست و نیازهای اسنادی، هر درخواست به مسیر ارزیابی مناسب هدایت می‌شود.',steps:['نیاز و بازار هدف روشن می‌شود','محصول، طرف معامله و اسناد موجود بررسی می‌شوند','گام‌های بعدی و اطلاعات ناقص اعلام می‌شود','دامنه پیشنهاد، نمونه و هماهنگی با طرفین تأیید می‌شود'],cta:'روش کار را ببینید'}
+}[lang];
 const completionAbout = aboutEnhancement[lang];
 const completionMarkets = marketsDetail[lang];
 const platform = tradePlatformCopy[lang];
@@ -198,6 +206,10 @@ const verifiedLater = {
       <div><p class="eyebrow">CTSEG · {scenarioKicker}</p><h2>{completionHome.scenarioTitle}</h2><p>{completionHome.scenarioLead}</p></div>
       <aside class="side-panel"><a class="button button-secondary" href={scenarioHref} data-case-scenario-cta>{completionHome.scenarioCta}</a></aside>
     </div></section>}
+    <section class="section operational-trust" aria-labelledby="operational-trust-title"><div class="container content-grid">
+      <div><p class="eyebrow">CTSEG · {scenarioKicker}</p><h2 id="operational-trust-title">{operationalTrust.title}</h2><p>{operationalTrust.lead}</p></div>
+      <div class="operational-trust-panel"><ol>{operationalTrust.steps.map((step,index)=><li><span>{indexLabel(index)}</span><strong>{step}</strong></li>)}</ol><a class="button button-secondary" href={workHref} data-how-we-work-cta>{operationalTrust.cta} →</a></div>
+    </div></section>
     <section class="section company-trust-band" id="company"><div class="container">
       <div class="company-trust-heading"><h2>{completionHome.trustTitle}</h2><p>{company.name}</p></div>
       <dl class="trust-facts">

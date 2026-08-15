@@ -218,17 +218,17 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ],
 
     applicationsTitle: 'Kullanım Alanları',
-    applicationsLead: 'REFLEX eldivenleri medikal, gıda ve endüstriyel hijyen gereksinimlerine göre sertifikalandırılmıştır.',
+    applicationsLead: 'Medikal, gıda ve endüstriyel kullanım iddiaları; seçilen ürün, üretici, parti ve hedef pazar için mevcut belgeler üzerinden ayrıca doğrulanır.',
 
     applications: [
       {
         title: 'Medikal ve Sağlık Hizmetleri',
-        description: 'CE 2841 ve EN ISO 374-5 standartlarında klinik muayene, hasta bakımı ve laboratuvar kullanımı.',
+        description: 'Klinik muayene, hasta bakımı ve laboratuvar kullanımı için uygunluk; seçilen model ve hedef pazar belgeleri üzerinden ayrıca teyit edilir.',
         image: '/images/reflex/slider-ortax4.jpg'
       },
       {
         title: 'Gıda İşleme ve Catering',
-        description: 'Endüstriyel mutfaklar ve gıda imalathaneleri için gıda temas onaylı hijyenik koruma.',
+        description: 'Gıda işleme ve catering kullanımı için gıda temas uygunluğu, seçilen ürün ve hedef pazar belgeleri üzerinden ayrıca teyit edilir.',
         image: '/images/reflex/slider-ortax1.jpg'
       },
       {
@@ -244,11 +244,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ],
 
     galleryTitle: 'Kalite ve Teknoloji Galerisi',
-    galleryLead: 'REFLEX ambalaj, sertifika ve çevre dostu üretim teknolojilerinden görüntüler.',
+    galleryLead: 'REFLEX ambalaj, üretim ve mevcut kalite belgelerine ilişkin görseller; teknik kapsam seçilen ürün ve parti için ayrıca teyit edilir.',
 
     galleryItems: [
       {
-        title: '%100 Geri Dönüştürülebilir TPE',
+        title: 'TPE çevresel özellikleri · belgeye göre doğrulanır',
         tag: 'Çevre',
         image: '/images/reflex/reflex-sliderx1.jpg',
         imageMobile: '/images/reflex/reflex-sliderx1-m.jpg'
@@ -260,7 +260,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         imageMobile: '/images/reflex/reflex-slider1-m.jpg'
       },
       {
-        title: 'Sertifikalı Yüksek Kapasiteli Üretim',
+        title: 'Üretim kapasitesi · talep üzerine doğrulanır',
         tag: 'İmalat',
         image: '/images/reflex/slider-ortax1.jpg'
       },
@@ -299,7 +299,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     eyebrow: 'Medical & Protective Gloves Portfolio',
     heroTitle: 'REFLEX Disposable Gloves for Medical, Industrial and Food Applications',
     heroLead: 'CTSEG provides bulk export supply of high-capacity nitrile examination gloves, latex-free TPE, thermo vinyl, and copolymer disposable gloves backed by batch quality documentation for international distributors, healthcare institutions, and industrial procurement buyers.',
-    heroBadges: ['CE 2841 & ISO 9001 Certified', '100% Recyclable TPE', 'Food & Medical Grade Safe', 'Export & Logistics Support'],
+    heroBadges: ['Product-specific verification', 'Batch document review', 'Bulk B2B supply', 'Export coordination'],
     ctaQuote: 'Request a Quote',
     ctaCatalog: 'Download Official Catalogue (PDF)',
     ctaProducts: 'View Products',
@@ -307,7 +307,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     aboutEyebrow: 'Production Capacity & Standards',
     aboutTitle: 'High-Volume Manufacturing & Standards Compliance',
     aboutText1: 'Manufactured in Istanbul, Türkiye, REFLEX utilizes high-tech automated production lines operating 24/7. Using quality raw materials and special TPE formulations, REFLEX produces medical examination and industrial protection gloves.',
-    aboutText2: 'Manufacturing facilities meet accredited laboratory standards with CE 2841, EN ISO 374-1 Type C, EN 420+A1, EN ISO 374-5 (Virus protection) and ISO 9001 certifications.',
+    aboutText2: 'Available standards, certificates and laboratory documents are reviewed against the selected product, producer, batch and destination market before any commercial decision.',
     aboutRoleTitle: 'CTSEG Commercial Services',
     aboutRoleText: 'CTSEG acts as the international trade and sourcing partner for REFLEX products. We assist importers and distributors with export documentation, certificates of analysis (COA) and transport logistics.',
     aboutMarketsTitle: 'Target Markets',
@@ -397,17 +397,17 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ],
 
     applicationsTitle: 'Application Areas',
-    applicationsLead: 'REFLEX gloves are certified for medical, food and industrial hygiene requirements.',
+    applicationsLead: 'Medical, food and industrial-use claims are reviewed against the available documents for the selected product, producer, batch and destination market.',
 
     applications: [
       {
         title: 'Medical & Healthcare Services',
-        description: 'Clinical examinations, patient care and laboratories meeting CE 2841 and EN ISO 374-5 standards.',
+        description: 'Suitability for clinical examinations, patient care and laboratories is confirmed against the selected model and destination-market documents.',
         image: '/images/reflex/slider-ortax4.jpg'
       },
       {
         title: 'Food Processing & Catering',
-        description: 'Certified for direct food contact in commercial kitchens and food processing facilities.',
+        description: 'Direct food-contact suitability is confirmed against the selected product and destination-market documents.',
         image: '/images/reflex/slider-ortax1.jpg'
       },
       {
@@ -423,11 +423,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ],
 
     galleryTitle: 'Quality & Technology Gallery',
-    galleryLead: 'Overview of REFLEX packaging, certificates and eco-friendly manufacturing technologies.',
+    galleryLead: 'Overview of REFLEX packaging, production and available quality documents; technical scope is confirmed for the selected product and batch.',
 
     galleryItems: [
       {
-        title: '100% Recyclable Eco TPE',
+        title: 'TPE environmental attributes · verified by document',
         tag: 'Environment',
         image: '/images/reflex/reflex-sliderx1.jpg',
         imageMobile: '/images/reflex/reflex-sliderx1-m.jpg'
@@ -439,7 +439,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         imageMobile: '/images/reflex/reflex-slider1-m.jpg'
       },
       {
-        title: 'Certified High-Capacity Turkish Production',
+        title: 'Production capacity · verified on request',
         tag: 'Manufacturing',
         image: '/images/reflex/slider-ortax1.jpg'
       },
