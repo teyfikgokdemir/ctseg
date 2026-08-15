@@ -120,7 +120,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     eyebrow: 'Medikal ve Koruyucu Eldiven Portföyü',
     heroTitle: 'REFLEX Tek Kullanımlık ve Muayene Eldivenleri',
     heroLead: 'CTSEG; uluslararası distribütörler, sağlık kuruluşları ve kurumsal alıcılar için yüksek üretim kapasiteli nitril muayene eldivenleri, latekssiz TPE, termo vinil ve kopolimer tek kullanımlık eldiven portföyünü toplu ihracat ve kalite dokümantasyonu ile sunar.',
-    heroBadges: ['CE 2841 & ISO 9001', 'Geri Dönüşümlü TPE', 'Gıda & Medikal Uygun', 'İhracat & Lojistik'],
+    heroBadges: ['Ürün bazında doğrulama', 'Parti belge incelemesi', 'B2B toplu tedarik', 'İhracat koordinasyonu'],
     ctaQuote: 'Teklif Alın',
     ctaCatalog: 'Kataloğu İndir (PDF)',
     ctaProducts: 'Ürünleri İnceleyin',
@@ -128,7 +128,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     aboutEyebrow: 'Üretim Kapasitesi ve Standartlar',
     aboutTitle: 'Yüksek Hacimli Üretim ve Standartlara Uyum',
     aboutText1: 'İstanbul tesislerinde üretilen REFLEX ürünleri, 7/24 çalışan yüksek teknolojili otomatik üretim hatlarında imal edilir. Yüksek kaliteli hammaddeler ve özel TPE formülasyonu ile medikal muayene ve endüstriyel koruma eldivenleri üretilmektedir.',
-    aboutText2: 'Üretim tesisleri; CE 2841, EN ISO 374-1 Type C, EN 420+A1, EN ISO 374-5 (Virüs koruması) ve ISO 9001 sertifikasyonları ile akredite laboratuvar standartlarını karşılar.',
+    aboutText2: 'Mevcut standart, sertifika ve laboratuvar belgeleri ticari karar öncesinde ürün, üretici, parti ve hedef pazar için incelenir.',
     aboutRoleTitle: 'CTSEG Ticari Hizmetleri',
     aboutRoleText: 'CTSEG, REFLEX ürünlerinin uluslararası pazarlara ihracatında tedarik ve ticaret ortağı olarak hareket eder. İthalatçı firmalara ihracat dokümantasyonu, analiz belgeleri (COA) ve lojistik koordinasyonu sağlar.',
     aboutMarketsTitle: 'Hedef Pazarlar',
@@ -158,7 +158,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         variants: 'Yeşil, Pembe, Mavi, Siyah | Bedenler: S, M, L/XL',
         packing: '100 Adet / Kutu, 20 Kutu / Koli',
         image: '/images/reflex/reflex-cat6.jpg',
-        badges: ['Medikal CE 2841', 'EN ISO 374-5 Virüs Koruma', 'Non-Steril']
+        badges: ['Ürün belgeleriyle teyit', 'Hedef pazara göre incelenir', 'Steril olmayan']
       },
       {
         id: 'winlyex-thermo-vinyl',
@@ -337,7 +337,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         variants: 'Green, Pink, Blue, Black | Sizes: S, M, L/XL',
         packing: '100 pcs / box, 20 boxes / carton',
         image: '/images/reflex/reflex-cat6.jpg',
-        badges: ['Medical CE 2841', 'EN ISO 374-5 Antivirus', 'Non-Sterile']
+        badges: ['Product documents reviewed', 'Destination-market review', 'Non-sterile']
       },
       {
         id: 'winlyex-thermo-vinyl',
@@ -478,7 +478,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     eyebrow: 'Medizin- & Schutzhandschuh-Portfolio',
     heroTitle: 'REFLEX Einweg- & Untersuchungshandschuhe',
     heroLead: 'Hochleistungs-Handschuhlösungen aus TPE, Thermovinyl und Copolymer für internationale Importeure und Großabnehmer.',
-    heroBadges: ['CE 2841 & ISO 9001 Zertifiziert', '100% Recycelbares TPE', 'Lebensmittel- & Medizinqualität', 'Export- & Logistikunterstützung'],
+    heroBadges: ['Produktspezifische Prüfung', 'Chargen-Dokumentenprüfung', 'B2B-Großmengenversorgung', 'Exportkoordination'],
     ctaQuote: 'Angebot Anfragen',
     ctaCatalog: 'Katalog Herunterladen (PDF)',
     ctaProducts: 'Produkte Ansehen',
@@ -486,7 +486,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     aboutEyebrow: 'Produktionskapazität & Standards',
     aboutTitle: 'Großserienfertigung & Normenkonformität',
     aboutText1: 'Hergestellt in Istanbul, Türkei, verwendet REFLEX hochtechnologische automatisierte Produktionslinien im 24/7-Betrieb. Aus hochwertigen Rohstoffen und TPE-Rezepturen entstehen medizinische Untersuchungs- und Schutzhandschuhe.',
-    aboutText2: 'Die Fertigung entspricht den Standards akkreditierter Laboratorien mit CE 2841, EN ISO 374-1 Type C, EN 420+A1, EN ISO 374-5 (Virusschutz) und ISO 9001 Zertifizierungen.',
+    aboutText2: 'Verfügbare Normen, Zertifikate und Labordokumente werden vor einer kommerziellen Entscheidung für Produkt, Hersteller, Charge und Zielmarkt geprüft.',
     aboutRoleTitle: 'CTSEG Handelsdienstleistungen',
     aboutRoleText: 'CTSEG agiert als internationaler Handels- und Beschaffungspartner für REFLEX-Produkte. Wir unterstützen Importeure bei Exportdokumenten, Analysenzertifikaten (COA) und Transportlogistik.',
     aboutMarketsTitle: 'Zielmärkte',
@@ -516,7 +516,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         variants: 'Grün, Rosa, Blau, Schwarz | Größen: S, M, L/XL',
         packing: '100 Stk. / Box, 20 Boxen / Karton',
         image: '/images/reflex/reflex-cat6.jpg',
-        badges: ['Medizinisch CE 2841', 'EN ISO 374-5 Virus', 'Unsteril']
+        badges: ['Produktdokumente geprüft', 'Zielmarktprüfung', 'Unsteril']
       },
       {
         id: 'winlyex-thermo-vinyl',
@@ -576,17 +576,17 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ],
 
     applicationsTitle: 'Anwendungsbereiche',
-    applicationsLead: 'REFLEX Handschuhe sind für medizinische, Lebensmittel- und Industrieanforderungen zertifiziert.',
+    applicationsLead: 'Aussagen zur medizinischen, Lebensmittel- und industriellen Nutzung werden anhand der verfügbaren Dokumente für Produkt, Hersteller, Charge und Zielmarkt geprüft.',
 
     applications: [
       {
         title: 'Medizin & Gesundheit',
-        description: 'Klinische Untersuchungen, Patientenpflege und Laboratorien nach CE 2841 und EN ISO 374-5.',
+        description: 'Die Eignung für klinische Untersuchungen, Patientenpflege und Laboratorien wird anhand der Dokumente des gewählten Modells und Zielmarkts bestätigt.',
         image: '/images/reflex/slider-ortax4.jpg'
       },
       {
         title: 'Lebensmittelverarbeitung & Gastronomie',
-        description: 'Zertifiziert für den direkten Lebensmittelkontakt in Großküchen und Lebensmittelbetrieben.',
+        description: 'Die Eignung für direkten Lebensmittelkontakt wird anhand der Dokumente des gewählten Produkts und Zielmarkts bestätigt.',
         image: '/images/reflex/slider-ortax1.jpg'
       },
       {
@@ -602,11 +602,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ],
 
     galleryTitle: 'Galerie für Qualität & Technologie',
-    galleryLead: 'Übersicht über REFLEX-Verpackungen, Zertifikate und umweltfreundliche Technologien.',
+    galleryLead: 'Übersicht über REFLEX-Verpackungen, Produktion und verfügbare Qualitätsdokumente; der technische Umfang wird für Produkt und Charge bestätigt.',
 
     galleryItems: [
       {
-        title: '100% recycelbares Umwelt-TPE',
+        title: 'Umwelteigenschaften von TPE · dokumentenbasiert geprüft',
         tag: 'Umwelt',
         image: '/images/reflex/reflex-sliderx1.jpg',
         imageMobile: '/images/reflex/reflex-sliderx1-m.jpg'
@@ -618,7 +618,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         imageMobile: '/images/reflex/reflex-slider1-m.jpg'
       },
       {
-        title: 'Zertifizierte türkische Produktion mit hoher Kapazität',
+        title: 'Produktionskapazität · auf Anfrage geprüft',
         tag: 'Fertigung',
         image: '/images/reflex/slider-ortax1.jpg'
       },
@@ -657,7 +657,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     eyebrow: 'Portfolio Medico e di Protezione',
     heroTitle: 'Guanti Monouso e da Esame REFLEX',
     heroLead: 'Soluzioni ad alta capacità di guanti TPE, da esame, termo vinile e copolimero per importatori e distributori internazionali.',
-    heroBadges: ['Certificato CE 2841 & ISO 9001', 'TPE 100% Riciclabile', 'Sicuro per Contatto Alimentare e Medico', 'Supporto Logistico Export'],
+    heroBadges: ['Verifica specifica del prodotto', 'Revisione documenti di lotto', 'Fornitura B2B in grandi volumi', 'Coordinamento export'],
     ctaQuote: 'Richiedi un Preventivo',
     ctaCatalog: 'Scarica il Catalogo Ufficiale (PDF)',
     ctaProducts: 'Vedi i Prodotti',
@@ -665,7 +665,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     aboutEyebrow: 'Capacità Produttiva e Standard',
     aboutTitle: 'Produzione ad Alto Volume e Conformità',
     aboutText1: 'Prodotto a Istanbul, Turchia, REFLEX utilizza linee di produzione automatizzate ad alta tecnologia attive 24/7. Utilizzando materie prime di alta qualità e formulazioni speciali TPE, REFLEX produce guanti da esame medico e protezione industriale.',
-    aboutText2: 'Gli impianti soddisfano gli standard dei laboratori accreditati con certificazioni CE 2841, EN ISO 374-1 Type C, EN 420+A1, EN ISO 374-5 (Protezione virus) e ISO 9001.',
+    aboutText2: 'Norme, certificati e documenti di laboratorio disponibili vengono verificati per prodotto, produttore, lotto e mercato di destinazione prima di ogni decisione commerciale.',
     aboutRoleTitle: 'Servizi Commerciali CTSEG',
     aboutRoleText: 'CTSEG agisce come partner commerciale internazionale per i prodotti REFLEX. Assistiamo importatori e distributori con documenti di esportazione, certificati di analisi (COA) e logistica di trasporto.',
     aboutMarketsTitle: 'Mercati Target',
@@ -695,7 +695,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         variants: 'Verde, Rosa, Blu, Nero | Taglie: S, M, L/XL',
         packing: '100 pz / scatola, 20 scatole / cartone',
         image: '/images/reflex/reflex-cat6.jpg',
-        badges: ['Medicale CE 2841', 'EN ISO 374-5 Antivirus', 'Non Sterile']
+        badges: ['Documenti del prodotto verificati', 'Verifica del mercato', 'Non sterile']
       },
       {
         id: 'winlyex-thermo-vinyl',
@@ -755,7 +755,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ],
 
     applicationsTitle: 'Settori di Applicazione',
-    applicationsLead: 'I guanti REFLEX sono certificati per requisiti medici, alimentari e industriali.',
+    applicationsLead: 'Le indicazioni per uso medico, alimentare e industriale vengono verificate sui documenti disponibili per prodotto, produttore, lotto e mercato di destinazione.',
 
     applications: [
       {
@@ -781,7 +781,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ],
 
     galleryTitle: 'Galleria Qualità e Tecnologia',
-    galleryLead: 'Panoramica su imballaggi, certificati e tecnologie ecologiche REFLEX.',
+    galleryLead: 'Panoramica su imballaggi, produzione e documenti qualità disponibili; l’ambito tecnico viene confermato per prodotto e lotto.',
 
     galleryItems: [
       {
@@ -836,7 +836,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     eyebrow: 'سبد دستکش‌های پزشکی و حفاظتی',
     heroTitle: 'تأمین عمده دستکش‌های یک‌بارمصرف REFLEX برای کاربردهای پزشکی، صنعتی و غذایی',
     heroLead: 'CTSEG خدمات تأمین و صادرات عمده دستکش‌های معاینه نیتریل، TPE بدون لاتکس، ترمو وینیل و کدوپلیمر یک‌بارمصرف را همراه با اسناد کیفیت محموله برای توزیع‌کنندگان بین‌المللی، مراکز درمانی و خریداران شرکتی ارائه می‌دهد.',
-    heroBadges: ['دارای گواهی CE 2841 و ISO 9001', 'TPE ۱۰۰٪ قابل بازیافت', 'مورد تأیید بهداشتی و غذایی', 'پشتیبانی صادرات و لوگستیک'],
+    heroBadges: ['بررسی اختصاصی محصول', 'بررسی اسناد محموله', 'تأمین عمده B2B', 'هماهنگی صادرات'],
     ctaQuote: 'درخواست استعلام قیمت',
     ctaCatalog: 'دانلود کاتالوگ رسمی (PDF)',
     ctaProducts: 'مشاهده محصولات',
@@ -844,7 +844,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     aboutEyebrow: 'ظرفیت تولید و استانداردهای کیفی',
     aboutTitle: 'تولید با حجم بالا و انطباق کامل با استانداردها',
     aboutText1: 'محصولات REFLEX در استانبول ترکیه با خطوط اتوماتیک پیشرفته و به صورت ۲۴/۷ تولید می‌شوند. با استفاده از مواد اولیه باکیفیت و فرمولاسیون ویژه TPE، دستکش‌های معاینه پزشکی و ایمنی صنعتی به بازار عرضه می‌گردد.',
-    aboutText2: 'واحدهای تولیدی دارای گواهی‌های CE 2841، EN ISO 374-1 Type C، EN 420+A1، EN ISO 374-5 (محافظت ویروسی) و ISO 9001 بر اساس استانداردهای آزمایشگاهی معتبر هستند.',
+    aboutText2: 'استانداردها، گواهی‌ها و اسناد آزمایشگاهی موجود پیش از هر تصمیم تجاری برای محصول، تولیدکننده، محموله و بازار مقصد بررسی می‌شوند.',
     aboutRoleTitle: 'خدمات بازرگانی CTSEG',
     aboutRoleText: 'شرکت CTSEG به عنوان شریک تجاری و تأمین‌کننده بین‌المللی محصولات REFLEX عمل می‌کند. ما اسناد صادراتی، گواهی آنالیز (COA) و امور logistics ترابری را برای واردکنندگان هماهنگ می‌نماییم.',
     aboutMarketsTitle: 'بازارهای هدف',
@@ -874,7 +874,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         variants: 'سبز، صورتی، آبی، مشکی | سایزها: S, M, L/XL',
         packing: '۱۰۰ عدد در جعبه، ۲۰ جعبه در کارتن',
         image: '/images/reflex/reflex-cat6.jpg',
-        badges: ['گواهی پزشکی CE 2841', 'EN ISO 374-5 آنتی‌ویروس', 'غیراستریل']
+        badges: ['بررسی اسناد محصول', 'بررسی بازار مقصد', 'غیراستریل']
       },
       {
         id: 'winlyex-thermo-vinyl',
@@ -934,12 +934,12 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ],
 
     applicationsTitle: 'حوزه‌های کاربرد',
-    applicationsLead: 'دستکش‌های REFLEX دارای استانداردهای بهداشتی در صنایع پزشکی، غذایی و صنعتی هستند.',
+    applicationsLead: 'ادعاهای مربوط به کاربرد پزشکی، غذایی و صنعتی بر اساس اسناد موجود برای محصول، تولیدکننده، محموله و بازار مقصد بررسی می‌شوند.',
 
     applications: [
       {
         title: 'خدمات پزشکی و درمانی',
-        description: 'معاینات بالینی، مراقبت از بیمار و آزمایشگاه‌ها بر اساس استانداردهای CE 2841 و EN ISO 374-5.',
+        description: 'مناسب بودن برای معاینات بالینی، مراقبت از بیمار و آزمایشگاه‌ها بر اساس اسناد مدل منتخب و بازار مقصد تأیید می‌شود.',
         image: '/images/reflex/slider-ortax4.jpg'
       },
       {
@@ -960,7 +960,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ],
 
     galleryTitle: 'گالری کیفیت و فناوری',
-    galleryLead: 'تصاویری از بسته‌بندی، گواهینامه‌ها و فناوری‌های دوستدار محیط زیست REFLEX.',
+    galleryLead: 'مروری بر بسته‌بندی، تولید و اسناد کیفیت موجود REFLEX؛ دامنه فنی برای محصول و محموله منتخب تأیید می‌شود.',
 
     galleryItems: [
       {
@@ -1015,7 +1015,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     eyebrow: 'Медицинский и защитный ассортимент',
     heroTitle: 'Одноразовые и смотровые перчатки REFLEX',
     heroLead: 'Высокопроизводительные решения для TPE, смотровых, термовиниловых и кополимерных перчаток для международных импортеров и дистрибьюторов.',
-    heroBadges: ['Сертификация CE 2841 и ISO 9001', '100% перерабатываемый TPE', 'Безопасно для пищевых продуктов', 'Экспортная логистика'],
+    heroBadges: ['Проверка по продукту', 'Проверка документов партии', 'Оптовые B2B-поставки', 'Экспортная координация'],
     ctaQuote: 'Запросить расчет',
     ctaCatalog: 'Скачать официальный каталог (PDF)',
     ctaProducts: 'Смотреть продукцию',
@@ -1023,7 +1023,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     aboutEyebrow: 'Производственная мощность и стандарты',
     aboutTitle: 'Крупносерийное производство и соответствие стандартам',
     aboutText1: 'Произведенные в Стамбуле (Турция) перчатки REFLEX изготавливаются на автоматизированных высокотехнологичных линиях в режиме 24/7. REFLEX производит медицинские смотровые и гигиенические перчатки.',
-    aboutText2: 'Производственные мощности соответствуют стандартам аккредитованных лабораторий и имеют сертификаты CE 2841, EN ISO 374-1 Type C, EN 420+A1, EN ISO 374-5 и ISO 9001.',
+    aboutText2: 'Доступные стандарты, сертификаты и лабораторные документы проверяются для продукта, производителя, партии и рынка назначения до коммерческого решения.',
     aboutRoleTitle: 'Коммерческие услуги CTSEG',
     aboutRoleText: 'CTSEG выступает в качестве международного торгового и закупочного партнера продукции REFLEX. Мы содействуем импортерам в подготовке экспортной документации, сертификатов анализа (COA) и логистическом сопровождении.',
     aboutMarketsTitle: 'Целевые рынки',
@@ -1053,7 +1053,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         variants: 'Зеленый, Розовый, Синий, Черный | Размеры: S, M, L/XL',
         packing: '100 шт. / коробка, 20 коробок / упаковка',
         image: '/images/reflex/reflex-cat6.jpg',
-        badges: ['Медицинский CE 2841', 'EN ISO 374-5 Вирус', 'Нестерильно']
+        badges: ['Проверка документов продукта', 'Проверка рынка назначения', 'Нестерильно']
       },
       {
         id: 'winlyex-thermo-vinyl',
@@ -1113,12 +1113,12 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ],
 
     applicationsTitle: 'Области применения',
-    applicationsLead: 'Перчатки REFLEX сертифицированы для медицинских, пищевых и промышленных нужд.',
+    applicationsLead: 'Заявления о медицинском, пищевом и промышленном применении проверяются по доступным документам продукта, производителя, партии и рынка назначения.',
 
     applications: [
       {
         title: 'Медицина и здравоохранение',
-        description: 'Клинические осмотры, уход за пациентами и лаборатории по стандартам CE 2841 и EN ISO 374-5.',
+        description: 'Пригодность для клинических осмотров, ухода за пациентами и лабораторий подтверждается документами выбранной модели и рынка назначения.',
         image: '/images/reflex/slider-ortax4.jpg'
       },
       {
@@ -1139,11 +1139,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ],
 
     galleryTitle: 'Галерея качества и технологий',
-    galleryLead: 'Обзор упаковки, сертификатов и экологичных технологий REFLEX.',
+    galleryLead: 'Обзор упаковки, производства и доступных документов качества REFLEX; технический охват подтверждается для продукта и партии.',
 
     galleryItems: [
       {
-        title: '100% перерабатываемый TPE',
+        title: 'Экологические характеристики TPE · проверяются по документам',
         tag: 'Экология',
         image: '/images/reflex/reflex-sliderx1.jpg',
         imageMobile: '/images/reflex/reflex-sliderx1-m.jpg'
@@ -1202,7 +1202,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     aboutEyebrow: 'Kapaciteti i Prodhimit & Standardet',
     aboutTitle: 'Prodhim në Vëllim të Madh dhe Pajtueshmëri me Standardet',
     aboutText1: 'E prodhuar në Stamboll, Turqi, REFLEX përdor linja prodhimi të automatizuara të teknologjisë së lartë që punojnë 24/7. Duke përdorur lëndë të parë cilësore dhe formulime speciale TPE, REFLEX prodhon doreza mjekësore dhe mbrojtëse industriale.',
-    aboutText2: 'Kapacitetet e prodhimit plotësojnë standardet e laboratorëve të akredituar me certifikata CE 2841, EN ISO 374-1 Type C, EN 420+A1, EN ISO 374-5 (Mbrojtje kundër viruseve) dhe ISO 9001.',
+    aboutText2: 'Standardet, certifikatat dhe dokumentet laboratorike të disponueshme kontrollohen për produktin, prodhuesin, lotin dhe tregun e synuar para vendimit tregtar.',
     aboutRoleTitle: 'Shërbimet Komerciale CTSEG',
     aboutRoleText: 'CTSEG vepron si partner tregtar dhe furnizues ndërkombëtar për produktet REFLEX. Ne ndihmojmë importuesit me dokumentacionin e eksportit, certifikatat e analizës (COA) dhe logjistikën e transportit.',
     aboutMarketsTitle: 'Tregjet Synuar',
@@ -1232,7 +1232,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         variants: 'E Gjelbër, Rozë, E Kaltër, E Zezë | Madhësitë: S, M, L/XL',
         packing: '100 copë / kuti, 20 kuti / karton',
         image: '/images/reflex/reflex-cat6.jpg',
-        badges: ['Mjekësore CE 2841', 'EN ISO 374-5 Antivirus', 'Jo Sterile']
+        badges: ['Verifikim sipas produktit', 'Kontroll i tregut të synuar', 'Jo sterile']
       },
       {
         id: 'winlyex-thermo-vinyl',
@@ -1297,7 +1297,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     applications: [
       {
         title: 'Mjekësi dhe Kujdes Shëndetësor',
-        description: 'Kontrolle klinike, kujdes për pacientët dhe laboratore sipas CE 2841 dhe EN ISO 374-5.',
+        description: 'Përshtatshmëria për kontrolle klinike, kujdes pacientësh dhe laboratorë konfirmohet sipas dokumenteve të modelit dhe tregut të synuar.',
         image: '/images/reflex/slider-ortax4.jpg'
       },
       {
@@ -1411,7 +1411,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         variants: 'Зелена, Розова, Сина, Црна | Големини: S, M, L/XL',
         packing: '100 парчиња / кутија, 20 кутии / картон',
         image: '/images/reflex/reflex-cat6.jpg',
-        badges: ['Медицински CE 2841', 'EN ISO 374-5 Антивирус', 'Нестерилни']
+        badges: ['Проверка по продукту', 'Проверка рынка назначения', 'Нестерильно']
       },
       {
         id: 'winlyex-thermo-vinyl',
@@ -1476,7 +1476,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     applications: [
       {
         title: 'Медицина и Здравство',
-        description: 'Клинички прегледи, грижа за пациенти и лаборатории според CE 2841 и EN ISO 374-5.',
+        description: 'Соодветноста за клинички прегледи, грижа за пациенти и лаборатории се потврдува според документите за избраниот модел и целниот пазар.',
         image: '/images/reflex/slider-ortax4.jpg'
       },
       {
@@ -1560,7 +1560,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     aboutEyebrow: 'Proizvodni Kapacitet i Standardi',
     aboutTitle: 'Proizvodnja u Velikom Obimu i Usaglašenost sa Standardima',
     aboutText1: 'Proizvedene u Istanbulu, Turska, REFLEX koristi visokotehnološke automatizovane proizvodne linije koje rade 24/7. Koristeći kvalitetne sirovine i specijalne TPE formulacije, REFLEX proizvodi medicinske pregledne i industrijske zaštitne rukavice.',
-    aboutText2: 'Proizvodni kapaciteti ispunjavaju standarde akreditovanih laboratorija sa sertifikatima CE 2841, EN ISO 374-1 Type C, EN 420+A1, EN ISO 374-5 (Zaštita od virusa) i ISO 9001.',
+    aboutText2: 'Dostupni standardi, sertifikati i laboratorijska dokumentacija proveravaju se za proizvod, proizvođača, partiju i ciljano tržište pre komercijalne odluke.',
     aboutRoleTitle: 'Komercijalne Usluge CTSEG-a',
     aboutRoleText: 'CTSEG deluje kao međunarodni trgovinski i nabavni partner za proizvode REFLEX. Pomažemo uvoznicima sa izvoznom dokumentacijom, sertifikatima analize (COA) i transportnom logistikom.',
     aboutMarketsTitle: 'Ciljna Tržišta',
@@ -1590,7 +1590,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         variants: 'Zelena, Roze, Plava, Crna | Veličine: S, M, L/XL',
         packing: '100 kom. / kutija, 20 kutija / karton',
         image: '/images/reflex/reflex-cat6.jpg',
-        badges: ['Medicinske CE 2841', 'EN ISO 374-5 Antivirus', 'Nesterilne']
+        badges: ['Provjera dokumentacije proizvoda', 'Provjera ciljnog tržišta', 'Nesterilno']
       },
       {
         id: 'winlyex-thermo-vinyl',
@@ -1650,12 +1650,12 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ],
 
     applicationsTitle: 'Oblasti Primene',
-    applicationsLead: 'Rukavice REFLEX su sertifikovane za medicinske, prehrambene i industrijske zahteve.',
+    applicationsLead: 'Tvrdnje o medicinskoj, prehrambenoj i industrijskoj upotrebi proveravaju se prema dostupnoj dokumentaciji proizvoda, proizvođača, partije i ciljanog tržišta.',
 
     applications: [
       {
         title: 'Medicina i Zdravstvo',
-        description: 'Klinički pregledi, nega pacijenata i laboratorije prema CE 2841 i EN ISO 374-5.',
+        description: 'Pogodnost za kliničke preglede, negu pacijenata i laboratorije potvrđuje se prema dokumentaciji izabranog modela i ciljanog tržišta.',
         image: '/images/reflex/slider-ortax4.jpg'
       },
       {
