@@ -177,15 +177,19 @@ const qualityCardsData = [
       </div>
 
       <figure class="reflex-hero-figure">
-        <img
-          src="/images/reflex/reflex-slider1.jpg"
-          width="1200"
-          height="850"
-          alt="REFLEX Disposable Gloves Bulk Supplier Packaging and Production"
-          loading="eager"
-          decoding="async"
-          class="reflex-hero-media"
-        />
+        <picture>
+          <source srcset="/images/reflex/reflex-slider1.webp" type="image/webp" />
+          <img
+            src="/images/reflex/reflex-slider1.jpg"
+            width="1200"
+            height="850"
+            alt="REFLEX Disposable Gloves Bulk Supplier Packaging and Production"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="reflex-hero-media"
+          />
+        </picture>
         <figcaption class="reflex-media-caption">
           <strong>Product-specific documentation</strong> · Bulk export and commercial supply subject to verification
         </figcaption>
