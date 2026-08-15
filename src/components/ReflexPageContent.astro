@@ -9,6 +9,15 @@ const data = reflexData[currentLang] || reflexData.en;
 const ui = reflexUi[currentLang] || reflexUi.en;
 const isRtl = currentLang === 'fa';
 const reflexUrl = reflexPath(currentLang);
+const rfqPrivacyHref = currentLang === 'tr' ? '/tr/gizlilik-politikasi/' : currentLang === 'en' ? '/en/privacy-policy/' : '/en/privacy-policy/';
+const rfqPrivacy = ({
+  tr: { label: 'Bilgilerimin bu teklif talebinin değerlendirilmesi için işlenmesini kabul ediyorum.', link: 'Gizlilik bildirimi', error: 'Talep gönderilemedi. Lütfen tekrar deneyin veya e-posta ile ulaşın.' },
+  en: { label: 'I agree that my information may be processed to assess this quotation request.', link: 'Privacy notice', error: 'The request could not be sent. Please try again or contact us by email.' },
+  de: { label: 'Ich stimme zu, dass meine Daten zur Bewertung dieser Angebotsanfrage verarbeitet werden.', link: 'Datenschutzhinweis', error: 'Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut.' },
+  it: { label: 'Accetto che i miei dati siano trattati per valutare questa richiesta di offerta.', link: 'Informativa privacy', error: 'La richiesta non può essere inviata. Riprova o contattaci via e-mail.' },
+  ru: { label: 'Я согласен на обработку моих данных для оценки этого запроса предложения.', link: 'Политика конфиденциальности', error: 'Не удалось отправить запрос. Повторите попытку или свяжитесь с нами по электронной почте.' },
+  fa: { label: 'با پردازش اطلاعات خود برای ارزیابی این درخواست پیشنهاد موافقم.', link: 'اطلاعیه حریم خصوصی', error: 'ارسال درخواست انجام نشد. دوباره تلاش کنید.' }
+}[currentLang as 'tr' | 'en' | 'de' | 'it' | 'ru' | 'fa'] || { label: 'I agree that my information may be processed to assess this quotation request.', link: 'Privacy notice', error: 'The request could not be sent. Please try again or contact us by email.' });
 
 const categoryVideoMap: Record<string, { video: string; poster: string; title: string }> = {
   'flex-hitech': {
@@ -491,67 +500,105 @@ const qualityCardsData = [
         </div>
 
         <div class="reflex-rfq-form-card">
-          <form class="reflex-form" action="https://formspree.io/f/xvovbgyp" method="POST">
-            <input type="hidden" name="form_type" value="reflex_b2b_rfq" />
+          <form class="reflex-form" id="reflex-rfq-fields" data-reflex-form action="/api/contact" method="post">
             <input type="hidden" name="locale" value={currentLang} />
+            <input type="hidden" name="intent" value="buyer_request" />
+            <input type="hidden" name="tradeDirection" value="import_to_turkiye" />
+            <input type="hidden" name="productFamily" value="reflex_gloves" />
+            <input type="hidden" name="startedAt" value="" data-rfq-started-at />
+            <input type="hidden" name="pagePath" value="" data-rfq-page-path />
+            <div class="form-honeypot" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
 
             <div class="form-row">
               <div class="form-group">
                 <label for="rfq-name">{data.formLabels.name} *</label>
-                <input type="text" id="rfq-name" name="name" required placeholder="Full Name" />
+                <input type="text" id="rfq-name" name="name" required maxlength="120" autocomplete="name" />
               </div>
               <div class="form-group">
                 <label for="rfq-email">{data.formLabels.email} *</label>
-                <input type="email" id="rfq-email" name="email" required placeholder="company@domain.com" />
+                <input type="email" id="rfq-email" name="emailOrPhone" required maxlength="254" autocomplete="email" placeholder="company@domain.com" />
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group">
                 <label for="rfq-phone">{data.formLabels.phone}</label>
-                <input type="tel" id="rfq-phone" name="phone" placeholder="+1 234 567 890" />
+                <input type="tel" id="rfq-phone" name="phone" maxlength="80" autocomplete="tel" placeholder="+1 234 567 890" />
               </div>
               <div class="form-group">
                 <label for="rfq-company">{data.formLabels.company} *</label>
-                <input type="text" id="rfq-company" name="company" required placeholder="Company Name" />
+                <input type="text" id="rfq-company" name="company" required maxlength="160" autocomplete="organization" />
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group">
                 <label for="rfq-country">{data.formLabels.country} *</label>
-                <input type="text" id="rfq-country" name="country" required placeholder="Target Delivery Country" />
+                <input type="text" id="rfq-country" name="destinationMarket" required maxlength="100" autocomplete="country-name" />
               </div>
               <div class="form-group">
                 <label for="rfq-product">{data.formLabels.product}</label>
                 <select id="rfq-product" name="product">
-                  <option value="all">REFLEX Full Gloves Portfolio</option>
-                  {data.categories.map((c) => (
-                    <option value={c.id}>{c.name}</option>
-                  ))}
+                  <option value="REFLEX Full Gloves Portfolio">REFLEX Full Gloves Portfolio</option>
+                  {data.categories.map((c) => (<option value={c.name}>{c.name}</option>))}
                 </select>
               </div>
             </div>
 
             <div class="form-group">
               <label for="rfq-volume">{data.formLabels.volume}</label>
-              <input type="text" id="rfq-volume" name="volume" placeholder="e.g. 500 Master Cartons / 10,000 Boxes" />
+              <input type="text" id="rfq-volume" name="quantity" maxlength="120" placeholder="e.g. 500 Master Cartons / 10,000 Boxes" />
             </div>
 
             <div class="form-group">
               <label for="rfq-notes">{data.formLabels.notes}</label>
-              <textarea id="rfq-notes" name="notes" rows="4" placeholder="Specify sizes, destination port, target delivery date, or private label requirements..."></textarea>
+              <textarea id="rfq-notes" name="message" maxlength="2000" rows="4" placeholder="Specify sizes, destination port, target delivery date, or private label requirements..."></textarea>
             </div>
 
-            <button type="submit" class="button button-large button-block">
-              {data.formLabels.submit}
-            </button>
+            <label class="reflex-rfq-privacy"><input type="checkbox" name="privacy" value="accepted" required /> <span>{rfqPrivacy.label} <a href={rfqPrivacyHref}>{rfqPrivacy.link}</a></span></label>
+            <p class="reflex-rfq-status" data-rfq-status role="status" aria-live="polite"></p>
+            <button type="submit" class="button button-large button-block">{data.formLabels.submit}</button>
           </form>
         </div>
       </div>
     </div>
   </section>
 </div>
+
+<script define:vars={{ success: data.formLabels.successMessage, error: rfqPrivacy.error }}>
+  (() => {
+    document.querySelectorAll('[data-reflex-form]').forEach((form) => {
+      if (form.dataset.enhanced) return;
+      form.dataset.enhanced = 'true';
+      const started = form.querySelector('[data-rfq-started-at]');
+      const pagePath = form.querySelector('[data-rfq-page-path]');
+      const status = form.querySelector('[data-rfq-status]');
+      const submit = form.querySelector('[type="submit"]');
+      const setDefaults = () => { if (started) started.value = String(Date.now()); if (pagePath) pagePath.value = location.pathname; };
+      setDefaults();
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        status.textContent = '';
+        submit.disabled = true;
+        try {
+          const response = await fetch(form.action, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(Object.fromEntries(new FormData(form))) });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(result.code || 'request_failed');
+          status.textContent = success;
+          window.ctsegTrack?.('reflex_rfq_success', { form_type: 'reflex_b2b_rfq', product_family: 'reflex_gloves' });
+          form.reset();
+          setDefaults();
+        } catch {
+          status.textContent = error;
+          window.ctsegTrack?.('reflex_rfq_error', { form_type: 'reflex_b2b_rfq', product_family: 'reflex_gloves' });
+        } finally {
+          submit.disabled = false;
+        }
+      });
+    });
+  })();
+</script>
 
 <style>
   .reflex-page {
@@ -579,6 +626,12 @@ const qualityCardsData = [
     background: rgba(226, 185, 108, 0.12);
     color: #ffffff !important;
   }
+
+  .reflex-rfq-privacy { display: grid; grid-template-columns: 20px 1fr; gap: .65rem; align-items: start; margin: 1rem 0 1.25rem; color: #d1d5db; font-size: .85rem; line-height: 1.5; }
+  .reflex-rfq-privacy input { width: 18px; height: 18px; margin-top: .1rem; accent-color: #e2b96c; }
+  .reflex-rfq-privacy a { color: #f0d39a; text-decoration: underline; text-underline-offset: .15em; }
+  .reflex-rfq-status { min-height: 1.6em; margin: .75rem 0 0; color: #f0d39a; }
+  .reflex-form .form-honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
   /* 1. Hero Section */
   .reflex-hero-section {
