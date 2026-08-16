@@ -219,7 +219,7 @@ html[data-locale=de] .page-hero h1,html[data-locale=it] .page-hero h1,html[data-
 .footer-company span{color:var(--muted);font-size:.82rem}
 .footer-main nav{display:flex;flex-direction:column;gap:10px}
 .footer-main nav strong{margin-bottom:11px;font-family:'Source Serif 4',Georgia,serif;font-size:1.3rem;font-weight:500}
-.footer-main nav a,.footer-bottom{color:var(--muted);font-size:.86rem}
+.footer-main nav a,.footer-bottom{color:#c7c2b7;font-size:.86rem}
 .footer-main nav a:hover,.footer-bottom a:hover{color:var(--accent-soft)}
 .footer-bottom{display:flex;justify-content:space-between;gap:25px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line)}
 .footer-bottom p{margin:0}.footer-bottom nav{display:flex;gap:18px;flex-wrap:wrap;justify-content:flex-end}
