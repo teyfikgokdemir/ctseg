@@ -28,6 +28,14 @@ const methodLabel: Record<Locale,string> = {
   tr:'Yöntem', en:'Method', de:'Arbeitsweise', it:'Metodo', ru:'Метод', fa:'روش کار'
 };
 
+const solutionLinks = [
+  [t.services, localizedPath(lang,'services')],
+  [p.buyerTitle, `${home}#for-buyers`],
+  [p.producerTitle, `${home}#for-producers`],
+  [methodLabel[lang] || 'Method', localizedPath(lang,'how-we-work')],
+  [medicalLabel, reflexUrl]
+];
+
 const nav = [
   ['services', t.services, localizedPath(lang,'services')],
   ['buyers', p.buyerTitle, `${home}#for-buyers`],
@@ -76,7 +84,15 @@ const globalSwitchPath = (target: string): string => {
       <span class="sr-only">{t.menu}</span><span></span><span></span>
     </button>
     <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav>
-      {nav.map(([key, label, href]) => key === 'markets' && (lang === 'en' || lang === 'fa') ? (
+      {nav.map(([key, label, href]) => key === 'services' ? (
+        <div class="nav-solutions-group" data-solutions-nav-group>
+          <button class:list={['nav-solutions-parent',{ active: pageKey === key }]} type="button" aria-expanded="false" aria-controls="solutions-panel" data-solutions-toggle><span>{label}</span><i aria-hidden="true"></i></button>
+          <div id="solutions-panel" class="nav-solutions-menu" aria-label={label} data-solutions-menu>
+            <div class="nav-solutions-intro"><strong>{label}</strong><span>{lang === 'tr' ? 'Ticari kararınızı netleştiren yollar' : lang === 'en' ? 'Commercial paths built around your requirement' : 'Structured commercial paths for your requirement'}</span></div>
+            {solutionLinks.map(([solutionLabel, solutionHref]) => <a href={solutionHref}>{solutionLabel}<i aria-hidden="true">↗</i></a>)}
+          </div>
+        </div>
+      ) : key === 'markets' && (lang === 'en' || lang === 'fa') ? (
         <div class="nav-market-group" data-markets-nav-group>
           <a class:list={['nav-market-parent',{ active: pageKey === key }]} href={href} data-markets-nav-link>{label}</a>
           <div class="nav-market-menu" aria-label="Special market resources">
@@ -130,10 +146,18 @@ const globalSwitchPath = (target: string): string => {
   const nav = document.querySelector('[data-primary-nav]');
   const languageToggle = document.querySelector('[data-language-toggle]');
   const languageMenu = document.querySelector('[data-language-menu]');
+  const solutionsToggle = document.querySelector('[data-solutions-toggle]');
+  const solutionsGroup = document.querySelector('[data-solutions-nav-group]');
+  const closeSolutions = (restoreFocus = false) => {
+    solutionsToggle?.setAttribute('aria-expanded', 'false');
+    solutionsGroup?.classList.remove('is-open');
+    if (restoreFocus) solutionsToggle?.focus();
+  };
   const closeNavigation = () => {
     toggle?.setAttribute('aria-expanded', 'false');
     nav?.classList.remove('open');
     document.body.classList.remove('menu-open');
+    closeSolutions();
   };
   const closeLanguageMenu = () => {
     languageToggle?.setAttribute('aria-expanded', 'false');
@@ -150,14 +174,23 @@ const globalSwitchPath = (target: string): string => {
     languageToggle.setAttribute('aria-expanded', String(!open));
     languageMenu?.classList.toggle('open', !open);
   });
+  solutionsToggle?.addEventListener('click', () => {
+    const open = solutionsToggle.getAttribute('aria-expanded') === 'true';
+    solutionsToggle.setAttribute('aria-expanded', String(!open));
+    solutionsGroup?.classList.toggle('is-open', !open);
+  });
   document.querySelectorAll('[data-locale-option]').forEach((link) => link.addEventListener('click', closeNavigation));
   document.addEventListener('click', (event) => {
-    if (!(event.target instanceof Node) || document.querySelector('.language-switcher')?.contains(event.target)) return;
+    if (!(event.target instanceof Node)) return;
+    if (document.querySelector('.language-switcher')?.contains(event.target)) return;
+    if (solutionsGroup?.contains(event.target)) return;
     closeLanguageMenu();
+    closeSolutions();
   });
   document.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
     closeLanguageMenu();
+    closeSolutions(true);
     closeNavigation();
   });
 </script>
