@@ -566,7 +566,7 @@ try {
         await page.waitForTimeout(300);
       }
       const contract=await page.evaluate(({lang,targets,mobile})=>{
-        const selector=mobile?'.mobile-locales [data-locale-option]':'#language-panel [data-locale-option]';
+        const selector=mobile?'.mobile-lang-grid [data-locale-option]':'#language-panel [data-locale-option]';
         const links=[...document.querySelectorAll(selector)];
         const visible=(element)=>{if(!element)return false;const box=element.getBoundingClientRect();const style=getComputedStyle(element);return box.width>0&&box.height>0&&style.visibility!=='hidden'&&style.display!=='none'};
         return{
