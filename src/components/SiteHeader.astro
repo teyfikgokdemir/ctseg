@@ -77,75 +77,78 @@ const globalSwitchPath = (target: string): string => {
       <span class="sr-only">{t.menu}</span><span></span><span></span>
     </button>
     <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav aria-hidden="true">
-      <div class="mobile-nav-head">
-        <div class="mobile-nav-brand">
-          <span class="mobile-nav-title">CTSEG</span>
-          <span class="mobile-nav-subtitle">{lang === 'en' ? 'MAIN MENU' : 'ANA MENÜ'}</span>
+      <!-- Mobile Only Container -->
+      <div class="mobile-only-nav">
+        <div class="mobile-nav-head">
+          <div class="mobile-nav-brand">
+            <span class="mobile-nav-title">CTSEG</span>
+            <span class="mobile-nav-subtitle">{lang === 'en' ? 'MAIN MENU' : 'ANA MENÜ'}</span>
+          </div>
+          <button class="mobile-nav-close" type="button" aria-label="Close menu" data-mobile-close>
+            <span aria-hidden="true">✕</span>
+          </button>
         </div>
-        <button class="mobile-nav-close" type="button" aria-label="Close menu" data-mobile-close>
-          <span aria-hidden="true">✕</span>
-        </button>
-      </div>
 
-      <!-- Card Section 1: Mobile Language Switcher -->
-      <div class="mobile-myth-card mobile-myth-card--lang">
-        <div class="myth-card-head">
-          <span class="myth-card-title">🌐 {t.language || 'DİL / LANGUAGE'}</span>
-          <span class="myth-card-badge">GLOBAL</span>
-        </div>
-        <div class="mobile-lang-grid">
-          {globalLocales.map((code) => (
-            <a
-              lang={code}
-              hreflang={code}
-              class:list={['mobile-lang-item', { active: code === lang }]}
-              href={globalSwitchPath(code)}
-              aria-current={code === lang ? 'true' : undefined}
-              data-locale-option
-            >
-              <span class="lang-code">{code.toUpperCase()}</span>
-              <span class="lang-name">{globalLocaleNames[code]}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-
-      <!-- Card Section 2: Hizmetler & Çözümler (Collapsible Accordion - Closed by Default) -->
-      <div class="mobile-myth-card mobile-accordion" data-accordion data-open="false">
-        <button class="mobile-accordion-btn" type="button" aria-expanded="false" data-accordion-btn>
-          <span class="myth-card-title">🏢 {t.services ? t.services.toUpperCase() : 'HİZMETLER'}</span>
-          <span class="accordion-arrow" aria-hidden="true">▾</span>
-        </button>
-        <div class="mobile-accordion-content" hidden data-accordion-content>
-          <div class="mobile-solutions-grid">
-            {solutionLinks.map(([solutionLabel, solutionHref]) => (
-              <a href={solutionHref} class="mobile-solution-item">
-                <strong class="sol-title">{solutionLabel}</strong>
+        <!-- Card Section 1: Mobile Language Switcher -->
+        <div class="mobile-myth-card mobile-myth-card--lang">
+          <div class="myth-card-head">
+            <span class="myth-card-title">🌐 {t.language || 'DİL / LANGUAGE'}</span>
+            <span class="myth-card-badge">GLOBAL</span>
+          </div>
+          <div class="mobile-lang-grid">
+            {globalLocales.map((code) => (
+              <a
+                lang={code}
+                hreflang={code}
+                class:list={['mobile-lang-item', { active: code === lang }]}
+                href={globalSwitchPath(code)}
+                aria-current={code === lang ? 'true' : undefined}
+                data-locale-option
+              >
+                <span class="lang-code">{code.toUpperCase()}</span>
+                <span class="lang-name">{globalLocaleNames[code]}</span>
               </a>
             ))}
           </div>
         </div>
-      </div>
 
-      <!-- Card Section 3: Navigasyon -->
-      <div class="mobile-myth-card">
-        <div class="myth-card-head">
-          <span class="myth-card-title">📌 {lang === 'tr' ? 'HIZLI ERİŞİM' : 'NAVIGATION'}</span>
-          <span class="myth-card-badge">MENÜ</span>
+        <!-- Card Section 2: Hizmetler & Çözümler (Collapsible Accordion - Closed by Default) -->
+        <div class="mobile-myth-card mobile-accordion" data-accordion data-open="false">
+          <button class="mobile-accordion-btn" type="button" aria-expanded="false" data-accordion-btn>
+            <span class="myth-card-title">🏢 {t.services ? t.services.toUpperCase() : 'HİZMETLER'}</span>
+            <span class="accordion-arrow" aria-hidden="true">▾</span>
+          </button>
+          <div class="mobile-accordion-content" hidden data-accordion-content>
+            <div class="mobile-solutions-grid">
+              {solutionLinks.map(([solutionLabel, solutionHref]) => (
+                <a href={solutionHref} class="mobile-solution-item">
+                  <strong class="sol-title">{solutionLabel}</strong>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
-        <div class="mobile-nav-grid">
-          {nav.filter(([key]) => key !== 'services').map(([key, label, href]) => (
-            <a href={href} class:list={['mobile-nav-item', { active: pageKey === key }]}>
-              <strong>{label}</strong>
-            </a>
-          ))}
-        </div>
-      </div>
 
-      <!-- Card Section 4: Mobile CTA Button -->
-      <a class="button button-primary mobile-cta-btn" href={localizedPath(lang, 'contact')}>
-        {t.quote || 'TEKLİF İSTE'}
-      </a>
+        <!-- Card Section 3: Navigasyon -->
+        <div class="mobile-myth-card">
+          <div class="myth-card-head">
+            <span class="myth-card-title">📌 {lang === 'tr' ? 'HIZLI ERİŞİM' : 'NAVIGATION'}</span>
+            <span class="myth-card-badge">MENÜ</span>
+          </div>
+          <div class="mobile-nav-grid">
+            {nav.filter(([key]) => key !== 'services').map(([key, label, href]) => (
+              <a href={href} class:list={['mobile-nav-item', { active: pageKey === key }]}>
+                <strong>{label}</strong>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Card Section 4: Mobile CTA Button -->
+        <a class="button button-primary mobile-cta-btn" href={localizedPath(lang, 'contact')}>
+          {t.quote || 'TEKLİF İSTE'}
+        </a>
+      </div>
       
       <!-- Desktop Navigation Items (Desktop Only - UNTOUCHED) -->
       <div class="desktop-only-nav">
@@ -194,6 +197,8 @@ const globalSwitchPath = (target: string): string => {
   const closeButton = document.querySelector('[data-mobile-close]');
   const languageToggle = document.querySelector('[data-language-toggle]');
   const languageMenu = document.querySelector('[data-language-menu]');
+  const solutionsToggle = document.querySelector('[data-solutions-toggle]');
+  const solutionsGroup = document.querySelector('[data-solutions-nav-group]');
 
   // Mobile Accordion (Hizmetler) Toggle
   const accordionBtn = document.querySelector('[data-accordion-btn]');
@@ -257,6 +262,13 @@ const globalSwitchPath = (target: string): string => {
 
   closeButton?.addEventListener('click', closeNavigation);
 
+  solutionsToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = solutionsToggle.getAttribute('aria-expanded') === 'true';
+    solutionsToggle.setAttribute('aria-expanded', String(!open));
+    solutionsGroup?.classList.toggle('is-open', !open);
+  });
+
   languageToggle?.addEventListener('click', () => {
     const open = languageToggle.getAttribute('aria-expanded') === 'true';
     languageToggle.setAttribute('aria-expanded', String(!open));
@@ -269,6 +281,10 @@ const globalSwitchPath = (target: string): string => {
     if (!(event.target instanceof Node)) return;
     if (!document.querySelector('.language-switcher')?.contains(event.target)) {
       closeLanguageMenu();
+    }
+    if (!document.querySelector('.nav-solutions-group')?.contains(event.target)) {
+      solutionsToggle?.setAttribute('aria-expanded', 'false');
+      solutionsGroup?.classList.remove('is-open');
     }
   });
 
@@ -293,3 +309,33 @@ const globalSwitchPath = (target: string): string => {
     }
   });
 </script>
+
+<style is:global>
+  @media (min-width: 1051px) {
+    .mobile-only-nav,
+    .mobile-nav-head,
+    .mobile-myth-card,
+    .mobile-cta-btn {
+      display: none !important;
+    }
+
+    .desktop-only-nav {
+      display: flex !important;
+      align-items: center !important;
+      gap: 23px !important;
+    }
+  }
+
+  @media (max-width: 1050px) {
+    .desktop-only-nav {
+      display: none !important;
+    }
+
+    .mobile-only-nav {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      width: 100% !important;
+    }
+  }
+</style>
