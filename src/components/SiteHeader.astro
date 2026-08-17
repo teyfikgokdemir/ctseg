@@ -76,9 +76,10 @@ const globalSwitchPath = (target: string): string => {
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label={t.menu || "Menu"} data-menu-toggle>
       <span class="sr-only">{t.menu}</span><span></span><span></span>
     </button>
+
     <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav aria-hidden="true">
-      <!-- Mobile Only Container -->
-      <div class="mobile-only-nav">
+      <!-- MOBILE ONLY PANEL (86272194 Standard - Pure Mythborn Card Grid) -->
+      <div class="mobile-only-panel">
         <div class="mobile-nav-head">
           <div class="mobile-nav-brand">
             <span class="mobile-nav-title">CTSEG</span>
@@ -89,10 +90,10 @@ const globalSwitchPath = (target: string): string => {
           </button>
         </div>
 
-        <!-- Card Section 1: Mobile Language Switcher -->
+        <!-- Card 1: Language Switcher -->
         <div class="mobile-myth-card mobile-myth-card--lang">
           <div class="myth-card-head">
-            <span class="myth-card-title">🌐 {t.language || 'DİL / LANGUAGE'}</span>
+            <span class="myth-card-title">🌐 {t.language || 'DİL SEÇİMİ'}</span>
             <span class="myth-card-badge">GLOBAL</span>
           </div>
           <div class="mobile-lang-grid">
@@ -112,24 +113,22 @@ const globalSwitchPath = (target: string): string => {
           </div>
         </div>
 
-        <!-- Card Section 2: Hizmetler & Çözümler (Collapsible Accordion - Closed by Default) -->
-        <div class="mobile-myth-card mobile-accordion" data-accordion data-open="false">
-          <button class="mobile-accordion-btn" type="button" aria-expanded="false" data-accordion-btn>
+        <!-- Card 2: Hizmetler (Mythborn Open 2-Column Grid) -->
+        <div class="mobile-myth-card">
+          <div class="myth-card-head">
             <span class="myth-card-title">🏢 {t.services ? t.services.toUpperCase() : 'HİZMETLER'}</span>
-            <span class="accordion-arrow" aria-hidden="true">▾</span>
-          </button>
-          <div class="mobile-accordion-content" hidden data-accordion-content>
-            <div class="mobile-solutions-grid">
-              {solutionLinks.map(([solutionLabel, solutionHref]) => (
-                <a href={solutionHref} class="mobile-solution-item">
-                  <strong class="sol-title">{solutionLabel}</strong>
-                </a>
-              ))}
-            </div>
+            <span class="myth-card-badge">OPERASYON</span>
+          </div>
+          <div class="mobile-solutions-grid">
+            {solutionLinks.map(([solutionLabel, solutionHref]) => (
+              <a href={solutionHref} class="mobile-solution-item">
+                <strong class="sol-title">{solutionLabel.toUpperCase()}</strong>
+              </a>
+            ))}
           </div>
         </div>
 
-        <!-- Card Section 3: Navigasyon -->
+        <!-- Card 3: Hızlı Erişim / Navigasyon -->
         <div class="mobile-myth-card">
           <div class="myth-card-head">
             <span class="myth-card-title">📌 {lang === 'tr' ? 'HIZLI ERİŞİM' : 'NAVIGATION'}</span>
@@ -138,19 +137,14 @@ const globalSwitchPath = (target: string): string => {
           <div class="mobile-nav-grid">
             {nav.filter(([key]) => key !== 'services').map(([key, label, href]) => (
               <a href={href} class:list={['mobile-nav-item', { active: pageKey === key }]}>
-                <strong>{label}</strong>
+                <strong>{label.toUpperCase()}</strong>
               </a>
             ))}
           </div>
         </div>
-
-        <!-- Card Section 4: Mobile CTA Button -->
-        <a class="button button-primary mobile-cta-btn" href={localizedPath(lang, 'contact')}>
-          {t.quote || 'TEKLİF İSTE'}
-        </a>
       </div>
-      
-      <!-- Desktop Navigation Items (Desktop Only - UNTOUCHED) -->
+
+      <!-- DESKTOP ONLY NAVIGATION (6c5f79d2 Standard - Exact Original Desktop Header) -->
       <div class="desktop-only-nav">
         <div class="nav-solutions-group" data-solutions-nav-group>
           <button class:list={['nav-solutions-parent',{ active: pageKey === 'services' }]} type="button" aria-expanded="false" aria-controls="solutions-panel" data-solutions-toggle>
@@ -165,7 +159,22 @@ const globalSwitchPath = (target: string): string => {
           </div>
         </div>
 
-        {nav.filter(([key]) => key !== 'services').map(([key, label, href]) => (
+        {nav.filter(([key]) => key !== 'services').map(([key, label, href]) => key === 'markets' && (lang === 'en' || lang === 'fa') ? (
+          <div class="nav-market-group" data-markets-nav-group>
+            <a class:list={['nav-market-parent',{ active: pageKey === key }]} href={href} data-markets-nav-link>{label}</a>
+            <div class="nav-market-menu" aria-label="Special market resources">
+              <a
+                class:list={['fa-market-nav-link',{ active: pageKey === 'iran-sourcing' }]}
+                href="/fa/"
+                data-fa-nav-link
+                data-fa-landing-link
+              >
+                <strong>{lang === 'fa' ? 'برای کسب‌وکارهای ایرانی' : 'For Iranian Businesses'}</strong>
+                <span>{lang === 'fa' ? 'پشتیبانی تجارت بین‌المللی' : 'Persian landing page'}</span>
+              </a>
+            </div>
+          </div>
+        ) : (
           <a class:list={['desktop-nav-link', { active: pageKey === key }]} href={href}>{label}</a>
         ))}
 
@@ -185,6 +194,7 @@ const globalSwitchPath = (target: string): string => {
             ><span>{code.toUpperCase()}</span><strong>{globalLocaleNames[code]}</strong><i aria-hidden="true"></i></a>)}
           </div>
         </div>
+
         <a class="button button-small nav-cta" href={localizedPath(lang, 'contact')}>{t.quote}</a>
       </div>
     </nav>
@@ -200,36 +210,23 @@ const globalSwitchPath = (target: string): string => {
   const solutionsToggle = document.querySelector('[data-solutions-toggle]');
   const solutionsGroup = document.querySelector('[data-solutions-nav-group]');
 
-  // Mobile Accordion (Hizmetler) Toggle
-  const accordionBtn = document.querySelector('[data-accordion-btn]');
-  const accordionContent = document.querySelector('[data-accordion-content]');
-  const accordionCard = document.querySelector('[data-accordion]');
-
   let previousScroll = 0;
   let previousFocus: HTMLElement | null = null;
 
-  accordionBtn?.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const isHidden = accordionContent?.hasAttribute('hidden');
-    if (isHidden) {
-      accordionContent?.removeAttribute('hidden');
-      accordionCard?.setAttribute('data-open', 'true');
-      accordionBtn.setAttribute('aria-expanded', 'true');
-    } else {
-      accordionContent?.setAttribute('hidden', '');
-      accordionCard?.setAttribute('data-open', 'false');
-      accordionBtn.setAttribute('aria-expanded', 'false');
-    }
-  });
-
   const focusable = () => nav ? [...nav.querySelectorAll('a[href], button:not([disabled])')].filter(el => !el.closest('[hidden]')) : [];
+
+  const closeSolutions = (restoreFocus = false) => {
+    solutionsToggle?.setAttribute('aria-expanded', 'false');
+    solutionsGroup?.classList.remove('is-open');
+    if (restoreFocus) (solutionsToggle as HTMLElement)?.focus();
+  };
 
   const closeNavigation = () => {
     if (!nav || !nav.classList.contains('open')) return;
     toggle?.setAttribute('aria-expanded', 'false');
     nav.classList.remove('open');
     nav.setAttribute('aria-hidden', 'true');
+    closeSolutions();
     
     setTimeout(() => {
       document.body.classList.remove('menu-open');
@@ -283,14 +280,14 @@ const globalSwitchPath = (target: string): string => {
       closeLanguageMenu();
     }
     if (!document.querySelector('.nav-solutions-group')?.contains(event.target)) {
-      solutionsToggle?.setAttribute('aria-expanded', 'false');
-      solutionsGroup?.classList.remove('is-open');
+      closeSolutions();
     }
   });
 
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && nav?.classList.contains('open')) {
       closeLanguageMenu();
+      closeSolutions(true);
       closeNavigation();
     }
     if (event.key === 'Tab' && nav?.classList.contains('open')) {
@@ -308,11 +305,30 @@ const globalSwitchPath = (target: string): string => {
       }
     }
   });
+
+  const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const marketParent = document.querySelector('.nav-market-parent');
+  const marketGroup = document.querySelector('.nav-market-group');
+  if (marketParent && marketGroup) {
+    marketParent.addEventListener('click', (e) => {
+      if (isTouchDevice() && window.innerWidth > 1050) {
+        if (!marketGroup.classList.contains('touch-open')) {
+          e.preventDefault();
+          marketGroup.classList.add('touch-open');
+        }
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (marketGroup.classList.contains('touch-open') && !marketGroup.contains(e.target as Node)) {
+        marketGroup.classList.remove('touch-open');
+      }
+    });
+  }
 </script>
 
 <style is:global>
   @media (min-width: 1051px) {
-    .mobile-only-nav,
+    .mobile-only-panel,
     .mobile-nav-head,
     .mobile-myth-card,
     .mobile-cta-btn {
@@ -331,7 +347,7 @@ const globalSwitchPath = (target: string): string => {
       display: none !important;
     }
 
-    .mobile-only-nav {
+    .mobile-only-panel {
       display: flex !important;
       flex-direction: column !important;
       gap: 12px !important;
