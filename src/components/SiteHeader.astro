@@ -79,35 +79,71 @@ const globalSwitchPath = (target: string): string => {
     </button>
     <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav aria-hidden="true">
       <div class="mobile-nav-head">
-        <span class="mobile-nav-title">{lang === 'en' ? 'MENU' : 'MENÜ'}</span>
+        <div class="mobile-nav-brand">
+          <span class="mobile-nav-title">CTSEG</span>
+          <span class="mobile-nav-subtitle">{lang === 'en' ? 'MAIN MENU' : 'ANA MENÜ'}</span>
+        </div>
         <button class="mobile-nav-close" type="button" aria-label="Close menu" data-mobile-close>
           <span aria-hidden="true">✕</span>
         </button>
       </div>
-      {nav.map(([key, label, href]) => key === 'services' ? (
-        <div class="nav-solutions-group" data-solutions-nav-group>
-          <button class:list={['nav-solutions-parent',{ active: pageKey === key }]} type="button" aria-expanded="false" aria-controls="solutions-panel" data-solutions-toggle><span>{label}</span><i aria-hidden="true"></i></button>
-          <div id="solutions-panel" class="nav-solutions-menu" aria-label={label} data-solutions-menu>
-            <div class="nav-solutions-intro"><strong>{label}</strong><span>{lang === 'tr' ? 'Ticari kararınızı netleştiren yollar' : lang === 'en' ? 'Commercial paths built around your requirement' : 'Structured commercial paths for your requirement'}</span></div>
-            {solutionLinks.map(([solutionLabel, solutionHref]) => <a href={solutionHref}>{solutionLabel}<i aria-hidden="true">↗</i></a>)}
-          </div>
+
+      <!-- Card Section 1: Mobile Language Switcher (Mythborn Grid) -->
+      <div class="mobile-myth-card mobile-myth-card--lang">
+        <div class="myth-card-head">
+          <span class="myth-card-title">🌐 {t.language || 'DİL / LANGUAGE'}</span>
+          <span class="myth-card-badge">GLOBAL</span>
         </div>
-      ) : key === 'markets' && (lang === 'en' || lang === 'fa') ? (
-        <div class="nav-market-group" data-markets-nav-group>
-          <a class:list={['nav-market-parent',{ active: pageKey === key }]} href={href} data-markets-nav-link>{label}</a>
-          <div class="nav-market-menu" aria-label="Special market resources">
+        <div class="mobile-lang-grid">
+          {globalLocales.map((code) => (
             <a
-              class:list={['fa-market-nav-link',{ active: pageKey === 'iran-sourcing' }]}
-              href="/fa/"
-              data-fa-nav-link
-              data-fa-landing-link
+              lang={code}
+              hreflang={code}
+              class:list={['mobile-lang-item', { active: code === lang }]}
+              href={globalSwitchPath(code)}
+              aria-current={code === lang ? 'true' : undefined}
+              data-locale-option
             >
-              <strong>{lang === 'fa' ? 'برای کسب‌وکارهای ایرانی' : 'For Iranian Businesses'}</strong>
-              <span>{lang === 'fa' ? 'پشتیبانی تجارت بین‌المللی' : 'Persian landing page'}</span>
+              <span class="lang-code">{code.toUpperCase()}</span>
+              <span class="lang-name">{globalLocaleNames[code]}</span>
             </a>
-          </div>
+          ))}
         </div>
-      ) : <a class:list={{ active: pageKey === key }} href={href}>{label}</a>)}
+      </div>
+
+      <!-- Card Section 2: Primary Navigation Items -->
+      <div class="mobile-nav-body">
+        {nav.map(([key, label, href]) => key === 'services' ? (
+          <div class="nav-solutions-group mobile-myth-card" data-solutions-nav-group>
+            <button class:list={['nav-solutions-parent',{ active: pageKey === key }]} type="button" aria-expanded="false" aria-controls="solutions-panel" data-solutions-toggle>
+              <span>{label}</span>
+              <i aria-hidden="true">▾</i>
+            </button>
+            <div id="solutions-panel" class="nav-solutions-menu" aria-label={label} data-solutions-menu>
+              <div class="nav-solutions-intro"><strong>{label}</strong><span>{lang === 'tr' ? 'Ticari kararınızı netleştiren yollar' : lang === 'en' ? 'Commercial paths built around your requirement' : 'Structured commercial paths for your requirement'}</span></div>
+              <div class="mobile-solutions-grid">
+                {solutionLinks.map(([solutionLabel, solutionHref]) => <a href={solutionHref} class="mobile-solution-item"><span>{solutionLabel}</span><i aria-hidden="true">↗</i></a>)}
+              </div>
+            </div>
+          </div>
+        ) : key === 'markets' && (lang === 'en' || lang === 'fa') ? (
+          <div class="nav-market-group mobile-myth-card" data-markets-nav-group>
+            <a class:list={['nav-market-parent',{ active: pageKey === key }]} href={href} data-markets-nav-link>{label}</a>
+            <div class="nav-market-menu" aria-label="Special market resources">
+              <a
+                class:list={['fa-market-nav-link',{ active: pageKey === 'iran-sourcing' }]}
+                href="/fa/"
+                data-fa-nav-link
+                data-fa-landing-link
+              >
+                <strong>{lang === 'fa' ? 'برای کسب‌وکارهای ایرانی' : 'For Iranian Businesses'}</strong>
+                <span>{lang === 'fa' ? 'پشتیبانی تجارت بین‌المللی' : 'Persian landing page'}</span>
+              </a>
+            </div>
+          </div>
+        ) : <a class:list={['mobile-nav-link', { active: pageKey === key }]} href={href}>{label}</a>)}
+      </div>
+      
       <div class="language-switcher language-switcher-desktop">
         <button type="button" aria-expanded="false" aria-controls="language-panel" aria-label={t.language} data-language-toggle>
           <span class="locale-code">{(['tr','en','de','it','fa','ru'].includes(lang) ? lang : 'en').toUpperCase()}</span>
@@ -122,19 +158,6 @@ const globalSwitchPath = (target: string): string => {
             aria-current={code === lang ? 'true' : undefined}
             data-locale-option
           ><span>{code.toUpperCase()}</span><strong>{globalLocaleNames[code]}</strong><i aria-hidden="true"></i></a>)}
-        </div>
-      </div>
-      <div class="mobile-locales" aria-label={t.language}>
-        <span class="mobile-locales-label">{t.language}</span>
-        <div>
-          {globalLocales.map((code) => <a
-            lang={code}
-            hreflang={code}
-            class:list={{ active: code === lang }}
-            href={globalSwitchPath(code)}
-            aria-current={code === lang ? 'true' : undefined}
-            data-locale-option
-          >{code.toUpperCase()}<span class="sr-only"> · {globalLocaleNames[code]}</span></a>)}
         </div>
       </div>
       <a class="button button-small nav-cta" href={localizedPath(lang, 'contact')}>{t.quote}</a>
