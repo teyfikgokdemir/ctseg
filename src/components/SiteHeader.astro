@@ -9,6 +9,7 @@ const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?
 const t = ui[lang] || ui.en;
 const home = localizedPath(lang, 'home');
 const p = tradePlatformCopy[lang] || tradePlatformCopy.en;
+const processLabel = {tr:'Yöntem',en:'Method',de:'Methode',it:'Metodo',fa:'روش کار',ru:'Метод'}[lang] || 'Method';
 const medicalNavLabels: Record<string, string> = {
   tr: 'REFLEX Medikal',
   en: 'REFLEX Medical',
@@ -28,6 +29,7 @@ const methodLabel: Record<Locale,string> = {
   tr:'Yöntem', en:'Method', de:'Arbeitsweise', it:'Metodo', ru:'Метод', fa:'روش کار'
 };
 
+<<<<<<< HEAD
 const solutionLinks = [
   [t.services, localizedPath(lang,'services')],
   [p.buyerTitle, `${home}#for-buyers`],
@@ -43,6 +45,20 @@ const nav = [
   ['method', methodLabel[lang], localizedPath(lang,'how-we-work')],
   ['medical', medicalLabel, reflexUrl],
   ['markets', t.markets, localizedPath(lang,'markets')],
+=======
+const nav = lang === 'ru' ? [
+  ['services', t.services, `${home}#trade-paths`],
+  ['sectors', t.products, `${home}#sectors`],
+  ['method', processLabel, localizedPath(lang,'how-we-work')],
+  ['markets', t.markets, `${home}#markets`],
+  ['about', t.about, `${home}#company`],
+  ['contact', t.contact, `${home}#contact`]
+] : [
+  ['services', t.services, localizedPath(lang,'services')],
+  ['products', t.products, localizedPath(lang,'products')],
+  ['method', processLabel, localizedPath(lang,'how-we-work')],
+  ['insights', t.insights, localizedPath(lang,'insights')],
+>>>>>>> 6191fa3 (feat(header): standardize header/menu behavior to Mythborn reference standard)
   ['about', t.about, localizedPath(lang,'about')],
   ['contact', t.contact, localizedPath(lang,'contact')]
 ];
@@ -75,12 +91,13 @@ const globalSwitchPath = (target: string): string => {
   return localizedPath(target, pageKey, pageId);
 };
 ---
+<div class="mobile-menu-backdrop" hidden data-menu-backdrop></div>
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href={home} aria-label={`CTSEG · ${t.home}`}>
       <img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" decoding="async" />
     </a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-menu-toggle>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label={t.menu || "Menu"} data-menu-toggle>
       <span class="sr-only">{t.menu}</span><span></span><span></span>
     </button>
     <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav>
@@ -144,36 +161,49 @@ const globalSwitchPath = (target: string): string => {
 <script>
   const toggle = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('[data-primary-nav]');
+  const backdrop = document.querySelector('[data-menu-backdrop]');
   const languageToggle = document.querySelector('[data-language-toggle]');
   const languageMenu = document.querySelector('[data-language-menu]');
   const solutionsToggle = document.querySelector('[data-solutions-toggle]');
   const solutionsGroup = document.querySelector('[data-solutions-nav-group]');
+
   const closeSolutions = (restoreFocus = false) => {
     solutionsToggle?.setAttribute('aria-expanded', 'false');
     solutionsGroup?.classList.remove('is-open');
     if (restoreFocus) solutionsToggle?.focus();
   };
+
   const closeNavigation = () => {
     toggle?.setAttribute('aria-expanded', 'false');
     nav?.classList.remove('open');
     document.body.classList.remove('menu-open');
+    backdrop?.setAttribute('hidden', '');
     closeSolutions();
   };
+
   const closeLanguageMenu = () => {
     languageToggle?.setAttribute('aria-expanded', 'false');
     languageMenu?.classList.remove('open');
   };
+
   toggle?.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') === 'true';
     toggle.setAttribute('aria-expanded', String(!open));
     nav?.classList.toggle('open', !open);
     document.body.classList.toggle('menu-open', !open);
+    if (!open) {
+      backdrop?.removeAttribute('hidden');
+    } else {
+      backdrop?.setAttribute('hidden', '');
+    }
   });
+
   languageToggle?.addEventListener('click', () => {
     const open = languageToggle.getAttribute('aria-expanded') === 'true';
     languageToggle.setAttribute('aria-expanded', String(!open));
     languageMenu?.classList.toggle('open', !open);
   });
+<<<<<<< HEAD
   solutionsToggle?.addEventListener('click', () => {
     const open = solutionsToggle.getAttribute('aria-expanded') === 'true';
     solutionsToggle.setAttribute('aria-expanded', String(!open));
@@ -186,11 +216,47 @@ const globalSwitchPath = (target: string): string => {
     if (solutionsGroup?.contains(event.target)) return;
     closeLanguageMenu();
     closeSolutions();
+=======
+
+  nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNavigation));
+  backdrop?.addEventListener('click', closeNavigation);
+
+  document.addEventListener('click', (event) => {
+    if (!(event.target instanceof Node)) return;
+    
+    if (!document.querySelector('.language-switcher')?.contains(event.target)) {
+      closeLanguageMenu();
+    }
+    
+    if (nav?.classList.contains('open') && !nav.contains(event.target) && !toggle?.contains(event.target) && !backdrop?.contains(event.target)) {
+      closeNavigation();
+    }
+>>>>>>> 6191fa3 (feat(header): standardize header/menu behavior to Mythborn reference standard)
   });
+
   document.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
     closeLanguageMenu();
     closeSolutions(true);
     closeNavigation();
   });
+
+  const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const marketParent = document.querySelector('.nav-market-parent');
+  const marketGroup = document.querySelector('.nav-market-group');
+  if (marketParent && marketGroup) {
+    marketParent.addEventListener('click', (e) => {
+      if (isTouchDevice() && window.innerWidth > 1050) {
+        if (!marketGroup.classList.contains('touch-open')) {
+          e.preventDefault();
+          marketGroup.classList.add('touch-open');
+        }
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (marketGroup.classList.contains('touch-open') && !marketGroup.contains(e.target as Node)) {
+        marketGroup.classList.remove('touch-open');
+      }
+    });
+  }
 </script>
