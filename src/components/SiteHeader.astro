@@ -232,10 +232,14 @@ const globalSwitchPath = (target: string): string => {
     languageMenu?.classList.toggle('open', !open);
   });
 
-  solutionsToggle?.addEventListener('click', () => {
+  solutionsToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
     const open = solutionsToggle.getAttribute('aria-expanded') === 'true';
     solutionsToggle.setAttribute('aria-expanded', String(!open));
     solutionsGroup?.classList.toggle('is-open', !open);
+    if (open) {
+      (solutionsToggle as HTMLElement)?.blur();
+    }
   });
 
   nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNavigation));
