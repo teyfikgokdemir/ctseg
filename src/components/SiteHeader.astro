@@ -78,7 +78,7 @@ const globalSwitchPath = (target: string): string => {
     </button>
 
     <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav aria-hidden="true">
-      <!-- MOBILE ONLY PANEL (86272194 Standard - Pure Mythborn Card Grid) -->
+      <!-- MOBILE ONLY PANEL (86272194 Standard - Pure Mythborn Card Grid - UNTOUCHED) -->
       <div class="mobile-only-panel">
         <div class="mobile-nav-head">
           <div class="mobile-nav-brand">
@@ -144,12 +144,12 @@ const globalSwitchPath = (target: string): string => {
         </div>
       </div>
 
-      <!-- DESKTOP ONLY NAVIGATION (6c5f79d2 Standard - Exact Original Desktop Header) -->
+      <!-- DESKTOP ONLY NAVIGATION (High Contrast & Clean Chevron) -->
       <div class="desktop-only-nav">
         <div class="nav-solutions-group" data-solutions-nav-group>
           <button class:list={['nav-solutions-parent',{ active: pageKey === 'services' }]} type="button" aria-expanded="false" aria-controls="solutions-panel" data-solutions-toggle>
             <span>{t.services}</span>
-            <i aria-hidden="true">▾</i>
+            <span class="desktop-chevron" aria-hidden="true">▾</span>
           </button>
           <div id="solutions-panel" class="nav-solutions-menu" aria-label={t.services} data-solutions-menu>
             <div class="nav-solutions-intro"><strong>{t.services}</strong><span>{lang === 'tr' ? 'Ticari kararınızı netleştiren yollar' : lang === 'en' ? 'Commercial paths built around your requirement' : 'Structured commercial paths for your requirement'}</span></div>
@@ -338,7 +338,73 @@ const globalSwitchPath = (target: string): string => {
     .desktop-only-nav {
       display: flex !important;
       align-items: center !important;
-      gap: 23px !important;
+      gap: 24px !important;
+    }
+
+    .desktop-only-nav a,
+    .desktop-nav-link,
+    .nav-solutions-parent,
+    .nav-market-parent {
+      color: #ffffff !important;
+      font-size: 0.83rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.05em !important;
+      text-transform: uppercase !important;
+      opacity: 0.95 !important;
+      transition: color 0.2s ease, opacity 0.2s ease !important;
+    }
+
+    .desktop-only-nav a:hover,
+    .desktop-nav-link:hover,
+    .nav-solutions-parent:hover,
+    .nav-market-parent:hover {
+      color: var(--accent-soft, #e2ca91) !important;
+      opacity: 1 !important;
+    }
+
+    .desktop-chevron {
+      display: inline-block !important;
+      font-style: normal !important;
+      font-size: 0.75rem !important;
+      margin-left: 4px !important;
+      transition: transform 0.2s ease !important;
+      color: #ffffff !important;
+    }
+
+    .nav-solutions-parent[aria-expanded="true"] .desktop-chevron {
+      transform: rotate(180deg) !important;
+    }
+
+    .nav-solutions-menu {
+      background: #141820 !important;
+      border: 1.5px solid #363e4d !important;
+      border-radius: 12px !important;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+      padding: 12px !important;
+    }
+
+    .nav-solutions-intro strong {
+      color: #ffffff !important;
+      font-size: 0.88rem !important;
+      font-weight: 800 !important;
+    }
+
+    .nav-solutions-intro span {
+      color: #a4abb8 !important;
+      font-size: 0.75rem !important;
+    }
+
+    .desktop-solutions-grid .desktop-solution-item {
+      padding: 10px 12px !important;
+      border-radius: 8px !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      font-size: 0.84rem !important;
+    }
+
+    .desktop-solutions-grid .desktop-solution-item:hover {
+      background: #252d3a !important;
+      color: var(--accent-soft, #e2ca91) !important;
     }
   }
 
