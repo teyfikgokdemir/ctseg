@@ -5,6 +5,7 @@ import { reflexPath, type ReflexLocale } from '../data/reflex-data';
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 import { tradePlatformCopy } from '../data/trade-platform';
 import { searchLandingPath, type SearchLandingId } from '../data/search-landings';
+
 const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?: string; pageId?: string };
 const t = ui[lang] || ui.en;
 const home = localizedPath(lang, 'home');
@@ -29,7 +30,6 @@ const methodLabel: Record<Locale,string> = {
   tr:'Yöntem', en:'Method', de:'Arbeitsweise', it:'Metodo', ru:'Метод', fa:'روش کار'
 };
 
-<<<<<<< HEAD
 const solutionLinks = [
   [t.services, localizedPath(lang,'services')],
   [p.buyerTitle, `${home}#for-buyers`],
@@ -38,14 +38,6 @@ const solutionLinks = [
   [medicalLabel, reflexUrl]
 ];
 
-const nav = [
-  ['services', t.services, localizedPath(lang,'services')],
-  ['buyers', p.buyerTitle, `${home}#for-buyers`],
-  ['producers', p.producerTitle, `${home}#for-producers`],
-  ['method', methodLabel[lang], localizedPath(lang,'how-we-work')],
-  ['medical', medicalLabel, reflexUrl],
-  ['markets', t.markets, localizedPath(lang,'markets')],
-=======
 const nav = lang === 'ru' ? [
   ['services', t.services, `${home}#trade-paths`],
   ['sectors', t.products, `${home}#sectors`],
@@ -58,31 +50,16 @@ const nav = lang === 'ru' ? [
   ['products', t.products, localizedPath(lang,'products')],
   ['method', processLabel, localizedPath(lang,'how-we-work')],
   ['insights', t.insights, localizedPath(lang,'insights')],
->>>>>>> 6191fa3 (feat(header): standardize header/menu behavior to Mythborn reference standard)
   ['about', t.about, localizedPath(lang,'about')],
   ['contact', t.contact, localizedPath(lang,'contact')]
 ];
 
-const medicalLocales = [
-  { code: 'tr', label: 'Türkçe' },
-  { code: 'en', label: 'English' },
-  { code: 'de', label: 'Deutsch' },
-  { code: 'it', label: 'Italiano' },
-  { code: 'fa', label: 'فارسی' },
-  { code: 'ru', label: 'Русский' },
-  { code: 'sq', label: 'Shqip' },
-  { code: 'mk', label: 'Македонски' },
-  { code: 'sr', label: 'Srpski' }
-];
-
-// Always use the 6-locale activeLocaleRegistry so check-site passes
 const globalLocales = activeLocaleRegistry.map((entry) => entry.code);
 const globalLocaleNames = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code, entry.label])) as Record<ActiveLocale,string>;
 
 const globalSwitchPath = (target: string): string => {
   if (pageKey === 'search-landing' && pageId) return searchLandingPath(target as Locale,pageId as SearchLandingId);
   if (target === 'fa') return '/fa/';
-  // On medical pages route locales to their reflexPath
   if (pageKey === 'medical') {
     const reflexLocales = ['en','tr','de','it','ru','fa'] as const;
     if ((reflexLocales as readonly string[]).includes(target)) return reflexPath(target as ReflexLocale);
@@ -100,7 +77,13 @@ const globalSwitchPath = (target: string): string => {
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label={t.menu || "Menu"} data-menu-toggle>
       <span class="sr-only">{t.menu}</span><span></span><span></span>
     </button>
-    <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav>
+    <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav aria-hidden="true">
+      <div class="mobile-nav-head">
+        <span class="mobile-nav-title">{lang === 'en' ? 'MENU' : 'MENÜ'}</span>
+        <button class="mobile-nav-close" type="button" aria-label="Close menu" data-mobile-close>
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>
       {nav.map(([key, label, href]) => key === 'services' ? (
         <div class="nav-solutions-group" data-solutions-nav-group>
           <button class:list={['nav-solutions-parent',{ active: pageKey === key }]} type="button" aria-expanded="false" aria-controls="solutions-panel" data-solutions-toggle><span>{label}</span><i aria-hidden="true"></i></button>
@@ -161,24 +144,46 @@ const globalSwitchPath = (target: string): string => {
 <script>
   const toggle = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('[data-primary-nav]');
+  const closeButton = document.querySelector('[data-mobile-close]');
   const backdrop = document.querySelector('[data-menu-backdrop]');
   const languageToggle = document.querySelector('[data-language-toggle]');
   const languageMenu = document.querySelector('[data-language-menu]');
   const solutionsToggle = document.querySelector('[data-solutions-toggle]');
   const solutionsGroup = document.querySelector('[data-solutions-nav-group]');
 
+  let previousScroll = 0;
+  let previousFocus: HTMLElement | null = null;
+
+  const focusable = () => nav ? [...nav.querySelectorAll('a[href], button:not([disabled])')].filter(el => !el.closest('[hidden]')) : [];
+
   const closeSolutions = (restoreFocus = false) => {
     solutionsToggle?.setAttribute('aria-expanded', 'false');
     solutionsGroup?.classList.remove('is-open');
-    if (restoreFocus) solutionsToggle?.focus();
+    if (restoreFocus) (solutionsToggle as HTMLElement)?.focus();
   };
 
   const closeNavigation = () => {
+    if (!nav || !nav.classList.contains('open')) return;
     toggle?.setAttribute('aria-expanded', 'false');
-    nav?.classList.remove('open');
+    nav.classList.remove('open');
+    nav.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('menu-open');
     backdrop?.setAttribute('hidden', '');
     closeSolutions();
+    window.scrollTo(0, previousScroll);
+    if (previousFocus instanceof HTMLElement) previousFocus.focus({ preventScroll: true });
+  };
+
+  const openNavigation = () => {
+    if (!nav || nav.classList.contains('open')) return;
+    previousScroll = window.scrollY;
+    previousFocus = document.activeElement as HTMLElement;
+    toggle?.setAttribute('aria-expanded', 'true');
+    nav.classList.add('open');
+    nav.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('menu-open');
+    backdrop?.removeAttribute('hidden');
+    (closeButton as HTMLElement)?.focus();
   };
 
   const closeLanguageMenu = () => {
@@ -188,57 +193,54 @@ const globalSwitchPath = (target: string): string => {
 
   toggle?.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!open));
-    nav?.classList.toggle('open', !open);
-    document.body.classList.toggle('menu-open', !open);
-    if (!open) {
-      backdrop?.removeAttribute('hidden');
-    } else {
-      backdrop?.setAttribute('hidden', '');
-    }
+    if (open) closeNavigation();
+    else openNavigation();
   });
+
+  closeButton?.addEventListener('click', closeNavigation);
+  backdrop?.addEventListener('click', closeNavigation);
 
   languageToggle?.addEventListener('click', () => {
     const open = languageToggle.getAttribute('aria-expanded') === 'true';
     languageToggle.setAttribute('aria-expanded', String(!open));
     languageMenu?.classList.toggle('open', !open);
   });
-<<<<<<< HEAD
+
   solutionsToggle?.addEventListener('click', () => {
     const open = solutionsToggle.getAttribute('aria-expanded') === 'true';
     solutionsToggle.setAttribute('aria-expanded', String(!open));
     solutionsGroup?.classList.toggle('is-open', !open);
   });
-  document.querySelectorAll('[data-locale-option]').forEach((link) => link.addEventListener('click', closeNavigation));
-  document.addEventListener('click', (event) => {
-    if (!(event.target instanceof Node)) return;
-    if (document.querySelector('.language-switcher')?.contains(event.target)) return;
-    if (solutionsGroup?.contains(event.target)) return;
-    closeLanguageMenu();
-    closeSolutions();
-=======
 
   nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNavigation));
-  backdrop?.addEventListener('click', closeNavigation);
 
   document.addEventListener('click', (event) => {
     if (!(event.target instanceof Node)) return;
-    
     if (!document.querySelector('.language-switcher')?.contains(event.target)) {
       closeLanguageMenu();
     }
-    
-    if (nav?.classList.contains('open') && !nav.contains(event.target) && !toggle?.contains(event.target) && !backdrop?.contains(event.target)) {
-      closeNavigation();
-    }
->>>>>>> 6191fa3 (feat(header): standardize header/menu behavior to Mythborn reference standard)
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape') return;
-    closeLanguageMenu();
-    closeSolutions(true);
-    closeNavigation();
+    if (event.key === 'Escape' && nav?.classList.contains('open')) {
+      closeLanguageMenu();
+      closeSolutions(true);
+      closeNavigation();
+    }
+    if (event.key === 'Tab' && nav?.classList.contains('open')) {
+      const items = focusable();
+      if (items.length > 0) {
+        const first = items[0] as HTMLElement;
+        const last = items[items.length - 1] as HTMLElement;
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    }
   });
 
   const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
