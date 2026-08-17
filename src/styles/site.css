@@ -245,7 +245,7 @@ html[data-locale=de] .page-hero h1,html[data-locale=it] .page-hero h1,html[data-
   :root{--header-height:74px}
   .container{width:min(var(--max),calc(100% - 36px))}
   .header-inner{height:var(--header-height)}.brand img{width:135px}.menu-toggle{display:block}
-  .desktop-only-nav{display:none!important}
+  .desktop-only-nav,.nav-solutions-group,.nav-solutions-menu,.nav-solutions-parent{display:none!important}
   .mobile-menu-backdrop{display:none!important}
   .mobile-nav-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.12)}
   .mobile-nav-brand{display:flex;flex-direction:column}

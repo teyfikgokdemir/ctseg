@@ -201,15 +201,15 @@ const globalSwitchPath = (target: string): string => {
   accordionBtn?.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const isOpen = accordionCard?.getAttribute('data-open') === 'true';
-    if (isOpen) {
-      accordionCard?.setAttribute('data-open', 'false');
-      accordionBtn.setAttribute('aria-expanded', 'false');
-      accordionContent?.setAttribute('hidden', '');
-    } else {
+    const isHidden = accordionContent?.hasAttribute('hidden');
+    if (isHidden) {
+      accordionContent?.removeAttribute('hidden');
       accordionCard?.setAttribute('data-open', 'true');
       accordionBtn.setAttribute('aria-expanded', 'true');
-      accordionContent?.removeAttribute('hidden');
+    } else {
+      accordionContent?.setAttribute('hidden', '');
+      accordionCard?.setAttribute('data-open', 'false');
+      accordionBtn.setAttribute('aria-expanded', 'false');
     }
   });
 
