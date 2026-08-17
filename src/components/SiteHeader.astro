@@ -376,11 +376,25 @@ const globalSwitchPath = (target: string): string => {
     }
 
     .nav-solutions-menu {
+      width: 320px !important;
+      min-width: 320px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 6px !important;
       background: #141820 !important;
       border: 1.5px solid #363e4d !important;
-      border-radius: 12px !important;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6) !important;
+      border-radius: 14px !important;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.65) !important;
       padding: 12px !important;
+    }
+
+    .nav-solutions-intro {
+      grid-column: auto !important;
+      display: grid !important;
+      gap: 3px !important;
+      padding: 4px 6px 10px !important;
+      border-bottom: 1px solid #28303f !important;
+      margin-bottom: 4px !important;
     }
 
     .nav-solutions-intro strong {
@@ -394,17 +408,36 @@ const globalSwitchPath = (target: string): string => {
       font-size: 0.75rem !important;
     }
 
+    .desktop-solutions-grid {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 4px !important;
+    }
+
     .desktop-solutions-grid .desktop-solution-item {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
       padding: 10px 12px !important;
       border-radius: 8px !important;
+      background: rgba(255, 255, 255, 0.03) !important;
+      border: 1px solid rgba(255, 255, 255, 0.05) !important;
       color: #ffffff !important;
       font-weight: 700 !important;
       font-size: 0.84rem !important;
+      white-space: nowrap !important;
+      transition: all 0.18s ease !important;
+    }
+
+    .desktop-solutions-grid .desktop-solution-item span {
+      white-space: nowrap !important;
     }
 
     .desktop-solutions-grid .desktop-solution-item:hover {
       background: #252d3a !important;
-      color: var(--accent-soft, #e2ca91) !important;
+      border-color: var(--accent, #91452f) !important;
+      color: var(--accent-soft, #e5a17b) !important;
+      transform: translateX(4px) !important;
     }
   }
 
