@@ -68,7 +68,6 @@ const globalSwitchPath = (target: string): string => {
   return localizedPath(target, pageKey, pageId);
 };
 ---
-<div class="mobile-menu-backdrop" hidden data-menu-backdrop></div>
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href={home} aria-label={`CTSEG · ${t.home}`}>
@@ -111,93 +110,100 @@ const globalSwitchPath = (target: string): string => {
         </div>
       </div>
 
-      <!-- Card Section 2: Primary Navigation Items -->
-      <div class="mobile-nav-body">
-        {nav.map(([key, label, href]) => key === 'services' ? (
-          <div class="nav-solutions-group mobile-myth-card" data-solutions-nav-group>
-            <button class:list={['nav-solutions-parent',{ active: pageKey === key }]} type="button" aria-expanded="false" aria-controls="solutions-panel" data-solutions-toggle>
-              <span>{label}</span>
-              <i aria-hidden="true">▾</i>
-            </button>
-            <div id="solutions-panel" class="nav-solutions-menu" aria-label={label} data-solutions-menu>
-              <div class="nav-solutions-intro"><strong>{label}</strong><span>{lang === 'tr' ? 'Ticari kararınızı netleştiren yollar' : lang === 'en' ? 'Commercial paths built around your requirement' : 'Structured commercial paths for your requirement'}</span></div>
-              <div class="mobile-solutions-grid">
-                {solutionLinks.map(([solutionLabel, solutionHref]) => <a href={solutionHref} class="mobile-solution-item"><span>{solutionLabel}</span><i aria-hidden="true">↗</i></a>)}
-              </div>
-            </div>
-          </div>
-        ) : key === 'markets' && (lang === 'en' || lang === 'fa') ? (
-          <div class="nav-market-group mobile-myth-card" data-markets-nav-group>
-            <a class:list={['nav-market-parent',{ active: pageKey === key }]} href={href} data-markets-nav-link>{label}</a>
-            <div class="nav-market-menu" aria-label="Special market resources">
-              <a
-                class:list={['fa-market-nav-link',{ active: pageKey === 'iran-sourcing' }]}
-                href="/fa/"
-                data-fa-nav-link
-                data-fa-landing-link
-              >
-                <strong>{lang === 'fa' ? 'برای کسب‌وکارهای ایرانی' : 'For Iranian Businesses'}</strong>
-                <span>{lang === 'fa' ? 'پشتیبانی تجارت بین‌المللی' : 'Persian landing page'}</span>
-              </a>
-            </div>
-          </div>
-        ) : <a class:list={['mobile-nav-link', { active: pageKey === key }]} href={href}>{label}</a>)}
-      </div>
-      
-      <div class="language-switcher language-switcher-desktop">
-        <button type="button" aria-expanded="false" aria-controls="language-panel" aria-label={t.language} data-language-toggle>
-          <span class="locale-code">{(['tr','en','de','it','fa','ru'].includes(lang) ? lang : 'en').toUpperCase()}</span>
-          <span class="locale-chevron" aria-hidden="true"></span>
-        </button>
-        <div id="language-panel" class="language-menu" data-language-menu>
-          {globalLocales.map((code) => <a
-            lang={code}
-            hreflang={code}
-            class:list={{ active: code === lang }}
-            href={globalSwitchPath(code)}
-            aria-current={code === lang ? 'true' : undefined}
-            data-locale-option
-          ><span>{code.toUpperCase()}</span><strong>{globalLocaleNames[code]}</strong><i aria-hidden="true"></i></a>)}
+      <!-- Card Section 2: Hizmetler & Çözümler (Mythborn Open Card Grid) -->
+      <div class="mobile-myth-card">
+        <div class="myth-card-head">
+          <span class="myth-card-title">🏢 {t.services ? t.services.toUpperCase() : 'HİZMETLER'}</span>
+          <span class="myth-card-badge">OPERASYON</span>
+        </div>
+        <div class="mobile-solutions-grid">
+          {solutionLinks.map(([solutionLabel, solutionHref]) => (
+            <a href={solutionHref} class="mobile-solution-item">
+              <strong class="sol-title">{solutionLabel}</strong>
+            </a>
+          ))}
         </div>
       </div>
-      <a class="button button-small nav-cta" href={localizedPath(lang, 'contact')}>{t.quote}</a>
+
+      <!-- Card Section 3: Navigasyon -->
+      <div class="mobile-myth-card">
+        <div class="myth-card-head">
+          <span class="myth-card-title">📌 {lang === 'tr' ? 'HIZLI ERİŞİM' : 'NAVIGATION'}</span>
+          <span class="myth-card-badge">MENÜ</span>
+        </div>
+        <div class="mobile-nav-grid">
+          {nav.filter(([key]) => key !== 'services').map(([key, label, href]) => (
+            <a href={href} class:list={['mobile-nav-item', { active: pageKey === key }]}>
+              <strong>{label}</strong>
+            </a>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Desktop Navigation Items (Desktop Only - UNTOUCHED) -->
+      <div class="desktop-only-nav">
+        <div class="nav-solutions-group" data-solutions-nav-group>
+          <button class:list={['nav-solutions-parent',{ active: pageKey === 'services' }]} type="button" aria-expanded="false" aria-controls="solutions-panel" data-solutions-toggle>
+            <span>{t.services}</span>
+            <i aria-hidden="true">▾</i>
+          </button>
+          <div id="solutions-panel" class="nav-solutions-menu" aria-label={t.services} data-solutions-menu>
+            <div class="nav-solutions-intro"><strong>{t.services}</strong><span>{lang === 'tr' ? 'Ticari kararınızı netleştiren yollar' : lang === 'en' ? 'Commercial paths built around your requirement' : 'Structured commercial paths for your requirement'}</span></div>
+            <div class="desktop-solutions-grid">
+              {solutionLinks.map(([solutionLabel, solutionHref]) => <a href={solutionHref} class="desktop-solution-item"><span>{solutionLabel}</span><i aria-hidden="true">↗</i></a>)}
+            </div>
+          </div>
+        </div>
+
+        {nav.filter(([key]) => key !== 'services').map(([key, label, href]) => (
+          <a class:list={['desktop-nav-link', { active: pageKey === key }]} href={href}>{label}</a>
+        ))}
+
+        <div class="language-switcher language-switcher-desktop">
+          <button type="button" aria-expanded="false" aria-controls="language-panel" aria-label={t.language} data-language-toggle>
+            <span class="locale-code">{(['tr','en','de','it','fa','ru'].includes(lang) ? lang : 'en').toUpperCase()}</span>
+            <span class="locale-chevron" aria-hidden="true"></span>
+          </button>
+          <div id="language-panel" class="language-menu" data-language-menu>
+            {globalLocales.map((code) => <a
+              lang={code}
+              hreflang={code}
+              class:list={{ active: code === lang }}
+              href={globalSwitchPath(code)}
+              aria-current={code === lang ? 'true' : undefined}
+              data-locale-option
+            ><span>{code.toUpperCase()}</span><strong>{globalLocaleNames[code]}</strong><i aria-hidden="true"></i></a>)}
+          </div>
+        </div>
+        <a class="button button-small nav-cta" href={localizedPath(lang, 'contact')}>{t.quote}</a>
+      </div>
     </nav>
   </div>
 </header>
+
 <script>
   const toggle = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('[data-primary-nav]');
   const closeButton = document.querySelector('[data-mobile-close]');
-  const backdrop = document.querySelector('[data-menu-backdrop]');
   const languageToggle = document.querySelector('[data-language-toggle]');
   const languageMenu = document.querySelector('[data-language-menu]');
-  const solutionsToggle = document.querySelector('[data-solutions-toggle]');
-  const solutionsGroup = document.querySelector('[data-solutions-nav-group]');
 
   let previousScroll = 0;
   let previousFocus: HTMLElement | null = null;
 
   const focusable = () => nav ? [...nav.querySelectorAll('a[href], button:not([disabled])')].filter(el => !el.closest('[hidden]')) : [];
 
-  const closeSolutions = (restoreFocus = false) => {
-    solutionsToggle?.setAttribute('aria-expanded', 'false');
-    solutionsGroup?.classList.remove('is-open');
-    if (restoreFocus) (solutionsToggle as HTMLElement)?.focus();
-  };
-
   const closeNavigation = () => {
     if (!nav || !nav.classList.contains('open')) return;
     toggle?.setAttribute('aria-expanded', 'false');
     nav.classList.remove('open');
     nav.setAttribute('aria-hidden', 'true');
-    backdrop?.setAttribute('hidden', '');
-    closeSolutions();
     
     setTimeout(() => {
       document.body.classList.remove('menu-open');
       window.scrollTo({ top: previousScroll, behavior: 'instant' });
       if (previousFocus instanceof HTMLElement) previousFocus.focus({ preventScroll: true });
-    }, 200);
+    }, 150);
   };
 
   const openNavigation = () => {
@@ -208,7 +214,6 @@ const globalSwitchPath = (target: string): string => {
     nav.classList.add('open');
     nav.setAttribute('aria-hidden', 'false');
     document.body.classList.add('menu-open');
-    backdrop?.removeAttribute('hidden');
     (closeButton as HTMLElement)?.focus();
   };
 
@@ -224,22 +229,11 @@ const globalSwitchPath = (target: string): string => {
   });
 
   closeButton?.addEventListener('click', closeNavigation);
-  backdrop?.addEventListener('click', closeNavigation);
 
   languageToggle?.addEventListener('click', () => {
     const open = languageToggle.getAttribute('aria-expanded') === 'true';
     languageToggle.setAttribute('aria-expanded', String(!open));
     languageMenu?.classList.toggle('open', !open);
-  });
-
-  solutionsToggle?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const open = solutionsToggle.getAttribute('aria-expanded') === 'true';
-    solutionsToggle.setAttribute('aria-expanded', String(!open));
-    solutionsGroup?.classList.toggle('is-open', !open);
-    if (open) {
-      (solutionsToggle as HTMLElement)?.blur();
-    }
   });
 
   nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeNavigation));
@@ -254,7 +248,6 @@ const globalSwitchPath = (target: string): string => {
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && nav?.classList.contains('open')) {
       closeLanguageMenu();
-      closeSolutions(true);
       closeNavigation();
     }
     if (event.key === 'Tab' && nav?.classList.contains('open')) {
@@ -272,23 +265,4 @@ const globalSwitchPath = (target: string): string => {
       }
     }
   });
-
-  const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-  const marketParent = document.querySelector('.nav-market-parent');
-  const marketGroup = document.querySelector('.nav-market-group');
-  if (marketParent && marketGroup) {
-    marketParent.addEventListener('click', (e) => {
-      if (isTouchDevice() && window.innerWidth > 1050) {
-        if (!marketGroup.classList.contains('touch-open')) {
-          e.preventDefault();
-          marketGroup.classList.add('touch-open');
-        }
-      }
-    });
-    document.addEventListener('click', (e) => {
-      if (marketGroup.classList.contains('touch-open') && !marketGroup.contains(e.target as Node)) {
-        marketGroup.classList.remove('touch-open');
-      }
-    });
-  }
 </script>
