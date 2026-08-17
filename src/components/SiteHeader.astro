@@ -87,7 +87,7 @@ const globalSwitchPath = (target: string): string => {
         </button>
       </div>
 
-      <!-- Card Section 1: Mobile Language Switcher (Mythborn Grid) -->
+      <!-- Card Section 1: Mobile Language Switcher -->
       <div class="mobile-myth-card mobile-myth-card--lang">
         <div class="myth-card-head">
           <span class="myth-card-title">🌐 {t.language || 'DİL / LANGUAGE'}</span>
@@ -110,18 +110,20 @@ const globalSwitchPath = (target: string): string => {
         </div>
       </div>
 
-      <!-- Card Section 2: Hizmetler & Çözümler (Mythborn Open Card Grid) -->
-      <div class="mobile-myth-card">
-        <div class="myth-card-head">
+      <!-- Card Section 2: Hizmetler & Çözümler (Collapsible Accordion - Closed by Default) -->
+      <div class="mobile-myth-card mobile-accordion" data-accordion data-open="false">
+        <button class="mobile-accordion-btn" type="button" aria-expanded="false" data-accordion-btn>
           <span class="myth-card-title">🏢 {t.services ? t.services.toUpperCase() : 'HİZMETLER'}</span>
-          <span class="myth-card-badge">OPERASYON</span>
-        </div>
-        <div class="mobile-solutions-grid">
-          {solutionLinks.map(([solutionLabel, solutionHref]) => (
-            <a href={solutionHref} class="mobile-solution-item">
-              <strong class="sol-title">{solutionLabel}</strong>
-            </a>
-          ))}
+          <span class="accordion-arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="mobile-accordion-content" hidden data-accordion-content>
+          <div class="mobile-solutions-grid">
+            {solutionLinks.map(([solutionLabel, solutionHref]) => (
+              <a href={solutionHref} class="mobile-solution-item">
+                <strong class="sol-title">{solutionLabel}</strong>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -188,8 +190,28 @@ const globalSwitchPath = (target: string): string => {
   const languageToggle = document.querySelector('[data-language-toggle]');
   const languageMenu = document.querySelector('[data-language-menu]');
 
+  // Mobile Accordion (Hizmetler) Toggle
+  const accordionBtn = document.querySelector('[data-accordion-btn]');
+  const accordionContent = document.querySelector('[data-accordion-content]');
+  const accordionCard = document.querySelector('[data-accordion]');
+
   let previousScroll = 0;
   let previousFocus: HTMLElement | null = null;
+
+  accordionBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const isOpen = accordionCard?.getAttribute('data-open') === 'true';
+    if (isOpen) {
+      accordionCard?.setAttribute('data-open', 'false');
+      accordionBtn.setAttribute('aria-expanded', 'false');
+      accordionContent?.setAttribute('hidden', '');
+    } else {
+      accordionCard?.setAttribute('data-open', 'true');
+      accordionBtn.setAttribute('aria-expanded', 'true');
+      accordionContent?.removeAttribute('hidden');
+    }
+  });
 
   const focusable = () => nav ? [...nav.querySelectorAll('a[href], button:not([disabled])')].filter(el => !el.closest('[hidden]')) : [];
 
