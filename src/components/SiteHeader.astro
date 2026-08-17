@@ -190,11 +190,14 @@ const globalSwitchPath = (target: string): string => {
     toggle?.setAttribute('aria-expanded', 'false');
     nav.classList.remove('open');
     nav.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('menu-open');
     backdrop?.setAttribute('hidden', '');
     closeSolutions();
-    window.scrollTo(0, previousScroll);
-    if (previousFocus instanceof HTMLElement) previousFocus.focus({ preventScroll: true });
+    
+    setTimeout(() => {
+      document.body.classList.remove('menu-open');
+      window.scrollTo({ top: previousScroll, behavior: 'instant' });
+      if (previousFocus instanceof HTMLElement) previousFocus.focus({ preventScroll: true });
+    }, 200);
   };
 
   const openNavigation = () => {
