@@ -272,6 +272,7 @@ html[data-locale=de] .page-hero h1,html[data-locale=it] .page-hero h1,html[data-
   .mobile-solution-item,.mobile-nav-item{display:flex;flex-direction:column;padding:12px;border-radius:12px;background:#262d3a!important;border:1.5px solid #3d4757!important;color:#fff!important;text-decoration:none}
   .mobile-solution-item .sol-title,.mobile-nav-item strong{font-size:.9rem;font-weight:800;color:#ffffff!important}
   .mobile-nav-item.active{border-color:var(--accent)!important;background:#313a4a!important}
+  .mobile-cta-btn{width:100%!important;min-height:50px!important;margin-top:6px!important;border-radius:14px!important;font-size:.95rem!important;font-weight:800!important;letter-spacing:.08em!important;display:flex!important;align-items:center!important;justify-content:center!important}
   .hero{min-height:auto;padding:62px 0 72px}.hero-grid,.page-hero-grid,.portfolio-layout,.section-head,.content-grid{grid-template-columns:1fr}
   .hero h1,html[data-locale=de] .hero h1,html[data-locale=it] .hero h1,html[data-locale=ru] .hero h1{font-size:clamp(2.9rem,7vw,3.8rem);max-width:15ch}.hero-visual{width:100%;max-width:700px;margin-left:auto}.hero-visual figcaption{grid-template-columns:1fr}
   .product-editorial-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"lead lead" "medium-a medium-b" "compact-a compact-b" "compact-c compact-c"}
