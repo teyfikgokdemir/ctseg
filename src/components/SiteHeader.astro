@@ -197,6 +197,12 @@ const globalSwitchPath = (target: string): string => {
 
         <a class="button button-small nav-cta" href={localizedPath(lang, 'contact')}>{t.quote}</a>
       </div>
+      {(lang === 'en' || lang === 'fa') && (
+        <a class="fa-market-nav-link fa-nav-promo" href="/fa/" data-fa-nav-link data-fa-landing-link>
+          <strong>{lang === 'fa' ? 'برای کسب‌وکارهای ایرانی' : 'For Iranian Businesses'}</strong>
+          <span>{lang === 'fa' ? 'پشتیبانی تجارت بین‌المللی' : 'Persian landing page'}</span>
+        </a>
+      )}
     </nav>
   </div>
 </header>

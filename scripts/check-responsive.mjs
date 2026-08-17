@@ -163,7 +163,7 @@ try {
       await page.locator('[data-menu-toggle]').click();
       mobileMenu = await page.locator('[data-primary-nav]').isVisible();
       bodyScrollLocked = await page.evaluate(() => document.body.classList.contains('menu-open') && getComputedStyle(document.body).overflow === 'hidden');
-      if (!testCase.openMenu) await page.locator('[data-menu-toggle]').click();
+      if (!testCase.openMenu) await page.locator('[data-mobile-close]').click();
     }
     if (testCase.persian && testCase.width <= 820) {
       const toggle = page.locator('[data-fa-menu-toggle]');
@@ -218,7 +218,7 @@ try {
       persianMobileMenu={initial,opened,focusTrapped,escapeClosed,outsideClosed};
     }
     if (testCase.openLanguage) await page.locator('[data-language-toggle]').click();
-    if (testCase.openPersianNav) await page.locator('[data-markets-nav-group]').hover();
+    if (testCase.openPersianNav) await page.locator('[data-fa-nav-link]').hover();
     const contactEmailLink = page.locator('.contact-email-link');
     if (await contactEmailLink.count()) {
       await page.keyboard.press('Tab');
@@ -260,7 +260,7 @@ try {
       ,localeOptions:document.querySelectorAll('#language-panel [data-locale-option]').length
       ,activeDesktopLocale:document.querySelectorAll('#language-panel [data-locale-option][aria-current="true"]').length
       ,mobilePanelHeight:document.querySelector('[data-primary-nav]')?.getBoundingClientRect().height ?? 0
-      ,visibleMobileLocales:[...document.querySelectorAll('.mobile-locales [data-locale-option]')].filter((link) => {
+      ,visibleMobileLocales:[...document.querySelectorAll('.mobile-lang-grid [data-locale-option]')].filter((link) => {
         const box=link.getBoundingClientRect(); return box.width>0&&box.height>0;
       }).length
       ,localeRouteMatch:[...document.querySelectorAll('[data-locale-option]')].every((link) => {

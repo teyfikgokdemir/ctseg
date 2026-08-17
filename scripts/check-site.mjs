@@ -210,7 +210,7 @@ for (const file of htmlFiles) {
   }
   if (!tradeRecord) {
     const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
-    const mobileLocales = html.match(/class="mobile-locales"[\s\S]*?<\/div>\s*<\/div>/)?.[0] ?? '';
+    const mobileLocales = html.match(/class="mobile-lang-grid"[\s\S]*?<\/div>/)?.[0] ?? '';
     const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
     if ((desktopLocales.match(/data-locale-option/g) || []).length !== 6) errors.push(`${label}: desktop locale panel must contain six languages`);
     if ((mobileLocales.match(/data-locale-option/g) || []).length !== 6) errors.push(`${label}: mobile locale panel must contain six languages`);
