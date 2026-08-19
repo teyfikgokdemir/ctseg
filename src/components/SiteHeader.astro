@@ -77,7 +77,7 @@ const globalSwitchPath = (target: string): string => {
       <span class="sr-only">{t.menu}</span><span></span><span></span>
     </button>
 
-    <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav aria-hidden="true">
+    <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav>
       <!-- MOBILE ONLY PANEL (86272194 Standard - Pure Mythborn Card Grid - UNTOUCHED) -->
       <div class="mobile-only-panel">
         <div class="mobile-nav-head">
@@ -218,8 +218,24 @@ const globalSwitchPath = (target: string): string => {
 
   let previousScroll = 0;
   let previousFocus: HTMLElement | null = null;
+  const mobileBreakpoint = window.matchMedia('(max-width: 1050px)');
+
+  const syncNavigationAccessibility = () => {
+    if (!nav) return;
+    const isMobile = mobileBreakpoint.matches;
+    const isOpen = nav.classList.contains('open');
+    if (isMobile) {
+      nav.toggleAttribute('inert', !isOpen);
+      nav.setAttribute('aria-hidden', String(!isOpen));
+    } else {
+      nav.removeAttribute('inert');
+      nav.removeAttribute('aria-hidden');
+    }
+  };
 
   const focusable = () => nav ? [...nav.querySelectorAll('a[href], button:not([disabled])')].filter(el => !el.closest('[hidden]')) : [];
+
+  syncNavigationAccessibility();
 
   const closeSolutions = (restoreFocus = false) => {
     solutionsToggle?.setAttribute('aria-expanded', 'false');
@@ -231,7 +247,7 @@ const globalSwitchPath = (target: string): string => {
     if (!nav || !nav.classList.contains('open')) return;
     toggle?.setAttribute('aria-expanded', 'false');
     nav.classList.remove('open');
-    nav.setAttribute('aria-hidden', 'true');
+    syncNavigationAccessibility();
     closeSolutions();
     
     setTimeout(() => {
@@ -247,7 +263,7 @@ const globalSwitchPath = (target: string): string => {
     previousFocus = document.activeElement as HTMLElement;
     toggle?.setAttribute('aria-expanded', 'true');
     nav.classList.add('open');
-    nav.setAttribute('aria-hidden', 'false');
+    syncNavigationAccessibility();
     document.body.classList.add('menu-open');
     (closeButton as HTMLElement)?.focus();
   };
@@ -256,6 +272,8 @@ const globalSwitchPath = (target: string): string => {
     languageToggle?.setAttribute('aria-expanded', 'false');
     languageMenu?.classList.remove('open');
   };
+
+  mobileBreakpoint.addEventListener('change', syncNavigationAccessibility);
 
   toggle?.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') === 'true';
