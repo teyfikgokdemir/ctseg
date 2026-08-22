@@ -2,6 +2,7 @@
 import '../../../styles/site.css';
 import ResponsiveImage from '../../../components/ResponsiveImage.astro';
 import { pathForSector, persianProducerCopy, tradeCopy, tradeLocales, tradeSectorIds, tradeUi, type TradeLocale, type TradeSectorId } from '../../../data/trade-sectors';
+import { company } from '../../../data/site';
 import { localizedTradeVisual, sourcingTradeVisualKeys } from '../../../data/trade-visuals';
 import { FEATURE_IMAGE_WIDTHS } from '../../../lib/responsive-images';
 import { localeDirection, localeOg } from '../../../data/locales';
@@ -25,7 +26,7 @@ const chrome = {
   vi: { skip: 'Chuyển đến nội dung chính', language: 'Chọn ngôn ngữ', menu: 'Mở menu ngôn ngữ', close: 'Đóng menu ngôn ngữ' }
 }[lang];
 const schema=[
- {'@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',name:'CTSEG Sanayi ve Ticaret Limited Şirketi',alternateName:'CTSEG',foundingDate:'2022',founder:{'@type':'Person',name:'Teyfik Gökdemir'},address:{'@type':'PostalAddress',addressLocality:'Tuzla',addressRegion:'İstanbul',addressCountry:'TR'},url:'https://ctseg.com.tr/'},
+ {'@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',name:company.name[lang] || company.name.en,alternateName:'CTSEG',foundingDate:'2022',founder:{'@type':'Person',name:'Teyfik Gökdemir'},address:{'@type':'PostalAddress',addressLocality:'Tuzla',addressRegion:'İstanbul',addressCountry:'TR'},url:'https://ctseg.com.tr/'},
  {'@type':'WebPage','@id':`${canonical}#webpage`,url:canonical,name:copy.title,description:metaDescription,inLanguage:lang,isPartOf:{'@id':'https://ctseg.com.tr/#website'},about:{'@id':'https://ctseg.com.tr/#organization'}},
  {'@type':'Service','@id':`${canonical}#service`,name:copy.title,description:metaDescription,serviceType:copy.eyebrow,provider:{'@id':'https://ctseg.com.tr/#organization'},areaServed:['Türkiye','Europe','United States','International'],inLanguage:lang,audience:producer?.audiences.map(audienceType=>({'@type':'Audience',audienceType}))},
  {'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'CTSEG',item:`https://ctseg.com.tr${home}`},{'@type':'ListItem',position:2,name:copy.title,item:canonical}]}

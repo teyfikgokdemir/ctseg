@@ -13,7 +13,16 @@ export { activeLocales };
 type Localized<T = string> = Record<Locale, T>;
 
 export const company = {
-  name: 'CTSEG Sanayi ve Ticaret Limited Şirketi',
+  name: {
+    tr: 'CTSEG Sanayi ve Ticaret Limited Şirketi',
+    en: 'CTSEG Industry and Trade Limited Company',
+    de: 'CTSEG Industrie und Handel GmbH',
+    it: 'CTSEG S.r.l.',
+    fa: 'CTSEG (شرکت با مسئولیت محدود صنعتی و تجاری)',
+    ru: 'CTSEG Промышленно-Торговая Компания с Ограниченной Ответственностью',
+    zh: 'CTSEG 工业与贸易有限公司',
+    vi: 'Công ty TNHH Công nghiệp và Thương mại CTSEG'
+  },
   alternateName: 'CTSEG',
   founder: 'Teyfik Gökdemir',
   foundingYear: '2022',
@@ -42,49 +51,49 @@ export const companyCopy: Record<Locale, {
   },
   en: {
     aboutHeading: 'From Istanbul to international trade',
-    aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi was founded in Istanbul in 2022 by Teyfik Gökdemir. CTSEG supports companies with strategic sourcing, manufacturer and supplier verification, cost analysis, trade product sourcing and international trade processes.',
+    aboutBody: 'CTSEG Industry and Trade Limited Company was founded in Istanbul in 2022 by Teyfik Gökdemir. CTSEG supports companies with strategic sourcing, manufacturer and supplier verification, cost analysis, trade product sourcing and international trade processes.',
     labels: { name: 'Company name', founder: 'Founder', founded: 'Year established', headquarters: 'Headquarters' },
     headquarters: 'Tuzla, Istanbul, Türkiye',
     footerLocation: 'Tuzla, Istanbul, Türkiye'
   },
   de: {
     aboutHeading: 'Von Istanbul in den internationalen Handel',
-    aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi wurde 2022 von Teyfik Gökdemir in Istanbul gegründet. CTSEG unterstützt Unternehmen bei strategischer Beschaffung, der Prüfung von Herstellern und Lieferanten, Kostenanalysen, der Beschaffung von Handelsprodukten und internationalen Handelsprozessen.',
+    aboutBody: 'CTSEG Industrie und Handel GmbH wurde 2022 von Teyfik Gökdemir in Istanbul gegründet. CTSEG unterstützt Unternehmen bei strategischer Beschaffung, der Prüfung von Herstellern und Lieferanten, Kostenanalysen, der Beschaffung von Handelsprodukten und internationalen Handelsprozessen.',
     labels: { name: 'Unternehmensname', founder: 'Gründer', founded: 'Gründungsjahr', headquarters: 'Hauptsitz' },
     headquarters: 'Tuzla, Istanbul, Türkei',
     footerLocation: 'Tuzla, Istanbul, Türkei'
   },
   it: {
     aboutHeading: 'Da Istanbul al commercio internazionale',
-    aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi è stata fondata a Istanbul nel 2022 da Teyfik Gökdemir. CTSEG affianca le aziende nel sourcing strategico, nella verifica di produttori e fornitori, nell’analisi dei costi, nell’approvvigionamento di prodotti commerciali e nei processi di commercio internazionale.',
+    aboutBody: 'CTSEG S.r.l. è stata fondata a Istanbul nel 2022 da Teyfik Gökdemir. CTSEG affianca le aziende nel sourcing strategico, nella verifica di produttori e fornitori, nell’analisi dei costi, nell’approvvigionamento di prodotti commerciali e nei processi di commercio internazionale.',
     labels: { name: 'Nome dell’azienda', founder: 'Fondatore', founded: 'Anno di fondazione', headquarters: 'Sede' },
     headquarters: 'Tuzla, Istanbul, Turchia',
     footerLocation: 'Tuzla, Istanbul, Turchia'
   },
   ru: {
     aboutHeading: 'Из Стамбула — на международные рынки',
-    aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi основана Тейфиком Гёкдемиром в Стамбуле в 2022 году. Компания помогает с международным сорсингом, проверкой производителей и поставщиков, поиском покупателей и коммерческой координацией.',
+    aboutBody: 'Компания CTSEG Промышленно-Торговая Компания с Ограниченной Ответственностью основана Тейфиком Гёкдемиром в Стамбуле в 2022 году. Компания помогает с международным сорсингом, проверкой производителей и поставщиков, поиском покупателей и коммерческой координацией.',
     labels: { name: 'Компания', founder: 'Основатель', founded: 'Год основания', headquarters: 'Главный офис' },
     headquarters: 'Tuzla, Стамбул, Турция',
     footerLocation: 'Тузла, Стамбул, Турция'
   },
   fa: {
     aboutHeading: 'از استانبول به تجارت بین‌المللی',
-    aboutBody: 'شرکت CTSEG Sanayi ve Ticaret Limited Şirketi در سال ۲۰۲۲ توسط توفیق گوکدمیر در استانبول تأسیس شد. CTSEG به شرکت‌ها در زمینه تأمین استراتژیک، اعتبارسنجی تولیدکنندگان و تأمین‌کنندگان، تحلیل هزینه، تأمین کالاهای تجاری و فرآیندهای تجارت بین‌الملل خدمات ارائه می‌دهد.',
+    aboutBody: 'شرکت CTSEG (شرکت با مسئولیت محدود صنعتی و تجاری) در سال ۲۰۲۲ توسط توفیق گوکدمیر در استانبول تأسیس شد. CTSEG به شرکت‌ها در زمینه تأمین استراتژیک، اعتبارسنجی تولیدکنندگان و تأمین‌کنندگان، تحلیل هزینه، تأمین کالاهای تجاری و فرآیندهای تجارت بین‌الملل خدمات ارائه می‌دهد.',
     labels: { name: 'نام شرکت', founder: 'بنیان‌گذار', founded: 'سال تأسیس', headquarters: 'دفتر مرکزی' },
     headquarters: 'توزلا، استانبول، ترکیه',
     footerLocation: 'توزلا، استانبول، ترکیه'
   },
   zh: {
     aboutHeading: '立足伊斯坦布尔，连接全球贸易',
-    aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi 由 Teyfik Gökdemir 于 2022 年在伊斯坦布尔创立。CTSEG 致力于为全球企业提供战略采购、生产商与供应商背景核验、成本优化分析、大宗特色商品供应链对接以及国际贸易商业决策支持。',
+    aboutBody: 'CTSEG 工业与贸易有限公司由 Teyfik Gökdemir 于 2022 年在伊斯坦布尔创立。CTSEG 致力于为全球企业提供战略采购、生产商与供应商背景核验、成本优化分析、大宗特色商品供应链对接以及国际贸易商业决策支持。',
     labels: { name: '公司名称', founder: '创始人', founded: '创立年份', headquarters: '总部地址' },
     headquarters: '土耳其伊斯坦布尔图兹拉 (Tuzla, Istanbul, Türkiye)',
     footerLocation: '土耳其伊斯坦布尔图兹拉'
   },
   vi: {
     aboutHeading: 'Từ Istanbul kết nối thương mại quốc tế',
-    aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi được thành lập tại Istanbul vào năm 2022 bởi Teyfik Gökdemir. CTSEG hỗ trợ các doanh nghiệp trong việc thu mua chiến lược, thẩm định và xác minh nhà sản xuất/nhà cung cấp, phân tích chi phí, cung ứng sản phẩm thương mại và điều phối các quy trình thương mại quốc tế.',
+    aboutBody: 'Công ty TNHH Công nghiệp và Thương mại CTSEG được thành lập tại Istanbul vào năm 2022 bởi Teyfik Gökdemir. CTSEG hỗ trợ các doanh nghiệp trong việc thu mua chiến lược, thẩm định và xác minh nhà sản xuất/nhã cung cấp, phân tích chi phí, cung ứng sản phẩm thương mại và điều phối các quy trình thương mại quốc tế.',
     labels: { name: 'Tên công ty', founder: 'Người sáng lập', founded: 'Năm thành lập', headquarters: 'Trụ sở chính' },
     headquarters: 'Tuzla, Istanbul, Thổ Nhĩ Kỳ',
     footerLocation: 'Tuzla, Istanbul, Thổ Nhĩ Kỳ'

@@ -49,7 +49,19 @@ let productSchemaPages = 0;
 let productAssessmentServicePages = 0;
 let contactEmailPanels = 0;
 let searchLandingPages = 0;
-const companyName = 'CTSEG Sanayi ve Ticaret Limited Şirketi';
+const companyNames = {
+  tr: 'CTSEG Sanayi ve Ticaret Limited Şirketi',
+  en: 'CTSEG Industry and Trade Limited Company',
+  de: 'CTSEG Industrie und Handel GmbH',
+  it: 'CTSEG S.r.l.',
+  fa: 'CTSEG (شرکت با مسئولیت محدود صنعتی و تجاری)',
+  ru: 'CTSEG Промышленно-Торговая Компания с Ограниченной Ответственностью',
+  zh: 'CTSEG 工业与贸易有限公司',
+  vi: 'Công ty TNHH Công nghiệp và Thương mại CTSEG',
+  sq: 'CTSEG Industry and Trade Limited Company',
+  mk: 'CTSEG Industry and Trade Limited Company',
+  sr: 'CTSEG Industry and Trade Limited Company'
+};
 const aboutPages = new Set([
   'tr/hakkimizda/index.html',
   'en/about/index.html',
@@ -110,6 +122,7 @@ for (const file of htmlFiles) {
   const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
   const rawLang = html.match(/<html lang="([^"]+)"/)?.[1];
   const lang = rawLang?.startsWith('zh') ? 'zh' : rawLang?.startsWith('vi') ? 'vi' : rawLang;
+  const expectedCompanyName = companyNames[lang] || companyNames.en;
   const alternates = Object.fromEntries([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
   const jsonLdBlocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((match) => match[1]);
   const parsedSchemas = [];
@@ -137,7 +150,7 @@ for (const file of htmlFiles) {
   if (/\u00C3[\u00BC\u00B6\u00A7\u009F\u0087\u0096\u009C\u00A4\u00A0]|\u00C2\u00A9|\u00E2[\u20AC\u201D\u2013\u2014\u2122\u0153]|\u00C4[\u0178\u00B1]|\u00C5[\u0178\u017E\u009F\u009E]|\uFFFD/.test(html)) {
     errors.push(`${label}: mojibake text remains`);
   }
-  if (!html.includes(companyName)) {
+  if (!html.includes(expectedCompanyName)) {
     errors.push(`${label}: localized footer company identity missing`);
   }
   if (isTurkishPage && !html.includes('Türkiye merkezli uluslararası ticaret eşleştirme ve bağımsız ticari koordinasyon.')) {
@@ -148,7 +161,7 @@ for (const file of htmlFiles) {
   }
   if (organizations.length !== 1) errors.push(`${label}: expected one Organization schema, found ${organizations.length}`);
   if (organization && (
-    organization.name !== companyName ||
+    organization.name !== expectedCompanyName ||
     organization.alternateName !== 'CTSEG' ||
     organization.foundingDate !== '2022' ||
     organization.founder?.['@type'] !== 'Person' ||

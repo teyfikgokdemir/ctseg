@@ -31,7 +31,7 @@ const alternateCodes = pageKey === 'medical'
     : pageKey === 'guides' ? ['tr','en'] : locales);
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
-  name:company.name,alternateName:company.alternateName,foundingDate:company.foundingYear,
+  name:company.name[lang as Locale] || company.name.en,alternateName:company.alternateName,foundingDate:company.foundingYear,
   founder:{'@type':'Person',name:company.founder},
   address:{
     '@type':'PostalAddress',

@@ -43,7 +43,7 @@ const copyright = copyrightMap[lang] || copyrightMap.en;
       <a class="brand" href={localizedPath(lang, 'home')}><img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" loading="lazy" decoding="async" /></a>
       <p>{description}</p>
       <div class="footer-company">
-        <strong>{company.name}</strong>
+        <strong>{company.name[lang] || company.name.en}</strong>
         <span>{company.foundingYear} · {corporate.footerLocation}</span>
       </div>
     </div>
@@ -78,7 +78,7 @@ const copyright = copyrightMap[lang] || copyrightMap.en;
   <div class="container footer-bottom">
     <p>{copyright}</p>
     <nav aria-label="Legal">
-      {legalIds.map((id) => <a href={localizedPath(lang, 'legal', id)}>{legal[id].titles[lang]}</a>)}
+      {legalIds.map((id) => <a href={localizedPath(lang, 'legal', id)}>{legal[id].titles[lang] || legal[id].titles.en}</a>)}
     </nav>
   </div>
 </footer>

@@ -222,7 +222,7 @@ const verifiedLater = {
       <div class="operational-trust-panel"><ol>{operationalTrust.steps.map((step,index)=><li><span>{indexLabel(index)}</span><strong>{step}</strong></li>)}</ol><a class="button button-secondary" href={workHref} data-how-we-work-cta>{operationalTrust.cta} →</a></div>
     </div></section>
     <section class="section company-trust-band" id="company"><div class="container">
-      <div class="company-trust-heading"><h2>{completionHome.trustTitle}</h2><p>{company.name}</p></div>
+      <div class="company-trust-heading"><h2>{completionHome.trustTitle}</h2><p>{company.name[lang] || company.name.en}</p></div>
       <dl class="trust-facts">
         <div><dt>01</dt><dd>{completionHome.established}</dd></div>
         <div><dt>02</dt><dd>{completionHome.founder}</dd></div>
@@ -410,7 +410,7 @@ const verifiedLater = {
       <div class="prose"><div class="content-block"><p class="eyebrow">{company.alternateName} · {company.foundingYear}</p><h2>{corporate.aboutHeading}</h2><p>{corporate.aboutBody}</p></div></div>
       <aside class="company-card" aria-label={corporate.labels.name}>
         <dl>
-          <div><dt>{corporate.labels.name}</dt><dd>{company.name}</dd></div>
+          <div><dt>{corporate.labels.name}</dt><dd>{company.name[lang] || company.name.en}</dd></div>
           <div><dt>{corporate.labels.founder}</dt><dd>{company.founder}</dd></div>
           <div><dt>{corporate.labels.founded}</dt><dd>{company.foundingYear}</dd></div>
           <div><dt>{corporate.labels.headquarters}</dt><dd>{corporate.headquarters}</dd></div>

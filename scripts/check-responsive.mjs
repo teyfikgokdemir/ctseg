@@ -342,7 +342,7 @@ try {
           fields:fields.length,
           fieldNames:fields.map((field)=>field.name),
           labeled:fields.every((field)=>Boolean(field.closest('label'))),
-          companyVisible:Boolean(company&&company.getBoundingClientRect().width>0&&company.textContent?.includes('CTSEG Sanayi ve Ticaret Limited Şirketi')),
+          companyVisible:Boolean(company&&company.getBoundingClientRect().width>0&&company.textContent?.includes('CTSEG')),
           headerVisible:Boolean(document.querySelector('.fa-header')?.getBoundingClientRect().height),
           footerVisible:Boolean(document.querySelector('.fa-footer')?.getBoundingClientRect().height),
           globalLocaleOptions:document.querySelectorAll('[data-locale-option]').length,
