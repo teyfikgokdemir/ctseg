@@ -18,22 +18,30 @@ const data = reflexData[lang] || reflexData.en;
 const alternates = reflexAlternates();
 const canonical = `https://ctseg.com.tr${reflexPath(lang)}`;
 
+const homeNames: Record<string, string> = {
+  tr: 'Ana Sayfa', en: 'Home', de: 'Startseite', it: 'Home', fa: 'صفحه اصلی', ru: 'Главная', zh: '首页', vi: 'Trang chủ', sq: 'Kreu', mk: 'Почетна', sr: 'Početna'
+};
+
+const medicalNames: Record<string, string> = {
+  tr: 'Medikal ve Hijyen', en: 'Medical & Hygiene', de: 'Medizin & Hygiene', it: 'Medico e Igiene', fa: 'پزشکی و بهداشت', ru: 'Медицина и гигиена', zh: '医疗与防护卫生', vi: 'Y tế & Vệ sinh', sq: 'Mjekësi & Higjienë', mk: 'Медицина и хигиена', sr: 'Medicina i higijena'
+};
+
 const schema = [
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: `https://ctseg.com.tr/${lang}/` },
-      { '@type': 'ListItem', position: 2, name: 'Medical & Hygiene', item: canonical }
+      { '@type': 'ListItem', position: 1, name: homeNames[lang] || 'Home', item: `https://ctseg.com.tr/${lang}/` },
+      { '@type': 'ListItem', position: 2, name: medicalNames[lang] || 'Medical & Hygiene', item: canonical }
     ]
   },
   {
     '@context': 'https://schema.org',
     '@type': 'MedicalWebPage',
     '@id': `${canonical}#medical-page`,
-    name: 'REFLEX Disposable Gloves Portfolio',
+    name: data.heroTitle,
     description: data.metaDescription,
-    aspect: 'Medical & Protective Gloves Portfolio',
+    aspect: data.eyebrow,
     image: 'https://ctseg.com.tr/images/reflex-tpe-gloves-hero.webp'
   }
 ];

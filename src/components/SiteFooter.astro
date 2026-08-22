@@ -50,7 +50,19 @@ const copyright = copyrightMap[lang] || copyrightMap.en;
     <nav aria-label={t.products}>
       <strong>{t.products}</strong>
       <a href={localizedPath(lang, 'products')}>{t.allProducts}</a>
-      <a href={reflexPath(lang)}>REFLEX Medical Gloves</a>
+      <a href={reflexPath(lang)}>{({
+        tr: 'REFLEX Medikal Eldivenler',
+        en: 'REFLEX Medical Gloves',
+        de: 'REFLEX Medizinische Handschuhe',
+        it: 'Guanti Medici REFLEX',
+        fa: 'دستکش‌های پزشکی REFLEX',
+        ru: 'Медицинские перчатки REFLEX',
+        zh: 'REFLEX 医用与防护手套',
+        vi: 'Găng tay y tế REFLEX',
+        sq: 'Doreza Mjekësore REFLEX',
+        mk: 'REFLEX Медицински Ракавици',
+        sr: 'REFLEX Medicinske Rukavice'
+      }[lang] || 'REFLEX Medical Gloves')}</a>
       <a href={localizedPath(lang, 'markets')}>{t.markets}</a>
       <a href={localizedPath(lang, 'insights')}>{t.insights}</a>
     </nav>
@@ -60,6 +72,7 @@ const copyright = copyrightMap[lang] || copyrightMap.en;
       {(lang === 'tr' || lang === 'en' || lang === 'fa' || lang === 'zh' || lang === 'vi') && <a href={localizedPath(lang,'how-we-work')}>{lang === 'tr' ? 'Nasıl çalışıyoruz?' : lang === 'fa' ? 'چگونه کار می‌کنیم؟' : lang === 'zh' ? '运作模式' : lang === 'vi' ? 'Phương thức hoạt động' : 'How we work'}</a>}
       <a href={localizedPath(lang, 'contact')}>{t.contact}</a>
       <a href={`mailto:${company.email}`}>{company.email}</a>
+      <a href="https://t.me/teyfikgokdemir" target="_blank" rel="noopener noreferrer" aria-label="Telegram: @teyfikgokdemir">Telegram (@teyfikgokdemir)</a>
     </nav>
   </div>
   <div class="container footer-bottom">

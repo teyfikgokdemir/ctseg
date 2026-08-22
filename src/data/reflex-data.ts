@@ -11,7 +11,9 @@ export const reflexLocaleNames: Record<ReflexLocale, string> = {
   fa: 'فارسی',
   sq: 'Shqip',
   mk: 'Македонски',
-  sr: 'Srpski'
+  sr: 'Srpski',
+  zh: '简体中文',
+  vi: 'Tiếng Việt'
 };
 
 export function reflexPath(lang: ReflexLocale): string {
@@ -29,7 +31,9 @@ export function reflexAlternates(): Record<ReflexLocale, string> {
     fa: 'https://ctseg.com.tr/fa/medical/reflex-disposable-gloves/',
     sq: 'https://ctseg.com.tr/sq/medical/reflex-disposable-gloves/',
     mk: 'https://ctseg.com.tr/mk/medical/reflex-disposable-gloves/',
-    sr: 'https://ctseg.com.tr/sr/medical/reflex-disposable-gloves/'
+    sr: 'https://ctseg.com.tr/sr/medical/reflex-disposable-gloves/',
+    zh: 'https://ctseg.com.tr/zh/medical/reflex-disposable-gloves/',
+    vi: 'https://ctseg.com.tr/vi/medical/reflex-disposable-gloves/'
   };
 }
 
@@ -1722,6 +1726,352 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
       notes: 'Napomene o Incoterms & Specifikacijama',
       submit: 'Pošaljite Zahtev za Ponudu',
       successMessage: 'Vaš zahtev je zabeležen. Naš izvozni tim će razmotriti vaše specifikacije.'
+    }
+  },
+  zh: {
+    metaTitle: 'B2B REFLEX 医用与工业级一次性防护手套大宗采购供应 | CTSEG 医疗防护',
+    metaDescription: 'CTSEG 为全球买家、分销商与医疗机构提供土耳其 REFLEX 一次性防护手套大宗直供（包括混合 TPE、医用检查、热塑性乙烯基与共聚物手套），附带完整批次质检单证与出口协调。',
+    eyebrow: '医用检查与工业级一次性防护手套矩阵',
+    heroTitle: 'REFLEX 医用检查与一次性防护手套大宗直供',
+    heroLead: 'CTSEG 为全球分销商、医疗机构与工业企业提供高产能丁腈检查手套、无乳胶 TPE、热塑性乙烯基（Thermo Vinyl）及共聚物一次性手套大宗出口直供与逐批次合规质检单证支持。',
+    heroBadges: ['单证逐批核验', '批次报告核查', 'B2B 大宗集采', '国际出口物流协调'],
+    ctaQuote: '索取正式报价',
+    ctaCatalog: '下载产品手册 (PDF)',
+    ctaProducts: '查阅完整产品系列',
+
+    aboutEyebrow: '现代化生产产能与国际标准',
+    aboutTitle: '自动化规模化生产与严苛合规标准',
+    aboutText1: 'REFLEX 系列产品在伊斯坦布尔现代化生产基地制造，配备 24/7 全天候运转的高精度自动化流水线。采用高纯度原材料与专利级 TPE 配方，生产符合医用检查与工业级防护标准的专业手套。',
+    aboutText2: '在做出商业决策前，我们将根据指定产品、生产工厂、具体批次与目标市场准入要求，全面核对现行有效认证、检测报告与实验室检验单证。',
+    aboutRoleTitle: 'CTSEG 商业协同定位',
+    aboutRoleText: 'CTSEG 作为 REFLEX 手套面向国际市场的专业战略采购与贸易协调伙伴，为海外进口商提供出口单证整理、出厂检验分析报告 (COA) 审核与全流程物流协同支持。',
+    aboutMarketsTitle: '重点交付市场',
+    aboutMarketsList: ['欧盟与英国', '巴尔干地区', '中东与海湾地区', '北非与地中海沿岸', '全球大宗进口商'],
+
+    categoriesTitle: 'REFLEX 医用与防护手套产品矩阵',
+    categoriesLead: '查阅针对不同行业应用场景、卫生级别与防护强度定制的 REFLEX 手套全系产品。',
+
+    categories: [
+      {
+        id: 'flex-hitech',
+        name: 'FLEX Hi-Tech 混合 TPE 防护手套',
+        subtitle: '新一代高弹性混合工艺',
+        description: '乳胶与丁腈的高性价比替代方案。触感柔软、高延展性、无粉配方。',
+        material: 'TPE（热塑性弹性体）',
+        variants: '黑色、蓝色、透明 | 尺码：S, M, L, XL',
+        packing: '100 只/盒，20 盒/箱 (70 箱/托盘)',
+        image: '/images/reflex/flex-hi-tech-main.jpg',
+        badges: ['无乳胶', '无粉配方', '食品接触级']
+      },
+      {
+        id: 'medilex-exam',
+        name: 'MEDILEX 医用检查手套 (Healthy Touch)',
+        subtitle: '临床检查与医疗健康防护',
+        description: '专为临床检查及医疗卫生环境研发的非灭菌检查手套。',
+        material: '医用级聚合物 / TPE 复合配方',
+        variants: '绿色、粉色、蓝色、黑色 | 尺码：S, M, L/XL',
+        packing: '100 只/盒，20 盒/箱 (70 箱/托盘)',
+        image: '/images/reflex/reflex-cat6.jpg',
+        badges: ['单证逐项核验', '按目标市场合规评估', '非无菌级']
+      },
+      {
+        id: 'winlyex-thermo-vinyl',
+        name: 'WINLYEX Extra 加厚热塑性乙烯基手套',
+        subtitle: '加厚耐用型与化学防护',
+        description: '具备出色的耐化学飞溅性能，全生命周期碳足迹降低 70% 的加厚乙烯基复合配方。',
+        material: '热塑性乙烯基复合材料 (Thermo Vinyl)',
+        variants: '紫色、绿色、透明、粉色 | 尺码：S, M, L/XL',
+        packing: '100 只/盒，20 盒/箱 (70 箱/托盘)',
+        image: '/images/reflex/reflex-cat5.jpg',
+        badges: ['加厚抗撕裂', '低碳环保', '高阻隔防护']
+      },
+      {
+        id: 'slimfit-copolymer',
+        name: 'SLIMFIT 共聚物高灵敏度防护手套',
+        subtitle: '透气防汗与高触觉灵敏度',
+        description: '兼顾精细触感与防手汗透气结构，适用于精密装配与精细操作。',
+        material: '无粉共聚物树脂 (Copolymer)',
+        variants: '黑色、蓝色、米白 | 尺码：S, M, L/XL',
+        packing: '100 只/盒，20 盒/箱 (70 箱/托盘)',
+        image: '/images/reflex/reflex-cat8.jpg',
+        badges: ['透气防汗', '高灵敏触觉', '超薄贴合']
+      },
+      {
+        id: 'winlyex-powder-free',
+        name: 'WINLYEX 无粉医用检查级手套',
+        subtitle: '医用与高洁净度无粉标准',
+        description: '表面微麻处理，提供优异湿滑抓握力与可靠的生物及液体阻隔屏障。',
+        material: '医用级无粉复合配方',
+        variants: '蓝色、白色、薄荷绿 | 尺码：S, M, L, XL',
+        packing: '100 只/盒，20 盒/箱 (70 箱/托盘)',
+        image: '/images/reflex/reflex-cat4.jpg',
+        badges: ['无粉处理', '防滑微麻面', '医用检查级']
+      },
+      {
+        id: 'florex-multipurpose',
+        name: 'FLOREX 多用途大宗商业手套',
+        subtitle: '多领域通用经济型解决方案',
+        description: '适用于食品加工、餐饮服务、轻工业保洁及大宗商业流通的高性价比防护手套。',
+        material: '高性价比多用途聚合物',
+        variants: '透明、蓝色、黄色 | 尺码：通用均码 / S, M, L',
+        packing: '100 只/盒，20 盒/箱 (70 箱/托盘)',
+        image: '/images/reflex/reflex-cat5.jpg',
+        badges: ['经济耐用', '食品接触级', '多领域通用']
+      },
+      {
+        id: 'reflex-vinyl',
+        name: 'REFLEX 经典乙烯基防护手套',
+        subtitle: '高韧性经典合成防护',
+        description: '标准工业与日常卫生防护手套，具备出色的抗拉伸韧性与舒适穿戴体验。',
+        material: '优质合成乙烯基 (PVC)',
+        variants: '透明、蓝色 | 尺码：S, M, L, XL',
+        packing: '100 只/盒，20 盒/箱 (70 箱/托盘)',
+        image: '/images/reflex/reflex-cat3.jpg',
+        badges: ['无乳胶致敏', '高抗拉伸', '防静电']
+      }
+    ],
+
+    applicationsTitle: '广泛覆盖各大核心工业与卫生领域',
+    applicationsLead: '从高卫生标准的医疗临床到大通量食品加工与工业洁净防护。',
+    applications: [
+      {
+        title: '医疗卫生与临床护理',
+        description: '适用于医院门诊、诊所常规检查、护理及实验室样本处理，提供可靠的卫生屏障。',
+        image: '/images/reflex/slider-ortax4.jpg'
+      },
+      {
+        title: '食品加工与餐饮连锁',
+        description: '完全符合食品接触安全规范，保障大宗食品分切、包装与中央厨房卫生安全。',
+        image: '/images/reflex/slider-ortax1.jpg'
+      },
+      {
+        title: '工业制造与精密组装',
+        description: '耐油污飞溅、防静电与优异的抓握力，适用于汽车零部件装配、电子与通用制造。',
+        image: '/images/reflex/slider-ortax2.jpg'
+      },
+      {
+        title: '商业保洁与专业清洁',
+        description: '针对清洁洗涤剂与日常污渍提供坚韧防护，耐磨损且穿脱便捷。',
+        image: '/images/reflex/reflex-cat4.jpg'
+      }
+    ],
+
+    galleryTitle: '产品实物与包装视觉呈现',
+    galleryLead: '查阅 REFLEX 产品的精细做工、外包装箱规与托盘标准堆叠实景。',
+    galleryItems: [
+      {
+        title: '标准彩盒与外箱包装规范',
+        tag: '外箱与彩盒',
+        image: '/images/reflex/reflex-sliderx1.jpg'
+      },
+      {
+        title: '高密度自动化车间生产实景',
+        tag: '工厂车间',
+        image: '/images/reflex/reflex-slider1.jpg'
+      },
+      {
+        title: '集装箱与托盘出口装运实景',
+        tag: '物流装载',
+        image: '/images/reflex/slider-ortax1.jpg'
+      },
+      {
+        title: '出厂质量抽检与拉伸性能测试',
+        tag: '质量控制',
+        image: '/images/reflex/reflex-slider2.jpg'
+      }
+    ],
+
+    downloadTitle: '下载 REFLEX 官方产品技术手册',
+    downloadLead: '获取完整的技术参数表、装箱量、材质说明与国际合规认证总览。',
+    downloadButton: '下载完整产品目录 (PDF)',
+    pdfNotice: 'PDF 包含全系产品规格、单箱尺寸、装柜量与检测标准。',
+
+    rfqTitle: '提交大宗采购询价需求 (RFQ)',
+    rfqLead: '请填写您的采购规格、目标采购量与期望交货条款，我们将在 24 小时内完成评估并提供商务答复。',
+    formLabels: {
+      name: '姓名 / 职务',
+      email: '企业业务邮箱',
+      phone: '联系电话 / 微信 / WhatsApp',
+      company: '采购企业名称',
+      country: '目的国 / 港口',
+      product: '意向手套品类',
+      volume: '预计采购量 (箱 / 托盘 / 集装箱)',
+      notes: '具体规格要求、OEM 定制需求或交期期望',
+      submit: '提交正式询价',
+      successMessage: '感谢您的询价！CTSEG 国际贸易团队将在 24 小时内与您联系。'
+    }
+  },
+  vi: {
+    metaTitle: 'Cung Ứng Găng Tay Dùng Một Lần REFLEX B2B | CTSEG Medical',
+    metaDescription: 'CTSEG cung cấp danh mục găng tay dùng một lần REFLEX xuất khẩu số lượng lớn (TPE, Găng khám bệnh, Vinyl, Copolymer) cho thị trường châu Âu, Balkan và quốc tế.',
+    eyebrow: 'Danh mục găng tay y tế & bảo hộ chuyên dụng',
+    heroTitle: 'Găng Tay Dùng Một Lần & Găng Tay Khám REFLEX',
+    heroLead: 'CTSEG cung cấp nguồn hàng xuất khẩu số lượng lớn cho găng tay khám nitrile, TPE không chứa latex, thermo vinyl và copolymer dùng một lần kèm hồ sơ chứng từ chất lượng kiểm định theo lô dành cho các nhà phân phối quốc tế, cơ sở y tế và doanh nghiệp thu mua công nghiệp.',
+    heroBadges: ['Xác minh theo sản phẩm', 'Rà soát chứng từ lô hàng', 'Cung ứng B2B số lượng lớn', 'Điều phối xuất khẩu'],
+    ctaQuote: 'Nhận báo giá',
+    ctaCatalog: 'Tải Catalogue (PDF)',
+    ctaProducts: 'Xem sản phẩm',
+
+    aboutEyebrow: 'Năng lực sản xuất và tiêu chuẩn quốc tế',
+    aboutTitle: 'Sản xuất công suất cao và tuân thủ tiêu chuẩn',
+    aboutText1: 'Được sản xuất tại các nhà máy hiện đại ở Istanbul, các sản phẩm REFLEX được chế tạo trên dây chuyền tự động hóa công nghệ cao hoạt động 24/7. Sử dụng nguyên liệu chất lượng cao và công thức TPE chuyên dụng để sản xuất găng tay khám y tế và bảo hộ công nghiệp.',
+    aboutText2: 'Các tiêu chuẩn, chứng chỉ và tài liệu thử nghiệm hiện có được xem xét kỹ lưỡng theo sản phẩm, nhà sản xuất, lô hàng và thị trường mục tiêu trước khi ra quyết định thương mại.',
+    aboutRoleTitle: 'Dịch vụ thương mại CTSEG',
+    aboutRoleText: 'CTSEG đóng vai trò là đối tác thương mại và cung ứng trong việc xuất khẩu các sản phẩm REFLEX ra thị trường quốc tế. Cung cấp hồ sơ xuất khẩu, giấy chứng nhận phân tích (COA) và điều phối logistics cho các nhà nhập khẩu.',
+    aboutMarketsTitle: 'Thị trường mục tiêu',
+    aboutMarketsList: ['Liên minh châu Âu & Vương quốc Anh', 'Các nước Balkan', 'Trung Đông', 'Bắc Phi', 'Các nhà nhập khẩu quốc tế'],
+
+    categoriesTitle: 'Danh mục sản phẩm REFLEX',
+    categoriesLead: 'Khám phá dòng găng tay REFLEX phù hợp với nhiều ngành nghề và yêu cầu sử dụng khác nhau.',
+
+    categories: [
+      {
+        id: 'flex-hitech',
+        name: 'Găng tay Hybrid TPE FLEX Hi-Tech',
+        subtitle: 'Công nghệ Hybrid thế hệ mới',
+        description: 'Giải pháp thay thế kinh tế cho latex và nitrile. Kết cấu mềm mại, độ co giãn cao và không chứa bột.',
+        material: 'TPE (Thermoplastic Elastomer)',
+        variants: 'Đen, Xanh dương, Trong suốt | Kích cỡ: S, M, L, XL',
+        packing: '100 cái/hộp, 20 hộp/thùng (70 thùng/pallet)',
+        image: '/images/reflex/flex-hi-tech-main.jpg',
+        badges: ['Không chứa Latex', 'Không bột', 'Phù hợp thực phẩm']
+      },
+      {
+        id: 'medilex-exam',
+        name: 'Găng tay khám bệnh MEDILEX (Healthy Touch)',
+        subtitle: 'Khám lâm sàng và chăm sóc sức khỏe',
+        description: 'Găng tay khám không tiệt trùng được thiết kế chuyên biệt cho môi trường thăm khám lâm sàng và y tế.',
+        material: 'Hỗn hợp Polymer y tế / TPE',
+        variants: 'Xanh lá, Hồng, Xanh dương, Đen | Kích cỡ: S, M, L/XL',
+        packing: '100 cái/hộp, 20 hộp/thùng (70 thùng/pallet)',
+        image: '/images/reflex/reflex-cat6.jpg',
+        badges: ['Kiểm tra theo chứng từ', 'Thẩm định theo thị trường', 'Không tiệt trùng']
+      },
+      {
+        id: 'winlyex-thermo-vinyl',
+        name: 'Găng tay Thermo Vinyl Siêu Dày WINLYEX Extra',
+        subtitle: 'Độ dày vượt trội & Bảo vệ hóa chất',
+        description: 'Công thức thermo vinyl tăng cường độ dày mang lại khả năng kháng hóa chất cao và giảm 70% lượng khí thải carbon.',
+        material: 'Hợp chất Thermo Vinyl Composite',
+        variants: 'Tím, Xanh lá, Trong suốt, Hồng | Kích cỡ: S, M, L/XL',
+        packing: '100 cái/hộp, 20 hộp/thùng (70 thùng/pallet)',
+        image: '/images/reflex/reflex-cat5.jpg',
+        badges: ['Siêu bền dai', 'Giảm phát thải Carbon', 'Rào cản bảo vệ cao']
+      },
+      {
+        id: 'slimfit-copolymer',
+        name: 'Găng tay nhạy cảm Copolymer SLIMFIT',
+        subtitle: 'Thoáng khí & Chống mồ hôi tay',
+        description: 'Phát triển với công nghệ thoáng khí giúp chống bí mồ hôi tay trong khi vẫn duy trì cảm giác cầm nắm xúc giác chính xác.',
+        material: 'Copolymer không bột',
+        variants: 'Đen, Xanh dương, Kem | Kích cỡ: S, M, L/XL',
+        packing: '100 cái/hộp, 20 hộp/thùng (70 thùng/pallet)',
+        image: '/images/reflex/reflex-cat8.jpg',
+        badges: ['Thoáng khí', 'Độ nhạy xúc giác cao', 'Ôm sát vừa vặn']
+      },
+      {
+        id: 'winlyex-powder-free',
+        name: 'Găng tay không bột chuẩn y tế WINLYEX',
+        subtitle: 'Chuẩn mực không bột y tế & phòng sạch',
+        description: 'Bề mặt xử lý nhám nhẹ giúp tăng độ bám khi thao tác ướt và tạo rào cản ngăn ngừa chất lỏng sinh học tin cậy.',
+        material: 'Hợp chất y tế không bột cao cấp',
+        variants: 'Xanh dương, Trắng, Xanh bạc hà | Kích cỡ: S, M, L, XL',
+        packing: '100 cái/hộp, 20 hộp/thùng (70 thùng/pallet)',
+        image: '/images/reflex/reflex-cat4.jpg',
+        badges: ['Không bột', 'Chống trơn trượt', 'Chuẩn khám bệnh']
+      },
+      {
+        id: 'florex-multipurpose',
+        name: 'Găng tay đa năng FLOREX',
+        subtitle: 'Giải pháp kinh tế đa ngành',
+        description: 'Thích hợp cho chế biến thực phẩm, dịch vụ ăn uống, vệ sinh công nghiệp nhẹ và thương mại tổng hợp.',
+        material: 'Polymer đa dụng kinh tế',
+        variants: 'Trong suốt, Xanh dương, Vàng | Kích cỡ: Freesize / S, M, L',
+        packing: '100 cái/hộp, 20 hộp/thùng (70 thùng/pallet)',
+        image: '/images/reflex/reflex-cat5.jpg',
+        badges: ['Bền bỉ kinh tế', 'An toàn thực phẩm', 'Đa năng tiện dụng']
+      },
+      {
+        id: 'reflex-vinyl',
+        name: 'Găng tay Vinyl Cổ Điển REFLEX',
+        subtitle: 'Bảo vệ tổng hợp dẻo dai',
+        description: 'Găng tay vệ sinh và công nghiệp tiêu chuẩn với độ bền kéo tốt và trải nghiệm đeo thoải mái.',
+        material: 'Vinyl tổng hợp cao cấp (PVC)',
+        variants: 'Trong suốt, Xanh dương | Kích cỡ: S, M, L, XL',
+        packing: '100 cái/hộp, 20 hộp/thùng (70 thùng/pallet)',
+        image: '/images/reflex/reflex-cat3.jpg',
+        badges: ['Không gây dị ứng latex', 'Độ bền kéo cao', 'Chống tĩnh điện']
+      }
+    ],
+
+    applicationsTitle: 'Ứng dụng trong các lĩnh vực trọng yếu',
+    applicationsLead: 'Từ môi trường y tế đòi hỏi sự chuẩn xác đến các nhà máy thực phẩm và công nghiệp.',
+    applications: [
+      {
+        title: 'Y tế & Chăm sóc sức khỏe',
+        description: 'Thích hợp cho khám bệnh ngoại trú, phòng khám, điều dưỡng và xét nghiệm.',
+        image: '/images/reflex/slider-ortax4.jpg'
+      },
+      {
+        title: 'Chế biến thực phẩm & Nhà hàng',
+        description: 'Đảm bảo vệ sinh an toàn thực phẩm trong sơ chế, đóng gói và bếp công nghiệp.',
+        image: '/images/reflex/slider-ortax1.jpg'
+      },
+      {
+        title: 'Sản xuất công nghiệp & Lắp ráp',
+        description: 'Chống dầu mỡ nhẹ, chống tĩnh điện và tăng cường độ bám khi thao tác.',
+        image: '/images/reflex/slider-ortax2.jpg'
+      },
+      {
+        title: 'Vệ sinh thương mại & Tẩy rửa',
+        description: 'Bảo vệ đôi tay trước các chất tẩy rửa thông thường và bụi bẩn công nghiệp.',
+        image: '/images/reflex/reflex-cat4.jpg'
+      }
+    ],
+
+    galleryTitle: 'Hình ảnh thực tế & Đóng gói sản phẩm',
+    galleryLead: 'Xem quy cách đóng hộp, đóng thùng carton và xếp pallet xuất khẩu thực tế.',
+    galleryItems: [
+      {
+        title: 'Quy cách đóng gói hộp và thùng carton',
+        tag: 'Bao bì & Thùng carton',
+        image: '/images/reflex/reflex-sliderx1.jpg'
+      },
+      {
+        title: 'Dây chuyền sản xuất tự động hóa cao',
+        tag: 'Quy trình sản xuất',
+        image: '/images/reflex/reflex-slider1.jpg'
+      },
+      {
+        title: 'Xếp dỡ và đóng container xuất khẩu',
+        tag: 'Logistics xuất khẩu',
+        image: '/images/reflex/slider-ortax1.jpg'
+      },
+      {
+        title: 'Kiểm tra chất lượng và độ bền kéo',
+        tag: 'Kiểm soát chất lượng',
+        image: '/images/reflex/reflex-slider2.jpg'
+      }
+    ],
+
+    downloadTitle: 'Tải tài liệu giới thiệu sản phẩm REFLEX',
+    downloadLead: 'Xem thông số kỹ thuật chi tiết, quy cách đóng gói và tiêu chuẩn sản phẩm.',
+    downloadButton: 'Tải Catalogue đầy đủ (PDF)',
+    pdfNotice: 'Tài liệu PDF bao gồm bảng thông số, quy cách đóng gói và kích thước thùng.',
+
+    rfqTitle: 'Yêu cầu báo giá đơn hàng lớn (RFQ)',
+    rfqLead: 'Vui lòng cung cấp quy cách sản phẩm, số lượng dự kiến và điều kiện giao hàng để nhận báo giá thương mại.',
+    formLabels: {
+      name: 'Họ và tên',
+      email: 'Email doanh nghiệp',
+      phone: 'Số điện thoại / Zalo / WhatsApp',
+      company: 'Tên công ty',
+      country: 'Quốc gia / Cảng đích',
+      product: 'Sản phẩm quan tâm',
+      volume: 'Số lượng dự kiến (Thùng / Pallet / Container)',
+      notes: 'Yêu cầu cụ thể hoặc ghi chú thêm',
+      submit: 'Gửi yêu cầu báo giá',
+      successMessage: 'Cảm ơn quý khách! Đội ngũ thương mại CTSEG sẽ liên hệ trong vòng 24 giờ.'
     }
   }
 };
