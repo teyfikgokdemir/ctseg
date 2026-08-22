@@ -13,6 +13,10 @@ html[data-locale=de]{--accent:#685741;--accent-soft:#c7b394;--locale-wash:#20211
 html[data-locale=it]{--accent:#705a1d;--accent-soft:#dec16e;--locale-wash:#172113;--locale-surface:#121a10;--locale-line:rgba(181,154,78,.36)}
 html[data-locale=fa]{--accent:#75485f;--accent-soft:#d2a8c1;--locale-wash:#2b1725;--locale-surface:#21131d;--locale-line:rgba(168,117,146,.36)}
 html[data-locale=ru]{--accent:#68542f;--accent-soft:#e6d2aa;--locale-wash:#131a31;--locale-surface:#111526;--locale-line:rgba(193,168,120,.36)}
+html[data-locale=zh]{--accent:#78541e;--accent-soft:#f3d79b;--locale-wash:#2a1b14;--locale-surface:#1c130f;--locale-line:rgba(185,131,58,.36)}
+html[data-locale=vi]{--accent:#744b1c;--accent-soft:#eec492;--locale-wash:#241913;--locale-surface:#19120e;--locale-line:rgba(170,116,56,.36)}
+html[data-locale=zh] body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif}
+html[data-locale=zh] h1,html[data-locale=zh] h2,html[data-locale=zh] h3,html[data-locale=zh] .section-title{font-family:"Songti SC","SimSun","Source Serif 4",Georgia,serif;letter-spacing:0}
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}

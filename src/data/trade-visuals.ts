@@ -37,7 +37,9 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       it:'Porto e campioni di prodotto che rappresentano i flussi commerciali internazionali',
       ru:'Порт и образцы продукции как образ международной торговли',
       fa:'نمای بندر و نمونه‌های محصول به‌عنوان تصویری از جریان تجارت بین‌المللی'
-    }
+    ,
+      zh:'代表全球大宗贸易与跨境物流的现代化港口与产品样品',
+      vi:'Cảng biển và mẫu sản phẩm đại diện cho dòng chảy thương mại quốc tế'}
   },
   'food-oils':{
     key:'food-oils',source:'/images/ctseg-vegetable-oils-food-editorial.webp',sector:'food, grains and vegetable oils',
@@ -50,7 +52,9 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       it:'Campioni non marchiati di olio vegetale e ingredienti alimentari per la valutazione commerciale',
       ru:'Немаркированные образцы растительного масла и пищевых ингредиентов для оценки',
       fa:'نمونه‌های بدون نشان تجاری از روغن گیاهی و مواد اولیه غذایی برای ارزیابی تجاری'
-    }
+    ,
+      zh:'用于商业决策评估的中性植物油及精选大宗食品原料样品',
+      vi:'Mẫu dầu thực vật không thương hiệu và nguyên liệu thực phẩm phục vụ đánh giá thương mại'}
   },
   'nuts-dates':{
     key:'nuts-dates',source:'/images/ctseg-mixed-nuts-premium.webp',sector:'nuts, dates and dried fruits',
@@ -63,7 +67,9 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       it:'Campioni di frutta a guscio ed essiccata per valutare qualità e classificazione',
       ru:'Образцы орехов и сухофруктов для оценки качества и сорта',
       fa:'نمونه‌های خشکبار و میوه خشک برای بررسی کیفیت و درجه‌بندی محصول'
-    }
+    ,
+      zh:'用于品质检验、等级评估与规格核验的特色坚果及干果样品',
+      vi:'Mẫu hạt dinh dưỡng và trái cây sấy khô phục vụ đánh giá chất lượng và phân hạng'}
   },
   'carpets-textiles':{
     key:'carpets-textiles',source:'/images/ctseg-iranian-carpets-editorial.webp',sector:'carpets and textiles',
@@ -76,7 +82,9 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       it:'Tappeti annodati a mano per rappresentare la valutazione di materiali e tessitura',
       ru:'Ковры ручной работы для оценки материалов и качества плетения',
       fa:'فرش‌های دستباف به‌عنوان تصویری از بررسی مواد و کیفیت بافت'
-    }
+    ,
+      zh:'波斯传统手工地毯纹样细节与精细打结工艺鉴别',
+      vi:'Chi tiết kết cấu hoa văn và tay nghề dệt thảm thủ công truyền thống'}
   },
   'textiles-inputs':{
     key:'textiles-inputs',source:'/images/ctseg-wholesale-textiles-editorial.webp',sector:'textiles and production inputs',
@@ -89,7 +97,9 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       it:'Campioni di tessuto, asciugamani e prodotti tessili su un tavolo di valutazione commerciale',
       ru:'Образцы тканей, полотенец и текстиля на столе для коммерческой оценки',
       fa:'نمونه‌های پارچه، حوله و منسوجات روی میز ارزیابی تجاری'
-    }
+    ,
+      zh:'用于大宗采购评估的高品质纺织面料与工业包材样品',
+      vi:'Mẫu vải dệt chất lượng cao và vật tư bao bì phục vụ đánh giá thu mua'}
   }
 };
 

@@ -4,7 +4,7 @@ import { join, relative, resolve } from 'node:path';
 const dist = resolve('dist');
 const errors = [];
 const origin = 'https://ctseg.com.tr';
-const coreLocales = ['tr','en','de','it','ru'];
+const coreLocales = ['tr','en','de','it','ru','zh','vi'];
 
 if (!existsSync(dist)) {
   console.error('dist/ not found. Run npm run build first.');
@@ -46,7 +46,8 @@ for (const file of htmlFiles) {
   const robots = html.match(/<meta name="robots" content="([^"]+)"/)?.[1] ?? '';
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1]?.trim() ?? '';
   const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1]?.trim() ?? '';
-  const lang = html.match(/<html lang="([^"]+)"/)?.[1] ?? '';
+  const rawLang = html.match(/<html lang="([^"]+)"/)?.[1] ?? '';
+  const lang = rawLang.startsWith('zh') ? 'zh' : rawLang.startsWith('vi') ? 'vi' : rawLang;
   const h1Count = (html.match(/<h1\b/g) || []).length;
   const expectedPath = outputPath(file);
   const expectedCanonical = encodeURI(`${origin}${expectedPath}`);
@@ -160,9 +161,9 @@ for (const pathname of requiredCanonicalPaths) {
 const serviceSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Service"'));
 const blogSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Blog"'));
 const blogPostingPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"BlogPosting"'));
-if (serviceSchemaPages.length !== 186) errors.push(`expected 186 Service schema pages including homepages, sourcing pages, full catalogue assessments, full service pages and 24 solution landings, found ${serviceSchemaPages.length}`);
-if (blogSchemaPages.length !== 6) errors.push(`expected 6 Blog schema pages across all active locales, found ${blogSchemaPages.length}`);
-if (blogPostingPages.length !== 42) errors.push(`expected 42 BlogPosting pages across all 6 active locales, found ${blogPostingPages.length}`);
+if (serviceSchemaPages.length !== 248) errors.push(`expected 248 Service schema pages including homepages, sourcing pages, full catalogue assessments, full service pages and 32 solution landings, found ${serviceSchemaPages.length}`);
+if (blogSchemaPages.length !== 8) errors.push(`expected 8 Blog schema pages across all active locales, found ${blogSchemaPages.length}`);
+if (blogPostingPages.length !== 56) errors.push(`expected 56 BlogPosting pages across all 8 active locales, found ${blogPostingPages.length}`);
 
 const deploymentHeaders = readFileSync(join(dist,'_headers'),'utf8');
 if (/X-Robots-Tag\s*:\s*(?:noindex|none)/i.test(deploymentHeaders)) errors.push('deployment headers contain a blocking X-Robots-Tag');

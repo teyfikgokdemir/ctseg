@@ -1,6 +1,6 @@
-export type ReflexLocale = 'en' | 'tr' | 'de' | 'it' | 'ru' | 'fa' | 'sq' | 'mk' | 'sr';
+export type ReflexLocale = 'en' | 'tr' | 'de' | 'it' | 'ru' | 'fa' | 'zh' | 'vi' | 'sq' | 'mk' | 'sr';
 
-export const reflexLocales: ReflexLocale[] = ['en', 'tr', 'de', 'it', 'ru', 'fa', 'sq', 'mk', 'sr'];
+export const reflexLocales: ReflexLocale[] = ['en', 'tr', 'de', 'it', 'ru', 'fa', 'zh', 'vi', 'sq', 'mk', 'sr'];
 
 export const reflexLocaleNames: Record<ReflexLocale, string> = {
   en: 'English',

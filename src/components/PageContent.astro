@@ -39,7 +39,9 @@ const operationalTrust = {
   de:{title:'Was passiert nach einer Anfrage?',lead:'Jede Anfrage wird nach Klärung von Umfang und Dokumentationsbedarf dem passenden Bewertungsweg zugeordnet.',steps:['Bedarf und Zielmarkt werden geklärt','Produkt, Gegenpartei und vorhandene Unterlagen werden geprüft','Machbare nächste Schritte und fehlende Angaben werden mitgeteilt','Angebots-, Muster- und Koordinationsumfang wird bestätigt'],cta:'Arbeitsweise ansehen'},
   it:{title:'Cosa succede dopo una richiesta?',lead:'Ogni richiesta viene indirizzata al percorso di valutazione corretto dopo aver chiarito ambito e documentazione necessaria.',steps:['Si chiariscono esigenza e mercato target','Si esaminano prodotto, controparte e documenti disponibili','Si condividono passaggi successivi e dati mancanti','Si confermano offerta, campioni e perimetro di coordinamento'],cta:'Scopri come lavoriamo'},
   ru:{title:'Что происходит после запроса?',lead:'После уточнения объёма и требований к документам запрос направляется по подходящему пути оценки.',steps:['Уточняются потребность и целевой рынок','Проверяются продукт, контрагент и доступные документы','Сообщаются возможные следующие шаги и недостающие данные','Подтверждаются предложение, образцы и объём координации'],cta:'Посмотреть метод работы'},
-  fa:{title:'پس از ارسال درخواست چه اتفاقی می‌افتد؟',lead:'پس از روشن شدن دامنه درخواست و نیازهای اسنادی، هر درخواست به مسیر ارزیابی مناسب هدایت می‌شود.',steps:['نیاز و بازار هدف روشن می‌شود','محصول، طرف معامله و اسناد موجود بررسی می‌شوند','گام‌های بعدی و اطلاعات ناقص اعلام می‌شود','دامنه پیشنهاد، نمونه و هماهنگی با طرفین تأیید می‌شود'],cta:'روش کار را ببینید'}
+  fa:{title:'پس از ارسال درخواست چه اتفاقی می‌افتد؟',lead:'پس از روشن شدن دامنه درخواست و نیازهای اسنادی، هر درخواست به مسیر ارزیابی مناسب هدایت می‌شود.',steps:['نیاز و بازار هدف روشن می‌شود','محصول، طرف معامله و اسناد موجود بررسی می‌شوند','گام‌های بعدی و اطلاعات ناقص اعلام می‌شود','دامنه پیشنهاد، نمونه و هماهنگی با طرفین تأیید می‌شود'],cta:'روش کار را ببینید'},
+  zh:{title:'提交采购需求后有哪些后续流程？',lead:'在明确具体采购范畴、规格指标与单证需求后，每一份商业委托均将进入标准化评估路径。',steps:['明确产品技术参数与目标进出口市场','深入核验工厂资质、实际产能与出厂单证','出具可行性评估、比价分析与风险提示','协同买卖双方确认样品检验、报价细节与履约节点'],cta:'查看标准业务流程'},
+  vi:{title:'Điều gì xảy ra sau khi gửi yêu cầu?',lead:'Mỗi yêu cầu thương mại được chuyển đến lộ trình đánh giá phù hợp sau khi làm rõ phạm vi và nhu cầu chứng từ.',steps:['Làm rõ yêu cầu kỹ thuật và thị trường mục tiêu','Đánh giá sản phẩm, đối tác và hồ sơ hiện có','Chia sẻ các bước khả thi tiếp theo và thông tin cần bổ sung','Xác nhận phạm vi báo giá, mẫu thử và điều phối với các bên'],cta:'Xem quy trình làm việc'}
 }[lang];
 const completionAbout = aboutEnhancement[lang];
 const completionMarkets = marketsDetail[lang];
@@ -54,7 +56,9 @@ const sectorEntry = {
   de:{title:'Beschaffung iranischer Teppiche und Textilien',lead:'Drei Fachbereiche mit Produkt-, Hersteller-, Muster-, Qualitäts-, Verpackungs- und Logistikkriterien.'},
   it:{title:'Sourcing di tappeti iraniani e tessili',lead:'Tre aree specialistiche valutate per prodotto, produttore, campioni, qualità, imballaggio e logistica.'},
   ru:{title:'Сорсинг иранских ковров и текстиля',lead:'Три профильных направления с оценкой продукта, производителя, образцов, качества и упаковки.'},
-  fa:{title:'حوزه‌های تأمین فرش و منسوجات ایرانی',lead:'سه حوزه تخصصی را همراه با معیارهای محصول، تولیدکننده، نمونه، کیفیت، بسته‌بندی و لجستیک بررسی کنید.'}
+  fa:{title:'حوزه‌های تأمین فرش و منسوجات ایرانی',lead:'سه حوزه تخصصی را همراه با معیارهای محصول، تولیدکننده، نمونه، کیفیت، بسته‌بندی و لجستیک بررسی کنید.'},
+  zh:{title:'特色手工地毯与大宗纺织寻源专区',lead:'深入探索三大特色品类：产品材质工艺、工厂实地产能、样品打样、质量标准、环保包装及跨境多式联运。'},
+  vi:{title:'Nguồn cung thảm và dệt may chuyên biệt',lead:'Khám phá ba lĩnh vực chuyên sâu qua các tiêu chí sản phẩm, nhà sản xuất, mẫu thử, chất lượng, đóng gói và logistics.'}
 }[lang];
 const service = id && key === 'services' ? services[id as keyof typeof services] : null;
 const detailedService = service && id && (lang === 'tr' || lang === 'en') && id in serviceDetails[lang]
@@ -69,11 +73,12 @@ const homeHref = localizedPath(lang, 'home');
 const sectionHref = (section:string) => localizedPath(lang, section);
 const indexLabel = (index:number) => String(index + 1).padStart(2,'0');
 const marketNames = {
-  tr:['Türkiye','Avrupa','Uluslararası'], en:['Türkiye','Europe','International'], de:['Türkiye','Europa','International'],
-  it:['Türkiye','Europa','Internazionale'], ru:['Турция','Европа','Международные рынки'], fa:['ترکیه','اروپا','بین‌المللی']
+  tr:['Türkiye','Avrupa','Uluslararası'], en:['Türkiye','Europe','International'], de:['Türkei','Europa','International'],
+  it:['Turchia','Europa','Internazionale'], ru:['Турция','Европа','Международные рынки'], fa:['ترکیه','اروپا','بین‌المللی'],
+  zh:['土耳其枢纽','欧洲市场','全球大宗贸易走廊'], vi:['Thổ Nhĩ Kỳ','Châu Âu','Thị trường quốc tế']
 }[lang];
-const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',ru:'Правовая информация',fa:'حقوقی'}[lang];
-const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',ru:'27 июля 2026',fa:'۲۷ ژوئیه ۲۰۲۶'}[lang];
+const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',ru:'Правовая информация',fa:'حقوقی',zh:'法律政策与合规',vi:'Pháp lý'}[lang];
+const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',ru:'27 июля 2026',fa:'۲۷ ژوئیه ۲۰۲۶',zh:'2026年7月27日',vi:'27 tháng 7, 2026'}[lang];
 const showcaseRoles = ['lead','medium','medium','compact','compact','compact'];
 const productFamilies:Record<string,string> = {
   'akbari-pistachio':'pistachio', 'mazafati-dates':'dates', almonds:'nuts',
@@ -82,32 +87,32 @@ const productFamilies:Record<string,string> = {
 const catalogueGroups = [
   {
     key:'pistachio',
-    title:{tr:'Fıstık Çeşitleri',en:'Pistachio Varieties',de:'Pistaziensorten',it:'Varietà di pistacchio',ru:'Сорта фисташек',fa:'انواع پسته'}[lang],
+    title:{tr:'Fıstık Çeşitleri',en:'Pistachio Varieties',de:'Pistaziensorten',it:'Varietà di pistacchio',ru:'Сорта фисташек',fa:'انواع پسته',zh:'开心果系列',vi:'Các loại hạt dẻ cười'}[lang],
     ids:['akbari-pistachio','kaleghouchi-pistachio','green-peeled-pistachio','fandoghi-pistachio','pistachio-granules','ahmad-aghaei-pistachio']
   },
   {
     key:'dates',
-    title:{tr:'Hurma ve Hurma Ürünleri',en:'Dates & Date Products',de:'Datteln & Dattelprodukte',it:'Datteri e derivati',ru:'Финики и производные продукты',fa:'خرما و فرآورده‌های خرما'}[lang],
+    title:{tr:'Hurma ve Hurma Ürünleri',en:'Dates & Date Products',de:'Datteln & Dattelprodukte',it:'Datteri e derivati',ru:'Финики и производные продукты',fa:'خرما و فرآورده‌های خرما',zh:'椰枣及深加工制品',vi:'Chà là & Sản phẩm từ chà là'}[lang],
     ids:['mazafati-dates','date-paste-syrup']
   },
   {
     key:'nuts',
-    title:{tr:'Kuruyemişler',en:'Nuts',de:'Nüsse',it:'Frutta a guscio',ru:'Орехи',fa:'خشکبار و مغزها'}[lang],
+    title:{tr:'Kuruyemişler',en:'Nuts',de:'Nüsse',it:'Frutta a guscio',ru:'Орехи',fa:'خشکبار و مغزها',zh:'特色坚果系列',vi:'Các loại hạt'}[lang],
     ids:['almonds','walnuts','mixed-nuts']
   },
   {
     key:'dried-fruit',
-    title:{tr:'Kuru Meyveler',en:'Dried Fruits',de:'Trockenfrüchte',it:'Frutta essiccata',ru:'Сухофрукты',fa:'میوه‌های خشک'}[lang],
+    title:{tr:'Kuru Meyveler',en:'Dried Fruits',de:'Trockenfrüchte',it:'Frutta essiccata',ru:'Сухофрукты',fa:'میوه‌های خشک',zh:'脱水干果系列',vi:'Trái cây sấy khô'}[lang],
     ids:['raisins','dried-apricots-kernels','dried-mulberries']
   },
   {
     key:'seeds',
-    title:{tr:'Tohumlar',en:'Seeds',de:'Saaten',it:'Semi',ru:'Семена',fa:'تخمه‌ها و دانه‌ها'}[lang],
+    title:{tr:'Tohumlar',en:'Seeds',de:'Saaten',it:'Semi',ru:'Семена',fa:'تخمه‌ها و دانه‌ها',zh:'大宗籽仁系列',vi:'Các loại hạt giống & hạt xuất khẩu'}[lang],
     ids:['pumpkin-seeds','sunflower-seeds']
   },
   {
     key:'specialities',
-    title:{tr:'Safran ve Özel Ürünler',en:'Saffron & Specialities',de:'Safran & Spezialitäten',it:'Zafferano e specialità',ru:'Шафран и специализированные продукты',fa:'زعفران و محصولات خاص'}[lang],
+    title:{tr:'Safran ve Özel Ürünler',en:'Saffron & Specialities',de:'Safran & Spezialitäten',it:'Zafferano e specialità',ru:'Шафран и специализированные продукты',fa:'زعفران و محصولات خاص',zh:'顶级藏红花与天然特色食品',vi:'Saffron & Đặc sản'}[lang],
     ids:['saffron','zereshk']
   }
 ];
@@ -120,10 +125,12 @@ const processLabels = {
   de:{boundary:'Rollen- und Verantwortungsgrenze',answers:'Direkte Antworten',answerLead:'Kernfragen zu Beschaffung und kommerzieller Koordination.'},
   it:{boundary:'Limiti di ruolo e responsabilità',answers:'Risposte dirette',answerLead:'Domande essenziali su sourcing e coordinamento commerciale.'},
   ru:{boundary:'Границы роли и ответственности',answers:'Прямые ответы',answerLead:'Основные вопросы о сорсинге и коммерческой координации.'},
-  fa:{boundary:'حدود نقش و مسئولیت',answers:'پاسخ‌های مستقیم',answerLead:'پرسش‌های اصلی درباره تأمین و هماهنگی تجاری.'}
+  fa:{boundary:'حدود نقش و مسئولیت',answers:'پاسخ‌های مستقیم',answerLead:'پرسش‌های اصلی درباره تأمین و هماهنگی تجاری.'},
+  zh:{boundary:'机构角色定位与权责边界',answers:'常见商务问题直截解答',answerLead:'关于跨境战略采购、主体核验与供应链协调的核心解答。'},
+  vi:{boundary:'Ranh giới vai trò và trách nhiệm',answers:'Giải đáp trực tiếp',answerLead:'Các câu hỏi cốt lõi về thu mua và điều phối thương mại.'}
 }[lang];
-const scenarioKicker = {tr:'Temsili çalışma',en:'Representative work',de:'Repräsentatives Szenario',it:'Scenario rappresentativo',ru:'Пример сценария',fa:'سناریوی نمونه'}[lang];
-const guide = key === 'guides' && id ? (guides[id as keyof typeof guides]?.[(lang === 'tr' || lang === 'en') ? lang : 'en'] || null) : null;
+const scenarioKicker = {tr:'Temsili çalışma',en:'Representative work',de:'Repräsentatives Szenario',it:'Scenario rappresentativo',ru:'Пример сценария',fa:'سناریوی نمونه',zh:'实战案例',vi:'Kịch bản đại diện'}[lang];
+const guide = key === 'guides' && id ? (guides[id as keyof typeof guides]?.[lang] || guides[id as keyof typeof guides]?.['en'] || null) : null;
 const searchLanding = key === 'search-landing' && id ? searchLandings[id as keyof typeof searchLandings]?.content[lang] : null;
 const workHref = localizedPath(lang,'how-we-work');
 const scenarioHref = localizedPath(lang,'scenarios');
@@ -133,7 +140,9 @@ const productCommercialLabels = {
   de:['Herkunft','Produkttyp / Sorte','Mögliche Verpackung','MOQ','Qualitäts- und Analysedokumente','Muster','Eigenmarke','Lieferung und Incoterm','Lieferzeit','Lagerung','Zielanwendung','Angaben für ein Angebot'],
   it:['Origine','Tipo / varietà','Possibile imballaggio','MOQ','Documenti qualità e analisi','Campione','Private label','Consegna e Incoterm','Tempi','Stoccaggio','Uso previsto','Dati necessari per l’offerta'],
   ru:['Происхождение','Тип / сорт','Возможная упаковка','MOQ','Документы качества и анализов','Образец','Собственная торговая марка','Доставка и Incoterms','Срок поставки','Хранение','Целевое применение','Информация для коммерческого предложения'],
-  fa:['مبدأ','نوع / واریته محصول','بسته‌بندی احتمالی','حداقل سفارش MOQ','اسناد کیفیت و آزمایشگاهی','نمونه','برند اختصاصی','تحویل و Incoterms','زمان تحویل','شرایط نگهداری','کاربرد هدف','اطلاعات مورد نیاز برای استعلام']
+  fa:['مبدأ','نوع / واریته محصول','بسته‌بندی احتمالی','حداقل سفارش MOQ','اسناد کیفیت و آزمایشگاهی','نمونه','برند اختصاصی','تحویل و Incoterms','زمان تحویل','شرایط نگهداری','کاربرد هدف','اطلاعات مورد نیاز برای استعلام'],
+  zh:['真实原产地','产品品类 / 品种','常规包装形式','最低起订量 (MOQ)','质量认证与 COA 质检单证','样品调样政策','OEM / 贴牌定制 (Private Label)','交货方式与 Incoterms','生产交期排程','仓储与温湿度要求','目标工业/食用用途','发起正式报价所需信息'],
+  vi:['Xuất xứ','Chủng loại / giống','Bao bì khả thi','Số lượng đặt hàng tối thiểu (MOQ)','Chứng từ chất lượng và phân tích','Mẫu thử','Thương hiệu riêng (Private Label)','Giao hàng và Incoterms','Thời gian giao hàng','Bảo quản','Mục đích sử dụng','Thông tin cần thiết để báo giá']
 }[lang];
 const verifiedLater = {
   tr:['Üretici ve sipariş yapısına göre doğrulanır','Teklif aşamasında teyit edilir','Parti bazında belge kontrolü yapılır','Talebe göre değerlendirilir','Üretici ve hedef pazara göre değerlendirilir'],
@@ -141,7 +150,9 @@ const verifiedLater = {
   de:['Nach Hersteller und Auftragsstruktur zu prüfen','In der Angebotsphase zu bestätigen','Dokumentenprüfung je Charge','Auf Anfrage zu bewerten','Nach Hersteller und Zielmarkt zu bewerten'],
   it:['Da verificare secondo produttore e ordine','Da confermare in fase di offerta','Documenti verificati per lotto','Valutato su richiesta','Valutato per produttore e mercato target'],
   ru:['Проверяется в зависимости от производителя и структуры заказа','Подтверждается на этапе коммерческого предложения','Документы проверяются по партии','Оценивается по запросу','Оценивается в зависимости от производителя и целевого рынка'],
-  fa:['بر اساس تولیدکننده و ساختار سفارش ارزیابی می‌شود','در مرحله استعلام قیمت تأیید می‌شود','بررسی اسناد در سطح محموله انجام می‌شود','بر اساس درخواست بررسی می‌شود','بر اساس تولیدکننده و بازار هدف ارزیابی می‌شود']
+  fa:['بر اساس تولیدکننده و ساختار سفارش ارزیابی می‌شود','در مرحله استعلام قیمت تأیید می‌شود','بررسی اسناد در سطح محموله انجام می‌شود','بر اساس درخواست بررسی می‌شود','بر اساس تولیدکننده و بازار هدف ارزیابی می‌شود'],
+  zh:['依据生产企业资质与具体订单结构核实','在正式询价报价阶段书面确认','逐批次核验第三方检测单证','根据具体业务需求专项评估','依据生产工厂与目标市场准入综合评估'],
+  vi:['Được xác minh theo nhà sản xuất và cấu trúc đơn hàng','Được xác nhận ở giai đoạn báo giá','Chứng từ được kiểm tra theo từng lô hàng','Được đánh giá theo yêu cầu','Được đánh giá theo nhà sản xuất và thị trường mục tiêu']
 }[lang];
 ---
 {key === 'home' && (
@@ -322,7 +333,7 @@ const verifiedLater = {
     <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={product.names[lang]} lead={product.descriptions[lang]} parentHref={sectionHref('products')} parentLabel={t.products} product={product} ctaHref={sectionHref('contact')} ctaLabel={t.quote} imageNote={editorial.productImageNote} />
     <section class="section product-detail-content"><div class="container content-grid">
       <div class="prose">
-        <div class="content-block product-commercial-facts"><h2>{lang === 'tr' ? 'Ticari değerlendirme bilgileri' : lang === 'en' ? 'Commercial assessment information' : lang === 'de' ? 'Angaben zur kaufmännischen Bewertung' : lang === 'it' ? 'Informazioni per la valutazione commerciale' : 'Informations d’évaluation commerciale'}</h2>
+        <div class="content-block product-commercial-facts"><h2>{lang === 'tr' ? 'Ticari değerlendirme bilgileri' : lang === 'en' ? 'Commercial assessment information' : lang === 'de' ? 'Angaben zur kaufmännischen Bewertung' : lang === 'it' ? 'Informazioni per la valutazione commerciale' : lang === 'zh' ? '大宗商品商业评估核心参数' : lang === 'vi' ? 'Thông tin đánh giá thương mại' : 'Informations d’évaluation commerciale'}</h2>
           <dl>{productCommercialLabels.map((label,index) => {
             const values=[
               product.origin,product.names[lang],verifiedLater[0],verifiedLater[1],verifiedLater[2],
@@ -330,6 +341,8 @@ const verifiedLater = {
               copy.productUses.join(' · '),
               lang === 'tr' ? 'Spesifikasyon, miktar, ambalaj, teslim yeri, hedef tarih ve belge beklentisi' :
               lang === 'en' ? 'Specification, quantity, packaging, delivery point, target date and document requirements' :
+              lang === 'zh' ? '产品技术规格书、采购订购量 (MOQ)、包装方案、目标口岸、交付期及必备单证要求' :
+              lang === 'vi' ? 'Thông số kỹ thuật, số lượng, quy cách đóng gói, địa điểm giao hàng, tiến độ và yêu cầu chứng từ' :
               verifiedLater[0]
             ];
             return <div><dt>{label}</dt><dd>{values[index]}</dd></div>;
@@ -457,12 +470,12 @@ const verifiedLater = {
 
 {key === 'guides' && guide && (
   <>
-    <PageHero lang={lang} eyebrow={lang === 'tr' ? 'Satın alma rehberi' : 'Sourcing guide'} title={guide.title} lead={guide.description} />
+    <PageHero lang={lang} eyebrow={lang === 'tr' ? 'Satın alma rehberi' : lang === 'zh' ? '大宗采购指南' : lang === 'vi' ? 'Hướng dẫn thu mua' : 'Sourcing guide'} title={guide.title} lead={guide.description} />
     <section class="section"><article class="container guide-article">
-      <div class="guide-meta"><span>{lang === 'tr' ? 'Yazar' : 'Author'}: Teyfik Gökdemir</span><span>{t.updated}: {updatedDate}</span></div>
+      <div class="guide-meta"><span>{lang === 'tr' ? 'Yazar' : lang === 'zh' ? '作者' : lang === 'vi' ? 'Tác giả' : 'Author'}: Teyfik Gökdemir</span><span>{t.updated}: {updatedDate}</span></div>
       <p class="article-answer">{guide.intro}</p>
-      <section class="content-block"><h2>{lang === 'tr' ? 'Kontrol listesi' : 'Checklist'}</h2><ul class="check-list">{guide.checklist.map((item)=><li>{item}</li>)}</ul></section>
-      <section class="content-block"><h2>{lang === 'tr' ? 'Karşılaştırma tablosu' : 'Comparison table'}</h2>
+      <section class="content-block"><h2>{lang === 'tr' ? 'Kontrol listesi' : lang === 'zh' ? '必备核查清单' : lang === 'vi' ? 'Danh mục kiểm tra' : 'Checklist'}</h2><ul class="check-list">{guide.checklist.map((item)=><li>{item}</li>)}</ul></section>
+      <section class="content-block"><h2>{lang === 'tr' ? 'Karşılaştırma tablosu' : lang === 'zh' ? '核心比价维度表' : lang === 'vi' ? 'Bảng so sánh' : 'Comparison table'}</h2>
         <div class="guide-table-wrap"><table><thead><tr>{guide.table[0].map((cell)=><th>{cell}</th>)}</tr></thead><tbody>{guide.table.slice(1).map((row)=><tr>{row.map((cell)=><td>{cell}</td>)}</tr>)}</tbody></table></div>
       </section>
       <div class="cta-statement"><h2>{guide.cta}</h2><a class="button" href={sectionHref('contact')}>{completionHome.commercialCta}</a></div>

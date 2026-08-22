@@ -22,8 +22,10 @@ const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pag
 const alternates = pageKey === 'search-landing' && pageId ? searchLandingAlternates(pageId) : routeAlternates(pageKey, pageId);
 if (pageKey === 'home') alternates.fa = 'https://ctseg.com.tr/fa/';
 if (pageKey === 'home') alternates.ru = 'https://ctseg.com.tr/ru/';
+if (pageKey === 'home') alternates.zh = 'https://ctseg.com.tr/zh/';
+if (pageKey === 'home') alternates.vi = 'https://ctseg.com.tr/vi/';
 const alternateCodes = pageKey === 'medical'
-  ? ['tr','en','de','it','ru','fa','sq','mk','sr']
+  ? ['tr','en','de','it','ru','fa','zh','vi','sq','mk','sr']
   : (pageKey === 'home' || ['how-we-work','scenarios'].includes(pageKey)
     ? activeLocales
     : pageKey === 'guides' ? ['tr','en'] : locales);
@@ -64,7 +66,7 @@ const heroSizes = '(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(
 const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
 ---
 <!doctype html>
-<html lang={lang} dir={localeDirection(lang)} data-locale={lang}>
+<html lang={lang === 'zh' ? 'zh-CN' : lang === 'vi' ? 'vi-VN' : lang} dir={localeDirection(lang)} data-locale={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

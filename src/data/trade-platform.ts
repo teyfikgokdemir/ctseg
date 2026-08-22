@@ -64,5 +64,44 @@ export const tradePlatformCopy:Record<PlatformLocale,PlatformCopy> = {
   },
   fa:{
     eyebrow:'تطبیق تجاری بین‌المللی و هماهنگی بازرگانی',title:'خریداران را به تولیدکنندگان و تأمین‌کنندگان مناسب متصل می‌کنیم.',lead:'پژوهش محصول، ارزیابی تأمین‌کننده، یافتن خریدار و هماهنگی تجاری را در بازارهای بین‌المللی مدیریت می‌کنیم.',buyerCta:'به دنبال تأمین‌کننده هستم',producerCta:'به دنبال خریدار و بازار هستم',pathsTitle:'تطبیق تجاری در هر دو سوی بازار',pathsLead:'هر همکاری بر پایه نیاز واقعی و اطلاعات تجاری قابل‌بررسی شکل می‌گیرد.',buyerTitle:'برای خریداران',buyerText:'نیاز را تعریف می‌کنیم، تولیدکننده و تأمین‌کننده را بررسی می‌کنیم و فرایند RFQ و مقایسه پیشنهادها را هماهنگ می‌سازیم.',producerTitle:'برای تولیدکنندگان',producerText:'آمادگی تجاری محصول، بازارهای هدف و خریداران مناسب را ارزیابی و ارتباط اولیه و ارائه پیشنهاد را هماهنگ می‌کنیم.',sectorsTitle:'تأمین قابل‌بررسی در حوزه‌های منتخب',sectorsLead:'به‌جای ارائه فهرست ثابت، محصول، طرف تجاری، اسناد و امکان اجرا را در حوزه‌های تجاری منتخب ارزیابی می‌کنیم.',sectors:[{title:'مواد غذایی، برنج، غلات و روغن‌ها',text:'ارزیابی محصول و پیشنهاد برای مواد غذایی، برنج، غلات و روغن‌های گیاهی بدون نشان تجاری.'},{title:'خشکبار، خرما و میوه‌های خشک',text:'ارزیابی تجاری درجه‌بندی، کیفیت، بسته‌بندی و تناسب محصول با بازار.'},{title:'فرش و منسوجات',text:'بررسی تخصصی فرش ایرانی، فرش ابریشم دستباف، پارچه و محصولات نساجی.'},{title:'بسته‌بندی، نهاده‌های تولید و تأمین پروژه‌ای',text:'تحقیق و هماهنگی برای نیازهای مشخص بسته‌بندی، نهاده‌های فنی و پروژه‌ها.'}],corridorsTitle:'کریدورهای تجاری',corridorsLead:'ارتباط‌های دوسویه در بازارهای منتخب با هماهنگی از ترکیه.',corridors:['ترکیه ↔ اروپا','ترکیه ↔ ایران','ایران ↔ اروپا و آمریکا','ترکیه ↔ بازارهای بین‌المللی مناسب'],processTitle:'فرایندی شفاف و سنجیده',process:['تعریف نیاز','بررسی بازار و طرف تجاری','راستی‌آزمایی','آماده‌سازی RFQ و پیشنهاد','نمونه و هماهنگی تجاری','تصمیم و گام‌های بعدی']
+  },
+  zh:{
+    eyebrow:'国际贸易精准匹配与大宗商业协调',
+    title:'为全球买家精准对接源头制造企业与合规供应商。',
+    lead:'我们在跨国采购全流程中，统筹目标产品调研、工厂资质实测、海外买家发现与端到端商业协调。',
+    buyerCta:'我是买家，寻找核验供应商',producerCta:'我是工厂，拓展海外市场',
+    pathsTitle:'双向驱动的国际商业匹配体系',pathsLead:'每一项商务委托均立足于真实的采购需求与切实可行的商业交付数据。',
+    buyerTitle:'面向全球采购商 (Buyers)',buyerText:'明确采购技术指标，实地调研并深度核验源头工厂资质，协同编制专业 RFQ 并展开总成本比价分析。',
+    producerTitle:'面向源头制造企业 (Producers)',producerText:'评估产品出海商业成熟度，精准挖掘海外目标市场与匹配买家，协调样品试测与首期商业报价。',
+    sectorsTitle:'深耕特色大宗与重点工业品类',sectorsLead:'我们拒绝展示虚构库存，而是在聚焦的优势品类中，一体化评估产品指标、生产主体、法定单证与履约可行性。',
+    sectors:[
+      {title:'大宗特色食品、原粮与植物油',text:'针对大宗食品原料、粮食作物及中性包装植物油开展产品指标与报价全方位评估。'},
+      {title:'特色坚果、鲜黑椰枣与脱水干果',text:'依据品种纯度、分级规格、包装阻隔与目标国准入进行综合商业评估。'},
+      {title:'传统手工地毯、丝绸与大宗纺织品',text:'提供伊朗传统手工真丝地毯、工业面料与家纺产品的专业寻源支持。'},
+      {title:'工业环保包装、生产辅料与项目物资',text:'针对特定包材结构、工业原材料及工程项目物资进行专项寻源与协调。'}
+    ],
+    corridorsTitle:'核心贸易走廊',corridorsLead:'立足土耳其地理枢纽，构建辐射欧洲、中东及全球主要大宗贸易市场的双向连接。',
+    corridors:['土耳其 ↔ 欧洲主要市场','土耳其 ↔ 中东及伊朗','伊朗 ↔ 欧洲及美洲市场','土耳其 ↔ 全球新兴贸易市场'],
+    processTitle:'严谨规范的决策流程',process:['需求梳理与指标定义','市场排查与主体尽调','资质与单证交叉核验','标准 RFQ 编制与比价','样品盲测与条款谈判','商业决策与履约协同']
+  },
+  vi:{
+    eyebrow:'Kết nối thương mại quốc tế & Điều phối thương mại',
+    title:'Chúng tôi kết nối người mua với đúng nhà sản xuất và nhà cung cấp.',
+    lead:'Chúng tôi quản lý nghiên cứu sản phẩm, thẩm định nhà cung cấp, tìm kiếm người mua và điều phối thương mại trên các thị trường quốc tế.',
+    buyerCta:'Tôi cần tìm nhà cung cấp',producerCta:'Tôi cần tìm người mua',
+    pathsTitle:'Kết nối thương mại hai chiều hiệu quả',pathsLead:'Mỗi dự án hợp tác được xây dựng dựa trên nhu cầu thực tế và thông tin thương mại có thể thực thi.',
+    buyerTitle:'Dành cho người mua',buyerText:'Chúng tôi xác định yêu cầu, nghiên cứu và thẩm định nhà sản xuất/nhà cung cấp, đồng thời điều phối RFQ và so sánh báo giá.',
+    producerTitle:'Dành cho nhà sản xuất',producerText:'Chúng tôi đánh giá sự sẵn sàng thương mại, nghiên cứu thị trường mục tiêu và hồ sơ người mua phù hợp, đồng thời điều phối tiếp cận ban đầu.',
+    sectorsTitle:'Thu mua có thể xác minh qua các danh mục chọn lọc',sectorsLead:'Thay vì đưa ra một danh mục cố định, chúng tôi đánh giá sản phẩm, đối tác, tài liệu và tính khả thi trên các ngành hàng thương mại chọn lọc.',
+    sectors:[
+      {title:'Thực phẩm, gạo, ngũ cốc và dầu thực vật',text:'Đánh giá sản phẩm và báo giá cho thực phẩm, gạo, ngũ cốc và dầu thực vật trung tính.'},
+      {title:'Hạt dinh dưỡng, chà là và trái cây khô',text:'Đánh giá thương mại qua phân hạng sản phẩm, chất lượng, bao bì và sự phù hợp thị trường.'},
+      {title:'Thảm trang trí và hàng dệt may',text:'Đánh giá chuyên sâu về thảm Ba Tư, thảm lụa dệt tay, vải và sản phẩm dệt may.'},
+      {title:'Bao bì, vật tư sản xuất và thu mua dự án',text:'Nghiên cứu và điều phối cho các yêu cầu bao bì, vật tư kỹ thuật và dự án cụ thể.'}
+    ],
+    corridorsTitle:'Các hành lang thương mại',corridorsLead:'Kết nối thương mại hai chiều trên các thị trường quốc tế chọn lọc, điều phối từ Thổ Nhĩ Kỳ.',
+    corridors:['Thổ Nhĩ Kỳ ↔ Châu Âu','Thổ Nhĩ Kỳ ↔ Iran','Iran ↔ Châu Âu và Hoa Kỳ','Thổ Nhĩ Kỳ ↔ Các thị trường quốc tế phù hợp'],
+    processTitle:'Quy trình minh bạch và chuẩn mực',process:['Xác định yêu cầu','Nghiên cứu thị trường & đối tác','Thẩm định xác minh','Lập RFQ & báo giá','Mẫu thử & điều phối','Quyết định & các bước tiếp theo']
   }
 };
+

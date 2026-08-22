@@ -4,7 +4,9 @@ export const localeRegistry = [
   { code:'de', label:'Deutsch', locale:'de-DE', direction:'ltr', prefix:'/de/', ogLocale:'de_DE', active:true, order:3 },
   { code:'it', label:'Italiano', locale:'it-IT', direction:'ltr', prefix:'/it/', ogLocale:'it_IT', active:true, order:4 },
   { code:'fa', label:'فارسی', locale:'fa-IR', direction:'rtl', prefix:'/fa/', ogLocale:'fa_IR', active:true, order:5 },
-  { code:'ru', label:'Русский', locale:'ru-RU', direction:'ltr', prefix:'/ru/', ogLocale:'ru_RU', active:true, order:6 }
+  { code:'ru', label:'Русский', locale:'ru-RU', direction:'ltr', prefix:'/ru/', ogLocale:'ru_RU', active:true, order:6 },
+  { code:'zh', label:'中文', locale:'zh-CN', direction:'ltr', prefix:'/zh/', ogLocale:'zh_CN', active:true, order:7 },
+  { code:'vi', label:'Tiếng Việt', locale:'vi-VN', direction:'ltr', prefix:'/vi/', ogLocale:'vi_VN', active:true, order:8 }
 ] as const;
 
 export type ActiveLocale = (typeof localeRegistry)[number]['code'];

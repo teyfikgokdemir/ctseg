@@ -10,7 +10,7 @@ const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?
 const t = ui[lang] || ui.en;
 const home = localizedPath(lang, 'home');
 const p = tradePlatformCopy[lang] || tradePlatformCopy.en;
-const processLabel = {tr:'Yöntem',en:'Method',de:'Methode',it:'Metodo',fa:'روش کار',ru:'Метод'}[lang] || 'Method';
+const processLabel = {tr:'Yöntem',en:'Method',de:'Methode',it:'Metodo',fa:'روش کار',ru:'Метод',zh:'运作模式',vi:'Phương thức'}[lang] || 'Method';
 const medicalNavLabels: Record<string, string> = {
   tr: 'REFLEX Medikal',
   en: 'REFLEX Medical',
@@ -18,16 +18,18 @@ const medicalNavLabels: Record<string, string> = {
   it: 'REFLEX Medicale',
   fa: 'دستکش پزشکی REFLEX',
   ru: 'REFLEX Медицина',
+  zh: 'REFLEX 医用手套',
+  vi: 'Găng tay REFLEX',
   sq: 'REFLEX Medikal',
   mk: 'REFLEX Medikal',
   sr: 'REFLEX Medikal'
 };
 
-const safeReflexLang = (['en','tr','de','it','ru','fa','sq','mk','sr'].includes(lang) ? lang : 'en') as ReflexLocale;
+const safeReflexLang = (['en','tr','de','it','ru','fa','zh','vi','sq','mk','sr'].includes(lang) ? lang : 'en') as ReflexLocale;
 const reflexUrl = reflexPath(safeReflexLang);
 const medicalLabel = medicalNavLabels[lang] || 'REFLEX Medical';
 const methodLabel: Record<Locale,string> = {
-  tr:'Yöntem', en:'Method', de:'Arbeitsweise', it:'Metodo', ru:'Метод', fa:'روش کار'
+  tr:'Yöntem', en:'Method', de:'Arbeitsweise', it:'Metodo', ru:'Метод', fa:'روش کار', zh:'运作模式', vi:'Phương thức hoạt động'
 };
 
 const solutionLinks = [
@@ -180,7 +182,7 @@ const globalSwitchPath = (target: string): string => {
 
         <div class="language-switcher language-switcher-desktop">
           <button type="button" aria-expanded="false" aria-controls="language-panel" aria-label={t.language} data-language-toggle>
-            <span class="locale-code">{(['tr','en','de','it','fa','ru'].includes(lang) ? lang : 'en').toUpperCase()}</span>
+            <span class="locale-code">{lang.toUpperCase()}</span>
             <span class="locale-chevron" aria-hidden="true"></span>
           </button>
           <div id="language-panel" class="language-menu" data-language-menu>

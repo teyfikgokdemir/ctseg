@@ -40,6 +40,14 @@ export const searchLandingIndexCopy = {
   "fa": {
     "title": "راهکار برای تصمیم‌گیری‌های تجاری مشخص",
     "lead": "صفحات متمرکز برای شرکت‌هایی که به یک تأمین‌کننده، تولیدکننده، RFQ قابل مقایسه یا ارزیابی مستند تدارکات مواد غذایی نیاز دارند."
+  },
+  "zh": {
+    "title": "针对关键商业采购决策的专项解决方案",
+    "lead": "面向需要物色土耳其源头工厂、OEM 代工制造商、编制高可比性标准 RFQ 或完成全套食品批次合规评估的企业。"
+  },
+  "vi": {
+    "title": "Giải pháp cho các quyết định thương mại chuyên biệt",
+    "lead": "Các trang chuyên sâu dành cho doanh nghiệp cần tìm nhà cung cấp, nhà sản xuất OEM, lập RFQ so sánh chuẩn hóa hoặc đánh giá nguồn cung thực phẩm có chứng từ."
   }
 } as Record<Locale,{title:string;lead:string}>;
 
@@ -303,7 +311,93 @@ export const searchLandings = {
             "answer": "محصول یا خدمت، مشخصات، مقدار تخمینی، نقطه تحویل هدف، زمان‌بندی و هرگونه الزام کیفیت یا سند را ارائه دهید."
           }
         ]
-      }
+      },
+      "zh": {
+        "eyebrow": "土耳其本土供应链 · 供应商深度核验",
+        "title": "土耳其源头工厂与供应商背景核验与战略寻源",
+        "description": "基于清晰界定的 B2B 采购规格，对土耳其境内的实体生产厂家与大宗供应商实施结构化调研与基于证据的背景尽调。",
+        "answerTitle": "如何在土耳其高效寻找并深度核验一家真实的生产商？",
+        "directAnswer": "CTSEG 首先与您共同界定产品技术参数、采购体量 (MOQ)、质量认证、必备单证及交货口岸标准。随后在土耳其本土产业带展开精准筛选，并官方交叉核验企业商业登记 (Commercial Registration)、实际经营地址、产线排产产能、历史出口记录、银行信誉及商贸交易条款。所有核验结果、待查疑点及后续验厂建议均以透明报告呈现，不作脱离事实的绝对担保。",
+        "audienceTitle": "本专项解决方案适用对象",
+        "audience": "计划进入土耳其供应链集群、寻找替代货源、构建第二供应备份渠道，或在下达重大采购订单 (PO) 前需要对候选工厂进行独立第三方背调的跨国采购决策层。",
+        "criteriaTitle": "核心尽调与核验维度",
+        "criteria": [
+                "企业法定商业注册登记与实际签约授权人资质",
+                "工厂实际生产制造产能、产线设备与排产负荷",
+                "ISO/CE 等质量认证体系、全批次流向溯源及质检单证",
+                "起订量 (MOQ)、生产交期、Incoterms 交付及跨境结算方式"
+        ],
+        "processTitle": "结构化核验作业流程",
+        "process": [
+                "明确技术采购规格书与关键排除指标",
+                "在土耳其对应产业集群筛选候选制造工厂",
+                "多源交叉核验证据并排查信息疑点",
+                "交付优选供应商短名单、显性风险提示及验厂建议"
+        ],
+        "evidenceTitle": "证据依据与职责边界说明",
+        "evidence": "本项核验如实记录评估节点所获取的真实有效凭证，并明确标识尚未覆盖的盲区。依据具体行业与资金风险，后续可能仍需安排实地验厂、权威实验室化验或法律顾问专项复核。",
+        "serviceType": "土耳其源头供应商寻源与背景核验服务",
+        "ctaTitle": "明确您的土耳其采购与供应商核验需求",
+        "ctaText": "请提供产品类别、规格说明、预估批次采购量、目标交付国及必备单证要求，我们将为您启动初步商业评估。",
+        "ctaLabel": "申请供应商核验评估",
+        "faq": [
+                {
+                        "question": "供应商背景核验是否等同于对未来履约的绝对担保？",
+                        "answer": "不是。背景核验旨在最大限度消除信息不对称、排查欺诈风险并记录现有证据，但无法替代对未来生产波动、国际航运延误或市场波动的动态商业管控。"
+                },
+                {
+                        "question": "CTSEG 能否同时横向对比多家土耳其候选工厂？",
+                        "answer": "可以。所有候选工厂均置于完全相同的技术参数、产能规模、质量标准及商业交易条款下进行横向加权比对，确保差异清晰透明。"
+                },
+                {
+                        "question": "启动土耳其供应商核验项目需要提供哪些基础信息？",
+                        "answer": "请提供产品或服务名称、详细技术规格书、预估采购数量、目标交付口岸、交期要求以及任何强制性的认证或质检单证标准。"
+                }
+        ]
+},
+      "vi": {
+        "eyebrow": "Thổ Nhĩ Kỳ · Tìm nguồn cung ứng",
+        "title": "Tìm kiếm và thẩm định nhà cung cấp tại Thổ Nhĩ Kỳ",
+        "description": "Nghiên cứu có cấu trúc và xác minh dựa trên bằng chứng về các nhà sản xuất và nhà cung cấp tại Thổ Nhĩ Kỳ cho các yêu cầu B2B xác định.",
+        "answerTitle": "Làm thế nào để tìm và thẩm định nhà cung cấp tại Thổ Nhĩ Kỳ?",
+        "directAnswer": "CTSEG trước hết xác định rõ tiêu chí sản phẩm, sản lượng, chất lượng, chứng từ và giao hàng. Chúng tôi sau đó nghiên cứu các ứng viên phù hợp tại Thổ Nhĩ Kỳ và đối chiếu chéo đăng ký doanh nghiệp, hoạt động thực tế, năng lực sản xuất, tài liệu tham khảo và điều khoản thương mại. Các phát hiện và khuyến nghị kiểm tra tiếp theo được báo cáo minh bạch mà không đưa ra bảo đảm vô điều kiện.",
+        "audienceTitle": "Giải pháp này dành cho ai",
+        "audience": "Người mua B2B gia nhập thị trường cung ứng Thổ Nhĩ Kỳ, thay thế nguồn cung hiện tại, xây dựng nguồn dự phòng hoặc đánh giá độc lập ứng viên trước khi đặt đơn hàng lớn.",
+        "criteriaTitle": "Tiêu chí đánh giá cốt lõi",
+        "criteria": [
+                "Tư cách pháp nhân doanh nghiệp và người đại diện ủy quyền",
+                "Năng lực sản xuất hoặc cung ứng thực tế phù hợp",
+                "Hồ sơ chất lượng, tài liệu phân tích và khả năng truy xuất",
+                "Tính khả thi thương mại về MOQ, thời gian giao hàng và Incoterms"
+        ],
+        "processTitle": "Quy trình làm việc từng bước",
+        "process": [
+                "Xác định hồ sơ yêu cầu và tiêu chí loại trừ",
+                "Lập danh sách nhà sản xuất và nhà cung cấp phù hợp tại Thổ Nhĩ Kỳ",
+                "Đối chiếu chéo tài liệu, cơ sở thực tế và thông tin xác minh",
+                "Báo cáo danh sách chọn lọc cùng các phát hiện và khoảng trống dữ liệu"
+        ],
+        "evidenceTitle": "Bằng chứng và giới hạn trách nhiệm",
+        "evidence": "Đánh giá ghi nhận các bằng chứng xác minh được tại thời điểm rà soát và nêu rõ những nội dung chưa kiểm tra. Tùy thuộc vào rủi ro, có thể cần kiểm toán tại chỗ, phân tích mẫu tại phòng thí nghiệm hoặc ý kiến pháp lý.",
+        "serviceType": "Dịch vụ tìm kiếm và thẩm định nhà cung cấp Thổ Nhĩ Kỳ",
+        "ctaTitle": "Xác định nhu cầu tìm nguồn cung ứng tại Thổ Nhĩ Kỳ",
+        "ctaText": "Gửi thông tin về sản phẩm, thông số kỹ thuật, số lượng ước tính, quốc gia đích và chứng từ cần thiết để chúng tôi đánh giá.",
+        "ctaLabel": "Yêu cầu đánh giá nhà cung cấp",
+        "faq": [
+                {
+                        "question": "Thẩm định nhà cung cấp có phải là bảo đảm hoàn toàn không?",
+                        "answer": "Không. Thẩm định giúp giảm thiểu rủi ro thông tin và làm rõ bằng chứng thực tế, nhưng không thay thế cho việc kiểm soát chất lượng liên tục và quản lý hợp đồng."
+                },
+                {
+                        "question": "CTSEG có thể so sánh nhiều nhà sản xuất cùng lúc không?",
+                        "answer": "Có. Chúng tôi cấu trúc tiêu chí kỹ thuật và thương mại để so sánh các ứng viên trên cùng một cơ sở chuẩn hóa."
+                },
+                {
+                        "question": "Cần cung cấp thông tin gì để bắt đầu?",
+                        "answer": "Cần cung cấp thông số sản phẩm, số lượng dự kiến, địa điểm giao hàng, thời hạn và các yêu cầu chứng từ pháp lý bắt buộc."
+                }
+        ]
+}
     },
     "paths": {
       "tr": "/tr/cozumler/turkiyede-tedarikci-bulma-dogrulama/",
@@ -311,7 +405,9 @@ export const searchLandings = {
       "de": "/de/loesungen/lieferantensuche-pruefung-tuerkei/",
       "it": "/it/soluzioni/ricerca-verifica-fornitori-turchia/",
       "ru": "/ru/resheniya/poisk-proverka-postavshchikov-turciya/",
-      "fa": "/fa/solutions/supplier-sourcing-verification-turkiye/"
+      "fa": "/fa/solutions/supplier-sourcing-verification-turkiye/",
+      "zh": "/zh/solutions/turkiye-supplier-sourcing-verification/",
+      "vi": "/vi/solutions/turkiye-supplier-sourcing-verification/"
     }
   },
   "private-label-manufacturer": {
@@ -573,7 +669,93 @@ export const searchLandings = {
             "answer": "بله. قالب بسته‌بندی، مسئولیت‌های artwork، اطلاعات برچسب، نسخه‌های زبانی و نیازهای بازار هدف می‌توانند در دامنه مقایسه گنجانده شوند."
           }
         ]
-      }
+      },
+      "zh": {
+        "eyebrow": "OEM / 贴牌定制 · 实体代工厂尽调",
+        "title": "自有品牌 (Private Label) 与 OEM 代工生产商寻源及核验",
+        "description": "面向定制配方、专属包装及自有品牌分装需求，系统化发掘并严密核验具备真实代工实力的生产厂家。",
+        "answerTitle": "如何甄选并核验一家靠谱的自有品牌 (Private Label) 代工厂？",
+        "directAnswer": "CTSEG 首先梳理您的产品定制配方要求、外包装形态、最低起订量 (MOQ) 容忍度与目标上市时间。随后全面筛查具备合规代工资质的源头工厂，实地核查其专属模具开发能力、印刷包装配套、自动化产线洁净等级、配方保密机制及批次留样管理体系，输出具备落地执行力的比价与验厂建议。",
+        "audienceTitle": "本专项解决方案适用对象",
+        "audience": "计划打造自主品牌、拓展特色产品线、寻找高性价比海外 OEM/ODM 代工基地，或需要摆脱贴牌中介直连源头实力工厂的品牌商、大型连锁商超及跨境电商企业。",
+        "criteriaTitle": "代工厂核心考量指标",
+        "criteria": [
+                "OEM/ODM 生产线自动化程度与专属打样开模周期",
+                "配方工艺保密协议 (NDA) 机制与知识产权合规",
+                "定制包材配合度、外箱印刷标准与起订梯度 (MOQ)",
+                "各批次出品一致性检验、留样复检与质保条款"
+        ],
+        "processTitle": "代工厂评估实施步骤",
+        "process": [
+                "明确定制技术规格、包装设计参数与目标单价区间",
+                "筛选具备同类成熟出口经验的专业代工制造企业",
+                "核查打样能力、原料溯源凭单及代工合规资质",
+                "交付综合评估矩阵并协助推进产线试产与封样"
+        ],
+        "evidenceTitle": "证据依据与职责边界说明",
+        "evidence": "代工生产涉及专有模具、定制包材与长周期排产，所有原料批次质检证书 (COA)、打样实物确认单及质量公差容限均须在正式量产合同签署前完成法律与技术双重确认。",
+        "serviceType": "自有品牌与 OEM 代工厂寻源核验服务",
+        "ctaTitle": "开启您的自有品牌代工项目评估",
+        "ctaText": "请提供产品类别、定制配方或包装要求、首期采购计划量及目标销售市场，我们的专业团队将为您快速梳理可行的代工落地路径。",
+        "ctaLabel": "申请代工厂评估",
+        "faq": [
+                {
+                        "question": "OEM 代工厂的最低起订量 (MOQ) 通常如何界定？",
+                        "answer": "代工厂的 MOQ 主要受定制原料批次投入量、包材制版印刷起印量以及自动化产线换线清洗成本决定。CTSEG 协助您测算不同起订量下的 TCO 综合成本。"
+                },
+                {
+                        "question": "如何确保代工厂严格执行定制配方保密？",
+                        "answer": "我们建议并在前期协助建立具备法律约束力的保密协议 (NDA)，并严格核查工厂对于客户专有配方、模具资产的物理隔离与知识产权管理制度。"
+                },
+                {
+                        "question": "是否支持在量产前进行产线试机与小批量试产？",
+                        "answer": "支持。在正式签署大批量订单前，协调实验室样品打样及工业级产线小批量试机验证是降低量产风险的关键步骤。"
+                }
+        ]
+},
+      "vi": {
+        "eyebrow": "Nhãn hàng riêng · Sản xuất OEM",
+        "title": "Tìm kiếm và thẩm định nhà sản xuất gia công & nhãn hàng riêng (Private Label)",
+        "description": "Nghiên cứu và thẩm định có cấu trúc các nhà sản xuất có năng lực gia công OEM/Private Label theo công thức và bao bì tùy chỉnh.",
+        "answerTitle": "Làm thế nào để tìm và đánh giá nhà máy gia công nhãn hàng riêng uy tín?",
+        "directAnswer": "CTSEG trước hết làm rõ công thức tùy chỉnh, quy cách đóng gói, mức dung sai MOQ và tiến độ ra mắt thị trường. Chúng tôi sau đó sàng lọc các nhà máy có năng lực gia công thực tế, kiểm tra khả năng phát triển khuôn mẫu, in ấn bao bì, tiêu chuẩn phòng sạch, bảo mật công thức và quy trình lưu mẫu đối chứng.",
+        "audienceTitle": "Giải pháp này dành cho ai",
+        "audience": "Chủ sở hữu thương hiệu, chuỗi bán lẻ hoặc nhà phân phối muốn mở rộng dòng sản phẩm nhãn riêng hoặc tìm kiếm cơ sở gia công đáng tin cậy.",
+        "criteriaTitle": "Tiêu chí đánh giá nhà máy gia công",
+        "criteria": [
+                "Năng lực sản xuất OEM/ODM thực tế và thiết bị đóng gói",
+                "Quy trình bảo mật công thức và tài sản trí tuệ (NDA)",
+                "Khả năng đáp ứng bao bì, nhãn mác và linh hoạt MOQ",
+                "Kiểm soát chất lượng đồng đều giữa các lô và chứng nhận"
+        ],
+        "processTitle": "Quy trình đánh giá",
+        "process": [
+                "Làm rõ thông số kỹ thuật, bao bì và dung sai chấp nhận",
+                "Sàng lọc các nhà sản xuất có kinh nghiệm gia công phù hợp",
+                "Đánh giá năng lực mẫu thử, nguyên liệu và hồ sơ pháp lý",
+                "Cung cấp ma trận so sánh và hỗ trợ các bước thử nghiệm"
+        ],
+        "evidenceTitle": "Bằng chứng và ranh giới trách nhiệm",
+        "evidence": "Hợp đồng gia công đòi hỏi làm rõ thông số kỹ thuật chi tiết, quyền sở hữu nhãn hiệu và quy chuẩn bao bì trước khi tiến hành sản xuất hàng loạt.",
+        "serviceType": "Dịch vụ tìm kiếm nhà sản xuất nhãn hàng riêng",
+        "ctaTitle": "Bắt đầu dự án nhãn hàng riêng của bạn",
+        "ctaText": "Gửi thông tin sản phẩm, yêu cầu công thức/bao bì, sản lượng dự kiến và thị trường mục tiêu để nhận tư vấn khả thi.",
+        "ctaLabel": "Đánh giá khả năng gia công",
+        "faq": [
+                {
+                        "question": "MOQ cho đơn hàng Private Label được xác định thế nào?",
+                        "answer": "MOQ phụ thuộc vào mẻ sản xuất tối thiểu của nguyên liệu, số lượng in bao bì tối thiểu và chi phí chuyển đổi dây chuyền của nhà máy."
+                },
+                {
+                        "question": "Làm thế nào để bảo vệ công thức độc quyền?",
+                        "answer": "Cần ký kết thỏa thuận bảo mật (NDA) và hợp đồng gia công chặt chẽ quy định rõ quyền sở hữu trí tuệ trước khi chia sẻ dữ liệu kỹ thuật."
+                },
+                {
+                        "question": "Có thể làm mẫu thử trước khi ký hợp đồng chính thức không?",
+                        "answer": "Có. Giai đoạn thử nghiệm mẫu trong phòng lab và chạy thử pilot trên dây chuyền là bước bắt buộc để đảm bảo chất lượng."
+                }
+        ]
+}
     },
     "paths": {
       "tr": "/tr/cozumler/ozel-markali-uretici-arastirmasi/",
@@ -581,7 +763,9 @@ export const searchLandings = {
       "de": "/de/loesungen/private-label-herstellerrecherche/",
       "it": "/it/soluzioni/ricerca-produttore-marchio-privato/",
       "ru": "/ru/resheniya/poisk-proizvoditelya-chastnoy-marki/",
-      "fa": "/fa/solutions/private-label-manufacturer-research/"
+      "fa": "/fa/solutions/private-label-manufacturer-research/",
+      "zh": "/zh/solutions/private-label-contract-manufacturer-sourcing/",
+      "vi": "/vi/solutions/private-label-contract-manufacturer-sourcing/"
     }
   },
   "rfq-bid-comparison": {
@@ -843,7 +1027,93 @@ export const searchLandings = {
             "answer": "خیر. CTSEG شواهد و مقایسه را ساختاربندی می‌کند. تصمیم نهایی، تصویب و مسئولیت قراردادی با خریدار است."
           }
         ]
-      }
+      },
+      "zh": {
+        "eyebrow": "国际比价 · 商业谈判赋能",
+        "title": "跨国采购标准 RFQ 编制与多源供应商横向比价矩阵",
+        "description": "将不同工厂碎片化的非标报价转换为统一度量衡、同等交货条款与可比权重的专业评估矩阵，还原真实 TCO 综合拥有成本。",
+        "answerTitle": "如何跨语言、跨币种公允对比多家跨国供应商的非标报价？",
+        "directAnswer": "CTSEG 深度拆解各工厂报价中的隐形成本：剔除不具可比性的包装差异、将不同 Incoterms 条款（如 FOB vs CIF）折算至相同口岸基准、核算起订量差异带来的资金占用成本、分析付款结算账期及单证认证附加费。最终为您呈现一份指标透明、加权清晰的横向比价分析矩阵，支撑高层精准决策。",
+        "audienceTitle": "本专项解决方案适用对象",
+        "audience": "正在面对多家海外供应商混杂报价、无法准确核算到岸真实成本、怀疑现有供应商报价虚高，或需向投资人/采购委员会汇报比价依据的专业采购与供应链管理团队。",
+        "criteriaTitle": "RFQ 核心比价维度",
+        "criteria": [
+                "基准产品技术公差、用料纯度与质检等级一致性",
+                "Incoterms 交付条款、国际海运/陆运附加费与保险",
+                "阶梯订购量 (MOQ) 单价与模具包材摊销成本",
+                "结算货币汇率风险、信用证条款与延期付款成本"
+        ],
+        "processTitle": "标准 RFQ 编制与比价流程",
+        "process": [
+                "编制标准统一的结构化 RFQ 询价模板与参数表",
+                "向多家具备资质的工厂定向发放并规范回填格式",
+                "统一换算计量单位、交付条款与综合落地税费",
+                "输出多维度加权比价报告及关键商业谈判筹码建议"
+        ],
+        "evidenceTitle": "数据来源与商业中立声明",
+        "evidence": "比价矩阵完全基于工厂盖章生效的正式报价单 (Proforma Invoice / Quotation)、公布的国际海运运价指数及法定海关税则归类进行客观测算，保持严格的商业独立与中立性。",
+        "serviceType": "国际商业 RFQ 编制与供应链比价服务",
+        "ctaTitle": "提交您当前的 RFQ 或供应商报价明细",
+        "ctaText": "发送您收到的工厂原始报价单或采购需求清单，我们将协助您梳理标准化比价模型并识别隐性成本漏洞。",
+        "ctaLabel": "申请 RFQ 比价分析",
+        "faq": [
+                {
+                        "question": "为什么看似单价最低的工厂最终总成本反而更高？",
+                        "answer": "低单价往往隐藏了高额包装费、严苛的港口杂费、较差的装柜容积率、更高的报废率或苛刻的现金预付要求。TCO 模型能够彻底还原真实成本。"
+                },
+                {
+                        "question": "CTSEG 是否直接参与最终采购合同的价格谈判？",
+                        "answer": "我们提供客观翔实的数据矩阵、同行成本基准与谈判策略建议，由买卖双方在充分知情的基础上自主达成商业协议。"
+                },
+                {
+                        "question": "比价周期通常需要多长时间？",
+                        "answer": "在所有候选工厂按标准格式提交完整技术与商务数据后，通常在 2-4 个工作日内即可完成多维矩阵建模与分析报告。"
+                }
+        ]
+},
+      "vi": {
+        "eyebrow": "So sánh báo giá · Phân tích RFQ",
+        "title": "Lập RFQ quốc tế và ma trận so sánh báo giá nhà cung cấp",
+        "description": "Chuyển đổi các báo giá phân mảnh thành ma trận so sánh chuẩn hóa theo cùng điều kiện giao hàng, dung sai kỹ thuật và tổng chi phí sở hữu (TCO).",
+        "answerTitle": "Làm thế nào để so sánh công bằng báo giá từ nhiều nhà cung cấp quốc tế?",
+        "directAnswer": "CTSEG bóc tách chi tiết các cấu phần chi phí: chuẩn hóa quy cách đóng gói, quy đổi các điều kiện Incoterms (FOB, CIF, CFR) về cùng mặt bằng giao hàng, tính toán chi phí vốn theo các mức MOQ, điều khoản thanh toán và chi phí chứng từ. Kết quả là một ma trận so sánh đa chiều giúp doanh nghiệp ra quyết định mua hàng tối ưu.",
+        "audienceTitle": "Giải pháp này dành cho ai",
+        "audience": "Trưởng phòng mua hàng, giám đốc chuỗi cung ứng và doanh nghiệp cần đánh giá khách quan các báo giá phức tạp từ nhiều nhà cung cấp quốc tế.",
+        "criteriaTitle": "Tiêu chí so sánh RFQ",
+        "criteria": [
+                "Tính tương đương về thông số kỹ thuật và dung sai chất lượng",
+                "Chuẩn hóa điều kiện Incoterms, cước vận chuyển và bảo hiểm",
+                "Đơn giá theo các bậc số lượng đặt hàng tối thiểu (MOQ)",
+                "Điều khoản thanh toán, rủi ro tỷ giá và chi phí tài chính"
+        ],
+        "processTitle": "Quy trình thực hiện",
+        "process": [
+                "Xây dựng mẫu RFQ chuẩn hóa với các tiêu chí bắt buộc",
+                "Gửi yêu cầu và thu thập báo giá theo cấu trúc đồng nhất",
+                "Quy đổi đơn vị tính, điều kiện giao hàng và chi phí phụ",
+                "Lập ma trận so sánh TCO và đưa ra khuyến nghị đàm phán"
+        ],
+        "evidenceTitle": "Dữ liệu và tính khách quan",
+        "evidence": "Ma trận so sánh dựa trên báo giá chính thức, tài liệu kỹ thuật và biểu thuế quan hiện hành, đảm bảo tính khách quan và độc lập thương mại.",
+        "serviceType": "Dịch vụ lập RFQ và so sánh báo giá quốc tế",
+        "ctaTitle": "Chuẩn hóa quy trình RFQ của bạn",
+        "ctaText": "Gửi danh sách yêu cầu hoặc các báo giá hiện có để chúng tôi hỗ trợ xây dựng ma trận so sánh chi tiết.",
+        "ctaLabel": "Yêu cầu phân tích RFQ",
+        "faq": [
+                {
+                        "question": "Tại sao báo giá đơn vị thấp nhất chưa chắc là lựa chọn tối ưu?",
+                        "answer": "Giá xuất xưởng thấp có thể đi kèm chi phí đóng gói cao, điều khoản giao hàng bất lợi, tỷ lệ hao hụt lớn hoặc rủi ro thanh toán trả trước toàn bộ."
+                },
+                {
+                        "question": "CTSEG có thay mặt khách hàng đàm phán giá không?",
+                        "answer": "Chúng tôi cung cấp dữ liệu phân tích, điểm chuẩn thị trường và luận điểm đàm phán để khách hàng tự tin thương thảo trực tiếp."
+                },
+                {
+                        "question": "Thời gian lập ma trận so sánh mất bao lâu?",
+                        "answer": "Sau khi nhận đủ thông tin chuẩn hóa từ các nhà cung cấp, bản phân tích so sánh hoàn chỉnh thường được hoàn thành trong 2-4 ngày làm việc."
+                }
+        ]
+}
     },
     "paths": {
       "tr": "/tr/cozumler/uluslararasi-rfq-teklif-karsilastirma/",
@@ -851,7 +1121,9 @@ export const searchLandings = {
       "de": "/de/loesungen/internationaler-rfq-angebotsvergleich/",
       "it": "/it/soluzioni/rfq-internazionale-confronto-offerte/",
       "ru": "/ru/resheniya/mezhdunarodnyi-rfq-sravnenie-predlozheniy/",
-      "fa": "/fa/solutions/international-rfq-bid-comparison/"
+      "fa": "/fa/solutions/international-rfq-bid-comparison/",
+      "zh": "/zh/solutions/international-rfq-bid-comparison-matrix/",
+      "vi": "/vi/solutions/international-rfq-bid-comparison-matrix/"
     }
   },
   "food-origin-compliance": {
@@ -1113,7 +1385,93 @@ export const searchLandings = {
             "answer": "مراجع ذی‌صلاح و متخصصان مجاز حقوقی، گمرکی، آزمایشگاهی یا ایمنی غذایی باید الزامات مقرراتی را در صورت لزوم تأیید کنند."
           }
         ]
-      }
+      },
+      "zh": {
+        "eyebrow": "食品原产地合规 · 批次单证尽调",
+        "title": "进口食品原产地真实性核验与批次质检单证全流程尽调",
+        "description": "面向大宗农产品与包装食品，严格核验真实原产地溯源码、批次质量检测报告 (COA) 与海关法定准入合规单证。",
+        "answerTitle": "如何核实进口食品的真实产地并确保每批次单证合规合法？",
+        "directAnswer": "CTSEG 针对大宗食品与特色农产品执行全链条单证交叉比对：从源头种植基地/压榨工厂的营业资质、产地证明 (C/O)、批次健康证书 (Health Certificate)、植检证 (Phytosanitary Certificate)、第三方权威实验室农残及理化检验单 (COA)，到外箱合规标签声明进行全盘核查，彻底排查虚假产地混充与伪造质检单证风险。",
+        "audienceTitle": "本专项解决方案适用对象",
+        "audience": "从事特色坚果、食用植物油、鲜黑椰枣、顶级藏红花等大宗食品进口的商贸公司、食品工业加工厂、品牌连锁超市及清关合规风控部门。",
+        "criteriaTitle": "食品合规核心尽调维度",
+        "criteria": [
+                "真实生产工厂地理位置、种植加工许可与卫生注册号",
+                "官方原产地证书 (Certificate of Origin) 防伪与签发机构",
+                "各生产批号 (Batch/Lot) 与 COA 实验室检测报告严格对应",
+                "重金属、黄曲霉毒素、农残限量及目标国强制卫生标准"
+        ],
+        "processTitle": "批次单证合规审查流程",
+        "process": [
+                "明确目标进口国家/地区的最新食品安全法规与限量指标",
+                "收集工厂全套企业资质、生产许可及往期出口报关单证",
+                "逐批次核验第三方实验室检测项目、测试方法与代表性",
+                "出具单证合规性评估意见书及潜在清关风险阻断建议"
+        ],
+        "evidenceTitle": "专业职责与法定监管边界说明",
+        "evidence": "CTSEG 依托专业外贸经验执行细致的商业与单证比对，但不能替代海关检验检疫机构 (Customs CIQ) 或具备法定资质的国家级实验室所出具的法定通关检测报告。",
+        "serviceType": "食品原产地与批次质检单证合规评估服务",
+        "ctaTitle": "提交您的食品进口合规与单证核验委托",
+        "ctaText": "请提供产品品类、拟进口产地、目标清关口岸及现有单证扫描件，我们将为您评估单证完备度与合规风险。",
+        "ctaLabel": "申请食品合规评估",
+        "faq": [
+                {
+                        "question": "工厂提供了一份 COA 检测报告，是否意味着该批次货物百分之百合格？",
+                        "answer": "不一定。必须核查该 COA 是否与当前提货批号完全一致、测试项目是否覆盖目标国强制指标、检测机构是否具备 ISO 17025 认证资质。"
+                },
+                {
+                        "question": "能否仅凭产品包装上的文字或图片判定原产地？",
+                        "answer": "绝对不能。原产地必须依据官方签发的原产地证书 (C/O)、工厂提单及完税凭证等法定链条综合认定，严禁虚假产地标注。"
+                },
+                {
+                        "question": "如发现批次单证存在缺失或疑点，应如何处理？",
+                        "answer": "在货物出厂发运前要求工厂补全官方单证或指定权威第三方实验室（如 SGS、Eurofins）进行独立抽样复测，坚决杜绝带险出运。"
+                }
+        ]
+},
+      "vi": {
+        "eyebrow": "Nguồn gốc thực phẩm · Chứng từ lô hàng",
+        "title": "Xác minh nguồn gốc thực phẩm và thẩm định chứng từ chất lượng theo lô",
+        "description": "Đánh giá có cấu trúc về tính xác thực của xuất xứ nông sản/thực phẩm, chứng nhận kiểm nghiệm (COA) và hồ sơ tuân thủ pháp lý theo từng lô hàng.",
+        "answerTitle": "Làm thế nào để xác minh xuất xứ thực phẩm và kiểm soát chứng từ lô hàng?",
+        "directAnswer": "CTSEG đối chiếu chéo toàn diện chuỗi chứng từ: đăng ký nhà máy sản xuất, chứng nhận xuất xứ (C/O), chứng thư kiểm dịch thực vật/y tế, phiếu phân tích kiểm nghiệm (COA) từ phòng lab độc lập và quy chuẩn ghi nhãn hàng hóa. Quy trình này giúp loại bỏ rủi ro gian lận xuất xứ và chứng từ giả mạo trước khi giao dịch.",
+        "audienceTitle": "Giải pháp này dành cho ai",
+        "audience": "Nhà nhập khẩu thực phẩm, đơn vị chế biến, chuỗi siêu thị và phòng quản lý chất lượng cần bảo đảm nguồn gốc minh bạch cho các lô hàng nông sản và thực phẩm.",
+        "criteriaTitle": "Tiêu chí thẩm định thực phẩm",
+        "criteria": [
+                "Địa điểm sản xuất thực tế và đăng ký cơ sở đủ điều kiện an toàn thực phẩm",
+                "Chứng nhận xuất xứ (C/O) hợp lệ từ cơ quan có thẩm quyền",
+                "Tính nhất quán giữa số lô (Batch/Lot) và kết quả kiểm nghiệm COA",
+                "Chỉ tiêu vi sinh, kim loại nặng, dư lượng thuốc BVTV theo chuẩn thị trường đích"
+        ],
+        "processTitle": "Quy trình thẩm định hồ sơ",
+        "process": [
+                "Rà soát quy định an toàn thực phẩm của thị trường nhập khẩu",
+                "Thu thập và kiểm tra tính xác thực của bộ hồ sơ nhà sản xuất",
+                "Đối chiếu phương pháp kiểm nghiệm và phạm vi phân tích trong COA",
+                "Lập báo cáo đánh giá rủi ro và các điểm cần làm rõ trước khi ký hợp đồng"
+        ],
+        "evidenceTitle": "Bằng chứng và ranh giới chuyên môn",
+        "evidence": "Đánh giá của CTSEG dựa trên việc đối chiếu chứng từ và dữ liệu thương mại, không thay thế chức năng kiểm nghiệm chính thức của cơ quan hải quan và kiểm dịch nhà nước.",
+        "serviceType": "Dịch vụ thẩm định nguồn gốc và chứng từ thực phẩm",
+        "ctaTitle": "Bảo đảm tuân thủ cho lô hàng thực phẩm của bạn",
+        "ctaText": "Gửi thông tin sản phẩm, xuất xứ dự kiến, thị trường nhập khẩu và các chứng từ hiện có để được rà soát chi tiết.",
+        "ctaLabel": "Yêu cầu thẩm định thực phẩm",
+        "faq": [
+                {
+                        "question": "Một bản COA có đủ chứng minh sự phù hợp với mọi quy định thị trường không?",
+                        "answer": "Không. Cần đối chiếu phạm vi kiểm nghiệm, phương pháp thử, phòng lab thực hiện, tính đại diện của mẫu và giới hạn cho phép của thị trường nhập khẩu."
+                },
+                {
+                        "question": "Có thể suy đoán xuất xứ từ tên gọi thương mại hay hình ảnh không?",
+                        "answer": "Tuyệt đối không. Xuất xứ phải được chứng minh qua hồ sơ nhà sản xuất, chứng từ lô hàng và chứng nhận C/O chính thức, không che giấu hay dán nhãn sai lệch."
+                },
+                {
+                        "question": "Ai là người xác nhận cuối cùng về sự tuân thủ an toàn thực phẩm?",
+                        "answer": "Cơ quan hải quan và cơ quan quản lý an toàn thực phẩm nước sở tại chịu trách nhiệm cấp phép thông quan; CTSEG giúp nhận diện và phòng ngừa rủi ro trước khi xuất hàng."
+                }
+        ]
+}
     },
     "paths": {
       "tr": "/tr/cozumler/gida-mense-parti-belge-tedarik-degerlendirmesi/",
@@ -1121,7 +1479,9 @@ export const searchLandings = {
       "de": "/de/loesungen/lebensmittel-herkunft-chargendokumente-beschaffung/",
       "it": "/it/soluzioni/origine-alimenti-documenti-lotto-approvvigionamento/",
       "ru": "/ru/resheniya/proiskhozhdenie-pishchevyh-produktov-dokumenty-partii/",
-      "fa": "/fa/solutions/food-origin-batch-document-sourcing-assessment/"
+      "fa": "/fa/solutions/food-origin-batch-document-sourcing-assessment/",
+      "zh": "/zh/solutions/food-origin-batch-document-sourcing-assessment/",
+      "vi": "/vi/solutions/food-origin-batch-document-sourcing-assessment/"
     }
   }
 } as unknown as Record<SearchLandingId,{

@@ -10,17 +10,19 @@ const {lang,id}=Astro.props as {lang:TradeLocale;id:TradeSectorId};
 const copy=tradeCopy[lang][id],ui=tradeUi[lang];
 const canonical=`https://ctseg.com.tr${pathForSector(lang,id)}`;
 const visual=localizedTradeVisual(sourcingTradeVisualKeys[id],lang);
-const contact={tr:'/tr/iletisim/',en:'/en/contact/',de:'/de/kontakt/',it:'/it/contatti/',fa:'/fa/#contact',ru:'/ru/#contact'}[lang];
+const contact = { tr:'/tr/iletisim/', en:'/en/contact/', de:'/de/kontakt/', it:'/it/contatti/', fa:'/fa/#contact', ru:'/ru/#contact', zh:'/zh/contact/', vi:'/vi/contact/' }[lang];
 const home=lang==='tr'?'/':lang==='fa'?'/fa/':`/${lang}/`;
 const producer=lang==='fa'?persianProducerCopy[id]:null;
 const metaDescription=producer?`${copy.description} ${producer.lead}`:copy.description;
-const chrome={
- tr:{skip:'Ana içeriğe geç',language:'Dil seçimi',menu:'Dil menüsünü aç',close:'Dil menüsünü kapat'},
- en:{skip:'Skip to main content',language:'Language selection',menu:'Open language menu',close:'Close language menu'},
- de:{skip:'Zum Hauptinhalt',language:'Sprachauswahl',menu:'Sprachmenü öffnen',close:'Sprachmenü schließen'},
- it:{skip:'Vai al contenuto principale',language:'Selezione lingua',menu:'Apri il menu lingua',close:'Chiudi il menu lingua'},
- ru:{skip:'Перейти к содержанию',language:'Выбор языка',menu:'Открыть меню языков',close:'Закрыть меню языков'},
- fa:{skip:'رفتن به محتوای اصلی',language:'انتخاب زبان',menu:'باز کردن منوی زبان',close:'بستن منوی زبان'}
+const chrome = {
+  tr: { skip: 'Ana içeriğe geç', language: 'Dil seçimi', menu: 'Dil menüsünü aç', close: 'Dil menüsünü kapat' },
+  en: { skip: 'Skip to main content', language: 'Language selection', menu: 'Open language menu', close: 'Close language menu' },
+  de: { skip: 'Zum Hauptinhalt', language: 'Sprachauswahl', menu: 'Sprachmenü öffnen', close: 'Sprachmenü schließen' },
+  it: { skip: 'Vai al contenuto principale', language: 'Selezione lingua', menu: 'Apri il menu lingua', close: 'Chiudi il menu lingua' },
+  ru: { skip: 'Перейти к содержанию', language: 'Выбор языка', menu: 'Открыть меню языков', close: 'Закрыть меню языков' },
+  fa: { skip: 'رفتن به محتوای اصلی', language: 'انتخاب زبان', menu: 'باز کردن منوی زبان', close: 'بستن منوی زبان' },
+  zh: { skip: '跳转到主要内容', language: '语言选择', menu: '打开语言菜单', close: '关闭语言菜单' },
+  vi: { skip: 'Chuyển đến nội dung chính', language: 'Chọn ngôn ngữ', menu: 'Mở menu ngôn ngữ', close: 'Đóng menu ngôn ngữ' }
 }[lang];
 const schema=[
  {'@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',name:'CTSEG Sanayi ve Ticaret Limited Şirketi',alternateName:'CTSEG',foundingDate:'2022',founder:{'@type':'Person',name:'Teyfik Gökdemir'},address:{'@type':'PostalAddress',addressLocality:'Tuzla',addressRegion:'İstanbul',addressCountry:'TR'},url:'https://ctseg.com.tr/'},
@@ -29,7 +31,7 @@ const schema=[
  {'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'CTSEG',item:`https://ctseg.com.tr${home}`},{'@type':'ListItem',position:2,name:copy.title,item:canonical}]}
 ];
 ---
-<!doctype html><html lang={lang} dir={localeDirection(lang)}><head>
+<!doctype html><html lang={lang === 'zh' ? 'zh-CN' : lang === 'vi' ? 'vi-VN' : lang} dir={localeDirection(lang)}><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>{copy.title} | CTSEG</title><meta name="description" content={metaDescription}/><meta name="robots" content="index,follow,max-image-preview:large"/><link rel="canonical" href={canonical}/>
 {tradeLocales.map(code=><link rel="alternate" hreflang={code} href={`https://ctseg.com.tr${pathForSector(code,id)}`}/>)}<link rel="alternate" hreflang="x-default" href={`https://ctseg.com.tr${pathForSector('en',id)}`}/>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin/><link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin/><meta property="og:type" content="website"/><meta property="og:locale" content={localeOg(lang)}/><meta property="og:title" content={copy.title}/><meta property="og:description" content={metaDescription}/><meta property="og:url" content={canonical}/><meta property="og:image" content={`https://ctseg.com.tr${visual.source}`}/><meta property="og:image:alt" content={visual.altText}/><meta property="og:image:width" content={String(visual.width)}/><meta property="og:image:height" content={String(visual.height)}/><meta name="twitter:card" content="summary_large_image"/><script type="application/ld+json" set:html={JSON.stringify(schema)}></script>

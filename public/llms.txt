@@ -49,6 +49,8 @@ CTSEG is not a marketplace, factory, seller of a fixed inventory, or guaranteed 
 - [Italian homepage](https://ctseg.com.tr/it/)
 - [Persian homepage](https://ctseg.com.tr/fa/)
 - [Russian homepage](https://ctseg.com.tr/ru/)
+- [Chinese homepage](https://ctseg.com.tr/zh/)
+- [Vietnamese homepage](https://ctseg.com.tr/vi/)
 
 ## Core pages
 
@@ -66,6 +68,8 @@ CTSEG is not a marketplace, factory, seller of a fixed inventory, or guaranteed 
 - [Italian methodology](https://ctseg.com.tr/it/come-lavoriamo/)
 - [Russian methodology](https://ctseg.com.tr/ru/kak-my-rabotaem/)
 - [Persian methodology](https://ctseg.com.tr/fa/ravesh-kar/)
+- [Chinese methodology](https://ctseg.com.tr/zh/how-we-work/)
+- [Vietnamese methodology](https://ctseg.com.tr/vi/how-we-work/)
 
 ## Specialist sourcing pages
 

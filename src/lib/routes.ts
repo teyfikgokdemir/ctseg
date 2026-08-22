@@ -50,12 +50,14 @@ export function getMeta(record: RouteRecord) {
   const copy = pageCopy[lang];
   const t = ui[lang];
   if (key === 'home') return {
-    title:`CTSEG | ${lang === 'tr' ? 'Uluslararası Ticaret Eşleştirme ve Koordinasyon' : lang === 'en' ? 'International Trade Matching & Coordination' : lang === 'de' ? 'Internationale Geschäftsanbahnung & Koordination' : lang === 'it' ? 'Matching Commerciale Internazionale' : lang === 'fa' ? 'تطبیق تجاری و توسعه بازار بین‌المللی' : 'Международный сорсинг и коммерческая координация'}`,
+    title:`CTSEG | ${lang === 'tr' ? 'Uluslararası Ticaret Eşleştirme ve Koordinasyon' : lang === 'en' ? 'International Trade Matching & Coordination' : lang === 'de' ? 'Internationale Geschäftsanbahnung & Koordination' : lang === 'it' ? 'Matching Commerciale Internazionale' : lang === 'fa' ? 'تطبیق تجاری و توسعه بازار بین‌المللی' : lang === 'zh' ? '国际贸易匹配与大宗供应链商业协调' : lang === 'vi' ? 'Kết nối thương mại quốc tế & Điều phối thương mại' : 'Международный сорсинг и коммерческая координация'}`,
     description: lang === 'tr' ? 'CTSEG, alıcıları doğrulanabilir tedarikçilerle; üreticileri uygun alıcılar ve uluslararası pazar fırsatlarıyla buluşturan ticari koordinasyon platformudur.' :
       lang === 'en' ? 'CTSEG connects buyers with verifiable suppliers and producers with suitable buyers and international market opportunities through independent commercial coordination.' :
       lang === 'de' ? 'CTSEG verbindet Einkäufer mit prüfbaren Lieferanten und Hersteller mit geeigneten Abnehmern und internationalen Marktchancen.' :
       lang === 'it' ? 'CTSEG collega acquirenti a fornitori verificabili e produttori a buyer e opportunità internazionali tramite coordinamento commerciale indipendente.' :
       lang === 'fa' ? 'CTSEG خریداران را به تأمین‌کنندگان قابل‌بررسی و تولیدکنندگان را به خریداران و بازارهای مناسب بین‌المللی متصل می‌کند.' :
+      lang === 'zh' ? 'CTSEG 是一家立足土耳其的国际战略采购与大宗商贸协调机构，为跨国买家与经过严格背景核验的源头生产商建立透明高效的商业连接。' :
+      lang === 'vi' ? 'CTSEG kết nối người mua với các nhà cung cấp có thể xác minh và nhà sản xuất với người mua phù hợp thông qua điều phối thương mại độc lập.' :
       'CTSEG помогает искать производителей и поставщиков, находить покупателей и координировать международные коммерческие процессы.'
   };
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };

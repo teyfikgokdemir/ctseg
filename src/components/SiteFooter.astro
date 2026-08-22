@@ -14,6 +14,8 @@ const descriptionMap: Record<string, string> = {
   fr:'Sourcing stratégique, produits commerciaux vérifiés et aide à la décision internationale depuis la Turquie.',
   ru:'Международный сорсинг и независимая коммерческая координация из Турции.',
   fa:'تأمین استراتژیک، محصولات تجاری معتبر و پشتیبانی تصمیم‌گیری تجاری بین‌المللی از ترکیه.',
+  zh:'立足土耳其的国际贸易匹配与独立商业协调专业机构。',
+  vi:'Kết nối thương mại quốc tế và điều phối thương mại độc lập từ Thổ Nhĩ Kỳ.',
   sq:'Sourcing strategjik, produkte tregtare të verifikuara dhe mbështetje për vendimmarrje tregtare ndërkombëtare nga Turqia.',
   mk:'Стратешка набавка, верификувани трговски производи и меѓународна поддршка за трговски одлуки од Турција.',
   sr:'Strateška nabavka, verifikovani trgovinski proizvodi i međunarodna podrška za trgovinske odluke iz Turske.'
@@ -27,6 +29,8 @@ const copyrightMap: Record<string, string> = {
   fr:`© ${year} CTSEG. Tous droits réservés.`,
   ru:`© ${year} CTSEG. Все права защищены.`,
   fa:`© ${year} CTSEG. تمامی حقوق محفوظ است.`,
+  zh:`© ${year} CTSEG. 保留所有权利。`,
+  vi:`© ${year} CTSEG. Bảo lưu mọi quyền.`,
   sq:`© ${year} CTSEG. Të gjitha të drejtat të rezervuara.`,
   mk:`© ${year} CTSEG. Сите права се задржани.`,
   sr:`© ${year} CTSEG. Sva prava zadržana.`
@@ -53,7 +57,7 @@ const copyright = copyrightMap[lang] || copyrightMap.en;
     <nav aria-label={t.contact}>
       <strong>CTSEG</strong>
       <a href={localizedPath(lang, 'about')}>{t.about}</a>
-      {(lang === 'tr' || lang === 'en' || lang === 'fa') && <a href={localizedPath(lang,'how-we-work')}>{lang === 'tr' ? 'Nasıl çalışıyoruz?' : lang === 'fa' ? 'چگونه کار می‌کنیم؟' : 'How we work'}</a>}
+      {(lang === 'tr' || lang === 'en' || lang === 'fa' || lang === 'zh' || lang === 'vi') && <a href={localizedPath(lang,'how-we-work')}>{lang === 'tr' ? 'Nasıl çalışıyoruz?' : lang === 'fa' ? 'چگونه کار می‌کنیم؟' : lang === 'zh' ? '运作模式' : lang === 'vi' ? 'Phương thức hoạt động' : 'How we work'}</a>}
       <a href={localizedPath(lang, 'contact')}>{t.contact}</a>
       <a href={`mailto:${company.email}`}>{company.email}</a>
     </nav>

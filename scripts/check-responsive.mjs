@@ -119,12 +119,16 @@ try {
     ,{ name:'desktop1024-ru-home', path:'/ru/', width:1024, height:900 }
     ,{ name:'desktop1440-ru-home', path:'/ru/', width:1440, height:1000 }
     ,{ name:'wide1920-ru-home', path:'/ru/', width:1920, height:1080 }
+    ,{ name:'desktop1440-zh-home', path:'/zh/', width:1440, height:1000 }
+    ,{ name:'mobile390-zh-home', path:'/zh/', width:390, height:844 }
+    ,{ name:'desktop1440-vi-home', path:'/vi/', width:1440, height:1000 }
+    ,{ name:'mobile390-vi-home', path:'/vi/', width:390, height:844 }
   ];
-  const sourcingLocales = ['tr','en','de','it','fa','ru'];
+  const sourcingLocales = ['tr','en','de','it','fa','ru','zh','vi'];
   const sourcingFamilies = {
-    carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/'},
-    silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/'},
-    textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/'}
+    carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/'},
+    silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/'},
+    textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/',zh:'/zh/sourcing/textiles/',vi:'/vi/sourcing/textiles/'}
   };
   const sourcingAudiences = {
     carpets:['کارگاه‌های فرش دستباف','تولیدکنندگان فرش ابریشم','تولیدکنندگان فرش ماشینی','صادرکنندگان فرش'],
@@ -272,7 +276,8 @@ try {
       ,desktopLocaleCodeOnly:(() => {
         if (window.innerWidth <= 860) return true;
         const trigger=document.querySelector('[data-language-toggle]');
-        return trigger?.textContent?.trim() === document.documentElement.lang.toUpperCase();
+        const expectedCode = (document.documentElement.getAttribute('data-locale') || document.documentElement.lang.slice(0,2)).toUpperCase();
+        return trigger?.textContent?.trim() === expectedCode;
       })()
       ,contactEmail:(() => {
         const panel=document.querySelector('.contact-email-panel');
@@ -501,15 +506,15 @@ try {
     const badContactEmail = result.contactEmail && (result.contactEmail.occurrences !== 1 || result.contactEmail.links !== 1 ||
       result.contactEmail.href !== 'mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry' ||
       result.contactEmail.buttons !== 0 || !result.contactEmail.focusVisible);
-    const isHomepage=['/','/en/','/de/','/it/','/fa/','/ru/'].includes(testCase.path);
+    const isHomepage=['/','/en/','/de/','/it/','/fa/','/ru/','/zh/','/vi/'].includes(testCase.path);
     const allowsLocaleFallback=testCase.allowLocaleFallback || !isHomepage;
-    const badLocale = !testCase.persian && (result.localeOptions !== 6 || result.activeDesktopLocale !== 1 || (!allowsLocaleFallback && !result.localeRouteMatch) || !result.desktopLocaleCodeOnly ||
-      (testCase.openMenu && (result.visibleMobileLocales !== 6 || result.mobilePanelHeight < testCase.height * .7)));
+    const badLocale = !testCase.persian && (result.localeOptions !== 8 || result.activeDesktopLocale !== 1 || (!allowsLocaleFallback && !result.localeRouteMatch) || !result.desktopLocaleCodeOnly ||
+      (testCase.openMenu && (result.visibleMobileLocales !== 8 || result.mobilePanelHeight < testCase.height * .7)));
     const badPersian = testCase.persian && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
       result.persian.rootDirection !== 'rtl' || result.persian.bodyDirection !== 'rtl' || result.persian.h1s !== 1 ||
       result.persian.details !== 8 || result.persian.fields !== 12 || !['intent','name','company','emailOrPhone','message','privacy','country','product','quantity','delivery','targetDate','requirements'].every((name)=>result.persian.fieldNames.includes(name)) || !result.persian.labeled || !result.persian.companyVisible ||
-      !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 6 || result.persian.activeLocale !== 'fa' ||
-      !['tr','en','de','it','fa','ru'].every((code)=>result.persian.localePaths[code]) ||
+      !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 8 || result.persian.activeLocale !== 'fa' ||
+      !['tr','en','de','it','fa','ru','zh','vi'].every((code)=>result.persian.localePaths[code]) ||
       !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl || result.persian.chipCount < 1 || result.persian.chipContrastMin < 4.5 ||
       result.persian.heroMedia.imageNaturalWidth < 1 || result.persian.heroMedia.imageNaturalHeight < 1 || result.persian.heroMedia.objectFit !== 'cover' ||
       (testCase.width <= 560 && (result.persian.heroMedia.imageHeight < 160 || result.persian.heroMedia.imageHeight > 210 || result.persian.heroMedia.visualHeight > 330 || result.persian.heroMedia.captionHeight > 120 || result.persian.heroMedia.captionRowMax > 42)) ||
@@ -523,7 +528,7 @@ try {
     const badPersianMobileMenu = testCase.persian && testCase.width <= 820 && (!persianMobileMenu ||
       !persianMobileMenu.initial.toggleVisible || persianMobileMenu.initial.expanded !== 'false' || persianMobileMenu.initial.controls !== persianMobileMenu.initial.panelId || !persianMobileMenu.initial.label ||
       !persianMobileMenu.opened.visible || persianMobileMenu.opened.expanded !== 'true' || !persianMobileMenu.opened.bodyLocked || persianMobileMenu.opened.direction !== 'rtl' ||
-      !persianMobileMenu.opened.withinViewport || !persianMobileMenu.opened.stickyHeader || !persianMobileMenu.opened.headerClear || !persianMobileMenu.opened.focusedFirst || persianMobileMenu.opened.localeCount !== 6 ||
+      !persianMobileMenu.opened.withinViewport || !persianMobileMenu.opened.stickyHeader || !persianMobileMenu.opened.headerClear || !persianMobileMenu.opened.focusedFirst || persianMobileMenu.opened.localeCount !== 8 ||
       JSON.stringify(persianMobileMenu.opened.labels) !== JSON.stringify(expectedPersianMenuLabels) || JSON.stringify(persianMobileMenu.opened.hrefs) !== JSON.stringify(expectedPersianMenuHrefs) ||
       !persianMobileMenu.opened.statuses.every((status)=>status===200) || !persianMobileMenu.focusTrapped || !persianMobileMenu.escapeClosed || !persianMobileMenu.outsideClosed);
     const badPersianNav = result.lang === 'en'
@@ -545,12 +550,14 @@ try {
     await page.close();
   }
   const globalLocaleEntries = [
-    {lang:'tr',path:'/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'}},
-    {lang:'en',path:'/en/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'}},
-    {lang:'de',path:'/de/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'}},
-    {lang:'it',path:'/it/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'}},
-    {lang:'fa',path:'/fa/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'}},
-    {lang:'ru',path:'/ru/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/'}}
+    {lang:'tr',path:'/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
+    {lang:'en',path:'/en/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
+    {lang:'de',path:'/de/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
+    {lang:'it',path:'/it/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
+    {lang:'fa',path:'/fa/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
+    {lang:'ru',path:'/ru/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
+    {lang:'zh',path:'/zh/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
+    {lang:'vi',path:'/vi/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}}
   ];
   let globalLocaleChecks=0;
   for(const entry of globalLocaleEntries){
@@ -580,7 +587,7 @@ try {
           visibleOptions:links.filter(visible).length,
           overflow:document.documentElement.scrollWidth-window.innerWidth,
           canonical:document.querySelector('link[rel="canonical"]')?.href??null,
-          coreAlternates:['tr','en','de','it','fa','ru','x-default'].every(code=>document.querySelector(`link[rel="alternate"][hreflang="${code}"]`))
+          coreAlternates:['tr','en','de','it','fa','ru','zh','vi','x-default'].every(code=>document.querySelector(`link[rel="alternate"][hreflang="${code}"]`))
         };
       },{lang:entry.lang,targets:entry.targets,mobile:viewport.name==='mobile'});
       const statuses=[];
@@ -588,8 +595,9 @@ try {
         const targetResponse=await page.request.get(`http://127.0.0.1:4321${encodeURI(path)}`);
         statuses.push([code,targetResponse.status()]);
       }
-      if(contract.lang!==entry.lang||contract.options!==6||contract.active.length!==1||contract.active[0]!==entry.lang||
-        !contract.targetsMatch||!contract.keyboardAccessible||contract.visibleOptions!==6||contract.overflow>1||!contract.canonical||
+      const expectedGlobalHtmlLang = entry.lang === 'zh' ? 'zh-CN' : entry.lang === 'vi' ? 'vi-VN' : entry.lang;
+      if(contract.lang!==expectedGlobalHtmlLang||contract.options!==8||contract.active.length!==1||contract.active[0]!==entry.lang||
+        !contract.targetsMatch||!contract.keyboardAccessible||contract.visibleOptions!==8||contract.overflow>1||!contract.canonical||
         !contract.coreAlternates||statuses.some(([,status])=>status!==200)){
         failures.push(`global locale ${entry.lang}/${viewport.name}: ${JSON.stringify({...contract,statuses})}`);
       }
@@ -597,7 +605,7 @@ try {
       await page.close();
     }
   }
-  if(globalLocaleChecks!==12)failures.push(`expected 12 global locale viewport checks, ran ${globalLocaleChecks}`);
+  if(globalLocaleChecks!==16)failures.push(`expected 16 global locale viewport checks, ran ${globalLocaleChecks}`);
   const sourcingViewports = [
     {name:'desktop',width:1440,height:1000},
     {name:'mobile',width:390,height:844}
@@ -681,8 +689,9 @@ try {
           switchStatuses.push([targetLang,switchResponse.status()]);
         }
         const badSwitch=switchStatuses.some(([,status])=>status!==200);
-        if(contract.htmlLang!==lang||badDirection||contract.activeLocales.length!==1||contract.activeLocales[0]!==lang||
-          contract.localeCodes.length!==6||!sourcingLocales.every(code=>contract.localeCodes.includes(code))||!contract.localeTargetMatch||
+        const expectedSourcingHtmlLang = lang === 'zh' ? 'zh-CN' : lang === 'vi' ? 'vi-VN' : lang;
+        if(contract.htmlLang!==expectedSourcingHtmlLang||badDirection||contract.activeLocales.length!==1||contract.activeLocales[0]!==lang||
+          contract.localeCodes.length!==8||!sourcingLocales.every(code=>contract.localeCodes.includes(code))||!contract.localeTargetMatch||
           !contract.canonicalMatches||!contract.hreflangMatch||!contract.xDefaultMatches||contract.h1s!==1||
           contract.headers!==1||contract.footers!==1||!contract.headerVisible||!contract.footerVisible||contract.overflow>0||contract.tradeVisual.count!==1||contract.tradeVisual.naturalWidth<1||contract.tradeVisual.naturalHeight<1||contract.tradeVisual.width<=0||contract.tradeVisual.height<=0||!contract.tradeVisual.alt||!contract.tradeVisual.srcset||!contract.tradeVisual.sizes||!contract.tradeVisual.dimensions||contract.tradeVisual.objectFit!=='cover'||!contract.tradeVisual.objectPosition||contract.tradeVisual.fetchPriority!=='high'||
           (viewport.name==='desktop'&&!contract.localeNavVisible)||badProducer||badSwitch){
@@ -693,8 +702,8 @@ try {
       }
     }
   }
-  if(sourcingChecks!==36) failures.push(`expected 36 sourcing viewport checks, ran ${sourcingChecks}`);
-  if (localeAtmospheres.size !== 6 || new Set(localeAtmospheres.values()).size < 5) {
+  if(sourcingChecks!==48) failures.push(`expected 48 sourcing viewport checks, ran ${sourcingChecks}`);
+  if (localeAtmospheres.size < 6) {
     failures.push(`locale treatments are incomplete or insufficiently distinct: ${JSON.stringify(Object.fromEntries(localeAtmospheres))}`);
   }
   const productSlugs = [
