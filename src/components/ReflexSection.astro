@@ -2,10 +2,24 @@
 import { reflexData, reflexPath, type ReflexLocale } from '../data/reflex-data';
 
 const { lang = 'en' } = Astro.props as { lang?: string };
-const currentLang = (['en', 'tr', 'de', 'it', 'ru', 'fa', 'sq', 'mk', 'sr'].includes(lang) ? lang : 'en') as ReflexLocale;
+const currentLang = (['en', 'tr', 'de', 'it', 'ru', 'fa', 'zh', 'vi', 'sq', 'mk', 'sr'].includes(lang) ? lang : 'en') as ReflexLocale;
 const data = reflexData[currentLang] || reflexData.en;
 const reflexUrl = reflexPath(currentLang);
 const isRtl = currentLang === 'fa';
+
+const videoCaption = {
+  tr: '<span><strong>CE 2841 & ISO 9001</strong> · Medikal ve Hijyenik Tek Kullanımlık Eldivenler</span>',
+  en: '<span><strong>CE 2841 & ISO 9001</strong> · Premium Medical & Hygiene Disposable Gloves</span>',
+  de: '<span><strong>CE 2841 & ISO 9001</strong> · Premium Einweghandschuhe für Medizin & Hygiene</span>',
+  it: '<span><strong>CE 2841 & ISO 9001</strong> · Guanti Monouso Premium per Uso Medico e Igienico</span>',
+  ru: '<span><strong>CE 2841 & ISO 9001</strong> · Одноразовые перчатки премиум-класса для медицины и гигиены</span>',
+  fa: '<span><strong>CE 2841 & ISO 9001</strong> · دستکش‌های یک‌بارمصرف ممتاز پزشکی و بهداشتی</span>',
+  zh: '<span><strong>CE 2841 & ISO 9001</strong> · 医用与卫生防护级高品质一次性手套</span>',
+  vi: '<span><strong>CE 2841 & ISO 9001</strong> · Găng tay dùng một lần cao cấp cho y tế & vệ sinh</span>',
+  sq: '<span><strong>CE 2841 & ISO 9001</strong> · Doreza Premium me Një Përdorim për Mjekësi dhe Higjienë</span>',
+  mk: '<span><strong>CE 2841 & ISO 9001</strong> · Премиум ракавици за еднократна употреба за медицина и хигиена</span>',
+  sr: '<span><strong>CE 2841 & ISO 9001</strong> · Premium jednokratne rukavice za medicinu i higijenu</span>'
+}[currentLang] || '<span><strong>CE 2841 & ISO 9001</strong> · Premium Medical & Hygiene Disposable Gloves</span>';
 ---
 
 <section class="section reflex-featured-section" id="featured-medical-brand" dir={isRtl ? 'rtl' : 'ltr'}>
@@ -62,9 +76,7 @@ const isRtl = currentLang === 'fa';
           aria-label={`${data.heroTitle} - Featured Commercial Video`}
           class="reflex-hero-video"
         ></video>
-        <figcaption class="reflex-visual-caption">
-          <span><strong>CE 2841 & ISO 9001</strong> · Premium Medical & Hygiene Disposable Gloves</span>
-        </figcaption>
+        <figcaption class="reflex-visual-caption" set:html={videoCaption} />
       </figure>
     </div>
   </div>
