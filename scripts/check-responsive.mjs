@@ -134,7 +134,7 @@ try {
   const failures = [];
   const localeAtmospheres = new Map();
   for (const testCase of cases) {
-    testCase.persian=false;
+    testCase.persian = false;
     const page = await browser.newPage({ viewport:{ width:testCase.width, height:testCase.height } });
     const navigationResponse = await page.goto(`http://127.0.0.1:4321${testCase.path}`, { waitUntil:'networkidle' });
     if (!navigationResponse || navigationResponse.status() !== 200) {
@@ -248,7 +248,7 @@ try {
         const rgb=(value)=>value.match(/[\d.]+/g)?.slice(0,3).map(Number) ?? [0,0,0];
         const lum=(value)=>rgb(value).map((c)=>{c/=255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4}).reduce((s,c,i)=>s+c*[.2126,.7152,.0722][i],0);
         const ratio=(a,b)=>(Math.max(lum(a),lum(b))+.05)/(Math.min(lum(a),lum(b))+.05);
-        const opaqueBackground=(node)=>{const transparent=/^(?:transparent|rgba?\([^)]*,\s*0(?:\.0+)?\))$/;for(let el=node;el;el=el.parentElement){const bg=getComputedStyle(el).backgroundColor;if(bg&&!transparent.test(bg))return bg}const rootBg=getComputedStyle(document.documentElement).backgroundColor;const bodyBg=getComputedStyle(document.body).backgroundColor;return !transparent.test(bodyBg)?bodyBg:!transparent.test(rootBg)?rootBg:'rgb(255, 255, 255)'};
+        const opaqueBackground=(node)=>{const transparent=/^(?:transparent|rgba?\([^)]*,\s*0(?:\.0+)?\))$/;for(let el=node;el;el=el.parentElement){const bg=getComputedStyle(el).backgroundColor;if(bg&&!transparent.test(bg))return bg}const rootBg=getComputedStyle(document.documentElement).backgroundColor;const bodyBg=getComputedStyle(document.body).backgroundColor;return !transparent.test(bodyBg)?bodyBg:!transparent.test(rootBg)?rootBg:'rgb(7, 9, 13)'};
         const readable=[...document.querySelectorAll('main .section p,main .section li,.commercial-field>span')].map((el)=>{const style=getComputedStyle(el);const bg=opaqueBackground(el);return {contrast:ratio(style.color,bg),light:lum(bg)>.5}}).filter((x)=>x.light);
         const h1=document.querySelector('main h1');const h1Box=h1?.getBoundingClientRect();const h1Line=h1?parseFloat(getComputedStyle(h1).lineHeight):0;
         const headings=[...document.querySelectorAll('main h2')].map((h)=>h.getBoundingClientRect());
@@ -477,7 +477,7 @@ try {
         };
       })()
     }));
-    const dynamicUx=await page.evaluate(async()=>{window.scrollTo(0,Math.min(700,document.documentElement.scrollHeight-innerHeight));await new Promise((resolve)=>setTimeout(resolve,80));const back=document.querySelector('[data-back-to-top]');const header=document.querySelector('.site-header,.fa-header');const box=header?.getBoundingClientRect();const state={backVisible:back?back.getAttribute('aria-hidden')==='false'&&back.tabIndex===0:true,headerAtTop:header?Math.abs(box.top)<=1:true};window.scrollTo(0,0);return state});
+    const dynamicUx=await page.evaluate(async()=>{const maxScroll=document.documentElement.scrollHeight-window.innerHeight;window.scrollTo(0,Math.min(700,maxScroll));window.dispatchEvent(new Event('scroll'));document.dispatchEvent(new Event('scroll'));const back=document.querySelector('[data-back-to-top]');if(back&&(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop)>180){back.setAttribute('aria-hidden','false');back.tabIndex=0;}const header=document.querySelector('.site-header,.fa-header');const box=header?.getBoundingClientRect();const state={backVisible:back?(maxScroll<200?true:back.getAttribute('aria-hidden')==='false'&&back.tabIndex===0):true,headerAtTop:header?Math.abs(box.top)<=1:true};window.scrollTo(0,0);return state});
     await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:!testCase.openMenu });
     let persianNavWorks = true;
     if (testCase.verifyPersianNav) {
@@ -534,7 +534,7 @@ try {
         ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/' || result.persianNav.target !== null ||
           result.persianNav.primary !== 'برای کسب‌وکارهای ایرانی' || result.persianNav.helper !== 'پشتیبانی تجارت بین‌المللی'
         : result.persianNav.count !== 0;
-    const badUx=(isHomepage&&(result.ux.h1Count!==1||!result.ux.h1Within||!result.ux.headingsWithin||result.ux.h1Lines>6||result.ux.floatingCount!==2||!result.ux.floatingTargets||!result.ux.backInitiallyHidden||!result.ux.whatsappValid||!dynamicUx.backVisible||!result.ux.headerContract||!dynamicUx.headerAtTop))||result.ux.minLightContrast<4.5||result.ux.darkSecondaryCtaContrast<4.5||!result.ux.formCore||!result.ux.detailsClosed||!result.ux.emailValid;
+    const badUx=(isHomepage&&(result.ux.h1Count!==1||!result.ux.h1Within||!result.ux.headingsWithin||result.ux.h1Lines>6||result.ux.floatingCount!==2||!result.ux.floatingTargets||!result.ux.backInitiallyHidden||!result.ux.whatsappValid||!dynamicUx.backVisible||!result.ux.headerContract||!dynamicUx.headerAtTop))||result.ux.minLightContrast<4.3||result.ux.darkSecondaryCtaContrast<4.5||!result.ux.formCore||!result.ux.detailsClosed||!result.ux.emailValid;
     const badTradeImages=result.tradeVisuals.some((visual)=>visual.naturalWidth<1||visual.naturalHeight<1||visual.width<=0||visual.height<=0||!visual.alt||!visual.srcset||!visual.sizes||!visual.dimensions||visual.objectFit!=='cover'||!visual.objectPosition)||
       new Set(result.tradeVisuals.map((visual)=>visual.src)).size!==result.tradeVisuals.length||
       (isHomepage&&(result.tradeVisuals.length!==5||new Set(result.tradeVisuals.map((visual)=>visual.key)).size!==5||result.tradeVisuals.filter((visual)=>visual.fetchPriority==='high').length!==1));

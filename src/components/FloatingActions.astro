@@ -73,7 +73,7 @@ const copy = contactCopy[lang];
       const top=actions.querySelector('[data-back-to-top]');
       if(!(top instanceof HTMLButtonElement))return;
       const update=()=>{
-        const visible=scrollY>180;
+        const visible=(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop)>180;
         top.classList.toggle('visible',visible);
         top.setAttribute('aria-hidden',String(!visible));
         top.tabIndex=visible?0:-1;

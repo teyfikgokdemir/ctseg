@@ -4,3 +4,8 @@ dist/
 .artifacts/
 .DS_Store
 *.log
+.env
+.env.*
+.env.local
+.vscode/
+.idea/
