@@ -8,9 +8,9 @@ This avoids keeping `/` and `/tr/` as two indexable copies while preserving the 
 
 ## Languages and hreflang
 
-The core multilingual set is Turkish, English, German, Italian and French. Each route advertises only counterparts that actually exist, including itself. Reciprocal mappings use the localized route tables rather than assuming identical slugs.
+The core multilingual set is Turkish, English, German, Italian, Persian, Russian, Simplified Chinese and Vietnamese. Each core route advertises only counterparts that actually exist, including itself. Reciprocal mappings use the localized route tables rather than assuming identical slugs. The REFLEX medical catalogue additionally exposes Albanian, Macedonian and Serbian routes from its dedicated medical locale registry.
 
-English is the intentional `x-default` because CTSEG serves an international B2B audience and English is the neutral fallback when no supported language matches. The standalone Persian sourcing landing page is not a full site locale and remains outside the global hreflang cluster.
+English is the intentional `x-default` because CTSEG serves an international B2B audience and English is the neutral fallback when no supported language matches. Persian sourcing pages are part of the current localized route surface. The additional Albanian, Macedonian and Serbian routes are limited to the REFLEX medical catalogue and are not general site locales.
 
 ## Canonical URL standard
 
