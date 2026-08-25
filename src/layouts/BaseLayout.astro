@@ -171,6 +171,9 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
         document.querySelectorAll('[data-trade-intent],[data-contact-intent],[data-fa-intent]').forEach((link)=>link.addEventListener('click',()=>{
           window.ctsegTrack('trade_intent_click',{trade_intent:link.getAttribute('data-trade-intent')||link.getAttribute('data-contact-intent')||link.getAttribute('data-fa-intent')||''});
         }));
+        document.querySelectorAll('[data-commercial-cta]').forEach((link)=>link.addEventListener('click',()=>{
+          window.ctsegTrack('commercial_landing_cta_click',{service_interest:link.getAttribute('data-commercial-service')||'',cta_location:'landing_band'});
+        }));
         document.querySelectorAll('[data-contact-whatsapp]').forEach((link)=>link.addEventListener('click',()=>window.ctsegTrack('direct_contact_click',{contact_channel:'whatsapp'})));
         document.querySelectorAll('[data-contact-email]').forEach((link)=>link.addEventListener('click',()=>window.ctsegTrack('direct_contact_click',{contact_channel:'email'})));
         document.querySelectorAll('[data-locale-option]').forEach((link)=>link.addEventListener('click',()=>window.ctsegTrack('language_change',{target_locale:link.getAttribute('hreflang')||''})));
