@@ -40,6 +40,7 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
     <input type="hidden" name="utmContent" value="" data-attribution="utm_content" />
     <input type="hidden" name="utmTerm" value="" data-attribution="utm_term" />
     <input type="hidden" name="clickId" value="" data-attribution="click_id" />
+    <input type="hidden" name="serviceInterest" value="" data-attribution="service_interest" />
     <div class="form-honeypot" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
     <div class="commercial-form-grid commercial-form-grid--core">
       <label class="commercial-field"><span>{copy.intentLabel}</span><select name="intent" required data-commercial-intent><option value=""></option><option value="buyer_request">{copy.buyerIntent}</option><option value="supplier_market_entry">{copy.producerIntent}</option></select></label>
@@ -90,6 +91,8 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
       const savedProduct=sessionStorage.getItem('ctseg-product-request');
       if(savedProduct&&product instanceof HTMLInputElement){product.value=savedProduct;sessionStorage.removeItem('ctseg-product-request')}
       const requestParams=new URLSearchParams(location.search);
+      const serviceInterest=form.elements.namedItem('serviceInterest');
+      if(serviceInterest instanceof HTMLInputElement)serviceInterest.value=(requestParams.get('service')||'').slice(0,80);
       const requestedIntent=requestParams.get('intent');
       const requestedDirection=requestParams.get('direction');
       const requestedFamily=requestParams.get('category');
@@ -98,9 +101,9 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
       if(productFamily instanceof HTMLSelectElement&&['vegetable_oils','nuts_dried_fruit','reflex_gloves','biofuel_feedstock','other'].includes(requestedFamily||''))productFamily.value=requestedFamily;
       document.querySelectorAll('[data-fa-intent],[data-contact-intent],[data-trade-intent]').forEach((link)=>link.addEventListener('click',()=>{const value=link.getAttribute('data-fa-intent')||link.getAttribute('data-contact-intent')||link.getAttribute('data-trade-intent');if(intent instanceof HTMLSelectElement&&value)intent.value=value}));
       let startedTracked=false;
-      const track=(event,parameters={})=>window.ctsegTrack?.(event,{form_type:'qualified_commercial_request',trade_intent:intent instanceof HTMLSelectElement?intent.value:'',trade_direction:tradeDirection instanceof HTMLSelectElement?tradeDirection.value:'',product_family:productFamily instanceof HTMLSelectElement?productFamily.value:'',...parameters});
+      const track=(event,parameters={})=>window.ctsegTrack?.(event,{form_type:'qualified_commercial_request',service_interest:serviceInterest instanceof HTMLInputElement?serviceInterest.value:'',trade_intent:intent instanceof HTMLSelectElement?intent.value:'',trade_direction:tradeDirection instanceof HTMLSelectElement?tradeDirection.value:'',product_family:productFamily instanceof HTMLSelectElement?productFamily.value:'',...parameters});
       form.addEventListener('focusin',()=>{if(!startedTracked){startedTracked=true;track('contact_form_start')}},{once:true});
-      const summary=()=>Array.from(new FormData(form).entries()).filter(([key,value])=>!['website','startedAt','privacy','locale','pagePath','landingPath','referrerHost','utmSource','utmMedium','utmCampaign','utmContent','utmTerm','clickId'].includes(key)&&String(value).trim()).map(([key,value])=>`${key}: ${String(value).trim()}`).join('\n');
+      const summary=()=>Array.from(new FormData(form).entries()).filter(([key,value])=>!['website','startedAt','privacy','locale','pagePath','landingPath','referrerHost','utmSource','utmMedium','utmCampaign','utmContent','utmTerm','clickId','serviceInterest'].includes(key)&&String(value).trim()).map(([key,value])=>`${key}: ${String(value).trim()}`).join('\n');
       download?.addEventListener('click',()=>{track('form_fallback_download');const blob=new Blob([`CTSEG short commercial request\n\n${summary()}\n`],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='ctseg-commercial-request.txt';link.click();URL.revokeObjectURL(url)});
       form.closest('.commercial-form-disclosure')?.addEventListener('toggle',(event)=>{if(event.currentTarget.open)track('contact_form_open')});
       form.addEventListener('submit',async(event)=>{

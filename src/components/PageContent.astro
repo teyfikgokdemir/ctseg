@@ -70,7 +70,19 @@ const legalPage = id && key === 'legal' ? legal[id as keyof typeof legal] : null
 const postIndex:Record<string,number> = {'strategic-vs-procurement':0,'supplier-selection':1,'total-cost':2,'supplier-risk':3,rfq:4,'supply-chain-risk':5};
 const originalPost = insight && (lang === 'tr' || lang === 'en') && id in postIndex ? getPosts(lang).at(postIndex[id]) : null;
 const homeHref = localizedPath(lang, 'home');
-const sectionHref = (section:string) => localizedPath(lang, section);
+  const sectionHref = (section:string) => localizedPath(lang, section);
+  const commercialCtaCopy = {
+    tr:{eyebrow:'Ticari değerlendirme',title:'Kararı netleştirmek için kapsamı birlikte tanımlayalım.',text:'İhtiyacınızı, hedef pazarı ve mevcut bilgileri paylaşın. CTSEG uygun araştırma, doğrulama veya tedarik yolunu netleştirerek sonraki adımları belirler.',button:'Ticari talep oluştur',proof:'İhtiyaç · pazar · risk · sonraki adım'},
+    en:{eyebrow:'Commercial assessment',title:'Let us define the right decision path for your requirement.',text:'Share your need, target market and available information. CTSEG will clarify the appropriate research, verification or sourcing path and the next practical steps.',button:'Start a commercial request',proof:'Requirement · market · risk · next step'},
+    de:{eyebrow:'Kommerzielle Bewertung',title:'Definieren wir gemeinsam den passenden Entscheidungsweg.',text:'Teilen Sie Bedarf, Zielmarkt und verfügbare Informationen. CTSEG klärt den passenden Recherche-, Prüf- oder Beschaffungsweg und die nächsten Schritte.',button:'Anfrage starten',proof:'Bedarf · Markt · Risiko · nächster Schritt'},
+    it:{eyebrow:'Valutazione commerciale',title:'Definiamo insieme il percorso decisionale più adatto.',text:'Condividi esigenza, mercato target e informazioni disponibili. CTSEG chiarirà il percorso di ricerca, verifica o sourcing e i prossimi passi.',button:'Avvia una richiesta',proof:'Esigenza · mercato · rischio · prossimo passo'},
+    ru:{eyebrow:'Коммерческая оценка',title:'Определим подходящий путь принятия решения.',text:'Сообщите о задаче, целевом рынке и доступной информации. CTSEG уточнит путь исследования, проверки или снабжения и следующие шаги.',button:'Отправить запрос',proof:'Задача · рынок · риск · следующий шаг'},
+    fa:{eyebrow:'ارزیابی تجاری',title:'مسیر درست تصمیم‌گیری را با هم مشخص کنیم.',text:'نیاز، بازار هدف و اطلاعات موجود را به اشتراک بگذارید تا مسیر تحقیق، راستی‌آزمایی یا تأمین و گام‌های بعدی روشن شود.',button:'ارسال درخواست تجاری',proof:'نیاز · بازار · ریسک · گام بعدی'},
+    zh:{eyebrow:'商务评估',title:'共同明确适合您需求的决策路径。',text:'提交您的需求、目标市场与现有信息，CTSEG 将明确调研、核验或寻源路径及下一步行动。',button:'提交商务需求',proof:'需求 · 市场 · 风险 · 下一步'},
+    vi:{eyebrow:'Đánh giá thương mại',title:'Cùng xác định lộ trình quyết định phù hợp.',text:'Chia sẻ nhu cầu, thị trường mục tiêu và thông tin hiện có để CTSEG xác định lộ trình nghiên cứu, xác minh hoặc tìm nguồn cung.',button:'Gửi yêu cầu thương mại',proof:'Nhu cầu · thị trường · rủi ro · bước tiếp theo'}
+  }[lang];
+  const commercialServiceId = id || key;
+
 const indexLabel = (index:number) => String(index + 1).padStart(2,'0');
 const marketNames = {
   tr:['Türkiye','Avrupa','Uluslararası'], en:['Türkiye','Europe','International'], de:['Türkei','Europa','International'],
@@ -253,6 +265,10 @@ const verifiedLater = {
 {service && (
   <>
     <PageHero lang={lang} eyebrow={t.services} title={service.names[lang]} lead={service.descriptions[lang]} parentHref={sectionHref('services')} parentLabel={t.services} />
+    <section class="section commercial-intent-section" aria-labelledby="commercial-intent-title"><div class="container commercial-intent-band">
+      <div class="commercial-intent-copy"><p class="eyebrow">{commercialCtaCopy.eyebrow}</p><h2 id="commercial-intent-title">{commercialCtaCopy.title}</h2><p>{commercialCtaCopy.text}</p></div>
+      <div class="commercial-intent-action"><div class="commercial-intent-proof"><span>01</span><strong>{commercialCtaCopy.proof}</strong></div><a class="button" href={`${sectionHref('contact')}?intent=buyer_request&service=${commercialServiceId}#commercial-form`} data-commercial-cta data-commercial-service={commercialServiceId}>{commercialCtaCopy.button} →</a></div>
+    </div></section>
     <section class="section"><div class="container content-grid">
       <div class="prose">
         {detailedService ? (
@@ -285,6 +301,10 @@ const verifiedLater = {
 {searchLanding && id && (
   <>
     <PageHero lang={lang} eyebrow={searchLanding.eyebrow} title={searchLanding.title} lead={searchLanding.description} parentHref={sectionHref('services')} parentLabel={t.services} />
+    <section class="section commercial-intent-section" aria-labelledby="commercial-intent-title"><div class="container commercial-intent-band">
+      <div class="commercial-intent-copy"><p class="eyebrow">{commercialCtaCopy.eyebrow}</p><h2 id="commercial-intent-title">{commercialCtaCopy.title}</h2><p>{commercialCtaCopy.text}</p></div>
+      <div class="commercial-intent-action"><div class="commercial-intent-proof"><span>01</span><strong>{commercialCtaCopy.proof}</strong></div><a class="button" href={`${sectionHref('contact')}?intent=buyer_request&service=${id}#commercial-form`} data-commercial-cta data-commercial-service={id}>{commercialCtaCopy.button} →</a></div>
+    </div></section>
     <section class="section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer"><h2>{searchLanding.answerTitle}</h2><p>{searchLanding.directAnswer}</p></div>
