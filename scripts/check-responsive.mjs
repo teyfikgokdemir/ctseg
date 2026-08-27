@@ -33,6 +33,9 @@ const server = createServer(async (request, response) => {
   }
 });
 await new Promise((resolvePromise) => server.listen(4321, '127.0.0.1', resolvePromise));
+const blockFirstPartyTelemetry = async (page) => {
+  await page.route('https://teyfikgokdemir.com/api/sources*', (route) => route.abort());
+};
 let browser;
 try {
   const output = resolve('.artifacts/visual');
@@ -140,6 +143,7 @@ try {
   for (const testCase of cases) {
     testCase.persian = false;
     const page = await browser.newPage({ viewport:{ width:testCase.width, height:testCase.height } });
+    await blockFirstPartyTelemetry(page);
     const navigationResponse = await page.goto(`http://127.0.0.1:4321${testCase.path}`, { waitUntil:'networkidle' });
     if (!navigationResponse || navigationResponse.status() !== 200) {
       failures.push(`${testCase.name}: expected HTTP 200, received ${navigationResponse?.status() ?? 'no response'}`);
@@ -564,6 +568,7 @@ try {
     for(const viewport of [{name:'desktop',width:1440,height:1000},{name:'mobile',width:390,height:844}]){
       globalLocaleChecks++;
       const page=await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
+      await blockFirstPartyTelemetry(page);
       const response=await page.goto(`http://127.0.0.1:4321${entry.path}`,{waitUntil:'domcontentloaded'});
       if(response?.status()!==200)failures.push(`global locale ${entry.lang}/${viewport.name}: HTTP ${response?.status()??'none'}`);
       {
@@ -617,6 +622,7 @@ try {
         sourcingChecks++;
         const path = routes[lang];
         const page = await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
+        await blockFirstPartyTelemetry(page);
         const response = await page.goto(`http://127.0.0.1:4321${encodeURI(path)}`,{waitUntil:'networkidle'});
         if (response?.status() !== 200) failures.push(`sourcing ${family}/${lang}/${viewport.name}: HTTP ${response?.status() ?? 'none'}`);
         await page.addStyleTag({content:'*,*:before,*:after{animation:none!important;transition:none!important}'});
@@ -721,6 +727,7 @@ try {
   mkdirSync(mediaOutput,{recursive:true});
   for (const viewport of mediaViewports) {
     const page = await browser.newPage({ viewport:{width:viewport.width,height:viewport.height} });
+    await blockFirstPartyTelemetry(page);
     for (const slug of productSlugs) {
       await page.goto(`http://127.0.0.1:4321/en/trade-products/${slug}/`,{waitUntil:'domcontentloaded'});
       await page.addStyleTag({content:'*,*:before,*:after{animation:none!important;transition:none!important}'});

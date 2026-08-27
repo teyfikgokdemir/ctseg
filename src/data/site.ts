@@ -326,56 +326,56 @@ export const services: Record<(typeof serviceIds)[number], { slugs: Localized; n
     slugs: { tr:'stratejik-tedarik', en:'strategic-sourcing', de:'strategische-beschaffung', it:'approvvigionamento-strategico', ru:'strategicheskiy-sorsing', fa:'strategic-sourcing', zh:'strategic-sourcing', vi:'strategic-sourcing' },
     names: { tr:'Stratejik Tedarik', en:'Strategic Sourcing', de:'Strategische Beschaffung', it:'Approvvigionamento strategico', ru:'Стратегический сорсинг', fa:'تأمین استراتژیک', zh:'战略采购与供应链对接', vi:'Thu mua chiến lược' },
     descriptions: {
-      tr:'Tedarik pazarı analizi, RFQ, doğrulama, teklif karşılaştırma ve performans planıyla sürdürülebilir kararlar.',
-      en:'Sustainable decisions through supply-market analysis, RFQ, verification, bid comparison and performance planning.',
-      de:'Nachhaltige Entscheidungen durch Beschaffungsmarktanalyse, RFQ, Prüfung, Angebotsvergleich und Leistungsplanung.',
-      it:'Decisioni sostenibili con analisi del mercato di fornitura, RFQ, verifica, confronto offerte e piano prestazioni.',
-      ru:'Устойчивые решения благодаря анализу рынка поставщиков, подготовке RFQ, верификации и мониторингу производительности.',
-      fa:'تصمیم‌گیری پایدار از طریق تحلیل بازار تأمین، RFQ، اعتباربرسنجی، مقایسه پیشنهادات و برنامه‌ریزی عملکرد.',
-      zh:'通过严密的目标供应市场调研、RFQ 询价设计、供应商深度核验、报价横向对比及履约管控，实现稳健长效的采购决策。',
-      vi:'Đưa ra quyết định bền vững thông qua phân tích thị trường cung ứng, chuẩn bị RFQ, thẩm định, so sánh báo giá và lập kế hoạch hiệu suất.'
+      tr:'Stratejik tedarik ve satın alma desteği: tedarik pazarı araştırması, tedarikçi yeterlilik değerlendirmesi, RFQ, teklif karşılaştırması, toplam maliyet ve performans planı.',
+      en:'Strategic sourcing and procurement support through supply-market analysis, supplier qualification, RFQ, bid comparison, total cost and performance planning.',
+      de:'Strategische Beschaffung und Einkaufsunterstützung durch Marktanalyse, Lieferantenprüfung, RFQ, Angebotsvergleich, Gesamtkosten und Leistungsplanung.',
+      it:'Supporto al sourcing strategico e agli acquisti con analisi del mercato, qualificazione fornitori, RFQ, confronto offerte, costo totale e piano prestazioni.',
+      ru:'Стратегический сорсинг и поддержка закупок: анализ рынка поставщиков, квалификация, RFQ, сравнение предложений, совокупная стоимость и план исполнения.',
+      fa:'پشتیبانی از تأمین استراتژیک و خرید با تحلیل بازار تأمین، ارزیابی تأمین‌کننده، RFQ، مقایسه پیشنهادها، هزینه کل و برنامه عملکرد.',
+      zh:'通过供应市场调研、供应商资格核验、RFQ 询价设计、报价横向对比、总拥有成本与履约规划，支持稳健的战略采购决策。',
+      vi:'Hỗ trợ thu mua chiến lược và mua sắm bằng phân tích thị trường cung ứng, thẩm định nhà cung cấp, RFQ, so sánh báo giá, tổng chi phí và kế hoạch thực hiện.'
     }
   },
   'supplier-verification': {
     slugs: { tr:'tedarikci-bulma-ve-dogrulama', en:'supplier-sourcing-and-verification', de:'lieferantensuche-und-pruefung', it:'ricerca-e-verifica-fornitori', ru:'poisk-i-verifikatsiya-postavshchikov', fa:'supplier-sourcing-and-verification', zh:'supplier-sourcing-and-verification', vi:'supplier-sourcing-and-verification' },
     names: { tr:'Tedarikçi Bulma ve Doğrulama', en:'Supplier Sourcing & Verification', de:'Lieferantensuche & -prüfung', it:'Ricerca e verifica fornitori', ru:'Поиск и верификация поставщиков', fa:'شناسایی و اعتباربرسنجی تأمین‌کننده', zh:'供应商背景与生产能力核验', vi:'Thẩm định & xác minh nhà cung cấp' },
     descriptions: {
-      tr:'Üretici keşfi, şirket, kapasite, belge, referans ve ticari şartların çapraz doğrulaması.',
-      en:'Producer discovery and cross-verification of company, capacity, documents, references and commercial terms.',
-      de:'Produzentensuche und Gegenprüfung von Unternehmen, Kapazität, Dokumenten, Referenzen und Konditionen.',
-      it:'Ricerca produttori e verifica incrociata di azienda, capacità, documenti, referenze e condizioni commerciali.',
-      ru:'Поиск производителей и перекрёстная проверка компании, мощностей, документов, рекомендаций и коммерческих условий.',
-      fa:'شناسایی تولیدکننده و ارزیابی تقاطعی شرکت، ظرفیت، اسناد، سوابق و شرایط تجاری.',
-      zh:'独立核验企业商业登记与实际法人主体、生产制造产能、质量认证体系、海关与银行信誉及真实履约资质。',
-      vi:'Đánh giá độc lập về đăng ký doanh nghiệp, cơ sở sản xuất, năng lực, hệ thống chất lượng, tài liệu và điều khoản thương mại.'
+      tr:'Türkiye ve uluslararası pazarlarda tedarikçi bulma ve doğrulama: şirket kimliği, kapasite, kalite belgeleri, referanslar ve ticari uygunluk.',
+      en:'Supplier sourcing and verification in Türkiye and international markets, covering legal identity, capacity, quality documents, references and commercial fit.',
+      de:'Lieferantensuche und -prüfung in Türkiye und internationalen Märkten: Rechtsidentität, Kapazität, Qualitätsdokumente, Referenzen und kaufmännische Eignung.',
+      it:'Ricerca e verifica di fornitori in Türkiye e nei mercati internazionali: identità legale, capacità, documenti qualità, referenze e adeguatezza commerciale.',
+      ru:'Поиск и проверка поставщиков в Турции и на международных рынках: юридическая идентичность, мощности, документы качества, рекомендации и коммерческая пригодность.',
+      fa:'جست‌وجو و اعتبارسنجی تأمین‌کنندگان در ترکیه و بازارهای بین‌المللی با بررسی هویت حقوقی، ظرفیت، اسناد کیفیت، سوابق و تناسب تجاری.',
+      zh:'面向土耳其及国际市场的供应商寻源与核验，覆盖法人身份、实际产能、质量单证、商业信誉与交易适配性。',
+      vi:'Tìm kiếm và xác minh nhà cung cấp tại Thổ Nhĩ Kỳ và các thị trường quốc tế, bao gồm pháp nhân, năng lực, hồ sơ chất lượng, tham chiếu và mức độ phù hợp thương mại.'
     }
   },
   'trade-advisory': {
     slugs: { tr:'uluslararasi-ticaret-danismanligi', en:'international-trade-advisory', de:'internationale-handelsberatung', it:'consulenza-commerciale-internazionale', ru:'konsultatsii-po-mezhdunarodnoy-torgovle', fa:'international-trade-advisory', zh:'international-trade-advisory', vi:'international-trade-advisory' },
     names: { tr:'Uluslararası Ticaret Danışmanlığı', en:'International Trade Advisory', de:'Handelsberatung', it:'Consulenza commerciale internazionale', ru:'Консультации по международной торговле', fa:'مشاوره تجارت بین‌الملل', zh:'国际贸易与合规咨询', vi:'Tư vấn thương mại quốc tế' },
     descriptions: {
-      tr:'Gümrük, menşe, mevzuat, Incoterms, ödeme yapıları ve sözleşme tasarımıyla sınır ötesi karar desteği.',
-      en:'Cross-border decision support covering customs, origin, regulation, Incoterms, payment structures and contract design.',
-      de:'Grenzüberschreitende Entscheidungsunterstützung zu Zoll, Herkunft, Regulierung, Incoterms, Zahlung und Verträgen.',
-      it:'Supporto transfrontaliero su dogane, origine, normative, Incoterms, strutture di pagamento e contratti.',
-      ru:'Поддержка решений для трансграничной торговли: таможня, происхождение, регуляции, Incoterms, формы оплаты и контракты.',
-      fa:'پشتیبانی از تصمیم‌گیری‌های فرامرزی در زمینه گمرک، مبدأ، مقررات، Incoterms، ساختارهای پرداخت و قراردادها.',
-      zh:'针对目标进出口市场的关税合规、产地证与单证要求、Incoterms 交付方式及跨境结算模式提供专业决策支持。',
-      vi:'Hỗ trợ quyết định thương mại xuyên biên giới về hải quan, xuất xứ, quy định pháp lý, Incoterms, thanh toán và cấu trúc hợp đồng.'
+      tr:'İthalat ve ihracat kararları, Türkiye pazarına giriş, gümrük, menşe, mevzuat, Incoterms, ödeme yapıları ve sözleşmeler için ticari destek.',
+      en:'International trade advisory for import/export decision support, Turkey market entry, customs, origin, regulation, Incoterms, payment structures and contracts.',
+      de:'Internationale Handelsberatung für Import-/Exportentscheidungen, Markteintritt in Türkiye, Zoll, Ursprung, Regulierung, Incoterms, Zahlung und Verträge.',
+      it:'Consulenza commerciale internazionale per decisioni di import/export, ingresso nel mercato turco, dogane, origine, norme, Incoterms, pagamenti e contratti.',
+      ru:'Консультации по международной торговле для импорта и экспорта, выхода на рынок Турции, таможни, происхождения, регулирования, Incoterms, платежей и контрактов.',
+      fa:'مشاوره تجارت بین‌الملل برای تصمیم‌های واردات و صادرات، ورود به بازار ترکیه، گمرک، مبدأ، مقررات، Incoterms، پرداخت و قراردادها.',
+      zh:'为进出口决策、进入土耳其市场、关税与原产地、监管、Incoterms、跨境结算及合同结构提供国际贸易咨询支持。',
+      vi:'Tư vấn thương mại quốc tế cho quyết định xuất nhập khẩu, tiếp cận thị trường Thổ Nhĩ Kỳ, hải quan, xuất xứ, quy định, Incoterms, thanh toán và hợp đồng.'
     }
   },
   tco: {
     slugs: { tr:'toplam-maliyet-optimizasyonu', en:'cost-optimisation-tco', de:'kostenoptimierung-tco', it:'ottimizzazione-costi-tco', ru:'optimizatsiya-zatrat-tco', fa:'cost-optimisation-tco', zh:'cost-optimisation-tco', vi:'cost-optimisation-tco' },
     names: { tr:'Maliyet Optimizasyonu (TCO)', en:'Cost Optimisation (TCO)', de:'Kostenoptimierung (TCO)', it:'Ottimizzazione dei costi (TCO)', ru:'Оптимизация затрат (TCO)', fa:'بهینه‌سازی هزینه (TCO)', zh:'总拥有成本 (TCO) 分析与优化', vi:'Phân tích & tối ưu chi phí (TCO)' },
     descriptions: {
-      tr:'Birim fiyatın ötesinde navlun, fire, kalite, stok, finansman ve risk unsurlarını içeren toplam maliyet analizi.',
-      en:'Total-cost analysis beyond unit price, capturing freight, waste, quality, inventory, finance and risk.',
-      de:'Gesamtkostenanalyse jenseits des Stückpreises unter Einbezug von Fracht, Ausschuss, Qualität, Lager, Finanzen und Risiko.',
-      it:'Analisi del costo totale oltre il prezzo unitario: trasporto, scarti, qualità, scorte, finanza e rischio.',
-      ru:'Анализ совокупной стоимости сверх цены за единицу: фрахт, потери, качество, запасы, финансирование и риски.',
-      fa:'تحلیل هزینه کل فراتر از قیمت واحد، با در نظر گرفتن حمل، ضایعات، کیفیت، موجودی، تأمین مالی و ریسک.',
-      zh:'超越单纯的单价对比，全面测算包装、国际运费、关税合规、质损风险及资金周转占用等全链路综合拥有成本。',
-      vi:'Phân tích tổng chi phí vượt ra ngoài đơn giá: vận chuyển, hao hụt, chất lượng, hàng tồn kho, tài chính và rủi ro.'
+      tr:'Satın alma maliyeti ve toplam sahip olma maliyeti analizi: birim fiyatın ötesinde navlun, fire, kalite, stok, finansman ve risk.',
+      en:'Procurement cost optimisation and total-cost-of-ownership analysis beyond unit price, covering freight, waste, quality, inventory, finance and risk.',
+      de:'Beschaffungskosten- und Gesamtkostenanalyse jenseits des Stückpreises mit Fracht, Ausschuss, Qualität, Lager, Finanzierung und Risiko.',
+      it:'Ottimizzazione dei costi di acquisto e analisi del costo totale oltre il prezzo unitario: trasporto, scarti, qualità, scorte, finanza e rischio.',
+      ru:'Оптимизация закупочных затрат и анализ совокупной стоимости сверх цены единицы: фрахт, потери, качество, запасы, финансирование и риски.',
+      fa:'بهینه‌سازی هزینه خرید و تحلیل هزینه کل فراتر از قیمت واحد با در نظر گرفتن حمل، ضایعات، کیفیت، موجودی، تأمین مالی و ریسک.',
+      zh:'超越单价比较的采购成本优化与总拥有成本分析，覆盖运费、损耗、质量、库存、融资与交易风险。',
+      vi:'Tối ưu chi phí thu mua và phân tích tổng chi phí vượt ra ngoài đơn giá, bao gồm vận chuyển, hao hụt, chất lượng, tồn kho, tài chính và rủi ro.'
     }
   },
   'market-entry': {
@@ -781,7 +781,7 @@ export const pageCopy: Record<Locale, any> = {
   tr:{
     servicesTitle:'Tedarik kararının her aşaması için uzmanlık.', servicesLead:'Strateji, doğrulama, ticari analiz ve uygulamayı ortak bir karar disiplini içinde birleştiriyoruz.',
     productsTitle:'Ticari ürün portföyü', productsLead:'Aynı ürün kataloğu her pazarda şeffaf menşe, parti bazlı kalite ve doğrulanabilir ticari şartlarla değerlendirilir.',
-    marketsTitle:'Türkiye’den Avrupa ve uluslararası pazarlara.', marketsLead:'Yerel üretim gerçekliğini hedef pazar mevzuatı, alıcı beklentisi ve uygulanabilir teslim modelleriyle eşleştiriyoruz.',
+    marketsTitle:'Türkiye’den Avrupa ve uluslararası pazarlara tedarik.', marketsLead:'Türkiye tedariki, tedarikçi doğrulaması ve satın alma desteğini hedef pazar mevzuatı, alıcı beklentisi ve uygulanabilir teslim modelleriyle birleştiriyoruz.',
     aboutTitle:'Ticaretin belirsizliğini azaltan bağımsız karar ortağı.', aboutLead:'CTSEG, stratejik tedarik ve uluslararası ticaret projelerinde kanıt, şeffaflık ve uygulanabilirlik ilkeleriyle çalışır.',
     contactTitle:'Ticari ihtiyacınızı net bir değerlendirmeyle başlatın.', insightsTitle:'Karar vericiler için uygulanabilir içgörüler.', insightsLead:'Tedarik, toplam maliyet, menşe, kalite ve ticari risk üzerine kısa, kanıta dayalı rehberler.',
     framework:['İhtiyaç ve spesifikasyon','Taraf ve belge doğrulaması','Kalite, maliyet ve risk karşılaştırması','Şeffaf karar ve uygulama kaydı'],
@@ -794,7 +794,7 @@ export const pageCopy: Record<Locale, any> = {
   en:{
     servicesTitle:'International sourcing and procurement support for better decisions.',servicesLead:'We combine strategic sourcing, supplier qualification, verification, commercial analysis and execution within one decision discipline.',
     productsTitle:'Trade products for qualified B2B requirements',productsLead:'Each product is assessed through transparent origin, specification, batch-level quality and verifiable commercial terms before a commercial route is discussed.',
-    marketsTitle:'Turkey sourcing for Europe and international markets.',marketsLead:'We connect production realities in Türkiye and selected supply markets with target-market regulation, buyer expectations and executable delivery models.',
+    marketsTitle:'Turkey sourcing for Europe and international markets.',marketsLead:'We connect Turkey sourcing, supplier verification and procurement support with target-market regulation, buyer expectations and executable delivery models.',
     aboutTitle:'A Turkey-based partner for international B2B sourcing decisions.',aboutLead:'CTSEG supports buyers, producers and commercial teams through evidence, transparency and executability in strategic sourcing, supplier verification and international trade projects.',
     contactTitle:'Discuss your procurement requirement with CTSEG.',insightsTitle:'Practical insight for international sourcing decisions.',insightsLead:'Concise, evidence-led guidance on sourcing, total cost, origin, quality and commercial risk.',
     framework:['Requirement and specification','Supplier qualification and document verification','Quality, total cost and commercial-risk comparison','Transparent decision and execution record'],
@@ -807,7 +807,7 @@ export const pageCopy: Record<Locale, any> = {
   de:{
     servicesTitle:'Kompetenz für jede Phase der Beschaffungsentscheidung.',servicesLead:'Wir verbinden Strategie, Prüfung, kaufmännische Analyse und Umsetzung in einer Entscheidungsdisziplin.',
     productsTitle:'Handelsprodukt-Portfolio',productsLead:'Dasselbe Sortiment wird in jedem Markt anhand transparenter Herkunft, Chargenqualität und überprüfbarer Konditionen bewertet.',
-    marketsTitle:'Von Türkiye nach Europa und in internationale Märkte.',marketsLead:'Wir verbinden lokale Produktionsrealität mit Zielmarktregeln, Käufererwartungen und umsetzbaren Liefermodellen.',
+    marketsTitle:'Beschaffung aus Türkiye für Europa und internationale Märkte.',marketsLead:'Wir verbinden Lieferantensuche, Prüfung und Einkaufsunterstützung mit Zielmarktregeln, Käufererwartungen und umsetzbaren Liefermodellen.',
     aboutTitle:'Ein unabhängiger Entscheidungspartner, der Unsicherheit im Handel reduziert.',aboutLead:'CTSEG arbeitet bei strategischer Beschaffung und internationalem Handel nach den Prinzipien Evidenz, Transparenz und Umsetzbarkeit.',
     contactTitle:'Beginnen Sie Ihren Handelsbedarf mit einer klaren Bewertung.',insightsTitle:'Praktische Einblicke für Entscheider.',insightsLead:'Kompakte, evidenzbasierte Leitfäden zu Beschaffung, Gesamtkosten, Herkunft, Qualität und Handelsrisiko.',
     framework:['Bedarf und Spezifikation','Prüfung von Parteien und Dokumenten','Vergleich von Qualität, Kosten und Risiko','Transparenter Entscheidungs- und Umsetzungsnachweis'],
@@ -820,7 +820,7 @@ export const pageCopy: Record<Locale, any> = {
   it:{
     servicesTitle:'Competenze per ogni fase della decisione di approvvigionamento.',servicesLead:'Uniamo strategia, verifica, analisi commerciale ed esecuzione in un’unica disciplina decisionale.',
     productsTitle:'Portafoglio prodotti commerciali',productsLead:'Lo stesso catalogo è valutato in ogni mercato con origine trasparente, qualità per lotto e condizioni verificabili.',
-    marketsTitle:'Dalla Türkiye verso l’Europa e i mercati internazionali.',marketsLead:'Allineiamo la realtà produttiva locale con norme del mercato, aspettative dei buyer e modelli di consegna realizzabili.',
+    marketsTitle:'Sourcing dalla Türkiye per l’Europa e i mercati internazionali.',marketsLead:'Uniamo ricerca e verifica dei fornitori e supporto agli acquisti con regole del mercato target, esigenze dei buyer e modelli di consegna realizzabili.',
     aboutTitle:'Un partner decisionale indipendente che riduce l’incertezza nel commercio.',aboutLead:'CTSEG opera con evidenze, trasparenza e realizzabilità nei progetti di sourcing strategico e commercio internazionale.',
     contactTitle:'Avvia la tua esigenza commerciale con una valutazione chiara.',insightsTitle:'Approfondimenti pratici per decisori.',insightsLead:'Guide concise e basate su evidenze su sourcing, costo totale, origine, qualità e rischio commerciale.',
     framework:['Fabbisogno e specifica','Verifica di controparti e documenti','Confronto di qualità, costo e rischio','Registro trasparente di decisione ed esecuzione'],
