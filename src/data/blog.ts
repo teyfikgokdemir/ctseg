@@ -484,6 +484,141 @@ export const posts: BlogPost[] = [
     ]
   },
 
+  {
+    lang: 'en',
+    slug: 'total-cost-of-ownership',
+    title: 'Total Cost of Ownership in Procurement: TCO & Should-Cost Model',
+    description: 'Total cost of ownership (TCO) in procurement: compare Should-Cost models, landed cost, freight, customs duties, defect risk, and supply chain cost optimization.',
+    date: '2026-07-27',
+    updated: '2026-09-02',
+    readingTime: '10 min',
+    answer: 'Total Cost of Ownership (TCO) in procurement evaluates the complete landed commercial cost of acquiring a product—including freight, customs duties, quality inspection, defect risks, and inventory holding—rather than relying solely on purchase order unit price. In contrast, a Should-Cost model estimates what a product ought to cost based on raw material, labor, and manufacturing overhead.',
+    faq: [
+      {
+        question: 'What is total cost of ownership (TCO) in procurement?',
+        answer: 'Total Cost of Ownership (TCO) in procurement is a comprehensive financial evaluation method that calculates all direct, indirect, and landed costs associated with purchasing a product or service across its entire lifecycle, including freight, customs, quality inspections, inventory holding, and supply chain risk.'
+      },
+      {
+        question: 'What is the difference between a Should-Cost model and Total Cost of Ownership (TCO)?',
+        answer: 'A Should-Cost model is an analytical benchmark that estimates what a product should cost to produce based on raw material prices, labor rates, energy, overhead, and supplier profit margin. TCO measures the total financial impact of accepting a specific supplier offer, incorporating landed logistics, tariffs, quality risks, and capital holding costs.'
+      },
+      {
+        question: 'What are the main components of total procurement cost?',
+        answer: 'The five primary components of total procurement cost are unit purchase price, international freight and customs duties, quality and defect costs (pre-shipment COA inspections), inventory capital holding costs, and commercial/exchange rate risk.'
+      },
+      {
+        question: 'Why is the lowest unit price often misleading in supply chain management?',
+        answer: 'A low unit purchase price can be offset by long transit lead times, expensive ocean freight, unexpected customs clearance fees, poor packaging, high defect rates, or unmanaged currency fluctuations, resulting in a significantly higher total cost of ownership.'
+      },
+      {
+        question: 'How does TCO support strategic sourcing and supplier selection?',
+        answer: 'TCO allows procurement teams to compare pre-qualified suppliers on a true landed cost basis rather than nominal unit prices, enabling strategic negotiations on Incoterms, payment terms, quality guarantees, and lead time reduction.'
+      }
+    ],
+    sections: [
+      {
+        heading: 'Introduction: What is Total Cost of Ownership (TCO) in procurement?',
+        body: [
+          'In global B2B procurement and supply chain management, purchasing decisions based solely on purchase order (PO) unit price frequently fail to deliver expected financial savings. The nominal price quoted by a manufacturer represents only a fraction of the total procurement cost required to deliver goods to a production facility or distribution warehouse.',
+          '<strong>Total Cost of Ownership (TCO)</strong> is a structured evaluation methodology that calculates every direct, indirect, and landed expense incurred throughout the procurement lifecycle. By analyzing transportation, tariffs, pre-shipment quality verification, defect risks, inventory holding costs, and commercial terms, TCO enables procurement leaders to make data-driven sourcing awards that protect operating margins.'
+        ]
+      },
+      {
+        heading: 'Should-Cost model vs Total Cost of Ownership (TCO)',
+        body: [
+          'A frequent area of confusion in strategic procurement is the relationship between a <strong>Should-Cost model</strong> and <strong>Total Cost of Ownership (TCO)</strong>. While both tools are used to optimize total procurement cost, they serve distinct strategic functions during supplier negotiation and award evaluation:',
+          '• <strong>Should-Cost Model (Production Baseline):</strong> A Should-Cost model is a bottom-up cost estimation tool that calculates what a product <em>should cost to manufacture</em> under efficient market conditions. It breaks down cost components into raw materials (e.g., metal, polymer, agricultural commodity), direct manufacturing labor, machine cycle times, energy, overhead, and a fair supplier profit margin (typically 8–15%). Procurement teams use Should-Cost models during negotiations to challenge inflated supplier quotes and establish target pricing.',
+          '• <strong>Total Cost of Ownership / TCO (Landed Commercial Cost):</strong> TCO measures what a product <em>will actually cost the buyer</em> after factoring in all logistics, trade, quality, and inventory variables associated with a specific supplier quote. TCO takes the negotiated purchase price as an input and adds freight, duty, port charges, inspection costs, safety stock holding expenses, and risk factors to determine the true landed cost.',
+          'In summary: A Should-Cost model tells you what the supplier\'s factory price ought to be; a TCO model tells you which supplier offer delivers the lowest total landed cost to your business.'
+        ]
+      },
+      {
+        heading: 'The 5 core components of Total Procurement Cost',
+        body: [
+          'To calculate TCO accurately across international supply chains, procurement teams evaluate five main cost categories:',
+          '<strong>1. Base Purchase Price:</strong> The contracted unit cost based on order quantity (MOQ), volume tier discounts, and packaging specifications.',
+          '<strong>2. Logistics, Incoterms & Customs Duties:</strong> Freight transportation (ocean, road, or air), transit insurance, port terminal handling charges (THC), customs broker fees, and import tariffs based on HS codes and country of origin.',
+          '<strong>3. Quality Control & Defect Risk:</strong> Pre-shipment audit fees, Certificate of Analysis (COA) laboratory testing expenses, packaging enforcement, scrap rates, and rework costs incurred if non-conforming shipments arrive.',
+          '<strong>4. Inventory & Transit Holding Costs:</strong> Capital tied up during transit lead times, working capital interest rates, warehouse storage costs, and safety stock required to buffer against supplier shipping delays.',
+          '<strong>5. Commercial & Currency Exposure:</strong> Payment terms (e.g., advance vs. LC vs. open account), foreign exchange rate volatility, contract enforcement exposure, and geopolitical supply chain disruption risk.'
+        ]
+      },
+      {
+        heading: 'TCO vs Should-Cost comparison matrix',
+        body: [
+          'The matrix below contrasts Should-Cost modeling and Total Cost of Ownership across key procurement dimensions:',
+          `<div class="guide-table-wrap">
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Should-Cost Model</th>
+<th>Total Cost of Ownership (TCO)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary Objective</strong></td>
+<td>Determine baseline fair manufacturing cost</td>
+<td>Calculate total landed commercial expense</td>
+</tr>
+<tr>
+<td><strong>Core Focus</strong></td>
+<td>Raw materials, labor, energy & supplier margin</td>
+<td>Landed freight, duties, quality, inventory & risk</td>
+</tr>
+<tr>
+<td><strong>Key Usage</strong></td>
+<td>Leverage during price negotiation & RFQ target setting</td>
+<td>Supplier selection, award decision & trade route comparison</td>
+</tr>
+<tr>
+<td><strong>Data Sources</strong></td>
+<td>Commodity indices, labor benchmarks, engineering specs</td>
+<td>Freight quotes, tariff schedules, defect rates, working capital rates</td>
+</tr>
+<tr>
+<td><strong>Strategic Outcome</strong></td>
+<td>Prevents overpaying for factory production</td>
+<td>Prevents unexpected margin erosion from hidden supply chain costs</td>
+</tr>
+</tbody>
+</table>
+</div>`
+        ]
+      },
+      {
+        heading: 'Calculating landed TCO in international supply chains',
+        body: [
+          'Consider an international buyer sourcing industrial products from overseas. Supplier A offers an EXW (Ex Works) price of €10.00/unit. Supplier B offers a DAP (Delivered at Place) price of €11.20/unit with pre-shipment COA inspection included.',
+          'Under a superficial evaluation, Supplier A appears €1.20/unit cheaper. However, a rigorous TCO calculation reveals the true picture:',
+          '• <strong>Supplier A (EXW €10.00):</strong> Freight & port fees (€1.10) + Import duties (€0.50) + Pre-shipment inspection (€0.40) + 6-week transit inventory holding (€0.35) + 5% historical defect scrap rate (€0.55) = <strong>Total Landed TCO: €12.90 / unit</strong>.',
+          '• <strong>Supplier B (DAP €11.20):</strong> Landed freight included + Import duties (€0.50) + Pre-shipment COA included (€0.00) + 2-week transit inventory holding (€0.12) + 0% defect rate (€0.00) = <strong>Total Landed TCO: €11.82 / unit</strong>.',
+          'Through TCO analysis, Supplier B is proven to be <strong>€1.08 per unit cheaper</strong> overall, despite having an 12% higher nominal purchase price.'
+        ]
+      },
+      {
+        heading: 'Cost optimization: Connecting TCO to supplier verification and RFQs',
+        body: [
+          'Optimizing total cost of ownership in procurement requires integrating TCO metrics into upstream sourcing workflows:',
+          '• <strong>Standardized RFQs:</strong> Require all suppliers to quote against specified Incoterms, transit times, and COA quality requirements. Learn how to structure RFQs in our guide on <a class="text-link" href="/en/insights/how-to-write-an-effective-rfq/">How to Write an Effective RFQ →</a>',
+          '• <strong>Upstream Supplier Verification:</strong> Verify factory registration, capacity, and quality management systems before placing orders to eliminate defect costs. Explore <a class="text-link" href="/en/services/supplier-sourcing-and-verification/">CTSEG Supplier Sourcing & Verification →</a>',
+          '• <strong>Strategic Sourcing Consulting:</strong> Work with independent trade coordinators to evaluate global supply markets and negotiate multi-year category agreements. Learn more about <a class="text-link" href="/en/services/strategic-sourcing/">CTSEG Strategic Sourcing Services →</a>'
+        ]
+      },
+      {
+        heading: 'Frequently asked questions',
+        body: [
+          '<details open><summary>What is total cost of ownership (TCO) in procurement?</summary><p>Total Cost of Ownership (TCO) in procurement is a financial evaluation method that calculates all direct, indirect, and landed costs associated with purchasing a product, including freight, customs, quality inspections, inventory holding, and supply chain risk.</p></details>',
+          '<details><summary>What is the difference between a Should-Cost model and Total Cost of Ownership (TCO)?</summary><p>A Should-Cost model estimates what a product should cost to produce based on raw material prices, labor rates, and overhead. TCO measures the total financial impact of accepting a specific supplier offer, incorporating landed logistics, tariffs, quality risks, and capital holding costs.</p></details>',
+          '<details><summary>What are the main components of total procurement cost?</summary><p>The five primary components are base purchase price, freight and customs duties, quality inspection/defect costs, inventory capital holding costs, and commercial/exchange rate risk.</p></details>',
+          '<details><summary>Why is the lowest unit price often misleading?</summary><p>A low unit purchase price can be offset by long transit times, high ocean freight, customs clearance fees, poor packaging, or high defect rates, resulting in a higher total cost of ownership.</p></details>',
+          '<details><summary>How does TCO support strategic sourcing?</summary><p>TCO allows procurement teams to compare suppliers on a true landed cost basis rather than nominal unit prices, enabling strategic negotiations on Incoterms, payment terms, quality guarantees, and lead times.</p></details>'
+        ]
+      }
+    ]
+  },
+
   // 3. GERMAN (de)
   {
     lang: 'de',
