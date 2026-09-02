@@ -1,5 +1,5 @@
 ---
-import { getPosts } from '../data/blog';
+import { getPosts, getPostForInsight } from '../data/blog';
 import { serviceDetails } from '../data/service-details';
 import PageHero from './PageHero.astro';
 import Framework from './Framework.astro';
@@ -67,8 +67,7 @@ const detailedService = service && id && (lang === 'tr' || lang === 'en') && id 
 const product = id && key === 'products' ? products[id as keyof typeof products] : null;
 const insight = id && key === 'insights' ? insights[id as keyof typeof insights] : null;
 const legalPage = id && key === 'legal' ? legal[id as keyof typeof legal] : null;
-const postIndex:Record<string,number> = {'strategic-vs-procurement':0,'supplier-selection':1,'total-cost':2,'supplier-risk':3,rfq:4,'supply-chain-risk':5};
-const originalPost = insight && (lang === 'tr' || lang === 'en') && id in postIndex ? getPosts(lang).at(postIndex[id]) : null;
+const originalPost = insight && id ? getPostForInsight(lang, id) : null;
 const homeHref = localizedPath(lang, 'home');
 const sectionHref = (section:string) => localizedPath(lang, section);
 const indexLabel = (index:number) => String(index + 1).padStart(2,'0');

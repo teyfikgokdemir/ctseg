@@ -727,9 +727,36 @@ export const insightIds = ['strategic-vs-procurement','supplier-selection','supp
 export const insights: Record<(typeof insightIds)[number], { slugs: Localized; titles: Localized; descriptions: Localized; answers: Localized }> = {
   'strategic-vs-procurement': {
     slugs:{tr:'stratejik-tedarik-ve-satin-alma-farki',en:'strategic-sourcing-vs-procurement',de:'strategische-beschaffung-vs-einkauf',it:'sourcing-strategico-vs-acquisti',ru:'strategicheskiy-sorsing-i-zakupki',fa:'strategic-sourcing-vs-procurement',zh:'strategic-sourcing-vs-procurement',vi:'strategic-sourcing-vs-procurement'},
-    titles:{tr:'Stratejik tedarik ve satın alma arasındaki fark',en:'Strategic Sourcing vs Procurement: Differences, Process & Strategy',de:'Strategische Beschaffung vs. Einkauf',it:'Sourcing strategico e acquisti a confronto',ru:'Стратегический сорсинг и закупки: в чём отличие?',fa:'تفاوت تأمین استراتژیک و خرید',zh:'战略采购与事务性采购的核心区别与商业实践',vi:'Thu mua chiến lược và mua sắm thông thường: Sự khác biệt cốt lõi'},
-    descriptions:{tr:'Kapsam, maliyet, risk, tedarikçi yönetimi ve karar süreci açısından stratejik tedarik ile satın alma karşılaştırması.',en:'Strategic sourcing vs procurement: a practical B2B comparison guide covering upstream sourcing strategy, downstream purchasing, the 7-step process, TCO and risk controls.',de:'Vergleich von strategischer Beschaffung und Einkauf nach Umfang, Kosten, Risiko, Lieferantenmanagement und Entscheidung.',it:'Confronto tra sourcing strategico e acquisti per ambito, costo, rischio, gestione fornitori e decisioni.',ru:'Сравнение стратегического сорсинга и закупок по объёму, стоимости, риску, работе с поставщиками и процессу принятия решений.',fa:'مقایسه تأمین استراتژیک و خرید از نظر دامنه، هزینه، ریسک، مدیریت تأمین‌کننده و فرآیند تصمیم‌گیری.',zh:'从采购范畴、总体拥有成本 (TCO)、供应链风险把控、供应商关系管理及长远决策机制等维度深度解析战略采购与事务性采购。',vi:'So sánh thu mua chiến lược và mua sắm thông thường trên các khía cạnh phạm vi, chi phí, rủi ro, quản lý nhà cung cấp và quyết định thương mại.'},
-    answers:{tr:'Satın alma işlemi yürütür; stratejik tedarik ise talep, pazar, toplam maliyet, risk, müzakere ve performansı uzun vadeli bir karar sistemi içinde yönetir.',en:'Procurement executes purchasing and transactional operations. Strategic sourcing is the broader, long-term decision framework that manages category spend, supply markets, supplier qualification, total cost of ownership (TCO), risk, negotiation and performance monitoring before and after the award.',de:'Der Einkauf führt die Bestellung aus; strategische Beschaffung steuert Bedarf, Markt, Gesamtkosten, Risiko, Verhandlung und Leistung langfristig.',it:'Gli acquisti eseguono la transazione; il sourcing strategico governa fabbisogno, mercato, costo totale, rischio, negoziazione e prestazioni nel lungo periodo.',ru:'Закупки выполняют покупку; стратегический сорсинг управляет спросом, рынком, совокупной стоимостью, риском, переговорами и показателями эффективности в долгосрочной перспективе.',fa:'خرید، عملیات سفارش را اجرا می‌کند؛ تأمین استراتژیک تقاضا، بازار، هزینه کل، ریسک و عملکرد را در یک سیستم مدیریت می‌کند.',zh:'事务性采购侧重于被动执行订单下达与日常对账；而战略采购则是将市场供需趋势、总体拥有成本 (TCO)、供应链风险管理、商务谈判与履约指标作为长效决策系统进行全局统筹。',vi:'Mua sắm thông thường thực hiện việc mua hàng tức thời; thu mua chiến lược quản lý nhu cầu, thị trường, tổng chi phí, rủi ro, đàm phán và hiệu suất như một hệ thống dài hạn.'}
+    titles:{
+      tr:'Stratejik Tedarik ve Satın Alma Arasındaki Fark: 7 Adım & TCO',
+      en:'Strategic Sourcing vs Procurement: Differences, Process & Strategy',
+      de:'Strategische Beschaffung vs. Einkauf: Unterschiede, 7-Schritte & TCO',
+      it:'Sourcing Strategico vs Acquisti: Differenze, Processo in 7 Passi e TCO',
+      ru:'Стратегический сорсинг и закупки: отличия, 7 этапов и TCO',
+      fa:'تفاوت تأمین استراتژیک و خرید (Procurement): فرآیند ۷ مرحله‌ای و TCO',
+      zh:'战略采购 vs 事务性采购：核心区别、7步法寻源流程与TCO总拥有成本',
+      vi:'Thu Mua Chiến Lược vs Mua Sắm Thông Thường: Khác Biệt, Quy Trình 7 Bước & TCO'
+    },
+    descriptions:{
+      tr:'Stratejik tedarik ve satın alma arasındaki farklar; operasyonel satın alma, stratejik sourcing 7 adım süreci, TCO toplam maliyet ve risk yönetimi rehberi.',
+      en:'Strategic sourcing vs procurement: a practical B2B comparison guide covering upstream sourcing strategy, downstream purchasing, the 7-step process, TCO and risk controls.',
+      de:'Strategische Beschaffung vs. operativer Einkauf: B2B-Leitfaden zu TCO-Gesamtkosten, Lieferantenprüfung, 7-Schritte-Sourcing-Prozess und Risikomanagement.',
+      it:'Confronto tra sourcing strategico e acquisti operativi: guida B2B su costo totale di possesso (TCO), verifica fornitori e gestione del rischio.',
+      ru:'Сравнение стратегического сорсинга и операционных закупок: B2B-руководство по совокупной стоимости владения (TCO), проверке контрагентов и рискам.',
+      fa:'راهنمای جامع B2B برای تفاوت تأمین استراتژیک و خرید عملیاتی، فرآیند ۷ مرحله‌ای sourcing، تحلیل هزینه کل مالکیت (TCO) و اعتبارسنجی تأمین‌کننده.',
+      zh:'深度对比战略采购 (Strategic Sourcing) 与事务性采购 (Procurement)：涵盖7步寻源流程、供应商尽职调查、TCO总拥有成本模型与供应链风险防范。',
+      vi:'Hướng dẫn so sánh thu mua chiến lược (Strategic Sourcing) và mua sắm thông thường (Procurement): mô hình TCO, quy trình 7 bước và thẩm định nhà cung cấp.'
+    },
+    answers:{
+      tr:'Satın alma sipariş ve işlem yürütür; stratejik tedarik ise talep, pazar araştırması, tedarikçi doğrulaması, TCO toplam maliyet, risk ve performansı uzun vadeli bir karar sisteminde yönetir.',
+      en:'Procurement executes purchasing and transactional operations. Strategic sourcing is the broader, long-term decision framework that manages category spend, supply markets, supplier qualification, total cost of ownership (TCO), risk, negotiation and performance monitoring before and after the award.',
+      de:'Der operative Einkauf führt Bestellungen aus; die strategische Beschaffung steuert Bedarfe, Beschaffungsmärkte, Lieferantenprüfung, TCO-Gesamtkosten und Risiken langfristig.',
+      it:'Gli acquisti operativi eseguono le transazioni; il sourcing strategico governa fabbisogni, mercati, qualifica fornitori, costo totale di possesso (TCO) e rischi nel lungo periodo.',
+      ru:'Закупки выполняют операционные заказы; стратегический сорсинг управляет категорией, рынком, проверкой контрагентов, TCO и рисками в долгосрочной перспективе.',
+      fa:'خرید عملیاتی، سفارشات و پرداخت‌ها را اجرا می‌کند؛ تأمین استراتژیک تقاضا، بازار، اعتبارسنجی تأمین‌کننده، هزینه کل مالکیت (TCO) و ریسک را در یک سیستم مدیریت می‌نماید.',
+      zh:'事务性采购侧重于被动执行订单下达与日常对账；而战略采购则是将市场供需趋势、供应商资质核验、总体拥有成本 (TCO)、商务谈判与履约指标作为长效决策系统进行全局统筹。',
+      vi:'Mua sắm thông thường thực hiện đơn hàng tức thời; thu mua chiến lược quản lý nhu cầu, thị trường, thẩm định nhà cung cấp, tổng chi phí sở hữu (TCO) và rủi ro như một hệ thống dài hạn.'
+    }
   },
   'supplier-selection': {
     slugs:{tr:'tedarikci-secim-kriterleri',en:'supplier-selection-criteria',de:'kriterien-lieferantenauswahl',it:'criteri-selezione-fornitori',ru:'kriterii-vybora-postavshchikov',fa:'supplier-selection-criteria',zh:'supplier-selection-criteria',vi:'supplier-selection-criteria'},

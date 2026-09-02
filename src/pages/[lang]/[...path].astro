@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageContent from '../../components/PageContent.astro';
 import { insights, products, services, ui } from '../../data/site';
 import { guides, processPages } from '../../data/completion';
-import { getPosts } from '../../data/blog';
+import { getPosts, getPostForInsight } from '../../data/blog';
 import { searchLandings } from '../../data/search-landings';
 import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, tradeMatchingServiceSchema, type RouteRecord } from '../../lib/routes';
 
@@ -70,10 +70,7 @@ if (record.key === 'products' && record.id) {
 }
 if (record.key === 'insights' && record.id) {
   const insight = insights[record.id as keyof typeof insights];
-  const postIndex:Record<string,number> = {'strategic-vs-procurement':0,'supplier-selection':1,'total-cost':2,'supplier-risk':3,rfq:4,'supply-chain-risk':5};
-  const originalPost = (record.lang === 'tr' || record.lang === 'en') && record.id in postIndex
-    ? getPosts(record.lang).at(postIndex[record.id])
-    : null;
+  const originalPost = record.id ? getPostForInsight(record.lang, record.id) : null;
   schemas.push({
     '@context':'https://schema.org','@type':'BlogPosting',
     '@id':`${canonicalFor(record)}#article`,url:canonicalFor(record),headline:insight.titles[record.lang],
