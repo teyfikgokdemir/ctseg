@@ -1,6 +1,6 @@
 # CTSEG Corporate Website
 
-Premium multilingual Astro website for CTSEG in Turkish, English, German, Italian, Persian, Russian, Simplified Chinese and Vietnamese. The REFLEX medical catalogue also exposes dedicated Albanian, Macedonian and Serbian routes.
+Premium multilingual Astro website for CTSEG in Turkish, English, German, Italian and French.
 
 ## Commands
 
@@ -12,7 +12,7 @@ npm run check:site
 npm run validate
 ```
 
-`check:site` validates generated internal links, page language, title, description, canonical, reciprocal multilingual hreflang coverage, and single header/footer rendering.
+`check:site` validates generated internal links, page language, title, description, canonical, reciprocal five-language hreflang coverage, and single header/footer rendering.
 
 ## Architecture
 

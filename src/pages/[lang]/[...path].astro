@@ -83,6 +83,15 @@ if (record.key === 'insights' && record.id) {
     author:{'@type':'Person',name:'Teyfik Gökdemir'},
     publisher:{'@id':'https://ctseg.com.tr/#organization'}
   });
+  if (originalPost?.faq) {
+    schemas.push({
+      '@context':'https://schema.org','@type':'FAQPage',
+      mainEntity:originalPost.faq.map((item) => ({
+        '@type':'Question',name:item.question,
+        acceptedAnswer:{'@type':'Answer',text:item.answer}
+      }))
+    });
+  }
 }
 if (record.key === 'how-we-work') {
   const process=processPages[record.lang];

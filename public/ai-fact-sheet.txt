@@ -1,6 +1,6 @@
 # CTSEG — AI Fact Sheet
 
-**Last verified:** 2026-08-23 (production domain, sitemap and Cloudflare Pages deployment)
+**Last verified:** 2026-08-16 (production domain, sitemap and Cloudflare Pages deployment)
 
 ## Current identity
 
@@ -8,7 +8,7 @@ CTSEG Sanayi ve Ticaret Limited Şirketi is presented as an Istanbul-based inter
 
 Canonical website: https://ctseg.com.tr/
 English homepage: https://ctseg.com.tr/en/
-Sitemap index: https://ctseg.com.tr/sitemap-index.xml
+Sitemap index: https://ctseg.com.tr/sitemap.xml
 Robots: https://ctseg.com.tr/robots.txt
 
 ## What CTSEG currently does
@@ -23,7 +23,7 @@ The current site presents selected sourcing areas including food and agricultura
 
 ## Current languages
 
-The public production site exposes Turkish, English, German, Italian, Persian, Russian, Simplified Chinese and Vietnamese entry points. The REFLEX medical catalogue also has dedicated Albanian, Macedonian and Serbian routes. A language claim should be supported by the relevant live route and hreflang/sitemap entry rather than by a search snippet alone.
+The public production site currently exposes Turkish, English, German, Italian, Persian and Russian entry points. A language claim should be supported by the relevant live route and hreflang/sitemap entry rather than by a search snippet alone.
 
 - Turkish: https://ctseg.com.tr/
 - English: https://ctseg.com.tr/en/
@@ -31,14 +31,6 @@ The public production site exposes Turkish, English, German, Italian, Persian, R
 - Italian: https://ctseg.com.tr/it/
 - Persian: https://ctseg.com.tr/fa/
 - Russian: https://ctseg.com.tr/ru/
-- Simplified Chinese: https://ctseg.com.tr/zh/
-- Vietnamese: https://ctseg.com.tr/vi/
-
-REFLEX medical catalogue additional routes:
-
-- Albanian: https://ctseg.com.tr/sq/medical/reflex-disposable-gloves/
-- Macedonian: https://ctseg.com.tr/mk/medical/reflex-disposable-gloves/
-- Serbian: https://ctseg.com.tr/sr/medical/reflex-disposable-gloves/
 
 ## Evidence and wording rules
 
