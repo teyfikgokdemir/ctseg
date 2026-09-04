@@ -148,8 +148,11 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
           window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-B8BLQ7KK2T',{anonymize_ip:true});
           const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-B8BLQ7KK2T';document.head.appendChild(s);
         };
+        window.addEventListener('load',()=>{
+          if(window.requestIdleCallback){window.requestIdleCallback(load,{timeout:2200});}else{window.setTimeout(load,1600);}
+        });
         const apply=(value)=>{localStorage.setItem(key,value);box.hidden=true;if(value==='accepted')load()};
-        const saved=localStorage.getItem(key);if(saved==='accepted')load();else if(!saved)box.hidden=false;
+        const saved=localStorage.getItem(key);if(saved==='accepted'||saved==='rejected')box.hidden=true;else box.hidden=false;
         box.querySelector('[data-cookie-accept]')?.addEventListener('click',()=>apply('accepted'));
         box.querySelector('[data-cookie-reject]')?.addEventListener('click',()=>apply('rejected'));
         document.querySelectorAll('[data-fa-landing-link]').forEach((link)=>link.addEventListener('click',()=>{
