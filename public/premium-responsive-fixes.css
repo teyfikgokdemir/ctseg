@@ -3,24 +3,38 @@ html{max-width:100%}
 body{max-width:100%;overflow-x:hidden}
 main,.site-header,.site-footer{max-width:100%}
 
-/* Keep readable copy on genuinely light premium surfaces. Avoid blanket rules that can darken text inside image cards. */
+/*
+ * The legacy stylesheet owns the responsive/locale mechanics. This layer only
+ * hardens the premium presentation. Keep foreground and surface declarations
+ * together so a premium text colour can never land on the legacy paper tone.
+ */
+.trade-paths-section,
+.markets-editorial{background:#161616!important;color:#fff!important}
+.cta-statement{background:#161616!important;color:#fff!important}
+
+/* Readable copy on genuinely light premium surfaces. */
 .hero .lead,.page-hero .lead,
 .platform-sectors .section-head p,
 .trade-corridors .section-head p,
 .trade-corridors> .container > p,
 .trade-corridors li,
+.scenario-teaser p,
 .operational-trust .section-head p,
+.operational-trust> .container > .content-grid > div > p,
 .operational-trust-panel p,
 .operational-trust-panel li,
 .company-trust-band p,
 .company-trust-band li,
+.commercial-form-section p,
+.commercial-form-section li,
 .commercial-field>span{color:#303030!important}
 
-/* Preserve light copy on dark/image-driven surfaces. */
-.platform-sector-grid article p{color:#f0f0f0!important}
+/* Light copy is scoped only to surfaces whose dark background is guaranteed above. */
 .trade-paths-section p,.trade-paths-section li,
 .markets-editorial p,.markets-editorial li,
 .cta-statement p,.cta-statement li{color:#d5d5d5!important}
+.platform-sector-grid article{background:#161616!important}
+.platform-sector-grid article p{color:#f0f0f0!important}
 
 /* Secondary CTA contrast must remain explicit on both light and dark panels. */
 .hero .button-secondary,.page-hero .button-secondary,.reflex-page .button-secondary{
@@ -60,7 +74,7 @@ html[data-locale="vi"] .hero h1{
 }
 
 @media (max-width:860px){
-  /* Mobile word masks can make long German/Russian words wider than the viewport. */
+  /* Mobile word masks can make long localized words wider than the viewport. */
   .hero h1 .premium-word-mask,.page-hero h1 .premium-word-mask,
   .hero h1 .premium-word,.page-hero h1 .premium-word{display:inline!important;max-width:100%;overflow-wrap:anywhere;word-break:normal}
   html[data-locale="de"] .hero h1,
@@ -70,6 +84,10 @@ html[data-locale="vi"] .hero h1{
   html[data-locale="vi"] .hero h1{font-size:clamp(42px,10.8vw,64px)!important;line-height:.98!important;letter-spacing:-.045em!important}
   .corridor-list>div{grid-template-columns:42px minmax(0,1fr)!important;min-height:94px}
   .corridor-list strong{font-size:clamp(24px,7vw,38px)!important}
+
+  /* Keep the clipped accessibility label from contributing a fractional RTL scroll width. */
+  html[dir="rtl"] .menu-toggle{overflow:hidden}
+  html[dir="rtl"] .menu-toggle .sr-only{left:auto!important;right:0!important;inset-inline-start:auto!important;inset-inline-end:0!important}
 }
 
 @media (max-width:430px){
