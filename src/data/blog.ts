@@ -140,7 +140,7 @@ export const posts: BlogPost[] = [
           'Başarılı bir stratejik tedarik çalışması, kurumsal hedeflerle pazar gerçeklerini birleştiren 7 adımlı bir metodoloji izler:',
           '<strong>1. İhtiyaç ve Kategori Harcama Analizi:</strong> Geçmiş harcama verilerini haritalandırın, sipariş hacimlerini belirleyin ve teknik ürün spesifikasyonlarını netleştirin.',
           '<strong>2. Tedarik Pazarı Araştırması:</strong> Üretici bölgeleri, hammadde fiyat sürücülerini, kapasite kısıtlarını, gümrük tarifelerini ve hedef pazarlardaki mevzuat eğilimlerini analiz edin.',
-          '<strong>3. Tedarikçi Keşfi ve Doğrulaması:</strong> Potansiyel üreticileri belirleyin, resmi şirket kayıtlarını, üretim kapasitesini, sertifikaları ve numune uygunluğunu denetleyin. Detaylı bilgi için <a class="text-link" href="/tr/hizmetler/tedarikci-ve-uretici-dogrulamasi/">CTSEG Tedarikçi ve Üretici Doğrulaması →</a>',
+          '<strong>3. Tedarikçi Keşfi ve Doğrulaması:</strong> Potansiyel üreticileri belirleyin, resmi şirket kayıtlarını, üretim kapasitesini, sertifikaları ve numune uygunluğunu denetleyin. Detaylı bilgi için <a class="text-link" href="/tr/hizmetler/tedarikci-bulma-ve-dogrulama/">CTSEG Tedarikçi ve Üretici Doğrulaması →</a>',
           '<strong>4. RFQ / RFP ve Teklif Yapılandırması:</strong> Incoterms, ambalaj, kalite standardı ve belge beklentilerini açıkça tanımlayan karşılaştırılabilir teklif formları (RFQ) hazırlayın. Rehberimizi inceleyin: <a class="text-link" href="/tr/icgoruler/etkili-rfq-nasil-hazirlanir/">Etkili RFQ Nasıl Hazırlanır? →</a>',
           '<strong>5. TCO ve Olası Maliyet Değerlendirmesi:</strong> Birim fiyatı; navlun, gümrük, sigorta, kalite kontrol, ödeme vadeleri ve stok taşıma maliyetleriyle birleştirerek Toplam Sahip Olma Maliyetini (TCO) hesaplayın. İnceleyin: <a class="text-link" href="/tr/icgoruler/toplam-sahip-olma-maliyeti/">Toplam Sahip Olma Maliyeti (TCO) →</a>',
           '<strong>6. Ticari Müzakere ve Tedarikçi Seçimi:</strong> Fiyat kademeleri, ödeme şartları, termin süreleri ve sözleşmesel güvenceler üzerinde müzakere yürüterek kararı verin. İnceleyin: <a class="text-link" href="/tr/hizmetler/stratejik-tedarik/">CTSEG Stratejik Tedarik Hizmetleri →</a>',
@@ -731,7 +731,7 @@ export const posts: BlogPost[] = [
           'Eine erfolgreiche strategische Beschaffung folgt einem klaren 7-Schritte-Prozess:',
           '<strong>1. Bedarfs- & Warengruppenanalyse:</strong> Erfassen historischer Einkaufsdaten, Definieren von Spezifikationen und Qualitätsstandards.',
           '<strong>2. Beschaffungsmarktforschung:</strong> Analyse von Herstellerregionen, Kapazitäten, Rohstoffkosten und Zollstrukturen in den Zielländern.',
-          '<strong>3. Lieferantenidentifikation & -prüfung:</strong> Überprüfung von Unternehmensregistern, Produktionskapazitäten, Zertifikaten und Musterqualität. Mehr erfahren: <a class="text-link" href="/de/dienstleistungen/hersteller-pruefung/">CTSEG Hersteller- & Lieferantenprüfung →</a>',
+          '<strong>3. Lieferantenidentifikation & -prüfung:</strong> Überprüfung von Unternehmensregistern, Produktionskapazitäten, Zertifikaten und Musterqualität. Mehr erfahren: <a class="text-link" href="/de/dienstleistungen/lieferantensuche-und-pruefung/">CTSEG Hersteller- & Lieferantenprüfung →</a>',
           '<strong>4. Ausschreibung & Angebotserstellung (RFQ):</strong> Erstellung vergleichbarer Angebotsanforderungen inklusive Incoterms und Qualitätsstandards. Lesen Sie unseren Leitfaden: <a class="text-link" href="/de/einblicke/wirksame-rfq-erstellen/">Wirksame RFQ erstellen →</a>',
           '<strong>5. TCO- & Gesamtkostenbewertung:</strong> Berechnung der Total Cost of Ownership unter Einbeziehung von Fracht, Zoll, Qualitätskontrolle und Zahlungskonditionen. Mehr erfahren: <a class="text-link" href="/de/einblicke/gesamtbetriebskosten-tco/">Gesamtbetriebskosten (TCO) →</a>',
           '<strong>6. Kommerzielle Verhandlung & Lieferantenauswahl:</strong> Verhandlung von Preistaffeln, Lieferzeiten und Vertragsklauseln. Entdecken Sie: <a class="text-link" href="/de/dienstleistungen/strategische-beschaffung/">CTSEG Strategische Beschaffung →</a>',
@@ -909,10 +909,10 @@ export const posts: BlogPost[] = [
         body: [
           '<strong>1. Analisi dei fabbisogni e della spesa:</strong> Definizione delle specifiche tecniche e dei volumi d\'acquisto.<br>',
           '<strong>2. Ricerca sui mercati di fornitura:</strong> Mappatura dei distretti produttivi, dei costi delle materie prime e dei dazi.<br>',
-          '<strong>3. Identificazione e verifica dei fornitori:</strong> Audit documentali e verifiche operative. Scopri di più: <a class="text-link" href="/it/servizi/verifica-fornitori/">CTSEG Verifica Fornitori →</a><br>',
+          '<strong>3. Identificazione e verifica dei fornitori:</strong> Audit documentali e verifiche operative. Scopri di più: <a class="text-link" href="/it/servizi/ricerca-e-verifica-fornitori/">CTSEG Verifica Fornitori →</a><br>',
           '<strong>4. Strutturazione di RFQ / RFP comparabili:</strong> Invio di richieste d\'offerta chiare ed omogenee.<br>',
           '<strong>5. Valutazione del TCO e dei costi reali:</strong> Integrazione di nolo, dazi e controlli qualità. Scopri di più: <a class="text-link" href="/it/approfondimenti/costo-totale-di-possesso/">Costo Totale di Possesso (TCO) →</a><br>',
-          '<strong>6. Negoziazione commerciale e selezione:</strong> Definizione delle condizioni commerciali ottimali. Scopri di più: <a class="text-link" href="/it/servizi/sourcing-strategico/">CTSEG Sourcing Strategico →</a><br>',
+          '<strong>6. Negoziazione commerciale e selezione:</strong> Definizione delle condizioni commerciali ottimali. Scopri di più: <a class="text-link" href="/it/servizi/approvvigionamento-strategico/">CTSEG Sourcing Strategico →</a><br>',
           '<strong>7. Contratto, logistica e controllo prestazioni:</strong> Firma dei contratti, ispezioni pre-spedizione (COA) e monitoraggio KPI. Scopri di più: <a class="text-link" href="/it/come-lavoriamo/">CTSEG Come Lavoriamo →</a>'
         ]
       },
@@ -1031,7 +1031,7 @@ export const posts: BlogPost[] = [
           '<strong>۴. ساختاردهی استعلام قیمت (RFQ/RFP):</strong> تنظیم فرم‌های استعلام شفاف با مشخصات Incoterms.<br>',
           '<strong>۵. محاسبه هزینه کل مالکیت (TCO):</strong> ترکیب قیمت واحد با حمل، گمرک و بازرسی کیفیت. اطلاعات بیشتر: <a class="text-link" href="/fa/insights/total-cost-of-ownership/">هزینه کل مالکیت (TCO) →</a><br>',
           '<strong>۶. مذاکره تجاری و انتخاب:</strong> توافق بر سر شرایط پرداخت و ضمانت‌های قراردادی. اطلاعات بیشتر: <a class="text-link" href="/fa/services/strategic-sourcing/">تأمین استراتژیک CTSEG →</a><br>',
-          '<strong>۷. عقد قرارداد، لجستیک و پایش عملکرد:</strong> بازرسی قبل از حمل (COA) و پیگیری شاخص‌های عملکردی. اطلاعات بیشتر: <a class="text-link" href="/fa/how-we-work/">روش کار CTSEG →</a>'
+          '<strong>۷. عقد قرارداد، لجستیک و پایش عملکرد:</strong> بازرسی قبل از حمل (COA) و پیگیری شاخص‌های عملکردی. اطلاعات بیشتر: <a class="text-link" href="/fa/ravesh-kar/">روش کار CTSEG →</a>'
         ]
       },
       {
@@ -1145,7 +1145,7 @@ export const posts: BlogPost[] = [
         body: [
           '<strong>1. Анализ потребностей и категории:</strong> Формирование технических спецификаций.<br>',
           '<strong>2. Исследование рынка поставщиков:</strong> Изучение производственных кластеров и таможенных пошлин.<br>',
-          '<strong>3. Поиск и проверка поставщиков:</strong> Проверка юрлиц, мощности и сертификатов. Узнать больше: <a class="text-link" href="/ru/uslugi/proverka-postavshchikov/">Проверка поставщиков CTSEG →</a><br>',
+          '<strong>3. Поиск и проверка поставщиков:</strong> Проверка юрлиц, мощности и сертификатов. Узнать больше: <a class="text-link" href="/ru/uslugi/poisk-i-verifikatsiya-postavshchikov/">Проверка поставщиков CTSEG →</a><br>',
           '<strong>4. Подготовка RFQ / RFP:</strong> Составление стандартизированных форм запроса котировок.<br>',
           '<strong>5. Расчет TCO и целевой стоимости:</strong> Учет фрахта, таможни и рисков брака. Подробнее: <a class="text-link" href="/ru/materialy/stoimost-polnogo-vladeniya-tco/">Совокупная стоимость владения (TCO) →</a><br>',
           '<strong>6. Переговоры и выбор контрагента:</strong> Согласование условий оплаты и гарантий. Подробнее: <a class="text-link" href="/ru/uslugi/strategicheskiy-sorsing/">Стратегический сорсинг CTSEG →</a><br>',
