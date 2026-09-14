@@ -36,10 +36,42 @@ const copyrightMap: Record<string, string> = {
   sr:`© ${year} CTSEG. Sva prava zadržana.`
 };
 const copyright = copyrightMap[lang] || copyrightMap.en;
+const marketLocales: Array<{ code: Locale; flag:string; label:string; href:string }> = [
+  { code:'tr', flag:'🇹🇷', label:'Türkiye', href:'/' },
+  { code:'en', flag:'🇬🇧', label:'English', href:'/en/' },
+  { code:'de', flag:'🇩🇪', label:'Deutschland', href:'/de/' },
+  { code:'it', flag:'🇮🇹', label:'Italia', href:'/it/' },
+  { code:'fa', flag:'🇮🇷', label:'ایران', href:'/fa/' },
+  { code:'ru', flag:'🇷🇺', label:'Россия', href:'/ru/' },
+  { code:'zh', flag:'🇨🇳', label:'中国', href:'/zh/' },
+  { code:'vi', flag:'🇻🇳', label:'Việt Nam', href:'/vi/' }
+];
+const marketLabel = ({tr:'Global Pazarlar',en:'Global Markets',de:'Globale Märkte',it:'Mercati globali',fa:'بازارهای جهانی',ru:'Глобальные рынки',zh:'全球市场',vi:'Thị trường toàn cầu'} as Record<string,string>)[lang] || 'Global Markets';
 ---
 <link rel="stylesheet" href="/premium-trade-house.css" />
 <link rel="stylesheet" href="/premium-responsive-fixes.css" />
 <footer class="site-footer">
+  <div class="footer-markets-wrap">
+    <div class="container footer-markets">
+      <div class="footer-markets-label">
+        <span class="footer-markets-kicker">CTSEG</span>
+        <strong>{marketLabel}</strong>
+      </div>
+      <nav class="footer-market-links" aria-label={marketLabel}>
+        {marketLocales.map((item) => (
+          <a
+            href={item.href}
+            class:list={['footer-market-link', item.code === lang && 'is-active']}
+            aria-current={item.code === lang ? 'page' : undefined}
+            data-footer-locale={item.code}
+          >
+            <span aria-hidden="true" class="footer-market-flag">{item.flag}</span>
+            <span>{item.label}</span>
+          </a>
+        ))}
+      </nav>
+    </div>
+  </div>
   <div class="container footer-main">
     <div class="footer-brand">
       <a class="brand" href={localizedPath(lang, 'home')}><img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" loading="lazy" decoding="async" /></a>
@@ -84,4 +116,26 @@ const copyright = copyrightMap[lang] || copyrightMap.en;
     </nav>
   </div>
 </footer>
+<style>
+  .footer-markets-wrap{border-bottom:1px solid rgba(255,255,255,.14);border-top:1px solid rgba(255,255,255,.1);background:#111}
+  .footer-markets{display:grid;grid-template-columns:minmax(180px,.8fr) minmax(0,2.7fr);gap:32px;align-items:center;padding-top:28px;padding-bottom:28px}
+  .footer-markets-label{display:flex;align-items:baseline;gap:12px;min-width:0}
+  .footer-markets-kicker{font-size:11px;line-height:1;letter-spacing:.18em;text-transform:uppercase;color:#c4f000;font-weight:800}
+  .footer-markets-label strong{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#fff;white-space:nowrap}
+  .footer-market-links{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;min-width:0}
+  .footer-market-link{display:flex;align-items:center;justify-content:center;gap:7px;min-width:0;padding:11px 8px;border:1px solid rgba(255,255,255,.14);border-radius:999px;color:#d8d8d8;text-decoration:none;font-size:12px;line-height:1;white-space:nowrap;transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease}
+  .footer-market-link:hover,.footer-market-link:focus-visible{border-color:#c4f000;color:#fff;transform:translateY(-1px)}
+  .footer-market-link.is-active{background:#c4f000;border-color:#c4f000;color:#0a0a0a;font-weight:800}
+  .footer-market-flag{font-size:15px;line-height:1}
+  @media (max-width:1100px){
+    .footer-markets{grid-template-columns:1fr;gap:18px}
+    .footer-market-links{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .footer-markets-label{justify-content:space-between}
+  }
+  @media (max-width:620px){
+    .footer-markets{padding-top:22px;padding-bottom:22px}
+    .footer-market-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .footer-market-link{justify-content:flex-start;padding:12px 14px;font-size:12px}
+  }
+</style>
 <script src="/premium-motion.js" defer></script>
