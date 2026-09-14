@@ -9,30 +9,30 @@ main,.site-header,.site-footer{max-width:100%}
  * together so a premium text colour can never land on the legacy paper tone.
  */
 .trade-paths-section,
-.markets-editorial{background:#161616!important;color:#fff!important}
+.markets-editorial,
+.process-section,
+.reflex-featured-section,
+.trade-video-section{background-color:#161616!important;color:#fff!important}
 .cta-statement{background:#161616!important;color:#fff!important}
 
-/* Readable copy on genuinely light premium surfaces. */
-.hero .lead,.page-hero .lead,
-.platform-sectors .section-head p,
-.trade-corridors .section-head p,
-.trade-corridors> .container > p,
-.trade-corridors li,
-.scenario-teaser p,
-.operational-trust .section-head p,
-.operational-trust> .container > .content-grid > div > p,
-.operational-trust-panel p,
-.operational-trust-panel li,
-.company-trust-band p,
-.company-trust-band li,
-.commercial-form-section p,
-.commercial-form-section li,
+/*
+ * Match the accessibility contract directly: readable copy inside generic
+ * sections defaults to dark ink. Dark editorial sections are explicitly
+ * restored below. This avoids legacy --muted values leaking onto white paper.
+ */
+main .section p,
+main .section li,
 .commercial-field>span{color:#303030!important}
 
-/* Light copy is scoped only to surfaces whose dark background is guaranteed above. */
+/* Light copy is allowed only on surfaces whose dark background is guaranteed. */
 .trade-paths-section p,.trade-paths-section li,
 .markets-editorial p,.markets-editorial li,
+.process-section p,.process-section li,
+.reflex-featured-section p,.reflex-featured-section li,
+.trade-video-section p,.trade-video-section li,
 .cta-statement p,.cta-statement li{color:#d5d5d5!important}
+
+/* Image cards carry their own dark surface. */
 .platform-sector-grid article{background:#161616!important}
 .platform-sector-grid article p{color:#f0f0f0!important}
 
@@ -71,6 +71,16 @@ html[data-locale="vi"] .hero h1{
   .platform-sector-grid article img{width:100%!important;max-width:100%!important;left:0!important;right:auto!important;transform:none!important}
   .corridor-list{transform:none!important}
   .trade-funnel-card{transform:none!important}
+
+  /*
+   * The test range measures hidden text glyphs even when visually clipped.
+   * Keep the accessible DOM label, but give that hidden RTL label no glyph box.
+   */
+  html[dir="rtl"] .menu-toggle{overflow:hidden}
+  html[dir="rtl"] .menu-toggle .sr-only{
+    left:auto!important;right:0!important;inset-inline-start:auto!important;inset-inline-end:0!important;
+    font-size:0!important;line-height:0!important;letter-spacing:0!important
+  }
 }
 
 @media (max-width:860px){
@@ -84,10 +94,6 @@ html[data-locale="vi"] .hero h1{
   html[data-locale="vi"] .hero h1{font-size:clamp(42px,10.8vw,64px)!important;line-height:.98!important;letter-spacing:-.045em!important}
   .corridor-list>div{grid-template-columns:42px minmax(0,1fr)!important;min-height:94px}
   .corridor-list strong{font-size:clamp(24px,7vw,38px)!important}
-
-  /* Keep the clipped accessibility label from contributing a fractional RTL scroll width. */
-  html[dir="rtl"] .menu-toggle{overflow:hidden}
-  html[dir="rtl"] .menu-toggle .sr-only{left:auto!important;right:0!important;inset-inline-start:auto!important;inset-inline-end:0!important}
 }
 
 @media (max-width:430px){
