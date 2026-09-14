@@ -178,6 +178,24 @@ const verifiedLater = {
           />
           <figcaption>{h.trust.map((item:string,index:number) => <span><small>{indexLabel(index)}</small>{item}</span>)}</figcaption>
         </figure>
+        <div class="trade-gateway-banner" style="grid-column: 1 / -1; margin-top: 24px;">
+          <div class="trade-funnel-card">
+            <div>
+              <span class="trade-funnel-kicker">{lang === 'tr' ? 'TÜRKİYE’DEN DÜNYAYA İHRACAT' : lang === 'zh' ? '土耳其与泛欧市场开拓' : lang === 'vi' ? 'XUẤT KHẨU TỪ THỔ NHĨ KỲ RA THẾ GIỚI' : lang === 'de' ? 'EXPORT AUS DER TÜRKEI' : 'OUTBOUND EXPORT EXPANSION'}</span>
+              <h3 class="trade-funnel-title">{lang === 'tr' ? 'Üretiminizi Küresel Pazarlara Taşıyın' : lang === 'zh' ? '协助优质企业开拓泛欧与中东国际市场' : lang === 'vi' ? 'Đưa năng lực sản xuất tiếp cận thị trường toàn cầu' : lang === 'de' ? 'Türkische Hersteller für europäische Abnehmer' : 'Scale Your Production to Global Markets'}</h3>
+              <p class="trade-funnel-desc">{lang === 'tr' ? 'Avrupa, Körfez ve Asya’daki doğrulanmış B2B alıcılarla doğrudan eşleşin; sözleşme, akreditif ve ihracat lojistiğini profesyonelce yönetin.' : lang === 'zh' ? '直连泛欧高净值 B2B 买家网络，提供海外属地化商业对接、海外验厂协助与跨境合规履约全流程协同。' : lang === 'vi' ? 'Kết nối trực tiếp với các nhà mua hàng B2B uy tín tại Châu Âu, Trung Đông và Châu Á; quản lý hợp đồng và logistics trọn gói.' : lang === 'de' ? 'Direkte Verbindung mit geprüften Abnehmern in DACH und Europa. Vertrags- und Qualitätsmanagement vor Ort.' : 'Direct matching with verified B2B buyers across Europe, Middle East, and Asia. Contract, letter of credit, and logistics coordination.'}</p>
+            </div>
+            <a class="button" href={contactWithIntent('supplier_market_entry')} data-trade-intent="supplier_market_entry">{platform.producerCta} →</a>
+          </div>
+          <div class="trade-funnel-card">
+            <div>
+              <span class="trade-funnel-kicker">{lang === 'tr' ? 'KÜRESEL STRATEJİK TEDARİK' : lang === 'zh' ? '大宗工业品与源头工厂直采' : lang === 'vi' ? 'THU MUA CHIẾN LƯỢC TOÀN CẦU' : lang === 'de' ? 'STRATEGISCHES NEARSHORING' : 'VERIFIED GLOBAL SOURCING'}</span>
+              <h3 class="trade-funnel-title">{lang === 'tr' ? 'Doğrulanmış Üretici ve Hammadde Tedariği' : lang === 'zh' ? '土耳其及欧亚一手原产地合规货源' : lang === 'vi' ? 'Nhà sản xuất & Nguồn nguyên liệu được thẩm định' : lang === 'de' ? 'Geprüfte Produzenten & Rohstoffbeschaffung' : 'Verified Manufacturers & Raw Material Sourcing'}</h3>
+              <p class="trade-funnel-desc">{lang === 'tr' ? 'Türkiye ve bölgesel koridorlardan bağımsız fabrika denetimi, teknik ürün föyü (TDS), karşılaştırılabilir RFQ ve TCO maliyet optimizasyonu.' : lang === 'zh' ? '深入源头工厂与产地，提供技术规格书 (TDS) 核验、批次化验单 (COA) 审核与全生命周期 TCO 采购降本方案。' : lang === 'vi' ? 'Thẩm định nhà xưởng trực tiếp, phiếu thông số kỹ thuật (TDS), ma trận so sánh RFQ và tối ưu hóa tổng chi phí sở hữu (TCO).' : lang === 'de' ? 'Werksprüfungen in der Türkei, technische Datenblätter (TDS), vergleichbare RFQs und TCO-Optimierung.' : 'On-site factory audits in Türkiye and regional corridors, technical data sheets (TDS), structured RFQs, and TCO cost optimization.'}</p>
+            </div>
+            <a class="button button-secondary" href={contactWithIntent('buyer_request')} data-trade-intent="buyer_request">{platform.buyerCta} →</a>
+          </div>
+        </div>
       </div>
     </section>
     <section class="section trade-paths-section" id="trade-paths"><div class="container">

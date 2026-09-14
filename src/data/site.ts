@@ -43,57 +43,57 @@ export const companyCopy: Record<Locale, {
   footerLocation: string;
 }> = {
   tr: {
-    aboutHeading: 'İstanbul’dan uluslararası ticarete',
-    aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi, 2022 yılında Teyfik Gökdemir tarafından İstanbul’da kuruldu. CTSEG; stratejik tedarik, üretici ve tedarikçi doğrulaması, maliyet analizi, ticari ürün tedariği ve uluslararası ticaret süreçlerinde şirketlere destek verir.',
+    aboutHeading: 'Türkiye’nin Küresel Ticaret ve Tedarik Köprüsü',
+    aboutBody: 'CTSEG Sanayi ve Ticaret Limited Şirketi, 2022 yılında İstanbul’da kuruldu. CTSEG; Türk sanayici ve üreticilerinin Avrupa, Körfez ve Asya pazarlarına ihracat açılımını yönetirken, uluslararası alıcılara Türkiye ve bölgesel ticaret koridorlarında bağımsız tedarikçi doğrulaması, stratejik hammadde tedariği, RFQ yönetimi ve ticari koordinasyon sunar.',
     labels: { name: 'Şirket adı', founder: 'Kurucu', founded: 'Kuruluş yılı', headquarters: 'Merkez' },
     headquarters: 'Tuzla, İstanbul, Türkiye',
     footerLocation: 'Tuzla, İstanbul, Türkiye'
   },
   en: {
-    aboutHeading: 'From Istanbul to international trade',
-    aboutBody: 'CTSEG Industry and Trade Limited Company was founded in Istanbul in 2022 by Teyfik Gökdemir. CTSEG supports companies with strategic sourcing, manufacturer and supplier verification, cost analysis, trade product sourcing and international trade processes.',
+    aboutHeading: 'Two-Way Global Trade & Strategic Sourcing Gateway',
+    aboutBody: 'CTSEG Industry and Trade Limited Company was founded in Istanbul in 2022. Operating as an independent B2B commercial gateway, CTSEG facilitates export market entry for Turkish manufacturers while delivering factory verification, strategic raw material sourcing, and end-to-end contract coordination for international buyers across Europe, Asia, and the Middle East.',
     labels: { name: 'Company name', founder: 'Founder', founded: 'Year established', headquarters: 'Headquarters' },
     headquarters: 'Tuzla, Istanbul, Türkiye',
     footerLocation: 'Tuzla, Istanbul, Türkiye'
   },
   de: {
-    aboutHeading: 'Von Istanbul in den internationalen Handel',
-    aboutBody: 'CTSEG Industrie und Handel GmbH wurde 2022 von Teyfik Gökdemir in Istanbul gegründet. CTSEG unterstützt Unternehmen bei strategischer Beschaffung, der Prüfung von Herstellern und Lieferanten, Kostenanalysen, der Beschaffung von Handelsprodukten und internationalen Handelsprozessen.',
+    aboutHeading: 'Zwei-Wege-Handelsbrücke & Strategisches Sourcing',
+    aboutBody: 'CTSEG Industrie und Handel GmbH verbindet als unabhängige Handels- und Sourcing-Plattform türkische Hersteller mit europäischen Märkten und unterstützt Unternehmen aus der DACH-Region bei Nearshoring, Werksprüfungen, Rohstoffbeschaffung und verlässlicher Lieferkettenkoordination.',
     labels: { name: 'Unternehmensname', founder: 'Gründer', founded: 'Gründungsjahr', headquarters: 'Hauptsitz' },
     headquarters: 'Tuzla, Istanbul, Türkei',
     footerLocation: 'Tuzla, Istanbul, Türkei'
   },
   it: {
-    aboutHeading: 'Da Istanbul al commercio internazionale',
-    aboutBody: 'CTSEG S.r.l. è stata fondata a Istanbul nel 2022 da Teyfik Gökdemir. CTSEG affianca le aziende nel sourcing strategico, nella verifica di produttori e fornitori, nell’analisi dei costi, nell’approvvigionamento di prodotti commerciali e nei processi di commercio internazionale.',
+    aboutHeading: 'Ponte Commerciale Bilaterale e Sourcing Strategico',
+    aboutBody: 'CTSEG affianca le aziende nell’espansione export e nel nearshoring strategico tra Turchia, Europa e mercati internazionali, fornendo audit di fabbrica indipendenti, fornitura di materie prime industriali e coordinamento contrattuale B2B.',
     labels: { name: 'Nome dell’azienda', founder: 'Fondatore', founded: 'Anno di fondazione', headquarters: 'Sede' },
     headquarters: 'Tuzla, Istanbul, Turchia',
     footerLocation: 'Tuzla, Istanbul, Turchia'
   },
   ru: {
-    aboutHeading: 'Из Стамбула — на международные рынки',
-    aboutBody: 'Компания CTSEG Промышленно-Торговая Компания с Ограниченной Ответственностью основана Тейфиком Гёкдемиром в Стамбуле в 2022 году. Компания помогает с международным сорсингом, проверкой производителей и поставщиков, поиском покупателей и коммерческой координацией.',
+    aboutHeading: 'Двусторонний торговый мост и стратегический сорсинг',
+    aboutBody: 'Компания CTSEG выступает независимым торгово-сорсинговым шлюзом между Турцией, Европой и Евразией, организуя как экспорт турецких производителей на внешние рынки, так и аудит производств, сорсинг сырья и контрактное сопровождение для международных импортеров.',
     labels: { name: 'Компания', founder: 'Основатель', founded: 'Год основания', headquarters: 'Главный офис' },
     headquarters: 'Tuzla, Стамбул, Турция',
     footerLocation: 'Тузла, Стамбул, Турция'
   },
   fa: {
-    aboutHeading: 'از استانبول به تجارت بین‌المللی',
-    aboutBody: 'شرکت CTSEG (شرکت با مسئولیت محدود صنعتی و تجاری) در سال ۲۰۲۲ توسط توفیق گوکدمیر در استانبول تأسیس شد. CTSEG به شرکت‌ها در زمینه تأمین استراتژیک، اعتبارسنجی تولیدکنندگان و تأمین‌کنندگان، تحلیل هزینه، تأمین کالاهای تجاری و فرآیندهای تجارت بین‌الملل خدمات ارائه می‌دهد.',
+    aboutHeading: 'گذرگاه تجاری دوسویه و تأمین استراتژیک بین‌المللی',
+    aboutBody: 'شرکت CTSEG به عنوان یک پلتفرم مستقل تجاری، تسهیل‌کننده صادرات و واردات بین بازارهای منطقه‌ای، ترکیه و اروپا است و خدمات اعتبارسنجی کارخانجات، تطبیق تجاری B2B، تأمین مواد اولیه استراتژیک و مدیریت اسناد محموله را ارائه می‌دهد.',
     labels: { name: 'نام شرکت', founder: 'بنیان‌گذار', founded: 'سال تأسیس', headquarters: 'دفتر مرکزی' },
     headquarters: 'توزلا، استانبول، ترکیه',
     footerLocation: 'توزلا، استانبول، ترکیه'
   },
   zh: {
-    aboutHeading: '立足伊斯坦布尔，连接全球贸易',
-    aboutBody: 'CTSEG 工业与贸易有限公司由 Teyfik Gökdemir 于 2022 年在伊斯坦布尔创立。CTSEG 致力于为全球企业提供战略采购、生产商与供应商背景核验、成本优化分析、大宗特色商品供应链对接以及国际贸易商业决策支持。',
+    aboutHeading: '立足伊斯坦布尔，构筑中土与泛欧双向商贸枢纽',
+    aboutBody: 'CTSEG 工业与贸易有限公司立足伊斯坦布尔核心物流走廊。一方面协助中国出海企业与大宗贸易商以土耳其为支点开拓欧洲及中东市场并开展属地化供应链核验，另一方面为跨国买家提供土耳其优质工业制造、特色农产品原产地直采与端到端贸易协同。',
     labels: { name: '公司名称', founder: '创始人', founded: '创立年份', headquarters: '总部地址' },
     headquarters: '土耳其伊斯坦布尔图兹拉 (Tuzla, Istanbul, Türkiye)',
     footerLocation: '土耳其伊斯坦布尔图兹拉'
   },
   vi: {
-    aboutHeading: 'Từ Istanbul kết nối thương mại quốc tế',
-    aboutBody: 'Công ty TNHH Công nghiệp và Thương mại CTSEG được thành lập tại Istanbul vào năm 2022 bởi Teyfik Gökdemir. CTSEG hỗ trợ các doanh nghiệp trong việc thu mua chiến lược, thẩm định và xác minh nhà sản xuất/nhã cung cấp, phân tích chi phí, cung ứng sản phẩm thương mại và điều phối các quy trình thương mại quốc tế.',
+    aboutHeading: 'Cầu Nối Thương Mại Hai Chiều & Thu Mua Chiến Lược Toàn Cầu',
+    aboutBody: 'Công ty TNHH Công nghiệp và Thương mại CTSEG đóng vai trò là hành lang thương mại chiến lược hai chiều giữa Việt Nam, Thổ Nhĩ Kỳ và Châu Âu. Chúng tôi hỗ trợ các doanh nghiệp Đông Nam Á mở rộng xuất khẩu sang Thổ Nhĩ Kỳ và thị trường EU, đồng thời cung cấp giải pháp thẩm định nhà xưởng, thu mua nguyên liệu công nghiệp và điều phối thương mại B2B an toàn.',
     labels: { name: 'Tên công ty', founder: 'Người sáng lập', founded: 'Năm thành lập', headquarters: 'Trụ sở chính' },
     headquarters: 'Tuzla, Istanbul, Thổ Nhĩ Kỳ',
     footerLocation: 'Tuzla, Istanbul, Thổ Nhĩ Kỳ'
@@ -658,68 +658,68 @@ export const editorialCopy: Record<Locale, {
   marketsKicker:string; productImageNote:string;
 }> = {
   tr:{
-    manifestoTitle:'Tedarik, tek bir ürün aramasından daha fazlasıdır.',
-    manifestoText:'CTSEG; üretici keşfi, doğrulama, kalite, toplam maliyet, menşe şeffaflığı, pazar uygunluğu ve ticari uygulamayı tek bir karar disiplini içinde birleştirir.',
-    portfolioTitle:'Bölgesel ürün ve tedarik evreni',
-    portfolioText:'Bu seçki, CTSEG’in kuruyemiş, kuru meyve ve seçili gıda kategorilerindeki daha geniş bölgesel araştırma ve tedarik evrenini temsil eder; görseldeki her ürün aktif katalog ürünü değildir.',
-    marketsKicker:'Menşe · dokümantasyon · mevzuat · teslim modeli',
-    productImageNote:'Görsel, ürün kategorisini temsil eder; çeşit özellikleri teknik tanım ve parti belgeleriyle doğrulanır.'
+    manifestoTitle:'Uluslararası ticaret, sıradan bir aracı listesinden fazlasıdır.',
+    manifestoText:'CTSEG; ihracatta küresel pazar eşleştirmesi, ithalatta ise üretici keşfi, fabrika doğrulaması, TCO maliyet optimizasyonu ve sözleşme güvencesini tek bir ticari disiplinde birleştirir.',
+    portfolioTitle:'Stratejik Ticaret ve Tedarik Koridorları',
+    portfolioText:'Bu seçki, CTSEG’in Türk sanayisi, gıda hammaddeleri ve medikal/endüstriyel sarf kategorilerindeki çift yönlü bölgesel ticaret evrenini temsil eder; çeşitler parti spesifikasyonları ve resmi akreditasyonlarla doğrulanır.',
+    marketsKicker:'İhracat açılımı · Menşe doğrulaması · TCO analizi · Teslim güvencesi',
+    productImageNote:'Görsel, ürün kategorisini temsil eder; çeşit özellikleri teknik veri föyü (TDS) ve parti belgeleriyle doğrulanır.'
   },
   en:{
-    manifestoTitle:'Sourcing is more than a product search.',
-    manifestoText:'CTSEG brings producer discovery, verification, quality, total cost, origin transparency, market fit and commercial execution into one decision discipline.',
-    portfolioTitle:'A regional product and sourcing universe',
-    portfolioText:'This selection represents CTSEG’s wider regional research and sourcing universe across nuts, dried fruit and selected foods; not every item pictured is an active catalogue product.',
-    marketsKicker:'Origin · documentation · regulation · delivery model',
-    productImageNote:'The image represents the product category; varietal characteristics are verified through specification and batch documentation.'
+    manifestoTitle:'Global trade is more than a broker contact list.',
+    manifestoText:'CTSEG unifies outbound export expansion, factory verification, strategic raw material sourcing, and total cost of ownership (TCO) discipline into a single cross-border operating architecture.',
+    portfolioTitle:'Strategic Trade & Sourcing Corridors',
+    portfolioText:'This portfolio represents CTSEG’s two-way regional trade network spanning industrial goods, agricultural raw materials, and certified PPE supplies across Eurasia and international markets.',
+    marketsKicker:'Export expansion · Origin verification · TCO analysis · Contract delivery',
+    productImageNote:'The image represents the product category; technical specifications and batch parameters are verified via formal TDS documentation.'
   },
   de:{
-    manifestoTitle:'Beschaffung ist mehr als eine Produktsuche.',
-    manifestoText:'CTSEG verbindet Produzentensuche, Prüfung, Qualität, Gesamtkosten, Herkunftstransparenz, Markteignung und kommerzielle Umsetzung in einer Entscheidungsdisziplin.',
-    portfolioTitle:'Ein regionales Produkt- und Beschaffungsuniversum',
-    portfolioText:'Diese Auswahl steht für das breitere regionale Recherche- und Beschaffungsfeld von CTSEG bei Nüssen, Trockenfrüchten und ausgewählten Lebensmitteln; nicht jedes abgebildete Produkt gehört zum aktiven Katalog.',
-    marketsKicker:'Herkunft · Dokumentation · Regulierung · Liefermodell',
-    productImageNote:'Das Bild repräsentiert die Produktkategorie; Sortenmerkmale werden über Spezifikation und Chargendokumente geprüft.'
+    manifestoTitle:'Globaler Handel ist mehr als ein Zwischenhändler-Kontakt.',
+    manifestoText:'CTSEG vereint Nearshoring-Exportförderung, Werksaudits vor Ort, strategische Rohstoffbeschaffung und verlässliche TCO-Kostenkontrolle in einer unabhängigen Handelsdisziplin.',
+    portfolioTitle:'Strategische Handels- & Sourcing-Korridore',
+    portfolioText:'Diese Auswahl steht für das bilaterale Handels- und Sourcing-Netzwerk von CTSEG für Industrieerzeugnisse, Agrarrohstoffe und medizinisches Verbrauchsmaterial.',
+    marketsKicker:'Exportförderung · Herkunftsprüfung · TCO-Kostenanalyse · Vertragssicherheit',
+    productImageNote:'Das Bild repräsentiert die Produktkategorie; Sortenmerkmale werden über technische Datenblätter (TDS) und Chargendokumente geprüft.'
   },
   it:{
-    manifestoTitle:'L’approvvigionamento va oltre la ricerca di un prodotto.',
-    manifestoText:'CTSEG integra ricerca dei produttori, verifica, qualità, costo totale, trasparenza dell’origine, idoneità al mercato ed esecuzione commerciale in un’unica disciplina decisionale.',
-    portfolioTitle:'Un universo regionale di prodotti e sourcing',
-    portfolioText:'Questa selezione rappresenta il più ampio universo regionale di ricerca e approvvigionamento CTSEG tra frutta secca, essiccata e alimenti selezionati; non tutti gli articoli raffigurati appartengono al catalogo attivo.',
-    marketsKicker:'Origine · documentazione · normativa · modello di consegna',
-    productImageNote:'L’immagine rappresenta la categoria; le caratteristiche varietali sono verificate tramite specifica e documenti di lotto.'
+    manifestoTitle:'Il commercio globale va oltre un elenco di intermediari.',
+    manifestoText:'CTSEG integra espansione export, audit dei produttori, approvvigionamento di materie prime e controllo dei costi TCO in un’unica architettura commerciale indipendente.',
+    portfolioTitle:'Corridoi Commerciali e di Sourcing Strategico',
+    portfolioText:'Questa selezione rappresenta la rete di commercio e approvvigionamento bilaterale di CTSEG per forniture industriali, materie prime agricole e dispositivi certificati.',
+    marketsKicker:'Sviluppo export · Verifica origine · Analisi TCO · Consegna contrattuale',
+    productImageNote:'L’immagine rappresenta la categoria; le caratteristiche tecniche sono verificate tramite scheda tecnica (TDS) e documenti di lotto.'
   },
   ru:{
-    manifestoTitle:'Сорсинг — это больше, чем поиск товара.',
-    manifestoText:'CTSEG объединяет поиск производителей, проверку, качество, прозрачность происхождения и соответствие рынку в единой системе принятия решений.',
-    portfolioTitle:'Региональные направления продукции и сорсинга',
-    portfolioText:'Подборка показывает более широкий круг исследований CTSEG по орехам, сухофруктам и отдельным пищевым категориям; изображения не означают наличие товара на складе.',
-    marketsKicker:'Происхождение · документы · требования · коммерческая модель',
-    productImageNote:'Изображение представляет категорию; характеристики проверяются по спецификации и документам на партию.'
+    manifestoTitle:'Международная торговля — больше, чем список посредников.',
+    manifestoText:'CTSEG объединяет экспортный выход на внешние рынки, проверку фабрик, сорсинг сырья и оптимизацию совокупной стоимости владения (TCO) в единую систему торговых решений.',
+    portfolioTitle:'Стратегические торговые и сорсинговые коридоры',
+    portfolioText:'Подборка отражает двустороннюю сеть CTSEG по поставкам промышленной продукции, аграрного сырья и сертифицированных расходных материалов в Евразийском регионе.',
+    marketsKicker:'Развитие экспорта · Верификация происхождения · Анализ TCO · Надежность контрактов',
+    productImageNote:'Изображение представляет категорию; характеристики проверяются по техническим паспортам (TDS) и документам на партию.'
   },
   fa:{
-    manifestoTitle:'تأمین فراتر از جستجوی ساده یک کالا است.',
-    manifestoText:'CTSEG شناسایی تولیدکننده، اعتباربرسنجی، کیفیت، هزینه کل، شفافیت مبدأ و اجرای تجاری را در یک انضباط تصمیم‌گیری واحد ترکیب می‌کند.',
-    portfolioTitle:'سبد منطقه‌ای کالا و تأمین',
-    portfolioText:'این انتخاب نشان‌دهنده حوزه‌های وسیع‌تر تحقیق و تأمین CTSEG در خشکبار، میوه‌های خشک و کالاهای اساسی است.',
-    marketsKicker:'مبدأ · اسناد · قوانین · مدل تحویل',
-    productImageNote:'تصویر نشان‌دهنده دسته‌بندی محصول است؛ ویژگی‌های فنی از طریق مشخصات و اسناد محموله اعتبارسنجی می‌شوند.'
+    manifestoTitle:'تجارت بین‌الملل فراتر از یک لیست واسطه ساده است.',
+    manifestoText:'CTSEG توسعه صادرات، اعتبارسنجی مستقل کارخانجات، تأمین استراتژیک مواد اولیه و بهینه‌سازی هزینه کل مالکیت (TCO) را در یک ساختار تجاری یکپارچه پیوند می‌دهد.',
+    portfolioTitle:'راهگذرهای تجاری و تأمین استراتژیک',
+    portfolioText:'این سبد نشان‌دهنده شبکه تجارت دوسویه CTSEG در حوزه کالاهای صنعتی، مواد اولیه کشاورزی و اقلام مصرفی استاندارد در سطح بین‌المللی است.',
+    marketsKicker:'توسعه صادرات · اعتبارسنجی مبدأ · تحلیل TCO · تضمین قرارداد',
+    productImageNote:'تصویر نشان‌دهنده دسته‌بندی است؛ ویژگی‌های فنی از طریق شناسنامه فنی (TDS) و اسناد محموله تأیید می‌شوند.'
   },
   zh:{
-    manifestoTitle:'寻源绝非简单的产品搜索。',
-    manifestoText:'CTSEG 将源头工厂发现、主体资格尽职核验、严格品质标准、总拥有成本测算、真实产地透明度、海外市场准入及商业落地执行熔铸于统一严谨的决策体系中。',
-    portfolioTitle:'区域特色大宗与高阶寻源版图',
-    portfolioText:'本选集展示了 CTSEG 在坚果、干果及精选高附加值大宗食品领域更广阔的区域研究与寻源版图；图示商品代表品类范畴，具体供货基于各批次技术规格与正式订单排产。',
-    marketsKicker:'真实产地 · 批次单证 · 准入法规 · 交付架构',
-    productImageNote:'图片仅代表所属产品品类；具体品种等级、理化指标均以双方确认的技术规格书及批次检测报告 (COA) 为准。'
+    manifestoTitle:'全球商贸绝非简单的中间商名录撮合。',
+    manifestoText:'CTSEG 将中国企业出海泛欧枢纽搭建、土耳其本地工厂深度验厂、工业制造与特色农产品源头集采以及全生命周期 TCO 成本控制熔铸为一体化跨国商贸执行体系。',
+    portfolioTitle:'欧亚战略商贸与大宗寻源走廊',
+    portfolioText:'展示了 CTSEG 跨越工业制成品、精选农副大宗原料及合规防护耗材的双向区域商贸版图；技术指标均以正式技术规格书 (TDS) 与出厂化验单为准。',
+    marketsKicker:'出海落地 · 真实原产地核验 · TCO全成本优化 · 履约协同',
+    productImageNote:'图示代表所属产品品类；具体规格容差均以双语技术规格书 (TDS) 与检测报告 (COA) 为准。'
   },
   vi:{
-    manifestoTitle:'Thu mua vượt xa một cuộc tìm kiếm sản phẩm thông thường.',
-    manifestoText:'CTSEG kết hợp tìm kiếm nhà sản xuất, thẩm định đối tác, quản lý chất lượng, tối ưu tổng chi phí, minh bạch nguồn gốc, mức độ phù hợp thị trường và thực thi thương mại vào một kỷ luật quyết định duy nhất.',
-    portfolioTitle:'Không gian sản phẩm và nguồn cung khu vực',
-    portfolioText:'Danh mục này đại diện cho mạng lưới nghiên cứu và thu mua khu vực rộng lớn hơn của CTSEG đối với các loại hạt, trái cây khô và thực phẩm chọn lọc; không phải mọi mặt hàng hiển thị đều là sản phẩm có sẵn trong kho.',
-    marketsKicker:'Xuất xứ · Chứng từ lô hàng · Quy chuẩn thị trường · Mô hình giao hàng',
-    productImageNote:'Hình ảnh đại diện cho danh mục sản phẩm; các đặc tính cụ thể của từng giống được xác thực qua thông số kỹ thuật và chứng từ lô hàng.'
+    manifestoTitle:'Thương mại quốc tế vượt xa một danh bạ môi giới thông thường.',
+    manifestoText:'CTSEG kết hợp mở rộng xuất khẩu hai chiều, thẩm định nhà xưởng độc lập, thu mua nguyên liệu chiến lược và tối ưu tổng chi phí sở hữu (TCO) vào một hệ thống vận hành thương mại chuẩn mực.',
+    portfolioTitle:'Hành Lang Thương Mại & Thu Mua Chiến Lược',
+    portfolioText:'Danh mục này đại diện cho mạng lưới thương mại hai chiều của CTSEG đối với hàng công nghiệp, nông sản nguyên liệu và vật tư tiêu hao đạt chuẩn quốc tế.',
+    marketsKicker:'Mở rộng xuất khẩu · Xác minh xuất xứ · Phân tích TCO · Đảm bảo hợp đồng',
+    productImageNote:'Hình ảnh đại diện cho danh mục; thông số kỹ thuật được xác thực bằng phiếu thông số kỹ thuật (TDS) và chứng từ lô hàng.'
   }
 };
 

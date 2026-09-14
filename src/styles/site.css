@@ -438,3 +438,348 @@ html[data-locale="ru"] h1,html[data-locale="ru"] h2,html[data-locale="ru"] h3,ht
 .corridor-list div:last-child{border-inline-end:0}
 @media(max-width:860px){.platform-sector-grid,.corridor-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.trade-paths-grid,.platform-sector-grid,.corridor-list{grid-template-columns:1fr}.trade-intent-actions .button{width:100%}.corridor-list div{border-inline-end:0;border-block-end:1px solid var(--line,#d7d6cd)}}
+
+/* ==========================================================================
+   REFLEX MEDICAL & INDUSTRIAL B2B STYLES (TECHNICAL DATA SHEET SYSTEM)
+   ========================================================================== */
+.reflex-hero-section {
+  padding-block: clamp(40px, 6vw, 80px);
+  border-bottom: 1px solid var(--line);
+}
+.reflex-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+.reflex-hero-figure {
+  margin: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  overflow: hidden;
+}
+.reflex-hero-media {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.reflex-media-caption {
+  padding: 12px 16px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  background: var(--surface-soft);
+}
+.reflex-hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.reflex-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+.reflex-hero-badge::before {
+  content: "✓";
+  color: var(--accent-soft);
+  font-weight: bold;
+}
+
+/* Category & Product Cards */
+.reflex-category-section {
+  padding-block: clamp(50px, 8vw, 90px);
+}
+.reflex-product-grid {
+  display: grid;
+  gap: clamp(32px, 5vw, 48px);
+  margin-top: 40px;
+}
+.reflex-product-card {
+  display: grid;
+  grid-template-columns: minmax(300px, 380px) 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  padding: clamp(24px, 3.5vw, 36px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+  align-items: start;
+}
+.reflex-product-card:hover {
+  border-color: var(--accent-soft);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+}
+.reflex-product-card--lead {
+  border-left: 4px solid var(--accent);
+}
+.reflex-card-image-box {
+  position: relative;
+  margin: 0;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.reflex-card-image-box img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: contain;
+  padding: 16px;
+}
+.reflex-card-index {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 7px;
+  background: rgba(7, 9, 13, 0.9);
+  color: var(--accent-soft);
+  border: 1px solid var(--line);
+}
+.reflex-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.reflex-card-heading h3 {
+  margin: 4px 0 0;
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  color: #ffffff;
+  line-height: 1.2;
+}
+.reflex-card-subtitle {
+  margin: 0;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-soft);
+}
+.reflex-card-desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Badges (Fixing the glued text bug) */
+.reflex-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+.reflex-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  border-radius: 2px;
+}
+.reflex-card-badge::before {
+  content: "•";
+  color: var(--accent-soft);
+}
+
+/* Technical Specification Matrix (TDS Grid) */
+.reflex-spec-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  margin: 8px 0 0;
+  padding: 16px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+}
+.reflex-spec-list > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.reflex-spec-list dt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-soft);
+}
+.reflex-spec-list dd {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.reflex-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+.reflex-card-film {
+  border: 1px solid var(--line);
+  padding: 10px 14px;
+  background: var(--surface-soft);
+}
+.reflex-card-film summary {
+  cursor: pointer;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--accent-soft);
+}
+.reflex-card-video {
+  width: 100%;
+  margin-top: 10px;
+  border: 1px solid var(--line);
+}
+
+/* Capacity & Trust Grid */
+.reflex-capacity-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+.reflex-capacity-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.reflex-capacity-card strong {
+  font-size: 0.82rem;
+  color: var(--accent-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.reflex-capacity-card span {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.reflex-role-card {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  border-block: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+.reflex-disclaimer-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* Applications Grid */
+.reflex-app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 36px;
+}
+.reflex-app-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+.reflex-app-fig {
+  margin: 0;
+  border-bottom: 1px solid var(--line);
+}
+.reflex-app-fig img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.reflex-app-body {
+  padding: 20px;
+}
+.reflex-app-body h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  color: #ffffff;
+}
+.reflex-app-body p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* Double Funnel B2B Hero System */
+.trade-gateway-banner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 32px;
+}
+.trade-funnel-card {
+  padding: clamp(24px, 3vw, 36px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.trade-funnel-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-soft);
+}
+.trade-funnel-kicker {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-soft);
+}
+.trade-funnel-title {
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+.trade-funnel-desc {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+}
+
+@media(max-width: 860px) {
+  .reflex-hero-grid,
+  .reflex-product-card,
+  .trade-gateway-banner {
+    grid-template-columns: 1fr;
+  }
+}
+

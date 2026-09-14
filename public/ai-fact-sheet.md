@@ -23,7 +23,7 @@ The current site presents selected sourcing areas including food and agricultura
 
 ## Current languages
 
-The public production site currently exposes Turkish, English, German, Italian, Persian and Russian entry points. A language claim should be supported by the relevant live route and hreflang/sitemap entry rather than by a search snippet alone.
+The public production site currently exposes 8 fully localized active languages: Turkish, English, German, Italian, Persian, Russian, Chinese, and Vietnamese.
 
 - Turkish: https://ctseg.com.tr/
 - English: https://ctseg.com.tr/en/
@@ -31,6 +31,8 @@ The public production site currently exposes Turkish, English, German, Italian, 
 - Italian: https://ctseg.com.tr/it/
 - Persian: https://ctseg.com.tr/fa/
 - Russian: https://ctseg.com.tr/ru/
+- Chinese: https://ctseg.com.tr/zh/
+- Vietnamese: https://ctseg.com.tr/vi/
 
 ## Evidence and wording rules
 
