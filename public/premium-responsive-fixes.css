@@ -1,0 +1,69 @@
+/* Responsive and accessibility hardening for the premium trade-house layer. */
+html,body{max-width:100%;overflow-x:clip}
+main,.site-header,.site-footer{max-width:100%}
+
+/* Keep readable copy on light surfaces without flattening the dark editorial sections. */
+.hero .lead,.page-hero .lead,
+.platform-sectors p,.platform-sectors li,
+.trade-corridors p,.trade-corridors li,
+.operational-trust p,.operational-trust li,
+.company-trust-band p,.company-trust-band li,
+.commercial-field>span{color:#3b3b3b!important}
+.trade-paths-section p,.trade-paths-section li,
+.markets-editorial p,.markets-editorial li,
+.cta-statement p,.cta-statement li{color:#c9c9c9!important}
+
+/* Secondary CTA contrast must remain explicit on both light and dark panels. */
+.hero .button-secondary,.page-hero .button-secondary,.reflex-page .button-secondary{
+  background:#fff!important;color:#0a0a0a!important;border-color:#4a4a4a!important
+}
+.portfolio-section .button-secondary,.process-section .button-secondary,
+.site-footer .button-secondary,.cta-statement .button-secondary{
+  background:#161616!important;color:#fff!important;border-color:#a8a8a8!important
+}
+
+/* Long international corridor names should wrap inside the editorial row. */
+.corridor-list,.corridor-list>div{min-width:0;max-width:100%}
+.corridor-list>div{grid-template-columns:minmax(44px,80px) minmax(0,1fr)!important}
+.corridor-list strong{min-width:0;max-width:100%;font-size:clamp(25px,3.35vw,54px)!important;line-height:1.04!important;white-space:normal;overflow-wrap:anywhere}
+html[dir="rtl"] .corridor-list strong{text-align:right}
+
+/* Localized hero copy needs a little more measure than short English/Turkish copy. */
+html[data-locale="de"] .hero h1,
+html[data-locale="it"] .hero h1,
+html[data-locale="fa"] .hero h1,
+html[data-locale="ru"] .hero h1,
+html[data-locale="vi"] .hero h1{
+  max-width:100%!important;font-size:clamp(50px,5.55vw,88px)!important;line-height:.94!important;letter-spacing:-.055em!important
+}
+
+/* The header remains continuously available; the premium motion layer must never move it off-canvas. */
+.site-header{transform:none!important}
+
+@media (max-width:1050px){
+  .site-header{top:0!important;transform:none!important}
+  .header-inner{min-height:72px!important}
+  .platform-sector-grid article{min-width:0;contain:paint}
+  .platform-sector-grid article picture{display:block;position:absolute;inset:0;overflow:hidden}
+  .platform-sector-grid article img{width:100%!important;max-width:100%!important;left:0!important;right:auto!important;transform:none!important}
+  .corridor-list{transform:none!important}
+  .trade-funnel-card{transform:none!important}
+}
+
+@media (max-width:860px){
+  /* Mobile word masks can make long German/Russian words wider than the viewport. */
+  .hero h1 .premium-word-mask,.page-hero h1 .premium-word-mask,
+  .hero h1 .premium-word,.page-hero h1 .premium-word{display:inline!important;max-width:100%;overflow-wrap:anywhere;word-break:normal}
+  html[data-locale="de"] .hero h1,
+  html[data-locale="it"] .hero h1,
+  html[data-locale="fa"] .hero h1,
+  html[data-locale="ru"] .hero h1,
+  html[data-locale="vi"] .hero h1{font-size:clamp(42px,10.8vw,64px)!important;line-height:.98!important;letter-spacing:-.045em!important}
+  .corridor-list>div{grid-template-columns:42px minmax(0,1fr)!important;min-height:94px}
+  .corridor-list strong{font-size:clamp(24px,7vw,38px)!important}
+}
+
+@media (max-width:430px){
+  html[data-locale="ru"] .hero h1,html[data-locale="de"] .hero h1{font-size:clamp(38px,10vw,46px)!important}
+  .container{max-width:100%}
+}

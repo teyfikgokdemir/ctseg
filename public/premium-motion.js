@@ -33,7 +33,7 @@
   };
 
   const splitWords = (element) => {
-    if (!element || element.dataset.premiumSplit === 'true') return [];
+    if (!element || element.dataset.premiumSplit === 'true' || window.innerWidth <= 860) return [];
     const text = element.textContent.trim();
     if (!text) return [];
     const words = text.split(/\s+/);
@@ -78,14 +78,17 @@
     gsap.registerPlugin(ScrollTrigger);
 
     document.documentElement.classList.add('premium-motion-ready');
+    const desktopMotion = window.matchMedia('(min-width: 1101px)').matches;
 
     const heroTitle = document.querySelector('.hero h1');
     if (heroTitle) {
       const heroWords = splitWords(heroTitle);
-      gsap.fromTo(heroWords,
-        { yPercent: 125, rotate: 2, opacity: 0 },
-        { yPercent: 0, rotate: 0, opacity: 1, duration: 1.05, stagger: .065, ease: 'back.out(1.4)', delay: .08 }
-      );
+      if (heroWords.length) {
+        gsap.fromTo(heroWords,
+          { yPercent: 125, rotate: 2, opacity: 0 },
+          { yPercent: 0, rotate: 0, opacity: 1, duration: 1.05, stagger: .065, ease: 'back.out(1.4)', delay: .08 }
+        );
+      }
     }
     gsap.fromTo('.hero-copy .eyebrow,.hero-copy .lead,.hero-copy .actions',
       { y: 34, opacity: 0 },
@@ -101,6 +104,7 @@
     const headingSelector = '.section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2,.page-hero h1';
     document.querySelectorAll(headingSelector).forEach((heading) => {
       const words = splitWords(heading);
+      if (!words.length) return;
       gsap.fromTo(words,
         { yPercent: 112, opacity: 0, rotate: 1 },
         {
@@ -135,46 +139,37 @@
       });
     });
 
-    document.querySelectorAll('.platform-sector-grid article').forEach((card) => {
-      const image = card.querySelector('img');
-      if (!image) return;
-      gsap.fromTo(image,{ yPercent:-6, scale:1.1 },{
-        yPercent:6, scale:1.02, ease:'none',
-        scrollTrigger:{ trigger:card,start:'top bottom',end:'bottom top',scrub:1.1 }
+    if (desktopMotion) {
+      document.querySelectorAll('.platform-sector-grid article').forEach((card) => {
+        const image = card.querySelector('img');
+        if (!image) return;
+        gsap.fromTo(image,{ yPercent:-6, scale:1.1 },{
+          yPercent:6, scale:1.02, ease:'none',
+          scrollTrigger:{ trigger:card,start:'top bottom',end:'bottom top',scrub:1.1 }
+        });
       });
-    });
 
-    document.querySelectorAll('.trade-funnel-card').forEach((card, index) => {
-      gsap.to(card,{
-        y: index % 2 === 0 ? -22 : 18,
-        ease:'none',
-        scrollTrigger:{ trigger:card,start:'top bottom',end:'bottom top',scrub:1.2 }
+      document.querySelectorAll('.trade-funnel-card').forEach((card, index) => {
+        gsap.to(card,{
+          y: index % 2 === 0 ? -22 : 18,
+          ease:'none',
+          scrollTrigger:{ trigger:card,start:'top bottom',end:'bottom top',scrub:1.2 }
+        });
       });
-    });
 
-    const corridors = document.querySelector('.corridor-list');
-    if (corridors) {
-      gsap.fromTo(corridors,{ xPercent:2 },{
-        xPercent:-2,ease:'none',scrollTrigger:{trigger:corridors,start:'top bottom',end:'bottom top',scrub:1.3}
-      });
+      const corridors = document.querySelector('.corridor-list');
+      if (corridors) {
+        gsap.fromTo(corridors,{ xPercent:1 },{
+          xPercent:-1,ease:'none',scrollTrigger:{trigger:corridors,start:'top bottom',end:'bottom top',scrub:1.3}
+        });
+      }
     }
 
     initCursor(gsap);
 
-    let lastY = window.scrollY;
+    /* Sticky navigation remains available at every scroll position. */
     const header = document.querySelector('.site-header');
-    if (header) {
-      ScrollTrigger.create({
-        start: 100,
-        end: 'max',
-        onUpdate: (self) => {
-          const y = self.scroll();
-          const down = y > lastY && y > 180;
-          gsap.to(header,{ yPercent: down ? -105 : 0,duration:.42,ease:'power3.out',overwrite:true });
-          lastY = y;
-        }
-      });
-    }
+    if (header) gsap.set(header,{ yPercent:0, clearProps:'transform' });
   };
 
   Promise.all([
