@@ -63,6 +63,46 @@ html[data-locale="vi"] .hero h1{
 /* The header remains continuously available; premium motion must never move it off-canvas. */
 .site-header{top:0!important;transform:none!important}
 
+/*
+ * Desktop editorial rhythm: closer to the oversized, high-contrast cadence of
+ * the Monas reference while leaving the legacy tablet/mobile contract intact.
+ */
+@media (min-width:1101px){
+  .hero{padding-top:clamp(76px,6.6vw,126px);padding-bottom:clamp(112px,9.5vw,182px)}
+  .hero-grid{grid-template-columns:minmax(0,.86fr) minmax(460px,1.14fr);gap:clamp(54px,6.2vw,118px);align-items:center}
+  .hero h1{font-size:clamp(76px,9.15vw,156px)!important;line-height:.84!important;letter-spacing:-.078em!important;max-width:9.2ch}
+  .hero .lead{max-width:29em}
+  .hero-visual{min-height:clamp(620px,47vw,820px)}
+  .hero-visual picture,.hero-visual img{min-height:clamp(620px,47vw,820px)}
+  .trade-gateway-banner{margin-top:clamp(46px,5vw,92px)!important;gap:22px!important}
+  .trade-funnel-card{min-height:clamp(460px,34vw,590px)}
+  .trade-funnel-title{font-size:clamp(50px,4.7vw,82px)!important;line-height:.92!important;max-width:9.5ch}
+
+  .section{padding-block:clamp(116px,10.2vw,190px)}
+  .section-head{grid-template-columns:minmax(0,1.46fr) minmax(300px,.54fr);gap:clamp(54px,7vw,126px);margin-bottom:clamp(70px,7.4vw,132px)}
+  .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(68px,8.4vw,138px)!important;line-height:.84!important;letter-spacing:-.072em!important}
+  .section-head p{max-width:30em}
+
+  .trade-paths-grid article{min-height:clamp(430px,32vw,570px);padding:clamp(48px,4.8vw,84px)}
+  .trade-paths-grid h3{font-size:clamp(54px,5.6vw,92px);line-height:.9}
+  .trade-paths-grid .text-link{left:clamp(48px,4.8vw,84px);bottom:48px}
+
+  .platform-sector-grid{gap:24px!important;align-items:start}
+  .platform-sector-grid article{min-height:clamp(590px,44vw,760px)!important}
+  .platform-sector-grid article:nth-child(even){margin-top:clamp(64px,7vw,118px)}
+  .platform-sector-grid article h3{font-size:clamp(48px,4.8vw,78px)!important;line-height:.92!important}
+
+  .corridor-list>div{min-height:clamp(122px,8.5vw,162px)}
+  .corridor-list strong{font-size:clamp(42px,4.25vw,72px)!important;line-height:.96!important}
+  .market-line>div{min-height:clamp(132px,9vw,172px)}
+  .market-line strong{font-size:clamp(48px,5.6vw,92px)}
+
+  .operational-trust-panel{padding:clamp(38px,4vw,68px)}
+  .trust-facts{margin-top:clamp(62px,6vw,108px)}
+  .trust-facts>div{padding:clamp(30px,3vw,52px)}
+  .cta-statement{padding:clamp(68px,7.2vw,126px)!important;min-height:clamp(520px,42vw,700px);display:flex;flex-direction:column;justify-content:center}
+}
+
 @media (max-width:1050px){
   .site-header{position:sticky!important;top:0!important;transform:none!important}
   .header-inner{min-height:72px!important}
