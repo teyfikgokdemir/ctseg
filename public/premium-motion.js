@@ -84,32 +84,38 @@
     if (heroTitle) {
       const heroWords = splitWords(heroTitle);
       if (heroWords.length) {
+        gsap.set(heroTitle,{ perspective:900, transformStyle:'preserve-3d' });
         gsap.fromTo(heroWords,
-          { yPercent: 125, rotate: 2, opacity: 0 },
-          { yPercent: 0, rotate: 0, opacity: 1, duration: 1.05, stagger: .065, ease: 'back.out(1.4)', delay: .08 }
+          { y:50, yPercent:70, rotateX:-80, transformOrigin:'50% 100%', opacity:0 },
+          { y:0, yPercent:0, rotateX:0, opacity:1, duration:1.8, stagger:.055, ease:'back.out(1.55)', delay:.08 }
         );
       }
     }
     gsap.fromTo('.hero-copy .eyebrow,.hero-copy .lead,.hero-copy .actions',
-      { y: 34, opacity: 0 },
-      { y: 0, opacity: 1, duration: .85, stagger: .1, ease: 'power3.out', delay: .34 }
+      { y:42, opacity:0 },
+      { y:0, opacity:1, duration:1, stagger:.11, ease:'power3.out', delay:.3 }
     );
+
     const heroVisual = document.querySelector('.hero-visual');
     if (heroVisual) {
-      gsap.fromTo(heroVisual,{ clipPath:'inset(0 0 100% 0 round 22px)' },{ clipPath:'inset(0 0 0% 0 round 22px)',duration:1.2,ease:'power4.inOut',delay:.16 });
+      gsap.fromTo(heroVisual,
+        { clipPath:'inset(0 100% 0 0 round 22px)' },
+        { clipPath:'inset(0 0% 0 0 round 22px)',duration:1.5,ease:'power4.inOut',delay:.14 }
+      );
       const image = heroVisual.querySelector('img');
-      if (image) gsap.fromTo(image,{ scale:1.16 },{ scale:1,duration:1.55,ease:'power3.out',delay:.18 });
+      if (image) gsap.fromTo(image,{ xPercent:14, scale:1.3 },{ xPercent:0, scale:1, duration:1.5, ease:'power4.inOut', delay:.14 });
     }
 
     const headingSelector = '.section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2,.page-hero h1';
     document.querySelectorAll(headingSelector).forEach((heading) => {
       const words = splitWords(heading);
       if (!words.length) return;
+      gsap.set(heading,{ perspective:900, transformStyle:'preserve-3d' });
       gsap.fromTo(words,
-        { yPercent: 112, opacity: 0, rotate: 1 },
+        { yPercent:100, rotateX:-80, transformOrigin:'50% 100%', opacity:0 },
         {
-          yPercent: 0, opacity: 1, rotate: 0, duration: .85, stagger: .045, ease: 'back.out(1.25)',
-          scrollTrigger: { trigger: heading, start: 'top 88%', once: true }
+          yPercent:0, rotateX:0, opacity:1, duration:1, stagger:.07, ease:'back.out(1.3)',
+          scrollTrigger:{ trigger:heading, start:'top 88%', once:true }
         }
       );
     });
@@ -130,37 +136,58 @@
       if (!nodes.length) return;
       nodes.forEach((node, index) => {
         gsap.fromTo(node,
-          { y, opacity: 0 },
+          { y, opacity:0 },
           {
-            y: 0, opacity: 1, duration: .9, ease: 'power3.out', delay: Math.min(index * stagger, .3),
-            scrollTrigger: { trigger: node, start: 'top 90%', once: true }
+            y:0, opacity:1, duration:.95, ease:'power3.out', delay:Math.min(index * stagger,.3),
+            scrollTrigger:{ trigger:node, start:'top 90%', once:true }
           }
         );
       });
     });
 
     if (desktopMotion) {
-      document.querySelectorAll('.platform-sector-grid article').forEach((card) => {
+      document.querySelectorAll('.platform-sector-grid article').forEach((card, index) => {
         const image = card.querySelector('img');
         if (!image) return;
-        gsap.fromTo(image,{ yPercent:-6, scale:1.1 },{
-          yPercent:6, scale:1.02, ease:'none',
-          scrollTrigger:{ trigger:card,start:'top bottom',end:'bottom top',scrub:1.1 }
-        });
+        gsap.fromTo(card,
+          { clipPath:index % 2 === 0 ? 'inset(0 100% 0 0 round 22px)' : 'inset(0 0 0 100% round 22px)' },
+          {
+            clipPath:'inset(0 0% 0 0 round 22px)', duration:1.35, ease:'power4.inOut',
+            scrollTrigger:{ trigger:card, start:'top 88%', once:true }
+          }
+        );
+        gsap.fromTo(image,
+          { xPercent:index % 2 === 0 ? 18 : -18, yPercent:-5, scale:1.3 },
+          {
+            xPercent:0, yPercent:6, scale:1.04, ease:'none',
+            scrollTrigger:{ trigger:card, start:'top bottom', end:'bottom top', scrub:1.05 }
+          }
+        );
       });
 
       document.querySelectorAll('.trade-funnel-card').forEach((card, index) => {
         gsap.to(card,{
-          y: index % 2 === 0 ? -22 : 18,
+          y:index % 2 === 0 ? -24 : 20,
           ease:'none',
-          scrollTrigger:{ trigger:card,start:'top bottom',end:'bottom top',scrub:1.2 }
+          scrollTrigger:{ trigger:card, start:'top bottom', end:'bottom top', scrub:1.15 }
         });
       });
 
       const corridors = document.querySelector('.corridor-list');
       if (corridors) {
-        gsap.fromTo(corridors,{ xPercent:1 },{
-          xPercent:-1,ease:'none',scrollTrigger:{trigger:corridors,start:'top bottom',end:'bottom top',scrub:1.3}
+        gsap.fromTo(corridors,{ xPercent:1.2 },{
+          xPercent:-1.2,ease:'none',scrollTrigger:{trigger:corridors,start:'top bottom',end:'bottom top',scrub:1.2}
+        });
+      }
+
+      const paths = document.querySelector('.trade-paths-grid');
+      if (paths) {
+        const pathCards = [...paths.querySelectorAll('article')];
+        pathCards.forEach((card, index) => {
+          gsap.fromTo(card,
+            { yPercent:index % 2 === 0 ? 8 : -4 },
+            { yPercent:index % 2 === 0 ? -6 : 7, ease:'none', scrollTrigger:{ trigger:paths, start:'top bottom', end:'bottom top', scrub:1.25 } }
+          );
         });
       }
     }
