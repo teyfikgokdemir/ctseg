@@ -1,17 +1,26 @@
 /* Responsive and accessibility hardening for the premium trade-house layer. */
-html,body{max-width:100%;overflow-x:clip}
+html{max-width:100%}
+body{max-width:100%;overflow-x:hidden}
 main,.site-header,.site-footer{max-width:100%}
 
-/* Keep readable copy on light surfaces without flattening the dark editorial sections. */
+/* Keep readable copy on genuinely light premium surfaces. Avoid blanket rules that can darken text inside image cards. */
 .hero .lead,.page-hero .lead,
-.platform-sectors p,.platform-sectors li,
-.trade-corridors p,.trade-corridors li,
-.operational-trust p,.operational-trust li,
-.company-trust-band p,.company-trust-band li,
-.commercial-field>span{color:#3b3b3b!important}
+.platform-sectors .section-head p,
+.trade-corridors .section-head p,
+.trade-corridors> .container > p,
+.trade-corridors li,
+.operational-trust .section-head p,
+.operational-trust-panel p,
+.operational-trust-panel li,
+.company-trust-band p,
+.company-trust-band li,
+.commercial-field>span{color:#303030!important}
+
+/* Preserve light copy on dark/image-driven surfaces. */
+.platform-sector-grid article p{color:#f0f0f0!important}
 .trade-paths-section p,.trade-paths-section li,
 .markets-editorial p,.markets-editorial li,
-.cta-statement p,.cta-statement li{color:#c9c9c9!important}
+.cta-statement p,.cta-statement li{color:#d5d5d5!important}
 
 /* Secondary CTA contrast must remain explicit on both light and dark panels. */
 .hero .button-secondary,.page-hero .button-secondary,.reflex-page .button-secondary{
@@ -37,11 +46,11 @@ html[data-locale="vi"] .hero h1{
   max-width:100%!important;font-size:clamp(50px,5.55vw,88px)!important;line-height:.94!important;letter-spacing:-.055em!important
 }
 
-/* The header remains continuously available; the premium motion layer must never move it off-canvas. */
-.site-header{transform:none!important}
+/* The header remains continuously available; premium motion must never move it off-canvas. */
+.site-header{top:0!important;transform:none!important}
 
 @media (max-width:1050px){
-  .site-header{top:0!important;transform:none!important}
+  .site-header{position:sticky!important;top:0!important;transform:none!important}
   .header-inner{min-height:72px!important}
   .platform-sector-grid article{min-width:0;contain:paint}
   .platform-sector-grid article picture{display:block;position:absolute;inset:0;overflow:hidden}
