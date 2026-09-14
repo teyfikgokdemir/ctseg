@@ -50,18 +50,25 @@ export function getMeta(record: RouteRecord) {
   const copy = pageCopy[lang];
   const t = ui[lang];
   if (key === 'home') return {
-    title:`CTSEG | ${lang === 'tr' ? 'Uluslararası Ticaret Eşleştirme ve Koordinasyon' : lang === 'en' ? 'International Trade Matching & Coordination' : lang === 'de' ? 'Internationale Geschäftsanbahnung & Koordination' : lang === 'it' ? 'Matching Commerciale Internazionale' : lang === 'fa' ? 'تطبیق تجاری و توسعه بازار بین‌المللی' : lang === 'zh' ? '国际贸易匹配与大宗供应链商业协调' : lang === 'vi' ? 'Kết nối thương mại quốc tế & Điều phối thương mại' : 'Международный сорсинг и коммерческая координация'}`,
-    description: lang === 'tr' ? 'CTSEG, alıcıları doğrulanabilir tedarikçilerle; üreticileri uygun alıcılar ve uluslararası pazar fırsatlarıyla buluşturan ticari koordinasyon platformudur.' :
-      lang === 'en' ? 'CTSEG connects buyers with verifiable suppliers and producers with suitable buyers and international market opportunities through independent commercial coordination.' :
-      lang === 'de' ? 'CTSEG verbindet Einkäufer mit prüfbaren Lieferanten und Hersteller mit geeigneten Abnehmern und internationalen Marktchancen.' :
-      lang === 'it' ? 'CTSEG collega acquirenti a fornitori verificabili e produttori a buyer e opportunità internazionali tramite coordinamento commerciale indipendente.' :
-      lang === 'fa' ? 'CTSEG خریداران را به تأمین‌کنندگان قابل‌بررسی و تولیدکنندگان را به خریداران و بازارهای مناسب بین‌المللی متصل می‌کند.' :
-      lang === 'zh' ? 'CTSEG 是一家立足土耳其的国际战略采购与大宗商贸协调机构，为跨国买家与经过严格背景核验的源头生产商建立透明高效的商业连接。' :
-      lang === 'vi' ? 'CTSEG kết nối người mua với các nhà cung cấp có thể xác minh và nhà sản xuất với người mua phù hợp thông qua điều phối thương mại độc lập.' :
-      'CTSEG помогает искать производителей и поставщиков, находить покупателей и координировать международные коммерческие процессы.'
+    title: lang === 'tr' ? 'CTSEG | Türkiye\'den Tedarikçi Bul, Doğrulat ve İhracat Yap' :
+           lang === 'de' ? 'CTSEG | B2B-Lieferanten aus der Türkei finden & prüfen' :
+           lang === 'it' ? 'CTSEG | Fornitori B2B dalla Turchia — Ricerca e Verifica' :
+           lang === 'fa' ? 'CTSEG | یافتن و تأیید تأمینکنندگان از ترکیه برای تجارت B2B' :
+           lang === 'zh' ? 'CTSEG | 土耳其B2B供应商寻源与验证' :
+           lang === 'vi' ? 'CTSEG | Tìm & Xác minh Nhà cung cấp B2B từ Thổ Nhĩ Kỳ' :
+           lang === 'ru' ? 'CTSEG | Поиск и проверка B2B-поставщиков из Турции' :
+           'CTSEG | Find & Verify B2B Suppliers from Türkiye',
+    description: lang === 'tr' ? 'CTSEG, Türkiye ve uluslararası pazarlarda B2B tedarikçi araştırması, doğrulama, teklif karşılaştırma ve ticari koordinasyon hizmeti sunar. Doğrulanmış tedarikçiye bağlanın.' :
+      lang === 'de' ? 'CTSEG bietet B2B-Lieferantensuche, Verifizierung, Angebotskoordination und Handelsanbahnung aus der Türkei und internationalen Märkten. Jetzt verifizierte Lieferanten finden.' :
+      lang === 'it' ? 'CTSEG offre ricerca fornitori B2B, verifica, coordinamento RFQ e matching commerciale dalla Turchia e dai mercati internazionali. Connettiti con fornitori verificati.' :
+      lang === 'fa' ? 'CTSEG خدمات تأمین تأمینکننده B2B، تأیید، هماهنگی RFQ و تطبیق تجاری از ترکیه و بازارهای بینالمللی ارائه میدهد. امروز با تأمینکنندگان تأیید شده ارتباط برقرار کنید.' :
+      lang === 'zh' ? 'CTSEG提供来自土耳其及国际市场的B2B供应商寻源、验证、RFQ协调和贸易匹配服务。立即联系经过验证的供应商。' :
+      lang === 'vi' ? 'CTSEG cung cấp tìm kiếm nhà cung cấp B2B, xác minh, phối hợp RFQ và kết nối thương mại từ Thổ Nhĩ Kỳ và các thị trường quốc tế. Kết nối với nhà cung cấp đã được xác minh ngay hôm nay.' :
+      lang === 'ru' ? 'CTSEG предоставляет услуги поиска поставщиков B2B, верификации, координации RFQ и торгового сопровождения из Турции и международных рынков. Найдите проверенных поставщиков.' :
+      'CTSEG provides B2B supplier sourcing, verification, RFQ coordination and trade matching from Türkiye and international markets. Connect with verified suppliers today.'
   };
-  if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
-  if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} B2B | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
+  if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — B2B Sourcing Advisory | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
+  if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} — Wholesale B2B | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
   if (key === 'insights' && id) return { title:`${insights[id as keyof typeof insights].titles[lang]} | CTSEG`, description:insights[id as keyof typeof insights].descriptions[lang] };
   if (key === 'how-we-work') return {title:`${processPages[lang].title} | CTSEG`,description:processPages[lang].description};
   if (key === 'scenarios') return {title:`${scenarioPages[lang].title} | CTSEG`,description:scenarioPages[lang].description};
