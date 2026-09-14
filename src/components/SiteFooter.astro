@@ -7,18 +7,18 @@ const t = ui[lang] || ui.en;
 const corporate = companyCopy[lang] || companyCopy.en;
 const year = new Date().getFullYear();
 const descriptionMap: Record<string, string> = {
-  tr:'Türkiye merkezli uluslararası ticaret eşleştirme ve bağımsız ticari koordinasyon.',
-  en:'International trade matching and independent commercial coordination from Türkiye.',
-  de:'Internationale Geschäftsanbahnung und unabhängige Handelskoordination aus der Türkiye.',
-  it:'Matching commerciale internazionale e coordinamento indipendente dalla Türkiye.',
-  fr:'Sourcing stratégique, produits commerciaux vérifiés et aide à la décision internationale depuis la Turquie.',
-  ru:'Международный сорсинг и независимая коммерческая координация из Турции.',
-  fa:'تأمین استراتژیک، محصولات تجاری معتبر و پشتیبانی تصمیم‌گیری تجاری بین‌المللی از ترکیه.',
-  zh:'立足土耳其的国际贸易匹配与独立商业协调专业机构。',
-  vi:'Kết nối thương mại quốc tế và điều phối thương mại độc lập từ Thổ Nhĩ Kỳ.',
-  sq:'Sourcing strategjik, produkte tregtare të verifikuara dhe mbështetje për vendimmarrje tregtare ndërkombëtare nga Turqia.',
-  mk:'Стратешка набавка, верификувани трговски производи и меѓународна поддршка за трговски одлуки од Турција.',
-  sr:'Strateška nabavka, verifikovani trgovinski proizvodi i međunarodna podrška za trgovinske odluke iz Turske.'
+  tr:'Türkiye merkezli, Türkiye ile dünya arasında çift yönlü çalışan küresel ticaret ve stratejik tedarik evi.',
+  en:'A Türkiye-based two-way global trade and strategic sourcing house connecting companies, manufacturers and buyers across markets.',
+  de:'Ein in der Türkei ansässiges, beidseitig arbeitendes Haus für globalen Handel, Nearshoring und strategische Beschaffung.',
+  it:'Una trade house con base in Turchia per commercio globale bidirezionale, market entry e sourcing strategico.',
+  fr:'Une maison de commerce basée en Turquie pour le sourcing stratégique et les échanges internationaux bidirectionnels.',
+  ru:'Торговый дом в Турции для двусторонней международной торговли, выхода на рынки и стратегического сорсинга.',
+  fa:'خانه تجارت و تأمین استراتژیک مستقر در ترکیه برای تجارت دوطرفه میان ترکیه و بازارهای جهانی.',
+  zh:'立足土耳其、连接中国与土耳其、欧洲及全球市场的双向国际贸易与战略采购服务机构。',
+  vi:'Nhà thương mại và sourcing chiến lược hai chiều có trụ sở tại Thổ Nhĩ Kỳ, kết nối doanh nghiệp Việt Nam với Thổ Nhĩ Kỳ, châu Âu và các thị trường toàn cầu.',
+  sq:'Shtëpi tregtare me bazë në Turqi për tregti ndërkombëtare dykahëshe dhe sourcing strategjik.',
+  mk:'Трговска куќа со седиште во Турција за двонасочна глобална трговија и стратешка набавка.',
+  sr:'Trgovinska kuća sa sedištem u Turskoj za dvosmernu globalnu trgovinu i stratešku nabavku.'
 };
 const description = descriptionMap[lang] || descriptionMap.en;
 const copyrightMap: Record<string, string> = {
@@ -37,6 +37,7 @@ const copyrightMap: Record<string, string> = {
 };
 const copyright = copyrightMap[lang] || copyrightMap.en;
 ---
+<link rel="stylesheet" href="/premium-trade-house.css" />
 <footer class="site-footer">
   <div class="container footer-main">
     <div class="footer-brand">
@@ -82,3 +83,4 @@ const copyright = copyrightMap[lang] || copyrightMap.en;
     </nav>
   </div>
 </footer>
+<script src="/premium-motion.js" defer></script>
