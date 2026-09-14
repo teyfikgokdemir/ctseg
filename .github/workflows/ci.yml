@@ -1,12 +1,18 @@
 name: CI
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ctseg-ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  validate:
+  core:
+    name: Core validation
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,4 +21,25 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run validate
+      - run: npm run build
+      - run: npm run check:site
+      - run: npm run check:seo
+      - run: npm run check:form
+      - run: npm run check:images
+      - run: npm run check:locales
+
+  visual-qa:
+    name: Responsive visual QA
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Run responsive audit
+        continue-on-error: true
+        run: npm run check:responsive
