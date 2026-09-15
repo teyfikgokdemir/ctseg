@@ -2,10 +2,49 @@
 const { title, steps } = Astro.props as { title?:string; steps:string[] };
 ---
 <section class="process-section section">
-  <div class="container">
-    {title && <h2 class="section-title">{title}</h2>}
+  <div class="container process-shell">
+    {title && (
+      <div class="process-heading">
+        <span class="process-kicker">CTSEG · PROCESS</span>
+        <h2 class="section-title">{title}</h2>
+      </div>
+    )}
     <ol class="process-rail">
-      {steps.map((step) => <li><strong>{step}</strong></li>)}
+      {steps.map((step) => (
+        <li>
+          <span class="process-mark" aria-hidden="true"></span>
+          <strong>{step}</strong>
+          <span class="process-arrow" aria-hidden="true">↗</span>
+        </li>
+      ))}
     </ol>
   </div>
 </section>
+
+<style>
+  .process-shell{display:grid;grid-template-columns:minmax(0,.82fr) minmax(560px,1.18fr);gap:clamp(44px,6vw,104px);align-items:start}
+  .process-heading{position:sticky;top:118px;max-width:560px}
+  .process-kicker{display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;color:#c4f000;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+  .process-kicker::before{content:"";width:34px;height:3px;border-radius:999px;background:#c4f000}
+  .process-heading .section-title{margin:0;max-width:11ch;font-size:clamp(46px,4.7vw,76px);line-height:.96;letter-spacing:-.05em;color:#fff}
+  .process-rail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:0;padding:0;list-style:none;counter-reset:none}
+  .process-rail li{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:210px;padding:30px;border:1px solid rgba(255,255,255,.13);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.015));overflow:hidden;transition:transform .28s ease,border-color .28s ease,background-color .28s ease}
+  .process-rail li::before{display:none!important;content:none!important}
+  .process-mark{position:absolute;left:28px;top:28px;width:44px;height:4px;border-radius:999px;background:#c4f000}
+  .process-arrow{position:absolute;right:24px;top:19px;color:rgba(255,255,255,.38);font-size:22px;line-height:1;transition:color .25s ease,transform .25s ease}
+  .process-rail strong{max-width:18ch;color:#c4f000!important;font-size:clamp(20px,1.55vw,27px);line-height:1.18;letter-spacing:-.025em;font-weight:700}
+  .process-rail li:hover{transform:translateY(-5px);border-color:#c4f000;background:rgba(196,240,0,.045)}
+  .process-rail li:hover .process-arrow{color:#c4f000;transform:translate(2px,-2px)}
+  @media (max-width:1100px){
+    .process-shell{grid-template-columns:1fr;gap:34px}
+    .process-heading{position:static;max-width:none}
+    .process-heading .section-title{max-width:16ch}
+  }
+  @media (max-width:720px){
+    .process-rail{grid-template-columns:1fr;gap:12px}
+    .process-rail li{min-height:150px;padding:25px 22px;border-radius:18px}
+    .process-mark{left:22px;top:21px}
+    .process-arrow{right:20px;top:17px}
+    .process-heading .section-title{font-size:clamp(36px,9vw,48px);max-width:100%}
+  }
+</style>
