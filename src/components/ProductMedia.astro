@@ -8,7 +8,17 @@ const { product, lang, eager=false, secondary=false, className='', sizes='(max-w
 const secondarySrc = product.media.secondary;
 const src = secondary ? secondarySrc : product.media.src;
 const shouldRender = Boolean(src) && (!secondary || secondarySrc !== product.media.src);
-const alt = secondary ? `${product.names[lang]} · 02` : product.names[lang];
+const secondaryLabel = ({
+  tr:'alternatif ürün görünümü',
+  en:'alternate product view',
+  de:'alternative Produktansicht',
+  it:'vista alternativa del prodotto',
+  ru:'дополнительный вид продукта',
+  fa:'نمای جایگزین محصول',
+  zh:'产品另一视图',
+  vi:'góc nhìn sản phẩm khác'
+} as Record<string,string>)[lang] || 'alternate product view';
+const alt = secondary ? `${product.names[lang]} · ${secondaryLabel}` : product.names[lang];
 const mediaType = product.media.mediaType ?? 'photo';
 ---
 {shouldRender && <figure class:list={['product-media', `product-media--${mediaType}`, className]} data-product-media={secondary ? 'secondary' : 'primary'} data-media-type={mediaType}>
