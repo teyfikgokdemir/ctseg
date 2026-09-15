@@ -1,0 +1,62 @@
+---
+import { localizedPath, type Locale } from '../data/site';
+const { lang } = Astro.props as { lang: Locale };
+const copy = {
+  tr:{kicker:'CTSEG · GLOBAL TRADE HOUSE',title:'Ticareti ürün listesinden çıkarıp, çalışan bir sisteme dönüştürüyoruz.',lead:'CTSEG; Türkiye ile Avrupa, Orta Doğu ve Asya arasında iki yönlü ticaret, stratejik tedarik ve pazara giriş çalışmalarını tek bir ticari koordinasyon modeli altında yürütür.',services:'Çalışma alanlarını inceleyin',contact:'Ticari talep gönderin',pillars:[['Pazar zekâsı','Talebi, hedef pazarı, alıcı profilini ve ticari uygulanabilirliği araştırırız.'],['Tedarik ve doğrulama','Üretici, tedarikçi, teknik belge ve teklifleri karşılaştırılabilir bir çerçevede değerlendiririz.'],['İhracat ve pazara giriş','Üreticilerin doğru pazar, alıcı profili ve ilk ticari temas yollarını belirlemelerine destek oluruz.'],['Ticari koordinasyon','RFQ, numune, belge, teklif ve sonraki adımları taraflar arasında düzenli bir akışta koordine ederiz.']]},
+  en:{kicker:'CTSEG · GLOBAL TRADE HOUSE',title:'We turn international trade from a product list into an operating system.',lead:'CTSEG brings two-way trade, strategic sourcing and market-entry work between Türkiye, Europe, the Middle East and Asia into one commercial coordination model.',services:'Explore our capabilities',contact:'Send a commercial request',pillars:[['Market intelligence','We research demand, target markets, buyer profiles and commercial feasibility.'],['Sourcing & verification','We assess manufacturers, suppliers, technical documents and proposals in a comparable framework.'],['Export & market entry','We support producers in identifying suitable markets, buyer profiles and first commercial routes.'],['Commercial coordination','We coordinate RFQs, samples, documents, proposals and next steps across counterparties.']]},
+  de:{kicker:'CTSEG · GLOBAL TRADE HOUSE',title:'Wir machen aus internationalem Handel ein belastbares Betriebssystem.',lead:'CTSEG bündelt bidirektionalen Handel, strategische Beschaffung und Markteintritt zwischen der Türkei, Europa, Nahost und Asien in einem kommerziellen Koordinationsmodell.',services:'Leistungsfelder ansehen',contact:'Kommerzielle Anfrage senden',pillars:[['Marktintelligenz','Wir analysieren Bedarf, Zielmärkte, Käuferprofile und kommerzielle Machbarkeit.'],['Beschaffung & Prüfung','Wir bewerten Hersteller, Lieferanten, technische Unterlagen und Angebote in einem vergleichbaren Rahmen.'],['Export & Markteintritt','Wir unterstützen Hersteller bei der Auswahl geeigneter Märkte, Käuferprofile und erster Vertriebswege.'],['Handelskoordination','Wir koordinieren RFQs, Muster, Dokumente, Angebote und nächste Schritte zwischen den Parteien.']]},
+  it:{kicker:'CTSEG · GLOBAL TRADE HOUSE',title:'Trasformiamo il commercio internazionale in un sistema operativo concreto.',lead:'CTSEG integra commercio bidirezionale, sourcing strategico e market entry tra Turchia, Europa, Medio Oriente e Asia in un unico modello di coordinamento commerciale.',services:'Scopri le nostre attività',contact:'Invia una richiesta commerciale',pillars:[['Intelligence di mercato','Analizziamo domanda, mercati obiettivo, profili buyer e fattibilità commerciale.'],['Sourcing & verifica','Valutiamo produttori, fornitori, documenti tecnici e offerte in un quadro comparabile.'],['Export & market entry','Supportiamo i produttori nell’individuare mercati, buyer e primi percorsi commerciali.'],['Coordinamento commerciale','Coordiniamo RFQ, campioni, documenti, offerte e passaggi successivi tra le parti.']]},
+  ru:{kicker:'CTSEG · GLOBAL TRADE HOUSE',title:'Мы превращаем международную торговлю в управляемую систему.',lead:'CTSEG объединяет двустороннюю торговлю, стратегический сорсинг и выход на рынки между Турцией, Европой, Ближним Востоком и Азией в единую модель коммерческой координации.',services:'Посмотреть направления работы',contact:'Отправить коммерческий запрос',pillars:[['Рыночная аналитика','Мы изучаем спрос, целевые рынки, профили покупателей и коммерческую реализуемость.'],['Сорсинг и проверка','Оцениваем производителей, поставщиков, технические документы и предложения в сопоставимом формате.'],['Экспорт и выход на рынок','Помогаем производителям определить подходящие рынки, профили покупателей и первые коммерческие маршруты.'],['Коммерческая координация','Координируем RFQ, образцы, документы, предложения и следующие шаги между сторонами.']]},
+  fa:{kicker:'CTSEG · GLOBAL TRADE HOUSE',title:'تجارت بین‌المللی را از فهرست محصول به یک سیستم عملیاتی تبدیل می‌کنیم.',lead:'CTSEG تجارت دوطرفه، تأمین استراتژیک و ورود به بازار میان ترکیه، اروپا، خاورمیانه و آسیا را در یک مدل هماهنگی تجاری یکپارچه می‌کند.',services:'حوزه‌های کاری را ببینید',contact:'درخواست تجاری ارسال کنید',pillars:[['هوشمندی بازار','تقاضا، بازار هدف، پروفایل خریدار و امکان‌پذیری تجاری را بررسی می‌کنیم.'],['تأمین و راستی‌آزمایی','تولیدکنندگان، تأمین‌کنندگان، اسناد فنی و پیشنهادها را در چارچوبی قابل‌مقایسه ارزیابی می‌کنیم.'],['صادرات و ورود به بازار','به تولیدکنندگان برای شناسایی بازار مناسب، خریدار هدف و مسیرهای اولیه تجاری کمک می‌کنیم.'],['هماهنگی تجاری','RFQ، نمونه، اسناد، پیشنهادها و گام‌های بعدی را میان طرفین هماهنگ می‌کنیم.']]},
+  zh:{kicker:'CTSEG · GLOBAL TRADE HOUSE',title:'我们把国际贸易从“产品清单”升级为可执行的商业系统。',lead:'CTSEG 将土耳其与欧洲、中东及亚洲之间的双向贸易、战略采购与市场进入工作整合为统一的商业协调体系。',services:'查看业务能力',contact:'提交商业需求',pillars:[['市场情报','研究真实需求、目标市场、买家画像与商业可行性。'],['采购与核验','在可比较框架中评估制造商、供应商、技术文件与报价。'],['出口与市场进入','协助企业识别合适市场、目标买家画像与首轮商业接触路径。'],['商业协调','统筹 RFQ、样品、文件、报价与交易双方的后续推进。']]},
+  vi:{kicker:'CTSEG · GLOBAL TRADE HOUSE',title:'Chúng tôi biến thương mại quốc tế từ danh mục sản phẩm thành một hệ thống vận hành.',lead:'CTSEG tích hợp thương mại hai chiều, sourcing chiến lược và thâm nhập thị trường giữa Thổ Nhĩ Kỳ, châu Âu, Trung Đông và châu Á trong một mô hình điều phối thương mại thống nhất.',services:'Khám phá năng lực',contact:'Gửi yêu cầu thương mại',pillars:[['Thông tin thị trường','Nghiên cứu nhu cầu, thị trường mục tiêu, hồ sơ người mua và tính khả thi thương mại.'],['Sourcing & thẩm định','Đánh giá nhà sản xuất, nhà cung cấp, tài liệu kỹ thuật và báo giá trong một khung so sánh.'],['Xuất khẩu & thâm nhập thị trường','Hỗ trợ doanh nghiệp xác định thị trường phù hợp, hồ sơ người mua và các tuyến tiếp cận ban đầu.'],['Điều phối thương mại','Điều phối RFQ, mẫu thử, chứng từ, báo giá và các bước tiếp theo giữa các bên.']]}
+}[lang];
+---
+<section class="trade-house-statement section" aria-labelledby="trade-house-statement-title">
+  <div class="container trade-house-statement__shell">
+    <div class="trade-house-statement__intro">
+      <p class="eyebrow">{copy.kicker}</p>
+      <h2 id="trade-house-statement-title">{copy.title}</h2>
+      <p class="trade-house-statement__lead">{copy.lead}</p>
+      <div class="trade-house-statement__actions">
+        <a class="button" href={localizedPath(lang,'services')}>{copy.services}</a>
+        <a class="button button-secondary" href={localizedPath(lang,'contact')}>{copy.contact}</a>
+      </div>
+    </div>
+    <div class="trade-house-statement__grid">
+      {copy.pillars.map(([title,text]) => (
+        <article>
+          <span class="trade-house-statement__mark" aria-hidden="true"></span>
+          <h3>{title}</h3>
+          <p>{text}</p>
+          <span class="trade-house-statement__arrow" aria-hidden="true">↗</span>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .trade-house-statement{position:relative;overflow:hidden;background:#0f0f0f;color:#fff;border-top:1px solid rgba(255,255,255,.08)}
+  .trade-house-statement::before{content:"TRADE";position:absolute;right:-.04em;bottom:-.17em;font-family:var(--font-sans,Arial,sans-serif);font-size:clamp(150px,25vw,430px);font-weight:900;line-height:.8;letter-spacing:-.08em;color:rgba(255,255,255,.025);pointer-events:none;user-select:none}
+  .trade-house-statement__shell{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,.88fr) minmax(520px,1.12fr);gap:clamp(48px,7vw,112px);align-items:start}
+  .trade-house-statement__intro{position:sticky;top:118px;max-width:650px}
+  .trade-house-statement .eyebrow{margin:0 0 24px;color:#c4f000!important;font-size:12px;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+  .trade-house-statement h2{margin:0;max-width:11ch;color:#fff;font-family:var(--font-sans,Arial,sans-serif);font-size:clamp(48px,5.4vw,88px);font-weight:780;line-height:.94;letter-spacing:-.06em;text-wrap:balance}
+  .trade-house-statement__lead{margin:30px 0 0;max-width:42em;color:#d8d8d3!important;font-size:18px;line-height:1.68;font-weight:500}
+  .trade-house-statement__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+  .trade-house-statement__actions .button{border-radius:999px;background:#c4f000!important;border-color:#c4f000!important;color:#0a0a0a!important;font-weight:800}
+  .trade-house-statement__actions .button-secondary{background:transparent!important;border-color:rgba(255,255,255,.24)!important;color:#fff!important}
+  .trade-house-statement__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .trade-house-statement__grid article{position:relative;display:flex;flex-direction:column;min-height:280px;padding:30px;border:1px solid rgba(255,255,255,.12);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.052),rgba(255,255,255,.015));overflow:hidden;transition:transform .28s ease,border-color .28s ease,background .28s ease}
+  .trade-house-statement__grid article:hover{transform:translateY(-5px);border-color:#c4f000;background:rgba(196,240,0,.035)}
+  .trade-house-statement__mark{width:46px;height:4px;border-radius:999px;background:#c4f000}
+  .trade-house-statement__grid h3{margin:auto 0 14px;max-width:12ch;color:#fff;font-size:clamp(24px,2vw,34px);line-height:1.04;letter-spacing:-.035em}
+  .trade-house-statement__grid p{margin:0;max-width:32em;color:#cfcfca!important;font-size:15px;line-height:1.58}
+  .trade-house-statement__arrow{position:absolute;right:24px;top:20px;color:rgba(255,255,255,.38);font-size:22px;transition:color .25s ease,transform .25s ease}
+  .trade-house-statement__grid article:hover .trade-house-statement__arrow{color:#c4f000;transform:translate(2px,-2px)}
+  :global(html[dir="rtl"]) .trade-house-statement__arrow{right:auto;left:24px}
+  :global(html[dir="rtl"]) .trade-house-statement::before{right:auto;left:-.04em}
+  @media(max-width:1100px){.trade-house-statement__shell{grid-template-columns:1fr;gap:38px}.trade-house-statement__intro{position:static;max-width:820px}.trade-house-statement h2{max-width:14ch}}
+  @media(max-width:720px){.trade-house-statement{padding-block:64px}.trade-house-statement__grid{grid-template-columns:1fr;gap:12px}.trade-house-statement__grid article{min-height:210px;padding:24px;border-radius:18px}.trade-house-statement h2{font-size:clamp(38px,10.2vw,54px);line-height:.98;max-width:100%}.trade-house-statement__lead{font-size:16px;line-height:1.62}.trade-house-statement__actions{display:grid;grid-template-columns:1fr}.trade-house-statement__actions .button{justify-content:center;width:100%}}
+</style>
