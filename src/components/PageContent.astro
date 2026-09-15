@@ -46,6 +46,98 @@ const operationalTrust = {
   vi:{title:'Điều gì xảy ra sau khi gửi yêu cầu?',lead:'Mỗi yêu cầu thương mại được chuyển đến lộ trình đánh giá phù hợp sau khi làm rõ phạm vi và nhu cầu chứng từ.',steps:['Làm rõ yêu cầu kỹ thuật và thị trường mục tiêu','Đánh giá sản phẩm, đối tác và hồ sơ hiện có','Chia sẻ các bước khả thi tiếp theo và thông tin cần bổ sung','Xác nhận phạm vi báo giá, mẫu thử và điều phối với các bên'],cta:'Xem quy trình làm việc'}
 }[lang];
 const completionAbout = aboutEnhancement[lang];
+const aboutGovernance = {
+  tr: {
+    eyebrow: 'Kurumsal Yönetim ve Liderlik',
+    founderRole: 'Kurucu ve Yönetici Ortak',
+    complianceKicker: 'Kurumsal Şeffaflık İlkesi'
+  },
+  en: {
+    eyebrow: 'Corporate Governance & Leadership',
+    founderRole: 'Founder & Managing Director',
+    complianceKicker: 'Institutional Transparency Standard'
+  },
+  de: {
+    eyebrow: 'Unternehmensführung & Leitung',
+    founderRole: 'Gründer & Geschäftsführender Gesellschafter',
+    complianceKicker: 'Grundsatz institutioneller Transparenz'
+  },
+  it: {
+    eyebrow: 'Governance Aziendale e Direzione',
+    founderRole: 'Fondatore e Managing Director',
+    complianceKicker: 'Standard di Trasparenza Istituzionale'
+  },
+  ru: {
+    eyebrow: 'Корпоративное управление и руководство',
+    founderRole: 'Основатель и управляющий директор',
+    complianceKicker: 'Принцип корпоративной прозрачности'
+  },
+  fa: {
+    eyebrow: 'حاکمیت شرکتی و رهبری',
+    founderRole: 'بنیان‌گذار و مدیر ارشد',
+    complianceKicker: 'اصل شفافیت سازمانی'
+  },
+  zh: {
+    eyebrow: '公司治理与管理架构',
+    founderRole: '创始人兼常务董事',
+    complianceKicker: '机构透明度与治理准则'
+  },
+  vi: {
+    eyebrow: 'Quản trị doanh nghiệp & Lãnh đạo',
+    founderRole: 'Người sáng lập & Giám đốc điều hành',
+    complianceKicker: 'Nguyên tắc minh bạch doanh nghiệp'
+  }
+}[lang];
+const aboutMandate = {
+  tr: {
+    title: 'İki Yönlü Küresel Ticaret Mimarisi',
+    desc: 'CTSEG; bir yandan Türk üreticilerinin Avrupa, Körfez ve Asya pazarlarına doğrudan ihracat açılımını yapılandırırken, diğer yandan küresel alıcılar için Türkiye ve bölgesel ticaret koridorlarında bağımsız fabrika denetimi, RFQ karşılaştırması ve uçtan uca tedarik koordinasyonu sağlar.',
+    tagExport: 'Türkiye İhracat Açılımı (Avrupa · Körfez · Asya)',
+    tagSourcing: 'Küresel Alıcı Tedarik Masası (Doğrulanmış Üretim)'
+  },
+  en: {
+    title: 'Two-Way Global Trade Mandate',
+    desc: 'CTSEG coordinates strategic export expansion for Turkish manufacturers into Europe, the Gulf, and Asia, while managing independent factory verification, RFQ benchmarking, and end-to-end procurement for international buyers across Turkey and regional corridors.',
+    tagExport: 'Turkey Export Expansion (Europe · Gulf · Asia)',
+    tagSourcing: 'Global Buyer Sourcing Desk (Verified Capacity)'
+  },
+  de: {
+    title: 'Zwei-Wege-Welthandelsmandat',
+    desc: 'CTSEG koordiniert die strategische Markterweiterung türkischer Industrieunternehmen nach Europa, den Golf und Asien und bietet internationalen Einkäufern unabhängige Werksprüfungen, RFQ-Benchmarking und Beschaffungsabwicklung.',
+    tagExport: 'Türkei-Exportexpansion (Europa · Golf · Asien)',
+    tagSourcing: 'Beschaffungsdesk für globale Einkäufer (Geprüfte Fertigung)'
+  },
+  it: {
+    title: 'Mandato di Commercio Globale Bilaterale',
+    desc: 'CTSEG struttura l’espansione estera dei produttori turchi verso Europa, Golfo e Asia, garantendo al contempo ad acquirenti globali verifiche di fabbrica indipendenti, benchmark RFQ e gestione del procurement.',
+    tagExport: 'Espansione Export Turchia (Europa · Golfo · Asia)',
+    tagSourcing: 'Desk Sourcing Internazionale (Capacità Verificata)'
+  },
+  ru: {
+    title: 'Двусторонняя модель глобальной торговли',
+    desc: 'CTSEG координирует экспорт турецких производителей в Европу, страны Залива и Азию, а также обеспечивает международным покупателям независимый аудит предприятий, сопоставление RFQ и сквозное управление закупками.',
+    tagExport: 'Экспорт из Турции (Европа · Залив · Азия)',
+    tagSourcing: 'Сорсинг для международных импортеров (Проверенные мощности)'
+  },
+  fa: {
+    title: 'مأموریت تجاری دوسویه بین‌المللی',
+    desc: 'CTSEG از یک سو مسیر صادرات تولیدکنندگان ترکیه‌ای به بازارهای اروپا، خلیج فارس و آسیا را ساختاربندی می‌کند و از سوی دیگر ممیزی مستقل کارخانه‌ها، ارزیابی RFQ و هماهنگی خرید را برای خریداران بین‌المللی مدیریت می‌نماید.',
+    tagExport: 'توسعه صادرات ترکیه (اروپا · خلیج فارس · آسیا)',
+    tagSourcing: 'میز تأمین خریداران بین‌المللی (ظرفیت‌های اعتبارسنجی‌شده)'
+  },
+  zh: {
+    title: '双向全球贸易与供应链使命',
+    desc: 'CTSEG 一方面协助土耳其优质制造企业拓展欧洲、海湾国家及亚洲新兴出口市场；另一方面为跨国采购商在土耳其与区域走廊统筹独立验厂、专业 RFQ 横向对标及端到端履约协同。',
+    tagExport: '土耳其制造业出海 (欧洲 · 海湾 · 亚洲)',
+    tagSourcing: '全球买家战略直采中心 (真实验厂与产能保障)'
+  },
+  vi: {
+    title: 'Sứ mệnh thương mại toàn cầu hai chiều',
+    desc: 'CTSEG vừa điều phối mở rộng xuất khẩu cho các nhà sản xuất Thổ Nhĩ Kỳ sang châu Âu, vùng Vịnh và châu Á, vừa cung cấp dịch vụ thẩm định nhà máy độc lập, đối chuẩn RFQ và mua hàng trọn gói cho người mua quốc tế.',
+    tagExport: 'Mở rộng xuất khẩu Thổ Nhĩ Kỳ (Châu Âu · Vùng Vịnh · Châu Á)',
+    tagSourcing: 'Bàn thu mua quốc tế (Năng lực đã kiểm chứng)'
+  }
+}[lang];
 const completionMarkets = marketsDetail[lang];
 const platform = tradePlatformCopy[lang];
 const contact = contactCopy[lang];
@@ -995,24 +1087,84 @@ const verifiedLater = {
   <>
     <PageHero lang={lang} eyebrow={t.about} title={copy.aboutTitle} lead={copy.aboutLead} />
     <section class="section company-profile-section"><div class="container content-grid">
-      <div class="prose"><div class="content-block"><p class="eyebrow">{company.alternateName} · {company.foundingYear}</p><h2>{corporate.aboutHeading}</h2><p>{corporate.aboutBody}</p></div></div>
+      <div class="prose">
+        <div class="content-block">
+          <p class="eyebrow">{company.alternateName} · {company.foundingYear}</p>
+          <h2>{corporate.aboutHeading}</h2>
+          <p>{corporate.aboutBody}</p>
+        </div>
+        <div class="about-mandate-card">
+          <div class="about-mandate-header">
+            <span class="about-mandate-badge">Trade Architecture</span>
+            <h3>{aboutMandate.title}</h3>
+          </div>
+          <p>{aboutMandate.desc}</p>
+          <div class="about-mandate-tags">
+            <span class="about-tag">⇄ {aboutMandate.tagExport}</span>
+            <span class="about-tag">✓ {aboutMandate.tagSourcing}</span>
+          </div>
+        </div>
+      </div>
       <aside class="company-card" aria-label={corporate.labels.name}>
-        <dl>
-          <div><dt>{corporate.labels.name}</dt><dd>{company.name[lang] || company.name.en}</dd></div>
-          <div><dt>{corporate.labels.founder}</dt><dd>{company.founder}</dd></div>
+        <div class="company-card-header">
+          <span class="company-badge">Institutional Registry</span>
+          <h3>{company.name[lang] || company.name.en}</h3>
+        </div>
+        <dl class="company-meta-dl">
+          <div><dt>{corporate.labels.founder}</dt><dd><strong>{company.founder}</strong></dd></div>
           <div><dt>{corporate.labels.founded}</dt><dd>{company.foundingYear}</dd></div>
           <div><dt>{corporate.labels.headquarters}</dt><dd>{corporate.headquarters}</dd></div>
+          <div><dt>{corporate.labels.name}</dt><dd>{company.name[lang] || company.name.en}</dd></div>
         </dl>
       </aside>
     </div></section>
     <section class="section about-detail-section"><div class="container content-grid">
-      <div class="prose">
-        <section class="content-block"><h2>{completionAbout.whoTitle}</h2><p>{completionAbout.who}</p></section>
-        <section class="content-block"><h2>{completionAbout.workTitle}</h2><ul class="check-list">{completionAbout.work.map((item)=><li>{item}</li>)}</ul></section>
-        <section class="content-block"><h2>{completionAbout.methodTitle}</h2><p>{completionAbout.method}</p>{<a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a>}</section>
-        <section class="content-block"><h2>{completionAbout.ethicsTitle}</h2><ul class="check-list">{completionAbout.ethics.map((item)=><li>{item}</li>)}</ul></section>
+      <div class="about-pillars-stack">
+        <article class="about-pillar-card">
+          <div class="pillar-kicker">01 / Identity</div>
+          <h2>{completionAbout.whoTitle}</h2>
+          <p>{completionAbout.who}</p>
+        </article>
+        <article class="about-pillar-card">
+          <div class="pillar-kicker">02 / Capabilities</div>
+          <h2>{completionAbout.workTitle}</h2>
+          <ul class="about-capabilities-grid">
+            {completionAbout.work.map((item) => (
+              <li><span class="check-icon">✓</span> <span>{item}</span></li>
+            ))}
+          </ul>
+        </article>
+        <article class="about-pillar-card">
+          <div class="pillar-kicker">03 / Methodology</div>
+          <h2>{completionAbout.methodTitle}</h2>
+          <p>{completionAbout.method}</p>
+          <div class="about-method-action">
+            <a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a>
+          </div>
+        </article>
+        <article class="about-pillar-card about-pillar-ethics">
+          <div class="pillar-kicker">04 / Ethical Boundaries</div>
+          <h2>{completionAbout.ethicsTitle}</h2>
+          <ul class="about-ethics-list">
+            {completionAbout.ethics.map((item) => (
+              <li><span class="ethics-bullet">⊘</span> <span>{item}</span></li>
+            ))}
+          </ul>
+        </article>
       </div>
-      <aside class="founder-panel"><p class="eyebrow">{completionAbout.founderTitle}</p><h2>{company.founder}</h2><p>{completionAbout.founder}</p></aside>
+      <aside class="founder-panel">
+        <div class="founder-panel-card">
+          <span class="founder-eyebrow">{aboutGovernance.eyebrow}</span>
+          <h2>{company.founder}</h2>
+          <p class="founder-role">{aboutGovernance.founderRole}</p>
+          <div class="founder-divider"></div>
+          <p class="founder-bio">{completionAbout.founder}</p>
+          <div class="founder-compliance-badge">
+            <span class="compliance-icon">⚖</span>
+            <span>{aboutGovernance.complianceKicker}</span>
+          </div>
+        </div>
+      </aside>
     </div></section>
     <Framework lang={lang} />
     <section class="section"><div class="container cta-statement"><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.contact}</a></div></section>

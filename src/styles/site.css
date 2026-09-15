@@ -556,7 +556,52 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
 .process-detail-link{margin-top:-38px;margin-bottom:70px}.compact-link-section{padding-top:36px;padding-bottom:54px}.compact-link-section .text-link{margin-top:0}
 
 /* Company, markets and direct-answer surfaces. */
-.company-profile-section{padding-top:72px}.company-card,.founder-panel{padding:26px 0;border-top:2px solid var(--accent)}.founder-panel h2{margin:6px 0 16px;font-size:clamp(2rem,3vw,3.3rem)}.founder-panel p{color:#575952}.market-role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid #aaa598}.market-role-grid article{padding:28px 28px 38px;border-right:1px solid #d3cec1;border-bottom:1px solid #d3cec1}.market-role-grid article:nth-child(3n){border-right:0}.market-role-grid span{color:var(--accent);font-size:.72rem;letter-spacing:.14em}.market-role-grid h2{margin:38px 0 22px;font-size:clamp(1.8rem,2.6vw,3rem)}.market-role-grid ul{margin:0;padding-left:18px;color:#575952}.direct-answer{padding:28px;border:1px solid #d3cec1;background:#e8e3d8}.direct-answer h2{font-size:clamp(2rem,3vw,3rem)}
+.company-profile-section{padding-top:72px}
+.about-mandate-card{margin-top:32px;padding:26px;border:1px solid #c9c3b7;border-inline-start:3px solid var(--accent);background:#f2efe7}
+.about-mandate-header{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.about-mandate-badge{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.about-mandate-card h3{margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:clamp(1.2rem,1.8vw,1.5rem);font-weight:600;line-height:1.25}
+.about-mandate-card p{margin:0;color:#44463f;font-size:.92rem;line-height:1.6}
+.about-mandate-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.about-tag{display:inline-flex;align-items:center;font-size:.75rem;padding:5px 12px;background:#e8e3d8;border:1px solid #d3cec1;color:#2c2e27;font-weight:600}
+
+.company-card{padding:28px;background:#151515;color:#f7f6f1;border:1px solid #282828;border-top:3px solid var(--accent);align-self:start}
+.company-card-header{margin-bottom:22px;border-bottom:1px solid rgba(247,246,241,.14);padding-bottom:14px}
+.company-badge{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-on-dark,#c4f000);margin-bottom:6px}
+.company-card-header h3{margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:clamp(1.15rem,1.6vw,1.35rem);font-weight:500;color:#f7f6f1;line-height:1.3}
+.company-meta-dl{margin:0;display:grid;gap:14px}
+.company-meta-dl>div{border-bottom:1px solid rgba(247,246,241,.1);padding-bottom:10px}
+.company-meta-dl>div:last-child{border-bottom:0;padding-bottom:0}
+.company-meta-dl dt{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#9b9992;margin-bottom:3px}
+.company-meta-dl dd{margin:0;font-size:.9rem;color:#f7f6f1;line-height:1.4}
+.company-meta-dl dd strong{color:var(--accent-on-dark,#c4f000);font-weight:600}
+
+.about-detail-section{padding-top:20px}
+.about-pillars-stack{display:grid;gap:26px}
+.about-pillar-card{background:#f2efe7;border:1px solid #c9c3b7;padding:30px}
+.pillar-kicker{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:10px}
+.about-pillar-card h2{margin:0 0 14px;font-family:'Source Serif 4',Georgia,serif;font-size:clamp(1.4rem,2.2vw,1.9rem);font-weight:500;line-height:1.25}
+.about-pillar-card p{margin:0;color:#44463f;line-height:1.65;font-size:.95rem}
+.about-capabilities-grid{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.about-capabilities-grid li{display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:#33352e;line-height:1.4}
+.about-capabilities-grid .check-icon{color:var(--accent);font-weight:800;flex-shrink:0}
+.about-method-action{margin-top:18px}
+
+.about-pillar-ethics{background:#ede8dc;border-inline-start:3px solid #222}
+.about-ethics-list{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
+.about-ethics-list li{display:flex;align-items:baseline;gap:10px;font-size:.88rem;color:#33352e;line-height:1.45}
+.ethics-bullet{color:var(--accent);font-weight:700;flex-shrink:0}
+
+.founder-panel{align-self:start}
+.founder-panel-card{padding:28px;background:#f2efe7;border:1px solid #c9c3b7;border-top:3px solid var(--accent)}
+.founder-eyebrow{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:8px}
+.founder-panel h2{margin:0 0 4px;font-family:'Source Serif 4',Georgia,serif;font-size:clamp(1.6rem,2.4vw,2.2rem);font-weight:500;line-height:1.2}
+.founder-role{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:#686a63;font-weight:600;margin:0 0 16px}
+.founder-divider{height:1px;background:#d3cec1;margin:16px 0}
+.founder-bio{font-size:.9rem;line-height:1.65;color:#44463f;margin:0 0 18px}
+.founder-compliance-badge{display:inline-flex;align-items:center;gap:8px;font-size:.74rem;font-weight:600;color:#575952;padding:6px 12px;background:#e8e3d8;border:1px solid #d3cec1}
+
+.market-role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid #aaa598}.market-role-grid article{padding:28px 28px 38px;border-right:1px solid #d3cec1;border-bottom:1px solid #d3cec1}.market-role-grid article:nth-child(3n){border-right:0}.market-role-grid span{color:var(--accent);font-size:.72rem;letter-spacing:.14em}.market-role-grid h2{margin:38px 0 22px;font-size:clamp(1.8rem,2.6vw,3rem)}.market-role-grid ul{margin:0;padding-left:18px;color:#575952}.direct-answer{padding:28px;border:1px solid #d3cec1;background:#e8e3d8}.direct-answer h2{font-size:clamp(2rem,3vw,3rem)}
 
 /* Scenario and process evidence pages. */
 .detailed-process{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);margin:0;padding:0;border-top:1px solid #aaa598}.detailed-process li{min-height:190px;padding:26px;border-right:1px solid #d3cec1;border-bottom:1px solid #d3cec1}.detailed-process li:nth-child(3n){border-right:0}.detailed-process span,.scenario-heading span{color:var(--accent);font-size:.72rem;letter-spacing:.14em}.detailed-process h2{margin-top:46px;font-size:clamp(1.55rem,2.5vw,2.65rem)}.role-boundary,.scenario-disclaimer{margin-top:42px;padding:24px 28px;border-left:2px solid var(--accent);background:#e8e3d8}.role-boundary p,.scenario-disclaimer{color:#575952}.answer-section{background:#e8e3d8}.answer-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}.answer-grid article{padding:26px;border:1px solid #d3cec1;background:#f2efe7}.answer-grid h3{margin:0 0 12px;font-family:'Source Serif 4',Georgia,serif;font-size:clamp(1.35rem,2vw,2rem);font-weight:500}.answer-grid p{margin:0;color:#575952}.scenario-list{display:grid;gap:54px;margin-top:44px}.scenario-list article{padding-top:26px;border-top:1px solid #aaa598}.scenario-heading{display:grid;grid-template-columns:60px 1fr;gap:20px;align-items:start}.scenario-heading h2{font-size:clamp(2rem,3.2vw,3.8rem)}.scenario-list dl{margin:34px 0 0}.scenario-list dl>div{display:grid;grid-template-columns:minmax(150px,.35fr) 1fr;gap:28px;padding:16px 0;border-bottom:1px solid #d3cec1}.scenario-list dt{color:#575952;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase}.scenario-list dd{margin:0}
@@ -569,5 +614,5 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
   .trade-gateway-banner{grid-template-columns:1fr}.platform-sector-grid{grid-template-columns:repeat(2,1fr)}.market-role-grid{grid-template-columns:1fr 1fr}.market-role-grid article:nth-child(3n){border-right:1px solid #d3cec1}.market-role-grid article:nth-child(2n){border-right:0}.commercial-request-shell{grid-template-columns:1fr}.trust-facts{grid-template-columns:1fr 1fr}.trust-facts>div:nth-child(2){border-right:0}.trust-facts>div:last-child{grid-column:1/-1;border-top:1px solid rgba(242,239,231,.18)}.detailed-process{grid-template-columns:repeat(2,1fr)}.detailed-process li:nth-child(3n){border-right:1px solid #d3cec1}.detailed-process li:nth-child(2n){border-right:0}
 }
 @media(max-width:760px){
-  .trade-gateway-banner,.platform-sector-grid,.market-role-grid,.answer-grid,.trust-facts,.detailed-process{grid-template-columns:1fr}.trade-funnel-card{min-height:280px;padding:26px}.platform-sector-grid article{min-height:390px}.market-role-grid article,.market-role-grid article:nth-child(2n),.market-role-grid article:nth-child(3n){border-right:0}.trust-facts>div{border-right:0;border-bottom:1px solid rgba(242,239,231,.18)}.trust-facts>div:last-child{grid-column:auto}.detailed-process li,.detailed-process li:nth-child(2n),.detailed-process li:nth-child(3n){min-height:150px;border-right:0}.scenario-heading{grid-template-columns:42px 1fr}.scenario-list dl>div{grid-template-columns:1fr;gap:5px}.commercial-request-shell{padding:26px}.commercial-request-form{grid-template-columns:1fr}.commercial-field--full,.commercial-form-actions{grid-column:auto}.company-trust-heading{align-items:start;flex-direction:column}.catalog-download{align-items:start;flex-direction:column}.catalogue-group-heading{grid-template-columns:42px 1fr;gap:12px}.process-detail-link{margin-top:-18px;margin-bottom:50px}
+  .trade-gateway-banner,.platform-sector-grid,.market-role-grid,.answer-grid,.trust-facts,.detailed-process{grid-template-columns:1fr}.trade-funnel-card{min-height:280px;padding:26px}.platform-sector-grid article{min-height:390px}.market-role-grid article,.market-role-grid article:nth-child(2n),.market-role-grid article:nth-child(3n){border-right:0}.trust-facts>div{border-right:0;border-bottom:1px solid rgba(242,239,231,.18)}.trust-facts>div:last-child{grid-column:auto}.detailed-process li,.detailed-process li:nth-child(2n),.detailed-process li:nth-child(3n){min-height:150px;border-right:0}.scenario-heading{grid-template-columns:42px 1fr}.scenario-list dl>div{grid-template-columns:1fr;gap:5px}.commercial-request-shell{padding:26px}.commercial-request-form{grid-template-columns:1fr}.commercial-field--full,.commercial-form-actions{grid-column:auto}.company-trust-heading{align-items:start;flex-direction:column}.catalog-download{align-items:start;flex-direction:column}.catalogue-group-heading{grid-template-columns:42px 1fr;gap:12px}.process-detail-link{margin-top:-18px;margin-bottom:50px}.about-capabilities-grid{grid-template-columns:1fr}
 }
