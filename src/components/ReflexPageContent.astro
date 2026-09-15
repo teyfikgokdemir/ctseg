@@ -110,7 +110,7 @@ const localizedHeroLead = {
 const heroTrustBadges = {
   tr: ['Ürün bazında doğrulama', 'Parti belge incelemesi', 'Toplu B2B tedarik', 'İhracat koordinasyonu'],
   en: ['Product-specific verification', 'Batch document review', 'Bulk B2B supply', 'Export coordination'],
-  fa: ['صادرات و lojistik', 'سفارشات عمده B2B', 'گزینه‌های برند اختصاصی', 'اسناد و COA محموله'],
+  fa: ['صادرات و لجستیک', 'سفارشات عمده B2B', 'گزینه‌های برند اختصاصی', 'اسناد و COA محموله'],
   de: ['Export-Lieferung', 'Großbestellungen', 'Private-Label-Optionen', 'Qualitätsdokumentation'],
   it: ['Fornitura Export', 'Ordini all’Ingrosso', 'Opzioni Private Label', 'Documentazione di Qualità'],
   ru: ['Экспортные Поставки', 'Оптовые Заказы', 'Private Label', 'Документы Качества'],
@@ -132,7 +132,7 @@ const capacityCardsData = [
   },
   {
     title: { tr: 'Ürün Çeşitliliği', en: 'Product Range', fa: 'سبد کامل محصولات', zh: '全品类手套矩阵', vi: 'Danh mục sản phẩm' }[currentLang] || 'Product Range',
-    desc: { tr: 'TPE, Nitril hibrit, Termo Vinil, Kopolimer ve Muayene eldivenleri.', en: 'Nitrile-hybrid, TPE, Thermo Vinyl, Copolymer & Medical Examination series.', fa: 'دستکش‌های TPE، هیبرید نیتریل، ترمو وینیل، کدوپلیمر و معاینه.', zh: '涵盖混合 TPE、丁腈复合、加厚热塑乙烯基、共聚物及医用检查系列。', vi: 'Dòng sản phẩm Hybrid Nitrile, TPE, Thermo Vinyl, Copolymer & Khám y tế.' }[currentLang] || 'Nitrile-hybrid, TPE, Thermo Vinyl, Copolymer & Medical Examination series.'
+    desc: { tr: 'TPE, Nitril hibrit, Termo Vinil, Kopolimer ve Muayene eldivenleri.', en: 'Nitrile-hybrid, TPE, Thermo Vinyl, Copolymer & Medical Examination series.', fa: 'دستکش‌های TPE، هیبرید نیتریل، ترمو وینیل، کوپلیمر و معاینه.', zh: '涵盖混合 TPE、丁腈复合、加厚热塑乙烯基、共聚物及医用检查系列。', vi: 'Dòng sản phẩm Hybrid Nitrile, TPE, Thermo Vinyl, Copolymer & Khám y tế.' }[currentLang] || 'Nitrile-hybrid, TPE, Thermo Vinyl, Copolymer & Medical Examination series.'
   },
   {
     title: { tr: 'Ambalaj Seçenekleri', en: 'Packaging Options', fa: 'گزینه‌های بسته‌بندی', zh: '包装与定制方案', vi: 'Quy cách đóng gói' }[currentLang] || 'Packaging Options',
@@ -147,7 +147,7 @@ const qualityCardsData = [
   },
   {
     title: { tr: 'Ürün Tutarlılığı', en: 'Product Consistency', fa: 'ثبات کیفیت تولید', zh: '批量品质一致性', vi: 'Đồng nhất sản phẩm' }[currentLang] || 'Product Consistency',
-    desc: { tr: 'Otomatik hat üretimi ile standart et kalınlığı ve bariyer performansı.', en: 'Automated line production ensuring uniform wall thickness and reliable barrier performance.', fa: 'خطوط اتوماتیک برای ضخامت یکنواخت و عملکرد bariyer قابل‌اعتماد.', zh: '全自动化精密切割与热封工艺，确保壁厚均匀与可靠的生物液体阻隔性。', vi: 'Dây chuyền tự động đảm bảo độ dày thành đồng đều và hiệu suất rào cản tin cậy.' }[currentLang] || 'Automated line production ensuring uniform wall thickness and reliable barrier performance.'
+    desc: { tr: 'Otomatik hat üretimi ile standart et kalınlığı ve bariyer performansı.', en: 'Automated line production ensuring uniform wall thickness and reliable barrier performance.', fa: 'خطوط اتوماتیک برای ضخامت یکنواخت و عملکرد باریِر قابل‌اعتماد.', zh: '全自动化精密切割与热封工艺，确保壁厚均匀与可靠的生物液体阻隔性。', vi: 'Dây chuyền tự động đảm bảo độ dày thành đồng đều và hiệu suất rào cản tin cậy.' }[currentLang] || 'Automated line production ensuring uniform wall thickness and reliable barrier performance.'
   },
   {
     title: { tr: 'Uluslararası Tedarik Standartları', en: 'International Supply Standards', fa: 'استانداردهای تأمین بین‌المللی', zh: '国际贸易合规交付', vi: 'Tiêu chuẩn cung ứng quốc tế' }[currentLang] || 'International Supply Standards',
@@ -209,6 +209,120 @@ const notesPlaceholder = {
   ru: 'Укажите размеры, порт назначения, срок поставки или требования к private label...',
   fa: 'سایزها، بندر مقصد، تاریخ تحویل یا الزامات برند اختصاصی را قید فرمایید...'
 }[currentLang] || 'Specify sizes, destination port, target delivery date, or private label requirements...';
+
+const familyTitles: Record<string, { fam1: string; fam1Desc: string; fam2: string; fam2Desc: string; fam3: string; fam3Desc: string }> = {
+  tr: {
+    fam1: 'Medikal Muayene ve Klinik Hijyen Serisi',
+    fam1Desc: 'Sağlık kuruluşları, klinikler ve steril olmayan hasta bakım ortamları için optimize edilmiş bariyer.',
+    fam2: 'Yüksek Bariyer & İleri Hibrit Polimer Serisi',
+    fam2Desc: 'Gelişmiş TPE, termo vinil kompozit ve nefes alabilir kopolimer teknolojili endüstriyel ve medikal alternatifler.',
+    fam3: 'Çok Amaçlı Koruma ve Özel Ebat Serisi',
+    fam3Desc: 'Gıda servisi, temizlik, horeca ve özel boyutlu hassas kullanım için formüle edilmiş eldivenler.'
+  },
+  en: {
+    fam1: 'Medical Examination & Clinical Hygiene Series',
+    fam1Desc: 'Barrier protection engineered for healthcare facilities, outpatient clinics, and non-sterile care environments.',
+    fam2: 'High-Barrier & Advanced Hybrid Polymer Series',
+    fam2Desc: 'Advanced TPE, thermo vinyl composites and breathable copolymer formulations as high-performance alternatives.',
+    fam3: 'Multipurpose Protective & Specialty Handling Series',
+    fam3Desc: 'Formulated for commercial food handling, hospitality, facility management, and youth/specialty dimensions.'
+  },
+  de: {
+    fam1: 'Medizinische Untersuchung & Klinische Hygiene',
+    fam1Desc: 'Barriereschutz für Gesundheitseinrichtungen, Kliniken und unsterile Pflegeumgebungen.',
+    fam2: 'Hochbarriere & Fortschrittliche Hybrid-Polymere',
+    fam2Desc: 'TPE-, Thermo-Vinyl- und Copolyester-Handschuhe für Industrie und medizinische Alternativen.',
+    fam3: 'Mehrzweck-Schutz & Spezielle Größen',
+    fam3Desc: 'Für Lebensmittelverarbeitung, Gastronomie, Reinigung und Spezialanwendungen.'
+  },
+  it: {
+    fam1: 'Esame Medico & Igiene Clinica',
+    fam1Desc: 'Protezione di barriera per strutture sanitarie, ambulatori e ambienti non sterili.',
+    fam2: 'Alta Barriera & Polimeri Ibridi Avanzati',
+    fam2Desc: 'Formulazioni TPE, termo-vinile e copolimero per applicazioni industriali e commerciali.',
+    fam3: 'Protezione Multiuso & Dimensioni Speciali',
+    fam3Desc: 'Per settore alimentare, horeca, pulizia professionale e formati speciali.'
+  },
+  ru: {
+    fam1: 'Медицинские Смотровые и Клинические Перчатки',
+    fam1Desc: 'Барьерная защита для медицинских учреждений, клиник и нестерильного ухода.',
+    fam2: 'Высокобарьерные и Гибридные Полимеры',
+    fam2Desc: 'Передовые TPE, термовинил и кополимеры для промышленных и специализированных задач.',
+    fam3: 'Многоцелевая Защита и Специальные Размеры',
+    fam3Desc: 'Для пищевых производств, клининга, HoReCa и детских размеров.'
+  },
+  fa: {
+    fam1: 'مجموعه دستکش‌های معاینه پزشکی و بهداشت بالینی',
+    fam1Desc: 'حفاظت بهداشتی برای مراکز درمانی، درمانگاه‌ها و محیط‌های مراقبت غیر استریل.',
+    fam2: 'مجموعه پلیمری با سد محافظتی بالا و هیبرید',
+    fam2Desc: 'فرمولاسیون پیشرفته TPE، ترمو وینیل و کوپلیمر به عنوان گزینه‌های صنعتی و بهداشتی.',
+    fam3: 'مجموعه چندمنظوره محافظتی و سایزهای ویژه',
+    fam3Desc: 'طراحی‌شده برای صنایع غذایی، خدمات تشریفات، نظافت عمومی و کودکان.'
+  },
+  zh: {
+    fam1: '医用检查与临床卫生防护矩阵',
+    fam1Desc: '专为医疗卫生机构、诊所门诊与非无菌护理环境研发的致密阻隔手套。',
+    fam2: '高阻隔与先进复合热塑聚合物矩阵',
+    fam2Desc: '涵盖高弹 TPE、加厚热塑乙烯基及透气共聚物的大宗替代方案。',
+    fam3: '商业多用途防护与专属规格矩阵',
+    fam3Desc: '适用于食品加工、餐饮服务、工业保洁及特殊规格防护需求。'
+  },
+  vi: {
+    fam1: 'Dòng Găng Tay Khám Y Tế & Vệ Sinh Lâm Sàng',
+    fam1Desc: 'Bảo vệ rào cản tối ưu cho các cơ sở y tế, phòng khám và môi trường chăm sóc không tiệt trùng.',
+    fam2: 'Dòng Polyme Lai Tiến Tiến & Rào Cản Cao',
+    fam2Desc: 'Công nghệ TPE tiên tiến, composite thermo vinyl và copolymer thoáng khí.',
+    fam3: 'Dòng Bảo Hộ Đa Năng & Kích Cỡ Đặc Biệt',
+    fam3Desc: 'Thiết kế cho ngành chế biến thực phẩm, dịch vụ ẩm thực, vệ sinh và kích cỡ chuyên biệt.'
+  },
+  sq: {
+    fam1: 'Ekzaminim Mjekësor & Higjienë Klinike',
+    fam1Desc: 'Mbrojtje për institucione shëndetësore dhe klinika.',
+    fam2: 'Barierë e Lartë & Polimere Hibride',
+    fam2Desc: 'Formulime TPE, termo vinil dhe kopolimer.',
+    fam3: 'Mbrojtje Shumëqëllimore & Përmasa Speciale',
+    fam3Desc: 'Për përpunim ushqimi dhe pastrim.'
+  },
+  mk: {
+    fam1: 'Медицински прегледи и клиничка хигиена',
+    fam1Desc: 'Бариерна заштита за здравствени установи.',
+    fam2: 'Висока бариера и хибридни полимери',
+    fam2Desc: 'TPE, термо винил и кополимерни формулации.',
+    fam3: 'Повеќенаменска заштита и посебни големини',
+    fam3Desc: 'За прехранбена индустрија и чистење.'
+  },
+  sr: {
+    fam1: 'Medicinski pregledi i klinička higijena',
+    fam1Desc: 'Zaštita za zdravstvene ustanove i klinike.',
+    fam2: 'Visoka barijera i hibridni polimeri',
+    fam2Desc: 'TPE, termo vinil i kopolimerne formulacije.',
+    fam3: 'Višenamenska zaštita i posebne dimenzije',
+    fam3Desc: 'Za preradu hrane i čišćenje.'
+  }
+};
+
+const currentFamTitles = familyTitles[currentLang] || familyTitles.en;
+
+const productFamilies = [
+  {
+    id: 'fam-exam',
+    title: currentFamTitles.fam1,
+    desc: currentFamTitles.fam1Desc,
+    categoryIds: ['medilex-exam', 'winlyex-powder-free']
+  },
+  {
+    id: 'fam-barrier',
+    title: currentFamTitles.fam2,
+    desc: currentFamTitles.fam2Desc,
+    categoryIds: ['flex-hitech', 'winlyex-thermo-vinyl', 'slimfit-copolymer']
+  },
+  {
+    id: 'fam-protective',
+    title: currentFamTitles.fam3,
+    desc: currentFamTitles.fam3Desc,
+    categoryIds: ['florex-multipurpose', 'flex-kids']
+  }
+];
 ---
 
 <div class="reflex-page" dir={isRtl ? 'rtl' : 'ltr'}>
@@ -229,9 +343,8 @@ const notesPlaceholder = {
         <div class="reflex-hero-badges-grid">
           {heroTrustBadges.map((badge) => (
             <div class="reflex-hero-badge-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                <polyline points="22 4 12 14.01 9 11.01"/>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"/>
               </svg>
               <span>{badge}</span>
             </div>
@@ -243,7 +356,7 @@ const notesPlaceholder = {
             {data.ctaQuote} →
           </a>
           <a class="button button-secondary" href="/documents/reflex-medical-catalogue.pdf" download="REFLEX-Medical-Catalogue.pdf" data-catalog-download data-catalog-language={currentLang}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
               <polyline points="7 10 12 15 17 10"/>
               <line x1="12" y1="15" x2="12" y2="3"/>
@@ -257,75 +370,101 @@ const notesPlaceholder = {
       </div>
 
       <figure class="reflex-hero-figure">
-        <picture>
-          <source srcset="/images/reflex/reflex-slider1.webp" type="image/webp" />
-          <img
-            src="/images/reflex/reflex-slider1.jpg"
-            width="1200"
-            height="850"
-            alt={localizedHeroTitle}
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-            class="reflex-hero-media"
-          />
-        </picture>
+        <div class="reflex-hero-media-wrapper">
+          <picture>
+            <source srcset="/images/reflex/reflex-slider1.webp" type="image/webp" />
+            <img
+              src="/images/reflex/reflex-slider1.jpg"
+              width="1200"
+              height="850"
+              alt={localizedHeroTitle}
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              class="reflex-hero-media"
+            />
+          </picture>
+        </div>
         <figcaption class="reflex-media-caption" set:html={mediaCaption} />
       </figure>
     </div>
   </section>
 
-  <!-- 2. Manufacturing Capacity & B2B Supplier Section -->
-  <section class="section reflex-about-section">
-    <div class="container content-grid">
-      <div class="prose">
-        <span class="eyebrow">{data.aboutEyebrow}</span>
-        <h2>{data.aboutTitle}</h2>
-        <p>{data.aboutText1}</p>
-        <p>{data.aboutText2}</p>
-
-        <div class="reflex-role-card">
-          <h3>{data.aboutRoleTitle}</h3>
-          <p>{data.aboutRoleText}</p>
-          <div class="reflex-disclaimer-note">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="12" y1="16" x2="12" y2="12"/>
-              <line x1="12" y1="8" x2="12.01" y2="8"/>
-            </svg>
-            <span>{ui.roleScope}</span>
-          </div>
+  <!-- 2. Manufacturing & Facility Evidence Section -->
+  <section class="section reflex-facility-section" id="facility-evidence">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">{data.aboutEyebrow}</span>
+          <h2>{data.aboutTitle}</h2>
         </div>
+        <p>{data.aboutText1}</p>
       </div>
 
-      <aside class="side-panel">
-        <div class="reflex-markets-card">
-          <div class="reflex-facility-media-box">
-            <img
-              src="/images/reflex/resizer (1).jpg"
-              width="680"
-              height="750"
-              alt={facilityCaption}
-              loading="lazy"
-              decoding="async"
-            />
-            <small>{facilityCaption}</small>
+      <div class="reflex-facility-evidence-grid">
+        <div class="reflex-facility-narrative">
+          <div class="reflex-facility-media-card">
+            <div class="reflex-facility-image-wrap">
+              <img
+                src="/images/reflex/resizer (1).jpg"
+                width="680"
+                height="500"
+                alt={facilityCaption}
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="reflex-evidence-tag">COMMERCIAL EVIDENCE</span>
+            </div>
+            <figcaption class="reflex-facility-caption">
+              <strong>{facilityCaption}</strong>
+              <p>{data.aboutText2}</p>
+            </figcaption>
           </div>
 
+          <div class="reflex-role-card">
+            <div class="reflex-role-header">
+              <span class="reflex-role-kicker">INDEPENDENT SOURCING COORDINATION</span>
+              <h3>{data.aboutRoleTitle}</h3>
+            </div>
+            <p>{data.aboutRoleText}</p>
+            <div class="reflex-disclaimer-note">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+              <span>{ui.roleScope}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reflex-capability-column">
           <div class="reflex-capacity-grid">
             {capacityCardsData.map((card) => (
               <div class="reflex-capacity-card">
                 <strong>{card.title}</strong>
-                <span>{card.desc}</span>
+                <p>{card.desc}</p>
               </div>
             ))}
           </div>
+
+          <div class="reflex-markets-mandate-card">
+            <h4>{data.aboutMarketsTitle}</h4>
+            <ul class="reflex-markets-list">
+              {data.aboutMarketsList.map((m) => (
+                <li>
+                  <span class="reflex-market-dot"></span>
+                  <span>{m}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </aside>
+      </div>
     </div>
   </section>
 
-  <!-- 3. Featured Commercial Demonstration Video -->
+  <!-- Commercial Demonstration Video Panel -->
   <ProductVideoSection
     videoSrc="/videos/Commercial_prompt_for_disposable_gloves.mp4"
     posterSrc="/images/reflex/resizer.jpg"
@@ -337,83 +476,144 @@ const notesPlaceholder = {
     muted={false}
   />
 
-  <!-- 4. Product Portfolio Cards -->
+  <!-- 3. Product Families Section -->
   <section class="section reflex-categories-section" id="product-categories">
     <div class="container">
       <div class="section-head">
-        <h2>{ui.portfolioTitle}</h2>
+        <div>
+          <span class="eyebrow">{ui.portfolioTitle}</span>
+          <h2>{data.categoriesTitle}</h2>
+        </div>
         <p>{data.categoriesLead}</p>
       </div>
 
-      <div class="reflex-products-grid" data-reflex-product-grid>
-        {data.categories.map((cat, index) => (
-          <article class:list={['reflex-product-card', { 'reflex-product-card--lead': index === 0 }]} id={cat.id} data-reflex-product-card>
-            <figure class="reflex-card-image-box">
-              <span class="reflex-card-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-              <img
-                src={cat.image}
-                width="640"
-                height="450"
-                alt={cat.name}
-                loading="lazy"
-                decoding="async"
-              />
-            </figure>
-
-            <div class="reflex-card-content">
-              <div class="reflex-card-heading">
-                <p class="reflex-card-subtitle">{cat.subtitle}</p>
-                <h3>{cat.name}</h3>
+      <div class="reflex-families-container">
+        {productFamilies.map((fam) => {
+          const items = data.categories.filter((c) => fam.categoryIds.includes(c.id));
+          if (!items.length) return null;
+          return (
+            <div class="reflex-family-block" id={fam.id}>
+              <div class="reflex-family-header">
+                <div class="reflex-family-title-wrap">
+                  <span class="reflex-family-pill">SERIES / FAMILY</span>
+                  <h3>{fam.title}</h3>
+                </div>
+                <p>{fam.desc}</p>
               </div>
-              <p class="reflex-card-desc">{cat.description}</p>
 
-              <div class="reflex-card-badges" aria-label={`${cat.name} product highlights`}>
-                {cat.badges.slice(0, 3).map((badge) => (
-                  <span class="reflex-card-badge">{badge}</span>
+              <div class="reflex-family-grid">
+                {items.map((cat, idx) => (
+                  <article class="reflex-product-card" id={cat.id} data-reflex-product-card>
+                    <figure class="reflex-card-image-box">
+                      <span class="reflex-card-index" aria-hidden="true">{String(idx + 1).padStart(2, '0')}</span>
+                      <img
+                        src={cat.image}
+                        width="640"
+                        height="450"
+                        alt={cat.name}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
+
+                    <div class="reflex-card-content">
+                      <div class="reflex-card-heading">
+                        <p class="reflex-card-subtitle">{cat.subtitle}</p>
+                        <h4>{cat.name}</h4>
+                      </div>
+                      <p class="reflex-card-desc">{cat.description}</p>
+
+                      <div class="reflex-card-badges" aria-label={`${cat.name} product highlights`}>
+                        {cat.badges.slice(0, 3).map((badge) => (
+                          <span class="reflex-card-badge">{badge}</span>
+                        ))}
+                      </div>
+
+                      <dl class="reflex-spec-list">
+                        <div>
+                          <dt>{ui.material}</dt>
+                          <dd>{cat.material}</dd>
+                        </div>
+                        <div>
+                          <dt>{ui.variants}</dt>
+                          <dd>{cat.variants}</dd>
+                        </div>
+                        <div>
+                          <dt>{ui.packaging}</dt>
+                          <dd>{cat.packing}</dd>
+                        </div>
+                      </dl>
+
+                      {categoryVideoMap[cat.id] && (
+                        <details class="reflex-card-film">
+                          <summary>{ui.videoTitle}</summary>
+                          <div class="reflex-card-video-box">
+                            <video
+                              src={categoryVideoMap[cat.id].video}
+                              poster={categoryVideoMap[cat.id].poster}
+                              controls
+                              playsinline
+                              preload="metadata"
+                              aria-label={`${cat.name} Product Video`}
+                              class="reflex-card-video"
+                            ></video>
+                          </div>
+                        </details>
+                      )}
+
+                      <div class="reflex-card-actions">
+                        <a class="button button-small" href="#rfq-form" data-product-quote={cat.name}>
+                          <span>{ui.quote}</span><span aria-hidden="true">→</span>
+                        </a>
+                      </div>
+                    </div>
+                  </article>
                 ))}
               </div>
-
-              <dl class="reflex-spec-list">
-                <div>
-                  <dt>{ui.material}</dt>
-                  <dd>{cat.material}</dd>
-                </div>
-                <div>
-                  <dt>{ui.variants}</dt>
-                  <dd>{cat.variants}</dd>
-                </div>
-                <div>
-                  <dt>{ui.packaging}</dt>
-                  <dd>{cat.packing}</dd>
-                </div>
-              </dl>
-
-              {categoryVideoMap[cat.id] && (
-                <details class="reflex-card-film">
-                  <summary>{ui.videoTitle}</summary>
-                  <div class="reflex-card-video-box">
-                    <video
-                      src={categoryVideoMap[cat.id].video}
-                      poster={categoryVideoMap[cat.id].poster}
-                      controls
-                      playsinline
-                      preload="metadata"
-                      aria-label={`${cat.name} Product Video`}
-                      class="reflex-card-video"
-                    ></video>
-                  </div>
-                </details>
-              )}
-
-              <div class="reflex-card-actions">
-                <a class="button button-small" href="#rfq-form" data-product-quote={cat.name}>
-                  <span>{ui.quote}</span><span aria-hidden="true">→</span>
-                </a>
-              </div>
             </div>
-          </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Quality Control & International Standards Section -->
+  <section class="section reflex-quality-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">STANDARDS & VERIFICATION</span>
+          <h2>{ui.qualityTitle}</h2>
+        </div>
+        <p>{ui.qualityLead}</p>
+      </div>
+
+      <div class="reflex-quality-grid">
+        {qualityCardsData.map((qc) => (
+          <div class="reflex-quality-card">
+            <div class="reflex-quality-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            </div>
+            <h3>{qc.title}</h3>
+            <p>{qc.desc}</p>
+          </div>
         ))}
       </div>
+
+      <aside class="reflex-document-scope" aria-label={ui.documentTitle}>
+        <div class="reflex-document-scope-head">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="16" x2="12" y2="12"/>
+            <line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          <strong>{ui.documentTitle}</strong>
+        </div>
+        <p>{ui.documentText}</p>
+      </aside>
     </div>
   </section>
 
@@ -421,7 +621,10 @@ const notesPlaceholder = {
   <section class="section reflex-applications-section">
     <div class="container">
       <div class="section-head">
-        <h2>{ui.applicationsTitle}</h2>
+        <div>
+          <span class="eyebrow">SECTOR FOCUS</span>
+          <h2>{ui.applicationsTitle}</h2>
+        </div>
         <p>{data.applicationsLead}</p>
       </div>
 
@@ -448,43 +651,16 @@ const notesPlaceholder = {
     </div>
   </section>
 
-  <!-- 6. Quality Control & International Standards Section -->
-  <section class="section reflex-quality-section">
-    <div class="container">
-      <div class="section-head">
-        <h2>{ui.qualityTitle}</h2>
-        <p>{ui.qualityLead}</p>
-      </div>
-
-      <div class="reflex-quality-grid">
-        {qualityCardsData.map((qc) => (
-          <div class="reflex-quality-card">
-            <div class="reflex-quality-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <path d="m9 12 2 2 4-4"/>
-              </svg>
-            </div>
-            <h3>{qc.title}</h3>
-            <p>{qc.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. Product Gallery -->
+  <!-- 6. Product Gallery & Technical Catalogue -->
   <section class="section reflex-gallery-section">
     <div class="container">
       <div class="section-head">
-        <h2>{data.galleryTitle}</h2>
+        <div>
+          <span class="eyebrow">MEDIA ARCHIVE</span>
+          <h2>{data.galleryTitle}</h2>
+        </div>
         <p>{data.galleryLead}</p>
       </div>
-
-      <aside class="reflex-document-scope" aria-label={ui.documentTitle}>
-        <strong>{ui.documentTitle}</strong>
-        <p>{ui.documentText}</p>
-      </aside>
 
       <div class="reflex-gallery-grid">
         {data.galleryItems.map((item) => (
@@ -509,12 +685,8 @@ const notesPlaceholder = {
           </figure>
         ))}
       </div>
-    </div>
-  </section>
 
-  <!-- 8. Catalogue Download Section -->
-  <section class="section reflex-download-banner">
-    <div class="container">
+      <!-- Catalogue Download Banner -->
       <div class="reflex-download-box">
         <div class="reflex-download-text">
           <h2>{data.downloadTitle}</h2>
@@ -542,55 +714,45 @@ const notesPlaceholder = {
     </div>
   </section>
 
-  <!-- 9. Request for Commercial Quotation (RFQ) Section -->
+  <!-- 7. Request for Commercial Quotation (RFQ) Section -->
   <section class="section reflex-rfq-section" id="rfq-form">
     <div class="container">
       <div class="reflex-rfq-grid">
         <div class="reflex-rfq-info">
           <span class="eyebrow">{ui.rfqEyebrow}</span>
           <h2>{ui.rfqTitle}</h2>
-          <p>{data.rfqLead}</p>
+          <p class="lead reflex-rfq-lead">{data.rfqLead}</p>
 
           <div class="reflex-rfq-trust-box">
             <h4 class="reflex-rfq-trust-heading">{ui.rfqTrustTitle}</h4>
             <ul class="reflex-rfq-trust-list">
-              <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>{ui.trustItems[0]}</span>
-              </li>
-              <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>{ui.trustItems[1]}</span>
-              </li>
-              <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>{ui.trustItems[2]}</span>
-              </li>
-              <li>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e2b96c" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                <span>{ui.trustItems[3]}</span>
-              </li>
+              {ui.trustItems.map((item) => (
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>{item}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div class="reflex-rfq-features">
             <div class="reflex-rfq-feat">
               <strong>{ui.logisticsTitle}</strong>
-              <span>{ui.logisticsText}</span>
+              <p>{ui.logisticsText}</p>
             </div>
             <div class="reflex-rfq-feat">
               <strong>{ui.documentsTitle}</strong>
-              <span>{ui.documentsText}</span>
+              <p>{ui.documentsText}</p>
             </div>
             <div class="reflex-rfq-feat">
               <strong>{ui.verificationTitle}</strong>
-              <span>{ui.verificationText}</span>
+              <p>{ui.verificationText}</p>
             </div>
           </div>
         </div>
 
         <div class="reflex-rfq-form-card">
-          <form class="reflex-form" id="reflex-rfq-fields" data-reflex-form action="/api/contact" method="post">
+          <form class="reflex-form" id="reflex-rfq-fields" data-reflex-form data-commercial-form action="/api/contact" method="post">
             <input type="hidden" name="locale" value={currentLang} />
             <input type="hidden" name="intent" value="buyer_request" />
             <input type="hidden" name="tradeDirection" value="import_to_turkiye" />
@@ -600,34 +762,34 @@ const notesPlaceholder = {
             <div class="form-honeypot" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
 
             <div class="form-row">
-              <div class="form-group">
-                <label for="rfq-name">{data.formLabels.name} *</label>
+              <div class="form-group commercial-field">
+                <span><label for="rfq-name">{data.formLabels.name} *</label></span>
                 <input type="text" id="rfq-name" name="name" required maxlength="120" autocomplete="name" />
               </div>
-              <div class="form-group">
-                <label for="rfq-email">{data.formLabels.email} *</label>
+              <div class="form-group commercial-field">
+                <span><label for="rfq-email">{data.formLabels.email} *</label></span>
                 <input type="email" id="rfq-email" name="emailOrPhone" required maxlength="254" autocomplete="email" placeholder="company@domain.com" />
               </div>
             </div>
 
             <div class="form-row">
-              <div class="form-group">
-                <label for="rfq-phone">{data.formLabels.phone}</label>
+              <div class="form-group commercial-field">
+                <span><label for="rfq-phone">{data.formLabels.phone}</label></span>
                 <input type="tel" id="rfq-phone" name="phone" maxlength="80" autocomplete="tel" placeholder="+1 234 567 890" />
               </div>
-              <div class="form-group">
-                <label for="rfq-company">{data.formLabels.company} *</label>
+              <div class="form-group commercial-field">
+                <span><label for="rfq-company">{data.formLabels.company} *</label></span>
                 <input type="text" id="rfq-company" name="company" required maxlength="160" autocomplete="organization" />
               </div>
             </div>
 
             <div class="form-row">
-              <div class="form-group">
-                <label for="rfq-country">{data.formLabels.country} *</label>
+              <div class="form-group commercial-field">
+                <span><label for="rfq-country">{data.formLabels.country} *</label></span>
                 <input type="text" id="rfq-country" name="destinationMarket" required maxlength="100" autocomplete="country-name" />
               </div>
-              <div class="form-group">
-                <label for="rfq-product">{data.formLabels.product}</label>
+              <div class="form-group commercial-field">
+                <span><label for="rfq-product">{data.formLabels.product}</label></span>
                 <select id="rfq-product" name="product">
                   <option value={allProductsOption}>{allProductsOption}</option>
                   {data.categories.map((c) => (<option value={c.name}>{c.name}</option>))}
@@ -635,28 +797,31 @@ const notesPlaceholder = {
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="rfq-volume">{data.formLabels.volume}</label>
+            <div class="form-group commercial-field">
+              <span><label for="rfq-volume">{data.formLabels.volume}</label></span>
               <input type="text" id="rfq-volume" name="quantity" maxlength="120" placeholder={volumePlaceholder} />
             </div>
 
             <div class="form-row">
-              <div class="form-group">
-                <label for="rfq-incoterm">{rfqExtra.incoterm}</label>
+              <div class="form-group commercial-field">
+                <span><label for="rfq-incoterm">{rfqExtra.incoterm}</label></span>
                 <input type="text" id="rfq-incoterm" name="incoterm" maxlength="30" placeholder="FOB, CIF or DAP" />
               </div>
-              <div class="form-group">
-                <label for="rfq-target-date">{rfqExtra.targetDate}</label>
+              <div class="form-group commercial-field">
+                <span><label for="rfq-target-date">{rfqExtra.targetDate}</label></span>
                 <input type="date" id="rfq-target-date" name="targetDate" />
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="rfq-notes">{data.formLabels.notes}</label>
+            <div class="form-group commercial-field commercial-field--full">
+              <span><label for="rfq-notes">{data.formLabels.notes}</label></span>
               <textarea id="rfq-notes" name="message" maxlength="2000" rows="4" placeholder={notesPlaceholder}></textarea>
             </div>
 
-            <label class="reflex-rfq-privacy"><input type="checkbox" name="privacy" value="accepted" required /> <span>{rfqPrivacy.label} <a href={rfqPrivacyHref}>{rfqPrivacy.link}</a></span></label>
+            <label class="reflex-rfq-privacy">
+              <input type="checkbox" name="privacy" value="accepted" required />
+              <span>{rfqPrivacy.label} <a href={rfqPrivacyHref}>{rfqPrivacy.link}</a></span>
+            </label>
             <p class="reflex-rfq-status" data-rfq-status role="status" aria-live="polite"></p>
             <button type="submit" class="button button-large button-block">{data.formLabels.submit}</button>
           </form>
@@ -665,6 +830,1160 @@ const notesPlaceholder = {
     </div>
   </section>
 </div>
+
+<style>
+  .reflex-page {
+    background-color: #111210;
+    color: #f2efe7;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Global tokens & Typography for Reflex */
+  .reflex-page .eyebrow {
+    display: inline-block;
+    color: #c4f000;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .reflex-page .section {
+    padding-block: clamp(64px, 7vw, 112px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .reflex-page .section-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    gap: clamp(32px, 4vw, 64px);
+    align-items: end;
+    margin-bottom: clamp(40px, 5vw, 64px);
+  }
+
+  .reflex-page .section-head h2 {
+    font-family: var(--font-serif, 'Source Serif 4', Georgia, serif);
+    font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    color: #ffffff;
+    margin: 0;
+  }
+
+  .reflex-page .section-head p {
+    color: #d1d1cb;
+    font-size: clamp(0.95rem, 1.2vw, 1.12rem);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* 1. Hero Section */
+  .reflex-hero-section {
+    padding-top: clamp(40px, 5vw, 80px);
+    padding-bottom: clamp(64px, 7vw, 100px);
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at 85% 20%, rgba(196, 240, 0, 0.04), transparent 45%), #111210;
+  }
+
+  .reflex-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
+    gap: clamp(36px, 5vw, 72px);
+    align-items: center;
+  }
+
+  .reflex-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.76rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #888882;
+    margin-bottom: 20px;
+  }
+
+  .reflex-breadcrumbs a {
+    color: #b5b5ad;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .reflex-breadcrumbs a:hover {
+    color: #c4f000;
+  }
+
+  .reflex-breadcrumbs .current {
+    color: #e2e2dc;
+    font-weight: 600;
+  }
+
+  .reflex-h1 {
+    font-family: var(--font-serif, 'Source Serif 4', Georgia, serif);
+    font-size: clamp(2.35rem, 4.3vw, 4.4rem);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.045em;
+    color: #ffffff;
+    margin: 0 0 22px;
+    text-wrap: balance;
+  }
+
+  .reflex-hero-lead {
+    font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+    line-height: 1.62;
+    color: #c4f000;
+    font-weight: 550;
+    max-width: 38em;
+    margin: 0 0 30px;
+  }
+
+  .reflex-hero-badges-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+
+  .reflex-hero-badge-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e5e5df;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .reflex-hero-badge-item svg {
+    color: #c4f000;
+    flex-shrink: 0;
+  }
+
+  .reflex-hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .reflex-hero-actions .button {
+    background: #c4f000;
+    border-color: #c4f000;
+    color: #0a0a0a !important;
+    font-weight: 800;
+  }
+
+  .reflex-hero-actions .button:hover {
+    background: #d4f733;
+    border-color: #d4f733;
+  }
+
+  .reflex-hero-actions .button-secondary {
+    background: #ffffff !important;
+    border-color: #4a4a4a !important;
+    color: #0a0a0a !important;
+    font-weight: 700;
+  }
+
+  .reflex-hero-actions .button-secondary:hover {
+    background: #f0f0eb !important;
+  }
+
+  .reflex-hero-figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reflex-hero-media-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: #0d0e0c;
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.4);
+  }
+
+  .reflex-hero-media-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border: 1px solid rgba(196, 240, 0, 0.18);
+    border-radius: inherit;
+  }
+
+  .reflex-hero-media {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/11;
+    max-height: 480px;
+    object-fit: cover;
+  }
+
+  .reflex-media-caption {
+    margin-top: 14px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.78rem;
+    color: #b0b0a6;
+    line-height: 1.45;
+  }
+
+  .reflex-media-caption strong {
+    color: #f2efe7;
+  }
+
+  /* 2. Manufacturing & Facility Evidence Section */
+  .reflex-facility-section {
+    background-color: #151614;
+  }
+
+  .reflex-facility-evidence-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(32px, 4.5vw, 64px);
+    align-items: start;
+  }
+
+  .reflex-facility-media-card {
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #111210;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    margin-bottom: 28px;
+  }
+
+  .reflex-facility-image-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/10;
+    max-height: 440px;
+    background: #000;
+  }
+
+  .reflex-facility-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .reflex-evidence-tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: #c4f000;
+    color: #0a0a0a;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    padding: 6px 12px;
+    border-radius: 4px;
+  }
+
+  [dir="rtl"] .reflex-evidence-tag {
+    left: auto;
+    right: 16px;
+  }
+
+  .reflex-facility-caption {
+    padding: 20px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .reflex-facility-caption strong {
+    display: block;
+    font-size: 0.96rem;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+
+  .reflex-facility-caption p {
+    font-size: 0.86rem;
+    color: #a8a89f;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .reflex-role-card {
+    padding: 26px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-inline-start: 3px solid #c4f000;
+  }
+
+  .reflex-role-kicker {
+    display: inline-block;
+    color: #c4f000;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .reflex-role-card h3 {
+    margin: 0 0 12px;
+    font-size: 1.25rem;
+    color: #ffffff;
+  }
+
+  .reflex-role-card p {
+    color: #b5b5ad;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin: 0 0 16px;
+  }
+
+  .reflex-disclaimer-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: rgba(196, 240, 0, 0.05);
+    border: 1px solid rgba(196, 240, 0, 0.2);
+    color: #e5e5df;
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  .reflex-disclaimer-note svg {
+    color: #c4f000;
+    flex-shrink: 0;
+  }
+
+  .reflex-capacity-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .reflex-capacity-card {
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .reflex-capacity-card strong {
+    color: #c4f000;
+    font-size: 0.84rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .reflex-capacity-card p {
+    margin: 0;
+    color: #c0c0b8;
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .reflex-markets-mandate-card {
+    padding: 22px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .reflex-markets-mandate-card h4 {
+    margin: 0 0 14px;
+    font-size: 0.88rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .reflex-markets-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+  }
+
+  .reflex-markets-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #b5b5ad;
+    font-size: 0.82rem;
+  }
+
+  .reflex-market-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #c4f000;
+    flex-shrink: 0;
+  }
+
+  /* 3. Product Families Section */
+  .reflex-categories-section {
+    background-color: #111210;
+  }
+
+  .reflex-families-container {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(48px, 6vw, 84px);
+  }
+
+  .reflex-family-block {
+    position: relative;
+  }
+
+  .reflex-family-header {
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .reflex-family-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .reflex-family-pill {
+    background: #c4f000;
+    color: #0a0a0a;
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .reflex-family-header h3 {
+    margin: 0;
+    font-family: var(--font-serif, 'Source Serif 4', Georgia, serif);
+    font-size: clamp(1.4rem, 2.2vw, 1.95rem);
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .reflex-family-header p {
+    margin: 0;
+    color: #a2a29b;
+    font-size: 0.92rem;
+    max-width: 44em;
+    line-height: 1.5;
+  }
+
+  .reflex-family-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: clamp(20px, 2.5vw, 32px);
+  }
+
+  .reflex-product-card {
+    background: #161715;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .reflex-product-card:hover {
+    border-color: rgba(196, 240, 0, 0.45);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.35);
+  }
+
+  .reflex-card-image-box {
+    margin: 0 0 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .reflex-card-image-box img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .reflex-card-index {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(17, 18, 16, 0.88);
+    color: #c4f000;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  [dir="rtl"] .reflex-card-index {
+    left: auto;
+    right: 10px;
+  }
+
+  .reflex-card-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 14px;
+  }
+
+  .reflex-card-subtitle {
+    margin: 0;
+    color: #c4f000;
+    font-size: 0.72rem;
+    font-weight: 750;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .reflex-card-heading h4 {
+    margin: 4px 0 0;
+    font-size: 1.25rem;
+    font-weight: 650;
+    color: #ffffff;
+    line-height: 1.25;
+  }
+
+  .reflex-card-desc {
+    margin: 0;
+    color: #b0b0a8;
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .reflex-card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .reflex-card-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #d6d6ce;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  .reflex-spec-list {
+    margin: 8px 0 0;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: grid;
+    gap: 8px;
+  }
+
+  .reflex-spec-list dt {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8c8c85;
+    margin-bottom: 2px;
+  }
+
+  .reflex-spec-list dd {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #f0f0ea;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .reflex-card-film {
+    margin-top: 4px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    padding: 10px 12px;
+  }
+
+  .reflex-card-film summary {
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #c4f000;
+    user-select: none;
+  }
+
+  .reflex-card-video-box {
+    margin-top: 10px;
+  }
+
+  .reflex-card-video {
+    width: 100%;
+    border-radius: 6px;
+    display: block;
+    background: #000;
+  }
+
+  .reflex-card-actions {
+    margin-top: auto;
+    padding-top: 14px;
+  }
+
+  .reflex-card-actions .button {
+    width: 100%;
+    background: #c4f000;
+    border-color: #c4f000;
+    color: #0a0a0a !important;
+    font-weight: 800;
+    gap: 8px;
+  }
+
+  .reflex-card-actions .button:hover {
+    background: #d4f733;
+    border-color: #d4f733;
+  }
+
+  /* 4. Quality Control & International Standards Section */
+  .reflex-quality-section {
+    background-color: #151614;
+  }
+
+  .reflex-quality-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .reflex-quality-card {
+    padding: 28px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .reflex-quality-icon {
+    color: #c4f000;
+  }
+
+  .reflex-quality-card h3 {
+    margin: 0;
+    font-size: 1.18rem;
+    color: #ffffff;
+    font-weight: 650;
+  }
+
+  .reflex-quality-card p {
+    margin: 0;
+    color: #b5b5ad;
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .reflex-document-scope {
+    padding: 22px 26px;
+    border-radius: 12px;
+    background: rgba(196, 240, 0, 0.04);
+    border: 1px solid rgba(196, 240, 0, 0.25);
+  }
+
+  .reflex-document-scope-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #c4f000;
+    margin-bottom: 8px;
+  }
+
+  .reflex-document-scope-head strong {
+    font-size: 0.88rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .reflex-document-scope p {
+    margin: 0;
+    color: #d4d4cc;
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  /* 5. Sector Applications Section */
+  .reflex-applications-section {
+    background-color: #111210;
+  }
+
+  .reflex-app-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .reflex-app-card {
+    border-radius: 14px;
+    overflow: hidden;
+    background: #161715;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reflex-app-fig {
+    margin: 0;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .reflex-app-fig img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .reflex-app-card:hover .reflex-app-fig img {
+    transform: scale(1.04);
+  }
+
+  .reflex-app-body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+  }
+
+  .reflex-app-body h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    color: #ffffff;
+    font-weight: 650;
+  }
+
+  .reflex-app-body p {
+    margin: 0;
+    font-size: 0.84rem;
+    color: #a5a59d;
+    line-height: 1.5;
+  }
+
+  /* 6. Product Gallery & Technical Catalogue */
+  .reflex-gallery-section {
+    background-color: #151614;
+  }
+
+  .reflex-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .reflex-gallery-card {
+    margin: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #111210;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reflex-gallery-card picture {
+    display: block;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+
+  .reflex-gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .reflex-gallery-card figcaption {
+    padding: 14px 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .reflex-gallery-card .tag {
+    display: inline-block;
+    color: #c4f000;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .reflex-gallery-card h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .reflex-download-box {
+    border-radius: 18px;
+    padding: clamp(32px, 4vw, 48px);
+    background: linear-gradient(135deg, #181917 0%, #20221e 100%);
+    border: 1px solid rgba(196, 240, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .reflex-download-text h2 {
+    margin: 0 0 10px;
+    font-family: var(--font-serif, 'Source Serif 4', Georgia, serif);
+    font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+    color: #ffffff;
+  }
+
+  .reflex-download-text p {
+    margin: 0 0 12px;
+    color: #b5b5ad;
+    font-size: 0.92rem;
+    max-width: 36em;
+  }
+
+  .reflex-pdf-notice {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #8c8c84;
+    font-size: 0.78rem;
+  }
+
+  .reflex-download-action .button {
+    background: #c4f000;
+    border-color: #c4f000;
+    color: #0a0a0a !important;
+    font-weight: 800;
+    white-space: nowrap;
+    gap: 10px;
+  }
+
+  .reflex-download-action .button:hover {
+    background: #d4f733;
+  }
+
+  /* 7. Commercial RFQ Section */
+  .reflex-rfq-section {
+    background-color: #111210;
+  }
+
+  .reflex-rfq-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    gap: clamp(36px, 5vw, 72px);
+    align-items: start;
+  }
+
+  .reflex-rfq-lead {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #b5b5ad;
+    margin: 0 0 28px;
+  }
+
+  .reflex-rfq-trust-box {
+    padding: 22px 24px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 24px;
+  }
+
+  .reflex-rfq-trust-heading {
+    margin: 0 0 14px;
+    font-size: 0.84rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .reflex-rfq-trust-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .reflex-rfq-trust-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.84rem;
+    color: #d1d1cb;
+  }
+
+  .reflex-rfq-trust-list svg {
+    color: #c4f000;
+    flex-shrink: 0;
+  }
+
+  .reflex-rfq-features {
+    display: grid;
+    gap: 16px;
+  }
+
+  .reflex-rfq-feat {
+    padding: 16px 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .reflex-rfq-feat strong {
+    display: block;
+    color: #c4f000;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .reflex-rfq-feat p {
+    margin: 0;
+    color: #a5a59d;
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .reflex-rfq-form-card {
+    border-radius: 18px;
+    background: #161715;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: clamp(24px, 3.5vw, 40px);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+  }
+
+  .reflex-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-group label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #d1d1cb;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    font: inherit;
+    font-size: 0.9rem;
+    padding: 12px 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .form-group select {
+    background-color: #1a1b18;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #c4f000;
+    box-shadow: 0 0 0 2px rgba(196, 240, 0, 0.2);
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: #777770;
+  }
+
+  .reflex-rfq-privacy {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.78rem;
+    color: #a5a59d;
+    line-height: 1.45;
+    margin-top: 4px;
+    cursor: pointer;
+  }
+
+  .reflex-rfq-privacy input {
+    margin-top: 3px;
+    accent-color: #c4f000;
+  }
+
+  .reflex-rfq-privacy a {
+    color: #c4f000;
+    text-decoration: underline;
+  }
+
+  .reflex-rfq-status {
+    min-height: 1.2em;
+    margin: 0;
+    font-size: 0.85rem;
+  }
+
+  .reflex-rfq-status.is-success {
+    color: #c4f000;
+  }
+
+  .reflex-rfq-status.is-error {
+    color: #ff6b6b;
+  }
+
+  .button-block {
+    width: 100%;
+    background: #c4f000;
+    border-color: #c4f000;
+    color: #0a0a0a !important;
+    font-weight: 800;
+    font-size: 0.92rem;
+    padding-block: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .button-block:hover {
+    background: #d4f733;
+  }
+
+  .form-honeypot {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Responsive Media Queries */
+  @media (max-width: 1024px) {
+    .reflex-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .reflex-facility-evidence-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .reflex-app-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .reflex-rfq-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .reflex-download-box {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .reflex-page .section-head {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .reflex-quality-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .reflex-capacity-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .reflex-family-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .reflex-hero-badges-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .reflex-hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .reflex-hero-actions .button {
+      width: 100%;
+      text-align: center;
+    }
+
+    .reflex-app-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 
 <script define:vars={{ success: data.formLabels.successMessage, error: rfqPrivacy.error }}>
   (() => {
