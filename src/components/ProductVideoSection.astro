@@ -35,9 +35,11 @@ const isRtl = lang === 'fa';
     <div class="product-video-header">
       <span class="eyebrow product-video-kicker">{kicker}</span>
       <h3 class="product-video-heading">{heading}</h3>
+      <p class="product-video-intro">{description}</p>
     </div>
 
     <figure class="product-video-wrapper" style={`aspect-ratio: ${aspectRatio};`}>
+      <span class="product-video-tag" aria-hidden="true">CTSEG / TRADE PORTFOLIO</span>
       <video
         src={videoSrc}
         poster={posterSrc}
@@ -51,82 +53,173 @@ const isRtl = lang === 'fa';
         class="product-video-element"
       ></video>
     </figure>
-
-    <p class="product-video-caption">
-      {description}
-    </p>
   </div>
 </section>
 
 <style>
   .product-video-section {
-    padding: 3.5rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    background: linear-gradient(180deg, rgba(13, 17, 23, 0.6) 0%, rgba(7, 9, 13, 0.9) 100%);
+    position: relative;
+    overflow: hidden;
+    padding: clamp(4.5rem, 7vw, 7.5rem) 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: #111210;
+    color: #fff;
+  }
+
+  .product-video-section::before {
+    content: 'CTSEG';
+    position: absolute;
+    right: -.04em;
+    bottom: -.18em;
+    font-size: clamp(150px, 22vw, 370px);
+    font-weight: 900;
+    line-height: .78;
+    letter-spacing: -.09em;
+    color: rgba(255,255,255,.022);
+    pointer-events: none;
+    user-select: none;
   }
 
   .product-video-container {
-    max-width: 860px;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(280px,.7fr) minmax(0,1.3fr);
+    gap: clamp(34px,5vw,82px);
+    align-items: center;
+    max-width: 1240px;
     margin: 0 auto;
-    text-align: center;
   }
 
   .product-video-header {
-    margin-bottom: 1.75rem;
+    min-width: 0;
   }
 
   .product-video-kicker {
-    display: inline-block;
-    color: var(--accent-soft, #e2b96c);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 22px;
+    color: #c4f000;
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: .14em;
     text-transform: uppercase;
-    margin-bottom: 0.5rem;
+  }
+
+  .product-video-kicker::before {
+    content: '';
+    width: 36px;
+    height: 4px;
+    border-radius: 999px;
+    background: #c4f000;
   }
 
   .product-video-heading {
-    font-family: var(--font-heading, 'Source Serif 4', Georgia, serif);
-    font-size: clamp(1.5rem, 2.5vw, 2.1rem);
-    font-weight: 500;
-    color: var(--text, #f1eee7);
+    max-width: 10ch;
     margin: 0;
-    line-height: 1.25;
+    color: #fff;
+    font-family: var(--font-sans, Arial, sans-serif);
+    font-size: clamp(2.65rem, 4.7vw, 5rem);
+    font-weight: 760;
+    line-height: .96;
+    letter-spacing: -.055em;
+    text-wrap: balance;
+  }
+
+  .product-video-intro {
+    max-width: 34em;
+    margin: 28px 0 0;
+    color: #c4f000;
+    font-size: clamp(1rem,1.3vw,1.15rem);
+    font-weight: 600;
+    line-height: 1.62;
   }
 
   .product-video-wrapper {
-    margin: 0 0 1.5rem 0;
     position: relative;
-    border-radius: 0.875rem;
+    margin: 0;
     overflow: hidden;
-    background: #07090d;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 26px;
+    background: #070806;
+    box-shadow: 0 28px 80px rgba(0,0,0,.3);
+  }
+
+  .product-video-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(196,240,0,.09);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .product-video-tag {
+    position: absolute;
+    z-index: 2;
+    top: 18px;
+    left: 18px;
+    padding: 9px 12px;
+    border-radius: 999px;
+    background: #c4f000;
+    color: #0a0a0a;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .1em;
   }
 
   .product-video-element {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-    border-radius: 0.875rem;
+    border-radius: inherit;
+    transition: transform .8s cubic-bezier(.2,.8,.2,1);
   }
 
-  .product-video-caption {
-    margin: 0 auto;
-    max-width: 700px;
-    color: var(--muted, #aba89f);
-    font-size: 0.92rem;
-    line-height: 1.6;
+  .product-video-wrapper:hover .product-video-element {
+    transform: scale(1.018);
+  }
+
+  [dir="rtl"] .product-video-tag {
+    left: auto;
+    right: 18px;
+  }
+
+  @media (max-width: 900px) {
+    .product-video-container {
+      grid-template-columns: 1fr;
+    }
+    .product-video-heading {
+      max-width: 14ch;
+    }
+    .product-video-intro {
+      margin-top: 20px;
+    }
   }
 
   @media (max-width: 640px) {
     .product-video-section {
-      padding: 2.5rem 0;
+      padding: 4rem 0;
     }
-    .product-video-header {
-      margin-bottom: 1.25rem;
+    .product-video-heading {
+      max-width: 100%;
+      font-size: clamp(2.25rem,10vw,3.3rem);
+    }
+    .product-video-wrapper {
+      border-radius: 20px;
+    }
+    .product-video-tag {
+      top: 12px;
+      left: 12px;
+      font-size: 9px;
+      padding: 8px 10px;
+    }
+    [dir="rtl"] .product-video-tag {
+      left: auto;
+      right: 12px;
     }
   }
 </style>
