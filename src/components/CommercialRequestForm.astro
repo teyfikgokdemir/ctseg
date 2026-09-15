@@ -115,6 +115,19 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
   }
   @media(max-width:720px){
     .commercial-form-panel{padding:24px 18px;border-radius:20px;margin-inline:-2px}.commercial-form-intro h2{font-size:clamp(38px,10vw,52px);max-width:100%}.commercial-form-intro>p:not(.eyebrow){font-size:16px}.direct-contact-cards{grid-template-columns:1fr}.commercial-form-disclosure{border-radius:18px}.commercial-form-disclosure>summary{padding:20px;font-size:16px}.commercial-form{padding:0 18px 22px}.commercial-form-grid{grid-template-columns:1fr}.commercial-field--wide{grid-column:auto}.commercial-form-actions .button{width:100%}.commercial-form-panel::before{font-size:42vw;bottom:-.04em}}
+  /* Trade desk composition: ruled contact routes and a clear request sheet. */
+  .commercial-form-panel{border-radius:0;box-shadow:none}
+  .commercial-form-panel::before{content:none}
+  .direct-contact-cards{gap:0;border-top:1px solid rgba(255,255,255,.2)}
+  .direct-contact-card{min-height:68px;padding:12px 0;border:0;border-bottom:1px solid rgba(255,255,255,.2);border-radius:0;background:transparent;box-shadow:none}
+  .direct-contact-card>span{width:38px;height:38px;border-radius:0;background:transparent;color:#c4f000!important;border:1px solid rgba(196,240,0,.45)}
+  .direct-contact-card:hover,.direct-contact-card:focus-visible{transform:none;background:transparent;border-color:#c4f000}
+  .commercial-form-disclosure{border-radius:0;box-shadow:none}
+  .commercial-form-disclosure>summary{border-bottom:1px solid #d4d4cc}
+  .commercial-form-disclosure>summary span{border-radius:0}
+  .commercial-field input,.commercial-field select,.commercial-field textarea{border-radius:0}
+  .commercial-form-actions .button,.form-fallback{border-radius:0}
+  @media(max-width:980px){.direct-contact-cards{border-top:0}.direct-contact-card{border-top:1px solid rgba(255,255,255,.2)}}
 </style>
 
 <script define:vars={{ copy }}>
