@@ -361,3 +361,11 @@ html[data-locale="vi"] .hero h1{
 .site-footer .footer-market-link.is-active,.site-footer .footer-market-link.is-active span{
   color:#0a0a0a!important
 }
+
+/* REFLEX and process labels use the same acid information tone. */
+.reflex-page .reflex-hero-lead{
+  color:#c4f000!important;opacity:1!important;font-weight:650!important
+}
+.process-section .process-rail strong{
+  color:#c4f000!important;opacity:1!important;font-weight:700!important
+}
