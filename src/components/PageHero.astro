@@ -32,13 +32,8 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
     border-bottom:1px solid #d7d1c5!important;
     padding-block:clamp(72px,8vw,132px)!important;
   }
-  html body main .page-hero::before{
-    content:none!important;
-    display:none!important;
-  }
-  html body main .page-hero::after{
-    border-color:rgba(17,17,17,.12)!important;
-  }
+  html body main .page-hero::before{content:none!important;display:none!important}
+  html body main .page-hero::after{border-color:rgba(17,17,17,.12)!important}
   .page-hero>.container{position:relative;z-index:1}
   .page-hero-grid{display:grid!important;grid-template-columns:minmax(0,.9fr) minmax(420px,1.1fr)!important;gap:clamp(44px,6vw,96px)!important;align-items:center!important}
   .page-hero-copy{max-width:900px}
@@ -47,28 +42,8 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
   html body main .page-hero .breadcrumb a:hover{color:#111!important}
   html body main .page-hero .breadcrumb [aria-current="page"]{color:#777773!important;max-width:44ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   html body main .page-hero .eyebrow{margin:0 0 18px;color:#6d8200!important;font-size:12px!important;line-height:1.2;font-weight:800!important;letter-spacing:.15em!important;text-transform:uppercase}
-  html body main .page-hero h1{
-    margin:0!important;
-    max-width:13ch!important;
-    color:#111!important;
-    font-family:var(--font-sans,Arial,sans-serif)!important;
-    font-size:clamp(52px,6.1vw,96px)!important;
-    font-weight:800!important;
-    line-height:.95!important;
-    letter-spacing:-.06em!important;
-    text-wrap:balance;
-    opacity:1!important;
-    text-shadow:none!important;
-  }
-  html body main .page-hero .lead{
-    max-width:48rem!important;
-    margin:30px 0 0!important;
-    color:#4a4944!important;
-    font-size:clamp(17px,1.35vw,20px)!important;
-    line-height:1.65!important;
-    font-weight:500!important;
-    opacity:1!important;
-  }
+  html body main .page-hero h1{margin:0!important;max-width:13ch!important;color:#111!important;font-family:var(--font-sans,Arial,sans-serif)!important;font-size:clamp(52px,6.1vw,96px)!important;font-weight:800!important;line-height:.95!important;letter-spacing:-.06em!important;text-wrap:balance;opacity:1!important;text-shadow:none!important}
+  html body main .page-hero .lead{max-width:48rem!important;margin:30px 0 0!important;color:#4a4944!important;font-size:clamp(17px,1.35vw,20px)!important;line-height:1.65!important;font-weight:500!important;opacity:1!important}
   .page-hero .actions{margin-top:32px}
   html body main .page-hero .button{border-radius:999px!important;background:#c4f000!important;color:#0a0a0a!important;border-color:#a9cf00!important;padding:14px 22px!important;font-weight:800!important}
   .page-hero-media-wrap{position:relative;min-width:0}
@@ -77,10 +52,41 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
   html body main .page-hero.page-hero--compact{padding-block:clamp(40px,4.2vw,64px)!important}
   html body main .page-hero--compact h1{font-size:clamp(46px,5vw,78px)!important;max-width:15ch!important}
 
+  /* How-we-work: editorial sequence first, direct answers second. */
+  html body main .detailed-process{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;margin:0!important;padding:0!important;border-top:1px solid #aaa598!important;list-style:none!important;counter-reset:trade-step}
+  html body main .detailed-process li{position:relative!important;display:flex!important;min-height:250px!important;padding:30px 30px 34px!important;flex-direction:column!important;justify-content:space-between!important;border:0!important;border-right:1px solid #d3cec1!important;border-bottom:1px solid #d3cec1!important;background:transparent!important;counter-increment:trade-step}
+  html body main .detailed-process li:nth-child(3n){border-right:0!important}
+  html body main .detailed-process li span{color:#6d8200!important;font-size:11px!important;font-weight:800!important;letter-spacing:.16em!important}
+  html body main .detailed-process li h2{max-width:15ch!important;margin:70px 0 0!important;color:#171814!important;font-family:var(--font-sans,Arial,sans-serif)!important;font-size:clamp(24px,2.15vw,34px)!important;font-weight:750!important;line-height:1.02!important;letter-spacing:-.045em!important;text-wrap:balance}
+  html body main .detailed-process li::after{content:"";position:absolute;left:30px;right:30px;bottom:-1px;height:3px;background:#c4f000;transform:scaleX(.16);transform-origin:left center;transition:transform .32s ease}
+  html body main .detailed-process li:hover::after{transform:scaleX(1)}
+  html[dir="rtl"] body main .detailed-process li::after{transform-origin:right center}
+  html body main .role-boundary{display:grid!important;grid-template-columns:minmax(180px,.32fr) minmax(0,1fr)!important;gap:clamp(30px,5vw,80px)!important;margin-top:48px!important;padding:28px 0!important;border:0!important;border-top:1px solid #aaa598!important;border-bottom:1px solid #d3cec1!important;background:transparent!important}
+  html body main .role-boundary strong{color:#171814!important;font-size:12px!important;letter-spacing:.11em!important;text-transform:uppercase}
+  html body main .role-boundary p{max-width:760px!important;margin:0!important;color:#555650!important;font-size:16px!important;line-height:1.65!important}
+  html body main .answer-section{background:#242720!important;color:#f3f0e8!important;border-top:0!important}
+  html body main .answer-section .section-head{border-bottom:1px solid rgba(243,240,232,.22)!important;padding-bottom:34px!important}
+  html body main .answer-section .section-head h2{color:#f3f0e8!important}
+  html body main .answer-section .section-head p{color:#bbbdb3!important}
+  html body main .answer-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:0!important;border-top:1px solid rgba(243,240,232,.2)!important}
+  html body main .answer-grid article{position:relative!important;min-height:220px!important;padding:30px 34px 34px 0!important;border:0!important;border-bottom:1px solid rgba(243,240,232,.16)!important;background:transparent!important}
+  html[dir="ltr"] body main .answer-grid article:nth-child(odd){padding-right:42px!important;border-right:1px solid rgba(243,240,232,.16)!important}
+  html[dir="ltr"] body main .answer-grid article:nth-child(even){padding-left:42px!important}
+  html[dir="rtl"] body main .answer-grid article:nth-child(odd){padding-left:42px!important;border-left:1px solid rgba(243,240,232,.16)!important}
+  html[dir="rtl"] body main .answer-grid article:nth-child(even){padding-right:42px!important}
+  html body main .answer-grid article::before{content:"Q";display:block;margin-bottom:34px;color:#c4f000;font-size:11px;font-weight:900;letter-spacing:.14em}
+  html body main .answer-grid h3{max-width:25ch!important;margin:0 0 14px!important;color:#f3f0e8!important;font-family:var(--font-sans,Arial,sans-serif)!important;font-size:clamp(20px,1.8vw,28px)!important;font-weight:750!important;line-height:1.08!important;letter-spacing:-.035em!important}
+  html body main .answer-grid p{max-width:54ch!important;margin:0!important;color:#bbbdb3!important;font-size:15px!important;line-height:1.7!important}
+  html body main .answer-section .actions{margin-top:42px!important}
+  html body main .answer-section .button{background:#c4f000!important;border-color:#c4f000!important;color:#111!important;border-radius:999px!important}
+
   @media(max-width:980px){
     .page-hero-grid{grid-template-columns:1fr!important}
     html body main .page-hero h1{font-size:clamp(46px,8vw,72px)!important;max-width:16ch!important}
     .page-hero .breadcrumb{margin-bottom:26px}
+    html body main .detailed-process{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+    html body main .detailed-process li:nth-child(3n){border-right:1px solid #d3cec1!important}
+    html body main .detailed-process li:nth-child(2n){border-right:0!important}
   }
   @media(max-width:620px){
     html body main .page-hero{padding-block:58px!important}
@@ -89,5 +95,13 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
     html body main .page-hero .lead{margin-top:22px!important;font-size:16px!important;line-height:1.6!important}
     .page-hero .breadcrumb [aria-current="page"]{max-width:26ch}
     .page-hero .button{width:100%;justify-content:center}
+    html body main .detailed-process{grid-template-columns:1fr!important}
+    html body main .detailed-process li,html body main .detailed-process li:nth-child(2n),html body main .detailed-process li:nth-child(3n){min-height:190px!important;padding:24px 0 28px!important;border-right:0!important}
+    html body main .detailed-process li::after{left:0;right:0}
+    html body main .detailed-process li h2{margin-top:48px!important;font-size:clamp(24px,7.4vw,30px)!important}
+    html body main .role-boundary{grid-template-columns:1fr!important;gap:14px!important;margin-top:34px!important;padding:24px 0!important}
+    html body main .answer-grid{grid-template-columns:1fr!important}
+    html body main .answer-grid article,html[dir="ltr"] body main .answer-grid article:nth-child(odd),html[dir="ltr"] body main .answer-grid article:nth-child(even),html[dir="rtl"] body main .answer-grid article:nth-child(odd),html[dir="rtl"] body main .answer-grid article:nth-child(even){min-height:0!important;padding:28px 0 30px!important;border-right:0!important;border-left:0!important}
+    html body main .answer-grid article::before{margin-bottom:24px}
   }
 </style>
