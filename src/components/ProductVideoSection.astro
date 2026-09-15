@@ -28,6 +28,15 @@ const {
 } = Astro.props;
 
 const isRtl = lang === 'fa';
+const evidenceLabel = ({
+  tr:'Ticari ürün kanıtı', en:'Commercial product evidence', de:'Kommerzieller Produktnachweis',
+  it:'Evidenza commerciale del prodotto', ru:'Коммерческое подтверждение продукта',
+  fa:'ارائه تجاری محصول', zh:'商业产品实证', vi:'Bằng chứng sản phẩm thương mại'
+} as Record<string,string>)[lang] || 'Commercial product evidence';
+const audienceLabel = ({
+  tr:'B2B değerlendirme', en:'B2B evaluation', de:'B2B-Bewertung', it:'Valutazione B2B',
+  ru:'B2B-оценка', fa:'ارزیابی B2B', zh:'B2B 评估', vi:'Đánh giá B2B'
+} as Record<string,string>)[lang] || 'B2B evaluation';
 ---
 
 <section class="section product-video-section" dir={isRtl ? 'rtl' : 'ltr'}>
@@ -36,10 +45,15 @@ const isRtl = lang === 'fa';
       <span class="eyebrow product-video-kicker">{kicker}</span>
       <h3 class="product-video-heading">{heading}</h3>
       <p class="product-video-intro">{description}</p>
+      <div class="product-video-meta" aria-label={evidenceLabel}>
+        <span>{evidenceLabel}</span>
+        <span>{audienceLabel}</span>
+      </div>
     </div>
 
     <figure class="product-video-wrapper" style={`aspect-ratio: ${aspectRatio};`}>
-      <span class="product-video-tag" aria-hidden="true">CTSEG / TRADE PORTFOLIO</span>
+      <div class="product-video-frame" aria-hidden="true"></div>
+      <span class="product-video-tag" aria-hidden="true">CTSEG / EVIDENCE</span>
       <video
         src={videoSrc}
         poster={posterSrc}
@@ -52,174 +66,34 @@ const isRtl = lang === 'fa';
         aria-label={`${kicker}: ${heading}`}
         class="product-video-element"
       ></video>
+      <figcaption class="product-video-caption"><span>{evidenceLabel}</span><strong>{audienceLabel}</strong></figcaption>
     </figure>
   </div>
 </section>
 
 <style>
-  .product-video-section {
-    position: relative;
-    overflow: hidden;
-    padding: clamp(4.5rem, 7vw, 7.5rem) 0;
-    border-top: 1px solid rgba(255,255,255,.08);
-    border-bottom: 1px solid rgba(255,255,255,.08);
-    background: #111210;
-    color: #fff;
-  }
-
-  .product-video-section::before {
-    content: 'CTSEG';
-    position: absolute;
-    right: -.04em;
-    bottom: -.18em;
-    font-size: clamp(150px, 22vw, 370px);
-    font-weight: 900;
-    line-height: .78;
-    letter-spacing: -.09em;
-    color: rgba(255,255,255,.022);
-    pointer-events: none;
-    user-select: none;
-  }
-
-  .product-video-container {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: minmax(280px,.7fr) minmax(0,1.3fr);
-    gap: clamp(34px,5vw,82px);
-    align-items: center;
-    max-width: 1240px;
-    margin: 0 auto;
-  }
-
-  .product-video-header {
-    min-width: 0;
-  }
-
-  .product-video-kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0 0 22px;
-    color: #c4f000;
-    font-size: 11px;
-    font-weight: 850;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-  }
-
-  .product-video-kicker::before {
-    content: '';
-    width: 36px;
-    height: 4px;
-    border-radius: 999px;
-    background: #c4f000;
-  }
-
-  .product-video-heading {
-    max-width: 10ch;
-    margin: 0;
-    color: #fff;
-    font-family: var(--font-sans, Arial, sans-serif);
-    font-size: clamp(2.65rem, 4.7vw, 5rem);
-    font-weight: 760;
-    line-height: .96;
-    letter-spacing: -.055em;
-    text-wrap: balance;
-  }
-
-  .product-video-intro {
-    max-width: 34em;
-    margin: 28px 0 0;
-    color: #c4f000;
-    font-size: clamp(1rem,1.3vw,1.15rem);
-    font-weight: 600;
-    line-height: 1.62;
-  }
-
-  .product-video-wrapper {
-    position: relative;
-    margin: 0;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.13);
-    border-radius: 26px;
-    background: #070806;
-    box-shadow: 0 28px 80px rgba(0,0,0,.3);
-  }
-
-  .product-video-wrapper::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border: 1px solid rgba(196,240,0,.09);
-    border-radius: inherit;
-    pointer-events: none;
-  }
-
-  .product-video-tag {
-    position: absolute;
-    z-index: 2;
-    top: 18px;
-    left: 18px;
-    padding: 9px 12px;
-    border-radius: 999px;
-    background: #c4f000;
-    color: #0a0a0a;
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: .1em;
-  }
-
-  .product-video-element {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: inherit;
-    transition: transform .8s cubic-bezier(.2,.8,.2,1);
-  }
-
-  .product-video-wrapper:hover .product-video-element {
-    transform: scale(1.018);
-  }
-
-  [dir="rtl"] .product-video-tag {
-    left: auto;
-    right: 18px;
-  }
-
-  @media (max-width: 900px) {
-    .product-video-container {
-      grid-template-columns: 1fr;
-    }
-    .product-video-heading {
-      max-width: 14ch;
-    }
-    .product-video-intro {
-      margin-top: 20px;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .product-video-section {
-      padding: 4rem 0;
-    }
-    .product-video-heading {
-      max-width: 100%;
-      font-size: clamp(2.25rem,10vw,3.3rem);
-    }
-    .product-video-wrapper {
-      border-radius: 20px;
-    }
-    .product-video-tag {
-      top: 12px;
-      left: 12px;
-      font-size: 9px;
-      padding: 8px 10px;
-    }
-    [dir="rtl"] .product-video-tag {
-      left: auto;
-      right: 12px;
-    }
-  }
+  .product-video-section{position:relative;overflow:hidden;padding:clamp(4.5rem,7vw,7.5rem) 0;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);background:#111210;color:#fff}
+  .product-video-section::before{content:'EVIDENCE';position:absolute;right:-.04em;bottom:-.18em;font-size:clamp(120px,19vw,330px);font-weight:900;line-height:.78;letter-spacing:-.08em;color:rgba(255,255,255,.021);pointer-events:none;user-select:none}
+  .product-video-container{position:relative;z-index:1;display:grid;grid-template-columns:minmax(280px,.72fr) minmax(0,1.28fr);gap:clamp(40px,5.5vw,88px);align-items:center;max-width:1240px;margin:0 auto}
+  .product-video-header{min-width:0}
+  .product-video-kicker{display:inline-flex;align-items:center;gap:10px;margin:0 0 22px;color:#c4f000;font-size:11px;font-weight:850;letter-spacing:.14em;text-transform:uppercase}
+  .product-video-kicker::before{content:'';width:36px;height:3px;border-radius:999px;background:#c4f000}
+  .product-video-heading{max-width:10ch;margin:0;color:#fff;font-family:var(--font-sans,Arial,sans-serif);font-size:clamp(2.65rem,4.7vw,5rem);font-weight:760;line-height:.96;letter-spacing:-.055em;text-wrap:balance}
+  .product-video-intro{max-width:35em;margin:28px 0 0;color:#d2d2cd;font-size:clamp(1rem,1.25vw,1.12rem);font-weight:500;line-height:1.65}
+  .product-video-meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px;padding-top:22px;border-top:1px solid rgba(255,255,255,.13)}
+  .product-video-meta span{display:inline-flex;align-items:center;min-height:32px;padding:7px 11px;border:1px solid rgba(196,240,0,.22);border-radius:999px;background:rgba(196,240,0,.035);color:#efefeb;font-size:10px;font-weight:800;letter-spacing:.065em;text-transform:uppercase}
+  .product-video-wrapper{position:relative;margin:0;overflow:hidden;border:1px solid rgba(255,255,255,.14);border-radius:28px;background:#070806;box-shadow:0 32px 84px rgba(0,0,0,.34)}
+  .product-video-wrapper::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 58%,rgba(0,0,0,.5) 100%);pointer-events:none}
+  .product-video-frame{position:absolute;inset:14px;z-index:3;border:1px solid rgba(255,255,255,.11);border-radius:19px;pointer-events:none}
+  .product-video-tag{position:absolute;z-index:4;top:26px;left:26px;padding:9px 12px;border-radius:999px;background:#c4f000;color:#0a0a0a;font-size:9px;font-weight:900;letter-spacing:.1em}
+  .product-video-element{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit;transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .8s ease}
+  .product-video-wrapper:hover .product-video-element{transform:scale(1.025);filter:saturate(1.04)}
+  .product-video-caption{position:absolute;z-index:4;left:27px;right:27px;bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:18px;color:#fff;pointer-events:none}
+  .product-video-caption span,.product-video-caption strong{font-size:10px;line-height:1.3;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+  .product-video-caption span{color:#c4f000}.product-video-caption strong{color:#f0f0ec;text-align:right}
+  [dir="rtl"] .product-video-section::before{right:auto;left:-.04em}
+  [dir="rtl"] .product-video-tag{left:auto;right:26px}
+  [dir="rtl"] .product-video-caption strong{text-align:left}
+  @media(max-width:900px){.product-video-container{grid-template-columns:1fr}.product-video-heading{max-width:14ch}.product-video-intro{margin-top:20px}}
+  @media(max-width:640px){.product-video-section{padding:4rem 0}.product-video-heading{max-width:100%;font-size:clamp(2.25rem,10vw,3.3rem)}.product-video-wrapper{margin-inline:-12px;border-inline:0;border-radius:0}.product-video-frame{inset:10px;border-radius:13px}.product-video-tag{top:18px;left:18px;font-size:8px;padding:8px 10px}.product-video-caption{left:18px;right:18px;bottom:16px}.product-video-caption strong{display:none}[dir="rtl"] .product-video-tag{left:auto;right:18px}}
 </style>
