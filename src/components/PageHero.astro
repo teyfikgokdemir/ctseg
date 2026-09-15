@@ -52,6 +52,14 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
   html body main .page-hero.page-hero--compact{padding-block:clamp(40px,4.2vw,64px)!important}
   html body main .page-hero--compact h1{font-size:clamp(46px,5vw,78px)!important;max-width:15ch!important}
 
+  /* Header quote CTA must keep dark ink against the lime surface on inner pages. */
+  html body .site-header .desktop-only-nav .nav-cta,
+  html body .site-header .desktop-only-nav .nav-cta:hover,
+  html body .site-header .desktop-only-nav .nav-cta:focus-visible,
+  html body .site-header .desktop-only-nav .nav-cta:active{background:#c4f000!important;border-color:#c4f000!important;color:#0a0a0a!important;opacity:1!important}
+  html body .site-header .desktop-only-nav .nav-cta:hover,
+  html body .site-header .desktop-only-nav .nav-cta:focus-visible{background:#d4ff28!important;border-color:#d4ff28!important}
+
   /* How-we-work: editorial sequence first, direct answers second. */
   html body main .detailed-process{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;margin:0!important;padding:0!important;border-top:1px solid #aaa598!important;list-style:none!important;counter-reset:trade-step}
   html body main .detailed-process li{position:relative!important;display:flex!important;min-height:250px!important;padding:30px 30px 34px!important;flex-direction:column!important;justify-content:space-between!important;border:0!important;border-right:1px solid #d3cec1!important;border-bottom:1px solid #d3cec1!important;background:transparent!important;counter-increment:trade-step}
