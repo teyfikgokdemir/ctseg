@@ -2,24 +2,17 @@
 const { title, steps } = Astro.props as { title?:string; steps:string[] };
 const segment = Astro.url.pathname.split('/').filter(Boolean)[0] || 'tr';
 const locale = ['tr','en','de','it','ru','fa','zh','vi'].includes(segment) ? segment : 'tr';
-const kicker = ({
-  tr:'CTSEG · SÜREÇ',
-  en:'CTSEG · PROCESS',
-  de:'CTSEG · PROZESS',
-  it:'CTSEG · PROCESSO',
-  ru:'CTSEG · ПРОЦЕСС',
-  fa:'CTSEG · فرایند',
-  zh:'CTSEG · 流程',
-  vi:'CTSEG · QUY TRÌNH'
-} as Record<string,string>)[locale];
+const kicker = ({tr:'CTSEG · SÜREÇ',en:'CTSEG · PROCESS',de:'CTSEG · PROZESS',it:'CTSEG · PROCESSO',ru:'CTSEG · ПРОЦЕСС',fa:'CTSEG · فرایند',zh:'CTSEG · 流程',vi:'CTSEG · QUY TRÌNH'} as Record<string,string>)[locale];
+const sequenceLabel = ({tr:'Ticari uygulama sırası',en:'Commercial execution sequence',de:'Kommerzielle Ausführungsfolge',it:'Sequenza di esecuzione commerciale',ru:'Последовательность коммерческого исполнения',fa:'توالی اجرای تجاری',zh:'商业执行流程',vi:'Trình tự triển khai thương mại'} as Record<string,string>)[locale];
 ---
 <section class="process-section section" data-process-locale={locale}>
   <div class="container process-shell">
     <div class="process-heading">
       <span class="process-kicker">{kicker}</span>
       {title && <h2 class="section-title">{title}</h2>}
+      <p class="process-caption">{sequenceLabel}</p>
     </div>
-    <ol class="process-rail">
+    <ol class="process-rail" aria-label={sequenceLabel}>
       {steps.map((step) => (
         <li>
           <span class="process-mark" aria-hidden="true"></span>
@@ -32,32 +25,27 @@ const kicker = ({
 </section>
 
 <style>
-  .process-shell{display:grid;grid-template-columns:minmax(0,.82fr) minmax(560px,1.18fr);gap:clamp(44px,6vw,104px);align-items:start}
+  .process-section{position:relative;overflow:hidden;background:#111;color:#fff;border-block:1px solid rgba(255,255,255,.08)}
+  .process-section::after{content:"FLOW";position:absolute;inset-inline-end:-.04em;bottom:-.17em;font-family:var(--font-sans,Arial,sans-serif);font-size:clamp(140px,22vw,360px);font-weight:900;line-height:.8;letter-spacing:-.08em;color:rgba(255,255,255,.02);pointer-events:none;user-select:none}
+  .process-shell{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,.78fr) minmax(560px,1.22fr);gap:clamp(48px,6.5vw,110px);align-items:start}
   .process-heading{position:sticky;top:118px;max-width:560px}
   .process-kicker{display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;color:#c4f000;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
   .process-kicker::before{content:"";width:34px;height:3px;border-radius:999px;background:#c4f000}
-  .process-heading .section-title{margin:0;max-width:11ch;font-size:clamp(46px,4.7vw,76px);line-height:.96;letter-spacing:-.05em;color:#fff}
-  .process-rail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:0;padding:0;list-style:none;counter-reset:none}
-  .process-rail li{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:210px;padding:30px;border:1px solid rgba(255,255,255,.13);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.015));overflow:hidden;transition:transform .28s ease,border-color .28s ease,background-color .28s ease}
-  .process-rail li::before{display:none!important;content:none!important}
-  .process-mark{position:absolute;inset-inline-start:28px;top:28px;width:44px;height:4px;border-radius:999px;background:#c4f000}
-  .process-arrow{position:absolute;inset-inline-end:24px;top:19px;color:rgba(255,255,255,.38);font-size:22px;line-height:1;transition:color .25s ease,transform .25s ease}
-  .process-rail strong{max-width:18ch;color:#c4f000!important;font-size:clamp(20px,1.55vw,27px);line-height:1.18;letter-spacing:-.025em;font-weight:700}
-  .process-rail li:hover{transform:translateY(-5px);border-color:#c4f000;background:rgba(196,240,0,.045)}
-  .process-rail li:hover .process-arrow{color:#c4f000;transform:translate(2px,-2px)}
+  .process-heading .section-title{margin:0;max-width:11ch;font-size:clamp(46px,4.7vw,76px);line-height:.96;letter-spacing:-.05em;color:#fff;text-wrap:balance}
+  .process-caption{margin:28px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);max-width:32em;color:#999993;font-size:11px;line-height:1.5;font-weight:750;letter-spacing:.1em;text-transform:uppercase}
+  .process-rail{margin:0;padding:0;list-style:none;border-top:1px solid rgba(255,255,255,.16)}
+  .process-rail li{position:relative;display:grid;grid-template-columns:18px minmax(0,1fr) 34px;gap:22px;align-items:center;min-height:132px;padding:26px 4px;border-bottom:1px solid rgba(255,255,255,.16);overflow:hidden;transition:padding .28s ease,border-color .28s ease}
+  .process-rail li::before{content:""!important;display:block!important;position:absolute;inset:0 -18px;background:rgba(196,240,0,.035);opacity:0;transform:scaleY(.76);transition:opacity .28s ease,transform .28s ease;z-index:-1}
+  .process-rail li:hover{padding-inline:14px;border-color:rgba(196,240,0,.48)}
+  .process-rail li:hover::before{opacity:1;transform:scaleY(1)}
+  .process-mark{width:9px;height:9px;border-radius:50%;background:#c4f000;box-shadow:0 0 0 6px rgba(196,240,0,.07)}
+  .process-arrow{justify-self:end;color:rgba(255,255,255,.34);font-size:23px;line-height:1;transition:color .25s ease,transform .25s ease}
+  .process-rail strong{max-width:28ch;color:#fff!important;font-size:clamp(23px,2vw,34px);line-height:1.08;letter-spacing:-.035em;font-weight:720}
+  .process-rail li:hover .process-arrow{color:#c4f000;transform:translate(3px,-3px)}
   :global(html[dir="rtl"]) .process-kicker{letter-spacing:0;text-transform:none}
-  :global(html[dir="rtl"]) .process-rail strong{text-align:right;max-width:20ch}
-  :global(html[dir="rtl"]) .process-rail li:hover .process-arrow{transform:translate(-2px,-2px)}
-  @media (max-width:1100px){
-    .process-shell{grid-template-columns:1fr;gap:34px}
-    .process-heading{position:static;max-width:none}
-    .process-heading .section-title{max-width:16ch}
-  }
-  @media (max-width:720px){
-    .process-rail{grid-template-columns:1fr;gap:12px}
-    .process-rail li{min-height:150px;padding:25px 22px;border-radius:18px}
-    .process-mark{inset-inline-start:22px;top:21px}
-    .process-arrow{inset-inline-end:20px;top:17px}
-    .process-heading .section-title{font-size:clamp(36px,9vw,48px);max-width:100%}
-  }
+  :global(html[dir="rtl"]) .process-caption{letter-spacing:0;text-transform:none}
+  :global(html[dir="rtl"]) .process-rail strong{text-align:right;max-width:30ch}
+  :global(html[dir="rtl"]) .process-rail li:hover .process-arrow{transform:translate(-3px,-3px)}
+  @media(max-width:1100px){.process-shell{grid-template-columns:1fr;gap:40px}.process-heading{position:static;max-width:760px}.process-heading .section-title{max-width:16ch}}
+  @media(max-width:720px){.process-section{padding-block:64px}.process-heading .section-title{font-size:clamp(36px,9vw,48px);max-width:100%}.process-caption{margin-top:22px}.process-rail li{grid-template-columns:12px minmax(0,1fr) 26px;gap:14px;min-height:104px;padding-block:22px}.process-rail li:hover{padding-inline:8px}.process-mark{width:7px;height:7px;box-shadow:0 0 0 4px rgba(196,240,0,.07)}.process-rail strong{font-size:clamp(20px,6vw,27px);max-width:100%}.process-arrow{font-size:20px}}
 </style>
