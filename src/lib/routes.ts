@@ -50,22 +50,22 @@ export function getMeta(record: RouteRecord) {
   const copy = pageCopy[lang];
   const t = ui[lang];
   if (key === 'home') return {
-    title: lang === 'tr' ? 'CTSEG | Türkiye\'den Tedarikçi Bul, Doğrulat ve İhracat Yap' :
-           lang === 'de' ? 'CTSEG | B2B-Lieferanten aus der Türkei finden & prüfen' :
-           lang === 'it' ? 'CTSEG | Fornitori B2B dalla Turchia — Ricerca e Verifica' :
-           lang === 'fa' ? 'CTSEG | یافتن و تأیید تأمینکنندگان از ترکیه برای تجارت B2B' :
-           lang === 'zh' ? 'CTSEG | 土耳其B2B供应商寻源与验证' :
-           lang === 'vi' ? 'CTSEG | Tìm & Xác minh Nhà cung cấp B2B từ Thổ Nhĩ Kỳ' :
-           lang === 'ru' ? 'CTSEG | Поиск и проверка B2B-поставщиков из Турции' :
-           'CTSEG | Find & Verify B2B Suppliers from Türkiye',
-    description: lang === 'tr' ? 'CTSEG, Türkiye ve uluslararası pazarlarda B2B tedarikçi araştırması, doğrulama, teklif karşılaştırma ve ticari koordinasyon hizmeti sunar. Doğrulanmış tedarikçiye bağlanın.' :
-      lang === 'de' ? 'CTSEG bietet B2B-Lieferantensuche, Verifizierung, Angebotskoordination und Handelsanbahnung aus der Türkei und internationalen Märkten. Jetzt verifizierte Lieferanten finden.' :
-      lang === 'it' ? 'CTSEG offre ricerca fornitori B2B, verifica, coordinamento RFQ e matching commerciale dalla Turchia e dai mercati internazionali. Connettiti con fornitori verificati.' :
-      lang === 'fa' ? 'CTSEG خدمات تأمین تأمینکننده B2B، تأیید، هماهنگی RFQ و تطبیق تجاری از ترکیه و بازارهای بینالمللی ارائه میدهد. امروز با تأمینکنندگان تأیید شده ارتباط برقرار کنید.' :
-      lang === 'zh' ? 'CTSEG提供来自土耳其及国际市场的B2B供应商寻源、验证、RFQ协调和贸易匹配服务。立即联系经过验证的供应商。' :
-      lang === 'vi' ? 'CTSEG cung cấp tìm kiếm nhà cung cấp B2B, xác minh, phối hợp RFQ và kết nối thương mại từ Thổ Nhĩ Kỳ và các thị trường quốc tế. Kết nối với nhà cung cấp đã được xác minh ngay hôm nay.' :
-      lang === 'ru' ? 'CTSEG предоставляет услуги поиска поставщиков B2B, верификации, координации RFQ и торгового сопровождения из Турции и международных рынков. Найдите проверенных поставщиков.' :
-      'CTSEG provides B2B supplier sourcing, verification, RFQ coordination and trade matching from Türkiye and international markets. Connect with verified suppliers today.'
+    title: lang === 'tr' ? 'CTSEG | Küresel Ticaret, Stratejik Tedarik ve Pazara Giriş' :
+           lang === 'de' ? 'CTSEG | Globaler Handel, strategische Beschaffung & Markteintritt' :
+           lang === 'it' ? 'CTSEG | Commercio Globale, Sourcing Strategico & Market Entry' :
+           lang === 'fa' ? 'CTSEG | تجارت جهانی، تأمین استراتژیک و ورود به بازار' :
+           lang === 'zh' ? 'CTSEG | 双向全球贸易、战略采购与市场进入' :
+           lang === 'vi' ? 'CTSEG | Thương mại Toàn cầu, Sourcing Chiến lược & Thâm nhập Thị trường' :
+           lang === 'ru' ? 'CTSEG | Международная торговля, стратегический сорсинг и выход на рынок' :
+           'CTSEG | Global Trade, Strategic Sourcing & Market Entry',
+    description: lang === 'tr' ? 'CTSEG, Türkiye ile dünya pazarları arasında iki yönlü B2B ticaret, stratejik tedarik, tedarikçi doğrulama, RFQ yönetimi ve ihracat/pazara giriş koordinasyonu yürütür.' :
+      lang === 'de' ? 'CTSEG verbindet die Türkei mit internationalen Märkten durch bidirektionalen B2B-Handel, strategische Beschaffung, Lieferantenprüfung, RFQ-Management und Markteintritt.' :
+      lang === 'it' ? 'CTSEG collega la Turchia ai mercati internazionali con commercio B2B bidirezionale, sourcing strategico, verifica fornitori, gestione RFQ e market entry.' :
+      lang === 'fa' ? 'CTSEG تجارت B2B دوطرفه میان ترکیه و بازارهای جهانی، تأمین استراتژیک، راستی‌آزمایی تأمین‌کننده، مدیریت RFQ و ورود به بازار را هماهنگ می‌کند.' :
+      lang === 'zh' ? 'CTSEG连接土耳其与全球市场，提供双向B2B贸易、战略采购、供应商核验、RFQ管理与跨境市场进入协调。' :
+      lang === 'vi' ? 'CTSEG kết nối Thổ Nhĩ Kỳ với thị trường quốc tế thông qua thương mại B2B hai chiều, sourcing chiến lược, thẩm định nhà cung cấp, quản lý RFQ và thâm nhập thị trường.' :
+      lang === 'ru' ? 'CTSEG связывает Турцию с международными рынками через двустороннюю B2B-торговлю, стратегический сорсинг, проверку поставщиков, RFQ и сопровождение выхода на рынок.' :
+      'CTSEG connects Türkiye with international markets through two-way B2B trade, strategic sourcing, supplier verification, RFQ management and market-entry coordination.'
   };
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — B2B Sourcing Advisory | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
   if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} — Wholesale B2B | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
@@ -115,12 +115,12 @@ export function tradeMatchingServiceSchema(record:RouteRecord, title:string, des
   return {
     '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#trade-matching-service`,
     name:title,description,url:canonicalFor(record),inLanguage:record.lang,
-    serviceType:'International trade matching and commercial coordination',
+    serviceType:'Two-way global trade, strategic sourcing, supplier verification and market entry',
     provider:{'@id':'https://ctseg.com.tr/#organization'},
-    areaServed:['Türkiye','Europe','Iran','United States','International'],
+    areaServed:['Türkiye','Europe','Middle East','Asia','International'],
     audience:[
-      {'@type':'BusinessAudience',name:'Buyers seeking suppliers'},
-      {'@type':'BusinessAudience',name:'Producers seeking buyers and international markets'}
+      {'@type':'BusinessAudience',name:'Buyers seeking verified suppliers and sourcing routes'},
+      {'@type':'BusinessAudience',name:'Manufacturers and producers seeking buyers and international market entry'}
     ]
   };
 }

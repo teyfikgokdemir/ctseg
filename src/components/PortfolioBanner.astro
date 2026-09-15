@@ -4,25 +4,68 @@ import ResponsiveImage from './ResponsiveImage.astro';
 import { FEATURE_IMAGE_WIDTHS, PORTFOLIO_IMAGE } from '../lib/responsive-images';
 const { lang } = Astro.props as { lang:Locale };
 const copy = editorialCopy[lang];
+const content = ({
+  tr:{label:'Ticari portföy ve seçili çalışma alanları',eyebrow:'CTSEG · Seçili çalışma alanları',tag:'CTSEG / TRADE HOUSE',sectors:['Gıda & Tarım','Endüstriyel Tedarik','Medikal','Tekstil & Ev Yaşam']},
+  en:{label:'Trade portfolio and selected mandates',eyebrow:'CTSEG · Selected mandates',tag:'CTSEG / TRADE HOUSE',sectors:['Food & Agriculture','Industrial Sourcing','Medical','Textiles & Home']},
+  de:{label:'Handelsportfolio und ausgewählte Mandate',eyebrow:'CTSEG · Ausgewählte Mandate',tag:'CTSEG / TRADE HOUSE',sectors:['Lebensmittel & Agrar','Industriebeschaffung','Medizin','Textilien & Wohnen']},
+  it:{label:'Portfolio commerciale e mandati selezionati',eyebrow:'CTSEG · Mandati selezionati',tag:'CTSEG / TRADE HOUSE',sectors:['Food & Agricoltura','Sourcing industriale','Medicale','Tessile & Casa']},
+  ru:{label:'Торговое портфолио и выбранные направления',eyebrow:'CTSEG · Выбранные направления',tag:'CTSEG / TRADE HOUSE',sectors:['Продукты и агро','Промышленный сорсинг','Медицина','Текстиль и дом']},
+  fa:{label:'پرتفوی تجاری و حوزه‌های منتخب',eyebrow:'CTSEG · حوزه‌های منتخب',tag:'CTSEG / TRADE HOUSE',sectors:['غذا و کشاورزی','تأمین صنعتی','پزشکی','نساجی و خانه']},
+  zh:{label:'贸易组合与精选业务领域',eyebrow:'CTSEG · 精选业务领域',tag:'CTSEG / TRADE HOUSE',sectors:['食品与农业','工业采购','医疗','纺织与家居']},
+  vi:{label:'Danh mục thương mại và các lĩnh vực trọng điểm',eyebrow:'CTSEG · Lĩnh vực trọng điểm',tag:'CTSEG / TRADE HOUSE',sectors:['Thực phẩm & Nông nghiệp','Sourcing công nghiệp','Y tế','Dệt may & Gia dụng']}
+} as Record<string,{label:string;eyebrow:string;tag:string;sectors:string[]}>)[lang] || {
+  label:'Trade portfolio and selected mandates',eyebrow:'CTSEG · Selected mandates',tag:'CTSEG / TRADE HOUSE',sectors:['Food & Agriculture','Industrial Sourcing','Medical','Textiles & Home']
+};
 ---
-<section class="portfolio-banner section">
-  <div class="container portfolio-layout">
+<section class="portfolio-banner section" aria-label={content.label}>
+  <div class="container portfolio-shell">
     <figure class="portfolio-visual">
       <ResponsiveImage
         src={PORTFOLIO_IMAGE}
         widths={FEATURE_IMAGE_WIDTHS}
-        sizes="(max-width:860px) calc(100vw - 36px), min(67vw,930px)"
+        sizes="(max-width:860px) calc(100vw - 36px), min(57vw,820px)"
         width={1536}
         height={1024}
         loading="lazy"
         decoding="async"
         alt=""
       />
+      <span class="portfolio-visual-tag">{content.tag}</span>
     </figure>
+
     <div class="portfolio-copy">
-      <p class="eyebrow">CTSEG · Portfolio</p>
+      <p class="eyebrow">{content.eyebrow}</p>
       <h2>{copy.portfolioTitle}</h2>
-      <p>{copy.portfolioText}</p>
+      <p class="portfolio-lead">{copy.portfolioText}</p>
+      <ul class="portfolio-sector-list" aria-label={content.label}>
+        {content.sectors.map((sector) => <li>{sector}</li>)}
+      </ul>
+      <p class="portfolio-note">{content.label}</p>
     </div>
   </div>
 </section>
+
+<style is:global>
+  .portfolio-banner{position:relative;overflow:hidden;background:#111!important;color:#fff;border-block:1px solid rgba(255,255,255,.08)}
+  .portfolio-banner::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(196,240,0,.035),transparent 30%),radial-gradient(circle at 14% 78%,rgba(255,255,255,.035),transparent 25%)}
+  .portfolio-shell{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(350px,.85fr);gap:clamp(48px,7vw,110px);align-items:center}
+  .portfolio-visual{position:relative;margin:0;min-height:clamp(500px,44vw,680px);overflow:hidden;background:#1a1a1a;border:1px solid rgba(255,255,255,.11);box-shadow:0 34px 90px rgba(0,0,0,.3)}
+  .portfolio-visual::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.52) 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
+  .portfolio-visual picture,.portfolio-visual img{display:block;width:100%;height:100%;min-height:clamp(500px,44vw,680px);object-fit:cover}
+  .portfolio-visual img{transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .75s ease}
+  .portfolio-visual:hover img{transform:scale(1.025);filter:saturate(1.03)}
+  .portfolio-visual-tag{position:absolute;z-index:3;inset-inline-start:22px;bottom:20px;display:inline-flex;align-items:center;min-height:32px;padding:0 11px;border:1px solid rgba(196,240,0,.48);background:rgba(10,10,10,.82);backdrop-filter:blur(8px);color:#c4f000!important;font-size:9px;line-height:1;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+  .portfolio-copy{max-width:650px}
+  .portfolio-copy .eyebrow{margin:0 0 22px;color:#c4f000!important;font-size:11px;font-weight:850;letter-spacing:.12em;text-transform:uppercase}
+  .portfolio-copy h2{margin:0;max-width:11ch;color:#fff!important;font-family:var(--font-heading,'Source Serif 4',Georgia,serif);font-size:clamp(46px,5vw,80px)!important;line-height:.96!important;font-weight:680;letter-spacing:-.055em;text-wrap:balance}
+  .portfolio-lead{margin:30px 0 0!important;max-width:38em;color:#d4d4ce!important;font-size:17px!important;line-height:1.7!important;font-weight:500!important}
+  .portfolio-sector-list{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:36px 0 0;padding:0;border-top:1px solid rgba(255,255,255,.14)}
+  .portfolio-sector-list li{position:relative;display:flex;align-items:center;min-height:56px;padding:13px 24px 13px 18px;border-bottom:1px solid rgba(255,255,255,.11);color:#efefeb;font-size:13px;font-weight:680;line-height:1.3}
+  .portfolio-sector-list li:nth-child(odd){border-inline-end:1px solid rgba(255,255,255,.11);padding-inline-start:0}
+  .portfolio-sector-list li::after{content:"";position:absolute;inset-inline-end:8px;width:18px;height:1px;background:#c4f000;opacity:.75}
+  .portfolio-note{margin:24px 0 0!important;color:#85857f!important;font-size:10px!important;line-height:1.5!important;font-weight:750!important;letter-spacing:.08em;text-transform:uppercase}
+  html[dir="rtl"] .portfolio-copy .eyebrow,html[dir="rtl"] .portfolio-visual-tag,html[dir="rtl"] .portfolio-note{letter-spacing:0;text-transform:none}
+  @media(max-width:980px){.portfolio-shell{grid-template-columns:1fr;gap:42px}.portfolio-copy{max-width:780px}.portfolio-copy h2{max-width:15ch}.portfolio-visual{min-height:500px}.portfolio-visual picture,.portfolio-visual img{min-height:500px}}
+  @media(max-width:620px){.portfolio-banner{padding-block:64px!important}.portfolio-shell{gap:30px}.portfolio-visual{min-height:390px}.portfolio-visual picture,.portfolio-visual img{min-height:390px}.portfolio-visual-tag{inset-inline-start:14px;bottom:14px;font-size:9px}.portfolio-copy h2{font-size:clamp(34px,9.4vw,48px)!important;line-height:1!important;max-width:100%}.portfolio-lead{font-size:16px!important;line-height:1.62!important;margin-top:22px!important}.portfolio-sector-list{grid-template-columns:1fr;margin-top:28px}.portfolio-sector-list li,.portfolio-sector-list li:nth-child(odd){min-height:50px;padding-inline:0 28px;border-inline-end:0}.portfolio-note{margin-top:20px!important}}
+  @media(prefers-reduced-motion:reduce){.portfolio-visual img{transition:none}}
+</style>

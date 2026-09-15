@@ -72,6 +72,64 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
   </details>
 </section>
 
+<style is:global>
+  .commercial-form-panel{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(34px,5vw,82px);overflow:hidden;padding:clamp(38px,5vw,76px);border:1px solid rgba(255,255,255,.1);border-radius:30px;background:#111;color:#fff;box-shadow:0 28px 80px rgba(0,0,0,.16)}
+  .commercial-form-panel::before{content:"CTSEG";position:absolute;right:-.05em;bottom:-.16em;z-index:-1;font-size:clamp(150px,22vw,360px);font-weight:900;line-height:.8;letter-spacing:-.09em;color:rgba(255,255,255,.022);pointer-events:none;user-select:none}
+  .commercial-form-panel::after{content:"";position:absolute;left:0;top:0;width:34%;height:5px;background:#c4f000}
+  .commercial-form-intro{align-self:start;position:sticky;top:118px}
+  .commercial-form-intro .eyebrow{color:#c4f000!important;font-weight:800!important;letter-spacing:.1em!important}
+  .commercial-form-intro h2{margin:18px 0 22px;color:#fff;font-size:clamp(42px,4.6vw,76px);line-height:.94;letter-spacing:-.055em;max-width:10ch;text-wrap:balance}
+  .commercial-form-intro>p:not(.eyebrow){max-width:34em;color:#d4d4cf!important;font-size:17px;line-height:1.62}
+  .direct-contact-cards{display:grid;gap:10px;margin-top:34px}
+  .direct-contact-card{position:relative;display:grid;grid-template-columns:46px minmax(0,1fr);gap:14px;align-items:center;min-height:68px;padding:12px 16px;border:1px solid rgba(255,255,255,.14);border-radius:16px;background:rgba(255,255,255,.035);color:#fff;text-decoration:none;transition:transform .25s ease,border-color .25s ease,background .25s ease}
+  .direct-contact-card>span{display:grid;place-items:center;width:42px;height:42px;border-radius:999px;background:#c4f000;color:#0a0a0a!important;font-size:12px;font-weight:900;letter-spacing:.04em}
+  .direct-contact-card strong{font-size:15px;color:#fff}
+  .direct-contact-card small{grid-column:2;color:#aaa!important;margin-top:-10px;overflow-wrap:anywhere}
+  .direct-contact-card:hover{transform:translateX(5px);border-color:#c4f000;background:rgba(196,240,0,.06)}
+  .commercial-form-disclosure{align-self:start;border:1px solid rgba(255,255,255,.14);border-radius:24px;background:#f6f6f1;color:#111;overflow:hidden;box-shadow:0 22px 60px rgba(0,0,0,.2)}
+  .commercial-form-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 26px;cursor:pointer;list-style:none;font-size:18px;font-weight:800;color:#111}
+  .commercial-form-disclosure>summary::-webkit-details-marker{display:none}
+  .commercial-form-disclosure>summary span{display:grid;place-items:center;width:36px;height:36px;border-radius:999px;background:#c4f000;color:#0a0a0a!important;font-size:20px;transition:transform .25s ease}
+  .commercial-form-disclosure[open]>summary span{transform:rotate(45deg)}
+  .commercial-form{padding:0 26px 28px}
+  .commercial-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .commercial-field{display:flex;flex-direction:column;gap:8px;min-width:0}
+  .commercial-field--wide{grid-column:1/-1}
+  .commercial-field>span{font-size:12px!important;font-weight:800!important;letter-spacing:.055em;text-transform:uppercase;color:#464640!important}
+  .commercial-field input,.commercial-field select,.commercial-field textarea{width:100%;min-height:52px;padding:13px 14px;border:1px solid #d4d4cc;border-radius:12px;background:#fff;color:#111;font:inherit;outline:none;transition:border-color .2s ease,box-shadow .2s ease}
+  .commercial-field textarea{min-height:120px;resize:vertical}
+  .commercial-field input:focus,.commercial-field select:focus,.commercial-field textarea:focus{border-color:#9cbf00;box-shadow:0 0 0 3px rgba(196,240,0,.24)}
+  .commercial-details{margin-top:18px;border-top:1px solid #deded7;padding-top:18px}
+  .commercial-details>summary{cursor:pointer;font-weight:800;color:#1b1b19;margin-bottom:18px}
+  .privacy-check{display:flex;gap:10px;align-items:flex-start;margin-top:22px;color:#4a4a45;font-size:13px;line-height:1.5}
+  .privacy-check input{margin-top:3px;accent-color:#111}
+  .privacy-check a{color:#111;font-weight:800}
+  .commercial-form-actions{margin-top:22px}
+  .commercial-form-actions .button{min-height:50px;border-radius:999px;background:#111!important;color:#fff!important;border-color:#111!important;padding-inline:22px;font-weight:800}
+  .commercial-form-actions .button:hover{background:#c4f000!important;color:#111!important;border-color:#c4f000!important}
+  .form-status{margin-top:16px!important;color:#30302d!important}
+  .form-fallback{margin-top:16px;padding:16px;border-radius:14px;background:#ecece6}
+  .form-honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+  @media(max-width:980px){
+    .commercial-form-panel{grid-template-columns:1fr;padding:34px;border-radius:24px}.commercial-form-intro{position:static}.commercial-form-intro h2{max-width:14ch}.direct-contact-cards{grid-template-columns:repeat(3,minmax(0,1fr))}.direct-contact-card{grid-template-columns:42px minmax(0,1fr)}
+  }
+  @media(max-width:720px){
+    .commercial-form-panel{padding:24px 18px;border-radius:20px;margin-inline:-2px}.commercial-form-intro h2{font-size:clamp(38px,10vw,52px);max-width:100%}.commercial-form-intro>p:not(.eyebrow){font-size:16px}.direct-contact-cards{grid-template-columns:1fr}.commercial-form-disclosure{border-radius:18px}.commercial-form-disclosure>summary{padding:20px;font-size:16px}.commercial-form{padding:0 18px 22px}.commercial-form-grid{grid-template-columns:1fr}.commercial-field--wide{grid-column:auto}.commercial-form-actions .button{width:100%}.commercial-form-panel::before{font-size:42vw;bottom:-.04em}}
+  /* Trade desk composition: ruled contact routes and a clear request sheet. */
+  .commercial-form-panel{border-radius:0;box-shadow:none}
+  .commercial-form-panel::before{content:none}
+  .direct-contact-cards{gap:0;border-top:1px solid rgba(255,255,255,.2)}
+  .direct-contact-card{min-height:68px;padding:12px 0;border:0;border-bottom:1px solid rgba(255,255,255,.2);border-radius:0;background:transparent;box-shadow:none}
+  .direct-contact-card>span{width:38px;height:38px;border-radius:0;background:transparent;color:#c4f000!important;border:1px solid rgba(196,240,0,.45)}
+  .direct-contact-card:hover,.direct-contact-card:focus-visible{transform:none;background:transparent;border-color:#c4f000}
+  .commercial-form-disclosure{border-radius:0;box-shadow:none}
+  .commercial-form-disclosure>summary{border-bottom:1px solid #d4d4cc}
+  .commercial-form-disclosure>summary span{border-radius:0}
+  .commercial-field input,.commercial-field select,.commercial-field textarea{border-radius:0}
+  .commercial-form-actions .button,.form-fallback{border-radius:0}
+  @media(max-width:980px){.direct-contact-cards{border-top:0}.direct-contact-card{border-top:1px solid rgba(255,255,255,.2)}}
+</style>
+
 <script define:vars={{ copy }}>
   (() => {
     document.querySelectorAll('[data-commercial-form]').forEach((form) => {

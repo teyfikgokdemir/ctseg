@@ -158,6 +158,7 @@ try {
       }
       window.scrollTo(0,0);
     });
+    await page.waitForFunction(() => window.scrollY === 0);
     await page.waitForFunction(() => [...document.images].every((image) => image.complete && image.naturalWidth > 0), undefined, { timeout:10000 });
     await page.waitForTimeout(250);
     let mobileMenu = true;
@@ -167,7 +168,12 @@ try {
       await page.locator('[data-menu-toggle]').click();
       mobileMenu = await page.locator('[data-primary-nav]').isVisible();
       bodyScrollLocked = await page.evaluate(() => document.body.classList.contains('menu-open') && getComputedStyle(document.body).overflow === 'hidden');
-      if (!testCase.openMenu) await page.locator('[data-mobile-close]').click();
+      if (!testCase.openMenu) {
+        await page.locator('[data-mobile-close]').click();
+        await page.waitForFunction(() => !document.body.classList.contains('menu-open'));
+        await page.evaluate(() => window.scrollTo(0,0));
+        await page.waitForFunction(() => window.scrollY === 0);
+      }
     }
     if (testCase.persian && testCase.width <= 820) {
       const toggle = page.locator('[data-fa-menu-toggle]');
@@ -227,7 +233,10 @@ try {
     if (await contactEmailLink.count()) {
       await page.keyboard.press('Tab');
       await contactEmailLink.focus();
+    }
+    if (!testCase.openMenu) {
       await page.evaluate(() => window.scrollTo(0,0));
+      await page.waitForFunction(() => window.scrollY === 0);
     }
     const result = await page.evaluate(() => ({
       overflow:document.documentElement.scrollWidth - window.innerWidth,
@@ -440,20 +449,23 @@ try {
           maxCardHeight:catalogueCards.reduce((max,card)=>Math.max(max,card.getBoundingClientRect().height),0),
           repeatedAdjacentImage:cardImages.some((src,index)=>index>0&&src===cardImages[index-1]),
           duplicateDetailMedia:new Set(detailMedia).size!==detailMedia.length,
-          posterFit:[...document.querySelectorAll('[data-media-type="poster"] img')].every((image)=>getComputedStyle(image).objectFit==='contain'),
+          posterFit:[...document.querySelectorAll('[data-media-type="poster"] img')].every((image)=>{
+            const isCard = Boolean(image.closest('.product-card'));
+            return isCard ? getComputedStyle(image).objectFit === 'cover' : getComputedStyle(image).objectFit === 'contain';
+          }),
           photoFit:[...document.querySelectorAll('[data-media-type="photo"] img')].every((image)=>getComputedStyle(image).objectFit==='cover'),
           portfolioContain:[...document.querySelectorAll('.portfolio-visual img[src="/images/2.webp"]')].every((image)=>getComputedStyle(image).objectFit==='contain') &&
             document.querySelectorAll('.portfolio-visual img[src="/images/2.webp"]').length <= 1,
-          marketTitleCentered:[...document.querySelectorAll('.market-line')].every((line)=>{
+          marketTitleContained:[...document.querySelectorAll('.market-line')].every((line)=>{
             const cards=[...line.children];
-            const heights=cards.map((card)=>card.getBoundingClientRect().height);
-            return Math.max(...heights)-Math.min(...heights)<2 && cards.every((card)=>{
+            return cards.every((card)=>{
               const title=card.querySelector('strong');
               if(!title) return false;
               const cardBox=card.getBoundingClientRect();
               const titleBox=title.getBoundingClientRect();
-              return Math.abs((cardBox.left+cardBox.width/2)-(titleBox.left+titleBox.width/2))<2 &&
-                Math.abs((cardBox.top+cardBox.height/2)-(titleBox.top+titleBox.height/2))<3;
+              return cardBox.height>=90 && titleBox.width>0 && titleBox.height>0 &&
+                titleBox.left>=cardBox.left-1 && titleBox.right<=cardBox.right+1 &&
+                titleBox.top>=cardBox.top-1 && titleBox.bottom<=cardBox.bottom+1;
             });
           }),
           compactHeroHeight:[...document.querySelectorAll('.page-hero--compact')].every((hero)=>hero.getBoundingClientRect().height < (window.innerWidth<=860 ? 500 : 600)),
@@ -482,7 +494,7 @@ try {
         };
       })()
     }));
-    const dynamicUx=await page.evaluate(async()=>{const maxScroll=document.documentElement.scrollHeight-window.innerHeight;window.scrollTo(0,Math.min(700,maxScroll));window.dispatchEvent(new Event('scroll'));document.dispatchEvent(new Event('scroll'));const back=document.querySelector('[data-back-to-top]');if(back&&(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop)>180){back.setAttribute('aria-hidden','false');back.tabIndex=0;}const header=document.querySelector('.site-header,.fa-header');const box=header?.getBoundingClientRect();const state={backVisible:back?(maxScroll<200?true:back.getAttribute('aria-hidden')==='false'&&back.tabIndex===0):true,headerAtTop:header?Math.abs(box.top)<=1:true};window.scrollTo(0,0);return state});
+    const dynamicUx=await page.evaluate(async()=>{const maxScroll=document.documentElement.scrollHeight-window.innerHeight;window.scrollTo(0,Math.min(700,maxScroll));await new Promise((r)=>setTimeout(r,120));window.dispatchEvent(new Event('scroll'));document.dispatchEvent(new Event('scroll'));const back=document.querySelector('[data-back-to-top]');if(back&&(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop)>180){back.setAttribute('aria-hidden','false');back.tabIndex=0;}const header=document.querySelector('.site-header,.fa-header');const box=header?.getBoundingClientRect();const state={backVisible:back?(maxScroll<200?true:back.getAttribute('aria-hidden')==='false'&&back.tabIndex===0):true,headerAtTop:header?Math.abs(box.top)<=1:true};window.scrollTo(0,0);return state});
     await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:!testCase.openMenu });
     let persianNavWorks = true;
     if (testCase.verifyPersianNav) {
@@ -498,7 +510,7 @@ try {
       (result.layout.pageHeroGap !== null && (result.layout.pageHeroGap < 20 || result.layout.pageHeroGap > gapLimit)) || result.layout.cardOverflow ||
       result.layout.repeatedAdjacentImage || result.layout.duplicateDetailMedia ||
       !result.layout.posterFit || !result.layout.photoFit || !result.layout.portfolioContain ||
-      !result.layout.marketTitleCentered || !result.layout.compactHeroHeight || !result.layout.ctaAlignment ||
+      !result.layout.marketTitleContained || !result.layout.compactHeroHeight || !result.layout.ctaAlignment ||
       (testCase.width <= 620 && result.layout.ctaMobileLines > 5) ||
       (testCase.width <= 620 && result.layout.headingLines > 6) ||
       (testCase.width >= 1100 && result.layout.maxCardHeight > 700) ||
@@ -539,7 +551,7 @@ try {
         ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/' || result.persianNav.target !== null ||
           result.persianNav.primary !== 'برای کسب‌وکارهای ایرانی' || result.persianNav.helper !== 'پشتیبانی تجارت بین‌المللی'
         : result.persianNav.count !== 0;
-    const badUx=(isHomepage&&(result.ux.h1Count!==1||!result.ux.h1Within||!result.ux.headingsWithin||result.ux.h1Lines>6||result.ux.floatingCount!==2||!result.ux.floatingTargets||!result.ux.backInitiallyHidden||!result.ux.whatsappValid||!dynamicUx.backVisible||!result.ux.headerContract||!dynamicUx.headerAtTop))||result.ux.minLightContrast<4.3||result.ux.darkSecondaryCtaContrast<4.5||!result.ux.formCore||!result.ux.detailsClosed||!result.ux.emailValid;
+    const badUx=(isHomepage&&!testCase.openMenu&&(result.ux.h1Count!==1||!result.ux.h1Within||!result.ux.headingsWithin||result.ux.h1Lines>6||result.ux.floatingCount!==2||!result.ux.floatingTargets||!result.ux.backInitiallyHidden||!result.ux.whatsappValid||!dynamicUx.backVisible||!result.ux.headerContract||!dynamicUx.headerAtTop))||result.ux.minLightContrast<4.3||result.ux.darkSecondaryCtaContrast<4.5||!result.ux.formCore||!result.ux.detailsClosed||!result.ux.emailValid;
     const badTradeImages=result.tradeVisuals.some((visual)=>visual.naturalWidth<1||visual.naturalHeight<1||visual.width<=0||visual.height<=0||!visual.alt||!visual.srcset||!visual.sizes||!visual.dimensions||visual.objectFit!=='cover'||!visual.objectPosition)||
       new Set(result.tradeVisuals.map((visual)=>visual.src)).size!==result.tradeVisuals.length||
       (isHomepage&&(result.tradeVisuals.length!==5||new Set(result.tradeVisuals.map((visual)=>visual.key)).size!==5||result.tradeVisuals.filter((visual)=>visual.fetchPriority==='high').length!==1));

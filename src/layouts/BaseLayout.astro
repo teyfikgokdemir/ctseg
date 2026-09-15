@@ -4,6 +4,7 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import FloatingActions from '../components/FloatingActions.astro';
 import TradeVideo from '../components/TradeVideo.astro';
+import TradeHouseStatement from '../components/TradeHouseStatement.astro';
 import { company, locales, localizedPath, products, routeAlternates, ui, type Locale } from '../data/site';
 import type { ReflexLocale } from '../data/reflex-data';
 import { activeLocales, localeDirection, localeOg } from '../data/locales';
@@ -29,9 +30,21 @@ const alternateCodes = pageKey === 'medical'
   : (pageKey === 'home' || ['how-we-work','scenarios'].includes(pageKey)
     ? activeLocales
     : pageKey === 'guides' ? ['tr','en'] : locales);
+const organizationDescription = ({
+  tr:'CTSEG, Türkiye merkezli iki yönlü küresel ticaret, stratejik tedarik, tedarikçi doğrulama ve pazara giriş çalışmaları yürüten bağımsız bir B2B ticaret evidir.',
+  en:'CTSEG is a Türkiye-based independent B2B trade house for two-way global trade, strategic sourcing, supplier verification and market entry.',
+  de:'CTSEG ist ein unabhängiges B2B-Handelshaus mit Sitz in der Türkei für bidirektionalen Welthandel, strategische Beschaffung, Lieferantenprüfung und Markteintritt.',
+  it:'CTSEG è una trade house B2B indipendente con base in Turchia, focalizzata su commercio globale bidirezionale, sourcing strategico, verifica fornitori e market entry.',
+  ru:'CTSEG — независимый B2B торговый дом в Турции, работающий с двусторонней международной торговлей, стратегическим сорсингом, проверкой поставщиков и выходом на рынки.',
+  fa:'CTSEG یک خانه تجارت مستقل B2B مستقر در ترکیه برای تجارت دوطرفه جهانی، تأمین استراتژیک، راستی‌آزمایی تأمین‌کنندگان و ورود به بازار است.',
+  zh:'CTSEG 是一家立足土耳其的独立 B2B 国际贸易机构，专注双向全球贸易、战略采购、供应商核验与市场进入。',
+  vi:'CTSEG là một trade house B2B độc lập có trụ sở tại Thổ Nhĩ Kỳ, tập trung vào thương mại toàn cầu hai chiều, sourcing chiến lược, thẩm định nhà cung cấp và thâm nhập thị trường.'
+} as Record<string,string>)[lang] || 'CTSEG is a Türkiye-based independent B2B trade house for two-way global trade, strategic sourcing, supplier verification and market entry.';
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
   name:company.name[lang as Locale] || company.name.en,alternateName:company.alternateName,foundingDate:company.foundingYear,
+  description:organizationDescription,
+  slogan:'Two-Way Global Trade & Strategic Sourcing House',
   founder:{'@type':'Person',name:company.founder},
   address:{
     '@type':'PostalAddress',
@@ -41,8 +54,15 @@ const organization = {
     addressCountry:company.addressCountry
   },
   url:'https://ctseg.com.tr/',logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
-  email:company.email,telephone:company.phone,areaServed:['Türkiye','Europe','International'],
-  knowsAbout:['International trade matching','Commercial coordination','Buyer and supplier research','Supplier verification','Producer market entry','Food and agricultural sourcing','Textiles and home textiles','Packaging and industrial inputs','Iranian carpets','Hand-knotted silk carpets']
+  email:company.email,telephone:company.phone,
+  areaServed:['Türkiye','Europe','Middle East','Asia','International'],
+  knowsLanguage:activeLocales,
+  knowsAbout:[
+    'Two-way global trade','Strategic sourcing','Supplier sourcing and verification','Factory and counterparty verification',
+    'International RFQ management','Export market entry','B2B buyer research','Commercial coordination','Nearshoring from Türkiye',
+    'Trade intelligence','Total cost of ownership analysis','Food and agricultural sourcing','Textiles and home textiles',
+    'Packaging and industrial inputs','Iranian carpets','Hand-knotted silk carpets'
+  ]
 };
 const website = {
   '@context':'https://schema.org','@type':'WebSite','@id':'https://ctseg.com.tr/#website',
@@ -105,7 +125,11 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
   <body>
     <a class="skip-link" href="#main">{lang === 'ru' ? 'Перейти к содержанию' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : 'Skip to content'}</a>
     <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
-    <main id="main"><slot />{pageKey === 'home' && <TradeVideo lang={lang} />}</main>
+    <main id="main">
+      <slot />
+      {pageKey === 'home' && <TradeHouseStatement lang={lang as Locale} />}
+      {pageKey === 'home' && <TradeVideo lang={lang} />}
+    </main>
     <SiteFooter lang={lang} />
     {pageKey === 'home' && <FloatingActions lang={lang} />}
     <aside class="cookie-consent" data-cookie-consent hidden aria-label={t.cookieTitle}>

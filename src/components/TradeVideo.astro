@@ -2,52 +2,77 @@
 import type { Locale } from '../data/site';
 const { lang } = Astro.props as { lang: Locale };
 const copy = {
-  tr:{eyebrow:'CTSEG · Ticari koordinasyon',title:'Araştırmadan ticari eşleştirmeye',text:'Ürün, üretici, numune ve pazar değerlendirmesini tek bir ticari koordinasyon akışında bir araya getiriyoruz.',label:'CTSEG ticari araştırma ve koordinasyon süreci'},
-  en:{eyebrow:'CTSEG · Commercial coordination',title:'From research to commercial matching',text:'We bring product, producer, sample and market assessment together in one commercial coordination flow.',label:'CTSEG commercial research and coordination process'},
-  de:{eyebrow:'CTSEG · Handelskoordination',title:'Von der Recherche zur geschäftlichen Vermittlung',text:'Wir verbinden Produkt-, Hersteller-, Muster- und Marktbewertung in einem koordinierten Handelsprozess.',label:'CTSEG Prozess für Handelsrecherche und Koordination'},
-  it:{eyebrow:'CTSEG · Coordinamento commerciale',title:'Dalla ricerca all’abbinamento commerciale',text:'Riuniamo la valutazione di prodotti, produttori, campioni e mercati in un unico processo di coordinamento commerciale.',label:'Processo CTSEG di ricerca e coordinamento commerciale'},
-  fa:{eyebrow:'CTSEG · هماهنگی تجاری',title:'از بررسی تا تطبیق تجاری',text:'بررسی محصول، تولیدکننده، نمونه و بازار را در یک مسیر هماهنگ تجاری کنار هم قرار می‌دهیم.',label:'فرایند بررسی و هماهنگی تجاری CTSEG'},
-  ru:{eyebrow:'CTSEG · Коммерческая координация',title:'От исследования к коммерческому подбору',text:'Мы объединяем оценку продукции, производителей, образцов и рынков в единый процесс коммерческой координации.',label:'Процесс коммерческого исследования и координации CTSEG'},
-  zh:{eyebrow:'CTSEG · 跨国商贸协调',title:'从供应链调研到商业精准匹配',text:'我们将产品技术规格、工厂实测、样品化验与海外市场准入统筹于严密的商业协同流程中。',label:'CTSEG 跨国商业调研与供应链协调流程'},
-  vi:{eyebrow:'CTSEG · Điều phối thương mại',title:'Từ nghiên cứu đến kết nối thương mại',text:'Chúng tôi kết hợp đánh giá sản phẩm, nhà sản xuất, mẫu thử và thị trường trong một luồng điều phối thương mại thống nhất.',label:'Quy trình nghiên cứu và điều phối thương mại CTSEG'}
+  tr:{eyebrow:'CTSEG · Ticari operasyon',title:'Ticaret, doğru bilgi kadar doğru koordinasyon da ister.',text:'Ürün araştırması, üretici değerlendirmesi, RFQ, numune, belge ve pazar bilgisini tek bir ticari operasyon akışında bir araya getiriyoruz.',label:'CTSEG ticari araştırma ve koordinasyon süreci',tag:'Saha · Veri · Doğrulama',stages:['Araştırma','Doğrulama','RFQ','Numune','Koordinasyon']},
+  en:{eyebrow:'CTSEG · Trade operations',title:'Trade needs disciplined coordination, not just good information.',text:'We bring product research, manufacturer assessment, RFQs, samples, documentation and market intelligence into one commercial operating flow.',label:'CTSEG commercial research and coordination process',tag:'Fieldwork · Data · Verification',stages:['Research','Verification','RFQ','Samples','Coordination']},
+  de:{eyebrow:'CTSEG · Handelsoperationen',title:'Handel braucht belastbare Koordination, nicht nur gute Informationen.',text:'Wir bündeln Produktrecherche, Herstellerbewertung, RFQs, Muster, Dokumentation und Marktinformationen in einem strukturierten Handelsprozess.',label:'CTSEG Prozess für Handelsrecherche und Koordination',tag:'Recherche · Daten · Verifizierung',stages:['Recherche','Prüfung','RFQ','Muster','Koordination']},
+  it:{eyebrow:'CTSEG · Operazioni commerciali',title:'Il commercio richiede coordinamento rigoroso, non solo buone informazioni.',text:'Riuniamo ricerca prodotto, valutazione dei produttori, RFQ, campioni, documentazione e intelligence di mercato in un unico flusso operativo.',label:'Processo CTSEG di ricerca e coordinamento commerciale',tag:'Ricerca · Dati · Verifica',stages:['Ricerca','Verifica','RFQ','Campioni','Coordinamento']},
+  fa:{eyebrow:'CTSEG · عملیات تجاری',title:'تجارت فقط به اطلاعات خوب نیاز ندارد؛ هماهنگی منظم هم ضروری است.',text:'تحقیق محصول، ارزیابی تولیدکننده، RFQ، نمونه، اسناد و اطلاعات بازار را در یک جریان عملیاتی تجاری یکپارچه می‌کنیم.',label:'فرایند بررسی و هماهنگی تجاری CTSEG',tag:'تحقیق · داده · راستی‌آزمایی',stages:['تحقیق','راستی‌آزمایی','RFQ','نمونه','هماهنگی']},
+  ru:{eyebrow:'CTSEG · Торговые операции',title:'Международной торговле нужна дисциплина координации, а не только информация.',text:'Мы объединяем исследование продукции, оценку производителей, RFQ, образцы, документы и рыночную аналитику в единый операционный процесс.',label:'Процесс коммерческого исследования и координации CTSEG',tag:'Аналитика · Данные · Проверка',stages:['Исследование','Проверка','RFQ','Образцы','Координация']},
+  zh:{eyebrow:'CTSEG · 跨国商贸运营',title:'国际贸易不仅需要可靠信息，更需要严谨的执行协调。',text:'我们将产品调研、工厂评估、RFQ、样品、技术文件与市场情报整合进同一商业运营流程。',label:'CTSEG 跨国商业调研与供应链协调流程',tag:'调研 · 数据 · 验证',stages:['调研','验证','RFQ','样品','协调']},
+  vi:{eyebrow:'CTSEG · Vận hành thương mại',title:'Thương mại cần điều phối kỷ luật, không chỉ thông tin tốt.',text:'Chúng tôi kết hợp nghiên cứu sản phẩm, đánh giá nhà sản xuất, RFQ, mẫu thử, hồ sơ và thông tin thị trường trong một luồng vận hành thương mại thống nhất.',label:'Quy trình nghiên cứu và điều phối thương mại CTSEG',tag:'Nghiên cứu · Dữ liệu · Xác minh',stages:['Nghiên cứu','Xác minh','RFQ','Mẫu thử','Điều phối']}
 }[lang];
 ---
 <section class="section trade-video-section" data-trade-video-section>
-  <div class="container trade-video-grid">
-    <div class="trade-video-copy">
+  <div class="container trade-video-shell">
+    <div class="trade-video-topline">
       <p class="eyebrow">{copy.eyebrow}</p>
-      <h2>{copy.title}</h2>
-      <p>{copy.text}</p>
+      <span class="trade-video-tag">{copy.tag}</span>
     </div>
-    <figure class="trade-video-frame">
-      <video
-        data-trade-video
-        muted
-        loop
-        playsinline
-        preload="none"
-        poster="/videos/ctseg-trade-coordination-poster.webp"
-        aria-label={copy.label}
-      >
-        <source src="/videos/ctseg-trade-coordination-1080p.webm" type="video/webm" />
-        <source src="/videos/ctseg-trade-coordination-1080p.mp4" type="video/mp4" />
-      </video>
-    </figure>
+    <div class="trade-video-grid">
+      <div class="trade-video-copy">
+        <h2>{copy.title}</h2>
+        <p>{copy.text}</p>
+        <div class="trade-video-stages" aria-label={copy.label}>
+          {copy.stages.map((stage) => <span>{stage}</span>)}
+        </div>
+      </div>
+      <figure class="trade-video-frame">
+        <video
+          data-trade-video
+          muted
+          loop
+          playsinline
+          preload="none"
+          poster="/videos/ctseg-trade-coordination-poster.webp"
+          aria-label={copy.label}
+        >
+          <source src="/videos/ctseg-trade-coordination-1080p.webm" type="video/webm" />
+          <source src="/videos/ctseg-trade-coordination-1080p.mp4" type="video/mp4" />
+        </video>
+        <div class="trade-video-frame-line" aria-hidden="true"></div>
+        <figcaption><span>CTSEG / OPS</span><strong>{copy.label}</strong></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
 <style is:global>
-  .trade-video-section{background:#272923;color:#f2efe7}
-  .trade-video-grid{display:grid;grid-template-columns:minmax(240px,.55fr) minmax(0,1.45fr);gap:clamp(34px,5vw,76px);align-items:center}
-  .trade-video-copy .eyebrow{color:var(--accent-on-dark,#e2ca91)}
-  .trade-video-copy h2{margin:0;font-family:'Source Serif 4',Georgia,serif;font-size:clamp(2.35rem,3.6vw,4.2rem);font-weight:500;line-height:1.02;letter-spacing:-.035em;text-wrap:balance}
-  .trade-video-copy>p:last-child{max-width:38ch;margin:24px 0 0;color:#c7c2b7;font-size:1.05rem}
-  .trade-video-frame{position:relative;margin:0;overflow:hidden;border:1px solid rgba(242,239,231,.2);background:#171914;aspect-ratio:16/9}
-  .trade-video-frame:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
-  .trade-video-frame video{display:block;width:100%;height:100%;object-fit:cover;background:#171914}
-  @media(max-width:860px){.trade-video-grid{grid-template-columns:1fr}.trade-video-copy>p:last-child{max-width:58ch}}
-  @media(max-width:620px){.trade-video-section{padding-block:64px}.trade-video-copy .eyebrow{color:var(--accent-on-dark,#e2ca91)}
-  .trade-video-copy h2{font-size:clamp(2rem,9vw,2.8rem)}.trade-video-frame{margin-inline:-13px;border-inline:0}}
+  .trade-video-section{position:relative;background:#151515;color:#fff;overflow:hidden;border-top:1px solid rgba(255,255,255,.08)}
+  .trade-video-section::before{content:"OPERATIONS";position:absolute;right:-.04em;bottom:-.13em;font-family:var(--font-sans,Arial,sans-serif);font-size:clamp(110px,17vw,300px);font-weight:900;line-height:.8;letter-spacing:-.075em;color:rgba(255,255,255,.02);pointer-events:none;user-select:none}
+  .trade-video-shell{position:relative;z-index:1}
+  .trade-video-topline{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:clamp(36px,4.5vw,66px);padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.16)}
+  .trade-video-copy .eyebrow,.trade-video-topline .eyebrow{margin:0;color:#c4f000!important;font-weight:800!important;letter-spacing:.1em!important}
+  .trade-video-tag{color:#a7a7a2;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+  .trade-video-grid{display:grid;grid-template-columns:minmax(310px,.8fr) minmax(0,1.2fr);gap:clamp(46px,6vw,96px);align-items:center}
+  .trade-video-copy{max-width:650px}
+  .trade-video-copy h2{margin:0;max-width:11ch;font-family:var(--font-sans,Arial,sans-serif);font-size:clamp(46px,4.7vw,78px);font-weight:780;line-height:.95;letter-spacing:-.055em;text-wrap:balance;color:#fff}
+  .trade-video-copy>p{max-width:36em;margin:28px 0 0;color:#d8d8d3!important;font-size:18px!important;line-height:1.65!important;font-weight:500!important}
+  .trade-video-stages{display:flex;flex-wrap:wrap;gap:9px;margin-top:34px}
+  .trade-video-stages span{display:inline-flex;align-items:center;min-height:34px;padding:8px 12px;border:1px solid rgba(196,240,0,.25);border-radius:999px;background:rgba(196,240,0,.045);color:#f2f2ee;font-size:11px;font-weight:780;letter-spacing:.055em;text-transform:uppercase}
+  .trade-video-stages span::before{content:"";width:6px;height:6px;margin-inline-end:8px;border-radius:50%;background:#c4f000;box-shadow:0 0 0 4px rgba(196,240,0,.08)}
+  .trade-video-frame{position:relative;margin:0;overflow:hidden;border:1px solid rgba(255,255,255,.16);border-radius:28px;background:#0d0d0d;aspect-ratio:16/10;box-shadow:0 34px 90px rgba(0,0,0,.36)}
+  .trade-video-frame:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.04) 40%,rgba(0,0,0,.62) 100%)}
+  .trade-video-frame:after{content:"";position:absolute;inset:14px;z-index:2;pointer-events:none;border:1px solid rgba(255,255,255,.1);border-radius:18px}
+  .trade-video-frame video{display:block;width:100%;height:100%;object-fit:cover;background:#0d0d0d;transform:scale(1.015);transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .8s ease}
+  .trade-video-frame:hover video{transform:scale(1.05);filter:saturate(1.06) contrast(1.02)}
+  .trade-video-frame-line{position:absolute;left:28px;top:28px;z-index:3;width:72px;height:4px;border-radius:999px;background:#c4f000;box-shadow:0 0 24px rgba(196,240,0,.18)}
+  .trade-video-frame figcaption{position:absolute;left:28px;right:28px;bottom:24px;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#fff}
+  .trade-video-frame figcaption span{flex:0 0 auto;padding:9px 12px;border-radius:999px;background:#c4f000;color:#0a0a0a;font-size:10px;font-weight:900;letter-spacing:.09em}
+  .trade-video-frame figcaption strong{max-width:32em;text-align:right;font-size:12px;line-height:1.35;font-weight:650;color:#f1f1ed}
+  :global(html[dir="rtl"]) .trade-video-frame figcaption strong{text-align:left}
+  :global(html[dir="rtl"]) .trade-video-section::before{right:auto;left:-.04em}
+  @media(max-width:960px){.trade-video-grid{grid-template-columns:1fr;align-items:start}.trade-video-copy{max-width:780px}.trade-video-copy h2{max-width:14ch}.trade-video-copy>p{max-width:46em}.trade-video-frame{aspect-ratio:16/9}}
+  @media(max-width:620px){.trade-video-section{padding-block:64px}.trade-video-topline{align-items:flex-start;flex-direction:column;margin-bottom:32px}.trade-video-tag{white-space:normal}.trade-video-copy h2{font-size:clamp(36px,9.7vw,50px);line-height:.98;max-width:100%}.trade-video-copy>p{font-size:16px!important}.trade-video-stages{margin-top:26px}.trade-video-stages span{font-size:10px}.trade-video-frame{margin-inline:-13px;border-inline:0;border-radius:0}.trade-video-frame:after{inset:10px;border-radius:12px}.trade-video-frame-line{left:18px;top:18px;width:54px}.trade-video-frame figcaption{left:18px;right:18px;bottom:16px}.trade-video-frame figcaption strong{display:none}}
 </style>
 
 <script>

@@ -28,7 +28,9 @@ for(const [locale,path] of Object.entries(homes)){
 
 const ruHome=read(homes.ru);
 if(!ruHome.includes('<html lang="ru" dir="ltr"'))errors.push('Russian homepage lang/direction incorrect');
-if((ruHome.match(/<h1\b/g)||[]).length!==1||!ruHome.includes('Мы связываем покупателей с подходящими производителями и поставщиками.'))errors.push('Russian homepage H1 missing or duplicated');
+const ruH1Matches=[...ruHome.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)];
+const ruH1Text=(ruH1Matches[0]?.[1]??'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+if(ruH1Matches.length!==1||!/[А-Яа-яЁё]/.test(ruH1Text)||!ruH1Text.includes('Турц'))errors.push('Russian homepage H1 missing, duplicated or not localized');
 if(!/[А-Яа-яЁё]/.test(ruHome))errors.push('Russian homepage has no Cyrillic content');
 for(const marker of ['Accueil','Français','Demander une offre','Tous droits réservés','Politique de confidentialité'])if(ruHome.includes(marker))errors.push(`Russian homepage contains French marker: ${marker}`);
 const disclosure=ruHome.match(/<details class="commercial-form-disclosure"[^>]*>/)?.[0]??'';
