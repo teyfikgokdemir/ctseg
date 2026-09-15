@@ -7,7 +7,7 @@ const t = ui[lang] || ui.en;
 const corporate = companyCopy[lang] || companyCopy.en;
 const year = new Date().getFullYear();
 const descriptionMap: Record<string, string> = {
-  tr:'Türkiye merkezli uluslararası ticaret eşleştirme ve bağımsız ticari koordinasyon.',
+  tr:'Türkiye merkezli iki yönlü küresel ticaret, stratejik tedarik ve pazara giriş evi.',
   en:'A Türkiye-based two-way global trade and strategic sourcing house connecting companies, manufacturers and buyers across markets.',
   de:'Ein in der Türkei ansässiges, beidseitig arbeitendes Haus für globalen Handel, Nearshoring und strategische Beschaffung.',
   it:'Una trade house con base in Turchia per commercio globale bidirezionale, market entry e sourcing strategico.',
@@ -47,6 +47,16 @@ const marketLocales: Array<{ code: Locale; flag:string; label:string; href:strin
   { code:'vi', flag:'🇻🇳', label:'Việt Nam', href:'/vi/' }
 ];
 const marketLabel = ({tr:'Global Pazarlar',en:'Global Markets',de:'Globale Märkte',it:'Mercati globali',fa:'بازارهای جهانی',ru:'Глобальные рынки',zh:'全球市场',vi:'Thị trường toàn cầu'} as Record<string,string>)[lang] || 'Global Markets';
+const footerNav = ({
+  tr:{portfolio:'Ticaret Portföyü',overview:'Portföyü İnceleyin',sourcing:'Stratejik Tedarik',marketEntry:'İhracat ve Pazara Giriş',intelligence:'Ticaret İçgörüleri'},
+  en:{portfolio:'Trade Portfolio',overview:'Explore the Portfolio',sourcing:'Strategic Sourcing',marketEntry:'Export & Market Entry',intelligence:'Trade Intelligence'},
+  de:{portfolio:'Handelsportfolio',overview:'Portfolio ansehen',sourcing:'Strategische Beschaffung',marketEntry:'Export & Markteintritt',intelligence:'Handelswissen'},
+  it:{portfolio:'Portafoglio Commerciale',overview:'Esplora il portafoglio',sourcing:'Sourcing Strategico',marketEntry:'Export & Market Entry',intelligence:'Intelligence Commerciale'},
+  ru:{portfolio:'Торговый портфель',overview:'Смотреть портфель',sourcing:'Стратегический сорсинг',marketEntry:'Экспорт и выход на рынок',intelligence:'Торговая аналитика'},
+  fa:{portfolio:'سبد تجاری',overview:'مشاهده سبد تجاری',sourcing:'تأمین استراتژیک',marketEntry:'صادرات و ورود به بازار',intelligence:'بینش تجاری'},
+  zh:{portfolio:'贸易组合',overview:'查看贸易组合',sourcing:'战略采购',marketEntry:'出口与市场进入',intelligence:'贸易洞察'},
+  vi:{portfolio:'Danh mục thương mại',overview:'Khám phá danh mục',sourcing:'Sourcing chiến lược',marketEntry:'Xuất khẩu & thâm nhập thị trường',intelligence:'Thông tin thương mại'}
+} as Record<string,{portfolio:string;overview:string;sourcing:string;marketEntry:string;intelligence:string}>)[lang] || {portfolio:'Trade Portfolio',overview:'Explore the Portfolio',sourcing:'Strategic Sourcing',marketEntry:'Export & Market Entry',intelligence:'Trade Intelligence'};
 const statementMap: Record<string,string> = {
   tr:'SINIRLARIN ÖTESİNDE TİCARET.',
   en:'TRADE WITHOUT BORDERS.',
@@ -70,7 +80,7 @@ const footerStatement = statementMap[lang] || statementMap.en;
   </div>
   <div class="container footer-main">
     <div class="footer-brand"><a class="brand" href={localizedPath(lang, 'home')}><img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" loading="lazy" decoding="async" /></a><p>{description}</p><div class="footer-company"><strong>{company.name[lang] || company.name.en}</strong><span>{company.foundingYear} · {corporate.footerLocation}</span></div></div>
-    <nav aria-label={t.products}><strong>{t.products}</strong><a href={localizedPath(lang, 'products')}>{t.allProducts}</a><a href={reflexPath(lang)}>{({tr:'REFLEX Medikal Eldivenler',en:'REFLEX Medical Gloves',de:'REFLEX Medizinische Handschuhe',it:'Guanti Medici REFLEX',fa:'دستکش‌های پزشکی REFLEX',ru:'Медицинские перчатки REFLEX',zh:'REFLEX 医用与防护手套',vi:'Găng tay y tế REFLEX',sq:'Doreza Mjekësore REFLEX',mk:'REFLEX Медицински Ракавици',sr:'REFLEX Medicinske Rukavice'}[lang] || 'REFLEX Medical Gloves')}</a><a href={localizedPath(lang, 'markets')}>{t.markets}</a><a href={localizedPath(lang, 'insights')}>{t.insights}</a></nav>
+    <nav aria-label={footerNav.portfolio}><strong>{footerNav.portfolio}</strong><a href={localizedPath(lang, 'products')}>{footerNav.overview}</a><a href={localizedPath(lang,'services','strategic-sourcing')}>{footerNav.sourcing}</a><a href={localizedPath(lang,'services','market-entry')}>{footerNav.marketEntry}</a><a href={reflexPath(lang)}>{({tr:'REFLEX Medikal Eldivenler',en:'REFLEX Medical Gloves',de:'REFLEX Medizinische Handschuhe',it:'Guanti Medici REFLEX',fa:'دستکش‌های پزشکی REFLEX',ru:'Медицинские перчатки REFLEX',zh:'REFLEX 医用与防护手套',vi:'Găng tay y tế REFLEX',sq:'Doreza Mjekësore REFLEX',mk:'REFLEX Медицински Ракавици',sr:'REFLEX Medicinske Rukavice'}[lang] || 'REFLEX Medical Gloves')}</a><a href={localizedPath(lang, 'markets')}>{t.markets}</a><a href={localizedPath(lang, 'insights')}>{footerNav.intelligence}</a></nav>
     <nav aria-label={t.contact}><strong>CTSEG</strong><a href={localizedPath(lang, 'about')}>{t.about}</a>{(lang === 'tr' || lang === 'en' || lang === 'fa' || lang === 'zh' || lang === 'vi') && <a href={localizedPath(lang,'how-we-work')}>{lang === 'tr' ? 'Nasıl çalışıyoruz?' : lang === 'fa' ? 'چگونه کار می‌کنیم؟' : lang === 'zh' ? '运作模式' : lang === 'vi' ? 'Phương thức hoạt động' : 'How we work'}</a>}<a href={localizedPath(lang, 'contact')}>{t.contact}</a><a href={`mailto:${company.email}`}>{company.email}</a><a href="https://t.me/teyfikgokdemir" target="_blank" rel="noopener noreferrer" aria-label="Telegram: @teyfikgokdemir">Telegram (@teyfikgokdemir)</a></nav>
   </div>
   <div class="container footer-bottom"><p>{copyright}</p><nav aria-label="Legal">{legalIds.map((id) => <a href={localizedPath(lang, 'legal', id)}>{legal[id].titles[lang] || legal[id].titles.en}</a>)}</nav></div>
