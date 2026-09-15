@@ -17,7 +17,54 @@
     document.head.appendChild(script);
   });
 
+  const initMarquee = () => {
+    const tradePaths = document.querySelector('.trade-paths-section');
+    if (!tradePaths || document.querySelector('.premium-trade-marquee')) return;
+
+    const locale = document.documentElement.dataset.locale || document.documentElement.lang || 'en';
+    const copy = {
+      tr:'KÜRESEL TİCARET · STRATEJİK TEDARİK · PAZARA GİRİŞ · DOĞRULANMIŞ ÜRETİCİLER · ',
+      en:'GLOBAL TRADE · STRATEGIC SOURCING · MARKET ENTRY · VERIFIED PRODUCERS · ',
+      de:'GLOBALER HANDEL · STRATEGISCHE BESCHAFFUNG · MARKTEINTRITT · GEPRÜFTE HERSTELLER · ',
+      it:'COMMERCIO GLOBALE · SOURCING STRATEGICO · INGRESSO NEI MERCATI · PRODUTTORI VERIFICATI · ',
+      fa:'تجارت جهانی · تأمین استراتژیک · ورود به بازار · تولیدکنندگان تأییدشده · ',
+      ru:'ГЛОБАЛЬНАЯ ТОРГОВЛЯ · СТРАТЕГИЧЕСКИЙ СОРСИНГ · ВЫХОД НА РЫНОК · ПРОВЕРЕННЫЕ ПРОИЗВОДИТЕЛИ · ',
+      zh:'全球贸易 · 战略采购 · 市场进入 · 已验证制造商 · ',
+      vi:'THƯƠNG MẠI TOÀN CẦU · SOURCING CHIẾN LƯỢC · THÂM NHẬP THỊ TRƯỜNG · NHÀ SẢN XUẤT ĐÃ XÁC MINH · '
+    };
+    const text = copy[locale] || copy.en;
+
+    if (!document.getElementById('premium-marquee-styles')) {
+      const style = document.createElement('style');
+      style.id = 'premium-marquee-styles';
+      style.textContent = `
+        .premium-trade-marquee{overflow:hidden;background:#c4f000;color:#0a0a0a;border-top:1px solid rgba(10,10,10,.16);border-bottom:1px solid rgba(10,10,10,.16);padding:18px 0;position:relative;z-index:2}
+        .premium-trade-marquee__track{display:flex;width:max-content;will-change:transform;animation:ctseg-premium-marquee 24s linear infinite}
+        .premium-trade-marquee__text{flex:none;padding-right:.55em;font-size:clamp(34px,5.2vw,86px);line-height:.92;font-weight:700;letter-spacing:-.055em;white-space:nowrap}
+        html[dir="rtl"] .premium-trade-marquee__track{direction:rtl;animation-direction:reverse}
+        @keyframes ctseg-premium-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+        @media(max-width:760px){.premium-trade-marquee{padding:13px 0}.premium-trade-marquee__text{font-size:clamp(30px,10vw,46px)}}
+      `;
+      document.head.appendChild(style);
+    }
+
+    const band = document.createElement('div');
+    band.className = 'premium-trade-marquee';
+    band.setAttribute('aria-hidden','true');
+    const track = document.createElement('div');
+    track.className = 'premium-trade-marquee__track';
+    [0,1].forEach(() => {
+      const item = document.createElement('span');
+      item.className = 'premium-trade-marquee__text';
+      item.textContent = `${text}${text}`;
+      track.appendChild(item);
+    });
+    band.appendChild(track);
+    tradePaths.parentNode.insertBefore(band, tradePaths);
+  };
+
   const initFallback = () => {
+    initMarquee();
     const items = document.querySelectorAll('.trade-funnel-card,.platform-sector-grid article,.trade-paths-grid article,.corridor-list>div,.card,.content-block,.operational-trust-panel,.trust-facts>div');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -72,6 +119,7 @@
   };
 
   const init = () => {
+    initMarquee();
     const gsap = window.gsap;
     const ScrollTrigger = window.ScrollTrigger;
     if (!gsap || !ScrollTrigger) return initFallback();
