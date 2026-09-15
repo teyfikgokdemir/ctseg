@@ -723,7 +723,25 @@ export const editorialCopy: Record<Locale, {
   }
 };
 
-export const insightIds = ['strategic-vs-procurement','supplier-selection','supplier-risk','total-cost','rfq','supply-chain-risk','origin-compliance'] as const;
+export const insightIds = [
+  'strategic-vs-procurement',
+  'supplier-selection',
+  'supplier-risk',
+  'total-cost',
+  'rfq',
+  'supply-chain-risk',
+  'origin-compliance',
+  'nearshoring-europe-turkey',
+  'turkey-manufacturer-sourcing',
+  'china-vs-turkey-sourcing',
+  'vietnam-turkey-trade-routes',
+  'iran-turkey-commodity-corridors',
+  'private-label-contract-manufacturing',
+  'supplier-due-diligence',
+  'turkey-export-market-entry',
+  'landed-cost-moq-optimization',
+  'trade-house-vs-broker'
+] as const;
 export const insights: Record<(typeof insightIds)[number], { slugs: Localized; titles: Localized; descriptions: Localized; answers: Localized }> = {
   'strategic-vs-procurement': {
     slugs:{tr:'stratejik-tedarik-ve-satin-alma-farki',en:'strategic-sourcing-vs-procurement',de:'strategische-beschaffung-vs-einkauf',it:'sourcing-strategico-vs-acquisti',ru:'strategicheskiy-sorsing-i-zakupki',fa:'strategic-sourcing-vs-procurement',zh:'strategic-sourcing-vs-procurement',vi:'strategic-sourcing-vs-procurement'},
@@ -793,6 +811,336 @@ export const insights: Record<(typeof insightIds)[number], { slugs: Localized; t
     titles:{tr:'Gıda tedariğinde menşe ve uyum',en:'Origin and compliance in food sourcing',de:'Herkunft und Konformität in der Lebensmittelbeschaffung',it:'Origine e conformità nel sourcing alimentare',ru:'Происхождение и соответствие при сорсинге пищевых продуктов',fa:'مبدأ و انطباق در تأمین مواد غذایی',zh:'大宗与特色食品跨境采购中的真实产地溯源与合规监管要求',vi:'Minh bạch nguồn gốc và tuân thủ quy chuẩn trong thu mua thực phẩm'},
     descriptions:{tr:'Gerçek menşe, parti izlenebilirliği, COA, aflatoksin, pestisit ve hedef pazar uygunluğu için temel kontroller.',en:'Core controls for actual origin, batch traceability, COA, aflatoxin, pesticides and target-market compliance.',de:'Kernprüfungen für tatsächliche Herkunft, Chargenrückverfolgung, COA, Aflatoxin, Pestizide und Zielmarktkonformität.',it:'Controlli essenziali su origine effettiva, tracciabilità lotto, COA, aflatossine, pesticidi e conformità al mercato.',ru:'Основные проверки реального происхождения, прослеживаемости партий, COA, афлатоксинов, пестицидов и соответствия целевому рынку.',fa:'کنترل‌های کلیدی برای مبدأ واقعی، قابلیت ردگیری محموله، اسناد COA، آفلاتوکسین و انطباق با بازار هدف.',zh:'针对真实原产地判定、全批次流向溯源、分析检测报告 (COA)、黄曲霉毒素、农残限量标准及目标国海关与食品安全准入的严苛核查要点。',vi:'Các kiểm soát then chốt về nguồn gốc thực tế, khả năng truy xuất lô hàng, COA, chỉ tiêu aflatoxin, dư lượng thuốc bảo vệ thực vật và quy chuẩn thị trường mục tiêu.'},
     answers:{tr:'Menşe ticari evrak, üretici ve parti düzeyinde açıkça beyan edilmeli; hedef pazar limitleri sevkiyat öncesinde doğrulanmalıdır.',en:'Origin should be declared clearly at commercial-document, producer and batch level; target-market limits must be verified before shipment.',de:'Die Herkunft ist in Handelsdokumenten sowie auf Hersteller- und Chargenebene offenzulegen; Zielmarktgrenzen sind vor Versand zu prüfen.',it:'L’origine va dichiarata nei documenti commerciali e a livello di produttore e lotto; i limiti del mercato vanno verificati prima della spedizione.',ru:'Происхождение должно быть указано в коммерческих документах, на уровне производителя и партии; пределы и нормативы целевого рынка необходимо проверить до отправки.',fa:'مبدأ کالا باید در اسناد تجاری و سطح محموله شفاف اعلام شود و الزامات بازار هدف قبل از حمل اعتبارسنجی گردد.',zh:'原产地信息必须在商业发票、原产地证书、生产商信息及批次溯源码层面保持完全一致且真实透明，所有理化与卫生限量标准必须在装船发运前完成第三方权威检测。',vi:'Xuất xứ phải được khai báo minh bạch trên chứng từ thương mại, hồ sơ nhà sản xuất và cấp độ lô hàng; các chỉ tiêu an toàn phải được kiểm nghiệm đạt chuẩn trước khi giao hàng.'}
+  },
+  'nearshoring-europe-turkey': {
+    slugs:{tr:'avrupa-turkiye-nearshoring-tedarik-koridoru',en:'europe-turkey-nearshoring-supply-corridor',de:'nearshoring-europa-tuerkei-lieferkette',it:'nearshoring-europa-turchia-catena-fornitura',ru:'nearshoring-evropa-turtsiya-cepochka-postavok',fa:'nearshoring-europe-turkey-supply-corridor',zh:'nearshoring-europe-turkey-supply-corridor',vi:'nearshoring-europe-turkey-supply-corridor'},
+    titles:{
+      tr:'Avrupa-Türkiye Nearshoring Koridoru: Tedarik Zincirini Yakınlaştırma Rehberi',
+      en:'Europe-Turkey Nearshoring Corridor: Strategic Supply Chain Realignment',
+      de:'Nearshoring-Korridor Europa–Türkei: Strategische Neuausrichtung der Lieferkette',
+      it:'Corridoio Nearshoring Europa-Turchia: Riorganizzazione Strategica della Filiera',
+      ru:'Коридор ниршоринга Европа–Турция: стратегическая реорганизация поставок',
+      fa:'گذرگاه نیرشورینگ اروپا–ترکیه: بازآرایی استراتژیک زنجیره تأمین',
+      zh:'欧洲-土耳其近岸外包贸易走廊：跨国供应链近地化重构与风险对冲策略',
+      vi:'Hành lang Nearshoring Châu Âu–Thổ Nhĩ Kỳ: Tái cấu trúc chuỗi cung ứng chiến lược'
+    },
+    descriptions:{
+      tr:'Avrupa sanayisi için Türkiye nearshoring avantajları; 3-5 günlük karayolu teslimatı, Gümrük Birliği ve karbon ayak izi optimizasyonu.',
+      en:'Nearshoring from Turkey to Europe: 3-5 day transit times, EU Customs Union benefits, CBAM carbon compliance and dual-sourcing resilience.',
+      de:'Nearshoring aus der Türkei nach Europa: 3–5 Tage Lkw-Laufzeit, Zollunion, CBAM-Klimavorgaben und Resilienz durch Dual-Sourcing.',
+      it:'Nearshoring dalla Turchia all’Europa: tempi di transito di 3-5 giorni, Unione Doganale, conformità CBAM e resilienza dual-sourcing.',
+      ru:'Преимущества ниршоринга из Турции в Европу: автодоставка за 3–5 дней, Таможенный союз ЕС, нормы CBAM и устойчивость поставок.',
+      fa:'مزایای نیرشورینگ از ترکیه به اروپا: حمل جاده‌ای ۳ تا ۵ روزه، اتحادیه گمرکی، استانداردهای کربن CBAM و پایداری تأمین چندگانه.',
+      zh:'深度解析欧洲制造业向土耳其近岸转移的核心动因：3至5天公路速达、欧盟关税同盟零关税待遇、CBAM碳关税应对及双供应链冗余避险机制。',
+      vi:'Lợi ích nearshoring từ Thổ Nhĩ Kỳ sang Châu Âu: thời gian vận tải bộ 3-5 ngày, Hiệp định Hải quan, tuân thủ CBAM và khả năng phục hồi nguồn cung.'
+    },
+    answers:{
+      tr:'Türkiye, Avrupa sanayisine 3-5 günlük karayolu terminleri, AB Gümrük Birliği muafiyeti ve düşük karbonlu lojistikle Asya bağımlılığını azaltan stratejik bir nearshoring üssü sunar.',
+      en:'Turkey offers European buyers a decisive nearshoring hedge with 3-5 day overland road freight, duty-free EU Customs Union integration, and significantly lower Scope 3 transport emissions compared to East Asian maritime routes.',
+      de:'Die Türkei bietet europäischen Einkäufern eine strategische Nearshoring-Alternative mit 3–5 Tagen Lkw-Transit, Zollunionsvorteilen und reduzierten Transportemissionen gegenüber asiatischen Seefrachtrouten.',
+      it:'La Turchia offre agli acquirenti europei un solido presidio di nearshoring con transito su gomma in 3-5 giorni, esenzione daziaria dell’Unione Doganale ed emissioni Scope 3 inferiori rispetto alle rotte marittime asiatiche.',
+      ru:'Турция выступает ключевым узлом ниршоринга для европейских компаний благодаря доставке автотранспортом за 3–5 дней, преференциям Таможенного союза и снижению углеродного следа по сравнению с морскими маршрутами из Азии.',
+      fa:'ترکیه با ارائه ترانزیت جاده‌ای ۳ تا ۵ روزه، معافیت‌های اتحادیه گمرکی اروپا و کاهش انتشارات کربنی نسبت به مسیرهای دریایی آسیا، پایگاه راهبردی نیرشورینگ برای خریداران اروپایی است.',
+      zh:'土耳其凭借泛欧3至5天卡车点对点直达时效、欧盟关税同盟项下工业品免税准入以及显著低于东亚海运的碳足迹，成为欧洲跨国企业化解供应链阻断风险的核心近岸基地。',
+      vi:'Thổ Nhĩ Kỳ mang lại giải pháp nearshoring tối ưu cho người mua Châu Âu với 3-5 ngày vận chuyển đường bộ, miễn thuế theo Hiệp định Hải quan và giảm thiểu phát thải Scope 3 so với đường biển Châu Á.'
+    }
+  },
+  'turkey-manufacturer-sourcing': {
+    slugs:{tr:'turkiyeden-uretici-tedarigi-fabrika-secimi',en:'sourcing-from-turkish-manufacturers-factory-audits',de:'beschaffung-tuerkische-hersteller-werkspruefung',it:'sourcing-produttori-turchi-audit-fabbrica',ru:'sorsing-turetskie-proizvoditeli-audit-fabrik',fa:'sourcing-from-turkish-manufacturers-factory-audits',zh:'sourcing-from-turkish-manufacturers-factory-audits',vi:'sourcing-from-turkish-manufacturers-factory-audits'},
+    titles:{
+      tr:'Türkiye’den Üretici Tedariği: Doğrudan Fabrika Seçimi ve Saha Denetimi',
+      en:'Sourcing from Turkish Manufacturers: Factory Selection & On-Site Audits',
+      de:'Sourcing bei türkischen Herstellern: Fabrikauswahl & Vor-Ort-Audits',
+      it:'Sourcing da Produttori Turchi: Selezione delle Fabbriche e Audit sul Posto',
+      ru:'Сорсинг у турецких производителей: выбор фабрик и выездной аудит',
+      fa:'تأمین از تولیدکنندگان ترکیه: شناسایی کارخانه‌ها و ممیزی میدانی',
+      zh:'土耳其源头工厂直采与验厂实务：生产基地筛选、设备核验与现场尽调',
+      vi:'Thu mua trực tiếp từ nhà sản xuất Thổ Nhĩ Kỳ: Tuyển chọn nhà máy và thẩm định thực địa'
+    },
+    descriptions:{
+      tr:'Türkiye’deki sanayi havzalarında doğrudan üretici bulma; aracıları eleme, makine kapasitesi doğrulama ve teknik fabrika denetimi.',
+      en:'Identifying genuine manufacturers across Turkey’s industrial hubs; eliminating broker layers, verifying machinery capacity and on-site audit protocol.',
+      de:'Herstellersourcing in türkischen Industriezentren: Zwischenhändler filtern, Maschinenkapazitäten prüfen und Vor-Ort-Audits strukturieren.',
+      it:'Identificare produttori autentici nei poli industriali turchi; eliminare intermediari opachi, verificare impianti e protocolli di audit.',
+      ru:'Поиск прямых производителей в промышленных кластерах Турции; отсечение посредников, аудит мощностей станков и протоколы проверки.',
+      fa:'شناسایی تولیدکنندگان دست‌اول در قطب‌های صنعتی ترکیه؛ حذف واسطه‌ها، راستی‌آزمایی ظرفیت ماشین‌آلات و پروتکل ممیزی کارخانه.',
+      zh:'系统梳理伊斯坦布尔、布尔萨、伊兹密尔等土耳其制造业集群：剔除皮包中间商、核实设备实际产出工时与权威实地验厂全流程指南。',
+      vi:'Tìm kiếm nhà sản xuất thực tế tại các cụm công nghiệp Thổ Nhĩ Kỳ; loại bỏ trung gian thương mại, xác minh công suất máy móc và quy trình kiểm toán nhà xưởng.'
+    },
+    answers:{
+      tr:'Türkiye’den tedarikte başarı, aracı tüccarlar ile gerçek imalatçıları ticari sicil, enerji tüketimi ve makine parkuru düzeyinde sahada doğrulamaktan geçer.',
+      en:'Direct manufacturing sourcing in Turkey succeeds when buyers bypass broker markups by auditing physical facilities, machine registries, electricity load capacity, and workforce scale before contractual commitments.',
+      de:'Erfolgreiches Herstellersourcing in der Türkei erfordert die unabhängige Überprüfung von Gewerberegistern, Maschinenparks und realen Fertigungskapazitäten vor Ort, um Intransparenz auszuschließen.',
+      it:'Il sourcing diretto in Turchia ha successo verificando sul campo registri industriali, impianti produttivi, consumi energetici e manodopera reale prima di emettere acconti contrattuali.',
+      ru:'Эффективный сорсинг на турецких фабриках строится на выездном аудите оборудования, подтверждении энергопотребления и юридической чистоты для исключения посреднических наценок.',
+      fa:'موفقیت در تأمین مستقیم از ترکیه در گرو ممیزی میدانی خطوط تولید، راستی‌آزمایی قبوض مصرف صنعتی و بررسی سوابق رسمی شرکت پیش از واریز پیش‌پرداخت است.',
+      zh:'在土耳其开展源头直采的关键在于穿透贸易中介表象，通过调取工商能耗底册、实地盘点数控机床与产能工时，在支付预付款前完成现场技术核验。',
+      vi:'Thu mua thành công tại Thổ Nhĩ Kỳ đòi hỏi người mua phải kiểm tra thực địa dây chuyền thiết bị, phụ tải điện công nghiệp và hồ sơ lao động để loại bỏ các tầng trung gian.'
+    }
+  },
+  'china-vs-turkey-sourcing': {
+    slugs:{tr:'cin-turkiye-tedarik-karsilastirmasi-tco-analizi',en:'china-vs-turkey-sourcing-total-cost-analysis',de:'china-vs-tuerkei-sourcing-tco-analyse',it:'cina-vs-turchia-sourcing-analisi-tco',ru:'sravnenie-sorsinga-kitay-turtsiya-analiz-tco',fa:'china-vs-turkey-sourcing-total-cost-analysis',zh:'china-vs-turkey-sourcing-total-cost-analysis',vi:'china-vs-turkey-sourcing-total-cost-analysis'},
+    titles:{
+      tr:'Çin ve Türkiye Tedarik Karşılaştırması: TCO, Termin ve Esneklik Analizi',
+      en:'China vs Turkey Sourcing: Landed Cost, Lead Time & Operational Agility',
+      de:'Sourcing in China vs. Türkei: Gesamtanlandekosten, Lieferzeit & Flexibilität',
+      it:'Sourcing in Cina vs Turchia: Costo Sbarcato, Tempi di Consegna e Flessibilità',
+      ru:'Сорсинг в Китае и Турции: совокупная себестоимость, сроки и гибкость',
+      fa:'مقایسه تأمین از چین و ترکیه: بهای تمام‌شده، زمان تحویل و چابکی عملیاتی',
+      zh:'中国与土耳其采购深度对标：离岸价陷阱、到岸总成本 (TCO) 与交期弹性量化',
+      vi:'So sánh nguồn cung Trung Quốc và Thổ Nhĩ Kỳ: Chi phí cập cảng, thời gian giao hàng và độ linh hoạt'
+    },
+    descriptions:{
+      tr:'Çin FOB birim fiyat illüzyonuna karşı Türkiye toplam sahip olma maliyeti (TCO); navlun dalgalanmaları, MOQ ve stok finansmanı kıyaslaması.',
+      en:'Comparing China FOB illusion against Turkey landed cost: freight volatility, container MOQs, inventory holding costs and cash-to-cash cycles.',
+      de:'FOB-Preisillusion in China versus TCO in der Türkei: Frachtvolatilität, Container-MOQs, Kapitalbindung und Liquiditätszyklen im Vergleich.',
+      it:'Confronto tra illusione FOB cinese e costo sbarcato in Turchia: volatilità noli, minimi d’ordine container, capitale circolante e scorte.',
+      ru:'Иллюзия цены FOB в Китае против совокупных затрат в Турции: волатильность фрахта, контейнерный MOQ и заморозка оборотного капитала.',
+      fa:'مقایسه قیمت ارزان FOB چین با بهای تمام‌شده ترکیه: نوسان کرایه حمل دریایی، حداقل سفارش‌های سنگین و هزینه خواب سرمایه.',
+      zh:'全景量化中国与土耳其采购模型：剖析超低出厂单价背后的高额集装箱海运附加费、高阶梯 MOQ、库存资金沉淀与现金周转周期差异。',
+      vi:'Phân tích ảo tưởng giá FOB Trung Quốc so với chi phí cập cảng Thổ Nhĩ Kỳ: biến động cước biển, MOQ container lớn và chi phí lưu kho vốn lưu động.'
+    },
+    answers:{
+      tr:'Çin\'in düşük birim fiyat avantajı; yüksek deniz navlunu, 40-50 günlük seyrüsefer, konteyner bazlı yüksek MOQ ve stok finansmanı hesaba katıldığında Türkiye lehine dengelenir.',
+      en:'While China frequently offers lower nominal unit prices, Turkey delivers superior landed cost and cash-cycle efficiency when ocean freight volatility, 45-day transit risk, large container MOQs, and inventory holding costs are modeled.',
+      de:'Trotz geringerer nominaler Stückpreise in Asien erzielt die Türkei oft die wirtschaftlichere Gesamtlösung, sobald Frachtvolatilität, 45 Tage Seeweg und hohe Mindestbestellmengen einberechnet werden.',
+      it:'Sebbene la Cina mostri spesso prezzi unitari inferiori, la Turchia garantisce un costo sbarcato e un’efficienza del circolante superiori considerando noli marittimi, 45 giorni di transito e scorte vincolate.',
+      ru:'Хотя Китай часто предлагает более низкие номинальные цены, Турция обеспечивает меньшую совокупную себестоимость с учётом волатильности фрахта, 45 дней пути и заморозки оборотного капитала.',
+      fa:'اگرچه چین قیمت‌های اولیه پایین‌تری ارائه می‌دهد، اما با محاسبه نوسانات شدید کرایه دریایی، ۴۵ روز ترانزیت و خواب سنگین سرمایه در انبار، تأمین از ترکیه توجیه اقتصادی بالاتری دارد.',
+      zh:'尽管中国在基础工业品上具备单件报价优势，但综合计入红海与苏伊士运费波动、45天海上风浪延误、整柜起订量占压及资金利息后，土耳其在全周期综合总成本与敏捷补货上更具竞争力。',
+      vi:'Dù Trung Quốc thường có đơn giá danh nghĩa thấp hơn, Thổ Nhĩ Kỳ lại mang đến tổng chi phí cập cảng và hiệu quả dòng tiền vượt trội khi tính đến biến động cước biển, thời gian vận chuyển 45 ngày và tồn kho lớn.'
+    }
+  },
+  'vietnam-turkey-trade-routes': {
+    slugs:{tr:'vietnam-turkiye-kuresel-tedarik-rotalari',en:'vietnam-turkey-global-supply-routes',de:'vietnam-tuerkei-globale-beschaffungsrouten',it:'vietnam-turchia-rotte-globali-approvvigionamento',ru:'marshruty-postavok-vietnam-turtsiya',fa:'vietnam-turkey-global-supply-routes',zh:'vietnam-turkey-global-supply-routes',vi:'tuyen-thuong-mai-toan-cau-viet-nam-tho-nhi-ky'},
+    titles:{
+      tr:'Vietnam ve Türkiye Ticaret Dinamikleri: Küresel Tedarik Rotası Karşılaştırması',
+      en:'Vietnam & Turkey Trade Corridors: Comparative Supply Chain Strategies',
+      de:'Handelskorridore Vietnam & Türkei: Vergleichende Lieferkettenstrategien',
+      it:'Corridoi Commerciali Vietnam e Turchia: Strategie di Filiera a Confronto',
+      ru:'Торговые коридоры Вьетнам–Турция: сравнительный анализ цепочек поставок',
+      fa:'راهگذرهای تجاری ویتنام و ترکیه: تحلیل تطبیقی راهبردهای زنجیره تأمین',
+      zh:'越南与土耳其跨境商贸走廊对标：东南亚与泛欧亚供应链多元化布局策略',
+      vi:'Hành lang thương mại Việt Nam – Thổ Nhĩ Kỳ: Chiến lược so sánh chuỗi cung ứng'
+    },
+    descriptions:{
+      tr:'Güneydoğu Asya ve Akdeniz tedarik eksenlerinin karşılaştırması; transit süreleri, tarife rejimleri ve tedarik zinciri çeşitlendirme modelleri.',
+      en:'Benchmarking Southeast Asia and Mediterranean sourcing hubs; transit duration, preferential tariffs, and geographic risk mitigation.',
+      de:'Vergleich von Beschaffungszentren in Südostasien und im Mittelmeerraum: Transitzeiten, Zollregime und geopolitische Risikodiversifizierung.',
+      it:'Confronto tra hub di sourcing del Sud-est asiatico e del Mediterraneo: tempi di transito, regimi tariffari e diversificazione del rischio.',
+      ru:'Сравнение сорсинговых хабов Юго-Восточной Азии и Средиземноморья: транзитные сроки, тарифы и географическая диверсификация рисков.',
+      fa:'مقایسه قطب‌های تأمین جنوب شرق آسیا و مدیترانه: مدت زمان ترانزیت، تعرفه‌ها و مدیریت ریسک‌های ژئوپلیتیک زنجیره تأمین.',
+      zh:'深度比较东南亚制造极（越南）与地中海枢纽（土耳其）：海空联运通道、原产地规则、双边自贸协定与跨国企业“中国+1”多元化寻源模型。',
+      vi:'So sánh trung tâm thu mua Đông Nam Á và Địa Trung Hải: thời gian vận chuyển, biểu thuế ưu đãi và chiến lược đa dạng hóa rủi ro địa lý.'
+    },
+    answers:{
+      tr:'Vietnam yüksek hacimli tüketici elektroniği ve tekstilde Güneydoğu Asya avantajı sunarken, Türkiye Avrupa ve Ortadoğu ekseninde hızlı termin ve gümrük birliği avantajıyla tamamlayıcı bir tedarik mimarisi oluşturur.',
+      en:'Vietnam provides scale advantages in consumer electronics and volume apparel, while Turkey acts as the optimal agile counterweight for rapid European fulfillment, specialized engineering, and customized industrial procurement.',
+      de:'Vietnam bietet Größenvorteile bei Großserien in Elektronik und Bekleidung, während die Türkei als agiles Gegengewicht für schnelle europäische Nachlieferungen und Spezialanfertigungen dient.',
+      it:'Il Vietnam offre vantaggi di scala per elettronica di consumo e abbigliamento, mentre la Turchia si conferma l’indispensabile contrappeso agile per consegne rapide sul mercato europeo e produzioni specializzate.',
+      ru:'Вьетнам обеспечивает масштаб в электронике и лёгкой промышленности, а Турция служит оперативным противовесом для быстрой логистики в Европу и гибких заказов.',
+      fa:'ویتنام در تولید انبوه پوشاک و الکترونیک مصرفی دارای مزیت مقیاس است، در حالی که ترکیه به‌عنوان موازنه‌کننده چابک برای تأمین سریع بازارهای اروپا و خاورمیانه عمل می‌کند.',
+      zh:'越南在大批量消费电子与基础纺织品领域具备亚太规模集聚优势；而土耳其则在面向泛欧高阶工业定制、严苛交期履约与多品种小批量混流生产中构成关键的互补支撑。',
+      vi:'Việt Nam có lợi thế quy mô về điện tử tiêu dùng và may mặc công nghiệp, trong khi Thổ Nhĩ Kỳ đóng vai trò đối trọng linh hoạt cho các đơn hàng tốc độ cao phục vụ thị trường Châu Âu.'
+    }
+  },
+  'iran-turkey-commodity-corridors': {
+    slugs:{tr:'iran-turkiye-tarimsal-emtia-ve-hammadde-koridoru',en:'iran-turkey-commodity-corridors-batch-verification',de:'iran-tuerkei-agrarrohstoffe-chargenpruefung',it:'iran-turchia-materie-prime-verifica-lotti',ru:'koridor-iran-turtsiya-sorsing-syrya',fa:'iran-turkey-commodity-corridors-batch-verification',zh:'iran-turkey-commodity-corridors-batch-verification',vi:'iran-turkey-commodity-corridors-batch-verification'},
+    titles:{
+      tr:'İran-Türkiye Ticaret Koridoru: Tarımsal Emtia ve Hammadde Tedariği',
+      en:'Iran-Turkey Commodity Corridors: Agricultural Sourcing & Batch Verification',
+      de:'Handelskorridor Iran–Türkei: Agrarrohstoffe & Chargenanalytik',
+      it:'Corridoio Commerciale Iran-Turchia: Materie Prime Agricole e Verifica dei Lotti',
+      ru:'Торговый коридор Иран–Турция: аграрное сырьё и попартийный контроль',
+      fa:'راهگذار تجاری ایران و ترکیه: تأمین مواد اولیه و اعتبارسنجی پارت‌های کالایی',
+      zh:'伊朗-土耳其跨境大宗商贸走廊：特色农产寻源、入境转口与批次化验核验',
+      vi:'Hành lang hàng hóa Iran – Thổ Nhĩ Kỳ: Thu mua nông sản và kiểm định theo lô'
+    },
+    descriptions:{
+      tr:'Antep fıstığı, hurma, safran ve petrokimya türevlerinde sınır lojistiği, parti laboratuvar analizleri (aflatoksin, saflık) ve uyum rehberi.',
+      en:'Speciality sourcing in pistachios, dates, saffron and raw materials: border logistics, accredited lab testing, aflatoxin limits and regulatory compliance.',
+      de:'Spezialitätenbeschaffung bei Pistazien, Datteln, Safran und Rohstoffen: Grenzlogistik, akkreditierte Laboranalysen, Aflatoxingrenzen und Compliance.',
+      it:'Sourcing di pistacchi, datteri, zafferano e materie prime: logistica di frontiera, test accreditati di laboratorio, limiti di aflatossine e conformità.',
+      ru:'Сорсинг фисташек, фиников, шафрана и сырья: приграничная логистика, лабораторные тесты, нормы афлатоксинов и юридическая чистота.',
+      fa:'تأمین تخصصی پسته، خرما، زعفران و مواد اولیه: لجستیک مرزی، آزمون‌های آزمایشگاهی آفلاتوکسین و تطبیق کامل با استانداردهای گمرکی.',
+      zh:'针对中东特色开心果、椰枣、藏红花及工业基础原材料：解析陆路口岸转运、第三方 CNAS/ILAC 实验室黄曲霉毒素检测及全链路贸易合规。',
+      vi:'Thu mua chuyên biệt hạt dẻ cười, chà là, nhụy hoa nghệ tây và nguyên liệu thô: logistics biên giới, kiểm nghiệm aflatoxin và tuân thủ pháp lý.'
+    },
+    answers:{
+      tr:'İran-Türkiye hattında emtia tedariği, sınırda parti bazlı akredite laboratuvar testleri ve uluslararası mevzuata tam uyumlu şeffaf evrak yapısıyla yönetilmelidir.',
+      en:'Commodity sourcing along the Iran-Turkey corridor requires rigorous batch-level accredited testing (for aflatoxins, moisture, and grading) and transparent legal documentation before cross-border transit.',
+      de:'Rohstofftransaktionen über den Korridor Iran–Türkei verlangen lückenlose Chargenanalysen in akkreditierten Laboren und strikte Dokumentenkonformität an der Grenze.',
+      it:'Il sourcing di materie prime nel corridoio Iran-Turchia richiede rigorose analisi di lotto accreditate (aflatossine, umidità) e documentazione doganale conforme prima del transito transfrontaliero.',
+      ru:'Закупки сырья по коридору Иран–Турция требуют обязательного попартийного лабораторного контроля (афлатоксины, влажность) и полной прозрачности товаросопроводительных документов.',
+      fa:'تأمین کالا در راهگذار تجاری ایران و ترکیه مستلزم انجام آزمایش‌های دقیق پارت‌محور در آزمایشگاه‌های معتبر و تنظیم اسناد شفاف و منطبق با قوانین بین‌المللی است.',
+      zh:'依托土耳其区域中枢开展农产与大宗原料贸易，必须在入境口岸执行严格的逐批次抽样化验（黄曲霉毒素、微生物及水分），并出具全程可追溯的法定清关单证。',
+      vi:'Thu mua hàng hóa qua hành lang Iran - Thổ Nhĩ Kỳ đòi hỏi kiểm nghiệm phòng thí nghiệm độc lập cho từng lô hàng và hồ sơ chứng từ minh bạch trước khi qua biên giới.'
+    }
+  },
+  'private-label-contract-manufacturing': {
+    slugs:{tr:'turkiyede-private-label-ve-fason-uretim-rehberi',en:'private-label-contract-manufacturing-turkey',de:'private-label-auftragsfertigung-tuerkei',it:'private-label-produzione-conto-terzi-turchia',ru:'kontraktnoe-proizvodstvo-chastnaya-marka-turtsiya',fa:'private-label-contract-manufacturing-turkey',zh:'private-label-contract-manufacturing-turkey',vi:'gia-cong-oem-nhan-hang-rieng-tho-nhi-ky'},
+    titles:{
+      tr:'Türkiye’de Fason Üretim ve Private Label: Sözleşme ve Kalite Yönetimi',
+      en:'Private Label & Contract Manufacturing in Turkey: Governance & IP Protection',
+      de:'Private Label & Lohnfertigung in der Türkei: Verträge, Qualität & IP-Schutz',
+      it:'Private Label e Produzione Conto Terzi in Turchia: Governance e Tutela IP',
+      ru:'Контрактное производство и СТМ в Турции: контроль качества и защита IP',
+      fa:'تولید قراردادی و برند اختصاصی در ترکیه: مدیریت قرارداد، کیفیت و مالکیت فکری',
+      zh:'土耳其 OEM / 贴牌定制与合同代工实战：配方知识产权保护、模具归属与质量验收',
+      vi:'Sản xuất gia công và thương hiệu riêng tại Thổ Nhĩ Kỳ: Quản trị hợp đồng và bảo hộ IP'
+    },
+    descriptions:{
+      tr:'Türk üreticilerle private label fason üretim süreçleri; teknik şartname hazırlığı, fikri mülkiyet koruması, kalıp mülkiyeti ve parti denetimleri.',
+      en:'Structuring contract manufacturing in Turkey: technical specifications, IP safeguarding, packaging tooling ownership, and pre-shipment inspections.',
+      de:'Auftragsfertigung in der Türkei: Erstellung technischer Leistungsbeschreibungen, Schutz geistigen Eigentums, Werkzeugrechte und Vorabnahme.',
+      it:'Strutturare la produzione conto terzi in Turchia: specifiche tecniche, tutela della proprietà intellettuale, proprietà degli stampi e controlli pre-imbarco.',
+      ru:'Организация контрактного производства в Турции: техзадания, защита интеллектуальной собственности, владение оснасткой и инспекция отгрузок.',
+      fa:'ساختاردهی تولید قراردادی در ترکیه: تدوین مشخصات فنی، حفاظت از فرمولاسیون و مالکیت فکری، مالکیت قالب‌ها و بازرسی قبل از حمل.',
+      zh:'指导跨国品牌在土耳其落地代工项目：从工程技术规格书编制、配方保密条款、印刷模具资产归属界定到出厂前 AQL 抽样质检全流程。',
+      vi:'Thiết lập quan hệ đối tác gia công tại Thổ Nhĩ Kỳ: lập hồ sơ kỹ thuật, bảo vệ sở hữu trí tuệ, quyền sở hữu khuôn mẫu và kiểm định chất lượng trước xuất xưởng.'
+    },
+    answers:{
+      tr:'Türkiye\'de başarılı private label üretimi; net teknik spesifikasyonlar, kalıp mülkiyetinin alıcıda kalması ve parti bazlı bağımsız kalite denetimleriyle garanti altına alınır.',
+      en:'Successful private-label outsourcing in Turkey hinges on precise technical dossiers, explicit tooling asset ownership, robust non-disclosure agreements, and independent pre-shipment batch audits.',
+      de:'Erfolgreiche Eigenmarkenprojekte in der Türkei basieren auf präzisen Pflichtenheften, klaren Eigentumsrechten an Werkzeugen und unabhängigen Chargenprüfungen vor Auslieferung.',
+      it:'Il successo delle produzioni private label in Turchia dipende da capitolati tecnici rigorosi, proprietà formale degli stampi in capo al committente e audit indipendenti sui lotti prima della spedizione.',
+      ru:'Успех проектов СТМ в Турции определяется детальными техзаданиями, юридическим закреплением прав на пресс-формы за заказчиком и попартийным контролем до отгрузки.',
+      fa:'موفقیت در تولید تحت برند اختصاصی در ترکیه مستلزم تدوین دقیق مشخصات فنی، تثبیت مالکیت خریدار بر قالب‌ها و بازرسی مستقل هر پارت پیش از بارگیری است.',
+      zh:'在土耳其顺利推进贴牌代工的关键，在于将工艺标准固化为法律级技术附件、确保定制模具资产权属明晰归买方所有，并常态化实施出厂前第三方独立验货。',
+      vi:'Thành công trong sản xuất gia công tại Thổ Nhĩ Kỳ dựa trên hồ sơ kỹ thuật chuẩn xác, quyền sở hữu pháp lý đối với khuôn mẫu và kiểm định độc lập từng lô hàng.'
+    }
+  },
+  'supplier-due-diligence': {
+    slugs:{tr:'tedarikci-istihbarati-ve-dolandiricilik-onleme',en:'supplier-due-diligence-anti-fraud-verification',de:'lieferanten-due-diligence-betrugspraevention',it:'due-diligence-fornitori-prevenzione-frodi',ru:'proverka-postavshchikov-i-zaschita-ot-moshennichestva',fa:'supplier-due-diligence-anti-fraud-verification',zh:'supplier-due-diligence-anti-fraud-verification',vi:'tham-dinh-nha-cung-cap-phong-ngua-gian-lan'},
+    titles:{
+      tr:'Tedarikçi İstihbaratı ve Dolandırıcılık Önleme: B2B Doğrulama Rehberi',
+      en:'Supplier Due Diligence & Anti-Fraud: B2B Counterparty Verification Guide',
+      de:'Lieferanten-Due-Diligence & Betrugsprävention: B2B-Verifikationsleitfaden',
+      it:'Due Diligence dei Fornitori e Prevenzione Frodi: Guida alla Verifica B2B',
+      ru:'Проверка контрагентов и защита от мошенничества: B2B-руководство',
+      fa:'استعلام جامع تأمین‌کننده و پیشگیری از کلاهبرداری در تجارت B2B',
+      zh:'跨国供应商深度商业尽职调查与反欺诈防范指南：空壳公司与虚假单证识别',
+      vi:'Thẩm định chuyên sâu nhà cung cấp và phòng ngừa gian lận thương mại B2B'
+    },
+    descriptions:{
+      tr:'Uluslararası ticarette sahte fabrika, paravan şirket ve yanıltıcı evrak risklerini eleyen çok katmanlı kurumsal doğrulama protokolü.',
+      en:'Multi-layered counterparty verification to eliminate ghost factories, shell companies, payment diversion fraud, and forged certifications in global trade.',
+      de:'Mehrstufige B2B-Prüfung zum Ausschluss von Scheinfirmen, Zahlungsmanipulationen und gefälschten Qualitätszertifikaten im internationalen Handel.',
+      it:'Verifica controparti multilivello per eliminare fabbriche fantasma, società di comodo, frodi sui pagamenti e certificati contraffatti nel commercio globale.',
+      ru:'Многоуровневая проверка контрагентов: выявление фирм-однодневок, предотвращение мошенничества с реквизитами и поддельных сертификатов.',
+      fa:'اعتبارسنجی چندلایه طرف‌های تجاری جهت حذف کارخانه‌های صوری، شرکت‌های کاغذی، تغییر فریبکارانه حساب بانکی و مدارک جعلی در تجارت فرامرزی.',
+      zh:'系统揭示跨境贸易中的空壳幽灵工厂、付款截流钓鱼欺诈及伪造检测证书套路：涵盖商业登记穿透、银行账户一致性审查与现场突击核验。',
+      vi:'Quy trình xác minh đối tác đa tầng giúp nhận diện nhà máy ảo, công ty bình phong, gian lận tài khoản thanh toán và chứng chỉ giả mạo trong thương mại quốc tế.'
+    },
+    answers:{
+      tr:'B2B ticari dolandırıcılıklardan korunmanın tek yolu, şirket sicilini, vergi kaydını, banka hesap sahibini ve üretim tesisini birbirinden bağımsız resmi kanallarla doğrulamaktır.',
+      en:'Protecting commercial capital against international fraud requires three independent checks: government corporate registry validation, bank beneficiary verification, and unannounced physical factory confirmation.',
+      de:'Der Schutz von Geschäftskapital vor B2B-Betrug erfordert drei unabhängige Säulen: Handelsregisterabgleich, Verifikation des Bankkontoinhabers und physische Betriebsbesichtigung.',
+      it:'Proteggere il capitale aziendale dalle frodi B2B richiede tre verifiche indipendenti: visura camerale governativa, conferma bancaria del beneficiario e ispezione fisica non annunciata dell’impianto.',
+      ru:'Защита коммерческих средств от мошенничества требует трёх независимых шагов: проверки в госреестрах, верификации банковского бенефициара и выездной проверки объекта.',
+      fa:'حفاظت از سرمایه در معاملات بین‌المللی نیازمند سه اقدام مستقل است: استعلام ثبتی و مالیاتی از مراجع دولتی، تطبیق مالک حساب بانکی و بازدید فیزیکی از خط تولید کارخانه.',
+      zh:'防范跨境商业欺诈必须筑牢三道独立防线：穿透核查官方工商税务底册、要求银行开具受益人资信证明、以及由独立专业机构执行不预先通知的现场突击验厂。',
+      vi:'Bảo vệ nguồn vốn doanh nghiệp trước gian lận thương mại đòi hỏi ba bước kiểm tra độc lập: đối chiếu hồ sơ đăng ký chính thức, xác thực tài khoản ngân hàng thụ hưởng và khảo sát thực địa nhà máy.'
+    }
+  },
+  'turkey-export-market-entry': {
+    slugs:{tr:'turk-ureticileri-icin-kuresel-pazara-giris-stratejisi',en:'global-market-entry-for-turkish-producers',de:'globaler-markteintritt-fuer-tuerkische-hersteller',it:'market-entry-globale-produttori-turchi',ru:'vyhod-na-mezhdunarodnye-rynki-turetskih-proizvoditeley',fa:'global-market-entry-for-turkish-producers',zh:'global-market-entry-for-turkish-producers',vi:'chien-luoc-xuat-khau-toan-cau-nha-san-xuat-tho-nhi-ky'},
+    titles:{
+      tr:'Türk Üreticileri İçin Küresel Pazara Giriş: İhracat Stratejisi ve Doğrulama',
+      en:'Global Market Entry for Turkish Producers: Export Sourcing & Channel Architecture',
+      de:'Globaler Markteintritt für türkische Hersteller: Exportstrategie & Vertriebskanäle',
+      it:'Ingresso nei Mercati Globali per Produttori Turchi: Strategia Export e Canali',
+      ru:'Выход турецких производителей на мировые рынки: экспортная стратегия и каналы',
+      fa:'ورود تولیدکنندگان ترکیه به بازارهای جهانی: استراتژی صادرات و معماری کانال‌های توزیع',
+      zh:'土耳其优质制造企业全球化出海指南：欧美与海湾市场准入、标准合规与直采渠道搭建',
+      vi:'Thâm nhập thị trường toàn cầu cho nhà sản xuất Thổ Nhĩ Kỳ: Chiến lược xuất khẩu và xây dựng kênh phân phối'
+    },
+    descriptions:{
+      tr:'Türk sanayicilerinin Avrupa, Körfez ve Asya pazarlarına açılımı; teknik mevzuat uyumu (CE, REACH, FDA), kurumsal RFQ yanıtı ve alıcı güveni inşası.',
+      en:'Strategic export expansion for Turkish manufacturers into Europe, the Gulf and Asia; compliance frameworks (CE, REACH, FDA), RFQ readiness, and buyer trust.',
+      de:'Strategische Exportexpansion türkischer Industrieunternehmen nach Europa, den Golf und Asien: Zertifizierungen (CE, REACH), RFQ-Kompetenz und Vertrauensaufbau.',
+      it:'Espansione commerciale estera dei produttori turchi verso Europa, Golfo e Asia: conformità tecnica (CE, REACH, FDA), gestione RFQ e affidabilità B2B.',
+      ru:'Стратегический экспорт турецких заводов в Европу, страны Залива и Азию: стандарты (CE, REACH, FDA), подготовка к RFQ и доверие покупателей.',
+      fa:'توسعه استراتژیک صادرات تولیدکنندگان ترکیه به اروپا، خلیج فارس و آسیا: انطباق با مقررات فنی (CE, REACH, FDA)، آمادگی برای RFQ و جلب اعتماد خریداران.',
+      zh:'指导土耳其先进制造企业布局泛欧、中东海湾及北美高端市场：剖析国际工业标准认证（CE、REACH、FDA）、专业化 RFQ 报价应答机制及与跨国买家建立长效信任。',
+      vi:'Mở rộng xuất khẩu chiến lược cho các nhà sản xuất Thổ Nhĩ Kỳ sang Châu Âu, vùng Vịnh và Châu Á: tuân thủ tiêu chuẩn kỹ thuật, năng lực phản hồi RFQ và xây dựng niềm tin đối tác.'
+    },
+    answers:{
+      tr:'Türk üreticilerinin küresel pazarlarda kalıcı olması, yalnızca fiyat rekabetine değil; hedef pazar sertifikasyonlarına tam uyum ve kurumsal RFQ yanıt disiplinine bağlıdır.',
+      en:'Turkish manufacturers achieve sustainable export growth not through ad-hoc price cutting, but by establishing verifiable regulatory compliance, professional multilingual RFQ responses, and transparent quality data.',
+      de:'Türkische Hersteller sichern sich langfristigen Exporterfolg nicht über Preiskämpfe, sondern durch zertifizierte regulatorische Konformität, professionelle RFQ-Reaktionen und verlässliche Qualität.',
+      it:'I produttori turchi ottengono una crescita sostenibile all’estero non con ribassi improvvisati, ma garantendo conformità certificata, risposte RFQ professionali e standard qualitativi dimostrabili.',
+      ru:'Устойчивый успех турецких предприятий на внешних рынках строится не на ценовом демпинге, а на подтверждённом соответствии международным нормам и прозрачной работе с RFQ.',
+      fa:'توسعه پایدار صادرات تولیدکنندگان ترکیه نه از طریق تخفیف‌های بی‌رویه، بلکه با انطباق کامل با استانداردهای بین‌المللی، پاسخ‌دهی حرفه‌ای به RFQ و شفافیت در کیفیت محقق می‌شود.',
+      zh:'土耳其制造企业拓展全球蓝海的立足之本，绝非单一的价格恶性内卷，而是在于建立严谨的国际资质认证体系、规范的多语种 RFQ 报价交互规范以及透明可视的产品批次质保数据。',
+      vi:'Các nhà sản xuất Thổ Nhĩ Kỳ đạt được tăng trưởng xuất khẩu bền vững không phải qua việc cắt giảm giá đơn thuần, mà nhờ vào sự tuân thủ quy chuẩn quốc tế và phản hồi RFQ chuyên nghiệp.'
+    }
+  },
+  'landed-cost-moq-optimization': {
+    slugs:{tr:'landed-cost-modellemesi-ve-moq-optimizasyonu',en:'landed-cost-modeling-moq-optimization',de:'landed-cost-modellierung-moq-optimierung',it:'modellazione-landed-cost-ottimizzazione-moq',ru:'raschet-landed-cost-i-optimizatsiya-moq',fa:'landed-cost-modeling-moq-optimization',zh:'landed-cost-modeling-moq-optimization',vi:'mo-hinh-hoa-chi-phi-cap-cang-va-toi-uu-moq'},
+    titles:{
+      tr:'Landed Cost Modellemesi ve Minimum Sipariş Miktarı (MOQ) Optimizasyonu',
+      en:'Landed Cost Modeling & MOQ Optimization: Balancing Working Capital and Scale',
+      de:'Landed-Cost-Modellierung & MOQ-Optimierung: Liquidität vs. Skaleneffekte',
+      it:'Modellazione del Landed Cost e Ottimizzazione MOQ: Capitale Circolante e Scala',
+      ru:'Моделирование Landed Cost и оптимизация MOQ: баланс оборотного капитала и объёма',
+      fa:'مدل‌سازی بهای تمام‌شده نهایی (Landed Cost) و بهینه‌سازی حداقل سفارش (MOQ)',
+      zh:'到岸总成本 (Landed Cost) 精算与最低起订量 (MOQ) 动态平衡优化模型',
+      vi:'Mô hình hóa chi phí cập cảng (Landed Cost) và tối ưu hóa số lượng đặt hàng tối thiểu (MOQ)'
+    },
+    descriptions:{
+      tr:'Fabrika çıkış fiyatından (EXW/FOB) gümrük teslimine (DDP) toplam maliyet hesabı; navlun, vergi, depolama ve finansman maliyetlerinin analizi.',
+      en:'Calculating full landed cost from EXW/FOB to final delivery: tariffs, terminal handling, freight volatility, and working capital carrying cost.',
+      de:'Berechnung der tatsächlichen Gesamtanlandekosten von EXW/FOB bis DDP: Zölle, Hafengebühren, Frachtschwankungen und Lagerzinsen im Fokus.',
+      it:'Calcolo del costo sbarcato completo da EXW/FOB alla consegna finale: dazi doganali, spese di terminal, noli e oneri finanziari di magazzino.',
+      ru:'Расчёт полной себестоимости с доставкой от EXW/FOB до склада покупателя: пошлины, терминальные сборы, фрахт и затраты на хранение.',
+      fa:'محاسبه دقیق بهای تمام‌شده کالا از درب کارخانه (EXW/FOB) تا تحویل نهایی (DDP): تعرفه‌ها، هزینه‌های بندری، نوسانات حمل و بهره خواب سرمایه.',
+      zh:'从离岸出厂价 (EXW/FOB) 穿透测算至完税后到门价 (DDP) 的专业数理模型：深入拆解关税梯度、码头杂费 (THC)、集装箱运费浮动及库存持有财务成本。',
+      vi:'Tính toán toàn diện chi phí cập cảng từ giá xuất xưởng đến kho nhận hàng: thuế quan, phí cảng, biến động cước và chi phí vốn lưu kho.'
+    },
+    answers:{
+      tr:'Landed Cost analizi, tedarik kararında yalnızca birim fiyatı değil; gümrük, navlun, sigorta, finansman ve MOQ kaynaklı stok taşıma maliyetlerini tek bir denklemde birleştirir.',
+      en:'True Landed Cost modeling prevents working capital traps by evaluating freight tariffs, port demurrage, financing rates, and inventory obsolescence alongside supplier unit volume discounts.',
+      de:'Eine präzise Landed-Cost-Rechnung schützt vor Liquiditätsengpässen, indem sie Zölle, Hafengebühren, Finanzierungskosten und Lagerbindung mit Mengenrabatten gegenrechnet.',
+      it:'La modellazione del Landed Cost protegge il capitale circolante valutando dazi, oneri portuali, tassi di interesse e obsolescenza delle scorte insieme agli sconti quantità del fornitore.',
+      ru:'Моделирование Landed Cost защищает оборотный капитал, оценивая пошлины, терминальные сборы, ставки финансирования и риски неликвида наряду с оптовыми скидками поставщика.',
+      fa:'مدل‌سازی بهای تمام‌شده نهایی از تله‌های نقدینگی جلوگیری می‌کند؛ زیرا تعرفه‌ها، دموراژ بندری، نرخ بهره و ریسک انبارداری را در کنار تخفیفات حجمی تأمین‌کننده ارزیابی می‌نماید.',
+      zh:'严谨的到岸总成本 (Landed Cost) 测算模型能够有效避免企业陷入营运资金陷阱——将目的港清关税费、码头滞箱费、资金占用利率及折损报废风险与上游阶梯起订量折扣进行综合对冲量化。',
+      vi:'Mô hình hóa chi phí cập cảng thực tế giúp doanh nghiệp tránh bẫy vốn lưu động bằng cách đánh giá đồng thời thuế quan, phí lưu bãi, lãi suất tài trợ và khấu hao tồn kho cùng các chiết khấu số lượng.'
+    }
+  },
+  'trade-house-vs-broker': {
+    slugs:{tr:'stratejik-ticaret-evi-ile-komisyoncu-arasindaki-fark',en:'strategic-trade-house-vs-commission-broker',de:'strategisches-handelshaus-vs-provisionsmakler',it:'trade-house-strategica-vs-broker-a-commissione',ru:'torgovyi-dom-ili-posrednik-komissioner',fa:'strategic-trade-house-vs-commission-broker',zh:'strategic-trade-house-vs-commission-broker',vi:'nha-thuong-mai-chien-luoc-vs-moi-gioi-hoa-hong'},
+    titles:{
+      tr:'Stratejik Ticaret Evi ile Komisyoncu Arasındaki Fark: Şeffaf Yönetim Modeli',
+      en:'Strategic Trade House vs Commission Broker: Governance & Alignment in Global Trade',
+      de:'Strategisches Handelshaus vs. Provisionsmakler: Transparenz & Governance im Welthandel',
+      it:'Trade House Strategica vs Broker a Commissione: Governance e Trasparenza nel B2B',
+      ru:'Стратегический торговый дом или брокер-комиссионер: прозрачная модель управления',
+      fa:'تفاوت خانه تجارت استراتژیک با واسطه کمیسیونی: مدل حاکمیت شفاف در تجارت بین‌الملل',
+      zh:'国际战略综合商社与传统居间中介的核心区别：透明商业契约、履约治理与零隐性加价',
+      vi:'Nhà thương mại chiến lược so với môi giới hoa hồng: Mô hình quản trị và tính minh bạch'
+    },
+    descriptions:{
+      tr:'Uluslararası B2B ticarette bağımsız ticaret evi ile geleneksel komisyoncuların karşılaştırması; şeffaf hizmet ücreti, menşe netliği ve sözleşme güvencesi.',
+      en:'Comparing institutional trade houses with transactional brokers: fee transparency, verifiable origin, contractual governance, and conflict-of-interest mitigation.',
+      de:'Institutionelle Handelshäuser versus Provisionsmakler: Transparente Honorare, klare Herkunftsnachweise, Vertrags-Governance und Interessenskonflikte im Fokus.',
+      it:'Confronto tra trade house istituzionali e broker tradizionali: onorari trasparenti, origine verificabile, governance contrattuale e assenza di conflitti d’interesse.',
+      ru:'Сравнение институционального торгового дома и разовых брокеров: прозрачные тарифы, прямое происхождение, контрактная ответственность и защита интересов.',
+      fa:'مقایسه ساختاری شرکت‌های معتبر بازرگانی با واسطه‌های سنتی: دستمزد شفاف، اصالت مبدأ، تعهد قراردادی و جلوگیری از تعارض منافع.',
+      zh:'系统剖析专业国际贸易综合协调机构与传统居间掮客的本质区别：深度解析透明服务费率机制、法定真实原产地溯源、合同法律履约保障与利益冲突防范。',
+      vi:'So sánh nhà thương mại chuyên nghiệp với các bên môi giới giao dịch: phí dịch vụ minh bạch, xuất xứ xác thực, quản trị hợp đồng và triệt tiêu xung đột lợi ích.'
+    },
+    answers:{
+      tr:'Stratejik bir ticaret evi gizli fiyat farkı koymaz; şeffaf bir hizmet yapısıyla alıcı ve üreticiyi aynı sözleşme masasında buluşturarak kalite, teslimat ve risk sorumluluğunu üstlenir.',
+      en:'A strategic trade house operates on defined, transparent terms—connecting buyer and producer directly under clear contracts, eliminating hidden broker margins, and actively governing quality and compliance.',
+      de:'Ein strategisches Handelshaus vermeidet versteckte Margen, schafft direkte Transparenz zwischen Einkäufer und Hersteller und übernimmt Verantwortung für Qualität, Dokumente und Vertragserfüllung.',
+      it:'Una trade house strategica non applica ricarichi occulti; opera su base trasparente mettendo in relazione acquirente e produttore con contratti chiari e governando qualità e conformità.',
+      ru:'Стратегический торговый дом исключает скрытые наценки, организует прямой контракт между покупателем и производителем и обеспечивает контроль качества и юридическую чистоту.',
+      fa:'یک خانه تجارت استراتژیک از اضافه کردن حاشیه سود پنهان خودداری کرده و با ساختار شفاف، خریدار و تولیدکننده را تحت قراردادی روشن متصل نموده و مسئولیت کیفیت و انطباق را به عهده می‌گیرد.',
+      zh:'现代战略贸易机构坚决摒弃传统倒手掮客的隐蔽高额加价模式；立足于经书面约定的透明服务费体系，协同买卖双方在法定契约下直接签署交易，并全程统筹质量检验、单证流转与违约风控。',
+      vi:'Một nhà thương mại chiến lược hoạt động dựa trên các điều khoản dịch vụ minh bạch, kết nối người mua và nhà sản xuất trực tiếp qua hợp đồng chuẩn, loại bỏ biên lợi nhuận ẩn và kiểm soát chất lượng.'
+    }
   }
 };
 

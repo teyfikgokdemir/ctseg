@@ -58,7 +58,7 @@ for(const path of ruCore){
 }
 const walk=(dir)=>readdirSync(dir,{withFileTypes:true}).flatMap((entry)=>entry.isDirectory()?walk(join(dir,entry.name)):[join(dir,entry.name)]);
 const ruHtml=walk(join(dist,'ru')).filter((path)=>path.endsWith('.html'));
-if(ruHtml.length!==51)errors.push(`expected 51 indexable Russian HTML pages, found ${ruHtml.length}`);
+if(ruHtml.length!==61)errors.push(`expected 61 indexable Russian HTML pages, found ${ruHtml.length}`);
 const frenchLeak=/\b(?:Accueil|Français|fournisseurs?|produits?|marchés?|données|confidentialité|conditions|utilisation|recherche|approvisionnement|conformité|origine|demander|offre|politique|notre|votre|avec|pour|dans|sur|une|des|les)\b/i;
 for(const path of ruHtml){
   const visibleText=readFileSync(path,'utf8').replace(/<script[\s\S]*?<\/script>/gi,'').replace(/<style[\s\S]*?<\/style>/gi,'').replace(/<[^>]+>/g,' ');
@@ -88,4 +88,4 @@ for(const rule of requiredRedirects){
 }
 
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log('Locale contract passed: 8 active locales, 51-page Russian parity, localized solution landings, French cleanup and one-hop redirects.');
+console.log('Locale contract passed: 8 active locales, 61-page Russian parity, localized solution landings, French cleanup and one-hop redirects.');
