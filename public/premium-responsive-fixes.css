@@ -217,3 +217,18 @@ html[data-locale="vi"] .hero h1{
 .site-header .brand img,.site-footer .brand img{display:block!important;width:158px!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;filter:brightness(0) invert(1)!important}
 .site-header .brand::before,.site-footer .brand::before{display:none!important}
 @media(max-width:1050px){.site-header .brand img{width:135px!important}}
+
+/* Institutional home hero: CTSEG charcoal and acid, with readable locale text. */
+.hero{background:#111!important;color:#f3f3ef!important}
+.hero::before{content:none!important}
+.hero h1{color:#f3f3ef!important;font-weight:700!important;text-shadow:none!important}
+.hero-copy .eyebrow{color:#c4f000!important}
+.hero .lead{color:#d1d1cb!important;font-weight:500!important}
+.hero .button:not(.button-secondary){background:#c4f000!important;border-color:#c4f000!important;color:#111!important}
+.hero .button-secondary{background:transparent!important;border-color:rgba(255,255,255,.55)!important;color:#fff!important}
+.hero .hero-intent-links a,.hero .hero-visual figcaption{color:#e4e4dd!important}
+.hero .button{border-radius:0!important}
+.hero-visual{border-radius:0!important;box-shadow:none!important}
+.hero-visual::after{content:none!important}
+.hero-visual figcaption{border-radius:0!important}
+@media(min-width:1101px){html[data-locale="de"] .hero h1,html[data-locale="ru"] .hero h1{font-size:clamp(56px,4.7vw,76px)!important;line-height:.98!important;max-width:16ch!important}}
