@@ -232,3 +232,18 @@ html[data-locale="vi"] .hero h1{
 .hero-visual::after{content:none!important}
 .hero-visual figcaption{border-radius:0!important}
 @media(min-width:1101px){html[data-locale="de"] .hero h1,html[data-locale="ru"] .hero h1{font-size:clamp(56px,4.7vw,76px)!important;line-height:.98!important;max-width:16ch!important}}
+
+/* Two commercial directions read as one trade-house mandate. */
+.trade-gateway-banner{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:0!important;border-top:1px solid rgba(255,255,255,.26)!important}
+.trade-gateway-banner::before{content:none!important}
+.trade-funnel-card,.trade-funnel-card:first-child,.trade-funnel-card:nth-child(2){min-height:340px!important;padding:clamp(28px,3vw,44px)!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.26)!important;border-radius:0!important;background:#151515!important;color:#f2f2ec!important;box-shadow:none!important;transform:none!important}
+.trade-funnel-card:first-child{border-inline-end:1px solid rgba(255,255,255,.26)!important}
+.trade-funnel-card:nth-child(2){background:#1d1d1d!important}
+.trade-funnel-card::before,.trade-funnel-card::after{content:none!important}
+.trade-funnel-card:hover{transform:none!important;box-shadow:none!important;background:#202020!important}
+.trade-funnel-kicker,.trade-funnel-card:nth-child(2) .trade-funnel-kicker{display:inline-block!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#c4f000!important}
+.trade-funnel-title,.trade-funnel-card:nth-child(2) .trade-funnel-title{max-width:18ch!important;color:#f2f2ec!important;font-size:clamp(30px,3vw,46px)!important}
+.trade-funnel-desc,.trade-funnel-card:nth-child(2) .trade-funnel-desc{color:#d1d1cb!important}
+.trade-funnel-card .button,.trade-funnel-card:nth-child(2) .button{border-radius:0!important;background:transparent!important;border-color:#c4f000!important;color:#c4f000!important}
+.trade-funnel-card .button:hover,.trade-funnel-card .button:focus-visible{background:#c4f000!important;color:#111!important}
+@media(max-width:860px){.trade-gateway-banner{grid-template-columns:1fr!important}.trade-funnel-card:first-child{border-inline-end:0!important}.trade-funnel-card,.trade-funnel-card:first-child,.trade-funnel-card:nth-child(2){min-height:0!important}}
