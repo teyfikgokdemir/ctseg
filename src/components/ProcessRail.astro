@@ -1,14 +1,24 @@
 ---
 const { title, steps } = Astro.props as { title?:string; steps:string[] };
+const segment = Astro.url.pathname.split('/').filter(Boolean)[0] || 'tr';
+const locale = ['tr','en','de','it','ru','fa','zh','vi'].includes(segment) ? segment : 'tr';
+const kicker = ({
+  tr:'CTSEG · SÜREÇ',
+  en:'CTSEG · PROCESS',
+  de:'CTSEG · PROZESS',
+  it:'CTSEG · PROCESSO',
+  ru:'CTSEG · ПРОЦЕСС',
+  fa:'CTSEG · فرایند',
+  zh:'CTSEG · 流程',
+  vi:'CTSEG · QUY TRÌNH'
+} as Record<string,string>)[locale];
 ---
-<section class="process-section section">
+<section class="process-section section" data-process-locale={locale}>
   <div class="container process-shell">
-    {title && (
-      <div class="process-heading">
-        <span class="process-kicker">CTSEG · PROCESS</span>
-        <h2 class="section-title">{title}</h2>
-      </div>
-    )}
+    <div class="process-heading">
+      <span class="process-kicker">{kicker}</span>
+      {title && <h2 class="section-title">{title}</h2>}
+    </div>
     <ol class="process-rail">
       {steps.map((step) => (
         <li>
@@ -30,11 +40,14 @@ const { title, steps } = Astro.props as { title?:string; steps:string[] };
   .process-rail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:0;padding:0;list-style:none;counter-reset:none}
   .process-rail li{position:relative;display:flex;flex-direction:column;justify-content:flex-end;min-height:210px;padding:30px;border:1px solid rgba(255,255,255,.13);border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.015));overflow:hidden;transition:transform .28s ease,border-color .28s ease,background-color .28s ease}
   .process-rail li::before{display:none!important;content:none!important}
-  .process-mark{position:absolute;left:28px;top:28px;width:44px;height:4px;border-radius:999px;background:#c4f000}
-  .process-arrow{position:absolute;right:24px;top:19px;color:rgba(255,255,255,.38);font-size:22px;line-height:1;transition:color .25s ease,transform .25s ease}
+  .process-mark{position:absolute;inset-inline-start:28px;top:28px;width:44px;height:4px;border-radius:999px;background:#c4f000}
+  .process-arrow{position:absolute;inset-inline-end:24px;top:19px;color:rgba(255,255,255,.38);font-size:22px;line-height:1;transition:color .25s ease,transform .25s ease}
   .process-rail strong{max-width:18ch;color:#c4f000!important;font-size:clamp(20px,1.55vw,27px);line-height:1.18;letter-spacing:-.025em;font-weight:700}
   .process-rail li:hover{transform:translateY(-5px);border-color:#c4f000;background:rgba(196,240,0,.045)}
   .process-rail li:hover .process-arrow{color:#c4f000;transform:translate(2px,-2px)}
+  :global(html[dir="rtl"]) .process-kicker{letter-spacing:0;text-transform:none}
+  :global(html[dir="rtl"]) .process-rail strong{text-align:right;max-width:20ch}
+  :global(html[dir="rtl"]) .process-rail li:hover .process-arrow{transform:translate(-2px,-2px)}
   @media (max-width:1100px){
     .process-shell{grid-template-columns:1fr;gap:34px}
     .process-heading{position:static;max-width:none}
@@ -43,8 +56,8 @@ const { title, steps } = Astro.props as { title?:string; steps:string[] };
   @media (max-width:720px){
     .process-rail{grid-template-columns:1fr;gap:12px}
     .process-rail li{min-height:150px;padding:25px 22px;border-radius:18px}
-    .process-mark{left:22px;top:21px}
-    .process-arrow{right:20px;top:17px}
+    .process-mark{inset-inline-start:22px;top:21px}
+    .process-arrow{inset-inline-end:20px;top:17px}
     .process-heading .section-title{font-size:clamp(36px,9vw,48px);max-width:100%}
   }
 </style>
