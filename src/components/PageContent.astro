@@ -280,6 +280,113 @@ const sourcingDeskCopy: Record<Locale, { kicker: string; title: string; lead: st
     note: 'Hồ sơ xuất xứ và kiểm định lô hàng luôn được công khai minh bạch ở giai đoạn báo giá.'
   }
 };
+const featuredInsightLabel = {
+  tr: 'ÖNE ÇIKAN TİCARİ ANALİZ',
+  en: 'FEATURED TRADE INTELLIGENCE',
+  de: 'FOKUS-HANDELSANALYSE',
+  it: 'ANALISI COMMERCIALE IN EVIDENZA',
+  ru: 'ГЛАВНЫЙ АНАЛИТИЧЕСКИЙ МАТЕРИАЛ',
+  fa: 'تحلیل برگزیده تجاری',
+  zh: '核心商贸研判报告',
+  vi: 'PHÂN TÍCH THƯƠNG MẠI TIÊU BIỂU'
+}[lang] || 'Featured Analysis';
+const readArticleLabel = {
+  tr: 'Analizin Tamamını Oku',
+  en: 'Read Full Analysis',
+  de: 'Vollständige Analyse lesen',
+  it: 'Leggi l’analisi completa',
+  ru: 'Читать анализ полностью',
+  fa: 'مطالعه کامل تحلیل',
+  zh: '阅读完整研报',
+  vi: 'Đọc toàn bộ bài viết'
+}[lang] || 'Read Article';
+const insightCategories: Record<string, Record<Locale, string>> = {
+  'strategic-vs-procurement': {
+    tr: 'Stratejik Tedarik', en: 'Strategic Sourcing', de: 'Strategische Beschaffung',
+    it: 'Sourcing Strategico', ru: 'Стратегический сорсинг', fa: 'تأمین استراتژیک',
+    zh: '战略采购', vi: 'Thu mua chiến lược'
+  },
+  'supplier-selection': {
+    tr: 'Tedarikçi Seçimi', en: 'Supplier Selection', de: 'Lieferantenauswahl',
+    it: 'Selezione Fornitori', ru: 'Выбор поставщиков', fa: 'انتخاب تأمین‌کننده',
+    zh: '供应商准入标准', vi: 'Tiêu chuẩn nhà cung cấp'
+  },
+  'supplier-risk': {
+    tr: 'Risk & Doğrulama', en: 'Risk & Verification', de: 'Risiko & Prüfung',
+    it: 'Rischio e Verifica', ru: 'Верификация рисков', fa: 'اعتبارسنجی و ریسک',
+    zh: '验厂与风险核验', vi: 'Thẩm định rủi ro'
+  },
+  'total-cost': {
+    tr: 'Maliyet & TCO', en: 'Cost & TCO', de: 'Kosten & TCO',
+    it: 'Costi e TCO', ru: 'Анализ TCO', fa: 'تحلیل هزینه (TCO)',
+    zh: 'TCO 总拥有成本', vi: 'Chi phí & TCO'
+  },
+  'rfq': {
+    tr: 'RFQ Mimarisi', en: 'RFQ Architecture', de: 'RFQ-Architektur',
+    it: 'Architettura RFQ', ru: 'Архитектура RFQ', fa: 'معماری RFQ',
+    zh: 'RFQ 询价架构', vi: 'Cấu trúc RFQ'
+  },
+  'supply-chain-risk': {
+    tr: 'Tedarik Zinciri', en: 'Supply Chain Risk', de: 'Lieferketten-Risiko',
+    it: 'Rischio di Filiera', ru: 'Управление рисками', fa: 'ریسک زنجیره تأمین',
+    zh: '供应链韧性管理', vi: 'Quản trị chuỗi cung ứng'
+  },
+  'origin-compliance': {
+    tr: 'Menşe & Uyum', en: 'Origin & Compliance', de: 'Herkunft & Compliance',
+    it: 'Origine e Conformità', ru: 'Происхождение и комплаенс', fa: 'مبدأ و انطباق قانونی',
+    zh: '真实产地与合规', vi: 'Xuất xứ & Tuân thủ'
+  }
+};
+const advisoryDeskCopy: Record<Locale, { kicker: string; title: string; lead: string; cta: string }> = {
+  tr: {
+    kicker: 'Stratejik Ticaret Masası',
+    title: 'Özel pazar araştırması veya fabrika doğrulamasına mı ihtiyacınız var?',
+    lead: 'CTSEG; Türkiye, Avrupa ve Asya arasındaki ticaret koridorlarında bağımsız üretici araştırması, TCO maliyet analizi, numune denetimi ve sözleşme güvencesi sağlar.',
+    cta: 'Danışmanlık Talebi Oluşturun'
+  },
+  en: {
+    kicker: 'Strategic Advisory Desk',
+    title: 'Need bespoke market intelligence or factory verification?',
+    lead: 'CTSEG provides independent producer audits, total-cost (TCO) modeling, batch inspection, and contract governance across European, Turkish, and Asian trade corridors.',
+    cta: 'Request Commercial Advisory'
+  },
+  de: {
+    kicker: 'Strategischer Beratungsdesk',
+    title: 'Benötigen Sie maßgeschneiderte Marktanalysen oder Lieferantenprüfungen?',
+    lead: 'CTSEG bietet unabhängige Herstellerprüfungen, TCO-Gesamtkostenrechnungen, Chargenkontrollen und Vertragssicherheit in den Handelskorridoren.',
+    cta: 'Beratung anfordern'
+  },
+  it: {
+    kicker: 'Desk di consulenza strategica',
+    title: 'Hai bisogno di ricerche di mercato su misura o verifica fornitori?',
+    lead: 'CTSEG offre audit indipendenti dei produttori, modellazione TCO, ispezione dei lotti e garanzie contrattuali nei corridoi commerciali eurasiatici.',
+    cta: 'Richiedi consulenza commerciale'
+  },
+  ru: {
+    kicker: 'Отдел стратегического консалтинга',
+    title: 'Требуется индивидуальный анализ рынка или аудит фабрик?',
+    lead: 'CTSEG проводит независимый аудит производителей, расчёт совокупной стоимости (TCO), инспекцию партий и контрактную защиту в торговых коридорах.',
+    cta: 'Запросить консультацию'
+  },
+  fa: {
+    kicker: 'میز مشاوره استراتژیک',
+    title: 'به تحقیقات اختصاصی بازار یا اعتبارسنجی کارخانه نیاز دارید؟',
+    lead: 'CTSEG ارزیابی مستقل کارخانه‌ها، مدل‌سازی هزینه کل مالکیت (TCO)، بازرسی پارت و تضمین قرارداد را در راهگذرهای تجاری فرامرزی ارائه می‌دهد.',
+    cta: 'ثبت درخواست مشاوره تجاری'
+  },
+  zh: {
+    kicker: '跨国商贸战略咨询台',
+    title: '需要定制化的跨国供应链调研或深度实地验厂评估？',
+    lead: 'CTSEG 在土耳其、泛欧与泛亚跨境贸易通道中，提供独立工厂背调、到岸总拥有成本 (TCO) 精算、批次留样复验及跨国合同履约合规保障。',
+    cta: '预约跨境商贸战略咨询'
+  },
+  vi: {
+    kicker: 'Bàn tư vấn chiến lược',
+    title: 'Cần nghiên cứu thị trường chuyên biệt hoặc thẩm định nhà xưởng?',
+    lead: 'CTSEG cung cấp dịch vụ thẩm định nhà máy độc lập, lập mô hình chi phí TCO, kiểm định lô hàng và quản trị hợp đồng trên các hành lang thương mại.',
+    cta: 'Yêu cầu tư vấn thương mại'
+  }
+};
 const processPage = processPages[lang];
 const scenarioPage = scenarioPages[lang];
 const processLabels = {
@@ -589,16 +696,105 @@ const verifiedLater = {
   </>
 )}
 
-{key === 'insights' && !id && (
-  <>
-    <PageHero lang={lang} eyebrow={t.insights} title={copy.insightsTitle} lead={copy.insightsLead} />
-    <section class="section"><div class="container card-grid">{insightIds.map((insightId,index) => <a class="card" href={localizedPath(lang,'insights',insightId)}><small>{indexLabel(index)}</small><h2>{insights[insightId].titles[lang]}</h2><p>{insights[insightId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
-    {(lang === 'tr' || lang === 'en') && <section class="section guide-directory"><div class="container">
-      <div class="section-head"><h2>{lang === 'tr' ? 'Satın alma rehberleri' : 'Sourcing guides'}</h2><p>{lang === 'tr' ? 'RFQ, kalite belgesi ve toplam maliyet için uygulanabilir kontrol listeleri.' : 'Practical checklists for RFQs, quality documents and total cost.'}</p></div>
-      <div class="card-grid">{Object.entries(guides).map(([guideId,item],index)=><a class="card" href={localizedPath(lang,'guides',guideId)}><small>{indexLabel(index)}</small><h3>{item[lang].title}</h3><p>{item[lang].description}</p><strong>{t.readMore} →</strong></a>)}</div>
-    </div></section>}
-  </>
-)}
+{key === 'insights' && !id && (() => {
+  const featuredId = insightIds[0];
+  const featuredInsight = insights[featuredId];
+  const featuredPost = getPostForInsight(lang, featuredId);
+  const remainingIds = insightIds.slice(1);
+  return (
+    <>
+      <PageHero lang={lang} eyebrow={t.insights} title={copy.insightsTitle} lead={copy.insightsLead} />
+      <section class="section insight-section"><div class="container">
+        {featuredInsight && (
+          <article class="insight-featured">
+            <div class="featured-badge-bar">
+              <span class="featured-kicker">{featuredInsightLabel}</span>
+              <span class="featured-category">{insightCategories[featuredId]?.[lang]}</span>
+              {featuredPost?.readingTime && <span class="featured-meta">{featuredPost.readingTime} · {featuredPost.date}</span>}
+            </div>
+            <h2 class="featured-title">
+              <a href={localizedPath(lang,'insights',featuredId)}>
+                {featuredInsight.titles[lang]}
+              </a>
+            </h2>
+            <p class="featured-lead">{featuredInsight.descriptions[lang]}</p>
+            {featuredPost?.answer && (
+              <blockquote class="featured-key-takeaway">
+                <strong>{lang === 'tr' ? 'Temel Stratejik Çıkarım' : lang === 'en' ? 'Core Strategic Takeaway' : lang === 'zh' ? '核心战略研判' : 'Key Strategic Takeaway'}</strong>
+                <p>"{featuredPost.answer}"</p>
+              </blockquote>
+            )}
+            <div class="featured-action">
+              <a class="button button-accent" href={localizedPath(lang,'insights',featuredId)}>
+                {readArticleLabel} →
+              </a>
+            </div>
+          </article>
+        )}
+
+        <div class="insight-grid">
+          {remainingIds.map((insightId) => {
+            const post = getPostForInsight(lang, insightId);
+            const category = insightCategories[insightId]?.[lang];
+            return (
+              <a class="insight-card" href={localizedPath(lang,'insights',insightId)}>
+                <div class="insight-card-meta">
+                  <span class="insight-category-tag">{category}</span>
+                  <span class="insight-read-time">{post?.readingTime || (lang === 'tr' ? '8 dk' : '8 min')}</span>
+                </div>
+                <h2 class="insight-card-title">{insights[insightId].titles[lang]}</h2>
+                <p class="insight-card-desc">{insights[insightId].descriptions[lang]}</p>
+                <div class="insight-card-footer">
+                  <span class="insight-read-action">{readArticleLabel}</span>
+                  <span class="insight-arrow" aria-hidden="true">→</span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+
+        {(lang === 'tr' || lang === 'en') && (
+          <div class="guide-directory-section">
+            <div class="section-head">
+              <p class="eyebrow">{lang === 'tr' ? 'Uygulamalı Dokümantasyon' : 'Operational Documentation'}</p>
+              <h2>{lang === 'tr' ? 'Satın alma rehberleri' : 'Sourcing guides'}</h2>
+              <p>{lang === 'tr' ? 'RFQ, kalite belgesi ve toplam maliyet için uygulanabilir kontrol listeleri.' : 'Practical checklists for RFQs, quality documents and total cost.'}</p>
+            </div>
+            <div class="guide-grid">
+              {Object.entries(guides).map(([guideId,item],index)=>(
+                <a class="guide-card" href={localizedPath(lang,'guides',guideId)}>
+                  <div class="guide-card-header">
+                    <span class="guide-index">{indexLabel(index)}</span>
+                    <span class="guide-badge">{lang === 'tr' ? 'Kontrol Listesi' : 'Checklist'}</span>
+                  </div>
+                  <h3>{item[lang].title}</h3>
+                  <p>{item[lang].description}</p>
+                  <span class="guide-link-action">{t.readMore} →</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div class="insight-advisory-desk">
+          <div class="advisory-desk-content">
+            <span class="advisory-kicker">{advisoryDeskCopy[lang].kicker}</span>
+            <h2 class="advisory-title">{advisoryDeskCopy[lang].title}</h2>
+            <p class="advisory-lead">{advisoryDeskCopy[lang].lead}</p>
+          </div>
+          <div class="advisory-desk-actions">
+            <a class="button button-accent" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">
+              {advisoryDeskCopy[lang].cta} →
+            </a>
+            <a class="button button-secondary" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noopener noreferrer">
+              WhatsApp Direct Desk ↗
+            </a>
+          </div>
+        </div>
+      </div></section>
+    </>
+  );
+})()}
 
 {insight && (
   <>
