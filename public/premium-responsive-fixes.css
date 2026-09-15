@@ -45,11 +45,18 @@ main .section li,
   background:#161616!important;color:#fff!important;border-color:#a8a8a8!important
 }
 
-/* Long international corridor names should wrap inside the editorial row. */
-.corridor-list,.corridor-list>div{min-width:0;max-width:100%}
-.corridor-list>div{grid-template-columns:minmax(44px,80px) minmax(0,1fr)!important}
-.corridor-list strong{min-width:0;max-width:100%;font-size:clamp(25px,3.35vw,54px)!important;line-height:1.04!important;white-space:normal;overflow-wrap:anywhere}
+/* Long international corridor names should wrap inside one editorial row. */
+.corridor-list{display:block!important;min-width:0;max-width:100%;width:100%}
+.corridor-list>div{width:100%;min-width:0;max-width:100%;grid-template-columns:minmax(44px,80px) minmax(0,1fr)!important}
+.corridor-list strong{min-width:0;max-width:100%;font-size:clamp(25px,3.35vw,54px)!important;line-height:1.04!important;white-space:normal;overflow-wrap:normal;word-break:normal;text-wrap:balance}
 html[dir="rtl"] .corridor-list strong{text-align:right}
+
+/* Keep long editorial headings dramatic without allowing awkward one-word columns. */
+.hero h1,.page-hero h1,
+.section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2,
+.trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{
+  overflow-wrap:normal;word-break:normal;text-wrap:balance
+}
 
 /* Localized hero copy needs a little more measure than short English/Turkish copy. */
 html[data-locale="de"] .hero h1,
@@ -64,43 +71,43 @@ html[data-locale="vi"] .hero h1{
 .site-header{top:0!important;transform:none!important}
 
 /*
- * Desktop editorial rhythm: closer to the oversized, high-contrast cadence of
- * the Monas reference while leaving the legacy tablet/mobile contract intact.
+ * Desktop editorial rhythm: keep the Monas scale, but cap it below the point
+ * where Turkish and other long labels collapse into narrow vertical stacks.
  */
 @media (min-width:1101px){
-  .hero{padding-top:clamp(76px,6.6vw,126px);padding-bottom:clamp(112px,9.5vw,182px)}
-  .hero-grid{grid-template-columns:minmax(0,.86fr) minmax(460px,1.14fr);gap:clamp(54px,6.2vw,118px);align-items:center}
-  .hero h1{font-size:clamp(76px,9.15vw,156px)!important;line-height:.84!important;letter-spacing:-.078em!important;max-width:9.2ch}
-  .hero .lead{max-width:29em}
-  .hero-visual{min-height:clamp(620px,47vw,820px)}
-  .hero-visual picture,.hero-visual img{min-height:clamp(620px,47vw,820px)}
-  .trade-gateway-banner{margin-top:clamp(46px,5vw,92px)!important;gap:22px!important}
-  .trade-funnel-card{min-height:clamp(460px,34vw,590px)}
-  .trade-funnel-title{font-size:clamp(50px,4.7vw,82px)!important;line-height:.92!important;max-width:9.5ch}
+  .hero{padding-top:clamp(70px,5.8vw,112px);padding-bottom:clamp(96px,8vw,154px)}
+  .hero-grid{grid-template-columns:minmax(0,.92fr) minmax(440px,1.08fr);gap:clamp(42px,5vw,90px);align-items:center}
+  .hero h1{font-size:clamp(70px,7.6vw,132px)!important;line-height:.88!important;letter-spacing:-.068em!important;max-width:10.5ch}
+  .hero .lead{max-width:32em}
+  .hero-visual{min-height:clamp(590px,43vw,760px)}
+  .hero-visual picture,.hero-visual img{min-height:clamp(590px,43vw,760px)}
+  .trade-gateway-banner{margin-top:clamp(42px,4.5vw,78px)!important;gap:22px!important}
+  .trade-funnel-card{min-height:clamp(430px,31vw,540px)}
+  .trade-funnel-title{font-size:clamp(44px,4vw,68px)!important;line-height:.96!important;max-width:11ch}
 
-  .section{padding-block:clamp(116px,10.2vw,190px)}
-  .section-head{grid-template-columns:minmax(0,1.46fr) minmax(300px,.54fr);gap:clamp(54px,7vw,126px);margin-bottom:clamp(70px,7.4vw,132px)}
-  .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(68px,8.4vw,138px)!important;line-height:.84!important;letter-spacing:-.072em!important}
-  .section-head p{max-width:30em}
+  .section{padding-block:clamp(104px,8.7vw,164px)}
+  .section-head{grid-template-columns:minmax(0,1.36fr) minmax(300px,.64fr);gap:clamp(44px,5.6vw,96px);margin-bottom:clamp(58px,6vw,104px)}
+  .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(60px,6.7vw,108px)!important;line-height:.9!important;letter-spacing:-.06em!important}
+  .section-head p{max-width:32em}
 
-  .trade-paths-grid article{min-height:clamp(430px,32vw,570px);padding:clamp(48px,4.8vw,84px)}
-  .trade-paths-grid h3{font-size:clamp(54px,5.6vw,92px);line-height:.9}
-  .trade-paths-grid .text-link{left:clamp(48px,4.8vw,84px);bottom:48px}
+  .trade-paths-grid article{min-height:clamp(410px,29vw,520px);padding:clamp(44px,4.2vw,72px)}
+  .trade-paths-grid h3{font-size:clamp(48px,4.7vw,76px);line-height:.94}
+  .trade-paths-grid .text-link{left:clamp(44px,4.2vw,72px);bottom:42px}
 
   .platform-sector-grid{gap:24px!important;align-items:start}
-  .platform-sector-grid article{min-height:clamp(590px,44vw,760px)!important}
-  .platform-sector-grid article:nth-child(even){margin-top:clamp(64px,7vw,118px)}
-  .platform-sector-grid article h3{font-size:clamp(48px,4.8vw,78px)!important;line-height:.92!important}
+  .platform-sector-grid article{min-height:clamp(560px,40vw,700px)!important}
+  .platform-sector-grid article:nth-child(even){margin-top:clamp(52px,5vw,86px)}
+  .platform-sector-grid article h3{font-size:clamp(42px,4vw,64px)!important;line-height:.96!important}
 
-  .corridor-list>div{min-height:clamp(122px,8.5vw,162px)}
-  .corridor-list strong{font-size:clamp(42px,4.25vw,72px)!important;line-height:.96!important}
-  .market-line>div{min-height:clamp(132px,9vw,172px)}
-  .market-line strong{font-size:clamp(48px,5.6vw,92px)}
+  .corridor-list>div{min-height:clamp(108px,7vw,138px)}
+  .corridor-list strong{font-size:clamp(36px,3.4vw,56px)!important;line-height:1!important}
+  .market-line>div{min-height:clamp(116px,7.6vw,148px)}
+  .market-line strong{font-size:clamp(42px,4.5vw,72px)!important;line-height:.98!important}
 
-  .operational-trust-panel{padding:clamp(38px,4vw,68px)}
-  .trust-facts{margin-top:clamp(62px,6vw,108px)}
-  .trust-facts>div{padding:clamp(30px,3vw,52px)}
-  .cta-statement{padding:clamp(68px,7.2vw,126px)!important;min-height:clamp(520px,42vw,700px);display:flex;flex-direction:column;justify-content:center}
+  .operational-trust-panel{padding:clamp(36px,3.5vw,58px)}
+  .trust-facts{margin-top:clamp(54px,5vw,88px)}
+  .trust-facts>div{padding:clamp(28px,2.6vw,44px)}
+  .cta-statement{padding:clamp(60px,6vw,104px)!important;min-height:clamp(470px,36vw,620px);display:flex;flex-direction:column;justify-content:center}
 }
 
 @media (max-width:1050px){
@@ -138,16 +145,19 @@ html[data-locale="vi"] .hero h1{
   /* Mobile word masks can make long localized words wider than the viewport. */
   .hero h1 .premium-word-mask,.page-hero h1 .premium-word-mask,
   .hero h1 .premium-word,.page-hero h1 .premium-word{display:inline!important;max-width:100%;overflow-wrap:anywhere;word-break:normal}
+  .hero h1,.page-hero h1{font-size:clamp(42px,12vw,66px)!important;line-height:.96!important;letter-spacing:-.05em!important;max-width:100%!important}
+  .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(38px,10.5vw,58px)!important;line-height:.98!important;letter-spacing:-.045em!important}
+  .trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{font-size:clamp(30px,8.8vw,44px)!important;line-height:1!important}
   html[data-locale="de"] .hero h1,
   html[data-locale="it"] .hero h1,
   html[data-locale="fa"] .hero h1,
   html[data-locale="ru"] .hero h1,
-  html[data-locale="vi"] .hero h1{font-size:clamp(42px,10.8vw,64px)!important;line-height:.98!important;letter-spacing:-.045em!important}
-  .corridor-list>div{grid-template-columns:42px minmax(0,1fr)!important;min-height:94px}
-  .corridor-list strong{font-size:clamp(24px,7vw,38px)!important}
+  html[data-locale="vi"] .hero h1{font-size:clamp(38px,10vw,56px)!important;line-height:.98!important;letter-spacing:-.04em!important}
+  .corridor-list>div{grid-template-columns:38px minmax(0,1fr)!important;min-height:84px}
+  .corridor-list strong{font-size:clamp(22px,6.2vw,32px)!important;line-height:1.05!important}
 }
 
 @media (max-width:430px){
-  html[data-locale="ru"] .hero h1,html[data-locale="de"] .hero h1{font-size:clamp(38px,10vw,46px)!important}
+  html[data-locale="ru"] .hero h1,html[data-locale="de"] .hero h1{font-size:clamp(34px,9.3vw,42px)!important}
   .container{max-width:100%}
 }
