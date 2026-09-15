@@ -55,8 +55,18 @@ html[dir="rtl"] .corridor-list strong{text-align:right}
 .hero h1,.page-hero h1,
 .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2,
 .trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{
-  overflow-wrap:normal;word-break:normal;text-wrap:balance
+  overflow-wrap:normal;word-break:normal;text-wrap:balance;hyphens:none
 }
+.section-head,.section-head>*{min-width:0}
+
+/* Turkish copy is naturally longer; cap display type before it starts stacking. */
+html[data-locale="tr"] .hero h1{max-width:11.5ch!important}
+html[data-locale="tr"] .section-head h2,
+html[data-locale="tr"] .markets-editorial h2,
+html[data-locale="tr"] .company-trust-heading h2,
+html[data-locale="tr"] .cta-statement h2{max-width:13ch}
+html[data-locale="tr"] .trade-paths-grid h3,
+html[data-locale="tr"] .platform-sector-grid article h3{max-width:16ch}
 
 /* Localized hero copy needs a little more measure than short English/Turkish copy. */
 html[data-locale="de"] .hero h1,
@@ -78,6 +88,7 @@ html[data-locale="vi"] .hero h1{
   .hero{padding-top:clamp(70px,5.8vw,112px);padding-bottom:clamp(96px,8vw,154px)}
   .hero-grid{grid-template-columns:minmax(0,.92fr) minmax(440px,1.08fr);gap:clamp(42px,5vw,90px);align-items:center}
   .hero h1{font-size:clamp(70px,7.6vw,132px)!important;line-height:.88!important;letter-spacing:-.068em!important;max-width:10.5ch}
+  html[data-locale="tr"] .hero h1{font-size:clamp(64px,6.65vw,116px)!important;line-height:.9!important;max-width:11.5ch!important}
   .hero .lead{max-width:32em}
   .hero-visual{min-height:clamp(590px,43vw,760px)}
   .hero-visual picture,.hero-visual img{min-height:clamp(590px,43vw,760px)}
@@ -88,16 +99,22 @@ html[data-locale="vi"] .hero h1{
   .section{padding-block:clamp(104px,8.7vw,164px)}
   .section-head{grid-template-columns:minmax(0,1.36fr) minmax(300px,.64fr);gap:clamp(44px,5.6vw,96px);margin-bottom:clamp(58px,6vw,104px)}
   .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(60px,6.7vw,108px)!important;line-height:.9!important;letter-spacing:-.06em!important}
+  html[data-locale="tr"] .section-head h2,
+  html[data-locale="tr"] .markets-editorial h2,
+  html[data-locale="tr"] .company-trust-heading h2,
+  html[data-locale="tr"] .cta-statement h2{font-size:clamp(54px,5.7vw,94px)!important;line-height:.94!important;letter-spacing:-.052em!important}
   .section-head p{max-width:32em}
 
   .trade-paths-grid article{min-height:clamp(410px,29vw,520px);padding:clamp(44px,4.2vw,72px)}
   .trade-paths-grid h3{font-size:clamp(48px,4.7vw,76px);line-height:.94}
+  html[data-locale="tr"] .trade-paths-grid h3{font-size:clamp(42px,4vw,66px)!important;line-height:.98!important}
   .trade-paths-grid .text-link{left:clamp(44px,4.2vw,72px);bottom:42px}
 
   .platform-sector-grid{gap:24px!important;align-items:start}
   .platform-sector-grid article{min-height:clamp(560px,40vw,700px)!important}
   .platform-sector-grid article:nth-child(even){margin-top:clamp(52px,5vw,86px)}
   .platform-sector-grid article h3{font-size:clamp(42px,4vw,64px)!important;line-height:.96!important}
+  html[data-locale="tr"] .platform-sector-grid article h3{font-size:clamp(38px,3.5vw,56px)!important;line-height:1!important}
 
   .corridor-list>div{min-height:clamp(108px,7vw,138px)}
   .corridor-list strong{font-size:clamp(36px,3.4vw,56px)!important;line-height:1!important}
@@ -146,7 +163,12 @@ html[data-locale="vi"] .hero h1{
   .hero h1 .premium-word-mask,.page-hero h1 .premium-word-mask,
   .hero h1 .premium-word,.page-hero h1 .premium-word{display:inline!important;max-width:100%;overflow-wrap:anywhere;word-break:normal}
   .hero h1,.page-hero h1{font-size:clamp(42px,12vw,66px)!important;line-height:.96!important;letter-spacing:-.05em!important;max-width:100%!important}
+  html[data-locale="tr"] .hero h1{font-size:clamp(40px,10.8vw,58px)!important;line-height:1!important}
   .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(38px,10.5vw,58px)!important;line-height:.98!important;letter-spacing:-.045em!important}
+  html[data-locale="tr"] .section-head h2,
+  html[data-locale="tr"] .markets-editorial h2,
+  html[data-locale="tr"] .company-trust-heading h2,
+  html[data-locale="tr"] .cta-statement h2{font-size:clamp(34px,9vw,50px)!important;line-height:1!important;max-width:100%}
   .trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{font-size:clamp(30px,8.8vw,44px)!important;line-height:1!important}
   html[data-locale="de"] .hero h1,
   html[data-locale="it"] .hero h1,
