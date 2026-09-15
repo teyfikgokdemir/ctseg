@@ -369,3 +369,25 @@ html[data-locale="vi"] .hero h1{
 .process-section .process-rail strong{
   color:#c4f000!important;opacity:1!important;font-weight:700!important
 }
+
+/* Markets: premium editorial rails inspired by the REFLEX rhythm, without cards or numbering. */
+.markets-editorial{position:relative;overflow:hidden;background:#10110f!important}
+.markets-editorial::before{content:"CTSEG";position:absolute;right:-.04em;bottom:-.22em;font-size:clamp(150px,21vw,360px);font-weight:900;line-height:.78;letter-spacing:-.09em;color:rgba(255,255,255,.025);pointer-events:none;user-select:none}
+.markets-editorial>.container{position:relative;z-index:1}
+.markets-editorial .section-head{align-items:end!important}
+.markets-editorial .section-head h2{color:#fff!important;max-width:12ch!important}
+.markets-editorial .section-head p{color:#c4f000!important;max-width:34em!important}
+.markets-editorial .market-line{display:grid!important;grid-template-columns:1fr!important;gap:0!important;margin-top:clamp(36px,4vw,64px)!important;border-top:1px solid rgba(255,255,255,.16)!important}
+.markets-editorial .market-line>div{position:relative!important;display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:clamp(110px,8vw,150px)!important;padding:20px 0!important;border-bottom:1px solid rgba(255,255,255,.16)!important;overflow:hidden!important;background:transparent!important;transition:padding .28s ease,border-color .28s ease!important}
+.markets-editorial .market-line>div::before{content:"";position:absolute;left:0;top:0;width:5px;height:100%;background:#c4f000;transform:scaleY(0);transform-origin:bottom;transition:transform .28s ease}
+.markets-editorial .market-line>div::after{content:"↗";font-size:clamp(24px,2vw,34px);line-height:1;color:#c4f000;opacity:.72;transition:transform .28s ease,opacity .28s ease}
+.markets-editorial .market-line strong{color:#fff!important;font-size:clamp(42px,5vw,76px)!important;line-height:.94!important;letter-spacing:-.055em!important;font-weight:750!important;max-width:14ch!important}
+.markets-editorial .market-line>div:hover{padding-left:28px!important;border-color:rgba(196,240,0,.48)!important}
+.markets-editorial .market-line>div:hover::before{transform:scaleY(1)}
+.markets-editorial .market-line>div:hover::after{transform:translate(4px,-4px);opacity:1}
+@media(max-width:760px){
+  .markets-editorial::before{font-size:38vw;bottom:-.08em;right:-.08em}
+  .markets-editorial .market-line>div{min-height:92px!important;padding:16px 0!important}
+  .markets-editorial .market-line strong{font-size:clamp(30px,9vw,42px)!important;max-width:12ch!important}
+  .markets-editorial .market-line>div:hover{padding-left:14px!important}
+}
