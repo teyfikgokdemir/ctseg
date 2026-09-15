@@ -23,14 +23,14 @@
 
     const locale = document.documentElement.dataset.locale || document.documentElement.lang || 'en';
     const copy = {
-      tr:'KÜRESEL TİCARET · STRATEJİK TEDARİK · PAZARA GİRİŞ · DOĞRULANMIŞ ÜRETİCİLER · ',
-      en:'GLOBAL TRADE · STRATEGIC SOURCING · MARKET ENTRY · VERIFIED PRODUCERS · ',
-      de:'GLOBALER HANDEL · STRATEGISCHE BESCHAFFUNG · MARKTEINTRITT · GEPRÜFTE HERSTELLER · ',
-      it:'COMMERCIO GLOBALE · SOURCING STRATEGICO · INGRESSO NEI MERCATI · PRODUTTORI VERIFICATI · ',
-      fa:'تجارت جهانی · تأمین استراتژیک · ورود به بازار · تولیدکنندگان تأییدشده · ',
-      ru:'ГЛОБАЛЬНАЯ ТОРГОВЛЯ · СТРАТЕГИЧЕСКИЙ СОРСИНГ · ВЫХОД НА РЫНОК · ПРОВЕРЕННЫЕ ПРОИЗВОДИТЕЛИ · ',
-      zh:'全球贸易 · 战略采购 · 市场进入 · 已验证制造商 · ',
-      vi:'THƯƠNG MẠI TOÀN CẦU · SOURCING CHIẾN LƯỢC · THÂM NHẬP THỊ TRƯỜNG · NHÀ SẢN XUẤT ĐÃ XÁC MINH · '
+      tr:'KÜRESEL TİCARET · STRATEJİK TEDARİK · PAZARA GİRİŞ · TEDARİKÇİ KEŞFİ · ',
+      en:'GLOBAL TRADE · STRATEGIC SOURCING · MARKET ENTRY · SUPPLIER DISCOVERY · ',
+      de:'GLOBALER HANDEL · STRATEGISCHE BESCHAFFUNG · MARKTEINTRITT · LIEFERANTENSUCHE · ',
+      it:'COMMERCIO GLOBALE · SOURCING STRATEGICO · INGRESSO NEI MERCATI · RICERCA FORNITORI · ',
+      fa:'تجارت جهانی · تأمین استراتژیک · ورود به بازار · جستجوی تأمین‌کنندگان · ',
+      ru:'ГЛОБАЛЬНАЯ ТОРГОВЛЯ · СТРАТЕГИЧЕСКИЙ СОРСИНГ · ВЫХОД НА РЫНОК · ПОИСК ПОСТАВЩИКОВ · ',
+      zh:'全球贸易 · 战略采购 · 市场进入 · 供应商发现 · ',
+      vi:'THƯƠNG MẠI TOÀN CẦU · SOURCING CHIẾN LƯỢC · THÂM NHẬP THỊ TRƯỜNG · TÌM KIẾM NHÀ CUNG CẤP · '
     };
     const text = copy[locale] || copy.en;
 
