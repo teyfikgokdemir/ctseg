@@ -213,3 +213,7 @@ html[data-locale="vi"] .hero h1{
 .trade-funnel-card:first-child{background:linear-gradient(145deg,#121311 0%,#1d1f1a 100%)!important;border-color:rgba(255,255,255,.12)!important}
 .trade-funnel-card:nth-child(2){background:linear-gradient(145deg,#c4f000 0%,#b4df00 100%)!important;border-color:#c4f000!important}
 @media(max-width:860px){.trade-gateway-banner{grid-template-columns:1fr!important;gap:14px!important;margin-top:38px!important}.trade-gateway-banner::before{top:-12px;font-size:9px;max-width:calc(100vw - 56px);overflow:hidden;text-overflow:ellipsis}.trade-funnel-card{min-height:330px!important;padding:28px!important;border-radius:20px!important}.trade-funnel-title{font-size:clamp(30px,8vw,40px)!important;max-width:100%!important}.trade-funnel-desc{font-size:16px!important}}
+/* Keep the actual CTSEG identity visible in both navigation and footer. */
+.site-header .brand img,.site-footer .brand img{display:block!important;width:158px!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;filter:brightness(0) invert(1)!important}
+.site-header .brand::before,.site-footer .brand::before{display:none!important}
+@media(max-width:1050px){.site-header .brand img{width:135px!important}}
