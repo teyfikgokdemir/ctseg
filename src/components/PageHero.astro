@@ -33,18 +33,8 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
     padding-block:clamp(72px,8vw,132px)!important;
   }
   .page-hero::before{
-    content:"CTSEG";
-    position:absolute;
-    right:-.03em;
-    bottom:-.18em;
-    font-family:var(--font-sans,Arial,sans-serif);
-    font-size:clamp(150px,24vw,430px);
-    font-weight:900;
-    line-height:.8;
-    letter-spacing:-.08em;
-    color:rgba(255,255,255,.025);
-    pointer-events:none;
-    user-select:none;
+    content:none!important;
+    display:none!important;
   }
   .page-hero>.container{position:relative;z-index:1}
   .page-hero-grid{display:grid!important;grid-template-columns:minmax(0,.9fr) minmax(420px,1.1fr)!important;gap:clamp(44px,6vw,96px)!important;align-items:center!important}
@@ -78,7 +68,7 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
   .page-hero-media-wrap{position:relative;min-width:0}
   .page-hero .product-hero-media{border-radius:24px!important;overflow:hidden!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:0 28px 70px rgba(0,0,0,.28)!important}
   .page-hero .media-note{margin:12px 0 0!important;color:#a8a8a3!important;font-size:12px!important}
-  .page-hero--compact{padding-block:clamp(58px,6vw,92px)!important}
+  .page-hero.page-hero--compact{padding-block:clamp(40px,4.2vw,64px)!important}
   .page-hero--compact h1{font-size:clamp(46px,5vw,78px)!important;max-width:15ch!important}
 
   @media(max-width:980px){
@@ -88,7 +78,7 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
   }
   @media(max-width:620px){
     .page-hero{padding-block:58px!important}
-    .page-hero::before{font-size:44vw;bottom:-.08em}
+    .page-hero.page-hero--compact{padding-block:40px!important}
     .page-hero h1{font-size:clamp(38px,10.5vw,52px)!important;line-height:.98!important;letter-spacing:-.045em!important;max-width:100%!important}
     .page-hero .lead{margin-top:22px!important;font-size:16px!important;line-height:1.6!important}
     .page-hero .breadcrumb [aria-current="page"]{max-width:26ch}
