@@ -183,3 +183,39 @@ html[data-locale="vi"] .hero h1{
   html[data-locale="ru"] .hero h1,html[data-locale="de"] .hero h1{font-size:clamp(34px,9.3vw,42px)!important}
   .container{max-width:100%}
 }
+
+/*
+ * Readability pass: supporting copy should be visibly present, not decorative.
+ * Keep Monas-like hierarchy, but raise contrast and minimum sizes enough that
+ * every descriptive line can be read in normal browsing and screenshots.
+ */
+.hero .lead,.section-head p,.corridors-lead,.markets-editorial .section-head p,
+.operational-trust p,.company-trust-band p,.scenario-teaser p{
+  color:#343434!important;opacity:1!important
+}
+.trade-paths-section .section-head p,.trade-paths-grid p,
+.markets-editorial p,.process-section p,.reflex-featured-section p,
+.trade-video-section p,.cta-statement p{
+  color:#e2e2e2!important;opacity:1!important
+}
+.trade-funnel-desc{opacity:1!important}
+.trade-funnel-card:not(:nth-child(2)) .trade-funnel-desc{color:#e2e2e2!important}
+.trade-funnel-card:nth-child(2) .trade-funnel-desc{color:#242424!important}
+.corridor-list span,.market-line span,.operational-trust-panel li span,.card small{
+  opacity:1!important;color:#5f5f5f!important
+}
+.platform-sector-grid article p{color:#f4f4f4!important;opacity:1!important}
+.site-footer p,.site-footer span,.site-footer li{opacity:1!important;color:#cfcfcf!important}
+
+@media (min-width:761px){
+  .hero .lead,.section-head p,.trade-paths-grid p,.trade-funnel-desc,
+  .platform-sector-grid article p,.markets-editorial p,.operational-trust p,
+  .company-trust-band p,.cta-statement p{font-size:max(16px,1rem)!important;line-height:1.55!important}
+}
+
+@media (max-width:760px){
+  .hero .lead,.section-head p,.trade-paths-grid p,.trade-funnel-desc,
+  .platform-sector-grid article p,.markets-editorial p,.operational-trust p,
+  .company-trust-band p,.cta-statement p{font-size:15px!important;line-height:1.5!important}
+  .corridor-list span,.market-line span,.card small{font-size:12px!important}
+}
