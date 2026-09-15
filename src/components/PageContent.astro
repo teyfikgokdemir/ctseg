@@ -118,6 +118,168 @@ const catalogueGroups = [
   }
 ];
 const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
+const jumpLabel = {
+  tr: 'Kategoriye Git',
+  en: 'Jump to Category',
+  de: 'Zur Kategorie springen',
+  it: 'Vai alla categoria',
+  ru: 'Перейти к категории',
+  fa: 'پرش به دسته‌بندی',
+  zh: '品类快速直达',
+  vi: 'Chuyển đến danh mục'
+}[lang] || 'Categories';
+const categoryLeads: Record<string, Record<Locale, string>> = {
+  pistachio: {
+    tr: 'İran ve bölgesel havzaların birinci sınıf Akbari, Kalleh Ghouchi, Ahmad Aghaei ve Fandoghi fıstıkları; kalibre tasnifi, aflatoksin analizleri ve vakumlu ihracat ambalajlarıyla toptan tedarik edilir.',
+    en: 'Premium Akbari, Kalleh Ghouchi, Ahmad Aghaei and Fandoghi pistachios from prime growing basins; calibrated by size, tested for aflatoxin, and supplied in vacuum or export-grade bulk packaging.',
+    de: 'Erstklassige Akbari-, Kalleh-Ghouchi-, Ahmad-Aghaei- und Fandoghi-Pistazien; nach Kalibern sortiert, auf Aflatoxine geprüft und in exportgerechten Großgebinden bereitgestellt.',
+    it: 'Pistacchi di prima scelta Akbari, Kalleh Ghouchi, Ahmad Aghaei e Fandoghi; calibrati per calibro, analizzati per le aflatossine e forniti in imballaggi all’ingrosso idonei all’esportazione.',
+    ru: 'Отборные сорта фисташек Акбари, Калле-Гучи, Ахмад-Агаи и Фандоги; калибровка по фракциям, контроль афлатоксинов и экспортная оптовая фасовка.',
+    fa: 'پسته‌های درجه‌یک اکبری، کله‌قوچی، احمدآقایی و فندقی از خاستگاه‌های اصلی؛ درجه‌بندی بر اساس انس، سنجش آفلاتوکسین و بسته‌بندی صادراتی فله و وکیوم.',
+    zh: '产自核心产区的顶级阿克巴里、卡勒古奇、艾哈迈德阿盖及凡多基开心果；经过严格颗粒度筛分、黄曲霉毒素理化检测与出口级真空/大宗包装。',
+    vi: 'Các dòng hạt dẻ cười Akbari, Kalleh Ghouchi, Ahmad Aghaei và Fandoghi thượng hạng; phân loại kích cỡ chuẩn, kiểm định độc tố aflatoxin và đóng gói xuất khẩu tiêu chuẩn.'
+  },
+  dates: {
+    tr: 'Taze Mazafati yaş hurma, endüstriyel hurma ezmesi ve konsantre şuruplar; soğuk zincir gereksinimleri ve gıda sanayii standartlarına tam uygunlukla sevk edilir.',
+    en: 'Fresh Mazafati dates, industrial date paste, and concentrated syrups supplied with full cold-chain compliance and food manufacturing specifications.',
+    de: 'Frische Mazafati-Datteln, industrielle Dattelpaste und konzentrierter Dattelsirup unter Einhaltung lückenloser Kühlketten- und Verarbeitungsstandards.',
+    it: 'Datteri freschi Mazafati, pasta di datteri industriale e sciroppi concentrati; forniti nel rispetto della catena del freddo e delle specifiche industriali.',
+    ru: 'Свежие финики Мазафати, промышленная финиковая паста и сиропы с контролем температурного режима и пищевых спецификаций.',
+    fa: 'خرمای تازه مضافتی بم، خمیر خرمای صنعتی و شیره تغلیظ‌شده با رعایت زنجیره سرد و استانداردهای صنایع غذایی.',
+    zh: '精选新鲜马扎法蒂椰枣、工业级高纯椰枣泥及浓缩原浆糖浆；符合全程冷链运输与现代食品工业高标准加工指标。',
+    vi: 'Chà là tươi Mazafati, bột nghiền chà là công nghiệp và si-rô cô đặc đáp ứng chuỗi bảo quản lạnh và tiêu chuẩn chế biến thực phẩm quốc tế.'
+  },
+  nuts: {
+    tr: 'Badem, ceviz içi ve özel kuruyemiş karışımları; pastacılık, atıştırmalık ve toptan paketleme sanayiine yönelik parti bazlı kalite garantisiyle sunulur.',
+    en: 'Almonds, walnut kernels, and custom nut selections delivered with batch-level quality assurance for confectionery, snacking, and packaging sectors.',
+    de: 'Mandeln, Walnusskerne und Nussmischungen mit chargenbezogener Qualitätssicherung für Süßwaren-, Snack- und Verpackungsbetriebe.',
+    it: 'Mandorle, gherigli di noce e selezioni di frutta secca con garanzia di qualità per lotto per l’industria dolciaria, snack e confezionamento.',
+    ru: 'Миндаль, ядра грецкого ореха и ореховые смеси с партионным контролем качества для кондитерской и снековой промышленности.',
+    fa: 'بادام، مغز گردو و ترکیبات خشکبار با تضمین کیفیت پارت‌محور برای صنایع قنادی، اسنک و بسته‌بندی عمده.',
+    zh: '优质脱壳巴旦木仁、精选核桃仁及特色坚果甄选组合；具备完善批次质检证书，直供食品糖果加工、休闲零食与品牌分装企业。',
+    vi: 'Hạnh nhân, nhân óc chó và hạt hỗn hợp chọn lọc với chứng nhận chất lượng từng lô dành cho sản xuất bánh kẹo, đồ ăn nhẹ và đóng gói.'
+  },
+  'dried-fruit': {
+    tr: 'Kuru üzüm, Malatya menşeli kayısı ve kayısı çekirdeği ile kurutulmuş dut; doğal kurutma, nem kontrolü ve standart dökme koli teslimatı.',
+    en: 'Raisins, Malatya apricots with kernels, and dried mulberries; naturally dried, moisture-controlled, and shipped in standard export cartons.',
+    de: 'Rosinen, Malatya-Aprikosen samt Kernen und getrocknete Maulbeeren; sonnengetrocknet, feuchtigkeitskontrolliert und im Exportkarton geliefert.',
+    it: 'Uvetta, albicocche e noccioli di Malatya e gelsi essiccati; essiccazione controllata, gestione dell’umidità e imballaggio in cartoni export.',
+    ru: 'Изюм, малатийская курага с косточками и сушёная шелковица; естественная сушка, контроль влажности и экспортная упаковка.',
+    fa: 'کشمش، زردآلو و مغز هسته زردآلو و توت خشک؛ خشک‌شده با روش‌های استاندارد، کنترل رطوبت و تحویل در کارتن‌های صادراتی.',
+    zh: '特级脱水葡萄干、马拉蒂亚原产优质杏干与杏仁及天然桑葚干；自然风干控水、理化指标均一，按出口标准箱规打托发运。',
+    vi: 'Nho khô, mơ sấy Malatya kèm nhân hạt và dâu tằm sấy; quy trình sấy tự nhiên, kiểm soát độ ẩm và đóng thùng carton xuất khẩu chuẩn.'
+  },
+  seeds: {
+    tr: 'Kabak çekirdeği ve ayçekirdeği çeşitleri; yabancı maddelerden arındırılmış, boylanmış ve yüksek yağ/tüketim kalitesinde toptan torbalarda sevk edilir.',
+    en: 'Pumpkin and sunflower seeds; cleaned, size-calibrated, and supplied in moisture-barrier wholesale sacks for roasting and food processing.',
+    de: 'Kürbiskerne und Sonnenblumenkerne; gereinigt, kalibriert und in feuchtigkeitsgeschützten Säcken für Röstereien und Verarbeiter lieferbar.',
+    it: 'Semi di zucca e di girasole; calibrati, puliti e forniti in sacchi all’ingrosso traspiranti per la tostatura e la lavorazione alimentare.',
+    ru: 'Тыквенные и подсолнечные семена; очищенные, калиброванные, поставляемые в оптовых мешках для обжарки и переработки.',
+    fa: 'تخمه کدو و تخمه آفتابگردان؛ بوجاری‌شده، درجه‌بندی‌شده و عرضه‌شده در کیسه‌های عمده مقاوم برای مصارف آجیلی و صنعتی.',
+    zh: '脱皮/带壳南瓜籽仁与高饱满度葵花籽；经除杂风选、粒度分选与防潮袋装，适配高端炒货及油脂食品精深加工。',
+    vi: 'Hạt bí và hạt hướng dương; được làm sạch, phân cỡ chuẩn và đóng bao sỉ chống ẩm phục vụ rang sấy và chế biến thực phẩm.'
+  },
+  specialities: {
+    tr: 'Super Negin ve Negin sınıfı sertifikalı İran safranı ile kurutulmuş زرشک (zereshk); ISO 3632 Kategori I laboratuvar analizleri ve mühürlü toptan ambalaj.',
+    en: 'Super Negin and Negin grade certified saffron and dried barberries (zereshk); accompanied by ISO 3632 Category I laboratory analyses in tamper-evident packaging.',
+    de: 'Zertifizierter Super-Negin- und Negin-Safran sowie getrocknete Berberitzen (Zereshk); mit ISO-3632-Kategorie-I-Zertifikat in versiegelten Gebinden.',
+    it: 'Zafferano certificato Super Negin e Negin e crespino essiccato (zereshk); analisi di laboratorio ISO 3632 Categoria I in confezioni sigillate.',
+    ru: 'Сертификат качества ISO 3632 Категории I на шафран сортов Super Negin и Negin, а также отборный барбарис (зерешк) в пломбированной таре.',
+    fa: 'زعفران صادراتی سوپر نگین و نگین دارای گواهی آزمایشگاهی استاندارد ISO 3632 دسته یک و زرشک اعلا در بسته‌بندی‌های پلمپ‌شده عمده.',
+    zh: '特级超级藏红花 (Super Negin) 与天然伏牛花果干 (Zereshk)；严格附带 ISO 3632 一级国际实验室检测报告与高密闭防伪批发包装。',
+    vi: 'Nhụy hoa nghệ tây (Saffron) Super Negin chuẩn chứng nhận và quả barberry sấy (zereshk); kèm phiếu kiểm nghiệm ISO 3632 Cấp 1 trong bao bì niêm phong.'
+  }
+};
+const groupBadges: Record<string, { b1: Record<Locale, string>; b2: Record<Locale, string>; b3: Record<Locale, string> }> = {
+  pistachio: {
+    b1: { tr:'Aflatoksin Analizli (COA)', en:'Aflatoxin Tested (COA)', de:'Aflatoxin-geprüft (COA)', it:'Analisi aflatossine (COA)', ru:'Контроль афлатоксинов (COA)', fa:'سنجش آفلاتوکسین (COA)', zh:'黄曲霉毒素严格检测 (COA)', vi:'Kiểm định độc tố Aflatoxin (COA)' },
+    b2: { tr:'Kalibre Tasnifi (20/22 - 30/32)', en:'Calibrated Sizes (20/22 - 30/32)', de:'Kalibersortierung (20/22 - 30/32)', it:'Calibratura (20/22 - 30/32)', ru:'Калибровка (20/22 - 30/32)', fa:'درجه‌بندی انس (۲۰/۲۲ تا ۳۰/۳۲)', zh:'标准尺寸颗粒筛分 (20/22 - 30/32)', vi:'Phân cỡ chuẩn (20/22 - 30/32)' },
+    b3: { tr:'Vakumlu & Dökme İhracat Ambalajı', en:'Vacuum & Bulk Export Packing', de:'Vakuum- & Exportgebinde', it:'Imballo sottovuoto ed export', ru:'Вакуумная и оптовая упаковка', fa:'بسته‌بندی وکیوم و فله صادراتی', zh:'出口级真空与大宗防潮包装', vi:'Đóng gói hút chân không & xuất khẩu' }
+  },
+  dates: {
+    b1: { tr:'Soğuk Zincir Yönetimi', en:'Cold-Chain Managed', de:'Kühlketten-Logistik', it:'Catena del freddo garantita', ru:'Контроль холодовой цепи', fa:'مدیریت زنجیره سرد', zh:'全程冷链仓储物流保障', vi:'Quản lý chuỗi lạnh khép kín' },
+    b2: { tr:'Sofralık & Endüstriyel Sınıflar', en:'Table & Processing Grades', de:'Tafel- & Industriequalitäten', it:'Gradi da tavola e industriali', ru:'Столовые и промышленные сорта', fa:'گریدهای پذیرایی و صنعتی', zh:'鲜食级与深加工工业级规格', vi:'Phân cấp ăn tươi & công nghiệp' },
+    b3: { tr:'%100 Doğal İlave Şekersiz', en:'100% Pure · No Added Sugar', de:'100% rein · Ohne Zuckerzusatz', it:'100% naturale · Senza zuccheri aggiunti', ru:'100% натуральный · Без сахара', fa:'۱۰۰٪ طبیعی · بدون شکر افزوده', zh:'100% 纯天然零糖添加', vi:'100% tự nhiên · Không đường bổ sung' }
+  },
+  nuts: {
+    b1: { tr:'Toptan Boylama & Kalibrasyon', en:'Wholesale Sizing & Sorting', de:'Großhandels-Sortierung', it:'Calibratura e selezione ingrosso', ru:'Сортировка и калибровка', fa:'سورتینگ و سایزبندی عمده', zh:'大宗批量筛分与粒度标定', vi:'Phân loại kích cỡ bán sỉ' },
+    b2: { tr:'Gıda Sanayii & Pastacılık Sınıfı', en:'Food Industry & Confectionery Grade', de:'Lebensmittel- & Konditoreiqualität', it:'Idoneo per pasticceria e industria', ru:'Для пищевой и кондитерской отрасли', fa:'ویژه صنایع غذایی و شیرینی‌پزی', zh:'符合现代烘焙糖果工业级标准', vi:'Đạt chuẩn công nghiệp thực phẩm' },
+    b3: { tr:'Nem ve Tazelik Bariyerli Ambalaj', en:'Moisture-Barrier Bulk Packaging', de:'Feuchtigkeitsgeschützte Gebinde', it:'Imballo barriera anti-umidità', ru:'Влагозащитная фасовка', fa:'بسته‌بندی محافظ رطوبت و تازگی', zh:'高阻隔防潮大宗安全包装', vi:'Bao bì chống ẩm giữ độ tươi' }
+  },
+  'dried-fruit': {
+    b1: { tr:'Malatya & Bölgesel Seçim', en:'Malatya & Regional Selection', de:'Malatya- & Regionalauswahl', it:'Selezione Malatya e regionale', ru:'Отбор из Малатьи и регионов', fa:'سورتینگ منطقه‌ای و مالاتیا', zh:'精选马拉蒂亚及核心特色产区', vi:'Tuyển chọn Malatya & vùng chuyên canh' },
+    b2: { tr:'Güneşte Doğal Kurutma', en:'Natural Sun-Drying', de:'Natürliche Sonnentrocknung', it:'Essiccazione naturale al sole', ru:'Естественная сушка', fa:'خشک‌شده طبیعی با آفتاب', zh:'传统自然日光晾晒控水工艺', vi:'Sấy khô tự nhiên dưới ánh nắng' },
+    b3: { tr:'Paletli Standart İhracat Kolileri', en:'Palletized Export Cartons', de:'Palettierte Exportkartons', it:'Cartoni export pallettizzati', ru:'Паллетированные экспортные короба', fa:'کارتن‌های پالت‌شده صادراتی', zh:'标准打托出口专用硬质纸箱', vi:'Đóng thùng carton xuất khẩu pallet' }
+  },
+  seeds: {
+    b1: { tr:'Yüksek Doluluk & Bütünlük Oranı', en:'High Kernel Count & Purity', de:'Hohe Reinheit & Auskernung', it:'Alta resa e purezza', ru:'Высокая чистота и калибр', fa:'درصد خلوص و پر بودن بالا', zh:'高出仁率与高净度风选指标', vi:'Tỷ lệ hạt chắc & độ sạch cao' },
+    b2: { tr:'Optik Ayıklama & Tozdan Arındırma', en:'Optical Sorting & Dedusted', de:'Optisch sortiert & entstaubt', it:'Cernita ottica e depolverazione', ru:'Оптическая сортировка и очистка', fa:'بوجاری و سورت نوری', zh:'色选机高精度剔除与除尘除杂', vi:'Phân loại quang học & khử bụi' },
+    b3: { tr:'25 kg / 50 kg Polipropilen Çuval', en:'25 kg / 50 kg PP Woven Bags', de:'25 kg / 50 kg PP-Gewebesäcke', it:'Sacchi in polipropilene 25 / 50 kg', ru:'Мешки ПП 25 кг / 50 кг', fa:'کیسه‌های پلی‌پروپیلن ۲۵ و ۵۰ کیلویی', zh:'25kg / 50kg 双层覆膜聚丙烯编织袋', vi:'Bao dệt PP 25 kg / 50 kg tiêu chuẩn' }
+  },
+  specialities: {
+    b1: { tr:'ISO 3632 Kategori I Analizli', en:'ISO 3632 Category I Certified', de:'ISO 3632 Kategorie I zertifiziert', it:'Certificato ISO 3632 Categoria I', ru:'Сертификат ISO 3632 Категория I', fa:'دارای گواهی استاندارد ISO 3632 دسته یک', zh:'ISO 3632 一级品质权威认证', vi:'Chứng nhận ISO 3632 Cấp I' },
+    b2: { tr:'Yüksek Krokin (Renklendirme) Değeri', en:'High Crocin (Colouring) Strength', de:'Hoher Crocin-Wert (Färbekraft)', it:'Elevato potere colorante (Crocina)', ru:'Высокий уровень кроцина (цветность)', fa:'کروسین و قدرت رنگ‌دهی بالا', zh:'高藏红花素 (Crocin) 色度指标', vi:'Hàm lượng Crocin (độ tạo màu) cao' },
+    b3: { tr:'Mühürlü Metal / Özel Toptan Kaplar', en:'Tamper-Sealed Bulk Tins', de:'Versiegelte Weißblechdosen', it:'Contenitori sigillati anti-manomissione', ru:'Пломбированная оптовая тара', fa:'ظروف فلزی پلمپ‌شده عمده', zh:'密封防伪马口铁大宗保质包装', vi:'Hộp thiếc niêm phong chuyên dụng' }
+  }
+};
+const sourcingDeskCopy: Record<Locale, { kicker: string; title: string; lead: string; cta: string; note: string }> = {
+  tr: {
+    kicker: 'Toptan Tedarik Masası',
+    title: 'Kurumsal Hacimli Sipariş ve Ticari Teklif Masası',
+    lead: 'Portföyümüzdeki tüm ürünler için spesifikasyon, parti analiz raporları (COA), özel etiketleme (private label) ve Incoterms teslim şartlarıyla kurumsal teklif hazırlıyoruz.',
+    cta: 'Ticari Talep Formunu Doldurun',
+    note: 'Menşe ve parti belgeleri her teklif aşamasında şeffaf olarak paylaşılır.'
+  },
+  en: {
+    kicker: 'Wholesale Sourcing Desk',
+    title: 'Institutional Bulk Sourcing & Quotation Desk',
+    lead: 'We structure commercial quotations for all portfolio commodities with full specifications, Certificate of Analysis (COA), private label options, and Incoterms delivery terms.',
+    cta: 'Submit Commercial Request',
+    note: 'Origin and batch verification documents are transparently disclosed at quotation stage.'
+  },
+  de: {
+    kicker: 'Großhandels-Beschaffungsdesk',
+    title: 'Institutionelle Großhandelsbeschaffung & Angebotsabwicklung',
+    lead: 'Wir erstellen kaufmännische Angebote für sämtliche Portfoliowaren mit Spezifikationen, Chargenanalysen (COA), Private-Label-Optionen und Incoterms-Lieferkonditionen.',
+    cta: 'Handelsanfrage einreichen',
+    note: 'Herkunfts- und Chargennachweise werden transparent im Angebotsprozess offengelegt.'
+  },
+  it: {
+    kicker: 'Desk approvvigionamento all’ingrosso',
+    title: 'Sourcing all’ingrosso e quotazioni commerciali istituzionali',
+    lead: 'Elaboriamo offerte commerciali su misura per tutti i prodotti in catalogo con specifiche, certificati di analisi (COA), private label e condizioni di resa Incoterms.',
+    cta: 'Invia richiesta commerciale',
+    note: 'I documenti di origine e di lotto sono condivisi con trasparenza in fase di quotazione.'
+  },
+  ru: {
+    kicker: 'Отдел оптовых поставок',
+    title: 'Оптовый сорсинг и подготовка коммерческих предложений',
+    lead: 'Формируем коммерческие предложения на весь ассортимент продукции с техническими спецификациями, сертификатами анализа (COA), частной маркой и условиями Incoterms.',
+    cta: 'Подать коммерческий запрос',
+    note: 'Документы о происхождении и партии предоставляются открыто на этапе котировки.'
+  },
+  fa: {
+    kicker: 'میز تأمین عمده',
+    title: 'میز استعلام قیمت و تأمین تجاری کلان',
+    lead: 'برای تمامی محصولات کاتالوگ، پیشنهادات تجاری بر اساس مشخصات فنی، آنالیزهای آزمایشگاهی (COA)، برچسب اختصاصی (Private Label) و شرایط تحویل Incoterms تدوین می‌شود.',
+    cta: 'ارسال درخواست تجاری',
+    note: 'اسناد مبدأ و پارت به‌صورت کاملاً شفاف در مرحله صدور پیش‌فاکتور ارائه می‌گردد.'
+  },
+  zh: {
+    kicker: '大宗商品战略采购中心',
+    title: '企业级大宗集采、规格定制与商业报价服务台',
+    lead: '针对全线贸易商品提供详尽技术规格书、出厂化验报告单 (COA)、自主品牌 OEM/贴牌生产方案及全套 Incoterms 国际交货条款报价。',
+    cta: '提交大宗采购与贸易问询',
+    note: '原产地证明与批次检验文件均在商业报价阶段如实透明提供。'
+  },
+  vi: {
+    kicker: 'Bàn thu mua bán sỉ',
+    title: 'Bộ phận thu mua số lượng lớn & Báo giá thương mại',
+    lead: 'Chúng tôi thiết lập báo giá thương mại cho toàn bộ danh mục sản phẩm kèm thông số kỹ thuật, chứng nhận phân tích (COA), đóng gói thương hiệu riêng và điều khoản Incoterms.',
+    cta: 'Gửi yêu cầu thương mại',
+    note: 'Hồ sơ xuất xứ và kiểm định lô hàng luôn được công khai minh bạch ở giai đoạn báo giá.'
+  }
+};
 const processPage = processPages[lang];
 const scenarioPage = scenarioPages[lang];
 const processLabels = {
@@ -328,11 +490,31 @@ const verifiedLater = {
         <a class="button button-secondary" href={lang === 'tr' ? '/downloads/ctseg-ticari-urunler-katalogu.pdf' : '/downloads/ctseg-trade-products-catalogue.pdf'} download data-catalog-download data-catalog-language={lang}>{lang === 'tr' ? 'Kataloğu indir' : 'Download catalogue'}</a>
       </div>}
       <div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div>
+      <nav class="catalogue-category-nav" aria-label={jumpLabel}>
+        <span class="category-nav-label">{jumpLabel}:</span>
+        <div class="category-nav-list">
+          {catalogueGroups.map((group, groupIndex) => (
+            <a class="category-nav-pill" href={`#group-${group.key}`}>
+              <span class="pill-num">{String(groupIndex + 1).padStart(2, '0')}</span>
+              <span class="pill-title">{group.title}</span>
+              <span class="pill-count">({group.ids.length})</span>
+            </a>
+          ))}
+        </div>
+      </nav>
       <div class="catalogue-directory">
-        {catalogueGroups.map((group,groupIndex) => <div class="catalogue-group" data-catalogue-group={group.key}>
+        {catalogueGroups.map((group,groupIndex) => <div class="catalogue-group" id={`group-${group.key}`} data-catalogue-group={group.key}>
           <div class="catalogue-group-heading">
-            <span>{String(groupIndex + 1).padStart(2,'0')}</span>
-            <h2>{group.title}</h2>
+            <div class="group-heading-top">
+              <span class="group-index">{String(groupIndex + 1).padStart(2,'0')}</span>
+              <h2>{group.title}</h2>
+            </div>
+            <p class="group-lead">{categoryLeads[group.key]?.[lang]}</p>
+            <div class="group-trade-badges">
+              <span class="trade-badge">✓ {groupBadges[group.key]?.b1[lang]}</span>
+              <span class="trade-badge">✓ {groupBadges[group.key]?.b2[lang]}</span>
+              <span class="trade-badge">✓ {groupBadges[group.key]?.b3[lang]}</span>
+            </div>
           </div>
           <div class="catalogue-grid">{group.ids.map((productId) => <ProductCard
             product={products[productId as keyof typeof products]}
@@ -342,6 +524,18 @@ const verifiedLater = {
             family={group.key}
           />)}</div>
         </div>)}
+      </div>
+      <div class="catalogue-sourcing-desk">
+        <div class="sourcing-desk-content">
+          <span class="sourcing-desk-kicker">{sourcingDeskCopy[lang].kicker}</span>
+          <h2 class="sourcing-desk-title">{sourcingDeskCopy[lang].title}</h2>
+          <p class="sourcing-desk-lead">{sourcingDeskCopy[lang].lead}</p>
+          <p class="sourcing-desk-note">🔒 {sourcingDeskCopy[lang].note}</p>
+        </div>
+        <div class="sourcing-desk-actions">
+          <a class="button button-accent" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{sourcingDeskCopy[lang].cta} →</a>
+          <a class="button button-secondary" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp Quick Desk ↗</a>
+        </div>
       </div>
     </div></section>
   </>
