@@ -300,3 +300,64 @@ html[data-locale="vi"] .hero h1{
   .corridor-list strong{font-size:clamp(21px,5.7vw,29px)!important}
   .corridor-list>div{grid-template-columns:32px minmax(0,1fr)!important;padding-block:12px}
 }
+
+/* CTSEG visual identity and contrast pass. */
+.site-header{background:#111!important;border-bottom:1px solid rgba(255,255,255,.1)!important;color:#fff!important}
+.site-header .header-inner{min-height:78px!important}
+.site-header .brand,.site-footer .brand{position:relative;display:inline-flex;align-items:center;min-width:118px;height:42px;text-decoration:none!important}
+.site-header .brand img,.site-footer .brand img{display:none!important}
+.site-header .brand::before,.site-footer .brand::before,
+.mobile-nav-title,.footer-markets-kicker,.footer-main nav:last-child>strong{
+  content:"CTSEG";
+  display:inline-block;
+  font-family:var(--font-sans,Arial,sans-serif);
+  font-size:30px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:-.07em;
+  background:linear-gradient(90deg,#fff 0 59%,#e34234 59% 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent!important;
+}
+.site-footer .brand::before{font-size:54px}
+.mobile-nav-title{font-size:24px!important}
+.footer-markets-kicker{font-size:12px!important;letter-spacing:.08em!important}
+.footer-main nav:last-child>strong{font-size:24px;letter-spacing:-.05em}
+
+@media (min-width:1051px){
+  .site-header .desktop-only-nav{display:flex!important;visibility:visible!important;opacity:1!important;color:#fff!important}
+  .site-header .desktop-nav-link,.site-header .nav-solutions-parent,.site-header .nav-market-parent,
+  .site-header .language-switcher button{color:#fff!important;opacity:1!important}
+  .site-header .desktop-nav-link:hover,.site-header .nav-solutions-parent:hover,.site-header .nav-market-parent:hover{color:#c4f000!important}
+  .site-header .nav-cta{background:#c4f000!important;color:#0a0a0a!important;border-color:#c4f000!important}
+}
+@media (max-width:1050px){
+  .site-header .menu-toggle{display:grid!important;place-items:center;background:transparent!important;border-color:rgba(255,255,255,.28)!important}
+  .site-header .menu-toggle span:not(.sr-only){background:#fff!important}
+}
+
+/* Hero: strong enough to read instantly, without returning to oversized display type. */
+.hero h1{color:#0a0a0a!important;font-weight:800!important;text-shadow:none!important;opacity:1!important}
+.hero-copy .eyebrow{color:#202020!important;opacity:1!important}
+.hero .lead{color:#262626!important;font-weight:550!important}
+.hero::before{
+  background:linear-gradient(90deg,rgba(10,10,10,.06) 0 59%,rgba(227,66,52,.16) 59% 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent!important
+}
+
+/* The acid sample becomes the information colour on dark editorial surfaces. */
+.trade-paths-section .section-head p,.trade-paths-section .eyebrow,
+.process-section .section-head p,.process-section .eyebrow,.process-section small,
+.reflex-featured-section .section-head p,.reflex-featured-section .eyebrow,.reflex-featured-section small,
+.trade-video-section .section-head p,.trade-video-section .eyebrow,.trade-video-section small,
+.markets-editorial .section-head p,.markets-editorial .eyebrow,.markets-editorial small,
+.cta-statement .eyebrow{
+  color:#c4f000!important;opacity:1!important;font-weight:700!important
+}
+.process-section p,.reflex-featured-section p,.trade-video-section p,.markets-editorial p{
+  color:#e9e9e9!important;opacity:1!important;font-weight:500!important
+}
+
+/* Active market chip: acid surface, black copy. */
+.site-footer .footer-market-link.is-active,.site-footer .footer-market-link.is-active span{
+  color:#0a0a0a!important
+}
