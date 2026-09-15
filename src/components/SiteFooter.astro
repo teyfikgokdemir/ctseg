@@ -116,7 +116,7 @@ const marketLabel = ({tr:'Global Pazarlar',en:'Global Markets',de:'Globale Märk
     </nav>
   </div>
 </footer>
-<style>
+<style is:global>
   .footer-markets-wrap{border-bottom:1px solid rgba(255,255,255,.14);border-top:1px solid rgba(255,255,255,.1);background:#111}
   .footer-markets{display:grid;grid-template-columns:minmax(180px,.8fr) minmax(0,2.7fr);gap:32px;align-items:center;padding-top:28px;padding-bottom:28px}
   .footer-markets-label{display:flex;align-items:baseline;gap:12px;min-width:0}
@@ -127,10 +127,45 @@ const marketLabel = ({tr:'Global Pazarlar',en:'Global Markets',de:'Globale Märk
   .footer-market-link:hover,.footer-market-link:focus-visible{border-color:#c4f000;color:#fff;transform:translateY(-1px)}
   .footer-market-link.is-active{background:#c4f000;border-color:#c4f000;color:#0a0a0a;font-weight:800}
   .footer-market-flag{font-size:15px;line-height:1}
+
+  /* Remove decorative sequence numbers across CTSEG cards and editorial lists. */
+  .hero-visual figcaption small,
+  .platform-sector-grid article>div>span,
+  .corridor-list>div>span,
+  .market-line>div>span,
+  .operational-trust-panel li>span,
+  .detailed-process li>span,
+  .scenario-heading>span,
+  .market-role-grid article>span,
+  .card>small,
+  .trust-facts dt{display:none!important}
+
+  /* Restore natural layout after removing number columns. */
+  .corridor-list>div{grid-template-columns:minmax(0,1fr)!important}
+  .market-line>div{grid-template-columns:minmax(0,1fr)!important}
+  .detailed-process li,.scenario-heading{grid-template-columns:minmax(0,1fr)!important}
+
+  /* Premium operational-trust cards: airy, editorial and number-free. */
+  .operational-trust .content-grid{grid-template-columns:minmax(0,.9fr) minmax(520px,1.1fr)!important;gap:clamp(42px,6vw,96px)!important;align-items:start}
+  .operational-trust-panel{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important}
+  .operational-trust-panel ol{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important;margin:0 0 24px!important;padding:0!important;list-style:none!important}
+  .operational-trust-panel li{position:relative!important;display:flex!important;align-items:flex-end!important;min-height:178px!important;padding:28px 26px!important;border:1px solid #dedcd5!important;border-radius:22px!important;background:linear-gradient(145deg,#fff 0%,#f7f6f2 100%)!important;box-shadow:0 16px 45px rgba(12,12,12,.055)!important;overflow:hidden!important;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease!important}
+  .operational-trust-panel li::before{content:"";position:absolute;left:26px;top:24px;width:46px;height:4px;border-radius:999px;background:#c4f000}
+  .operational-trust-panel li::after{content:"↗";position:absolute;right:22px;top:17px;font-size:20px;line-height:1;color:#b6b2a6}
+  .operational-trust-panel li strong{max-width:18ch;font-size:clamp(19px,1.55vw,25px)!important;line-height:1.22!important;letter-spacing:-.025em!important;color:#181818!important;font-weight:700!important}
+  .operational-trust-panel li:hover{transform:translateY(-4px);border-color:#c4f000!important;box-shadow:0 22px 56px rgba(12,12,12,.09)!important}
+  .operational-trust-panel .button{width:max-content!important;min-width:0!important;border-radius:999px!important;padding:13px 20px!important;background:#151515!important;color:#fff!important;border-color:#151515!important}
+
   @media (max-width:1100px){
     .footer-markets{grid-template-columns:1fr;gap:18px}
     .footer-market-links{grid-template-columns:repeat(4,minmax(0,1fr))}
     .footer-markets-label{justify-content:space-between}
+    .operational-trust .content-grid{grid-template-columns:1fr!important}
+  }
+  @media (max-width:720px){
+    .operational-trust-panel ol{grid-template-columns:1fr!important;gap:12px!important}
+    .operational-trust-panel li{min-height:138px!important;padding:24px 22px!important;border-radius:18px!important}
+    .operational-trust-panel li::before{left:22px;top:20px}
   }
   @media (max-width:620px){
     .footer-markets{padding-top:22px;padding-bottom:22px}
