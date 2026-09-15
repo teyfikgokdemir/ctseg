@@ -1,10 +1,9 @@
 ---
 import { localizedPath, ui, type Locale } from '../data/site';
 import ProductMedia from './ProductMedia.astro';
-const { product, productId, lang, index, featured=false, displayRole='', family='' } = Astro.props as {
+const { product, productId, lang, index: _index, featured=false, displayRole='', family='' } = Astro.props as {
   product:any; productId:string; lang:Locale; index:number; featured?:boolean; displayRole?:string; family?:string;
 };
-const label = String(index + 1).padStart(2,'0');
 const typographicVariety = ['kaleghouchi-pistachio','fandoghi-pistachio','ahmad-aghaei-pistachio'].includes(productId);
 const catalogueSizes = '(max-width:620px) calc(100vw - 26px), (max-width:1100px) calc(50vw - 28px), min(33vw,420px)';
 const showcaseSizes = {
@@ -13,6 +12,7 @@ const showcaseSizes = {
   compact:'(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(50vw - 27px), min(33vw,420px)'
 } as Record<string,string>;
 const imageSizes = displayRole ? showcaseSizes[displayRole] : catalogueSizes;
+const portfolioLabel = {tr:'Ticaret Portföyü',en:'Trade Portfolio',de:'Handelsportfolio',it:'Portafoglio commerciale',ru:'Торговый портфель',fa:'سبد تجاری',zh:'贸易组合',vi:'Danh mục thương mại'}[lang] || ui[lang].products;
 ---
 <a
   class:list={['product-card', displayRole && `product-card--${displayRole}`, { featured, 'typographic-card':typographicVariety }]}
@@ -22,12 +22,37 @@ const imageSizes = displayRole ? showcaseSizes[displayRole] : catalogueSizes;
   data-product-family={family || undefined}
 >
   {typographicVariety
-    ? <div class="variety-panel"><span>{ui[lang].products}</span><strong>{product.names[lang]}</strong></div>
+    ? <div class="variety-panel"><span>{portfolioLabel}</span><strong>{product.names[lang]}</strong></div>
     : <ProductMedia product={product} lang={lang} sizes={imageSizes} />}
   <div class="product-card-copy">
-    <span class="section-number">{label}</span>
+    <span class="product-card-kicker">{portfolioLabel}</span>
     <h2>{product.names[lang]}</h2>
     <p>{product.descriptions[lang]}</p>
-    <span class="text-link" aria-hidden="true">↗</span>
+    <span class="product-card-arrow" aria-hidden="true">↗</span>
   </div>
 </a>
+
+<style is:global>
+  .product-card{position:relative!important;display:flex!important;flex-direction:column!important;min-width:0!important;border:1px solid #dedcd5!important;border-radius:24px!important;background:#fff!important;color:#111!important;overflow:hidden!important;box-shadow:0 18px 48px rgba(12,12,12,.055)!important;text-decoration:none!important;transition:transform .32s cubic-bezier(.2,.8,.2,1),border-color .28s ease,box-shadow .28s ease!important}
+  .product-card::before{content:"";position:absolute;z-index:4;left:0;top:0;width:100%;height:4px;background:#c4f000;transform:scaleX(.18);transform-origin:left center;transition:transform .32s ease}
+  .product-card:hover{transform:translateY(-6px)!important;border-color:#c4f000!important;box-shadow:0 28px 70px rgba(12,12,12,.1)!important}
+  .product-card:hover::before{transform:scaleX(1)}
+  .product-card .product-media{position:relative!important;margin:0!important;aspect-ratio:4/3!important;overflow:hidden!important;background:#161616!important;border:0!important;border-radius:0!important}
+  .product-card .product-media picture,.product-card .product-media img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;transition:transform .7s cubic-bezier(.2,.8,.2,1),filter .35s ease!important}
+  .product-card:hover .product-media img{transform:scale(1.035)!important}
+  .product-card-copy{position:relative!important;display:flex!important;flex:1!important;flex-direction:column!important;padding:28px 28px 30px!important;background:linear-gradient(180deg,#fff 0%,#faf9f5 100%)!important}
+  .product-card-kicker{width:max-content;max-width:calc(100% - 44px);margin-bottom:18px!important;color:#6b6b66!important;font-size:10px!important;line-height:1.2!important;font-weight:850!important;letter-spacing:.11em!important;text-transform:uppercase!important}
+  .product-card h2{margin:0 46px 14px 0!important;max-width:16ch!important;color:#111!important;font-size:clamp(24px,2vw,34px)!important;line-height:1.02!important;letter-spacing:-.035em!important;font-weight:760!important}
+  .product-card p{margin:0!important;max-width:38em!important;color:#51514d!important;font-size:15px!important;line-height:1.58!important}
+  .product-card-arrow{position:absolute!important;right:24px!important;top:24px!important;width:34px!important;height:34px!important;display:grid!important;place-items:center!important;border-radius:50%!important;background:#151515!important;color:#c4f000!important;font-size:17px!important;line-height:1!important;transition:transform .28s ease,background .2s ease,color .2s ease!important}
+  .product-card:hover .product-card-arrow{transform:translate(3px,-3px)!important;background:#c4f000!important;color:#0a0a0a!important}
+  .product-card .variety-panel{position:relative!important;display:flex!important;min-height:300px!important;flex-direction:column!important;justify-content:flex-end!important;padding:30px!important;background:#151515!important;color:#fff!important;overflow:hidden!important}
+  .product-card .variety-panel::after{content:"CTSEG";position:absolute;right:-.05em;top:.04em;font-size:clamp(72px,10vw,150px);font-weight:900;line-height:.8;letter-spacing:-.08em;color:rgba(255,255,255,.035)}
+  .product-card .variety-panel span,.product-card .variety-panel strong{position:relative;z-index:1}
+  .product-card .variety-panel span{margin-bottom:12px;color:#c4f000!important;font-size:10px!important;font-weight:850!important;letter-spacing:.12em!important;text-transform:uppercase!important}
+  .product-card .variety-panel strong{max-width:13ch;color:#fff!important;font-size:clamp(30px,3vw,48px)!important;line-height:.98!important;letter-spacing:-.045em!important}
+  @media(max-width:620px){.product-card{border-radius:20px!important}.product-card-copy{padding:24px!important}.product-card h2{margin-right:42px!important;font-size:27px!important}.product-card-arrow{right:20px!important;top:20px!important;width:32px!important;height:32px!important}.product-card .variety-panel{min-height:250px!important;padding:24px!important}}
+  html[dir="rtl"] .product-card h2{margin-right:0!important;margin-left:46px!important}
+  html[dir="rtl"] .product-card-arrow{right:auto!important;left:24px!important}
+  html[dir="rtl"] .product-card::before{transform-origin:right center}
+</style>
