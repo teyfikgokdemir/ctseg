@@ -25,6 +25,7 @@ import { tradePlatformCopy } from '../data/trade-platform';
 import { tradeGateway } from '../data/trade-gateway';
 import { contactCopy } from '../data/contact-experience';
 import { searchLandingIds, searchLandingIndexCopy, searchLandings, searchLandingPath } from '../data/search-landings';
+import { productEvidence } from '../data/product-evidence';
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
@@ -45,7 +46,154 @@ const operationalTrust = {
   zh:{title:'提交采购需求后有哪些后续流程？',lead:'在明确具体采购范畴、规格指标与单证需求后，每一份商业委托均将进入标准化评估路径。',steps:['明确产品技术参数与目标进出口市场','深入核验工厂资质、实际产能与出厂单证','出具可行性评估、比价分析与风险提示','协同买卖双方确认样品检验、报价细节与履约节点'],cta:'查看标准业务流程'},
   vi:{title:'Điều gì xảy ra sau khi gửi yêu cầu?',lead:'Mỗi yêu cầu thương mại được chuyển đến lộ trình đánh giá phù hợp sau khi làm rõ phạm vi và nhu cầu chứng từ.',steps:['Làm rõ yêu cầu kỹ thuật và thị trường mục tiêu','Đánh giá sản phẩm, đối tác và hồ sơ hiện có','Chia sẻ các bước khả thi tiếp theo và thông tin cần bổ sung','Xác nhận phạm vi báo giá, mẫu thử và điều phối với các bên'],cta:'Xem quy trình làm việc'}
 }[lang];
+
+const contactProcessKicker = {
+  tr: 'Süreç Güvencesi',
+  en: 'Process Assurance',
+  de: 'Prozesssicherheit',
+  it: 'Garanzia di Processo',
+  ru: 'Гарантия процесса',
+  fa: 'اطمینان از فرآیند',
+  zh: '全流程履约保障',
+  vi: 'Đảm bảo quy trình'
+}[lang];
+
+const turnaroundCallout = {
+  tr: {
+    badge: '24-48 Saat Değerlendirme Standardı',
+    title: 'Hızlı Ön İnceleme ve Yapılandırılmış Yanıt',
+    desc: 'Alınan tüm ticari alım ve pazar açılımı talepleri, CTSEG ticaret masası tarafından en geç 24-48 iş saati içinde ön incelemeye alınarak spesifikasyon, lojistik fizibilite ve karşı taraf doğrulama yol haritası ile yanıtlanır.'
+  },
+  en: {
+    badge: '24-48h Assessment Standard',
+    title: 'Rapid Preliminary Review & Structured Response',
+    desc: 'All commercial procurement and market entry inquiries are evaluated by the CTSEG trade desk within 24 to 48 business hours, providing specification clarity, logistical feasibility, and counterparty qualification next steps.'
+  },
+  de: {
+    badge: '24-48h Bewertungsstandard',
+    title: 'Schnelle Vorprüfung & strukturierte Rückmeldung',
+    desc: 'Alle Anfragen zu Beschaffung und Marktzugang werden vom CTSEG-Handelsdesk innerhalb von 24–48 Geschäftsstunden vorgeprüft und mit konkreten Spezifikations-, Logistik- und Verifizierungsansätzen beantwortet.'
+  },
+  it: {
+    badge: 'Standard di Risposta 24-48h',
+    title: 'Revisione Preliminare Rapida e Risposta Strutturata',
+    desc: 'Tutte le richieste commerciali di approvvigionamento ed espansione di mercato vengono esaminate dal desk CTSEG entro 24-48 ore lavorative con una valutazione tecnica, logistica e di compliance.'
+  },
+  ru: {
+    badge: 'Стандарт оценки 24-48ч',
+    title: 'Быстрая предварительная экспертиза и структурированный ответ',
+    desc: 'Все торговые запросы на закупки и выход на рынок обрабатываются торговым отделом CTSEG в течение 24–48 рабочих часов с предоставлением спецификаций, логистической оценки и этапов верификации контрагентов.'
+  },
+  fa: {
+    badge: 'استاندارد ارزیابی ۲۴-۴۸ ساعته',
+    title: 'بررسی مقدماتی سریع و پاسخ ساختاریافته تجاری',
+    desc: 'کلیه درخواست‌های خرید تجاری یا ورود به بازار توسط میز بازرگانی CTSEG حداکثر ظرف ۲۴ تا ۴۸ ساعت کاری ارزیابی شده و با نقشه راه مشخصات فنی، امکان‌سنجی لجستیکی و اعتبارسنجی پاسخ داده می‌شوند.'
+  },
+  zh: {
+    badge: '24-48小时响应标准',
+    title: '快速初步合规审核与结构化贸易反馈',
+    desc: 'CTSEG交易台对所有提交的买家寻源与工厂出海申请在24至48个工作小时内完成初步审核，并就技术规格、物流可行性与交易对手合规出具明确推进路线。'
+  },
+  vi: {
+    badge: 'Tiêu chuẩn Đánh giá 24-48h',
+    title: 'Đánh giá sơ bộ nhanh chóng & Phản hồi thương mại có cấu trúc',
+    desc: 'Tất cả các yêu cầu mua hàng thương mại và tiếp cận thị trường đều được bộ phận thương mại CTSEG xem xét sơ bộ trong vòng 24-48 giờ làm việc kèm theo lộ trình thông số kỹ thuật và tính khả thi logistics.'
+  }
+}[lang];
+
 const completionAbout = aboutEnhancement[lang];
+const aboutGovernance = {
+  tr: {
+    eyebrow: 'Kurumsal Yönetim ve Liderlik',
+    founderRole: 'Kurucu ve Yönetici Ortak',
+    complianceKicker: 'Kurumsal Şeffaflık İlkesi'
+  },
+  en: {
+    eyebrow: 'Corporate Governance & Leadership',
+    founderRole: 'Founder & Managing Director',
+    complianceKicker: 'Institutional Transparency Standard'
+  },
+  de: {
+    eyebrow: 'Unternehmensführung & Leitung',
+    founderRole: 'Gründer & Geschäftsführender Gesellschafter',
+    complianceKicker: 'Grundsatz institutioneller Transparenz'
+  },
+  it: {
+    eyebrow: 'Governance Aziendale e Direzione',
+    founderRole: 'Fondatore e Managing Director',
+    complianceKicker: 'Standard di Trasparenza Istituzionale'
+  },
+  ru: {
+    eyebrow: 'Корпоративное управление и руководство',
+    founderRole: 'Основатель и управляющий директор',
+    complianceKicker: 'Принцип корпоративной прозрачности'
+  },
+  fa: {
+    eyebrow: 'حاکمیت شرکتی و رهبری',
+    founderRole: 'بنیان‌گذار و مدیر ارشد',
+    complianceKicker: 'اصل شفافیت سازمانی'
+  },
+  zh: {
+    eyebrow: '公司治理与管理架构',
+    founderRole: '创始人兼常务董事',
+    complianceKicker: '机构透明度与治理准则'
+  },
+  vi: {
+    eyebrow: 'Quản trị doanh nghiệp & Lãnh đạo',
+    founderRole: 'Người sáng lập & Giám đốc điều hành',
+    complianceKicker: 'Nguyên tắc minh bạch doanh nghiệp'
+  }
+}[lang];
+const aboutMandate = {
+  tr: {
+    title: 'İki Yönlü Küresel Ticaret Mimarisi',
+    desc: 'CTSEG; bir yandan Türk üreticilerinin Avrupa, Körfez ve Asya pazarlarına doğrudan ihracat açılımını yapılandırırken, diğer yandan küresel alıcılar için Türkiye ve bölgesel ticaret koridorlarında bağımsız fabrika denetimi, RFQ karşılaştırması ve uçtan uca tedarik koordinasyonu sağlar.',
+    tagExport: 'Türkiye İhracat Açılımı (Avrupa · Körfez · Asya)',
+    tagSourcing: 'Küresel Alıcı Tedarik Masası (Doğrulanmış Üretim)'
+  },
+  en: {
+    title: 'Two-Way Global Trade Mandate',
+    desc: 'CTSEG coordinates strategic export expansion for Turkish manufacturers into Europe, the Gulf, and Asia, while managing independent factory verification, RFQ benchmarking, and end-to-end procurement for international buyers across Turkey and regional corridors.',
+    tagExport: 'Turkey Export Expansion (Europe · Gulf · Asia)',
+    tagSourcing: 'Global Buyer Sourcing Desk (Verified Capacity)'
+  },
+  de: {
+    title: 'Zwei-Wege-Welthandelsmandat',
+    desc: 'CTSEG koordiniert die strategische Markterweiterung türkischer Industrieunternehmen nach Europa, den Golf und Asien und bietet internationalen Einkäufern unabhängige Werksprüfungen, RFQ-Benchmarking und Beschaffungsabwicklung.',
+    tagExport: 'Türkei-Exportexpansion (Europa · Golf · Asien)',
+    tagSourcing: 'Beschaffungsdesk für globale Einkäufer (Geprüfte Fertigung)'
+  },
+  it: {
+    title: 'Mandato di Commercio Globale Bilaterale',
+    desc: 'CTSEG struttura l’espansione estera dei produttori turchi verso Europa, Golfo e Asia, garantendo al contempo ad acquirenti globali verifiche di fabbrica indipendenti, benchmark RFQ e gestione del procurement.',
+    tagExport: 'Espansione Export Turchia (Europa · Golfo · Asia)',
+    tagSourcing: 'Desk Sourcing Internazionale (Capacità Verificata)'
+  },
+  ru: {
+    title: 'Двусторонняя модель глобальной торговли',
+    desc: 'CTSEG координирует экспорт турецких производителей в Европу, страны Залива и Азию, а также обеспечивает международным покупателям независимый аудит предприятий, сопоставление RFQ и сквозное управление закупками.',
+    tagExport: 'Экспорт из Турции (Европа · Залив · Азия)',
+    tagSourcing: 'Сорсинг для международных импортеров (Проверенные мощности)'
+  },
+  fa: {
+    title: 'مأموریت تجاری دوسویه بین‌المللی',
+    desc: 'CTSEG از یک سو مسیر صادرات تولیدکنندگان ترکیه‌ای به بازارهای اروپا، خلیج فارس و آسیا را ساختاربندی می‌کند و از سوی دیگر ممیزی مستقل کارخانه‌ها، ارزیابی RFQ و هماهنگی خرید را برای خریداران بین‌المللی مدیریت می‌نماید.',
+    tagExport: 'توسعه صادرات ترکیه (اروپا · خلیج فارس · آسیا)',
+    tagSourcing: 'میز تأمین خریداران بین‌المللی (ظرفیت‌های اعتبارسنجی‌شده)'
+  },
+  zh: {
+    title: '双向全球贸易与供应链使命',
+    desc: 'CTSEG 一方面协助土耳其优质制造企业拓展欧洲、海湾国家及亚洲新兴出口市场；另一方面为跨国采购商在土耳其与区域走廊统筹独立验厂、专业 RFQ 横向对标及端到端履约协同。',
+    tagExport: '土耳其制造业出海 (欧洲 · 海湾 · 亚洲)',
+    tagSourcing: '全球买家战略直采中心 (真实验厂与产能保障)'
+  },
+  vi: {
+    title: 'Sứ mệnh thương mại toàn cầu hai chiều',
+    desc: 'CTSEG vừa điều phối mở rộng xuất khẩu cho các nhà sản xuất Thổ Nhĩ Kỳ sang châu Âu, vùng Vịnh và châu Á, vừa cung cấp dịch vụ thẩm định nhà máy độc lập, đối chuẩn RFQ và mua hàng trọn gói cho người mua quốc tế.',
+    tagExport: 'Mở rộng xuất khẩu Thổ Nhĩ Kỳ (Châu Âu · Vùng Vịnh · Châu Á)',
+    tagSourcing: 'Bàn thu mua quốc tế (Năng lực đã kiểm chứng)'
+  }
+}[lang];
 const completionMarkets = marketsDetail[lang];
 const platform = tradePlatformCopy[lang];
 const contact = contactCopy[lang];
@@ -118,6 +266,407 @@ const catalogueGroups = [
   }
 ];
 const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
+const jumpLabel = {
+  tr: 'Kategoriye Git',
+  en: 'Jump to Category',
+  de: 'Zur Kategorie springen',
+  it: 'Vai alla categoria',
+  ru: 'Перейти к категории',
+  fa: 'پرش به دسته‌بندی',
+  zh: '品类快速直达',
+  vi: 'Chuyển đến danh mục'
+}[lang] || 'Categories';
+const categoryLeads: Record<string, Record<Locale, string>> = {
+  pistachio: {
+    tr: 'İran ve bölgesel havzaların birinci sınıf Akbari, Kalleh Ghouchi, Ahmad Aghaei ve Fandoghi fıstıkları; kalibre tasnifi, aflatoksin analizleri ve vakumlu ihracat ambalajlarıyla toptan tedarik edilir.',
+    en: 'Premium Akbari, Kalleh Ghouchi, Ahmad Aghaei and Fandoghi pistachios from prime growing basins; calibrated by size, tested for aflatoxin, and supplied in vacuum or export-grade bulk packaging.',
+    de: 'Erstklassige Akbari-, Kalleh-Ghouchi-, Ahmad-Aghaei- und Fandoghi-Pistazien; nach Kalibern sortiert, auf Aflatoxine geprüft und in exportgerechten Großgebinden bereitgestellt.',
+    it: 'Pistacchi di prima scelta Akbari, Kalleh Ghouchi, Ahmad Aghaei e Fandoghi; calibrati per calibro, analizzati per le aflatossine e forniti in imballaggi all’ingrosso idonei all’esportazione.',
+    ru: 'Отборные сорта фисташек Акбари, Калле-Гучи, Ахмад-Агаи и Фандоги; калибровка по фракциям, контроль афлатоксинов и экспортная оптовая фасовка.',
+    fa: 'پسته‌های درجه‌یک اکبری، کله‌قوچی، احمدآقایی و فندقی از خاستگاه‌های اصلی؛ درجه‌بندی بر اساس انس، سنجش آفلاتوکسین و بسته‌بندی صادراتی فله و وکیوم.',
+    zh: '产自核心产区的顶级阿克巴里、卡勒古奇、艾哈迈德阿盖及凡多基开心果；经过严格颗粒度筛分、黄曲霉毒素理化检测与出口级真空/大宗包装。',
+    vi: 'Các dòng hạt dẻ cười Akbari, Kalleh Ghouchi, Ahmad Aghaei và Fandoghi thượng hạng; phân loại kích cỡ chuẩn, kiểm định độc tố aflatoxin và đóng gói xuất khẩu tiêu chuẩn.'
+  },
+  dates: {
+    tr: 'Taze Mazafati yaş hurma, endüstriyel hurma ezmesi ve konsantre şuruplar; soğuk zincir gereksinimleri ve gıda sanayii standartlarına tam uygunlukla sevk edilir.',
+    en: 'Fresh Mazafati dates, industrial date paste, and concentrated syrups supplied with full cold-chain compliance and food manufacturing specifications.',
+    de: 'Frische Mazafati-Datteln, industrielle Dattelpaste und konzentrierter Dattelsirup unter Einhaltung lückenloser Kühlketten- und Verarbeitungsstandards.',
+    it: 'Datteri freschi Mazafati, pasta di datteri industriale e sciroppi concentrati; forniti nel rispetto della catena del freddo e delle specifiche industriali.',
+    ru: 'Свежие финики Мазафати, промышленная финиковая паста и сиропы с контролем температурного режима и пищевых спецификаций.',
+    fa: 'خرمای تازه مضافتی بم، خمیر خرمای صنعتی و شیره تغلیظ‌شده با رعایت زنجیره سرد و استانداردهای صنایع غذایی.',
+    zh: '精选新鲜马扎法蒂椰枣、工业级高纯椰枣泥及浓缩原浆糖浆；符合全程冷链运输与现代食品工业高标准加工指标。',
+    vi: 'Chà là tươi Mazafati, bột nghiền chà là công nghiệp và si-rô cô đặc đáp ứng chuỗi bảo quản lạnh và tiêu chuẩn chế biến thực phẩm quốc tế.'
+  },
+  nuts: {
+    tr: 'Badem, ceviz içi ve özel kuruyemiş karışımları; pastacılık, atıştırmalık ve toptan paketleme sanayiine yönelik parti bazlı kalite garantisiyle sunulur.',
+    en: 'Almonds, walnut kernels, and custom nut selections delivered with batch-level quality assurance for confectionery, snacking, and packaging sectors.',
+    de: 'Mandeln, Walnusskerne und Nussmischungen mit chargenbezogener Qualitätssicherung für Süßwaren-, Snack- und Verpackungsbetriebe.',
+    it: 'Mandorle, gherigli di noce e selezioni di frutta secca con garanzia di qualità per lotto per l’industria dolciaria, snack e confezionamento.',
+    ru: 'Миндаль, ядра грецкого ореха и ореховые смеси с партионным контролем качества для кондитерской и снековой промышленности.',
+    fa: 'بادام، مغز گردو و ترکیبات خشکبار با تضمین کیفیت پارت‌محور برای صنایع قنادی، اسنک و بسته‌بندی عمده.',
+    zh: '优质脱壳巴旦木仁、精选核桃仁及特色坚果甄选组合；具备完善批次质检证书，直供食品糖果加工、休闲零食与品牌分装企业。',
+    vi: 'Hạnh nhân, nhân óc chó và hạt hỗn hợp chọn lọc với chứng nhận chất lượng từng lô dành cho sản xuất bánh kẹo, đồ ăn nhẹ và đóng gói.'
+  },
+  'dried-fruit': {
+    tr: 'Kuru üzüm, Malatya menşeli kayısı ve kayısı çekirdeği ile kurutulmuş dut; doğal kurutma, nem kontrolü ve standart dökme koli teslimatı.',
+    en: 'Raisins, Malatya apricots with kernels, and dried mulberries; naturally dried, moisture-controlled, and shipped in standard export cartons.',
+    de: 'Rosinen, Malatya-Aprikosen samt Kernen und getrocknete Maulbeeren; sonnengetrocknet, feuchtigkeitskontrolliert und im Exportkarton geliefert.',
+    it: 'Uvetta, albicocche e noccioli di Malatya e gelsi essiccati; essiccazione controllata, gestione dell’umidità e imballaggio in cartoni export.',
+    ru: 'Изюм, малатийская курага с косточками и сушёная шелковица; естественная сушка, контроль влажности и экспортная упаковка.',
+    fa: 'کشمش، زردآلو و مغز هسته زردآلو و توت خشک؛ خشک‌شده با روش‌های استاندارد، کنترل رطوبت و تحویل در کارتن‌های صادراتی.',
+    zh: '特级脱水葡萄干、马拉蒂亚原产优质杏干与杏仁及天然桑葚干；自然风干控水、理化指标均一，按出口标准箱规打托发运。',
+    vi: 'Nho khô, mơ sấy Malatya kèm nhân hạt và dâu tằm sấy; quy trình sấy tự nhiên, kiểm soát độ ẩm và đóng thùng carton xuất khẩu chuẩn.'
+  },
+  seeds: {
+    tr: 'Kabak çekirdeği ve ayçekirdeği çeşitleri; yabancı maddelerden arındırılmış, boylanmış ve yüksek yağ/tüketim kalitesinde toptan torbalarda sevk edilir.',
+    en: 'Pumpkin and sunflower seeds; cleaned, size-calibrated, and supplied in moisture-barrier wholesale sacks for roasting and food processing.',
+    de: 'Kürbiskerne und Sonnenblumenkerne; gereinigt, kalibriert und in feuchtigkeitsgeschützten Säcken für Röstereien und Verarbeiter lieferbar.',
+    it: 'Semi di zucca e di girasole; calibrati, puliti e forniti in sacchi all’ingrosso traspiranti per la tostatura e la lavorazione alimentare.',
+    ru: 'Тыквенные и подсолнечные семена; очищенные, калиброванные, поставляемые в оптовых мешках для обжарки и переработки.',
+    fa: 'تخمه کدو و تخمه آفتابگردان؛ بوجاری‌شده، درجه‌بندی‌شده و عرضه‌شده در کیسه‌های عمده مقاوم برای مصارف آجیلی و صنعتی.',
+    zh: '脱皮/带壳南瓜籽仁与高饱满度葵花籽；经除杂风选、粒度分选与防潮袋装，适配高端炒货及油脂食品精深加工。',
+    vi: 'Hạt bí và hạt hướng dương; được làm sạch, phân cỡ chuẩn và đóng bao sỉ chống ẩm phục vụ rang sấy và chế biến thực phẩm.'
+  },
+  specialities: {
+    tr: 'Super Negin ve Negin sınıfı sertifikalı İran safranı ile kurutulmuş زرشک (zereshk); ISO 3632 Kategori I laboratuvar analizleri ve mühürlü toptan ambalaj.',
+    en: 'Super Negin and Negin grade certified saffron and dried barberries (zereshk); accompanied by ISO 3632 Category I laboratory analyses in tamper-evident packaging.',
+    de: 'Zertifizierter Super-Negin- und Negin-Safran sowie getrocknete Berberitzen (Zereshk); mit ISO-3632-Kategorie-I-Zertifikat in versiegelten Gebinden.',
+    it: 'Zafferano certificato Super Negin e Negin e crespino essiccato (zereshk); analisi di laboratorio ISO 3632 Categoria I in confezioni sigillate.',
+    ru: 'Сертификат качества ISO 3632 Категории I на шафран сортов Super Negin и Negin, а также отборный барбарис (зерешк) в пломбированной таре.',
+    fa: 'زعفران صادراتی سوپر نگین و نگین دارای گواهی آزمایشگاهی استاندارد ISO 3632 دسته یک و زرشک اعلا در بسته‌بندی‌های پلمپ‌شده عمده.',
+    zh: '特级超级藏红花 (Super Negin) 与天然伏牛花果干 (Zereshk)；严格附带 ISO 3632 一级国际实验室检测报告与高密闭防伪批发包装。',
+    vi: 'Nhụy hoa nghệ tây (Saffron) Super Negin chuẩn chứng nhận và quả barberry sấy (zereshk); kèm phiếu kiểm nghiệm ISO 3632 Cấp 1 trong bao bì niêm phong.'
+  }
+};
+const groupBadges: Record<string, { b1: Record<Locale, string>; b2: Record<Locale, string>; b3: Record<Locale, string> }> = {
+  pistachio: {
+    b1: { tr:'Aflatoksin Analizli (COA)', en:'Aflatoxin Tested (COA)', de:'Aflatoxin-geprüft (COA)', it:'Analisi aflatossine (COA)', ru:'Контроль афлатоксинов (COA)', fa:'سنجش آفلاتوکسین (COA)', zh:'黄曲霉毒素严格检测 (COA)', vi:'Kiểm định độc tố Aflatoxin (COA)' },
+    b2: { tr:'Kalibre Tasnifi (20/22 - 30/32)', en:'Calibrated Sizes (20/22 - 30/32)', de:'Kalibersortierung (20/22 - 30/32)', it:'Calibratura (20/22 - 30/32)', ru:'Калибровка (20/22 - 30/32)', fa:'درجه‌بندی انس (۲۰/۲۲ تا ۳۰/۳۲)', zh:'标准尺寸颗粒筛分 (20/22 - 30/32)', vi:'Phân cỡ chuẩn (20/22 - 30/32)' },
+    b3: { tr:'Vakumlu & Dökme İhracat Ambalajı', en:'Vacuum & Bulk Export Packing', de:'Vakuum- & Exportgebinde', it:'Imballo sottovuoto ed export', ru:'Вакуумная и оптовая упаковка', fa:'بسته‌بندی وکیوم و فله صادراتی', zh:'出口级真空与大宗防潮包装', vi:'Đóng gói hút chân không & xuất khẩu' }
+  },
+  dates: {
+    b1: { tr:'Soğuk Zincir Yönetimi', en:'Cold-Chain Managed', de:'Kühlketten-Logistik', it:'Catena del freddo garantita', ru:'Контроль холодовой цепи', fa:'مدیریت زنجیره سرد', zh:'全程冷链仓储物流保障', vi:'Quản lý chuỗi lạnh khép kín' },
+    b2: { tr:'Sofralık & Endüstriyel Sınıflar', en:'Table & Processing Grades', de:'Tafel- & Industriequalitäten', it:'Gradi da tavola e industriali', ru:'Столовые и промышленные сорта', fa:'گریدهای پذیرایی و صنعتی', zh:'鲜食级与深加工工业级规格', vi:'Phân cấp ăn tươi & công nghiệp' },
+    b3: { tr:'%100 Doğal İlave Şekersiz', en:'100% Pure · No Added Sugar', de:'100% rein · Ohne Zuckerzusatz', it:'100% naturale · Senza zuccheri aggiunti', ru:'100% натуральный · Без сахара', fa:'۱۰۰٪ طبیعی · بدون شکر افزوده', zh:'100% 纯天然零糖添加', vi:'100% tự nhiên · Không đường bổ sung' }
+  },
+  nuts: {
+    b1: { tr:'Toptan Boylama & Kalibrasyon', en:'Wholesale Sizing & Sorting', de:'Großhandels-Sortierung', it:'Calibratura e selezione ingrosso', ru:'Сортировка и калибровка', fa:'سورتینگ و سایزبندی عمده', zh:'大宗批量筛分与粒度标定', vi:'Phân loại kích cỡ bán sỉ' },
+    b2: { tr:'Gıda Sanayii & Pastacılık Sınıfı', en:'Food Industry & Confectionery Grade', de:'Lebensmittel- & Konditoreiqualität', it:'Idoneo per pasticceria e industria', ru:'Для пищевой и кондитерской отрасли', fa:'ویژه صنایع غذایی و شیرینی‌پزی', zh:'符合现代烘焙糖果工业级标准', vi:'Đạt chuẩn công nghiệp thực phẩm' },
+    b3: { tr:'Nem ve Tazelik Bariyerli Ambalaj', en:'Moisture-Barrier Bulk Packaging', de:'Feuchtigkeitsgeschützte Gebinde', it:'Imballo barriera anti-umidità', ru:'Влагозащитная фасовка', fa:'بسته‌بندی محافظ رطوبت و تازگی', zh:'高阻隔防潮大宗安全包装', vi:'Bao bì chống ẩm giữ độ tươi' }
+  },
+  'dried-fruit': {
+    b1: { tr:'Malatya & Bölgesel Seçim', en:'Malatya & Regional Selection', de:'Malatya- & Regionalauswahl', it:'Selezione Malatya e regionale', ru:'Отбор из Малатьи и регионов', fa:'سورتینگ منطقه‌ای و مالاتیا', zh:'精选马拉蒂亚及核心特色产区', vi:'Tuyển chọn Malatya & vùng chuyên canh' },
+    b2: { tr:'Güneşte Doğal Kurutma', en:'Natural Sun-Drying', de:'Natürliche Sonnentrocknung', it:'Essiccazione naturale al sole', ru:'Естественная сушка', fa:'خشک‌شده طبیعی با آفتاب', zh:'传统自然日光晾晒控水工艺', vi:'Sấy khô tự nhiên dưới ánh nắng' },
+    b3: { tr:'Paletli Standart İhracat Kolileri', en:'Palletized Export Cartons', de:'Palettierte Exportkartons', it:'Cartoni export pallettizzati', ru:'Паллетированные экспортные короба', fa:'کارتن‌های پالت‌شده صادراتی', zh:'标准打托出口专用硬质纸箱', vi:'Đóng thùng carton xuất khẩu pallet' }
+  },
+  seeds: {
+    b1: { tr:'Yüksek Doluluk & Bütünlük Oranı', en:'High Kernel Count & Purity', de:'Hohe Reinheit & Auskernung', it:'Alta resa e purezza', ru:'Высокая чистота и калибр', fa:'درصد خلوص و پر بودن بالا', zh:'高出仁率与高净度风选指标', vi:'Tỷ lệ hạt chắc & độ sạch cao' },
+    b2: { tr:'Optik Ayıklama & Tozdan Arındırma', en:'Optical Sorting & Dedusted', de:'Optisch sortiert & entstaubt', it:'Cernita ottica e depolverazione', ru:'Оптическая сортировка и очистка', fa:'بوجاری و سورت نوری', zh:'色选机高精度剔除与除尘除杂', vi:'Phân loại quang học & khử bụi' },
+    b3: { tr:'25 kg / 50 kg Polipropilen Çuval', en:'25 kg / 50 kg PP Woven Bags', de:'25 kg / 50 kg PP-Gewebesäcke', it:'Sacchi in polipropilene 25 / 50 kg', ru:'Мешки ПП 25 кг / 50 кг', fa:'کیسه‌های پلی‌پروپیلن ۲۵ و ۵۰ کیلویی', zh:'25kg / 50kg 双层覆膜聚丙烯编织袋', vi:'Bao dệt PP 25 kg / 50 kg tiêu chuẩn' }
+  },
+  specialities: {
+    b1: { tr:'ISO 3632 Kategori I Analizli', en:'ISO 3632 Category I Certified', de:'ISO 3632 Kategorie I zertifiziert', it:'Certificato ISO 3632 Categoria I', ru:'Сертификат ISO 3632 Категория I', fa:'دارای گواهی استاندارد ISO 3632 دسته یک', zh:'ISO 3632 一级品质权威认证', vi:'Chứng nhận ISO 3632 Cấp I' },
+    b2: { tr:'Yüksek Krokin (Renklendirme) Değeri', en:'High Crocin (Colouring) Strength', de:'Hoher Crocin-Wert (Färbekraft)', it:'Elevato potere colorante (Crocina)', ru:'Высокий уровень кроцина (цветность)', fa:'کروسین و قدرت رنگ‌دهی بالا', zh:'高藏红花素 (Crocin) 色度指标', vi:'Hàm lượng Crocin (độ tạo màu) cao' },
+    b3: { tr:'Mühürlü Metal / Özel Toptan Kaplar', en:'Tamper-Sealed Bulk Tins', de:'Versiegelte Weißblechdosen', it:'Contenitori sigillati anti-manomissione', ru:'Пломбированная оптовая тара', fa:'ظروف فلزی پلمپ‌شده عمده', zh:'密封防伪马口铁大宗保质包装', vi:'Hộp thiếc niêm phong chuyên dụng' }
+  }
+};
+const sourcingDeskCopy: Record<Locale, { kicker: string; title: string; lead: string; cta: string; note: string }> = {
+  tr: {
+    kicker: 'Toptan Tedarik Masası',
+    title: 'Kurumsal Hacimli Sipariş ve Ticari Teklif Masası',
+    lead: 'Portföyümüzdeki tüm ürünler için spesifikasyon, parti analiz raporları (COA), özel etiketleme (private label) ve Incoterms teslim şartlarıyla kurumsal teklif hazırlıyoruz.',
+    cta: 'Ticari Talep Formunu Doldurun',
+    note: 'Menşe ve parti belgeleri her teklif aşamasında şeffaf olarak paylaşılır.'
+  },
+  en: {
+    kicker: 'Wholesale Sourcing Desk',
+    title: 'Institutional Bulk Sourcing & Quotation Desk',
+    lead: 'We structure commercial quotations for all portfolio commodities with full specifications, Certificate of Analysis (COA), private label options, and Incoterms delivery terms.',
+    cta: 'Submit Commercial Request',
+    note: 'Origin and batch verification documents are transparently disclosed at quotation stage.'
+  },
+  de: {
+    kicker: 'Großhandels-Beschaffungsdesk',
+    title: 'Institutionelle Großhandelsbeschaffung & Angebotsabwicklung',
+    lead: 'Wir erstellen kaufmännische Angebote für sämtliche Portfoliowaren mit Spezifikationen, Chargenanalysen (COA), Private-Label-Optionen und Incoterms-Lieferkonditionen.',
+    cta: 'Handelsanfrage einreichen',
+    note: 'Herkunfts- und Chargennachweise werden transparent im Angebotsprozess offengelegt.'
+  },
+  it: {
+    kicker: 'Desk approvvigionamento all’ingrosso',
+    title: 'Sourcing all’ingrosso e quotazioni commerciali istituzionali',
+    lead: 'Elaboriamo offerte commerciali su misura per tutti i prodotti in catalogo con specifiche, certificati di analisi (COA), private label e condizioni di resa Incoterms.',
+    cta: 'Invia richiesta commerciale',
+    note: 'I documenti di origine e di lotto sono condivisi con trasparenza in fase di quotazione.'
+  },
+  ru: {
+    kicker: 'Отдел оптовых поставок',
+    title: 'Оптовый сорсинг и подготовка коммерческих предложений',
+    lead: 'Формируем коммерческие предложения на весь ассортимент продукции с техническими спецификациями, сертификатами анализа (COA), частной маркой и условиями Incoterms.',
+    cta: 'Подать коммерческий запрос',
+    note: 'Документы о происхождении и партии предоставляются открыто на этапе котировки.'
+  },
+  fa: {
+    kicker: 'میز تأمین عمده',
+    title: 'میز استعلام قیمت و تأمین تجاری کلان',
+    lead: 'برای تمامی محصولات کاتالوگ، پیشنهادات تجاری بر اساس مشخصات فنی، آنالیزهای آزمایشگاهی (COA)، برچسب اختصاصی (Private Label) و شرایط تحویل Incoterms تدوین می‌شود.',
+    cta: 'ارسال درخواست تجاری',
+    note: 'اسناد مبدأ و پارت به‌صورت کاملاً شفاف در مرحله صدور پیش‌فاکتور ارائه می‌گردد.'
+  },
+  zh: {
+    kicker: '大宗商品战略采购中心',
+    title: '企业级大宗集采、规格定制与商业报价服务台',
+    lead: '针对全线贸易商品提供详尽技术规格书、出厂化验报告单 (COA)、自主品牌 OEM/贴牌生产方案及全套 Incoterms 国际交货条款报价。',
+    cta: '提交大宗采购与贸易问询',
+    note: '原产地证明与批次检验文件均在商业报价阶段如实透明提供。'
+  },
+  vi: {
+    kicker: 'Bàn thu mua bán sỉ',
+    title: 'Bộ phận thu mua số lượng lớn & Báo giá thương mại',
+    lead: 'Chúng tôi thiết lập báo giá thương mại cho toàn bộ danh mục sản phẩm kèm thông số kỹ thuật, chứng nhận phân tích (COA), đóng gói thương hiệu riêng và điều khoản Incoterms.',
+    cta: 'Gửi yêu cầu thương mại',
+    note: 'Hồ sơ xuất xứ và kiểm định lô hàng luôn được công khai minh bạch ở giai đoạn báo giá.'
+  }
+};
+const featuredInsightLabel = {
+  tr: 'ÖNE ÇIKAN TİCARİ ANALİZ',
+  en: 'FEATURED TRADE INTELLIGENCE',
+  de: 'FOKUS-HANDELSANALYSE',
+  it: 'ANALISI COMMERCIALE IN EVIDENZA',
+  ru: 'ГЛАВНЫЙ АНАЛИТИЧЕСКИЙ МАТЕРИАЛ',
+  fa: 'تحلیل برگزیده تجاری',
+  zh: '核心商贸研判报告',
+  vi: 'PHÂN TÍCH THƯƠNG MẠI TIÊU BIỂU'
+}[lang] || 'Featured Analysis';
+const readArticleLabel = {
+  tr: 'Analizin Tamamını Oku',
+  en: 'Read Full Analysis',
+  de: 'Vollständige Analyse lesen',
+  it: 'Leggi l’analisi completa',
+  ru: 'Читать анализ полностью',
+  fa: 'مطالعه کامل تحلیل',
+  zh: '阅读完整研报',
+  vi: 'Đọc toàn bộ bài viết'
+}[lang] || 'Read Article';
+const insightCategories: Record<string, Record<Locale, string>> = {
+  'strategic-vs-procurement': {
+    tr: 'Stratejik Tedarik', en: 'Strategic Sourcing', de: 'Strategische Beschaffung',
+    it: 'Sourcing Strategico', ru: 'Стратегический сорсинг', fa: 'تأمین استراتژیک',
+    zh: '战略采购', vi: 'Thu mua chiến lược'
+  },
+  'supplier-selection': {
+    tr: 'Tedarikçi Seçimi', en: 'Supplier Selection', de: 'Lieferantenauswahl',
+    it: 'Selezione Fornitori', ru: 'Выбор поставщиков', fa: 'انتخاب تأمین‌کننده',
+    zh: '供应商准入标准', vi: 'Tiêu chuẩn nhà cung cấp'
+  },
+  'supplier-risk': {
+    tr: 'Risk & Doğrulama', en: 'Risk & Verification', de: 'Risiko & Prüfung',
+    it: 'Rischio e Verifica', ru: 'Верификация рисков', fa: 'اعتبارسنجی و ریسک',
+    zh: '验厂与风险核验', vi: 'Thẩm định rủi ro'
+  },
+  'total-cost': {
+    tr: 'Maliyet & TCO', en: 'Cost & TCO', de: 'Kosten & TCO',
+    it: 'Costi e TCO', ru: 'Анализ TCO', fa: 'تحلیل هزینه (TCO)',
+    zh: 'TCO 总拥有成本', vi: 'Chi phí & TCO'
+  },
+  'rfq': {
+    tr: 'RFQ Mimarisi', en: 'RFQ Architecture', de: 'RFQ-Architektur',
+    it: 'Architettura RFQ', ru: 'Архитектура RFQ', fa: 'معماری RFQ',
+    zh: 'RFQ 询价架构', vi: 'Cấu trúc RFQ'
+  },
+  'supply-chain-risk': {
+    tr: 'Tedarik Zinciri', en: 'Supply Chain Risk', de: 'Lieferketten-Risiko',
+    it: 'Rischio di Filiera', ru: 'Управление рисками', fa: 'ریسک زنجیره تأمین',
+    zh: '供应链韧性管理', vi: 'Quản trị chuỗi cung ứng'
+  },
+  'origin-compliance': {
+    tr: 'Menşe & Uyum', en: 'Origin & Compliance', de: 'Herkunft & Compliance',
+    it: 'Origine e Conformità', ru: 'Происхождение и комплаенс', fa: 'مبدأ و انطباق قانونی',
+    zh: '真实产地与合规', vi: 'Xuất xứ & Tuân thủ'
+  },
+  'nearshoring-europe-turkey': {
+    tr: 'Nearshoring & Lojistik', en: 'Nearshoring & Logistics', de: 'Nearshoring & Logistik',
+    it: 'Nearshoring e Logistica', ru: 'Ниаршоринг и логистика', fa: 'نزدیک‌سپاری و لجستیک',
+    zh: '近岸外包与物流', vi: 'Nearshoring & Logistics'
+  },
+  'turkey-manufacturer-sourcing': {
+    tr: 'Fabrika & Denetim', en: 'Factory Audits', de: 'Werksaudits & Fertigung',
+    it: 'Audit e Produzione', ru: 'Аудит фабрик и выпуск', fa: 'بازرسی کارخانه و تولید',
+    zh: '工厂审核与制造', vi: 'Kiểm toán nhà máy & Sản xuất'
+  },
+  'china-vs-turkey-sourcing': {
+    tr: 'Pazar Kıyaslaması', en: 'Market Comparison', de: 'Marktvergleich',
+    it: 'Confronto di Mercato', ru: 'Сравнение рынков', fa: 'مقایسه بازار',
+    zh: '中土寻源对比', vi: 'So sánh thị trường'
+  },
+  'vietnam-turkey-trade-routes': {
+    tr: 'Ticaret Koridorları', en: 'Trade Corridors', de: 'Handelskorridore',
+    it: 'Corridoi Commerciali', ru: 'Торговые коридоры', fa: 'راهگذرهای تجاری',
+    zh: '欧亚商贸走廊', vi: 'Hành lang thương mại'
+  },
+  'iran-turkey-commodity-corridors': {
+    tr: 'Emtia & Hammadde', en: 'Commodity Sourcing', de: 'Rohstoffbeschaffung',
+    it: 'Sourcing Materie Prime', ru: 'Сорсинг сырья', fa: 'تأمین مواد اولیه',
+    zh: '大宗商品与原料', vi: 'Nông sản & Nguyên liệu'
+  },
+  'private-label-contract-manufacturing': {
+    tr: 'Fason Üretim & OEM', en: 'Private Label & OEM', de: 'Private Label & OEM',
+    it: 'Private Label e OEM', ru: 'СТМ и контрактное производство', fa: 'تولید قراردادی و برند اختصاصی',
+    zh: '贴牌代工与自有品牌', vi: 'Gia công OEM & Thương hiệu riêng'
+  },
+  'supplier-due-diligence': {
+    tr: 'İstihbarat & Güvenlik', en: 'Due Diligence & Fraud', de: 'Due Diligence & Betrugsschutz',
+    it: 'Due Diligence e Antifrode', ru: 'Дью-дилидженс и безопасность', fa: 'اعتبارسنجی و پیشگیری از کلاهبرداری',
+    zh: '尽职调查与反诈防范', vi: 'Thẩm định & Chống gian lận'
+  },
+  'turkey-export-market-entry': {
+    tr: 'İhracat Stratejisi', en: 'Export Strategy', de: 'Exportstrategie',
+    it: 'Strategia di Esportazione', ru: 'Экспортная стратегия', fa: 'استراتژی صادرات',
+    zh: '出海战略落地', vi: 'Chiến lược xuất khẩu'
+  },
+  'landed-cost-moq-optimization': {
+    tr: 'Maliyet Modellemesi', en: 'Landed Cost & MOQ', de: 'Landed Cost & MOQ',
+    it: 'Costo Sbarcato e MOQ', ru: 'Landed Cost и MOQ', fa: 'بهای تمام‌شده و حداقل سفارش',
+    zh: '到岸成本与起订量优化', vi: 'Chi phí cập cảng & MOQ'
+  },
+  'trade-house-vs-broker': {
+    tr: 'Ticaret Yönetimi', en: 'Trade Governance', de: 'Handels-Governance',
+    it: 'Governance del Commercio', ru: 'Управление торговлей', fa: 'مدیریت و شفافیت تجارت',
+    zh: '国际贸易治理模式', vi: 'Quản trị thương mại'
+  }
+};
+const advisoryDeskCopy: Record<Locale, { kicker: string; title: string; lead: string; cta: string }> = {
+  tr: {
+    kicker: 'Stratejik Ticaret Masası',
+    title: 'Özel pazar araştırması veya fabrika doğrulamasına mı ihtiyacınız var?',
+    lead: 'CTSEG; Türkiye, Avrupa ve Asya arasındaki ticaret koridorlarında bağımsız üretici araştırması, TCO maliyet analizi, numune denetimi ve sözleşme güvencesi sağlar.',
+    cta: 'Danışmanlık Talebi Oluşturun'
+  },
+  en: {
+    kicker: 'Strategic Advisory Desk',
+    title: 'Need bespoke market intelligence or factory verification?',
+    lead: 'CTSEG provides independent producer audits, total-cost (TCO) modeling, batch inspection, and contract governance across European, Turkish, and Asian trade corridors.',
+    cta: 'Request Commercial Advisory'
+  },
+  de: {
+    kicker: 'Strategischer Beratungsdesk',
+    title: 'Benötigen Sie maßgeschneiderte Marktanalysen oder Lieferantenprüfungen?',
+    lead: 'CTSEG bietet unabhängige Herstellerprüfungen, TCO-Gesamtkostenrechnungen, Chargenkontrollen und Vertragssicherheit in den Handelskorridoren.',
+    cta: 'Beratung anfordern'
+  },
+  it: {
+    kicker: 'Desk di consulenza strategica',
+    title: 'Hai bisogno di ricerche di mercato su misura o verifica fornitori?',
+    lead: 'CTSEG offre audit indipendenti dei produttori, modellazione TCO, ispezione dei lotti e garanzie contrattuali nei corridoi commerciali eurasiatici.',
+    cta: 'Richiedi consulenza commerciale'
+  },
+  ru: {
+    kicker: 'Отдел стратегического консалтинга',
+    title: 'Требуется индивидуальный анализ рынка или аудит фабрик?',
+    lead: 'CTSEG проводит независимый аудит производителей, расчёт совокупной стоимости (TCO), инспекцию партий и контрактную защиту в торговых коридорах.',
+    cta: 'Запросить консультацию'
+  },
+  fa: {
+    kicker: 'میز مشاوره استراتژیک',
+    title: 'به تحقیقات اختصاصی بازار یا اعتبارسنجی کارخانه نیاز دارید؟',
+    lead: 'CTSEG ارزیابی مستقل کارخانه‌ها، مدل‌سازی هزینه کل مالکیت (TCO)، بازرسی پارت و تضمین قرارداد را در راهگذرهای تجاری فرامرزی ارائه می‌دهد.',
+    cta: 'ثبت درخواست مشاوره تجاری'
+  },
+  zh: {
+    kicker: '跨国商贸战略咨询台',
+    title: '需要定制化的跨国供应链调研或深度实地验厂评估？',
+    lead: 'CTSEG 在土耳其、泛欧与泛亚跨境贸易通道中，提供独立工厂背调、到岸总拥有成本 (TCO) 精算、批次留样复验及跨国合同履约合规保障。',
+    cta: '预约跨境商贸战略咨询'
+  },
+  vi: {
+    kicker: 'Bàn tư vấn chiến lược',
+    title: 'Cần nghiên cứu thị trường chuyên biệt hoặc thẩm định nhà xưởng?',
+    lead: 'CTSEG cung cấp dịch vụ thẩm định nhà máy độc lập, lập mô hình chi phí TCO, kiểm định lô hàng và quản trị hợp đồng trên các hành lang thương mại.',
+    cta: 'Yêu cầu tư vấn thương mại'
+  }
+};
+const executiveSummaryLabel = {
+  tr: 'YÖNETİCİ ÖZETİ & STRATEJİK ÇIKARIM',
+  en: 'EXECUTIVE SUMMARY & STRATEGIC TAKEAWAY',
+  de: 'EXECUTIVE SUMMARY & KERNAUSSAGE',
+  it: 'SINTESI ESECUTIVA E TAKEAWAY STRATEGICO',
+  ru: 'РЕЗЮМЕ ДЛЯ РУКОВОДИТЕЛЕЙ',
+  fa: 'خلاصه مدیریتی و دستاورد استراتژیک',
+  zh: '管理层摘要与核心研判',
+  vi: 'TÓM TẮT ĐIỀU HÀNH & KẾT LUẬN CHIẾN LƯỢC'
+}[lang] || 'Executive Summary';
+const authorLabel = {
+  tr: 'CTSEG Küresel Ticaret Masası',
+  en: 'CTSEG Global Trade Desk',
+  de: 'CTSEG Globaler Handelsdesk',
+  it: 'Desk commercio globale CTSEG',
+  ru: 'Отдел глобальной торговли CTSEG',
+  fa: 'میز تجارت جهانی CTSEG',
+  zh: 'CTSEG 全球贸易与供应链智库',
+  vi: 'Ban Nghiên cứu Thương mại CTSEG'
+}[lang] || 'CTSEG Trade Desk';
+const relatedServiceKicker = {
+  tr: 'İlgili Ticari Hizmet',
+  en: 'Related Commercial Capability',
+  de: 'Verwandte Handelsdienstleistung',
+  it: 'Servizio commerciale correlato',
+  ru: 'Связанная коммерческая услуга',
+  fa: 'خدمت تجاری مرتبط',
+  zh: '关联商贸服务与落地支持',
+  vi: 'Năng lực thương mại liên quan'
+}[lang] || 'Related Service';
+const relatedInsightsHeading = {
+  tr: 'Diğer Stratejik Analizler',
+  en: 'Related Trade Intelligence',
+  de: 'Weitere Handelsanalysen',
+  it: 'Altre analisi commerciali',
+  ru: 'Другие аналитические материалы',
+  fa: 'سایر تحلیل‌های استراتژیک',
+  zh: '更多贸易研报与行业洞察',
+  vi: 'Các phân tích thương mại khác'
+}[lang] || 'Related Intelligence';
+const articleRfqDesk = {
+  kicker: {
+    tr: 'Ticari İnceleme & Teklif',
+    en: 'Commercial Assessment & RFQ',
+    de: 'Handelsprüfung & Anfrage',
+    it: 'Valutazione commerciale e RFQ',
+    ru: 'Коммерческая оценка и запрос',
+    fa: 'بررسی تجاری و استعلام',
+    zh: '商业研判与委托询价',
+    vi: 'Đánh giá thương mại & Báo giá'
+  }[lang] || 'Commercial Assessment',
+  title: {
+    tr: 'Tedarik zincirinizi veya ihracat rotanızı doğrulamak ister misiniz?',
+    en: 'Need to verify your supply chain or explore new trade routes?',
+    de: 'Möchten Sie Ihre Lieferkette prüfen oder neue Handelswege erschließen?',
+    it: 'Desideri verificare la tua filiera o aprire nuove rotte commerciali?',
+    ru: 'Хотите проверить цепочку поставок или открыть новые торговые маршруты?',
+    fa: 'آیا مایلید زنجیره تأمین یا مسیرهای صادراتی خود را اعتبارسنجی کنید؟',
+    zh: '需要对目标供应链开展深度验厂或开拓泛欧贸易走廊？',
+    vi: 'Bạn cần xác minh chuỗi cung ứng hoặc mở rộng tuyến thương mại mới?'
+  }[lang] || 'Need to verify your supply chain?',
+  lead: {
+    tr: 'Fabrika doğrulaması, TCO maliyet analizi, numune denetimi veya Incoterms sözleşme mimarisi için ticari talebinizi iletin.',
+    en: 'Submit your commercial inquiry for factory verification, TCO cost modeling, batch inspections, or Incoterms contract governance.',
+    de: 'Reichen Sie Ihre Anfrage für Lieferantenprüfungen, TCO-Modellierung, Chargeninspektionen oder Vertragssicherheit ein.',
+    it: 'Invia la tua richiesta per verifica fornitori, modellazione costi TCO, ispezione lotti o governance contrattuale Incoterms.',
+    ru: 'Отправьте запрос на аудит фабрик, расчёт TCO, инспекцию партий или контрактное сопровождение сделок.',
+    fa: 'درخواست تجاری خود را برای اعتبارسنجی کارخانه، مدل‌سازی TCO، بازرسی پارت یا قراردادهای Incoterms ارسال کنید.',
+    zh: '欢迎提交具体业务委托，获取工厂实地考察报告、到岸 TCO 测算、样品实验室检测及国际贸易合同风控方案。',
+    vi: 'Gửi yêu cầu thương mại của bạn để được thẩm định nhà xưởng, lập mô hình chi phí TCO, kiểm định lô hàng và quản trị hợp đồng.'
+  }[lang] || 'Submit your commercial inquiry.',
+  cta: {
+    tr: 'Ticari Talep Formu',
+    en: 'Submit Commercial Request',
+    de: 'Handelsanfrage stellen',
+    it: 'Invia richiesta commerciale',
+    ru: 'Отправить запрос',
+    fa: 'ارسال درخواست تجاری',
+    zh: '填写商业需求委托单',
+    vi: 'Gửi yêu cầu thương mại'
+  }[lang] || 'Submit Request'
+};
 const processPage = processPages[lang];
 const scenarioPage = scenarioPages[lang];
 const processLabels = {
@@ -328,11 +877,31 @@ const verifiedLater = {
         <a class="button button-secondary" href={lang === 'tr' ? '/downloads/ctseg-ticari-urunler-katalogu.pdf' : '/downloads/ctseg-trade-products-catalogue.pdf'} download data-catalog-download data-catalog-language={lang}>{lang === 'tr' ? 'Kataloğu indir' : 'Download catalogue'}</a>
       </div>}
       <div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div>
+      <nav class="catalogue-category-nav" aria-label={jumpLabel}>
+        <span class="category-nav-label">{jumpLabel}:</span>
+        <div class="category-nav-list">
+          {catalogueGroups.map((group, groupIndex) => (
+            <a class="category-nav-pill" href={`#group-${group.key}`}>
+              <span class="pill-num">{String(groupIndex + 1).padStart(2, '0')}</span>
+              <span class="pill-title">{group.title}</span>
+              <span class="pill-count">({group.ids.length})</span>
+            </a>
+          ))}
+        </div>
+      </nav>
       <div class="catalogue-directory">
-        {catalogueGroups.map((group,groupIndex) => <div class="catalogue-group" data-catalogue-group={group.key}>
+        {catalogueGroups.map((group,groupIndex) => <div class="catalogue-group" id={`group-${group.key}`} data-catalogue-group={group.key}>
           <div class="catalogue-group-heading">
-            <span>{String(groupIndex + 1).padStart(2,'0')}</span>
-            <h2>{group.title}</h2>
+            <div class="group-heading-top">
+              <span class="group-index">{String(groupIndex + 1).padStart(2,'0')}</span>
+              <h2>{group.title}</h2>
+            </div>
+            <p class="group-lead">{categoryLeads[group.key]?.[lang]}</p>
+            <div class="group-trade-badges">
+              <span class="trade-badge">✓ {groupBadges[group.key]?.b1[lang]}</span>
+              <span class="trade-badge">✓ {groupBadges[group.key]?.b2[lang]}</span>
+              <span class="trade-badge">✓ {groupBadges[group.key]?.b3[lang]}</span>
+            </div>
           </div>
           <div class="catalogue-grid">{group.ids.map((productId) => <ProductCard
             product={products[productId as keyof typeof products]}
@@ -343,18 +912,45 @@ const verifiedLater = {
           />)}</div>
         </div>)}
       </div>
+      <div class="catalogue-sourcing-desk">
+        <div class="sourcing-desk-content">
+          <span class="sourcing-desk-kicker">{sourcingDeskCopy[lang].kicker}</span>
+          <h2 class="sourcing-desk-title">{sourcingDeskCopy[lang].title}</h2>
+          <p class="sourcing-desk-lead">{sourcingDeskCopy[lang].lead}</p>
+          <p class="sourcing-desk-note">🔒 {sourcingDeskCopy[lang].note}</p>
+        </div>
+        <div class="sourcing-desk-actions">
+          <a class="button button-accent" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{sourcingDeskCopy[lang].cta} →</a>
+          <a class="button button-secondary" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp Quick Desk ↗</a>
+        </div>
+      </div>
     </div></section>
   </>
 )}
 
-{product && (
+{product && (() => {
+  const evidence = (product?.id && productEvidence[product.id as keyof typeof productEvidence]) ? productEvidence[product.id as keyof typeof productEvidence] : null;
+  return (
   <>
-    <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={product.names[lang]} lead={product.descriptions[lang]} parentHref={sectionHref('products')} parentLabel={t.products} product={product} ctaHref={sectionHref('contact')} ctaLabel={t.quote} imageNote={editorial.productImageNote} />
+    <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={product.names[lang]} lead={product.descriptions[lang]} parentHref={sectionHref('products')} parentLabel={t.products} product={product} ctaHref={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} ctaLabel={t.quote} imageNote={editorial.productImageNote} />
     <section class="section product-detail-content"><div class="container content-grid">
       <div class="prose">
-        <div class="content-block product-commercial-facts"><h2>{lang === 'tr' ? 'Ticari değerlendirme bilgileri' : lang === 'en' ? 'Commercial assessment information' : lang === 'de' ? 'Angaben zur kaufmännischen Bewertung' : lang === 'it' ? 'Informazioni per la valutazione commerciale' : lang === 'zh' ? '大宗商品商业评估核心参数' : lang === 'vi' ? 'Thông tin đánh giá thương mại' : 'Informations d’évaluation commerciale'}</h2>
+        <div class="content-block product-commercial-facts"><h2>{lang === 'tr' ? 'Ticari değerlendirme bilgileri' : lang === 'en' ? 'Commercial assessment information' : lang === 'de' ? 'Angaben zur kaufmännischen Bewertung' : lang === 'it' ? 'Informazioni per la valutazione commerciale' : lang === 'ru' ? 'Параметры коммерческой оценки' : lang === 'fa' ? 'اطلاعات ارزیابی تجاری' : lang === 'zh' ? '大宗商品商业评估核心参数' : lang === 'vi' ? 'Thông tin đánh giá thương mại' : 'Commercial assessment information'}</h2>
           <dl>{productCommercialLabels.map((label,index) => {
-            const values=[
+            const values = evidence ? [
+              evidence.origin[lang],
+              evidence.variety[lang],
+              evidence.packaging[lang],
+              evidence.moq[lang],
+              evidence.qualityDocs[lang],
+              evidence.samplePolicy[lang],
+              evidence.privateLabel[lang],
+              evidence.incoterms[lang],
+              evidence.leadTime[lang],
+              evidence.storage[lang],
+              evidence.intendedUse[lang],
+              evidence.quoteRequirements[lang]
+            ] : [
               product.origin,product.names[lang],verifiedLater[0],verifiedLater[1],verifiedLater[2],
               verifiedLater[3],verifiedLater[4],verifiedLater[1],verifiedLater[1],verifiedLater[0],
               copy.productUses.join(' · '),
@@ -366,16 +962,40 @@ const verifiedLater = {
             ];
             return <div><dt>{label}</dt><dd>{values[index]}</dd></div>;
           })}</dl>
+          <div class="product-evidence-governance">
+            <div class="governance-badge">
+              <span class="governance-icon">🛡️</span>
+              <div class="governance-text">
+                <strong>{lang === 'tr' ? 'CTSEG Ticari Doğrulama & Koordinasyon Mimarisi' :
+                         lang === 'en' ? 'CTSEG Trade Verification & Sourcing Governance' :
+                         lang === 'de' ? 'CTSEG Handelsverifizierung & Sourcing-Governance' :
+                         lang === 'it' ? 'Governance di sourcing e verifica commerciale CTSEG' :
+                         lang === 'ru' ? 'Торговая верификация и координация сорсинга CTSEG' :
+                         lang === 'fa' ? 'ساختار اعتبارسنجی تجاری و راهبری تأمین CTSEG' :
+                         lang === 'zh' ? 'CTSEG 独立商业核验与供应链履约治理' :
+                         'Cơ chế thẩm định thương mại & quản trị nguồn cung CTSEG'}</strong>
+                <p>{lang === 'tr' ? 'CTSEG, doğrudan üretici olmayıp bağımsız ticaret ve tedarik koordinatörü olarak hareket eder. Her sevkiyatta parti analiz sertifikası (COA), akredite laboratuvar testleri ve sözleşme güvencesi CTSEG operasyon mimarisiyle koordine edilir.' :
+                    lang === 'en' ? 'CTSEG acts as an independent trade and sourcing coordinator rather than an integrated producer. Every consignment is coordinated with batch analysis certificates (COA), accredited lab tests, and contract fulfillment governance.' :
+                    lang === 'de' ? 'CTSEG fungiert als unabhängiger Handels- und Beschaffungskoordinator. Jede Lieferung wird durch Chargenprüfberichte (COA), akkreditierte Labortests und Vertragssicherheit im CTSEG-Rahmen koordiniert.' :
+                    lang === 'it' ? 'CTSEG opera come coordinatore commerciale e di sourcing indipendente. Ogni spedizione è coordinata con certificati di analisi (COA), test di laboratorio accreditati e conformità contrattuale.' :
+                    lang === 'ru' ? 'CTSEG действует как независимый координатор торговли и сорсинга. Каждая партия координируется с сертификатами анализа (COA), тестами аккредитованных лаборарий и исполнением контрактов.' :
+                    lang === 'fa' ? 'CTSEG به عنوان هماهنگ‌کننده مستقل تجارت و تأمین فعالیت می‌کند. تمامی محموله‌ها با گواهی آنالیز پارت (COA)، آزمون‌های معتبر آزمایشگاهی و تضمین تعهدات قراردادی هماهنگ می‌شوند.' :
+                    lang === 'zh' ? 'CTSEG 作为独立国际贸易协同机构，并非单一生产企业。每一批次大宗货物均在 CTSEG 贸易治理体系下执行出厂化验单 (COA) 核验、第三方实验室送检及商事履约保障。' :
+                    'CTSEG hoạt động như một đơn vị điều phối thương mại và thu mua độc lập. Mỗi lô hàng đều được điều phối với chứng nhận phân tích lô (COA), kiểm định phòng lab và bảo đảm thực hiện hợp đồng.'}</p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="content-block"><h2>{t.applications}</h2><ul class="check-list">{copy.productUses.map((item:string) => <li>{item}</li>)}</ul></div>
         <div class="content-block"><h2>{t.quality}</h2><ul class="check-list">{copy.productQuality.map((item:string) => <li>{item}</li>)}</ul><div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div></div>
         <div class="content-block"><h2>{t.logistics}</h2><p>{t.contactLead}</p>{product.media.secondary && <ProductMedia product={product} lang={lang} secondary={true} className="secondary-product-media" />}</div>
         <div class="content-block faq"><h2>{t.faq}</h2><details open><summary>{t.origin}</summary><p>{t.complianceText}</p></details><details><summary>{t.samplePolicy}</summary><p>{t.sampleText}</p></details></div>
       </div>
-      <aside class="side-panel"><p class="eyebrow">{t.logistics}</p><h2>{t.quote}</h2><p>{t.contactLead}</p><p><strong>{t.samplePolicy}</strong><br/>{t.sampleText}</p><a class="button" href={sectionHref('contact')} data-product-quote data-product-name={product.names[lang]}>{lang === 'tr' ? 'Bu ürün için teklif iste' : lang === 'en' ? 'Request commercial details' : t.quote}</a></aside>
+      <aside class="side-panel"><p class="eyebrow">{t.logistics}</p><h2>{t.quote}</h2><p>{t.contactLead}</p><p><strong>{t.samplePolicy}</strong><br/>{t.sampleText}</p><a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-product-quote data-product-name={product.names[lang]}>{lang === 'tr' ? 'Bu ürün için teklif iste' : lang === 'en' ? 'Request commercial details' : t.quote}</a></aside>
     </div></section>
   </>
-)}
+  );
+})()}
 
 {key === 'markets' && (
   <>
@@ -395,62 +1015,301 @@ const verifiedLater = {
   </>
 )}
 
-{key === 'insights' && !id && (
-  <>
-    <PageHero lang={lang} eyebrow={t.insights} title={copy.insightsTitle} lead={copy.insightsLead} />
-    <section class="section"><div class="container card-grid">{insightIds.map((insightId,index) => <a class="card" href={localizedPath(lang,'insights',insightId)}><small>{indexLabel(index)}</small><h2>{insights[insightId].titles[lang]}</h2><p>{insights[insightId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
-    {(lang === 'tr' || lang === 'en') && <section class="section guide-directory"><div class="container">
-      <div class="section-head"><h2>{lang === 'tr' ? 'Satın alma rehberleri' : 'Sourcing guides'}</h2><p>{lang === 'tr' ? 'RFQ, kalite belgesi ve toplam maliyet için uygulanabilir kontrol listeleri.' : 'Practical checklists for RFQs, quality documents and total cost.'}</p></div>
-      <div class="card-grid">{Object.entries(guides).map(([guideId,item],index)=><a class="card" href={localizedPath(lang,'guides',guideId)}><small>{indexLabel(index)}</small><h3>{item[lang].title}</h3><p>{item[lang].description}</p><strong>{t.readMore} →</strong></a>)}</div>
-    </div></section>}
-  </>
-)}
+{key === 'insights' && !id && (() => {
+  const featuredId = insightIds[0];
+  const featuredInsight = insights[featuredId];
+  const featuredPost = getPostForInsight(lang, featuredId);
+  const remainingIds = insightIds.slice(1);
+  return (
+    <>
+      <PageHero lang={lang} eyebrow={t.insights} title={copy.insightsTitle} lead={copy.insightsLead} />
+      <section class="section insight-section"><div class="container">
+        {featuredInsight && (
+          <article class="insight-featured">
+            <div class="featured-badge-bar">
+              <span class="featured-kicker">{featuredInsightLabel}</span>
+              <span class="featured-category">{insightCategories[featuredId]?.[lang]}</span>
+              {featuredPost?.readingTime && <span class="featured-meta">{featuredPost.readingTime} · {featuredPost.date}</span>}
+            </div>
+            <h2 class="featured-title">
+              <a href={localizedPath(lang,'insights',featuredId)}>
+                {featuredInsight.titles[lang]}
+              </a>
+            </h2>
+            <p class="featured-lead">{featuredInsight.descriptions[lang]}</p>
+            {featuredPost?.answer && (
+              <blockquote class="featured-key-takeaway">
+                <strong>{lang === 'tr' ? 'Temel Stratejik Çıkarım' : lang === 'en' ? 'Core Strategic Takeaway' : lang === 'zh' ? '核心战略研判' : 'Key Strategic Takeaway'}</strong>
+                <p>"{featuredPost.answer}"</p>
+              </blockquote>
+            )}
+            <div class="featured-action">
+              <a class="button button-accent" href={localizedPath(lang,'insights',featuredId)}>
+                {readArticleLabel} →
+              </a>
+            </div>
+          </article>
+        )}
 
-{insight && (
-  <>
-    <PageHero lang={lang} eyebrow={t.insights} title={insight.titles[lang]} lead={insight.descriptions[lang]} parentHref={sectionHref('insights')} parentLabel={t.insights} />
-    <section class="section"><article class="container prose">
-      <p class="article-answer">{originalPost?.answer ?? insight.answers[lang]}</p>
-      {originalPost ? originalPost.sections.map((section) => (
-        <section class="content-block">
-          <h2>{section.heading}</h2>
-          {section.body.map((paragraph) => (
-            paragraph.trim().startsWith('<') ? <div set:html={paragraph} /> : <p set:html={paragraph}></p>
-          ))}
-        </section>
-      )) :
-        copy.framework.map((heading:string,index:number) => <section class="content-block"><h2>{heading}</h2><p>{insight.descriptions[lang]} {index === 1 ? t.complianceText : insight.answers[lang]}</p></section>)}
-      <div class="content-block">
-        <h2>{lang === 'tr' ? 'İlgili hizmet' : lang === 'en' ? 'Related service' : t.related}</h2>
-        <p><a class="text-link" href={localizedPath(lang,'services',id === 'total-cost' ? 'tco' : id === 'supplier-selection' || id === 'supplier-risk' ? 'supplier-verification' : 'strategic-sourcing')}>{services[id === 'total-cost' ? 'tco' : id === 'supplier-selection' || id === 'supplier-risk' ? 'supplier-verification' : 'strategic-sourcing'].names[lang]} →</a></p>
-      </div>
-      <div class="cta-statement"><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.quote}</a></div>
-    </article></section>
-  </>
-)}
+        <div class="insight-grid">
+          {remainingIds.map((insightId) => {
+            const post = getPostForInsight(lang, insightId);
+            const category = insightCategories[insightId]?.[lang];
+            return (
+              <a class="insight-card" href={localizedPath(lang,'insights',insightId)}>
+                <div class="insight-card-meta">
+                  <span class="insight-category-tag">{category}</span>
+                  <span class="insight-read-time">{post?.readingTime || (lang === 'tr' ? '8 dk' : '8 min')}</span>
+                </div>
+                <h2 class="insight-card-title">{insights[insightId].titles[lang]}</h2>
+                <p class="insight-card-desc">{insights[insightId].descriptions[lang]}</p>
+                <div class="insight-card-footer">
+                  <span class="insight-read-action">{readArticleLabel}</span>
+                  <span class="insight-arrow" aria-hidden="true">→</span>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+
+        {(lang === 'tr' || lang === 'en') && (
+          <div class="guide-directory-section">
+            <div class="section-head">
+              <p class="eyebrow">{lang === 'tr' ? 'Uygulamalı Dokümantasyon' : 'Operational Documentation'}</p>
+              <h2>{lang === 'tr' ? 'Satın alma rehberleri' : 'Sourcing guides'}</h2>
+              <p>{lang === 'tr' ? 'RFQ, kalite belgesi ve toplam maliyet için uygulanabilir kontrol listeleri.' : 'Practical checklists for RFQs, quality documents and total cost.'}</p>
+            </div>
+            <div class="guide-grid">
+              {Object.entries(guides).map(([guideId,item],index)=>(
+                <a class="guide-card" href={localizedPath(lang,'guides',guideId)}>
+                  <div class="guide-card-header">
+                    <span class="guide-index">{indexLabel(index)}</span>
+                    <span class="guide-badge">{lang === 'tr' ? 'Kontrol Listesi' : 'Checklist'}</span>
+                  </div>
+                  <h3>{item[lang].title}</h3>
+                  <p>{item[lang].description}</p>
+                  <span class="guide-link-action">{t.readMore} →</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div class="insight-advisory-desk">
+          <div class="advisory-desk-content">
+            <span class="advisory-kicker">{advisoryDeskCopy[lang].kicker}</span>
+            <h2 class="advisory-title">{advisoryDeskCopy[lang].title}</h2>
+            <p class="advisory-lead">{advisoryDeskCopy[lang].lead}</p>
+          </div>
+          <div class="advisory-desk-actions">
+            <a class="button button-accent" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">
+              {advisoryDeskCopy[lang].cta} →
+            </a>
+            <a class="button button-secondary" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noopener noreferrer">
+              WhatsApp Direct Desk ↗
+            </a>
+          </div>
+        </div>
+      </div></section>
+    </>
+  );
+})()}
+
+{insight && id && (() => {
+  const relatedServiceKey = id === 'total-cost' ? 'tco' : id === 'supplier-selection' || id === 'supplier-risk' ? 'supplier-verification' : 'strategic-sourcing';
+  const relatedService = services[relatedServiceKey];
+  const relatedIds = insightIds.filter((item) => item !== id).slice(0, 2);
+  const currentCategory = insightCategories[id]?.[lang] || 'Trade Intelligence';
+  const answerText = originalPost?.answer ?? insight.answers[lang];
+
+  return (
+    <>
+      <PageHero lang={lang} eyebrow={`${t.insights} · ${currentCategory}`} title={insight.titles[lang]} lead={insight.descriptions[lang]} parentHref={sectionHref('insights')} parentLabel={t.insights} />
+      <section class="section article-editorial-section"><article class="container article-prose-container">
+        <div class="article-meta-header">
+          <div class="article-meta-tags">
+            <span class="article-topic-badge">{currentCategory}</span>
+            <span class="article-author-tag">🏛 {authorLabel}</span>
+          </div>
+          <div class="article-date-meta">
+            {originalPost?.date && <span>{t.date}: {originalPost.date}</span>}
+            {originalPost?.readingTime && <span>· ⏱ {originalPost.readingTime}</span>}
+          </div>
+        </div>
+
+        {answerText && (
+          <div class="article-executive-summary">
+            <span class="summary-kicker">📌 {executiveSummaryLabel}</span>
+            <p>{answerText}</p>
+          </div>
+        )}
+
+        <div class="article-body">
+          {originalPost ? originalPost.sections.map((section) => (
+            <section class="content-block article-block">
+              <h2>{section.heading}</h2>
+              {section.body.map((paragraph) => (
+                paragraph.trim().startsWith('<') ? <div class="table-scroll-wrapper" set:html={paragraph} /> : <p set:html={paragraph}></p>
+              ))}
+            </section>
+          )) :
+            copy.framework.map((heading:string,index:number) => (
+              <section class="content-block article-block">
+                <h2>{heading}</h2>
+                <p>{insight.descriptions[lang]} {index === 1 ? t.complianceText : insight.answers[lang]}</p>
+              </section>
+            ))
+          }
+        </div>
+
+        {originalPost?.faq && originalPost.faq.length > 0 && (
+          <div class="content-block article-faq-block">
+            <h2>{t.faq}</h2>
+            <div class="article-faq-list">
+              {originalPost.faq.map((item, idx) => (
+                <details open={idx === 0}>
+                  <summary>{item.question}</summary>
+                  <p>{item.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {relatedService && (
+          <div class="article-service-card">
+            <div class="service-card-text">
+              <span class="service-kicker">{relatedServiceKicker}</span>
+              <h3>{relatedService.names[lang]}</h3>
+              <p>{relatedService.descriptions[lang]}</p>
+            </div>
+            <a class="button button-secondary" href={localizedPath(lang,'services',relatedServiceKey)}>
+              {t.readMore} →
+            </a>
+          </div>
+        )}
+
+        <div class="article-related-intelligence">
+          <h2>{relatedInsightsHeading}</h2>
+          <div class="related-insights-grid">
+            {relatedIds.map((relId) => {
+              const relPost = getPostForInsight(lang, relId);
+              return (
+                <a class="related-insight-card" href={localizedPath(lang,'insights',relId)}>
+                  <div class="rel-meta">
+                    <span class="rel-category">{insightCategories[relId]?.[lang]}</span>
+                    {relPost?.readingTime && <span class="rel-time">{relPost.readingTime}</span>}
+                  </div>
+                  <h3>{insights[relId].titles[lang]}</h3>
+                  <span class="rel-link">{readArticleLabel} →</span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+
+        <div class="article-rfq-desk">
+          <div class="rfq-desk-content">
+            <span class="rfq-kicker">{articleRfqDesk.kicker}</span>
+            <h2>{articleRfqDesk.title}</h2>
+            <p>{articleRfqDesk.lead}</p>
+          </div>
+          <div class="rfq-desk-actions">
+            <a class="button button-accent" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">
+              {articleRfqDesk.cta} →
+            </a>
+            <a class="button button-secondary" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noopener noreferrer">
+              WhatsApp Direct Desk ↗
+            </a>
+          </div>
+        </div>
+      </article></section>
+    </>
+  );
+})()}
 
 {key === 'about' && (
   <>
     <PageHero lang={lang} eyebrow={t.about} title={copy.aboutTitle} lead={copy.aboutLead} />
     <section class="section company-profile-section"><div class="container content-grid">
-      <div class="prose"><div class="content-block"><p class="eyebrow">{company.alternateName} · {company.foundingYear}</p><h2>{corporate.aboutHeading}</h2><p>{corporate.aboutBody}</p></div></div>
+      <div class="prose">
+        <div class="content-block">
+          <p class="eyebrow">{company.alternateName} · {company.foundingYear}</p>
+          <h2>{corporate.aboutHeading}</h2>
+          <p>{corporate.aboutBody}</p>
+        </div>
+        <div class="about-mandate-card">
+          <div class="about-mandate-header">
+            <span class="about-mandate-badge">Trade Architecture</span>
+            <h3>{aboutMandate.title}</h3>
+          </div>
+          <p>{aboutMandate.desc}</p>
+          <div class="about-mandate-tags">
+            <span class="about-tag">⇄ {aboutMandate.tagExport}</span>
+            <span class="about-tag">✓ {aboutMandate.tagSourcing}</span>
+          </div>
+        </div>
+      </div>
       <aside class="company-card" aria-label={corporate.labels.name}>
-        <dl>
-          <div><dt>{corporate.labels.name}</dt><dd>{company.name[lang] || company.name.en}</dd></div>
-          <div><dt>{corporate.labels.founder}</dt><dd>{company.founder}</dd></div>
+        <div class="company-card-header">
+          <span class="company-badge">Institutional Registry</span>
+          <h3>{company.name[lang] || company.name.en}</h3>
+        </div>
+        <dl class="company-meta-dl">
+          <div><dt>{corporate.labels.founder}</dt><dd><strong>{company.founder}</strong></dd></div>
           <div><dt>{corporate.labels.founded}</dt><dd>{company.foundingYear}</dd></div>
           <div><dt>{corporate.labels.headquarters}</dt><dd>{corporate.headquarters}</dd></div>
+          <div><dt>{corporate.labels.name}</dt><dd>{company.name[lang] || company.name.en}</dd></div>
         </dl>
       </aside>
     </div></section>
     <section class="section about-detail-section"><div class="container content-grid">
-      <div class="prose">
-        <section class="content-block"><h2>{completionAbout.whoTitle}</h2><p>{completionAbout.who}</p></section>
-        <section class="content-block"><h2>{completionAbout.workTitle}</h2><ul class="check-list">{completionAbout.work.map((item)=><li>{item}</li>)}</ul></section>
-        <section class="content-block"><h2>{completionAbout.methodTitle}</h2><p>{completionAbout.method}</p>{<a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a>}</section>
-        <section class="content-block"><h2>{completionAbout.ethicsTitle}</h2><ul class="check-list">{completionAbout.ethics.map((item)=><li>{item}</li>)}</ul></section>
+      <div class="about-pillars-stack">
+        <article class="about-pillar-card">
+          <div class="pillar-kicker">01 / Identity</div>
+          <h2>{completionAbout.whoTitle}</h2>
+          <p>{completionAbout.who}</p>
+        </article>
+        <article class="about-pillar-card">
+          <div class="pillar-kicker">02 / Capabilities</div>
+          <h2>{completionAbout.workTitle}</h2>
+          <ul class="about-capabilities-grid">
+            {completionAbout.work.map((item) => (
+              <li><span class="check-icon">✓</span> <span>{item}</span></li>
+            ))}
+          </ul>
+        </article>
+        <article class="about-pillar-card">
+          <div class="pillar-kicker">03 / Methodology</div>
+          <h2>{completionAbout.methodTitle}</h2>
+          <p>{completionAbout.method}</p>
+          <div class="about-method-action">
+            <a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a>
+          </div>
+        </article>
+        <article class="about-pillar-card about-pillar-ethics">
+          <div class="pillar-kicker">04 / Ethical Boundaries</div>
+          <h2>{completionAbout.ethicsTitle}</h2>
+          <ul class="about-ethics-list">
+            {completionAbout.ethics.map((item) => (
+              <li><span class="ethics-bullet">⊘</span> <span>{item}</span></li>
+            ))}
+          </ul>
+        </article>
       </div>
-      <aside class="founder-panel"><p class="eyebrow">{completionAbout.founderTitle}</p><h2>{company.founder}</h2><p>{completionAbout.founder}</p></aside>
+      <aside class="founder-panel">
+        <div class="founder-panel-card">
+          <span class="founder-eyebrow">{aboutGovernance.eyebrow}</span>
+          <h2>{company.founder}</h2>
+          <p class="founder-role">{aboutGovernance.founderRole}</p>
+          <div class="founder-divider"></div>
+          <p class="founder-bio">{completionAbout.founder}</p>
+          <div class="founder-compliance-badge">
+            <span class="compliance-icon">⚖</span>
+            <span>{aboutGovernance.complianceKicker}</span>
+          </div>
+        </div>
+      </aside>
     </div></section>
     <Framework lang={lang} />
     <section class="section"><div class="container cta-statement"><h2>{h.ctaTitle}</h2><a class="button" href={sectionHref('contact')}>{t.contact}</a></div></section>
@@ -461,7 +1320,26 @@ const verifiedLater = {
   <>
     <PageHero lang={lang} eyebrow={t.contact} title={contact.title} lead={contact.intro} compact={true} />
     <section class="section commercial-form-section"><div class="container"><CommercialRequestForm lang={lang} /></div></section>
-    {<section class="section compact-link-section"><div class="container"><a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a></div></section>}
+    <section class="section operational-trust" aria-labelledby="contact-trust-title">
+      <div class="container content-grid">
+        <div>
+          <p class="eyebrow">CTSEG · {contactProcessKicker}</p>
+          <h2 id="contact-trust-title">{operationalTrust.title}</h2>
+          <p>{operationalTrust.lead}</p>
+          <div class="turnaround-callout">
+            <span class="turnaround-badge">{turnaroundCallout.badge}</span>
+            <h3>{turnaroundCallout.title}</h3>
+            <p>{turnaroundCallout.desc}</p>
+          </div>
+        </div>
+        <div class="operational-trust-panel">
+          <ol>
+            {operationalTrust.steps.map((step,index)=><li><span>{indexLabel(index)}</span><strong>{step}</strong></li>)}
+          </ol>
+          <a class="button button-secondary" href={workHref} data-how-we-work-cta>{operationalTrust.cta} →</a>
+        </div>
+      </div>
+    </section>
   </>
 )}
 

@@ -45,11 +45,11 @@ main .section li,
   background:#161616!important;color:#fff!important;border-color:#a8a8a8!important
 }
 
-/* Long international corridor names should wrap inside one editorial row. */
-.corridor-list{display:block!important;min-width:0;max-width:100%;width:100%}
-.corridor-list>div{width:100%;min-width:0;max-width:100%;grid-template-columns:minmax(44px,80px) minmax(0,1fr)!important}
-.corridor-list strong{min-width:0;max-width:100%;font-size:clamp(25px,3.35vw,54px)!important;line-height:1.04!important;white-space:normal;overflow-wrap:normal;word-break:normal;text-wrap:balance}
+/* International corridor dual-column cards */
+.corridor-list{min-width:0;max-width:100%;width:100%}
+.corridor-list>div{min-width:0;max-width:100%}
 html[dir="rtl"] .corridor-list strong{text-align:right}
+
 
 /* Keep long editorial headings dramatic without allowing awkward one-word columns. */
 .hero h1,.page-hero h1,
@@ -111,9 +111,6 @@ html[data-locale="vi"] .hero h1{
   .platform-sector-grid article:nth-child(even){margin-top:clamp(52px,5vw,86px)}
   .platform-sector-grid article h3{font-size:clamp(42px,4vw,64px)!important;line-height:.96!important}
   html[data-locale="tr"] .platform-sector-grid article h3{font-size:clamp(38px,3.5vw,56px)!important;line-height:1!important}
-
-  .corridor-list>div{min-height:clamp(108px,7vw,138px)}
-  .corridor-list strong{font-size:clamp(36px,3.4vw,56px)!important;line-height:1!important}
   .market-line>div{min-height:clamp(116px,7.6vw,148px)}
   .market-line strong{font-size:clamp(42px,4.5vw,72px)!important;line-height:.98!important}
 
@@ -143,8 +140,6 @@ html[data-locale="vi"] .hero h1{
   html[data-locale="tr"] .section-head h2,html[data-locale="tr"] .markets-editorial h2,html[data-locale="tr"] .company-trust-heading h2,html[data-locale="tr"] .cta-statement h2{font-size:clamp(34px,9vw,50px)!important;line-height:1!important;max-width:100%}
   .trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{font-size:clamp(30px,8.8vw,44px)!important;line-height:1!important}
   html[data-locale="de"] .hero h1,html[data-locale="it"] .hero h1,html[data-locale="fa"] .hero h1,html[data-locale="ru"] .hero h1,html[data-locale="vi"] .hero h1{font-size:clamp(38px,10vw,56px)!important;line-height:.98!important;letter-spacing:-.04em!important}
-  .corridor-list>div{grid-template-columns:38px minmax(0,1fr)!important;min-height:84px}
-  .corridor-list strong{font-size:clamp(22px,6.2vw,32px)!important;line-height:1.05!important}
 }
 
 @media (max-width:430px){html[data-locale="ru"] .hero h1,html[data-locale="de"] .hero h1{font-size:clamp(34px,9.3vw,42px)!important}.container{max-width:100%}}
@@ -167,13 +162,13 @@ html[data-locale="vi"] .hero h1{
   html[data-locale="tr"] .hero h1{font-size:clamp(58px,5.65vw,96px)!important;line-height:.95!important;max-width:12.5ch!important}
   .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(48px,5.2vw,84px)!important;line-height:.96!important;letter-spacing:-.05em!important;max-width:15ch}
   html[data-locale="tr"] .section-head h2,html[data-locale="tr"] .markets-editorial h2,html[data-locale="tr"] .company-trust-heading h2,html[data-locale="tr"] .cta-statement h2{font-size:clamp(46px,4.8vw,78px)!important;max-width:16ch}
-  .trade-funnel-title{font-size:clamp(38px,3.3vw,56px)!important;line-height:1!important;max-width:13ch}.trade-paths-grid h3{font-size:clamp(38px,3.6vw,58px)!important;line-height:1!important;max-width:15ch}.platform-sector-grid article h3{font-size:clamp(34px,3.15vw,50px)!important;line-height:1.02!important;max-width:17ch}.market-line strong{font-size:clamp(34px,3.7vw,58px)!important;line-height:1!important}.corridor-list strong{font-size:clamp(32px,3vw,48px)!important;line-height:1.03!important}
+  .trade-funnel-title{font-size:clamp(38px,3.3vw,56px)!important;line-height:1!important;max-width:13ch}.trade-paths-grid h3{font-size:clamp(38px,3.6vw,58px)!important;line-height:1!important;max-width:15ch}.platform-sector-grid article h3{font-size:clamp(34px,3.15vw,50px)!important;line-height:1.02!important;max-width:17ch}.market-line strong{font-size:clamp(34px,3.7vw,58px)!important;line-height:1!important}
   .hero .lead,.section-head p,.trade-paths-grid p,.trade-funnel-desc,.platform-sector-grid article p,.markets-editorial p,.operational-trust p,.company-trust-band p,.scenario-teaser p,.cta-statement p{font-size:18px!important;line-height:1.62!important}
   .section-head{grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:clamp(40px,4.8vw,78px)}.section{padding-block:clamp(88px,7vw,132px)}.trade-paths-grid article{min-height:390px}.platform-sector-grid article{min-height:clamp(500px,35vw,620px)!important}.platform-sector-grid article:nth-child(even){margin-top:clamp(34px,3.4vw,58px)}.cta-statement{min-height:430px}
 }
 
 @media (max-width:1100px){.hero h1,.page-hero h1{font-size:clamp(46px,8vw,72px)!important;line-height:.96!important;max-width:100%!important}.section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(38px,6.6vw,58px)!important;line-height:1!important;max-width:18ch}.trade-funnel-title,.trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{font-size:clamp(30px,5.6vw,44px)!important;line-height:1.03!important}.hero .lead,.section-head p,.trade-paths-grid p,.trade-funnel-desc,.platform-sector-grid article p,.markets-editorial p,.operational-trust p,.company-trust-band p,.scenario-teaser p,.cta-statement p{font-size:17px!important;line-height:1.58!important}}
-@media (max-width:760px){.hero h1,.page-hero h1{font-size:clamp(40px,10.4vw,54px)!important;line-height:.98!important;letter-spacing:-.045em!important}html[data-locale="tr"] .hero h1{font-size:clamp(38px,9.7vw,50px)!important}.section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(32px,8.2vw,44px)!important;line-height:1.02!important;letter-spacing:-.04em!important;max-width:100%}.trade-funnel-title,.trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{font-size:clamp(27px,7vw,36px)!important;line-height:1.04!important}.hero .lead,.section-head p,.trade-paths-grid p,.trade-funnel-desc,.platform-sector-grid article p,.markets-editorial p,.operational-trust p,.company-trust-band p,.scenario-teaser p,.cta-statement p{font-size:16px!important;line-height:1.6!important}.section{padding-block:64px!important}.section-head{margin-bottom:34px!important}.trade-funnel-card{min-height:340px!important}.platform-sector-grid article{min-height:390px!important}.corridor-list strong{font-size:clamp(21px,5.7vw,29px)!important}.corridor-list>div{grid-template-columns:32px minmax(0,1fr)!important;padding-block:12px}}
+@media (max-width:760px){.hero h1,.page-hero h1{font-size:clamp(40px,10.4vw,54px)!important;line-height:.98!important;letter-spacing:-.045em!important}html[data-locale="tr"] .hero h1{font-size:clamp(38px,9.7vw,50px)!important}.section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(32px,8.2vw,44px)!important;line-height:1.02!important;letter-spacing:-.04em!important;max-width:100%}.trade-funnel-title,.trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{font-size:clamp(27px,7vw,36px)!important;line-height:1.04!important}.hero .lead,.section-head p,.trade-paths-grid p,.trade-funnel-desc,.platform-sector-grid article p,.markets-editorial p,.operational-trust p,.company-trust-band p,.scenario-teaser p,.cta-statement p{font-size:16px!important;line-height:1.6!important}.section{padding-block:64px!important}.section-head{margin-bottom:34px!important}.trade-funnel-card{min-height:340px!important}.platform-sector-grid article{min-height:390px!important}}
 
 .site-header{background:#111!important;border-bottom:1px solid rgba(255,255,255,.1)!important;color:#fff!important}.site-header .header-inner{min-height:78px!important}.site-header .brand,.site-footer .brand{position:relative;display:inline-flex;align-items:center;min-width:118px;height:42px;text-decoration:none!important}.site-header .brand img,.site-footer .brand img{display:none!important}.site-header .brand::before,.site-footer .brand::before,.mobile-nav-title,.footer-markets-kicker,.footer-main nav:last-child>strong{content:"CTSEG";display:inline-block;font-family:var(--font-sans,Arial,sans-serif);font-size:30px;line-height:1;font-weight:900;letter-spacing:-.07em;background:linear-gradient(90deg,#fff 0 59%,#e34234 59% 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important}.site-footer .brand::before{font-size:54px}.mobile-nav-title{font-size:24px!important}.footer-markets-kicker{font-size:12px!important;letter-spacing:.08em!important}.footer-main nav:last-child>strong{font-size:24px;letter-spacing:-.05em}
 @media (min-width:1051px){.site-header .desktop-only-nav{display:flex!important;visibility:visible!important;opacity:1!important;color:#fff!important}.site-header .desktop-nav-link,.site-header .nav-solutions-parent,.site-header .nav-market-parent,.site-header .language-switcher button{color:#fff!important;opacity:1!important}.site-header .desktop-nav-link:hover,.site-header .nav-solutions-parent:hover,.site-header .nav-market-parent:hover{color:#c4f000!important}.site-header .nav-cta{background:#c4f000!important;color:#0a0a0a!important;border-color:#c4f000!important}}

@@ -13,6 +13,26 @@ const showcaseSizes = {
 } as Record<string,string>;
 const imageSizes = displayRole ? showcaseSizes[displayRole] : catalogueSizes;
 const portfolioLabel = {tr:'Ticaret Portföyü',en:'Trade Portfolio',de:'Handelsportfolio',it:'Portafoglio commerciale',ru:'Торговый портфель',fa:'سبد تجاری',zh:'贸易组合',vi:'Danh mục thương mại'}[lang] || ui[lang].products;
+const rfqPrompt = {
+  tr:'Ticari İnceleme & Teklif',
+  en:'Commercial Review & RFQ',
+  de:'Handelsprüfung & Anfrage',
+  it:'Valutazione & RFQ',
+  ru:'Оценка и запрос (RFQ)',
+  fa:'بررسی تجاری و استعلام قیمت',
+  zh:'商业核验与询价',
+  vi:'Đánh giá & Báo giá'
+}[lang] || 'RFQ';
+const originDisplay = {
+  tr: product.origin,
+  en: product.origin,
+  de: product.origin,
+  it: product.origin,
+  ru: product.origin === 'Iran' ? 'Иран' : 'Турция / Иран / проверенный источник',
+  fa: product.origin === 'Iran' ? 'ایران' : 'ترکیه / ایران / منبع تأییدشده',
+  zh: product.origin === 'Iran' ? '伊朗' : '土耳其 / 伊朗 / 认证供应源',
+  vi: product.origin === 'Iran' ? 'Iran' : 'Thổ Nhĩ Kỳ / Iran / nguồn xác minh'
+}[lang] || product.origin;
 ---
 <a
   class:list={['product-card', displayRole && `product-card--${displayRole}`, { featured, 'typographic-card':typographicVariety }]}
@@ -27,35 +47,43 @@ const portfolioLabel = {tr:'Ticaret Portföyü',en:'Trade Portfolio',de:'Handels
   <div class="product-card-copy">
     <div class="product-card-meta">
       <span class="product-card-kicker">{portfolioLabel}</span>
-      <span class="product-card-arrow" aria-hidden="true">↗</span>
+      <span class="product-card-origin-tag">{originDisplay}</span>
     </div>
     <h2>{product.names[lang]}</h2>
     <p>{product.descriptions[lang]}</p>
+    <div class="product-card-trade-footer">
+      <span class="product-card-rfq">{rfqPrompt}</span>
+      <span class="product-card-arrow" aria-hidden="true">→</span>
+    </div>
   </div>
 </a>
 
 <style is:global>
-  .product-card{position:relative!important;display:flex!important;flex-direction:column!important;min-width:0!important;border:0!important;border-bottom:1px solid #cbc9c1!important;border-radius:0!important;background:#f7f6f1!important;color:#111!important;overflow:hidden!important;box-shadow:none!important;text-decoration:none!important;transition:border-color .28s ease!important}
-  .product-card:hover{border-color:#111!important}
+  .product-card{position:relative!important;display:flex!important;flex-direction:column!important;min-width:0!important;max-height:none!important;border:1px solid #d8d5cc!important;border-bottom:2px solid #111!important;border-radius:0!important;background:#ffffff!important;color:#111!important;overflow:hidden!important;box-shadow:none!important;text-decoration:none!important;transition:border-color .28s ease,box-shadow .28s ease,transform .28s ease!important}
+  .product-card:hover{border-color:#111!important;border-bottom-color:#7e9a00!important;box-shadow:0 8px 24px rgba(17,17,17,.06)!important;transform:translateY(-2px)!important}
   .product-card .product-media{position:relative!important;margin:0!important;aspect-ratio:4/3!important;overflow:hidden!important;background:#161616!important;border:0!important;border-radius:0!important}
-  .product-card .product-media::after{content:"";position:absolute;inset:0;pointer-events:none;border:1px solid rgba(17,17,17,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+  .product-card .product-media::after{content:"";position:absolute;inset:0;pointer-events:none;border-bottom:1px solid rgba(17,17,17,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
   .product-card .product-media picture,.product-card .product-media img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;transition:transform .75s cubic-bezier(.2,.8,.2,1),filter .35s ease!important}
-  .product-card:hover .product-media img{transform:scale(1.025)!important}
-  .product-card-copy{position:relative!important;display:flex!important;flex:1!important;flex-direction:column!important;padding:22px 2px 28px!important;background:transparent!important}
-  .product-card-meta{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:20px!important;margin-bottom:18px!important;padding-bottom:12px!important;border-bottom:1px solid #dedcd5!important}
-  .product-card-kicker{margin:0!important;color:#74736d!important;font-size:10px!important;line-height:1.2!important;font-weight:820!important;letter-spacing:.1em!important;text-transform:uppercase!important}
-  .product-card h2{margin:0 0 13px!important;max-width:17ch!important;color:#111!important;font-family:var(--font-heading,'Source Serif 4',Georgia,serif)!important;font-size:clamp(26px,2.15vw,38px)!important;line-height:1!important;letter-spacing:-.04em!important;font-weight:680!important;text-wrap:balance!important}
-  .product-card p{margin:0!important;max-width:39em!important;color:#575650!important;font-size:14px!important;line-height:1.62!important}
-  .product-card-arrow{flex:0 0 auto!important;color:#111!important;font-size:19px!important;line-height:1!important;transition:transform .28s ease,color .2s ease!important}
-  .product-card:hover .product-card-arrow{transform:translate(3px,-3px)!important;color:#7e9a00!important}
-  .product-card .variety-panel{position:relative!important;display:flex!important;min-height:300px!important;flex-direction:column!important;justify-content:flex-end!important;padding:30px!important;background:#151515!important;color:#fff!important;overflow:hidden!important;border-bottom:3px solid #c4f000!important}
+  .product-card:hover .product-media img{transform:scale(1.03)!important}
+  .product-card-copy{position:relative!important;display:flex!important;flex:1!important;flex-direction:column!important;padding:20px 22px 22px!important;background:transparent!important}
+  .product-card-meta{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;margin-bottom:14px!important;padding-bottom:10px!important;border-bottom:1px solid #eeebe3!important}
+  .product-card-kicker{margin:0!important;color:#74736d!important;font-size:10px!important;line-height:1.2!important;font-weight:820!important;letter-spacing:.08em!important;text-transform:uppercase!important}
+  .product-card-origin-tag{display:inline-block!important;padding:2px 8px!important;background:#f2efe7!important;border:1px solid #dedcd5!important;color:#333!important;font-size:10.5px!important;font-weight:650!important;line-height:1.3!important}
+  .product-card h2{margin:0 0 10px!important;max-width:20ch!important;color:#111!important;font-family:var(--font-heading,'Source Serif 4',Georgia,serif)!important;font-size:clamp(22px,1.8vw,28px)!important;line-height:1.15!important;letter-spacing:-.03em!important;font-weight:680!important;text-wrap:balance!important}
+  .product-card p{margin:0 0 18px!important;max-width:39em!important;color:#575650!important;font-size:13.5px!important;line-height:1.6!important}
+  .product-card-trade-footer{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;margin-top:auto!important;padding-top:14px!important;border-top:1px solid #eeebe3!important}
+  .product-card-rfq{color:#1b1b1b!important;font-size:12px!important;font-weight:700!important;letter-spacing:.02em!important;transition:color .2s ease!important}
+  .product-card:hover .product-card-rfq{color:#7e9a00!important}
+  .product-card-arrow{flex:0 0 auto!important;color:#111!important;font-size:15px!important;line-height:1!important;transition:transform .28s ease,color .2s ease!important}
+  .product-card:hover .product-card-arrow{transform:translateX(4px)!important;color:#7e9a00!important}
+  .product-card .variety-panel{position:relative!important;display:flex!important;min-height:280px!important;flex-direction:column!important;justify-content:flex-end!important;padding:28px!important;background:#151515!important;color:#fff!important;overflow:hidden!important;border-bottom:3px solid #c4f000!important}
   .product-card .variety-panel::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(145deg,rgba(196,240,0,.08),transparent 38%),radial-gradient(circle at 82% 16%,rgba(255,255,255,.06),transparent 25%)}
   .product-card .variety-panel span,.product-card .variety-panel strong{position:relative;z-index:1}
-  .product-card .variety-panel span{margin-bottom:14px;color:#c4f000!important;font-size:10px!important;font-weight:850!important;letter-spacing:.12em!important;text-transform:uppercase!important}
-  .product-card .variety-panel strong{max-width:13ch;color:#fff!important;font-family:var(--font-heading,'Source Serif 4',Georgia,serif)!important;font-size:clamp(30px,3vw,48px)!important;line-height:.98!important;letter-spacing:-.045em!important}
+  .product-card .variety-panel span{margin-bottom:12px;color:#c4f000!important;font-size:10px!important;font-weight:850!important;letter-spacing:.12em!important;text-transform:uppercase!important}
+  .product-card .variety-panel strong{max-width:13ch;color:#fff!important;font-family:var(--font-heading,'Source Serif 4',Georgia,serif)!important;font-size:clamp(26px,2.6vw,40px)!important;line-height:1.02!important;letter-spacing:-.04em!important}
   html[dir="rtl"] .product-card-kicker,html[dir="rtl"] .product-card .variety-panel span{letter-spacing:0!important;text-transform:none!important}
   html[dir="rtl"] .product-card-arrow{transform:scaleX(-1)!important}
-  html[dir="rtl"] .product-card:hover .product-card-arrow{transform:scaleX(-1) translate(3px,-3px)!important}
-  @media(max-width:620px){.product-card-copy{padding:18px 0 24px!important}.product-card-meta{margin-bottom:15px!important}.product-card h2{font-size:29px!important}.product-card .variety-panel{min-height:250px!important;padding:24px!important}}
-  @media(prefers-reduced-motion:reduce){.product-card,.product-card .product-media img,.product-card-arrow{transition:none!important}}
+  html[dir="rtl"] .product-card:hover .product-card-arrow{transform:scaleX(-1) translateX(-4px)!important}
+  @media(max-width:620px){.product-card-copy{padding:16px 18px 18px!important}.product-card-meta{margin-bottom:12px!important}.product-card h2{font-size:23px!important}.product-card .variety-panel{min-height:220px!important;padding:20px!important}}
+  @media(prefers-reduced-motion:reduce){.product-card,.product-card:hover,.product-card .product-media img,.product-card-arrow{transform:none!important;transition:none!important}}
 </style>

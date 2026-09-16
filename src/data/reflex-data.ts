@@ -130,11 +130,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ctaProducts: 'Ürünleri İnceleyin',
 
     aboutEyebrow: 'Üretim Kapasitesi ve Standartlar',
-    aboutTitle: 'Yüksek Hacimli Üretim ve Standartlara Uyum',
-    aboutText1: 'İstanbul tesislerinde üretilen REFLEX ürünleri, 7/24 çalışan yüksek teknolojili otomatik üretim hatlarında imal edilir. Yüksek kaliteli hammaddeler ve özel TPE formülasyonu ile medikal muayene ve endüstriyel koruma eldivenleri üretilmektedir.',
+    aboutTitle: 'Üretim Standartları ve Tedarik Koordinasyonu',
+    aboutText1: 'REFLEX tek kullanımlık eldiven portföyü; medikal, gıda ve endüstriyel hijyen uygulamaları için doğrulanmış üretim ortakları ile koordine edilir. Hammadde özellikleri, polimer formülasyonları ve üretim kapasitesi talep ve üretici bazında teyit edilir.',
     aboutText2: 'Mevcut standart, sertifika ve laboratuvar belgeleri ticari karar öncesinde ürün, üretici, parti ve hedef pazar için incelenir.',
     aboutRoleTitle: 'CTSEG Ticari Hizmetleri',
-    aboutRoleText: 'CTSEG, REFLEX ürünlerinin uluslararası pazarlara ihracatında tedarik ve ticaret ortağı olarak hareket eder. İthalatçı firmalara ihracat dokümantasyonu, analiz belgeleri (COA) ve lojistik koordinasyonu sağlar.',
+    aboutRoleText: 'CTSEG, REFLEX ürün grubu için bağımsız tedarik ve ticaret ortağı olarak hareket eder. Doğrulanmış üreticiler ile uluslararası alıcılar arasında ihracat dokümantasyonu, parti analiz incelemesi (COA) ve lojistik koordinasyonu sağlar.',
     aboutMarketsTitle: 'Hedef Pazarlar',
     aboutMarketsList: ['Avrupa Birliği & İngiltere', 'Balkan Ülkeleri', 'Orta Doğu', 'Kuzey Afrika', 'Uluslararası İthalatçılar'],
 
@@ -269,7 +269,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         image: '/images/reflex/slider-ortax1.jpg'
       },
       {
-        title: 'Esenyurt Paketleme Hatları',
+        title: 'Paketleme ve Sevkiyat Hatları',
         tag: 'Tesis',
         image: '/images/reflex/reflex-slider2.jpg',
         imageMobile: '/images/reflex/reflex-slider2-m.jpg'
@@ -309,11 +309,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ctaProducts: 'View Products',
 
     aboutEyebrow: 'Production Capacity & Standards',
-    aboutTitle: 'High-Volume Manufacturing & Standards Compliance',
-    aboutText1: 'Manufactured in Istanbul, Türkiye, REFLEX utilizes high-tech automated production lines operating 24/7. Using quality raw materials and special TPE formulations, REFLEX produces medical examination and industrial protection gloves.',
+    aboutTitle: 'Manufacturing Standards & Sourcing Coordination',
+    aboutText1: 'The REFLEX disposable glove portfolio is coordinated with vetted manufacturing partners for medical, food, and industrial hygiene applications. Raw material specifications, polymer formulations, and production capacity are confirmed per inquiry and supplier.',
     aboutText2: 'Available standards, certificates and laboratory documents are reviewed against the selected product, producer, batch and destination market before any commercial decision.',
     aboutRoleTitle: 'CTSEG Commercial Services',
-    aboutRoleText: 'CTSEG acts as the international trade and sourcing partner for REFLEX products. We assist importers and distributors with export documentation, certificates of analysis (COA) and transport logistics.',
+    aboutRoleText: 'CTSEG acts as an independent trade and sourcing partner for the REFLEX product line. We coordinate export documentation, batch analysis review (COA), and freight logistics between vetted manufacturers and international buyers.',
     aboutMarketsTitle: 'Target Markets',
     aboutMarketsList: ['European Union & UK', 'Balkan Countries', 'Middle East', 'North Africa', 'Global Importers'],
 
@@ -448,7 +448,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         image: '/images/reflex/slider-ortax1.jpg'
       },
       {
-        title: 'Packaging Lines in Esenyurt Facility',
+        title: 'Packaging and Dispatch Lines',
         tag: 'Plant',
         image: '/images/reflex/reflex-slider2.jpg',
         imageMobile: '/images/reflex/reflex-slider2-m.jpg'
@@ -488,11 +488,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ctaProducts: 'Produkte Ansehen',
 
     aboutEyebrow: 'Produktionskapazität & Standards',
-    aboutTitle: 'Großserienfertigung & Normenkonformität',
-    aboutText1: 'Hergestellt in Istanbul, Türkei, verwendet REFLEX hochtechnologische automatisierte Produktionslinien im 24/7-Betrieb. Aus hochwertigen Rohstoffen und TPE-Rezepturen entstehen medizinische Untersuchungs- und Schutzhandschuhe.',
+    aboutTitle: 'Fertigungsstandards & Beschaffungskoordination',
+    aboutText1: 'Das REFLEX-Einweghandschuhportfolio wird mit geprüften Produktionspartnern für Medizin-, Lebensmittel- und Industrieanwendungen koordiniert. Rohstoffspezifikationen, Polymerformulierungen und Produktionskapazitäten werden je nach Anfrage und Hersteller bestätigt.',
     aboutText2: 'Verfügbare Normen, Zertifikate und Labordokumente werden vor einer kommerziellen Entscheidung für Produkt, Hersteller, Charge und Zielmarkt geprüft.',
     aboutRoleTitle: 'CTSEG Handelsdienstleistungen',
-    aboutRoleText: 'CTSEG agiert als internationaler Handels- und Beschaffungspartner für REFLEX-Produkte. Wir unterstützen Importeure bei Exportdokumenten, Analysenzertifikaten (COA) und Transportlogistik.',
+    aboutRoleText: 'CTSEG agiert als unabhängiger Handels- und Beschaffungspartner für die REFLEX-Produktlinie. Wir koordinieren Exportdokumente, Chargenanalysen (COA) und Transportlogistik zwischen geprüften Herstellern und internationalen Käufern.',
     aboutMarketsTitle: 'Zielmärkte',
     aboutMarketsList: ['Europäische Union & UK', 'Balkanstaaten', 'Naher Osten', 'Nordafrika', 'Globale Importeure'],
 
@@ -627,7 +627,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         image: '/images/reflex/slider-ortax1.jpg'
       },
       {
-        title: 'Verpackungslinien in Esenyurt',
+        title: 'Verpackungs- und Versandlinien',
         tag: 'Werk',
         image: '/images/reflex/reflex-slider2.jpg',
         imageMobile: '/images/reflex/reflex-slider2-m.jpg'
@@ -667,11 +667,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ctaProducts: 'Vedi i Prodotti',
 
     aboutEyebrow: 'Capacità Produttiva e Standard',
-    aboutTitle: 'Produzione ad Alto Volume e Conformità',
-    aboutText1: 'Prodotto a Istanbul, Turchia, REFLEX utilizza linee di produzione automatizzate ad alta tecnologia attive 24/7. Utilizzando materie prime di alta qualità e formulazioni speciali TPE, REFLEX produce guanti da esame medico e protezione industriale.',
+    aboutTitle: 'Standard di Produzione e Coordinamento Forniture',
+    aboutText1: 'Il portafoglio di guanti monouso REFLEX è coordinato con partner produttivi verificati per applicazioni mediche, alimentari e di igiene industriale. Specifiche delle materie prime, formulazioni polimeriche e capacità produttiva sono confermate per richiesta e fornitore.',
     aboutText2: 'Norme, certificati e documenti di laboratorio disponibili vengono verificati per prodotto, produttore, lotto e mercato di destinazione prima di ogni decisione commerciale.',
     aboutRoleTitle: 'Servizi Commerciali CTSEG',
-    aboutRoleText: 'CTSEG agisce come partner commerciale internazionale per i prodotti REFLEX. Assistiamo importatori e distributori con documenti di esportazione, certificati di analisi (COA) e logistica di trasporto.',
+    aboutRoleText: 'CTSEG agisce come partner commerciale e di sourcing indipendente per la linea di prodotti REFLEX. Coordiniamo la documentazione di esportazione, la revisione delle analisi di lotto (COA) e la logistica di spedizione tra produttori verificati e acquirenti internazionali.',
     aboutMarketsTitle: 'Mercati Target',
     aboutMarketsList: ['Unione Europea & UK', 'Paesi Balcanici', 'Medio Oriente', 'Nord Africa', 'Importatori Globali'],
 
@@ -806,7 +806,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         image: '/images/reflex/slider-ortax1.jpg'
       },
       {
-        title: 'Linee di Imballaggio a Esenyurt',
+        title: 'Linee di Imballaggio e Spedizione',
         tag: 'Stabilimento',
         image: '/images/reflex/reflex-slider2.jpg',
         imageMobile: '/images/reflex/reflex-slider2-m.jpg'
@@ -846,11 +846,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ctaProducts: 'مشاهده محصولات',
 
     aboutEyebrow: 'ظرفیت تولید و استانداردهای کیفی',
-    aboutTitle: 'تولید با حجم بالا و انطباق کامل با استانداردها',
-    aboutText1: 'محصولات REFLEX در استانبول ترکیه با خطوط اتوماتیک پیشرفته و به صورت ۲۴/۷ تولید می‌شوند. با استفاده از مواد اولیه باکیفیت و فرمولاسیون ویژه TPE، دستکش‌های معاینه پزشکی و ایمنی صنعتی به بازار عرضه می‌گردد.',
+    aboutTitle: 'استانداردهای تولید و هماهنگی تأمین',
+    aboutText1: 'سبد دستکش‌های یک‌بارمصرف REFLEX با تولیدکنندگان منتخب برای کاربردهای پزشکی، صنایع غذایی و بهداشت صنعتی هماهنگ می‌شود. مشخصات مواد اولیه، فرمولاسیون پلیمر و ظرفیت تولید بر اساس استعلام و تأمین‌کننده تأیید می‌گردد.',
     aboutText2: 'استانداردها، گواهی‌ها و اسناد آزمایشگاهی موجود پیش از هر تصمیم تجاری برای محصول، تولیدکننده، محموله و بازار مقصد بررسی می‌شوند.',
     aboutRoleTitle: 'خدمات بازرگانی CTSEG',
-    aboutRoleText: 'شرکت CTSEG به عنوان شریک تجاری و تأمین‌کننده بین‌المللی محصولات REFLEX عمل می‌کند. ما اسناد صادراتی، گواهی آنالیز (COA) و امور logistics ترابری را برای واردکنندگان هماهنگ می‌نماییم.',
+    aboutRoleText: 'شرکت CTSEG به عنوان شریک مستقل تجاری و تأمین برای خط محصولات REFLEX عمل می‌کند. ما هماهنگی اسناد صادراتی، بررسی آنالیز محموله (COA) و لجستیک حمل‌ونقل بین تولیدکنندگان و خریداران بین‌المللی را انجام می‌دهیم.',
     aboutMarketsTitle: 'بازارهای هدف',
     aboutMarketsList: ['اتحادیه اروپا و بریتانیا', 'کشورهای بالکان', 'خاورمیانه', 'شمال آفریقا', 'واردکنندگان بین‌المللی'],
 
@@ -1025,11 +1025,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ctaProducts: 'Смотреть продукцию',
 
     aboutEyebrow: 'Производственная мощность и стандарты',
-    aboutTitle: 'Крупносерийное производство и соответствие стандартам',
-    aboutText1: 'Произведенные в Стамбуле (Турция) перчатки REFLEX изготавливаются на автоматизированных высокотехнологичных линиях в режиме 24/7. REFLEX производит медицинские смотровые и гигиенические перчатки.',
+    aboutTitle: 'Стандарты производства и координация поставок',
+    aboutText1: 'Портфель одноразовых перчаток REFLEX координируется с проверенными производственными партнерами для медицинских, пищевых и промышленных сфер. Спецификации сырья, полимерные формулы и производственные мощности подтверждаются по запросу и поставщику.',
     aboutText2: 'Доступные стандарты, сертификаты и лабораторные документы проверяются для продукта, производителя, партии и рынка назначения до коммерческого решения.',
     aboutRoleTitle: 'Коммерческие услуги CTSEG',
-    aboutRoleText: 'CTSEG выступает в качестве международного торгового и закупочного партнера продукции REFLEX. Мы содействуем импортерам в подготовке экспортной документации, сертификатов анализа (COA) и логистическом сопровождении.',
+    aboutRoleText: 'CTSEG выступает независимым торгово-закупочным партнером для линейки REFLEX. Мы координируем экспортную документацию, проверку сертификатов анализа партий (COA) и логистику между проверенными производителями и международными покупателями.',
     aboutMarketsTitle: 'Целевые рынки',
     aboutMarketsList: ['Европейский Союз и Великобритания', 'Балканские страны', 'Ближний Восток', 'Северная Африка', 'Мировые импортеры'],
 
@@ -1204,11 +1204,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ctaProducts: 'Shikoni Produktet',
 
     aboutEyebrow: 'Kapaciteti i Prodhimit & Standardet',
-    aboutTitle: 'Prodhim në Vëllim të Madh dhe Pajtueshmëri me Standardet',
-    aboutText1: 'E prodhuar në Stamboll, Turqi, REFLEX përdor linja prodhimi të automatizuara të teknologjisë së lartë që punojnë 24/7. Duke përdorur lëndë të parë cilësore dhe formulime speciale TPE, REFLEX prodhon doreza mjekësore dhe mbrojtëse industriale.',
+    aboutTitle: 'Standardet e Prodhimit & Koordinimi i Furnizimit',
+    aboutText1: 'Portofoli i dorezave me një përdorim REFLEX koordinohet me partnerë të verifikuar prodhimi për aplikime mjekësore, ushqimore dhe higjienë industriale. Specifikimet e lëndës së parë, formulimet e polimerit dhe kapaciteti i prodhimit konfirmohen sipas kërkesës dhe prodhuesit.',
     aboutText2: 'Standardet, certifikatat dhe dokumentet laboratorike të disponueshme kontrollohen për produktin, prodhuesin, lotin dhe tregun e synuar para vendimit tregtar.',
     aboutRoleTitle: 'Shërbimet Komerciale CTSEG',
-    aboutRoleText: 'CTSEG vepron si partner tregtar dhe furnizues ndërkombëtar për produktet REFLEX. Ne ndihmojmë importuesit me dokumentacionin e eksportit, certifikatat e analizës (COA) dhe logjistikën e transportit.',
+    aboutRoleText: 'CTSEG vepron si partner i pavarur tregtar dhe burimor për linjën e produkteve REFLEX. Ne bashkërendojmë dokumentacionin e eksportit, rishikimin e analizave të serisë (COA) dhe logjistikën e transportit midis prodhuesve të verifikuar dhe blerësve ndërkombëtarë.',
     aboutMarketsTitle: 'Tregjet Synuar',
     aboutMarketsList: ['Bashkimi Evropian & Mbretëria e Bashkuar', 'Vendet e Ballkanit', 'Lindja e Mesme', 'Afrika e Veriut', 'Importuesit Globalë'],
 
@@ -1343,7 +1343,7 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
         image: '/images/reflex/slider-ortax1.jpg'
       },
       {
-        title: 'Linjat e Paketimit në Esenyurt',
+        title: 'Linjat e Paketimit dhe Dërgimit',
         tag: 'Fabrika',
         image: '/images/reflex/reflex-slider2.jpg',
         imageMobile: '/images/reflex/reflex-slider2-m.jpg'
@@ -1383,11 +1383,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ctaProducts: 'Видете ги Производите',
 
     aboutEyebrow: 'Производен Капацитет и Стандарди',
-    aboutTitle: 'Производство во Голем Обем и Усогласеност со Стандардите',
-    aboutText1: 'Произведени во Истанбул, Турција, REFLEX користи високотехнолошки автоматизирани производни линии кои работат 24/7. Користејќи квалитетни суровини и специјални TPE формулации, REFLEX произведува медицински и индустриски заштитни ракавици.',
-    aboutText2: 'Производствените капацитети ги исполнуваат стандардите на акредитирани лаборатории со сертификати CE 2841, EN ISO 374-1 Type C, EN 420+A1, EN ISO 374-5 (Заштита од вируси) и ISO 9001.',
+    aboutTitle: 'Производствени Стандарди и Координација на Набавка',
+    aboutText1: 'Портфолиото на ракавици за еднократна употреба REFLEX се координира со проверени производствени партнери за медицинска, прехранбена и индустриска примена. Спецификациите на суровините, полимерните формулации и производниот капацитет се потврдуваат според барање и производител.',
+    aboutText2: 'Достапните стандарди, сертификати и лабораториски документи се проверуваат за производот, производителот, партијата и целниот пазар пред секоја комерцијална одлука.',
     aboutRoleTitle: 'Трговски Услуги на CTSEG',
-    aboutRoleText: 'CTSEG делува како меѓународен трговски и набавен партнер за производите на REFLEX. Им помагаме на увозниците со извозна документација, сертификати за анализа (COA) и транспортна логистика.',
+    aboutRoleText: 'CTSEG делува како независен трговски и набавен партнер за производната линија REFLEX. Ние координираме извозна документација, преглед на анализи на серии (COA) и логистика на транспорт помеѓу проверени производители и меѓународни купувачи.',
     aboutMarketsTitle: 'Целни Пазари',
     aboutMarketsList: ['Европска Унија & Обединето Кралство', 'Балкански Земји', 'Блиски Исток', 'Северна Африка', 'Глобални Увозници'],
 
@@ -1562,11 +1562,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ctaProducts: 'Pogledajte Proizvode',
 
     aboutEyebrow: 'Proizvodni Kapacitet i Standardi',
-    aboutTitle: 'Proizvodnja u Velikom Obimu i Usaglašenost sa Standardima',
-    aboutText1: 'Proizvedene u Istanbulu, Turska, REFLEX koristi visokotehnološke automatizovane proizvodne linije koje rade 24/7. Koristeći kvalitetne sirovine i specijalne TPE formulacije, REFLEX proizvodi medicinske pregledne i industrijske zaštitne rukavice.',
+    aboutTitle: 'Proizvodni Standardi i Koordinacija Nabavke',
+    aboutText1: 'Portfolio jednokratnih rukavica REFLEX koordinira se sa proverenim proizvodnim partnerima za medicinsku, prehrambenu i industrijsku primenu. Specifikacije sirovina, polimerne formulacije i proizvodni kapacitet potvrđuju se prema upitu i proizvođaču.',
     aboutText2: 'Dostupni standardi, sertifikati i laboratorijska dokumentacija proveravaju se za proizvod, proizvođača, partiju i ciljano tržište pre komercijalne odluke.',
     aboutRoleTitle: 'Komercijalne Usluge CTSEG-a',
-    aboutRoleText: 'CTSEG deluje kao međunarodni trgovinski i nabavni partner za proizvode REFLEX. Pomažemo uvoznicima sa izvoznom dokumentacijom, sertifikatima analize (COA) i transportnom logistikom.',
+    aboutRoleText: 'CTSEG deluje kao nezavisni trgovinski i nabavni partner za liniju proizvoda REFLEX. Koordiniramo izvoznu dokumentaciju, proveru analiza serije (COA) i transportnu logistiku između proverenih proizvođača i međunarodnih kupaca.',
     aboutMarketsTitle: 'Ciljna Tržišta',
     aboutMarketsList: ['Evropska Unija & Velika Britanija', 'Balkanske Zemlje', 'Bliski Istok', 'Severna Afrika', 'Globalni Uvoznici'],
 
@@ -1740,11 +1740,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ctaProducts: '查阅完整产品系列',
 
     aboutEyebrow: '现代化生产产能与国际标准',
-    aboutTitle: '自动化规模化生产与严苛合规标准',
-    aboutText1: 'REFLEX 系列产品在伊斯坦布尔现代化生产基地制造，配备 24/7 全天候运转的高精度自动化流水线。采用高纯度原材料与专利级 TPE 配方，生产符合医用检查与工业级防护标准的专业手套。',
+    aboutTitle: '制造合规标准与战略采购协同',
+    aboutText1: 'REFLEX 一次性防护与检查手套矩阵由 CTSEG 协同经严格核验的专业生产伙伴组织供应，面向医疗护理、食品加工及工业卫生场景。原材料物性指标、聚合物配方与实际产能依据单批次采购需求及指定工厂书面核定。',
     aboutText2: '在做出商业决策前，我们将根据指定产品、生产工厂、具体批次与目标市场准入要求，全面核对现行有效认证、检测报告与实验室检验单证。',
     aboutRoleTitle: 'CTSEG 商业协同定位',
-    aboutRoleText: 'CTSEG 作为 REFLEX 手套面向国际市场的专业战略采购与贸易协调伙伴，为海外进口商提供出口单证整理、出厂检验分析报告 (COA) 审核与全流程物流协同支持。',
+    aboutRoleText: 'CTSEG 作为 REFLEX 系列产品的独立战略采购与跨境贸易协同服务商，在经核验的制造工厂与全球采购商之间，统筹负责出口报关单证、逐批次质检化验单 (COA) 审核与端到端物流交付协调。',
     aboutMarketsTitle: '重点交付市场',
     aboutMarketsList: ['欧盟与英国', '巴尔干地区', '中东与海湾地区', '北非与地中海沿岸', '全球大宗进口商'],
 
@@ -1913,11 +1913,11 @@ export const reflexData: Record<ReflexLocale, ReflexContent> = {
     ctaProducts: 'Xem sản phẩm',
 
     aboutEyebrow: 'Năng lực sản xuất và tiêu chuẩn quốc tế',
-    aboutTitle: 'Sản xuất công suất cao và tuân thủ tiêu chuẩn',
-    aboutText1: 'Được sản xuất tại các nhà máy hiện đại ở Istanbul, các sản phẩm REFLEX được chế tạo trên dây chuyền tự động hóa công nghệ cao hoạt động 24/7. Sử dụng nguyên liệu chất lượng cao và công thức TPE chuyên dụng để sản xuất găng tay khám y tế và bảo hộ công nghiệp.',
+    aboutTitle: 'Tiêu chuẩn sản xuất & Điều phối cung ứng',
+    aboutText1: 'Danh mục găng tay dùng một lần REFLEX được điều phối cùng các đối tác sản xuất đã qua thẩm định cho các ứng dụng y tế, thực phẩm và vệ sinh công nghiệp. Quy cách nguyên liệu, công thức polyme và công suất sản xuất được xác nhận theo yêu cầu và nhà cung cấp.',
     aboutText2: 'Các tiêu chuẩn, chứng chỉ và tài liệu thử nghiệm hiện có được xem xét kỹ lưỡng theo sản phẩm, nhà sản xuất, lô hàng và thị trường mục tiêu trước khi ra quyết định thương mại.',
     aboutRoleTitle: 'Dịch vụ thương mại CTSEG',
-    aboutRoleText: 'CTSEG đóng vai trò là đối tác thương mại và cung ứng trong việc xuất khẩu các sản phẩm REFLEX ra thị trường quốc tế. Cung cấp hồ sơ xuất khẩu, giấy chứng nhận phân tích (COA) và điều phối logistics cho các nhà nhập khẩu.',
+    aboutRoleText: 'CTSEG đóng vai trò là đối tác thương mại và tìm nguồn cung ứng độc lập cho dòng sản phẩm REFLEX. Chúng tôi điều phối chứng từ xuất khẩu, rà soát chứng nhận phân tích lô hàng (COA) và logistics vận tải giữa các nhà sản xuất đã kiểm định và người mua quốc tế.',
     aboutMarketsTitle: 'Thị trường mục tiêu',
     aboutMarketsList: ['Liên minh châu Âu & Vương quốc Anh', 'Các nước Balkan', 'Trung Đông', 'Bắc Phi', 'Các nhà nhập khẩu quốc tế'],
 
