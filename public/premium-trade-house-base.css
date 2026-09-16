@@ -199,7 +199,7 @@ html[dir="rtl"] .corridor-list strong{text-align:right!important}
 .trending-sectors {
   background-color: var(--premium-charcoal, #1a1a1a);
   color: var(--premium-wash, #f4f4f1);
-  padding: clamp(60px, 8vw, 120px) 0;
+  padding: clamp(30px, 5vw, 60px) 0;
 }
 .trending-sectors .section-head {
   display: flex;
@@ -226,7 +226,7 @@ html[dir="rtl"] .corridor-list strong{text-align:right!important}
   flex-wrap: wrap;
   justify-content: center;
   gap: clamp(12px, 2vw, 20px);
-  padding-top: clamp(32px, 4vw, 64px);
+  padding-top: clamp(24px, 3vw, 40px);
 }
 .trending-tag {
   flex: 1 1 auto;

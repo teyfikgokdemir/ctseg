@@ -39,7 +39,7 @@
       style.id = 'premium-marquee-styles';
       style.textContent = `
         .premium-trade-marquee{overflow:hidden;background:#c4f000;color:#0a0a0a;border-top:1px solid rgba(10,10,10,.16);border-bottom:1px solid rgba(10,10,10,.16);padding:18px 0;position:relative;z-index:2}
-        .premium-trade-marquee__track{display:flex;width:max-content;will-change:transform;animation:ctseg-premium-marquee 24s linear infinite}
+        .premium-trade-marquee__track{display:flex;width:max-content;will-change:transform;animation:ctseg-premium-marquee 45s linear infinite}
         .premium-trade-marquee__text{flex:none;padding-right:.55em;font-size:clamp(34px,5.2vw,86px);line-height:.92;font-weight:700;letter-spacing:-.055em;white-space:nowrap}
         html[dir="rtl"] .premium-trade-marquee__track{direction:rtl;animation-direction:reverse}
         @keyframes ctseg-premium-marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
