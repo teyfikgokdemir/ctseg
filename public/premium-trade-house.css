@@ -41,3 +41,7 @@
   .hero-visual figcaption span+span{border-left:1px solid rgba(255,255,255,.12)!important}
   .hero-visual figcaption small{margin:0!important;color:#c4f000!important;font-size:10px!important;letter-spacing:.06em!important}
 }
+
+/* Canonical CTSEG mark: override every legacy image treatment after the full premium cascade. */
+html body .site-header a.brand>img,
+html body .site-footer a.brand>img{filter:none!important;-webkit-filter:none!important;opacity:1!important}
