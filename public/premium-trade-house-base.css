@@ -108,7 +108,8 @@ html[dir="rtl"] .corridor-list strong{text-align:right!important}
 
 /* Hide the vestigial cream-colored sections on the home page (scenario-teaser and operational-trust) */
 main .scenario-teaser, 
-main .operational-trust {
+main .operational-trust,
+main .process-detail-link {
   display: none !important;
 }
 
