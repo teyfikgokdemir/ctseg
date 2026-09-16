@@ -69,8 +69,6 @@ const statementMap: Record<string,string> = {
 };
 const footerStatement = statementMap[lang] || statementMap.en;
 ---
-<link rel="stylesheet" href="/premium-trade-house.css" />
-<link rel="stylesheet" href="/premium-responsive-fixes.css" />
 <footer class="site-footer">
   <div class="footer-markets-wrap"><div class="container footer-markets"><div class="footer-markets-label"><span class="footer-markets-kicker">CTSEG</span><strong>{marketLabel}</strong></div><nav class="footer-market-links" aria-label={marketLabel}>{marketLocales.map((item) => (<a href={item.href} class:list={['footer-market-link', item.code === lang && 'is-active']} aria-current={item.code === lang ? 'page' : undefined} data-footer-locale={item.code}><span aria-hidden="true" class="footer-market-flag">{item.flag}</span><span>{item.label}</span></a>))}</nav></div></div>
   <div class="container footer-statement" aria-hidden="true">
