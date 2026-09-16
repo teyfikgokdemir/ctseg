@@ -202,17 +202,29 @@ html[dir="rtl"] .corridor-list strong{text-align:right!important}
   padding: clamp(60px, 8vw, 120px) 0;
 }
 .trending-sectors .section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 32px;
 }
 .trending-sectors .section-head h2 {
   color: #fff;
+  max-width: 100%;
+  margin: 0;
 }
 .trending-sectors .section-head p {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--premium-acid, #d4ff00);
+  max-width: 760px;
+  margin: 16px auto 0;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  font-weight: 500;
 }
 .trending-tags-grid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: clamp(12px, 2vw, 20px);
   padding-top: clamp(32px, 4vw, 64px);
 }
