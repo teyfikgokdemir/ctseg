@@ -194,3 +194,54 @@ html[dir="rtl"] .corridor-list strong{text-align:right!important}
   .product-commercial-facts dl>div{grid-template-columns:1fr!important;gap:6px!important;padding:14px 0!important}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.premium-cursor{display:none!important}}
+
+/* Trending Sectors (Home Page) */
+.trending-sectors {
+  background-color: var(--premium-charcoal, #1a1a1a);
+  color: var(--premium-wash, #f4f4f1);
+  padding: clamp(60px, 8vw, 120px) 0;
+}
+.trending-sectors .section-head {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+.trending-sectors .section-head h2 {
+  color: #fff;
+}
+.trending-sectors .section-head p {
+  color: rgba(255, 255, 255, 0.8);
+}
+.trending-tags-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(12px, 2vw, 20px);
+  padding-top: clamp(32px, 4vw, 64px);
+}
+.trending-tag {
+  flex: 1 1 auto;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 48px;
+}
+.trending-tag span {
+  display: block;
+  padding: 12px 24px;
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.1vw, 16px);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
+}
+.trending-tag:hover {
+  background-color: var(--premium-acid, #d4ff00);
+  border-color: var(--premium-acid, #d4ff00);
+}
+.trending-tag:hover span {
+  color: var(--premium-ink, #000);
+}
+

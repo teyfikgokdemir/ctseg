@@ -210,6 +210,17 @@ const sectorEntry = {
   zh:{title:'特色手工地毯与大宗纺织寻源专区',lead:'深入探索三大特色品类：产品材质工艺、工厂实地产能、样品打样、质量标准、环保包装及跨境多式联运。'},
   vi:{title:'Nguồn cung thảm và dệt may chuyên biệt',lead:'Khám phá ba lĩnh vực chuyên sâu qua các tiêu chí sản phẩm, nhà sản xuất, mẫu thử, chất lượng, đóng gói và logistics.'}
 }[lang];
+
+const trendingSectorsData = {
+  tr: { title: 'Küresel Tedarik Kapasitesi & Trendler', lead: 'Aktif olarak yönettiğimiz ticaret koridorlarında öne çıkan endüstriyel kapasiteler ve sektörel talepler.', tags: ['Endüstriyel Üretim & Hammadde ↗', 'Tüketici Ürünleri (FMCG) ↗', 'Tekstil & Teknik Kumaş ↗', 'Otomotiv Yan Sanayi ↗', 'İnşaat & Mimari Malzemeler ↗', 'Ambalaj & Polimer ↗', 'Tarım & Gıda Teknolojileri ↗', 'Medikal & Sağlık Ekipmanları ↗'] },
+  en: { title: 'Global Sourcing Capacity', lead: 'Prominent industrial capacities and sector demands in the trade corridors we actively manage.', tags: ['Industrial Manufacturing & Raw Materials ↗', 'Fast-Moving Consumer Goods (FMCG) ↗', 'Textiles & Technical Fabrics ↗', 'Automotive Sub-Industry ↗', 'Construction & Architectural Materials ↗', 'Packaging & Polymers ↗', 'Agricultural Technologies ↗', 'Medical & Healthcare Equipment ↗'] },
+  de: { title: 'Globale Beschaffungskapazität', lead: 'Hervorragende industrielle Kapazitäten und Branchennachfragen in den von uns verwalteten Handelskorridoren.', tags: ['Industrielle Fertigung & Rohstoffe ↗', 'Schnelldrehende Konsumgüter (FMCG) ↗', 'Textilien & Technische Gewebe ↗', 'Automobilzulieferindustrie ↗', 'Bau- & Architekturmaterialien ↗', 'Verpackungen & Polymere ↗', 'Agrartechnologien ↗', 'Medizin- & Gesundheitsausrüstung ↗'] },
+  it: { title: 'Capacità di Sourcing Globale', lead: 'Principali capacità industriali e richieste settoriali nei corridoi commerciali che gestiamo.', tags: ['Produzione Industriale e Materie Prime ↗', 'Beni di Largo Consumo (FMCG) ↗', 'Tessili e Tessuti Tecnici ↗', 'Subfornitura Automobilistica ↗', 'Materiali da Costruzione e Architettonici ↗', 'Imballaggi e Polimeri ↗', 'Tecnologie Agricole ↗', 'Attrezzature Mediche e Sanitarie ↗'] },
+  ru: { title: 'Глобальные возможности сорсинга', lead: 'Ключевые промышленные мощности и отраслевой спрос в торговых коридорах, которыми мы управляем.', tags: ['Промышленное производство и сырье ↗', 'Товары повседневного спроса (FMCG) ↗', 'Текстиль и технические ткани ↗', 'Автомобильные компоненты ↗', 'Строительные и архитектурные материалы ↗', 'Упаковка и полимеры ↗', 'Агротехнологии ↗', 'Медицинское оборудование ↗'] },
+  fa: { title: 'ظرفیت تأمین جهانی', lead: 'ظرفیت‌های صنعتی برجسته و تقاضای بخش‌های مختلف در کریدورهای تجاری تحت مدیریت ما.', tags: ['تولید صنعتی و مواد اولیه ↗', 'کالاهای تندمصرف (FMCG) ↗', 'منسوجات و پارچه‌های فنی ↗', 'قطعات و لوازم یدکی خودرو ↗', 'مصالح ساختمانی و معماری ↗', 'بسته‌بندی و پلیمرها ↗', 'فناوری‌های کشاورزی ↗', 'تجهیزات پزشکی و مراقبت‌های بهداشتی ↗'] },
+  zh: { title: '全球采购能力与重点行业', lead: '我们在核心贸易走廊中积极管理的重点工业产能与行业需求。', tags: ['工业制造与原材料 ↗', '快速消费品 (FMCG) ↗', '纺织品与工业面料 ↗', '汽车零部件 ↗', '建筑与装饰材料 ↗', '包装与聚合物 ↗', '农业技术与设备 ↗', '医疗与健康设备 ↗'] },
+  vi: { title: 'Năng lực thu mua toàn cầu', lead: 'Các năng lực công nghiệp nổi bật và nhu cầu ngành trong các hành lang thương mại mà chúng tôi quản lý.', tags: ['Sản xuất Công nghiệp & Nguyên liệu ↗', 'Hàng tiêu dùng nhanh (FMCG) ↗', 'Dệt may & Vải kỹ thuật ↗', 'Công nghiệp phụ trợ Ô tô ↗', 'Vật liệu Xây dựng & Kiến trúc ↗', 'Bao bì & Polymer ↗', 'Công nghệ Nông nghiệp ↗', 'Thiết bị Y tế & Chăm sóc sức khỏe ↗'] }
+}[lang];
 const service = id && key === 'services' ? services[id as keyof typeof services] : null;
 const detailedService = service && id && (lang === 'tr' || lang === 'en') && id in serviceDetails[lang]
   ? serviceDetails[lang][id as keyof typeof serviceDetails[typeof lang]]
@@ -756,18 +767,13 @@ const verifiedLater = {
         <article id="for-producers"><span>02</span><h3>{platform.producerTitle}</h3><p>{platform.producerText}</p><a class="text-link" href={contactWithIntent('supplier_market_entry')}>{platform.producerCta} ↗</a></article>
       </div>
     </div></section>
-    <section class="section platform-sectors" id="sectors" data-platform-sectors><div class="container">
-      <div class="section-head"><h2>{platform.sectorsTitle}</h2><p>{platform.sectorsLead}</p></div>
-      <div class="platform-sector-grid">
-        {platform.sectors.map((sector,index) => {
-          const visual=homepageSectorVisuals[index];
-          return <article data-sector-visual={visual.key}>
-            <ResponsiveImage src={visual.source} widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:620px) calc(100vw - 26px), (max-width:860px) 46vw, 25vw" width={visual.width} height={visual.height} alt={visual.altText} focalPosition={visual.focalPosition} visualKey={visual.key} loading="lazy" decoding="async" />
-            <div><span>{indexLabel(index)}</span><h3>{sector.title}</h3><p>{sector.text}</p></div>
-          </article>;
-        })}
+    <section class="section trending-sectors" id="sectors"><div class="container">
+      <div class="section-head"><h2>{trendingSectorsData.title}</h2><p>{trendingSectorsData.lead}</p></div>
+      <div class="trending-tags-grid">
+        {trendingSectorsData.tags.map(tag => (
+          <div class="trending-tag"><span>{tag}</span></div>
+        ))}
       </div>
-      <div class="specialist-routes"><a href={pathForSector(lang,'iranian-carpets')}>{tradeCopy[lang]['iranian-carpets'].scopeTitle} ↗</a><a href={pathForSector(lang,'silk-carpets')}>{tradeCopy[lang]['silk-carpets'].scopeTitle} ↗</a><a href={pathForSector(lang,'wholesale-textiles')}>{tradeCopy[lang]['wholesale-textiles'].scopeTitle} ↗</a></div>
     </div></section>
     <section class="section trade-corridors"><div class="container">
       <div class="section-head"><h2>{platform.corridorsTitle}</h2><p>{platform.corridorsLead}</p></div>
@@ -871,6 +877,19 @@ const verifiedLater = {
 {key === 'products' && !id && (
   <>
     <PageHero lang={lang} eyebrow={t.products} title={copy.productsTitle} lead={copy.productsLead} />
+    <section class="section platform-sectors" id="sectors" data-platform-sectors><div class="container">
+      <div class="section-head"><h2>{platform.sectorsTitle}</h2><p>{platform.sectorsLead}</p></div>
+      <div class="platform-sector-grid">
+        {platform.sectors.map((sector,index) => {
+          const visual=homepageSectorVisuals[index];
+          return <article data-sector-visual={visual.key}>
+            <ResponsiveImage src={visual.source} widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:620px) calc(100vw - 26px), (max-width:860px) 46vw, 25vw" width={visual.width} height={visual.height} alt={visual.altText} focalPosition={visual.focalPosition} visualKey={visual.key} loading="lazy" decoding="async" />
+            <div><span>{indexLabel(index)}</span><h3>{sector.title}</h3><p>{sector.text}</p></div>
+          </article>;
+        })}
+      </div>
+      <div class="specialist-routes"><a href={pathForSector(lang,'iranian-carpets')}>{tradeCopy[lang]['iranian-carpets'].scopeTitle} ↗</a><a href={pathForSector(lang,'silk-carpets')}>{tradeCopy[lang]['silk-carpets'].scopeTitle} ↗</a><a href={pathForSector(lang,'wholesale-textiles')}>{tradeCopy[lang]['wholesale-textiles'].scopeTitle} ↗</a></div>
+    </div></section>
     <section class="section catalogue-section"><div class="container">
       {(lang === 'tr' || lang === 'en') && <div class="catalog-download">
         <div><p class="eyebrow">PDF · 18 {lang === 'tr' ? 'ürün' : 'products'}</p><h2>{lang === 'tr' ? 'CTSEG Ticari Ürünler Kataloğu' : 'CTSEG Trade Products Catalogue'}</h2></div>
