@@ -8,6 +8,53 @@ const { lang } = Astro.props as { lang:ContactLocale };
 const copy = contactCopy[lang];
 const qualification = contactQualification[lang];
 const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal','privacy');
+
+const dynamicPlaceholders = {
+  tr: {
+    buyer_request: 'Aradığınız ürün spesifikasyonu, tahmini hacim (MT / Konteyner), teslimat Incoterm (FOB/CIF) ve hedef varış limanı detayları...',
+    supplier_market_entry: 'Ürettiğiniz ürünler, aylık/yıllık fiili üretim kapasiteniz, sahip olduğunuz kalite sertifikaları ve açılmak istediğiniz hedef pazarlar...',
+    default: 'Ticari talebinizin detayları, ürün spesifikasyonları ve teslimat gereksinimleri...'
+  },
+  en: {
+    buyer_request: 'Required product specifications, estimated volume (MT / containers), preferred Incoterm (FOB/CIF), and target destination port...',
+    supplier_market_entry: 'Manufactured product lines, monthly/annual production capacity, international quality certifications, and target export regions...',
+    default: 'Details of your commercial request, product specifications, and delivery requirements...'
+  },
+  de: {
+    buyer_request: 'Produktspezifikationen, geschätztes Volumen (Tonnen / Container), bevorzugte Incoterm (FOB/CIF) und Bestimmungshafen...',
+    supplier_market_entry: 'Hergestellte Produktlinien, monatliche/jährliche Produktionskapazität, Zertifizierungen und angestrebte Exportmärkte...',
+    default: 'Details zu Ihrer kommerziellen Anfrage, Produktspezifikationen und Lieferanforderungen...'
+  },
+  it: {
+    buyer_request: 'Specifiche del prodotto richiesto, volumi stimati (tonnellate / container), Incoterm desiderato (FOB/CIF) e porto di destinazione...',
+    supplier_market_entry: 'Linee di prodotto fabbricate, capacità produttiva mensile/annuale, certificazioni di qualità e mercati esteri target...',
+    default: 'Dettagli della richiesta commerciale, specifiche di prodotto e requisiti di consegna...'
+  },
+  ru: {
+    buyer_request: 'Требуемая спецификация товара, ориентировочный объем (тонны / контейнеры), предпочтительный Incoterm (FOB/CIF) и порт назначения...',
+    supplier_market_entry: 'Производимая номенклатура, фактическая мощность (в месяц/год), сертификаты качества и целевые рынки сбыта...',
+    default: 'Детали коммерческого запроса, технические параметры и условия поставки...'
+  },
+  fa: {
+    buyer_request: 'مشخصات فنی کالای درخواستی، تناژ یا حجم تقریبی (کانتینر/تن)، اینکوترمز ترجیحی (FOB/CIF) و بندر مقصد...',
+    supplier_market_entry: 'خطوط تولید کارخانه، ظرفیت تولید ماهانه/سالانه، گواهینامه‌های کیفی بین‌المللی و بازارهای صادراتی هدف...',
+    default: 'شرح درخواست تجاری، مشخصات فنی کالا و شرایط تحویل...'
+  },
+  zh: {
+    buyer_request: '所需产品的详细理化指标与规格、预估采购吨位/集装箱量、贸易术语(FOB/CIF)及目的港...',
+    supplier_market_entry: '源头工厂主营产品线、月度/年度实际产出量、已取得的国际质量认证与意向出口目标市场...',
+    default: '商业询盘详情、技术规格指标与交货需求...'
+  },
+  vi: {
+    buyer_request: 'Thông số kỹ thuật sản phẩm yêu cầu, khối lượng ước tính (tấn / container), Incoterm mong muốn (FOB/CIF) và cảng đích...',
+    supplier_market_entry: 'Danh mục sản phẩm sản xuất, công suất thực tế hàng tháng/năm, các chứng nhận chất lượng và thị trường xuất khẩu mục tiêu...',
+    default: 'Chi tiết yêu cầu thương mại, thông số kỹ thuật và điều kiện giao hàng...'
+  }
+}[lang] || {
+  buyer_request: 'Required product specifications, estimated volume, preferred Incoterm, and destination...',
+  supplier_market_entry: 'Manufactured products, verified production capacity, quality certifications, and target markets...',
+  default: 'Details of your commercial request...'
+};
 ---
 <section class="commercial-form-panel" id="commercial-form" aria-labelledby="commercial-form-title">
   <div class="commercial-form-intro">
@@ -41,6 +88,38 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
     <input type="hidden" name="utmTerm" value="" data-attribution="utm_term" />
     <input type="hidden" name="clickId" value="" data-attribution="click_id" />
     <div class="form-honeypot" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+    <div class="commercial-intent-cards" role="radiogroup" aria-label={copy.intentLabel}>
+      <button type="button" class="intent-card" data-intent-toggle="buyer_request" aria-pressed="false">
+        <span class="intent-card-icon">🛒</span>
+        <div class="intent-card-content">
+          <span class="intent-card-kicker">{lang === 'tr' ? 'ALICI / TEDARİK MASASI' : lang === 'de' ? 'EINKAUF / BESCHAFFUNG' : lang === 'it' ? 'ACQUIRENTE / SOURCING' : lang === 'ru' ? 'ЗАКУПКИ / СОРСИНГ' : lang === 'fa' ? 'خریدار / میز تأمین' : lang === 'zh' ? '跨国买家 / 战略寻源' : lang === 'vi' ? 'BÊN MUA / TÌM NGUỒN CUNG' : 'BUYER / SOURCING DESK'}</span>
+          <strong>{copy.buyerIntent}</strong>
+          <p>{lang === 'tr' ? 'Ürün spesifikasyonu, fabrika denetimi ve rekabetçi B2B teklif talebi' :
+              lang === 'en' ? 'Product specification, factory verification & commercial quotation' :
+              lang === 'de' ? 'Produktspezifikation, Werksprüfung & kaufmännische Angebote' :
+              lang === 'it' ? 'Specifiche di prodotto, audit produttore e offerta commerciale' :
+              lang === 'ru' ? 'Спецификация продукции, аудит фабрики и коммерческий расчет' :
+              lang === 'fa' ? 'مشخصات فنی کالا، بازرسی کارخانجات و استعلام قیمت بین‌المللی' :
+              lang === 'zh' ? '大宗商品技术规格书、源头工厂审核与多方比价寻源' :
+              'Thông số kỹ thuật, thẩm định nhà máy & báo giá thương mại'}</p>
+        </div>
+      </button>
+      <button type="button" class="intent-card" data-intent-toggle="supplier_market_entry" aria-pressed="false">
+        <span class="intent-card-icon">🏭</span>
+        <div class="intent-card-content">
+          <span class="intent-card-kicker">{lang === 'tr' ? 'ÜRETİCİ / İHRACAT AÇILIMI' : lang === 'de' ? 'HERSTELLER / MARKTZUGANG' : lang === 'it' ? 'PRODUTTORE / EXPORT' : lang === 'ru' ? 'ПРОИЗВОДИТЕЛЬ / ЭКСПОРТ' : lang === 'fa' ? 'تولیدکننده / ورود به بازار' : lang === 'zh' ? '源头工厂 / 出海对接' : lang === 'vi' ? 'NHÀ SẢN XUẤT / XUẤT KHẨU' : 'PRODUCER / MARKET ENTRY'}</span>
+          <strong>{copy.producerIntent}</strong>
+          <p>{lang === 'tr' ? 'Üretim kapasitesi doğrulaması, hedef pazar eşleştirmesi ve ihracat açılımı' :
+              lang === 'en' ? 'Production capacity verification, buyer matching & global export expansion' :
+              lang === 'de' ? 'Kapazitätsprüfung, Einkäufer-Matching & internationale Marktexpansion' :
+              lang === 'it' ? 'Verifica capacità produttiva, matching buyer ed espansione estera' :
+              lang === 'ru' ? 'Верификация мощностей, подбор покупателей и экспортный выход' :
+              lang === 'fa' ? 'اعتبارسنجی ظرفیت تولیدی، اتصال به خریداران جهانی و توسعه صادرات' :
+              lang === 'zh' ? '真实产能认证核验、跨国采购商对接与目标市场准入落地' :
+              'Xác minh năng lực sản xuất, kết nối người mua & mở rộng xuất khẩu'}</p>
+        </div>
+      </button>
+    </div>
     <div class="commercial-form-grid commercial-form-grid--core">
       <label class="commercial-field"><span>{copy.intentLabel}</span><select name="intent" required data-commercial-intent><option value=""></option><option value="buyer_request">{copy.buyerIntent}</option><option value="supplier_market_entry">{copy.producerIntent}</option></select></label>
       <label class="commercial-field"><span>{qualification.tradeDirection}</span><select name="tradeDirection" required data-trade-direction><option value=""></option>{qualification.tradeDirections.map((option)=><option value={option.value}>{option.label}</option>)}</select></label>
@@ -48,7 +127,7 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
       <label class="commercial-field"><span>{copy.name}</span><input type="text" name="name" autocomplete="name" maxlength="120" required /></label>
       <label class="commercial-field"><span>{copy.company}</span><input type="text" name="company" autocomplete="organization" maxlength="160" required /></label>
       <label class="commercial-field commercial-field--wide"><span>{copy.contact}</span><input type="text" name="emailOrPhone" autocomplete="email" maxlength="254" required data-contact-field /></label>
-      <label class="commercial-field commercial-field--wide"><span>{copy.message}</span><textarea name="message" maxlength="2000" rows="4" required></textarea></label>
+      <label class="commercial-field commercial-field--wide"><span>{copy.message}</span><textarea name="message" maxlength="2000" rows="4" placeholder={dynamicPlaceholders.default} required></textarea></label>
     </div>
     <details class="commercial-details">
       <summary>{copy.details}</summary>
@@ -92,6 +171,17 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
   .commercial-form-disclosure>summary span{display:grid;place-items:center;width:36px;height:36px;border-radius:999px;background:#c4f000;color:#0a0a0a!important;font-size:20px;transition:transform .25s ease}
   .commercial-form-disclosure[open]>summary span{transform:rotate(45deg)}
   .commercial-form{padding:0 26px 28px}
+  .commercial-intent-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:20px}
+  .intent-card{position:relative;display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border:2px solid #dedcd5;border-radius:14px;background:#fff;cursor:pointer;text-align:left;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;font:inherit}
+  .intent-card:hover{border-color:#b5b0a3;background:#fafaf7}
+  .intent-card.is-active{border-color:#111;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.08)}
+  .intent-card.is-active::after{content:"✓";position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;background:#c4f000;color:#111;font-size:12px;font-weight:900;display:grid;place-items:center}
+  .intent-card-icon{font-size:22px;line-height:1;flex-shrink:0;margin-top:2px}
+  .intent-card-content{display:flex;flex-direction:column;gap:3px;min-width:0}
+  .intent-card-kicker{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#706e68}
+  .intent-card strong{font-size:14.5px;font-weight:750;color:#181816;line-height:1.3}
+  .intent-card p{font-size:12px;color:#615f59;line-height:1.42;margin:0}
+  @media(max-width:680px){.commercial-intent-cards{grid-template-columns:1fr}}
   .commercial-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
   .commercial-field{display:flex;flex-direction:column;gap:8px;min-width:0}
   .commercial-field--wide{grid-column:1/-1}
@@ -130,7 +220,7 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
   @media(max-width:980px){.direct-contact-cards{border-top:0}.direct-contact-card{border-top:1px solid rgba(255,255,255,.2)}}
 </style>
 
-<script define:vars={{ copy }}>
+<script define:vars={{ copy, dynamicPlaceholders }}>
   (() => {
     document.querySelectorAll('[data-commercial-form]').forEach((form) => {
       if(form.dataset.enhanced)return;form.dataset.enhanced='true';
@@ -142,6 +232,46 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
       const intent=form.elements.namedItem('intent');
       const tradeDirection=form.elements.namedItem('tradeDirection');
       const productFamily=form.elements.namedItem('productFamily');
+      const message=form.elements.namedItem('message');
+      const intentCards=form.querySelectorAll('[data-intent-toggle]');
+      const disclosure=form.closest('.commercial-form-disclosure');
+
+      const updateIntentState=(selectedIntent,shouldOpenDisclosure=false)=>{
+        if(intent instanceof HTMLSelectElement&&intent.value!==selectedIntent){
+          intent.value=selectedIntent;
+        }
+        intentCards.forEach((card)=>{
+          const isActive=card.getAttribute('data-intent-toggle')===selectedIntent;
+          card.classList.toggle('is-active',isActive);
+          card.setAttribute('aria-pressed',isActive?'true':'false');
+        });
+        if(message instanceof HTMLTextAreaElement&&dynamicPlaceholders){
+          message.placeholder=dynamicPlaceholders[selectedIntent]||dynamicPlaceholders.default;
+        }
+        if(shouldOpenDisclosure&&disclosure&&!disclosure.open){
+          disclosure.open=true;
+        }
+      };
+
+      let startedTracked=false;
+      const track=(event,parameters={})=>window.ctsegTrack?.(event,{form_type:'qualified_commercial_request',trade_intent:intent instanceof HTMLSelectElement?intent.value:'',trade_direction:tradeDirection instanceof HTMLSelectElement?tradeDirection.value:'',product_family:productFamily instanceof HTMLSelectElement?productFamily.value:'',...parameters});
+
+      intentCards.forEach((card)=>{
+        card.addEventListener('click',()=>{
+          const val=card.getAttribute('data-intent-toggle');
+          if(val){
+            updateIntentState(val,true);
+            track('contact_intent_toggle',{intent:val});
+          }
+        });
+      });
+
+      if(intent instanceof HTMLSelectElement){
+        intent.addEventListener('change',()=>{
+          updateIntentState(intent.value,false);
+        });
+      }
+
       started.value=String(Date.now());
       const attribution=window.__ctsegAttribution||{landing_path:location.pathname};
       form.querySelectorAll('[data-attribution]').forEach((input)=>{input.value=input.dataset.attribution==='page_path'?location.pathname:(attribution[input.dataset.attribution]||'')});
@@ -151,12 +281,21 @@ const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal',
       const requestedIntent=requestParams.get('intent');
       const requestedDirection=requestParams.get('direction');
       const requestedFamily=requestParams.get('category');
-      if(intent instanceof HTMLSelectElement&&['buyer_request','supplier_market_entry'].includes(requestedIntent||''))intent.value=requestedIntent;
+      if(requestedIntent&&['buyer_request','supplier_market_entry'].includes(requestedIntent)){
+        updateIntentState(requestedIntent,true);
+      }else if(savedProduct){
+        updateIntentState('buyer_request',true);
+      }
       if(tradeDirection instanceof HTMLSelectElement&&['export_from_turkiye','import_to_turkiye','cross_border_sourcing','market_entry','other'].includes(requestedDirection||''))tradeDirection.value=requestedDirection;
       if(productFamily instanceof HTMLSelectElement&&['vegetable_oils','nuts_dried_fruit','reflex_gloves','biofuel_feedstock','other'].includes(requestedFamily||''))productFamily.value=requestedFamily;
-      document.querySelectorAll('[data-fa-intent],[data-contact-intent],[data-trade-intent]').forEach((link)=>link.addEventListener('click',()=>{const value=link.getAttribute('data-fa-intent')||link.getAttribute('data-contact-intent')||link.getAttribute('data-trade-intent');if(intent instanceof HTMLSelectElement&&value)intent.value=value}));
-      let startedTracked=false;
-      const track=(event,parameters={})=>window.ctsegTrack?.(event,{form_type:'qualified_commercial_request',trade_intent:intent instanceof HTMLSelectElement?intent.value:'',trade_direction:tradeDirection instanceof HTMLSelectElement?tradeDirection.value:'',product_family:productFamily instanceof HTMLSelectElement?productFamily.value:'',...parameters});
+      document.querySelectorAll('[data-fa-intent],[data-contact-intent],[data-trade-intent]').forEach((link)=>link.addEventListener('click',()=>{
+        const value=link.getAttribute('data-fa-intent')||link.getAttribute('data-contact-intent')||link.getAttribute('data-trade-intent');
+        if(value&&['buyer_request','supplier_market_entry'].includes(value)){
+          updateIntentState(value,true);
+        }else if(intent instanceof HTMLSelectElement&&value){
+          intent.value=value;
+        }
+      }));
       form.addEventListener('focusin',()=>{if(!startedTracked){startedTracked=true;track('contact_form_start')}},{once:true});
       const summary=()=>Array.from(new FormData(form).entries()).filter(([key,value])=>!['website','startedAt','privacy','locale','pagePath','landingPath','referrerHost','utmSource','utmMedium','utmCampaign','utmContent','utmTerm','clickId'].includes(key)&&String(value).trim()).map(([key,value])=>`${key}: ${String(value).trim()}`).join('\n');
       download?.addEventListener('click',()=>{track('form_fallback_download');const blob=new Blob([`CTSEG short commercial request\n\n${summary()}\n`],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='ctseg-commercial-request.txt';link.click();URL.revokeObjectURL(url)});

@@ -46,6 +46,61 @@ const operationalTrust = {
   zh:{title:'提交采购需求后有哪些后续流程？',lead:'在明确具体采购范畴、规格指标与单证需求后，每一份商业委托均将进入标准化评估路径。',steps:['明确产品技术参数与目标进出口市场','深入核验工厂资质、实际产能与出厂单证','出具可行性评估、比价分析与风险提示','协同买卖双方确认样品检验、报价细节与履约节点'],cta:'查看标准业务流程'},
   vi:{title:'Điều gì xảy ra sau khi gửi yêu cầu?',lead:'Mỗi yêu cầu thương mại được chuyển đến lộ trình đánh giá phù hợp sau khi làm rõ phạm vi và nhu cầu chứng từ.',steps:['Làm rõ yêu cầu kỹ thuật và thị trường mục tiêu','Đánh giá sản phẩm, đối tác và hồ sơ hiện có','Chia sẻ các bước khả thi tiếp theo và thông tin cần bổ sung','Xác nhận phạm vi báo giá, mẫu thử và điều phối với các bên'],cta:'Xem quy trình làm việc'}
 }[lang];
+
+const contactProcessKicker = {
+  tr: 'Süreç Güvencesi',
+  en: 'Process Assurance',
+  de: 'Prozesssicherheit',
+  it: 'Garanzia di Processo',
+  ru: 'Гарантия процесса',
+  fa: 'اطمینان از فرآیند',
+  zh: '全流程履约保障',
+  vi: 'Đảm bảo quy trình'
+}[lang];
+
+const turnaroundCallout = {
+  tr: {
+    badge: '24-48 Saat Değerlendirme Standardı',
+    title: 'Hızlı Ön İnceleme ve Yapılandırılmış Yanıt',
+    desc: 'Alınan tüm ticari alım ve pazar açılımı talepleri, CTSEG ticaret masası tarafından en geç 24-48 iş saati içinde ön incelemeye alınarak spesifikasyon, lojistik fizibilite ve karşı taraf doğrulama yol haritası ile yanıtlanır.'
+  },
+  en: {
+    badge: '24-48h Assessment Standard',
+    title: 'Rapid Preliminary Review & Structured Response',
+    desc: 'All commercial procurement and market entry inquiries are evaluated by the CTSEG trade desk within 24 to 48 business hours, providing specification clarity, logistical feasibility, and counterparty qualification next steps.'
+  },
+  de: {
+    badge: '24-48h Bewertungsstandard',
+    title: 'Schnelle Vorprüfung & strukturierte Rückmeldung',
+    desc: 'Alle Anfragen zu Beschaffung und Marktzugang werden vom CTSEG-Handelsdesk innerhalb von 24–48 Geschäftsstunden vorgeprüft und mit konkreten Spezifikations-, Logistik- und Verifizierungsansätzen beantwortet.'
+  },
+  it: {
+    badge: 'Standard di Risposta 24-48h',
+    title: 'Revisione Preliminare Rapida e Risposta Strutturata',
+    desc: 'Tutte le richieste commerciali di approvvigionamento ed espansione di mercato vengono esaminate dal desk CTSEG entro 24-48 ore lavorative con una valutazione tecnica, logistica e di compliance.'
+  },
+  ru: {
+    badge: 'Стандарт оценки 24-48ч',
+    title: 'Быстрая предварительная экспертиза и структурированный ответ',
+    desc: 'Все торговые запросы на закупки и выход на рынок обрабатываются торговым отделом CTSEG в течение 24–48 рабочих часов с предоставлением спецификаций, логистической оценки и этапов верификации контрагентов.'
+  },
+  fa: {
+    badge: 'استاندارد ارزیابی ۲۴-۴۸ ساعته',
+    title: 'بررسی مقدماتی سریع و پاسخ ساختاریافته تجاری',
+    desc: 'کلیه درخواست‌های خرید تجاری یا ورود به بازار توسط میز بازرگانی CTSEG حداکثر ظرف ۲۴ تا ۴۸ ساعت کاری ارزیابی شده و با نقشه راه مشخصات فنی، امکان‌سنجی لجستیکی و اعتبارسنجی پاسخ داده می‌شوند.'
+  },
+  zh: {
+    badge: '24-48小时响应标准',
+    title: '快速初步合规审核与结构化贸易反馈',
+    desc: 'CTSEG交易台对所有提交的买家寻源与工厂出海申请在24至48个工作小时内完成初步审核，并就技术规格、物流可行性与交易对手合规出具明确推进路线。'
+  },
+  vi: {
+    badge: 'Tiêu chuẩn Đánh giá 24-48h',
+    title: 'Đánh giá sơ bộ nhanh chóng & Phản hồi thương mại có cấu trúc',
+    desc: 'Tất cả các yêu cầu mua hàng thương mại và tiếp cận thị trường đều được bộ phận thương mại CTSEG xem xét sơ bộ trong vòng 24-48 giờ làm việc kèm theo lộ trình thông số kỹ thuật và tính khả thi logistics.'
+  }
+}[lang];
+
 const completionAbout = aboutEnhancement[lang];
 const aboutGovernance = {
   tr: {
@@ -1265,7 +1320,26 @@ const verifiedLater = {
   <>
     <PageHero lang={lang} eyebrow={t.contact} title={contact.title} lead={contact.intro} compact={true} />
     <section class="section commercial-form-section"><div class="container"><CommercialRequestForm lang={lang} /></div></section>
-    {<section class="section compact-link-section"><div class="container"><a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a></div></section>}
+    <section class="section operational-trust" aria-labelledby="contact-trust-title">
+      <div class="container content-grid">
+        <div>
+          <p class="eyebrow">CTSEG · {contactProcessKicker}</p>
+          <h2 id="contact-trust-title">{operationalTrust.title}</h2>
+          <p>{operationalTrust.lead}</p>
+          <div class="turnaround-callout">
+            <span class="turnaround-badge">{turnaroundCallout.badge}</span>
+            <h3>{turnaroundCallout.title}</h3>
+            <p>{turnaroundCallout.desc}</p>
+          </div>
+        </div>
+        <div class="operational-trust-panel">
+          <ol>
+            {operationalTrust.steps.map((step,index)=><li><span>{indexLabel(index)}</span><strong>{step}</strong></li>)}
+          </ol>
+          <a class="button button-secondary" href={workHref} data-how-we-work-cta>{operationalTrust.cta} →</a>
+        </div>
+      </div>
+    </section>
   </>
 )}
 
