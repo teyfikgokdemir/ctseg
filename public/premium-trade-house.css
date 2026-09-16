@@ -138,6 +138,16 @@ body{background:var(--premium-paper);color:var(--premium-ink);overflow-x:hidden}
 .side-panel{position:sticky;top:112px}
 .prose h2{letter-spacing:-.04em}
 .direct-answer,.article-answer{border-left:4px solid var(--premium-acid)!important}
+.product-commercial-facts dl{margin:28px 0 0;padding:0}
+.product-commercial-facts dl>div{display:grid;grid-template-columns:minmax(140px,.38fr) minmax(0,1fr);gap:20px;padding:16px 0;border-bottom:1px solid #e2ded5}
+.product-commercial-facts dl>div:last-child{border-bottom:0}
+.product-commercial-facts dt{font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;color:#575952;font-weight:700}
+.product-commercial-facts dd{margin:0;font-size:1rem;color:#181816;line-height:1.5}
+.product-evidence-governance{margin-top:32px;padding:20px 24px;background:#f5f4ef;border:1px solid #d3cec1;border-left:4px solid var(--premium-acid);border-radius:12px}
+.governance-badge{display:flex;gap:16px;align-items:flex-start}
+.governance-icon{font-size:22px;line-height:1;flex-shrink:0;margin-top:2px}
+.governance-text strong{display:block;font-size:.95rem;color:#181816;margin-bottom:6px;letter-spacing:-.01em}
+.governance-text p{font-size:.88rem;line-height:1.55;color:#575952;margin:0}
 
 /* Footer */
 .site-footer{background:var(--premium-charcoal)!important;color:#fff!important;border-top:0!important;padding-top:80px!important}
@@ -170,5 +180,6 @@ body{background:var(--premium-paper);color:var(--premium-ink);overflow-x:hidden}
   .market-line>div{grid-template-columns:48px 1fr;min-height:96px}.market-line strong{font-size:38px}
   .trust-facts{grid-template-columns:1fr}.trust-facts>div{border-right:0;border-bottom:1px solid rgba(10,10,10,.2)}.trust-facts>div:last-child{border-bottom:0}
   .cta-statement{padding:34px 24px!important}.premium-cursor{display:none!important}
+  .product-commercial-facts dl>div{grid-template-columns:1fr!important;gap:6px!important;padding:14px 0!important}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.premium-cursor{display:none!important}}
