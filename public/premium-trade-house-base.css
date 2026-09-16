@@ -197,8 +197,8 @@ html[dir="rtl"] .corridor-list strong{text-align:right!important}
 
 /* Trending Sectors (Home Page) */
 .trending-sectors {
-  background-color: var(--premium-charcoal, #1a1a1a);
-  color: var(--premium-wash, #f4f4f1);
+  background-color: var(--premium-charcoal, #1a1a1a) !important;
+  color: var(--premium-wash, #f4f4f1) !important;
   padding: 30px 0 !important;
 }
 .trending-sectors .section-head {
