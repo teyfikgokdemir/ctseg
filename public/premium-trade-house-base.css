@@ -286,15 +286,11 @@ main .process-detail-link {
   .trade-funnel-title {
     color: #fff !important;
   }
-  /* Fix invisible button text on the second card */
-  .trade-funnel-card:nth-child(2) .button-secondary {
-    border-color: rgba(255, 255, 255, 0.4) !important;
-    color: #fff !important;
-  }
-  .trade-funnel-card:nth-child(2) .button-secondary:hover {
-    border-color: var(--premium-acid, #c4f000) !important;
-    color: var(--premium-acid, #c4f000) !important;
-  }
+
+/* Explicitly override site.css to ensure button text is visible on both cards */
+main .trade-funnel-card .button { color: var(--premium-ink) !important; }
+main .trade-funnel-card:nth-child(2) .button-secondary { color: #fff !important; border-color: rgba(255, 255, 255, 0.4) !important; background: transparent !important; }
+main .trade-funnel-card:nth-child(2) .button-secondary:hover { color: var(--premium-acid) !important; border-color: var(--premium-acid) !important; }
 
 
 /* Premium Cookie Banner Override */
