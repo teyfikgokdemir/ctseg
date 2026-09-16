@@ -4,10 +4,10 @@ export const PRODUCT_IMAGE_WIDTHS = [360,540,720,768,960] as const;
 export const FEATURE_IMAGE_WIDTHS = [640,768,960,1280,1536] as const;
 export const HERO_IMAGE = '/images/ctseg-global-trade-hero-premium.webp';
 export const PORTFOLIO_IMAGE = '/images/2.webp';
-export const LOGO_IMAGE = '/images/ctseg-logo.svg';
+export const LOGO_IMAGE = '/images/ctseg-logo.svg?v=20260916b';
 
 export const generatedImageSrc = (src:string, width:number) => {
-  if (/\.svg$/i.test(src)) return src;
+  if (/\.svg(?:\?|$)/i.test(src)) return src;
   const sourceName = src.split('/').at(-1) ?? '';
   const filename = sourceName.replace(/\.(webp|png)$/i,'');
   const signature = (manifest as Record<string,string>)[`${sourceName}:${width}`]?.split(':')[0]?.slice(0,12);
