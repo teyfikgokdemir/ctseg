@@ -245,3 +245,23 @@ html[dir="rtl"] .corridor-list strong{text-align:right!important}
   color: var(--premium-ink, #000);
 }
 
+
+/* Premium Cookie Banner Override */
+.cookie-consent {
+  background: var(--premium-charcoal, #151515) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6) !important;
+  color: var(--premium-wash, #f4f4f1) !important;
+}
+.cookie-consent p {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+.cookie-actions button {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+}
+.cookie-actions .accept {
+  background: var(--premium-acid, #d4ff00) !important;
+  border-color: var(--premium-acid, #d4ff00) !important;
+  color: var(--premium-ink, #000) !important;
+}
