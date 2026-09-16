@@ -199,34 +199,44 @@ html[dir="rtl"] .corridor-list strong{text-align:right!important}
 .trending-sectors {
   background-color: var(--premium-charcoal, #1a1a1a);
   color: var(--premium-wash, #f4f4f1);
-  padding: clamp(30px, 5vw, 60px) 0;
+  padding: 30px 0 !important;
 }
 .trending-sectors .section-head {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 20px !important;
+  margin-bottom: 0 !important;
 }
 .trending-sectors .section-head h2 {
-  color: #fff;
-  max-width: 100%;
-  margin: 0;
+  color: #fff !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  font-size: clamp(32px, 4vw, 54px) !important;
+  line-height: 1.1 !important;
+  white-space: nowrap !important;
+}
+@media (max-width: 860px) {
+  .trending-sectors .section-head h2 {
+    white-space: normal !important;
+  }
 }
 .trending-sectors .section-head p {
-  color: var(--premium-acid, #d4ff00);
-  max-width: 760px;
-  margin: 16px auto 0;
-  font-size: clamp(1rem, 1.2vw, 1.15rem);
-  font-weight: 500;
+  color: var(--premium-acid, #d4ff00) !important;
+  max-width: 760px !important;
+  margin: 12px auto 0 !important;
+  font-size: clamp(14px, 1.2vw, 17px) !important;
+  font-weight: 500 !important;
+  opacity: 1 !important;
 }
 .trending-tags-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: clamp(12px, 2vw, 20px);
-  padding-top: clamp(24px, 3vw, 40px);
+  gap: 12px !important;
+  padding-top: 24px !important;
 }
 .trending-tag {
   flex: 1 1 auto;
