@@ -17,6 +17,11 @@ html[data-locale=zh]{--accent:#78541e;--accent-soft:#f3d79b;--locale-wash:#2a1b1
 html[data-locale=vi]{--accent:#744b1c;--accent-soft:#eec492;--locale-wash:#241913;--locale-surface:#19120e;--locale-line:rgba(170,116,56,.36)}
 html[data-locale=zh] body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif}
 html[data-locale=zh] h1,html[data-locale=zh] h2,html[data-locale=zh] h3,html[data-locale=zh] .section-title{font-family:"Songti SC","SimSun","Source Serif 4",Georgia,serif;letter-spacing:0}
+/* FA (Persian/RTL): DM Sans has no Arabic glyphs; fall back to system Naskh-style fonts */
+html[data-locale=fa] body{font-family:"Tahoma","Segoe UI","Arial Unicode MS","DejaVu Sans",system-ui,sans-serif}
+html[data-locale=fa] h1,html[data-locale=fa] h2,html[data-locale=fa] h3,html[data-locale=fa] .section-title{font-family:"Tahoma","Segoe UI","Arial Unicode MS",system-ui,sans-serif;letter-spacing:0}
+/* RU (Russian/Cyrillic): Source Serif 4 is Latin-only; ensure Cyrillic OS fallback */
+html[data-locale=ru] body{font-family:system-ui,"Segoe UI","Helvetica Neue","Arial Unicode MS",sans-serif}
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}

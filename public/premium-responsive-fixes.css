@@ -74,20 +74,20 @@ html[data-locale="it"] .hero h1,
 html[data-locale="fa"] .hero h1,
 html[data-locale="ru"] .hero h1,
 html[data-locale="vi"] .hero h1{
-  max-width:100%!important;font-size:clamp(50px,5.55vw,88px)!important;line-height:.94!important;letter-spacing:-.055em!important
+  max-width:100%!important;font-size:clamp(36px,4.2vw,68px)!important;line-height:.97!important;letter-spacing:-.045em!important
 }
 
 /* The header remains continuously available; premium motion must never move it off-canvas. */
 .site-header{top:0!important;transform:none!important}
 
 @media (min-width:1101px){
-  .hero{padding-top:clamp(70px,5.8vw,112px);padding-bottom:clamp(96px,8vw,154px)}
-  .hero-grid{grid-template-columns:minmax(0,.92fr) minmax(440px,1.08fr);gap:clamp(42px,5vw,90px);align-items:center}
-  .hero h1{font-size:clamp(70px,7.6vw,132px)!important;line-height:.88!important;letter-spacing:-.068em!important;max-width:10.5ch}
-  html[data-locale="tr"] .hero h1{font-size:clamp(64px,6.65vw,116px)!important;line-height:.9!important;max-width:11.5ch!important}
+  .hero{padding-top:clamp(52px,4.4vw,80px);padding-bottom:clamp(60px,5.4vw,96px)}
+  .hero-grid{grid-template-columns:minmax(0,.92fr) minmax(400px,1.08fr);gap:clamp(32px,4vw,68px);align-items:center}
+  .hero h1{font-size:clamp(48px,5.3vw,88px)!important;line-height:.93!important;letter-spacing:-.065em!important;max-width:10.5ch}
+  html[data-locale="tr"] .hero h1{font-size:clamp(42px,4.6vw,78px)!important;line-height:.96!important;max-width:11.5ch!important}
   .hero .lead{max-width:32em}
-  .hero-visual{min-height:clamp(590px,43vw,760px)}
-  .hero-visual picture,.hero-visual img{min-height:clamp(590px,43vw,760px)}
+  .hero-visual{min-height:clamp(440px,36vw,580px)}
+  .hero-visual picture,.hero-visual img{min-height:clamp(440px,36vw,580px)}
   .trade-gateway-banner{margin-top:clamp(42px,4.5vw,78px)!important;gap:22px!important}
   .trade-funnel-card{min-height:clamp(430px,31vw,540px)}
   .trade-funnel-title{font-size:clamp(44px,4vw,68px)!important;line-height:.96!important;max-width:11ch}
