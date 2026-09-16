@@ -26,6 +26,9 @@
   .nav-solutions-parent{white-space:nowrap!important;flex-wrap:nowrap!important;min-width:max-content!important}
   .nav-solutions-parent>span:first-child{white-space:nowrap!important}
   .nav-solutions-menu{width:min(430px,calc(100vw - 48px))!important;padding:14px!important;border:1px solid rgba(196,240,0,.2)!important;border-radius:20px!important;background:rgba(13,14,12,.975)!important;box-shadow:0 28px 70px rgba(0,0,0,.48)!important;backdrop-filter:blur(24px)!important;-webkit-backdrop-filter:blur(24px)!important}
+  /* JS owns this menu state. Do not let :focus-within keep it visually open after the toggle is pressed again. */
+  .nav-solutions-group:not(.is-open) .nav-solutions-menu{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translate(-50%,-7px)!important}
+  .nav-solutions-group.is-open .nav-solutions-menu{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translate(-50%,0)!important}
   .nav-solutions-intro{padding:9px 8px 14px!important;border-bottom:1px solid rgba(255,255,255,.1)!important}.nav-solutions-intro strong{color:#c4f000!important;font-size:12px!important;letter-spacing:.07em!important;text-transform:uppercase!important}.nav-solutions-intro span{margin-top:5px;color:#b9bbb5!important;font-size:12px!important;line-height:1.45!important}
   .desktop-solutions-grid{display:grid!important;grid-template-columns:1fr!important;gap:0!important}
   .desktop-solution-item{min-height:50px!important;padding:11px 7px!important;border-left:0!important;border-bottom:1px solid rgba(255,255,255,.08)!important;border-radius:0!important;font-size:13px!important;font-weight:650!important}
