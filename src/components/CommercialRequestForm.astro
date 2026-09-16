@@ -63,13 +63,29 @@ const dynamicPlaceholders = {
     <p>{copy.intro}</p>
     <div class="direct-contact-cards" aria-label={copy.floatingLabel}>
       <a class="direct-contact-card" href={whatsappHref(lang)} target="_blank" rel="noopener noreferrer" data-contact-whatsapp>
-        <span aria-hidden="true">WA</span><strong>{copy.whatsapp}</strong>
+        <span aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.32a8.188 8.188 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23m-2.52 3.67c-.17 0-.45.06-.69.32-.23.26-.88.87-.88 2.1 0 1.24.9 2.43 1.04 2.6.13.17 1.8 2.77 4.36 3.88 2.12.92 2.55.74 3.02.7.47-.05 1.51-.62 1.73-1.23.22-.61.22-1.13.15-1.24-.07-.11-.24-.17-.5-.3-.26-.13-1.52-.75-1.76-.84-.22-.09-.38-.13-.54.13-.16.26-.63.81-.77.97-.14.16-.28.18-.54.05-.26-.13-1.33-.49-2.6-1.62-.99-.88-1.66-1.97-1.79-2.19-.13-.22-.01-.34.12-.47.12-.12.27-.31.4-.46.13-.15.18-.26.27-.43.09-.17.04-.32-.02-.45-.06-.13-.52-1.27-.71-1.73-.18-.45-.37-.39-.51-.4-.13-.01-.29-.01-.45-.01"/>
+          </svg>
+        </span>
+        <strong>{copy.whatsapp}</strong>
       </a>
       <a class="direct-contact-card" href={emailHref(lang)} data-contact-email>
-        <span aria-hidden="true">@</span><strong>{copy.email}</strong><small>{company.email}</small>
+        <span aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <rect width="20" height="16" x="2" y="4" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+        </span>
+        <strong>{copy.email}</strong><small>{company.email}</small>
       </a>
       <a class="direct-contact-card" href="https://t.me/teyfikgokdemir" target="_blank" rel="noopener noreferrer" data-contact-telegram>
-        <span aria-hidden="true">TG</span><strong>Telegram</strong><small>@teyfikgokdemir</small>
+        <span aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l-.313 4.67c.458 0 .66-.21.916-.457l2.199-2.138 4.574 3.379c.843.465 1.448.225 1.658-.783l2.998-14.133c.307-1.233-.472-1.792-1.208-1.505z"/>
+          </svg>
+        </span>
+        <strong>Telegram</strong><small>@teyfikgokdemir</small>
       </a>
     </div>
   </div>
@@ -211,7 +227,9 @@ const dynamicPlaceholders = {
   .direct-contact-cards{gap:0;border-top:1px solid rgba(255,255,255,.2)}
   .direct-contact-card{min-height:68px;padding:12px 0;border:0;border-bottom:1px solid rgba(255,255,255,.2);border-radius:0;background:transparent;box-shadow:none}
   .direct-contact-card>span{width:38px;height:38px;border-radius:0;background:transparent;color:#c4f000!important;border:1px solid rgba(196,240,0,.45)}
+  .direct-contact-card>span svg{width:18px;height:18px;display:block;flex-shrink:0}
   .direct-contact-card:hover,.direct-contact-card:focus-visible{transform:none;background:transparent;border-color:#c4f000}
+  .direct-contact-card:hover>span,.direct-contact-card:focus-visible>span{border-color:#c4f000;background:rgba(196,240,0,.08)}
   .commercial-form-disclosure{border-radius:0;box-shadow:none}
   .commercial-form-disclosure>summary{border-bottom:1px solid #d4d4cc}
   .commercial-form-disclosure>summary span{border-radius:0}
