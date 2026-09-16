@@ -18,30 +18,54 @@
   .language-switcher-desktop .language-menu a strong{font-size:13px!important;font-weight:650!important;letter-spacing:.005em!important;color:inherit!important}
   .language-switcher-desktop .language-menu a i{width:5px!important;height:5px!important;background:transparent!important;box-shadow:none!important}
   .language-switcher-desktop .language-menu a:hover,.language-switcher-desktop .language-menu a:focus-visible{background:rgba(255,255,255,.055)!important;color:#fff!important;transform:translateX(2px)}
-  .language-switcher-desktop .language-menu a.active{background:rgba(196,240,0,.09)!important;color:#fff!important;box-shadow:inset 2px 0 0 #c4f000!important}
-  .language-switcher-desktop .language-menu a.active span{color:#c4f000!important}.language-switcher-desktop .language-menu a.active i{background:#c4f000!important;box-shadow:0 0 10px rgba(196,240,0,.45)!important}
+  .language-switcher-desktop .language-menu a.active{background:rgba(196,240,0,.09)!important;color:#fff!important;box-shadow:inset 2px 0 0 #c4f000!important}.language-switcher-desktop .language-menu a.active span{color:#c4f000!important}.language-switcher-desktop .language-menu a.active i{background:#c4f000!important;box-shadow:0 0 10px rgba(196,240,0,.45)!important}
   html[dir="rtl"] .language-switcher-desktop .language-menu{transform-origin:top left!important}html[dir="rtl"] .language-switcher-desktop .language-menu a.active{box-shadow:inset -2px 0 0 #c4f000!important}html[dir="rtl"] .language-switcher-desktop .language-menu a:hover,html[dir="rtl"] .language-switcher-desktop .language-menu a:focus-visible{transform:translateX(-2px)}
 
-  /* Keep the closed global-trade trigger on one line and make the open panel less bulky. */
-  .nav-solutions-parent{white-space:nowrap!important;flex-wrap:nowrap!important;min-width:max-content!important}
-  .nav-solutions-parent>span:first-child{white-space:nowrap!important}
+  .nav-solutions-parent{white-space:nowrap!important;flex-wrap:nowrap!important;min-width:max-content!important}.nav-solutions-parent>span:first-child{white-space:nowrap!important}
   .nav-solutions-menu{width:min(430px,calc(100vw - 48px))!important;padding:14px!important;border:1px solid rgba(196,240,0,.2)!important;border-radius:20px!important;background:rgba(13,14,12,.975)!important;box-shadow:0 28px 70px rgba(0,0,0,.48)!important;backdrop-filter:blur(24px)!important;-webkit-backdrop-filter:blur(24px)!important}
-  /* JS owns this menu state. Do not let :focus-within keep it visually open after the toggle is pressed again. */
-  .nav-solutions-group:not(.is-open) .nav-solutions-menu{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translate(-50%,-7px)!important}
-  .nav-solutions-group.is-open .nav-solutions-menu{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translate(-50%,0)!important}
+  .nav-solutions-group:not(.is-open) .nav-solutions-menu{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translate(-50%,-7px)!important}.nav-solutions-group.is-open .nav-solutions-menu{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:translate(-50%,0)!important}
   .nav-solutions-intro{padding:9px 8px 14px!important;border-bottom:1px solid rgba(255,255,255,.1)!important}.nav-solutions-intro strong{color:#c4f000!important;font-size:12px!important;letter-spacing:.07em!important;text-transform:uppercase!important}.nav-solutions-intro span{margin-top:5px;color:#b9bbb5!important;font-size:12px!important;line-height:1.45!important}
-  .desktop-solutions-grid{display:grid!important;grid-template-columns:1fr!important;gap:0!important}
-  .desktop-solution-item{min-height:50px!important;padding:11px 7px!important;border-left:0!important;border-bottom:1px solid rgba(255,255,255,.08)!important;border-radius:0!important;font-size:13px!important;font-weight:650!important}
-  .desktop-solution-item:last-child{border-bottom:0!important}.desktop-solution-item i{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:28px!important;height:28px!important;border-radius:50%!important;background:rgba(196,240,0,.1)!important;color:#c4f000!important}
-  .desktop-solution-item:hover,.desktop-solution-item:focus-visible{padding-left:11px!important;background:rgba(196,240,0,.055)!important;color:#fff!important;transform:none!important}
+  .desktop-solutions-grid{display:grid!important;grid-template-columns:1fr!important;gap:0!important}.desktop-solution-item{min-height:50px!important;padding:11px 7px!important;border-left:0!important;border-bottom:1px solid rgba(255,255,255,.08)!important;border-radius:0!important;font-size:13px!important;font-weight:650!important}.desktop-solution-item:last-child{border-bottom:0!important}.desktop-solution-item i{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:28px!important;height:28px!important;border-radius:50%!important;background:rgba(196,240,0,.1)!important;color:#c4f000!important}.desktop-solution-item:hover,.desktop-solution-item:focus-visible{padding-left:11px!important;background:rgba(196,240,0,.055)!important;color:#fff!important;transform:none!important}
 
-  /* Hero proof rail: one continuous premium row on desktop. */
-  .hero-visual figcaption{display:flex!important;grid-template-columns:none!important;align-items:stretch!important;gap:1px!important;background:rgba(255,255,255,.14)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:14px!important;box-shadow:0 16px 40px rgba(0,0,0,.18)!important}
-  .hero-visual figcaption span{flex:1 1 0!important;min-width:0!important;display:flex!important;align-items:center!important;padding:14px 16px!important;background:rgba(12,12,12,.82)!important;border:0!important;font-size:11px!important;font-weight:650!important;line-height:1.35!important;color:#f2f2ed!important}
-  .hero-visual figcaption span+span{border-left:1px solid rgba(255,255,255,.12)!important}
-  .hero-visual figcaption small{margin:0!important;color:#c4f000!important;font-size:10px!important;letter-spacing:.06em!important}
+  .hero-visual figcaption{display:flex!important;grid-template-columns:none!important;align-items:stretch!important;gap:1px!important;background:rgba(255,255,255,.14)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:14px!important;box-shadow:0 16px 40px rgba(0,0,0,.18)!important}.hero-visual figcaption span{flex:1 1 0!important;min-width:0!important;display:flex!important;align-items:center!important;padding:14px 16px!important;background:rgba(12,12,12,.82)!important;border:0!important;font-size:11px!important;font-weight:650!important;line-height:1.35!important;color:#f2f2ed!important}.hero-visual figcaption span+span{border-left:1px solid rgba(255,255,255,.12)!important}.hero-visual figcaption small{margin:0!important;color:#c4f000!important;font-size:10px!important;letter-spacing:.06em!important}
 }
 
-/* Canonical CTSEG mark: override every legacy image treatment after the full premium cascade. */
-html body .site-header a.brand>img,
-html body .site-footer a.brand>img{filter:none!important;-webkit-filter:none!important;opacity:1!important}
+html body .site-header a.brand>img,html body .site-footer a.brand>img{filter:none!important;-webkit-filter:none!important;opacity:1!important}
+
+/* Home editorial density pass: keep words intact and fit each story beat into a viewport-sized scene. */
+main .trade-house-statement h2,main .trade-house-statement__row h3,main .process-heading .section-title,main .process-rail strong,main .markets-editorial h2,main .markets-editorial h3{word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important;-webkit-hyphens:none!important}
+
+@media (min-width:1101px){
+  main .trade-house-statement{padding-block:58px!important}
+  main .trade-house-statement__shell{grid-template-columns:minmax(420px,.88fr) minmax(650px,1.12fr)!important;gap:clamp(48px,5vw,86px)!important;align-items:center!important}
+  main .trade-house-statement__intro{position:static!important;max-width:610px!important}
+  main .trade-house-statement h2{max-width:13ch!important;font-size:clamp(48px,4.35vw,70px)!important;line-height:.96!important;letter-spacing:-.052em!important}
+  main .trade-house-statement__lead{margin-top:22px!important;font-size:16px!important;line-height:1.55!important}
+  main .trade-house-statement__actions{margin-top:24px!important}
+  main .trade-house-statement__row{min-height:116px!important;padding:18px 4px!important;grid-template-columns:18px minmax(0,1fr) 30px!important;gap:18px!important}
+  main .trade-house-statement__row-copy{grid-template-columns:minmax(210px,.82fr) minmax(300px,1.18fr)!important;gap:30px!important}
+  main .trade-house-statement__row h3{max-width:18ch!important;font-size:clamp(22px,1.65vw,29px)!important;line-height:1.06!important}
+  main .trade-house-statement__row p{font-size:13px!important;line-height:1.48!important}
+
+  main .process-section{padding-block:58px!important}
+  main .process-shell{grid-template-columns:minmax(360px,.72fr) minmax(650px,1.28fr)!important;gap:clamp(48px,5vw,82px)!important;align-items:center!important}
+  main .process-heading{position:static!important;max-width:560px!important}
+  main .process-heading .section-title{max-width:14ch!important;font-size:clamp(42px,3.65vw,60px)!important;line-height:.98!important}
+  main .process-caption{margin-top:20px!important;padding-top:14px!important;line-height:1.5!important}
+  main .process-status{margin-top:17px!important}
+  main .process-rail li{min-height:91px!important;padding:15px 4px!important}
+  main .process-rail strong{max-width:38ch!important;font-size:clamp(20px,1.35vw,25px)!important;line-height:1.08!important}
+
+  main .markets-editorial{padding-block:58px!important}
+  main .markets-editorial .section-head{margin-bottom:34px!important}
+  main .markets-editorial .section-title,main .markets-editorial h2{font-size:clamp(48px,4.2vw,68px)!important;line-height:.96!important;max-width:14ch!important}
+  main .markets-editorial article,main .markets-editorial .market-card{min-height:0!important;padding-block:24px!important}
+}
+
+/* Representative/how-it-works cards: balanced typography, centered card copy and less dead space. */
+main .detailed-process li{justify-content:center!important;text-align:center!important;align-items:center!important;min-height:210px!important;padding:24px 26px!important}
+main .detailed-process li span{position:absolute!important;top:22px!important;left:26px!important}
+main .detailed-process li h2{margin:22px auto 0!important;max-width:18ch!important;word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important;text-align:center!important;font-size:clamp(22px,1.75vw,30px)!important;line-height:1.08!important}
+html[dir="rtl"] main .detailed-process li span{left:auto!important;right:26px!important}
+
+@media (max-width:1100px){main .trade-house-statement h2,main .process-heading .section-title{word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important}}
