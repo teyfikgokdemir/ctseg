@@ -350,3 +350,14 @@ main .trade-funnel-card:nth-child(2) .button-secondary:hover { color: var(--prem
 .catalogue-sourcing-desk h2, .catalogue-sourcing-desk .sourcing-desk-title { color: #fff !important; }
 .catalogue-sourcing-desk p, .catalogue-sourcing-desk .sourcing-desk-lead, .catalogue-sourcing-desk .sourcing-desk-note { color: #a1a1a1 !important; }
 .catalogue-sourcing-desk .sourcing-desk-kicker { color: var(--premium-acid) !important; }
+/* Premium Dark Inner Pages Overrides 2 - Legibility Fixes */
+.group-lead { color: #a1a1a1 !important; }
+.category-nav-pill { background: transparent !important; color: #fff !important; border-color: rgba(255,255,255,0.2) !important; }
+.category-nav-pill:hover { background: rgba(255,255,255,0.05) !important; color: var(--premium-acid) !important; border-color: var(--premium-acid) !important; }
+.category-nav-pill .pill-num { color: var(--premium-acid) !important; }
+.category-nav-pill:hover .pill-num { color: var(--premium-acid) !important; }
+.category-nav-pill .pill-count { color: #888 !important; }
+.category-nav-pill:hover .pill-count { color: var(--premium-acid) !important; }
+.origin-note { background: #111 !important; color: #fff !important; border-left-color: var(--premium-acid) !important; }
+.origin-note p { color: #ccc !important; }
+.origin-note strong { color: var(--premium-acid) !important; display: block; margin-bottom: 8px; }
