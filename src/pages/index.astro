@@ -1,12 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageContent from '../components/PageContent.astro';
-import { breadcrumbSchema, getMeta, tradeMatchingServiceSchema } from '../lib/routes';
+import { breadcrumbSchema, tradeMatchingServiceSchema } from '../lib/routes';
 const record = { lang:'tr' as const, key:'home' };
-const meta = getMeta(record);
+const meta = {
+  title: 'CTSEG | Stratejik Tedarik, B2B Ticaret ve Pazara Giriş',
+  description: 'CTSEG; Türkiye ile uluslararası pazarlar arasında stratejik tedarik, tedarikçi doğrulama, RFQ yönetimi, alıcı araştırması ve B2B pazara giriş koordinasyonu yürütür.',
+};
 const schema = [breadcrumbSchema(record,meta.title),tradeMatchingServiceSchema(record,meta.title,meta.description)];
+const socialImage = 'https://ctseg.com.tr/images/ctseg-global-trade-hero-premium.webp';
+const socialImageAlt = 'CTSEG uluslararası ticaret, stratejik tedarik ve B2B pazara giriş';
 ---
 <BaseLayout lang="tr" title={meta.title} description={meta.description} pageKey="home" canonical="https://ctseg.com.tr/" schema={schema}>
+  <meta slot="schema" property="og:image:secure_url" content={socialImage} />
+  <meta slot="schema" property="og:image:type" content="image/webp" />
+  <meta slot="schema" name="twitter:image" content={socialImage} />
+  <meta slot="schema" name="twitter:image:alt" content={socialImageAlt} />
   <PageContent record={record} />
 </BaseLayout>
 <style is:global>
