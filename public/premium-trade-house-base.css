@@ -361,3 +361,6 @@ main .trade-funnel-card:nth-child(2) .button-secondary:hover { color: var(--prem
 .origin-note { background: #111 !important; color: #fff !important; border-left-color: var(--premium-acid) !important; }
 .origin-note p { color: #ccc !important; }
 .origin-note strong { color: var(--premium-acid) !important; display: block; margin-bottom: 8px; }
+.group-lead, .catalogue-group .group-lead, .catalogue-group-heading p.group-lead { color: #a1a1a1 !important; }
+.trade-badge { background: transparent !important; color: #fff !important; border-color: rgba(255,255,255,0.2) !important; }
+.page-hero, .product-page-hero, section.page-hero { background: var(--premium-charcoal) !important; color: #fff !important; }
