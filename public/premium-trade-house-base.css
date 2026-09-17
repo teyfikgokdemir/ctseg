@@ -338,3 +338,15 @@ main .trade-funnel-card:nth-child(2) .button-secondary:hover { color: var(--prem
 .specialist-routes a:hover { color: var(--premium-acid) !important; }
 .page-hero h1, .page-hero .lead { color: #fff !important; }
 .catalogue-sourcing-desk { background: #111 !important; border-top-color: var(--premium-acid) !important; }
+.platform-sectors .section-head h2, .platform-sectors .section-head p { color: #fff !important; }
+.product-card { background: transparent !important; }
+.product-card-copy { background: transparent !important; }
+.product-card-copy h2 { color: #fff !important; }
+.product-card-copy p { color: #a1a1a1 !important; }
+.product-card-kicker { color: var(--premium-acid) !important; }
+.product-card-origin-tag { color: #888 !important; border-color: #333 !important; }
+.product-card-trade-footer { color: #fff !important; }
+.product-card-rfq { color: #fff !important; }
+.catalogue-sourcing-desk h2, .catalogue-sourcing-desk .sourcing-desk-title { color: #fff !important; }
+.catalogue-sourcing-desk p, .catalogue-sourcing-desk .sourcing-desk-lead, .catalogue-sourcing-desk .sourcing-desk-note { color: #a1a1a1 !important; }
+.catalogue-sourcing-desk .sourcing-desk-kicker { color: var(--premium-acid) !important; }
