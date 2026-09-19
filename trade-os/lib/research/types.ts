@@ -1,38 +1,18 @@
-﻿import type { SearchResult } from "@/lib/search";
-
-export type ResearchCaseType = "SOURCING" | "BUYER_SEARCH" | "LOGISTICS" ;
-
+﻿export type ResearchCaseType = "SOURCING" | "BUYER_SEARCH" | "LOGISTICS";
 export type ResearchMode = "QUICK" | "DEEP";
 
-export type ResearchRequest = {
-  type: ResearchCaseType;
-  mode?: ResearchMode;
-  rawRequest: string;
-  product?: string;
-  sourceRegion?: string;
-  destination?: string;
-  destinations?: string[];
-  aliases?: string[];
-  grade?: string;
-  excludedCountries?: string[];
-  transportModes?: string[];
-  languages?: string[];
-  maxQueries?: number;
-};
+export type ClaimType = "ROLE" | "PRODUCT" | "CONTACT" | "COUNTRY" | "GRADE" | "ROUTE";
+export type VerificationState = "CONFIRMED" | "PROBABLE" | "UNVERIFIED" | "CONTRADICTED";
 
-export type PlannedQuery = {
-  query: string;
-  language: string;
-  intent: string;
-  priority: number;
-};
-
-export type Evidence = {
+export interface Evidence {
   url: string;
   extractedText?: string;
   timestamp: string;
-  type: "HTML" | "PDF" | "STRUCTURED_DATA";
-};
+  type?: "HTML" | "PDF" | "STRUCTURED_DATA";
+  claimType: ClaimType;
+  status: VerificationState;
+  excerpt?: string;
+}
 
 export type VerificationLevel = 
   | "DISCOVERED" 
@@ -44,48 +24,79 @@ export type VerificationLevel =
   | "RECENT_ACTIVITY_CONFIRMED"
   | "FULLY_VERIFIED";
 
-export type VerificationState = "CONFIRMED" | "PROBABLE" | "UNVERIFIED" | "CONTRADICTED";
-
-export type CompanyRole = 
-  | "MANUFACTURER" 
-  | "DISTRIBUTOR" 
-  | "AUTHORIZED_DISTRIBUTOR" 
-  | "TRADER" 
-  | "IMPORTER" 
-  | "WHOLESALER" 
-  | "RETAILER" 
-  | "LOGISTICS_PROVIDER" 
-  | "FORWARDER" 
-  | "CARRIER"
-  | "UNKNOWN";
-
-export type VerifiedField<T> = {
+export interface VerifiedField<T> {
   value: T;
   state: VerificationState;
-  evidence?: Evidence[];
-};
+  evidence: Evidence[];
+}
 
-export type ResearchFinding = SearchResult & {
+export interface ResearchRequest {
+  rawRequest: string;
+  type: ResearchCaseType;
+  mode?: ResearchMode;
+  product?: string;
+  aliases?: string[];
+  grade?: string;
+  sourceRegion?: string;
+  destination?: string;
+  destinations?: string[];
+  excludedCountries?: string[];
+  transportModes?: string[];
+  languages?: string[];
+  maxQueries?: number;
+}
+
+export interface ResearchRun {
+  request: ResearchRequest;
+  queries: PlannedQuery[];
+  findings: ResearchFinding[];
+  diagnostics: AdapterDiagnostic[];
+  searchedAt: string;
+  paidFallbackUsed: boolean;
+  round: number;
+  clarification?: {
+    confidence: number;
+    missingCriticalFields: string[];
+    missingUsefulFields: string[];
+    assumptions: string[];
+    clarificationRequired: boolean;
+    question: string;
+  };
+}
+
+export interface PlannedQuery {
+  query: string;
+  language: string;
+  intent: string;
+  priority: number;
+}
+
+export interface AdapterDiagnostic {
+  adapter: string;
+  query: string;
+  rawCount: number;
+  acceptedCount: number;
+  status: string;
+  error?: string;
+}
+
+export interface ResearchFinding {
+  url: string;
+  title: string;
+  snippet?: string;
+  domain: string;
   adapter: string;
   query: string;
   language: string;
-  domain: string;
   freshnessScore: number;
-  verificationLevel?: VerificationLevel;
-  verificationScore: number;
-  relevanceScore: number;
-  totalScore: number;
-  historicalOnly: boolean;
-  
-  // Entity resolution
-  normalizedCompanyName?: string;
-  role?: VerifiedField<CompanyRole>;
-  productConfirmed?: VerifiedField<boolean>;
-  gradeConfirmed?: VerifiedField<string>;
+  companyName?: string;
   contactEmail?: VerifiedField<string>;
   contactPhone?: VerifiedField<string>;
   country?: VerifiedField<string>;
-  manufacturer?: VerifiedField<string>;
+  relevanceScore?: number;
+  totalScore?: number;
+  normalizedCompanyName?: string;
+  historicalOnly: boolean;
   
   fetchedContent?: {
     title?: string;
@@ -95,28 +106,30 @@ export type ResearchFinding = SearchResult & {
     isLive: boolean;
     type?: "PDF" | "HTML";
   };
-};
+  
+  productConfirmed?: VerifiedField<boolean>;
+  gradeConfirmed?: VerifiedField<string>;
+  role?: VerifiedField<CompanyRole>;
+  verificationScore: number;
+}
 
-export type ResearchRun = {
-  request: ResearchRequest;
-  queries: PlannedQuery[];
-  findings: ResearchFinding[];
-  diagnostics: { adapter: string; query: string; rawCount: number; acceptedCount: number; status: "success" | "error" | "rate-limited" | "temporarily_blocked" | "degraded"; error?: string }[];
-  searchedAt: string;
-  paidFallbackUsed: false;
-  clarification?: {
-    confidence: number;
-    missingCriticalFields: string[];
-    missingUsefulFields: string[];
-    assumptions: string[];
-    clarificationRequired: boolean;
-    question?: string;
-  };
-  gapAnalysis?: string;
-  followUpQueries?: PlannedQuery[];
-  round?: number;
-};
+export type CompanyRole = "MANUFACTURER" | "DISTRIBUTOR" | "TRADING_COMPANY" | "LOGISTICS" | "BUYER" | "UNKNOWN";
 
-
-
-
+export interface CompanyCandidate {
+  key: string;
+  name: string;
+  website: string;
+  role: VerifiedField<CompanyRole>;
+  productConfirmed: VerifiedField<boolean>;
+  gradeConfirmed: VerifiedField<string>;
+  contactEmail: VerifiedField<string>;
+  contactPhone: VerifiedField<string>;
+  country: VerifiedField<string>;
+  manufacturer: VerifiedField<string>;
+  freshnessScore: number;
+  verificationScore: number;
+  relevanceScore: number;
+  totalScore: number;
+  verificationLevel: VerificationLevel;
+  evidenceSources: Evidence[];
+}

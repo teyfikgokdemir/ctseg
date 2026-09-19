@@ -1,6 +1,6 @@
 ﻿import type { IntentProvider, ParsedIntent } from "./intent-parser";
 import { LocalIntentProvider } from "./intent-parser";
-import type { CompanyCandidate } from "./company-resolver";
+import type { CompanyCandidate } from "./types";
 import type { ResearchReview, ResearchReviewProvider } from "./research-review";
 import { LocalResearchReviewProvider } from "./research-review";
 import type { ResearchCaseType } from "./types";

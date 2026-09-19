@@ -34,7 +34,9 @@ export async function searchPlannedQueries(request: ResearchRequest, subject: st
             const verificationScore = scoreVerification(result.url);
             let domain = "unknown";
             try { domain = new URL(result.url).hostname.replace(/^www\./, "").toLowerCase(); } catch { continue; }
-            findings.push({ ...result, adapter: adapter.name, query: planned.query,
+            const { country, ...restResult } = result;
+            const mappedCountry = country ? { value: country, state: "UNVERIFIED" as const, evidence: [] } : undefined;
+            findings.push({ ...restResult, country: mappedCountry, adapter: adapter.name, query: planned.query,
               language: planned.language, domain, relevanceScore,
               freshnessScore: freshness.score, verificationScore,
               totalScore: Math.round(relevanceScore * 0.6 + freshness.score * 0.15 + verificationScore * 0.25),

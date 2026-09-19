@@ -1,5 +1,5 @@
 ﻿import type { ParsedIntent } from "./intent-parser";
-import type { CompanyCandidate } from "./company-resolver";
+import type { CompanyCandidate } from "./types";
 import type { ResearchCaseType } from "./types";
 
 export type ResearchReview = { summary: string; followUpQueries: string[]; limitations: string[]; provider: string };

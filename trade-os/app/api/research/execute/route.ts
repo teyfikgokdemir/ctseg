@@ -1,10 +1,10 @@
-﻿/* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { currentUser } from "@/lib/current-user";
 import { getResearchAIProvider } from "@/lib/research/local-ai-provider";
 import { runResearch } from "@/lib/research/orchestrator";
-import { resolveCompanies, type CompanyCandidate } from "@/lib/research/company-resolver";
+import { resolveCompanies } from "@/lib/research/company-resolver";
+import type { CompanyCandidate } from "@/lib/research/types";
 import type { ResearchReview } from "@/lib/research/research-review";
 import type { ResearchCaseType, ResearchFinding, ResearchRun, ResearchMode } from "@/lib/research/types";
 
@@ -70,10 +70,10 @@ export async function POST(request: NextRequest) {
         excludedCountries: parsed.excludedCountries, transportModes: parsed.transportModes,
         maxQueries: 12 });
         
-      const companies = resolveCompanies(run.findings, type === "LOGISTICS" ? "Taşıma hizmeti" : parsed.normalizedProduct);
+      const companies = resolveCompanies(run.findings);
       
       const limitedCompanies = companies.slice(0, 20); // pass fewer to AI to prevent context length errors
-      const review = await aiProvider.review(parsed, type, limitedCompanies as any); // cast for now
+      const review = await aiProvider.review(parsed, type, limitedCompanies); // cast for now
       results.push({ type, ...run, companies, review });
     }
     
@@ -100,8 +100,7 @@ export async function POST(request: NextRequest) {
           create: { caseId: created.id, companyId: company.id, relevanceScore: candidate.relevanceScore,
             matchReason: "Found for " + result.type + "; see evidence" } });
         await tx.evidence.createMany({ data: candidate.evidenceSources.map((source) => ({
-          companyId: company.id, claim: source.type + " Evidence", sourceUrl: source.url,
-          sourceType: "Agentic Fetcher", status: "VERIFIED",
+          companyId: company.id, claim: source.claimType, sourceUrl: source.url, sourceType: source.type || "HTML", status: source.status === "CONFIRMED" ? "VERIFIED" : source.status as import("@prisma/client").EvidenceStatus,
         })) });
       }
       await tx.researchSession.update({ where: { id: session.id }, data: {
@@ -116,5 +115,6 @@ export async function POST(request: NextRequest) {
       paidFallbackUsed: false }, { status: 500 });
   }
 }
+
 
 
