@@ -94,7 +94,7 @@ export class LocalIntentProvider implements IntentProvider {
     if (logistics) tasks.push("LOGISTICS");
     if (!tasks.length) tasks.push(preferredType ?? (product ? "SOURCING" : "LOGISTICS"));
     const preferredSourcingRegion = /önce\s*(?:tr|türkiye)|first\s*turkey|\btr[\s'’]*den\s*bul/i.test(raw)
-      ? "Türkiye" : sourceCountry ?? (tasks.includes("SOURCING") ? "Türkiye" : null);
+      ? "Türkiye" : sourceCountry ?? null;
     const destinations = mentioned.filter((country) => country !== sourceCountry &&
       (tasks.includes("BUYER_SEARCH") || country === "İran" || /için|hedef|pazar|varış/i.test(raw)) &&
       !(tasks.includes("SOURCING") && country === preferredSourcingRegion));
@@ -113,11 +113,7 @@ export class LocalIntentProvider implements IntentProvider {
         confidence -= 0.5;
         missingCriticalFields.push("product");
       }
-      if (destinations.includes("İran") && !sourceCountry && !raw.match(/önce/i) && !raw.match(/global/i)) {
-        // "İran için L-Threonine araştır" (could mean inside Iran or for Iran)
-        confidence -= 0.3;
-        assumptions.push("Türkiye'den (veya Global'den) İran'a tedarik aranıyor");
-      }
+      if (destinations.length > 0 && !sourceCountry && !preferredSourcingRegion && tasks.includes("SOURCING")) { clarificationQuestion = "Bu ürünü " + destinations[0] + " içinde mi arıyorsunuz, yoksa " + destinations[0] + " pazarına ithal etmek için mi?"; clarificationRequired = true; confidence -= 0.3; }
     }
 
     if (tasks.includes("LOGISTICS")) {
@@ -148,12 +144,7 @@ export class LocalIntentProvider implements IntentProvider {
       }
     }
 
-    if (raw.match(/L-Threonine için tedarikçi araştır/i) && raw === "L-Threonine için tedarikçi araştır") {
-       // specific override for test 1 to not ask
-       clarificationRequired = false;
-       confidence = 0.8;
-       assumptions.push("Varsayılan: Türkiye -> Global");
-    }
+    
 
     return {
       intent: tasks.length > 1 ? "MIXED" : tasks[0], tasks,
@@ -180,3 +171,4 @@ export class LocalIntentProvider implements IntentProvider {
 export async function parseIntent(rawRequest: string, preferredType?: ResearchCaseType): Promise<ParsedIntent> {
   return new LocalIntentProvider().parse(rawRequest, preferredType);
 }
+

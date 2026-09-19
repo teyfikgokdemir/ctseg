@@ -1,6 +1,4 @@
-﻿/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-"use client";
+﻿"use client";
 
 import { FormEvent, useState } from "react";
 import Link from "next/link";
@@ -21,7 +19,7 @@ type ResearchResult = { type: Mode; companies: Company[]; findings: { url: strin
   queries: { query: string }[]; diagnostics: { adapter: string; query: string; rawCount: number;
     acceptedCount: number; status: string; error?: string }[];
   review: { summary: string; followUpQueries: string[]; limitations: string[] }; round: number };
-type ResponseData = { case?: { id: string; reference: string }; parsed: Parsed; results?: ResearchResult[]; clarification?: any };
+type ResponseData = { case?: { id: string; reference: string }; parsed: Parsed; results?: ResearchResult[]; clarification?: { clarificationRequired: boolean; question: string } };
 
 const modes: { value: Mode; label: string }[] = [
   { value: "SOURCING", label: "Tedarikçi" }, { value: "BUYER_SEARCH", label: "Alıcı" },
@@ -31,20 +29,28 @@ const label = (type: string) => modes.find((item) => item.value === type)?.label
 
 export default function NewCasePage() {
   const [rawRequest, setRawRequest] = useState("");
+  const [clarificationAnswer, setClarificationAnswer] = useState("");
   const [preferredType, setPreferredType] = useState<Mode | null>(null);
   const [researchMode, setResearchMode] = useState<ResearchMode>("QUICK");
   const [data, setData] = useState<ResponseData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  async function research(event: FormEvent, bypassClarification = false) {
+  async function research(event: FormEvent, isClarification = false) {
     event.preventDefault();
-    if (!rawRequest.trim()) return;
+    const finalRequest = isClarification ? rawRequest + "\n\n[CLARIFICATION]: " + clarificationAnswer : rawRequest;
+    if (!finalRequest.trim()) return;
+    
+    if (isClarification) {
+      setRawRequest(finalRequest);
+      setClarificationAnswer("");
+    }
+
     setLoading(true); setData(null); setError("");
     try {
       const response = await fetch("/api/research/execute", { method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ rawRequest, preferredType, mode: researchMode }) });
+        body: JSON.stringify({ rawRequest: finalRequest, preferredType, mode: researchMode }) });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "Araştırma başlatılamadı.");
       setData(payload);
@@ -65,6 +71,7 @@ export default function NewCasePage() {
       <p className="lead">Talebi kendi sözlerinle yaz. Agentic Engine talebi anlar, kaynakları okur ve kanıtlarıyla doğrular.</p>
     </section>
 
+    {!data?.clarification?.clarificationRequired ? (
     <form className="research-form" onSubmit={(e) => research(e)}>
       <div className="quick-modes" aria-label="İsteğe bağlı araştırma odağı">
         <button type="button" className={!preferredType ? "active" : ""} onClick={() => setPreferredType(null)}>Otomatik</button>
@@ -74,8 +81,8 @@ export default function NewCasePage() {
       </div>
       
       <div className="quick-modes" aria-label="Araştırma Derinliği">
-        <button type="button" className={researchMode === "QUICK" ? "active" : ""} onClick={() => setResearchMode("QUICK")}>Hızlı Araştırma</button>
-        <button type="button" className={researchMode === "DEEP" ? "active" : ""} onClick={() => setResearchMode("DEEP")}>Derin Araştırma</button>
+        <button type="button" className={researchMode === "QUICK" ? "active" : ""} onClick={() => setResearchMode("QUICK")}>Hızlı Araştırma (max 5 fetch)</button>
+        <button type="button" className={researchMode === "DEEP" ? "active" : ""} onClick={() => setResearchMode("DEEP")}>Derin Araştırma (max 15 fetch)</button>
       </div>
 
       <label htmlFor="request-text">Talep</label>
@@ -88,6 +95,22 @@ export default function NewCasePage() {
         </button>
       </div>
     </form>
+    ) : (
+    <form className="research-form" onSubmit={(e) => research(e, true)}>
+      <div className="error-banner">
+        <div className="eyebrow">Agentic Soru (Eksik Bilgi)</div>
+        <p><strong>{data.clarification.question}</strong></p>
+      </div>
+      <label htmlFor="clarification-text">Yanıtınız</label>
+      <textarea id="clarification-text" value={clarificationAnswer} onChange={(event) => setClarificationAnswer(event.target.value)}
+        rows={4} maxLength={1000} placeholder="Yanıtınızı buraya yazın..." autoFocus />
+      <div className="research-form-footer">
+        <button className="primary-button" disabled={loading || !clarificationAnswer.trim()}>
+          {loading ? "Devam Ediliyor…" : "Yanıtla ve Devam Et"}
+        </button>
+      </div>
+    </form>
+    )}
 
     {loading && <section className="research-progress" role="status" aria-live="polite">
       <span className="progress-pulse" />
@@ -95,11 +118,6 @@ export default function NewCasePage() {
         <p>Intent ayrıştırılıyor, sayfalar okunuyor ve çapraz doğrulama yapılıyor.</p></div>
     </section>}
     {error && <div className="error-banner" role="alert">{error}</div>}
-
-    {data?.clarification?.clarificationRequired && <section className="research-summary error-banner">
-        <div className="eyebrow">Soru: {data.clarification.question}</div>
-        <p>Lütfen talebinize ekleyin ve tekrar araştırın.</p>
-    </section>}
 
     {data?.results && <>
       <section className="research-summary">
