@@ -1,19 +1,19 @@
 lock_refresh=0
 npm_ci=0
 prisma_generate=0
-next_build=0
+next_build=1
 --- tail ---
 
-up to date, audited 70 packages in 431ms
+up to date, audited 71 packages in 657ms
 
-31 packages are looking for funding
+32 packages are looking for funding
   run `npm fund` for details
 
 found 0 vulnerabilities
 
-added 42 packages, and audited 43 packages in 11s
+added 43 packages, and audited 44 packages in 10s
 
-9 packages are looking for funding
+10 packages are looking for funding
   run `npm fund` for details
 
 found 0 vulnerabilities
@@ -33,11 +33,11 @@ Prisma schema loaded from prisma/schema.prisma
 │    npm i @prisma/client@latest                          │
 └─────────────────────────────────────────────────────────┘
 
-✔ Generated Prisma Client (v6.12.0) to ./node_modules/@prisma/client in 105ms
+✔ Generated Prisma Client (v6.12.0) to ./node_modules/@prisma/client in 113ms
 
 Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
 
-Tip: Interested in query caching in just a few lines of code? Try Accelerate today! https://pris.ly/tip-3-accelerate
+Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
 
 
 > ctseg-trade-os@0.1.0 build
@@ -52,35 +52,41 @@ https://nextjs.org/telemetry
    ▲ Next.js 15.5.25
 
    Creating an optimized production build ...
- ✓ Compiled successfully in 5.5s
+ ⚠ Compiled with warnings in 1349ms
+
+./node_modules/jose/dist/webapi/lib/deflate.js
+A Node.js API is used (CompressionStream at line: 31) which is not supported in the Edge Runtime.
+Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+
+Import trace for requested module:
+./node_modules/jose/dist/webapi/lib/deflate.js
+./node_modules/jose/dist/webapi/lib/jwe_decrypt.js
+./node_modules/jose/dist/webapi/jwt/decrypt.js
+./node_modules/jose/dist/webapi/index.js
+
+./node_modules/jose/dist/webapi/lib/deflate.js
+A Node.js API is used (DecompressionStream at line: 34) which is not supported in the Edge Runtime.
+Learn more: https://nextjs.org/docs/api-reference/edge-runtime
+
+Import trace for requested module:
+./node_modules/jose/dist/webapi/lib/deflate.js
+./node_modules/jose/dist/webapi/lib/jwe_decrypt.js
+./node_modules/jose/dist/webapi/jwt/decrypt.js
+./node_modules/jose/dist/webapi/index.js
+
+ ✓ Compiled successfully in 6.4s
    Linting and checking validity of types ...
-   Collecting page data ...
-   Generating static pages (0/9) ...
-   Generating static pages (2/9) 
-   Generating static pages (4/9) 
-   Generating static pages (6/9) 
- ✓ Generating static pages (9/9)
-   Finalizing page optimization ...
-   Collecting build traces ...
+Failed to compile.
 
-Route (app)                                 Size  First Load JS
-┌ ○ /                                      140 B         103 kB
-├ ○ /_not-found                            994 B         104 kB
-├ ƒ /api/cases                             140 B         103 kB
-├ ƒ /api/research/plan                     140 B         103 kB
-├ ƒ /api/research/run                      140 B         103 kB
-├ ƒ /api/research/search                   140 B         103 kB
-├ ƒ /cases                                 140 B         103 kB
-├ ƒ /cases/[id]                            140 B         103 kB
-└ ○ /cases/new                           2.18 kB         105 kB
-+ First Load JS shared by all             103 kB
-  ├ chunks/255-37e0f0325134c4d7.js       46.4 kB
-  ├ chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB
-  └ other shared chunks (total)           1.9 kB
+./middleware.ts:57:46
+Type error: Argument of type 'string | null' is not assignable to parameter of type 'string'.
+  Type 'null' is not assignable to type 'string'.
 
-
-ƒ Middleware                             34.3 kB
-
-○  (Static)   prerendered as static content
-ƒ  (Dynamic)  server-rendered on demand
-
+[0m [90m 55 |[39m
+ [90m 56 |[39m     [36mconst[39m requestHeaders [33m=[39m [36mnew[39m [33mHeaders[39m(request[33m.[39mheaders)[33m;[39m
+[31m[1m>[22m[39m[90m 57 |[39m     requestHeaders[33m.[39m[36mset[39m([32m"x-ctseg-user-email"[39m[33m,[39m email)[33m;[39m
+ [90m    |[39m                                              [31m[1m^[22m[39m
+ [90m 58 |[39m
+ [90m 59 |[39m     [36mreturn[39m [33mNextResponse[39m[33m.[39mnext({
+ [90m 60 |[39m       request[33m:[39m { headers[33m:[39m requestHeaders }[33m,[39m[0m
+Next.js build worker exited with code: 1 and signal: null
