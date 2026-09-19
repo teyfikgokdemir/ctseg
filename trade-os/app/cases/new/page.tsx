@@ -29,6 +29,12 @@ type ResearchRun = {
   paidFallbackUsed: false;
 };
 
+type SavedCase = {
+  id: string;
+  reference: string;
+  title: string;
+};
+
 const types = [
   { value: "SOURCING", label: "Tedarikçi Bul", example: "İran için haftalık 100 MT Feed Grade L-Threonine arıyoruz. Önce Türkiye, sonra global." },
   { value: "BUYER_SEARCH", label: "Alıcı Bul", example: "İran safranını Almanya ve Fransa'da alabilecek güncel ithalatçı ve distribütörleri bul." },
@@ -40,15 +46,18 @@ export default function NewCasePage() {
   const [rawRequest, setRawRequest] = useState(types[0].example);
   const [plan, setPlan] = useState<Plan | null>(null);
   const [run, setRun] = useState<ResearchRun | null>(null);
+  const [savedCase, setSavedCase] = useState<SavedCase | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [researching, setResearching] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   async function submit(event: FormEvent) {
     event.preventDefault();
     setLoading(true);
     setPlan(null);
     setRun(null);
+    setSavedCase(null);
     setError("");
 
     const response = await fetch("/api/research/plan", {
@@ -63,15 +72,44 @@ export default function NewCasePage() {
     setLoading(false);
   }
 
+  async function persistCase(): Promise<SavedCase | null> {
+    if (savedCase) return savedCase;
+
+    setSaving(true);
+    const response = await fetch("/api/cases", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ type, rawRequest }),
+    });
+
+    const data = await response.json();
+    setSaving(false);
+
+    if (!response.ok) {
+      setError(data.error || "Vaka kaydedilemedi.");
+      return null;
+    }
+
+    const created = data.case as SavedCase;
+    setSavedCase(created);
+    return created;
+  }
+
   async function runResearch() {
     setResearching(true);
     setRun(null);
     setError("");
 
+    const storedCase = await persistCase();
+    if (!storedCase) {
+      setResearching(false);
+      return;
+    }
+
     const response = await fetch("/api/research/run", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ type, rawRequest, maxQueries: 18 }),
+      body: JSON.stringify({ type, rawRequest, caseId: storedCase.id, maxQueries: 18 }),
     });
 
     const data = await response.json();
@@ -86,6 +124,7 @@ export default function NewCasePage() {
     if (selected) setRawRequest(selected.example);
     setPlan(null);
     setRun(null);
+    setSavedCase(null);
     setError("");
   }
 
@@ -93,7 +132,10 @@ export default function NewCasePage() {
     <main className="shell">
       <header className="topbar">
         <a className="brand" href="/">CTSEG <span>Trade OS</span></a>
-        <div className="badge">Yeni Vaka</div>
+        <nav className="top-actions">
+          <a href="/cases">Vakalar</a>
+          <div className="badge">Yeni Vaka</div>
+        </nav>
       </header>
 
       <section className="case-layout">
@@ -136,6 +178,7 @@ export default function NewCasePage() {
             <>
               <div className="eyebrow">Araştırma Planı</div>
               <h2>{types.find((item) => item.value === plan.type)?.label}</h2>
+              {savedCase && <div className="saved-case">Kaydedildi · <strong>{savedCase.reference}</strong></div>}
               <ol className="task-list">
                 {plan.tasks.map((task) => <li key={task}>{task}</li>)}
               </ol>
@@ -143,8 +186,8 @@ export default function NewCasePage() {
                 <strong>Kaynak önceliği</strong>
                 <div className="source-list">{plan.sourcePriority.map((source) => <span key={source}>{source}</span>)}</div>
               </div>
-              <button className="primary-button research-button" onClick={runResearch} disabled={researching}>
-                {researching ? "Ücretsiz kaynaklar taranıyor…" : "Araştırmayı başlat"}
+              <button className="primary-button research-button" onClick={runResearch} disabled={researching || saving}>
+                {saving ? "Vaka kaydediliyor…" : researching ? "Ücretsiz kaynaklar taranıyor…" : "Kaydet ve araştırmayı başlat"}
               </button>
             </>
           )}
