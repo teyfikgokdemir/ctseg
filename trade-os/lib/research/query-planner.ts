@@ -74,7 +74,6 @@ function inferGeography(request: ResearchRequest): string {
     "türkiye": "Turkey",
     "turkey": "Turkey",
     "iran": "Iran",
-    "iran": "Iran",
     "çin": "China",
     "china": "China",
     "almanya": "Germany",
