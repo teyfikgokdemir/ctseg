@@ -27,7 +27,7 @@ export const dynamic = "force-dynamic";
 export default async function Home() {
   const user = await currentUser();
 
-  const [caseCount, activeCount, researchCount, recentCases] = await Promise.all([
+  const [caseCount, activeCount, researchCount] = await Promise.all([
     db.tradeCase.count(),
     db.tradeCase.count({
       where: {
@@ -37,18 +37,6 @@ export default async function Home() {
       },
     }),
     db.researchSession.count(),
-    db.tradeCase.findMany({
-      orderBy: { updatedAt: "desc" },
-      take: 3,
-      select: {
-        id: true,
-        title: true,
-        reference: true,
-        type: true,
-        status: true,
-        updatedAt: true,
-      },
-    }),
   ]);
 
   return (
@@ -65,13 +53,13 @@ export default async function Home() {
         </nav>
       </header>
 
-      <section className="dashboard-hero">
+      <section className="dashboard-hero home-hero">
         <div className="dashboard-hero-copy">
           <div className="eyebrow">Trade Intelligence System</div>
           <h1 className="dashboard-title">Ticareti araştır.<br />Kanıtla. Harekete geç.</h1>
           <p className="lead">
-            Tedarik, alıcı keşfi ve lojistik araştırmalarını tek operasyon hafızasında yönetin.
-            Ücretsiz kaynakları önceleyin, güncelliği kontrol edin, sonucu kanıtla birlikte saklayın.
+            Tedarikçi, alıcı ve taşıma seçeneklerini tek taleple araştırın.
+            Şirketleri kaynakları, güncelliği ve doğrulama durumuyla birlikte inceleyin.
           </p>
           <div className="hero-actions">
             <a className="primary-link" href="/cases/new">Yeni araştırma başlat</a>
@@ -79,24 +67,29 @@ export default async function Home() {
           </div>
         </div>
 
-        <aside className="dashboard-hero-panel">
-          <div className="hero-panel-head">
-            <span>OPERATIONS</span>
-            <strong>Live</strong>
-          </div>
-          <div className="hero-panel-stat">
-            <strong>{activeCount}</strong>
-            <span>aktif vaka</span>
-          </div>
-          <div className="hero-panel-lines">
-            <span><i />Free-first research</span>
-            <span><i />Evidence required</span>
-            <span><i />Paid source auto-use: off</span>
-          </div>
-        </aside>
       </section>
 
-      <section className="metric-grid">
+      <section className="module-section home-modules">
+        <div className="section-heading-row">
+          <div>
+            <div className="eyebrow">Research Desk</div>
+            <h2>Bir talep. Üç araştırma alanı.</h2>
+          </div>
+          <span>İhtiyacı yazın; araştırma alanı kendiliğinden belirlenir.</span>
+        </div>
+
+        <div className="modern-module-grid">
+          {modules.map((item) => (
+            <a className="modern-module-card" href="/cases/new" key={item.code}>
+              <div className="module-card-top"><span>{item.code}</span><small>{item.kicker}</small></div>
+              <div><h3>{item.title}</h3><p>{item.text}</p></div>
+              <div className="module-card-cta">Araştırmaya geç <b>↗</b></div>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="metric-grid home-metrics">
         <article className="metric-card">
           <span>Toplam vaka</span>
           <strong>{caseCount}</strong>
@@ -114,63 +107,6 @@ export default async function Home() {
         </article>
       </section>
 
-      <section className="module-section">
-        <div className="section-heading-row">
-          <div>
-            <div className="eyebrow">Research Desk</div>
-            <h2>Ne yapmak istiyorsun?</h2>
-          </div>
-          <span>Talebi sen yazarsın. Sistem hazır metin dayatmaz.</span>
-        </div>
-
-        <div className="modern-module-grid">
-          {modules.map((item) => (
-            <a className="modern-module-card" href="/cases/new" key={item.code}>
-              <div className="module-card-top">
-                <span>{item.code}</span>
-                <small>{item.kicker}</small>
-              </div>
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </div>
-              <div className="module-card-cta">Araştırmayı başlat <b>↗</b></div>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section className="recent-section">
-        <div className="section-heading-row">
-          <div>
-            <div className="eyebrow">Recent Memory</div>
-            <h2>Son vakalar</h2>
-          </div>
-          <a href="/cases">Tümünü gör →</a>
-        </div>
-
-        <div className="recent-case-grid">
-          {recentCases.length === 0 ? (
-            <div className="empty-list">Henüz vaka oluşturulmadı.</div>
-          ) : recentCases.map((item) => (
-            <a className="recent-case-card" href={`/cases/${item.id}`} key={item.id}>
-              <div className="result-meta">
-                <span>{item.type.replace("_", " ")}</span>
-                <span>{item.status}</span>
-              </div>
-              <h3>{item.title}</h3>
-              <div className="recent-case-footer">
-                <span>{item.reference}</span>
-                <span>
-                  {new Intl.DateTimeFormat("tr-TR", {
-                    dateStyle: "medium",
-                  }).format(item.updatedAt)}
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
     </main>
   );
 }

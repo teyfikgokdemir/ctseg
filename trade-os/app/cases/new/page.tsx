@@ -2,249 +2,131 @@
 
 import { FormEvent, useState } from "react";
 
-type Plan = {
-  type: string;
-  rawRequest: string;
-  tasks: string[];
-  sourcePriority: string[];
-  policy: { freeFirst: boolean; freshnessRequired: boolean; paidSourceBehavior: string };
-};
+type Mode = "SOURCING" | "BUYER_SEARCH" | "LOGISTICS";
+type Parsed = { intent: string; tasks: Mode[]; normalizedProduct: string | null; grade: string | null;
+  quantity: number | null; quantityUnit: string | null; recurrence: string | null;
+  preferredSourcingRegion: string | null; destinations: string[]; transportModes: string[] };
+type Evidence = { title: string; url: string; adapter: string; status: string; claim: string };
+type Company = { key: string; name: string; country: string | null; companyType: string;
+  productOrService: string | null; website: string; productPage: string | null; contactPage: string | null;
+  email: string | null; phone: string | null; freshnessScore: number; verificationScore: number;
+  evidenceCount: number; evidenceSources: Evidence[] };
+type ResearchResult = { type: Mode; companies: Company[]; findings: { url: string }[];
+  queries: { query: string }[]; diagnostics: { adapter: string; query: string; rawCount: number;
+    acceptedCount: number; status: string; error?: string }[];
+  review: { summary: string; followUpQueries: string[]; limitations: string[] } };
+type ResponseData = { case: { id: string; reference: string }; parsed: Parsed; results: ResearchResult[] };
 
-type Finding = {
-  title: string;
-  url: string;
-  snippet?: string;
-  domain: string;
-  adapter: string;
-  language: string;
-  freshnessScore: number;
-  verificationScore: number;
-  relevanceScore: number;
-  totalScore: number;
-  historicalOnly: boolean;
-};
-
-type ResearchRun = {
-  findings: Finding[];
-  queries: { query: string; language: string; intent: string }[];
-  diagnostics: { adapter: string; query: string; rawCount: number; acceptedCount: number; error?: string }[];
-  searchedAt: string;
-  paidFallbackUsed: false;
-};
-
-type SavedCase = {
-  id: string;
-  reference: string;
-  title: string;
-};
-
-const types = [
-  { value: "SOURCING", label: "Tedarikçi Bul" },
-  { value: "BUYER_SEARCH", label: "Alıcı Bul" },
-  { value: "LOGISTICS", label: "Lojistik Bul" },
+const modes: { value: Mode; label: string }[] = [
+  { value: "SOURCING", label: "Tedarikçi" }, { value: "BUYER_SEARCH", label: "Alıcı" },
+  { value: "LOGISTICS", label: "Lojistik" },
 ];
+const label = (type: string) => modes.find((item) => item.value === type)?.label || type;
 
 export default function NewCasePage() {
-  const [type, setType] = useState("SOURCING");
   const [rawRequest, setRawRequest] = useState("");
-  const [plan, setPlan] = useState<Plan | null>(null);
-  const [run, setRun] = useState<ResearchRun | null>(null);
-  const [savedCase, setSavedCase] = useState<SavedCase | null>(null);
-  const [error, setError] = useState("");
+  const [preferredType, setPreferredType] = useState<Mode | null>(null);
+  const [data, setData] = useState<ResponseData | null>(null);
   const [loading, setLoading] = useState(false);
-  const [researching, setResearching] = useState(false);
-  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
 
-  async function submit(event: FormEvent) {
+  async function research(event: FormEvent) {
     event.preventDefault();
-    setLoading(true);
-    setPlan(null);
-    setRun(null);
-    setSavedCase(null);
-    setError("");
-
-    const response = await fetch("/api/research/plan", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ type, rawRequest }),
-    });
-
-    const data = await response.json();
-    if (!response.ok) setError(data.error || "Araştırma planı oluşturulamadı.");
-    else setPlan(data);
-    setLoading(false);
+    if (!rawRequest.trim()) return;
+    setLoading(true); setData(null); setError("");
+    try {
+      const response = await fetch("/api/research/execute", { method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ rawRequest, preferredType }) });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Araştırma başlatılamadı.");
+      setData(payload);
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "Araştırma başlatılamadı.");
+    } finally { setLoading(false); }
   }
 
-  async function persistCase(): Promise<SavedCase | null> {
-    if (savedCase) return savedCase;
+  return <main className="shell research-shell">
+    <header className="topbar">
+      <a className="brand" href="/">CTSEG <span>Trade OS</span></a>
+      <nav className="top-actions"><a href="/cases">Vakalar</a><span className="badge">Yeni araştırma</span></nav>
+    </header>
 
-    setSaving(true);
-    const response = await fetch("/api/cases", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ type, rawRequest }),
-    });
+    <section className="research-intro">
+      <div className="eyebrow">Research Desk / Free First</div>
+      <h1>Ne arıyorsun?</h1>
+      <p className="lead">Talebi kendi sözlerinle yaz. Ürün, pazar, alıcı ve taşıma ihtiyacını sistem ayrıştırır; kaynakları kanıtlarıyla gösterir.</p>
+    </section>
 
-    const data = await response.json();
-    setSaving(false);
+    <form className="research-form" onSubmit={research}>
+      <div className="quick-modes" aria-label="İsteğe bağlı araştırma odağı">
+        <button type="button" className={!preferredType ? "active" : ""} onClick={() => setPreferredType(null)}>Otomatik</button>
+        {modes.map((mode) => <button type="button" key={mode.value}
+          className={preferredType === mode.value ? "active" : ""}
+          onClick={() => setPreferredType(mode.value)}>{mode.label}</button>)}
+      </div>
+      <label htmlFor="request-text">Talep</label>
+      <textarea id="request-text" value={rawRequest} onChange={(event) => setRawRequest(event.target.value)}
+        rows={7} maxLength={4000} placeholder="Ne araştırmak istediğini yaz…" />
+      <div className="research-form-footer">
+        <span>Eksik ayrıntılar araştırmayı durdurmaz. Firmalar yalnızca kaynaklarıyla görünür.</span>
+        <button className="primary-button" disabled={loading || !rawRequest.trim()}>
+          {loading ? "Araştırılıyor…" : "Araştır"}
+        </button>
+      </div>
+    </form>
 
-    if (!response.ok) {
-      setError(data.error || "Vaka kaydedilemedi.");
-      return null;
-    }
+    {loading && <section className="research-progress" role="status" aria-live="polite">
+      <span className="progress-pulse" />
+      <div><strong>Talep çözümleniyor ve ücretsiz kaynaklar taranıyor.</strong>
+        <p>Intent, sorgu planı, kaynak doğrulama ve şirket birleştirme işleniyor.</p></div>
+    </section>}
+    {error && <div className="error-banner" role="alert">{error}</div>}
 
-    const created = data.case as SavedCase;
-    setSavedCase(created);
-    return created;
-  }
-
-  async function runResearch() {
-    setResearching(true);
-    setRun(null);
-    setError("");
-
-    const storedCase = await persistCase();
-    if (!storedCase) {
-      setResearching(false);
-      return;
-    }
-
-    const response = await fetch("/api/research/run", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ type, rawRequest, caseId: storedCase.id, maxQueries: 12 }),
-    });
-
-    const data = await response.json();
-    if (!response.ok) setError(data.error || "Araştırma çalıştırılamadı.");
-    else setRun(data);
-    setResearching(false);
-  }
-
-  function changeType(next: string) {
-    setType(next);
-    setRawRequest("");
-    setPlan(null);
-    setRun(null);
-    setSavedCase(null);
-    setError("");
-  }
-
-  return (
-    <main className="shell">
-      <header className="topbar">
-        <a className="brand" href="/">CTSEG <span>Trade OS</span></a>
-        <nav className="top-actions">
-          <a href="/cases">Vakalar</a>
-          <div className="badge">Yeni Vaka</div>
-        </nav>
-      </header>
-
-      <section className="case-layout">
-        <div className="case-form-wrap">
-          <div className="eyebrow">Research Orchestrator</div>
-          <h1 className="case-title">Ne yapmak istiyorsun?</h1>
-          <p className="lead">Talebi doğal dille yaz. Sistem araştırmayı kaynak, güncellik ve doğrulama görevlerine ayırsın.</p>
-
-          <form className="case-form" onSubmit={submit}>
-            <div className="type-switch">
-              {types.map((item) => (
-                <button
-                  type="button"
-                  className={type === item.value ? "type-button active" : "type-button"}
-                  key={item.value}
-                  onClick={() => changeType(item.value)}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-            <label>
-              Talep
-              <textarea
-                value={rawRequest}
-                onChange={(e) => setRawRequest(e.target.value)}
-                rows={8}
-                placeholder="Talebinizi yazın…"
-              />
-            </label>
-            <button className="primary-button" disabled={loading || !rawRequest.trim()}>
-              {loading ? "Plan hazırlanıyor…" : "Araştırma planını oluştur"}
-            </button>
-          </form>
+    {data && <>
+      <section className="research-summary">
+        <div><div className="eyebrow">Araştırma özeti</div><h2>{data.parsed.normalizedProduct || data.parsed.tasks.map(label).join(" + ")}</h2></div>
+        <div className="summary-facts">
+          <span>{data.parsed.tasks.map(label).join(" + ")}</span>
+          {data.parsed.preferredSourcingRegion && <span>Öncelik {data.parsed.preferredSourcingRegion}</span>}
+          {data.parsed.destinations.length > 0 && <span>Hedef {data.parsed.destinations.join(", ")}</span>}
+          {data.parsed.quantity !== null && <span>{data.parsed.quantity} {data.parsed.quantityUnit}{data.parsed.recurrence === "weekly" ? " / hafta" : ""}</span>}
+          {data.parsed.grade && <span>{data.parsed.grade}</span>}
         </div>
-
-        <aside className="plan-panel">
-          {!plan ? (
-            <div className="empty-plan">
-              <span>FREE-FIRST</span>
-              <h2>Araştırma henüz başlamadı.</h2>
-              <p>Ücretli veri kaynakları otomatik kullanılmaz. Bulunursa yalnızca alternatif olarak raporlanır.</p>
-            </div>
-          ) : (
-            <>
-              <div className="eyebrow">Araştırma Planı</div>
-              <h2>{types.find((item) => item.value === plan.type)?.label}</h2>
-              {savedCase && <div className="saved-case">Kaydedildi · <strong>{savedCase.reference}</strong></div>}
-              <ol className="task-list">
-                {plan.tasks.map((task) => <li key={task}>{task}</li>)}
-              </ol>
-              <div className="source-block">
-                <strong>Kaynak önceliği</strong>
-                <div className="source-list">{plan.sourcePriority.map((source) => <span key={source}>{source}</span>)}</div>
-              </div>
-              <button className="primary-button research-button" onClick={runResearch} disabled={researching || saving}>
-                {saving ? "Vaka kaydediliyor…" : researching ? "Ücretsiz kaynaklar taranıyor…" : "Kaydet ve araştırmayı başlat"}
-              </button>
-            </>
-          )}
-        </aside>
+        <a href={`/cases/${data.case.id}`}>Vaka {data.case.reference} ↗</a>
       </section>
 
-      {error && <div className="error-banner">{error}</div>}
-
-      {run && (
-        <section className="results-section">
-          <div className="results-head">
-            <div>
-              <div className="eyebrow">Live Research</div>
-              <h2>{run.findings.length} benzersiz sonuç</h2>
-            </div>
-            <div className="badge">{run.queries.length} sorgu · Paid fallback: hayır</div>
-          </div>
-
-          <div className="results-grid">
-            {run.findings.slice(0, 40).map((finding) => (
-              <article className="result-card" key={finding.url}>
-                <div className="result-meta">
-                  <span>{finding.domain}</span>
-                  <span>{finding.language.toUpperCase()}</span>
-                  {finding.historicalOnly && <span className="warning">Eski veri</span>}
-                </div>
-                <h3>{finding.title}</h3>
-                {finding.snippet && <p>{finding.snippet}</p>}
-                <div className="score-row">
-                  <span>İlgi <strong>{finding.relevanceScore}</strong></span>
-                  <span>Güncellik <strong>{finding.freshnessScore}</strong></span>
-                  <span>Doğrulama <strong>{finding.verificationScore}</strong></span>
-                  <span>Toplam <strong>{finding.totalScore}</strong></span>
-                </div>
-                <a href={finding.url} target="_blank" rel="noreferrer">Kaynağı aç ↗</a>
-              </article>
-            ))}
-          </div>
-          {run.findings.length === 0 && <p>Uygun ticari sonuç bulunamadı. Arama tanısı aşağıdadır.</p>}
-          <details>
-            <summary>Arama tanısı · {run.diagnostics.length} adapter sorgusu</summary>
-            <ul>
-              {run.diagnostics.map((item, index) => <li key={`${item.adapter}-${index}`}>
-                {item.adapter}: {item.query} · ham {item.rawCount}, kabul {item.acceptedCount}
-                {item.error && ` · hata: ${item.error}`}
-              </li>)}
-            </ul>
-          </details>
-        </section>
-      )}
-    </main>
-  );
+      {data.results.map((result) => <section className="company-section" key={result.type}>
+        <div className="company-section-head"><div><div className="eyebrow">{label(result.type)} araştırması</div>
+          <h2>{result.companies.length} şirket adayı</h2></div>
+          <span>{result.queries.length} sorgu · {result.findings.length} kaynak</span></div>
+        <p className="review-summary">{result.review.summary}</p>
+        {result.companies.length === 0 && <p className="empty-result">Kanıtlı ticari aday bulunamadı. Adapter tanısı aşağıdadır.</p>}
+        <div className="company-grid">{result.companies.map((company) => <article className="company-card" key={company.key}>
+          <div className="company-card-top"><div><h3>{company.name}</h3><span>{company.country || "Ülke doğrulanmadı"} · {company.companyType}</span></div>
+            <strong>{company.evidenceCount} kanıt</strong></div>
+          {company.productOrService && <p>{company.productOrService}</p>}
+          <div className="company-links"><a href={company.website} target="_blank" rel="noreferrer">Web sitesi ↗</a>
+            {company.productPage && <a href={company.productPage} target="_blank" rel="noreferrer">Doğrulanan sayfa ↗</a>}
+            {company.contactPage && <a href={company.contactPage} target="_blank" rel="noreferrer">İletişim ↗</a>}</div>
+          {(company.email || company.phone) && <p className="company-contact">{[company.email, company.phone].filter(Boolean).join(" · ")}</p>}
+          <div className="company-scores"><span>Güncellik {company.freshnessScore}</span><span>Doğrulama {company.verificationScore}</span></div>
+          <details className="evidence-list"><summary>Kaynakları göster</summary><ul>{company.evidenceSources.map((source) => <li key={source.url}>
+            <a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>
+            <small>{source.claim} · {source.adapter}</small>
+          </li>)}</ul></details>
+        </article>)}</div>
+        {(result.review.followUpQueries.length > 0 || result.review.limitations.length > 0) && <div className="review-notes">
+          {result.review.limitations.map((item) => <p key={item}>{item}</p>)}
+          {result.review.followUpQueries.length > 0 && <details><summary>İkinci tur önerileri</summary><ul>
+            {result.review.followUpQueries.map((query) => <li key={query}>{query}</li>)}</ul></details>}
+        </div>}
+        <details className="diagnostic-panel"><summary>Arama tanısı · {result.diagnostics.length} adapter sorgusu</summary>
+          <ul>{result.diagnostics.map((item, index) => <li key={`${item.adapter}-${index}`}>
+            <strong>{item.adapter}</strong> · {item.status} · ham {item.rawCount} · kabul {item.acceptedCount}<br />
+            <span>{item.query}</span>{item.error && <small> · {item.error}</small>}
+          </li>)}</ul></details>
+      </section>)}
+    </>}
+  </main>;
 }
