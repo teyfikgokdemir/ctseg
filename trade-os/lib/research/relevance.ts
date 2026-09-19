@@ -1,4 +1,5 @@
 import type { ResearchCaseType, ResearchRequest } from "./types";
+import { normalizeProduct } from "./product-normalizer";
 
 const geographyTerms = new Set([
   "iran","iranda","irana","iran'ın","iranin",
@@ -84,10 +85,7 @@ function compact(value: string): string {
 }
 
 export function subjectVariants(subject: string): string[] {
-  if (/^(?:L[\s-]?)?(?:Threonine|Treonin)$/i.test(subject.trim())) {
-    return ["L-Threonine", "L Threonine", "Threonine", "L-Treonin", "L Treonin"];
-  }
-  return [subject];
+  return normalizeProduct(subject)?.aliases ?? [subject];
 }
 
 const lowValueDomains = [
