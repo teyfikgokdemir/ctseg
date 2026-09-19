@@ -1,15 +1,7 @@
 name: Trade OS CI
 
 on:
-  push:
-    branches: [trade-os]
-    paths:
-      - "trade-os/**"
-      - ".github/workflows/trade-os-ci.yml"
-  pull_request:
-    paths:
-      - "trade-os/**"
-      - ".github/workflows/trade-os-ci.yml"
+  workflow_dispatch:
 
 jobs:
   build:
