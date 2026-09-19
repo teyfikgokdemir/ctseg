@@ -72,6 +72,31 @@ export function coreTerms(subject: string): string[] {
     .filter((token) => !stopWords.has(token));
 }
 
+const lowValueDomains = [
+  "wikipedia.org",
+  "youtube.com",
+  "youtu.be",
+  "dailymotion.com",
+  "britannica.com",
+  "thefreedictionary.com",
+  "dictionary.com",
+  "encyclopedia.com",
+  "cnn.com",
+  "reuters.com",
+  "aljazeera.com",
+  "jpost.com",
+  "iranintl.com",
+];
+
+function isLowValueDomain(url: string): boolean {
+  try {
+    const hostname = new URL(url).hostname.replace(/^www\./, "").toLowerCase();
+    return lowValueDomains.some((domain) => hostname === domain || hostname.endsWith(`.${domain}`));
+  } catch {
+    return true;
+  }
+}
+
 const intentSignals: Record<ResearchCaseType, string[]> = {
   SOURCING: [
     "supplier","manufacturer","distributor","wholesaler","trader","producer",
@@ -94,6 +119,8 @@ export function isRelevantFinding(input: {
   snippet?: string;
   url: string;
 }): boolean {
+  if (isLowValueDomain(input.url)) return false;
+
   const haystack = `${input.title} ${input.snippet ?? ""} ${input.url}`
     .toLocaleLowerCase("tr-TR");
 
@@ -109,5 +136,11 @@ export function isRelevantFinding(input: {
   if (!subjectMatch) return false;
 
   const intentMatch = intentSignals[input.type].some((signal) => haystack.includes(signal));
+
+  if (input.type === "SOURCING") {
+    const technicalPage = /product|products|catalog|catalogue|tds|sds|technical|feed-additive|amino-acid/i.test(input.url);
+    return intentMatch || technicalPage;
+  }
+
   return intentMatch;
 }
