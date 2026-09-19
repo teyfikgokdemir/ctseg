@@ -35,6 +35,17 @@ Deploy the self-hosted SearXNG service from:
 
 Keep that service private where possible and set its internal URL as `SEARXNG_URL`.
 
+Without `SEARXNG_URL`, the free router still checks Bing RSS and a small live-verified
+commercial catalogue. This catalogue covers known example products and routes; it is
+not a general web index. `PUBLIC_SEARXNG_URL` is an optional, explicit opt-in for a
+public SearX-compatible JSON endpoint whose operator permits automated requests.
+Rate limits and provider failures appear in the per-query diagnostics.
+
+The research parser and evidence review use local rules by default. An optional
+localhost Ollama service can be connected with `LOCAL_RESEARCH_AI_URL` and
+`LOCAL_RESEARCH_AI_MODEL`; no paid AI endpoint is called automatically. Model output
+cannot mark an unsupported company or claim as verified.
+
 ## Cloudflare
 
 1. Point `trade.ctseg.com` to the Railway Trade OS service.
