@@ -73,3 +73,20 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
 .score-row span { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; color: var(--muted); font-size: 11px; }
 .score-row strong { color: var(--text); }
 @media (max-width: 900px) { .results-head { align-items: flex-start; flex-direction: column; } .results-grid { grid-template-columns: 1fr; } }
+
+.top-actions { display: flex; align-items: center; gap: 14px; }
+.top-actions > a { color: var(--muted); font-size: 13px; font-weight: 700; }
+.top-actions > a:hover { color: var(--text); }
+.saved-case { margin: -10px 0 18px; border: 1px solid rgba(255,107,74,.28); background: rgba(255,107,74,.07); color: var(--muted); border-radius: 12px; padding: 10px 12px; font-size: 12px; }
+.saved-case strong { color: var(--accent); }
+.list-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding: 56px 0 28px; }
+.primary-link { display: inline-flex; align-items: center; justify-content: center; border-radius: 14px; background: var(--accent); color: #140a07; font-weight: 800; padding: 14px 17px; white-space: nowrap; }
+.case-list { display: grid; gap: 10px; padding-bottom: 60px; }
+.case-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 24px; align-items: center; border: 1px solid var(--line); border-radius: 18px; background: var(--panel); padding: 20px; }
+.case-row h2 { margin: 11px 0 7px; font-size: 20px; letter-spacing: -.025em; }
+.case-row p { margin: 0; color: var(--muted); line-height: 1.5; font-size: 14px; }
+.case-stat { min-width: 72px; text-align: center; border-left: 1px solid var(--line); padding-left: 20px; }
+.case-stat strong { display: block; color: var(--accent); font-size: 24px; }
+.case-stat span { color: var(--muted); font-size: 11px; }
+.empty-list { border: 1px dashed var(--line); border-radius: 18px; padding: 34px; color: var(--muted); text-align: center; }
+@media (max-width: 700px) { .list-head { align-items: flex-start; flex-direction: column; } .case-row { grid-template-columns: 1fr; } .case-stat { border-left: 0; border-top: 1px solid var(--line); padding: 14px 0 0; text-align: left; } }
