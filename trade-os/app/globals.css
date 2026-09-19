@@ -376,3 +376,10 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
 .home-metrics .metric-card { background: transparent; border-top: 1px solid var(--line); border-right: 0; border-bottom: 0; border-left: 0; border-radius: 0; padding: 22px 4px; }
 .home-metrics .metric-card strong { font-size: 27px; }
 @media (max-width: 700px) { .home-hero { padding: 56px 0 45px; } .home-modules { margin-top: 38px; } .home-modules .modern-module-card { min-height: 245px; } }
+@media (max-width: 430px) {
+  .topbar-dashboard { flex-wrap: wrap; }
+  .topbar-dashboard .top-actions { width: 100%; justify-content: space-between; }
+  .topbar-dashboard .top-new-case { padding: 8px 11px; }
+  .delete-case-wrap { justify-content: flex-end; }
+  .delete-case-button { min-height: 44px; padding-inline: 16px; }
+}
