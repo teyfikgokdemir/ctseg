@@ -21,7 +21,10 @@ export default function Home() {
     <main className="shell">
       <header className="topbar">
         <div className="brand">CTSEG <span>Trade OS</span></div>
-        <div className="badge">Private Workspace</div>
+        <nav className="top-actions">
+          <a href="/cases">Vakalar</a>
+          <div className="badge">Private Workspace</div>
+        </nav>
       </header>
 
       <section className="hero">
