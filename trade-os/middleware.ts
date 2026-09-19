@@ -1,4 +1,5 @@
-import { createRemoteJWKSet, jwtVerify } from "jose";
+import { createRemoteJWKSet } from "jose/jwks/remote";
+import { jwtVerify } from "jose/jwt/verify";
 import { NextRequest, NextResponse } from "next/server";
 import { isAuthorizedEmail } from "./lib/auth";
 
@@ -43,7 +44,7 @@ export async function middleware(request: NextRequest) {
 
     const email = typeof payload.email === "string" ? payload.email.trim().toLowerCase() : null;
 
-    if (!isAuthorizedEmail(email)) {
+    if (!email || !isAuthorizedEmail(email)) {
       return new NextResponse("Forbidden", {
         status: 403,
         headers: {
