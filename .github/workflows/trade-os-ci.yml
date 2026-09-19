@@ -1,16 +1,10 @@
 name: Trade OS CI
 
 on:
-  push:
-    branches: [trade-os]
-    paths:
-      - ".github/workflows/trade-os-ci.yml"
-
-permissions:
-  contents: write
+  workflow_dispatch:
 
 jobs:
-  validate:
+  build:
     runs-on: ubuntu-latest
     env:
       DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
@@ -29,35 +23,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Validate no-SearXNG production build
-        shell: bash
-        run: |
-          set +e
-          npm ci >/tmp/ci.log 2>&1
-          S1=$?
-          npm audit --audit-level=high >>/tmp/ci.log 2>&1
-          S2=$?
-          npm run db:generate >>/tmp/ci.log 2>&1
-          S3=$?
-          npm run build >>/tmp/ci.log 2>&1
-          S4=$?
-          {
-            echo "npm_ci=$S1"
-            echo "audit=$S2"
-            echo "prisma_generate=$S3"
-            echo "next_build=$S4"
-            echo "--- tail ---"
-            tail -100 /tmp/ci.log
-          } > ci-status.txt
-          exit 0
-      - name: Persist status
-        working-directory: .
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add trade-os/ci-status.txt
-          if ! git diff --cached --quiet; then
-            git commit -m "chore(trade-os): persist no-SearXNG validation"
-            git push origin HEAD:trade-os
-          fi
+      - run: npm ci
+      - run: npm audit --audit-level=high
+      - run: npm run db:generate
+      - run: npm run build
