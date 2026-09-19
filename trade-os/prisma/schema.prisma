@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+}
+
+enum CaseType {
+  SOURCING
+  BUYER_SEARCH
+  LOGISTICS
+}
+
+enum CaseStatus {
+  NEW
+  RESEARCHING
+  SHORTLISTED
+  CONTACTING
+  QUOTED
+  NEGOTIATING
+  WON
+  LOST
+  ARCHIVED
+}
+
+enum CompanyType {
+  MANUFACTURER
+  DISTRIBUTOR
+  IMPORTER
+  WHOLESALER
+  DEALER
+  TRADER
+  BUYER
+  LOGISTICS
+  OTHER
+}
+
+enum EvidenceStatus {
+  VERIFIED
+  PARTIAL
+  HISTORICAL
+  UNVERIFIED
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  role      UserRole
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TradeCase {
+  id             String     @id @default(cuid())
+  reference      String     @unique
+  type           CaseType
+  status         CaseStatus @default(NEW)
+  title          String
+  rawRequest     String
+  productName    String?
+  grade          String?
+  quantity       String?
+  sourceRegion   String?
+  destination    String?
+  transportModes String[]
+  createdById    String
+  createdBy      User       @relation(fields: [createdById], references: [id])
+  companies      CaseCompany[]
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+}
+
+model Company {
+  id                String       @id @default(cuid())
+  name              String
+  website           String?
+  country           String?
+  city              String?
+  type              CompanyType
+  active            Boolean?
+  lastVerifiedAt    DateTime?
+  freshnessScore    Int?
+  verificationScore Int?
+  contacts          Contact[]
+  evidence          Evidence[]
+  cases             CaseCompany[]
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
+
+  @@index([name, country])
+}
+
+model CaseCompany {
+  caseId     String
+  companyId  String
+  matchReason String?
+  relevanceScore Int?
+  shortlisted Boolean @default(false)
+  tradeCase  TradeCase @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  company    Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@id([caseId, companyId])
+}
+
+model Contact {
+  id        String   @id @default(cuid())
+  companyId String
+  name      String?
+  role      String?
+  email     String?
+  phone     String?
+  whatsapp  String?
+  sourceUrl String?
+  verifiedAt DateTime?
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model Evidence {
+  id          String         @id @default(cuid())
+  companyId   String
+  claim       String
+  sourceUrl   String
+  sourceType  String
+  sourceDate  DateTime?
+  fetchedAt   DateTime       @default(now())
+  status      EvidenceStatus @default(UNVERIFIED)
+  excerpt     String?
+  company     Company        @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@index([companyId, fetchedAt])
+}
+
+model PaidAlternative {
+  id          String   @id @default(cuid())
+  caseId       String?
+  providerName String
+  reason       String
+  url          String?
+  discoveredAt DateTime @default(now())
+}
