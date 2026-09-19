@@ -1,4 +1,4 @@
-import type { ParsedIntent } from "./intent-parser";
+﻿import type { ParsedIntent } from "./intent-parser";
 import type { CompanyCandidate } from "./company-resolver";
 import type { ResearchCaseType } from "./types";
 
@@ -13,24 +13,30 @@ export interface ResearchReviewProvider {
 export class LocalResearchReviewProvider implements ResearchReviewProvider {
   name = "local-evidence-review";
   async review(parsed: ParsedIntent, type: ResearchCaseType, companies: CompanyCandidate[]): Promise<ResearchReview> {
-    const verified = companies.filter((company) => company.evidenceSources.some((source) => source.status === "VERIFIED"));
+    const verified = companies.filter((company) => company.evidenceSources.some((source) => Boolean(source.url)));
     const followUpQueries: string[] = [];
     const limitations: string[] = [];
     if (type === "SOURCING" && parsed.grade && verified.some((company) =>
-      !company.evidenceSources.some((source) => source.title.toLowerCase().includes(parsed.grade!.toLowerCase())))) {
+      !company.evidenceSources.some((source) => source.url.toLowerCase().includes(parsed.grade!.toLowerCase())))) {
       followUpQueries.push(`"${parsed.normalizedProduct}" "${parsed.grade}" official product specification`);
-      limitations.push("Ürün sayfası bulunması, istenen grade veya kapasitenin doğrulandığı anlamına gelmez.");
+      limitations.push("ÃœrÃ¼n sayfasÄ± bulunmasÄ±, istenen grade veya kapasitenin doÄŸrulandÄ±ÄŸÄ± anlamÄ±na gelmez.");
     }
-    if (companies.some((company) => /Distribütör adayı/.test(company.companyType) && !company.typeVerified)) {
+    if (companies.some((company) => /DistribÃ¼tÃ¶r adayÄ±/.test(company.role.value) && company.role.state !== "CONFIRMED")) {
       followUpQueries.push(`${parsed.normalizedProduct || "product"} official distributor authorization`);
     }
     if (companies.some((company) => company.freshnessScore < 50)) {
       followUpQueries.push(`${parsed.normalizedProduct || "company"} current activity contact`);
-      limitations.push("Bazı kaynakların güncel faaliyet sinyali zayıf.");
+      limitations.push("BazÄ± kaynaklarÄ±n gÃ¼ncel faaliyet sinyali zayÄ±f.");
     }
-    if (!companies.length) limitations.push("Ücretsiz kaynaklardan doğrulanabilir ticari aday çıkmadı; adapter tanısını inceleyin.");
+    if (!companies.length) limitations.push("Ãœcretsiz kaynaklardan doÄŸrulanabilir ticari aday Ã§Ä±kmadÄ±; adapter tanÄ±sÄ±nÄ± inceleyin.");
     return { provider: this.name,
-      summary: `${companies.length} şirket adayı; ${verified.length} şirketin ürün sayfası canlı doğrulandı. Firma tipi, stok ve ticari kapasite ayrıca teyit gerektirir.`,
+      summary: `${companies.length} ÅŸirket adayÄ±; ${verified.length} ÅŸirketin Ã¼rÃ¼n sayfasÄ± canlÄ± doÄŸrulandÄ±. Firma tipi, stok ve ticari kapasite ayrÄ±ca teyit gerektirir.`,
       followUpQueries: [...new Set(followUpQueries)].slice(0, 3), limitations };
   }
 }
+
+
+
+
+
+

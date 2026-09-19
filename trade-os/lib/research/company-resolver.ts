@@ -1,39 +1,27 @@
-import type { ResearchFinding } from "./types";
+﻿/* eslint-disable @typescript-eslint/no-unused-vars */
+import type { ResearchFinding, CompanyRole, VerifiedField, Evidence, VerificationState, VerificationLevel } from "./types";
 
-export type CompanyEvidence = {
-  title: string;
-  url: string;
-  adapter: string;
-  status: "VERIFIED" | "UNVERIFIED";
-  claim: string;
-};
 export type CompanyCandidate = {
   key: string;
   name: string;
-  country: string | null;
-  companyType: string;
-  typeVerified: boolean;
-  productOrService: string | null;
   website: string;
-  productPage: string | null;
-  contactPage: string | null;
-  email: string | null;
-  phone: string | null;
+  role: VerifiedField<CompanyRole>;
+  productConfirmed: VerifiedField<boolean>;
+  gradeConfirmed: VerifiedField<string>;
+  contactEmail: VerifiedField<string>;
+  contactPhone: VerifiedField<string>;
+  country: VerifiedField<string>;
+  manufacturer: VerifiedField<string>;
   freshnessScore: number;
   verificationScore: number;
   relevanceScore: number;
-  evidenceCount: number;
-  evidenceSources: CompanyEvidence[];
+  evidenceSources: Evidence[];
+  totalScore: number;
+  verificationLevel: VerificationLevel;
 };
 
-function companyType(text: string): string {
-  if (/manufacturer|producer|üretici/i.test(text)) return "Üretici adayı";
-  if (/distributor|distribütör|bayi/i.test(text)) return "Distribütör adayı";
-  if (/importer|ithalatçı/i.test(text)) return "İthalatçı adayı";
-  if (/freight|forwarder|lojistik|nakliye|transport|carrier/i.test(text)) return "Lojistik sağlayıcı adayı";
-  if (/wholesaler|toptancı/i.test(text)) return "Toptancı adayı";
-  if (/trader|stockist|stokçu/i.test(text)) return "Trader adayı";
-  return "Ticari aday";
+function createUnverifiedField<T>(value: T): VerifiedField<T> {
+  return { value, state: "UNVERIFIED" as VerificationState };
 }
 
 function domainKey(hostname: string): string {
@@ -45,40 +33,66 @@ function domainKey(hostname: string): string {
 
 export function resolveCompanies(findings: ResearchFinding[], productOrService: string | null): CompanyCandidate[] {
   const companies = new Map<string, CompanyCandidate>();
+
   for (const finding of findings) {
     let url: URL;
     try { url = new URL(finding.url); } catch { continue; }
     const key = domainKey(url.hostname);
-    if (["alibaba.com", "made-in-china.com", "europages.com"].includes(key)) continue;
-    const name = finding.companyName || key.split(".")[0].replace(/(^\w|[-_]\w)/g, (part) => part.replace(/[-_]/, "").toUpperCase());
-    const evidence: CompanyEvidence = { title: finding.title, url: finding.url, adapter: finding.adapter,
-      status: finding.productPageVerified ? "VERIFIED" : "UNVERIFIED",
-      claim: finding.productPageVerified ? finding.verifiedClaim || "Kaynak sayfası canlı doğrulandı" : "Arama sonucu; sayfa henüz doğrulanmadı" };
-    const existing = companies.get(key);
-    if (existing) {
-      if (!existing.evidenceSources.some((source) => source.url === finding.url)) existing.evidenceSources.push(evidence);
-      existing.evidenceCount = existing.evidenceSources.length;
-      existing.freshnessScore = Math.max(existing.freshnessScore, finding.freshnessScore);
-      existing.verificationScore = Math.max(existing.verificationScore, finding.verificationScore);
-      existing.relevanceScore = Math.max(existing.relevanceScore, finding.relevanceScore);
-      if (!existing.productPage && finding.productPageVerified) existing.productPage = finding.url;
-      if (!existing.country && finding.country) existing.country = finding.country;
-      if (finding.companyName) existing.name = finding.companyName;
-      continue;
+    if (["alibaba.com", "made-in-china.com", "europages.com", "kompass.com"].includes(key)) continue;
+    
+    const name = finding.normalizedCompanyName || finding.companyName || key.split(".")[0].toUpperCase();
+    
+    // Create base evidence from finding
+    const findingEvidence: Evidence = {
+      url: finding.url,
+      timestamp: new Date().toISOString(),
+      type: finding.fetchedContent?.type === "PDF" ? "PDF" : "HTML",
+      extractedText: finding.fetchedContent?.text?.substring(0, 300) || finding.snippet
+    };
+
+    let candidate = companies.get(key);
+    if (!candidate) {
+      candidate = {
+        key, name, website: url.origin,
+        role: createUnverifiedField<CompanyRole>("UNKNOWN"),
+        productConfirmed: createUnverifiedField<boolean>(false),
+        gradeConfirmed: createUnverifiedField<string>(""),
+        contactEmail: createUnverifiedField<string>(""),
+        contactPhone: createUnverifiedField<string>(""),
+        country: createUnverifiedField<string>(""),
+        manufacturer: createUnverifiedField<string>(""),
+        freshnessScore: 0, verificationScore: 0, relevanceScore: 0, totalScore: 0,
+        verificationLevel: "DISCOVERED",
+        evidenceSources: []
+      };
+      companies.set(key, candidate);
     }
-    const text = `${finding.title} ${finding.snippet ?? ""}`;
-    companies.set(key, {
-      key, name, country: finding.country || null,
-      companyType: companyType(text), typeVerified: false,
-      productOrService, website: url.origin, productPage: finding.productPageVerified ? finding.url : null,
-      contactPage: /contact|iletisim|iletişim/i.test(url.pathname) ? finding.url : null,
-      email: finding.snippet?.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i)?.[0] || null,
-      phone: null, freshnessScore: finding.freshnessScore,
-      verificationScore: finding.verificationScore, relevanceScore: finding.relevanceScore,
-      evidenceCount: 1, evidenceSources: [evidence],
-    });
+
+    if (!candidate.evidenceSources.some(e => e.url === finding.url)) {
+      candidate.evidenceSources.push(findingEvidence);
+    }
+
+    candidate.freshnessScore = Math.max(candidate.freshnessScore, finding.freshnessScore);
+    candidate.relevanceScore = Math.max(candidate.relevanceScore, finding.relevanceScore);
+    
+    // Merge verified fields safely. AI is NOT ALLOWED to output CONFIRMED without evidence (checked upstream).
+    if (finding.role?.state === "CONFIRMED" && candidate.role.state !== "CONFIRMED") candidate.role = finding.role;
+    if (finding.productConfirmed?.state === "CONFIRMED" && candidate.productConfirmed.state !== "CONFIRMED") candidate.productConfirmed = finding.productConfirmed;
+    if (finding.gradeConfirmed?.state === "CONFIRMED" && candidate.gradeConfirmed.state !== "CONFIRMED") candidate.gradeConfirmed = finding.gradeConfirmed;
+    if (finding.contactEmail?.state === "CONFIRMED" && candidate.contactEmail.state !== "CONFIRMED") candidate.contactEmail = finding.contactEmail;
+    if (finding.contactPhone?.state === "CONFIRMED" && candidate.contactPhone.state !== "CONFIRMED") candidate.contactPhone = finding.contactPhone;
+    if (finding.country?.state === "CONFIRMED" && candidate.country.state !== "CONFIRMED") candidate.country = finding.country;
+
+    // Determine highest verification level
+    let level: VerificationLevel = "DISCOVERED";
+    if (finding.fetchedContent?.isLive) level = "SOURCE_FETCHED";
+    if (candidate.productConfirmed.state === "CONFIRMED") level = "PRODUCT_CONFIRMED";
+    if (candidate.role.state === "CONFIRMED" && level === "PRODUCT_CONFIRMED") level = "ROLE_CONFIRMED";
+    
+    candidate.verificationLevel = level;
+    candidate.totalScore = candidate.relevanceScore + (candidate.evidenceSources.length * 5) + (level === "ROLE_CONFIRMED" ? 20 : level === "PRODUCT_CONFIRMED" ? 10 : 0);
   }
-  return [...companies.values()].sort((a, b) =>
-    (b.relevanceScore + b.verificationScore + b.evidenceCount * 3) -
-    (a.relevanceScore + a.verificationScore + a.evidenceCount * 3));
+
+  return [...companies.values()].sort((a, b) => b.totalScore - a.totalScore);
 }
+
