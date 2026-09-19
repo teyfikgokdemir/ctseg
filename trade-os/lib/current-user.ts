@@ -8,7 +8,7 @@ function adminEmail(): string | null {
 
 export async function currentUser() {
   const headerStore = await headers();
-  const accessEmail = headerStore.get("cf-access-authenticated-user-email");
+  const accessEmail = headerStore.get("x-ctseg-user-email");
   const developmentEmail =
     process.env.NODE_ENV === "development"
       ? process.env.DEV_USER_EMAIL?.trim().toLowerCase() || null
