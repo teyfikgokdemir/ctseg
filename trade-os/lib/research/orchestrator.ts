@@ -1,6 +1,7 @@
 import { getFreeSearchAdapters } from "@/lib/search";
 import { scoreFreshness, scoreVerification } from "./freshness";
 import { planResearchQueries } from "./query-planner";
+import { extractSubject, isRelevantFinding } from "./relevance";
 import type { ResearchFinding, ResearchRequest, ResearchRun } from "./types";
 
 function domainOf(url: string): string {
@@ -18,6 +19,7 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
   }
 
   const queries = planResearchQueries(request);
+  const subject = extractSubject(request);
   const jobs = queries.flatMap((planned) =>
     adapters.map(async (adapter) => {
       const results = await adapter.search({
@@ -26,7 +28,15 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
         timeRange: "year",
       });
 
-      return results.map<ResearchFinding>((result) => {
+      return results
+        .filter((result) => isRelevantFinding({
+          type: request.type,
+          subject,
+          title: result.title,
+          snippet: result.snippet,
+          url: result.url,
+        }))
+        .map<ResearchFinding>((result) => {
         const freshness = scoreFreshness(result);
         return {
           ...result,
