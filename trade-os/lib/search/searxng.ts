@@ -9,9 +9,9 @@ type SearxResult = {
 };
 
 export class SearxngAdapter implements SearchAdapter {
-  name = "searxng";
+  name: string;
 
-  constructor(private readonly baseUrl: string) {}
+  constructor(private readonly baseUrl: string, name = "searxng") { this.name = name; }
 
   async search(input: SearchRequest): Promise<SearchResult[]> {
     const url = new URL("/search", this.baseUrl);

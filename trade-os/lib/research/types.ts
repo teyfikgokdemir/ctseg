@@ -8,6 +8,11 @@ export type ResearchRequest = {
   product?: string;
   sourceRegion?: string;
   destination?: string;
+  destinations?: string[];
+  aliases?: string[];
+  grade?: string;
+  excludedCountries?: string[];
+  transportModes?: string[];
   languages?: string[];
   maxQueries?: number;
 };
@@ -35,7 +40,7 @@ export type ResearchRun = {
   request: ResearchRequest;
   queries: PlannedQuery[];
   findings: ResearchFinding[];
-  diagnostics: { adapter: string; query: string; rawCount: number; acceptedCount: number; error?: string }[];
+  diagnostics: { adapter: string; query: string; rawCount: number; acceptedCount: number; status: "success" | "error" | "rate-limited"; error?: string }[];
   searchedAt: string;
   paidFallbackUsed: false;
 };

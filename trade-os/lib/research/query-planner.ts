@@ -1,186 +1,77 @@
 import { extractSubject, subjectVariants } from "./relevance";
 import type { PlannedQuery, ResearchRequest } from "./types";
 
-const languageHints: Record<string, string[]> = {
-  Turkey: ["tr", "en"],
-  Türkiye: ["tr", "en"],
-  Iran: ["fa", "en"],
-  İran: ["fa", "en"],
-  China: ["zh", "en"],
-  Çin: ["zh", "en"],
-  Germany: ["de", "en"],
-  Almanya: ["de", "en"],
-  France: ["fr", "en"],
-  Fransa: ["fr", "en"],
-  Bulgaria: ["bg", "en"],
-  Bulgaristan: ["bg", "en"],
-};
+const sourcingTerms = ["supplier", "manufacturer", "distributor", "producer", "trader", "stockist", "product", "catalogue", "technical document"];
+const buyerTerms = ["importer", "buyer", "distributor", "wholesaler", "retailer", "procurement", "industrial user", "sector user"];
+const logisticsTerms = ["freight forwarder", "carrier", "road freight", "trucking", "shipping", "air cargo", "rail freight", "multimodal logistics"];
 
-const typeTerms = {
-  SOURCING: [
-    "supplier",
-    "manufacturer",
-    "distributor",
-    "wholesaler",
-    "trader",
-    "product",
-    "catalogue",
-  ],
-  BUYER_SEARCH: [
-    "importer",
-    "buyer",
-    "distributor",
-    "wholesaler",
-    "procurement",
-    "retailer",
-  ],
-  LOGISTICS: [
-    "freight forwarder",
-    "logistics",
-    "road freight",
-    "sea freight",
-    "air freight",
-    "rail freight",
-    "multimodal",
-  ],
-} as const;
-
-function inferLanguages(request: ResearchRequest): string[] {
-  if (request.languages?.length) return [...new Set(request.languages)];
-
-  const haystack = [request.rawRequest, request.sourceRegion, request.destination]
-    .filter(Boolean)
-    .join(" ");
-
-  const inferred = new Set<string>(["en"]);
-  for (const [place, languages] of Object.entries(languageHints)) {
-    if (haystack.toLocaleLowerCase("tr-TR").includes(place.toLocaleLowerCase("tr-TR"))) {
-      languages.forEach((language) => inferred.add(language));
-    }
-  }
-
-  if (/[çğıöşüİı]/i.test(haystack)) inferred.add("tr");
-  return [...inferred];
-}
-
-function sourcingMarkets(request: ResearchRequest): string[] {
-  if (request.sourceRegion?.trim()) return [...new Set(["Turkey", request.sourceRegion.trim(), ""])];
-
-  const raw = request.rawRequest.toLocaleLowerCase("tr-TR");
-  const markets: string[] = [];
-
-  if (
-    raw.includes("önce türkiye") ||
-    raw.includes("once turkiye") ||
-    raw.includes("türkiye, sonra global") ||
-    raw.includes("turkey first")
-  ) {
-    markets.push("Turkey", "");
-    return markets;
-  }
-
-  if (raw.includes("türkiye") || raw.includes("turkey")) markets.push("Turkey");
-  if (raw.includes("çin") || raw.includes("china")) markets.push("China");
-  if (raw.includes("almanya") || raw.includes("germany")) markets.push("Germany");
-  if (raw.includes("fransa") || raw.includes("france")) markets.push("France");
-  if (raw.includes("bulgaristan") || raw.includes("bulgaria")) markets.push("Bulgaria");
-
-  if (!markets.length) markets.push("Turkey");
+function sourceMarkets(request: ResearchRequest): string[] {
+  const preferred = request.sourceRegion?.trim();
+  const markets = [preferred || "Türkiye"];
+  if (preferred && !/türkiye|turkey/i.test(preferred)) markets.unshift("Türkiye");
   markets.push("");
   return [...new Set(markets)];
 }
 
 function buyerMarkets(request: ResearchRequest): string[] {
-  if (request.destination?.trim()) return [request.destination.trim()];
-
+  if (request.destinations?.length) return request.destinations;
+  if (request.destination) return request.destination.split(/[,;]+/).map((value) => value.trim()).filter(Boolean);
   const raw = request.rawRequest.toLocaleLowerCase("tr-TR");
-  const markets: string[] = [];
-  const pairs: Array<[string, string]> = [
-    ["almanya", "Germany"],
-    ["germany", "Germany"],
-    ["fransa", "France"],
-    ["france", "France"],
-    ["iran", "Iran"],
-    ["türkiye", "Turkey"],
-    ["turkey", "Turkey"],
-  ];
-
-  for (const [needle, market] of pairs) {
-    if (raw.includes(needle)) markets.push(market);
-  }
-
-  return [...new Set(markets.length ? markets : [""])];
-}
-
-function logisticsGeography(request: ResearchRequest): string {
-  if (request.sourceRegion || request.destination) {
-    return [request.sourceRegion, request.destination].filter(Boolean).join(" ");
-  }
-  return request.rawRequest.trim();
+  const markets = ["Almanya", "Fransa", "İran", "Türkiye"].filter((country) => raw.includes(country.toLocaleLowerCase("tr-TR")));
+  return markets.length ? markets : [""];
 }
 
 export function planResearchQueries(request: ResearchRequest): PlannedQuery[] {
-  const maxQueries = Math.min(Math.max(request.maxQueries ?? 12, 6), 40);
-  const languages = inferLanguages(request);
-  const subject = extractSubject(request);
-  const exactSubject = request.type === "LOGISTICS" ? subject : `"${subject}"`;
-
+  const maxQueries = Math.min(Math.max(request.maxQueries ?? 12, 4), 30);
+  const subject = request.product?.trim() || extractSubject(request);
+  const variants = request.aliases?.length ? request.aliases : subjectVariants(subject);
   const planned: PlannedQuery[] = [];
   let priority = 120;
+  const push = (query: string, language: string, intent: string) =>
+    planned.push({ query: query.replace(/\s+/g, " ").trim(), language, intent, priority: priority-- });
 
   if (request.type === "SOURCING") {
-    const markets = sourcingMarkets(request);
-    const variants = subjectVariants(subject);
-    for (const market of markets) {
-      const isTurkey = market === "Turkey";
-      const pairs = isTurkey
-        ? [[variants[0], "tedarikçi"], [variants[0], "üretici"],
-          [variants.find((v) => v === "L-Treonin") ?? variants[0], "tedarikçi"],
-          [variants.find((v) => v === "L Treonin") ?? variants[0], "distribütör"],
-          [variants[0], "ürün"], [variants[0], "supplier"]]
-        : [[variants[0], "supplier"], [variants[0], "feed grade manufacturer"],
-          [variants.find((v) => v === "L Threonine") ?? variants[0], "distributor"],
-          [variants.find((v) => v === "Threonine") ?? variants[0], "producer"],
-          [variants[0], "trader"], [variants[0], "product"]];
-      for (const [variant, term] of pairs) planned.push({
-        query: [`"${variant}"`, isTurkey ? "Türkiye" : market, term].filter(Boolean).join(" "),
-        language: isTurkey ? "tr" : "en",
-        intent: `${isTurkey ? "turkey" : "global"}-${term}`,
-        priority: priority--,
-      });
+    for (const market of sourceMarkets(request)) {
+      const turkey = /türkiye|turkey/i.test(market);
+      const first = variants[0] || subject;
+      const local = turkey ? variants.find((variant) => /treonin/i.test(variant)) || first : variants[1] || first;
+      const terms = turkey ? ["tedarikçi", "üretici", "distribütör", "ürün", "supplier", "manufacturer"] : sourcingTerms;
+      for (let index = 0; index < terms.length; index++) {
+        const variant = index === 2 || index === 3 ? local : first;
+        const grade = request.grade && index === 1 ? `"${request.grade}"` : "";
+        const exclude = request.excludedCountries?.map((value) => `-${value}`).join(" ") || "";
+        push([`"${variant}"`, market, grade, terms[index], exclude].filter(Boolean).join(" "),
+          turkey ? "tr" : "en", `${turkey ? "turkey" : "global"}-${terms[index]}`);
+      }
     }
   } else if (request.type === "BUYER_SEARCH") {
     for (const market of buyerMarkets(request)) {
-      for (const language of languages) {
-        for (const term of typeTerms.BUYER_SEARCH) {
-          planned.push({
-            query: [exactSubject, market, term].filter(Boolean).join(" "),
-            language,
-            intent: term,
-            priority: priority--,
-          });
-        }
+      for (let index = 0; index < buyerTerms.length; index++) {
+        const variant = variants[index % Math.max(1, variants.length)] || subject;
+        push([`"${variant}"`, market, buyerTerms[index]].filter(Boolean).join(" "), "en", `buyer-${market}-${buyerTerms[index]}`);
       }
     }
   } else {
-    const geography = logisticsGeography(request);
-    for (const language of languages) {
-      for (const term of typeTerms.LOGISTICS) {
-        planned.push({
-          query: [geography, term].filter(Boolean).join(" "),
-          language,
-          intent: term,
-          priority: priority--,
-        });
-      }
-    }
+    const route = [request.sourceRegion, request.destination].filter(Boolean).join(" to ") || request.rawRequest;
+    for (const term of logisticsTerms) push(`${route} ${term}`, "en", `logistics-${term}`);
+    if (request.transportModes?.includes("road")) push(`${route} road transport company`, "en", "logistics-route-road");
+    if (request.transportModes?.includes("sea")) push(`${route} sea freight forwarder`, "en", "logistics-route-sea");
   }
 
   const unique = new Map<string, PlannedQuery>();
-  for (const item of planned.sort((a, b) => b.priority - a.priority)) {
-    const key = `${item.language}:${item.query.toLocaleLowerCase("tr-TR")}`;
+  for (const item of planned) {
+    const key = item.query.toLocaleLowerCase("tr-TR");
     if (!unique.has(key)) unique.set(key, item);
   }
-
-  return [...unique.values()].slice(0, maxQueries);
+  const all = [...unique.values()];
+  if (request.type === "SOURCING") {
+    const turkey = all.filter((item) => item.intent.startsWith("turkey-")).slice(0, Math.floor(maxQueries / 2));
+    const global = all.filter((item) => item.intent.startsWith("global-")).slice(0, maxQueries - turkey.length);
+    return [...turkey, ...global];
+  }
+  if (request.type === "BUYER_SEARCH" && buyerMarkets(request).length > 1) {
+    const perMarket = Math.max(2, Math.floor(maxQueries / buyerMarkets(request).length));
+    return all.filter((_, index) => index % buyerTerms.length < perMarket).slice(0, maxQueries);
+  }
+  return all.slice(0, maxQueries);
 }
