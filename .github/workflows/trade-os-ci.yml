@@ -1,5 +1,5 @@
 name: Trade OS CI
-# checkpoint: production deploy readiness
+# checkpoint: access jwt fix
 
 on:
   push:
