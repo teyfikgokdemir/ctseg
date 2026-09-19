@@ -1,11 +1,17 @@
 name: Trade OS CI
 
 on:
+  push:
+    branches: [trade-os]
+    paths:
+      - ".github/workflows/trade-os-ci.yml"
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
     defaults:
       run:
         working-directory: trade-os
@@ -18,5 +24,3 @@ jobs:
       - run: npm ci
       - run: npm run db:generate
       - run: npm run build
-        env:
-          DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
