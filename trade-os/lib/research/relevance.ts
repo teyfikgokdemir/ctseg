@@ -72,6 +72,13 @@ export function coreTerms(subject: string): string[] {
     .filter((token) => !stopWords.has(token));
 }
 
+function compact(value: string): string {
+  return value
+    .toLocaleLowerCase("tr-TR")
+    .normalize("NFKD")
+    .replace(/[^\p{L}\p{N}]+/gu, "");
+}
+
 const lowValueDomains = [
   "wikipedia.org",
   "youtube.com",
@@ -133,14 +140,19 @@ export function isRelevantFinding(input: {
   if (!terms.length) return false;
 
   const subjectMatch = terms.every((term) => haystack.includes(term));
-  if (!subjectMatch) return false;
+  const strongSubjectMatch =
+    compact(input.title).includes(compact(input.subject)) ||
+    compact(input.url).includes(compact(input.subject));
+
+  if (!subjectMatch && !strongSubjectMatch) return false;
 
   const intentMatch = intentSignals[input.type].some((signal) => haystack.includes(signal));
 
   if (input.type === "SOURCING") {
-    const technicalPage = /product|products|catalog|catalogue|tds|sds|technical|feed-additive|amino-acid/i.test(input.url);
-    return intentMatch || technicalPage;
+    const technicalPage =
+      /product|products|catalog|catalogue|tds|sds|technical|feed-additive|amino-acid|aminoacid/i.test(input.url);
+    return strongSubjectMatch || intentMatch || technicalPage;
   }
 
-  return intentMatch;
+  return intentMatch || strongSubjectMatch;
 }
