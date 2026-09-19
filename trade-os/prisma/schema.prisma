@@ -76,8 +76,43 @@ model TradeCase {
   createdById    String
   createdBy      User       @relation(fields: [createdById], references: [id])
   companies      CaseCompany[]
+  researchRuns   ResearchSession[]
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
+}
+
+model ResearchSession {
+  id               String            @id @default(cuid())
+  caseId           String
+  queryCount       Int               @default(0)
+  resultCount      Int               @default(0)
+  paidFallbackUsed Boolean           @default(false)
+  startedAt        DateTime          @default(now())
+  completedAt      DateTime?
+  tradeCase        TradeCase         @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  findings         ResearchFinding[]
+
+  @@index([caseId, startedAt])
+}
+
+model ResearchFinding {
+  id                String          @id @default(cuid())
+  sessionId         String
+  title             String
+  url               String
+  snippet           String?
+  domain            String
+  adapter           String
+  query             String
+  language          String
+  freshnessScore    Int
+  verificationScore Int
+  historicalOnly    Boolean         @default(false)
+  createdAt         DateTime        @default(now())
+  session           ResearchSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId, freshnessScore])
+  @@index([domain])
 }
 
 model Company {
