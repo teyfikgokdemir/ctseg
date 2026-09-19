@@ -15,7 +15,8 @@
     "next": "15.5.25",
     "react": "19.1.1",
     "react-dom": "19.1.1",
-    "zod": "^4.1.11"
+    "zod": "^4.1.11",
+    "jose": "6.2.12"
   },
   "devDependencies": {
     "@types/node": "^24.3.0",
