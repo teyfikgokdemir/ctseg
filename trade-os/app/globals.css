@@ -59,7 +59,7 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
 .research-button { width: 100%; margin-top: 24px; }
 .error-banner { margin: 0 0 24px; border: 1px solid rgba(255,107,74,.4); background: rgba(255,107,74,.08); color: #ffd8ce; border-radius: 16px; padding: 16px 18px; }
 .results-section { margin: 18px 0 60px; padding: 28px; border: 1px solid var(--line); border-radius: 24px; background: #100f0e; }
-.results-head { display: flex; justify-content: space-between; gap: 20px; align-items: end; margin-bottom: 20px; }
+.results-head { display: flex; justify-content: space-between; gap: 20px; align-items: flex-end; margin-bottom: 20px; }
 .results-head h2 { margin: 7px 0 0; font-size: 32px; letter-spacing: -.035em; }
 .results-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .result-card { border: 1px solid var(--line); border-radius: 18px; background: var(--panel); padding: 20px; }
