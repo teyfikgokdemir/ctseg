@@ -3,3 +3,6 @@ node_modules
 .env
 .env.local
 *.log
+ci-audit.json
+ci-status.txt
+ci-diagnostic.txt
