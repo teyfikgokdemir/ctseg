@@ -46,7 +46,7 @@ export default async function CasesPage() {
         {cases.length === 0 ? (
           <div className="empty-list">Henüz kayıtlı vaka yok.</div>
         ) : cases.map((item) => (
-          <article className="case-row" key={item.id}>
+          <a className="case-row" href={`/cases/${item.id}`} key={item.id}>
             <div>
               <div className="result-meta">
                 <span>{labels[item.type]}</span>
@@ -60,7 +60,7 @@ export default async function CasesPage() {
               <strong>{item._count.companies}</strong>
               <span>firma</span>
             </div>
-          </article>
+          </a>
         ))}
       </section>
     </main>
