@@ -1,4 +1,4 @@
-import { extractSubject } from "./relevance";
+import { extractSubject, subjectVariants } from "./relevance";
 import type { PlannedQuery, ResearchRequest } from "./types";
 
 const languageHints: Record<string, string[]> = {
@@ -64,7 +64,7 @@ function inferLanguages(request: ResearchRequest): string[] {
 }
 
 function sourcingMarkets(request: ResearchRequest): string[] {
-  if (request.sourceRegion?.trim()) return [request.sourceRegion.trim(), ""];
+  if (request.sourceRegion?.trim()) return [...new Set(["Turkey", request.sourceRegion.trim(), ""])];
 
   const raw = request.rawRequest.toLocaleLowerCase("tr-TR");
   const markets: string[] = [];
@@ -85,6 +85,7 @@ function sourcingMarkets(request: ResearchRequest): string[] {
   if (raw.includes("fransa") || raw.includes("france")) markets.push("France");
   if (raw.includes("bulgaristan") || raw.includes("bulgaria")) markets.push("Bulgaria");
 
+  if (!markets.length) markets.push("Turkey");
   markets.push("");
   return [...new Set(markets)];
 }
@@ -119,7 +120,7 @@ function logisticsGeography(request: ResearchRequest): string {
 }
 
 export function planResearchQueries(request: ResearchRequest): PlannedQuery[] {
-  const maxQueries = Math.min(Math.max(request.maxQueries ?? 18, 6), 40);
+  const maxQueries = Math.min(Math.max(request.maxQueries ?? 12, 6), 40);
   const languages = inferLanguages(request);
   const subject = extractSubject(request);
   const exactSubject = request.type === "LOGISTICS" ? subject : `"${subject}"`;
@@ -129,57 +130,25 @@ export function planResearchQueries(request: ResearchRequest): PlannedQuery[] {
 
   if (request.type === "SOURCING") {
     const markets = sourcingMarkets(request);
-
+    const variants = subjectVariants(subject);
     for (const market of markets) {
       const isTurkey = market === "Turkey";
-
-      planned.push(
-        {
-          query: [exactSubject, isTurkey ? "site:.tr" : "", isTurkey ? "tedarikçi" : "supplier"].filter(Boolean).join(" "),
-          language: isTurkey ? "tr" : "en",
-          intent: isTurkey ? "supplier-tr" : "supplier-global",
-          priority: priority--,
-        },
-        {
-          query: [exactSubject, isTurkey ? "site:.tr" : "", isTurkey ? "üretici distribütör" : "manufacturer distributor"].filter(Boolean).join(" "),
-          language: isTurkey ? "tr" : "en",
-          intent: isTurkey ? "manufacturer-tr" : "manufacturer-global",
-          priority: priority--,
-        },
-        {
-          query: [exactSubject, isTurkey ? "site:.tr" : market, "feed additive amino acid"].filter(Boolean).join(" "),
-          language: isTurkey ? "tr" : "en",
-          intent: "product-page",
-          priority: priority--,
-        },
-      );
-
-      for (const language of languages) {
-        for (const term of typeTerms.SOURCING.slice(0, 4)) {
-          planned.push({
-            query: [exactSubject, market, term].filter(Boolean).join(" "),
-            language,
-            intent: term,
-            priority: priority--,
-          });
-        }
-      }
+      const pairs = isTurkey
+        ? [[variants[0], "tedarikçi"], [variants[0], "üretici"],
+          [variants.find((v) => v === "L-Treonin") ?? variants[0], "tedarikçi"],
+          [variants.find((v) => v === "L Treonin") ?? variants[0], "distribütör"],
+          [variants[0], "ürün"], [variants[0], "supplier"]]
+        : [[variants[0], "supplier"], [variants[0], "feed grade manufacturer"],
+          [variants.find((v) => v === "L Threonine") ?? variants[0], "distributor"],
+          [variants.find((v) => v === "Threonine") ?? variants[0], "producer"],
+          [variants[0], "trader"], [variants[0], "product"]];
+      for (const [variant, term] of pairs) planned.push({
+        query: [`"${variant}"`, isTurkey ? "Türkiye" : market, term].filter(Boolean).join(" "),
+        language: isTurkey ? "tr" : "en",
+        intent: `${isTurkey ? "turkey" : "global"}-${term}`,
+        priority: priority--,
+      });
     }
-
-    planned.push(
-      {
-        query: [exactSubject, "catalogue OR catalog PDF"].join(" "),
-        language: "en",
-        intent: "technical-document",
-        priority: 90,
-      },
-      {
-        query: [exactSubject, "official product"].join(" "),
-        language: "en",
-        intent: "official-product",
-        priority: 89,
-      },
-    );
   } else if (request.type === "BUYER_SEARCH") {
     for (const market of buyerMarkets(request)) {
       for (const language of languages) {

@@ -26,6 +26,8 @@ export type ResearchFinding = SearchResult & {
   domain: string;
   freshnessScore: number;
   verificationScore: number;
+  relevanceScore: number;
+  totalScore: number;
   historicalOnly: boolean;
 };
 
@@ -33,6 +35,7 @@ export type ResearchRun = {
   request: ResearchRequest;
   queries: PlannedQuery[];
   findings: ResearchFinding[];
+  diagnostics: { adapter: string; query: string; rawCount: number; acceptedCount: number; error?: string }[];
   searchedAt: string;
   paidFallbackUsed: false;
 };

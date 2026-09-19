@@ -41,6 +41,9 @@ export function extractSubject(request: ResearchRequest): string {
 
   const raw = request.rawRequest.trim();
 
+  const threonine = raw.match(/\bL[\s-]?(?:Threonine|Treonin)|\bThreonine\b|\bTreonin\b/i);
+  if (threonine) return threonine[0];
+
   const quoted = raw.match(/["“”']([^"“”']{2,80})["“”']/);
   if (quoted?.[1]) return quoted[1].trim();
 
@@ -74,9 +77,17 @@ export function coreTerms(subject: string): string[] {
 
 function compact(value: string): string {
   return value
-    .toLocaleLowerCase("tr-TR")
+    .toLowerCase()
     .normalize("NFKD")
-    .replace(/[^\p{L}\p{N}]+/gu, "");
+    .replace(/[^\p{L}\p{N}]+/gu, "")
+    .replace(/treonin/g, "threonine");
+}
+
+export function subjectVariants(subject: string): string[] {
+  if (/^(?:L[\s-]?)?(?:Threonine|Treonin)$/i.test(subject.trim())) {
+    return ["L-Threonine", "L Threonine", "Threonine", "L-Treonin", "L Treonin"];
+  }
+  return [subject];
 }
 
 const lowValueDomains = [
@@ -108,6 +119,7 @@ const intentSignals: Record<ResearchCaseType, string[]> = {
   SOURCING: [
     "supplier","manufacturer","distributor","wholesaler","trader","producer",
     "tedarik","üretici","distribütör","product","catalog","catalogue",
+    "feed additive","25 kg",
   ],
   BUYER_SEARCH: [
     "importer","buyer","distributor","wholesaler","procurement","retailer",
@@ -119,40 +131,49 @@ const intentSignals: Record<ResearchCaseType, string[]> = {
   ],
 };
 
-export function isRelevantFinding(input: {
+export function scoreRelevance(input: {
   type: ResearchCaseType;
   subject: string;
   title: string;
   snippet?: string;
   url: string;
-}): boolean {
-  if (isLowValueDomain(input.url)) return false;
+}): number {
+  if (isLowValueDomain(input.url)) return 0;
+  if (input.type === "SOURCING" && /capsules?|supplements?|healthy joints|100 grams|100 gr\b/i.test(
+    `${input.title} ${input.url}`)) return 0;
 
   const haystack = `${input.title} ${input.snippet ?? ""} ${input.url}`
     .toLocaleLowerCase("tr-TR");
 
   if (input.type === "LOGISTICS") {
     const signals = intentSignals.LOGISTICS;
-    return signals.some((signal) => haystack.includes(signal));
+    return signals.some((signal) => haystack.includes(signal)) ? 65 : 0;
   }
 
   const terms = coreTerms(input.subject);
-  if (!terms.length) return false;
+  if (!terms.length) return 0;
 
   const subjectMatch = terms.every((term) => haystack.includes(term));
   const strongSubjectMatch =
     compact(input.title).includes(compact(input.subject)) ||
     compact(input.url).includes(compact(input.subject));
 
-  if (!subjectMatch && !strongSubjectMatch) return false;
+  const variantMatch = subjectVariants(input.subject).some((variant) =>
+    compact(haystack).includes(compact(variant)));
+  if (!subjectMatch && !strongSubjectMatch && !variantMatch) return 0;
 
   const intentMatch = intentSignals[input.type].some((signal) => haystack.includes(signal));
 
   if (input.type === "SOURCING") {
     const technicalPage =
       /product|products|catalog|catalogue|tds|sds|technical|feed-additive|amino-acid|aminoacid/i.test(input.url);
-    return strongSubjectMatch || intentMatch || technicalPage;
+    return Math.min(100, (strongSubjectMatch ? 50 : variantMatch ? 42 : 30) +
+      (intentMatch ? 25 : 0) + (technicalPage ? 25 : 0));
   }
 
-  return intentMatch || strongSubjectMatch;
+  return (strongSubjectMatch ? 55 : variantMatch ? 45 : 30) + (intentMatch ? 30 : 0);
+}
+
+export function isRelevantFinding(input: Parameters<typeof scoreRelevance>[0]): boolean {
+  return scoreRelevance(input) >= (input.type === "SOURCING" ? 60 : 55);
 }

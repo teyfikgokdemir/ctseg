@@ -19,12 +19,15 @@ type Finding = {
   language: string;
   freshnessScore: number;
   verificationScore: number;
+  relevanceScore: number;
+  totalScore: number;
   historicalOnly: boolean;
 };
 
 type ResearchRun = {
   findings: Finding[];
   queries: { query: string; language: string; intent: string }[];
+  diagnostics: { adapter: string; query: string; rawCount: number; acceptedCount: number; error?: string }[];
   searchedAt: string;
   paidFallbackUsed: false;
 };
@@ -109,7 +112,7 @@ export default function NewCasePage() {
     const response = await fetch("/api/research/run", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ type, rawRequest, caseId: storedCase.id, maxQueries: 18 }),
+      body: JSON.stringify({ type, rawRequest, caseId: storedCase.id, maxQueries: 12 }),
     });
 
     const data = await response.json();
@@ -221,13 +224,25 @@ export default function NewCasePage() {
                 <h3>{finding.title}</h3>
                 {finding.snippet && <p>{finding.snippet}</p>}
                 <div className="score-row">
+                  <span>İlgi <strong>{finding.relevanceScore}</strong></span>
                   <span>Güncellik <strong>{finding.freshnessScore}</strong></span>
                   <span>Doğrulama <strong>{finding.verificationScore}</strong></span>
+                  <span>Toplam <strong>{finding.totalScore}</strong></span>
                 </div>
                 <a href={finding.url} target="_blank" rel="noreferrer">Kaynağı aç ↗</a>
               </article>
             ))}
           </div>
+          {run.findings.length === 0 && <p>Uygun ticari sonuç bulunamadı. Arama tanısı aşağıdadır.</p>}
+          <details>
+            <summary>Arama tanısı · {run.diagnostics.length} adapter sorgusu</summary>
+            <ul>
+              {run.diagnostics.map((item, index) => <li key={`${item.adapter}-${index}`}>
+                {item.adapter}: {item.query} · ham {item.rawCount}, kabul {item.acceptedCount}
+                {item.error && ` · hata: ${item.error}`}
+              </li>)}
+            </ul>
+          </details>
         </section>
       )}
     </main>
