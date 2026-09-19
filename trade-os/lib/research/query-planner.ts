@@ -64,12 +64,41 @@ function inferLanguages(request: ResearchRequest): string[] {
   return [...inferred];
 }
 
+function inferGeography(request: ResearchRequest): string {
+  if (request.sourceRegion || request.destination) {
+    return [request.sourceRegion, request.destination].filter(Boolean).join(" ");
+  }
+
+  const raw = request.rawRequest.toLocaleLowerCase("tr-TR");
+  const canonical: Record<string, string> = {
+    "türkiye": "Turkey",
+    "turkey": "Turkey",
+    "iran": "Iran",
+    "iran": "Iran",
+    "çin": "China",
+    "china": "China",
+    "almanya": "Germany",
+    "germany": "Germany",
+    "fransa": "France",
+    "france": "France",
+    "bulgaristan": "Bulgaria",
+    "bulgaria": "Bulgaria",
+  };
+
+  const places = new Set<string>();
+  for (const [needle, name] of Object.entries(canonical)) {
+    if (raw.includes(needle)) places.add(name);
+  }
+
+  return [...places].join(" ");
+}
+
 export function planResearchQueries(request: ResearchRequest): PlannedQuery[] {
   const maxQueries = Math.min(Math.max(request.maxQueries ?? 18, 6), 40);
   const languages = inferLanguages(request);
   const subject = extractSubject(request);
   const exactSubject = request.type === "LOGISTICS" ? subject : `"${subject}"`;
-  const geography = [request.sourceRegion, request.destination].filter(Boolean).join(" ");
+  const geography = inferGeography(request);
   const year = new Date().getUTCFullYear();
 
   const planned: PlannedQuery[] = [];
