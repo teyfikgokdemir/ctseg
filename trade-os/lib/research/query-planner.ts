@@ -1,3 +1,4 @@
+import { extractSubject } from "./relevance";
 import type { PlannedQuery, ResearchRequest } from "./types";
 
 const languageHints: Record<string, string[]> = {
@@ -63,14 +64,11 @@ function inferLanguages(request: ResearchRequest): string[] {
   return [...inferred];
 }
 
-function baseSubject(request: ResearchRequest): string {
-  return request.product?.trim() || request.rawRequest.trim();
-}
-
 export function planResearchQueries(request: ResearchRequest): PlannedQuery[] {
   const maxQueries = Math.min(Math.max(request.maxQueries ?? 18, 6), 40);
   const languages = inferLanguages(request);
-  const subject = baseSubject(request);
+  const subject = extractSubject(request);
+  const exactSubject = request.type === "LOGISTICS" ? subject : `"${subject}"`;
   const geography = [request.sourceRegion, request.destination].filter(Boolean).join(" ");
   const year = new Date().getUTCFullYear();
 
@@ -80,7 +78,7 @@ export function planResearchQueries(request: ResearchRequest): PlannedQuery[] {
   for (const language of languages) {
     for (const term of typeTerms[request.type]) {
       planned.push({
-        query: [subject, geography, term, year].filter(Boolean).join(" "),
+        query: [exactSubject, geography, term, year].filter(Boolean).join(" "),
         language,
         intent: term,
         priority: priority--,
@@ -90,13 +88,13 @@ export function planResearchQueries(request: ResearchRequest): PlannedQuery[] {
 
   planned.push(
     {
-      query: [subject, geography, "official company", "catalog", year].filter(Boolean).join(" "),
+      query: [exactSubject, geography, "official company", "catalog", year].filter(Boolean).join(" "),
       language: "en",
       intent: "official-evidence",
       priority: 99,
     },
     {
-      query: [subject, geography, "PDF", "catalogue", "2025 OR 2026"].filter(Boolean).join(" "),
+      query: [exactSubject, geography, "PDF", "catalogue", "2025 OR 2026"].filter(Boolean).join(" "),
       language: "en",
       intent: "recent-document",
       priority: 98,
