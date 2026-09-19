@@ -1,23 +1,18 @@
 name: Trade OS CI
-# checkpoint: access jwt fix
 
 on:
-  push:
-    branches: [trade-os]
-    paths:
-      - ".github/workflows/trade-os-ci.yml"
-
-permissions:
-  contents: write
+  workflow_dispatch:
 
 jobs:
-  validate:
+  build:
     runs-on: ubuntu-latest
     env:
       DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
       AUTHORIZED_EMAILS: ci@example.com
       PRIMARY_ADMIN_EMAIL: ci@example.com
       DEV_USER_EMAIL: ci@example.com
+      CLOUDFLARE_ACCESS_TEAM_DOMAIN: https://example.cloudflareaccess.com
+      CLOUDFLARE_ACCESS_AUD: ci-audience
     defaults:
       run:
         working-directory: trade-os
@@ -26,38 +21,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Refresh lock and validate
-        shell: bash
-        run: |
-          set +e
-          npm install --package-lock-only >/tmp/ci.log 2>&1
-          S0=$?
-          npm ci >>/tmp/ci.log 2>&1
-          S1=$?
-          npm audit --json > ci-audit.json 2>&1 || true
-          npm run db:generate >>/tmp/ci.log 2>&1
-          S2=$?
-          npm run build >>/tmp/ci.log 2>&1
-          S3=$?
-          {
-            echo "lock_refresh=$S0"
-            echo "npm_ci=$S1"
-            echo "prisma_generate=$S2"
-            echo "next_build=$S3"
-            echo "--- tail ---"
-            tail -100 /tmp/ci.log
-          } > ci-status.txt
-          exit 0
-
-      - name: Persist validation artifacts
-        working-directory: .
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add trade-os/package-lock.json trade-os/ci-audit.json trade-os/ci-status.txt
-          if ! git diff --cached --quiet; then
-            git commit -m "chore(trade-os): refresh lock and validation"
-            git push origin HEAD:trade-os
-          fi
+      - run: npm ci
+      - run: npm audit --audit-level=high
+      - run: npm run db:generate
+      - run: npm run build
