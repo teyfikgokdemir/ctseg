@@ -18,13 +18,21 @@ export async function currentUser() {
 
   if (!email || !isAuthorizedEmail(email)) return null;
 
+  const isAdmin = email === adminEmail();
+  const role = isAdmin ? "ADMIN" : "MANAGER";
+  const name = isAdmin ? "Teyfik Gökdemir" : "Mina Fakhimi";
+
   return db.user.upsert({
     where: { email },
-    update: { active: true },
+    update: {
+      name,
+      role,
+      active: true,
+    },
     create: {
       email,
-      name: email === adminEmail() ? "Teyfik Gökdemir" : "Mina Fakhimi",
-      role: email === adminEmail() ? "ADMIN" : "MANAGER",
+      name,
+      role,
       active: true,
     },
   });
