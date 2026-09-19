@@ -36,14 +36,14 @@ type SavedCase = {
 };
 
 const types = [
-  { value: "SOURCING", label: "Tedarikçi Bul", example: "İran için haftalık 100 MT Feed Grade L-Threonine arıyoruz. Önce Türkiye, sonra global." },
-  { value: "BUYER_SEARCH", label: "Alıcı Bul", example: "İran safranını Almanya ve Fransa'da alabilecek güncel ithalatçı ve distribütörleri bul." },
-  { value: "LOGISTICS", label: "Lojistik Bul", example: "Bulgaristan'dan İran'a 24 ton yük için kara, deniz ve alternatif taşıma çözümleri bul." },
+  { value: "SOURCING", label: "Tedarikçi Bul" },
+  { value: "BUYER_SEARCH", label: "Alıcı Bul" },
+  { value: "LOGISTICS", label: "Lojistik Bul" },
 ];
 
 export default function NewCasePage() {
   const [type, setType] = useState("SOURCING");
-  const [rawRequest, setRawRequest] = useState(types[0].example);
+  const [rawRequest, setRawRequest] = useState("");
   const [plan, setPlan] = useState<Plan | null>(null);
   const [run, setRun] = useState<ResearchRun | null>(null);
   const [savedCase, setSavedCase] = useState<SavedCase | null>(null);
@@ -120,8 +120,7 @@ export default function NewCasePage() {
 
   function changeType(next: string) {
     setType(next);
-    const selected = types.find((item) => item.value === next);
-    if (selected) setRawRequest(selected.example);
+    setRawRequest("");
     setPlan(null);
     setRun(null);
     setSavedCase(null);
@@ -159,7 +158,12 @@ export default function NewCasePage() {
             </div>
             <label>
               Talep
-              <textarea value={rawRequest} onChange={(e) => setRawRequest(e.target.value)} rows={8} />
+              <textarea
+                value={rawRequest}
+                onChange={(e) => setRawRequest(e.target.value)}
+                rows={8}
+                placeholder="Talebinizi yazın…"
+              />
             </label>
             <button className="primary-button" disabled={loading || !rawRequest.trim()}>
               {loading ? "Plan hazırlanıyor…" : "Araştırma planını oluştur"}
