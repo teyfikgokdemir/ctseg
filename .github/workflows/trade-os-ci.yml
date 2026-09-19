@@ -1,4 +1,5 @@
 name: Trade OS CI
+# checkpoint: research persistence
 
 on:
   push:
