@@ -1,14 +1,31 @@
+import { createRemoteJWKSet, jwtVerify } from "jose";
 import { NextRequest, NextResponse } from "next/server";
 import { isAuthorizedEmail } from "./lib/auth";
 
-export function middleware(request: NextRequest) {
+let cachedJwksUrl = "";
+let cachedJwks: ReturnType<typeof createRemoteJWKSet> | null = null;
+
+function jwksFor(teamDomain: string) {
+  const url = `${teamDomain.replace(/\/$/, "")}/cdn-cgi/access/certs`;
+
+  if (!cachedJwks || cachedJwksUrl !== url) {
+    cachedJwksUrl = url;
+    cachedJwks = createRemoteJWKSet(new URL(url));
+  }
+
+  return cachedJwks;
+}
+
+export async function middleware(request: NextRequest) {
   if (process.env.NODE_ENV === "development") {
     return NextResponse.next();
   }
 
-  const email = request.headers.get("cf-access-authenticated-user-email");
+  const teamDomain = process.env.CLOUDFLARE_ACCESS_TEAM_DOMAIN?.trim().replace(/\/$/, "");
+  const audience = process.env.CLOUDFLARE_ACCESS_AUD?.trim();
+  const token = request.headers.get("cf-access-jwt-assertion");
 
-  if (!isAuthorizedEmail(email)) {
+  if (!teamDomain || !audience || !token) {
     return new NextResponse("Forbidden", {
       status: 403,
       headers: {
@@ -18,9 +35,39 @@ export function middleware(request: NextRequest) {
     });
   }
 
-  const response = NextResponse.next();
-  if (email) response.headers.set("x-ctseg-user-email", email);
-  return response;
+  try {
+    const { payload } = await jwtVerify(token, jwksFor(teamDomain), {
+      issuer: teamDomain,
+      audience,
+    });
+
+    const email = typeof payload.email === "string" ? payload.email.trim().toLowerCase() : null;
+
+    if (!isAuthorizedEmail(email)) {
+      return new NextResponse("Forbidden", {
+        status: 403,
+        headers: {
+          "cache-control": "no-store",
+          "x-robots-tag": "noindex, nofollow",
+        },
+      });
+    }
+
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-ctseg-user-email", email);
+
+    return NextResponse.next({
+      request: { headers: requestHeaders },
+    });
+  } catch {
+    return new NextResponse("Forbidden", {
+      status: 403,
+      headers: {
+        "cache-control": "no-store",
+        "x-robots-tag": "noindex, nofollow",
+      },
+    });
+  }
 }
 
 export const config = {
