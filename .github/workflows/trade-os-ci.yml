@@ -1,5 +1,5 @@
 name: Trade OS CI
-# checkpoint: research persistence
+# checkpoint: production deploy readiness
 
 on:
   push:
