@@ -11,5 +11,7 @@ search:
     - json
 
 server:
-  limiter: true
+  secret_key: "replace-via-SEARXNG_SECRET"
+  limiter: false
+  public_instance: false
   image_proxy: false
