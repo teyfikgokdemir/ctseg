@@ -26,7 +26,7 @@ export async function searchPlannedQueries(request: ResearchRequest, subject: st
               title: result.title, snippet: result.snippet, url: result.url });
             if (relevanceScore < (request.type === "SOURCING" ? 60 : 55)) continue;
             if (request.type === "LOGISTICS" && request.sourceRegion && request.destination) {
-              const text = `${result.title} ${result.snippet ?? ""} ${result.url}`.toLocaleLowerCase("tr-TR");
+              const text = `${result.title} ${result.snippet ?? ""} ${result.url} ${result.country ?? ""}`.toLocaleLowerCase("tr-TR");
               if (![request.sourceRegion, request.destination].some((country) =>
                 text.includes(country.toLocaleLowerCase("tr-TR")))) continue;
             }

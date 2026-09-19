@@ -121,7 +121,7 @@ const intentSignals: Record<ResearchCaseType, string[]> = {
   ],
   BUYER_SEARCH: [
     "importer","buyer","distributor","wholesaler","procurement","retailer",
-    "ithalat","alıcı","distribütör","toptancı",
+    "ithalat","alıcı","distribütör","toptancı","grossiste","importateur",
   ],
   LOGISTICS: [
     "logistics","freight","forwarder","transport","shipping","cargo",
@@ -161,6 +161,15 @@ export function scoreRelevance(input: {
   if (!subjectMatch && !strongSubjectMatch && !variantMatch) return 0;
 
   const intentMatch = intentSignals[input.type].some((signal) => haystack.includes(signal));
+
+  if (input.type === "BUYER_SEARCH") {
+    const titleUrl = `${input.title} ${input.url}`.toLocaleLowerCase("tr-TR");
+    const exactProduct = subjectVariants(input.subject).some((variant) => {
+      const escaped = variant.toLocaleLowerCase("tr-TR").replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/[\s-]+/g, "[\\s-]+");
+      return new RegExp(`(?<![\\p{L}])${escaped}(?![\\p{L}])`, "u").test(titleUrl);
+    });
+    if (!exactProduct || !intentMatch) return 0;
+  }
 
   if (input.type === "SOURCING") {
     const technicalPage =

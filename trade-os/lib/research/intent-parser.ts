@@ -55,7 +55,8 @@ const modes: Array<[RegExp, string]> = [
 ];
 
 function findCountries(text: string): string[] {
-  return countries.filter(([pattern]) => pattern.test(text)).map(([, country]) => country);
+  const normalized = text.toLocaleLowerCase("tr-TR");
+  return countries.filter(([pattern]) => pattern.test(normalized)).map(([, country]) => country);
 }
 
 export class LocalIntentProvider implements IntentProvider {

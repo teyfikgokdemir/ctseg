@@ -4,6 +4,10 @@ export type SearchResult = {
   snippet?: string;
   engine?: string;
   publishedAt?: string | null;
+  companyName?: string;
+  country?: string;
+  productPageVerified?: boolean;
+  verifiedClaim?: string;
 };
 
 export type SearchRequest = {
