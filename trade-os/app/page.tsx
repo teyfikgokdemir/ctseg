@@ -41,14 +41,14 @@ export default function Home() {
 
       <section className="grid">
         {modules.map((item) => (
-          <article className="card" key={item.code}>
+          <a className="card" href="/cases/new" key={item.code}>
             <div>
               <small>{item.code}</small>
               <h2>{item.title}</h2>
               <p>{item.text}</p>
             </div>
             <div className="cta">Yeni vaka oluştur →</div>
-          </article>
+          </a>
         ))}
       </section>
     </main>
