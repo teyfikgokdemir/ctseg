@@ -1,7 +1,13 @@
 name: Trade OS CI
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [trade-os]
+    paths:
+      - ".github/workflows/trade-os-ci.yml"
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -13,10 +19,55 @@ jobs:
         working-directory: trade-os
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install --package-lock-only
-      - run: npm ci
-      - run: npm run db:generate
-      - run: npm run build
+
+      - name: Run diagnostic build
+        id: diagnostic
+        shell: bash
+        run: |
+          set +e
+          : > ci-diagnostic.txt
+
+          echo "== npm install --package-lock-only ==" >> ci-diagnostic.txt
+          npm install --package-lock-only >> ci-diagnostic.txt 2>&1
+          S1=$?
+
+          echo "\n== npm ci ==" >> ci-diagnostic.txt
+          npm ci >> ci-diagnostic.txt 2>&1
+          S2=$?
+
+          echo "\n== prisma generate ==" >> ci-diagnostic.txt
+          npm run db:generate >> ci-diagnostic.txt 2>&1
+          S3=$?
+
+          echo "\n== next build ==" >> ci-diagnostic.txt
+          npm run build >> ci-diagnostic.txt 2>&1
+          S4=$?
+
+          echo "\nSTATUS install=$S1 ci=$S2 prisma=$S3 build=$S4" >> ci-diagnostic.txt
+
+          if [ "$S1" -ne 0 ] || [ "$S2" -ne 0 ] || [ "$S3" -ne 0 ] || [ "$S4" -ne 0 ]; then
+            echo "failed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "failed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Persist diagnostic log
+        if: always()
+        working-directory: .
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add trade-os/ci-diagnostic.txt trade-os/package-lock.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(trade-os): persist CI diagnostic"
+            git push origin HEAD:trade-os
+          fi
+
+      - name: Fail when diagnostic failed
+        if: steps.diagnostic.outputs.failed == 'true'
+        run: exit 1
