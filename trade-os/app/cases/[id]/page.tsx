@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { currentUser } from "@/lib/current-user";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -44,9 +45,9 @@ export default async function CaseDetailPage({
   return (
     <main className="shell">
       <header className="topbar">
-        <a className="brand" href="/">CTSEG <span>Trade OS</span></a>
+        <Link className="brand" href="/">CTSEG <span>Trade OS</span></Link>
         <nav className="top-actions">
-          <a href="/cases">Vakalar</a>
+          <Link href="/cases">Vakalar</Link>
           <div className="badge">{tradeCase.reference}</div>
         </nav>
       </header>

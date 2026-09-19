@@ -1,6 +1,7 @@
 import { DeleteCaseButton } from "./delete-case-button";
 import { db } from "@/lib/db";
 import { currentUser } from "@/lib/current-user";
+import Link from "next/link";
 
 const labels = {
   SOURCING: "Tedarik",
@@ -41,9 +42,9 @@ export default async function CasesPage() {
   return (
     <main className="shell shell-dashboard">
       <header className="topbar">
-        <a className="brand" href="/">CTSEG <span>Trade OS</span></a>
+        <Link className="brand" href="/">CTSEG <span>Trade OS</span></Link>
         <nav className="top-actions">
-          <a href="/">Ana panel</a>
+          <Link href="/">Ana panel</Link>
           <div className="badge">{user.name}</div>
         </nav>
       </header>
@@ -54,7 +55,7 @@ export default async function CasesPage() {
           <h1 className="dashboard-title">Vakalar</h1>
           <p className="lead">Tedarik, alıcı araştırması ve lojistik operasyonlarının kalıcı CTSEG hafızası.</p>
         </div>
-        <a className="primary-link" href="/cases/new">Yeni vaka +</a>
+        <Link className="primary-link" href="/cases/new">Yeni vaka +</Link>
       </section>
 
       <section className="metric-grid metric-grid-cases">
@@ -77,7 +78,7 @@ export default async function CasesPage() {
           <div className="empty-list">Henüz kayıtlı vaka yok.</div>
         ) : cases.map((item) => (
           <article className="case-row modern-case-row" key={item.id}>
-            <a className="case-row-main" href={`/cases/${item.id}`}>
+            <Link className="case-row-main" href={`/cases/${item.id}`}>
               <div>
                 <div className="result-meta">
                   <span>{labels[item.type]}</span>
@@ -98,7 +99,7 @@ export default async function CasesPage() {
                   <span>firma</span>
                 </div>
               </div>
-            </a>
+            </Link>
 
             {user.role === "ADMIN" && (
               <DeleteCaseButton id={item.id} title={item.title} />

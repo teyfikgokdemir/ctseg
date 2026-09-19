@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import { currentUser } from "@/lib/current-user";
+import Link from "next/link";
 
 const modules = [
   {
@@ -47,8 +48,8 @@ export default async function Home() {
           <div className="workspace-caption">Private trade intelligence workspace</div>
         </div>
         <nav className="top-actions">
-          <a href="/cases">Vakalar</a>
-          <a className="top-new-case" href="/cases/new">Yeni vaka +</a>
+          <Link href="/cases">Vakalar</Link>
+          <Link className="top-new-case" href="/cases/new">Yeni vaka +</Link>
           <div className="badge">{user?.name ?? "Private Workspace"}</div>
         </nav>
       </header>
@@ -62,8 +63,8 @@ export default async function Home() {
             Şirketleri kaynakları, güncelliği ve doğrulama durumuyla birlikte inceleyin.
           </p>
           <div className="hero-actions">
-            <a className="primary-link" href="/cases/new">Yeni araştırma başlat</a>
-            <a className="secondary-link" href="/cases">Vaka hafızasını aç</a>
+            <Link className="primary-link" href="/cases/new">Yeni araştırma başlat</Link>
+            <Link className="secondary-link" href="/cases">Vaka hafızasını aç</Link>
           </div>
         </div>
 
@@ -80,11 +81,11 @@ export default async function Home() {
 
         <div className="modern-module-grid">
           {modules.map((item) => (
-            <a className="modern-module-card" href="/cases/new" key={item.code}>
+            <Link className="modern-module-card" href="/cases/new" key={item.code}>
               <div className="module-card-top"><span>{item.code}</span><small>{item.kicker}</small></div>
               <div><h3>{item.title}</h3><p>{item.text}</p></div>
               <div className="module-card-cta">Araştırmaya geç <b>↗</b></div>
-            </a>
+            </Link>
           ))}
         </div>
       </section>

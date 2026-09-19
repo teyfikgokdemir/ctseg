@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Link from "next/link";
 
 type Mode = "SOURCING" | "BUYER_SEARCH" | "LOGISTICS";
 type Parsed = { intent: string; tasks: Mode[]; normalizedProduct: string | null; grade: string | null;
@@ -48,8 +49,8 @@ export default function NewCasePage() {
 
   return <main className="shell research-shell">
     <header className="topbar">
-      <a className="brand" href="/">CTSEG <span>Trade OS</span></a>
-      <nav className="top-actions"><a href="/cases">Vakalar</a><span className="badge">Yeni araştırma</span></nav>
+      <Link className="brand" href="/">CTSEG <span>Trade OS</span></Link>
+      <nav className="top-actions"><Link href="/cases">Vakalar</Link><span className="badge">Yeni araştırma</span></nav>
     </header>
 
     <section className="research-intro">
@@ -93,7 +94,7 @@ export default function NewCasePage() {
           {data.parsed.quantity !== null && <span>{data.parsed.quantity} {data.parsed.quantityUnit}{data.parsed.recurrence === "weekly" ? " / hafta" : ""}</span>}
           {data.parsed.grade && <span>{data.parsed.grade}</span>}
         </div>
-        <a href={`/cases/${data.case.id}`}>Vaka {data.case.reference} ↗</a>
+        <Link href={`/cases/${data.case.id}`}>Vaka {data.case.reference} ↗</Link>
       </section>
 
       {data.results.map((result) => <section className="company-section" key={result.type}>
