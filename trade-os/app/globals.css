@@ -90,3 +90,11 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
 .case-stat span { color: var(--muted); font-size: 11px; }
 .empty-list { border: 1px dashed var(--line); border-radius: 18px; padding: 34px; color: var(--muted); text-align: center; }
 @media (max-width: 700px) { .list-head { align-items: flex-start; flex-direction: column; } .case-row { grid-template-columns: 1fr; } .case-stat { border-left: 0; border-top: 1px solid var(--line); padding: 14px 0 0; text-align: left; } }
+
+.case-detail-head { padding: 56px 0 30px; border-bottom: 1px solid var(--line); }
+.research-history { display: grid; gap: 18px; padding: 28px 0 64px; }
+.history-run { border: 1px solid var(--line); border-radius: 22px; background: #100f0e; padding: 22px; }
+.history-run-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 18px; margin-bottom: 18px; }
+.history-run-head h2 { margin: 7px 0 0; font-size: 24px; letter-spacing: -.03em; }
+.history-run-head > span { color: var(--muted); font-size: 12px; }
+@media (max-width: 700px) { .history-run-head { align-items: flex-start; flex-direction: column; } }
