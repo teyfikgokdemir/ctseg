@@ -1,26 +1,41 @@
+lock_refresh=0
 npm_ci=0
 prisma_generate=0
 next_build=0
 --- tail ---
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: ctseg-trade-os@0.1.0
+npm warn Found: react@19.3.0
+npm warn node_modules/react
+npm warn   react@"19.1.1" from the root project
+npm warn   3 more (next, react-dom, styled-jsx)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react@"^19.3.0" from react-dom@19.3.0
+npm warn node_modules/react-dom
+npm warn   react-dom@"19.1.1" from the root project
+npm warn   1 more (next)
 
-added 69 packages, and audited 70 packages in 11s
+up to date, audited 70 packages in 6s
 
-14 packages are looking for funding
+31 packages are looking for funding
   run `npm fund` for details
 
-5 vulnerabilities (1 moderate, 4 high)
+found 0 vulnerabilities
 
-To address all issues (including breaking changes), run:
-  npm audit fix --force
+added 42 packages, and audited 43 packages in 10s
 
-Run `npm audit` for details.
+9 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
 
 > ctseg-trade-os@0.1.0 db:generate
 > prisma generate
 
 Prisma schema loaded from prisma/schema.prisma
 ┌─────────────────────────────────────────────────────────┐
-│  Update available 6.19.3 -> 8.0.0-rc.15                 │
+│  Update available 6.12.0 -> 8.0.0-rc.15                 │
 │                                                         │
 │  This is a major update - please follow the guide at    │
 │  https://pris.ly/d/major-version-upgrade                │
@@ -30,11 +45,11 @@ Prisma schema loaded from prisma/schema.prisma
 │    npm i @prisma/client@latest                          │
 └─────────────────────────────────────────────────────────┘
 
-✔ Generated Prisma Client (v6.19.3) to ./node_modules/@prisma/client in 394ms
+✔ Generated Prisma Client (v6.12.0) to ./node_modules/@prisma/client in 93ms
 
 Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
 
-Tip: Need your database queries to be 1000x faster? Accelerate offers you that and more: https://pris.ly/tip-2-accelerate
+Tip: Interested in query caching in just a few lines of code? Try Accelerate today! https://pris.ly/tip-3-accelerate
 
 
 > ctseg-trade-os@0.1.0 build
@@ -49,7 +64,7 @@ https://nextjs.org/telemetry
    ▲ Next.js 15.5.25
 
    Creating an optimized production build ...
- ✓ Compiled successfully in 4.4s
+ ✓ Compiled successfully in 5.8s
    Linting and checking validity of types ...
    Collecting page data ...
    Generating static pages (0/9) ...
