@@ -4,7 +4,6 @@ const required = [
   "PRIMARY_ADMIN_EMAIL",
   "CLOUDFLARE_ACCESS_TEAM_DOMAIN",
   "CLOUDFLARE_ACCESS_AUD",
-  "SEARXNG_URL",
 ];
 
 const missing = required.filter((key) => !process.env[key]?.trim());
