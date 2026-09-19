@@ -52,25 +52,27 @@ export class BingRssAdapter implements SearchAdapter {
 
     const xml = await response.text();
     const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/gi)];
+    const results: SearchResult[] = [];
 
-    return items
-      .map((match) => {
-        const item = match[1];
-        const title = tag(item, "title");
-        const link = tag(item, "link");
-        const description = tag(item, "description");
-        const pubDate = tag(item, "pubDate");
+    for (const match of items) {
+      const item = match[1];
+      const title = tag(item, "title");
+      const link = tag(item, "link");
 
-        if (!title || !link) return null;
+      if (!title || !link) continue;
 
-        return {
-          title,
-          url: link,
-          snippet: description ?? undefined,
-          engine: "bing-rss",
-          publishedAt: pubDate ?? null,
-        } satisfies SearchResult;
-      })
-      .filter((item): item is SearchResult => Boolean(item));
+      const description = tag(item, "description");
+      const pubDate = tag(item, "pubDate");
+
+      results.push({
+        title,
+        url: link,
+        snippet: description ?? undefined,
+        engine: "bing-rss",
+        publishedAt: pubDate ?? null,
+      });
+    }
+
+    return results;
   }
 }
