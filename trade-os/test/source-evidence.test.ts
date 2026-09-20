@@ -1,5 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { SourceFetcher } from "../lib/research/source-fetcher";
+import dns from "node:dns/promises";
+import { createServer } from "node:http";
+import { SourceFetcher, safeConnectionLookup } from "../lib/research/source-fetcher";
 import { extractEvidence } from "../lib/research/evidence-extractor";
 import type { ParsedIntent } from "../lib/research/intent-parser";
 import type { ResearchFinding } from "../lib/research/types";
@@ -7,6 +9,34 @@ import type { ResearchFinding } from "../lib/research/types";
 afterEach(() => vi.restoreAllMocks());
 
 describe("source boundaries", () => {
+  it.each(["127.0.0.1", "169.254.169.254", "fd00::1"])("rejects connection-time DNS rebinding to %s", async (rebound) => {
+    const lookup = vi.spyOn(dns, "lookup").mockImplementationOnce(async () => [{ address: "8.8.8.8", family: 4 }] as never)
+      .mockImplementationOnce(async () => [{ address: rebound, family: rebound.includes(":") ? 6 : 4 }] as never);
+    expect(await SourceFetcher.isSafeIP("rebind.example")).toBe(true);
+    await expect(new Promise<void>((resolve, reject) => safeConnectionLookup("rebind.example", {}, (error) =>
+      error ? reject(error) : resolve()))).rejects.toThrow("UNSAFE_ADDRESS");
+    expect(lookup).toHaveBeenCalledTimes(2);
+  });
+
+  it("allows a public connection-time address", async () => {
+    vi.spyOn(dns, "lookup").mockImplementation(async () => [{ address: "8.8.8.8", family: 4 }] as never);
+    await expect(new Promise<string>((resolve, reject) => safeConnectionLookup("public.example", {}, (error, address) =>
+      error ? reject(error) : resolve(String(address))))).resolves.toBe("8.8.8.8");
+  });
+  it("rejects a rebound redirect host before a local TCP connection", async () => {
+    let connections = 0;
+    const server = createServer((_request, response) => { connections++; response.end("private"); });
+    await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
+    try {
+      const address = server.address();
+      if (!address || typeof address === "string") throw new Error("missing test port");
+      vi.spyOn(dns, "lookup").mockImplementationOnce(async () => [{ address: "8.8.8.8", family: 4 }] as never)
+        .mockImplementationOnce(async () => [{ address: "127.0.0.1", family: 4 }] as never);
+      const result = await SourceFetcher.fetch(`http://rebind.example:${address.port}/`, 0, 1000);
+      expect(result.isLive).toBe(false);
+      expect(connections).toBe(0);
+    } finally { await new Promise<void>((resolve) => server.close(() => resolve())); }
+  });
   it("rejects private, metadata, mapped IPv6 and unsupported schemes", async () => {
     for (const url of ["file:///etc/passwd", "http://localhost", "http://127.1.2.3", "http://10.1.1.1", "http://169.254.169.254", "http://[::ffff:127.0.0.1]"]) {
       expect(SourceFetcher.isSafeUrl(url)).toBe(false);

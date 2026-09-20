@@ -1,5 +1,6 @@
 import dns from "node:dns/promises";
 import net from "node:net";
+import { Agent } from "undici";
 import * as cheerio from "cheerio";
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const pdfParse = require("pdf-parse");
@@ -33,6 +34,20 @@ function publicAddress(address: string): boolean {
   return true;
 }
 
+// Undici invokes this lookup for the socket it actually opens. A prior DNS
+// check alone cannot protect against a hostname changing between lookups.
+export const safeConnectionLookup: net.LookupFunction = (hostname, _options, callback) => {
+  dns.lookup(hostname, { all: true }).then((addresses) => {
+    if (!addresses.length || addresses.some(({ address }) => !publicAddress(address))) {
+      callback(new Error("UNSAFE_ADDRESS"), "");
+      return;
+    }
+    callback(null, addresses[0].address, addresses[0].family);
+  }).catch(() => callback(new Error("DNS_LOOKUP_FAILED"), ""));
+};
+
+const safeDispatcher = new Agent({ connect: { lookup: safeConnectionLookup } });
+
 async function limitedBody(response: Response, limit: number): Promise<Buffer> {
   const declared = Number(response.headers.get("content-length"));
   if (Number.isFinite(declared) && declared > limit) throw new Error("SOURCE_TOO_LARGE");
@@ -65,7 +80,8 @@ export class SourceFetcher {
 
   static async isSafeIP(host: string): Promise<boolean> {
     try {
-      const addresses = net.isIP(host) ? [{ address: host }] : await dns.lookup(host, { all: true });
+      const normalized = host.replace(/^\[|\]$/g, "");
+      const addresses = net.isIP(normalized) ? [{ address: normalized }] : await dns.lookup(normalized, { all: true });
       return addresses.length > 0 && addresses.every((record) => publicAddress(record.address));
     } catch { return false; }
   }
@@ -79,8 +95,8 @@ export class SourceFetcher {
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), timeoutMs);
       try {
-        const response = await fetch(url, { signal: controller.signal, redirect: "manual",
-          headers: { "User-Agent": "CTSEG-Trade-Research/1.0" } });
+        const response = await fetch(url, { signal: controller.signal, redirect: "manual", dispatcher: safeDispatcher,
+          headers: { "User-Agent": "CTSEG-Trade-Research/1.0" } } as RequestInit & { dispatcher: Agent });
         if (response.status >= 300 && response.status < 400) {
           const location = response.headers.get("location");
           if (!location) throw new Error("INVALID_REDIRECT");
