@@ -1,40 +1,41 @@
 {
-    "name":  "ctseg-trade-os",
-    "version":  "0.1.0",
-    "private":  true,
-    "scripts":  {
-                    "dev":  "next dev",
-                    "build":  "next build",
-                    "start":  "next start",
-                    "lint":  "eslint .",
-                    "db:generate":  "prisma generate",
-                    "db:push":  "prisma db push",
-                    "prestart":  "node scripts/validate-production-env.mjs",
-                    "test":  "vitest run"
-                },
-    "dependencies":  {
-                         "@prisma/client":  "6.12.0",
-                         "cheerio":  "^1.2.0",
-                         "jose":  "6.2.12",
-                         "next":  "15.5.25",
-                         "pdf-parse":  "^2.4.5",
-                         "react":  "19.1.1",
-                         "react-dom":  "19.1.1",
-                         "zod":  "^4.1.11"
-                     },
-    "devDependencies":  {
-                            "@types/cheerio":  "^0.22.35",
-                            "@types/node":  "^24.3.0",
-                            "@types/pdf-parse":  "^1.1.5",
-                            "@types/react":  "^19.1.12",
-                            "@types/react-dom":  "^19.1.9",
-                            "eslint":  "^9.39.5",
-                            "eslint-config-next":  "^15.5.25",
-                            "prisma":  "6.12.0",
-                            "typescript":  "^5.9.2",
-                            "vitest":  "^5.0.1"
-                        },
-    "overrides":  {
-                      "postcss":  "^8.5.23"
-                  }
+    "name": "ctseg-trade-os",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "eslint .",
+        "db:generate": "prisma generate",
+        "db:push": "prisma db push",
+        "prestart": "node scripts/validate-production-env.mjs",
+        "test": "vitest run"
+    },
+    "dependencies": {
+        "@prisma/client": "6.12.0",
+        "cheerio": "^1.2.0",
+        "jose": "6.2.12",
+        "next": "15.5.25",
+        "pdf-parse": "^2.4.5",
+        "react": "19.1.1",
+        "react-dom": "19.1.1",
+        "tldts": "7.4.10",
+        "zod": "^4.1.11"
+    },
+    "devDependencies": {
+        "@types/cheerio": "^0.22.35",
+        "@types/node": "^24.3.0",
+        "@types/pdf-parse": "^1.1.5",
+        "@types/react": "^19.1.12",
+        "@types/react-dom": "^19.1.9",
+        "eslint": "^9.39.5",
+        "eslint-config-next": "^15.5.25",
+        "prisma": "6.12.0",
+        "typescript": "^5.9.2",
+        "vitest": "^5.0.1"
+    },
+    "overrides": {
+        "postcss": "^8.5.23"
+    }
 }
