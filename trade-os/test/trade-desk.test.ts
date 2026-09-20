@@ -4,10 +4,10 @@ const { currentUser, db } = vi.hoisted(() => {
   const db = {
     $transaction: vi.fn(), $executeRaw: vi.fn(),
     tradeCase: { create: vi.fn(), findUnique: vi.fn(), update: vi.fn(), count: vi.fn() },
-    company: { findUnique: vi.fn(), findMany: vi.fn(), create: vi.fn(), update: vi.fn() },
+    company: { findUnique: vi.fn(), findMany: vi.fn(), create: vi.fn(), update: vi.fn(), delete: vi.fn() },
     caseCompany: { findUnique: vi.fn(), upsert: vi.fn(), update: vi.fn() },
-    contact: { findFirst: vi.fn(), create: vi.fn() },
-    quotation: { create: vi.fn(), findUnique: vi.fn(), update: vi.fn() },
+    contact: { findFirst: vi.fn(), findUnique: vi.fn(), create: vi.fn(), update: vi.fn() },
+    quotation: { create: vi.fn(), findUnique: vi.fn(), findFirst: vi.fn(), update: vi.fn() },
     tradeTask: { create: vi.fn(), findUnique: vi.fn(), update: vi.fn(), count: vi.fn() },
     dealActivity: { create: vi.fn() },
     tradeDocument: { create: vi.fn() }, rfqDraft: { create: vi.fn() },
@@ -19,6 +19,7 @@ vi.mock("../lib/current-user", () => ({ currentUser }));
 vi.mock("../lib/db", () => ({ db }));
 
 import { POST } from "../app/api/trade-desk/route";
+import { DELETE as DELETE_COMPANY } from "../app/api/companies/[id]/route";
 import { caseQuotationWhere, dashboardWhere, draftRfq, loadDashboardMetrics } from "../lib/trade-desk";
 
 const post = async (body: Record<string, unknown>) => POST(new Request("http://localhost/api/trade-desk", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) }) as never);
@@ -107,5 +108,24 @@ describe("Trade Desk workflows", () => {
     const tradeCase = { title: "Feed", productName: "L-Threonine", productSpecification: "98.5%", quantity: "100", quantityUnit: "MT", destinationCountry: "İran" };
     expect(draftRfq(tradeCase, { name: "Anadolu", country: "Türkiye" }, "EMAIL").language).toBe("tr");
     expect(draftRfq(tradeCase, { name: "Acme", country: "Germany" }, "WHATSAPP").language).toBe("en");
+  });
+  it("rejects unauthenticated operational writes", async () => {
+    currentUser.mockResolvedValue(null);
+    expect((await post({ action: "case.create", title: "Denied" })).status).toBe(401);
+    expect(db.tradeCase.create).not.toHaveBeenCalled();
+  });
+  it("Mina cannot delete a quotation", async () => {
+    currentUser.mockResolvedValue(mina);
+    expect((await post({ action: "quotation.delete", quotationId: "q1" })).status).toBe(403);
+    expect(db.quotation.update).not.toHaveBeenCalled();
+  });
+  it("only ADMIN can delete an unlinked company", async () => {
+    currentUser.mockResolvedValue(mina);
+    expect((await DELETE_COMPANY({} as never, { params: Promise.resolve({ id: "co1" }) })).status).toBe(403);
+    currentUser.mockResolvedValue(tefyik);
+    db.company.findUnique.mockResolvedValue({ id: "co1", _count: { cases: 0, quotations: 0, tasks: 0, activities: 0, documents: 0, rfqDrafts: 0 } });
+    db.company.delete.mockResolvedValue({ id: "co1" });
+    expect((await DELETE_COMPANY({} as never, { params: Promise.resolve({ id: "co1" }) })).status).toBe(200);
+    expect(db.company.delete).toHaveBeenCalledOnce();
   });
 });
