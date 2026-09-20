@@ -3,7 +3,7 @@ import { planResearchQueries, generateFollowUpQueries } from "./query-planner";
 import { searchPlannedQueries } from "./search-router";
 import { extractEvidence } from "./evidence-extractor";
 import { FetchScheduler } from "./fetch-scheduler";
-import { domainKey } from "./company-resolver";
+import { domainKey, entityKey } from "./company-resolver";
 import type { ResearchFinding, ResearchRequest, ResearchRun, PlannedQuery, StopReason, CompanyCandidate } from "./types";
 import type { AdapterDiagnostic } from "./types";
 import { getResearchAIProvider } from "./local-ai-provider";
@@ -33,6 +33,7 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
   const allDiagnostics: AdapterDiagnostic[] = [];
   
   const fetchedUrls = new Set<string>();
+  const candidateKeys = new Set<string>();
   const executedQueryStrings = new Set<string>();
   
   const queriesToRun = planResearchQueries(request);
@@ -75,7 +76,9 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
         if (!allFindings.has(f.url)) {
           allFindings.set(f.url, f);
           newFindingsCount++;
-          if (allFindings.size > MAX_CANDIDATES) { stopReason = "HARD_CAP"; break; }
+          const eKey = entityKey(domainKey(f.domain), f.normalizedCompanyName || f.companyName);
+          candidateKeys.add(eKey);
+          if (candidateKeys.size > MAX_CANDIDATES) { stopReason = "HARD_CAP"; break; }
           // Schedule fetch
           let priority = f.relevanceScore || 50;
           if (f.domain.includes(request.product?.toLowerCase() || "")) priority += 20; // boost product in domain
