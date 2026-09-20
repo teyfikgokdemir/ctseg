@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
   const mode = "AUTO_RESEARCH" as const;
   
   if (!rawRequest || rawRequest.length > 4000) {
-    return NextResponse.json({ error: "Talep metni 1-4000 karakter olmalÄ±." }, { status: 400 });
+    return NextResponse.json({ error: "Talep metni 1-4000 karakter olmalı." }, { status: 400 });
   }
 
   const aiProvider = getResearchAIProvider();
@@ -117,7 +117,7 @@ export async function POST(request: NextRequest) {
       parsed, results: results.map(r => ({ type: r.type, companies: r.companies, review: r.review, searchedAt: r.searchedAt })), paidFallbackUsed: false });
   } catch (error) {
     console.error("Research execute failed", error);
-    return NextResponse.json({ error: "AraÅŸtÄ±rma tamamlanamadÄ±.", code: "RESEARCH_EXECUTION_FAILED",
+    return NextResponse.json({ error: "Araştırma tamamlanamadı.", code: "RESEARCH_EXECUTION_FAILED",
       paidFallbackUsed: false }, { status: 500 });
   }
 }
