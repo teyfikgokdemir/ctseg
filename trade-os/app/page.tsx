@@ -2,7 +2,7 @@ import Link from "next/link";
 import AppHeader from "@/components/app-header";
 import { db } from "@/lib/db";
 import { currentUser } from "@/lib/current-user";
-import { dashboardWhere, stageLabels } from "@/lib/trade-desk";
+import { dashboardWhere, loadDashboardMetrics, stageLabels } from "@/lib/trade-desk";
 
 export const dynamic = "force-dynamic";
 
@@ -10,11 +10,8 @@ export default async function Home() {
   const user = await currentUser();
   if (!user) return <main className="shell"><div className="error-banner">Yetkisiz.</div></main>;
   const where = dashboardWhere();
-  const [activeCases, pendingQuotations, todayTasks, openTasks, followups, cases, quotations] = await Promise.all([
-    db.tradeCase.count({ where: where.activeCases }),
-    db.tradeCase.count({ where: where.pendingQuotations }),
-    db.tradeTask.count({ where: where.todayTasks }),
-    db.tradeTask.count({ where: where.openTasks }),
+  const [metrics, followups, cases, quotations] = await Promise.all([
+    loadDashboardMetrics(db),
     db.tradeTask.findMany({ where: where.todayTasks, include: { tradeCase: true, company: true }, orderBy: [{ dueAt: "asc" }, { priority: "desc" }], take: 8 }),
     db.tradeCase.findMany({ where: where.activeCases, include: { createdBy: { select: { name: true, email: true } }, activities: { orderBy: { createdAt: "desc" }, take: 1 } }, orderBy: { updatedAt: "desc" }, take: 8 }),
     db.quotation.findMany({ where: { deletedAt: null }, include: { company: true, tradeCase: true }, orderBy: { quotationDate: "desc" }, take: 6 }),
@@ -23,10 +20,10 @@ export default async function Home() {
     <AppHeader />
     <section className="desk-heading"><div><div className="eyebrow">CTSEG TRADE DESK / GÜNLÜK OPERASYON</div><h1>Bugünün masası</h1><p>Açık işler, fiyat bekleyen vakalar ve sıradaki aksiyonlar.</p></div><Link className="primary-link" href="/cases/new">Yeni Talep +</Link></section>
     <section className="desk-kpis" aria-label="Operasyon göstergeleri">
-      <Link href="/cases?filter=active"><span>Aktif Vakalar</span><strong>{activeCases}</strong></Link>
-      <Link href="/cases?stage=RFQ_SENT"><span>Teklif Bekleyenler</span><strong>{pendingQuotations}</strong></Link>
-      <Link href="/tasks?filter=today"><span>Bugün Takip</span><strong>{todayTasks}</strong></Link>
-      <Link href="/tasks?filter=open"><span>Açık Görevler</span><strong>{openTasks}</strong></Link>
+      <Link href="/cases?filter=active"><span>Aktif Vakalar</span><strong>{metrics.activeCases}</strong></Link>
+      <Link href="/cases?stage=RFQ_SENT"><span>Teklif Bekleyenler</span><strong>{metrics.pendingQuotations}</strong></Link>
+      <Link href="/tasks?filter=today"><span>Bugün Takip</span><strong>{metrics.todayTasks}</strong></Link>
+      <Link href="/tasks?filter=open"><span>Açık Görevler</span><strong>{metrics.openTasks}</strong></Link>
     </section>
     <div className="desk-columns"><section className="desk-panel"><div className="desk-panel-head"><h2>Bugün takip edilecekler</h2><Link href="/tasks">Tüm görevler ↗</Link></div>
       {followups.length ? followups.map((task) => <article className="desk-list-row" key={task.id}><div><strong>{task.title}</strong><small>{task.tradeCase?.title || "Genel görev"} · {task.company?.name || "Firma belirtilmedi"}</small></div><div className="desk-list-side"><span>{task.dueAt?.toLocaleDateString("tr-TR") || "—"}</span><small>{task.assignedToEmail} · {task.priority}</small></div></article>) : <p className="desk-empty">Bugüne düşen açık görev yok.</p>}

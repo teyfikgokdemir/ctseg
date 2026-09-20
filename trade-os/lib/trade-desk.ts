@@ -1,4 +1,4 @@
-import { DealStage, TradePriority, type Prisma } from "@prisma/client";
+import { DealStage, QuotationStatus, TradePriority, type Prisma } from "@prisma/client";
 import { domainKey, normalizedEntityName } from "@/lib/research/company-resolver";
 
 export const stageLabels: Record<DealStage, string> = {
@@ -82,6 +82,25 @@ export function dashboardWhere(now = new Date()) {
     todayTasks: { status: "OPEN" as const, dueAt: { lt: end } },
     openTasks: { status: "OPEN" as const },
   } satisfies Record<string, Prisma.TradeCaseWhereInput | Prisma.TradeTaskWhereInput>;
+}
+
+export function caseQuotationWhere(caseId: string, currency?: string, status?: string): Prisma.QuotationWhereInput {
+  return {
+    caseId, deletedAt: null, currency: currency || undefined,
+    status: Object.values(QuotationStatus).includes(status as QuotationStatus) ? status as QuotationStatus : undefined,
+  };
+}
+
+export async function loadDashboardMetrics(client: {
+  tradeCase: { count: (args: { where: Prisma.TradeCaseWhereInput }) => Promise<number> };
+  tradeTask: { count: (args: { where: Prisma.TradeTaskWhereInput }) => Promise<number> };
+}, now = new Date()) {
+  const where = dashboardWhere(now);
+  const [activeCases, pendingQuotations, todayTasks, openTasks] = await Promise.all([
+    client.tradeCase.count({ where: where.activeCases }), client.tradeCase.count({ where: where.pendingQuotations }),
+    client.tradeTask.count({ where: where.todayTasks }), client.tradeTask.count({ where: where.openTasks }),
+  ]);
+  return { activeCases, pendingQuotations, todayTasks, openTasks };
 }
 
 export const priorities = Object.values(TradePriority);

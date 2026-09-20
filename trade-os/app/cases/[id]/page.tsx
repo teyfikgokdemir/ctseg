@@ -5,7 +5,7 @@ import AppHeader from "@/components/app-header";
 import { TradeForm } from "@/components/trade-form";
 import { db } from "@/lib/db";
 import { currentUser } from "@/lib/current-user";
-import { stageLabels } from "@/lib/trade-desk";
+import { caseQuotationWhere, stageLabels } from "@/lib/trade-desk";
 
 export const dynamic = "force-dynamic";
 const tabs = [["overview", "Genel Bakış"], ["companies", "Firmalar"], ["offers", "Teklifler"], ["activity", "Aktiviteler"], ["tasks", "Görevler"], ["documents", "Belgeler"], ["research", "Araştırma"]] as const;
@@ -19,7 +19,7 @@ export default async function CaseDetailPage({ params, searchParams }: { params:
   const item = await db.tradeCase.findUnique({ where: { id }, include: {
     createdBy: { select: { name: true, email: true } },
     companies: { include: { company: { include: { contacts: true, evidence: { orderBy: { fetchedAt: "desc" }, take: 20 } } } } },
-    quotations: { where: { deletedAt: null, currency: query.currency || undefined, status: Object.values(QuotationStatus).includes(query.status as QuotationStatus) ? query.status as QuotationStatus : undefined }, include: { company: true }, orderBy: query.sort === "price" ? [{ currency: "asc" }, { unitPrice: "asc" }] : query.sort === "lead" ? { leadTimeDays: "asc" } : { quotationDate: "desc" } },
+    quotations: { where: caseQuotationWhere(id, query.currency, query.status), include: { company: true }, orderBy: query.sort === "price" ? [{ currency: "asc" }, { unitPrice: "asc" }] : query.sort === "lead" ? { leadTimeDays: "asc" } : { quotationDate: "desc" } },
     tasks: { include: { company: true }, orderBy: { dueAt: "asc" } }, activities: { include: { company: true }, orderBy: { createdAt: "desc" }, take: 100 },
     documents: { include: { company: true }, orderBy: { createdAt: "desc" } }, rfqDrafts: { include: { company: true }, orderBy: { createdAt: "desc" } },
     researchRuns: { orderBy: { startedAt: "desc" }, include: { findings: { orderBy: { freshnessScore: "desc" }, take: 100 } } },
