@@ -4,6 +4,7 @@ import { createServer } from "node:http";
 import { PDFParse } from "pdf-parse";
 import { SourceFetcher, extractPdfText, safeConnectionLookup } from "../lib/research/source-fetcher";
 import { extractEvidence } from "../lib/research/evidence-extractor";
+import { resolveCompanies } from "../lib/research/company-resolver";
 import type { ParsedIntent } from "../lib/research/intent-parser";
 import type { ResearchFinding } from "../lib/research/types";
 
@@ -177,6 +178,20 @@ describe("evidence boundaries", () => {
     candidate.snippet = "XYZ is a supplier and manufacturer";
     extractEvidence(candidate, intent);
     expect(candidate.role?.state).not.toBe("CONFIRMED");
+  });
+  it("downgrades a previously confirmed role from a later live self-denial", () => {
+    const positive = finding("Supplier Ltd is a manufacturer of L-Threonine.");
+    positive.companyName = "Supplier Ltd";
+    extractEvidence(positive, intent);
+    const negative = finding("Supplier Ltd is not a manufacturer. We distribute L-Threonine.");
+    negative.url = "https://supplier.com/about";
+    negative.companyName = "Supplier Ltd";
+    extractEvidence(negative, intent);
+    expect(negative.role?.state).toBe("CONTRADICTED");
+    const company = resolveCompanies([positive, negative])[0];
+    expect(company.role.state).toBe("CONTRADICTED");
+    expect(company.verificationLevel).not.toBe("ROLE_CONFIRMED");
+    expect(company.evidenceSources.some((source) => source.status === "CONTRADICTED")).toBe(true);
   });
   it("separates product from grade and role", () => {
     const candidate = finding("We offer L-Threonine for animal nutrition.");

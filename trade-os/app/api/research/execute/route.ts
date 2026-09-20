@@ -103,7 +103,9 @@ export async function POST(request: NextRequest) {
           create: { caseId: created.id, companyId: company.id, relevanceScore: candidate.relevanceScore,
             matchReason: "Found for " + result.type + "; see evidence" } });
         await tx.evidence.createMany({ data: candidate.evidenceSources.map((source) => ({
-          companyId: company.id, claim: source.claimType, sourceUrl: source.url, sourceType: source.type || "HTML", status: source.status === "CONFIRMED" ? "VERIFIED" : source.status as import("@prisma/client").EvidenceStatus,
+          companyId: company.id, claim: source.claimType, sourceUrl: source.url, sourceType: source.type || "HTML",
+          status: source.status === "CONFIRMED" ? "VERIFIED" : source.status === "CONTRADICTED" || source.status === "PARTIAL" ? "PARTIAL" : "UNVERIFIED",
+          excerpt: source.excerpt || null,
         })) });
       }
       await tx.researchSession.update({ where: { id: session.id }, data: {

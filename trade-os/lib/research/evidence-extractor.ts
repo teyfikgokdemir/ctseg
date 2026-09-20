@@ -86,10 +86,16 @@ export function extractEvidence(finding: ResearchFinding, intent: ParsedIntent):
     }
   }
   if (!roleProven) negatives.push("ROLE_NOT_PROVEN");
-  if (finding.role?.value === "MANUFACTURER" && segments.some((segment) =>
-    (company && segment.includes(company) || pageIdentity && /\b(?:we|our)\b/.test(segment)) &&
-    /not\s+(?:a\s+)?manufacturer|not\s+the\s+manufacturer|distributor\s+only/i.test(segment))) {
-    finding.role = { value: "MANUFACTURER", state: "CONTRADICTED", evidence: finding.role.evidence.map((item) => ({ ...item, status: "CONTRADICTED" })) };
+  const denial = segments.find((segment) =>
+    ((company.length >= 4 && new RegExp(`${escape(company)}\\s+(?:is|are)\\s+not\\s+(?:a\\s+|the\\s+)?manufacturer\\b`, "u").test(segment)) ||
+      (pageIdentity && /\bwe\s+are\s+not\s+(?:a\s+|the\s+)?manufacturer\b/i.test(segment))) ||
+      ((company.length >= 4 && segment.includes(company) || pageIdentity && /\b(?:we|our)\b/.test(segment)) &&
+        /\bdistributor\s+only\b/i.test(segment)));
+  if (denial) {
+    finding.role = { value: "MANUFACTURER", state: "CONTRADICTED", evidence: [{
+      url: source.finalUrl || finding.url, timestamp: source.fetchedAt || new Date().toISOString(),
+      type: source.type === "PDF" ? "PDF" : "HTML", claimType: "ROLE", status: "CONTRADICTED", excerpt: denial,
+    }] };
     negatives.push("MANUFACTURER_CONTRADICTED");
   }
   finding.negativeSignals = [...new Set(negatives)];
