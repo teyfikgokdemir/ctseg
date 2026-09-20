@@ -29,6 +29,21 @@ describe("source boundaries", () => {
     expect(result.error).toBe("SOURCE_TOO_LARGE");
   });
 
+  it("stops an oversized streamed HTML body without Content-Length", async () => {
+    const stream = new ReadableStream<Uint8Array>({ start(controller) {
+      controller.enqueue(new Uint8Array(1024 * 1024));
+      controller.enqueue(new Uint8Array(1024 * 1024 + 1));
+      controller.close();
+    } });
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(stream, { headers: { "content-type": "text/html" } }));
+    expect((await SourceFetcher.fetch("https://8.8.8.8/")).error).toBe("SOURCE_TOO_LARGE");
+  });
+
+  it("distinguishes unsupported content", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response("binary", { headers: { "content-type": "image/png" } }));
+    expect((await SourceFetcher.fetch("https://8.8.8.8/")).error).toBe("UNSUPPORTED_CONTENT_TYPE");
+  });
+
   it("decodes Turkish UTF-8 content", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response("<html><body>İşletme şeker pancarı üreticisi</body></html>", { headers: { "content-type": "text/html; charset=utf-8" } }));
     const result = await SourceFetcher.fetch("https://8.8.8.8/");
