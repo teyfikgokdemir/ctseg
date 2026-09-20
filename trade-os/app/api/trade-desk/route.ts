@@ -3,6 +3,7 @@ import { CaseCompanyRole, CaseCompanyStatus, CaseType, CompanyRole, DealStage, Q
 import { currentUser } from "@/lib/current-user";
 import { db } from "@/lib/db";
 import { companyIdentity, date, draftRfq, enumValue, money, nextReference, optionalText, text, validUrl } from "@/lib/trade-desk";
+import { domainKey } from "@/lib/research/company-resolver";
 
 type Tx = Prisma.TransactionClient;
 const bad = (error: string, status = 400) => NextResponse.json({ error }, { status });
@@ -18,7 +19,7 @@ async function resolveCompany(tx: Tx, input: Record<string, unknown>) {
   if (input.website && !website) throw new Error("Geçerli bir HTTP(S) web adresi gerekli.");
   const identity = companyIdentity(name, website);
   await tx.$queryRaw`SELECT pg_advisory_xact_lock(hashtext(${identity})) IS NULL AS locked`;
-  const candidates = await tx.company.findMany({ where: website ? { website: { contains: new URL(website).hostname.replace(/^www\./, ""), mode: "insensitive" } } : { name: { equals: name, mode: "insensitive" } }, select: { id: true, name: true, website: true, roles: true } });
+  const candidates = await tx.company.findMany({ where: website ? { website: { contains: domainKey(new URL(website).hostname), mode: "insensitive" } } : { name: { equals: name, mode: "insensitive" } }, select: { id: true, name: true, website: true, roles: true } });
   const existing = candidates.find((candidate) => companyIdentity(candidate.name, candidate.website) === identity);
   const role = enumValue(CompanyRole, input.role, CompanyRole.OTHER);
   if (existing) return tx.company.update({ where: { id: existing.id }, data: {

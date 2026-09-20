@@ -92,6 +92,13 @@ describe("Trade Desk workflows", () => {
     expect(db.company.create).not.toHaveBeenCalled();
     expect(db.caseCompany.upsert).toHaveBeenCalledOnce();
   });
+  it("reuses a company when the same brand is imported from a subdomain", async () => {
+    db.company.findMany.mockResolvedValue([{ id: "co1", name: "Acme", website: "https://www.acme.com", roles: [] }]);
+    db.company.update.mockResolvedValue({ id: "co1", name: "Acme" });
+    expect((await post({ action: "research.import", caseId: "c1", name: "Acme", website: "https://shop.acme.com" })).status).toBe(201);
+    expect(db.company.findMany.mock.calls[0][0].where.website.contains).toBe("acme.com");
+    expect(db.company.create).not.toHaveBeenCalled();
+  });
   it("M: manual import creates a new company and case link", async () => {
     expect((await post({ action: "research.import", caseId: "c1", name: "Acme", website: "https://acme.com", roleInCase: "SUPPLIER" })).status).toBe(201);
     expect(db.company.create).toHaveBeenCalledOnce();
