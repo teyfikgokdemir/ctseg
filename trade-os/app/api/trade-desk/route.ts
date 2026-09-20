@@ -18,7 +18,7 @@ async function resolveCompany(tx: Tx, input: Record<string, unknown>) {
   if (input.website && !website) throw new Error("Geçerli bir HTTP(S) web adresi gerekli.");
   const identity = companyIdentity(name, website);
   await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${identity}))`;
-  const candidates = await tx.company.findMany({ where: website ? { website: { not: null } } : { name: { equals: name, mode: "insensitive" } }, select: { id: true, name: true, website: true, roles: true } });
+  const candidates = await tx.company.findMany({ where: website ? { website: { contains: new URL(website).hostname.replace(/^www\./, ""), mode: "insensitive" } } : { name: { equals: name, mode: "insensitive" } }, select: { id: true, name: true, website: true, roles: true } });
   const existing = candidates.find((candidate) => companyIdentity(candidate.name, candidate.website) === identity);
   const role = enumValue(CompanyRole, input.role, CompanyRole.OTHER);
   if (existing) return tx.company.update({ where: { id: existing.id }, data: {
@@ -78,6 +78,7 @@ export async function POST(request: NextRequest) {
         const caseId = text(body.caseId);
         const existing = await db.tradeCase.findUnique({ where: { id: caseId } });
         if (!existing) return bad("Vaka bulunamadı.", 404);
+        if (body.ownerUserEmail && !(await db.user.findFirst({ where: { email: text(body.ownerUserEmail, 320).toLowerCase(), active: true } }))) return bad("Sorumlu kullanıcı bulunamadı.");
         const stage = body.stage ? enumValue(DealStage, body.stage, existing.stage) : existing.stage;
         const item = await db.$transaction(async (tx) => {
           const updated = await tx.tradeCase.update({ where: { id: caseId }, data: {
@@ -89,7 +90,7 @@ export async function POST(request: NextRequest) {
             frequency: body.frequency === undefined ? undefined : optionalText(body.frequency, 80),
             sourceCountry: body.sourceCountry === undefined ? undefined : optionalText(body.sourceCountry, 100),
             destinationCountry: body.destinationCountry === undefined ? undefined : optionalText(body.destinationCountry, 100),
-            ownerUserEmail: body.ownerUserEmail === undefined ? undefined : optionalText(body.ownerUserEmail, 320),
+            ownerUserEmail: body.ownerUserEmail === undefined ? undefined : optionalText(body.ownerUserEmail, 320)?.toLowerCase(),
             priority: body.priority === undefined ? undefined : enumValue(TradePriority, body.priority, existing.priority),
             nextAction: body.nextAction === undefined ? undefined : optionalText(body.nextAction, 500),
             nextActionAt: body.nextActionAt === undefined ? undefined : date(body.nextActionAt),
@@ -138,6 +139,7 @@ export async function POST(request: NextRequest) {
         const companyId = text(body.companyId);
         const name = text(body.name, 200);
         if (!name || !(await db.company.findUnique({ where: { id: companyId } }))) return bad("Firma ve kişi adı gerekli.");
+        if (body.caseId && !(await db.caseCompany.findUnique({ where: { caseId_companyId: { caseId: text(body.caseId), companyId } } }))) return bad("Firma önce vakaya bağlanmalı.");
         const contact = await db.$transaction(async (tx) => {
           const created = await tx.contact.create({ data: { companyId, name, title: optionalText(body.title, 200), email: optionalText(body.email, 320), phone: optionalText(body.phone, 80), whatsapp: optionalText(body.whatsapp, 80), preferredChannel: body.preferredChannel ? enumValue(RfqChannel, body.preferredChannel, RfqChannel.EMAIL) : null, notes: optionalText(body.notes, 2000) } });
           if (body.caseId && await caseExists(tx, text(body.caseId))) await tx.dealActivity.create({ data: { caseId: text(body.caseId), companyId, userEmail: user.email, type: "CONTACT_ADDED", summary: `${name} iletişim kişisi eklendi.` } });
@@ -185,6 +187,7 @@ export async function POST(request: NextRequest) {
         if (!title) return bad("Görev başlığı gerekli.");
         if (caseId && !(await db.tradeCase.findUnique({ where: { id: caseId } }))) return bad("Vaka bulunamadı.");
         if (companyId && !(await db.company.findUnique({ where: { id: companyId } }))) return bad("Firma bulunamadı.");
+        if (caseId && companyId && !(await db.caseCompany.findUnique({ where: { caseId_companyId: { caseId, companyId } } }))) return bad("Firma önce vakaya bağlanmalı.");
         const assignedToEmail = text(body.assignedToEmail, 320).toLowerCase() || user.email;
         if (!(await db.user.findFirst({ where: { email: assignedToEmail, active: true } }))) return bad("Sorumlu kullanıcı bulunamadı.");
         const task = await db.$transaction(async (tx) => {
@@ -212,6 +215,8 @@ export async function POST(request: NextRequest) {
         const sourceUrl = body.sourceUrl ? validUrl(body.sourceUrl) : null;
         if (body.sourceUrl && !sourceUrl) return bad("Geçerli kaynak URL gerekli.");
         if (caseId && !(await db.tradeCase.findUnique({ where: { id: caseId } }))) return bad("Vaka bulunamadı.");
+        if (caseId && companyId && !(await db.caseCompany.findUnique({ where: { caseId_companyId: { caseId, companyId } } }))) return bad("Firma önce vakaya bağlanmalı.");
+        if (quotationId && !(await db.quotation.findFirst({ where: { id: quotationId, deletedAt: null, caseId: caseId || undefined, companyId: companyId || undefined } }))) return bad("Teklif bağlantısı bulunamadı.");
         const document = await db.$transaction(async (tx) => {
           const created = await tx.tradeDocument.create({ data: { caseId, companyId, quotationId, name, type: enumValue(TradeDocumentType, body.type, TradeDocumentType.OTHER), sourceUrl, storageRef: optionalText(body.storageRef, 1000), notes: optionalText(body.notes, 2000), uploadedByEmail: user.email } });
           if (caseId) await tx.dealActivity.create({ data: { caseId, companyId, userEmail: user.email, type: "DOCUMENT_ADDED", summary: `${name} belge kaydı eklendi.` } });
