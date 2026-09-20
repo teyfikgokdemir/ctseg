@@ -252,3 +252,6 @@ ALTER TABLE "RfqDraft" ADD CONSTRAINT "RfqDraft_caseId_fkey" FOREIGN KEY ("caseI
 
 -- AddForeignKey
 ALTER TABLE "RfqDraft" ADD CONSTRAINT "RfqDraft_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "TradeCase" ADD CONSTRAINT "TradeCase_buyerCompanyId_fkey" FOREIGN KEY ("buyerCompanyId") REFERENCES "Company"("id") ON DELETE SET NULL ON UPDATE CASCADE;

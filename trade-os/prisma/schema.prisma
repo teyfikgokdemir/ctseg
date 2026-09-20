@@ -162,6 +162,7 @@ model TradeCase {
   sourceCountry  String?
   destinationCountry String?
   buyerCompanyId String?
+  buyerCompany Company? @relation("CaseBuyer", fields: [buyerCompanyId], references: [id], onDelete: SetNull)
   ownerUserEmail String?
   priority       TradePriority @default(NORMAL)
   targetPrice    Decimal? @db.Decimal(18, 4)
@@ -252,6 +253,7 @@ model Company {
   contacts          Contact[]
   evidence          Evidence[]
   cases             CaseCompany[]
+  buyerCases        TradeCase[] @relation("CaseBuyer")
   quotations        Quotation[]
   tasks             TradeTask[]
   activities        DealActivity[]

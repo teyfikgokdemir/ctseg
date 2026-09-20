@@ -123,7 +123,7 @@ describe("Trade Desk workflows", () => {
     currentUser.mockResolvedValue(mina);
     expect((await DELETE_COMPANY({} as never, { params: Promise.resolve({ id: "co1" }) })).status).toBe(403);
     currentUser.mockResolvedValue(tefyik);
-    db.company.findUnique.mockResolvedValue({ id: "co1", _count: { cases: 0, quotations: 0, tasks: 0, activities: 0, documents: 0, rfqDrafts: 0 } });
+    db.company.findUnique.mockResolvedValue({ id: "co1", _count: { cases: 0, buyerCases: 0, quotations: 0, tasks: 0, activities: 0, documents: 0, rfqDrafts: 0 } });
     db.company.delete.mockResolvedValue({ id: "co1" });
     expect((await DELETE_COMPANY({} as never, { params: Promise.resolve({ id: "co1" }) })).status).toBe(200);
     expect(db.company.delete).toHaveBeenCalledOnce();
