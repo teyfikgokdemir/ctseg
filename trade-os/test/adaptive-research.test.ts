@@ -80,6 +80,11 @@ describe("Adaptive Broad Research Engine Scenarios", () => {
       product: "" 
     };
     const run = await runResearch(request);
-    expect(run.queries.length).toBeGreaterThan(0);
+    expect(run.clarification?.clarificationRequired).toBe(true);
+    expect(run.clarification?.question).toContain("İran");
+    expect(run.clarification?.question).toContain("ithal etmek");
+    expect(run.clarification?.confidence).toBeLessThan(0.8);
+    expect(run.queries).toEqual([]);
+    expect(run.findings).toEqual([]);
   });
 });
