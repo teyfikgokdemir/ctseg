@@ -28,7 +28,12 @@ export function extractEvidence(finding: ResearchFinding, intent: ParsedIntent):
     return { value, state: "CONFIRMED", evidence: [evidence] };
   };
 
-  if (product && text.includes(product) && !/\b(?:not|no|does not|unavailable)\s+(?:supply|sell|produce|offer)\b/i.test(text)) {
+  const productInHeading = !!product && [source.title, ...(source.headings || [])]
+    .some((heading) => heading?.toLocaleLowerCase("tr-TR").includes(product));
+  const productInTradeContext = !!product && /\b(product|products|offer|offers|supply|supplies|manufacture|manufacturer|produces|catalogue|catalog)\b|ürün|tedarik|üretim/iu
+    .test(excerpt(product).toLocaleLowerCase("tr-TR"));
+  if (product && text.includes(product) && (productInHeading || productInTradeContext) &&
+    !/\b(?:not|no|does not|unavailable)\s+(?:supply|sell|produce|offer)\b/i.test(text)) {
     finding.productConfirmed = confirmed(true, "PRODUCT", product);
   } else if (product) negatives.push("WRONG_PRODUCT");
 
@@ -50,8 +55,9 @@ export function extractEvidence(finding: ResearchFinding, intent: ParsedIntent):
     if (!match) continue;
     const roleTerm = match[0].toLocaleLowerCase("tr-TR");
     const companyContext = company.length >= 4 && nearby(text, company, roleTerm, 250);
-    const productContext = !!product && finding.productConfirmed?.state === "CONFIRMED" && nearby(text, product, roleTerm, 250);
-    if (companyContext || productContext) {
+    const ownClaim = !!product && finding.productConfirmed?.state === "CONFIRMED" &&
+      nearby(text, product, roleTerm, 180) && /\b(we|our|us)\s+(?:are\s+)?(?:a\s+)?(?:manufacturer|producer|distributor)\b/i.test(source.text);
+    if (companyContext || ownClaim) {
       finding.role = confirmed(role.value, "ROLE", roleTerm);
       roleProven = true;
       break;

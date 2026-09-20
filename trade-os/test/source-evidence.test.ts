@@ -67,6 +67,11 @@ describe("evidence boundaries", () => {
     expect(candidate.role).toBeUndefined();
     expect(candidate.negativeSignals).toContain("ROLE_NOT_PROVEN");
   });
+  it("does not confirm a bare product mention without trade context", () => {
+    const candidate = finding("The article briefly mentions L-Threonine in passing.");
+    extractEvidence(candidate, intent);
+    expect(candidate.productConfirmed).toBeUndefined();
+  });
   it("does not confirm snippet-only discovery", () => {
     const candidate = finding(); candidate.snippet = "L-Threonine Feed Grade manufacturer";
     extractEvidence(candidate, intent);

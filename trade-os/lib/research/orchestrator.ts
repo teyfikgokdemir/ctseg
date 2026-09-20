@@ -71,7 +71,7 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
            totalFetchedCount++;
            if (request.budgetTracker) request.budgetTracker.fetchesUsed = totalFetchedCount;
            
-         } catch (e: unknown) {
+         } catch {
            finding.fetchedContent = { isLive: false, error: "SOURCE_FETCH_FAILED" } as ResearchFinding["fetchedContent"];
          }
          extractEvidence(finding, parsedIntent);
