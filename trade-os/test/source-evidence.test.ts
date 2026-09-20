@@ -120,6 +120,45 @@ function finding(text?: string): ResearchFinding {
 }
 
 describe("evidence boundaries", () => {
+  it("does not treat an educational product mention as a commercial claim", () => {
+    const candidate = finding("L-Threonine is used in feed.");
+    extractEvidence(candidate, intent);
+    expect(candidate.productConfirmed?.state).not.toBe("CONFIRMED");
+  });
+  it("confirms a direct company product listing", () => {
+    const candidate = finding("Our products include L-Threonine.");
+    extractEvidence(candidate, intent);
+    expect(candidate.productConfirmed?.state).toBe("CONFIRMED");
+  });
+  it("confirms an explicit product-grade specification", () => {
+    const candidate = finding("L-Threonine Feed Grade 98.5%.");
+    extractEvidence(candidate, intent);
+    expect(candidate.productConfirmed?.state).toBe("CONFIRMED");
+    expect(candidate.gradeConfirmed?.state).toBe("CONFIRMED");
+  });
+  it("does not attach a distant grade category to the product", () => {
+    const candidate = finding(`Feed Grade Products. ${"Other catalogue material. ".repeat(300)} Our products include L-Threonine.`);
+    extractEvidence(candidate, intent);
+    expect(candidate.gradeConfirmed?.state).not.toBe("CONFIRMED");
+  });
+  it("does not attribute a third-party manufacturer claim to the page company", () => {
+    const candidate = finding("Our products include L-Threonine. Manufactured by ABC Chemicals.");
+    candidate.companyName = "XYZ Trading";
+    extractEvidence(candidate, intent);
+    expect(candidate.role?.state).not.toBe("CONFIRMED");
+  });
+  it("confirms an explicit company manufacturer claim", () => {
+    const candidate = finding("XYZ Chemicals is a manufacturer of L-Threonine.");
+    candidate.companyName = "XYZ Chemicals";
+    extractEvidence(candidate, intent);
+    expect(candidate.role?.state).toBe("CONFIRMED");
+  });
+  it("does not use a snippet-only supplier role", () => {
+    const candidate = finding("Our products include L-Threonine.");
+    candidate.snippet = "XYZ is a supplier and manufacturer";
+    extractEvidence(candidate, intent);
+    expect(candidate.role?.state).not.toBe("CONFIRMED");
+  });
   it("separates product from grade and role", () => {
     const candidate = finding("We offer L-Threonine for animal nutrition.");
     extractEvidence(candidate, intent);
