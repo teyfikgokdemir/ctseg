@@ -125,8 +125,20 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
         }
         
         const missing: string[] = [];
+        let hasGrade = false;
+        let hasCountry = false;
+        let hasContact = false;
+        for (const f of findings) {
+          if (f.gradeConfirmed?.state === "CONFIRMED") hasGrade = true;
+          if (f.country?.state === "CONFIRMED") hasCountry = true;
+          if (f.contactEmail?.state === "CONFIRMED" || f.contactPhone?.state === "CONFIRMED") hasContact = true;
+        }
+
         if (!hasProduct) missing.push("PRODUCT");
-        if (!hasRole && request.type !== "LOGISTICS") missing.push("CONTACT"); // as proxy for checking role/contact
+        if (!hasRole && request.type !== "LOGISTICS") missing.push("ROLE");
+        if (!hasGrade && request.grade) missing.push("GRADE");
+        if (!hasCountry && request.sourceRegion) missing.push("COUNTRY");
+        if (!hasContact) missing.push("CONTACT");
         
         if (missing.length > 0 && missing.length < 3) {
           const followups = generateFollowUpQueries(name, domain, missing);

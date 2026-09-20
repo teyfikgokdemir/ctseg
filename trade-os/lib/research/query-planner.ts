@@ -88,6 +88,15 @@ export function generateFollowUpQueries(companyName: string, domain: string, mis
   const push = (query: string, intent: string, family: QueryFamily) =>
     queries.push({ query, language: "en", intent, priority: priority--, family });
 
+  if (missingClaims.includes("ROLE")) {
+    push(`"${companyName}" manufacturer`, "followup-role-mfg", "COMMERCIAL");
+    push(`site:${domain} manufacturer`, "followup-role-site-mfg", "COMMERCIAL");
+    push(`site:${domain} supplier`, "followup-role-site-sup", "COMMERCIAL");
+  }
+  if (missingClaims.includes("GRADE")) {
+    push(`"${companyName}" grade specification`, "followup-grade", "PRODUCT_EXACT");
+    push(`site:${domain} specification`, "followup-grade-site", "DOCUMENT");
+  }
   if (missingClaims.includes("CONTACT")) {
     push(`"${companyName}" contact`, "followup-contact", "CONTACT");
     push(`site:${domain} contact email`, "followup-contact-site", "CONTACT");
