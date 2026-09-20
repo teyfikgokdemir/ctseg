@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { FormEvent, useState } from "react";
 import Link from "next/link";
@@ -11,7 +11,7 @@ type Evidence = { type: string; url: string; extractedText?: string; timestamp: 
 type VerifiedField<T> = { value: T; state: string; evidence?: Evidence[] };
 type CompanyRole = string;
 type Company = { key: string; name: string; country: VerifiedField<string>; role: VerifiedField<CompanyRole>;
-  productConfirmed: VerifiedField<boolean>; gradeConfirmed: VerifiedField<string>; website: string; 
+  productConfirmed: VerifiedField<boolean>; gradeConfirmed: VerifiedField<string>; website: string;
   contactEmail: VerifiedField<string>; contactPhone: VerifiedField<string>; freshnessScore: number; verificationScore: number;
   evidenceSources: Evidence[]; verificationLevel: string; negativeSignals?: string[] };
 type ResearchResult = { type: Mode; companies: Company[];
@@ -37,7 +37,7 @@ export default function ResearchClient({ name, firstName }: { name: string; firs
     event.preventDefault();
     const finalRequest = isClarification ? rawRequest + "\n\n[CLARIFICATION]: " + clarificationAnswer : rawRequest;
     if (!finalRequest.trim()) return;
-    
+
     if (isClarification) {
       setRawRequest(finalRequest);
       setClarificationAnswer("");
@@ -57,7 +57,7 @@ export default function ResearchClient({ name, firstName }: { name: string; firs
   }
 
   return <>
-    
+
 
     <section className="research-intro">
       <div className="eyebrow">Trade Intelligence</div>
@@ -123,13 +123,13 @@ export default function ResearchClient({ name, firstName }: { name: string; firs
         <div className="company-grid">{result.companies.map((company) => <article className="company-card" key={company.key}>
           <div className="company-card-top"><div><h3>{company.name}</h3>
             <span>
-                {company.country.state === "CONFIRMED" ? company.country.value : "Ülke doğrulanmadı"} · 
+                {company.country.state === "CONFIRMED" ? company.country.value : "Ülke doğrulanmadı"} ·
                 {company.role.state === "CONFIRMED" ? company.role.value : "Rol bilinmiyor"}
             </span></div>
             <strong>{company.evidenceSources.length} kanıt</strong></div>
           <p>Ürün: {company.productConfirmed.state === "CONFIRMED" ? "Doğrulandı" : "Doğrulanamadı"} · Grade: {company.gradeConfirmed.state === "CONFIRMED" ? company.gradeConfirmed.value : "Doğrulanamadı"}</p>
           <div className="company-links"><a href={company.website} target="_blank" rel="noreferrer">Web sitesi ↗</a></div>
-          {(company.contactEmail.state === "CONFIRMED" || company.contactPhone.state === "CONFIRMED") && 
+          {(company.contactEmail.state === "CONFIRMED" || company.contactPhone.state === "CONFIRMED") &&
              <p className="company-contact">{[company.contactEmail.value, company.contactPhone.value].filter(Boolean).join(" · ")}</p>}
           <div className="company-scores">
             <span>Güncellik {company.freshnessScore}</span>
@@ -149,3 +149,4 @@ export default function ResearchClient({ name, firstName }: { name: string; firs
     </>}
   </>;
 }
+

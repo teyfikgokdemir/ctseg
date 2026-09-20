@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { currentUser, identityForEmail } from "@/lib/current-user";
 
 export default async function AppHeader() {

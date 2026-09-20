@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   color-scheme: dark;
   --bg: #0c0b0a;
   --panel: #151311;
@@ -102,7 +102,7 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
 
 /* Dashboard refresh */
 .shell-dashboard { max-width: 1560px; }
-.topbar-dashboard { padding-bottom: 22px; }
+
 .workspace-caption { margin-top: 5px; color: #746d65; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
 .top-new-case { border: 1px solid rgba(255,107,74,.35); border-radius: 999px; padding: 9px 13px; color: var(--text) !important; background: rgba(255,107,74,.07); }
 
@@ -297,7 +297,7 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
 .research-intro .lead { margin-bottom: 0; max-width: 740px; }
 .research-form { border: 1px solid rgba(255,255,255,.12); border-radius: 24px; padding: clamp(16px, 3vw, 30px); background: linear-gradient(145deg,#1b1713,#120f0d 70%); }
 .header-welcome { color: var(--muted); font-size: 13px; margin-inline: auto; white-space: nowrap; }
-@media (max-width: 700px) { .topbar { flex-wrap: wrap; } .top-actions { min-width: 0; margin-left: auto; flex-wrap: wrap; justify-content: flex-end; } .top-actions .badge { display: block; white-space: nowrap; } .header-welcome { order: 3; width: 100%; margin: 0; } }
+
 .company-missing { color: var(--muted); font-size: 12px; line-height: 1.5; }
 .research-form label { display: block; margin: 0 0 12px; color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
 .research-form textarea { display: block; width: 100%; min-height: 200px; resize: vertical; border: 1px solid var(--line); border-radius: 17px; background: #0d0c0b; color: var(--text); padding: 20px; line-height: 1.55; outline: none; }
@@ -347,13 +347,12 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
   .company-section-head { align-items: flex-start; flex-direction: column; }
 }
 @media (max-width: 430px) {
-  .shell { padding: 18px 14px; }
-  .topbar { gap: 12px; }
-  .brand { font-size: 19px; white-space: nowrap; }
-  .top-actions { gap: 8px; }
-  .top-actions > a { font-size: 12px; }
-  .research-intro h1 { font-size: clamp(40px, 12vw, 52px); }
-  .research-intro .lead { font-size: 15px; }
+    .shell { padding: 18px 14px; }
+    .brand { font-size: 19px; white-space: nowrap; }
+    .top-actions { gap: 8px; }
+    .top-actions > a { font-size: 12px; }
+    .research-intro h1 { font-size: clamp(40px, 12vw, 52px); }
+    .research-intro .lead { font-size: 15px; }
   .header-welcome { order: 3; width: 100%; margin: 0; }
   .research-form textarea { padding: 16px; }
   .company-card { padding: 17px; }
@@ -377,9 +376,6 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
 .home-metrics .metric-card strong { font-size: 27px; }
 @media (max-width: 700px) { .home-hero { padding: 56px 0 45px; } .home-modules { margin-top: 38px; } .home-modules .modern-module-card { min-height: 245px; } }
 @media (max-width: 430px) {
-  .topbar-dashboard { flex-wrap: wrap; }
-  .topbar-dashboard .top-actions { width: 100%; justify-content: space-between; }
-  .topbar-dashboard .top-new-case { padding: 8px 11px; }
   .delete-case-wrap { justify-content: flex-end; }
   .delete-case-button { min-height: 44px; padding-inline: 16px; }
 }

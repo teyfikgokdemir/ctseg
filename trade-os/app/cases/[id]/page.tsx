@@ -1,8 +1,7 @@
-﻿import AppHeader from "@/components/app-header";
+import AppHeader from "@/components/app-header";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { currentUser } from "@/lib/current-user";
-
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +14,7 @@ export default async function CaseDetailPage({
   if (!user) {
     return (
       <main className="shell">
-        <div className="error-banner">Bu alan yalnÄ±zca yetkili CTSEG kullanÄ±cÄ±larÄ±na aÃ§Ä±ktÄ±r.</div>
+        <div className="error-banner">Bu alan yalnızca yetkili CTSEG kullanıcılarına açıktır.</div>
       </main>
     );
   }
@@ -53,27 +52,27 @@ export default async function CaseDetailPage({
         <p className="lead">{tradeCase.rawRequest}</p>
         <div className="policy">
           <span>{tradeCase.status}</span>
-          <span>{tradeCase.researchRuns.length} araÅŸtÄ±rma</span>
-          <span>Paid sources: kapalÄ±</span>
+          <span>{tradeCase.researchRuns.length} araştırma</span>
+          <span>Paid sources: kapalı</span>
         </div>
       </section>
 
       {tradeCase.companies.length > 0 && <section className="company-section">
         <div className="company-section-head"><div><div className="eyebrow">Company Memory</div>
-          <h2>{tradeCase.companies.length} ÅŸirket adayÄ±</h2></div></div>
+          <h2>{tradeCase.companies.length} şirket adayı</h2></div></div>
         <div className="company-grid">{tradeCase.companies.map(({ company }) => {
           const evidence = company.evidence.filter((item) => caseUrls.has(item.sourceUrl));
           return <article className="company-card" key={company.id}>
             <div className="company-card-top"><div><h3>{company.name}</h3>
-              <span>{company.country || "Ãœlke doÄŸrulanmadÄ±"} Â· Ticari aday</span></div>
-              <strong>{evidence.length} kanÄ±t</strong></div>
+              <span>{company.country || "Ülke doğrulanmadı"} · Ticari aday</span></div>
+              <strong>{evidence.length} kanıt</strong></div>
             {tradeCase.productName && <p>{tradeCase.productName}</p>}
-            <div className="company-links">{company.website && <a href={company.website} target="_blank" rel="noreferrer">Web sitesi â†—</a>}</div>
-            <div className="company-scores"><span>GÃ¼ncellik {company.freshnessScore ?? "â€”"}</span>
-              <span>DoÄŸrulama {company.verificationScore ?? "â€”"}</span></div>
-            <details className="evidence-list"><summary>KaynaklarÄ± gÃ¶ster</summary><ul>
+            <div className="company-links">{company.website && <a href={company.website} target="_blank" rel="noreferrer">Web sitesi ↗</a>}</div>
+            <div className="company-scores"><span>Güncellik {company.freshnessScore ?? "—"}</span>
+              <span>Doğrulama {company.verificationScore ?? "—"}</span></div>
+            <details className="evidence-list"><summary>Kaynakları göster</summary><ul>
               {evidence.map((source) => <li key={source.id}><a href={source.sourceUrl} target="_blank" rel="noreferrer">{source.sourceUrl}</a>
-                <small>{source.claim} Â· {source.status}</small></li>)}
+                <small>{source.claim} · {source.status}</small></li>)}
             </ul></details>
           </article>;
         })}</div>
@@ -81,18 +80,18 @@ export default async function CaseDetailPage({
 
       <section className="research-history">
         {tradeCase.researchRuns.length === 0 ? (
-          <div className="empty-list">Bu vaka iÃ§in henÃ¼z araÅŸtÄ±rma Ã§alÄ±ÅŸtÄ±rÄ±lmadÄ±.</div>
+          <div className="empty-list">Bu vaka için henüz araştırma çalıştırılmadı.</div>
         ) : tradeCase.researchRuns.map((run) => (
           <article className="history-run" key={run.id}>
             <div className="history-run-head">
               <div>
                 <div className="eyebrow">Research Run</div>
-                <h2>{run.resultCount} sonuÃ§ Â· {run.queryCount} sorgu</h2>
+                <h2>{run.resultCount} sonuç · {run.queryCount} sorgu</h2>
               </div>
               <span>{new Intl.DateTimeFormat("tr-TR", { dateStyle: "medium", timeStyle: "short" }).format(run.startedAt)}</span>
             </div>
 
-            <details className="diagnostic-panel"><summary>Ham kaynaklarÄ± gÃ¶ster Â· {run.findings.length}</summary><div className="results-grid">
+            <details className="diagnostic-panel"><summary>Ham kaynakları göster · {run.findings.length}</summary><div className="results-grid">
               {run.findings.map((finding) => (
                 <article className="result-card" key={finding.id}>
                   <div className="result-meta">
@@ -103,10 +102,10 @@ export default async function CaseDetailPage({
                   <h3>{finding.title}</h3>
                   {finding.snippet && <p>{finding.snippet}</p>}
                   <div className="score-row">
-                    <span>GÃ¼ncellik <strong>{finding.freshnessScore}</strong></span>
-                    <span>DoÄŸrulama <strong>{finding.verificationScore}</strong></span>
+                    <span>Güncellik <strong>{finding.freshnessScore}</strong></span>
+                    <span>Doğrulama <strong>{finding.verificationScore}</strong></span>
                   </div>
-                  <a href={finding.url} target="_blank" rel="noreferrer">KaynaÄŸÄ± aÃ§ â†—</a>
+                  <a href={finding.url} target="_blank" rel="noreferrer">Kaynağı aç ↗</a>
                 </article>
               ))}
             </div></details>
