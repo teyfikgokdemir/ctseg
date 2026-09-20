@@ -21,13 +21,13 @@ const authorized = process.env.AUTHORIZED_EMAILS
 const unique = [...new Set(authorized)];
 const admin = process.env.PRIMARY_ADMIN_EMAIL.trim().toLowerCase();
 
-if (unique.length !== 2) {
-  console.error("AUTHORIZED_EMAILS must contain exactly two unique users.");
+if (unique.length !== 2 || !unique.includes("teyfik@teyfikgokdemir.com") || !unique.includes("minafakhimi@icloud.com")) {
+  console.error("AUTHORIZED_EMAILS must contain the two approved CTSEG users.");
   process.exit(1);
 }
 
-if (!unique.includes(admin)) {
-  console.error("PRIMARY_ADMIN_EMAIL must be one of the two AUTHORIZED_EMAILS.");
+if (admin !== "teyfik@teyfikgokdemir.com") {
+  console.error("PRIMARY_ADMIN_EMAIL must be the approved CTSEG admin.");
   process.exit(1);
 }
 
