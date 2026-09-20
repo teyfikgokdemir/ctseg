@@ -1,0 +1,12 @@
+import Link from "next/link";
+import AppHeader from "@/components/app-header";
+import { TradeForm } from "@/components/trade-form";
+import { currentUser } from "@/lib/current-user";
+import { db } from "@/lib/db";
+
+export const dynamic = "force-dynamic";
+export default async function DocumentsPage() {
+  if (!(await currentUser())) return <main className="shell"><div className="error-banner">Yetkisiz.</div></main>;
+  const [documents, cases, companies] = await Promise.all([db.tradeDocument.findMany({ include: { tradeCase: true, company: true }, orderBy: { createdAt: "desc" }, take: 200 }), db.tradeCase.findMany({ select: { id: true, title: true }, orderBy: { updatedAt: "desc" }, take: 200 }), db.company.findMany({ select: { id: true, name: true }, orderBy: { name: "asc" }, take: 300 })]);
+  return <main className="shell"><AppHeader /><section className="desk-heading"><div><div className="eyebrow">DOCUMENT REGISTER</div><h1>Belgeler</h1><p>COA, TDS, teklif ve sevkiyat belgelerinin metadata kaydı.</p></div></section><section className="desk-panel"><div className="desk-table-wrap"><table className="desk-table"><thead><tr><th>Belge</th><th>Tür</th><th>Vaka</th><th>Firma</th><th>Tarih</th><th>Kaynak</th></tr></thead><tbody>{documents.map((document) => <tr key={document.id}><td>{document.name}</td><td>{document.type}</td><td>{document.tradeCase ? <Link href={`/cases/${document.caseId}?tab=documents`}>{document.tradeCase.title}</Link> : "—"}</td><td>{document.company?.name || "—"}</td><td>{document.createdAt.toLocaleDateString("tr-TR")}</td><td>{document.sourceUrl ? <a href={document.sourceUrl} target="_blank" rel="noreferrer">Aç ↗</a> : "Metadata"}</td></tr>)}</tbody></table></div>{!documents.length && <p className="desk-empty">Belge kaydı yok.</p>}</section><section className="desk-panel desk-form-panel"><h2>Belge metadata ekle</h2><TradeForm action="document.create" submit="Kaydı ekle" fields={[{ name: "name", label: "Belge adı", required: true }, { name: "type", label: "Tür", type: "select", options: ["COA", "TDS", "MSDS", "CERTIFICATE", "QUOTATION", "PROFORMA", "INVOICE", "PACKING_LIST", "CATALOG", "OTHER"].map((value) => ({ value, label: value })) }, { name: "caseId", label: "Vaka", type: "select", options: cases.map((item) => ({ value: item.id, label: item.title })) }, { name: "companyId", label: "Firma", type: "select", options: companies.map((item) => ({ value: item.id, label: item.name })) }, { name: "sourceUrl", label: "Kaynak URL", type: "url" }, { name: "notes", label: "Not", type: "textarea" }]} /></section></main>;
+}

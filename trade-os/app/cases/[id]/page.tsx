@@ -1,117 +1,45 @@
-import AppHeader from "@/components/app-header";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { DealStage, QuotationStatus } from "@prisma/client";
+import AppHeader from "@/components/app-header";
+import { TradeForm } from "@/components/trade-form";
 import { db } from "@/lib/db";
 import { currentUser } from "@/lib/current-user";
+import { stageLabels } from "@/lib/trade-desk";
 
 export const dynamic = "force-dynamic";
+const tabs = [["overview", "Genel Bakış"], ["companies", "Firmalar"], ["offers", "Teklifler"], ["activity", "Aktiviteler"], ["tasks", "Görevler"], ["documents", "Belgeler"], ["research", "Araştırma"]] as const;
 
-export default async function CaseDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function CaseDetailPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ tab?: string; currency?: string; status?: string; sort?: string }> }) {
   const user = await currentUser();
-  if (!user) {
-    return (
-      <main className="shell">
-        <div className="error-banner">Bu alan yalnızca yetkili CTSEG kullanıcılarına açıktır.</div>
-      </main>
-    );
-  }
-
+  if (!user) return <main className="shell"><div className="error-banner">Yetkisiz.</div></main>;
   const { id } = await params;
-  const tradeCase = await db.tradeCase.findUnique({
-    where: { id },
-    include: {
-      companies: { include: { company: { include: { evidence: { orderBy: { fetchedAt: "desc" }, take: 30 } } } } },
-      researchRuns: {
-        orderBy: { startedAt: "desc" },
-        include: {
-          findings: {
-            orderBy: [
-              { freshnessScore: "desc" },
-              { verificationScore: "desc" },
-            ],
-            take: 100,
-          },
-        },
-      },
-    },
-  });
-
-  if (!tradeCase) notFound();
-  const caseUrls = new Set(tradeCase.researchRuns.flatMap((run) => run.findings.map((finding) => finding.url)));
-
-  return (
-    <main className="shell">
-      <AppHeader />
-
-      <section className="case-detail-head">
-        <div className="eyebrow">{tradeCase.type.replace("_", " ")}</div>
-        <h1 className="case-title">{tradeCase.title}</h1>
-        <p className="lead">{tradeCase.rawRequest}</p>
-        <div className="policy">
-          <span>{tradeCase.status}</span>
-          <span>{tradeCase.researchRuns.length} araştırma</span>
-          <span>Paid sources: kapalı</span>
-        </div>
-      </section>
-
-      {tradeCase.companies.length > 0 && <section className="company-section">
-        <div className="company-section-head"><div><div className="eyebrow">Company Memory</div>
-          <h2>{tradeCase.companies.length} şirket adayı</h2></div></div>
-        <div className="company-grid">{tradeCase.companies.map(({ company }) => {
-          const evidence = company.evidence.filter((item) => caseUrls.has(item.sourceUrl));
-          return <article className="company-card" key={company.id}>
-            <div className="company-card-top"><div><h3>{company.name}</h3>
-              <span>{company.country || "Ülke doğrulanmadı"} · Ticari aday</span></div>
-              <strong>{evidence.length} kanıt</strong></div>
-            {tradeCase.productName && <p>{tradeCase.productName}</p>}
-            <div className="company-links">{company.website && <a href={company.website} target="_blank" rel="noreferrer">Web sitesi ↗</a>}</div>
-            <div className="company-scores"><span>Güncellik {company.freshnessScore ?? "—"}</span>
-              <span>Doğrulama {company.verificationScore ?? "—"}</span></div>
-            <details className="evidence-list"><summary>Kaynakları göster</summary><ul>
-              {evidence.map((source) => <li key={source.id}><a href={source.sourceUrl} target="_blank" rel="noreferrer">{source.sourceUrl}</a>
-                <small>{source.claim} · {source.status}</small></li>)}
-            </ul></details>
-          </article>;
-        })}</div>
-      </section>}
-
-      <section className="research-history">
-        {tradeCase.researchRuns.length === 0 ? (
-          <div className="empty-list">Bu vaka için henüz araştırma çalıştırılmadı.</div>
-        ) : tradeCase.researchRuns.map((run) => (
-          <article className="history-run" key={run.id}>
-            <div className="history-run-head">
-              <div>
-                <div className="eyebrow">Research Run</div>
-                <h2>Araştırma Havuzu ({run.resultCount} kaynak)</h2>
-              </div>
-              <span>{new Intl.DateTimeFormat("tr-TR", { dateStyle: "medium", timeStyle: "short" }).format(run.startedAt)}</span>
-            </div>
-
-            <details className="diagnostic-panel"><summary>Keşfedilen kaynakları göster · {run.findings.length}</summary><div className="results-grid">
-              {run.findings.map((finding) => (
-                <article className="result-card" key={finding.id}>
-                  <div className="result-meta">
-                    <span>{finding.domain}</span>
-                    <span>{finding.language.toUpperCase()}</span>
-                    {finding.historicalOnly && <span className="warning">Eski veri</span>}
-                  </div>
-                  <h3>{finding.title}</h3>
-                  {finding.snippet && <p>{finding.snippet}</p>}
-                  <div className="score-row">
-                    <span>Güncellik <strong>{finding.freshnessScore}</strong></span>
-                    <span>Doğrulama <strong>{finding.verificationScore}</strong></span>
-                  </div>
-                  <a href={finding.url} target="_blank" rel="noreferrer">Kaynağı aç ↗</a>
-                </article>
-              ))}
-            </div></details>
-          </article>
-        ))}
-      </section>
-    </main>
-  );
+  const query = await searchParams;
+  const tab = tabs.some(([key]) => key === query.tab) ? query.tab : "overview";
+  const item = await db.tradeCase.findUnique({ where: { id }, include: {
+    createdBy: { select: { name: true, email: true } },
+    companies: { include: { company: { include: { contacts: true, evidence: { orderBy: { fetchedAt: "desc" }, take: 20 } } } } },
+    quotations: { where: { deletedAt: null, currency: query.currency || undefined, status: Object.values(QuotationStatus).includes(query.status as QuotationStatus) ? query.status as QuotationStatus : undefined }, include: { company: true }, orderBy: query.sort === "price" ? [{ currency: "asc" }, { unitPrice: "asc" }] : query.sort === "lead" ? { leadTimeDays: "asc" } : { quotationDate: "desc" } },
+    tasks: { include: { company: true }, orderBy: { dueAt: "asc" } }, activities: { include: { company: true }, orderBy: { createdAt: "desc" }, take: 100 },
+    documents: { include: { company: true }, orderBy: { createdAt: "desc" } }, rfqDrafts: { include: { company: true }, orderBy: { createdAt: "desc" } },
+    researchRuns: { orderBy: { startedAt: "desc" }, include: { findings: { orderBy: { freshnessScore: "desc" }, take: 100 } } },
+  } });
+  if (!item) notFound();
+  const allCompanies = await db.company.findMany({ select: { id: true, name: true }, orderBy: { name: "asc" }, take: 300 });
+  const linked = item.companies.map((entry) => ({ value: entry.companyId, label: entry.company.name }));
+  const caseUrls = new Set(item.researchRuns.flatMap((run) => run.findings.map((finding) => finding.url)));
+  return <main className="shell"><AppHeader /><section className="desk-heading"><div><div className="eyebrow">{item.reference} / VAKA WORKSPACE</div><h1>{item.title}</h1><p>{[item.productName, item.destinationCountry || item.destination, item.quantity && `${item.quantity} ${item.quantityUnit || ""}`, item.productSpecification].filter(Boolean).join(" · ")}</p><div className="desk-facts"><span>Sorumlu: {item.ownerUserEmail || item.createdBy.name}</span><span>Aşama: {stageLabels[item.stage]}</span><span>Öncelik: {item.priority}</span></div></div><Link href="/cases">← Vakalar</Link></section>
+    <div className="quick-actions desk-case-actions"><Link href={`/cases/${id}?tab=companies`}>Firma Ekle ↗</Link><Link href={`/cases/${id}?tab=companies#rfq`}>RFQ Hazırla ↗</Link><Link href={`/cases/${id}?tab=offers`}>Teklif Gir ↗</Link><Link href={`/cases/${id}?tab=tasks`}>Görev Ekle ↗</Link><Link href={`/cases/${id}?tab=documents`}>Belge Ekle ↗</Link></div>
+    <nav className="desk-tabs" aria-label="Vaka bölümleri">{tabs.map(([key, label]) => <Link className={tab === key ? "selected" : ""} href={`/cases/${id}?tab=${key}`} key={key}>{label}</Link>)}</nav>
+    {tab === "overview" && <div className="desk-columns"><section className="desk-panel"><h2>Vaka özeti</h2><dl className="desk-definition"><dt>Ürün</dt><dd>{item.productName || "—"}</dd><dt>Spesifikasyon</dt><dd>{item.productSpecification || item.grade || "—"}</dd><dt>Miktar / sıklık</dt><dd>{item.quantity || "—"} {item.quantityUnit || ""} · {item.frequency || "—"}</dd><dt>Kaynak / hedef</dt><dd>{item.sourceCountry || item.sourceRegion || "—"} → {item.destinationCountry || item.destination || "—"}</dd><dt>Sonraki aksiyon</dt><dd>{item.nextAction || "Belirlenmedi"} {item.nextActionAt?.toLocaleDateString("tr-TR")}</dd><dt>Notlar</dt><dd>{item.notes || "—"}</dd></dl></section><section className="desk-panel"><h2>Aşamayı ve takibi güncelle</h2><TradeForm action="case.update" hidden={{ caseId: id }} submit="Vakayı güncelle" fields={[{ name: "stage", label: "Aşama", type: "select", value: item.stage, options: Object.values(DealStage).map((stage) => ({ value: stage, label: stageLabels[stage] })) }, { name: "ownerUserEmail", label: "Sorumlu e-posta", value: item.ownerUserEmail || item.createdBy.email }, { name: "nextAction", label: "Sonraki aksiyon", value: item.nextAction || "" }, { name: "nextActionAt", label: "Aksiyon tarihi", type: "datetime-local" }, { name: "notes", label: "Notlar", type: "textarea", value: item.notes || "" }]} /></section></div>}
+    {tab === "companies" && <><section className="desk-panel"><div className="desk-panel-head"><h2>Vakaya bağlı firmalar</h2><Link href="/companies">Firma CRM ↗</Link></div>{item.companies.length ? item.companies.map(({ company, roleInCase, status }) => <article className="desk-list-row" key={company.id}><div><strong>{company.name}</strong><small>{company.country || "Ülke belirtilmedi"} · {roleInCase} · {status}</small><small>{company.email || company.phone || "İletişim bilgisi yok"}</small></div><div className="desk-list-side"><Link href={`/companies/${company.id}`}>Detay ↗</Link>{company.website && <a href={company.website} target="_blank" rel="noreferrer">Web ↗</a>}</div></article>) : <p className="desk-empty">Firmalar henüz bağlanmadı.</p>}</section>
+      <div className="desk-columns"><section className="desk-panel"><h2>Mevcut firmayı bağla</h2><TradeForm action="company.link" hidden={{ caseId: id }} submit="Vakaya ekle" fields={[{ name: "companyId", label: "Firma", type: "select", required: true, options: allCompanies.map((company) => ({ value: company.id, label: company.name })) }, { name: "roleInCase", label: "Bu vakadaki rol", type: "select", options: ["SUPPLIER", "BUYER", "LOGISTICS", "OTHER"].map((value) => ({ value, label: value })) }, { name: "notes", label: "Not", type: "textarea" }]} /></section>
+      <section className="desk-panel"><h2>Harici araştırma sonucu ekle</h2><TradeForm action="research.import" hidden={{ caseId: id }} submit="Firmayı kaydet ve bağla" fields={[{ name: "name", label: "Firma", required: true }, { name: "website", label: "Website", type: "url" }, { name: "country", label: "Ülke" }, { name: "role", label: "Rol", type: "select", options: ["SUPPLIER", "MANUFACTURER", "DISTRIBUTOR", "BUYER", "IMPORTER", "LOGISTICS", "AGENT", "OTHER"].map((value) => ({ value, label: value })) }, { name: "email", label: "E-posta", type: "email" }, { name: "phone", label: "Telefon" }, { name: "notes", label: "Not", type: "textarea" }, { name: "sourceUrl", label: "Kaynak URL", type: "url" }]} /></section></div>
+      <section className="desk-panel" id="rfq"><h2>RFQ taslağı hazırla</h2><p>Yalnız taslak oluşturulur; mesaj gönderilmez.</p><TradeForm action="rfq.prepare" hidden={{ caseId: id }} submit="Taslağı hazırla" fields={[{ name: "companyId", label: "Firma", type: "select", required: true, options: linked }, { name: "channel", label: "Kanal", type: "select", options: [{ value: "EMAIL", label: "E-posta" }, { value: "WHATSAPP", label: "WhatsApp metni" }] }]} />{item.rfqDrafts.map((draft) => <details key={draft.id}><summary>{draft.company.name} · {draft.subject} · {draft.createdAt.toLocaleDateString("tr-TR")}</summary><pre className="desk-result">{draft.body}</pre></details>)}</section></>}
+    {tab === "offers" && <><section className="desk-panel"><div className="desk-panel-head"><h2>Teklif karşılaştırması</h2><span>Para birimi çevrimi ve otomatik seçim yok.</span></div><form className="desk-filter"><input type="hidden" name="tab" value="offers" /><input name="currency" placeholder="Para birimi" defaultValue={query.currency || ""} maxLength={3} /><select name="status" defaultValue={query.status || ""}><option value="">Tüm durumlar</option>{Object.values(QuotationStatus).map((status) => <option key={status}>{status}</option>)}</select><select name="sort" defaultValue={query.sort || "date"}><option value="date">Tarih</option><option value="price">Para birimi + fiyat</option><option value="lead">Termin</option></select><button>Uygula</button></form><div className="desk-table-wrap"><table className="desk-table"><thead><tr><th>Firma</th><th>Birim fiyat</th><th>Para birimi</th><th>MOQ</th><th>Incoterm</th><th>Termin</th><th>Ödeme</th><th>Menşe</th><th>Spesifikasyon</th><th>Tarih</th><th>Durum</th></tr></thead><tbody>{item.quotations.map((quote) => <tr key={quote.id}><td>{quote.company.name}</td><td>{quote.unitPrice.toString()} / {quote.unit}</td><td>{quote.currency}</td><td>{quote.moq || "—"}</td><td>{quote.incoterm || "—"}</td><td>{quote.leadTimeDays ?? "—"}</td><td>{quote.paymentTerms || "—"}</td><td>{quote.originCountry || "—"}</td><td>{quote.specification || "—"}</td><td>{quote.quotationDate.toLocaleDateString("tr-TR")}</td><td>{quote.status}</td></tr>)}</tbody></table></div>{!item.quotations.length && <p className="desk-empty">Bu vakada teklif yok.</p>}</section><section className="desk-panel"><h2>Teklif gir</h2><TradeForm action="quotation.create" hidden={{ caseId: id }} submit="Teklifi kaydet" fields={[{ name: "companyId", label: "Firma", type: "select", required: true, options: linked }, { name: "productName", label: "Ürün", required: true, value: item.productName || "" }, { name: "unitPrice", label: "Birim fiyat", type: "number", required: true }, { name: "currency", label: "Para birimi", value: "USD", required: true }, { name: "unit", label: "Birim", value: item.quantityUnit || "MT" }, { name: "quantity", label: "Miktar", type: "number" }, { name: "quantityUnit", label: "Miktar birimi", value: item.quantityUnit || "" }, { name: "moq", label: "MOQ" }, { name: "incoterm", label: "Incoterm" }, { name: "leadTimeDays", label: "Termin (gün)", type: "number" }, { name: "paymentTerms", label: "Ödeme" }, { name: "originCountry", label: "Menşe" }, { name: "specification", label: "Spesifikasyon" }, { name: "quotationDate", label: "Teklif tarihi", type: "date" }, { name: "notes", label: "Not", type: "textarea" }]} /></section></>}
+    {tab === "activity" && <section className="desk-panel"><h2>Aktivite akışı</h2>{item.activities.map((activity) => <article className="desk-list-row" key={activity.id}><div><strong>{activity.summary}</strong><small>{activity.type} · {activity.company?.name || "Vaka"}</small></div><div className="desk-list-side"><span>{activity.createdAt.toLocaleString("tr-TR")}</span><small>{activity.userEmail}</small></div></article>)}{!item.activities.length && <p className="desk-empty">Henüz aktivite yok.</p>}</section>}
+    {tab === "tasks" && <><section className="desk-panel"><h2>Görevler</h2>{item.tasks.map((task) => <article className="desk-list-row" key={task.id}><div><strong>{task.title}</strong><small>{task.company?.name || "Genel"} · {task.status} · {task.priority}</small></div><div className="desk-list-side"><span>{task.dueAt?.toLocaleDateString("tr-TR") || "Tarih yok"}</span><small>{task.assignedToEmail}</small></div></article>)}{!item.tasks.length && <p className="desk-empty">Görev yok.</p>}</section><section className="desk-panel"><h2>Görev ekle</h2><TradeForm action="task.create" hidden={{ caseId: id }} submit="Görevi kaydet" fields={[{ name: "title", label: "Görev", required: true }, { name: "companyId", label: "Firma", type: "select", options: linked }, { name: "dueAt", label: "Son tarih", type: "datetime-local" }, { name: "priority", label: "Öncelik", type: "select", options: ["LOW", "NORMAL", "HIGH"].map((value) => ({ value, label: value })) }, { name: "assignedToEmail", label: "Sorumlu e-posta", value: user.email }, { name: "description", label: "Açıklama", type: "textarea" }]} /></section></>}
+    {tab === "documents" && <><section className="desk-panel"><h2>Belge kayıtları</h2>{item.documents.map((document) => <article className="desk-list-row" key={document.id}><div><strong>{document.name}</strong><small>{document.type} · {document.company?.name || "Vaka"}</small></div><div className="desk-list-side">{document.sourceUrl && <a href={document.sourceUrl} target="_blank" rel="noreferrer">Kaynak ↗</a>}<small>{document.createdAt.toLocaleDateString("tr-TR")}</small></div></article>)}{!item.documents.length && <p className="desk-empty">Belge kaydı yok.</p>}</section><section className="desk-panel"><h2>Belge metadata ekle</h2><TradeForm action="document.create" hidden={{ caseId: id }} submit="Belgeyi kaydet" fields={[{ name: "name", label: "Belge adı", required: true }, { name: "type", label: "Tür", type: "select", options: ["COA", "TDS", "MSDS", "CERTIFICATE", "QUOTATION", "PROFORMA", "INVOICE", "PACKING_LIST", "CATALOG", "OTHER"].map((value) => ({ value, label: value })) }, { name: "companyId", label: "Firma", type: "select", options: linked }, { name: "sourceUrl", label: "Kaynak URL", type: "url" }, { name: "notes", label: "Not", type: "textarea" }]} /></section></>}
+    {tab === "research" && <><section className="desk-panel"><div className="desk-panel-head"><h2>Araştırma yardımcı alanı</h2><Link href={`/research/new?caseId=${id}`}>Yeni Araştırma ↗</Link></div><p>Firma keşfi ve doğrulama burada tutulur. Operasyonun durumu Genel Bakış ve diğer sekmelerde yönetilir.</p><h3>Bulunan firmalar</h3>{item.companies.map(({ company }) => { const evidence = company.evidence.filter((entry) => caseUrls.has(entry.sourceUrl)); return <article className="desk-list-row" key={company.id}><div><strong>{company.name}</strong><small>{company.country || "Ülke doğrulanmadı"} · {evidence.length} kaynak</small></div><div className="desk-list-side"><Link href={`/companies/${company.id}`}>Vakaya eklendi ↗</Link>{company.website && <a href={company.website} target="_blank" rel="noreferrer">Web ↗</a>}</div></article>; })}</section><section className="desk-panel"><h2>Araştırma geçmişi</h2>{item.researchRuns.map((run) => <details key={run.id} className="research-history"><summary>{run.startedAt.toLocaleString("tr-TR")} · {run.resultCount} kaynak</summary>{run.findings.map((finding) => <p key={finding.id}><a href={finding.url} target="_blank" rel="noreferrer">{finding.title || finding.domain} ↗</a></p>)}</details>)}{!item.researchRuns.length && <p className="desk-empty">Bu vaka için araştırma yok.</p>}</section></>}
+  </main>;
 }
