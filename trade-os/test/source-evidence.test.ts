@@ -104,6 +104,19 @@ describe("source boundaries", () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response("binary", { headers: { "content-type": "image/png" } }));
     expect((await SourceFetcher.fetch("https://8.8.8.8/")).error).toBe("UNSUPPORTED_CONTENT_TYPE");
   });
+  it.each([
+    { status: 302, headers: { location: "http://127.0.0.1/" } },
+    { status: 404, headers: { "content-type": "text/html" } },
+    { status: 200, headers: { "content-type": "image/png" } },
+    { status: 200, headers: { "content-type": "text/html", "content-length": String(2 * 1024 * 1024 + 1) } },
+  ])("cancels a response body on early exit: $status $headers", async ({ status, headers }) => {
+    const cancel = vi.fn();
+    const stream = new ReadableStream<Uint8Array>({ cancel });
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(stream, { status,
+      headers: Object.fromEntries(Object.entries(headers).filter(([, value]) => value !== undefined)) }));
+    await SourceFetcher.fetch("https://8.8.8.8/");
+    expect(cancel).toHaveBeenCalledOnce();
+  });
 
   it("decodes Turkish UTF-8 content", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response("<html><body>İşletme şeker pancarı üreticisi</body></html>", { headers: { "content-type": "text/html; charset=utf-8" } }));

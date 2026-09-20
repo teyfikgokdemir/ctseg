@@ -64,7 +64,10 @@ const safeDispatcher = new Agent({ connect: { lookup: safeConnectionLookup } });
 
 async function limitedBody(response: Response, limit: number): Promise<Buffer> {
   const declared = Number(response.headers.get("content-length"));
-  if (Number.isFinite(declared) && declared > limit) throw new Error("SOURCE_TOO_LARGE");
+  if (Number.isFinite(declared) && declared > limit) {
+    await discardResponse(response);
+    throw new Error("SOURCE_TOO_LARGE");
+  }
   if (!response.body) return Buffer.alloc(0);
   const reader = response.body.getReader();
   const chunks: Uint8Array[] = [];
@@ -79,6 +82,10 @@ async function limitedBody(response: Response, limit: number): Promise<Buffer> {
     }
   } finally { await reader.cancel().catch(() => undefined); }
   return Buffer.concat(chunks, size);
+}
+
+async function discardResponse(response: Response): Promise<void> {
+  await response.body?.cancel().catch(() => undefined);
 }
 
 export class SourceFetcher {
@@ -113,18 +120,25 @@ export class SourceFetcher {
           headers: { "User-Agent": "CTSEG-Trade-Research/1.0" } } as RequestInit & { dispatcher: Agent });
         if (response.status >= 300 && response.status < 400) {
           const location = response.headers.get("location");
+          await discardResponse(response);
           if (!location) throw new Error("INVALID_REDIRECT");
           url = new URL(location, url).href;
           continue;
         }
         const contentType = response.headers.get("content-type") || "";
         const fetchedAt = new Date().toISOString();
-        if (!response.ok) return { isLive: false, error: `HTTP_${response.status}`, type: "UNKNOWN" as const,
-          status: response.status, finalUrl: url, contentType, fetchedAt };
+        if (!response.ok) {
+          await discardResponse(response);
+          return { isLive: false, error: `HTTP_${response.status}`, type: "UNKNOWN" as const,
+            status: response.status, finalUrl: url, contentType, fetchedAt };
+        }
         const pdf = /application\/pdf/i.test(contentType) || (!contentType && /\.pdf(?:$|\?)/i.test(url));
         const html = /text\/html|application\/xhtml\+xml/i.test(contentType);
-        if (!pdf && !html) return { isLive: false, error: "UNSUPPORTED_CONTENT_TYPE", type: "UNKNOWN" as const,
-          status: response.status, finalUrl: url, contentType, fetchedAt };
+        if (!pdf && !html) {
+          await discardResponse(response);
+          return { isLive: false, error: "UNSUPPORTED_CONTENT_TYPE", type: "UNKNOWN" as const,
+            status: response.status, finalUrl: url, contentType, fetchedAt };
+        }
         if (pdf) {
           const data = await limitedBody(response, PDF_LIMIT);
           try {
