@@ -296,9 +296,9 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
 .research-intro h1 { font-size: clamp(42px, 6.8vw, 88px); max-width: none; }
 .research-intro .lead { margin-bottom: 0; max-width: 740px; }
 .research-form { border: 1px solid rgba(255,255,255,.12); border-radius: 24px; padding: clamp(16px, 3vw, 30px); background: linear-gradient(145deg,#1b1713,#120f0d 70%); }
-.quick-modes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-.quick-modes button { border: 1px solid var(--line); border-radius: 999px; padding: 9px 15px; color: var(--muted); background: transparent; cursor: pointer; }
-.quick-modes button.active { border-color: rgba(255,107,74,.55); background: rgba(255,107,74,.1); color: var(--text); }
+.header-welcome { color: var(--muted); font-size: 13px; margin-inline: auto; white-space: nowrap; }
+@media (max-width: 700px) { .topbar { flex-wrap: wrap; } .top-actions { min-width: 0; margin-left: auto; } .top-actions .badge { white-space: nowrap; } .header-welcome { order: 3; width: 100%; margin: 0; } }
+.company-missing { color: var(--muted); font-size: 12px; line-height: 1.5; }
 .research-form label { display: block; margin: 0 0 12px; color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
 .research-form textarea { display: block; width: 100%; min-height: 200px; resize: vertical; border: 1px solid var(--line); border-radius: 17px; background: #0d0c0b; color: var(--text); padding: 20px; line-height: 1.55; outline: none; }
 .research-form textarea:focus { border-color: var(--accent); }
@@ -354,7 +354,7 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
   .top-actions > a { font-size: 12px; }
   .research-intro h1 { font-size: clamp(40px, 12vw, 52px); }
   .research-intro .lead { font-size: 15px; }
-  .quick-modes button { padding: 8px 11px; font-size: 12px; }
+  .header-welcome { order: 3; width: 100%; margin: 0; }
   .research-form textarea { padding: 16px; }
   .company-card { padding: 17px; }
   .company-card-top { flex-wrap: wrap; }

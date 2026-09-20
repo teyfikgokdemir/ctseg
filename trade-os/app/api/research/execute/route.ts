@@ -6,10 +6,9 @@ import { runResearch } from "@/lib/research/orchestrator";
 import { resolveCompanies } from "@/lib/research/company-resolver";
 import type { CompanyCandidate } from "@/lib/research/types";
 import type { ResearchReview } from "@/lib/research/research-review";
-import type { ResearchCaseType, ResearchFinding, ResearchRun, ResearchMode } from "@/lib/research/types";
+import type { ResearchCaseType, ResearchFinding, ResearchRun } from "@/lib/research/types";
 
 const allowedTypes = new Set<ResearchCaseType>(["SOURCING", "BUYER_SEARCH", "LOGISTICS", ]);
-const allowedModes = new Set<ResearchMode>(["QUICK", "DEEP"]);
 
 function reference() {
   return "CTSEG-" + new Date().getUTCFullYear() + "-" + Date.now().toString(36).slice(-6).toUpperCase();
@@ -21,7 +20,7 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   const rawRequest = String(body.rawRequest || "").trim();
   const preferred = allowedTypes.has(body.preferredType) ? body.preferredType as ResearchCaseType : undefined;
-  const mode = allowedModes.has(body.mode) ? body.mode as ResearchMode : "QUICK";
+  const mode = "DEEP" as const; // Internal single research profile; the client cannot select a mode.
   
   if (!rawRequest || rawRequest.length > 4000) {
     return NextResponse.json({ error: "Talep metni 1-4000 karakter olmalı." }, { status: 400 });
