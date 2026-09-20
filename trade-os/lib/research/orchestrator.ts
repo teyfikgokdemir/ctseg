@@ -2,52 +2,9 @@
 import { planResearchQueries } from "./query-planner";
 import { searchPlannedQueries } from "./search-router";
 import { SourceFetcher } from "./source-fetcher";
-import type { ResearchFinding, ResearchRequest, ResearchRun, PlannedQuery, VerificationState, Evidence, VerifiedField, ClaimType } from "./types";
+import { extractEvidence } from "./evidence-extractor";
+import type { ResearchFinding, ResearchRequest, ResearchRun, PlannedQuery } from "./types";
 import type { AdapterDiagnostic } from "./types";
-
-function extractEvidence(finding: ResearchFinding, intent: Awaited<ReturnType<typeof parseIntent>>) {
-  if (!finding.fetchedContent || !finding.fetchedContent.isLive || !finding.fetchedContent.text || (finding.fetchedContent.status && finding.fetchedContent.status >= 400)) return;
-  
-  const text = finding.fetchedContent.text.toLowerCase();
-  
-  const createEvidence = (claimType: ClaimType, status: VerificationState): Evidence => ({
-    url: finding.url,
-    timestamp: new Date().toISOString(),
-    type: finding.fetchedContent?.type === "PDF" ? "PDF" : "HTML",
-    extractedText: text.substring(0, 300),
-    claimType,
-    status
-  });
-
-  const confirm = <T>(value: T, claimType: ClaimType): VerifiedField<T> => ({
-    value,
-    state: "CONFIRMED" as VerificationState,
-    evidence: [createEvidence(claimType, "CONFIRMED")]
-  });
-
-  // Product check - ONLY if intent has product!
-  if (intent.product && intent.product.trim().length > 1) {
-    if (text.includes(intent.product.toLowerCase())) {
-      finding.productConfirmed = confirm(true, "PRODUCT");
-    }
-  }
-
-  // Grade check
-  if (intent.grade && intent.grade.trim().length > 1) {
-    if (text.includes(intent.grade.toLowerCase())) {
-      finding.gradeConfirmed = confirm(intent.grade, "GRADE");
-    }
-  }
-
-  // Role check based on text signals
-  if (text.includes("manufacturer") || text.includes("üretici")) {
-    finding.role = confirm("MANUFACTURER", "ROLE");
-  } else if (text.includes("distributor") || text.includes("distribütör")) {
-    finding.role = confirm("DISTRIBUTOR", "ROLE");
-  } else if (text.includes("forwarder") || text.includes("logistics") || text.includes("nakliye")) {
-    finding.role = confirm("LOGISTICS", "ROLE");
-  }
-}
 
 export async function runResearch(request: ResearchRequest): Promise<ResearchRun> {
   const parsedIntent = await parseIntent(request.rawRequest, request.type);
@@ -114,11 +71,12 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
            totalFetchedCount++;
            if (request.budgetTracker) request.budgetTracker.fetchesUsed = totalFetchedCount;
            
-           // Extract with specific context
-           extractEvidence(finding, parsedIntent);
          } catch (e: unknown) {
-           finding.fetchedContent = { isLive: false, error: e instanceof Error ? e.message : String(e) } as ResearchFinding["fetchedContent"];
+           finding.fetchedContent = { isLive: false, error: "SOURCE_FETCH_FAILED" } as ResearchFinding["fetchedContent"];
          }
+         extractEvidence(finding, parsedIntent);
+      } else if (!SourceFetcher.isSafeUrl(finding.url)) {
+        finding.negativeSignals = ["INACCESSIBLE_SOURCE"];
       }
       allFindings.push(finding);
     }

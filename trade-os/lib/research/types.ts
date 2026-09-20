@@ -1,8 +1,9 @@
 ﻿export type ResearchCaseType = "SOURCING" | "BUYER_SEARCH" | "LOGISTICS";
 export type ResearchMode = "QUICK" | "DEEP";
 
-export type ClaimType = "ROLE" | "PRODUCT" | "CONTACT" | "COUNTRY" | "GRADE" | "ROUTE";
-export type VerificationState = "CONFIRMED" | "PROBABLE" | "UNVERIFIED" | "CONTRADICTED";
+export type ClaimType = "ROLE" | "PRODUCT" | "CONTACT" | "COUNTRY" | "GRADE" | "ROUTE" | "CAPACITY" | "AVAILABILITY";
+export type VerificationState = "CONFIRMED" | "PARTIAL" | "PROBABLE" | "UNVERIFIED" | "CONTRADICTED";
+export type NegativeSignal = "NOT_FOUND" | "WRONG_PRODUCT" | "STALE_PAGE" | "CONFLICTING_GRADE" | "ROLE_NOT_PROVEN" | "MANUFACTURER_CONTRADICTED" | "INACCESSIBLE_SOURCE";
 
 export interface Evidence {
   url: string;
@@ -98,6 +99,7 @@ export interface ResearchFinding {
   totalScore?: number;
   normalizedCompanyName?: string;
   historicalOnly: boolean;
+  negativeSignals?: NegativeSignal[];
   
   fetchedContent?: {
     title?: string;
