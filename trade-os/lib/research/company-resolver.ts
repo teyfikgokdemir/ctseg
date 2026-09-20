@@ -33,6 +33,7 @@ export function resolveCompanies(findings: ResearchFinding[]): CompanyCandidate[
         gradeConfirmed: unverified(""), contactEmail: unverified(""), contactPhone: unverified(""),
         country: unverified(""), manufacturer: unverified(""), freshnessScore: 0,
         verificationScore: 0, relevanceScore: 0, totalScore: 0, verificationLevel: "DISCOVERED", evidenceSources: [],
+        negativeSignals: [],
       };
       companies.set(key, candidate);
     }
@@ -45,9 +46,11 @@ export function resolveCompanies(findings: ResearchFinding[]): CompanyCandidate[
     };
     for (const field of [finding.role, finding.productConfirmed, finding.gradeConfirmed,
       finding.contactEmail, finding.contactPhone, finding.country]) mergeEvidence(field);
+    candidate.negativeSignals = [...new Set([...(candidate.negativeSignals || []), ...(finding.negativeSignals || [])])];
     candidate.freshnessScore = Math.max(candidate.freshnessScore, finding.freshnessScore || 0);
     candidate.relevanceScore = Math.max(candidate.relevanceScore, finding.relevanceScore || 0);
     if (finding.role?.state === "CONFIRMED") candidate.role = finding.role;
+    if (finding.role?.state === "CONTRADICTED") candidate.role = finding.role;
     if (finding.productConfirmed?.state === "CONFIRMED") candidate.productConfirmed = finding.productConfirmed;
     if (finding.gradeConfirmed?.state === "CONFIRMED") candidate.gradeConfirmed = finding.gradeConfirmed;
     if (finding.contactEmail?.state === "CONFIRMED") candidate.contactEmail = finding.contactEmail;

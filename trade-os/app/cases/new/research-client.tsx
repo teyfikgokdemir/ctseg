@@ -13,7 +13,7 @@ type CompanyRole = string;
 type Company = { key: string; name: string; country: VerifiedField<string>; role: VerifiedField<CompanyRole>;
   productConfirmed: VerifiedField<boolean>; gradeConfirmed: VerifiedField<string>; website: string; 
   contactEmail: VerifiedField<string>; contactPhone: VerifiedField<string>; freshnessScore: number; verificationScore: number;
-  evidenceSources: Evidence[]; verificationLevel: string };
+  evidenceSources: Evidence[]; verificationLevel: string; negativeSignals?: string[] };
 type ResearchResult = { type: Mode; companies: Company[];
   review: { summary: string; limitations: string[] } };
 type ResponseData = { case?: { id: string; reference: string }; parsed: Parsed; results?: ResearchResult[]; clarification?: { clarificationRequired: boolean; question: string } };
@@ -140,6 +140,7 @@ export default function ResearchClient({ name, firstName }: { name: string; firs
             <span>{verificationLabel(company.verificationLevel)}</span>
           </div>
           <p className="company-missing">Eksik: {[company.country.state !== "CONFIRMED" && "ülke", company.role.state !== "CONFIRMED" && "rol", company.productConfirmed.state !== "CONFIRMED" && "ürün", company.gradeConfirmed.state !== "CONFIRMED" && "grade", company.contactEmail.state !== "CONFIRMED" && company.contactPhone.state !== "CONFIRMED" && "iletişim"].filter(Boolean).join(", ") || "Temel alanlar doğrulandı"}</p>
+          {!!company.negativeSignals?.length && <p className="company-missing">Kaynak uyarısı: {company.negativeSignals.length} olumsuz veya eksik doğrulama sinyali</p>}
           <details className="evidence-list"><summary>Kaynakları göster</summary><ul>{company.evidenceSources.map((source, i) => <li key={i}>
             <a href={source.url} target="_blank" rel="noreferrer">{source.url}</a>
             <small>{source.type} Evidence</small>

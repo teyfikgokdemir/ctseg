@@ -28,6 +28,10 @@ export class LocalResearchReviewProvider implements ResearchReviewProvider {
       followUpQueries.push(`${parsed.normalizedProduct || "company"} current activity contact`);
       limitations.push("Bazı kaynakların güncel faaliyet sinyali zayıf.");
     }
+    if (companies.some((company) => (company.negativeSignals || []).some((signal) =>
+      ["NOT_FOUND", "WRONG_PRODUCT", "CONFLICTING_GRADE", "MANUFACTURER_CONTRADICTED", "INACCESSIBLE_SOURCE"].includes(signal)))) {
+      limitations.push("Bazı adaylarda erişilemeyen veya talebe uymayan kaynak sinyalleri var; doğrulanmış alanları ayrı inceleyin.");
+    }
     if (!companies.length) limitations.push("Ücretsiz kaynaklardan doğrulanabilir ticari aday çıkmadı.");
     return { provider: this.name,
       summary: `${companies.length} şirket adayı; ${verified.length} aday için kaynak kaydı var. Ürün, firma tipi, stok ve ticari kapasite ayrıca teyit gerektirir.`,

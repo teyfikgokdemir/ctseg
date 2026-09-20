@@ -30,4 +30,9 @@ describe("company identity", () => {
       finding("https://catalog.supplier.com.tr/b", "Supplier Ltd"),
     ])).toHaveLength(1);
   });
+  it("retains negative source signals for final review", () => {
+    const source = finding("https://supplier.co.uk/product", "Supplier Ltd");
+    source.negativeSignals = ["NOT_FOUND", "ROLE_NOT_PROVEN"];
+    expect(resolveCompanies([source])[0].negativeSignals).toEqual(["NOT_FOUND", "ROLE_NOT_PROVEN"]);
+  });
 });

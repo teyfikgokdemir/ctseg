@@ -140,4 +140,5 @@ export interface CompanyCandidate {
   totalScore: number;
   verificationLevel: VerificationLevel;
   evidenceSources: Evidence[];
+  negativeSignals?: NegativeSignal[];
 }
