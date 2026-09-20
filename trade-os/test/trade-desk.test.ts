@@ -126,13 +126,35 @@ describe("Trade Desk workflows", () => {
     expect((await post({ action: "quotation.delete", quotationId: "q1" })).status).toBe(403);
     expect(db.quotation.update).not.toHaveBeenCalled();
   });
-  it("only ADMIN can delete an unlinked company", async () => {
-    currentUser.mockResolvedValue(mina);
-    expect((await DELETE_COMPANY({} as never, { params: Promise.resolve({ id: "co1" }) })).status).toBe(403);
-    currentUser.mockResolvedValue(tefyik);
-    db.company.findUnique.mockResolvedValue({ id: "co1", _count: { cases: 0, buyerCases: 0, quotations: 0, tasks: 0, activities: 0, documents: 0, rfqDrafts: 0 } });
+  const deleteCompany = () => DELETE_COMPANY({} as never, { params: Promise.resolve({ id: "co1" }) });
+  const companyCounts = (overrides: Record<string, number> = {}) => ({
+    cases: 0, buyerCases: 0, quotations: 0, tasks: 0, activities: 0,
+    documents: 0, rfqDrafts: 0, contacts: 0, evidence: 0, ...overrides,
+  });
+  it("A: ADMIN can delete a company without linked records", async () => {
+    db.$queryRaw.mockResolvedValue([{ id: "co1" }]);
+    db.company.findUnique.mockResolvedValue({ id: "co1", _count: companyCounts() });
     db.company.delete.mockResolvedValue({ id: "co1" });
-    expect((await DELETE_COMPANY({} as never, { params: Promise.resolve({ id: "co1" }) })).status).toBe(200);
+    expect((await deleteCompany()).status).toBe(200);
     expect(db.company.delete).toHaveBeenCalledOnce();
+    expect(db.company.findUnique.mock.calls[0][0].include._count.select).toHaveProperty("contacts", true);
+    expect(db.company.findUnique.mock.calls[0][0].include._count.select).toHaveProperty("evidence", true);
+  });
+  it.each([
+    ["B: Contact", { contacts: 1 }],
+    ["C: Evidence", { evidence: 1 }],
+    ["D: CaseCompany", { cases: 1 }],
+    ["E: Quotation", { quotations: 1 }],
+  ])("%s blocks company deletion with 409", async (_label, counts) => {
+    db.$queryRaw.mockResolvedValue([{ id: "co1" }]);
+    db.company.findUnique.mockResolvedValue({ id: "co1", _count: companyCounts(counts) });
+    expect((await deleteCompany()).status).toBe(409);
+    expect(db.company.delete).not.toHaveBeenCalled();
+  });
+  it("F: MANAGER cannot delete a company", async () => {
+    currentUser.mockResolvedValue(mina);
+    expect((await deleteCompany()).status).toBe(403);
+    expect(db.$transaction).not.toHaveBeenCalled();
+    expect(db.company.delete).not.toHaveBeenCalled();
   });
 });
