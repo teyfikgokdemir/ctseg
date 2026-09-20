@@ -11,6 +11,20 @@ Create a new Railway service from `teyfikgokdemir/ctseg`:
 - Builder: Dockerfile (detected from `railway.toml`)
 - Add a PostgreSQL service and expose its `DATABASE_URL` to Trade OS.
 
+## TD-1 database migration preflight
+
+The production container runs `prisma migrate deploy` before starting the app. It does
+not run `prisma db push`. The repository currently contains only the
+`20260920_td1_trade_desk` migration, which extends the existing research schema.
+
+Before the first TD-1 deployment, take a database backup and inspect the production
+schema and `_prisma_migrations` history without changing either. If the existing
+schema was created with `prisma db push` and has no migration history, stop the
+deployment: `migrate deploy` will report P3005 on a nonempty database. In a separate,
+reviewed operation, establish a baseline for the exact pre-TD-1 schema, verify that
+the baseline matches production, and only then apply the TD-1 migration with
+`prisma migrate deploy`. Do not baseline or run `db push` automatically at startup.
+
 Required environment variables:
 
 ```

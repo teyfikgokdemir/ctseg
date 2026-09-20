@@ -16,4 +16,4 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY --from=builder /app ./
 EXPOSE 3000
-CMD ["sh", "-c", "npm run db:push && npm run start"]
+CMD ["sh", "-c", "npx prisma migrate deploy --schema=prisma/schema.prisma && npm run start"]
