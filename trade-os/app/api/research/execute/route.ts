@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
       rawRequest, productName: parsed.normalizedProduct, grade: parsed.grade,
       quantity: parsed.quantity === null ? null : parsed.quantity + " " + (parsed.quantityUnit || "").trim(),
       sourceRegion: parsed.preferredSourcingRegion, destination: parsed.destinations.join(", ") || null,
-      transportModes: parsed.transportModes, createdById: user.id,
+      transportModes: parsed.transportModes, createdById: user.id, ownerUserEmail: user.email, stage: "RESEARCH",
     } });
     const session = await db.researchSession.create({ data: { caseId: created.id } });
     if (!existingCase) await db.tradeCase.update({ where: { id: created.id }, data: { status: "RESEARCHING" } });

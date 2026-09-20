@@ -52,6 +52,7 @@ export async function POST(request: NextRequest) {
         ? body.transportModes.map(String).filter(Boolean)
         : [],
       createdById: user.id,
+      ownerUserEmail: user.email,
     },
   });
 

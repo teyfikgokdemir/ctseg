@@ -47,6 +47,23 @@ ADD COLUMN     "stage" "DealStage" NOT NULL DEFAULT 'NEW_REQUEST',
 ADD COLUMN     "targetCurrency" TEXT,
 ADD COLUMN     "targetPrice" DECIMAL(18,4);
 
+-- Preserve operational meaning of existing research cases and their owners.
+UPDATE "TradeCase" AS c SET
+    "stage" = CASE c."status"
+        WHEN 'RESEARCHING' THEN 'RESEARCH'::"DealStage"
+        WHEN 'SHORTLISTED' THEN 'SUPPLIERS_FOUND'::"DealStage"
+        WHEN 'CONTACTING' THEN 'SUPPLIERS_FOUND'::"DealStage"
+        WHEN 'QUOTED' THEN 'QUOTATIONS_RECEIVED'::"DealStage"
+        WHEN 'NEGOTIATING' THEN 'NEGOTIATION'::"DealStage"
+        WHEN 'WON' THEN 'COMPLETED'::"DealStage"
+        WHEN 'LOST' THEN 'LOST'::"DealStage"
+        WHEN 'ARCHIVED' THEN 'ON_HOLD'::"DealStage"
+        ELSE 'NEW_REQUEST'::"DealStage" END,
+    "ownerUserEmail" = u."email",
+    "sourceCountry" = c."sourceRegion",
+    "destinationCountry" = c."destination"
+FROM "User" AS u WHERE c."createdById" = u."id";
+
 -- AlterTable
 ALTER TABLE "Company" ADD COLUMN     "address" TEXT,
 ADD COLUMN     "email" TEXT,
@@ -56,11 +73,28 @@ ADD COLUMN     "phone" TEXT,
 ADD COLUMN     "roles" "CompanyRole"[] DEFAULT ARRAY[]::"CompanyRole"[],
 ADD COLUMN     "whatsapp" TEXT;
 
+UPDATE "Company" SET "roles" = CASE "type"
+    WHEN 'MANUFACTURER' THEN ARRAY['MANUFACTURER'::"CompanyRole"]
+    WHEN 'DISTRIBUTOR' THEN ARRAY['DISTRIBUTOR'::"CompanyRole"]
+    WHEN 'IMPORTER' THEN ARRAY['IMPORTER'::"CompanyRole"]
+    WHEN 'BUYER' THEN ARRAY['BUYER'::"CompanyRole"]
+    WHEN 'LOGISTICS' THEN ARRAY['LOGISTICS'::"CompanyRole"]
+    ELSE ARRAY['OTHER'::"CompanyRole"] END;
+
 -- AlterTable
 ALTER TABLE "CaseCompany" ADD COLUMN     "notes" TEXT,
 ADD COLUMN     "roleInCase" "CaseCompanyRole" NOT NULL DEFAULT 'OTHER',
 ADD COLUMN     "source" TEXT,
 ADD COLUMN     "status" "CaseCompanyStatus" NOT NULL DEFAULT 'DISCOVERED';
+
+UPDATE "CaseCompany" AS cc SET
+    "status" = CASE WHEN cc."shortlisted" THEN 'SHORTLISTED'::"CaseCompanyStatus" ELSE 'DISCOVERED'::"CaseCompanyStatus" END,
+    "roleInCase" = CASE c."type"
+        WHEN 'SOURCING' THEN 'SUPPLIER'::"CaseCompanyRole"
+        WHEN 'BUYER_SEARCH' THEN 'BUYER'::"CaseCompanyRole"
+        WHEN 'LOGISTICS' THEN 'LOGISTICS'::"CaseCompanyRole"
+        ELSE 'OTHER'::"CaseCompanyRole" END
+FROM "TradeCase" AS c WHERE cc."caseId" = c."id";
 
 -- AlterTable
 ALTER TABLE "Contact" ADD COLUMN     "notes" TEXT,
