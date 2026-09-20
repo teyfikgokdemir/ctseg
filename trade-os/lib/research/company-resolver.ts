@@ -5,11 +5,27 @@ export function domainKey(host: string): string {
   return getDomain(host, { allowPrivateDomains: true }) || host.replace(/^www\./, "").toLowerCase();
 }
 
-function entityKey(domain: string, name?: string): string {
-  const normalized = name?.normalize("NFKC").toLocaleLowerCase("tr-TR")
-    .replace(/\b(ltd|limited|llc|inc|aş|co|company)\b/gu, "")
-    .replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+export function normalizedEntityName(name?: string): string {
+  const words = (name || "").normalize("NFKC").toLocaleLowerCase("tr-TR")
+    .replace(/[^\p{L}\p{N}]+/gu, " ").trim().split(/\s+/u)
+    .filter((word) => word && !["ltd", "limited", "llc", "inc", "aş", "a", "ş", "co", "company"].includes(word));
+  return words.map((word) => word === "chemicals" ? "chemical" : word).join(" ");
+}
+
+export function entityKey(domain: string, name?: string): string {
+  const normalized = normalizedEntityName(name);
   return normalized ? `${domain}:${normalized}` : domain;
+}
+
+export function matchingPersistedCompany(candidate: CompanyCandidate,
+  records: Array<{ id: string; name: string; website: string | null }>): string | undefined {
+  const domain = domainKey(new URL(candidate.website).hostname);
+  const key = entityKey(domain, candidate.name);
+  return records.find((record) => {
+    if (!record.website) return false;
+    try { return entityKey(domainKey(new URL(record.website).hostname), record.name) === key; }
+    catch { return false; }
+  })?.id;
 }
 
 function unverified<T>(value: T): VerifiedField<T> {
@@ -22,7 +38,8 @@ export function resolveCompanies(findings: ResearchFinding[]): CompanyCandidate[
     let url: URL;
     try { url = new URL(finding.url); } catch { continue; }
     const domain = domainKey(url.hostname);
-    if (["alibaba.com", "made-in-china.com", "europages.com", "kompass.com"].includes(domain)) continue;
+    if (["alibaba.com", "made-in-china.com", "europages.com", "kompass.com"].includes(domain) ||
+      ["cloudfront.net", "azureedge.net"].some((platform) => url.hostname === platform || url.hostname.endsWith(`.${platform}`))) continue;
     const explicitName = finding.normalizedCompanyName || finding.companyName;
     const key = entityKey(domain, explicitName);
     let candidate = companies.get(key);

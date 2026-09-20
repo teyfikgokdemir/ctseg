@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { currentUser } from "@/lib/current-user";
 import { getResearchAIProvider } from "@/lib/research/local-ai-provider";
 import { runResearch } from "@/lib/research/orchestrator";
-import { resolveCompanies } from "@/lib/research/company-resolver";
+import { domainKey, matchingPersistedCompany, resolveCompanies } from "@/lib/research/company-resolver";
 import type { CompanyCandidate } from "@/lib/research/types";
 import type { ResearchReview } from "@/lib/research/research-review";
 import type { ResearchCaseType, ResearchFinding, ResearchRun } from "@/lib/research/types";
@@ -89,8 +89,11 @@ export async function POST(request: NextRequest) {
         historicalOnly: finding.historicalOnly,
       })) });
       for (const result of results) for (const candidate of result.companies) {
-        const existing = await tx.company.findFirst({ where: { website: candidate.website }, select: { id: true } });
-        const company = existing || await tx.company.create({ data: {
+        const domain = domainKey(new URL(candidate.website).hostname);
+        const possibleMatches = await tx.company.findMany({ where: { website: { contains: domain } },
+          select: { id: true, name: true, website: true } });
+        const existingId = matchingPersistedCompany(candidate, possibleMatches);
+        const company = existingId ? { id: existingId } : await tx.company.create({ data: {
           name: candidate.name, website: candidate.website, country: candidate.country.value || "UNKNOWN",
           type: "OTHER", freshnessScore: candidate.freshnessScore,
           verificationScore: candidate.verificationScore,

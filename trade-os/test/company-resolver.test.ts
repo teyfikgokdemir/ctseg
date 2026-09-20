@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { domainKey, resolveCompanies } from "../lib/research/company-resolver";
+import { domainKey, matchingPersistedCompany, resolveCompanies } from "../lib/research/company-resolver";
 import type { ResearchFinding } from "../lib/research/types";
 
 function finding(url: string, companyName?: string): ResearchFinding {
@@ -23,6 +23,29 @@ describe("company identity", () => {
     ]);
     expect(companies).toHaveLength(2);
     expect(new Set(companies.map((item) => item.key)).size).toBe(2);
+  });
+  it("uses domain and normalized name when matching persisted companies", () => {
+    const [chemical, trading] = resolveCompanies([
+      finding("https://www.parent.co.uk/chemical", "ABC Chemicals Ltd."),
+      finding("https://www.parent.co.uk/trading", "XYZ Trading"),
+    ]);
+    const records = [
+      { id: "chemical", name: "ABC Chemical Co.", website: "https://catalog.parent.co.uk" },
+      { id: "trading", name: "XYZ Trading", website: "https://www.parent.co.uk" },
+    ];
+    expect(matchingPersistedCompany(chemical, records)).toBe("chemical");
+    expect(matchingPersistedCompany(trading, records)).toBe("trading");
+    expect(matchingPersistedCompany(chemical, [records[1]])).toBeUndefined();
+  });
+  it("merges safe legal-name variants but separates meaningful brands", () => {
+    expect(resolveCompanies([
+      finding("https://parent.com/a", "ABC Chemicals Ltd."),
+      finding("https://shop.parent.com/b", "ABC Chemical Co."),
+      finding("https://parent.com/c", "XYZ Trading"),
+    ])).toHaveLength(2);
+  });
+  it("does not treat a shared CDN origin as a company", () => {
+    expect(resolveCompanies([finding("https://d123.cloudfront.net/catalog", "ABC Chemicals")])).toHaveLength(0);
   });
   it("merges the same named entity across subdomains", () => {
     expect(resolveCompanies([
