@@ -56,12 +56,8 @@ export default function ResearchClient({ name, firstName }: { name: string; firs
     } finally { setLoading(false); }
   }
 
-  return <main className="shell research-shell">
-    <header className="topbar">
-      <Link className="brand" href="/">CTSEG <span>Trade OS</span></Link>
-      <span className="header-welcome">Hoş geldin, {firstName}</span>
-      <nav className="top-actions"><Link href="/cases">Vakalar</Link><span className="badge">{name}</span></nav>
-    </header>
+  return <>
+    
 
     <section className="research-intro">
       <div className="eyebrow">Trade Intelligence</div>
@@ -151,6 +147,12 @@ export default function ResearchClient({ name, firstName }: { name: string; firs
         </div>}
       </section>)}
     </>}
-  </main>;
+  </>;
 }
+
+
+
+
+
+
 

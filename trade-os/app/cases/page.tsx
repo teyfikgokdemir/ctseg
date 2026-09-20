@@ -1,11 +1,12 @@
+﻿import AppHeader from "@/components/app-header";
 import { DeleteCaseButton } from "./delete-case-button";
 import { db } from "@/lib/db";
-import { currentUser, identityForEmail } from "@/lib/current-user";
+import { currentUser } from "@/lib/current-user";
 import Link from "next/link";
 
 const labels = {
   SOURCING: "Tedarik",
-  BUYER_SEARCH: "Alıcı",
+  BUYER_SEARCH: "AlÄ±cÄ±",
   LOGISTICS: "Lojistik",
 } as const;
 
@@ -17,7 +18,7 @@ export default async function CasesPage() {
   if (!user) {
     return (
       <main className="shell">
-        <div className="error-banner">Bu alan yalnızca yetkili CTSEG kullanıcılarına açıktır.</div>
+        <div className="error-banner">Bu alan yalnÄ±zca yetkili CTSEG kullanÄ±cÄ±larÄ±na aÃ§Ä±ktÄ±r.</div>
       </main>
     );
   }
@@ -41,20 +42,13 @@ export default async function CasesPage() {
 
   return (
     <main className="shell shell-dashboard">
-      <header className="topbar">
-        <Link className="brand" href="/">CTSEG <span>Trade OS</span></Link>
-        <span className="header-welcome">Hoş geldin, {identityForEmail(user.email)?.firstName}</span>
-        <nav className="top-actions">
-          <Link href="/">Ana panel</Link>
-          <div className="badge">{user.name}</div>
-        </nav>
-      </header>
+      <AppHeader />
 
       <section className="dashboard-hero compact">
         <div>
           <div className="eyebrow">Case Memory</div>
           <h1 className="dashboard-title">Vakalar</h1>
-          <p className="lead">Tedarik, alıcı araştırması ve lojistik operasyonlarının kalıcı CTSEG hafızası.</p>
+          <p className="lead">Tedarik, alÄ±cÄ± araÅŸtÄ±rmasÄ± ve lojistik operasyonlarÄ±nÄ±n kalÄ±cÄ± CTSEG hafÄ±zasÄ±.</p>
         </div>
         <Link className="primary-link" href="/cases/new">Yeni vaka +</Link>
       </section>
@@ -69,14 +63,14 @@ export default async function CasesPage() {
           <strong>{activeCount}</strong>
         </article>
         <article className="metric-card">
-          <span>Araştırma koşusu</span>
+          <span>AraÅŸtÄ±rma koÅŸusu</span>
           <strong>{cases.reduce((sum, item) => sum + item._count.researchRuns, 0)}</strong>
         </article>
       </section>
 
       <section className="case-list modern-case-list">
         {cases.length === 0 ? (
-          <div className="empty-list">Henüz kayıtlı vaka yok.</div>
+          <div className="empty-list">HenÃ¼z kayÄ±tlÄ± vaka yok.</div>
         ) : cases.map((item) => (
           <article className="case-row modern-case-row" key={item.id}>
             <Link className="case-row-main" href={`/cases/${item.id}`}>
@@ -93,7 +87,7 @@ export default async function CasesPage() {
               <div className="case-insights">
                 <div>
                   <strong>{item._count.researchRuns}</strong>
-                  <span>araştırma</span>
+                  <span>araÅŸtÄ±rma</span>
                 </div>
                 <div>
                   <strong>{item._count.companies}</strong>
@@ -111,3 +105,5 @@ export default async function CasesPage() {
     </main>
   );
 }
+
+

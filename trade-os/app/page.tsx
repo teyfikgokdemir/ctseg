@@ -1,33 +1,32 @@
+﻿import AppHeader from "@/components/app-header";
 import { db } from "@/lib/db";
-import { currentUser, identityForEmail } from "@/lib/current-user";
+import { currentUser } from "@/lib/current-user";
 import Link from "next/link";
 
 const modules = [
   {
     code: "01",
-    title: "Tedarikçi Bul",
+    title: "TedarikÃ§i Bul",
     kicker: "SOURCE",
-    text: "Üretici, distribütör, bayi, trader ve stokçuları çok kaynaklı araştır; güncellik ve kanıt ile doğrula.",
+    text: "Ãœretici, distribÃ¼tÃ¶r, bayi, trader ve stokÃ§ularÄ± Ã§ok kaynaklÄ± araÅŸtÄ±r; gÃ¼ncellik ve kanÄ±t ile doÄŸrula.",
   },
   {
     code: "02",
-    title: "Alıcı Bul",
+    title: "AlÄ±cÄ± Bul",
     kicker: "SELL",
-    text: "Ürünü kimlerin alabileceğini ülke, sektör ve satın alma profiline göre araştır; potansiyel alıcıları sınıflandır.",
+    text: "ÃœrÃ¼nÃ¼ kimlerin alabileceÄŸini Ã¼lke, sektÃ¶r ve satÄ±n alma profiline gÃ¶re araÅŸtÄ±r; potansiyel alÄ±cÄ±larÄ± sÄ±nÄ±flandÄ±r.",
   },
   {
     code: "03",
     title: "Lojistik Bul",
     kicker: "MOVE",
-    text: "Kara, deniz, hava, demiryolu ve multimodal alternatifleri karşılaştır; uygun forwarder ve taşıyıcıları araştır.",
+    text: "Kara, deniz, hava, demiryolu ve multimodal alternatifleri karÅŸÄ±laÅŸtÄ±r; uygun forwarder ve taÅŸÄ±yÄ±cÄ±larÄ± araÅŸtÄ±r.",
   },
 ];
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const user = await currentUser();
-
   const [caseCount, activeCount, researchCount] = await Promise.all([
     db.tradeCase.count(),
     db.tradeCase.count({
@@ -42,30 +41,19 @@ export default async function Home() {
 
   return (
     <main className="shell shell-dashboard">
-      <header className="topbar topbar-dashboard">
-        <div>
-          <div className="brand">CTSEG <span>Trade OS</span></div>
-          <div className="workspace-caption">Private trade intelligence workspace</div>
-        </div>
-        {user && <span className="header-welcome">Hoş geldin, {identityForEmail(user.email)?.firstName}</span>}
-        <nav className="top-actions">
-          <Link href="/cases">Vakalar</Link>
-          <Link className="top-new-case" href="/cases/new">Yeni vaka +</Link>
-          <div className="badge">{user?.name ?? "Private Workspace"}</div>
-        </nav>
-      </header>
+      <AppHeader />
 
       <section className="dashboard-hero home-hero">
         <div className="dashboard-hero-copy">
           <div className="eyebrow">Trade Intelligence System</div>
-          <h1 className="dashboard-title">Ticareti araştır.<br />Kanıtla. Harekete geç.</h1>
+          <h1 className="dashboard-title">Ticareti araÅŸtÄ±r.<br />KanÄ±tla. Harekete geÃ§.</h1>
           <p className="lead">
-            Tedarikçi, alıcı ve taşıma seçeneklerini tek taleple araştırın.
-            Şirketleri kaynakları, güncelliği ve doğrulama durumuyla birlikte inceleyin.
+            TedarikÃ§i, alÄ±cÄ± ve taÅŸÄ±ma seÃ§eneklerini tek taleple araÅŸtÄ±rÄ±n.
+            Åirketleri kaynaklarÄ±, gÃ¼ncelliÄŸi ve doÄŸrulama durumuyla birlikte inceleyin.
           </p>
           <div className="hero-actions">
-            <Link className="primary-link" href="/cases/new">Yeni araştırma başlat</Link>
-            <Link className="secondary-link" href="/cases">Vaka hafızasını aç</Link>
+            <Link className="primary-link" href="/cases/new">Yeni araÅŸtÄ±rma baÅŸlat</Link>
+            <Link className="secondary-link" href="/cases">Vaka hafÄ±zasÄ±nÄ± aÃ§</Link>
           </div>
         </div>
 
@@ -75,9 +63,9 @@ export default async function Home() {
         <div className="section-heading-row">
           <div>
             <div className="eyebrow">Research Desk</div>
-            <h2>Bir talep. Üç araştırma alanı.</h2>
+            <h2>Bir talep. ÃœÃ§ araÅŸtÄ±rma alanÄ±.</h2>
           </div>
-          <span>İhtiyacı yazın; araştırma alanı kendiliğinden belirlenir.</span>
+          <span>Ä°htiyacÄ± yazÄ±n; araÅŸtÄ±rma alanÄ± kendiliÄŸinden belirlenir.</span>
         </div>
 
         <div className="modern-module-grid">
@@ -85,7 +73,7 @@ export default async function Home() {
             <Link className="modern-module-card" href="/cases/new" key={item.code}>
               <div className="module-card-top"><span>{item.code}</span><small>{item.kicker}</small></div>
               <div><h3>{item.title}</h3><p>{item.text}</p></div>
-              <div className="module-card-cta">Araştırmaya geç <b>↗</b></div>
+              <div className="module-card-cta">AraÅŸtÄ±rmaya geÃ§ <b>â†—</b></div>
             </Link>
           ))}
         </div>
@@ -95,20 +83,23 @@ export default async function Home() {
         <article className="metric-card">
           <span>Toplam vaka</span>
           <strong>{caseCount}</strong>
-          <small>Kalıcı operasyon hafızası</small>
+          <small>KalÄ±cÄ± operasyon hafÄ±zasÄ±</small>
         </article>
         <article className="metric-card">
           <span>Aktif operasyon</span>
           <strong>{activeCount}</strong>
-          <small>Araştırma ve takip sürecinde</small>
+          <small>AraÅŸtÄ±rma ve takip sÃ¼recinde</small>
         </article>
         <article className="metric-card">
-          <span>Araştırma koşusu</span>
+          <span>AraÅŸtÄ±rma koÅŸusu</span>
           <strong>{researchCount}</strong>
-          <small>Kaydedilmiş araştırma geçmişi</small>
+          <small>KaydedilmiÅŸ araÅŸtÄ±rma geÃ§miÅŸi</small>
         </article>
       </section>
 
     </main>
   );
 }
+
+
+
