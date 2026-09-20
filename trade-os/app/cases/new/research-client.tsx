@@ -26,12 +26,28 @@ const label = (type: string) => modes.find((item) => item.value === type)?.label
 const verificationLabel = (level: string) => level === "ROLE_CONFIRMED" ? "Ürün ve rol doğrulandı" :
   level === "PRODUCT_CONFIRMED" ? "Ürün doğrulandı" : level === "SOURCE_FETCHED" ? "Kaynak incelendi" : "Doğrulanamadı";
 
-export default function ResearchClient({ name, firstName }: { name: string; firstName: string }) {
+export default function ResearchClient({ name, firstName, caseId }: { name: string; firstName: string; caseId?: string }) {
   const [rawRequest, setRawRequest] = useState("");
   const [clarificationAnswer, setClarificationAnswer] = useState("");
   const [data, setData] = useState<ResponseData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [added, setAdded] = useState<Record<string, boolean>>({});
+
+  async function addCompany(company: Company) {
+    const targetCaseId = caseId || data?.case?.id;
+    if (!targetCaseId) return;
+    try {
+      const response = await fetch("/api/trade-desk", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({
+        action: "research.import", caseId: targetCaseId, name: company.name, website: company.website,
+        country: company.country.value, email: company.contactEmail.value, phone: company.contactPhone.value,
+        sourceUrl: company.evidenceSources[0]?.url, roleInCase: "SUPPLIER",
+      }) });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error || "Firma eklenemedi.");
+      setAdded((current) => ({ ...current, [company.key]: true }));
+    } catch (cause) { setError(cause instanceof Error ? cause.message : "Firma eklenemedi."); }
+  }
 
   async function research(event: FormEvent, isClarification = false) {
     event.preventDefault();
@@ -47,7 +63,7 @@ export default function ResearchClient({ name, firstName }: { name: string; firs
     try {
       const response = await fetch("/api/research/execute", { method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ rawRequest: finalRequest }) });
+        body: JSON.stringify({ rawRequest: finalRequest, caseId }) });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.error || "Araştırma başlatılamadı.");
       setData(payload);
@@ -129,6 +145,7 @@ export default function ResearchClient({ name, firstName }: { name: string; firs
             <strong>{company.evidenceSources.length} kanıt</strong></div>
           <p>Ürün: {company.productConfirmed.state === "CONFIRMED" ? "Doğrulandı" : "Doğrulanamadı"} · Grade: {company.gradeConfirmed.state === "CONFIRMED" ? company.gradeConfirmed.value : "Doğrulanamadı"}</p>
           <div className="company-links"><a href={company.website} target="_blank" rel="noreferrer">Web sitesi ↗</a></div>
+          {(caseId || data.case?.id) && <button type="button" className="top-new-case" disabled={added[company.key]} onClick={() => addCompany(company)}>{added[company.key] ? "Vakaya eklendi" : "Vakaya Ekle"}</button>}
           {(company.contactEmail.state === "CONFIRMED" || company.contactPhone.state === "CONFIRMED") &&
              <p className="company-contact">{[company.contactEmail.value, company.contactPhone.value].filter(Boolean).join(" · ")}</p>}
           <div className="company-scores">

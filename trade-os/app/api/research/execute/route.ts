@@ -25,6 +25,8 @@ export async function POST(request: NextRequest) {
   if (!rawRequest || rawRequest.length > 4000) {
     return NextResponse.json({ error: "Talep metni 1-4000 karakter olmalı." }, { status: 400 });
   }
+  const existingCase = body.caseId ? await db.tradeCase.findUnique({ where: { id: String(body.caseId) } }) : null;
+  if (body.caseId && !existingCase) return NextResponse.json({ error: "Vaka bulunamadı." }, { status: 404 });
 
   const aiProvider = getResearchAIProvider();
   const parsed = await aiProvider.parse(rawRequest, preferred);
@@ -49,7 +51,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Passed clarification, create DB case
-    const created = await db.tradeCase.create({ data: {
+    const created = existingCase || await db.tradeCase.create({ data: {
       reference: reference(), type: parsed.tasks[0], title: (parsed.normalizedProduct || rawRequest).slice(0, 100),
       rawRequest, productName: parsed.normalizedProduct, grade: parsed.grade,
       quantity: parsed.quantity === null ? null : parsed.quantity + " " + (parsed.quantityUnit || "").trim(),
@@ -57,7 +59,7 @@ export async function POST(request: NextRequest) {
       transportModes: parsed.transportModes, createdById: user.id,
     } });
     const session = await db.researchSession.create({ data: { caseId: created.id } });
-    await db.tradeCase.update({ where: { id: created.id }, data: { status: "RESEARCHING" } });
+    if (!existingCase) await db.tradeCase.update({ where: { id: created.id }, data: { status: "RESEARCHING" } });
 
     // Actually run for all tasks (testRun was valid)
     for (const type of parsed.tasks) {
