@@ -8,7 +8,7 @@ export function domainKey(host: string): string {
 export function normalizedEntityName(name?: string): string {
   const words = (name || "").normalize("NFKC").toLocaleLowerCase("tr-TR")
     .replace(/[^\p{L}\p{N}]+/gu, " ").trim().split(/\s+/u)
-    .filter((word) => word && !["ltd", "limited", "llc", "inc", "aÅŸ", "a", "ÅŸ", "co", "company"].includes(word));
+    .filter((word) => word && !["ltd", "limited", "llc", "inc", "aş", "a", "ş", "co", "company"].includes(word));
   return words.map((word) => word === "chemicals" ? "chemical" : word).join(" ");
 }
 
@@ -67,6 +67,9 @@ export function resolveCompanies(findings: ResearchFinding[]): CompanyCandidate[
     candidate.negativeSignals = [...new Set([...(candidate.negativeSignals || []), ...(finding.negativeSignals || [])])];
     candidate.freshnessScore = Math.max(candidate.freshnessScore, finding.freshnessScore || 0);
     candidate.relevanceScore = Math.max(candidate.relevanceScore, finding.relevanceScore || 0);
+        if (candidate.negativeSignals.includes("WRONG_PRODUCT")) {
+      candidate.relevanceScore = Math.max(0, candidate.relevanceScore - 30);
+    }
     if (finding.role?.state === "CONFIRMED" && candidate.role.state !== "CONTRADICTED") candidate.role = finding.role;
     if (finding.role?.state === "CONTRADICTED") candidate.role = finding.role;
     if (finding.productConfirmed?.state === "CONFIRMED") candidate.productConfirmed = finding.productConfirmed;
@@ -84,6 +87,18 @@ export function resolveCompanies(findings: ResearchFinding[]): CompanyCandidate[
   
   
   
-  return [...companies.values()].sort((a, b) => b.totalScore - a.totalScore);
+  
+  const validCompanies = [...companies.values()].filter(c => {
+    if (c.evidenceSources.length === 0 && c.relevanceScore === 0 && (!c.negativeSignals || c.negativeSignals.length === 0)) return true;
+    if (c.evidenceSources.length > 0 && c.relevanceScore >= 30) return true;
+    if (c.productConfirmed.state === "CONFIRMED" || c.role.state === "CONFIRMED" || c.country.state === "CONFIRMED") return true;
+    if (c.relevanceScore >= 60) return true;
+    if (c.negativeSignals && c.negativeSignals.length > 0 && c.relevanceScore >= 10) return true;
+    if (c.role.state === "CONTRADICTED") return true;
+    return false;
+  });
+  
+  return validCompanies.sort((a, b) => b.totalScore - a.totalScore);
+
 }
 

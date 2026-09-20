@@ -56,6 +56,7 @@ describe("company identity", () => {
   it("retains negative source signals for final review", () => {
     const source = finding("https://supplier.co.uk/product", "Supplier Ltd");
     source.negativeSignals = ["NOT_FOUND", "ROLE_NOT_PROVEN"];
+    source.relevanceScore = 50;
     expect(resolveCompanies([source])[0].negativeSignals).toEqual(["NOT_FOUND", "ROLE_NOT_PROVEN"]);
   });
   it("does not downgrade a confirmed company when a later result is unverified", () => {
