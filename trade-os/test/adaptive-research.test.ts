@@ -5,7 +5,7 @@ import type { ResearchRequest } from "../lib/research/types";
 
 // Mock external deps to prevent actual network calls / timeouts
 vi.mock("../lib/research/search-router", () => ({
-  searchPlannedQueries: vi.fn().mockResolvedValue({ findings: [], diagnostics: [] })
+  searchPlannedQueries: vi.fn().mockResolvedValue({ findings: [{ url: "http://test.com", domain: "test.com", companyName: "Test", adapter: "test", query: "test", language: "en", freshnessScore: 80, relevanceScore: 80, title: "Test" }], diagnostics: [] })
 }));
 vi.mock("../lib/research/fetch-scheduler", () => ({
   FetchScheduler: class {
@@ -33,7 +33,7 @@ describe("Adaptive Broad Research Engine Scenarios", () => {
     const hasTr = run.queries.some(q => q.language === "tr");
     expect(hasTr).toBe(true);
     const hasExact = run.queries.some(q => q.intent.includes("exact"));
-    // expected in stage 2
+    expect(hasExact).toBe(true);
   });
 
   it("Scenario B: Buyer search without supplier planning", async () => {
@@ -57,7 +57,7 @@ describe("Adaptive Broad Research Engine Scenarios", () => {
       destination: "Iran"
     };
     const run = await runResearch(request);
-    // expected
+    expect(run.queries.some(q => q.intent.includes("logistics"))).toBe(true);
   });
 
   it("Scenario D: Mixed request budget handling", async () => {
@@ -78,6 +78,6 @@ describe("Adaptive Broad Research Engine Scenarios", () => {
       product: "" 
     };
     const run = await runResearch(request);
-    expect(run.queries.length).toBeGreaterThanOrEqual(0);
+    expect(run.queries.length).toBeGreaterThan(0);
   });
 });
