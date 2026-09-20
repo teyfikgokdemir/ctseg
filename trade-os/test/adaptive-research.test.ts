@@ -57,7 +57,9 @@ describe("Adaptive Broad Research Engine Scenarios", () => {
       destination: "Iran"
     };
     const run = await runResearch(request);
-    expect(run.queries.some(q => q.intent.includes("logistics"))).toBe(true);
+    expect(run.clarification?.clarificationRequired).not.toBe(true);
+    expect(run.queries.some(q => q.intent.startsWith("logistics-") && q.query.includes("Bulgaria to Iran"))).toBe(true);
+    expect(run.queries.every(q => !q.intent.includes("commercial-") && !q.intent.includes("global-exact"))).toBe(true);
   });
 
   it("Scenario D: Mixed request budget handling", async () => {

@@ -37,10 +37,10 @@ export interface IntentProvider {
 
 const countries: Array<[RegExp, string]> = [
   [/(?<!\p{L})(?:türkiye|turkiye|turkey|tr)(?!\p{L})/iu, "Türkiye"],
-  [/(?<!\p{L})(?:iran|iran'a|irana|iranda|iranın)(?!\p{L})/iu, "İran"],
+  [/(?<!\p{L})(?:iran|ıran|iran'a|irana|iranda|iranın)(?!\p{L})/iu, "İran"],
   [/(?<!\p{L})(?:almanya|almanyada|germany)(?!\p{L})/iu, "Almanya"],
   [/(?<!\p{L})(?:fransa|fransada|france)(?!\p{L})/iu, "Fransa"],
-  [/(?<!\p{L})(?:bulgaristan|bulgaristandan|bulgaria)(?!\p{L})/iu, "Bulgaristan"],
+  [/(?<!\p{L})(?:bulgaristan|bulgaristandan|bulgaria|bulgarıa)(?!\p{L})/iu, "Bulgaristan"],
   [/(?<!\p{L})(?:çin|cin|china)(?!\p{L})/iu, "Çin"],
 ];
 const profiles: Array<[RegExp, string]> = [
@@ -62,7 +62,10 @@ const modes: Array<[RegExp, string]> = [
 
 function findCountries(text: string): string[] {
   const normalized = text.toLocaleLowerCase("tr-TR");
-  return countries.filter(([pattern]) => pattern.test(normalized)).map(([, country]) => country);
+  return countries.flatMap(([pattern, country]) => {
+    const match = pattern.exec(normalized);
+    return match ? [{ country, index: match.index }] : [];
+  }).sort((a, b) => a.index - b.index).map(({ country }) => country);
 }
 
 export class LocalIntentProvider implements IntentProvider {
@@ -80,8 +83,9 @@ export class LocalIntentProvider implements IntentProvider {
       /food[\s-]?grade|gıda[\s-]?kalite/i.test(raw) ? "Food Grade" :
       /pharma[\s-]?grade|ilaç[\s-]?kalite/i.test(raw) ? "Pharma Grade" : null;
     const source = raw.match(/(?:bulgaristan|türkiye|turkiye|tr|çin|cin|china)[\s'’]*(?:dan|den|tan|ten)\b/i);
-    const sourceCountry = source ? findCountries(source[0])[0] ?? null : null;
     const mentioned = findCountries(raw);
+    const sourceCountry = source ? findCountries(source[0])[0] ?? null :
+      /\bto\b/i.test(raw) && mentioned.length >= 2 ? mentioned[0] : null;
     const buyer = /alıcı(?:sı)?\s*(?:bul|araştır)|ithalatçı(?:sı)?|müşteri\s*(?:bul|araştır)|buyer|importer/i.test(raw);
     const logistics = /nakliye|taşıma|lojistik|forwarder|freight|\byük\b|shipping|transport/i.test(raw);
     const sourcingCue = /tedarik|üretici|uretici|supplier|lazım|arıyoruz|istiyor|\b(?:tr|türkiye)[\s'’]*den\s*bul/i.test(raw);
