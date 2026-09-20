@@ -13,6 +13,8 @@ export default async function NewCasePage() {
       { name: "productSpecification", label: "Ürün spesifikasyonu", type: "textarea" },
       { name: "quantity", label: "Miktar" }, { name: "quantityUnit", label: "Miktar birimi" }, { name: "frequency", label: "Sıklık" },
       { name: "sourceCountry", label: "Kaynak ülke" }, { name: "destinationCountry", label: "Hedef ülke" },
+      { name: "targetPrice", label: "Hedef fiyat", type: "number" }, { name: "targetCurrency", label: "Hedef para birimi" },
+      { name: "incoterm", label: "Incoterm" }, { name: "paymentPreference", label: "Ödeme tercihi" },
       { name: "priority", label: "Öncelik", type: "select", options: [{ value: "LOW", label: "Düşük" }, { value: "NORMAL", label: "Normal" }, { value: "HIGH", label: "Yüksek" }] },
       { name: "nextAction", label: "Sonraki aksiyon" }, { name: "nextActionAt", label: "Aksiyon tarihi", type: "datetime-local" },
       { name: "notes", label: "Notlar", type: "textarea" },

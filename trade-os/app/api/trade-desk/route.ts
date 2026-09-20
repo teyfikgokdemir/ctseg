@@ -58,6 +58,8 @@ export async function POST(request: NextRequest) {
       case "case.create": {
         const title = text(body.title, 200);
         if (!title) return bad("Vaka başlığı gerekli.");
+        const buyerCompanyId = optionalText(body.buyerCompanyId);
+        if (buyerCompanyId && !(await db.company.findUnique({ where: { id: buyerCompanyId } }))) return bad("Alıcı firma bulunamadı.");
         const item = await db.$transaction(async (tx) => {
           const created = await tx.tradeCase.create({ data: {
             reference: nextReference(), type: enumValue(CaseType, body.type, CaseType.SOURCING), title,
@@ -67,6 +69,8 @@ export async function POST(request: NextRequest) {
             sourceCountry: optionalText(body.sourceCountry, 100), destinationCountry: optionalText(body.destinationCountry, 100),
             destination: optionalText(body.destinationCountry, 100), transportModes: [], createdById: user.id,
             ownerUserEmail: user.email, priority: enumValue(TradePriority, body.priority, TradePriority.NORMAL),
+            buyerCompanyId, targetPrice: money(body.targetPrice), targetCurrency: optionalText(body.targetCurrency, 8),
+            incoterm: optionalText(body.incoterm, 40), paymentPreference: optionalText(body.paymentPreference, 500),
             nextAction: optionalText(body.nextAction, 500), nextActionAt: date(body.nextActionAt), notes: optionalText(body.notes, 4000),
           } });
           await tx.dealActivity.create({ data: { caseId: created.id, userEmail: user.email, type: "CASE_CREATED", summary: "Vaka oluşturuldu." } });
@@ -79,6 +83,7 @@ export async function POST(request: NextRequest) {
         const existing = await db.tradeCase.findUnique({ where: { id: caseId } });
         if (!existing) return bad("Vaka bulunamadı.", 404);
         if (body.ownerUserEmail && !(await db.user.findFirst({ where: { email: text(body.ownerUserEmail, 320).toLowerCase(), active: true } }))) return bad("Sorumlu kullanıcı bulunamadı.");
+        if (body.buyerCompanyId && !(await db.company.findUnique({ where: { id: text(body.buyerCompanyId) } }))) return bad("Alıcı firma bulunamadı.");
         const stage = body.stage ? enumValue(DealStage, body.stage, existing.stage) : existing.stage;
         const item = await db.$transaction(async (tx) => {
           const updated = await tx.tradeCase.update({ where: { id: caseId }, data: {
@@ -95,9 +100,15 @@ export async function POST(request: NextRequest) {
             nextAction: body.nextAction === undefined ? undefined : optionalText(body.nextAction, 500),
             nextActionAt: body.nextActionAt === undefined ? undefined : date(body.nextActionAt),
             notes: body.notes === undefined ? undefined : optionalText(body.notes, 4000),
+            buyerCompanyId: body.buyerCompanyId === undefined ? undefined : optionalText(body.buyerCompanyId),
+            targetPrice: body.targetPrice === undefined ? undefined : money(body.targetPrice),
+            targetCurrency: body.targetCurrency === undefined ? undefined : optionalText(body.targetCurrency, 8),
+            incoterm: body.incoterm === undefined ? undefined : optionalText(body.incoterm, 40),
+            paymentPreference: body.paymentPreference === undefined ? undefined : optionalText(body.paymentPreference, 500),
             closedAt: stage === DealStage.COMPLETED || stage === DealStage.LOST ? existing.closedAt || new Date() : null,
           } });
           if (stage !== existing.stage) await tx.dealActivity.create({ data: { caseId, userEmail: user.email, type: "STAGE_CHANGED", summary: `${existing.stage} → ${stage}`, metadata: { from: existing.stage, to: stage } } });
+          if (body.notes !== undefined && optionalText(body.notes, 4000) !== existing.notes) await tx.dealActivity.create({ data: { caseId, userEmail: user.email, type: "NOTE_ADDED", summary: "Vaka notu güncellendi." } });
           return updated;
         });
         return NextResponse.json({ case: item });
@@ -125,6 +136,17 @@ export async function POST(request: NextRequest) {
         const link = await db.$transaction((tx) => linkCompany(tx, text(body.caseId), text(body.companyId), body, user.email));
         return NextResponse.json({ link }, { status: 201 });
       }
+      case "company.link.update": {
+        const caseId = text(body.caseId), companyId = text(body.companyId);
+        const existing = await db.caseCompany.findUnique({ where: { caseId_companyId: { caseId, companyId } } });
+        if (!existing) return bad("Vaka-firma bağlantısı bulunamadı.", 404);
+        const link = await db.caseCompany.update({ where: { caseId_companyId: { caseId, companyId } }, data: {
+          status: enumValue(CaseCompanyStatus, body.status, existing.status),
+          roleInCase: enumValue(CaseCompanyRole, body.roleInCase, existing.roleInCase),
+          notes: body.notes === undefined ? undefined : optionalText(body.notes, 4000),
+        } });
+        return NextResponse.json({ link });
+      }
       case "research.import": {
         const sourceUrl = body.sourceUrl ? validUrl(body.sourceUrl) : null;
         if (body.sourceUrl && !sourceUrl) return bad("Geçerli kaynak URL gerekli.");
@@ -146,6 +168,20 @@ export async function POST(request: NextRequest) {
           return created;
         });
         return NextResponse.json({ contact }, { status: 201 });
+      }
+      case "contact.update": {
+        const id = text(body.contactId);
+        const existing = await db.contact.findUnique({ where: { id } });
+        if (!existing) return bad("Kişi bulunamadı.", 404);
+        const contact = await db.contact.update({ where: { id }, data: {
+          name: body.name === undefined ? undefined : optionalText(body.name, 200),
+          title: body.title === undefined ? undefined : optionalText(body.title, 200),
+          email: body.email === undefined ? undefined : optionalText(body.email, 320),
+          phone: body.phone === undefined ? undefined : optionalText(body.phone, 80),
+          whatsapp: body.whatsapp === undefined ? undefined : optionalText(body.whatsapp, 80),
+          notes: body.notes === undefined ? undefined : optionalText(body.notes, 2000),
+        } });
+        return NextResponse.json({ contact });
       }
       case "quotation.create": {
         const caseId = text(body.caseId), companyId = text(body.companyId);
@@ -174,7 +210,16 @@ export async function POST(request: NextRequest) {
         const id = text(body.quotationId);
         const existing = await db.quotation.findUnique({ where: { id } });
         if (!existing || existing.deletedAt) return bad("Teklif bulunamadı.", 404);
-        const quotation = await db.quotation.update({ where: { id }, data: { status: enumValue(QuotationStatus, body.status, existing.status), notes: body.notes === undefined ? undefined : optionalText(body.notes, 4000) } });
+        const quotation = await db.quotation.update({ where: { id }, data: {
+          status: enumValue(QuotationStatus, body.status, existing.status),
+          notes: body.notes === undefined ? undefined : optionalText(body.notes, 4000),
+          unitPrice: body.unitPrice === undefined ? undefined : money(body.unitPrice) || undefined,
+          currency: body.currency === undefined ? undefined : text(body.currency, 8).toUpperCase(),
+          validUntil: body.validUntil === undefined ? undefined : date(body.validUntil),
+          moq: body.moq === undefined ? undefined : optionalText(body.moq, 100),
+          leadTimeDays: body.leadTimeDays === undefined ? undefined : Number(body.leadTimeDays),
+          paymentTerms: body.paymentTerms === undefined ? undefined : optionalText(body.paymentTerms, 500),
+        } });
         return NextResponse.json({ quotation });
       }
       case "quotation.delete": {
@@ -208,6 +253,21 @@ export async function POST(request: NextRequest) {
         });
         return NextResponse.json({ task });
       }
+      case "task.update": {
+        const id = text(body.taskId);
+        const existing = await db.tradeTask.findUnique({ where: { id } });
+        if (!existing) return bad("Görev bulunamadı.", 404);
+        const status = enumValue(TradeTaskStatus, body.status, existing.status);
+        const task = await db.tradeTask.update({ where: { id }, data: {
+          title: body.title === undefined ? undefined : text(body.title, 200),
+          description: body.description === undefined ? undefined : optionalText(body.description, 2000),
+          dueAt: body.dueAt === undefined ? undefined : date(body.dueAt),
+          assignedToEmail: body.assignedToEmail === undefined ? undefined : text(body.assignedToEmail, 320).toLowerCase(),
+          priority: body.priority === undefined ? undefined : enumValue(TradePriority, body.priority, existing.priority),
+          status, completedAt: status === TradeTaskStatus.DONE ? existing.completedAt || new Date() : null,
+        } });
+        return NextResponse.json({ task });
+      }
       case "document.create": {
         const caseId = optionalText(body.caseId), companyId = optionalText(body.companyId), quotationId = optionalText(body.quotationId);
         const name = text(body.name, 300);
@@ -223,6 +283,18 @@ export async function POST(request: NextRequest) {
           return created;
         });
         return NextResponse.json({ document }, { status: 201 });
+      }
+      case "document.update": {
+        const id = text(body.documentId);
+        if (!(await db.tradeDocument.findUnique({ where: { id } }))) return bad("Belge bulunamadı.", 404);
+        const sourceUrl = body.sourceUrl === undefined ? undefined : body.sourceUrl ? validUrl(body.sourceUrl) : null;
+        if (body.sourceUrl && !sourceUrl) return bad("Geçerli kaynak URL gerekli.");
+        const document = await db.tradeDocument.update({ where: { id }, data: {
+          name: body.name === undefined ? undefined : text(body.name, 300),
+          type: body.type === undefined ? undefined : enumValue(TradeDocumentType, body.type, TradeDocumentType.OTHER),
+          sourceUrl, notes: body.notes === undefined ? undefined : optionalText(body.notes, 2000),
+        } });
+        return NextResponse.json({ document });
       }
       case "rfq.prepare": {
         const caseId = text(body.caseId), companyId = text(body.companyId);
