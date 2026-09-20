@@ -160,6 +160,12 @@ describe("evidence boundaries", () => {
     extractEvidence(candidate, intent);
     expect(candidate.role?.state).not.toBe("CONFIRMED");
   });
+  it("does not turn a company's supplier claim into a third party's manufacturer role", () => {
+    const candidate = finding("XYZ Chemicals is a supplier of L-Threonine manufactured by ABC Chemicals.");
+    candidate.companyName = "XYZ Chemicals";
+    extractEvidence(candidate, intent);
+    expect(candidate.role?.value).not.toBe("MANUFACTURER");
+  });
   it("confirms an explicit company manufacturer claim", () => {
     const candidate = finding("XYZ Chemicals is a manufacturer of L-Threonine.");
     candidate.companyName = "XYZ Chemicals";

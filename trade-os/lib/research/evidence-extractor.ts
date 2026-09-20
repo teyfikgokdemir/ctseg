@@ -47,9 +47,9 @@ export function extractEvidence(finding: ResearchFinding, intent: ParsedIntent):
   const gradeTogether = !!product && !!grade && [
     ...segments,
     ...(source.headings || []).map(lower),
-  ].find((segment) => segment.includes(product) && segment.includes(grade) &&
-    Math.abs(segment.indexOf(product) - segment.indexOf(grade)) <= product.length + grade.length + 32 &&
-    !/\b(?:other|unrelated)\s+products\b/.test(segment));
+  ].find((segment) => new RegExp(
+    `(?:${escape(product)}[\\s():/|,-]{1,12}${escape(grade)}|${escape(grade)}[\\s():/|,-]{1,12}${escape(product)})`, "u"
+  ).test(segment));
   if (grade && finding.productConfirmed?.state === "CONFIRMED" && gradeTogether) {
     finding.gradeConfirmed = confirmed(intent.grade!, "GRADE", grade, gradeTogether || undefined);
   } else if (grade && /feed\s*grade|food\s*grade|pharma\s*grade/i.test(text)) {
@@ -65,11 +65,19 @@ export function extractEvidence(finding: ResearchFinding, intent: ParsedIntent):
     .some((label) => lower(label || "").includes(company));
   let roleProven = false;
   for (const role of roleTerms) {
-    const match = segments.find((segment) => role.pattern.test(segment) &&
-      ((company.length >= 4 && new RegExp(`${escape(company)}\\s+(?:is|are|manufactures|produces|supplies|distributes)\\b`, "u").test(segment) &&
-        !!product && segment.includes(product)) ||
-       (pageIdentity && !!product && segment.includes(product) &&
-        /\b(?:we are|we manufacture|we produce|we supply|our manufacturing|authorized distributor)\b/iu.test(segment))));
+    const selfRole = role.value === "MANUFACTURER"
+      ? /\b(?:we are (?:a |an )?(?:manufacturer|producer)|we manufacture|we produce|our manufacturing)\b/iu
+      : role.value === "DISTRIBUTOR"
+        ? /\b(?:we are (?:an? )?distributor|we distribute|our distribution|authorized distributor)\b/iu
+        : /\b(?:we are (?:a )?forwarder|our logistics)\b/iu;
+    const companyRole = role.value === "MANUFACTURER"
+      ? "(?:is|are)\\s+(?:a\\s+|an\\s+)?(?:manufacturer|producer)|manufactures|produces"
+      : role.value === "DISTRIBUTOR"
+        ? "(?:is|are)\\s+(?:an?\\s+)?distributor|distributes"
+        : "(?:is|are)\\s+(?:a\\s+)?(?:forwarder|logistics provider)";
+    const match = segments.find((segment) => role.pattern.test(segment) && !!product && segment.includes(product) &&
+      ((company.length >= 4 && new RegExp(`${escape(company)}\\s+(?:${companyRole})\\b`, "u").test(segment)) ||
+       (pageIdentity && selfRole.test(segment))));
     if (match && !/\b(?:manufactured|produced|supplied)\s+by\b/iu.test(match)) {
       const roleTerm = role.pattern.exec(match)?.[0] || "";
       finding.role = confirmed(role.value, "ROLE", roleTerm, match);
