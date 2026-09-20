@@ -1,5 +1,5 @@
 ﻿export type ResearchCaseType = "SOURCING" | "BUYER_SEARCH" | "LOGISTICS";
-export type ResearchMode = "QUICK" | "DEEP";
+export type ResearchMode = "AUTO_RESEARCH" | "QUICK" | "DEEP";
 
 export type ClaimType = "ROLE" | "PRODUCT" | "CONTACT" | "COUNTRY" | "GRADE" | "ROUTE" | "CAPACITY" | "AVAILABILITY";
 export type VerificationState = "CONFIRMED" | "PARTIAL" | "PROBABLE" | "UNVERIFIED" | "CONTRADICTED";
@@ -56,6 +56,7 @@ export interface ResearchRun {
   searchedAt: string;
   paidFallbackUsed: boolean;
   round: number;
+  stopReason?: StopReason;
   clarification?: {
     confidence: number;
     missingCriticalFields: string[];
@@ -142,3 +143,6 @@ export interface CompanyCandidate {
   evidenceSources: Evidence[];
   negativeSignals?: NegativeSignal[];
 }
+
+export type StopReason = "SATURATED" | "NO_NEW_CANDIDATES" | "HARD_CAP" | "TIME_BUDGET" | "RATE_LIMITED" | "ERROR_LIMIT";
+

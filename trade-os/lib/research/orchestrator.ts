@@ -1,146 +1,153 @@
 ﻿import { parseIntent } from "./intent-parser";
-import { planResearchQueries } from "./query-planner";
+import { planResearchQueries, generateFollowUpQueries } from "./query-planner";
 import { searchPlannedQueries } from "./search-router";
-import { SourceFetcher } from "./source-fetcher";
 import { extractEvidence } from "./evidence-extractor";
-import type { ResearchFinding, ResearchRequest, ResearchRun, PlannedQuery } from "./types";
+import { FetchScheduler } from "./fetch-scheduler";
+import { domainKey } from "./company-resolver";
+import type { ResearchFinding, ResearchRequest, ResearchRun, PlannedQuery, StopReason, CompanyCandidate } from "./types";
 import type { AdapterDiagnostic } from "./types";
+import { getResearchAIProvider } from "./local-ai-provider";
 
 export async function runResearch(request: ResearchRequest): Promise<ResearchRun> {
   const parsedIntent = await parseIntent(request.rawRequest, request.type);
   
   if (parsedIntent.clarificationRequired && parsedIntent.clarificationQuestion) {
     return {
-      request,
-      queries: [],
-      findings: [],
-      diagnostics: [],
-      searchedAt: new Date().toISOString(),
-      paidFallbackUsed: false,
+      request, queries: [], findings: [], diagnostics: [], searchedAt: new Date().toISOString(), paidFallbackUsed: false, round: 0,
       clarification: {
-        confidence: parsedIntent.confidence,
-        missingCriticalFields: parsedIntent.missingCriticalFields,
-        missingUsefulFields: parsedIntent.missingUsefulFields,
-        assumptions: parsedIntent.assumptions,
-        clarificationRequired: parsedIntent.clarificationRequired,
-        question: parsedIntent.clarificationQuestion
-      },
-      round: 0
+        confidence: parsedIntent.confidence, missingCriticalFields: parsedIntent.missingCriticalFields, missingUsefulFields: parsedIntent.missingUsefulFields,
+        assumptions: parsedIntent.assumptions, clarificationRequired: parsedIntent.clarificationRequired, question: parsedIntent.clarificationQuestion
+      }
     };
   }
 
-  const isDeep = request.mode === "DEEP";
-  const maxRounds = isDeep ? 3 : 1;
-  const maxFetchTotal = isDeep ? 15 : 5;
-  const maxQueriesTotal = isDeep ? 12 : 5;
+  // Safety caps
+  const startTime = Date.now();
+  const TIME_BUDGET_MS = 60000; 
+  const MAX_QUERIES = 20;
+  const MAX_FETCHES = 30;
+  const MAX_CANDIDATES = 60;
   
-  const allFindings: ResearchFinding[] = [];
+  const allFindings = new Map<string, ResearchFinding>();
   const allQueries: PlannedQuery[] = [];
   const allDiagnostics: AdapterDiagnostic[] = [];
-  
-  let currentRound = 1;
-  let currentQueries = planResearchQueries(request);
-  let totalFetchedCount = request.budgetTracker?.fetchesUsed || 0;
   
   const fetchedUrls = new Set<string>();
   const executedQueryStrings = new Set<string>();
   
-  while (currentRound <= maxRounds) {
-    // Deduplicate and limit queries
-    const newQueries = currentQueries.filter(q => !executedQueryStrings.has(q.query));
-    if (newQueries.length === 0) break;
-    
-    // Enforce budget limits on queries
-    const allowedNewQueries = newQueries.slice(0, Math.max(0, maxQueriesTotal - allQueries.length));
-    if (allowedNewQueries.length === 0) break;
-
-    allowedNewQueries.forEach(q => executedQueryStrings.add(q.query));
-    allQueries.push(...allowedNewQueries);
-
-    const searched = await searchPlannedQueries(request, parsedIntent.product || parsedIntent.intent, allowedNewQueries);
-    allDiagnostics.push(...searched.diagnostics);
-    
-    for (const finding of searched.findings) {
-      if (totalFetchedCount >= maxFetchTotal) break;
-      
-      if (!fetchedUrls.has(finding.url) && SourceFetcher.isSafeUrl(finding.url)) {
-         fetchedUrls.add(finding.url);
-         try {
-           const content = await SourceFetcher.fetch(finding.url, 5, 5000);
-           finding.fetchedContent = content as ResearchFinding["fetchedContent"];
-           totalFetchedCount++;
-           if (request.budgetTracker) request.budgetTracker.fetchesUsed = totalFetchedCount;
-           
-         } catch {
-           finding.fetchedContent = { isLive: false, error: "SOURCE_FETCH_FAILED" } as ResearchFinding["fetchedContent"];
-         }
-         extractEvidence(finding, parsedIntent);
-      } else if (!SourceFetcher.isSafeUrl(finding.url)) {
-        finding.negativeSignals = ["INACCESSIBLE_SOURCE"];
+  const queriesToRun = planResearchQueries(request);
+  let totalFetches = request.budgetTracker?.fetchesUsed || 0;
+  let totalQueries = 0;
+  let stopReason: StopReason | undefined = undefined;
+  
+  const scheduler = new FetchScheduler(4, 1, 3, async (finding, content) => {
+    finding.fetchedContent = content;
+    if (content.isLive && "text" in content && typeof content.text === "string") {
+      try {
+        extractEvidence(finding, parsedIntent);
+      } catch (e) {
+        console.error("Evidence extraction failed", e);
       }
-      allFindings.push(finding);
     }
+  });
+
+  let round = 1;
+
+  while (!stopReason) {
+    const timeElapsed = Date.now() - startTime;
+    if (timeElapsed > TIME_BUDGET_MS) { stopReason = "TIME_BUDGET"; break; }
     
-    if (currentRound < maxRounds && totalFetchedCount < maxFetchTotal) {
-      // Intent-specific Gap Analysis
-      const confirmedFindings = allFindings.filter(f => f.role?.state === "CONFIRMED" || f.productConfirmed?.state === "CONFIRMED");
-      const productName = parsedIntent.product || "product";
+    // Pick queries to run this iteration
+    const currentQueries = queriesToRun.filter(q => !executedQueryStrings.has(q.query)).slice(0, 5); // take up to 5 at a time
+    if (currentQueries.length === 0 && !scheduler.hasPending()) { stopReason = "SATURATED"; break; } // no more work
+    
+    if (currentQueries.length > 0) {
+      if (totalQueries + currentQueries.length > MAX_QUERIES) { stopReason = "HARD_CAP"; break; }
+      const searchRes = await searchPlannedQueries(request, request.product || "Product", currentQueries);
+      totalQueries += currentQueries.length;
       
-      if (request.type === "SOURCING") {
-        const foundRoles = allFindings.filter(f => f.role?.state === "CONFIRMED" && f.role.value === "MANUFACTURER").length;
-        if (foundRoles < 2) {
-          currentQueries = [{
-            query: "" + productName + " official manufacturer",
-            language: "en",
-            intent: "Sourcing Manufacturer gap analysis",
-            priority: 1
-          }];
-        } else break;
-      } else if (request.type === "BUYER_SEARCH") {
-        if (confirmedFindings.length < 2) {
-           currentQueries = [{
-             query: "" + productName + " importer buyer purchasing",
-             language: "en",
-             intent: "Buyer Search gap analysis",
-             priority: 1
-           }];
-        } else break;
-      } else if (request.type === "LOGISTICS") {
-        if (confirmedFindings.length < 2) {
-           currentQueries = [{
-             query: "international logistics forwarder shipping " + ((parsedIntent.preferredSourcingRegion || parsedIntent.sourceCountry) || "") + " to " + (parsedIntent.destinations?.[0] || ""),
-             language: "en",
-             intent: "Logistics route gap analysis",
-             priority: 1
-           }];
-        } else break;
+      currentQueries.forEach(q => executedQueryStrings.add(q.query));
+      allQueries.push(...currentQueries);
+      allDiagnostics.push(...searchRes.diagnostics);
+      
+      let newFindingsCount = 0;
+      for (const f of searchRes.findings) {
+        if (!allFindings.has(f.url)) {
+          allFindings.set(f.url, f);
+          newFindingsCount++;
+          if (allFindings.size > MAX_CANDIDATES) { stopReason = "HARD_CAP"; break; }
+          // Schedule fetch
+          let priority = f.relevanceScore || 50;
+          if (f.domain.includes(request.product?.toLowerCase() || "")) priority += 20; // boost product in domain
+          if (f.url.endsWith(".pdf")) priority += 30; // boost PDF
+          scheduler.add(f, priority);
+        }
+      }
+      if (stopReason) break;
+      if (newFindingsCount === 0 && !scheduler.hasPending()) { stopReason = "NO_NEW_CANDIDATES"; break; }
+    }
+
+    // Process fetches
+    let didFetch = false;
+    while (scheduler.canScheduleNext() && totalFetches < MAX_FETCHES && (Date.now() - startTime) < TIME_BUDGET_MS) {
+      const processed = await scheduler.processNextBatch();
+      if (processed) {
+        totalFetches += 4; // Approx batch size
+        didFetch = true;
       } else {
-        break; // Stop if type is unknown or mixed inside round logic
+        break;
       }
-    } else {
-      break;
     }
-    currentRound++;
+
+    if (totalFetches >= MAX_FETCHES) { stopReason = "HARD_CAP"; break; }
+
+    // Gap Critic: Generate follow-up queries if we have gaps and budget
+    if (didFetch && allQueries.length < MAX_QUERIES) {
+      // Group findings by domain to find candidates with missing info
+      const domainMap = new Map<string, ResearchFinding[]>();
+      for (const f of allFindings.values()) {
+        const d = domainKey(f.domain);
+        if (!domainMap.has(d)) domainMap.set(d, []);
+        domainMap.get(d)!.push(f);
+      }
+      
+      // Simple gap critic logic
+      for (const [domain, findings] of domainMap.entries()) {
+        let hasProduct = false;
+        let hasRole = false;
+        const name = domain;
+        for (const f of findings) {
+          if (f.productConfirmed?.state === "CONFIRMED") hasProduct = true;
+          if (f.role?.state === "CONFIRMED") hasRole = true;
+          if (f.negativeSignals?.includes("WRONG_PRODUCT") || f.negativeSignals?.includes("ROLE_NOT_PROVEN")) {
+            // Priority lowered, skip generating followups unless strictly needed
+          }
+        }
+        
+        const missing: string[] = [];
+        if (!hasProduct) missing.push("PRODUCT");
+        if (!hasRole && request.type !== "LOGISTICS") missing.push("CONTACT"); // as proxy for checking role/contact
+        
+        if (missing.length > 0 && missing.length < 3) {
+          const followups = generateFollowUpQueries(name, domain, missing);
+          queriesToRun.push(...followups);
+        }
+      }
+    }
+    
+    round++;
   }
 
-  // Final Deduplication
-  const deduped = new Map<string, ResearchFinding>();
-  for (const finding of allFindings) {
-    if (!deduped.has(finding.url) || finding.fetchedContent?.isLive) {
-      finding.verificationScore = 0; // Fix TS issue
-      deduped.set(finding.url, finding);
-    }
-  }
+  if (request.budgetTracker) request.budgetTracker.fetchesUsed = totalFetches;
 
   return {
     request,
     queries: allQueries,
-    findings: Array.from(deduped.values()),
+    findings: Array.from(allFindings.values()),
     diagnostics: allDiagnostics,
     searchedAt: new Date().toISOString(),
     paidFallbackUsed: false,
-    round: currentRound
+    round,
+    stopReason: stopReason || "SATURATED"
   };
 }
-
-

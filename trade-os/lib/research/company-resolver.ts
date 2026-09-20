@@ -1,4 +1,4 @@
-import { getDomain } from "tldts";
+﻿import { getDomain } from "tldts";
 import type { CompanyCandidate, ResearchFinding, VerifiedField, CompanyRole, VerificationLevel } from "./types";
 
 export function domainKey(host: string): string {
@@ -8,7 +8,7 @@ export function domainKey(host: string): string {
 export function normalizedEntityName(name?: string): string {
   const words = (name || "").normalize("NFKC").toLocaleLowerCase("tr-TR")
     .replace(/[^\p{L}\p{N}]+/gu, " ").trim().split(/\s+/u)
-    .filter((word) => word && !["ltd", "limited", "llc", "inc", "aş", "a", "ş", "co", "company"].includes(word));
+    .filter((word) => word && !["ltd", "limited", "llc", "inc", "aÅŸ", "a", "ÅŸ", "co", "company"].includes(word));
   return words.map((word) => word === "chemicals" ? "chemical" : word).join(" ");
 }
 
@@ -81,5 +81,9 @@ export function resolveCompanies(findings: ResearchFinding[]): CompanyCandidate[
     candidate.totalScore = candidate.relevanceScore + candidate.evidenceSources.length * 5 +
       (level === "ROLE_CONFIRMED" ? 20 : level === "PRODUCT_CONFIRMED" ? 10 : 0);
   }
+  
+  
+  
   return [...companies.values()].sort((a, b) => b.totalScore - a.totalScore);
 }
+

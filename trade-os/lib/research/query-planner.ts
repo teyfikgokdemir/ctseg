@@ -1,9 +1,16 @@
 import { extractSubject, subjectVariants } from "./relevance";
 import type { PlannedQuery, ResearchRequest } from "./types";
 
-const sourcingTerms = ["supplier", "manufacturer", "distributor", "producer", "trader", "stockist", "product", "catalogue", "technical document"];
-const buyerTerms = ["importer", "buyer", "distributor", "wholesaler", "retailer", "procurement", "industrial user", "sector user"];
-const logisticsTerms = ["freight forwarder", "carrier", "road freight", "trucking", "shipping", "air cargo", "rail freight", "multimodal logistics"];
+export type QueryFamily = "PRODUCT_EXACT" | "COMMERCIAL" | "GEO_LOCAL" | "DOCUMENT" | "CONTACT" | "LOGISTICS" | "BUYER";
+
+export interface FamilyQuery extends PlannedQuery {
+  family: QueryFamily;
+}
+
+const sourcingTerms = ["supplier", "manufacturer", "distributor", "producer", "trader", "stockist"];
+const documentTerms = ["catalog", "catalogue", "product list", "technical document", "pdf"];
+const buyerTerms = ["importer", "buyer", "distributor", "wholesaler", "retailer", "procurement", "industrial user"];
+const logisticsTerms = ["freight forwarder", "carrier", "road freight", "trucking", "shipping", "air cargo", "multimodal logistics"];
 
 function sourceMarkets(request: ResearchRequest): string[] {
   const preferred = request.sourceRegion?.trim();
@@ -21,57 +28,72 @@ function buyerMarkets(request: ResearchRequest): string[] {
   return markets.length ? markets : [""];
 }
 
-export function planResearchQueries(request: ResearchRequest): PlannedQuery[] {
-  const maxQueries = Math.min(Math.max(request.maxQueries ?? 12, 4), 30);
+export function planResearchQueries(request: ResearchRequest): FamilyQuery[] {
+  const maxQueries = Math.min(Math.max(request.maxQueries ?? 20, 4), 30);
   const subject = request.product?.trim() || extractSubject(request);
   const variants = request.aliases?.length ? request.aliases : subjectVariants(subject);
-  const planned: PlannedQuery[] = [];
-  let priority = 120;
-  const push = (query: string, language: string, intent: string) =>
-    planned.push({ query: query.replace(/\s+/g, " ").trim(), language, intent, priority: priority-- });
+  const planned: FamilyQuery[] = [];
+  let priority = 200;
+
+  const push = (query: string, language: string, intent: string, family: QueryFamily) =>
+    planned.push({ query: query.replace(/\s+/g, " ").trim(), language, intent, priority: priority--, family });
 
   if (request.type === "SOURCING") {
+    // 1. Exact
+    push(`"${subject}"`, "en", "global-exact", "PRODUCT_EXACT");
+    if (request.grade) push(`"${subject}" "${request.grade}"`, "en", "global-exact-grade", "PRODUCT_EXACT");
+
+    // 2. Commercial & Geo
     for (const market of sourceMarkets(request)) {
       const turkey = /türkiye|turkey/i.test(market);
-      const first = variants[0] || subject;
-      const local = turkey ? variants.find((variant) => /treonin/i.test(variant)) || first : variants[1] || first;
-      const terms = turkey ? ["tedarikçi", "üretici", "distribütör", "ürün", "supplier", "manufacturer"] : sourcingTerms;
-      for (let index = 0; index < terms.length; index++) {
-        const variant = index === 2 || index === 3 ? local : first;
-        const grade = request.grade && index === 1 ? `"${request.grade}"` : "";
+      const language = turkey ? "tr" : "en";
+      
+      const terms = turkey ? ["üretici", "tedarikçi", "distribütör", "fabrika"] : sourcingTerms;
+      
+      for (const term of terms) {
         const exclude = request.excludedCountries?.map((value) => `-${value}`).join(" ") || "";
-        push([`"${variant}"`, market, grade, terms[index], exclude].filter(Boolean).join(" "),
-          turkey ? "tr" : "en", `${turkey ? "turkey" : "global"}-${terms[index]}`);
+        push([`"${subject}"`, market, term, exclude].filter(Boolean).join(" "), language, `commercial-${term}`, turkey ? "GEO_LOCAL" : "COMMERCIAL");
       }
+    }
+
+    // 3. Document
+    for (const doc of documentTerms.slice(0, 3)) {
+      push(`"${subject}" ${doc}`, "en", `doc-${doc}`, "DOCUMENT");
+      push(`"${subject}" ext:pdf`, "en", `doc-ext-pdf`, "DOCUMENT");
     }
   } else if (request.type === "BUYER_SEARCH") {
     for (const market of buyerMarkets(request)) {
       for (let index = 0; index < buyerTerms.length; index++) {
-        const variant = variants[index % Math.max(1, variants.length)] || subject;
-        push([`"${variant}"`, market, buyerTerms[index]].filter(Boolean).join(" "), "en", `buyer-${market}-${buyerTerms[index]}`);
+        push([`"${subject}"`, market, buyerTerms[index]].filter(Boolean).join(" "), "en", `buyer-${market}-${buyerTerms[index]}`, "BUYER");
       }
     }
   } else {
     const route = [request.sourceRegion, request.destination].filter(Boolean).join(" to ") || request.rawRequest;
-    for (const term of logisticsTerms) push(`${route} ${term}`, "en", `logistics-${term}`);
-    if (request.transportModes?.includes("road")) push(`${route} road transport company`, "en", "logistics-route-road");
-    if (request.transportModes?.includes("sea")) push(`${route} sea freight forwarder`, "en", "logistics-route-sea");
+    for (const term of logisticsTerms) push(`${route} ${term}`, "en", `logistics-${term}`, "LOGISTICS");
+    if (request.transportModes?.includes("road")) push(`${route} road transport company`, "en", "logistics-route-road", "LOGISTICS");
+    if (request.transportModes?.includes("sea")) push(`${route} sea freight forwarder`, "en", "logistics-route-sea", "LOGISTICS");
   }
 
-  const unique = new Map<string, PlannedQuery>();
+  const unique = new Map<string, FamilyQuery>();
   for (const item of planned) {
     const key = item.query.toLocaleLowerCase("tr-TR");
     if (!unique.has(key)) unique.set(key, item);
   }
-  const all = [...unique.values()];
-  if (request.type === "SOURCING") {
-    const turkey = all.filter((item) => item.intent.startsWith("turkey-")).slice(0, Math.floor(maxQueries / 2));
-    const global = all.filter((item) => item.intent.startsWith("global-")).slice(0, maxQueries - turkey.length);
-    return [...turkey, ...global];
+  return [...unique.values()].slice(0, maxQueries);
+}
+
+export function generateFollowUpQueries(companyName: string, domain: string, missingClaims: string[]): FamilyQuery[] {
+  const queries: FamilyQuery[] = [];
+  let priority = 100;
+  const push = (query: string, intent: string, family: QueryFamily) =>
+    queries.push({ query, language: "en", intent, priority: priority--, family });
+
+  if (missingClaims.includes("CONTACT")) {
+    push(`"${companyName}" contact`, "followup-contact", "CONTACT");
+    push(`site:${domain} contact email`, "followup-contact-site", "CONTACT");
   }
-  if (request.type === "BUYER_SEARCH" && buyerMarkets(request).length > 1) {
-    const perMarket = Math.max(2, Math.floor(maxQueries / buyerMarkets(request).length));
-    return all.filter((_, index) => index % buyerTerms.length < perMarket).slice(0, maxQueries);
+  if (missingClaims.includes("PRODUCT")) {
+    push(`site:${domain} product`, "followup-product", "DOCUMENT");
   }
-  return all.slice(0, maxQueries);
+  return queries;
 }

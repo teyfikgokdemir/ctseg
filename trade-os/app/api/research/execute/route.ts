@@ -1,4 +1,4 @@
-﻿import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { currentUser } from "@/lib/current-user";
 import { getResearchAIProvider } from "@/lib/research/local-ai-provider";
@@ -20,10 +20,10 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   const rawRequest = String(body.rawRequest || "").trim();
   const preferred = allowedTypes.has(body.preferredType) ? body.preferredType as ResearchCaseType : undefined;
-  const mode = "DEEP" as const; // Internal single research profile; the client cannot select a mode.
+  const mode = "AUTO_RESEARCH" as const;
   
   if (!rawRequest || rawRequest.length > 4000) {
-    return NextResponse.json({ error: "Talep metni 1-4000 karakter olmalı." }, { status: 400 });
+    return NextResponse.json({ error: "Talep metni 1-4000 karakter olmalÄ±." }, { status: 400 });
   }
 
   const aiProvider = getResearchAIProvider();
@@ -110,17 +110,20 @@ export async function POST(request: NextRequest) {
       }
       await tx.researchSession.update({ where: { id: session.id }, data: {
         queryCount: results.reduce((sum, result) => sum + result.queries.length, 0),
-        resultCount: allFindings.size, completedAt: new Date(), paidFallbackUsed: false,
+        resultCount: allFindings.size, completedAt: new Date(), paidFallbackUsed: false, stopReason: results[0]?.stopReason,
       } });
     }, { timeout: 20000 });
     return NextResponse.json({ case: { id: created.id, reference: created.reference },
-      parsed, results, paidFallbackUsed: false });
+      parsed, results: results.map(r => ({ type: r.type, companies: r.companies, review: r.review, searchedAt: r.searchedAt })), paidFallbackUsed: false });
   } catch (error) {
     console.error("Research execute failed", error);
-    return NextResponse.json({ error: "Araştırma tamamlanamadı.", code: "RESEARCH_EXECUTION_FAILED",
+    return NextResponse.json({ error: "AraÅŸtÄ±rma tamamlanamadÄ±.", code: "RESEARCH_EXECUTION_FAILED",
       paidFallbackUsed: false }, { status: 500 });
   }
 }
+
+
+
 
 
 

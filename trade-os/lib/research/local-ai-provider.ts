@@ -45,18 +45,8 @@ export class LocalModelProvider implements IntentProvider, ResearchReviewProvide
   }
 
   async review(parsed: ParsedIntent, type: ResearchCaseType, companies: CompanyCandidate[]): Promise<ResearchReview> {
-    const fallback = await new LocalResearchReviewProvider().review(parsed, type, companies);
-    try {
-      const evidence = companies.slice(0, 12).map((company) => ({ name: company.name,
-        sources: company.evidenceSources.map((source) => ({ title: source.type, status: "VERIFIED", claim: source.url })) }));
-      const proposal = await chatJson(`Review only this evidence as JSON with fields followUpQueries (array of search strings) and limitations (array of strings). Do not create companies. Do not call any unverified claim verified. Requested grade: ${parsed.grade || "none"}. Task: ${type}. Evidence: ${JSON.stringify(evidence)}`);
-      const strings = (value: unknown) => Array.isArray(value)
-        ? value.filter((item): item is string => typeof item === "string" && item.length < 180).slice(0, 3) : [];
-      return { ...fallback, provider: this.name,
-        followUpQueries: [...new Set([...fallback.followUpQueries, ...strings(proposal.followUpQueries)])].slice(0, 5),
-        limitations: [...new Set([...fallback.limitations, ...strings(proposal.limitations)])].slice(0, 5) };
-    } catch { return fallback; }
-  }
+    return new LocalResearchReviewProvider().review(parsed, type, companies);
+    }
 }
 
 export function getResearchAIProvider(): IntentProvider & ResearchReviewProvider {
@@ -70,4 +60,6 @@ class LocalIntentProviderWithReview implements IntentProvider, ResearchReviewPro
     return new LocalResearchReviewProvider().review(parsed, type, companies);
   }
 }
+
+
 

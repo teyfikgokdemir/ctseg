@@ -89,6 +89,10 @@ model ResearchSession {
   paidFallbackUsed Boolean           @default(false)
   startedAt        DateTime          @default(now())
   completedAt      DateTime?
+  stopReason       String?
+  phase            String?
+  maxCandidates    Int?
+  maxQueries       Int?
   tradeCase        TradeCase         @relation(fields: [caseId], references: [id], onDelete: Cascade)
   findings         ResearchFinding[]
 
@@ -184,3 +188,4 @@ model PaidAlternative {
   url          String?
   discoveredAt DateTime @default(now())
 }
+

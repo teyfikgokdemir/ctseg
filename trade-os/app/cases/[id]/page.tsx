@@ -86,12 +86,12 @@ export default async function CaseDetailPage({
             <div className="history-run-head">
               <div>
                 <div className="eyebrow">Research Run</div>
-                <h2>{run.resultCount} sonuç · {run.queryCount} sorgu</h2>
+                <h2>Araştırma Havuzu ({run.resultCount} kaynak)</h2>
               </div>
               <span>{new Intl.DateTimeFormat("tr-TR", { dateStyle: "medium", timeStyle: "short" }).format(run.startedAt)}</span>
             </div>
 
-            <details className="diagnostic-panel"><summary>Ham kaynakları göster · {run.findings.length}</summary><div className="results-grid">
+            <details className="diagnostic-panel"><summary>Keşfedilen kaynakları göster · {run.findings.length}</summary><div className="results-grid">
               {run.findings.map((finding) => (
                 <article className="result-card" key={finding.id}>
                   <div className="result-meta">
