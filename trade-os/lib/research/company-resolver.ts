@@ -56,8 +56,8 @@ export function resolveCompanies(findings: ResearchFinding[]): CompanyCandidate[
     if (finding.contactEmail?.state === "CONFIRMED") candidate.contactEmail = finding.contactEmail;
     if (finding.contactPhone?.state === "CONFIRMED") candidate.contactPhone = finding.contactPhone;
     if (finding.country?.state === "CONFIRMED") candidate.country = finding.country;
-    let level: VerificationLevel = "DISCOVERED";
-    if (finding.fetchedContent?.isLive) level = "SOURCE_FETCHED";
+    let level: VerificationLevel = candidate.verificationLevel;
+    if (finding.fetchedContent?.isLive && level === "DISCOVERED") level = "SOURCE_FETCHED";
     if (candidate.productConfirmed.state === "CONFIRMED") level = "PRODUCT_CONFIRMED";
     if (candidate.role.state === "CONFIRMED" && level === "PRODUCT_CONFIRMED") level = "ROLE_CONFIRMED";
     candidate.verificationLevel = level;

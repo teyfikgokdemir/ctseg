@@ -35,4 +35,12 @@ describe("company identity", () => {
     source.negativeSignals = ["NOT_FOUND", "ROLE_NOT_PROVEN"];
     expect(resolveCompanies([source])[0].negativeSignals).toEqual(["NOT_FOUND", "ROLE_NOT_PROVEN"]);
   });
+  it("does not downgrade a confirmed company when a later result is unverified", () => {
+    const verified = finding("https://supplier.co.uk/product", "Supplier Ltd");
+    verified.fetchedContent = { isLive: true, text: "product" };
+    verified.productConfirmed = { value: true, state: "CONFIRMED", evidence: [] };
+    verified.role = { value: "MANUFACTURER", state: "CONFIRMED", evidence: [] };
+    const later = finding("https://supplier.co.uk/about", "Supplier Ltd");
+    expect(resolveCompanies([verified, later])[0].verificationLevel).toBe("ROLE_CONFIRMED");
+  });
 });
