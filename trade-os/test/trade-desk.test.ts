@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const { currentUser, db } = vi.hoisted(() => {
   const db = {
-    $transaction: vi.fn(), $executeRaw: vi.fn(),
+    $transaction: vi.fn(), $queryRaw: vi.fn(),
     tradeCase: { create: vi.fn(), findUnique: vi.fn(), update: vi.fn(), count: vi.fn() },
     company: { findUnique: vi.fn(), findMany: vi.fn(), create: vi.fn(), update: vi.fn(), delete: vi.fn() },
     caseCompany: { findUnique: vi.fn(), upsert: vi.fn(), update: vi.fn() },
@@ -29,7 +29,7 @@ const mina = { id: "u2", email: "minafakhimi@icloud.com", role: "MANAGER" };
 beforeEach(() => {
   vi.resetAllMocks();
   db.$transaction.mockImplementation(async (callback) => callback(db));
-  db.$executeRaw.mockResolvedValue(0);
+  db.$queryRaw.mockResolvedValue([]);
   db.tradeCase.create.mockResolvedValue({ id: "c1" });
   db.tradeCase.findUnique.mockResolvedValue({ id: "c1", stage: "NEW_REQUEST", priority: "NORMAL", closedAt: null });
   db.tradeCase.update.mockResolvedValue({ id: "c1", stage: "RFQ_SENT" });

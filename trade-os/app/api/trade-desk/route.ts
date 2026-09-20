@@ -17,7 +17,7 @@ async function resolveCompany(tx: Tx, input: Record<string, unknown>) {
   const website = input.website ? validUrl(input.website) : null;
   if (input.website && !website) throw new Error("Geçerli bir HTTP(S) web adresi gerekli.");
   const identity = companyIdentity(name, website);
-  await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${identity}))`;
+  await tx.$queryRaw`SELECT pg_advisory_xact_lock(hashtext(${identity})) IS NULL AS locked`;
   const candidates = await tx.company.findMany({ where: website ? { website: { contains: new URL(website).hostname.replace(/^www\./, ""), mode: "insensitive" } } : { name: { equals: name, mode: "insensitive" } }, select: { id: true, name: true, website: true, roles: true } });
   const existing = candidates.find((candidate) => companyIdentity(candidate.name, candidate.website) === identity);
   const role = enumValue(CompanyRole, input.role, CompanyRole.OTHER);
