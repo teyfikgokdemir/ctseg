@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { currentUser } from "@/lib/current-user";
+import { currentUser, identityForEmail } from "@/lib/current-user";
 import Link from "next/link";
 
 const modules = [
@@ -47,6 +47,7 @@ export default async function Home() {
           <div className="brand">CTSEG <span>Trade OS</span></div>
           <div className="workspace-caption">Private trade intelligence workspace</div>
         </div>
+        {user && <span className="header-welcome">Hoş geldin, {identityForEmail(user.email)?.firstName}</span>}
         <nav className="top-actions">
           <Link href="/cases">Vakalar</Link>
           <Link className="top-new-case" href="/cases/new">Yeni vaka +</Link>

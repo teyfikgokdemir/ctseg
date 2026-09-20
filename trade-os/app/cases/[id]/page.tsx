@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
-import { currentUser } from "@/lib/current-user";
+import { currentUser, identityForEmail } from "@/lib/current-user";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
@@ -46,9 +46,10 @@ export default async function CaseDetailPage({
     <main className="shell">
       <header className="topbar">
         <Link className="brand" href="/">CTSEG <span>Trade OS</span></Link>
+        <span className="header-welcome">Hoş geldin, {identityForEmail(user.email)?.firstName}</span>
         <nav className="top-actions">
           <Link href="/cases">Vakalar</Link>
-          <div className="badge">{tradeCase.reference}</div>
+          <div className="badge">{user.name}</div>
         </nav>
       </header>
 

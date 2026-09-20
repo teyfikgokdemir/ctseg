@@ -1,6 +1,6 @@
 import { DeleteCaseButton } from "./delete-case-button";
 import { db } from "@/lib/db";
-import { currentUser } from "@/lib/current-user";
+import { currentUser, identityForEmail } from "@/lib/current-user";
 import Link from "next/link";
 
 const labels = {
@@ -43,6 +43,7 @@ export default async function CasesPage() {
     <main className="shell shell-dashboard">
       <header className="topbar">
         <Link className="brand" href="/">CTSEG <span>Trade OS</span></Link>
+        <span className="header-welcome">Hoş geldin, {identityForEmail(user.email)?.firstName}</span>
         <nav className="top-actions">
           <Link href="/">Ana panel</Link>
           <div className="badge">{user.name}</div>
