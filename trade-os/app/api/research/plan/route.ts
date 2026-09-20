@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { researchPolicy, sourcePriority } from "@/lib/policy";
+import { currentUser } from "@/lib/current-user";
 
 type CaseType = "SOURCING" | "BUYER_SEARCH" | "LOGISTICS";
 
@@ -28,6 +29,7 @@ const typeTasks: Record<CaseType, string[]> = {
 };
 
 export async function POST(request: NextRequest) {
+  if (!(await currentUser())) return NextResponse.json({ error: "Yetkisiz." }, { status: 401 });
   const body = await request.json();
   const type = String(body.type || "SOURCING") as CaseType;
   const rawRequest = String(body.rawRequest || "").trim();

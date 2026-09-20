@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getFreeSearchAdapters } from "@/lib/search";
+import { currentUser } from "@/lib/current-user";
 
 export async function POST(request: NextRequest) {
+  if (!(await currentUser())) return NextResponse.json({ error: "Yetkisiz." }, { status: 401 });
   const body = await request.json();
   const query = String(body.query || "").trim();
   const language = body.language ? String(body.language) : undefined;
@@ -33,7 +35,7 @@ export async function POST(request: NextRequest) {
     .map((item) => item.value);
 
   const errors = settled
-    .map((item, index) => item.status === "rejected" ? { adapter: adapters[index].name, error: String(item.reason) } : null)
+    .map((item, index) => item.status === "rejected" ? { adapter: adapters[index].name, error: "SEARCH_BACKEND_ERROR" } : null)
     .filter(Boolean);
 
   const seen = new Set<string>();

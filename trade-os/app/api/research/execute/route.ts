@@ -112,7 +112,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ case: { id: created.id, reference: created.reference },
       parsed, results, paidFallbackUsed: false });
   } catch (error) {
-    return NextResponse.json({ error: "Araştırma tamamlanamadı.", detail: error instanceof Error ? error.message : "unknown",
+    console.error("Research execute failed", error);
+    return NextResponse.json({ error: "Araştırma tamamlanamadı.", code: "RESEARCH_EXECUTION_FAILED",
       paidFallbackUsed: false }, { status: 500 });
   }
 }

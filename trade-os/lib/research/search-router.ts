@@ -48,7 +48,7 @@ export async function searchPlannedQueries(request: ResearchRequest, subject: st
         } catch (error) {
           const message = error instanceof Error ? error.message : String(error);
           diagnostics.push({ adapter: adapter.name, query: planned.query, rawCount: 0,
-            acceptedCount: 0, status: /429|rate.limit/i.test(message) ? "rate-limited" : "error", error: message });
+            acceptedCount: 0, status: /429|rate.limit/i.test(message) ? "rate-limited" : "error", error: "SEARCH_BACKEND_ERROR" });
         }
       })));
     }

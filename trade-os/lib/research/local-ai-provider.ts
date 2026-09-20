@@ -35,7 +35,7 @@ export class LocalModelProvider implements IntentProvider, ResearchReviewProvide
     const fallback = await new LocalIntentProvider().parse(rawRequest, preferredType);
     try {
       const proposal = await chatJson(`Parse this trade request as JSON. Return only fields grade, specification, quantity, quantityUnit, recurrence, transportModes, specialConstraints. Do not invent a company, product, country or verified claim. Request: ${rawRequest}`);
-      const grade = typeof proposal.grade === "string" && /feed|food|pharma|yem|gÄ±da|ilaÃ§/i.test(rawRequest) ? proposal.grade.slice(0, 80) : fallback.grade;
+      const grade = typeof proposal.grade === "string" && /feed|food|pharma|yem|gıda|ilaç/i.test(rawRequest) ? proposal.grade.slice(0, 80) : fallback.grade;
       const constraints = Array.isArray(proposal.specialConstraints)
         ? proposal.specialConstraints.filter((value): value is string => typeof value === "string" && value.length < 120).slice(0, 5)
         : fallback.specialConstraints;

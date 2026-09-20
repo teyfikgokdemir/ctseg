@@ -19,18 +19,18 @@ export class LocalResearchReviewProvider implements ResearchReviewProvider {
     if (type === "SOURCING" && parsed.grade && verified.some((company) =>
       !company.evidenceSources.some((source) => source.url.toLowerCase().includes(parsed.grade!.toLowerCase())))) {
       followUpQueries.push(`"${parsed.normalizedProduct}" "${parsed.grade}" official product specification`);
-      limitations.push("ÃœrÃ¼n sayfasÄ± bulunmasÄ±, istenen grade veya kapasitenin doÄŸrulandÄ±ÄŸÄ± anlamÄ±na gelmez.");
+      limitations.push("Ürün sayfası bulunması, istenen grade veya kapasitenin doğrulandığı anlamına gelmez.");
     }
-    if (companies.some((company) => /DistribÃ¼tÃ¶r adayÄ±/.test(company.role.value) && company.role.state !== "CONFIRMED")) {
+    if (companies.some((company) => company.role.value === "DISTRIBUTOR" && company.role.state !== "CONFIRMED")) {
       followUpQueries.push(`${parsed.normalizedProduct || "product"} official distributor authorization`);
     }
     if (companies.some((company) => company.freshnessScore < 50)) {
       followUpQueries.push(`${parsed.normalizedProduct || "company"} current activity contact`);
-      limitations.push("BazÄ± kaynaklarÄ±n gÃ¼ncel faaliyet sinyali zayÄ±f.");
+      limitations.push("Bazı kaynakların güncel faaliyet sinyali zayıf.");
     }
-    if (!companies.length) limitations.push("Ãœcretsiz kaynaklardan doÄŸrulanabilir ticari aday Ã§Ä±kmadÄ±; adapter tanÄ±sÄ±nÄ± inceleyin.");
+    if (!companies.length) limitations.push("Ücretsiz kaynaklardan doğrulanabilir ticari aday çıkmadı.");
     return { provider: this.name,
-      summary: `${companies.length} ÅŸirket adayÄ±; ${verified.length} ÅŸirketin Ã¼rÃ¼n sayfasÄ± canlÄ± doÄŸrulandÄ±. Firma tipi, stok ve ticari kapasite ayrÄ±ca teyit gerektirir.`,
+      summary: `${companies.length} şirket adayı; ${verified.length} aday için kaynak kaydı var. Ürün, firma tipi, stok ve ticari kapasite ayrıca teyit gerektirir.`,
       followUpQueries: [...new Set(followUpQueries)].slice(0, 3), limitations };
   }
 }
