@@ -297,7 +297,7 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
 .research-intro .lead { margin-bottom: 0; max-width: 740px; }
 .research-form { border: 1px solid rgba(255,255,255,.12); border-radius: 24px; padding: clamp(16px, 3vw, 30px); background: linear-gradient(145deg,#1b1713,#120f0d 70%); }
 .header-welcome { color: var(--muted); font-size: 13px; margin-inline: auto; white-space: nowrap; }
-@media (max-width: 700px) { .topbar { flex-wrap: wrap; } .top-actions { min-width: 0; margin-left: auto; } .top-actions .badge { white-space: nowrap; } .header-welcome { order: 3; width: 100%; margin: 0; } }
+@media (max-width: 700px) { .topbar { flex-wrap: wrap; } .top-actions { min-width: 0; margin-left: auto; flex-wrap: wrap; justify-content: flex-end; } .top-actions .badge { display: block; white-space: nowrap; } .header-welcome { order: 3; width: 100%; margin: 0; } }
 .company-missing { color: var(--muted); font-size: 12px; line-height: 1.5; }
 .research-form label { display: block; margin: 0 0 12px; color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; }
 .research-form textarea { display: block; width: 100%; min-height: 200px; resize: vertical; border: 1px solid var(--line); border-radius: 17px; background: #0d0c0b; color: var(--text); padding: 20px; line-height: 1.55; outline: none; }
