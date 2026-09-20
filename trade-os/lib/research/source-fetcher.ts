@@ -2,11 +2,25 @@ import dns from "node:dns/promises";
 import net from "node:net";
 import { Agent } from "undici";
 import * as cheerio from "cheerio";
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const pdfParse = require("pdf-parse");
+import { PDFParse } from "pdf-parse";
 
 const HTML_LIMIT = 2 * 1024 * 1024;
 const PDF_LIMIT = 15 * 1024 * 1024;
+
+export async function extractPdfText(data: Buffer, timeoutMs = 5000): Promise<string> {
+  const parser = new PDFParse({ data });
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    const result = await Promise.race([
+      parser.getText({ first: 10 }),
+      new Promise<never>((_, reject) => { timer = setTimeout(() => reject(new Error("PDF_TIMEOUT")), timeoutMs); }),
+    ]);
+    return result.text.trim();
+  } finally {
+    if (timer) clearTimeout(timer);
+    await parser.destroy();
+  }
+}
 
 function publicAddress(address: string): boolean {
   const ip = address.split("%")[0].toLowerCase();
@@ -114,8 +128,7 @@ export class SourceFetcher {
         if (pdf) {
           const data = await limitedBody(response, PDF_LIMIT);
           try {
-            const parsed = await pdfParse(data);
-            const text = String(parsed.text || "").trim();
+            const text = await extractPdfText(data);
             return { isLive: true, title: text.length >= 20 ? "[PDF Document]" : "[Scanned PDF]",
               text: text.length >= 20 ? text.slice(0, 10000) : "", type: "PDF" as const, pdfLinks: [],
               status: response.status, finalUrl: url, contentType, fetchedAt };

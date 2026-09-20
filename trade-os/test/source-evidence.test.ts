@@ -1,7 +1,8 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import dns from "node:dns/promises";
 import { createServer } from "node:http";
-import { SourceFetcher, safeConnectionLookup } from "../lib/research/source-fetcher";
+import { PDFParse } from "pdf-parse";
+import { SourceFetcher, extractPdfText, safeConnectionLookup } from "../lib/research/source-fetcher";
 import { extractEvidence } from "../lib/research/evidence-extractor";
 import type { ParsedIntent } from "../lib/research/intent-parser";
 import type { ResearchFinding } from "../lib/research/types";
@@ -9,6 +10,36 @@ import type { ResearchFinding } from "../lib/research/types";
 afterEach(() => vi.restoreAllMocks());
 
 describe("source boundaries", () => {
+  function textPdf(message: string): Buffer {
+    const stream = `BT /F1 16 Tf 40 150 Td (${message}) Tj ET`;
+    const objects = [
+      "<< /Type /Catalog /Pages 2 0 R >>",
+      "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+      "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 300 200] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>",
+      "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
+      `<< /Length ${Buffer.byteLength(stream)} >>\nstream\n${stream}\nendstream`,
+    ];
+    let pdf = "%PDF-1.4\n";
+    const offsets = [0];
+    objects.forEach((object, index) => { offsets.push(Buffer.byteLength(pdf)); pdf += `${index + 1} 0 obj\n${object}\nendobj\n`; });
+    const xref = Buffer.byteLength(pdf);
+    pdf += `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`;
+    offsets.slice(1).forEach((offset) => { pdf += `${String(offset).padStart(10, "0")} 00000 n \n`; });
+    pdf += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;
+    return Buffer.from(pdf, "ascii");
+  }
+
+  it("extracts text from a real minimal PDF and releases the parser", async () => {
+    const destroy = vi.spyOn(PDFParse.prototype, "destroy");
+    const pdf = textPdf("L-Threonine Feed Grade");
+    expect(await extractPdfText(pdf)).toContain("L-Threonine Feed Grade");
+    expect(destroy).toHaveBeenCalled();
+  });
+
+  it("reports malformed PDFs without leaking parser errors", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response("not a PDF", { headers: { "content-type": "application/pdf" } }));
+    expect((await SourceFetcher.fetch("https://8.8.8.8/file.pdf")).error).toBe("UNREADABLE_PDF");
+  });
   it.each(["127.0.0.1", "169.254.169.254", "fd00::1"])("rejects connection-time DNS rebinding to %s", async (rebound) => {
     const lookup = vi.spyOn(dns, "lookup").mockImplementationOnce(async () => [{ address: "8.8.8.8", family: 4 }] as never)
       .mockImplementationOnce(async () => [{ address: rebound, family: rebound.includes(":") ? 6 : 4 }] as never);
