@@ -149,10 +149,3 @@ export default function ResearchClient({ name, firstName }: { name: string; firs
     </>}
   </>;
 }
-
-
-
-
-
-
-

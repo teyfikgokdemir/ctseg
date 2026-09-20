@@ -105,5 +105,3 @@ export default async function CasesPage() {
     </main>
   );
 }
-
-

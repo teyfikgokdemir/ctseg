@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   color-scheme: dark;
   --bg: #0c0b0a;
   --panel: #151311;
@@ -436,35 +436,31 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(18, 15, 13, 0.6);
-  border: 1px solid rgba(255, 107, 74, 0.12);
-  border-radius: 999px;
-  padding: 8px 24px;
 }
 
 .header-greeting {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--text);
-  font-size: 14px;
+  color: #fffaf0;
+  font-size: 13.5px;
   font-weight: 500;
   white-space: nowrap;
 }
 
 .status-dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 8px rgba(255, 107, 74, 0.4);
+  box-shadow: 0 0 6px rgba(255, 107, 74, 0.35);
 }
 
 .header-greeting-sub {
   margin-top: 2px;
-  color: var(--muted);
-  font-size: 10px;
-  letter-spacing: .05em;
+  color: #8c8177;
+  font-size: 9.5px;
+  letter-spacing: .08em;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -506,24 +502,24 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
 .user-pill {
   display: flex;
   align-items: center;
-  gap: 12px;
-  background: #151311;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
-  padding: 4px 16px 4px 4px;
+  gap: 10px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 4px 12px 4px 4px;
 }
 
 .user-monogram {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: #231b17;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  background: #191614;
   color: var(--text);
-  border: 1px solid rgba(255, 107, 74, 0.3);
+  border: 1px solid rgba(255, 107, 74, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: .05em;
 }
@@ -544,11 +540,11 @@ h1 { margin: 10px 0 14px; max-width: 950px; font-size: clamp(42px, 6vw, 82px); l
 
 .user-role {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 8px;
   letter-spacing: .1em;
   text-transform: uppercase;
   margin-top: 1px;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 /* Responsive Overrides */

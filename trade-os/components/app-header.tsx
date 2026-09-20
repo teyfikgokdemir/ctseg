@@ -10,7 +10,7 @@ export default async function AppHeader() {
   const role = user.role || "MANAGER";
 
   const nameParts = user.name.split(" ").filter(Boolean);
-  const monogram = nameParts.length >= 2 
+  const monogram = nameParts.length >= 2
     ? (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase()
     : nameParts[0].substring(0, 2).toUpperCase();
 
