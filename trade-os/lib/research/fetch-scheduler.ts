@@ -43,8 +43,9 @@ export class FetchScheduler {
     return false;
   }
 
-  async processNextBatch(): Promise<boolean> {
-    const promises: Promise<void>[] = [];
+  async processNextBatch(): Promise<{ attempted: number; completed: number; failed: number }> {
+    const promises: Promise<boolean>[] = [];
+    let attemptedCount = 0;
     
     while (this.activeFetches < this.globalConcurrency && this.queue.length > 0) {
       let selectedIndex = -1;
@@ -69,13 +70,16 @@ export class FetchScheduler {
       this.activeFetches++;
       this.domainActive.set(domain, (this.domainActive.get(domain) || 0) + 1);
       this.domainFetches.set(domain, (this.domainFetches.get(domain) || 0) + 1);
+      attemptedCount++;
 
       const p = (async () => {
         try {
           const content = await SourceFetcher.fetch(item.finding.url);
           await this.onFetchComplete(item.finding, content);
+          return true;
         } catch (e) {
           console.error("Fetch failed", e);
+          return false;
         } finally {
           this.activeFetches--;
           this.domainActive.set(domain, (this.domainActive.get(domain) || 0) - 1);
@@ -86,9 +90,10 @@ export class FetchScheduler {
     }
 
     if (promises.length > 0) {
-      await Promise.all(promises);
-      return true;
+      const results = await Promise.all(promises);
+      const completed = results.filter(r => r).length;
+      return { attempted: attemptedCount, completed, failed: attemptedCount - completed };
     }
-    return false;
+    return { attempted: 0, completed: 0, failed: 0 };
   }
 }

@@ -91,8 +91,8 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
     let didFetch = false;
     while (scheduler.canScheduleNext() && totalFetches < MAX_FETCHES && (Date.now() - startTime) < TIME_BUDGET_MS) {
       const processed = await scheduler.processNextBatch();
-      if (processed) {
-        totalFetches += 4; // Approx batch size
+      if (processed.attempted > 0) {
+        totalFetches += processed.attempted;
         didFetch = true;
       } else {
         break;
