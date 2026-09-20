@@ -60,7 +60,7 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
     
     // Pick queries to run this iteration
         let stage = "LOCAL";
-    let pendingLocal = queriesToRun.filter(q => !executedQueryStrings.has(q.query) && (q.language === "tr" || q.intent.includes("turkey") || q.intent.includes("türkiye")));
+    const pendingLocal = queriesToRun.filter(q => !executedQueryStrings.has(q.query) && (q.language === "tr" || q.intent.includes("turkey") || q.intent.includes("türkiye")));
     if (pendingLocal.length === 0 && !scheduler.hasPending()) {
       stage = "GLOBAL";
     }
