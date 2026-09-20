@@ -59,7 +59,17 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
     if (timeElapsed > TIME_BUDGET_MS) { stopReason = "TIME_BUDGET"; break; }
     
     // Pick queries to run this iteration
-    const currentQueries = queriesToRun.filter(q => !executedQueryStrings.has(q.query)).slice(0, 5); // take up to 5 at a time
+        let stage = "LOCAL";
+    let pendingLocal = queriesToRun.filter(q => !executedQueryStrings.has(q.query) && (q.language === "tr" || q.intent.includes("turkey") || q.intent.includes("türkiye")));
+    if (pendingLocal.length === 0 && !scheduler.hasPending()) {
+      stage = "GLOBAL";
+    }
+    
+    let currentQueries = queriesToRun.filter(q => !executedQueryStrings.has(q.query));
+    if (stage === "LOCAL") {
+      currentQueries = pendingLocal;
+    }
+    currentQueries = currentQueries.slice(0, 5);
     if (currentQueries.length === 0 && !scheduler.hasPending()) { stopReason = "SATURATED"; break; } // no more work
     
     if (currentQueries.length > 0) {

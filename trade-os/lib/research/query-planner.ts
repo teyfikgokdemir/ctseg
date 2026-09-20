@@ -39,9 +39,12 @@ export function planResearchQueries(request: ResearchRequest): FamilyQuery[] {
     planned.push({ query: query.replace(/\s+/g, " ").trim(), language, intent, priority: priority--, family });
 
   if (request.type === "SOURCING") {
-    // 1. Exact
+    // 1. Exact & Variants
     push(`"${subject}"`, "en", "global-exact", "PRODUCT_EXACT");
     if (request.grade) push(`"${subject}" "${request.grade}"`, "en", "global-exact-grade", "PRODUCT_EXACT");
+    for (let i = 0; i < Math.min(variants.length, 2); i++) {
+      if (variants[i] !== subject) push(`"${variants[i]}"`, "en", `global-variant-${i}`, "PRODUCT_EXACT");
+    }
 
     // 2. Commercial & Geo
     for (const market of sourceMarkets(request)) {
