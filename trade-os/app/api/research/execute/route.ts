@@ -34,7 +34,8 @@ export async function POST(request: NextRequest) {
     const results: Array<{ type: ResearchCaseType; companies: CompanyCandidate[]; review: ResearchReview } & ResearchRun> = [];
     
     // Check clarification immediately on first task
-    const testRun = await runResearch({
+    const budgetTracker = { fetchesUsed: 0 };
+    const testRun = await runResearch({ budgetTracker,
       type: parsed.tasks[0], mode, rawRequest,
       product: parsed.tasks[0] === "LOGISTICS" ? undefined : parsed.normalizedProduct || undefined,
       aliases: parsed.aliases, grade: parsed.grade || undefined,
@@ -62,7 +63,7 @@ export async function POST(request: NextRequest) {
     // Actually run for all tasks (testRun was valid)
     for (const type of parsed.tasks) {
       const destination = parsed.destinations[0];
-      const run = type === parsed.tasks[0] ? testRun : await runResearch({ type, mode, rawRequest,
+      const run = type === parsed.tasks[0] ? testRun : await runResearch({ budgetTracker, type, mode, rawRequest,
         product: type === "LOGISTICS" ? undefined : parsed.normalizedProduct || undefined,
         aliases: parsed.aliases, grade: parsed.grade || undefined,
         sourceRegion: type === "SOURCING" ? parsed.preferredSourcingRegion || undefined : parsed.sourceCountry || undefined,

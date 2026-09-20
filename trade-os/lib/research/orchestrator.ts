@@ -83,7 +83,7 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
   
   let currentRound = 1;
   let currentQueries = planResearchQueries(request);
-  let totalFetchedCount = 0;
+  let totalFetchedCount = request.budgetTracker?.fetchesUsed || 0;
   
   const fetchedUrls = new Set<string>();
   const executedQueryStrings = new Set<string>();
@@ -112,6 +112,7 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
            const content = await SourceFetcher.fetch(finding.url, 5, 5000);
            finding.fetchedContent = content as ResearchFinding["fetchedContent"];
            totalFetchedCount++;
+           if (request.budgetTracker) request.budgetTracker.fetchesUsed = totalFetchedCount;
            
            // Extract with specific context
            extractEvidence(finding, parsedIntent);

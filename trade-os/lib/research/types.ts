@@ -44,6 +44,7 @@ export interface ResearchRequest {
   transportModes?: string[];
   languages?: string[];
   maxQueries?: number;
+  budgetTracker?: { fetchesUsed: number };
 }
 
 export interface ResearchRun {
