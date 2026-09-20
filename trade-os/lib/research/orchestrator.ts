@@ -23,10 +23,10 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
 
   // Safety caps
   const startTime = Date.now();
-  const TIME_BUDGET_MS = 60000; 
-  const MAX_QUERIES = 20;
-  const MAX_FETCHES = 30;
-  const MAX_CANDIDATES = 60;
+    const TIME_BUDGET_MS = Math.min(Math.max(parseInt(process.env.RESEARCH_MAX_WALL_MS || "65000"), 30000), 90000);
+  const MAX_QUERIES = Math.min(Math.max(parseInt(process.env.RESEARCH_MAX_QUERIES || "20"), 5), 50);
+  const MAX_FETCHES = Math.min(Math.max(parseInt(process.env.RESEARCH_MAX_FETCHES || "30"), 5), 100);
+  const MAX_CANDIDATES = Math.min(Math.max(parseInt(process.env.RESEARCH_MAX_CANDIDATES || "60"), 10), 150);
   
   const allFindings = new Map<string, ResearchFinding>();
   const allQueries: PlannedQuery[] = [];
@@ -70,6 +70,11 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
       currentQueries.forEach(q => executedQueryStrings.add(q.query));
       allQueries.push(...currentQueries);
       allDiagnostics.push(...searchRes.diagnostics);
+      
+      const allRateLimited = searchRes.diagnostics.length > 0 && searchRes.diagnostics.every(d => d.status === "RATE_LIMITED");
+      const allFailed = searchRes.diagnostics.length > 0 && searchRes.diagnostics.every(d => d.status === "ERROR");
+      if (allRateLimited) { stopReason = "RATE_LIMITED"; break; }
+      if (allFailed && allFindings.size === 0) { stopReason = "ERROR_LIMIT"; break; }
       
       let newFindingsCount = 0;
       for (const f of searchRes.findings) {
@@ -153,7 +158,16 @@ export async function runResearch(request: ResearchRequest): Promise<ResearchRun
     round++;
   }
 
-  if (request.budgetTracker) request.budgetTracker.fetchesUsed = totalFetches;
+    if (request.budgetTracker) request.budgetTracker.fetchesUsed = totalFetches;
+  
+  console.log("[RESEARCH_OBSERVE]", JSON.stringify({
+    type: request.type,
+    timeMs: Date.now() - startTime,
+    queries: totalQueries,
+    fetches: totalFetches,
+    candidates: candidateKeys.size,
+    stopReason: stopReason || "SATURATED"
+  }));
 
   return {
     request,
