@@ -39,7 +39,8 @@ export function resolveCompanies(findings: ResearchFinding[]): CompanyCandidate[
     }
     const mergeEvidence = (field: VerifiedField<unknown> | undefined) => {
       for (const evidence of field?.evidence || []) {
-        if (!candidate!.evidenceSources.some((item) => item.url === evidence.url && item.claimType === evidence.claimType)) {
+        if (!candidate!.evidenceSources.some((item) => item.url === evidence.url &&
+          item.claimType === evidence.claimType && item.status === evidence.status)) {
           candidate!.evidenceSources.push(evidence);
         }
       }
@@ -49,15 +50,14 @@ export function resolveCompanies(findings: ResearchFinding[]): CompanyCandidate[
     candidate.negativeSignals = [...new Set([...(candidate.negativeSignals || []), ...(finding.negativeSignals || [])])];
     candidate.freshnessScore = Math.max(candidate.freshnessScore, finding.freshnessScore || 0);
     candidate.relevanceScore = Math.max(candidate.relevanceScore, finding.relevanceScore || 0);
-    if (finding.role?.state === "CONFIRMED") candidate.role = finding.role;
+    if (finding.role?.state === "CONFIRMED" && candidate.role.state !== "CONTRADICTED") candidate.role = finding.role;
     if (finding.role?.state === "CONTRADICTED") candidate.role = finding.role;
     if (finding.productConfirmed?.state === "CONFIRMED") candidate.productConfirmed = finding.productConfirmed;
     if (finding.gradeConfirmed?.state === "CONFIRMED") candidate.gradeConfirmed = finding.gradeConfirmed;
     if (finding.contactEmail?.state === "CONFIRMED") candidate.contactEmail = finding.contactEmail;
     if (finding.contactPhone?.state === "CONFIRMED") candidate.contactPhone = finding.contactPhone;
     if (finding.country?.state === "CONFIRMED") candidate.country = finding.country;
-    let level: VerificationLevel = candidate.verificationLevel;
-    if (finding.fetchedContent?.isLive && level === "DISCOVERED") level = "SOURCE_FETCHED";
+    let level: VerificationLevel = candidate.verificationLevel !== "DISCOVERED" || finding.fetchedContent?.isLive ? "SOURCE_FETCHED" : "DISCOVERED";
     if (candidate.productConfirmed.state === "CONFIRMED") level = "PRODUCT_CONFIRMED";
     if (candidate.role.state === "CONFIRMED" && level === "PRODUCT_CONFIRMED") level = "ROLE_CONFIRMED";
     candidate.verificationLevel = level;

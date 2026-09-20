@@ -43,4 +43,17 @@ describe("company identity", () => {
     const later = finding("https://supplier.co.uk/about", "Supplier Ltd");
     expect(resolveCompanies([verified, later])[0].verificationLevel).toBe("ROLE_CONFIRMED");
   });
+  it.each(["confirmed-first", "contradicted-first"])("keeps a role contradiction above confirmation (%s)", (order) => {
+    const confirmed = finding("https://supplier.co.uk/product", "Supplier Ltd");
+    confirmed.fetchedContent = { isLive: true, text: "Supplier Ltd is a manufacturer of L-Threonine" };
+    confirmed.productConfirmed = { value: true, state: "CONFIRMED", evidence: [] };
+    confirmed.role = { value: "MANUFACTURER", state: "CONFIRMED", evidence: [] };
+    const contradicted = finding("https://supplier.co.uk/about", "Supplier Ltd");
+    contradicted.fetchedContent = { isLive: true, text: "Supplier Ltd is not a manufacturer" };
+    contradicted.role = { value: "MANUFACTURER", state: "CONTRADICTED", evidence: [] };
+    const company = resolveCompanies(order === "confirmed-first" ? [confirmed, contradicted] : [contradicted, confirmed])[0];
+    expect(company.role.state).toBe("CONTRADICTED");
+    expect(company.productConfirmed.state).toBe("CONFIRMED");
+    expect(company.verificationLevel).toBe("PRODUCT_CONFIRMED");
+  });
 });
