@@ -24,12 +24,12 @@ describe('Global Fetch Budget', () => {
   it('QUICK cannot fetch > 5 and DEEP cannot fetch > 15', async () => {
     // QUICK limit
     const quickReq = { rawRequest: 'test', type: 'SOURCING', mode: 'QUICK', maxQueries: 12, budgetTracker: { fetchesUsed: 0 } };
-    const quickRun = await runResearch(quickReq as any);
+    await runResearch(quickReq as unknown as import('../lib/research/types').ResearchRequest);
     expect(quickReq.budgetTracker.fetchesUsed).toBeLessThanOrEqual(5);
 
     // DEEP limit
     const deepReq = { rawRequest: 'test', type: 'SOURCING', mode: 'DEEP', maxQueries: 12, budgetTracker: { fetchesUsed: 0 } };
-    const deepRun = await runResearch(deepReq as any);
+    await runResearch(deepReq as unknown as import('../lib/research/types').ResearchRequest);
     expect(deepReq.budgetTracker.fetchesUsed).toBeLessThanOrEqual(15);
   });
 });

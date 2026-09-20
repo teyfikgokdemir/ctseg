@@ -105,7 +105,12 @@ export interface ResearchFinding {
     headings?: string[];
     pdfLinks?: string[];
     isLive: boolean;
-    type?: "PDF" | "HTML";
+    type?: 'PDF' | 'HTML' | 'UNKNOWN';
+    status?: number | null;
+    finalUrl?: string;
+    contentType?: string | null;
+    fetchedAt?: string;
+    error?: string;
   };
   
   productConfirmed?: VerifiedField<boolean>;

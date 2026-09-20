@@ -6,7 +6,7 @@ import type { ResearchFinding, ResearchRequest, ResearchRun, PlannedQuery, Verif
 import type { AdapterDiagnostic } from "./types";
 
 function extractEvidence(finding: ResearchFinding, intent: Awaited<ReturnType<typeof parseIntent>>) {
-  if (!finding.fetchedContent || !finding.fetchedContent.isLive || !finding.fetchedContent.text) return;
+  if (!finding.fetchedContent || !finding.fetchedContent.isLive || !finding.fetchedContent.text || (finding.fetchedContent.status && finding.fetchedContent.status >= 400)) return;
   
   const text = finding.fetchedContent.text.toLowerCase();
   

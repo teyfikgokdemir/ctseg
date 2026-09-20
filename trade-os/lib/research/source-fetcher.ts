@@ -84,7 +84,7 @@ export class SourceFetcher {
         }
 
         if (response.status >= 400) {
-          return { isLive: false, error: "Status " + response.status, type: "UNKNOWN" };
+          return { isLive: false, error: 'Status ' + response.status, type: 'UNKNOWN', status: response.status, finalUrl: url, contentType: response.headers.get('content-type'), fetchedAt: new Date().toISOString() };
         }
 
         const contentType = response.headers.get("content-type") || "";
@@ -96,11 +96,11 @@ export class SourceFetcher {
             const pdfData = await pdfParse(Buffer.from(arrayBuffer));
             const text = pdfData.text.trim();
             if (!text || text.length < 20) {
-              return { isLive: true, title: "[Scanned PDF]", text: "UNREADABLE / NO_TEXT", type: "PDF", pdfLinks: [] };
+              return { isLive: true, title: '[Scanned PDF]', text: 'UNREADABLE / NO_TEXT', type: 'PDF', pdfLinks: [], status: response.status, finalUrl: url, contentType, fetchedAt: new Date().toISOString() };
             }
-            return { isLive: true, title: "[PDF Document]", text: text.slice(0, 10000), type: "PDF", pdfLinks: [] };
+            return { isLive: true, title: '[PDF Document]', text: text.slice(0, 10000), type: 'PDF', pdfLinks: [], status: response.status, finalUrl: url, contentType, fetchedAt: new Date().toISOString() };
           } catch {
-            return { isLive: true, title: "[Broken PDF]", text: "UNREADABLE / NO_TEXT", type: "PDF", pdfLinks: [] };
+            return { isLive: true, title: '[Broken PDF]', text: 'UNREADABLE / NO_TEXT', type: 'PDF', pdfLinks: [], status: response.status, finalUrl: url, contentType, fetchedAt: new Date().toISOString() };
           }
         }
 
@@ -125,14 +125,14 @@ export class SourceFetcher {
           }
         });
 
-        return { isLive: true, title, text: text.slice(0, 15000), type: "HTML", pdfLinks, headings };
+        return { isLive: true, title, text: text.slice(0, 15000), type: 'HTML', pdfLinks, headings, status: response.status, finalUrl: url, contentType: response.headers.get('content-type'), fetchedAt: new Date().toISOString() };
 
       } catch (e: unknown) {
         clearTimeout(id);
-        return { isLive: false, error: e instanceof Error ? e.message : String(e), type: "UNKNOWN" };
+        return { isLive: false, error: e instanceof Error ? e.message : String(e), type: 'UNKNOWN', status: null, finalUrl: url, contentType: null, fetchedAt: new Date().toISOString() };
       }
     }
     
-    return { isLive: false, error: "Too many redirects", type: "UNKNOWN" };
+    return { isLive: false, error: 'Too many redirects', type: 'UNKNOWN', status: null, finalUrl: url, contentType: null, fetchedAt: new Date().toISOString() };
   }
 }
