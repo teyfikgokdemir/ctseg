@@ -5,6 +5,7 @@ const dist = resolve('dist');
 const errors = [];
 const origin = 'https://ctseg.com.tr';
 const coreLocales = ['tr','en','de','it','ru','zh','vi'];
+const medicalLocales = ['tr','en','de','it','ru','fa','zh','vi','sq','mk','sr'];
 
 if (!existsSync(dist)) {
   console.error('dist/ not found. Run npm run build first.');
@@ -76,6 +77,13 @@ for (const file of htmlFiles) {
     if (!alternates['x-default']) errors.push(`${label}: missing x-default hreflang`);
     if (alternates[lang] !== canonical) errors.push(`${label}: self hreflang does not match canonical`);
   }
+  if (canonical.includes('/medical/reflex-disposable-gloves/')) {
+    const alternates = Object.fromEntries([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
+    for (const locale of medicalLocales) {
+      if (!alternates[locale]) errors.push(`${label}: medical hreflang ${locale} missing`);
+    }
+    if (!html.includes('MEDILEX') || !html.includes('REFLEX')) errors.push(`${label}: REFLEX / MEDILEX product identity markers missing`);
+  }
   for (const match of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)) {
     let href = match[1];
     if (href.startsWith(`${origin}/`)) href = new URL(href).pathname;
@@ -88,9 +96,11 @@ for (const file of htmlFiles) {
 for (const [canonical,page] of indexablePages) {
   const pathname = new URL(canonical).pathname;
   if (!internalLinkCounts.get(pathname)) errors.push(`${page.label}: orphaned canonical has no normal HTML internal link`);
-  if (page.lang === 'fa') continue;
   const alternates = Object.fromEntries([...page.html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
-  for (const locale of coreLocales.filter((code) => alternates[code])) {
+  const reciprocalLocales = canonical.includes('/medical/reflex-disposable-gloves/')
+    ? medicalLocales
+    : (page.lang === 'fa' ? [] : coreLocales.filter((code) => alternates[code]));
+  for (const locale of reciprocalLocales.filter((code) => alternates[code])) {
     const target = indexablePages.get(alternates[locale]);
     if (!target) {
       errors.push(`${page.label}: hreflang ${locale} target is not indexable`);
