@@ -306,6 +306,21 @@ const familyTitles: Record<string, { fam1: string; fam1Desc: string; fam2: strin
 
 const currentFamTitles = familyTitles[currentLang] || familyTitles.en;
 
+const portfolioIdentityCopy: Record<string, { title:string; text:string }> = {
+  tr:{title:'Ürün kimliği nasıl okunmalı?',text:'REFLEX bu sayfadaki ticari eldiven portföyünün üst tanımıdır. MEDILEX Healthy Touch ise portföy içinde listelenen muayene eldiveni ürün adıdır. Marka sahibi, üretici, teknik uygunluk, sertifika kapsamı, MOQ ve kapasite her ticari talepte ürün ve parti bazında ayrıca doğrulanır.'},
+  en:{title:'How to read the product identity',text:'REFLEX is the umbrella trade portfolio used on this page. MEDILEX Healthy Touch is the examination-glove product name listed within that portfolio. Brand ownership, manufacturer, technical compliance, certification scope, MOQ and capacity are verified separately for each commercial request and batch.'},
+  de:{title:'So ist die Produktidentität zu verstehen',text:'REFLEX ist die übergeordnete Handelsbezeichnung des auf dieser Seite dargestellten Handschuh-Portfolios. MEDILEX Healthy Touch ist die darin aufgeführte Produktbezeichnung für Untersuchungshandschuhe. Markeninhaber, Hersteller, technische Konformität, Zertifikatsumfang, MOQ und Kapazität werden je Anfrage und Charge separat geprüft.'},
+  it:{title:'Come leggere l’identità del prodotto',text:'REFLEX è la denominazione commerciale ombrello del portafoglio di guanti presentato in questa pagina. MEDILEX Healthy Touch è il nome del prodotto per guanti da esame incluso nel portafoglio. Proprietà del marchio, produttore, conformità tecnica, certificazioni, MOQ e capacità vengono verificati separatamente per ogni richiesta e lotto.'},
+  ru:{title:'Как понимать идентичность продукта',text:'REFLEX — общее торговое обозначение портфеля перчаток на этой странице. MEDILEX Healthy Touch — название позиции смотровых перчаток внутри этого портфеля. Владелец бренда, производитель, техническое соответствие, сертификаты, MOQ и мощности проверяются отдельно по каждому запросу и партии.'},
+  fa:{title:'هویت محصول چگونه خوانده شود؟',text:'REFLEX عنوان تجاری کلی سبد دستکش‌های این صفحه است. MEDILEX Healthy Touch نام محصول دستکش معاینه‌ای است که در این سبد فهرست شده است. مالکیت برند، تولیدکننده، انطباق فنی، دامنه گواهی‌ها، حداقل سفارش و ظرفیت برای هر درخواست و هر محموله جداگانه راستی‌آزمایی می‌شود.'},
+  zh:{title:'如何理解产品身份',text:'REFLEX 是本页面手套产品组合的上位商业名称；MEDILEX Healthy Touch 是该组合中列出的检查手套产品名称。品牌归属、实际生产商、技术符合性、证书范围、MOQ 与产能均按每次商业询盘及批次单独核验。'},
+  vi:{title:'Cách hiểu nhận diện sản phẩm',text:'REFLEX là tên thương mại bao quát cho danh mục găng tay trên trang này. MEDILEX Healthy Touch là tên sản phẩm găng tay khám được liệt kê trong danh mục. Chủ sở hữu thương hiệu, nhà sản xuất, mức độ phù hợp kỹ thuật, phạm vi chứng nhận, MOQ và công suất được xác minh riêng cho từng yêu cầu và từng lô.'},
+  sq:{title:'Si duhet lexuar identiteti i produktit',text:'REFLEX është emërtimi tregtar ombrellë i portofolit të dorezave në këtë faqe. MEDILEX Healthy Touch është emri i produktit të dorezave të ekzaminimit brenda këtij portofoli. Pronësia e markës, prodhuesi, përputhshmëria teknike, certifikatat, MOQ dhe kapaciteti verifikohen veçmas për çdo kërkesë dhe seri.'},
+  mk:{title:'Како да се чита идентитетот на производот',text:'REFLEX е чадор-трговската ознака за портфолиото на ракавици на оваа страница. MEDILEX Healthy Touch е името на производот за прегледни ракавици во рамките на портфолиото. Сопственоста на брендот, производителот, техничката усогласеност, сертификатите, MOQ и капацитетот се проверуваат одделно за секое барање и серија.'},
+  sr:{title:'Kako tumačiti identitet proizvoda',text:'REFLEX je krovni komercijalni naziv portfolija rukavica na ovoj stranici. MEDILEX Healthy Touch je naziv proizvoda za pregledne rukavice unutar tog portfolija. Vlasništvo nad brendom, proizvođač, tehnička usklađenost, sertifikati, MOQ i kapacitet proveravaju se zasebno za svaki upit i seriju.'}
+};
+const portfolioIdentity = portfolioIdentityCopy[currentLang] || portfolioIdentityCopy.en;
+
 const productFamilies = [
   {
     id: 'fam-exam',
@@ -489,6 +504,11 @@ const productFamilies = [
         </div>
         <p>{data.categoriesLead}</p>
       </div>
+
+      <aside class="reflex-product-identity" aria-label={portfolioIdentity.title}>
+        <strong>{portfolioIdentity.title}</strong>
+        <p>{portfolioIdentity.text}</p>
+      </aside>
 
       <div class="reflex-families-container">
         {productFamilies.map((fam) => {
@@ -817,8 +837,13 @@ const productFamilies = [
             </div>
 
             <div class="form-group commercial-field commercial-field--full">
-              <span><label for="rfq-notes">{data.formLabels.notes}</label></span>
-              <textarea id="rfq-notes" name="message" maxlength="2000" rows="4" placeholder={notesPlaceholder}></textarea>
+              <span><label for="rfq-requirements">{rfqExtra.documents}</label></span>
+              <input type="text" id="rfq-requirements" name="requirements" maxlength="500" placeholder="EN 455, ASTM D6319, COA, ISO 13485, packaging or other technical requirements" />
+            </div>
+
+            <div class="form-group commercial-field commercial-field--full">
+              <span><label for="rfq-notes">{data.formLabels.notes} *</label></span>
+              <textarea id="rfq-notes" name="message" maxlength="2000" rows="4" required placeholder={notesPlaceholder}></textarea>
             </div>
 
             <label class="reflex-rfq-privacy">
@@ -1245,6 +1270,16 @@ const productFamilies = [
   .reflex-categories-section {
     background-color: #111210;
   }
+
+  .reflex-product-identity {
+    margin: -18px 0 clamp(34px, 4vw, 52px);
+    padding: 18px 20px;
+    border: 1px solid rgba(196, 240, 0, 0.26);
+    border-inline-start: 3px solid #c4f000;
+    background: rgba(196, 240, 0, 0.045);
+  }
+  .reflex-product-identity strong { display:block; margin-bottom:7px; color:#c4f000; font-size:.78rem; font-weight:850; letter-spacing:.07em; text-transform:uppercase; }
+  .reflex-product-identity p { margin:0; max-width:86em; color:#c6c6be; font-size:.86rem; line-height:1.58; }
 
   .reflex-families-container {
     display: flex;
@@ -1997,27 +2032,38 @@ const productFamilies = [
       const pagePath = form.querySelector('[data-rfq-page-path]');
       const status = form.querySelector('[data-rfq-status]');
       const submit = form.querySelector('[type="submit"]');
-      const setDefaults = () => { if (started) started.value = String(Date.now()); if (pagePath) pagePath.value = location.pathname; };
+      const setDefaults = () => {
+        if (started && !started.value) started.value = String(Date.now());
+        if (pagePath) pagePath.value = location.pathname;
+      };
       setDefaults();
+      form.addEventListener('focusin', () => window.ctsegTrack?.('contact_form_start', { form_type:'medical_rfq', product_family:'reflex_gloves' }), { once:true });
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         setDefaults();
+        window.ctsegTrack?.('contact_form_submit_attempt', { form_type:'medical_rfq', product_family:'reflex_gloves' });
         if (submit) submit.disabled = true;
         if (status) { status.textContent = ''; status.className = 'reflex-rfq-status'; }
         try {
+          const payload = Object.fromEntries(new FormData(form).entries());
           const res = await fetch(form.action || '/api/contact', {
             method: 'POST',
-            body: new FormData(form),
-            headers: { 'Accept': 'application/json' }
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
           });
           const json = await res.json().catch(() => null);
           if (res.ok && json?.ok) {
             form.reset();
+            if (started) started.value = String(Date.now());
+            window.ctsegTrack?.('contact_form_success', { form_type:'medical_rfq', product_family:'reflex_gloves' });
+            window.ctsegTrack?.('generate_lead', { form_type:'medical_rfq', product_family:'reflex_gloves' });
             if (status) { status.textContent = success; status.classList.add('is-success'); }
           } else {
+            window.ctsegTrack?.('contact_form_error', { form_type:'medical_rfq', product_family:'reflex_gloves', error_code:json?.code || 'request_failed' });
             if (status) { status.textContent = json?.message || error; status.classList.add('is-error'); }
           }
         } catch {
+          window.ctsegTrack?.('contact_form_error', { form_type:'medical_rfq', product_family:'reflex_gloves', error_code:'network_error' });
           if (status) { status.textContent = error; status.classList.add('is-error'); }
         } finally {
           if (submit) submit.disabled = false;
