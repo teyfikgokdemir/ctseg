@@ -10,6 +10,7 @@ import { vietnamMarketEntryContent } from '../../data/vietnam-market-entry';
 import { vietnamTurkiyeContent } from '../../data/vietnam-turkiye';
 import { chinaMarketEntryContent } from '../../data/china-market-entry';
 import { chinaTurkiyeContent } from '../../data/china-turkiye';
+import { ukraineTurkiyeContent } from '../../data/ukraine-market';
 import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, tradeMatchingServiceSchema, type RouteRecord } from '../../lib/routes';
 
 export function getStaticPaths() {
@@ -120,6 +121,26 @@ if (record.key === 'china-market-entry' && chinaMarketEntryContent.zh) {
     '@context':'https://schema.org','@type':'ItemList',
     name:page.sectorsTitle,itemListOrder:'https://schema.org/ItemListOrderAscending',
     itemListElement:page.sectors.map((name,index)=>({'@type':'ListItem',position:index+1,name}))
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'FAQPage',
+    mainEntity:page.faq.map((item)=>({'@type':'Question',name:item.question,acceptedAnswer:{'@type':'Answer',text:item.answer}}))
+  });
+}
+if (record.key === 'ukraine-turkiye') {
+  const page=ukraineTurkiyeContent;
+  schemas.push({
+    '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#ukraine-turkiye-sourcing-service`,
+    url:canonicalFor(record),name:page.title,description:page.description,inLanguage:'tr',
+    serviceType:'Ukraine to Türkiye B2B sourcing and import coordination',
+    provider:{'@id':'https://ctseg.com.tr/#organization'},
+    areaServed:['Türkiye','Ukraine'],
+    audience:{'@type':'BusinessAudience',name:'Türkiye-based importers, food/feed buyers and industrial buyers'}
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'ItemList',
+    name:page.productsTitle,itemListOrder:'https://schema.org/ItemListOrderAscending',
+    itemListElement:page.products.map((name,index)=>({'@type':'ListItem',position:index+1,name}))
   });
   schemas.push({
     '@context':'https://schema.org','@type':'FAQPage',
