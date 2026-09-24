@@ -7,6 +7,8 @@ import { searchLandingIds, searchLandings, searchLandingPath } from '../data/sea
 import { iranTradeContent } from '../data/iran-trade';
 import { vietnamMarketEntryContent } from '../data/vietnam-market-entry';
 import { vietnamTurkiyeContent } from '../data/vietnam-turkiye';
+import { chinaMarketEntryContent } from '../data/china-market-entry';
+import { chinaTurkiyeContent } from '../data/china-turkiye';
 
 export type RouteRecord = {
   lang: Locale;
@@ -24,6 +26,8 @@ export function getRouteRecords(): RouteRecord[] {
     if (lang === 'tr' || lang === 'en' || lang === 'fa') records.push({lang,path:iranTradeContent[lang].slug,key:'iran-trade'});
     if (lang === 'vi' && vietnamMarketEntryContent.vi) records.push({lang,path:vietnamMarketEntryContent.vi.slug,key:'vietnam-market-entry'});
     if (lang === 'tr' && vietnamTurkiyeContent.tr) records.push({lang,path:vietnamTurkiyeContent.tr.slug,key:'vietnam-turkiye'});
+    if (lang === 'zh' && chinaMarketEntryContent.zh) records.push({lang,path:chinaMarketEntryContent.zh.slug,key:'china-market-entry'});
+    if (lang === 'tr' && chinaTurkiyeContent.tr) records.push({lang,path:chinaTurkiyeContent.tr.slug,key:'china-turkiye'});
     for (const id of searchLandingIds) records.push({
       lang,path:searchLandingPath(lang,id).replace(`/${lang}/`,'').replace(/^\//,'').replace(/\/$/,''),key:'search-landing',id
     });
@@ -88,6 +92,14 @@ export function getMeta(record: RouteRecord) {
   }
   if (key === 'vietnam-turkiye') {
     const page=vietnamTurkiyeContent.tr!;
+    return {title:`${page.title} | CTSEG`,description:page.description};
+  }
+  if (key === 'china-market-entry') {
+    const page=chinaMarketEntryContent.zh!;
+    return {title:`${page.title} | CTSEG`,description:page.description};
+  }
+  if (key === 'china-turkiye') {
+    const page=chinaTurkiyeContent.tr!;
     return {title:`${page.title} | CTSEG`,description:page.description};
   }
   if (key === 'search-landing' && id) {
