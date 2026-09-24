@@ -57,10 +57,10 @@ const alternateCodes = pageKey === 'medical'
   ? ['tr','en','de','it','ru','fa','zh','vi','sq','mk','sr']
   : (pageKey === 'home' && lang === 'fa'
     ? ['tr','en','fa']
-    : pageKey === 'home' && ['zh','vi'].includes(String(lang))
+    : pageKey === 'home' && ['de','it','ru','zh','vi'].includes(String(lang))
     ? [String(lang)]
     : pageKey === 'home'
-    ? ['tr','en','de','it','ru']
+    ? ['tr','en']
     : ['how-we-work','scenarios'].includes(pageKey)
     ? activeLocales
     : pageKey === 'iran-trade' ? ['tr','en','fa']
@@ -171,10 +171,10 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
     <main id="main">
       <slot />
-      {pageKey === 'home' && !['fa','zh','vi'].includes(String(lang)) && <TradeHouseStatement lang={lang as Locale} />}
-      {pageKey === 'home' && !['fa','zh','vi'].includes(String(lang)) && <TradeVideo lang={lang} />}
+      {pageKey === 'home' && !['de','it','ru','fa','zh','vi'].includes(String(lang)) && <TradeHouseStatement lang={lang as Locale} />}
+      {pageKey === 'home' && !['de','it','ru','fa','zh','vi'].includes(String(lang)) && <TradeVideo lang={lang} />}
     </main>
-    <SiteFooter lang={lang} />
+    <SiteFooter lang={lang} pageKey={pageKey} />
     {pageKey === 'home' && <FloatingActions lang={lang} />}
     <aside class="cookie-consent" data-cookie-consent hidden aria-label={t.cookieTitle}>
       <div><strong>{t.cookieTitle}</strong><p>{t.cookieCopy}</p><a href={cookieHref}>{t.details}</a></div>
