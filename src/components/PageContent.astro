@@ -31,6 +31,7 @@ import { vietnamMarketEntryContent } from '../data/vietnam-market-entry';
 import { vietnamTurkiyeContent } from '../data/vietnam-turkiye';
 import { chinaMarketEntryContent } from '../data/china-market-entry';
 import { chinaTurkiyeContent } from '../data/china-turkiye';
+import { ukraineTurkiyeContent } from '../data/ukraine-market';
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
@@ -44,6 +45,7 @@ const vietnamMarketEntry = vietnamMarketEntryContent.vi;
 const vietnamTurkiye = vietnamTurkiyeContent.tr;
 const chinaMarketEntry = chinaMarketEntryContent.zh;
 const chinaTurkiye = chinaTurkiyeContent.tr;
+const ukraineTurkiye = ukraineTurkiyeContent;
 const corporate = companyCopy[lang];
 const editorial = editorialCopy[lang];
 const completionHome = homeEnhancement[lang];
@@ -1070,6 +1072,38 @@ const verifiedLater = {
   </>
 )}
 
+{key === 'ukraine-turkiye' && ukraineTurkiye && (
+  <>
+    <PageHero lang={lang} eyebrow={ukraineTurkiye.eyebrow} title={ukraineTurkiye.title} lead={ukraineTurkiye.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
+    <section class="section"><div class="container content-grid">
+      <div class="prose">
+        <div class="content-block direct-answer">
+          <h2>{ukraineTurkiye.directAnswerTitle}</h2>
+          <p>{ukraineTurkiye.directAnswer}</p>
+        </div>
+        <div class="content-block">
+          <h2>{ukraineTurkiye.productsTitle}</h2>
+          <ol class="check-list">{ukraineTurkiye.products.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}</ol>
+        </div>
+        <div class="content-block origin-note">
+          <h2>{ukraineTurkiye.complianceTitle}</h2>
+          <p>{ukraineTurkiye.complianceText}</p>
+        </div>
+        <div class="content-block faq">
+          <h2>{t.faq}</h2>
+          {ukraineTurkiye.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+        </div>
+      </div>
+      <aside class="side-panel">
+        <p class="eyebrow">CTSEG · Ukraine → Türkiye</p>
+        <h2>{ukraineTurkiye.ctaTitle}</h2>
+        <p>{ukraineTurkiye.ctaText}</p>
+        <a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{ukraineTurkiye.ctaLabel}</a>
+      </aside>
+    </div></section>
+  </>
+)}
+
 {key === 'china-turkiye' && chinaTurkiye && (
   <>
     <PageHero lang={lang} eyebrow={chinaTurkiye.eyebrow} title={chinaTurkiye.title} lead={chinaTurkiye.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
@@ -1259,6 +1293,16 @@ const verifiedLater = {
           <p>{chinaMarketEntry.description}</p>
         </div>
         <a class="button button-secondary" href={`/zh/${chinaMarketEntry.slug}/`}>{t.readMore} →</a>
+      </div></section>
+    )}
+    {lang === 'tr' && ukraineTurkiye && (
+      <section class="section compact-link-section"><div class="container cta-statement">
+        <div>
+          <p class="eyebrow">{ukraineTurkiye.eyebrow}</p>
+          <h2>{ukraineTurkiye.title}</h2>
+          <p>{ukraineTurkiye.description}</p>
+        </div>
+        <a class="button button-secondary" href={`/tr/${ukraineTurkiye.slug}/`}>{t.readMore} →</a>
       </div></section>
     )}
     {lang === 'tr' && chinaTurkiye && (
