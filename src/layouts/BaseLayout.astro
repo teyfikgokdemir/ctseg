@@ -26,7 +26,12 @@ const {
   canonical?: string; schema?: any[] | any; noindex?: boolean;
 };
 const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
-const alternates = pageKey === 'search-landing' && pageId ? searchLandingAlternates(pageId) :
+const alternates = pageKey === 'home' && lang === 'fa' ? {
+  tr:`https://ctseg.com.tr/tr/${iranTradeContent.tr.slug}/`,
+  en:`https://ctseg.com.tr/en/${iranTradeContent.en.slug}/`,
+  fa:'https://ctseg.com.tr/fa/'
+} as Record<string,string> :
+  pageKey === 'search-landing' && pageId ? searchLandingAlternates(pageId) :
   pageKey === 'vietnam-market-entry' && vietnamMarketEntryContent.vi ? {
     vi:`https://ctseg.com.tr/vi/${vietnamMarketEntryContent.vi.slug}/`
   } as Record<string,string> :
@@ -50,7 +55,9 @@ const alternates = pageKey === 'search-landing' && pageId ? searchLandingAlterna
 if (pageKey === 'home') alternates.ru = 'https://ctseg.com.tr/ru/';
 const alternateCodes = pageKey === 'medical'
   ? ['tr','en','de','it','ru','fa','zh','vi','sq','mk','sr']
-  : (pageKey === 'home' && ['fa','zh','vi'].includes(String(lang))
+  : (pageKey === 'home' && lang === 'fa'
+    ? ['tr','en','fa']
+    : pageKey === 'home' && ['zh','vi'].includes(String(lang))
     ? [String(lang)]
     : pageKey === 'home'
     ? ['tr','en','de','it','ru']
