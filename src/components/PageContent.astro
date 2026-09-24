@@ -35,6 +35,7 @@ import { ukraineTurkiyeContent } from '../data/ukraine-market';
 import { regionalIntentHomes } from '../data/regional-intent-homes';
 import { tradeDeskCopy } from '../data/trade-desk';
 import { termsOfUseCopy } from '../data/legal';
+import { syriaMarketContent } from '../data/syria-market';
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
@@ -49,6 +50,7 @@ const vietnamTurkiye = vietnamTurkiyeContent.tr;
 const chinaMarketEntry = chinaMarketEntryContent.zh;
 const chinaTurkiye = chinaTurkiyeContent.tr;
 const ukraineTurkiye = ukraineTurkiyeContent;
+const syriaMarket = (lang === 'tr' || lang === 'en') ? syriaMarketContent[lang] : null;
 const regionalIntentHome = (['de','it','ru'].includes(lang) ? regionalIntentHomes[lang as 'de'|'it'|'ru'] : null);
 const tradeDesk = tradeDeskCopy[lang as keyof typeof tradeDeskCopy];
 const corporate = companyCopy[lang];
@@ -1405,6 +1407,57 @@ const verifiedLater = {
   </>
 )}
 
+{key === 'syria-market' && syriaMarket && (
+  <>
+    <PageHero lang={lang} eyebrow={syriaMarket.eyebrow} title={syriaMarket.title} lead={syriaMarket.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
+    <section class="section"><div class="container content-grid">
+      <div class="prose">
+        <div class="content-block direct-answer">
+          <h2>{syriaMarket.directAnswerTitle}</h2>
+          <p>{syriaMarket.directAnswer}</p>
+        </div>
+        <div class="content-block">
+          <h2>{syriaMarket.buyerTitle}</h2>
+          <p>{syriaMarket.buyerText}</p>
+          <a class="button" href={lang === 'tr' ? '/tr/iletisim/?intent=buyer_request&support=supplier_sourcing&direction=cross_border_sourcing#commercial-form' : '/en/contact/?intent=buyer_request&support=supplier_sourcing&direction=cross_border_sourcing#commercial-form'} data-contact-intent="buyer_request">{syriaMarket.buyerCta}</a>
+        </div>
+        <div class="content-block">
+          <h2>{syriaMarket.sellerTitle}</h2>
+          <p>{syriaMarket.sellerText}</p>
+          <a class="button button-secondary" href={lang === 'tr' ? '/tr/iletisim/?intent=supplier_market_entry&support=market_entry&direction=market_entry#commercial-form' : '/en/contact/?intent=supplier_market_entry&support=market_entry&direction=market_entry#commercial-form'} data-contact-intent="supplier_market_entry">{syriaMarket.sellerCta}</a>
+        </div>
+        <div class="content-block">
+          <h2>{syriaMarket.sectorsTitle}</h2>
+          <p>{syriaMarket.sectorsLead}</p>
+          <ul class="check-list">{syriaMarket.sectors.map((item)=><li>{item}</li>)}</ul>
+        </div>
+        <div class="content-block">
+          <h2>{syriaMarket.processTitle}</h2>
+          <ol class="check-list">{syriaMarket.process.map((item)=><li>{item}</li>)}</ol>
+        </div>
+        <div class="content-block origin-note">
+          <h2>{syriaMarket.complianceTitle}</h2>
+          <p>{syriaMarket.complianceText}</p>
+        </div>
+        <div class="content-block">
+          <h2>{syriaMarket.boundariesTitle}</h2>
+          <ul class="check-list">{syriaMarket.boundaries.map((item)=><li>{item}</li>)}</ul>
+        </div>
+        <div class="content-block faq">
+          <h2>{t.faq}</h2>
+          {syriaMarket.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+        </div>
+      </div>
+      <aside class="side-panel">
+        <p class="eyebrow">CTSEG · Türkiye ⇄ Syria</p>
+        <h2>{syriaMarket.buyerTitle}</h2>
+        <p>{syriaMarket.buyerText}</p>
+        <a class="button" href={lang === 'tr' ? '/tr/iletisim/?intent=buyer_request&support=supplier_sourcing&direction=cross_border_sourcing#commercial-form' : '/en/contact/?intent=buyer_request&support=supplier_sourcing&direction=cross_border_sourcing#commercial-form'} data-contact-intent="buyer_request">{syriaMarket.buyerCta}</a>
+      </aside>
+    </div></section>
+  </>
+)}
+
 {key === 'iran-trade' && (
   <>
     <PageHero lang={lang} eyebrow={iranTrade.eyebrow} title={iranTrade.title} lead={iranTrade.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
@@ -1502,6 +1555,16 @@ const verifiedLater = {
           <p>{vietnamMarketEntry.description}</p>
         </div>
         <a class="button button-secondary" href="/vi/">{t.readMore} →</a>
+      </div></section>
+    )}
+    {(lang === 'tr' || lang === 'en') && syriaMarket && (
+      <section class="section compact-link-section"><div class="container cta-statement">
+        <div>
+          <p class="eyebrow">{syriaMarket.eyebrow}</p>
+          <h2>{syriaMarket.title}</h2>
+          <p>{syriaMarket.description}</p>
+        </div>
+        <a class="button button-secondary" href={localizedPath(lang,'syria-market')}>{t.readMore} →</a>
       </div></section>
     )}
     {(lang === 'tr' || lang === 'en' || lang === 'fa') && (
