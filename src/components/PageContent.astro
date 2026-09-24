@@ -34,6 +34,7 @@ import { chinaTurkiyeContent } from '../data/china-turkiye';
 import { ukraineTurkiyeContent } from '../data/ukraine-market';
 import { regionalIntentHomes } from '../data/regional-intent-homes';
 import { tradeDeskCopy } from '../data/trade-desk';
+import { termsOfUseCopy } from '../data/legal';
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
@@ -1866,9 +1867,12 @@ const verifiedLater = {
   </>
 )}
 
-{legalPage && (
-  <>
-    <PageHero lang={lang} eyebrow={`CTSEG · ${legalLabel}`} title={legalPage.titles[lang]} lead={copy.legalIntro} />
-    <section class="section"><article class="container prose"><p class="eyebrow">{t.updated}: {updatedDate}</p>{copy.legalSections.map((section:string[]) => <section class="content-block"><h2>{section[0]}</h2><p>{section[1]}</p></section>)}</article></section>
-  </>
-)}
+{legalPage && (() => {
+  const legalCopy = id === 'terms' ? termsOfUseCopy[lang] : { intro: copy.legalIntro, sections: copy.legalSections };
+  return (
+    <>
+      <PageHero lang={lang} eyebrow={`CTSEG · ${legalLabel}`} title={legalPage.titles[lang]} lead={legalCopy.intro} />
+      <section class="section"><article class="container prose"><p class="eyebrow">{t.updated}: {updatedDate}</p>{legalCopy.sections.map((section:string[]) => <section class="content-block"><h2>{section[0]}</h2><p>{section[1]}</p></section>)}</article></section>
+    </>
+  );
+})()}
