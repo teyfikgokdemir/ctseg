@@ -22,10 +22,11 @@ const isPlainObject = (value) => Boolean(value) && typeof value === 'object' && 
 const withRateLimitQueue = async (key,task) => {
   const previous=rateLimitQueues.get(key)||Promise.resolve();
   let release;
-  const current=new Promise((resolve)=>{release=resolve});
-  rateLimitQueues.set(key,previous.then(()=>current));
+  const gate=new Promise((resolve)=>{release=resolve});
+  const tail=previous.then(()=>gate);
+  rateLimitQueues.set(key,tail);
   await previous;
-  try{return await task()}finally{release();if(rateLimitQueues.get(key)===current)rateLimitQueues.delete(key)}
+  try{return await task()}finally{release();if(rateLimitQueues.get(key)===tail)rateLimitQueues.delete(key)}
 };
 const hash = async (value) => {
   const bytes = new TextEncoder().encode(value);
