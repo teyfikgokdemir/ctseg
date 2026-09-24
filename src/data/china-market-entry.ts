@@ -1,0 +1,85 @@
+import type { Locale } from './site';
+
+export type ChinaMarketEntryCopy = {
+  slug:string;
+  eyebrow:string;
+  title:string;
+  description:string;
+  directAnswerTitle:string;
+  directAnswer:string;
+  sectorsTitle:string;
+  sectorsLead:string;
+  sectors:string[];
+  supportTitle:string;
+  supportLead:string;
+  support:string[];
+  complianceTitle:string;
+  complianceText:string;
+  processTitle:string;
+  process:string[];
+  faq:{question:string;answer:string}[];
+  ctaTitle:string;
+  ctaText:string;
+  ctaLabel:string;
+};
+
+export const chinaMarketEntryContent: Partial<Record<Locale,ChinaMarketEntryCopy>> = {
+  zh:{
+    slug:'zhongguo-qiye-jinru-tuerqi-he-ouzhou-shichang',
+    eyebrow:'中国 → 土耳其与欧洲市场',
+    title:'帮助中国制造商和出口企业进入土耳其及欧洲B2B市场',
+    description:'CTSEG面向希望拓展土耳其及欧洲市场的中国制造商、OEM/ODM工厂、品牌方和出口企业，提供市场适配评估、进口商与经销商渠道对接、RFQ协调、样品与商务资料准备以及市场准入审查。',
+    directAnswerTitle:'CTSEG如何帮助中国企业开发土耳其和欧洲市场？',
+    directAnswer:'CTSEG以独立B2B贸易协调方的身份，帮助中国制造商和出口企业评估其产品在土耳其及适合的欧洲市场中的商业可行性，并与进口商、经销商、项目采购方和专业B2B买家建立联系。我们重点关注产品定位、技术规格、价格竞争力、MOQ、交付能力、认证与合规资料以及目标市场的真实采购需求，而不是简单提供买家名单。',
+    sectorsTitle:'优先评估的中国制造与出口品类',
+    sectorsLead:'优先选择技术优势明确、供应能力稳定、文件完整并具备持续B2B采购潜力的产品。',
+    sectors:[
+      '工业机械及生产线设备',
+      '包装、灌装与贴标设备',
+      '食品加工机械与配套设备',
+      '工业自动化与工厂周边设备',
+      '泵、阀门、过滤器及流体控制部件',
+      '轴承、减速机、密封件与机械传动部件',
+      '低压电气设备、工业开关及配电组件',
+      '工业电缆、连接器及线束产品',
+      'HVAC、通风及商用机电设备',
+      '商业照明及项目型照明产品',
+      '电子零部件与OEM组件',
+      '包装材料与包装工业配套产品',
+      '家具、家居用品与工程配套产品',
+      '建筑五金及部分工程材料',
+      'OEM/ODM及自有品牌消费品',
+      '符合目标市场要求的其他工业与商业产品'
+    ],
+    supportTitle:'CTSEG为中国制造商和出口企业提供的支持',
+    supportLead:'重点是把产品和工厂能力整理成土耳其及欧洲专业买家可以快速评估的商业资料，并推动真实RFQ。',
+    support:[
+      '评估产品在土耳其及目标欧洲市场的适配度',
+      '识别进口商、经销商、项目采购方和B2B买家类型',
+      '梳理产品规格、MOQ、产能、报价和Incoterms',
+      '协调RFQ、样品、技术沟通和商务报价',
+      '审查标签、包装、认证及进口所需文件',
+      '对土耳其市场准入、反倾销及贸易救济风险进行初步筛查',
+      '在资料和产品适配后推进买家沟通与合作机会'
+    ],
+    complianceTitle:'进入土耳其及欧洲市场前先做准入与贸易措施审查',
+    complianceText:'中国制造商进入土耳其或欧洲市场时，需要根据产品HS编码、原产地、技术标准、认证、标签、进口许可、反倾销措施、保障措施及其他贸易救济要求进行逐项核查。汽车、电池、光伏、化工、钢铁、纺织及部分工业品类可能存在额外限制或监管要求。CTSEG不会将任何品类默认视为可自由进入市场，只有在商业路径和合规路径均可执行时才推进下一步。',
+    processTitle:'中国企业市场进入评估流程',
+    process:[
+      '提交公司资料、官网、产品目录及重点出口产品',
+      '提供技术规格、MOQ、月产能、目标价格、Incoterms和现有认证',
+      'CTSEG评估产品与土耳其或目标欧洲市场的匹配度',
+      '核查必要文件、标签、认证和潜在贸易措施',
+      '资料和产品匹配后，按具体项目推进RFQ及买家对接'
+    ],
+    faq:[
+      {question:'CTSEG是否直接采购中国企业的产品？',answer:'不一定。CTSEG主要作为独立B2B贸易协调与市场进入服务方，根据具体项目连接合适的进口商、经销商、项目采购方或专业买家。'},
+      {question:'哪些中国企业更适合申请市场评估？',answer:'具有稳定产能、清晰技术规格、可验证认证、明确MOQ和出口报价，并愿意配合样品、文件及买家沟通的制造商和出口企业更适合。'},
+      {question:'CTSEG能否保证订单？',answer:'不能。订单取决于产品竞争力、价格、文件、认证、交付能力以及与目标市场真实采购需求的匹配程度。'},
+      {question:'土耳其和欧洲可以同时评估吗？',answer:'可以，但两类市场会分别审查。相同产品在土耳其和欧盟可能面临不同的关税、认证、标签、贸易救济及进口要求。'}
+    ],
+    ctaTitle:'向CTSEG提交您的中国制造产品',
+    ctaText:'请发送公司资料、官网、产品目录、技术规格、MOQ、产能、现有认证、目标市场和出口报价。CTSEG将先评估产品进入土耳其及适合的欧洲市场的商业与合规可行性。',
+    ctaLabel:'提交出口合作资料'
+  }
+};
