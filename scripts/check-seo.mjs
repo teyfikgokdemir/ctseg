@@ -145,6 +145,7 @@ const requiredRedirects = {
   '/tr':'/',
   '/tr/':'/',
   '/sitemap.xml':'/sitemap-index.xml',
+  '/en/solutions/':'/en/services/',
   '/en/services/supplier-sourcing-verification/':'/en/services/supplier-sourcing-and-verification/',
   '/en/blog/supply-chain-risk-management/':'/en/insights/supply-chain-risk-management/',
   '/en/blog/total-cost-of-ownership-procurement/':'/en/insights/total-cost-of-ownership/',
