@@ -12,6 +12,7 @@ import { FEATURE_IMAGE_WIDTHS, generatedImageSrc, generatedImageSrcset } from '.
 import { localizedTradeVisual } from '../data/trade-visuals';
 import { searchLandingAlternates } from '../data/search-landings';
 import { iranTradeContent } from '../data/iran-trade';
+import { vietnamMarketEntryContent } from '../data/vietnam-market-entry';
 
 const {
   lang='tr', title, description, pageKey='home', pageId, canonical,
@@ -22,6 +23,9 @@ const {
 };
 const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
 const alternates = pageKey === 'search-landing' && pageId ? searchLandingAlternates(pageId) :
+  pageKey === 'vietnam-market-entry' && vietnamMarketEntryContent.vi ? {
+    vi:`https://ctseg.com.tr/vi/${vietnamMarketEntryContent.vi.slug}/`
+  } as Record<string,string> :
   pageKey === 'iran-trade' ? {
     tr:`https://ctseg.com.tr/tr/${iranTradeContent.tr.slug}/`,
     en:`https://ctseg.com.tr/en/${iranTradeContent.en.slug}/`,
@@ -36,6 +40,7 @@ const alternateCodes = pageKey === 'medical'
   : (pageKey === 'home' || ['how-we-work','scenarios'].includes(pageKey)
     ? activeLocales
     : pageKey === 'iran-trade' ? ['tr','en','fa']
+    : pageKey === 'vietnam-market-entry' ? ['vi']
     : pageKey === 'guides' ? ['tr','en'] : locales);
 const organizationDescription = ({
   tr:'CTSEG, Türkiye merkezli iki yönlü küresel ticaret, stratejik tedarik, tedarikçi doğrulama ve pazara giriş çalışmaları yürüten bağımsız bir B2B ticaret evidir.',
@@ -68,7 +73,7 @@ const organization = {
     'Two-way global trade','Strategic sourcing','Supplier sourcing and verification','Factory and counterparty verification',
     'International RFQ management','Export market entry','B2B buyer research','Commercial coordination','Nearshoring from Türkiye',
     'Trade intelligence','Total cost of ownership analysis','Food and agricultural sourcing','Textiles and home textiles',
-    'Packaging and industrial inputs','Iranian carpets','Hand-knotted silk carpets','Türkiye-Iran trade corridor','Iran sourcing','Iranian food exports'
+    'Packaging and industrial inputs','Iranian carpets','Hand-knotted silk carpets','Türkiye-Iran trade corridor','Iran sourcing','Iranian food exports','Vietnam exporter market entry','Vietnam to Türkiye trade','Vietnam to Europe trade'
   ]
 };
 const website = {
