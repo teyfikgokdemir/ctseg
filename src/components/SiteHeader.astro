@@ -55,13 +55,23 @@ const globalLocaleNames: Record<string,string> = {...Object.fromEntries(activeLo
 const globalSwitchPath = (target: string): string => {
   if (target === 'uk') return '/uk/';
   if (pageKey === 'search-landing' && pageId) return searchLandingPath(target as Locale,pageId as SearchLandingId);
+  if (pageKey === 'iran-trade') {
+    if (target === 'tr') return '/tr/iran-turkiye-ticaret/';
+    if (target === 'en') return '/en/iran-turkiye-europe-trade/';
+    if (target === 'fa') return '/fa/';
+    return `/${target}/`;
+  }
+  if (['vietnam-turkiye','china-turkiye','ukraine-turkiye'].includes(pageKey)) {
+    return target === 'tr' ? localizedPath('tr', pageKey, pageId) : `/${target}/`;
+  }
   if (target === 'fa') return '/fa/';
   if (pageKey === 'medical') {
     const reflexLocales = ['en','tr','de','it','ru','fa'] as const;
     if ((reflexLocales as readonly string[]).includes(target)) return reflexPath(target as ReflexLocale);
-    return '/';
+    return `/${target}/`;
   }
-  return localizedPath(target, pageKey, pageId);
+  const resolved = localizedPath(target as Locale, pageKey, pageId);
+  return resolved?.includes('undefined') ? `/${target}/` : resolved;
 };
 ---
 <header class="site-header">
