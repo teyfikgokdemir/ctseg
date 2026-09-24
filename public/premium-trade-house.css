@@ -268,3 +268,67 @@ main .section:not(.markets-editorial) .section-head p{
     border-color:rgba(17,17,17,.35)!important;
   }
 }
+
+
+/* Trade path cards — align with CTSEG site language */
+@media(min-width:981px){
+  main .trade-paths-section{
+    padding-block:34px!important;
+  }
+  main .trade-paths-section .section-head{
+    margin-bottom:22px!important;
+  }
+  main .trade-paths-grid{
+    border-radius:14px!important;
+    background:transparent!important;
+  }
+  main .trade-paths-grid article{
+    min-height:228px!important;
+    padding:28px 28px 66px!important;
+    text-align:left!important;
+    background:#151615!important;
+  }
+  main .trade-paths-grid article>span{
+    display:none!important;
+  }
+  main .trade-paths-grid h3{
+    max-width:18ch!important;
+    margin:0 0 14px!important;
+    font-size:clamp(24px,1.55vw,30px)!important;
+    line-height:1.08!important;
+    letter-spacing:-.025em!important;
+    text-align:left!important;
+  }
+  main .trade-paths-grid p{
+    max-width:42ch!important;
+    margin:0!important;
+    font-size:15px!important;
+    line-height:1.62!important;
+    text-align:left!important;
+    color:#b7b7b2!important;
+  }
+  main .trade-paths-grid .text-link{
+    left:28px!important;
+    right:auto!important;
+    bottom:24px!important;
+    font-size:12px!important;
+    text-align:left!important;
+  }
+  main .trade-paths-grid article:hover,
+  main .trade-paths-grid article:focus-within{
+    background:#191a18!important;
+    color:#fff!important;
+  }
+  main .trade-paths-grid article:hover h3,
+  main .trade-paths-grid article:focus-within h3{
+    color:#fff!important;
+  }
+  main .trade-paths-grid article:hover p,
+  main .trade-paths-grid article:focus-within p{
+    color:#c7c7c1!important;
+  }
+  main .trade-paths-grid article:hover .text-link,
+  main .trade-paths-grid article:focus-within .text-link{
+    color:#c4f000!important;
+  }
+}
