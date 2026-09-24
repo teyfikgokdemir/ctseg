@@ -71,6 +71,19 @@ const schema = [
   },
   {
     '@context':'https://schema.org',
+    '@type':'Service',
+    '@id':`${canonical}#external-trade-desk`,
+    url:canonical,
+    name:'Зовнішній відділ міжнародної торгівлі CTSEG',
+    description:'CTSEG може постійно координувати sourcing, розвиток експорту, пошук покупців і дистриб’юторів, RFQ, комерційне листування та звітність як зовнішня функція міжнародної торгівлі.',
+    inLanguage:'uk-UA',
+    serviceType:'Outsourced international trade desk, sourcing and export development',
+    provider:{'@id':'https://ctseg.com.tr/#organization'},
+    areaServed:['Ukraine','Türkiye','Europe'],
+    audience:{'@type':'BusinessAudience',name:'Ukrainian companies outsourcing ongoing international trade operations'}
+  },
+  {
+    '@context':'https://schema.org',
     '@type':'FAQPage',
     mainEntity:page.faq.map((item)=>({
       '@type':'Question',
@@ -176,6 +189,26 @@ const schema = [
           </aside>
         </div>
       </section>
+      <section class="section">
+        <div class="container content-grid">
+          <div class="prose">
+            <p class="eyebrow">CTSEG · ЗОВНІШНІЙ TRADE DESK</p>
+            <h2>Зовнішня функція міжнародної торгівлі для української компанії</h2>
+            <p>CTSEG може постійно вести пошук постачальників, розвиток експорту, пошук покупців і дистриб’юторів, RFQ, комерційне листування та follow-up як зовнішній відділ міжнародної торгівлі. За погодженням робота може вестися через корпоративну електронну пошту клієнта з прозорим зазначенням ролі CTSEG.</p>
+            <ul class="check-list">
+              <li>Щомісячний retainer за постійну операційну підтримку</li>
+              <li>Sourcing, export development та buyer/distributor follow-up</li>
+              <li>Корпоративна пошта, CRM-пайплайн і регулярна звітність</li>
+            </ul>
+          </div>
+          <aside class="side-panel">
+            <p class="eyebrow">CTSEG · External Trade Desk</p>
+            <h3>Передати міжнародну торгівлю в зовнішнє управління</h3>
+            <a class="button" href="/en/contact/?intent=external_trade_desk&direction=other&category=other#commercial-form">Обговорити Trade Desk</a>
+          </aside>
+        </div>
+      </section>
+
       <section class="section uk-reflex-section" id="reflex-gloves">
         <div class="container uk-reflex-grid">
           <div>
