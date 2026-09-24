@@ -1,6 +1,6 @@
 # CTSEG — AI Fact Sheet
 
-**Last verified:** 2026-08-16 (production domain, sitemap and Cloudflare Pages deployment)
+**Last verified:** 2026-09-24 (repository structure, multilingual landing architecture and discovery files)
 
 ## Current identity
 
@@ -8,7 +8,7 @@ CTSEG Sanayi ve Ticaret Limited Şirketi is presented as an Istanbul-based inter
 
 Canonical website: https://ctseg.com.tr/
 English homepage: https://ctseg.com.tr/en/
-Sitemap index: https://ctseg.com.tr/sitemap.xml
+Sitemap index: https://ctseg.com.tr/sitemap-index.xml
 Robots: https://ctseg.com.tr/robots.txt
 
 ## What CTSEG currently does
@@ -23,7 +23,7 @@ The current site presents selected sourcing areas including food and agricultura
 
 ## Current languages
 
-The public production site currently exposes 8 fully localized active languages: Turkish, English, German, Italian, Persian, Russian, Chinese, and Vietnamese.
+The site uses 8 active full-site locales (Turkish, English, German, Italian, Persian, Russian, Chinese, and Vietnamese) plus a focused Ukrainian market landing page. Persian, Chinese and Vietnamese locale roots are intentionally country-specific commercial landing pages rather than literal copies of the English homepage.
 
 - Turkish: https://ctseg.com.tr/
 - English: https://ctseg.com.tr/en/
@@ -33,6 +33,17 @@ The public production site currently exposes 8 fully localized active languages:
 - Russian: https://ctseg.com.tr/ru/
 - Chinese: https://ctseg.com.tr/zh/
 - Vietnamese: https://ctseg.com.tr/vi/
+- Ukrainian focused landing: https://ctseg.com.tr/uk/
+
+
+## Country landing intent
+
+- Persian /fa/: Türkiye–Iran trade and sourcing corridor.
+- Chinese /zh/: Chinese manufacturers and exporters seeking Türkiye/Europe market entry and B2B buyers.
+- Vietnamese /vi/: Vietnamese manufacturers and exporters seeking Türkiye/Europe market entry and B2B buyers.
+- Ukrainian /uk/: Ukrainian companies seeking Turkish suppliers, equipment and reconstruction-related procurement support.
+
+Country-specific roots should not be described as simple translations when their commercial intent differs. Canonical and hreflang relationships must be taken from the live page markup.
 
 ## Evidence and wording rules
 
