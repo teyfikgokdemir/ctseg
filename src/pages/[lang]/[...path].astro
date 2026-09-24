@@ -12,6 +12,7 @@ import { chinaMarketEntryContent } from '../../data/china-market-entry';
 import { chinaTurkiyeContent } from '../../data/china-turkiye';
 import { ukraineTurkiyeContent } from '../../data/ukraine-market';
 import { regionalIntentHomes } from '../../data/regional-intent-homes';
+import { tradeDeskCopy } from '../../data/trade-desk';
 import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, tradeMatchingServiceSchema, type RouteRecord } from '../../lib/routes';
 
 export function getStaticPaths() {
@@ -106,6 +107,17 @@ if (record.key === 'home') {
   } else {
     schemas.push(tradeMatchingServiceSchema(record,meta.title,meta.description));
   }
+}
+if (record.key === 'home' && tradeDeskCopy[record.lang as keyof typeof tradeDeskCopy]) {
+  const desk=tradeDeskCopy[record.lang as keyof typeof tradeDeskCopy];
+  schemas.push({
+    '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#external-trade-desk`,
+    url:canonicalFor(record),name:desk.title,description:desk.text,inLanguage:record.lang,
+    serviceType:'Outsourced international trade desk, sourcing and export development',
+    provider:{'@id':'https://ctseg.com.tr/#organization'},
+    areaServed:['Türkiye','Europe','Middle East','Asia','International'],
+    audience:{'@type':'BusinessAudience',name:'Companies outsourcing ongoing international trade, sourcing and export development operations'}
+  });
 }
 if (record.key === 'services' && record.id) {
   const service = services[record.id as keyof typeof services];
