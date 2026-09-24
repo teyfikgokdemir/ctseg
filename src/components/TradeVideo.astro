@@ -69,8 +69,8 @@ const copy = {
   .trade-video-frame figcaption{position:absolute;left:28px;right:28px;bottom:24px;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:20px;color:#fff}
   .trade-video-frame figcaption span{flex:0 0 auto;padding:9px 12px;border-radius:999px;background:#c4f000;color:#0a0a0a;font-size:10px;font-weight:900;letter-spacing:.09em}
   .trade-video-frame figcaption strong{max-width:32em;text-align:right;font-size:12px;line-height:1.35;font-weight:650;color:#f1f1ed}
-  :global(html[dir="rtl"]) .trade-video-frame figcaption strong{text-align:left}
-  :global(html[dir="rtl"]) .trade-video-section::before{right:auto;left:-.04em}
+  html[dir="rtl"] .trade-video-frame figcaption strong{text-align:left}
+  html[dir="rtl"] .trade-video-section::before{right:auto;left:-.04em}
   @media(max-width:960px){.trade-video-grid{grid-template-columns:1fr;align-items:start}.trade-video-copy{max-width:780px}.trade-video-copy h2{max-width:14ch}.trade-video-copy>p{max-width:46em}.trade-video-frame{aspect-ratio:16/9}}
   @media(max-width:620px){.trade-video-section{padding-block:64px}.trade-video-topline{align-items:flex-start;flex-direction:column;margin-bottom:32px}.trade-video-tag{white-space:normal}.trade-video-copy h2{font-size:clamp(36px,9.7vw,50px);line-height:.98;max-width:100%}.trade-video-copy>p{font-size:16px!important}.trade-video-stages{margin-top:26px}.trade-video-stages span{font-size:10px}.trade-video-frame{margin-inline:-13px;border-inline:0;border-radius:0}.trade-video-frame:after{inset:10px;border-radius:12px}.trade-video-frame-line{left:18px;top:18px;width:54px}.trade-video-frame figcaption{left:18px;right:18px;bottom:16px}.trade-video-frame figcaption strong{display:none}}
 </style>
