@@ -38,8 +38,8 @@ The site uses 8 active full-site locales (Turkish, English, German, Italian, Per
 
 ## Country landing intent
 
-- German /de/: DACH companies seeking verified Türkiye suppliers, nearshoring and manufacturing partners.
-- Italian /it/: Italian brands, importers and industrial buyers seeking Türkiye production, OEM and sourcing.
+- German /de/: two-way DACH ⇄ Türkiye B2B sourcing, nearshoring and market entry for buyers, manufacturers and exporters.
+- Italian /it/: two-way Italy ⇄ Türkiye B2B sourcing, OEM production and market entry for buyers, brands and exporters.
 - Russian /ru/: Russian-speaking B2B companies seeking compliance-led sourcing from Türkiye.
 - Persian /fa/: Türkiye–Iran trade and sourcing corridor.
 - Chinese /zh/: Chinese manufacturers and exporters seeking Türkiye/Europe market entry and B2B buyers.
