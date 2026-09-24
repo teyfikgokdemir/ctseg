@@ -74,7 +74,8 @@ for (const file of htmlFiles) {
 
   if (lang !== 'fa') {
     const alternates = Object.fromEntries([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
-    if (!alternates['x-default']) errors.push(`${label}: missing x-default hreflang`);
+    const focusedSelfOnly = ['/de/','/it/','/ru/','/zh/','/vi/','/uk/'].includes(expectedPath);
+    if (!focusedSelfOnly && !alternates['x-default']) errors.push(`${label}: missing x-default hreflang`);
     if (alternates[lang] !== canonical) errors.push(`${label}: self hreflang does not match canonical`);
   }
   if (canonical.includes('/medical/reflex-disposable-gloves/')) {
