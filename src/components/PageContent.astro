@@ -709,6 +709,36 @@ const processLabels = {
   vi:{boundary:'Ranh giới vai trò và trách nhiệm',answers:'Giải đáp trực tiếp',answerLead:'Các câu hỏi cốt lõi về thu mua và điều phối thương mại.'}
 }[lang];
 const scenarioKicker = {tr:'Temsili çalışma',en:'Representative work',de:'Repräsentatives Szenario',it:'Scenario rappresentativo',ru:'Пример сценария',fa:'سناریوی نمونه',zh:'实战案例',vi:'Kịch bản đại diện'}[lang];
+
+const representativeRfq = lang === 'tr' ? {
+  eyebrow:'Temsili çıktı · RFQ karşılaştırması',
+  title:'Teklifleri aynı ticari zeminde karşılaştırma örneği',
+  note:'Bu tablo gerçek bir müşteri, tedarikçi veya gerçekleşmiş fiyat sonucu değildir. CTSEG’in teklifleri hangi alanlarda normalize ettiğini göstermek için hazırlanmış temsili bir çıktıdır.',
+  headers:['Karşılaştırma alanı','Tedarikçi A','Tedarikçi B','Tedarikçi C'],
+  rows:[
+    ['Teknik spesifikasyon','Uygun / teyit gerekli','Uygun','Kısmi bilgi'],
+    ['MOQ','Teklifte belirtilir','Teklifte belirtilir','Açık bilgi gerekli'],
+    ['Incoterm ve teslim noktası','FOB teyidi','CIF seçeneği','EXW teyidi'],
+    ['COA / menşe / batch belgesi','Parti aşamasında doğrulanır','Ön belge mevcut','Belge listesi bekleniyor'],
+    ['Termin','Yazılı teklif ile teyit','Yazılı teklif ile teyit','Kapasite teyidi gerekli'],
+    ['Ticari risk notu','Belge kapsamı açık kalmalı','Teslim kapsamı karşılaştırılmalı','Eksik bilgiler tamamlanmadan ilerlenmemeli']
+  ],
+  cta:'RFQ veya tekliflerinizi değerlendirmeye gönderin'
+} : lang === 'en' ? {
+  eyebrow:'Representative output · RFQ comparison',
+  title:'Example of normalising quotations onto one commercial basis',
+  note:'This table is not a real client, supplier or completed pricing result. It is a representative output showing the fields CTSEG uses to normalise commercial quotations.',
+  headers:['Comparison field','Supplier A','Supplier B','Supplier C'],
+  rows:[
+    ['Technical specification','Fit / confirmation required','Fit','Partial information'],
+    ['MOQ','To be confirmed in quotation','To be confirmed in quotation','Open information required'],
+    ['Incoterm and delivery point','FOB confirmation','CIF option','EXW confirmation'],
+    ['COA / origin / batch documents','Verified at batch stage','Preliminary document available','Document list pending'],
+    ['Lead time','Confirmed by written quotation','Confirmed by written quotation','Capacity confirmation required'],
+    ['Commercial risk note','Keep documentation scope open','Compare delivery scope','Do not progress before missing data is closed']
+  ],
+  cta:'Submit your RFQ or quotations for assessment'
+} : null;
 const guide = key === 'guides' && id ? (guides[id as keyof typeof guides]?.[lang] || guides[id as keyof typeof guides]?.['en'] || null) : null;
 const searchLanding = key === 'search-landing' && id ? searchLandings[id as keyof typeof searchLandings]?.content[lang] : null;
 const workHref = localizedPath(lang,'how-we-work');
@@ -1848,6 +1878,16 @@ const verifiedLater = {
         <dl>{scenarioPage.labels.map((label,valueIndex)=><div><dt>{label}</dt><dd>{item[valueIndex+1]}</dd></div>)}</dl>
         <a class="text-link" href={sectionHref('contact')} data-case-scenario-cta>{completionHome.commercialCta} →</a>
       </article>)}</div>
+      {representativeRfq && <section class="content-block representative-rfq" aria-labelledby="representative-rfq-title">
+        <p class="eyebrow">{representativeRfq.eyebrow}</p>
+        <h2 id="representative-rfq-title">{representativeRfq.title}</h2>
+        <p>{representativeRfq.note}</p>
+        <div class="guide-table-wrap"><table>
+          <thead><tr>{representativeRfq.headers.map((cell)=><th>{cell}</th>)}</tr></thead>
+          <tbody>{representativeRfq.rows.map((row)=><tr>{row.map((cell)=><td>{cell}</td>)}</tr>)}</tbody>
+        </table></div>
+        <a class="button" href={sectionHref('contact')} data-rfq-example-cta>{representativeRfq.cta}</a>
+      </section>}
     </div></section>
   </>
 )}
