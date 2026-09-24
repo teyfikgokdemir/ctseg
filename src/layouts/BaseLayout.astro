@@ -111,7 +111,7 @@ const website = {
 };
 const webpage = {
   '@context':'https://schema.org','@type':'WebPage','@id':`${canonicalUrl}#webpage`,
-  url:canonicalUrl,name:title,description,inLanguage:lang,
+  url:canonicalUrl,name:title,description,inLanguage:schemaLanguage(lang),
   isPartOf:{'@id':'https://ctseg.com.tr/#website'},about:{'@id':'https://ctseg.com.tr/#organization'}
 };
 const extra = Array.isArray(schema) ? schema : [schema];
