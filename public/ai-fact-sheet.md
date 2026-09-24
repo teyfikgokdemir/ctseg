@@ -65,3 +65,7 @@ Old analyses may describe a narrower or different sector list. Current selected-
 - Services: https://ctseg.com.tr/en/services/
 - Contact: https://ctseg.com.tr/en/contact/
 - Insights: https://ctseg.com.tr/en/insights/
+
+## External Trade Desk
+
+CTSEG also offers an outsourced international trade function for companies that need ongoing sourcing, export development, buyer/distributor research, RFQ follow-up and commercial coordination without building a full internal trade team. The operating model can include a monthly retainer, company-owned email, CRM/pipeline management and periodic reporting, with CTSEG's external role disclosed transparently.
