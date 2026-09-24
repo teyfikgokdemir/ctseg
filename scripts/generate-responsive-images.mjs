@@ -35,6 +35,11 @@ const jobs = [
   { source:'ctseg-mixed-nuts-premium.webp', widths:featureWidths, quality },
   { source:'ctseg-iranian-carpets-editorial.webp', widths:featureWidths, quality },
   { source:'ctseg-wholesale-textiles-editorial.webp', widths:featureWidths, quality },
+  { source:'ctseg-2026/supplier-rfq-comparison.webp', widths:featureWidths, quality },
+  { source:'ctseg-2026/supplier-verification.webp', widths:featureWidths, quality },
+  { source:'ctseg-2026/external-trade-desk.webp', widths:featureWidths, quality },
+  { source:'ctseg-2026/industrial-products-review.webp', widths:featureWidths, quality },
+  { source:'ctseg-2026/manufacturer-buyer-meeting.webp', widths:featureWidths, quality },
   { source:'2.webp', widths:featureWidths, quality }
 ];
 
