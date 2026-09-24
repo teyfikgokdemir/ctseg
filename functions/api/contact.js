@@ -1,4 +1,5 @@
 const memoryRateLimit = new Map();
+const rateLimitQueues = new Map();
 const allowedOrigins = [
   /^https:\/\/(?:www\.)?ctseg\.com\.tr$/,
   /^https:\/\/[a-z0-9-]+\.ctseg\.pages\.dev$/,
@@ -16,7 +17,16 @@ const productFamilies = ['vegetable_oils','nuts_dried_fruit','reflex_gloves','bi
 const json = (body,status=200) => new Response(JSON.stringify(body),{
   status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}
 });
-const clean = (value,max) => String(value ?? '').replace(/\u0000/g,'').trim().slice(0,max);
+const clean = (value,max) => value.replace(/\u0000/g,'').trim().slice(0,max);
+const isPlainObject = (value) => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+const withRateLimitQueue = async (key,task) => {
+  const previous=rateLimitQueues.get(key)||Promise.resolve();
+  let release;
+  const current=new Promise((resolve)=>{release=resolve});
+  rateLimitQueues.set(key,previous.then(()=>current));
+  await previous;
+  try{return await task()}finally{release();if(rateLimitQueues.get(key)===current)rateLimitQueues.delete(key)}
+};
 const hash = async (value) => {
   const bytes = new TextEncoder().encode(value);
   const digest = await crypto.subtle.digest('SHA-256',bytes);
@@ -25,17 +35,23 @@ const hash = async (value) => {
 const rateLimited = async (context) => {
   const ip=context.request.headers.get('cf-connecting-ip')||'unknown';
   const key=`contact:${await hash(ip)}`;
-  const now=Date.now();
-  if(context.env.CONTACT_RATE_LIMIT?.get){
-    const current=Number(await context.env.CONTACT_RATE_LIMIT.get(key)||0);
-    if(current>=8)return true;
-    await context.env.CONTACT_RATE_LIMIT.put(key,String(current+1),{expirationTtl:3600});
-    return false;
+  if(context.env.CONTACT_RATE_LIMITER?.limit){
+    const decision=await context.env.CONTACT_RATE_LIMITER.limit({key});
+    return !decision?.success;
   }
-  const current=memoryRateLimit.get(key)||{count:0,expires:now+3600000};
-  if(current.expires<now){current.count=0;current.expires=now+3600000}
-  current.count+=1;memoryRateLimit.set(key,current);
-  return current.count>8;
+  return withRateLimitQueue(key,async()=>{
+    const now=Date.now();
+    if(context.env.CONTACT_RATE_LIMIT?.get){
+      const current=Number(await context.env.CONTACT_RATE_LIMIT.get(key)||0);
+      if(current>=8)return true;
+      await context.env.CONTACT_RATE_LIMIT.put(key,String(current+1),{expirationTtl:3600});
+      return false;
+    }
+    const current=memoryRateLimit.get(key)||{count:0,expires:now+3600000};
+    if(current.expires<now){current.count=0;current.expires=now+3600000}
+    current.count+=1;memoryRateLimit.set(key,current);
+    return current.count>8;
+  });
 };
 
 export async function onRequestPost(context){
@@ -44,7 +60,11 @@ export async function onRequestPost(context){
   if(await rateLimited(context))return json({code:'rate_limited'},429);
   let raw;
   try{raw=await context.request.json()}catch{return json({code:'invalid_json'},400)}
-  const data=Object.fromEntries(Object.entries(limits).map(([key,max])=>[key,clean(raw[key],max)]));
+  if(!isPlainObject(raw))return json({code:'invalid_payload'},400);
+  for(const key of Object.keys(limits)){
+    if(raw[key]!==undefined&&raw[key]!==null&&typeof raw[key]!=='string')return json({code:'invalid_field_type',field:key},400);
+  }
+  const data=Object.fromEntries(Object.entries(limits).map(([key,max])=>[key,clean(raw[key]??'',max)]));
   if(data.website)return json({ok:true});
   if(required.some((key)=>!data[key]))return json({code:'missing_required_fields'},400);
   if(!['buyer_request','supplier_market_entry','external_trade_desk'].includes(data.intent))return json({code:'invalid_intent'},400);
