@@ -69,3 +69,77 @@ html body main .detailed-process li h2{display:block!important;width:100%!import
 html[dir="rtl"] body main .detailed-process li span{left:auto!important;right:26px!important;text-align:right!important}html[dir="rtl"] body main .detailed-process li h2{text-align:center!important}
 @media(max-width:620px){html body main .detailed-process li{min-height:172px!important;padding:40px 18px 22px!important}html body main .detailed-process li span{top:18px!important;left:18px!important}html body main .detailed-process li h2{font-size:clamp(20px,6.4vw,27px)!important;max-width:20ch!important}html[dir="rtl"] body main .detailed-process li span{left:auto!important;right:18px!important}}
 @media (max-width:1100px){main .trade-house-statement h2,main .process-heading .section-title{word-break:normal!important;overflow-wrap:normal!important;hyphens:none!important}}
+
+
+/* 2026-09 final visual QA: centered section headings and compact three-path trade cards. */
+main .section:not(.markets-editorial)>.container>.section-head,
+main .section:not(.markets-editorial) .container>.section-head{
+  display:block!important;
+  text-align:center!important;
+  max-width:1240px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  margin-bottom:clamp(28px,3.5vw,48px)!important;
+}
+main .section:not(.markets-editorial) .section-head h2{
+  max-width:none!important;
+  margin:0 auto!important;
+  font-size:clamp(30px,3vw,50px)!important;
+  line-height:1.06!important;
+  letter-spacing:-.04em!important;
+  text-align:center!important;
+}
+main .section:not(.markets-editorial) .section-head p{
+  max-width:72rem!important;
+  margin:14px auto 0!important;
+  font-size:clamp(15px,1.15vw,18px)!important;
+  line-height:1.55!important;
+  text-align:center!important;
+}
+@media(min-width:1080px){
+  main .section:not(.markets-editorial) .section-head h2{white-space:nowrap!important}
+}
+.trade-paths-section{padding-block:clamp(54px,6vw,86px)!important}
+.trade-paths-section .section-head h2{color:#fff!important}
+.trade-paths-section .section-head p{color:#aaa!important}
+.trade-paths-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:0!important;
+}
+.trade-paths-grid article{
+  min-height:300px!important;
+  padding:30px 28px 68px!important;
+}
+.trade-paths-grid article:not(:last-child){border-right:1px solid var(--premium-line)!important}
+.trade-paths-grid h3{
+  margin:20px 0 14px!important;
+  font-size:clamp(28px,2.45vw,42px)!important;
+  line-height:1.04!important;
+  letter-spacing:-.04em!important;
+}
+.trade-paths-grid p{
+  max-width:34ch!important;
+  margin:0!important;
+  font-size:15px!important;
+  line-height:1.55!important;
+}
+.trade-paths-grid .text-link{
+  left:28px!important;
+  right:28px!important;
+  bottom:26px!important;
+  font-size:13px!important;
+}
+.catalogue-grid .product-card{background:#fff!important;color:#111!important}
+.catalogue-grid .product-card-copy{background:#fff!important}
+.catalogue-grid .product-card-copy h2{color:#111!important}
+.catalogue-grid .product-card-copy p{color:#575650!important}
+.catalogue-grid .product-card-kicker{color:#74736d!important}
+.catalogue-grid .product-card-origin-tag{color:#333!important;border-color:#dedcd5!important;background:#f2efe7!important}
+.catalogue-grid .product-card-trade-footer{color:#111!important;border-top-color:#eeebe3!important}
+.catalogue-grid .product-card-rfq,.catalogue-grid .product-card-arrow{color:#1b1b1b!important}
+@media(max-width:980px){
+  main .section:not(.markets-editorial) .section-head h2{white-space:normal!important}
+  .trade-paths-grid{grid-template-columns:1fr!important}
+  .trade-paths-grid article{min-height:250px!important;border-right:0!important;border-bottom:1px solid var(--premium-line)!important}
+  .trade-paths-grid article:last-child{border-bottom:0!important}
+}
