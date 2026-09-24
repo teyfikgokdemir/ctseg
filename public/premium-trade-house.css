@@ -426,3 +426,21 @@ main .trade-paths-grid p::selection{
   background:#c4f000!important;
   color:#111!important;
 }
+
+
+/* Turkish trade cards: match the restrained English scale exactly */
+@media(min-width:981px){
+  html[data-locale="tr"] main .trade-paths-grid h3{
+    font-size:30px!important;
+    line-height:1.06!important;
+    max-width:17ch!important;
+  }
+  html[data-locale="tr"] main .trade-paths-grid p{
+    font-size:15px!important;
+    line-height:1.56!important;
+    max-width:38ch!important;
+  }
+  html[data-locale="tr"] main .trade-paths-grid .text-link{
+    font-size:11px!important;
+  }
+}
