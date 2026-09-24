@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageContent from '../../components/PageContent.astro';
+import { schemaLanguage } from '../../data/locales';
 import { insights, products, services, ui } from '../../data/site';
 import { guides, processPages } from '../../data/completion';
 import { getPosts, getPostForInsight } from '../../data/blog';
@@ -44,7 +45,7 @@ if (record.key === 'home') {
     const page=regionalIntentHomes[record.lang as 'de'|'it'|'ru'];
     schemas.push({
       '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#regional-sourcing-service`,
-      url:canonicalFor(record),name:page.title,description:page.description,inLanguage:record.lang,
+      url:canonicalFor(record),name:page.title,description:page.description,inLanguage:schemaLanguage(record.lang),
       serviceType:record.lang === 'de'
         ? 'Two-way DACH Türkiye B2B sourcing, nearshoring and market entry'
         : record.lang === 'it'
@@ -112,7 +113,7 @@ if (record.key === 'home' && tradeDeskCopy[record.lang as keyof typeof tradeDesk
   const desk=tradeDeskCopy[record.lang as keyof typeof tradeDeskCopy];
   schemas.push({
     '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#external-trade-desk`,
-    url:canonicalFor(record),name:desk.title,description:desk.text,inLanguage:record.lang,
+    url:canonicalFor(record),name:desk.title,description:desk.text,inLanguage:schemaLanguage(record.lang),
     serviceType:'Outsourced international trade desk, sourcing and export development',
     provider:{'@id':'https://ctseg.com.tr/#organization'},
     areaServed:['Türkiye','Europe','Middle East','Asia','International'],
@@ -125,7 +126,7 @@ if (record.key === 'services' && record.id) {
     '@context':'https://schema.org','@type':'Service',
     '@id':`${canonicalFor(record)}#service`,url:canonicalFor(record),
     name:service.names[record.lang],description:service.descriptions[record.lang],
-    serviceType:service.names[record.lang],inLanguage:record.lang,
+    serviceType:service.names[record.lang],inLanguage:schemaLanguage(record.lang),
     provider:{'@id':'https://ctseg.com.tr/#organization'},
     areaServed:['Türkiye','Europe','International']
   });
@@ -134,7 +135,7 @@ if (record.key === 'insights' && !record.id) {
   schemas.push({
     '@context':'https://schema.org','@type':'Blog',
     '@id':`${canonicalFor(record)}#blog`,url:canonicalFor(record),
-    name:meta.title,description:meta.description,inLanguage:record.lang,
+    name:meta.title,description:meta.description,inLanguage:schemaLanguage(record.lang),
     publisher:{'@id':'https://ctseg.com.tr/#organization'}
   });
 }
@@ -144,7 +145,7 @@ if (record.key === 'products' && record.id) {
     '@context':'https://schema.org','@type':'Product',
     '@id':`${canonicalFor(record)}#product`,url:canonicalFor(record),
     name:product.names[record.lang],description:product.descriptions[record.lang],image:`https://ctseg.com.tr${product.media.src}`,
-    category:'B2B trade product',inLanguage:record.lang,
+    category:'B2B trade product',inLanguage:schemaLanguage(record.lang),
     additionalProperty:[
       {'@type':'PropertyValue',name:ui[record.lang].origin,value:product.origin},
       {'@type':'PropertyValue',name:'Assessment status',value:'Specification, availability, MOQ, documents and commercial terms verified on request'}
@@ -177,7 +178,7 @@ if (record.key === 'insights' && record.id) {
     '@id':`${canonicalFor(record)}#article`,url:canonicalFor(record),headline:insight.titles[record.lang],
     description:insight.descriptions[record.lang],
     datePublished:originalPost?.date ?? '2026-07-27',dateModified:originalPost?.updated ?? '2026-07-27',
-    inLanguage:record.lang,mainEntityOfPage:{'@id':`${canonicalFor(record)}#webpage`},
+    inLanguage:schemaLanguage(record.lang),mainEntityOfPage:{'@id':`${canonicalFor(record)}#webpage`},
     author:{'@type':'Person',name:'Teyfik Gökdemir'},
     publisher:{'@id':'https://ctseg.com.tr/#organization'}
   });
@@ -306,7 +307,7 @@ if (record.key === 'iran-trade') {
   const page=iranTradeContent[record.lang];
   schemas.push({
     '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#iran-trade-service`,
-    url:canonicalFor(record),name:page.title,description:page.description,inLanguage:record.lang,
+    url:canonicalFor(record),name:page.title,description:page.description,inLanguage:schemaLanguage(record.lang),
     serviceType:'Türkiye-Iran cross-border B2B sourcing and trade coordination',
     provider:{'@id':'https://ctseg.com.tr/#organization'},
     areaServed:['Türkiye','Iran','Europe'],
@@ -331,7 +332,7 @@ if (record.key === 'search-landing' && record.id) {
   const landing=searchLandings[record.id as keyof typeof searchLandings].content[record.lang];
   schemas.push({
     '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#service`,
-    url:canonicalFor(record),name:landing.title,description:landing.description,inLanguage:record.lang,
+    url:canonicalFor(record),name:landing.title,description:landing.description,inLanguage:schemaLanguage(record.lang),
     serviceType:landing.serviceType,provider:{'@id':'https://ctseg.com.tr/#organization'},
     areaServed:['Türkiye','Europe','Iran','International'],audience:{'@type':'BusinessAudience',name:landing.audienceTitle}
   });
@@ -345,7 +346,7 @@ if (record.key === 'guides' && record.id) {
   const guide = guides[record.id as keyof typeof guides]?.[guideLang] || { title: 'Guide', description: 'Commercial guide' };
   schemas.push({
     '@context':'https://schema.org','@type':'Article',headline:guide.title,description:guide.description,
-    datePublished:'2026-07-27',dateModified:'2026-07-27',inLanguage:record.lang,
+    datePublished:'2026-07-27',dateModified:'2026-07-27',inLanguage:schemaLanguage(record.lang),
     mainEntityOfPage:canonicalFor(record),author:{'@type':'Person',name:'Teyfik Gökdemir'},
     publisher:{'@id':'https://ctseg.com.tr/#organization'}
   });
