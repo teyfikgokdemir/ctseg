@@ -790,7 +790,7 @@ const verifiedLater = {
         <div class="content-block" id="sectors"><h2>{iranTradeContent.fa.inboundTitle}</h2><p>{iranTradeContent.fa.inboundLead}</p><ol class="check-list">{iranTradeContent.fa.inboundItems.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}</ol></div>
         <div class="content-block"><h2>{iranTradeContent.fa.outboundTitle}</h2><p>{iranTradeContent.fa.outboundLead}</p><ul class="check-list">{iranTradeContent.fa.outboundItems.map((item)=><li>{item}</li>)}</ul></div>
         <div class="content-block origin-note"><h2>{iranTradeContent.fa.complianceTitle}</h2><p>{iranTradeContent.fa.complianceText}</p></div>
-        <div class="content-block"><h2>{iranTradeContent.fa.processTitle}</h2><ol class="check-list">{iranTradeContent.fa.process.map((item)=><li>{item}</li>)}</ol></div>
+        <div class="content-block"><h2>{iranTradeContent.fa.processTitle}</h2><ol class="check-list">{iranTradeContent.fa.process.map((item)=><li>{item}</li>)}</ol><a class="text-link" href={scenarioHref}>سناریوهای نمونه همکاری →</a></div>
         <div class="content-block faq"><h2>{t.faq}</h2>{iranTradeContent.fa.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
       </div>
       <aside class="side-panel">
