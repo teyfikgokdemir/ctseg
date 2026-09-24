@@ -143,3 +143,14 @@ main .section:not(.markets-editorial) .section-head p{
   .trade-paths-grid article{min-height:250px!important;border-right:0!important;border-bottom:1px solid var(--premium-line)!important}
   .trade-paths-grid article:last-child{border-bottom:0!important}
 }
+
+
+/* Trade paths final compact desktop layout */
+@media(min-width:981px){
+  main .trade-paths-section .container{max-width:1660px!important}
+  main .trade-paths-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;width:100%!important;gap:0!important}
+  main .trade-paths-grid article{min-width:0!important;min-height:248px!important;padding:26px 24px 64px!important}
+  main .trade-paths-grid h3{font-size:clamp(27px,2.1vw,36px)!important;line-height:1.04!important;margin:17px 0 12px!important}
+  main .trade-paths-grid p{font-size:14px!important;line-height:1.5!important;max-width:34ch!important}
+  main .trade-paths-grid .text-link{left:24px!important;right:24px!important;bottom:22px!important;font-size:12px!important}
+}
