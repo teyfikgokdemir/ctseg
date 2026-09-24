@@ -19,13 +19,13 @@
 </section>
 
 <style is:global>
-  .ctseg-home-promo-video{padding:34px 0 82px;background:#07090d;border-top:0}
-  .ctseg-home-promo-video__frame{position:relative;margin:0;overflow:hidden;border:1px solid rgba(238,232,218,.16);border-radius:28px;background:#0b0d11;aspect-ratio:16/9;box-shadow:0 34px 90px rgba(0,0,0,.32)}
+  .ctseg-home-promo-video{padding:18px 0 42px;background:#07090d;border-top:0}
+  .ctseg-home-promo-video__frame{position:relative;margin:0;overflow:hidden;border:1px solid rgba(238,232,218,.16);border-radius:28px;background:#0b0d11;height:clamp(420px,calc(100svh - 190px),620px);box-shadow:0 34px 90px rgba(0,0,0,.32)}
   .ctseg-home-promo-video__frame::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border:1px solid rgba(255,255,255,.08);border-radius:inherit}
-  .ctseg-home-promo-video__frame video{display:block;width:100%;height:100%;object-fit:cover;background:#0b0d11}
+  .ctseg-home-promo-video__frame video{display:block;width:100%;height:100%;object-fit:cover;object-position:center;background:#0b0d11}
   @media(max-width:620px){
-    .ctseg-home-promo-video{padding:12px 0 58px}
-    .ctseg-home-promo-video__frame{border-radius:18px}
+    .ctseg-home-promo-video{padding:10px 0 38px}
+    .ctseg-home-promo-video__frame{height:auto;aspect-ratio:16/9;border-radius:18px}
   }
   @media(prefers-reduced-motion:reduce){
     .ctseg-home-promo-video__frame video{animation:none}
