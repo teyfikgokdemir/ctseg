@@ -7,7 +7,7 @@ import { contactQualification } from '../data/contact-qualification';
 const { lang } = Astro.props as { lang:ContactLocale };
 const copy = contactCopy[lang];
 const qualification = contactQualification[lang];
-const privacyHref = lang === 'fa' ? '/fa/#privacy' : localizedPath(lang,'legal','privacy');
+const privacyHref = lang === 'fa' ? '/fa/privacy/' : localizedPath(lang,'legal','privacy');
 
 const dynamicPlaceholders = {
   tr: {
