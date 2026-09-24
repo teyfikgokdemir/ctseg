@@ -6,6 +6,7 @@ import { guideIds, guides, guideSlugs, processPages, scenarioPages, specialSlugs
 import { searchLandingIds, searchLandings, searchLandingPath } from '../data/search-landings';
 import { iranTradeContent } from '../data/iran-trade';
 import { vietnamMarketEntryContent } from '../data/vietnam-market-entry';
+import { vietnamTurkiyeContent } from '../data/vietnam-turkiye';
 
 export type RouteRecord = {
   lang: Locale;
@@ -22,6 +23,7 @@ export function getRouteRecords(): RouteRecord[] {
     records.push({lang,path:specialSlugs.scenarios[lang],key:'scenarios'});
     if (lang === 'tr' || lang === 'en' || lang === 'fa') records.push({lang,path:iranTradeContent[lang].slug,key:'iran-trade'});
     if (lang === 'vi' && vietnamMarketEntryContent.vi) records.push({lang,path:vietnamMarketEntryContent.vi.slug,key:'vietnam-market-entry'});
+    if (lang === 'tr' && vietnamTurkiyeContent.tr) records.push({lang,path:vietnamTurkiyeContent.tr.slug,key:'vietnam-turkiye'});
     for (const id of searchLandingIds) records.push({
       lang,path:searchLandingPath(lang,id).replace(`/${lang}/`,'').replace(/^\//,'').replace(/\/$/,''),key:'search-landing',id
     });
@@ -82,6 +84,10 @@ export function getMeta(record: RouteRecord) {
   }
   if (key === 'vietnam-market-entry') {
     const page=vietnamMarketEntryContent.vi!;
+    return {title:`${page.title} | CTSEG`,description:page.description};
+  }
+  if (key === 'vietnam-turkiye') {
+    const page=vietnamTurkiyeContent.tr!;
     return {title:`${page.title} | CTSEG`,description:page.description};
   }
   if (key === 'search-landing' && id) {
