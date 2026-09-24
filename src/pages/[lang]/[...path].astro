@@ -7,6 +7,7 @@ import { getPosts, getPostForInsight } from '../../data/blog';
 import { searchLandings } from '../../data/search-landings';
 import { iranTradeContent } from '../../data/iran-trade';
 import { vietnamMarketEntryContent } from '../../data/vietnam-market-entry';
+import { vietnamTurkiyeContent } from '../../data/vietnam-turkiye';
 import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, tradeMatchingServiceSchema, type RouteRecord } from '../../lib/routes';
 
 export function getStaticPaths() {
@@ -101,6 +102,26 @@ if (record.key === 'how-we-work') {
   schemas.push({
     '@context':'https://schema.org','@type':'FAQPage',
     mainEntity:process.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))
+  });
+}
+if (record.key === 'vietnam-turkiye' && vietnamTurkiyeContent.tr) {
+  const page=vietnamTurkiyeContent.tr;
+  schemas.push({
+    '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#vietnam-turkiye-sourcing-service`,
+    url:canonicalFor(record),name:page.title,description:page.description,inLanguage:'tr',
+    serviceType:'Vietnam to Türkiye B2B sourcing and import coordination',
+    provider:{'@id':'https://ctseg.com.tr/#organization'},
+    areaServed:['Türkiye','Vietnam'],
+    audience:{'@type':'BusinessAudience',name:'Türkiye-based importers, distributors, food businesses and industrial buyers'}
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'ItemList',
+    name:page.productsTitle,itemListOrder:'https://schema.org/ItemListOrderAscending',
+    itemListElement:page.products.map((item,index)=>({'@type':'ListItem',position:index+1,name:item.name,description:item.signal}))
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'FAQPage',
+    mainEntity:page.faq.map((item)=>({'@type':'Question',name:item.question,acceptedAnswer:{'@type':'Answer',text:item.answer}}))
   });
 }
 if (record.key === 'vietnam-market-entry' && vietnamMarketEntryContent.vi) {
