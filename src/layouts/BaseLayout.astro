@@ -11,6 +11,7 @@ import { activeLocales, localeDirection, localeOg } from '../data/locales';
 import { FEATURE_IMAGE_WIDTHS, generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
 import { localizedTradeVisual } from '../data/trade-visuals';
 import { searchLandingAlternates } from '../data/search-landings';
+import { iranTradeContent } from '../data/iran-trade';
 
 const {
   lang='tr', title, description, pageKey='home', pageId, canonical,
@@ -20,7 +21,12 @@ const {
   canonical?: string; schema?: any[] | any; noindex?: boolean;
 };
 const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
-const alternates = pageKey === 'search-landing' && pageId ? searchLandingAlternates(pageId) : routeAlternates(pageKey, pageId);
+const alternates = pageKey === 'search-landing' && pageId ? searchLandingAlternates(pageId) :
+  pageKey === 'iran-trade' ? {
+    tr:`https://ctseg.com.tr/tr/${iranTradeContent.tr.slug}/`,
+    en:`https://ctseg.com.tr/en/${iranTradeContent.en.slug}/`,
+    fa:`https://ctseg.com.tr/fa/${encodeURI(iranTradeContent.fa.slug)}/`
+  } as Record<string,string> : routeAlternates(pageKey, pageId);
 if (pageKey === 'home') alternates.fa = 'https://ctseg.com.tr/fa/';
 if (pageKey === 'home') alternates.ru = 'https://ctseg.com.tr/ru/';
 if (pageKey === 'home') alternates.zh = 'https://ctseg.com.tr/zh/';
@@ -29,6 +35,7 @@ const alternateCodes = pageKey === 'medical'
   ? ['tr','en','de','it','ru','fa','zh','vi','sq','mk','sr']
   : (pageKey === 'home' || ['how-we-work','scenarios'].includes(pageKey)
     ? activeLocales
+    : pageKey === 'iran-trade' ? ['tr','en','fa']
     : pageKey === 'guides' ? ['tr','en'] : locales);
 const organizationDescription = ({
   tr:'CTSEG, Türkiye merkezli iki yönlü küresel ticaret, stratejik tedarik, tedarikçi doğrulama ve pazara giriş çalışmaları yürüten bağımsız bir B2B ticaret evidir.',
@@ -61,7 +68,7 @@ const organization = {
     'Two-way global trade','Strategic sourcing','Supplier sourcing and verification','Factory and counterparty verification',
     'International RFQ management','Export market entry','B2B buyer research','Commercial coordination','Nearshoring from Türkiye',
     'Trade intelligence','Total cost of ownership analysis','Food and agricultural sourcing','Textiles and home textiles',
-    'Packaging and industrial inputs','Iranian carpets','Hand-knotted silk carpets'
+    'Packaging and industrial inputs','Iranian carpets','Hand-knotted silk carpets','Türkiye-Iran trade corridor','Iran sourcing','Iranian food exports'
   ]
 };
 const website = {
