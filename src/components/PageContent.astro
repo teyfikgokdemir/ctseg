@@ -10,6 +10,7 @@ import ProductCard from './ProductCard.astro';
 import ProductMedia from './ProductMedia.astro';
 import ResponsiveImage from './ResponsiveImage.astro';
 import CommercialRequestForm from './CommercialRequestForm.astro';
+import HomepagePromoVideo from './HomepagePromoVideo.astro';
 import { FEATURE_IMAGE_WIDTHS } from '../lib/responsive-images';
 import { homeTradeVisualKeys, localizedTradeVisual, serviceTradeVisualKeys } from '../data/trade-visuals';
 import {
@@ -928,6 +929,7 @@ const verifiedLater = {
         </div>
       </div>
     </section>
+    {lang === 'tr' && <HomepagePromoVideo />}
     <section class="section trade-paths-section" id="trade-paths"><div class="container">
       <div class="section-head"><h2>{platform.pathsTitle}</h2><p>{platform.pathsLead}</p></div>
       <div class="trade-paths-grid">
