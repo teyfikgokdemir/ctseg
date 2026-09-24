@@ -57,7 +57,7 @@ for (const job of jobs) {
   for (const width of job.widths) {
     const filename = `${stem}-${width}.webp`;
     const outputPath = join(outputDir,filename);
-    const key = `${job.source}:${width}`;
+    const key = `${basename(job.source)}:${width}`;
     const signature = `${sourceHash}:${width}:${job.quality}:webp-v1`;
     if (previous[key] === signature && existsSync(outputPath)) {
       skipped++;
