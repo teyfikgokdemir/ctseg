@@ -33,6 +33,7 @@ import { chinaMarketEntryContent } from '../data/china-market-entry';
 import { chinaTurkiyeContent } from '../data/china-turkiye';
 import { ukraineTurkiyeContent } from '../data/ukraine-market';
 import { regionalIntentHomes } from '../data/regional-intent-homes';
+import { tradeDeskCopy } from '../data/trade-desk';
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
@@ -48,6 +49,7 @@ const chinaMarketEntry = chinaMarketEntryContent.zh;
 const chinaTurkiye = chinaTurkiyeContent.tr;
 const ukraineTurkiye = ukraineTurkiyeContent;
 const regionalIntentHome = (['de','it','ru'].includes(lang) ? regionalIntentHomes[lang as 'de'|'it'|'ru'] : null);
+const tradeDesk = tradeDeskCopy[lang as keyof typeof tradeDeskCopy];
 const corporate = companyCopy[lang];
 const editorial = editorialCopy[lang];
 const completionHome = homeEnhancement[lang];
@@ -936,6 +938,24 @@ const verifiedLater = {
     <section class="section"><div class="container"><div class="cta-statement"><p class="eyebrow">CTSEG</p><h2>{platform.pathsTitle}</h2><div class="actions"><a class="button" href={contactWithIntent('buyer_request')}>{platform.buyerCta}</a><a class="button button-secondary" href={contactWithIntent('supplier_market_entry')}>{platform.producerCta}</a></div></div></div></section>
     <section class="section commercial-form-section" id="contact"><div class="container"><CommercialRequestForm lang={lang} /></div></section>
   </>
+)}
+
+{key === 'home' && tradeDesk && (
+  <section class="section trade-desk-home">
+    <div class="container content-grid">
+      <div class="prose">
+        <p class="eyebrow">{tradeDesk.eyebrow}</p>
+        <h2>{tradeDesk.title}</h2>
+        <p>{tradeDesk.text}</p>
+        <ul class="check-list">{tradeDesk.points.map((item)=><li>{item}</li>)}</ul>
+      </div>
+      <aside class="side-panel">
+        <p class="eyebrow">CTSEG · Trade Desk</p>
+        <h3>{tradeDesk.title}</h3>
+        <a class="button" href={`${sectionHref('contact')}?intent=external_trade_desk&direction=other&category=other#commercial-form`} data-contact-intent="external_trade_desk">{tradeDesk.cta}</a>
+      </aside>
+    </div>
+  </section>
 )}
 
 {key === 'services' && !id && (
