@@ -5,6 +5,7 @@ import { insights, products, services, ui } from '../../data/site';
 import { guides, processPages } from '../../data/completion';
 import { getPosts, getPostForInsight } from '../../data/blog';
 import { searchLandings } from '../../data/search-landings';
+import { iranTradeContent } from '../../data/iran-trade';
 import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, tradeMatchingServiceSchema, type RouteRecord } from '../../lib/routes';
 
 export function getStaticPaths() {
@@ -99,6 +100,31 @@ if (record.key === 'how-we-work') {
   schemas.push({
     '@context':'https://schema.org','@type':'FAQPage',
     mainEntity:process.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))
+  });
+}
+if (record.key === 'iran-trade') {
+  const page=iranTradeContent[record.lang];
+  schemas.push({
+    '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#iran-trade-service`,
+    url:canonicalFor(record),name:page.title,description:page.description,inLanguage:record.lang,
+    serviceType:'Türkiye-Iran cross-border B2B sourcing and trade coordination',
+    provider:{'@id':'https://ctseg.com.tr/#organization'},
+    areaServed:['Türkiye','Iran','Europe'],
+    audience:{'@type':'BusinessAudience',name:'Importers, distributors, manufacturers and institutional buyers'}
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'ItemList',
+    name:page.inboundTitle,itemListOrder:'https://schema.org/ItemListOrderAscending',
+    itemListElement:page.inboundItems.map((name,index)=>({'@type':'ListItem',position:index+1,name}))
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'ItemList',
+    name:page.outboundTitle,itemListOrder:'https://schema.org/ItemListOrderAscending',
+    itemListElement:page.outboundItems.map((name,index)=>({'@type':'ListItem',position:index+1,name}))
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'FAQPage',
+    mainEntity:page.faq.map((item)=>({'@type':'Question',name:item.question,acceptedAnswer:{'@type':'Answer',text:item.answer}}))
   });
 }
 if (record.key === 'search-landing' && record.id) {
