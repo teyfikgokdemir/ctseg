@@ -231,7 +231,7 @@ for (const file of htmlFiles) {
     if (catalogueGroups.length !== 6 || new Set(catalogueGroups).size !== 6) errors.push(`${label}: expected six unique catalogue groups`);
   }
   const isHome = isHomepage;
-  if (isGenericHomepage && !/(?:class="hero-visual"|class="fa-hero-visual")[\s\S]*?srcset="[^"]*\/images\/generated\/export-warehouse-operations-640\.webp/.test(html)) {
+  if (isGenericHomepage && !/(?:class="hero-visual"|class="fa-hero-visual")[\s\S]*?srcset="[^"]*\/images\/generated\/ctseg-global-trade-hero-premium-640\.webp/.test(html)) {
     errors.push(`${label}: responsive premium homepage hero missing`);
   }
   const imagePreloadCount = (html.match(/rel="preload" as="image"/g) || []).length;

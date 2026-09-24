@@ -13,11 +13,11 @@ export type TradeVisual = {
   source:string;
   sector:string;
   intendedUsage:readonly string[];
-  aspectRatio:'3 / 2'|'16 / 9';
+  aspectRatio:'3 / 2';
   focalPosition:string;
   alt:Record<TradeVisualLocale,string>;
-  width:number;
-  height:number;
+  width:1536;
+  height:1024;
   priority:'hero'|'support';
   reusePolicy:'single-home-hero'|'single-sector-card-or-specialist-hero';
 };
@@ -25,21 +25,21 @@ export type TradeVisual = {
 export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
   'global-trade-hero':{
     key:'global-trade-hero',
-    source:'/images/ctseg-2026/export-warehouse-operations.webp',
+    source:'/images/ctseg-global-trade-hero-premium.webp',
     sector:'global trade coordination',
     intendedUsage:['homepage hero'],
-    aspectRatio:'16 / 9',focalPosition:'center 50%',width:1376,height:768,priority:'hero',
+    aspectRatio:'3 / 2',focalPosition:'center 48%',width:1536,height:1024,priority:'hero',
     reusePolicy:'single-home-hero',
     alt:{
-      tr:'Uluslararası tedarik ve ihracat koordinasyonunu temsil eden modern endüstriyel depo operasyonu',
-      en:'Modern industrial warehouse operation representing international sourcing and export coordination',
-      de:'Moderner Industriebetrieb als Darstellung internationaler Beschaffungs- und Exportkoordination',
-      it:'Operazioni di magazzino industriale che rappresentano sourcing internazionale e coordinamento export',
-      ru:'Современный промышленный склад как образ международного сорсинга и экспортной координации',
-      fa:'عملیات مدرن انبار صنعتی به‌عنوان نمادی از تأمین بین‌المللی و هماهنگی صادرات',
-      zh:'体现国际采购与出口协调能力的现代工业仓储运营场景',
-      vi:'Hoạt động kho công nghiệp hiện đại đại diện cho thu mua quốc tế và điều phối xuất khẩu'
-    }
+      tr:'Uluslararası ticaret akışını temsil eden liman ve ürün numuneleri',
+      en:'Port and product samples representing international trade flows',
+      de:'Hafen und Produktmuster als Darstellung internationaler Handelsströme',
+      it:'Porto e campioni di prodotto che rappresentano i flussi commerciali internazionali',
+      ru:'Порт и образцы продукции как образ международной торговли',
+      fa:'نمای بندر و نمونه‌های محصول به‌عنوان تصویری از جریان تجارت بین‌المللی'
+    ,
+      zh:'代表全球大宗贸易与跨境物流的现代化港口与产品样品',
+      vi:'Cảng biển và mẫu sản phẩm đại diện cho dòng chảy thương mại quốc tế'}
   },
   'food-oils':{
     key:'food-oils',source:'/images/ctseg-vegetable-oils-food-editorial.webp',sector:'food, grains and vegetable oils',
@@ -51,10 +51,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       de:'Unmarkierte Pflanzenöl- und Lebensmittelrohstoffmuster für die kaufmännische Bewertung',
       it:'Campioni non marchiati di olio vegetale e ingredienti alimentari per la valutazione commerciale',
       ru:'Немаркированные образцы растительного масла и пищевых ингредиентов для оценки',
-      fa:'نمونه‌های بدون نشان تجاری از روغن گیاهی و مواد اولیه غذایی برای ارزیابی تجاری',
+      fa:'نمونه‌های بدون نشان تجاری از روغن گیاهی و مواد اولیه غذایی برای ارزیابی تجاری'
+    ,
       zh:'用于商业决策评估的中性植物油及精选大宗食品原料样品',
-      vi:'Mẫu dầu thực vật không thương hiệu và nguyên liệu thực phẩm phục vụ đánh giá thương mại'
-    }
+      vi:'Mẫu dầu thực vật không thương hiệu và nguyên liệu thực phẩm phục vụ đánh giá thương mại'}
   },
   'nuts-dates':{
     key:'nuts-dates',source:'/images/ctseg-mixed-nuts-premium.webp',sector:'nuts, dates and dried fruits',
@@ -66,10 +66,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       de:'Nuss- und Trockenfruchtmuster zur Bewertung von Qualität und Sortierung',
       it:'Campioni di frutta a guscio ed essiccata per valutare qualità e classificazione',
       ru:'Образцы орехов и сухофруктов для оценки качества и сорта',
-      fa:'نمونه‌های خشکبار و میوه خشک برای بررسی کیفیت و درجه‌بندی محصول',
+      fa:'نمونه‌های خشکبار و میوه خشک برای بررسی کیفیت و درجه‌بندی محصول'
+    ,
       zh:'用于品质检验、等级评估与规格核验的特色坚果及干果样品',
-      vi:'Mẫu hạt dinh dưỡng và trái cây sấy khô phục vụ đánh giá chất lượng và phân hạng'
-    }
+      vi:'Mẫu hạt dinh dưỡng và trái cây sấy khô phục vụ đánh giá chất lượng và phân hạng'}
   },
   'carpets-textiles':{
     key:'carpets-textiles',source:'/images/ctseg-iranian-carpets-editorial.webp',sector:'carpets and textiles',
@@ -81,10 +81,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       de:'Handgeknüpfte Teppiche als Darstellung der Material- und Webartprüfung',
       it:'Tappeti annodati a mano per rappresentare la valutazione di materiali e tessitura',
       ru:'Ковры ручной работы для оценки материалов и качества плетения',
-      fa:'فرش‌های دستباف به‌عنوان تصویری از بررسی مواد و کیفیت بافت',
+      fa:'فرش‌های دستباف به‌عنوان تصویری از بررسی مواد و کیفیت بافت'
+    ,
       zh:'波斯传统手工地毯纹样细节与精细打结工艺鉴别',
-      vi:'Chi tiết kết cấu hoa văn và tay nghề dệt thảm thủ công truyền thống'
-    }
+      vi:'Chi tiết kết cấu hoa văn và tay nghề dệt thảm thủ công truyền thống'}
   },
   'textiles-inputs':{
     key:'textiles-inputs',source:'/images/ctseg-wholesale-textiles-editorial.webp',sector:'textiles and production inputs',
@@ -96,10 +96,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       de:'Stoff-, Handtuch- und Textilmuster auf einem Tisch zur kaufmännischen Bewertung',
       it:'Campioni di tessuto, asciugamani e prodotti tessili su un tavolo di valutazione commerciale',
       ru:'Образцы тканей, полотенец и текстиля на столе для коммерческой оценки',
-      fa:'نمونه‌های پارچه، حوله و منسوجات روی میز ارزیابی تجاری',
+      fa:'نمونه‌های پارچه، حوله و منسوجات روی میز ارزیابی تجاری'
+    ,
       zh:'用于大宗采购评估的高品质纺织面料与工业包材样品',
-      vi:'Mẫu vải dệt chất lượng cao và vật tư bao bì phục vụ đánh giá thu mua'
-    }
+      vi:'Mẫu vải dệt chất lượng cao và vật tư bao bì phục vụ đánh giá thu mua'}
   }
 };
 
