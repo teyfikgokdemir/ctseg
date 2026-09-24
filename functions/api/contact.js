@@ -6,11 +6,12 @@ const allowedOrigins = [
   /^http:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/
 ];
 const limits = {
-  locale:5,intent:40,tradeDirection:40,productFamily:40,name:120,company:160,emailOrPhone:254,email:254,phone:80,originMarket:100,destinationMarket:100,
+  locale:5,intent:40,supportNeed:60,tradeDirection:40,productFamily:40,name:120,company:160,emailOrPhone:254,email:254,phone:80,originMarket:100,destinationMarket:100,
   product:240,quantity:120,packaging:160,incoterm:30,delivery:180,targetDate:40,requirements:500,message:2000,website:80,startedAt:30,privacy:20,
   pagePath:200,landingPath:200,referrerHost:160,utmSource:100,utmMedium:100,utmCampaign:120,utmContent:120,utmTerm:120,clickId:160
 };
-const required = ['intent','tradeDirection','productFamily','name','company','emailOrPhone','message','privacy'];
+const required = ['intent','supportNeed','tradeDirection','productFamily','name','company','emailOrPhone','message','privacy'];
+const supportNeeds = ['supplier_sourcing','rfq_comparison','private_label','market_entry','document_assessment','external_trade_desk','other'];
 const tradeDirections = ['export_from_turkiye','import_to_turkiye','cross_border_sourcing','market_entry','other'];
 const productFamilies = ['vegetable_oils','nuts_dried_fruit','reflex_gloves','biofuel_feedstock','other'];
 
@@ -69,6 +70,7 @@ export async function onRequestPost(context){
   if(data.website)return json({ok:true});
   if(required.some((key)=>!data[key]))return json({code:'missing_required_fields'},400);
   if(!['buyer_request','supplier_market_entry','external_trade_desk'].includes(data.intent))return json({code:'invalid_intent'},400);
+  if(!supportNeeds.includes(data.supportNeed))return json({code:'invalid_support_need'},400);
   if(!tradeDirections.includes(data.tradeDirection))return json({code:'invalid_trade_direction'},400);
   if(!productFamilies.includes(data.productFamily))return json({code:'invalid_product_family'},400);
   const contact=data.emailOrPhone;
@@ -87,6 +89,7 @@ export async function onRequestPost(context){
   const lines=[
     'CTSEG commercial assessment request',
     `Intent: ${data.intent}`,
+    `Requested support: ${data.supportNeed}`,
     `Trade direction: ${data.tradeDirection}`,
     `Product family: ${data.productFamily}`,
     `Locale: ${data.locale}`,
