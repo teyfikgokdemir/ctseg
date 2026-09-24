@@ -1112,6 +1112,16 @@ const verifiedLater = {
       <div class="market-role-grid">{completionMarkets.map((market,index) => <article><span>{indexLabel(index)}</span><h2>{market.title}</h2><ul>{market.items.map((item)=><li>{item}</li>)}</ul></article>)}</div>
     </div></section>
     <ProcessRail steps={copy.framework} />
+    {lang === 'vi' && vietnamMarketEntry && (
+      <section class="section compact-link-section"><div class="container cta-statement">
+        <div>
+          <p class="eyebrow">{vietnamMarketEntry.eyebrow}</p>
+          <h2>{vietnamMarketEntry.title}</h2>
+          <p>{vietnamMarketEntry.description}</p>
+        </div>
+        <a class="button button-secondary" href={`/vi/${vietnamMarketEntry.slug}/`}>{t.readMore} →</a>
+      </div></section>
+    )}
     {(lang === 'tr' || lang === 'en' || lang === 'fa') && (
       <section class="section compact-link-section"><div class="container cta-statement">
         <div>
