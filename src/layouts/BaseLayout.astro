@@ -45,15 +45,16 @@ const alternates = pageKey === 'search-landing' && pageId ? searchLandingAlterna
   pageKey === 'iran-trade' ? {
     tr:`https://ctseg.com.tr/tr/${iranTradeContent.tr.slug}/`,
     en:`https://ctseg.com.tr/en/${iranTradeContent.en.slug}/`,
-    fa:`https://ctseg.com.tr/fa/${encodeURI(iranTradeContent.fa.slug)}/`
+    fa:'https://ctseg.com.tr/fa/'
   } as Record<string,string> : routeAlternates(pageKey, pageId);
-if (pageKey === 'home') alternates.fa = 'https://ctseg.com.tr/fa/';
 if (pageKey === 'home') alternates.ru = 'https://ctseg.com.tr/ru/';
-if (pageKey === 'home') alternates.zh = 'https://ctseg.com.tr/zh/';
-if (pageKey === 'home') alternates.vi = 'https://ctseg.com.tr/vi/';
 const alternateCodes = pageKey === 'medical'
   ? ['tr','en','de','it','ru','fa','zh','vi','sq','mk','sr']
-  : (pageKey === 'home' || ['how-we-work','scenarios'].includes(pageKey)
+  : (pageKey === 'home' && ['fa','zh','vi'].includes(String(lang))
+    ? [String(lang)]
+    : pageKey === 'home'
+    ? ['tr','en','de','it','ru']
+    : ['how-we-work','scenarios'].includes(pageKey)
     ? activeLocales
     : pageKey === 'iran-trade' ? ['tr','en','fa']
     : pageKey === 'vietnam-market-entry' ? ['vi']
@@ -127,7 +128,7 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1'} />
     <link rel="canonical" href={canonicalUrl} />
     {alternateCodes.map((code) => alternates[code as Locale] && <link rel="alternate" hreflang={code} href={alternates[code as Locale]} />)}
-    {alternates.en && <link rel="alternate" hreflang="x-default" href={alternates.en} />}
+    {alternateCodes.includes('en') && alternates.en && <link rel="alternate" hreflang="x-default" href={alternates.en} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -163,8 +164,8 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
     <main id="main">
       <slot />
-      {pageKey === 'home' && <TradeHouseStatement lang={lang as Locale} />}
-      {pageKey === 'home' && <TradeVideo lang={lang} />}
+      {pageKey === 'home' && !['fa','zh','vi'].includes(String(lang)) && <TradeHouseStatement lang={lang as Locale} />}
+      {pageKey === 'home' && !['fa','zh','vi'].includes(String(lang)) && <TradeVideo lang={lang} />}
     </main>
     <SiteFooter lang={lang} />
     {pageKey === 'home' && <FloatingActions lang={lang} />}
