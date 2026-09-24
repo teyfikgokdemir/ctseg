@@ -86,6 +86,15 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
   html body main .answer-section .actions{margin-top:42px!important}
   html body main .answer-section .button{background:#c4f000!important;border-color:#c4f000!important;color:#111!important;border-radius:999px!important}
 
+  /* Unified inner-page hero alignment across all locales. Product detail heroes keep their split layout. */
+  html body main .page-hero:not(.product-page-hero)>.container{max-width:1280px!important;text-align:center!important}
+  html body main .page-hero:not(.product-page-hero) .page-hero-copy{max-width:none!important;width:100%!important;margin-inline:auto!important}
+  html body main .page-hero:not(.product-page-hero) .breadcrumb{justify-content:center!important}
+  html body main .page-hero:not(.product-page-hero) .eyebrow{display:block!important;text-align:center!important}
+  html body main .page-hero:not(.product-page-hero) h1{max-width:none!important;margin-inline:auto!important;font-size:clamp(30px,2.8vw,46px)!important;line-height:1.06!important;letter-spacing:-.04em!important;text-align:center!important}
+  html body main .page-hero:not(.product-page-hero) .lead{max-width:76rem!important;margin:18px auto 0!important;text-align:center!important;font-size:clamp(16px,1.15vw,19px)!important;line-height:1.55!important}
+  html body main .page-hero:not(.product-page-hero) .actions{justify-content:center!important}
+  @media(min-width:1080px){html body main .page-hero:not(.product-page-hero) h1{white-space:nowrap!important}}
   @media(max-width:980px){
     .page-hero-grid{grid-template-columns:1fr!important}
     html body main .page-hero h1{font-size:clamp(46px,8vw,72px)!important;max-width:16ch!important}
