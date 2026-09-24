@@ -72,6 +72,11 @@ The locale roots below are intentionally not generic translations of the English
 
 These focused roots should be treated as distinct intent pages unless an explicit hreflang relationship is declared on-page. Do not infer that every locale root is a literal translation of the English homepage.
 
+
+## External Trade Desk
+
+CTSEG also offers an outsourced international trade function for companies that need ongoing sourcing, export development, buyer/distributor research, RFQ follow-up and commercial coordination without building a full internal trade team. The operating model can include a monthly retainer, company-owned email, CRM/pipeline management and periodic reporting, with CTSEG's external role disclosed transparently.
+
 ## Core pages
 
 - [Services](https://ctseg.com.tr/en/services/)
