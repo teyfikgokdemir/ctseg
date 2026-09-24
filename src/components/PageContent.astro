@@ -29,6 +29,8 @@ import { productEvidence } from '../data/product-evidence';
 import { iranTradeContent } from '../data/iran-trade';
 import { vietnamMarketEntryContent } from '../data/vietnam-market-entry';
 import { vietnamTurkiyeContent } from '../data/vietnam-turkiye';
+import { chinaMarketEntryContent } from '../data/china-market-entry';
+import { chinaTurkiyeContent } from '../data/china-turkiye';
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
@@ -40,6 +42,8 @@ const iranTrade = iranTradeContent[lang];
 const iranTradeHref = `/${lang}/${iranTrade.slug}/`;
 const vietnamMarketEntry = vietnamMarketEntryContent.vi;
 const vietnamTurkiye = vietnamTurkiyeContent.tr;
+const chinaMarketEntry = chinaMarketEntryContent.zh;
+const chinaTurkiye = chinaTurkiyeContent.tr;
 const corporate = companyCopy[lang];
 const editorial = editorialCopy[lang];
 const completionHome = homeEnhancement[lang];
@@ -786,7 +790,7 @@ const verifiedLater = {
       <div class="section-head"><h2>{platform.corridorsTitle}</h2><p>{platform.corridorsLead}</p></div>
       <div class="corridor-list">{platform.corridors.map((corridor,index) => <div><span>{indexLabel(index)}</span><strong>{corridor}</strong></div>)}</div>
     </div></section>
-    <ReflexSection lang={lang} />
+    {(lang !== 'zh' && lang !== 'vi') && <ReflexSection lang={lang} />}
     <ProcessRail title={platform.processTitle} steps={platform.process} />
     {<div class="container process-detail-link"><a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a></div>}
     <section class="markets-editorial section" id="markets"><div class="container">
@@ -888,6 +892,7 @@ const verifiedLater = {
       <div class="section-head"><h2>{platform.sectorsTitle}</h2><p>{platform.sectorsLead}</p></div>
       <div class="platform-sector-grid">
         {platform.sectors.map((sector,index) => {
+          if ((lang === 'zh' || lang === 'vi') && index === 0) return null;
           const visual=homepageSectorVisuals[index];
           return <article data-sector-visual={visual.key}>
             <ResponsiveImage src={visual.source} widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:620px) calc(100vw - 26px), (max-width:860px) 46vw, 25vw" width={visual.width} height={visual.height} alt={visual.altText} focalPosition={visual.focalPosition} visualKey={visual.key} loading="lazy" decoding="async" />
@@ -1022,6 +1027,91 @@ const verifiedLater = {
   </>
   );
 })()}
+
+{key === 'china-market-entry' && chinaMarketEntry && (
+  <>
+    <PageHero lang={lang} eyebrow={chinaMarketEntry.eyebrow} title={chinaMarketEntry.title} lead={chinaMarketEntry.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
+    <section class="section"><div class="container content-grid">
+      <div class="prose">
+        <div class="content-block direct-answer">
+          <h2>{chinaMarketEntry.directAnswerTitle}</h2>
+          <p>{chinaMarketEntry.directAnswer}</p>
+        </div>
+        <div class="content-block">
+          <h2>{chinaMarketEntry.sectorsTitle}</h2>
+          <p>{chinaMarketEntry.sectorsLead}</p>
+          <ol class="check-list">{chinaMarketEntry.sectors.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}</ol>
+        </div>
+        <div class="content-block">
+          <h2>{chinaMarketEntry.supportTitle}</h2>
+          <p>{chinaMarketEntry.supportLead}</p>
+          <ul class="check-list">{chinaMarketEntry.support.map((item)=><li>{item}</li>)}</ul>
+        </div>
+        <div class="content-block origin-note">
+          <h2>{chinaMarketEntry.complianceTitle}</h2>
+          <p>{chinaMarketEntry.complianceText}</p>
+        </div>
+        <div class="content-block">
+          <h2>{chinaMarketEntry.processTitle}</h2>
+          <ol class="check-list">{chinaMarketEntry.process.map((item)=><li>{item}</li>)}</ol>
+        </div>
+        <div class="content-block faq">
+          <h2>{t.faq}</h2>
+          {chinaMarketEntry.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+        </div>
+      </div>
+      <aside class="side-panel">
+        <p class="eyebrow">CTSEG · 中国 → Türkiye & Europe</p>
+        <h2>{chinaMarketEntry.ctaTitle}</h2>
+        <p>{chinaMarketEntry.ctaText}</p>
+        <a class="button" href={`${sectionHref('contact')}?intent=supplier_market_entry#commercial-form`} data-contact-intent="supplier_market_entry">{chinaMarketEntry.ctaLabel}</a>
+      </aside>
+    </div></section>
+  </>
+)}
+
+{key === 'china-turkiye' && chinaTurkiye && (
+  <>
+    <PageHero lang={lang} eyebrow={chinaTurkiye.eyebrow} title={chinaTurkiye.title} lead={chinaTurkiye.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
+    <section class="section"><div class="container content-grid">
+      <div class="prose">
+        <div class="content-block direct-answer">
+          <h2>{chinaTurkiye.directAnswerTitle}</h2>
+          <p>{chinaTurkiye.directAnswer}</p>
+        </div>
+        <div class="content-block">
+          <h2>{chinaTurkiye.productsTitle}</h2>
+          <p>{chinaTurkiye.productsLead}</p>
+          <ol class="check-list">
+            {chinaTurkiye.products.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')} · {item.name}</strong><br/><span>{item.signal}</span></li>)}
+          </ol>
+        </div>
+        <div class="content-block">
+          <h2>{chinaTurkiye.buyerTypesTitle}</h2>
+          <ul class="check-list">{chinaTurkiye.buyerTypes.map((item)=><li>{item}</li>)}</ul>
+        </div>
+        <div class="content-block origin-note">
+          <h2>{chinaTurkiye.complianceTitle}</h2>
+          <p>{chinaTurkiye.complianceText}</p>
+        </div>
+        <div class="content-block">
+          <h2>{chinaTurkiye.processTitle}</h2>
+          <ol class="check-list">{chinaTurkiye.process.map((item)=><li>{item}</li>)}</ol>
+        </div>
+        <div class="content-block faq">
+          <h2>{t.faq}</h2>
+          {chinaTurkiye.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+        </div>
+      </div>
+      <aside class="side-panel">
+        <p class="eyebrow">CTSEG · China → Türkiye</p>
+        <h2>{chinaTurkiye.ctaTitle}</h2>
+        <p>{chinaTurkiye.ctaText}</p>
+        <a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{chinaTurkiye.ctaLabel}</a>
+      </aside>
+    </div></section>
+  </>
+)}
 
 {key === 'vietnam-turkiye' && vietnamTurkiye && (
   <>
@@ -1161,6 +1251,26 @@ const verifiedLater = {
       <div class="market-role-grid">{completionMarkets.map((market,index) => <article><span>{indexLabel(index)}</span><h2>{market.title}</h2><ul>{market.items.map((item)=><li>{item}</li>)}</ul></article>)}</div>
     </div></section>
     <ProcessRail steps={copy.framework} />
+    {lang === 'zh' && chinaMarketEntry && (
+      <section class="section compact-link-section"><div class="container cta-statement">
+        <div>
+          <p class="eyebrow">{chinaMarketEntry.eyebrow}</p>
+          <h2>{chinaMarketEntry.title}</h2>
+          <p>{chinaMarketEntry.description}</p>
+        </div>
+        <a class="button button-secondary" href={`/zh/${chinaMarketEntry.slug}/`}>{t.readMore} →</a>
+      </div></section>
+    )}
+    {lang === 'tr' && chinaTurkiye && (
+      <section class="section compact-link-section"><div class="container cta-statement">
+        <div>
+          <p class="eyebrow">{chinaTurkiye.eyebrow}</p>
+          <h2>{chinaTurkiye.title}</h2>
+          <p>{chinaTurkiye.description}</p>
+        </div>
+        <a class="button button-secondary" href={`/tr/${chinaTurkiye.slug}/`}>{t.readMore} →</a>
+      </div></section>
+    )}
     {lang === 'tr' && vietnamTurkiye && (
       <section class="section compact-link-section"><div class="container cta-statement">
         <div>
