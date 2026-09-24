@@ -14,6 +14,9 @@
       >
         <source src="/videos/Ctseg_tanitim.mp4" type="video/mp4" />
       </video>
+      <button class="ctseg-home-promo-video__sound" type="button" data-ctseg-video-sound aria-pressed="false" aria-label="Videonun sesini aç">
+        <span aria-hidden="true">🔇</span><strong>Sesi aç</strong>
+      </button>
     </figure>
   </div>
 </section>
@@ -23,9 +26,15 @@
   .ctseg-home-promo-video__frame{position:relative;margin:0;overflow:hidden;border:1px solid rgba(238,232,218,.16);border-radius:28px;background:#0b0d11;height:clamp(420px,calc(100svh - 190px),620px);box-shadow:0 34px 90px rgba(0,0,0,.32)}
   .ctseg-home-promo-video__frame::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border:1px solid rgba(255,255,255,.08);border-radius:inherit}
   .ctseg-home-promo-video__frame video{display:block;width:100%;height:100%;object-fit:cover;object-position:center;background:#0b0d11}
+  .ctseg-home-promo-video__sound{position:absolute;right:20px;bottom:20px;z-index:4;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 14px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(7,9,13,.72);backdrop-filter:blur(12px);color:#fff;cursor:pointer;font:inherit;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+  .ctseg-home-promo-video__sound strong{font-size:12px;letter-spacing:.05em}
+  .ctseg-home-promo-video__sound:hover{border-color:rgba(196,240,0,.45)}
+
   @media(max-width:620px){
     .ctseg-home-promo-video{padding:10px 0 38px}
     .ctseg-home-promo-video__frame{height:auto;aspect-ratio:16/9;border-radius:18px}
+    .ctseg-home-promo-video__sound{right:12px;bottom:12px;min-height:38px;padding:0 12px}
+    .ctseg-home-promo-video__sound strong{font-size:11px}
   }
   @media(prefers-reduced-motion:reduce){
     .ctseg-home-promo-video__frame video{animation:none}
@@ -36,7 +45,20 @@
   (()=>{
     const video=document.querySelector('[data-ctseg-home-promo-video]') as HTMLVideoElement | null;
     if(!video)return;
+    const soundButton=document.querySelector('[data-ctseg-video-sound]') as HTMLButtonElement | null;
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    if(soundButton){
+      soundButton.addEventListener('click',()=>{
+        video.muted=!video.muted;
+        soundButton.setAttribute('aria-pressed',String(!video.muted));
+        soundButton.setAttribute('aria-label',video.muted?'Videonun sesini aç':'Videonun sesini kapat');
+        const icon=soundButton.querySelector('span');
+        const label=soundButton.querySelector('strong');
+        if(icon) icon.textContent=video.muted?'🔇':'🔊';
+        if(label) label.textContent=video.muted?'Sesi aç':'Sesi kapat';
+        if(video.paused) video.play().catch(()=>{});
+      });
+    }
     if(reduced.matches){ video.pause(); return; }
     if('IntersectionObserver' in window){
       const observer=new IntersectionObserver((entries)=>{
