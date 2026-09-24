@@ -154,3 +154,48 @@ main .section:not(.markets-editorial) .section-head p{
   main .trade-paths-grid p{font-size:14px!important;line-height:1.5!important;max-width:34ch!important}
   main .trade-paths-grid .text-link{left:24px!important;right:24px!important;bottom:22px!important;font-size:12px!important}
 }
+
+
+/* Refined premium trade cards */
+@media(min-width:981px){
+  main .trade-paths-section{padding-block:42px!important}
+  main .trade-paths-section .section-head{margin-bottom:26px!important}
+  main .trade-paths-grid{border-radius:18px!important;overflow:hidden!important;border:1px solid rgba(255,255,255,.1)!important;border-top-color:rgba(196,240,0,.35)!important}
+  main .trade-paths-grid article{
+    min-height:216px!important;
+    padding:22px 22px 56px!important;
+    background:linear-gradient(180deg,rgba(255,255,255,.022),rgba(255,255,255,.008))!important;
+  }
+  main .trade-paths-grid article:hover{background:rgba(196,240,0,.96)!important}
+  main .trade-paths-grid article>span{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:28px!important;
+    height:28px!important;
+    border:1px solid rgba(196,240,0,.28)!important;
+    border-radius:999px!important;
+    font-size:10px!important;
+    letter-spacing:.06em!important;
+  }
+  main .trade-paths-grid h3{
+    max-width:14ch!important;
+    margin:14px 0 10px!important;
+    font-size:clamp(24px,1.7vw,31px)!important;
+    line-height:1.06!important;
+    letter-spacing:-.035em!important;
+  }
+  main .trade-paths-grid p{
+    max-width:32ch!important;
+    font-size:13px!important;
+    line-height:1.48!important;
+    color:#9f9f9f!important;
+  }
+  main .trade-paths-grid .text-link{
+    left:22px!important;
+    right:22px!important;
+    bottom:19px!important;
+    font-size:11px!important;
+    letter-spacing:.02em!important;
+  }
+}
