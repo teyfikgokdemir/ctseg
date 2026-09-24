@@ -1,0 +1,154 @@
+---
+import '../../styles/site.css';
+import { ukraineMarketEntry as page } from '../../data/ukraine-market';
+
+const canonical = 'https://ctseg.com.tr/uk/';
+const schema = [
+  {
+    '@context':'https://schema.org',
+    '@type':'WebPage',
+    '@id':`${canonical}#webpage`,
+    url:canonical,
+    name:page.title,
+    description:page.description,
+    inLanguage:'uk-UA',
+    isPartOf:{'@id':'https://ctseg.com.tr/#website'},
+    about:{'@id':'https://ctseg.com.tr/#organization'}
+  },
+  {
+    '@context':'https://schema.org',
+    '@type':'Service',
+    '@id':`${canonical}#ukraine-turkiye-sourcing`,
+    url:canonical,
+    name:page.title,
+    description:page.description,
+    inLanguage:'uk-UA',
+    serviceType:'Türkiye supplier sourcing and reconstruction procurement coordination for Ukrainian businesses',
+    provider:{'@id':'https://ctseg.com.tr/#organization'},
+    areaServed:['Ukraine','Türkiye'],
+    audience:{'@type':'BusinessAudience',name:'Ukrainian importers, contractors, manufacturers and project companies'}
+  },
+  {
+    '@context':'https://schema.org',
+    '@type':'ItemList',
+    name:page.sectorsTitle,
+    itemListOrder:'https://schema.org/ItemListOrderAscending',
+    itemListElement:page.sectors.map((name,index)=>({'@type':'ListItem',position:index+1,name}))
+  },
+  {
+    '@context':'https://schema.org',
+    '@type':'FAQPage',
+    mainEntity:page.faq.map((item)=>({
+      '@type':'Question',
+      name:item.question,
+      acceptedAnswer:{'@type':'Answer',text:item.answer}
+    }))
+  }
+];
+---
+<!doctype html>
+<html lang="uk-UA" dir="ltr" data-locale="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{page.title} | CTSEG</title>
+    <meta name="description" content={page.description} />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="uk" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="uk_UA" />
+    <meta property="og:title" content={page.title} />
+    <meta property="og:description" content={page.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="CTSEG" />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/uk/" aria-label="CTSEG Україна">
+          <img src="/images/ctseg-logo-transparent.png" width="320" height="103" alt="CTSEG" decoding="async" />
+        </a>
+        <div style="margin-left:auto;display:flex;gap:14px;align-items:center">
+          <a class="text-link" href="/tr/">TR</a>
+          <a class="text-link" href="/en/">EN</a>
+          <a class="button button-small" href="/en/contact/?intent=buyer_request#commercial-form">Надіслати RFQ</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">{page.eyebrow}</p>
+            <h1>{page.title}</h1>
+            <p class="lead">{page.description}</p>
+            <div class="actions">
+              <a class="button" href="/en/contact/?intent=buyer_request#commercial-form">{page.ctaLabel}</a>
+              <a class="button button-secondary" href="#sectors">Категорії постачання</a>
+            </div>
+          </div>
+          <figure class="hero-visual">
+            <img src="/images/ctseg-global-trade-hero-premium.webp" width="1536" height="1024" alt="B2B постачання між Україною та Туреччиною" loading="eager" decoding="async" style="width:100%;height:auto;display:block" />
+          </figure>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container content-grid">
+          <div class="prose">
+            <div class="content-block direct-answer">
+              <h2>{page.directAnswerTitle}</h2>
+              <p>{page.directAnswer}</p>
+            </div>
+
+            <div class="content-block" id="sectors">
+              <h2>{page.sectorsTitle}</h2>
+              <ol class="check-list">
+                {page.sectors.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}
+              </ol>
+            </div>
+
+            <div class="content-block origin-note">
+              <h2>{page.reconstructionTitle}</h2>
+              <p>{page.reconstructionText}</p>
+            </div>
+
+            <div class="content-block">
+              <h2>{page.supportTitle}</h2>
+              <ul class="check-list">{page.support.map((item)=><li>{item}</li>)}</ul>
+            </div>
+
+            <div class="content-block">
+              <h2>{page.processTitle}</h2>
+              <ol class="check-list">{page.process.map((item)=><li>{item}</li>)}</ol>
+            </div>
+
+            <div class="content-block faq">
+              <h2>Поширені запитання</h2>
+              {page.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+            </div>
+          </div>
+
+          <aside class="side-panel">
+            <p class="eyebrow">CTSEG · Україна ⇄ Türkiye</p>
+            <h2>{page.ctaTitle}</h2>
+            <p>{page.ctaText}</p>
+            <a class="button" href="/en/contact/?intent=buyer_request#commercial-form">{page.ctaLabel}</a>
+            <p style="margin-top:18px;font-size:.84rem;opacity:.78">CTSEG Sanayi ve Ticaret Limited Şirketi · İstanbul, Türkiye</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container" style="display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap">
+        <div><strong>CTSEG</strong><p>Стратегічне постачання · B2B координація · Вихід на ринок</p></div>
+        <div><a href="/en/contact/">Контакти</a> · <a href="/en/">Global site</a></div>
+      </div>
+    </footer>
+  </body>
+</html>
