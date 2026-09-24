@@ -62,6 +62,9 @@ CTSEG is not a speculative broker, transactional web shop, or seller of unverifi
 
 The locale roots below are intentionally not generic translations of the English homepage. They are focused commercial landing pages built around the primary local search intent:
 
+- German /de/: DACH companies seeking verified Türkiye suppliers, nearshoring and manufacturing partners.
+- Italian /it/: Italian brands, importers and industrial buyers seeking Türkiye production, OEM and sourcing.
+- Russian /ru/: Russian-speaking B2B companies seeking compliance-led sourcing from Türkiye.
 - Persian /fa/: Türkiye–Iran B2B sourcing, trade coordination and eligible market-entry flows.
 - Chinese /zh/: Chinese manufacturers, OEM/ODM factories and exporters seeking buyers, distributors and market entry in Türkiye and suitable European markets.
 - Vietnamese /vi/: Vietnamese manufacturers and exporters seeking buyers, distributors and market entry in Türkiye and suitable European markets.
