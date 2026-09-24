@@ -1,3 +1,4 @@
+import { schemaLanguage } from '../data/locales';
 import {
   insightIds, insights, legal, legalIds, locales, localizedPath, pageCopy, productIds, products,
   sectionSlugs, serviceIds, services, ui, type Locale
@@ -148,7 +149,7 @@ export function breadcrumbSchema(record: RouteRecord, title: string) {
 export function tradeMatchingServiceSchema(record:RouteRecord, title:string, description:string) {
   return {
     '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#trade-matching-service`,
-    name:title,description,url:canonicalFor(record),inLanguage:record.lang,
+    name:title,description,url:canonicalFor(record),inLanguage:schemaLanguage(record.lang),
     serviceType:'Two-way global trade, strategic sourcing, supplier verification and market entry',
     provider:{'@id':'https://ctseg.com.tr/#organization'},
     areaServed:['Türkiye','Europe','Middle East','Asia','International'],
