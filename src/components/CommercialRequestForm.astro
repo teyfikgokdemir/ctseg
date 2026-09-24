@@ -9,6 +9,81 @@ const copy = contactCopy[lang];
 const qualification = contactQualification[lang];
 const privacyHref = lang === 'fa' ? '/fa/privacy/' : localizedPath(lang,'legal','privacy');
 
+const supportNeedCopy = {
+  tr:{label:'Hangi konuda destek arıyorsunuz?',options:[
+    ['supplier_sourcing','Türkiye’de üretici veya tedarikçi bulma'],
+    ['rfq_comparison','RFQ hazırlama ve teklif karşılaştırma'],
+    ['private_label','Özel marka / fason üretici araştırması'],
+    ['market_entry','İhracat ve yeni pazar girişi'],
+    ['document_assessment','Ürün, menşe veya batch belgesi değerlendirmesi'],
+    ['external_trade_desk','Sürekli Dış Ticaret Masası'],
+    ['other','Diğer']
+  ]},
+  en:{label:'What support do you need?',options:[
+    ['supplier_sourcing','Find and verify a manufacturer or supplier in Türkiye'],
+    ['rfq_comparison','RFQ preparation and bid comparison'],
+    ['private_label','Private-label / contract manufacturer research'],
+    ['market_entry','Export and new-market entry'],
+    ['document_assessment','Product, origin or batch-document assessment'],
+    ['external_trade_desk','Ongoing External Trade Desk'],
+    ['other','Other']
+  ]},
+  de:{label:'Wobei benötigen Sie Unterstützung?',options:[
+    ['supplier_sourcing','Hersteller oder Lieferanten in der Türkei finden'],
+    ['rfq_comparison','RFQ-Erstellung und Angebotsvergleich'],
+    ['private_label','Private-Label- / Lohnhersteller-Recherche'],
+    ['market_entry','Export und Markteintritt'],
+    ['document_assessment','Produkt-, Ursprungs- oder Chargendokumentprüfung'],
+    ['external_trade_desk','Laufender externer Trade Desk'],
+    ['other','Sonstiges']
+  ]},
+  it:{label:'Di quale supporto avete bisogno?',options:[
+    ['supplier_sourcing','Ricerca e verifica di produttori o fornitori in Turchia'],
+    ['rfq_comparison','Preparazione RFQ e confronto offerte'],
+    ['private_label','Ricerca produttore private label / conto terzi'],
+    ['market_entry','Export e ingresso in nuovi mercati'],
+    ['document_assessment','Valutazione prodotto, origine o documenti di lotto'],
+    ['external_trade_desk','Trade Desk esterno continuativo'],
+    ['other','Altro']
+  ]},
+  ru:{label:'Какая поддержка вам нужна?',options:[
+    ['supplier_sourcing','Поиск и проверка производителя или поставщика в Турции'],
+    ['rfq_comparison','Подготовка RFQ и сравнение предложений'],
+    ['private_label','Поиск контрактного / private-label производителя'],
+    ['market_entry','Экспорт и выход на новый рынок'],
+    ['document_assessment','Проверка товара, происхождения или документов партии'],
+    ['external_trade_desk','Постоянный внешний Trade Desk'],
+    ['other','Другое']
+  ]},
+  fa:{label:'به چه نوع پشتیبانی نیاز دارید؟',options:[
+    ['supplier_sourcing','یافتن و اعتبارسنجی تولیدکننده یا تأمین‌کننده در ترکیه'],
+    ['rfq_comparison','تهیه RFQ و مقایسه پیشنهادها'],
+    ['private_label','تحقیق تولیدکننده پرایوت‌لیبل / قراردادی'],
+    ['market_entry','صادرات و ورود به بازار جدید'],
+    ['document_assessment','ارزیابی محصول، مبدأ یا اسناد پارت'],
+    ['external_trade_desk','میز تجارت خارجی مستمر'],
+    ['other','سایر']
+  ]},
+  zh:{label:'您需要哪类商业支持？',options:[
+    ['supplier_sourcing','寻找并核验土耳其制造商或供应商'],
+    ['rfq_comparison','RFQ编制与多供应商报价对比'],
+    ['private_label','贴牌 / 合同制造商调研'],
+    ['market_entry','出口与新市场进入'],
+    ['document_assessment','产品、原产地或批次文件评估'],
+    ['external_trade_desk','长期外包国际贸易团队'],
+    ['other','其他']
+  ]},
+  vi:{label:'Bạn cần hỗ trợ về nội dung nào?',options:[
+    ['supplier_sourcing','Tìm và xác minh nhà sản xuất / nhà cung cấp tại Thổ Nhĩ Kỳ'],
+    ['rfq_comparison','Chuẩn bị RFQ và so sánh báo giá'],
+    ['private_label','Nghiên cứu nhà sản xuất private label / gia công'],
+    ['market_entry','Xuất khẩu và tiếp cận thị trường mới'],
+    ['document_assessment','Đánh giá sản phẩm, xuất xứ hoặc hồ sơ lô hàng'],
+    ['external_trade_desk','Bộ phận Ngoại thương thuê ngoài dài hạn'],
+    ['other','Khác']
+  ]}
+}[lang];
+
 const dynamicPlaceholders = {
   tr: {
     buyer_request: 'Aradığınız ürün spesifikasyonu, tahmini hacim (MT / Konteyner), teslimat Incoterm (FOB/CIF) ve hedef varış limanı detayları...',
@@ -154,6 +229,7 @@ const dynamicPlaceholders = {
     </div>
     <div class="commercial-form-grid commercial-form-grid--core">
       <label class="commercial-field"><span>{copy.intentLabel}</span><select name="intent" required data-commercial-intent><option value=""></option><option value="buyer_request">{copy.buyerIntent}</option><option value="supplier_market_entry">{copy.producerIntent}</option><option value="external_trade_desk">{lang === 'tr' ? 'Dış Ticaret Masası' : lang === 'de' ? 'Externer Trade Desk' : lang === 'it' ? 'Trade Desk esterno' : lang === 'ru' ? 'Внешний Trade Desk' : lang === 'fa' ? 'میز تجارت خارجی' : lang === 'zh' ? '外包国际贸易团队' : lang === 'vi' ? 'Bộ phận Ngoại thương thuê ngoài' : 'External Trade Desk'}</option></select></label>
+      <label class="commercial-field commercial-field--wide"><span>{supportNeedCopy.label}</span><select name="supportNeed" required data-support-need><option value=""></option>{supportNeedCopy.options.map(([value,label])=><option value={value}>{label}</option>)}</select></label>
       <label class="commercial-field"><span>{qualification.tradeDirection}</span><select name="tradeDirection" required data-trade-direction><option value=""></option>{qualification.tradeDirections.map((option)=><option value={option.value}>{option.label}</option>)}</select></label>
       <label class="commercial-field commercial-field--wide"><span>{qualification.productFamily}</span><select name="productFamily" required data-product-family><option value=""></option>{qualification.productFamilies.map((option)=><option value={option.value}>{option.label}</option>)}</select></label>
       <label class="commercial-field"><span>{copy.name}</span><input type="text" name="name" autocomplete="name" maxlength="120" required /></label>
@@ -275,6 +351,7 @@ const dynamicPlaceholders = {
       const download=form.querySelector('[data-download-summary]');
       const product=form.elements.namedItem('product');
       const intent=form.elements.namedItem('intent');
+      const supportNeed=form.elements.namedItem('supportNeed');
       const tradeDirection=form.elements.namedItem('tradeDirection');
       const productFamily=form.elements.namedItem('productFamily');
       const message=form.elements.namedItem('message');
@@ -303,7 +380,7 @@ const dynamicPlaceholders = {
       };
 
       let startedTracked=false;
-      const track=(event,parameters={})=>window.ctsegTrack?.(event,{form_type:'qualified_commercial_request',trade_intent:intent instanceof HTMLSelectElement?intent.value:'',trade_direction:tradeDirection instanceof HTMLSelectElement?tradeDirection.value:'',product_family:productFamily instanceof HTMLSelectElement?productFamily.value:'',...parameters});
+      const track=(event,parameters={})=>window.ctsegTrack?.(event,{form_type:'qualified_commercial_request',trade_intent:intent instanceof HTMLSelectElement?intent.value:'',support_need:supportNeed instanceof HTMLSelectElement?supportNeed.value:'',trade_direction:tradeDirection instanceof HTMLSelectElement?tradeDirection.value:'',product_family:productFamily instanceof HTMLSelectElement?productFamily.value:'',...parameters});
 
       intentCards.forEach((card)=>{
         card.addEventListener('click',()=>{
