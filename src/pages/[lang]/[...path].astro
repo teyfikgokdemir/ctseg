@@ -6,6 +6,7 @@ import { guides, processPages } from '../../data/completion';
 import { getPosts, getPostForInsight } from '../../data/blog';
 import { searchLandings } from '../../data/search-landings';
 import { iranTradeContent } from '../../data/iran-trade';
+import { vietnamMarketEntryContent } from '../../data/vietnam-market-entry';
 import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, tradeMatchingServiceSchema, type RouteRecord } from '../../lib/routes';
 
 export function getStaticPaths() {
@@ -100,6 +101,26 @@ if (record.key === 'how-we-work') {
   schemas.push({
     '@context':'https://schema.org','@type':'FAQPage',
     mainEntity:process.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))
+  });
+}
+if (record.key === 'vietnam-market-entry' && vietnamMarketEntryContent.vi) {
+  const page=vietnamMarketEntryContent.vi;
+  schemas.push({
+    '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#vietnam-market-entry-service`,
+    url:canonicalFor(record),name:page.title,description:page.description,inLanguage:'vi',
+    serviceType:'Vietnam producer export market entry and B2B buyer development',
+    provider:{'@id':'https://ctseg.com.tr/#organization'},
+    areaServed:['Türkiye','Europe'],
+    audience:{'@type':'BusinessAudience',name:'Vietnamese manufacturers and exporters seeking buyers in Türkiye and Europe'}
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'ItemList',
+    name:page.sectorsTitle,itemListOrder:'https://schema.org/ItemListOrderAscending',
+    itemListElement:page.sectors.map((name,index)=>({'@type':'ListItem',position:index+1,name}))
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'FAQPage',
+    mainEntity:page.faq.map((item)=>({'@type':'Question',name:item.question,acceptedAnswer:{'@type':'Answer',text:item.answer}}))
   });
 }
 if (record.key === 'iran-trade') {
