@@ -6,6 +6,27 @@ const canonical = 'https://ctseg.com.tr/uk/';
 const schema = [
   {
     '@context':'https://schema.org',
+    '@type':'Organization',
+    '@id':'https://ctseg.com.tr/#organization',
+    name:'CTSEG Sanayi ve Ticaret Limited Şirketi',
+    alternateName:'CTSEG',
+    url:'https://ctseg.com.tr/',
+    logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
+    address:{'@type':'PostalAddress',addressLocality:'Tuzla',addressRegion:'İstanbul',addressCountry:'TR'},
+    areaServed:['Türkiye','Ukraine','Europe'],
+    knowsLanguage:['tr','en','uk']
+  },
+  {
+    '@context':'https://schema.org',
+    '@type':'WebSite',
+    '@id':'https://ctseg.com.tr/#website',
+    url:'https://ctseg.com.tr/',
+    name:'CTSEG',
+    publisher:{'@id':'https://ctseg.com.tr/#organization'},
+    inLanguage:['tr','en','uk']
+  },
+  {
+    '@context':'https://schema.org',
     '@type':'WebPage',
     '@id':`${canonical}#webpage`,
     url:canonical,
