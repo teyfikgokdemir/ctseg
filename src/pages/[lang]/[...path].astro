@@ -14,6 +14,7 @@ import { chinaTurkiyeContent } from '../../data/china-turkiye';
 import { ukraineTurkiyeContent } from '../../data/ukraine-market';
 import { regionalIntentHomes } from '../../data/regional-intent-homes';
 import { tradeDeskCopy } from '../../data/trade-desk';
+import { syriaMarketContent } from '../../data/syria-market';
 import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, tradeMatchingServiceSchema, type RouteRecord } from '../../lib/routes';
 
 export function getStaticPaths() {
@@ -118,6 +119,29 @@ if (record.key === 'home' && tradeDeskCopy[record.lang as keyof typeof tradeDesk
     provider:{'@id':'https://ctseg.com.tr/#organization'},
     areaServed:['Türkiye','Europe','Middle East','Asia','International'],
     audience:{'@type':'BusinessAudience',name:'Companies outsourcing ongoing international trade, sourcing and export development operations'}
+  });
+}
+if (record.key === 'syria-market' && (record.lang === 'tr' || record.lang === 'en')) {
+  const page=syriaMarketContent[record.lang];
+  schemas.push({
+    '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#syria-trade-service`,
+    url:canonicalFor(record),name:page.title,description:page.description,inLanguage:schemaLanguage(record.lang),
+    serviceType:'Türkiye Syria B2B sourcing, supplier verification and market-entry coordination',
+    provider:{'@id':'https://ctseg.com.tr/#organization'},
+    areaServed:['Türkiye','Syria'],
+    audience:[
+      {'@type':'BusinessAudience',name:'Syrian business buyers sourcing products and manufacturers from Türkiye'},
+      {'@type':'BusinessAudience',name:'Turkish manufacturers seeking buyers, importers and distributors in Syria'}
+    ]
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'ItemList',
+    name:page.sectorsTitle,
+    itemListElement:page.sectors.map((name,index)=>({'@type':'ListItem',position:index+1,name}))
+  });
+  schemas.push({
+    '@context':'https://schema.org','@type':'FAQPage',
+    mainEntity:page.faq.map((item)=>({'@type':'Question',name:item.question,acceptedAnswer:{'@type':'Answer',text:item.answer}}))
   });
 }
 if (record.key === 'services' && record.id) {
