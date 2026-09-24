@@ -763,10 +763,17 @@ const verifiedLater = {
         </div>
       </div>
       <aside class="side-panel">
-        <p class="eyebrow">CTSEG · Türkiye sourcing</p>
+        <p class="eyebrow">CTSEG · B2B corridor</p>
         <h2>{regionalIntentHome.ctaTitle}</h2>
         <p>{regionalIntentHome.ctaText}</p>
         <a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{regionalIntentHome.ctaLabel}</a>
+        {regionalIntentHome.sellerTitle && regionalIntentHome.sellerText && regionalIntentHome.sellerLabel && (
+          <div class="content-block" style="margin-top:1.4rem">
+            <h3>{regionalIntentHome.sellerTitle}</h3>
+            <p>{regionalIntentHome.sellerText}</p>
+            <a class="button button-secondary" href={`${sectionHref('contact')}?intent=supplier_market_entry#commercial-form`} data-contact-intent="supplier_market_entry">{regionalIntentHome.sellerLabel}</a>
+          </div>
+        )}
       </aside>
     </div></section>
   </>
