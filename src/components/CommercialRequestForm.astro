@@ -13,41 +13,49 @@ const dynamicPlaceholders = {
   tr: {
     buyer_request: 'Aradığınız ürün spesifikasyonu, tahmini hacim (MT / Konteyner), teslimat Incoterm (FOB/CIF) ve hedef varış limanı detayları...',
     supplier_market_entry: 'Ürettiğiniz ürünler, aylık/yıllık fiili üretim kapasiteniz, sahip olduğunuz kalite sertifikaları ve açılmak istediğiniz hedef pazarlar...',
+    external_trade_desk: 'Şirketinizin dış ticaret hedefi, mevcut ekip yapısı, hedef ülkeler, ürün grupları, aylık ihtiyaç ve CTSEG’den beklediğiniz operasyon kapsamı...',
     default: 'Ticari talebinizin detayları, ürün spesifikasyonları ve teslimat gereksinimleri...'
   },
   en: {
     buyer_request: 'Required product specifications, estimated volume (MT / containers), preferred Incoterm (FOB/CIF), and target destination port...',
     supplier_market_entry: 'Manufactured product lines, monthly/annual production capacity, international quality certifications, and target export regions...',
+    external_trade_desk: 'Your company’s trade objectives, target markets, product groups, current team setup and the ongoing scope you want CTSEG to manage...',
     default: 'Details of your commercial request, product specifications, and delivery requirements...'
   },
   de: {
     buyer_request: 'Produktspezifikationen, geschätztes Volumen (Tonnen / Container), bevorzugte Incoterm (FOB/CIF) und Bestimmungshafen...',
     supplier_market_entry: 'Hergestellte Produktlinien, monatliche/jährliche Produktionskapazität, Zertifizierungen und angestrebte Exportmärkte...',
+    external_trade_desk: 'Außenhandelsziele Ihres Unternehmens, Zielmärkte, Produktgruppen, aktuelles Team und gewünschter laufender Leistungsumfang...',
     default: 'Details zu Ihrer kommerziellen Anfrage, Produktspezifikationen und Lieferanforderungen...'
   },
   it: {
     buyer_request: 'Specifiche del prodotto richiesto, volumi stimati (tonnellate / container), Incoterm desiderato (FOB/CIF) e porto di destinazione...',
     supplier_market_entry: 'Linee di prodotto fabbricate, capacità produttiva mensile/annuale, certificazioni di qualità e mercati esteri target...',
+    external_trade_desk: 'Obiettivi di commercio estero, mercati target, prodotti, struttura interna e attività continuative che volete affidare a CTSEG...',
     default: 'Dettagli della richiesta commerciale, specifiche di prodotto e requisiti di consegna...'
   },
   ru: {
     buyer_request: 'Требуемая спецификация товара, ориентировочный объем (тонны / контейнеры), предпочтительный Incoterm (FOB/CIF) и порт назначения...',
     supplier_market_entry: 'Производимая номенклатура, фактическая мощность (в месяц/год), сертификаты качества и целевые рынки сбыта...',
+    external_trade_desk: 'Цели внешней торговли, целевые рынки, товарные группы, текущая команда и постоянный объём задач для CTSEG...',
     default: 'Детали коммерческого запроса, технические параметры и условия поставки...'
   },
   fa: {
     buyer_request: 'مشخصات فنی کالای درخواستی، تناژ یا حجم تقریبی (کانتینر/تن)، اینکوترمز ترجیحی (FOB/CIF) و بندر مقصد...',
     supplier_market_entry: 'خطوط تولید کارخانه، ظرفیت تولید ماهانه/سالانه، گواهینامه‌های کیفی بین‌المللی و بازارهای صادراتی هدف...',
+    external_trade_desk: 'اهداف تجارت خارجی شرکت، بازارهای هدف، گروه‌های محصول، ساختار فعلی تیم و دامنه عملیات مستمر مورد انتظار از CTSEG...',
     default: 'شرح درخواست تجاری، مشخصات فنی کالا و شرایط تحویل...'
   },
   zh: {
     buyer_request: '所需产品的详细理化指标与规格、预估采购吨位/集装箱量、贸易术语(FOB/CIF)及目的港...',
     supplier_market_entry: '源头工厂主营产品线、月度/年度实际产出量、已取得的国际质量认证与意向出口目标市场...',
+    external_trade_desk: '企业国际贸易目标、目标国家、产品线、现有团队配置，以及希望由 CTSEG 持续负责的业务范围...',
     default: '商业询盘详情、技术规格指标与交货需求...'
   },
   vi: {
     buyer_request: 'Thông số kỹ thuật sản phẩm yêu cầu, khối lượng ước tính (tấn / container), Incoterm mong muốn (FOB/CIF) và cảng đích...',
     supplier_market_entry: 'Danh mục sản phẩm sản xuất, công suất thực tế hàng tháng/năm, các chứng nhận chất lượng và thị trường xuất khẩu mục tiêu...',
+    external_trade_desk: 'Mục tiêu ngoại thương, thị trường mục tiêu, nhóm sản phẩm, cơ cấu đội ngũ hiện tại và phạm vi công việc dài hạn muốn CTSEG quản lý...',
     default: 'Chi tiết yêu cầu thương mại, thông số kỹ thuật và điều kiện giao hàng...'
   }
 }[lang] || {
@@ -135,9 +143,17 @@ const dynamicPlaceholders = {
               'Xác minh năng lực sản xuất, kết nối người mua & mở rộng xuất khẩu'}</p>
         </div>
       </button>
+      <button type="button" class="intent-card" data-intent-toggle="external_trade_desk" aria-pressed="false">
+        <span class="intent-card-icon">🌐</span>
+        <div class="intent-card-content">
+          <span class="intent-card-kicker">{lang === 'tr' ? 'DIŞ TİCARET MASASI' : lang === 'de' ? 'EXTERNER TRADE DESK' : lang === 'it' ? 'TRADE DESK ESTERNO' : lang === 'ru' ? 'ВНЕШНИЙ TRADE DESK' : lang === 'fa' ? 'میز تجارت خارجی' : lang === 'zh' ? '外包国际贸易团队' : lang === 'vi' ? 'BỘ PHẬN NGOẠI THƯƠNG' : 'EXTERNAL TRADE DESK'}</span>
+          <strong>{lang === 'tr' ? 'Dış ticaret operasyonumu CTSEG yönetsin' : lang === 'de' ? 'CTSEG soll meine Außenhandelsaktivitäten mitsteuern' : lang === 'it' ? 'Voglio affidare a CTSEG la gestione continuativa del commercio estero' : lang === 'ru' ? 'Нужна постоянная внешнеторговая функция от CTSEG' : lang === 'fa' ? 'مدیریت مستمر تجارت خارجی را به CTSEG بسپارم' : lang === 'zh' ? '由 CTSEG 持续运营我的国际贸易业务' : lang === 'vi' ? 'Tôi muốn CTSEG vận hành hoạt động ngoại thương thường xuyên' : 'I need CTSEG as an ongoing external trade function'}</strong>
+          <p>{lang === 'tr' ? 'Sourcing, ihracat geliştirme, buyer/distribütör araştırması, RFQ takibi ve periyodik raporlama' : lang === 'de' ? 'Sourcing, Exportentwicklung, Käufer-/Distributoren-Follow-up, RFQ und Reporting' : lang === 'it' ? 'Sourcing, sviluppo export, ricerca buyer/distributori, RFQ e reporting' : lang === 'ru' ? 'Сорсинг, развитие экспорта, поиск покупателей, RFQ и отчетность' : lang === 'fa' ? 'تأمین، توسعه صادرات، شناسایی خریدار، پیگیری RFQ و گزارش‌دهی' : lang === 'zh' ? '供应链开发、出口拓展、买家/经销商跟进、RFQ 与定期报告' : lang === 'vi' ? 'Sourcing, phát triển xuất khẩu, theo dõi buyer/nhà phân phối, RFQ và báo cáo' : 'Ongoing sourcing, export development, buyer/distributor follow-up, RFQ and reporting'}</p>
+        </div>
+      </button>
     </div>
     <div class="commercial-form-grid commercial-form-grid--core">
-      <label class="commercial-field"><span>{copy.intentLabel}</span><select name="intent" required data-commercial-intent><option value=""></option><option value="buyer_request">{copy.buyerIntent}</option><option value="supplier_market_entry">{copy.producerIntent}</option></select></label>
+      <label class="commercial-field"><span>{copy.intentLabel}</span><select name="intent" required data-commercial-intent><option value=""></option><option value="buyer_request">{copy.buyerIntent}</option><option value="supplier_market_entry">{copy.producerIntent}</option><option value="external_trade_desk">{lang === 'tr' ? 'Dış Ticaret Masası' : lang === 'de' ? 'Externer Trade Desk' : lang === 'it' ? 'Trade Desk esterno' : lang === 'ru' ? 'Внешний Trade Desk' : lang === 'fa' ? 'میز تجارت خارجی' : lang === 'zh' ? '外包国际贸易团队' : lang === 'vi' ? 'Bộ phận Ngoại thương thuê ngoài' : 'External Trade Desk'}</option></select></label>
       <label class="commercial-field"><span>{qualification.tradeDirection}</span><select name="tradeDirection" required data-trade-direction><option value=""></option>{qualification.tradeDirections.map((option)=><option value={option.value}>{option.label}</option>)}</select></label>
       <label class="commercial-field commercial-field--wide"><span>{qualification.productFamily}</span><select name="productFamily" required data-product-family><option value=""></option>{qualification.productFamilies.map((option)=><option value={option.value}>{option.label}</option>)}</select></label>
       <label class="commercial-field"><span>{copy.name}</span><input type="text" name="name" autocomplete="name" maxlength="120" required /></label>
@@ -187,7 +203,7 @@ const dynamicPlaceholders = {
   .commercial-form-disclosure>summary span{display:grid;place-items:center;width:36px;height:36px;border-radius:999px;background:#c4f000;color:#0a0a0a!important;font-size:20px;transition:transform .25s ease}
   .commercial-form-disclosure[open]>summary span{transform:rotate(45deg)}
   .commercial-form{padding:0 26px 28px}
-  .commercial-intent-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:20px}
+  .commercial-intent-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:20px}
   .intent-card{position:relative;display:flex;align-items:flex-start;gap:14px;padding:16px 18px;border:2px solid #dedcd5;border-radius:14px;background:#fff;cursor:pointer;text-align:left;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;font:inherit}
   .intent-card:hover{border-color:#b5b0a3;background:#fafaf7}
   .intent-card.is-active{border-color:#111;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.08)}
@@ -277,6 +293,10 @@ const dynamicPlaceholders = {
         if(message instanceof HTMLTextAreaElement&&dynamicPlaceholders){
           message.placeholder=dynamicPlaceholders[selectedIntent]||dynamicPlaceholders.default;
         }
+        if(selectedIntent==='external_trade_desk'){
+          if(tradeDirection instanceof HTMLSelectElement&&!tradeDirection.value)tradeDirection.value='other';
+          if(productFamily instanceof HTMLSelectElement&&!productFamily.value)productFamily.value='other';
+        }
         if(shouldOpenDisclosure&&disclosure&&!disclosure.open){
           disclosure.open=true;
         }
@@ -310,7 +330,7 @@ const dynamicPlaceholders = {
       const requestedIntent=requestParams.get('intent');
       const requestedDirection=requestParams.get('direction');
       const requestedFamily=requestParams.get('category');
-      if(requestedIntent&&['buyer_request','supplier_market_entry'].includes(requestedIntent)){
+      if(requestedIntent&&['buyer_request','supplier_market_entry','external_trade_desk'].includes(requestedIntent)){
         updateIntentState(requestedIntent,true);
       }else if(savedProduct){
         updateIntentState('buyer_request',true);
@@ -319,7 +339,7 @@ const dynamicPlaceholders = {
       if(productFamily instanceof HTMLSelectElement&&['vegetable_oils','nuts_dried_fruit','reflex_gloves','biofuel_feedstock','other'].includes(requestedFamily||''))productFamily.value=requestedFamily;
       document.querySelectorAll('[data-fa-intent],[data-contact-intent],[data-trade-intent]').forEach((link)=>link.addEventListener('click',()=>{
         const value=link.getAttribute('data-fa-intent')||link.getAttribute('data-contact-intent')||link.getAttribute('data-trade-intent');
-        if(value&&['buyer_request','supplier_market_entry'].includes(value)){
+        if(value&&['buyer_request','supplier_market_entry','external_trade_desk'].includes(value)){
           updateIntentState(value,true);
         }else if(intent instanceof HTMLSelectElement&&value){
           intent.value=value;
