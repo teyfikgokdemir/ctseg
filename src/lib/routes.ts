@@ -24,10 +24,8 @@ export function getRouteRecords(): RouteRecord[] {
     if (lang !== 'tr') records.push({ lang, key:'home' });
     records.push({lang,path:specialSlugs['how-we-work'][lang],key:'how-we-work'});
     records.push({lang,path:specialSlugs.scenarios[lang],key:'scenarios'});
-    if (lang === 'tr' || lang === 'en' || lang === 'fa') records.push({lang,path:iranTradeContent[lang].slug,key:'iran-trade'});
-    if (lang === 'vi' && vietnamMarketEntryContent.vi) records.push({lang,path:vietnamMarketEntryContent.vi.slug,key:'vietnam-market-entry'});
+    if (lang === 'tr' || lang === 'en') records.push({lang,path:iranTradeContent[lang].slug,key:'iran-trade'});
     if (lang === 'tr' && vietnamTurkiyeContent.tr) records.push({lang,path:vietnamTurkiyeContent.tr.slug,key:'vietnam-turkiye'});
-    if (lang === 'zh' && chinaMarketEntryContent.zh) records.push({lang,path:chinaMarketEntryContent.zh.slug,key:'china-market-entry'});
     if (lang === 'tr' && chinaTurkiyeContent.tr) records.push({lang,path:chinaTurkiyeContent.tr.slug,key:'china-turkiye'});
     if (lang === 'tr') records.push({lang,path:ukraineTurkiyeContent.slug,key:'ukraine-turkiye'});
     for (const id of searchLandingIds) records.push({
@@ -65,17 +63,17 @@ export function getMeta(record: RouteRecord) {
     title: lang === 'tr' ? 'CTSEG | Küresel Ticaret, Stratejik Tedarik ve Pazara Giriş' :
            lang === 'de' ? 'CTSEG | Globaler Handel, strategische Beschaffung & Markteintritt' :
            lang === 'it' ? 'CTSEG | Commercio Globale, Sourcing Strategico & Market Entry' :
-           lang === 'fa' ? 'CTSEG | تجارت جهانی، تأمین استراتژیک و ورود به بازار' :
-           lang === 'zh' ? 'CTSEG | 双向全球贸易、战略采购与市场进入' :
-           lang === 'vi' ? 'CTSEG | Thương mại Toàn cầu, Sourcing Chiến lược & Thâm nhập Thị trường' :
+           lang === 'fa' ? `${iranTradeContent.fa.title} | CTSEG` :
+           lang === 'zh' ? `${chinaMarketEntryContent.zh!.title} | CTSEG` :
+           lang === 'vi' ? `${vietnamMarketEntryContent.vi!.title} | CTSEG` :
            lang === 'ru' ? 'CTSEG | Международная торговля, стратегический сорсинг и выход на рынок' :
            'CTSEG | Global Trade, Strategic Sourcing & Market Entry',
     description: lang === 'tr' ? 'CTSEG, Türkiye ile dünya pazarları arasında iki yönlü B2B ticaret, stratejik tedarik, tedarikçi doğrulama, RFQ yönetimi ve ihracat/pazara giriş koordinasyonu yürütür.' :
       lang === 'de' ? 'CTSEG verbindet die Türkei mit internationalen Märkten durch bidirektionalen B2B-Handel, strategische Beschaffung, Lieferantenprüfung, RFQ-Management und Markteintritt.' :
       lang === 'it' ? 'CTSEG collega la Turchia ai mercati internazionali con commercio B2B bidirezionale, sourcing strategico, verifica fornitori, gestione RFQ e market entry.' :
-      lang === 'fa' ? 'CTSEG تجارت B2B دوطرفه میان ترکیه و بازارهای جهانی، تأمین استراتژیک، راستی‌آزمایی تأمین‌کننده، مدیریت RFQ و ورود به بازار را هماهنگ می‌کند.' :
-      lang === 'zh' ? 'CTSEG连接土耳其与全球市场，提供双向B2B贸易、战略采购、供应商核验、RFQ管理与跨境市场进入协调。' :
-      lang === 'vi' ? 'CTSEG kết nối Thổ Nhĩ Kỳ với thị trường quốc tế thông qua thương mại B2B hai chiều, sourcing chiến lược, thẩm định nhà cung cấp, quản lý RFQ và thâm nhập thị trường.' :
+      lang === 'fa' ? iranTradeContent.fa.description :
+      lang === 'zh' ? chinaMarketEntryContent.zh!.description :
+      lang === 'vi' ? vietnamMarketEntryContent.vi!.description :
       lang === 'ru' ? 'CTSEG связывает Турцию с международными рынками через двустороннюю B2B-торговлю, стратегический сорсинг, проверку поставщиков, RFQ и сопровождение выхода на рынок.' :
       'CTSEG connects Türkiye with international markets through two-way B2B trade, strategic sourcing, supplier verification, RFQ management and market-entry coordination.'
   };
