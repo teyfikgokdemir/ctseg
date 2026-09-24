@@ -1,5 +1,6 @@
 import { guideSlugs, specialSlugs, type GuideId } from './completion';
 import { activeLocales, localeByCode, siteLocales, type SiteLocale } from './locales';
+import { syriaMarketContent } from './syria-market';
 
 export const locales = siteLocales;
 export type Locale = SiteLocale;
@@ -1278,6 +1279,7 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
   if (key === 'medical') return pathLang === 'tr' ? '/medical/reflex-disposable-gloves/' : `/${pathLang}/medical/reflex-disposable-gloves/`;
   if (key === 'how-we-work') return `/${pathLang}/${specialSlugs['how-we-work'][safeLang]}/`;
   if (key === 'scenarios') return `/${pathLang}/${specialSlugs.scenarios[safeLang]}/`;
+  if (key === 'syria-market' && (safeLang === 'tr' || safeLang === 'en')) return `/${safeLang}/${syriaMarketContent[safeLang].slug}/`;
   if (key === 'guides' && id) {
     if (safeLang === 'tr' || safeLang === 'en') {
       const guideSlug = guideSlugs[id as GuideId]?.[safeLang];
@@ -1294,6 +1296,12 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
 }
 
 export function routeAlternates(key: string, id?: string): Record<string, string> {
+  if (key === 'syria-market') {
+    return {
+      tr: `https://ctseg.com.tr/tr/${syriaMarketContent.tr.slug}/`,
+      en: `https://ctseg.com.tr/en/${syriaMarketContent.en.slug}/`
+    };
+  }
   if (key === 'medical') {
     return {
       tr: 'https://ctseg.com.tr/medical/reflex-disposable-gloves/',
