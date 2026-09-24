@@ -48,10 +48,11 @@ const nav = [
   ['contact', t.contact, localizedPath(lang,'contact')]
 ];
 
-const globalLocales = activeLocaleRegistry.map((entry) => entry.code);
-const globalLocaleNames = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code, entry.label])) as Record<ActiveLocale,string>;
+const globalLocales = [...activeLocaleRegistry.map((entry) => entry.code), 'uk'] as string[];
+const globalLocaleNames: Record<string,string> = {...Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code, entry.label])), uk:'Українська'};
 
 const globalSwitchPath = (target: string): string => {
+  if (target === 'uk') return '/uk/';
   if (pageKey === 'search-landing' && pageId) return searchLandingPath(target as Locale,pageId as SearchLandingId);
   if (target === 'fa') return '/fa/';
   if (pageKey === 'medical') {
