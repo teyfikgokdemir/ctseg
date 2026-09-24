@@ -166,6 +166,7 @@ const requiredCanonicalPaths = [
   '/en/services/international-trade-advisory/','/en/cookie-policy/','/en/privacy-policy/',
   '/tr/hizmetler/uluslararasi-ticaret-danismanligi/','/tr/hizmetler/tedarikci-bulma-ve-dogrulama/',
   '/tr/hizmetler/stratejik-tedarik/'
+  ,'/tr/suriye-pazarina-ihracat-ve-tedarik/','/en/markets/syria/'
   ,'/fa/','/zh/','/vi/','/uk/'
 ];
 for (const pathname of requiredCanonicalPaths) {
