@@ -31,7 +31,7 @@ const safeReflexLang = (['en','tr','de','it','ru','fa','zh','vi','sq','mk','sr']
 const reflexUrl = reflexPath(safeReflexLang);
 const medicalLabel = medicalNavLabels[lang] || 'REFLEX Medical';
 
-const focusedCountryLp = pageKey === 'home' && ['fa','zh','vi'].includes(lang);
+const focusedCountryLp = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
 const solutionLinks = [
   [t.services, localizedPath(lang,'services')],
   [p.buyerTitle, `${home}#sectors`],
