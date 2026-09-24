@@ -47,18 +47,49 @@
     if(!video)return;
     const soundButton=document.querySelector('[data-ctseg-video-sound]') as HTMLButtonElement | null;
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    let audibleLoops=0;
+    const updateSoundButton=()=>{
+      if(!soundButton)return;
+      soundButton.setAttribute('aria-pressed',String(!video.muted));
+      soundButton.setAttribute('aria-label',video.muted?'Videonun sesini aç':'Videonun sesini kapat');
+      const icon=soundButton.querySelector('span');
+      const label=soundButton.querySelector('strong');
+      if(icon) icon.textContent=video.muted?'🔇':'🔊';
+      if(label) label.textContent=video.muted?'Sesi aç':'Sesi kapat';
+    };
     if(soundButton){
       soundButton.addEventListener('click',()=>{
-        video.muted=!video.muted;
-        soundButton.setAttribute('aria-pressed',String(!video.muted));
-        soundButton.setAttribute('aria-label',video.muted?'Videonun sesini aç':'Videonun sesini kapat');
-        const icon=soundButton.querySelector('span');
-        const label=soundButton.querySelector('strong');
-        if(icon) icon.textContent=video.muted?'🔇':'🔊';
-        if(label) label.textContent=video.muted?'Sesi aç':'Sesi kapat';
-        if(video.paused) video.play().catch(()=>{});
+        if(video.muted){
+          audibleLoops=0;
+          video.loop=false;
+          video.currentTime=0;
+          video.muted=false;
+          updateSoundButton();
+          video.play().catch(()=>{});
+        }else{
+          video.muted=true;
+          video.loop=true;
+          audibleLoops=0;
+          updateSoundButton();
+        }
       });
     }
+    video.addEventListener('ended',()=>{
+      if(!video.muted){
+        audibleLoops+=1;
+        if(audibleLoops<2){
+          video.currentTime=0;
+          video.play().catch(()=>{});
+          return;
+        }
+        video.muted=true;
+        video.loop=true;
+        audibleLoops=0;
+        updateSoundButton();
+        video.currentTime=0;
+        video.play().catch(()=>{});
+      }
+    });
     if(reduced.matches){ video.pause(); return; }
     if('IntersectionObserver' in window){
       const observer=new IntersectionObserver((entries)=>{
