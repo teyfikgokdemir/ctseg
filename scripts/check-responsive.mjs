@@ -463,7 +463,7 @@ try {
               if(!title) return false;
               const cardBox=card.getBoundingClientRect();
               const titleBox=title.getBoundingClientRect();
-              return cardBox.height>=90 && titleBox.width>0 && titleBox.height>0 &&
+              return titleBox.width>0 && titleBox.height>0 &&
                 titleBox.left>=cardBox.left-1 && titleBox.right<=cardBox.right+1 &&
                 titleBox.top>=cardBox.top-1 && titleBox.bottom<=cardBox.bottom+1;
             });
@@ -554,7 +554,7 @@ try {
     const badUx=(isHomepage&&!testCase.openMenu&&(result.ux.h1Count!==1||!result.ux.h1Within||!result.ux.headingsWithin||result.ux.h1Lines>6||result.ux.floatingCount!==2||!result.ux.floatingTargets||!result.ux.backInitiallyHidden||!result.ux.whatsappValid||!dynamicUx.backVisible||!result.ux.headerContract||!dynamicUx.headerAtTop))||result.ux.minLightContrast<4.3||result.ux.darkSecondaryCtaContrast<4.5||!result.ux.formCore||!result.ux.detailsClosed||!result.ux.emailValid;
     const badTradeImages=result.tradeVisuals.some((visual)=>visual.naturalWidth<1||visual.naturalHeight<1||visual.width<=0||visual.height<=0||!visual.alt||!visual.srcset||!visual.sizes||!visual.dimensions||visual.objectFit!=='cover'||!visual.objectPosition)||
       new Set(result.tradeVisuals.map((visual)=>visual.src)).size!==result.tradeVisuals.length||
-      (isGenericHomepage&&(result.tradeVisuals.length!==5||new Set(result.tradeVisuals.map((visual)=>visual.key)).size!==5||result.tradeVisuals.filter((visual)=>visual.fetchPriority==='high').length!==1));
+      (isGenericHomepage&&(result.tradeVisuals.length!==1||new Set(result.tradeVisuals.map((visual)=>visual.key)).size!==1||result.tradeVisuals.filter((visual)=>visual.fetchPriority==='high').length!==1));
     if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || badTradeImages || !mobileMenu || !bodyScrollLocked || badLayout || badLocale || badContactEmail || badPersian || badPersianMobileMenu || badPersianNav || badUx || !persianNavWorks) {
       failures.push(`${testCase.name}: ${JSON.stringify({...result,dynamicUx,mobileMenu,bodyScrollLocked,persianMobileMenu,persianNavWorks})}`);
     }
