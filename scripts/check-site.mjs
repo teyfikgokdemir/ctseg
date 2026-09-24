@@ -203,6 +203,8 @@ for (const file of htmlFiles) {
     ? ['tr','en','fa','x-default']
     : label === 'uk/index.html'
     ? ['uk']
+    : ['tr/cinden-turkiyeye-ithalat-ve-tedarik/index.html','tr/vietnamdan-turkiyeye-ithalat-ve-tedarik/index.html','tr/ukraynadan-turkiyeye-tedarik-ve-ticaret/index.html'].includes(label)
+    ? ['tr']
     : (hreflangs.includes('ru') || hreflangs.includes('fa') || hreflangs.includes('zh') || hreflangs.includes('vi'))
     ? [...tradeLocaleCodes,'x-default']
     : ['tr','en','x-default'];
