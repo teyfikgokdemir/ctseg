@@ -519,9 +519,9 @@ try {
       result.contactEmail.href !== 'mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry' ||
       result.contactEmail.buttons !== 0 || !result.contactEmail.focusVisible);
     const isHomepage=['/','/en/','/de/','/it/','/fa/','/ru/','/zh/','/vi/'].includes(testCase.path);
-    const allowsLocaleFallback=testCase.allowLocaleFallback || !isHomepage;
-    const badLocale = !testCase.persian && (result.localeOptions !== 8 || result.activeDesktopLocale !== 1 || (!allowsLocaleFallback && !result.localeRouteMatch) || !result.desktopLocaleCodeOnly ||
-      (testCase.openMenu && (result.visibleMobileLocales !== 8 || result.mobilePanelHeight < testCase.height * .7)));
+    const isGenericHomepage=['/','/en/'].includes(testCase.path);
+    const badLocale = !testCase.persian && (result.localeOptions !== 9 || result.activeDesktopLocale !== 1 || !result.desktopLocaleCodeOnly ||
+      (testCase.openMenu && (result.visibleMobileLocales !== 9 || result.mobilePanelHeight < testCase.height * .7)));
     const badPersian = testCase.persian && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
       result.persian.rootDirection !== 'rtl' || result.persian.bodyDirection !== 'rtl' || result.persian.h1s !== 1 ||
       result.persian.details !== 8 || result.persian.fields !== 12 || !['intent','name','company','emailOrPhone','message','privacy','country','product','quantity','delivery','targetDate','requirements'].every((name)=>result.persian.fieldNames.includes(name)) || !result.persian.labeled || !result.persian.companyVisible ||
@@ -554,22 +554,23 @@ try {
     const badUx=(isHomepage&&!testCase.openMenu&&(result.ux.h1Count!==1||!result.ux.h1Within||!result.ux.headingsWithin||result.ux.h1Lines>6||result.ux.floatingCount!==2||!result.ux.floatingTargets||!result.ux.backInitiallyHidden||!result.ux.whatsappValid||!dynamicUx.backVisible||!result.ux.headerContract||!dynamicUx.headerAtTop))||result.ux.minLightContrast<4.3||result.ux.darkSecondaryCtaContrast<4.5||!result.ux.formCore||!result.ux.detailsClosed||!result.ux.emailValid;
     const badTradeImages=result.tradeVisuals.some((visual)=>visual.naturalWidth<1||visual.naturalHeight<1||visual.width<=0||visual.height<=0||!visual.alt||!visual.srcset||!visual.sizes||!visual.dimensions||visual.objectFit!=='cover'||!visual.objectPosition)||
       new Set(result.tradeVisuals.map((visual)=>visual.src)).size!==result.tradeVisuals.length||
-      (isHomepage&&(result.tradeVisuals.length!==5||new Set(result.tradeVisuals.map((visual)=>visual.key)).size!==5||result.tradeVisuals.filter((visual)=>visual.fetchPriority==='high').length!==1));
+      (isGenericHomepage&&(result.tradeVisuals.length!==5||new Set(result.tradeVisuals.map((visual)=>visual.key)).size!==5||result.tradeVisuals.filter((visual)=>visual.fetchPriority==='high').length!==1));
     if (result.overflow > 1 || result.headers !== 1 || result.footers !== 1 || !result.logo || !result.images || badTradeImages || !mobileMenu || !bodyScrollLocked || badLayout || badLocale || badContactEmail || badPersian || badPersianMobileMenu || badPersianNav || badUx || !persianNavWorks) {
       failures.push(`${testCase.name}: ${JSON.stringify({...result,dynamicUx,mobileMenu,bodyScrollLocked,persianMobileMenu,persianNavWorks})}`);
     }
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);
     await page.close();
   }
+  const rootTargets={tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/',uk:'/uk/'};
   const globalLocaleEntries = [
-    {lang:'tr',path:'/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
-    {lang:'en',path:'/en/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
-    {lang:'de',path:'/de/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
-    {lang:'it',path:'/it/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
-    {lang:'fa',path:'/fa/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
-    {lang:'ru',path:'/ru/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
-    {lang:'zh',path:'/zh/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}},
-    {lang:'vi',path:'/vi/',targets:{tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/'}}
+    {lang:'tr',path:'/',targets:rootTargets,alternates:['tr','en','x-default']},
+    {lang:'en',path:'/en/',targets:rootTargets,alternates:['tr','en','x-default']},
+    {lang:'de',path:'/de/',targets:rootTargets,alternates:['de']},
+    {lang:'it',path:'/it/',targets:rootTargets,alternates:['it']},
+    {lang:'fa',path:'/fa/',targets:rootTargets,alternates:['tr','en','fa','x-default']},
+    {lang:'ru',path:'/ru/',targets:rootTargets,alternates:['ru']},
+    {lang:'zh',path:'/zh/',targets:rootTargets,alternates:['zh']},
+    {lang:'vi',path:'/vi/',targets:rootTargets,alternates:['vi']}
   ];
   let globalLocaleChecks=0;
   for(const entry of globalLocaleEntries){
@@ -584,7 +585,7 @@ try {
         await trigger.press('Enter');
         await page.waitForTimeout(300);
       }
-      const contract=await page.evaluate(({lang,targets,mobile})=>{
+      const contract=await page.evaluate(({lang,targets,mobile,alternates})=>{
         const selector=mobile?'.mobile-lang-grid [data-locale-option]':'#language-panel [data-locale-option]';
         const links=[...document.querySelectorAll(selector)];
         const visible=(element)=>{if(!element)return false;const box=element.getBoundingClientRect();const style=getComputedStyle(element);return box.width>0&&box.height>0&&style.visibility!=='hidden'&&style.display!=='none'};
@@ -599,17 +600,17 @@ try {
           visibleOptions:links.filter(visible).length,
           overflow:document.documentElement.scrollWidth-window.innerWidth,
           canonical:document.querySelector('link[rel="canonical"]')?.href??null,
-          coreAlternates:['tr','en','de','it','fa','ru','zh','vi','x-default'].every(code=>document.querySelector(`link[rel="alternate"][hreflang="${code}"]`))
+          coreAlternates:alternates.every(code=>document.querySelector(`link[rel="alternate"][hreflang="${code}"]`))
         };
-      },{lang:entry.lang,targets:entry.targets,mobile:viewport.name==='mobile'});
+      },{lang:entry.lang,targets:entry.targets,mobile:viewport.name==='mobile',alternates:entry.alternates});
       const statuses=[];
       for(const [code,path] of Object.entries(entry.targets)){
         const targetResponse=await page.request.get(`http://127.0.0.1:4321${encodeURI(path)}`);
         statuses.push([code,targetResponse.status()]);
       }
       const expectedGlobalHtmlLang = entry.lang === 'zh' ? 'zh-CN' : entry.lang === 'vi' ? 'vi-VN' : entry.lang;
-      if(contract.lang!==expectedGlobalHtmlLang||contract.options!==8||contract.active.length!==1||contract.active[0]!==entry.lang||
-        !contract.targetsMatch||!contract.keyboardAccessible||contract.visibleOptions!==8||contract.overflow>1||!contract.canonical||
+      if(contract.lang!==expectedGlobalHtmlLang||contract.options!==9||contract.active.length!==1||contract.active[0]!==entry.lang||
+        !contract.targetsMatch||!contract.keyboardAccessible||contract.visibleOptions!==9||contract.overflow>1||!contract.canonical||
         !contract.coreAlternates||statuses.some(([,status])=>status!==200)){
         failures.push(`global locale ${entry.lang}/${viewport.name}: ${JSON.stringify({...contract,statuses})}`);
       }
