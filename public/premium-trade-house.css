@@ -381,3 +381,48 @@ main .section:not(.markets-editorial) .section-head p{
     color:#111!important;
   }
 }
+
+
+/* Trade card typography and CTA legibility normalization */
+main .trade-paths-grid h3,
+main .trade-paths-grid p,
+main .trade-paths-grid .text-link{
+  font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif!important;
+  font-synthesis:none!important;
+}
+main .trade-paths-grid h3{
+  font-weight:720!important;
+  font-variation-settings:"wght" 720!important;
+}
+main .trade-paths-grid p{
+  font-weight:520!important;
+  font-variation-settings:"wght" 520!important;
+  letter-spacing:0!important;
+}
+main .trade-paths-grid .text-link,
+main .trade-paths-grid .text-link:link,
+main .trade-paths-grid .text-link:visited,
+main .trade-paths-grid .text-link:hover,
+main .trade-paths-grid .text-link:focus,
+main .trade-paths-grid .text-link:focus-visible,
+main .trade-paths-grid .text-link:active,
+main .trade-paths-grid article:hover .text-link,
+main .trade-paths-grid article:focus-within .text-link{
+  background:#c4f000!important;
+  color:#0b0c0a!important;
+  -webkit-text-fill-color:#0b0c0a!important;
+  opacity:1!important;
+  font-weight:760!important;
+  font-variation-settings:"wght" 760!important;
+  text-shadow:none!important;
+}
+main .trade-paths-grid .text-link::selection{
+  background:#111!important;
+  color:#c4f000!important;
+  -webkit-text-fill-color:#c4f000!important;
+}
+main .trade-paths-grid h3::selection,
+main .trade-paths-grid p::selection{
+  background:#c4f000!important;
+  color:#111!important;
+}
