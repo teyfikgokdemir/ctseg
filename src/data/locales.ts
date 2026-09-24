@@ -21,3 +21,5 @@ export const localeByCode = Object.fromEntries(localeRegistry.map((entry) => [en
 export const localeLabel = (code: string) => localeByCode[code as ActiveLocale]?.label ?? 'English';
 export const localeDirection = (code: string) => localeByCode[code as ActiveLocale]?.direction ?? 'ltr';
 export const localeOg = (code: string) => localeByCode[code as ActiveLocale]?.ogLocale ?? 'en_GB';
+
+export const schemaLanguage = (code: string) => code === 'zh' ? 'zh-CN' : code === 'vi' ? 'vi-VN' : code === 'uk' ? 'uk-UA' : code;
