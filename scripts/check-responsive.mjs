@@ -439,6 +439,17 @@ try {
         const catalogueCards=[...document.querySelectorAll('.catalogue-grid [data-product-card]')];
         const cardImages=catalogueCards.map((card)=>card.querySelector('img')?.getAttribute('src')).filter(Boolean);
         const detailMedia=[...document.querySelectorAll('[data-product-media] img')].map((image)=>image.getAttribute('src'));
+        const rgb=(value)=>value.match(/[\d.]+/g)?.slice(0,3).map(Number) ?? [0,0,0];
+        const lum=(value)=>rgb(value).map((channel)=>{const c=channel/255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4}).reduce((sum,channel,index)=>sum+channel*[.2126,.7152,.0722][index],0);
+        const contrast=(a,b)=>(Math.max(lum(a),lum(b))+.05)/(Math.min(lum(a),lum(b))+.05);
+        const catalogueTextReadable=catalogueCards.every((card)=>{
+          const copy=card.querySelector('.product-card-copy');
+          const heading=card.querySelector('.product-card-copy h2');
+          const paragraph=card.querySelector('.product-card-copy p');
+          if(!copy||!heading||!paragraph)return false;
+          const bg=getComputedStyle(copy).backgroundColor;
+          return contrast(getComputedStyle(heading).color,bg)>=4.5&&contrast(getComputedStyle(paragraph).color,bg)>=4.5;
+        });
         return {
           headingVisualOverlap:intersects(headingBox,visualBox),
           headerOverlap:Boolean(headerBox&&firstBox&&firstBox.top<headerBox.bottom-1),
@@ -490,7 +501,8 @@ try {
             const lineHeight=Number.parseFloat(getComputedStyle(heading).lineHeight);
             return Math.max(max,lineHeight?Math.round(box.height/lineHeight):0);
           },0),
-          productCount:catalogueCards.length
+          productCount:catalogueCards.length,
+          catalogueTextReadable
         };
       })()
     }));
@@ -510,7 +522,7 @@ try {
       (result.layout.pageHeroGap !== null && (result.layout.pageHeroGap < 20 || result.layout.pageHeroGap > gapLimit)) || result.layout.cardOverflow ||
       result.layout.repeatedAdjacentImage || result.layout.duplicateDetailMedia ||
       !result.layout.posterFit || !result.layout.photoFit || !result.layout.portfolioContain ||
-      !result.layout.marketTitleContained || !result.layout.compactHeroHeight || !result.layout.ctaAlignment ||
+      !result.layout.marketTitleContained || !result.layout.compactHeroHeight || !result.layout.ctaAlignment || !result.layout.catalogueTextReadable ||
       (testCase.width <= 620 && result.layout.ctaMobileLines > 5) ||
       (testCase.width <= 620 && result.layout.headingLines > 6) ||
       (testCase.width >= 1100 && result.layout.maxCardHeight > 700) ||
