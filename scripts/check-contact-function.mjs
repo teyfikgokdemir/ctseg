@@ -19,6 +19,8 @@ const expectStatus = async (response,status,label) => {
 };
 
 await expectStatus(onRequest(),405,'unsupported method');
+await expectStatus(await onRequestPost(makeContext(null,undefined,{},'203.0.113.40')),400,'null payload validation');
+await expectStatus(await onRequestPost(makeContext({...valid,name:{x:1}},undefined,{},'203.0.113.41')),400,'object field validation');
 await expectStatus(await onRequestPost(makeContext(valid,'https://evil.example',{},'203.0.113.11')),403,'origin validation');
 await expectStatus(await onRequestPost(makeContext({...valid,emailOrPhone:'invalid@'},undefined,{},'203.0.113.12')),400,'email validation');
 await expectStatus(await onRequestPost(makeContext({...valid,intent:'unknown'},undefined,{},'203.0.113.16')),400,'intent validation');
@@ -51,6 +53,17 @@ try{
 }finally{
   globalThis.fetch=originalFetch;
 }
+let atomicCount=0;
+const atomicLimiter={limit:async()=>({success:++atomicCount<=8})};
+globalThis.fetch=async()=>new Response(JSON.stringify({id:'test'}),{status:200});
+try{
+  const burst=await Promise.all(Array.from({length:12},(_,index)=>onRequestPost(makeContext({...valid,emailOrPhone:`burst${index}@example.test`},undefined,{
+    RESEND_API_KEY:'test-key',CONTACT_FROM_EMAIL:'CTSEG <forms@example.test>',CONTACT_TO_EMAIL:'info@example.test',CONTACT_RATE_LIMITER:atomicLimiter
+  },'203.0.113.42'))));
+  if(burst.filter((response)=>response.status===200).length!==8||burst.filter((response)=>response.status===429).length!==4)throw new Error('atomic rate limiter burst contract failed');
+}finally{
+  globalThis.fetch=originalFetch;
+}
 if(outbound?.url!=='https://api.resend.com/emails')throw new Error('email provider endpoint mismatch');
 if(!outbound?.body?.text||outbound.body.html)throw new Error('email payload must be plain text');
 if(!outbound.body.text.includes('Intent: supplier_market_entry'))throw new Error('stable producer intent missing from email payload');
@@ -59,4 +72,4 @@ if(!outbound.body.text.includes('Product family: vegetable_oils'))throw new Erro
 if(!outbound.body.text.includes('Landing page: /en/services/strategic-sourcing/'))throw new Error('first-touch landing attribution missing from email payload');
 if(!outbound.body.text.includes('UTM source / medium: google / organic'))throw new Error('UTM attribution missing from email payload');
 
-console.log('Contact function check passed: method, origin, qualification validation, honeypot, configuration fallback and Resend delivery.');
+console.log('Contact function check passed: method, origin, payload shape, qualification validation, atomic limiter binding, honeypot, configuration fallback and Resend delivery.');
