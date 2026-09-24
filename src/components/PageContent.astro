@@ -32,6 +32,7 @@ import { vietnamTurkiyeContent } from '../data/vietnam-turkiye';
 import { chinaMarketEntryContent } from '../data/china-market-entry';
 import { chinaTurkiyeContent } from '../data/china-turkiye';
 import { ukraineTurkiyeContent } from '../data/ukraine-market';
+import { regionalIntentHomes } from '../data/regional-intent-homes';
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
@@ -46,6 +47,7 @@ const vietnamTurkiye = vietnamTurkiyeContent.tr;
 const chinaMarketEntry = chinaMarketEntryContent.zh;
 const chinaTurkiye = chinaTurkiyeContent.tr;
 const ukraineTurkiye = ukraineTurkiyeContent;
+const regionalIntentHome = (['de','it','ru'].includes(lang) ? regionalIntentHomes[lang as 'de'|'it'|'ru'] : null);
 const corporate = companyCopy[lang];
 const editorial = editorialCopy[lang];
 const completionHome = homeEnhancement[lang];
@@ -729,6 +731,47 @@ const verifiedLater = {
   vi:['Được xác minh theo nhà sản xuất và cấu trúc đơn hàng','Được xác nhận ở giai đoạn báo giá','Chứng từ được kiểm tra theo từng lô hàng','Được đánh giá theo yêu cầu','Được đánh giá theo nhà sản xuất và thị trường mục tiêu']
 }[lang];
 ---
+{key === 'home' && regionalIntentHome && (
+  <>
+    <PageHero lang={lang} eyebrow={regionalIntentHome.eyebrow} title={regionalIntentHome.title} lead={regionalIntentHome.description} />
+    <section class="section"><div class="container content-grid">
+      <div class="prose">
+        <div class="content-block direct-answer">
+          <h2>{regionalIntentHome.directAnswerTitle}</h2>
+          <p>{regionalIntentHome.directAnswer}</p>
+        </div>
+        <div class="content-block" id="sectors">
+          <h2>{regionalIntentHome.sectorsTitle}</h2>
+          <p>{regionalIntentHome.sectorsLead}</p>
+          <ol class="check-list">{regionalIntentHome.sectors.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}</ol>
+        </div>
+        <div class="content-block">
+          <h2>{regionalIntentHome.supportTitle}</h2>
+          <ul class="check-list">{regionalIntentHome.support.map((item)=><li>{item}</li>)}</ul>
+        </div>
+        <div class="content-block origin-note">
+          <h2>{regionalIntentHome.complianceTitle}</h2>
+          <p>{regionalIntentHome.complianceText}</p>
+        </div>
+        <div class="content-block">
+          <h2>{regionalIntentHome.processTitle}</h2>
+          <ol class="check-list">{regionalIntentHome.process.map((item)=><li>{item}</li>)}</ol>
+        </div>
+        <div class="content-block faq">
+          <h2>{t.faq}</h2>
+          {regionalIntentHome.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+        </div>
+      </div>
+      <aside class="side-panel">
+        <p class="eyebrow">CTSEG · Türkiye sourcing</p>
+        <h2>{regionalIntentHome.ctaTitle}</h2>
+        <p>{regionalIntentHome.ctaText}</p>
+        <a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{regionalIntentHome.ctaLabel}</a>
+      </aside>
+    </div></section>
+  </>
+)}
+
 {key === 'home' && lang === 'fa' && (
   <>
     <PageHero lang={lang} eyebrow={iranTradeContent.fa.eyebrow} title={iranTradeContent.fa.title} lead={iranTradeContent.fa.description} />
@@ -796,7 +839,7 @@ const verifiedLater = {
   </>
 )}
 
-{key === 'home' && !['fa','zh','vi'].includes(lang) && (
+{key === 'home' && !['de','it','ru','fa','zh','vi'].includes(lang) && (
   <>
     <section class="hero">
       <div class="container hero-grid">
