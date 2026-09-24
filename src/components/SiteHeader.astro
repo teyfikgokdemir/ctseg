@@ -61,9 +61,7 @@ const globalSwitchPath = (target: string): string => {
     if (target === 'fa') return '/fa/';
     return `/${target}/`;
   }
-  if (['vietnam-turkiye','china-turkiye','ukraine-turkiye'].includes(pageKey)) {
-    return target === 'tr' ? localizedPath('tr', pageKey, pageId) : `/${target}/`;
-  }
+  if (['vietnam-turkiye','china-turkiye','ukraine-turkiye'].includes(pageKey)) return `/${target}/`;
   if (target === 'fa') return '/fa/';
   if (pageKey === 'medical') {
     const reflexLocales = ['en','tr','de','it','ru','fa'] as const;
