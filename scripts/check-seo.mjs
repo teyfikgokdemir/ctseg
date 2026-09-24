@@ -74,7 +74,7 @@ for (const file of htmlFiles) {
 
   if (lang !== 'fa') {
     const alternates = Object.fromEntries([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
-    const focusedSelfOnly = ['/de/','/it/','/ru/','/zh/','/vi/','/uk/'].includes(expectedPath);
+    const focusedSelfOnly = ['/de/','/it/','/ru/','/zh/','/vi/','/uk/','/tr/cinden-turkiyeye-ithalat-ve-tedarik/','/tr/vietnamdan-turkiyeye-ithalat-ve-tedarik/','/tr/ukraynadan-turkiyeye-tedarik-ve-ticaret/'].includes(expectedPath);
     if (!focusedSelfOnly && !alternates['x-default']) errors.push(`${label}: missing x-default hreflang`);
     if (alternates[lang] !== canonical) errors.push(`${label}: self hreflang does not match canonical`);
   }
