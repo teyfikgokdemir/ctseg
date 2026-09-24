@@ -10,6 +10,7 @@ import { vietnamTurkiyeContent } from '../data/vietnam-turkiye';
 import { chinaMarketEntryContent } from '../data/china-market-entry';
 import { chinaTurkiyeContent } from '../data/china-turkiye';
 import { ukraineTurkiyeContent } from '../data/ukraine-market';
+import { regionalIntentHomes } from '../data/regional-intent-homes';
 
 export type RouteRecord = {
   lang: Locale;
@@ -61,20 +62,20 @@ export function getMeta(record: RouteRecord) {
   const t = ui[lang];
   if (key === 'home') return {
     title: lang === 'tr' ? 'CTSEG | Küresel Ticaret, Stratejik Tedarik ve Pazara Giriş' :
-           lang === 'de' ? 'CTSEG | Globaler Handel, strategische Beschaffung & Markteintritt' :
-           lang === 'it' ? 'CTSEG | Commercio Globale, Sourcing Strategico & Market Entry' :
+           lang === 'de' ? `${regionalIntentHomes.de.title} | CTSEG` :
+           lang === 'it' ? `${regionalIntentHomes.it.title} | CTSEG` :
            lang === 'fa' ? `${iranTradeContent.fa.title} | CTSEG` :
            lang === 'zh' ? `${chinaMarketEntryContent.zh!.title} | CTSEG` :
            lang === 'vi' ? `${vietnamMarketEntryContent.vi!.title} | CTSEG` :
-           lang === 'ru' ? 'CTSEG | Международная торговля, стратегический сорсинг и выход на рынок' :
+           lang === 'ru' ? `${regionalIntentHomes.ru.title} | CTSEG` :
            'CTSEG | Global Trade, Strategic Sourcing & Market Entry',
     description: lang === 'tr' ? 'CTSEG, Türkiye ile dünya pazarları arasında iki yönlü B2B ticaret, stratejik tedarik, tedarikçi doğrulama, RFQ yönetimi ve ihracat/pazara giriş koordinasyonu yürütür.' :
-      lang === 'de' ? 'CTSEG verbindet die Türkei mit internationalen Märkten durch bidirektionalen B2B-Handel, strategische Beschaffung, Lieferantenprüfung, RFQ-Management und Markteintritt.' :
-      lang === 'it' ? 'CTSEG collega la Turchia ai mercati internazionali con commercio B2B bidirezionale, sourcing strategico, verifica fornitori, gestione RFQ e market entry.' :
+      lang === 'de' ? regionalIntentHomes.de.description :
+      lang === 'it' ? regionalIntentHomes.it.description :
       lang === 'fa' ? iranTradeContent.fa.description :
       lang === 'zh' ? chinaMarketEntryContent.zh!.description :
       lang === 'vi' ? vietnamMarketEntryContent.vi!.description :
-      lang === 'ru' ? 'CTSEG связывает Турцию с международными рынками через двустороннюю B2B-торговлю, стратегический сорсинг, проверку поставщиков, RFQ и сопровождение выхода на рынок.' :
+      lang === 'ru' ? regionalIntentHomes.ru.description :
       'CTSEG connects Türkiye with international markets through two-way B2B trade, strategic sourcing, supplier verification, RFQ management and market-entry coordination.'
   };
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — B2B Sourcing Advisory | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
