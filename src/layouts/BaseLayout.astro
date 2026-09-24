@@ -14,6 +14,8 @@ import { searchLandingAlternates } from '../data/search-landings';
 import { iranTradeContent } from '../data/iran-trade';
 import { vietnamMarketEntryContent } from '../data/vietnam-market-entry';
 import { vietnamTurkiyeContent } from '../data/vietnam-turkiye';
+import { chinaMarketEntryContent } from '../data/china-market-entry';
+import { chinaTurkiyeContent } from '../data/china-turkiye';
 
 const {
   lang='tr', title, description, pageKey='home', pageId, canonical,
@@ -29,6 +31,12 @@ const alternates = pageKey === 'search-landing' && pageId ? searchLandingAlterna
   } as Record<string,string> :
   pageKey === 'vietnam-turkiye' && vietnamTurkiyeContent.tr ? {
     tr:`https://ctseg.com.tr/tr/${vietnamTurkiyeContent.tr.slug}/`
+  } as Record<string,string> :
+  pageKey === 'china-market-entry' && chinaMarketEntryContent.zh ? {
+    zh:`https://ctseg.com.tr/zh/${chinaMarketEntryContent.zh.slug}/`
+  } as Record<string,string> :
+  pageKey === 'china-turkiye' && chinaTurkiyeContent.tr ? {
+    tr:`https://ctseg.com.tr/tr/${chinaTurkiyeContent.tr.slug}/`
   } as Record<string,string> :
   pageKey === 'iran-trade' ? {
     tr:`https://ctseg.com.tr/tr/${iranTradeContent.tr.slug}/`,
@@ -46,6 +54,8 @@ const alternateCodes = pageKey === 'medical'
     : pageKey === 'iran-trade' ? ['tr','en','fa']
     : pageKey === 'vietnam-market-entry' ? ['vi']
     : pageKey === 'vietnam-turkiye' ? ['tr']
+    : pageKey === 'china-market-entry' ? ['zh']
+    : pageKey === 'china-turkiye' ? ['tr']
     : pageKey === 'guides' ? ['tr','en'] : locales);
 const organizationDescription = ({
   tr:'CTSEG, Türkiye merkezli iki yönlü küresel ticaret, stratejik tedarik, tedarikçi doğrulama ve pazara giriş çalışmaları yürüten bağımsız bir B2B ticaret evidir.',
@@ -78,7 +88,7 @@ const organization = {
     'Two-way global trade','Strategic sourcing','Supplier sourcing and verification','Factory and counterparty verification',
     'International RFQ management','Export market entry','B2B buyer research','Commercial coordination','Nearshoring from Türkiye',
     'Trade intelligence','Total cost of ownership analysis','Food and agricultural sourcing','Textiles and home textiles',
-    'Packaging and industrial inputs','Iranian carpets','Hand-knotted silk carpets','Türkiye-Iran trade corridor','Iran sourcing','Iranian food exports','Vietnam exporter market entry','Vietnam to Türkiye trade','Vietnam to Europe trade','Vietnam sourcing for Türkiye','Vietnam coffee sourcing','Vietnam food imports'
+    'Packaging and industrial inputs','Iranian carpets','Hand-knotted silk carpets','Türkiye-Iran trade corridor','Iran sourcing','Iranian food exports','Vietnam exporter market entry','Vietnam to Türkiye trade','Vietnam to Europe trade','Vietnam sourcing for Türkiye','Vietnam coffee sourcing','Vietnam food imports','China manufacturer market entry','China to Türkiye sourcing','China to Europe trade'
   ]
 };
 const website = {
