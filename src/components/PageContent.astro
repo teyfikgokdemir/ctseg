@@ -42,7 +42,7 @@ const h = homeCopy[lang];
 const gateway = tradeGateway[lang];
 const copy = pageCopy[lang];
 const iranTrade = iranTradeContent[lang];
-const iranTradeHref = `/${lang}/${iranTrade.slug}/`;
+const iranTradeHref = lang === 'fa' ? '/fa/' : `/${lang}/${iranTrade.slug}/`;
 const vietnamMarketEntry = vietnamMarketEntryContent.vi;
 const vietnamTurkiye = vietnamTurkiyeContent.tr;
 const chinaMarketEntry = chinaMarketEntryContent.zh;
@@ -1430,7 +1430,7 @@ const verifiedLater = {
           <h2>{chinaMarketEntry.title}</h2>
           <p>{chinaMarketEntry.description}</p>
         </div>
-        <a class="button button-secondary" href={`/zh/${chinaMarketEntry.slug}/`}>{t.readMore} →</a>
+        <a class="button button-secondary" href="/zh/">{t.readMore} →</a>
       </div></section>
     )}
     {lang === 'tr' && ukraineTurkiye && (
@@ -1470,7 +1470,7 @@ const verifiedLater = {
           <h2>{vietnamMarketEntry.title}</h2>
           <p>{vietnamMarketEntry.description}</p>
         </div>
-        <a class="button button-secondary" href={`/vi/${vietnamMarketEntry.slug}/`}>{t.readMore} →</a>
+        <a class="button button-secondary" href="/vi/">{t.readMore} →</a>
       </div></section>
     )}
     {(lang === 'tr' || lang === 'en' || lang === 'fa') && (
