@@ -11,7 +11,7 @@ import ProductMedia from './ProductMedia.astro';
 import ResponsiveImage from './ResponsiveImage.astro';
 import CommercialRequestForm from './CommercialRequestForm.astro';
 import { FEATURE_IMAGE_WIDTHS } from '../lib/responsive-images';
-import { homeTradeVisualKeys, localizedTradeVisual } from '../data/trade-visuals';
+import { homeTradeVisualKeys, localizedTradeVisual, serviceTradeVisualKeys } from '../data/trade-visuals';
 import {
   aboutEnhancement, guides, homeEnhancement, marketsDetail, processPages, scenarioPages
 } from '../data/completion';
@@ -246,6 +246,9 @@ const detailedService = service && id && (lang === 'tr' || lang === 'en') && id 
   ? serviceDetails[lang][id as keyof typeof serviceDetails[typeof lang]]
   : null;
 const product = id && key === 'products' ? products[id as keyof typeof products] : null;
+const serviceVisual = service && id && id in serviceTradeVisualKeys
+  ? localizedTradeVisual(serviceTradeVisualKeys[id as keyof typeof serviceTradeVisualKeys], lang)
+  : null;
 const insight = id && key === 'insights' ? insights[id as keyof typeof insights] : null;
 const legalPage = id && key === 'legal' ? legal[id as keyof typeof legal] : null;
 const originalPost = insight && id ? getPostForInsight(lang, id) : null;
@@ -1011,6 +1014,27 @@ const verifiedLater = {
 {service && (
   <>
     <PageHero lang={lang} eyebrow={t.services} title={service.names[lang]} lead={service.descriptions[lang]} parentHref={sectionHref('services')} parentLabel={t.services} />
+    {serviceVisual && (
+      <section class="service-visual-band" data-service-visual-band>
+        <div class="container">
+          <figure class="service-detail-visual">
+            <ResponsiveImage
+              src={serviceVisual.source}
+              widths={FEATURE_IMAGE_WIDTHS}
+              sizes="(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(100vw - 36px), min(100vw - 64px, 1320px)"
+              width={serviceVisual.width}
+              height={serviceVisual.height}
+              alt={serviceVisual.altText}
+              focalPosition={serviceVisual.focalPosition}
+              visualKey={serviceVisual.key}
+              loading="lazy"
+              fetchpriority="auto"
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </section>
+    )}
     <section class="section"><div class="container content-grid">
       <div class="prose">
         {detailedService ? (
