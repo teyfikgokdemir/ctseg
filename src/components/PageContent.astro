@@ -28,6 +28,7 @@ import { searchLandingIds, searchLandingIndexCopy, searchLandings, searchLanding
 import { productEvidence } from '../data/product-evidence';
 import { iranTradeContent } from '../data/iran-trade';
 import { vietnamMarketEntryContent } from '../data/vietnam-market-entry';
+import { vietnamTurkiyeContent } from '../data/vietnam-turkiye';
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
@@ -38,6 +39,7 @@ const copy = pageCopy[lang];
 const iranTrade = iranTradeContent[lang];
 const iranTradeHref = `/${lang}/${iranTrade.slug}/`;
 const vietnamMarketEntry = vietnamMarketEntryContent.vi;
+const vietnamTurkiye = vietnamTurkiyeContent.tr;
 const corporate = companyCopy[lang];
 const editorial = editorialCopy[lang];
 const completionHome = homeEnhancement[lang];
@@ -1021,6 +1023,53 @@ const verifiedLater = {
   );
 })()}
 
+{key === 'vietnam-turkiye' && vietnamTurkiye && (
+  <>
+    <PageHero lang={lang} eyebrow={vietnamTurkiye.eyebrow} title={vietnamTurkiye.title} lead={vietnamTurkiye.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
+    <section class="section"><div class="container content-grid">
+      <div class="prose">
+        <div class="content-block direct-answer">
+          <h2>{vietnamTurkiye.directAnswerTitle}</h2>
+          <p>{vietnamTurkiye.directAnswer}</p>
+        </div>
+        <div class="content-block">
+          <h2>{vietnamTurkiye.trendTitle}</h2>
+          <p>{vietnamTurkiye.trendLead}</p>
+        </div>
+        <div class="content-block">
+          <h2>{vietnamTurkiye.productsTitle}</h2>
+          <p>{vietnamTurkiye.productsLead}</p>
+          <ol class="check-list">
+            {vietnamTurkiye.products.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')} · {item.name}</strong><br/><span>{item.signal}</span></li>)}
+          </ol>
+        </div>
+        <div class="content-block">
+          <h2>{vietnamTurkiye.buyerTypesTitle}</h2>
+          <ul class="check-list">{vietnamTurkiye.buyerTypes.map((item)=><li>{item}</li>)}</ul>
+        </div>
+        <div class="content-block origin-note">
+          <h2>{vietnamTurkiye.complianceTitle}</h2>
+          <p>{vietnamTurkiye.complianceText}</p>
+        </div>
+        <div class="content-block">
+          <h2>{vietnamTurkiye.processTitle}</h2>
+          <ol class="check-list">{vietnamTurkiye.process.map((item)=><li>{item}</li>)}</ol>
+        </div>
+        <div class="content-block faq">
+          <h2>{t.faq}</h2>
+          {vietnamTurkiye.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+        </div>
+      </div>
+      <aside class="side-panel">
+        <p class="eyebrow">CTSEG · Vietnam → Türkiye</p>
+        <h2>{vietnamTurkiye.ctaTitle}</h2>
+        <p>{vietnamTurkiye.ctaText}</p>
+        <a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{vietnamTurkiye.ctaLabel}</a>
+      </aside>
+    </div></section>
+  </>
+)}
+
 {key === 'vietnam-market-entry' && vietnamMarketEntry && (
   <>
     <PageHero lang={lang} eyebrow={vietnamMarketEntry.eyebrow} title={vietnamMarketEntry.title} lead={vietnamMarketEntry.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
@@ -1112,6 +1161,16 @@ const verifiedLater = {
       <div class="market-role-grid">{completionMarkets.map((market,index) => <article><span>{indexLabel(index)}</span><h2>{market.title}</h2><ul>{market.items.map((item)=><li>{item}</li>)}</ul></article>)}</div>
     </div></section>
     <ProcessRail steps={copy.framework} />
+    {lang === 'tr' && vietnamTurkiye && (
+      <section class="section compact-link-section"><div class="container cta-statement">
+        <div>
+          <p class="eyebrow">{vietnamTurkiye.eyebrow}</p>
+          <h2>{vietnamTurkiye.title}</h2>
+          <p>{vietnamTurkiye.description}</p>
+        </div>
+        <a class="button button-secondary" href={`/tr/${vietnamTurkiye.slug}/`}>{t.readMore} →</a>
+      </div></section>
+    )}
     {lang === 'vi' && vietnamMarketEntry && (
       <section class="section compact-link-section"><div class="container cta-statement">
         <div>
