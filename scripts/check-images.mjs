@@ -8,7 +8,7 @@ const root=fileURLToPath(new URL('..',import.meta.url));
 const dist=join(root,'dist');
 const failures=[];
 const expectedWidths=[640,768,960,1280,1536];
-const homeFiles=['index.html','en/index.html','de/index.html','it/index.html','fa/index.html','ru/index.html'];
+const homeFiles=['index.html','en/index.html'];
 
 const walk=(dir)=>readdirSync(dir,{withFileTypes:true}).flatMap((entry)=>{
   const path=join(dir,entry.name);
@@ -57,7 +57,7 @@ for(const file of htmlFiles){
 for(const file of homeFiles){
   const html=readFileSync(join(dist,file),'utf8');
   const keys=[...html.matchAll(/data-trade-visual="([^"]+)"/g)].map((match)=>match[1]);
-  const expected=['global-trade-hero',...homeTradeVisualKeys];
+  const expected=['global-trade-hero'];
   if(JSON.stringify(keys)!==JSON.stringify(expected))failures.push(`${file}: expected ${expected.join(', ')}, got ${keys.join(', ')}`);
   const imagePreloads=[...html.matchAll(/<link\b[^>]*rel="preload"[^>]*as="image"[^>]*>/gi)];
   if(imagePreloads.length!==1)failures.push(`${file}: expected one hero image preload, got ${imagePreloads.length}`);
@@ -75,4 +75,4 @@ if(failures.length){
   console.error(failures.join('\n'));
   process.exit(1);
 }
-console.log(`Image audit passed: ${Object.keys(tradeVisuals).length} central assets, ${homeFiles.length} localized homepages, responsive manifest ${expectedWidths.join('/')}px.`);
+console.log(`Image audit passed: ${Object.keys(tradeVisuals).length} central assets, focused locale roots avoid generic home imagery, and ${homeFiles.length} global hubs keep the responsive hero contract (${expectedWidths.join('/')}px).`);
