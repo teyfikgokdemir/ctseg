@@ -67,16 +67,16 @@ body{background:var(--premium-paper);color:var(--premium-ink);overflow-x:hidden}
 /* Marquee-style sector/service rhythm */
 .trade-paths-section{background:var(--premium-charcoal);color:#fff;overflow:hidden}
 .trade-paths-section .section-head p{color:#aaa}
-.trade-paths-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--premium-line);border-bottom:1px solid var(--premium-line)}
-.trade-paths-grid article{padding:clamp(32px,4vw,66px);min-height:360px;position:relative;border-right:1px solid var(--premium-line);transition:background .35s,color .35s}
+.trade-paths-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--premium-line);border-bottom:1px solid var(--premium-line);width:100%}
+.trade-paths-grid article{min-width:0;padding:26px 24px 66px;min-height:250px;position:relative;border-right:1px solid var(--premium-line);transition:background .35s,color .35s}
 .trade-paths-grid article:last-child{border-right:0}
 .trade-paths-grid article:hover{background:var(--premium-acid);color:var(--premium-ink)}
 .trade-paths-grid article>span{font-size:13px;font-weight:800;color:var(--premium-acid)}
 .trade-paths-grid article:hover>span{color:var(--premium-ink)}
-.trade-paths-grid h3{font-size:clamp(38px,5vw,80px);line-height:.95;letter-spacing:-.055em;margin:28px 0 20px;color:inherit}
-.trade-paths-grid p{max-width:40ch;font-size:18px;line-height:1.55;color:#aaa}
+.trade-paths-grid h3{font-size:clamp(28px,2.25vw,38px);line-height:1.04;letter-spacing:-.04em;margin:18px 0 12px;color:inherit}
+.trade-paths-grid p{max-width:36ch;font-size:14px;line-height:1.55;color:#aaa}
 .trade-paths-grid article:hover p{color:#2c2c2c}
-.trade-paths-grid .text-link{position:absolute;left:clamp(32px,4vw,66px);bottom:36px;color:inherit;font-weight:750}
+.trade-paths-grid .text-link{position:absolute;left:24px;right:24px;bottom:24px;color:inherit;font-size:12px;font-weight:750}
 
 .platform-sectors{background:#f4f4f1}
 .platform-sector-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important}
