@@ -45,13 +45,19 @@ if (record.key === 'home') {
       '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#regional-sourcing-service`,
       url:canonicalFor(record),name:page.title,description:page.description,inLanguage:record.lang,
       serviceType:record.lang === 'de'
-        ? 'Türkiye sourcing and nearshoring for DACH companies'
+        ? 'Two-way DACH Türkiye B2B sourcing, nearshoring and market entry'
         : record.lang === 'it'
-        ? 'Türkiye OEM manufacturing and sourcing for Italian companies'
+        ? 'Two-way Italy Türkiye B2B sourcing, OEM manufacturing and market entry'
         : 'Compliance-led Türkiye sourcing for Russian-speaking B2B companies',
       provider:{'@id':'https://ctseg.com.tr/#organization'},
       areaServed:record.lang === 'de' ? ['Germany','Austria','Switzerland','Türkiye'] : record.lang === 'it' ? ['Italy','Türkiye'] : ['Türkiye','International'],
-      audience:{'@type':'BusinessAudience',name:record.lang === 'de' ? 'DACH B2B buyers and procurement teams' : record.lang === 'it' ? 'Italian brands, importers and industrial buyers' : 'Russian-speaking B2B buyers seeking compliant sourcing in Türkiye'}
+      audience:record.lang === 'de' ? [
+        {'@type':'BusinessAudience',name:'DACH B2B buyers and procurement teams sourcing from Türkiye'},
+        {'@type':'BusinessAudience',name:'DACH manufacturers and exporters seeking buyers or distributors in Türkiye'}
+      ] : record.lang === 'it' ? [
+        {'@type':'BusinessAudience',name:'Italian brands, importers and industrial buyers sourcing from Türkiye'},
+        {'@type':'BusinessAudience',name:'Italian manufacturers and exporters seeking buyers or distributors in Türkiye'}
+      ] : {'@type':'BusinessAudience',name:'Russian-speaking B2B buyers seeking compliant sourcing in Türkiye'}
     });
     schemas.push({
       '@context':'https://schema.org','@type':'ItemList',
