@@ -26,6 +26,7 @@ import { tradeGateway } from '../data/trade-gateway';
 import { contactCopy } from '../data/contact-experience';
 import { searchLandingIds, searchLandingIndexCopy, searchLandings, searchLandingPath } from '../data/search-landings';
 import { productEvidence } from '../data/product-evidence';
+import { iranTradeContent } from '../data/iran-trade';
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
@@ -33,6 +34,8 @@ const t = ui[lang];
 const h = homeCopy[lang];
 const gateway = tradeGateway[lang];
 const copy = pageCopy[lang];
+const iranTrade = iranTradeContent[lang];
+const iranTradeHref = `/${lang}/${iranTrade.slug}/`;
 const corporate = companyCopy[lang];
 const editorial = editorialCopy[lang];
 const completionHome = homeEnhancement[lang];
@@ -1016,6 +1019,48 @@ const verifiedLater = {
   );
 })()}
 
+{key === 'iran-trade' && (
+  <>
+    <PageHero lang={lang} eyebrow={iranTrade.eyebrow} title={iranTrade.title} lead={iranTrade.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
+    <section class="section"><div class="container content-grid">
+      <div class="prose">
+        <div class="content-block direct-answer">
+          <h2>{iranTrade.directAnswerTitle}</h2>
+          <p>{iranTrade.directAnswer}</p>
+        </div>
+        <div class="content-block">
+          <h2>{iranTrade.inboundTitle}</h2>
+          <p>{iranTrade.inboundLead}</p>
+          <ol class="check-list">{iranTrade.inboundItems.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}</ol>
+        </div>
+        <div class="content-block">
+          <h2>{iranTrade.outboundTitle}</h2>
+          <p>{iranTrade.outboundLead}</p>
+          <ul class="check-list">{iranTrade.outboundItems.map((item)=><li>{item}</li>)}</ul>
+        </div>
+        <div class="content-block origin-note">
+          <h2>{iranTrade.complianceTitle}</h2>
+          <p>{iranTrade.complianceText}</p>
+        </div>
+        <div class="content-block">
+          <h2>{iranTrade.processTitle}</h2>
+          <ol class="check-list">{iranTrade.process.map((item)=><li>{item}</li>)}</ol>
+        </div>
+        <div class="content-block faq">
+          <h2>{t.faq}</h2>
+          {iranTrade.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+        </div>
+      </div>
+      <aside class="side-panel">
+        <p class="eyebrow">CTSEG · Türkiye ⇄ Iran</p>
+        <h2>{iranTrade.ctaTitle}</h2>
+        <p>{iranTrade.ctaText}</p>
+        <a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{iranTrade.ctaLabel}</a>
+      </aside>
+    </div></section>
+  </>
+)}
+
 {key === 'markets' && (
   <>
     <PageHero lang={lang} eyebrow={t.markets} title={copy.marketsTitle} lead={copy.marketsLead} />
@@ -1023,6 +1068,16 @@ const verifiedLater = {
       <div class="market-role-grid">{completionMarkets.map((market,index) => <article><span>{indexLabel(index)}</span><h2>{market.title}</h2><ul>{market.items.map((item)=><li>{item}</li>)}</ul></article>)}</div>
     </div></section>
     <ProcessRail steps={copy.framework} />
+    {(lang === 'tr' || lang === 'en' || lang === 'fa') && (
+      <section class="section compact-link-section"><div class="container cta-statement">
+        <div>
+          <p class="eyebrow">{iranTrade.eyebrow}</p>
+          <h2>{iranTrade.title}</h2>
+          <p>{iranTrade.description}</p>
+        </div>
+        <a class="button button-secondary" href={iranTradeHref}>{t.readMore} →</a>
+      </div></section>
+    )}
     {lang === 'en' && (
       <aside class="iran-sourcing-link container" aria-labelledby="iran-sourcing-title">
         <p class="eyebrow">Persian resource</p>
