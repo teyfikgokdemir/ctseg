@@ -12,6 +12,7 @@ import { chinaMarketEntryContent } from '../data/china-market-entry';
 import { chinaTurkiyeContent } from '../data/china-turkiye';
 import { ukraineTurkiyeContent } from '../data/ukraine-market';
 import { regionalIntentHomes } from '../data/regional-intent-homes';
+import { termsOfUseCopy } from '../data/legal';
 
 export type RouteRecord = {
   lang: Locale;
@@ -118,7 +119,9 @@ export function getMeta(record: RouteRecord) {
   }
   if (key === 'legal' && id) return {
     title:`${legal[id as keyof typeof legal].titles[lang]} | CTSEG`,
-    description:`${legal[id as keyof typeof legal].titles[lang]}. ${copy.legalIntro}`
+    description:id === 'terms'
+      ? termsOfUseCopy[lang].intro
+      : `${legal[id as keyof typeof legal].titles[lang]}. ${copy.legalIntro}`
   };
   const map: Record<string, [string,string]> = {
     services:[copy.servicesTitle,copy.servicesLead], products:[copy.productsTitle,copy.productsLead],
