@@ -11,6 +11,7 @@ import { vietnamTurkiyeContent } from '../../data/vietnam-turkiye';
 import { chinaMarketEntryContent } from '../../data/china-market-entry';
 import { chinaTurkiyeContent } from '../../data/china-turkiye';
 import { ukraineTurkiyeContent } from '../../data/ukraine-market';
+import { regionalIntentHomes } from '../../data/regional-intent-homes';
 import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, tradeMatchingServiceSchema, type RouteRecord } from '../../lib/routes';
 
 export function getStaticPaths() {
@@ -33,6 +34,28 @@ if (record.key === 'home') {
       provider:{'@id':'https://ctseg.com.tr/#organization'},
       areaServed:['Iran','Türkiye','Europe'],
       audience:{'@type':'BusinessAudience',name:'Iranian buyers, producers and exporters'}
+    });
+    schemas.push({
+      '@context':'https://schema.org','@type':'FAQPage',
+      mainEntity:page.faq.map((item)=>({'@type':'Question',name:item.question,acceptedAnswer:{'@type':'Answer',text:item.answer}}))
+    });
+  } else if (['de','it','ru'].includes(record.lang)) {
+    const page=regionalIntentHomes[record.lang as 'de'|'it'|'ru'];
+    schemas.push({
+      '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#regional-sourcing-service`,
+      url:canonicalFor(record),name:page.title,description:page.description,inLanguage:record.lang,
+      serviceType:record.lang === 'de'
+        ? 'Türkiye sourcing and nearshoring for DACH companies'
+        : record.lang === 'it'
+        ? 'Türkiye OEM manufacturing and sourcing for Italian companies'
+        : 'Compliance-led Türkiye sourcing for Russian-speaking B2B companies',
+      provider:{'@id':'https://ctseg.com.tr/#organization'},
+      areaServed:record.lang === 'de' ? ['Germany','Austria','Switzerland','Türkiye'] : record.lang === 'it' ? ['Italy','Türkiye'] : ['Türkiye','International'],
+      audience:{'@type':'BusinessAudience',name:record.lang === 'de' ? 'DACH B2B buyers and procurement teams' : record.lang === 'it' ? 'Italian brands, importers and industrial buyers' : 'Russian-speaking B2B buyers seeking compliant sourcing in Türkiye'}
+    });
+    schemas.push({
+      '@context':'https://schema.org','@type':'ItemList',
+      name:page.sectorsTitle,itemListElement:page.sectors.map((name,index)=>({'@type':'ListItem',position:index+1,name}))
     });
     schemas.push({
       '@context':'https://schema.org','@type':'FAQPage',
