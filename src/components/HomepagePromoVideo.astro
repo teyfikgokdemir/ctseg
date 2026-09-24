@@ -1,0 +1,53 @@
+---
+---
+<section class="section ctseg-home-promo-video" aria-label="CTSEG ticari operasyon tanıtım videosu">
+  <div class="container">
+    <figure class="ctseg-home-promo-video__frame">
+      <video
+        data-ctseg-home-promo-video
+        muted
+        loop
+        playsinline
+        autoplay
+        preload="metadata"
+        aria-label="CTSEG stratejik tedarik, ticaret ve operasyon tanıtım videosu"
+      >
+        <source src="/videos/ctseg-tanitim.mp4" type="video/mp4" />
+      </video>
+    </figure>
+  </div>
+</section>
+
+<style is:global>
+  .ctseg-home-promo-video{padding:34px 0 82px;background:#07090d;border-top:0}
+  .ctseg-home-promo-video__frame{position:relative;margin:0;overflow:hidden;border:1px solid rgba(238,232,218,.16);border-radius:28px;background:#0b0d11;aspect-ratio:16/9;box-shadow:0 34px 90px rgba(0,0,0,.32)}
+  .ctseg-home-promo-video__frame::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border:1px solid rgba(255,255,255,.08);border-radius:inherit}
+  .ctseg-home-promo-video__frame video{display:block;width:100%;height:100%;object-fit:cover;background:#0b0d11}
+  @media(max-width:620px){
+    .ctseg-home-promo-video{padding:12px 0 58px}
+    .ctseg-home-promo-video__frame{border-radius:18px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .ctseg-home-promo-video__frame video{animation:none}
+  }
+</style>
+
+<script>
+  (()=>{
+    const video=document.querySelector('[data-ctseg-home-promo-video]') as HTMLVideoElement | null;
+    if(!video)return;
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    if(reduced.matches){ video.pause(); return; }
+    if('IntersectionObserver' in window){
+      const observer=new IntersectionObserver((entries)=>{
+        for(const entry of entries){
+          if(entry.isIntersecting) video.play().catch(()=>{});
+          else video.pause();
+        }
+      },{rootMargin:'120px'});
+      observer.observe(video);
+    }else{
+      video.play().catch(()=>{});
+    }
+  })();
+</script>
