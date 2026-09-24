@@ -23,7 +23,61 @@ export function getStaticPaths() {
 const { record } = Astro.props as { record: RouteRecord };
 const meta = getMeta(record);
 const schemas:any[] = [breadcrumbSchema(record, meta.title)];
-if (record.key === 'home') schemas.push(tradeMatchingServiceSchema(record,meta.title,meta.description));
+if (record.key === 'home') {
+  if (record.lang === 'fa') {
+    const page=iranTradeContent.fa;
+    schemas.push({
+      '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#iran-trade-service`,
+      url:canonicalFor(record),name:page.title,description:page.description,inLanguage:'fa',
+      serviceType:'Iran Türkiye B2B sourcing and market-entry coordination',
+      provider:{'@id':'https://ctseg.com.tr/#organization'},
+      areaServed:['Iran','Türkiye','Europe'],
+      audience:{'@type':'BusinessAudience',name:'Iranian buyers, producers and exporters'}
+    });
+    schemas.push({
+      '@context':'https://schema.org','@type':'FAQPage',
+      mainEntity:page.faq.map((item)=>({'@type':'Question',name:item.question,acceptedAnswer:{'@type':'Answer',text:item.answer}}))
+    });
+  } else if (record.lang === 'zh' && chinaMarketEntryContent.zh) {
+    const page=chinaMarketEntryContent.zh;
+    schemas.push({
+      '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#china-market-entry-service`,
+      url:canonicalFor(record),name:page.title,description:page.description,inLanguage:'zh-CN',
+      serviceType:'China manufacturer export market entry and B2B buyer development',
+      provider:{'@id':'https://ctseg.com.tr/#organization'},
+      areaServed:['Türkiye','Europe'],
+      audience:{'@type':'BusinessAudience',name:'Chinese manufacturers, OEM/ODM factories and exporters'}
+    });
+    schemas.push({
+      '@context':'https://schema.org','@type':'ItemList',
+      name:page.sectorsTitle,itemListElement:page.sectors.map((name,index)=>({'@type':'ListItem',position:index+1,name}))
+    });
+    schemas.push({
+      '@context':'https://schema.org','@type':'FAQPage',
+      mainEntity:page.faq.map((item)=>({'@type':'Question',name:item.question,acceptedAnswer:{'@type':'Answer',text:item.answer}}))
+    });
+  } else if (record.lang === 'vi' && vietnamMarketEntryContent.vi) {
+    const page=vietnamMarketEntryContent.vi;
+    schemas.push({
+      '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#vietnam-market-entry-service`,
+      url:canonicalFor(record),name:page.title,description:page.description,inLanguage:'vi-VN',
+      serviceType:'Vietnam exporter market entry and B2B buyer development',
+      provider:{'@id':'https://ctseg.com.tr/#organization'},
+      areaServed:['Türkiye','Europe'],
+      audience:{'@type':'BusinessAudience',name:'Vietnamese manufacturers and exporters'}
+    });
+    schemas.push({
+      '@context':'https://schema.org','@type':'ItemList',
+      name:page.sectorsTitle,itemListElement:page.sectors.map((name,index)=>({'@type':'ListItem',position:index+1,name}))
+    });
+    schemas.push({
+      '@context':'https://schema.org','@type':'FAQPage',
+      mainEntity:page.faq.map((item)=>({'@type':'Question',name:item.question,acceptedAnswer:{'@type':'Answer',text:item.answer}}))
+    });
+  } else {
+    schemas.push(tradeMatchingServiceSchema(record,meta.title,meta.description));
+  }
+}
 if (record.key === 'services' && record.id) {
   const service = services[record.id as keyof typeof services];
   schemas.push({
