@@ -47,7 +47,7 @@ export async function onRequestPost(context){
   const data=Object.fromEntries(Object.entries(limits).map(([key,max])=>[key,clean(raw[key],max)]));
   if(data.website)return json({ok:true});
   if(required.some((key)=>!data[key]))return json({code:'missing_required_fields'},400);
-  if(!['buyer_request','supplier_market_entry'].includes(data.intent))return json({code:'invalid_intent'},400);
+  if(!['buyer_request','supplier_market_entry','external_trade_desk'].includes(data.intent))return json({code:'invalid_intent'},400);
   if(!tradeDirections.includes(data.tradeDirection))return json({code:'invalid_trade_direction'},400);
   if(!productFamilies.includes(data.productFamily))return json({code:'invalid_product_family'},400);
   const contact=data.emailOrPhone;
