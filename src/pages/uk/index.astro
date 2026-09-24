@@ -10,6 +10,8 @@ const schema = [
     '@id':'https://ctseg.com.tr/#organization',
     name:'CTSEG Sanayi ve Ticaret Limited Şirketi',
     alternateName:'CTSEG',
+    foundingDate:'2022',
+    founder:{'@type':'Person',name:'Teyfik Gökdemir'},
     url:'https://ctseg.com.tr/',
     logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
     address:{'@type':'PostalAddress',addressLocality:'Tuzla',addressRegion:'İstanbul',addressCountry:'TR'},
@@ -104,6 +106,8 @@ const schema = [
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="uk" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:title" content={page.title} />
