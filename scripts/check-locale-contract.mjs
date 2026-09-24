@@ -4,6 +4,7 @@ import { join, resolve } from 'node:path';
 const dist=resolve('dist');
 const errors=[];
 const active=['tr','en','de','it','fa','ru','zh','vi'];
+const switchLocales=[...active,'uk'];
 const homes={tr:'index.html',en:'en/index.html',de:'de/index.html',it:'it/index.html',fa:'fa/index.html',ru:'ru/index.html',zh:'zh/index.html',vi:'vi/index.html'};
 const ruSourcing=['ru/sourcing/carpets/index.html','ru/sourcing/hand-knotted-silk-carpets/index.html','ru/sourcing/textiles/index.html'];
 const ruCore=[
@@ -21,9 +22,10 @@ if(existsSync(join(dist,'fr')))errors.push('French build directory still exists'
 for(const [locale,path] of Object.entries(homes)){
   const html=read(path);
   const links=[...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].map((match)=>match[0]);
-  for(const code of active)if(!links.some((tag)=>tag.includes(`hreflang="${code}"`)))errors.push(`${path}: locale switcher missing ${code}`);
+  for(const code of switchLocales)if(!links.some((tag)=>tag.includes(`hreflang="${code}"`)))errors.push(`${path}: locale switcher missing ${code}`);
   if(links.some((tag)=>tag.includes('hreflang="fr"')))errors.push(`${path}: French remains in locale switcher`);
-  if(!html.includes(`hreflang="${locale}"`)||!html.includes('hreflang="x-default"'))errors.push(`${path}: homepage hreflang contract incomplete`);
+  const requiredAlternates = locale === 'fa' ? ['tr','en','fa','x-default'] : ['tr','en'].includes(locale) ? ['tr','en','x-default'] : [locale];
+  for(const code of requiredAlternates)if(!html.includes(`hreflang="${code}"`))errors.push(`${path}: homepage hreflang ${code} missing`);
 }
 
 const ruHome=read(homes.ru);
@@ -33,10 +35,7 @@ const ruH1Text=(ruH1Matches[0]?.[1]??'').replace(/<[^>]+>/g,' ').replace(/\s+/g,
 if(ruH1Matches.length!==1||!/[А-Яа-яЁё]/.test(ruH1Text)||!ruH1Text.includes('Турц'))errors.push('Russian homepage H1 missing, duplicated or not localized');
 if(!/[А-Яа-яЁё]/.test(ruHome))errors.push('Russian homepage has no Cyrillic content');
 for(const marker of ['Accueil','Français','Demander une offre','Tous droits réservés','Politique de confidentialité'])if(ruHome.includes(marker))errors.push(`Russian homepage contains French marker: ${marker}`);
-const disclosure=ruHome.match(/<details class="commercial-form-disclosure"[^>]*>/)?.[0]??'';
-if(!disclosure||/\sopen(?:\s|>)/.test(disclosure))errors.push('Russian detailed form is not initially closed');
-for(const text of ['Написать в WhatsApp','Отправить письмо','Отправить подробный запрос','buyer_request','supplier_market_entry'])if(!ruHome.includes(text))errors.push(`Russian contact contract missing: ${text}`);
-if(ruHome.indexOf('Написать в WhatsApp')>ruHome.indexOf('commercial-form-disclosure')||ruHome.indexOf('Отправить письмо')>ruHome.indexOf('commercial-form-disclosure'))errors.push('Russian direct CTAs do not precede the form');
+for(const text of ['direct-answer','id="sectors"','КОМПЛАЕНС','external_trade_desk'])if(!ruHome.includes(text))errors.push(`Russian focused landing contract missing: ${text}`);
 if(!ruHome.includes('property="og:locale" content="ru_RU"'))errors.push('Russian OG locale missing');
 
 for(const path of ruSourcing){
@@ -88,4 +87,4 @@ for(const rule of requiredRedirects){
 }
 
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log('Locale contract passed: 8 active locales, 61-page Russian parity, localized solution landings, French cleanup and one-hop redirects.');
+console.log('Locale contract passed: 8 full-site locales plus focused Ukrainian entry, intent-specific locale roots, 61-page Russian parity, localized solution landings, French cleanup and one-hop redirects.');
