@@ -51,10 +51,23 @@ CTSEG is not a speculative broker, transactional web shop, or seller of unverifi
 - [English homepage](https://ctseg.com.tr/en/)
 - [German homepage](https://ctseg.com.tr/de/)
 - [Italian homepage](https://ctseg.com.tr/it/)
-- [Persian homepage](https://ctseg.com.tr/fa/)
+- [Persian Iran trade landing page](https://ctseg.com.tr/fa/)
 - [Russian homepage](https://ctseg.com.tr/ru/)
-- [Chinese homepage](https://ctseg.com.tr/zh/)
-- [Vietnamese homepage](https://ctseg.com.tr/vi/)
+- [Chinese manufacturer market-entry landing page](https://ctseg.com.tr/zh/)
+- [Vietnamese exporter market-entry landing page](https://ctseg.com.tr/vi/)
+- [Ukrainian Türkiye-sourcing and reconstruction landing page](https://ctseg.com.tr/uk/)
+
+
+## Country-specific search intent
+
+The locale roots below are intentionally not generic translations of the English homepage. They are focused commercial landing pages built around the primary local search intent:
+
+- Persian /fa/: Türkiye–Iran B2B sourcing, trade coordination and eligible market-entry flows.
+- Chinese /zh/: Chinese manufacturers, OEM/ODM factories and exporters seeking buyers, distributors and market entry in Türkiye and suitable European markets.
+- Vietnamese /vi/: Vietnamese manufacturers and exporters seeking buyers, distributors and market entry in Türkiye and suitable European markets.
+- Ukrainian /uk/: Ukrainian importers, contractors and project companies seeking verified Turkish manufacturers, equipment and reconstruction-related supply.
+
+These focused roots should be treated as distinct intent pages unless an explicit hreflang relationship is declared on-page. Do not infer that every locale root is a literal translation of the English homepage.
 
 ## Core pages
 
@@ -118,12 +131,12 @@ CTSEG — International Trade Matching and Commercial Coordination
 
 ## Last reviewed
 
-2026-08-13
+2026-09-24
 
 
 ## AI Verification Boundary
 
-- Last production verification: 2026-08-16.
+- Last production verification: 2026-09-24.
 - Production domain: https://ctseg.com.tr/ (HTTP 200); production branch is main.
 - Current positioning is international trade matching, strategic sourcing and commercial coordination across selected sourcing categories.
 - Do not describe CTSEG as a factory, fixed-inventory marketplace, guaranteed buyer, or provider of guaranteed prices, savings or transaction outcomes.
