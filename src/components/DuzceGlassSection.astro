@@ -9,6 +9,7 @@ const href = duzceGlassPath(currentLang);
 const contactHref = localizedPath(currentLang as Locale, 'contact');
 const isRtl = currentLang === 'fa';
 const homeTitle = currentLang === 'tr' ? 'Düzce Cam için uluslararası ticaret kanalı.' : d.title;
+const exportDeskLabel = currentLang === 'tr' ? 'CTSEG / İHRACAT MASASI' : currentLang === 'ro' ? 'CTSEG / BIROU EXPORT' : currentLang === 'bg' ? 'CTSEG / ЕКСПОРТЕН ОТДЕЛ' : currentLang === 'sr' ? 'CTSEG / IZVOZNI DESK' : 'CTSEG / EXPORT DESK';
 ---
 <section class="section duzce-glass-feature" id="duzce-glass" dir={isRtl ? 'rtl' : 'ltr'}>
   <div class="container duzce-glass-shell">
@@ -30,7 +31,7 @@ const homeTitle = currentLang === 'tr' ? 'Düzce Cam için uluslararası ticaret
     <div class="duzce-glass-panel">
       <div class="duzce-glass-panel-top">
         <span>DÜZCE FLOAT GLASS</span>
-        <strong>CTSEG / EXPORT DESK</strong>
+        <strong>{exportDeskLabel}</strong>
       </div>
       <div class="duzce-glass-grid">
         <div>
