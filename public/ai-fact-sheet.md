@@ -1,6 +1,6 @@
 # CTSEG — AI Fact Sheet
 
-**Last verified:** 2026-09-24 (repository structure, multilingual landing architecture and discovery files)
+**Last verified:** 2026-09-26 (repository structure, multilingual architecture, discovery files and CI validation)
 
 ## Current identity
 
@@ -23,7 +23,7 @@ The current site presents selected sourcing areas including food and agricultura
 
 ## Current languages
 
-The site uses 8 active full-site locales (Turkish, English, German, Italian, Persian, Russian, Chinese, and Vietnamese) plus a focused Ukrainian market landing page. Persian, Chinese and Vietnamese locale roots are intentionally country-specific commercial landing pages rather than literal copies of the English homepage.
+The site uses 11 active full-site locales (Turkish, English, German, Italian, Persian, Russian, Chinese, Vietnamese, Romanian, Bulgarian and Serbian) plus a focused Ukrainian market landing page. Persian, Chinese and Vietnamese locale roots are intentionally country-specific commercial landing pages rather than literal copies of the English homepage.
 
 - Turkish: https://ctseg.com.tr/
 - English: https://ctseg.com.tr/en/
@@ -33,6 +33,9 @@ The site uses 8 active full-site locales (Turkish, English, German, Italian, Per
 - Russian: https://ctseg.com.tr/ru/
 - Chinese: https://ctseg.com.tr/zh/
 - Vietnamese: https://ctseg.com.tr/vi/
+- Romanian: https://ctseg.com.tr/ro/
+- Bulgarian: https://ctseg.com.tr/bg/
+- Serbian: https://ctseg.com.tr/sr/
 - Ukrainian focused landing: https://ctseg.com.tr/uk/
 
 
@@ -44,6 +47,9 @@ The site uses 8 active full-site locales (Turkish, English, German, Italian, Per
 - Persian /fa/: Türkiye–Iran trade and sourcing corridor.
 - Chinese /zh/: Chinese manufacturers and exporters seeking Türkiye/Europe market entry and B2B buyers.
 - Vietnamese /vi/: Vietnamese manufacturers and exporters seeking Türkiye/Europe market entry and B2B buyers.
+- Romanian /ro/: Romanian companies seeking verified Türkiye sourcing, supplier verification and market-entry coordination.
+- Bulgarian /bg/: Bulgarian companies seeking verified Türkiye sourcing, supplier verification and market-entry coordination.
+- Serbian /sr/: Serbian companies seeking verified Türkiye sourcing, supplier verification and market-entry coordination.
 - Ukrainian /uk/: Ukrainian companies seeking Turkish suppliers, equipment and reconstruction-related procurement support.
 
 Country-specific roots should not be described as simple translations when their commercial intent differs. Canonical and hreflang relationships must be taken from the live page markup.
