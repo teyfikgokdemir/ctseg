@@ -8,12 +8,13 @@ const d = duzceGlassData[currentLang] || duzceGlassData.en;
 const href = duzceGlassPath(currentLang);
 const contactHref = localizedPath(currentLang as Locale, 'contact');
 const isRtl = currentLang === 'fa';
+const homeTitle = currentLang === 'tr' ? 'Düzce Cam için uluslararası ticaret kanalı.' : d.title;
 ---
 <section class="section duzce-glass-feature" id="duzce-glass" dir={isRtl ? 'rtl' : 'ltr'}>
   <div class="container duzce-glass-shell">
     <div class="duzce-glass-copy">
       <span class="eyebrow duzce-glass-eyebrow">{d.eyebrow}</span>
-      <h2>{d.title}</h2>
+      <h2>{homeTitle}</h2>
       <p class="lead">{d.lead}</p>
 
       <div class="duzce-glass-badges" aria-label={d.eyebrow}>
