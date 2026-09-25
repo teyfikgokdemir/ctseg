@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import DuzceGlassPageContent from '../../../components/DuzceGlassPageContent.astro';
+import { duzceGlassData, duzceGlassLocales, duzceGlassPath, type DuzceGlassLocale } from '../../../data/duzce-glass';
+
+export function getStaticPaths() {
+  return duzceGlassLocales.filter((lang) => lang !== 'tr').map((lang) => ({params:{lang},props:{lang}}));
+}
+const { lang } = Astro.props as { lang:DuzceGlassLocale };
+const data = duzceGlassData[lang] || duzceGlassData.en;
+const canonical = `https://ctseg.com.tr${duzceGlassPath(lang)}`;
+const schema = [{
+  '@context':'https://schema.org','@type':'CollectionPage','@id':`${canonical}#glass-export`,
+  name:data.metaTitle,description:data.metaDescription,url:canonical,
+  about:['Float glass','Coated glass','Laminated glass','Mirror','Solar glass','Satin glass','Lacquered glass']
+}];
+---
+<BaseLayout lang={lang} title={data.metaTitle} description={data.metaDescription} pageKey="glass" canonical={canonical} schema={schema}>
+  <DuzceGlassPageContent lang={lang} />
+</BaseLayout>
