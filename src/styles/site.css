@@ -1216,3 +1216,46 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
     min-height:128px!important;
   }
 }
+
+
+/* BALKAN MOBILE OVERFLOW GUARD 2026-09-26 */
+@media (max-width:560px){
+  html[data-locale=ro] #external-trade-desk .text-link,
+  html[data-locale=bg] #external-trade-desk .text-link,
+  html[data-locale=sr] #external-trade-desk .text-link{
+    max-width:100%!important;
+    width:100%!important;
+    box-sizing:border-box!important;
+    padding-inline:14px!important;
+    font-size:.68rem!important;
+    line-height:1.2!important;
+    letter-spacing:.025em!important;
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-overflow:clip!important;
+    text-align:center!important;
+  }
+
+  html[data-locale=ro] .trending-sectors .section-head h2,
+  html[data-locale=bg] .trending-sectors .section-head h2,
+  html[data-locale=sr] .trending-sectors .section-head h2{
+    max-width:100%!important;
+    width:100%!important;
+    margin-inline:0!important;
+    font-size:clamp(1.55rem,7vw,2rem)!important;
+    line-height:1.03!important;
+    letter-spacing:-.035em!important;
+    white-space:normal!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+    hyphens:none!important;
+  }
+
+  html[data-locale=ro] .trending-sectors .section-head p,
+  html[data-locale=bg] .trending-sectors .section-head p,
+  html[data-locale=sr] .trending-sectors .section-head p{
+    max-width:100%!important;
+    font-size:.94rem!important;
+    line-height:1.5!important;
+  }
+}
