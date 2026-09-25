@@ -59,6 +59,7 @@ const globalLocaleFlags: Record<string,string> = {tr:'/images/flags/tr.svg',en:'
 const globalSwitchPath = (target: string): string => {
   if (target === 'uk') return '/uk/';
   if (pageKey === 'search-landing' && pageId) return searchLandingPath(target as Locale,pageId as SearchLandingId);
+  if (pageKey === 'insights' && pageId && ['ro','bg','sr'].includes(target)) return localizedPath(target as Locale,'insights');
   if (pageKey === 'iran-trade') {
     if (target === 'tr') return '/tr/iran-turkiye-ticaret/';
     if (target === 'en') return '/en/iran-turkiye-europe-trade/';
