@@ -20,7 +20,6 @@ const statusLabel = ({tr:'Kontrollü ilerleme',en:'Controlled progression',de:'K
     <ol class="process-rail" aria-label={sequenceLabel}>
       {steps.map((step) => (
         <li>
-          <span class="process-node" aria-hidden="true"><i></i></span>
           <strong>{step}</strong>
           <span class="process-arrow" aria-hidden="true">↗</span>
         </li>
@@ -43,12 +42,8 @@ const statusLabel = ({tr:'Kontrollü ilerleme',en:'Controlled progression',de:'K
   .process-status span::after{content:"";position:absolute;inset-inline-start:0;top:-2px;width:22px;height:5px;border-radius:99px;background:#c4f000}
   .process-status small{font-size:10px;font-weight:760;letter-spacing:.12em;text-transform:uppercase}
   .process-rail{position:relative;margin:0;padding:0;list-style:none;border-top:1px solid rgba(255,255,255,.18)}
-  .process-rail::before{content:"";position:absolute;inset-block:0;inset-inline-start:12px;width:1px;background:linear-gradient(to bottom,#c4f000 0%,rgba(196,240,0,.12) 100%);pointer-events:none}
-  .process-rail li{position:relative;display:grid;grid-template-columns:25px minmax(0,1fr) 30px;gap:22px;align-items:center;min-height:112px;padding:22px 4px;border-bottom:1px solid rgba(255,255,255,.16);overflow:hidden;transition:padding .28s ease,border-color .28s ease,background .28s ease}
-  .process-rail li:hover,.process-rail li:focus-within{padding-inline:12px;border-color:rgba(196,240,0,.5);background:linear-gradient(90deg,rgba(196,240,0,.045),transparent 72%)}
-  .process-node{position:relative;z-index:1;display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#111;border:1px solid rgba(196,240,0,.58);box-shadow:0 0 0 5px #111}
-  .process-node i{display:block;width:6px;height:6px;border-radius:50%;background:#c4f000;transition:transform .25s ease}
-  .process-rail li:hover .process-node i{transform:scale(1.5)}
+    .process-rail li{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 30px;gap:22px;align-items:center;min-height:112px;padding:22px 4px 22px 26px;border-bottom:1px solid rgba(255,255,255,.16);overflow:hidden;transition:padding .28s ease,border-color .28s ease,background .28s ease}
+  .process-rail li::before{content:"";position:absolute;left:0;top:50%;width:8px;height:2px;background:#c4f000;transform:translateY(-50%);opacity:.9}.process-rail li:hover,.process-rail li:focus-within{padding-left:32px;padding-right:12px;border-color:rgba(196,240,0,.5);background:linear-gradient(90deg,rgba(196,240,0,.045),transparent 72%)}
   .process-arrow{justify-self:end;color:rgba(255,255,255,.32);font-size:21px;line-height:1;transition:color .25s ease,transform .25s ease}
   .process-rail strong{max-width:31ch;color:#fff!important;font-family:'DM Sans',system-ui,sans-serif;font-size:clamp(21px,1.65vw,29px);font-weight:690;line-height:1.08;letter-spacing:-.035em;text-wrap:balance}
   .process-rail li:hover .process-arrow{color:#c4f000;transform:translate(3px,-3px)}
@@ -57,6 +52,6 @@ const statusLabel = ({tr:'Kontrollü ilerleme',en:'Controlled progression',de:'K
   :global(html[dir="rtl"]) .process-rail strong{text-align:right;max-width:32ch}
   :global(html[dir="rtl"]) .process-rail li:hover .process-arrow{transform:translate(-3px,-3px)}
   @media(max-width:1100px){.process-shell{grid-template-columns:1fr;gap:38px}.process-heading{position:static;max-width:760px}.process-heading .section-title{max-width:15ch}.process-caption{max-width:48em}.process-rail li{min-height:104px}}
-  @media(max-width:720px){.process-section{padding-block:60px}.process-heading .section-title{max-width:100%;font-size:clamp(34px,9vw,46px)!important}.process-caption{margin-top:20px}.process-status{margin-top:18px}.process-rail li{grid-template-columns:21px minmax(0,1fr) 24px;gap:14px;min-height:92px;padding-block:19px}.process-rail::before{inset-inline-start:10px}.process-rail li:hover{padding-inline:7px}.process-node{width:21px;height:21px;box-shadow:0 0 0 4px #111}.process-node i{width:5px;height:5px}.process-rail strong{max-width:100%;font-size:clamp(19px,5.7vw,25px)}.process-arrow{font-size:18px}}
-  @media(prefers-reduced-motion:reduce){.process-rail li,.process-node i,.process-arrow{transition:none}}
+  @media(max-width:720px){.process-section{padding-block:60px}.process-heading .section-title{max-width:100%;font-size:clamp(34px,9vw,46px)!important}.process-caption{margin-top:20px}.process-status{margin-top:18px}.process-rail li{grid-template-columns:minmax(0,1fr) 24px;gap:14px;min-height:92px;padding:19px 0 19px 22px}.process-rail li:hover{padding-left:26px;padding-right:7px}.process-rail strong{max-width:100%;font-size:clamp(19px,5.7vw,25px)}.process-arrow{font-size:18px}}
+  @media(prefers-reduced-motion:reduce){.process-rail li,.process-arrow{transition:none}}
 </style>
