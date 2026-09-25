@@ -1661,6 +1661,7 @@ const verifiedLater = {
 )}
 
 {key === 'insights' && !id && (() => {
+  const balkanInsightsPending = ['ro','bg','sr'].includes(lang);
   const featuredId = insightIds[0];
   const featuredInsight = insights[featuredId];
   const featuredPost = getPostForInsight(lang, featuredId);
@@ -1669,7 +1670,11 @@ const verifiedLater = {
     <>
       <PageHero lang={lang} eyebrow={t.insights} title={copy.insightsTitle} lead={copy.insightsLead} />
       <section class="section insight-section"><div class="container">
-        {featuredInsight && (
+        {balkanInsightsPending ? (
+          <div class="empty-state">
+            <p>{t.emptyInsights}</p>
+          </div>
+        ) : featuredInsight && (
           <article class="insight-featured">
             <div class="featured-badge-bar">
               <span class="featured-kicker">{featuredInsightLabel}</span>
@@ -1696,7 +1701,7 @@ const verifiedLater = {
           </article>
         )}
 
-        <div class="insight-grid">
+        {!balkanInsightsPending && <div class="insight-grid">
           {remainingIds.map((insightId) => {
             const post = getPostForInsight(lang, insightId);
             const category = insightCategories[insightId]?.[lang];
@@ -1715,7 +1720,7 @@ const verifiedLater = {
               </a>
             );
           })}
-        </div>
+        </div>}
 
         {(lang === 'tr' || lang === 'en') && (
           <div class="guide-directory-section">
