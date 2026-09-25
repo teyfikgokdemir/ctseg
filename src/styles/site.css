@@ -1177,3 +1177,42 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
     min-height:46px!important;
   }
 }
+
+
+/* BALKAN MOBILE MARKET TYPOGRAPHY 2026-09-26 */
+@media (max-width:560px){
+  html[data-locale=ro] .markets-editorial .section-head h2,
+  html[data-locale=bg] .markets-editorial .section-head h2,
+  html[data-locale=sr] .markets-editorial .section-head h2{
+    max-width:none!important;
+    width:100%!important;
+    margin-inline:0!important;
+    font-size:clamp(1rem,4.55vw,1.35rem)!important;
+    line-height:1.05!important;
+    letter-spacing:-.035em!important;
+    white-space:nowrap!important;
+    text-wrap:nowrap!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+    hyphens:none!important;
+  }
+  html[data-locale=ro] .market-line strong,
+  html[data-locale=bg] .market-line strong,
+  html[data-locale=sr] .market-line strong{
+    left:16px!important;
+    right:16px!important;
+    font-size:clamp(1.55rem,7vw,2rem)!important;
+    line-height:1!important;
+    letter-spacing:-.035em!important;
+    white-space:nowrap!important;
+    text-wrap:nowrap!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+    hyphens:none!important;
+  }
+  html[data-locale=ro] .market-line>div,
+  html[data-locale=bg] .market-line>div,
+  html[data-locale=sr] .market-line>div{
+    min-height:128px!important;
+  }
+}
