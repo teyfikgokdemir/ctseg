@@ -1390,7 +1390,7 @@ Object.assign(homeCopy as any,{
     trust:['Contrapărți verificate','Origine transparentă','Disciplină B2B în decizie','Türkiye · Europa · Internațional'],
     servicesTitle:'Mai mult decât o listă de furnizori.',servicesLead:'Structurăm întregul proces, de la cerință și verificare până la ofertă și execuție.',
     productsTitle:'Portofoliu comercial verificabil.',productsLead:'Produse selectate evaluate transparent prin origine, lot, parametri de calitate și opțiuni de livrare.',
-    marketsTitle:'Conexiuni comerciale aplicabile între piețe.',marketsLead:'Sourcing și coordonare comercială din Türkiye către România, Europa și piețe internaționale.',
+    marketsTitle:'Conexiuni comerciale concrete între piețe.',marketsLead:'Sourcing și coordonare comercială din Türkiye către România, Europa și piețe internaționale.',
     processTitle:'Progres controlat în patru pași',process:['Definirea cerinței','Verificarea pieței și contrapărților','Compararea imaginii comerciale totale','Monitorizarea execuției și performanței'],
     ctaTitle:'Transformați următoarea decizie de sourcing într-una bazată pe dovezi.'
   },
@@ -1401,7 +1401,7 @@ Object.assign(homeCopy as any,{
     trust:['Проверени контрагенти','Прозрачен произход','B2B дисциплина при решенията','Türkiye · Европа · Международно'],
     servicesTitle:'Повече от списък с доставчици.',servicesLead:'Структурираме целия процес – от изискването и проверката до офертата и изпълнението.',
     productsTitle:'Проверим търговски продуктов портфейл.',productsLead:'Подбрани продукти, оценявани прозрачно по произход, партида, качество и варианти за доставка.',
-    marketsTitle:'Практични връзки между пазари.',marketsLead:'Снабдяване и търговска координация от Türkiye към България, Европа и международни пазари.',
+    marketsTitle:'Практични търговски връзки между пазари.',marketsLead:'Снабдяване и търговска координация от Türkiye към България, Европа и международни пазари.',
     processTitle:'Контролиран процес в четири стъпки',process:['Дефиниране на нуждата','Проверка на пазара и контрагентите','Сравнение на общата търговска картина','Проследяване на изпълнението и резултатите'],
     ctaTitle:'Вземете следващото решение за снабдяване на база проверими данни.'
   },
@@ -1412,7 +1412,7 @@ Object.assign(homeCopy as any,{
     trust:['Provereni poslovni partneri','Transparentno poreklo','B2B disciplina odlučivanja','Türkiye · Evropa · Međunarodno'],
     servicesTitle:'Više od liste dobavljača.',servicesLead:'Strukturišemo ceo proces – od zahteva i provere do ponude i realizacije.',
     productsTitle:'Proverljiv trgovinski portfolio proizvoda.',productsLead:'Odabrani proizvodi procenjeni kroz transparentno poreklo, seriju, parametre kvaliteta i opcije isporuke.',
-    marketsTitle:'Primenljive veze između tržišta.',marketsLead:'Sourcing i trgovinska koordinacija iz Türkiye prema Srbiji, Evropi i međunarodnim tržištima.',
+    marketsTitle:'Konkretne trgovinske veze između tržišta.',marketsLead:'Sourcing i trgovinska koordinacija iz Türkiye prema Srbiji, Evropi i međunarodnim tržištima.',
     processTitle:'Kontrolisan napredak u četiri koraka',process:['Definisanje zahteva','Provera tržišta i partnera','Poređenje ukupne komercijalne slike','Praćenje realizacije i učinka'],
     ctaTitle:'Neka sledeća sourcing odluka bude zasnovana na dokazima.'
   }
