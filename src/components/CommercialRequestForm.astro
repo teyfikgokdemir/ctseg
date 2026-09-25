@@ -356,7 +356,7 @@ const dynamicPlaceholders = {
       const intentCards=form.querySelectorAll('[data-intent-toggle]');
       const disclosure=form.closest('.commercial-form-disclosure');
 
-      const updateIntentState=(selectedIntent,shouldOpenDisclosure=false)=>{
+      const updateIntentState=(selectedIntent)=>{
         if(intent instanceof HTMLSelectElement&&intent.value!==selectedIntent){
           intent.value=selectedIntent;
         }
@@ -371,9 +371,6 @@ const dynamicPlaceholders = {
         if(selectedIntent==='external_trade_desk'){
           if(tradeDirection instanceof HTMLSelectElement&&!tradeDirection.value)tradeDirection.value='other';
           if(productFamily instanceof HTMLSelectElement&&!productFamily.value)productFamily.value='other';
-        }
-        if(shouldOpenDisclosure&&disclosure&&!disclosure.open){
-          disclosure.open=true;
         }
       };
 
@@ -425,7 +422,6 @@ const dynamicPlaceholders = {
       form.addEventListener('focusin',()=>{if(!startedTracked){startedTracked=true;track('contact_form_start')}},{once:true});
       const summary=()=>Array.from(new FormData(form).entries()).filter(([key,value])=>!['website','startedAt','privacy','locale','pagePath','landingPath','referrerHost','utmSource','utmMedium','utmCampaign','utmContent','utmTerm','clickId'].includes(key)&&String(value).trim()).map(([key,value])=>`${key}: ${String(value).trim()}`).join('\n');
       download?.addEventListener('click',()=>{track('form_fallback_download');const blob=new Blob([`CTSEG short commercial request\n\n${summary()}\n`],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='ctseg-commercial-request.txt';link.click();URL.revokeObjectURL(url)});
-      form.closest('.commercial-form-disclosure')?.addEventListener('toggle',(event)=>{if(event.currentTarget.open)track('contact_form_open')});
       form.addEventListener('submit',async(event)=>{
         event.preventDefault();fallback.hidden=true;status.textContent='';if(!form.reportValidity())return;
         track('contact_form_submit_attempt');const submit=form.querySelector('[type="submit"]');submit.disabled=true;
