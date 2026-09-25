@@ -44,7 +44,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       fa:'نمای بندر و نمونه‌های محصول به‌عنوان تصویری از جریان تجارت بین‌المللی'
     ,
       zh:'代表全球大宗贸易与跨境物流的现代化港口与产品样品',
-      vi:'Cảng biển và mẫu sản phẩm đại diện cho dòng chảy thương mại quốc tế'}
+      vi:'Cảng biển và mẫu sản phẩm đại diện cho dòng chảy thương mại quốc tế',
+      ro:'Port și mostre de produse care reprezintă fluxurile comerciale internaționale',
+      bg:'Пристанище и продуктови мостри, представящи международните търговски потоци',
+      sr:'Luka i uzorci proizvoda koji predstavljaju međunarodne trgovinske tokove'}
   },
   'food-oils':{
     key:'food-oils',source:'/images/ctseg-vegetable-oils-food-editorial.webp',sector:'food, grains and vegetable oils',
@@ -59,7 +62,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       fa:'نمونه‌های بدون نشان تجاری از روغن گیاهی و مواد اولیه غذایی برای ارزیابی تجاری'
     ,
       zh:'用于商业决策评估的中性植物油及精选大宗食品原料样品',
-      vi:'Mẫu dầu thực vật không thương hiệu và nguyên liệu thực phẩm phục vụ đánh giá thương mại'}
+      vi:'Mẫu dầu thực vật không thương hiệu và nguyên liệu thực phẩm phục vụ đánh giá thương mại',
+      ro:'Mostre de ulei vegetal fără marcă și ingrediente alimentare pentru evaluare comercială',
+      bg:'Небрандирани мостри на растително масло и хранителни съставки за търговска оценка',
+      sr:'Nebrandirani uzorci biljnog ulja i prehrambenih sastojaka za komercijalnu procenu'}
   },
   'nuts-dates':{
     key:'nuts-dates',source:'/images/ctseg-mixed-nuts-premium.webp',sector:'nuts, dates and dried fruits',
@@ -74,7 +80,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       fa:'نمونه‌های خشکبار و میوه خشک برای بررسی کیفیت و درجه‌بندی محصول'
     ,
       zh:'用于品质检验、等级评估与规格核验的特色坚果及干果样品',
-      vi:'Mẫu hạt dinh dưỡng và trái cây sấy khô phục vụ đánh giá chất lượng và phân hạng'}
+      vi:'Mẫu hạt dinh dưỡng và trái cây sấy khô phục vụ đánh giá chất lượng và phân hạng',
+      ro:'Mostre de nuci și fructe uscate pentru evaluarea calității și clasificării',
+      bg:'Мостри на ядки и сушени плодове за оценка на качеството и класа',
+      sr:'Uzorci orašastih plodova i suvog voća za procenu kvaliteta i klase'}
   },
   'carpets-textiles':{
     key:'carpets-textiles',source:'/images/ctseg-iranian-carpets-editorial.webp',sector:'carpets and textiles',
@@ -89,7 +98,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       fa:'فرش‌های دستباف به‌عنوان تصویری از بررسی مواد و کیفیت بافت'
     ,
       zh:'波斯传统手工地毯纹样细节与精细打结工艺鉴别',
-      vi:'Chi tiết kết cấu hoa văn và tay nghề dệt thảm thủ công truyền thống'}
+      vi:'Chi tiết kết cấu hoa văn và tay nghề dệt thảm thủ công truyền thống',
+      ro:'Detalii de covoare înnodate manual pentru evaluarea materialului și a țesăturii',
+      bg:'Детайли от ръчно тъкани килими за оценка на материала и изработката',
+      sr:'Detalji ručno čvorovanih tepiha za procenu materijala i izrade'}
   },
   'strategic-sourcing':{
     key:'strategic-sourcing',source:'/images/ctseg-2026/supplier-rfq-comparison.webp',sector:'strategic sourcing and RFQ comparison',
@@ -103,7 +115,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       ru:'Специалист по закупкам сравнивает промышленные варианты поставок и предложения RFQ',
       fa:'کارشناس تدارکات در حال مقایسه گزینه‌های تأمین صنعتی و پیشنهادهای RFQ',
       zh:'采购专员对工业供应方案与RFQ报价进行结构化比较',
-      vi:'Chuyên gia thu mua so sánh phương án cung ứng công nghiệp và báo giá RFQ'
+      vi:'Chuyên gia thu mua so sánh phương án cung ứng công nghiệp và báo giá RFQ',
+      ro:'Specialist în achiziții comparând opțiuni de sourcing industrial și oferte RFQ',
+      bg:'Специалист по снабдяване сравнява индустриални източници и RFQ оферти',
+      sr:'Stručnjak za nabavku poredi industrijske sourcing opcije i RFQ ponude'
     }
   },
   'supplier-verification':{
@@ -118,7 +133,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       ru:'Специалист по качеству и сорсингу проводит проверку промышленного продукта и поставщика',
       fa:'کارشناس کیفیت و تأمین در حال ارزیابی محصول صنعتی و اعتبارسنجی تأمین‌کننده',
       zh:'质量与采购专员开展工业产品和供应商核验',
-      vi:'Chuyên gia chất lượng và thu mua thực hiện xác minh sản phẩm công nghiệp và nhà cung cấp'
+      vi:'Chuyên gia chất lượng và thu mua thực hiện xác minh sản phẩm công nghiệp và nhà cung cấp',
+      ro:'Specialist în calitate și sourcing verificând un produs industrial și furnizorul',
+      bg:'Специалист по качество и снабдяване проверява индустриален продукт и доставчик',
+      sr:'Stručnjak za kvalitet i sourcing proverava industrijski proizvod i dobavljača'
     }
   },
   'trade-advisory':{
@@ -133,7 +151,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       ru:'Специалист по внешней торговле координирует коммерческие операции и планирование отгрузок',
       fa:'کارشناس تجارت بین‌الملل در حال هماهنگی عملیات تجاری و برنامه‌ریزی حمل',
       zh:'国际贸易专员协调商业运营与跨境发运计划',
-      vi:'Chuyên gia thương mại quốc tế điều phối vận hành thương mại và kế hoạch vận chuyển'
+      vi:'Chuyên gia thương mại quốc tế điều phối vận hành thương mại và kế hoạch vận chuyển',
+      ro:'Specialist în comerț internațional coordonând operațiuni comerciale și planificarea transportului',
+      bg:'Специалист по международна търговия координира търговски операции и планиране на доставката',
+      sr:'Stručnjak za međunarodnu trgovinu koordinira komercijalne operacije i planiranje isporuke'
     }
   },
   'tco-analysis':{
@@ -148,7 +169,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       ru:'Команда закупок оценивает промышленную продукцию по совокупной стоимости и коммерческим критериям',
       fa:'تیم تدارکات در حال ارزیابی محصولات صنعتی بر اساس هزینه کل و معیارهای تجاری',
       zh:'采购团队依据总成本与商业条件评估工业产品',
-      vi:'Đội ngũ thu mua đánh giá sản phẩm công nghiệp theo tổng chi phí và tiêu chí thương mại'
+      vi:'Đội ngũ thu mua đánh giá sản phẩm công nghiệp theo tổng chi phí và tiêu chí thương mại',
+      ro:'Echipă de achiziții evaluând produse industriale după costul total și criterii comerciale',
+      bg:'Екип по снабдяване оценява индустриални продукти по общ разход и търговски критерии',
+      sr:'Tim nabavke procenjuje industrijske proizvode prema ukupnom trošku i komercijalnim kriterijumima'
     }
   },
   'market-entry':{
@@ -163,7 +187,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       ru:'Встреча производителя с международным покупателем по выходу на рынок',
       fa:'جلسه ورود به بازار میان تولیدکننده و خریدار بین‌المللی',
       zh:'制造商与国际买家开展市场进入商务会谈',
-      vi:'Cuộc họp thâm nhập thị trường giữa nhà sản xuất và người mua quốc tế'
+      vi:'Cuộc họp thâm nhập thị trường giữa nhà sản xuất và người mua quốc tế',
+      ro:'Întâlnire de intrare pe piață între un producător și un cumpărător internațional',
+      bg:'Среща за навлизане на пазара между производител и международен купувач',
+      sr:'Sastanak o ulasku na tržište između proizvođača i međunarodnog kupca'
     }
   },
   'textiles-inputs':{
@@ -179,7 +206,10 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       fa:'نمونه‌های پارچه، حوله و منسوجات روی میز ارزیابی تجاری'
     ,
       zh:'用于大宗采购评估的高品质纺织面料与工业包材样品',
-      vi:'Mẫu vải dệt chất lượng cao và vật tư bao bì phục vụ đánh giá thu mua'}
+      vi:'Mẫu vải dệt chất lượng cao và vật tư bao bì phục vụ đánh giá thu mua',
+      ro:'Mostre de textile și materiale de ambalare pentru evaluarea comercială',
+      bg:'Мостри на текстил и опаковъчни материали за търговска оценка',
+      sr:'Uzorci tekstila i ambalažnog materijala za komercijalnu procenu'}
   }
 };
 
