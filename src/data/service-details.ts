@@ -207,5 +207,5 @@ export const serviceDetails:Record<'tr'|'en'|'ro'|'bg'|'sr',Record<CoreServiceId
       processTitle:'Tok angažmana',process:['Procena cilja, proizvoda, tržišta i postojeće strukture','Istraživanje i provera tržišnih uslova i potencijalnih partnera','Poređenje scenarija troška, isporuke, dokumentacije i rizika','Definisanje plana realizacije, odgovornosti i kontrolnih tačaka'],
       faq:[{question:'Da li ovo zamenjuje pravno ili carinsko savetovanje?',answer:'Ne. CTSEG strukturira komercijalnu odluku i operativni model; pravna, poreska i carinska pitanja treba da vode ovlašćeni stručnjaci kada je potrebno.'},{question:'Može li obim da obuhvati i uvoz i izvoz?',answer:'Da. Angažman može biti fokusiran na izbor zemlje izvora, uvoz, izvoz, proveru partnera ili ulazak na novo tržište.'}]
     }
-  }  }
+  }
 };
