@@ -225,7 +225,10 @@ const aboutMandate = {
     desc: 'CTSEG vừa điều phối mở rộng xuất khẩu cho các nhà sản xuất Thổ Nhĩ Kỳ sang châu Âu, vùng Vịnh và châu Á, vừa cung cấp dịch vụ thẩm định nhà máy độc lập, đối chuẩn RFQ và mua hàng trọn gói cho người mua quốc tế.',
     tagExport: 'Mở rộng xuất khẩu Thổ Nhĩ Kỳ (Châu Âu · Vùng Vịnh · Châu Á)',
     tagSourcing: 'Bàn thu mua quốc tế (Năng lực đã kiểm chứng)'
-  }
+  },
+  ro:{title:'Mandat de comerț global bidirecțional',desc:'CTSEG coordonează extinderea exportului producătorilor din Türkiye către România, Europa și alte piețe, iar pentru cumpărătorii internaționali gestionează verificarea fabricilor, compararea RFQ-urilor și coordonarea aprovizionării.',tagExport:'Extinderea exportului din Türkiye (România · Europa · Global)',tagSourcing:'Sourcing pentru cumpărători internaționali (Capacitate verificată)'},
+  bg:{title:'Мандат за двупосочна глобална търговия',desc:'CTSEG координира износа на производители от Türkiye към България, Европа и други пазари, а за международни купувачи управлява проверка на фабрики, RFQ сравнение и координация на снабдяването.',tagExport:'Износ от Türkiye (България · Европа · Глобално)',tagSourcing:'Снабдяване за международни купувачи (Проверен капацитет)'},
+  sr:{title:'Mandat dvosmerne globalne trgovine',desc:'CTSEG koordinira izvoz proizvođača iz Türkiye prema Srbiji, Evropi i drugim tržištima, dok za međunarodne kupce vodi proveru fabrika, RFQ poređenje i koordinaciju nabavke.',tagExport:'Izvoz iz Türkiye (Srbija · Evropa · Globalno)',tagSourcing:'Sourcing za međunarodne kupce (Provereni kapacitet)'}
 }[lang];
 const completionMarkets = marketsDetail[lang];
 const platform = tradePlatformCopy[lang];
@@ -328,7 +331,7 @@ const jumpLabel = {
   ru: 'Перейти к категории',
   fa: 'پرش به دسته‌بندی',
   zh: '品类快速直达',
-  vi: 'Chuyển đến danh mục'
+  vi: 'Chuyển đến danh mục', ro:'Mergi la categorie', bg:'Към категория', sr:'Idi na kategoriju'
 }[lang] || 'Categories';
 const categoryLeads: Record<string, Record<Locale, string>> = {
   pistachio: {
@@ -490,7 +493,7 @@ const featuredInsightLabel = {
   ru: 'ГЛАВНЫЙ АНАЛИТИЧЕСКИЙ МАТЕРИАЛ',
   fa: 'تحلیل برگزیده تجاری',
   zh: '核心商贸研判报告',
-  vi: 'PHÂN TÍCH THƯƠNG MẠI TIÊU BIỂU'
+  vi: 'PHÂN TÍCH THƯƠNG MẠI TIÊU BIỂU', ro:'ANALIZĂ COMERCIALĂ SELECTATĂ', bg:'ИЗБРАН ТЪРГОВСКИ АНАЛИЗ', sr:'IZDVOJENA TRGOVINSKA ANALIZA'
 }[lang] || 'Featured Analysis';
 const readArticleLabel = {
   tr: 'Analizin Tamamını Oku',
@@ -500,7 +503,7 @@ const readArticleLabel = {
   ru: 'Читать анализ полностью',
   fa: 'مطالعه کامل تحلیل',
   zh: '阅读完整研报',
-  vi: 'Đọc toàn bộ bài viết'
+  vi: 'Đọc toàn bộ bài viết', ro:'Citește analiza completă', bg:'Прочети целия анализ', sr:'Pročitaj celu analizu'
 }[lang] || 'Read Article';
 const insightCategories: Record<string, Record<Locale, string>> = {
   'strategic-vs-procurement': {
@@ -677,7 +680,7 @@ const relatedInsightsHeading = {
   ru: 'Другие аналитические материалы',
   fa: 'سایر تحلیل‌های استراتژیک',
   zh: '更多贸易研报与行业洞察',
-  vi: 'Các phân tích thương mại khác'
+  vi: 'Các phân tích thương mại khác', ro:'Analize comerciale conexe', bg:'Свързани търговски анализи', sr:'Povezani trgovinski uvidi'
 }[lang] || 'Related Intelligence';
 const articleRfqDesk = {
   kicker: {
@@ -731,9 +734,12 @@ const processLabels = {
   ru:{boundary:'Границы роли и ответственности',answers:'Прямые ответы',answerLead:'Основные вопросы о сорсинге и коммерческой координации.'},
   fa:{boundary:'حدود نقش و مسئولیت',answers:'پاسخ‌های مستقیم',answerLead:'پرسش‌های اصلی درباره تأمین و هماهنگی تجاری.'},
   zh:{boundary:'机构角色定位与权责边界',answers:'常见商务问题直截解答',answerLead:'关于跨境战略采购、主体核验与供应链协调的核心解答。'},
-  vi:{boundary:'Ranh giới vai trò và trách nhiệm',answers:'Giải đáp trực tiếp',answerLead:'Các câu hỏi cốt lõi về thu mua và điều phối thương mại.'}
+  vi:{boundary:'Ranh giới vai trò và trách nhiệm',answers:'Giải đáp trực tiếp',answerLead:'Các câu hỏi cốt lõi về thu mua và điều phối thương mại.'},
+  ro:{boundary:'Limita rolului și responsabilității',answers:'Răspunsuri directe',answerLead:'Întrebări esențiale despre sourcing și coordonare comercială.'},
+  bg:{boundary:'Граница на ролята и отговорността',answers:'Директни отговори',answerLead:'Основни въпроси за снабдяването и търговската координация.'},
+  sr:{boundary:'Granica uloge i odgovornosti',answers:'Direktni odgovori',answerLead:'Ključna pitanja o sourcingu i komercijalnoj koordinaciji.'}
 }[lang];
-const scenarioKicker = {tr:'Temsili çalışma',en:'Representative work',de:'Repräsentatives Szenario',it:'Scenario rappresentativo',ru:'Пример сценария',fa:'سناریوی نمونه',zh:'实战案例',vi:'Kịch bản đại diện'}[lang];
+const scenarioKicker = {tr:'Temsili çalışma',en:'Representative work',de:'Repräsentatives Szenario',it:'Scenario rappresentativo',ru:'Пример сценария',fa:'سناریوی نمونه',zh:'实战案例',vi:'Kịch bản đại diện',ro:'Scenariu reprezentativ',bg:'Представителен сценарий',sr:'Reprezentativni scenario'}[lang];
 
 const representativeRfq = lang === 'tr' ? {
   eyebrow:'Temsili çıktı · RFQ karşılaştırması',
