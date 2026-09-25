@@ -4,8 +4,8 @@ import { join, relative, resolve } from 'node:path';
 const dist = resolve('dist');
 const errors = [];
 const origin = 'https://ctseg.com.tr';
-const coreLocales = ['tr','en','de','it','ru','zh','vi'];
-const glassLocales = ['tr','en','de','it','ru','fa','zh','vi'];
+const coreLocales = ['tr','en','de','it','ru','zh','vi','ro','bg','sr'];
+const glassLocales = ['tr','en','de','it','ru','fa','zh','vi','ro','bg','sr'];
 
 if (!existsSync(dist)) {
   console.error('dist/ not found. Run npm run build first.');
@@ -48,7 +48,7 @@ for (const file of htmlFiles) {
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1]?.trim() ?? '';
   const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1]?.trim() ?? '';
   const rawLang = html.match(/<html lang="([^"]+)"/)?.[1] ?? '';
-  const lang = rawLang.startsWith('zh') ? 'zh' : rawLang.startsWith('vi') ? 'vi' : rawLang.startsWith('uk') ? 'uk' : rawLang;
+  const lang = rawLang.startsWith('zh') ? 'zh' : rawLang.startsWith('vi') ? 'vi' : rawLang.startsWith('ro') ? 'ro' : rawLang.startsWith('bg') ? 'bg' : rawLang.startsWith('sr') ? 'sr' : rawLang.startsWith('uk') ? 'uk' : rawLang;
   const h1Count = (html.match(/<h1\b/g) || []).length;
   const expectedPath = outputPath(file);
   const expectedCanonical = encodeURI(`${origin}${expectedPath}`);
@@ -177,8 +177,8 @@ const serviceSchemaPages = [...indexablePages.values()].filter((page) => page.ht
 const blogSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Blog"'));
 const blogPostingPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"BlogPosting"'));
 if (serviceSchemaPages.length < 245) errors.push(`expected at least 245 Service schema pages across core services, sourcing, country LPs, catalogue assessments and solution landings, found ${serviceSchemaPages.length}`);
-if (blogSchemaPages.length !== 8) errors.push(`expected 8 Blog schema pages across all active locales, found ${blogSchemaPages.length}`);
-if (blogPostingPages.length !== 136) errors.push(`expected 136 BlogPosting pages across all 8 active locales, found ${blogPostingPages.length}`);
+if (blogSchemaPages.length !== 11) errors.push(`expected 11 Blog schema pages across all full-site locales, found ${blogSchemaPages.length}`);
+if (blogPostingPages.length !== 136) errors.push(`expected 136 BlogPosting pages across the eight currently translated article locales, found ${blogPostingPages.length}`);
 
 const deploymentHeaders = readFileSync(join(dist,'_headers'),'utf8');
 if (/X-Robots-Tag\s*:\s*(?:noindex|none)/i.test(deploymentHeaders)) errors.push('deployment headers contain a blocking X-Robots-Tag');
