@@ -1304,3 +1304,284 @@ export function routeAlternates(key: string, id?: string): Record<string, string
   return Object.fromEntries(locales.map((lang) => [lang, `https://ctseg.com.tr${localizedPath(lang, key, id)}`])) as Record<Locale, string>;
 }
 
+
+
+/* Balkan locale rollout: ro, bg, sr */
+Object.assign(localeNames as any, { ro:'Română', bg:'Български', sr:'Srpski' });
+Object.assign(company.name as any, {
+  ro:'CTSEG Companie de Industrie și Comerț',
+  bg:'CTSEG Индустрия и Търговия',
+  sr:'CTSEG Industrija i Trgovina'
+});
+Object.assign(companyCopy as any, {
+  ro:{
+    aboutHeading:'Punte comercială bidirecțională și sourcing strategic',
+    aboutBody:'CTSEG este o casă de comerț B2B independentă, cu sediul în Istanbul, care sprijină producătorii din Türkiye să intre pe piețele europene și internaționale și ajută cumpărătorii din România să identifice, verifice și compare producători și furnizori din Türkiye și din coridoarele regionale.',
+    labels:{name:'Denumirea companiei',founder:'Fondator',founded:'Anul înființării',headquarters:'Sediu'},
+    headquarters:'Tuzla, Istanbul, Türkiye',footerLocation:'Tuzla, Istanbul, Türkiye'
+  },
+  bg:{
+    aboutHeading:'Двупосочен търговски мост и стратегическо снабдяване',
+    aboutBody:'CTSEG е независима B2B търговска къща със седалище в Истанбул. Подпомагаме турски производители при излаз на европейски и международни пазари и съдействаме на български купувачи при откриване, проверка и сравнение на производители и доставчици от Türkiye и регионалните търговски коридори.',
+    labels:{name:'Име на дружеството',founder:'Основател',founded:'Година на основаване',headquarters:'Централа'},
+    headquarters:'Тузла, Истанбул, Türkiye',footerLocation:'Тузла, Истанбул, Türkiye'
+  },
+  sr:{
+    aboutHeading:'Dvosmerni trgovinski most i strateški sourcing',
+    aboutBody:'CTSEG je nezavisna B2B trgovinska kuća sa sedištem u Istanbulu. Pomažemo proizvođačima iz Türkiye da uđu na evropska i međunarodna tržišta, a kupcima iz Srbije da pronađu, provere i uporede proizvođače i dobavljače iz Türkiye i regionalnih trgovinskih koridora.',
+    labels:{name:'Naziv kompanije',founder:'Osnivač',founded:'Godina osnivanja',headquarters:'Sedište'},
+    headquarters:'Tuzla, Istanbul, Türkiye',footerLocation:'Tuzla, Istanbul, Türkiye'
+  }
+});
+Object.assign(sectionSlugs.services as any,{ro:'servicii',bg:'uslugi',sr:'usluge'});
+Object.assign(sectionSlugs.products as any,{ro:'produse-comerciale',bg:'targovski-produkti',sr:'trgovinski-proizvodi'});
+Object.assign(sectionSlugs.markets as any,{ro:'piete',bg:'pazari',sr:'trzista'});
+Object.assign(sectionSlugs.insights as any,{ro:'analize',bg:'analizi',sr:'uvidi'});
+Object.assign(sectionSlugs.about as any,{ro:'despre-noi',bg:'za-nas',sr:'o-nama'});
+Object.assign(sectionSlugs.contact as any,{ro:'contact',bg:'kontakt',sr:'kontakt'});
+
+Object.assign(ui as any,{
+  ro:{
+    home:'Acasă',services:'Servicii',products:'Produse comerciale',markets:'Piețe',insights:'Analize',
+    about:'Despre noi',contact:'Contact',quote:'Solicită ofertă',menu:'Deschide meniul',close:'Închide meniul',
+    language:'Selectarea limbii',readMore:'Vezi detalii',allProducts:'Vezi toate produsele',allServices:'Vezi toate serviciile',
+    origin:'Transparența originii',quality:'Calitate și conformitate',logistics:'Evaluare comercială',applications:'Aplicații',
+    faq:'Întrebări frecvente',related:'Soluții conexe',updated:'Ultima actualizare',details:'Detalii',
+    cookieTitle:'Preferințe cookie',cookieCopy:'Folosim cookie-uri analitice numai cu acordul dvs. Cookie-urile esențiale sunt întotdeauna active.',
+    accept:'Accept',reject:'Respinge',rights:'Toate drepturile rezervate.',
+    samplePolicy:'Politica de mostre',sampleText:'Mostrele nu sunt gratuite și nici disponibile public. Pot fi analizate după precalificare pentru cumpărători comerciali serioși, după verificarea companiei, utilizării, volumului estimativ și țării de livrare.',
+    complianceText:'Originea reală, producătorul și documentele de lot sunt declarate transparent. CTSEG nu susține ascunderea originii sau reetichetarea înșelătoare.',
+    contactLead:'Trimiteți compania, cerința, volumul estimativ și țara de livrare. Echipa noastră va stabili traseul comercial potrivit.',
+    emptyInsights:'Nu există încă analize publicate în limba română.'
+  },
+  bg:{
+    home:'Начало',services:'Услуги',products:'Търговски продукти',markets:'Пазари',insights:'Анализи',
+    about:'За нас',contact:'Контакт',quote:'Поискай оферта',menu:'Отвори менюто',close:'Затвори менюто',
+    language:'Избор на език',readMore:'Виж повече',allProducts:'Всички продукти',allServices:'Всички услуги',
+    origin:'Прозрачен произход',quality:'Качество и съответствие',logistics:'Търговска оценка',applications:'Приложения',
+    faq:'Често задавани въпроси',related:'Свързани решения',updated:'Последна актуализация',details:'Детайли',
+    cookieTitle:'Настройки за бисквитки',cookieCopy:'Използваме аналитични бисквитки само с ваше съгласие. Необходимите бисквитки са винаги активни.',
+    accept:'Приемам',reject:'Отказвам',rights:'Всички права запазени.',
+    samplePolicy:'Политика за мостри',sampleText:'Мострите не са безплатни и не са публично достъпни. Те се разглеждат след предварителна квалификация на сериозни B2B купувачи и проверка на фирма, приложение, ориентировъчен обем и държава на доставка.',
+    complianceText:'Реалният произход, производителят и документите за партидата се декларират прозрачно. CTSEG не подкрепя прикриване на произход или подвеждащо преетикетиране.',
+    contactLead:'Споделете фирмата, нуждата, ориентировъчния обем и държавата за доставка. Екипът ни ще определи подходящия търговски процес.',
+    emptyInsights:'Все още няма публикувани анализи на български.'
+  },
+  sr:{
+    home:'Početna',services:'Usluge',products:'Trgovinski proizvodi',markets:'Tržišta',insights:'Uvidi',
+    about:'O nama',contact:'Kontakt',quote:'Zatraži ponudu',menu:'Otvori meni',close:'Zatvori meni',
+    language:'Izbor jezika',readMore:'Saznaj više',allProducts:'Pogledaj sve proizvode',allServices:'Pogledaj sve usluge',
+    origin:'Transparentnost porekla',quality:'Kvalitet i usklađenost',logistics:'Komercijalna procena',applications:'Primene',
+    faq:'Česta pitanja',related:'Povezana rešenja',updated:'Poslednje ažuriranje',details:'Detalji',
+    cookieTitle:'Podešavanja kolačića',cookieCopy:'Analitičke kolačiće koristimo samo uz vašu saglasnost. Neophodni kolačići su uvek aktivni.',
+    accept:'Prihvati',reject:'Odbij',rights:'Sva prava zadržana.',
+    samplePolicy:'Politika uzoraka',sampleText:'Uzorci nisu besplatni niti javno dostupni. Razmatraju se nakon pretkvalifikacije ozbiljnih B2B kupaca i provere kompanije, namene, okvirnog obima i zemlje isporuke.',
+    complianceText:'Stvarno poreklo, proizvođač i dokumentacija serije navode se transparentno. CTSEG ne podržava prikrivanje porekla niti obmanjujuće prepakivanje ili preoznačavanje.',
+    contactLead:'Pošaljite podatke o kompaniji, potrebi, okvirnom obimu i zemlji isporuke. Naš tim će odrediti odgovarajući komercijalni postupak.',
+    emptyInsights:'Još nema objavljenih uvida na srpskom jeziku.'
+  }
+});
+
+Object.assign(homeCopy as any,{
+  ro:{
+    eyebrow:'Sourcing strategic · comerț internațional',title:'Claritate comercială pentru decizii complexe de aprovizionare.',
+    lead:'Combinăm identificarea producătorilor, verificarea, calitatea, costul total și compatibilitatea cu piața într-un proces disciplinat de decizie.',
+    signal:'CTSEG Signal Room',live:'Evaluare activă',signals:[['SOURCING','Producător și capacitate'],['CALITATE','COA și trasabilitate'],['PIAȚĂ','Conformitate și model de livrare']],
+    trust:['Contrapărți verificate','Origine transparentă','Disciplină B2B în decizie','Türkiye · Europa · Internațional'],
+    servicesTitle:'Mai mult decât o listă de furnizori.',servicesLead:'Structurăm întregul proces, de la cerință și verificare până la ofertă și execuție.',
+    productsTitle:'Portofoliu comercial verificabil.',productsLead:'Produse selectate evaluate transparent prin origine, lot, parametri de calitate și opțiuni de livrare.',
+    marketsTitle:'Conexiuni comerciale aplicabile între piețe.',marketsLead:'Sourcing și coordonare comercială din Türkiye către România, Europa și piețe internaționale.',
+    processTitle:'Progres controlat în patru pași',process:['Definirea cerinței','Verificarea pieței și contrapărților','Compararea imaginii comerciale totale','Monitorizarea execuției și performanței'],
+    ctaTitle:'Transformați următoarea decizie de sourcing într-una bazată pe dovezi.'
+  },
+  bg:{
+    eyebrow:'Стратегическо снабдяване · международна търговия',title:'Търговска яснота при сложни решения за снабдяване.',
+    lead:'Обединяваме търсене на производители, проверка, качество, обща цена и пазарна приложимост в дисциплиниран процес за вземане на решения.',
+    signal:'CTSEG Signal Room',live:'Активна оценка',signals:[['СНАБДЯВАНЕ','Производител и капацитет'],['КАЧЕСТВО','COA и проследимост'],['ПАЗАР','Съответствие и модел на доставка']],
+    trust:['Проверени контрагенти','Прозрачен произход','B2B дисциплина при решенията','Türkiye · Европа · Международно'],
+    servicesTitle:'Повече от списък с доставчици.',servicesLead:'Структурираме целия процес – от изискването и проверката до офертата и изпълнението.',
+    productsTitle:'Проверим търговски продуктов портфейл.',productsLead:'Подбрани продукти, оценявани прозрачно по произход, партида, качество и варианти за доставка.',
+    marketsTitle:'Практични връзки между пазари.',marketsLead:'Снабдяване и търговска координация от Türkiye към България, Европа и международни пазари.',
+    processTitle:'Контролиран процес в четири стъпки',process:['Дефиниране на нуждата','Проверка на пазара и контрагентите','Сравнение на общата търговска картина','Проследяване на изпълнението и резултатите'],
+    ctaTitle:'Вземете следващото решение за снабдяване на база проверими данни.'
+  },
+  sr:{
+    eyebrow:'Strateški sourcing · međunarodna trgovina',title:'Komercijalna jasnoća za složene odluke o nabavci.',
+    lead:'Objedinjujemo pronalaženje proizvođača, proveru, kvalitet, ukupan trošak i tržišnu usklađenost u disciplinovan proces odlučivanja.',
+    signal:'CTSEG Signal Room',live:'Aktivna procena',signals:[['SOURCING','Proizvođač i kapacitet'],['KVALITET','COA i sledljivost'],['TRŽIŠTE','Usklađenost i model isporuke']],
+    trust:['Provereni poslovni partneri','Transparentno poreklo','B2B disciplina odlučivanja','Türkiye · Evropa · Međunarodno'],
+    servicesTitle:'Više od liste dobavljača.',servicesLead:'Strukturišemo ceo proces – od zahteva i provere do ponude i realizacije.',
+    productsTitle:'Proverljiv trgovinski portfolio proizvoda.',productsLead:'Odabrani proizvodi procenjeni kroz transparentno poreklo, seriju, parametre kvaliteta i opcije isporuke.',
+    marketsTitle:'Primenljive veze između tržišta.',marketsLead:'Sourcing i trgovinska koordinacija iz Türkiye prema Srbiji, Evropi i međunarodnim tržištima.',
+    processTitle:'Kontrolisan napredak u četiri koraka',process:['Definisanje zahteva','Provera tržišta i partnera','Poređenje ukupne komercijalne slike','Praćenje realizacije i učinka'],
+    ctaTitle:'Neka sledeća sourcing odluka bude zasnovana na dokazima.'
+  }
+});
+
+const balkanServices:any = {
+  ro:{
+    'strategic-sourcing':['sourcing-strategic','Sourcing strategic','Analiză de piață, RFQ, verificare și compararea ofertelor pentru decizii B2B de aprovizionare din Türkiye și piețe regionale.'],
+    'supplier-verification':['verificare-furnizori','Verificarea furnizorilor','Verificarea identității companiei, capacității, documentelor, referințelor și condițiilor comerciale înaintea unei decizii de achiziție.'],
+    'trade-advisory':['consultanta-comerciala','Consultanță comercială','Structurarea rutelor comerciale, documentelor, riscurilor și pașilor de implementare pentru tranzacții internaționale B2B.'],
+    'tco':['analiza-costului-total','Analiza costului total (TCO)','Compararea prețului, transportului, taxelor, asigurării, stocului și riscului printr-un model de cost total.'],
+    'market-entry':['intrare-pe-piata','Export și intrare pe piață','Evaluarea pregătirii comerciale, cercetarea pieței, identificarea cumpărătorilor și coordonarea primelor contacte.']
+  },
+  bg:{
+    'strategic-sourcing':['strategichesko-snabdyavane','Стратегическо снабдяване','Пазарен анализ, RFQ, проверка и сравнение на оферти за B2B снабдяване от Türkiye и регионални пазари.'],
+    'supplier-verification':['proverka-na-dostavchitsi','Проверка на доставчици','Проверка на фирмена идентичност, капацитет, документи, референции и търговски условия преди решение за покупка.'],
+    'trade-advisory':['targovski-konsultatsii','Търговски консултации','Структуриране на търговски маршрути, документи, рискове и стъпки за изпълнение при международни B2B сделки.'],
+    'tco':['analiz-na-obshta-tsena','Анализ на общата цена (TCO)','Сравнение на цена, транспорт, мита, застраховка, складови разходи и риск чрез модел на обща стойност.'],
+    'market-entry':['navlizane-na-pazara','Износ и навлизане на пазара','Оценка на търговската готовност, пазарно проучване, идентифициране на купувачи и координация на първоначалния контакт.']
+  },
+  sr:{
+    'strategic-sourcing':['strateski-sourcing','Strateški sourcing','Analiza tržišta, RFQ, provera i poređenje ponuda za B2B nabavku iz Türkiye i regionalnih tržišta.'],
+    'supplier-verification':['provera-dobavljaca','Provera dobavljača','Provera identiteta kompanije, kapaciteta, dokumentacije, referenci i komercijalnih uslova pre odluke o kupovini.'],
+    'trade-advisory':['trgovinsko-savetovanje','Trgovinsko savetovanje','Strukturisanje trgovinskih ruta, dokumentacije, rizika i koraka realizacije za međunarodne B2B transakcije.'],
+    'tco':['analiza-ukupnog-troska','Analiza ukupnog troška (TCO)','Poređenje cene, transporta, carina, osiguranja, skladištenja i rizika kroz model ukupnog troška.'],
+    'market-entry':['ulazak-na-trziste','Izvoz i ulazak na tržište','Procena komercijalne spremnosti, istraživanje tržišta, identifikacija kupaca i koordinacija prvog kontakta.']
+  }
+};
+for(const lang of ['ro','bg','sr']){
+  for(const id of serviceIds){
+    const [slug,name,description]=balkanServices[lang][id];
+    Object.assign(services[id].slugs as any,{[lang]:slug});
+    Object.assign(services[id].names as any,{[lang]:name});
+    Object.assign(services[id].descriptions as any,{[lang]:description});
+  }
+}
+
+const balkanProductNames:any = {
+  ro:['Fistic Akbari','Fistic Kalleh Ghouchi (Jumbo)','Fistic Fandoghi (Rotund)','Fistic Ahmad Aghaei','Miez de fistic verde decojit','Miez și granule de fistic','Curmale Mazafati','Pastă și sirop de curmale','Stafide','Migdale','Nuci','Caise uscate și sâmburi','Semințe de dovleac','Semințe de floarea-soarelui','Șofran','Dude uscate','Zereshk (drăcile uscate)','Mix de nuci și specialități'],
+  bg:['Фъстък Акбари','Фъстък Kalleh Ghouchi (Jumbo)','Фъстък Fandoghi (кръгъл)','Фъстък Ahmad Aghaei','Зелени белени ядки от шамфъстък','Ядки и гранули от шамфъстък','Фурми Mazafati','Паста и сироп от фурми','Стафиди','Бадеми','Орехи','Сушени кайсии и ядки','Тиквени семки','Слънчогледови семки','Шафран','Сушени черници','Зерешк (сушен берберис)','Микс ядки и специалитети'],
+  sr:['Akbari pistaći','Kalleh Ghouchi pistaći (Jumbo)','Fandoghi pistaći (okrugli)','Ahmad Aghaei pistaći','Zeleni oljušteni pistaći','Jezgra i granule pistaća','Mazafati urme','Pasta i sirup od urmi','Suvo grožđe','Badem','Orah','Suve kajsije i koštice','Seme bundeve','Suncokretovo seme','Šafran','Sušeni dud','Zereshk (sušeni žutika plod)','Mešani orašasti plodovi i specijaliteti']
+};
+const balkanProductDescriptions:any = {
+  ro:[
+    'Fistic iranian alungit, cu deschidere naturală, pentru retail premium, cadouri și HoReCa.',
+    'Fistic jumbo mare și rotund, potrivit pentru retail premium și mixuri de snackuri.',
+    'Fistic compact și rotund pentru procesare industrială, cofetărie, înghețată și ambalare de volum.',
+    'Fistic cu coajă deschisă, formă elegant alungită și aromă bogată, apreciat pe piețele europene.',
+    'Miez verde intens, recoltat timpuriu, pentru patiserie premium, gelato și ciocolaterie.',
+    'Granule și fâșii de fistic calibrate pentru patiserie, toppinguri, umpluturi și producție industrială.',
+    'Curmale moi, închise la culoare și natural umede pentru retail și consum direct.',
+    'Pastă de curmale fără aditivi și sirop concentrat ca alternativă naturală la zahăr.',
+    'Stafide pentru distribuție angro, procesare alimentară și ambalare privată.',
+    'Migdale pentru comerț angro, procesare, cofetărie și retail specializat.',
+    'Nuci în coajă și miez de nucă pentru distribuție B2B și industria alimentară.',
+    'Caise uscate și sâmburi pentru retail, ingrediente și procesare alimentară.',
+    'Semințe de dovleac pentru snackuri, brutării și distribuție angro.',
+    'Semințe de floarea-soarelui pentru consum, procesare și distribuție de volum.',
+    'Șofran premium pentru gastronomie, retail specializat și ingrediente cu valoare ridicată.',
+    'Dude albe uscate natural pentru retail sănătos, mixuri și ingrediente.',
+    'Zereshk roșu uscat pentru gastronomie persană, retail și distribuție specializată.',
+    'Mixuri comerciale de nuci și produse speciale configurate pentru canal, ambalaj și piață.'
+  ],
+  bg:[
+    'Удължен ирански шамфъстък с естествено отворена черупка за премиум търговия, подаръчни опаковки и HoReCa.',
+    'Едър кръгъл jumbo шамфъстък за премиум търговия и ядкови миксове.',
+    'Компактен кръгъл шамфъстък за индустриална преработка, сладкарство, сладолед и висок обем.',
+    'Светла черупка, издължена форма и богат вкус, предпочитан на европейските пазари.',
+    'Интензивно зелени белени ядки от ранна реколта за премиум сладкарство, джелато и шоколад.',
+    'Калибрирани гранули и резени шамфъстък за печива, топинги, пълнежи и индустриални приложения.',
+    'Меки, тъмни и естествено сочни фурми за директна консумация и търговия на дребно.',
+    'Чиста паста и концентриран сироп от фурми като естествен заместител на захарта.',
+    'Стафиди за едро, хранителна преработка и private label опаковане.',
+    'Бадеми за търговия на едро, преработка, сладкарство и специализиран retail.',
+    'Орехи с черупка и ядки за B2B дистрибуция и хранителната индустрия.',
+    'Сушени кайсии и ядки за retail, съставки и хранителна преработка.',
+    'Тиквени семки за снакс, пекарни и търговия на едро.',
+    'Слънчогледови семки за директна консумация, преработка и обемна дистрибуция.',
+    'Премиум шафран за гастрономия, специализиран retail и високостойностни съставки.',
+    'Естествено сушени бели черници за здравословен retail, миксове и съставки.',
+    'Сушен червен zereshk за персийска кухня, специализиран retail и дистрибуция.',
+    'Търговски миксове от ядки и специални продукти според канал, опаковка и целеви пазар.'
+  ],
+  sr:[
+    'Izduženi iranski pistaći sa prirodno otvorenom ljuskom za premium maloprodaju, poklon-pakovanja i HoReCa kanal.',
+    'Krupni, zaobljeni jumbo pistaći za premium prodaju i snack mešavine.',
+    'Kompaktni okrugli pistaći za industrijsku preradu, poslastičarstvo, sladoled i velike serije pakovanja.',
+    'Svetla ljuska, elegantno izdužen oblik i bogata aroma, cenjeni na evropskim tržištima.',
+    'Intenzivno zelena oljuštena jezgra rane berbe za vrhunsko poslastičarstvo, gelato i čokoladu.',
+    'Kalibrisane granule i listići pistaća za pekarstvo, prelive, punjenja i industrijsku proizvodnju.',
+    'Meke, tamne i prirodno sočne urme za direktnu potrošnju i maloprodaju.',
+    'Čista pasta i koncentrisani sirup od urmi kao prirodna alternativa rafinisanom šećeru.',
+    'Suvo grožđe za veleprodaju, prehrambenu preradu i private-label pakovanje.',
+    'Badem za veleprodaju, preradu, poslastičarstvo i specijalizovanu maloprodaju.',
+    'Orah u ljusci i jezgra za B2B distribuciju i prehrambenu industriju.',
+    'Suve kajsije i jezgra koštice za retail, sastojke i prehrambenu preradu.',
+    'Seme bundeve za grickalice, pekarstvo i veleprodajnu distribuciju.',
+    'Suncokretovo seme za direktnu potrošnju, preradu i velike distributivne količine.',
+    'Premium šafran za gastronomiju, specijalizovanu maloprodaju i sastojke visoke vrednosti.',
+    'Prirodno sušeni beli dud za zdravu hranu, mešavine i sastojke.',
+    'Sušeni crveni zereshk za persijsku gastronomiju, specijalizovani retail i distribuciju.',
+    'Komercijalne mešavine orašastih plodova i specijaliteta prilagođene kanalu, pakovanju i tržištu.'
+  ]
+};
+for(const lang of ['ro','bg','sr']){
+  productIds.forEach((id,index)=>{
+    Object.assign(productNames[id] as any,{[lang]:balkanProductNames[lang][index]});
+    Object.assign(productDescriptions[id] as any,{[lang]:balkanProductDescriptions[lang][index]});
+    Object.assign(productSlugs[id] as any,{[lang]:id});
+  });
+}
+
+Object.assign(editorialCopy as any,{
+  ro:{manifestoTitle:'Comerțul internațional înseamnă mai mult decât o listă de intermediari.',manifestoText:'CTSEG combină dezvoltarea exportului, verificarea fabricilor, sourcingul strategic și disciplina costului total într-un singur sistem comercial transfrontalier.',portfolioTitle:'Coridoare strategice de comerț și sourcing',portfolioText:'Portofoliul reflectă rețeaua comercială bidirecțională CTSEG pentru produse industriale, materii prime agricole și categorii B2B selectate.',marketsKicker:'Dezvoltare export · verificarea originii · analiză TCO · coordonarea livrării',productImageNote:'Imaginea reprezintă categoria; specificațiile tehnice și parametrii lotului se verifică prin documentație TDS și de lot.'},
+  bg:{manifestoTitle:'Международната търговия е повече от списък с посредници.',manifestoText:'CTSEG обединява развитие на износа, проверка на фабрики, стратегическо снабдяване и контрол на общите разходи в единна трансгранична търговска система.',portfolioTitle:'Стратегически търговски и снабдителни коридори',portfolioText:'Портфолиото представя двупосочната мрежа на CTSEG за индустриални продукти, аграрни суровини и избрани B2B категории.',marketsKicker:'Развитие на износа · проверка на произхода · TCO анализ · координация на доставката',productImageNote:'Изображението представя продуктовата категория; техническите характеристики и параметрите на партидата се проверяват чрез TDS и партидни документи.'},
+  sr:{manifestoTitle:'Međunarodna trgovina je više od liste posrednika.',manifestoText:'CTSEG objedinjuje razvoj izvoza, proveru fabrika, strateški sourcing i disciplinu ukupnih troškova u jedinstven prekogranični trgovinski sistem.',portfolioTitle:'Strateški trgovinski i sourcing koridori',portfolioText:'Portfolio predstavlja dvosmernu CTSEG mrežu za industrijske proizvode, poljoprivredne sirovine i odabrane B2B kategorije.',marketsKicker:'Razvoj izvoza · provera porekla · TCO analiza · koordinacija isporuke',productImageNote:'Slika predstavlja kategoriju proizvoda; tehničke specifikacije i parametri serije proveravaju se kroz TDS i prateću dokumentaciju.'}
+});
+
+for(const id of legalIds){
+  const local:any = {
+    privacy:{ro:['politica-de-confidentialitate','Politica de confidențialitate'],bg:['politika-za-poveritelnost','Политика за поверителност'],sr:['politika-privatnosti','Politika privatnosti']},
+    cookies:{ro:['politica-cookie','Politica cookie'],bg:['politika-za-biskvitki','Политика за бисквитки'],sr:['politika-kolacica','Politika kolačića']},
+    terms:{ro:['termeni-de-utilizare','Termeni de utilizare'],bg:['usloviya-za-polzvane','Условия за ползване'],sr:['uslovi-koriscenja','Uslovi korišćenja']},
+    'data-protection':{ro:['informare-protectia-datelor','Informare privind protecția datelor'],bg:['uvedomlenie-za-zashtita-na-dannite','Уведомление за защита на данните'],sr:['obavestenje-o-zastiti-podataka','Obaveštenje o zaštiti podataka']}
+  }[id];
+  for(const lang of ['ro','bg','sr']){
+    Object.assign(legal[id].slugs as any,{[lang]:local[lang][0]});
+    Object.assign(legal[id].titles as any,{[lang]:local[lang][1]});
+  }
+}
+
+Object.assign(pageCopy as any,{
+  ro:{
+    servicesTitle:'Competență pentru fiecare etapă a deciziei de sourcing.',servicesLead:'Combinăm strategie, verificare, analiză comercială și execuție într-o singură disciplină de decizie.',
+    productsTitle:'Portofoliu de produse comerciale',productsLead:'Catalogul este evaluat prin origine transparentă, calitate la nivel de lot și condiții comerciale verificabile.',
+    marketsTitle:'Din Türkiye către România, Europa și piețe internaționale.',marketsLead:'Corelăm realitatea producției cu reglementările pieței țintă, cerințele cumpărătorilor și modele de livrare aplicabile.',
+    aboutTitle:'Partener independent pentru reducerea incertitudinii în comerț.',aboutLead:'CTSEG lucrează pe bază de dovezi, transparență și aplicabilitate în proiecte de sourcing strategic și comerț internațional.',
+    contactTitle:'Porniți cerința comercială printr-o evaluare clară.',insightsTitle:'Analize practice pentru decidenți.',insightsLead:'Ghiduri concise, bazate pe dovezi, despre sourcing, cost total, origine, calitate și risc comercial.',
+    framework:['Cerință și specificație','Verificarea contrapărții și documentelor','Comparație calitate, cost și risc','Decizie transparentă și evidență de execuție'],
+    serviceFaq:['Cum începe un proiect?','Domeniul, obiectivul, produsul sau serviciul, piața și calendarul sunt clarificate într-o scurtă etapă de calificare.','CTSEG acționează în numele furnizorului?','CTSEG declară clar mandatul și rolul comercial și documentează criteriile de evaluare.'],
+    productUses:['Producție alimentară și aplicații industriale','Distribuție angro și private label','HoReCa și retail specializat'],
+    productQuality:['Cerințe privind aflatoxinele și pesticidele','Umiditate, microbiologie și specificație','COA, cod de lot și trasabilitate','Conformitate cu piața țintă'],
+    legalIntro:'Această informare explică transparent utilizarea site-ului CTSEG și prelucrarea datelor asociată.',
+    legalSections:[['Domeniu și responsabilitate','CTSEG urmărește menținerea corectitudinii informațiilor corporative și comerciale. Solicitările pot fi trimise la info@ctseg.com.tr.'],['Informații și scop','La contact putem prelucra numele, compania, e-mailul, telefonul și detaliile cerinței comerciale, precum și jurnale tehnice limitate pentru securitate.'],['Partajare, păstrare și securitate','Datele sunt partajate numai cu furnizori necesari și autorități competente, conform legii aplicabile, și sunt șterse sau anonimizate după expirarea scopului și perioadelor legale.'],['Drepturi și contact','Pentru acces, rectificare, ștergere, opoziție și alte drepturi privind datele, scrieți la info@ctseg.com.tr.']]
+  },
+  bg:{
+    servicesTitle:'Експертиза за всеки етап от решението за снабдяване.',servicesLead:'Обединяваме стратегия, проверка, търговски анализ и изпълнение в единна дисциплина за вземане на решения.',
+    productsTitle:'Търговски продуктов портфейл',productsLead:'Каталогът се оценява чрез прозрачен произход, качество по партиди и проверими търговски условия.',
+    marketsTitle:'От Türkiye към България, Европа и международните пазари.',marketsLead:'Съчетаваме реалните производствени възможности с регулациите на целевия пазар, изискванията на купувачите и приложими модели за доставка.',
+    aboutTitle:'Независим партньор за намаляване на несигурността в търговията.',aboutLead:'CTSEG работи с доказателства, прозрачност и практическа приложимост при стратегическо снабдяване и международна търговия.',
+    contactTitle:'Започнете търговската си заявка с ясна оценка.',insightsTitle:'Практични анализи за вземащите решения.',insightsLead:'Кратки, основани на данни материали за снабдяване, общи разходи, произход, качество и търговски риск.',
+    framework:['Нужда и спецификация','Проверка на контрагенти и документи','Сравнение на качество, разходи и риск','Прозрачно решение и запис на изпълнението'],
+    serviceFaq:['Как започва проектът?','Обхватът, целта, продуктът или услугата, пазарът и срокът за решение се уточняват в кратка квалификационна среща.','CTSEG работи ли от името на доставчик?','CTSEG ясно декларира мандата и търговската си роля и документира критериите за оценка.'],
+    productUses:['Хранително производство и индустриални приложения','Дистрибуция на едро и private label','HoReCa и специализиран retail'],
+    productQuality:['Изисквания за афлатоксини и пестициди','Влага, микробиология и продуктова спецификация','COA, партиден код и проследимост','Съответствие с целевия пазар'],
+    legalIntro:'Това уведомление предоставя прозрачна информация за използването на сайта CTSEG и свързаната обработка на данни.',
+    legalSections:[['Обхват и отговорност','CTSEG се стреми да поддържа точна корпоративна и търговска информация. Запитвания могат да се изпращат на info@ctseg.com.tr.'],['Информация и цел','При контакт можем да обработваме име, фирма, имейл, телефон и данни за търговската заявка, както и ограничени технически записи за сигурност.'],['Споделяне, съхранение и сигурност','Данните се споделят само с необходимите доставчици и компетентни органи съгласно приложимото право и се изтриват или анонимизират след отпадане на целта и законовите срокове.'],['Права и контакт','За достъп, корекция, изтриване, възражение и други права за защита на данните пишете на info@ctseg.com.tr.']]
+  },
+  sr:{
+    servicesTitle:'Stručnost za svaku fazu sourcing odluke.',servicesLead:'Povezujemo strategiju, proveru, komercijalnu analizu i realizaciju u jedinstvenu disciplinu odlučivanja.',
+    productsTitle:'Portfolio trgovinskih proizvoda',productsLead:'Katalog se procenjuje kroz transparentno poreklo, kvalitet po seriji i proverljive komercijalne uslove.',
+    marketsTitle:'Iz Türkiye ka Srbiji, Evropi i međunarodnim tržištima.',marketsLead:'Povezujemo realne proizvodne mogućnosti sa pravilima ciljnog tržišta, očekivanjima kupaca i primenljivim modelima isporuke.',
+    aboutTitle:'Nezavisni partner za smanjenje neizvesnosti u trgovini.',aboutLead:'CTSEG radi na osnovu dokaza, transparentnosti i primenljivosti u strateškom sourcingu i međunarodnoj trgovini.',
+    contactTitle:'Pokrenite komercijalni zahtev jasnom procenom.',insightsTitle:'Praktični uvidi za donosioce odluka.',insightsLead:'Sažeti vodiči zasnovani na dokazima o sourcingu, ukupnom trošku, poreklu, kvalitetu i komercijalnom riziku.',
+    framework:['Zahtev i specifikacija','Provera partnera i dokumentacije','Poređenje kvaliteta, troška i rizika','Transparentna odluka i evidencija realizacije'],
+    serviceFaq:['Kako počinje projekat?','Obim, cilj, proizvod ili usluga, tržište i rok odluke razjašnjavaju se u kratkom kvalifikacionom razgovoru.','Da li CTSEG radi u ime dobavljača?','CTSEG jasno navodi mandat i komercijalnu ulogu i dokumentuje kriterijume procene.'],
+    productUses:['Prehrambena proizvodnja i industrijske primene','Veleprodaja i private label','HoReCa i specijalizovana maloprodaja'],
+    productQuality:['Zahtevi za aflatoksine i pesticide','Vlaga, mikrobiologija i specifikacija proizvoda','COA, kod serije i sledljivost','Usklađenost sa ciljnim tržištem'],
+    legalIntro:'Ovo obaveštenje transparentno opisuje korišćenje CTSEG sajta i povezanu obradu podataka.',
+    legalSections:[['Obim i odgovornost','CTSEG nastoji da korporativne i komercijalne informacije budu tačne. Zahtevi se mogu poslati na info@ctseg.com.tr.'],['Podaci i svrha','Kada nas kontaktirate možemo obrađivati ime, kompaniju, e-mail, telefon i detalje komercijalnog zahteva, kao i ograničene tehničke zapise radi bezbednosti.'],['Deljenje, čuvanje i bezbednost','Podaci se dele samo sa neophodnim pružaocima usluga i nadležnim organima u skladu sa primenljivim pravom i brišu se ili anonimizuju po isteku svrhe i zakonskih rokova.'],['Prava i kontakt','Za pristup, ispravku, brisanje, prigovor i druga prava u vezi sa podacima pišite na info@ctseg.com.tr.']]
+  }
+});
