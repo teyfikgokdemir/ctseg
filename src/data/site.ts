@@ -1384,13 +1384,13 @@ Object.assign(ui as any,{
 
 Object.assign(homeCopy as any,{
   ro:{
-    eyebrow:'Sourcing strategic · comerț internațional',title:'Claritate comercială pentru decizii complexe de aprovizionare.',
+    eyebrow:'Aprovizionare strategică · comerț internațional',title:'Claritate comercială pentru decizii complexe de aprovizionare.',
     lead:'Combinăm identificarea producătorilor, verificarea, calitatea, costul total și compatibilitatea cu piața într-un proces disciplinat de decizie.',
-    signal:'CTSEG Signal Room',live:'Evaluare activă',signals:[['SOURCING','Producător și capacitate'],['CALITATE','COA și trasabilitate'],['PIAȚĂ','Conformitate și model de livrare']],
+    signal:'Centrul de analiză CTSEG',live:'Evaluare activă',signals:[['APROVIZIONARE','Producător și capacitate'],['CALITATE','COA și trasabilitate'],['PIAȚĂ','Conformitate și model de livrare']],
     trust:['Contrapărți verificate','Origine transparentă','Disciplină B2B în decizie','Türkiye · Europa · Internațional'],
     servicesTitle:'Mai mult decât o listă de furnizori.',servicesLead:'Structurăm întregul proces, de la cerință și verificare până la ofertă și execuție.',
     productsTitle:'Portofoliu comercial verificabil.',productsLead:'Produse selectate evaluate transparent prin origine, lot, parametri de calitate și opțiuni de livrare.',
-    marketsTitle:'Conexiuni comerciale concrete între piețe.',marketsLead:'Sourcing și coordonare comercială din Türkiye către România, Europa și piețe internaționale.',
+    marketsTitle:'Conexiuni comerciale concrete între piețe.',marketsLead:'Aprovizionare și coordonare comercială din Türkiye către România, Europa și piețe internaționale.',
     processTitle:'Progres controlat în patru pași',process:['Definirea cerinței','Verificarea pieței și contrapărților','Compararea imaginii comerciale totale','Monitorizarea execuției și performanței'],
     ctaTitle:'Transformați următoarea decizie de sourcing într-una bazată pe dovezi.'
   },
@@ -1406,13 +1406,13 @@ Object.assign(homeCopy as any,{
     ctaTitle:'Вземете следващото решение за снабдяване на база проверими данни.'
   },
   sr:{
-    eyebrow:'Strateški sourcing · međunarodna trgovina',title:'Komercijalna jasnoća za složene odluke o nabavci.',
+    eyebrow:'Strateška nabavka · međunarodna trgovina',title:'Komercijalna jasnoća za složene odluke o nabavci.',
     lead:'Objedinjujemo pronalaženje proizvođača, proveru, kvalitet, ukupan trošak i tržišnu usklađenost u disciplinovan proces odlučivanja.',
-    signal:'CTSEG Signal Room',live:'Aktivna procena',signals:[['SOURCING','Proizvođač i kapacitet'],['KVALITET','COA i sledljivost'],['TRŽIŠTE','Usklađenost i model isporuke']],
+    signal:'CTSEG centar za procenu',live:'Aktivna procena',signals:[['NABAVKA','Proizvođač i kapacitet'],['KVALITET','COA i sledljivost'],['TRŽIŠTE','Usklađenost i model isporuke']],
     trust:['Provereni poslovni partneri','Transparentno poreklo','B2B disciplina odlučivanja','Türkiye · Evropa · Međunarodno'],
     servicesTitle:'Više od liste dobavljača.',servicesLead:'Strukturišemo ceo proces – od zahteva i provere do ponude i realizacije.',
     productsTitle:'Proverljiv trgovinski portfolio proizvoda.',productsLead:'Odabrani proizvodi procenjeni kroz transparentno poreklo, seriju, parametre kvaliteta i opcije isporuke.',
-    marketsTitle:'Konkretne trgovinske veze između tržišta.',marketsLead:'Sourcing i trgovinska koordinacija iz Türkiye prema Srbiji, Evropi i međunarodnim tržištima.',
+    marketsTitle:'Konkretne trgovinske veze između tržišta.',marketsLead:'Nabavka i trgovinska koordinacija iz Türkiye prema Srbiji, Evropi i međunarodnim tržištima.',
     processTitle:'Kontrolisan napredak u četiri koraka',process:['Definisanje zahteva','Provera tržišta i partnera','Poređenje ukupne komercijalne slike','Praćenje realizacije i učinka'],
     ctaTitle:'Neka sledeća sourcing odluka bude zasnovana na dokazima.'
   }
@@ -1420,7 +1420,7 @@ Object.assign(homeCopy as any,{
 
 const balkanServices:any = {
   ro:{
-    'strategic-sourcing':['sourcing-strategic','Sourcing strategic','Analiză de piață, RFQ, verificare și compararea ofertelor pentru decizii B2B de aprovizionare din Türkiye și piețe regionale.'],
+    'strategic-sourcing':['sourcing-strategic','Aprovizionare strategică','Analiză de piață, RFQ, verificare și compararea ofertelor pentru decizii B2B de aprovizionare din Türkiye și piețe regionale.'],
     'supplier-verification':['verificare-furnizori','Verificarea furnizorilor','Verificarea identității companiei, capacității, documentelor, referințelor și condițiilor comerciale înaintea unei decizii de achiziție.'],
     'trade-advisory':['consultanta-comerciala','Consultanță comercială','Structurarea rutelor comerciale, documentelor, riscurilor și pașilor de implementare pentru tranzacții internaționale B2B.'],
     'tco':['analiza-costului-total','Analiza costului total (TCO)','Compararea prețului, transportului, taxelor, asigurării, stocului și riscului printr-un model de cost total.'],
@@ -1434,7 +1434,7 @@ const balkanServices:any = {
     'market-entry':['navlizane-na-pazara','Износ и навлизане на пазара','Оценка на търговската готовност, пазарно проучване, идентифициране на купувачи и координация на първоначалния контакт.']
   },
   sr:{
-    'strategic-sourcing':['strateski-sourcing','Strateški sourcing','Analiza tržišta, RFQ, provera i poređenje ponuda za B2B nabavku iz Türkiye i regionalnih tržišta.'],
+    'strategic-sourcing':['strateski-sourcing','Strateška nabavka','Analiza tržišta, RFQ, provera i poređenje ponuda za B2B nabavku iz Türkiye i regionalnih tržišta.'],
     'supplier-verification':['provera-dobavljaca','Provera dobavljača','Provera identiteta kompanije, kapaciteta, dokumentacije, referenci i komercijalnih uslova pre odluke o kupovini.'],
     'trade-advisory':['trgovinsko-savetovanje','Trgovinsko savetovanje','Strukturisanje trgovinskih ruta, dokumentacije, rizika i koraka realizacije za međunarodne B2B transakcije.'],
     'tco':['analiza-ukupnog-troska','Analiza ukupnog troška (TCO)','Poređenje cene, transporta, carina, osiguranja, skladištenja i rizika kroz model ukupnog troška.'],
@@ -1526,9 +1526,9 @@ for(const lang of ['ro','bg','sr']){
 }
 
 Object.assign(editorialCopy as any,{
-  ro:{manifestoTitle:'Comerțul internațional înseamnă mai mult decât o listă de intermediari.',manifestoText:'CTSEG combină dezvoltarea exportului, verificarea fabricilor, sourcingul strategic și disciplina costului total într-un singur sistem comercial transfrontalier.',portfolioTitle:'Coridoare strategice de comerț și sourcing',portfolioText:'Portofoliul reflectă rețeaua comercială bidirecțională CTSEG pentru produse industriale, materii prime agricole și categorii B2B selectate.',marketsKicker:'Dezvoltare export · verificarea originii · analiză TCO · coordonarea livrării',productImageNote:'Imaginea reprezintă categoria; specificațiile tehnice și parametrii lotului se verifică prin documentație TDS și de lot.'},
+  ro:{manifestoTitle:'Comerțul internațional înseamnă mai mult decât o listă de intermediari.',manifestoText:'CTSEG combină dezvoltarea exportului, verificarea fabricilor, aprovizionarea strategică și disciplina costului total într-un singur sistem comercial transfrontalier.',portfolioTitle:'Coridoare strategice de comerț și aprovizionare',portfolioText:'Portofoliul reflectă rețeaua comercială bidirecțională CTSEG pentru produse industriale, materii prime agricole și categorii B2B selectate.',marketsKicker:'Dezvoltare export · verificarea originii · analiză TCO · coordonarea livrării',productImageNote:'Imaginea reprezintă categoria; specificațiile tehnice și parametrii lotului se verifică prin documentație TDS și de lot.'},
   bg:{manifestoTitle:'Международната търговия е повече от списък с посредници.',manifestoText:'CTSEG обединява развитие на износа, проверка на фабрики, стратегическо снабдяване и контрол на общите разходи в единна трансгранична търговска система.',portfolioTitle:'Стратегически търговски и снабдителни коридори',portfolioText:'Портфолиото представя двупосочната мрежа на CTSEG за индустриални продукти, аграрни суровини и избрани B2B категории.',marketsKicker:'Развитие на износа · проверка на произхода · TCO анализ · координация на доставката',productImageNote:'Изображението представя продуктовата категория; техническите характеристики и параметрите на партидата се проверяват чрез TDS и партидни документи.'},
-  sr:{manifestoTitle:'Međunarodna trgovina je više od liste posrednika.',manifestoText:'CTSEG objedinjuje razvoj izvoza, proveru fabrika, strateški sourcing i disciplinu ukupnih troškova u jedinstven prekogranični trgovinski sistem.',portfolioTitle:'Strateški trgovinski i sourcing koridori',portfolioText:'Portfolio predstavlja dvosmernu CTSEG mrežu za industrijske proizvode, poljoprivredne sirovine i odabrane B2B kategorije.',marketsKicker:'Razvoj izvoza · provera porekla · TCO analiza · koordinacija isporuke',productImageNote:'Slika predstavlja kategoriju proizvoda; tehničke specifikacije i parametri serije proveravaju se kroz TDS i prateću dokumentaciju.'}
+  sr:{manifestoTitle:'Međunarodna trgovina je više od liste posrednika.',manifestoText:'CTSEG objedinjuje razvoj izvoza, proveru fabrika, stratešku nabavku i disciplinu ukupnih troškova u jedinstven prekogranični trgovinski sistem.',portfolioTitle:'Strateški trgovinski i nabavni koridori',portfolioText:'Portfolio predstavlja dvosmernu CTSEG mrežu za industrijske proizvode, poljoprivredne sirovine i odabrane B2B kategorije.',marketsKicker:'Razvoj izvoza · provera porekla · TCO analiza · koordinacija isporuke',productImageNote:'Slika predstavlja kategoriju proizvoda; tehničke specifikacije i parametri serije proveravaju se kroz TDS i prateću dokumentaciju.'}
 });
 
 for(const id of legalIds){
@@ -1549,11 +1549,11 @@ Object.assign(pageCopy as any,{
     servicesTitle:'Competență pentru fiecare etapă a deciziei de sourcing.',servicesLead:'Combinăm strategie, verificare, analiză comercială și execuție într-o singură disciplină de decizie.',
     productsTitle:'Portofoliu de produse comerciale',productsLead:'Catalogul este evaluat prin origine transparentă, calitate la nivel de lot și condiții comerciale verificabile.',
     marketsTitle:'Din Türkiye către România, Europa și piețe internaționale.',marketsLead:'Corelăm realitatea producției cu reglementările pieței țintă, cerințele cumpărătorilor și modele de livrare aplicabile.',
-    aboutTitle:'Partener independent pentru reducerea incertitudinii în comerț.',aboutLead:'CTSEG lucrează pe bază de dovezi, transparență și aplicabilitate în proiecte de sourcing strategic și comerț internațional.',
+    aboutTitle:'Partener independent pentru reducerea incertitudinii în comerț.',aboutLead:'CTSEG lucrează pe bază de dovezi, transparență și aplicabilitate în proiecte de aprovizionare strategică și comerț internațional.',
     contactTitle:'Porniți cerința comercială printr-o evaluare clară.',insightsTitle:'Analize practice pentru decidenți.',insightsLead:'Ghiduri concise, bazate pe dovezi, despre sourcing, cost total, origine, calitate și risc comercial.',
     framework:['Cerință și specificație','Verificarea contrapărții și documentelor','Comparație calitate, cost și risc','Decizie transparentă și evidență de execuție'],
     serviceFaq:['Cum începe un proiect?','Domeniul, obiectivul, produsul sau serviciul, piața și calendarul sunt clarificate într-o scurtă etapă de calificare.','CTSEG acționează în numele furnizorului?','CTSEG declară clar mandatul și rolul comercial și documentează criteriile de evaluare.'],
-    productUses:['Producție alimentară și aplicații industriale','Distribuție angro și private label','HoReCa și retail specializat'],
+    productUses:['Producție alimentară și aplicații industriale','Distribuție angro și marcă proprie','HoReCa și comerț specializat cu amănuntul'],
     productQuality:['Cerințe privind aflatoxinele și pesticidele','Umiditate, microbiologie și specificație','COA, cod de lot și trasabilitate','Conformitate cu piața țintă'],
     legalIntro:'Această informare explică transparent utilizarea site-ului CTSEG și prelucrarea datelor asociată.',
     legalSections:[['Domeniu și responsabilitate','CTSEG urmărește menținerea corectitudinii informațiilor corporative și comerciale. Solicitările pot fi trimise la info@ctseg.com.tr.'],['Informații și scop','La contact putem prelucra numele, compania, e-mailul, telefonul și detaliile cerinței comerciale, precum și jurnale tehnice limitate pentru securitate.'],['Partajare, păstrare și securitate','Datele sunt partajate numai cu furnizori necesari și autorități competente, conform legii aplicabile, și sunt șterse sau anonimizate după expirarea scopului și perioadelor legale.'],['Drepturi și contact','Pentru acces, rectificare, ștergere, opoziție și alte drepturi privind datele, scrieți la info@ctseg.com.tr.']]
@@ -1566,20 +1566,20 @@ Object.assign(pageCopy as any,{
     contactTitle:'Започнете търговската си заявка с ясна оценка.',insightsTitle:'Практични анализи за вземащите решения.',insightsLead:'Кратки, основани на данни материали за снабдяване, общи разходи, произход, качество и търговски риск.',
     framework:['Нужда и спецификация','Проверка на контрагенти и документи','Сравнение на качество, разходи и риск','Прозрачно решение и запис на изпълнението'],
     serviceFaq:['Как започва проектът?','Обхватът, целта, продуктът или услугата, пазарът и срокът за решение се уточняват в кратка квалификационна среща.','CTSEG работи ли от името на доставчик?','CTSEG ясно декларира мандата и търговската си роля и документира критериите за оценка.'],
-    productUses:['Хранително производство и индустриални приложения','Дистрибуция на едро и private label','HoReCa и специализиран retail'],
+    productUses:['Хранително производство и индустриални приложения','Дистрибуция на едро и собствена марка','HoReCa и специализирана търговия на дребно'],
     productQuality:['Изисквания за афлатоксини и пестициди','Влага, микробиология и продуктова спецификация','COA, партиден код и проследимост','Съответствие с целевия пазар'],
     legalIntro:'Това уведомление предоставя прозрачна информация за използването на сайта CTSEG и свързаната обработка на данни.',
     legalSections:[['Обхват и отговорност','CTSEG се стреми да поддържа точна корпоративна и търговска информация. Запитвания могат да се изпращат на info@ctseg.com.tr.'],['Информация и цел','При контакт можем да обработваме име, фирма, имейл, телефон и данни за търговската заявка, както и ограничени технически записи за сигурност.'],['Споделяне, съхранение и сигурност','Данните се споделят само с необходимите доставчици и компетентни органи съгласно приложимото право и се изтриват или анонимизират след отпадане на целта и законовите срокове.'],['Права и контакт','За достъп, корекция, изтриване, възражение и други права за защита на данните пишете на info@ctseg.com.tr.']]
   },
   sr:{
-    servicesTitle:'Stručnost za svaku fazu sourcing odluke.',servicesLead:'Povezujemo strategiju, proveru, komercijalnu analizu i realizaciju u jedinstvenu disciplinu odlučivanja.',
+    servicesTitle:'Stručnost za svaku fazu odluke o nabavci.',servicesLead:'Povezujemo strategiju, proveru, komercijalnu analizu i realizaciju u jedinstvenu disciplinu odlučivanja.',
     productsTitle:'Portfolio trgovinskih proizvoda',productsLead:'Katalog se procenjuje kroz transparentno poreklo, kvalitet po seriji i proverljive komercijalne uslove.',
     marketsTitle:'Iz Türkiye ka Srbiji, Evropi i međunarodnim tržištima.',marketsLead:'Povezujemo realne proizvodne mogućnosti sa pravilima ciljnog tržišta, očekivanjima kupaca i primenljivim modelima isporuke.',
-    aboutTitle:'Nezavisni partner za smanjenje neizvesnosti u trgovini.',aboutLead:'CTSEG radi na osnovu dokaza, transparentnosti i primenljivosti u strateškom sourcingu i međunarodnoj trgovini.',
-    contactTitle:'Pokrenite komercijalni zahtev jasnom procenom.',insightsTitle:'Praktični uvidi za donosioce odluka.',insightsLead:'Sažeti vodiči zasnovani na dokazima o sourcingu, ukupnom trošku, poreklu, kvalitetu i komercijalnom riziku.',
+    aboutTitle:'Nezavisni partner za smanjenje neizvesnosti u trgovini.',aboutLead:'CTSEG radi na osnovu dokaza, transparentnosti i primenljivosti u strateškoj nabavci i međunarodnoj trgovini.',
+    contactTitle:'Pokrenite komercijalni zahtev jasnom procenom.',insightsTitle:'Praktični uvidi za donosioce odluka.',insightsLead:'Sažeti vodiči zasnovani na dokazima o nabavci, ukupnom trošku, poreklu, kvalitetu i komercijalnom riziku.',
     framework:['Zahtev i specifikacija','Provera partnera i dokumentacije','Poređenje kvaliteta, troška i rizika','Transparentna odluka i evidencija realizacije'],
     serviceFaq:['Kako počinje projekat?','Obim, cilj, proizvod ili usluga, tržište i rok odluke razjašnjavaju se u kratkom kvalifikacionom razgovoru.','Da li CTSEG radi u ime dobavljača?','CTSEG jasno navodi mandat i komercijalnu ulogu i dokumentuje kriterijume procene.'],
-    productUses:['Prehrambena proizvodnja i industrijske primene','Veleprodaja i private label','HoReCa i specijalizovana maloprodaja'],
+    productUses:['Prehrambena proizvodnja i industrijske primene','Veleprodaja i robna marka naručioca','HoReCa i specijalizovana maloprodaja'],
     productQuality:['Zahtevi za aflatoksine i pesticide','Vlaga, mikrobiologija i specifikacija proizvoda','COA, kod serije i sledljivost','Usklađenost sa ciljnim tržištem'],
     legalIntro:'Ovo obaveštenje transparentno opisuje korišćenje CTSEG sajta i povezanu obradu podataka.',
     legalSections:[['Obim i odgovornost','CTSEG nastoji da korporativne i komercijalne informacije budu tačne. Zahtevi se mogu poslati na info@ctseg.com.tr.'],['Podaci i svrha','Kada nas kontaktirate možemo obrađivati ime, kompaniju, e-mail, telefon i detalje komercijalnog zahteva, kao i ograničene tehničke zapise radi bezbednosti.'],['Deljenje, čuvanje i bezbednost','Podaci se dele samo sa neophodnim pružaocima usluga i nadležnim organima u skladu sa primenljivim pravom i brišu se ili anonimizuju po isteku svrhe i zakonskih rokova.'],['Prava i kontakt','Za pristup, ispravku, brisanje, prigovor i druga prava u vezi sa podacima pišite na info@ctseg.com.tr.']]
