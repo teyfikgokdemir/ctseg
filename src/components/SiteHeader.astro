@@ -165,7 +165,7 @@ const globalSwitchPath = (target: string): string => {
 
         <div class="language-switcher language-switcher-desktop">
           <button type="button" aria-expanded="false" aria-controls="language-panel" aria-label={t.language} data-language-toggle>
-            <img class="locale-flag" src={globalLocaleFlags[lang] || globalLocaleFlags.en} width="26" height="17" alt="" aria-hidden="true" />
+            <img class="locale-flag" src={globalLocaleFlags[lang] || globalLocaleFlags.en} width="26" height="17" alt="" aria-hidden="true" /><span class="sr-only locale-code">{lang.toUpperCase()}</span>
             <span class="locale-chevron" aria-hidden="true"></span>
           </button>
           <div id="language-panel" class="language-menu" data-language-menu>
