@@ -629,3 +629,10 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
 @media(max-width:760px){
   .trade-gateway-banner,.platform-sector-grid,.market-role-grid,.answer-grid,.trust-facts,.detailed-process{grid-template-columns:1fr}.trade-funnel-card{min-height:280px;padding:26px}.platform-sector-grid article{min-height:390px}.market-role-grid article,.market-role-grid article:nth-child(2n),.market-role-grid article:nth-child(3n){border-right:0}.trust-facts>div{border-right:0;border-bottom:1px solid rgba(242,239,231,.18)}.trust-facts>div:last-child{grid-column:auto}.detailed-process li,.detailed-process li:nth-child(2n),.detailed-process li:nth-child(3n){min-height:150px;border-right:0}.scenario-heading{grid-template-columns:42px 1fr}.scenario-list dl>div{grid-template-columns:1fr;gap:5px}.commercial-request-shell{padding:26px}.commercial-request-form{grid-template-columns:1fr}.commercial-field--full,.commercial-form-actions{grid-column:auto}.company-trust-heading{align-items:start;flex-direction:column}.catalog-download{align-items:start;flex-direction:column}.catalogue-group-heading{grid-template-columns:42px 1fr;gap:12px}.process-detail-link{margin-top:-18px;margin-bottom:50px}.about-capabilities-grid{grid-template-columns:1fr}
 }
+
+
+/* Turkish homepage hero: preserve the established copy in two clean lines. */
+.home-hero-title--tr{max-width:none!important;font-size:clamp(2.8rem,3.8vw,4.35rem)!important;line-height:1.02!important;letter-spacing:-.035em!important}
+.home-hero-title--tr span{display:block;white-space:nowrap}
+@media(max-width:1050px){.home-hero-title--tr span{white-space:normal}.home-hero-title--tr{max-width:16ch!important}}
+@media(max-width:620px){.home-hero-title--tr{font-size:clamp(2.35rem,10vw,3.15rem)!important;line-height:1.03!important}}
