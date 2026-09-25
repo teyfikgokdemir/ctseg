@@ -18,7 +18,9 @@ const descriptionMap: Record<string, string> = {
   vi:'Nhà thương mại và sourcing chiến lược hai chiều có trụ sở tại Thổ Nhĩ Kỳ, kết nối doanh nghiệp Việt Nam với Thổ Nhĩ Kỳ, châu Âu và các thị trường toàn cầu.',
   sq:'Shtëpi tregtare me bazë në Turqi për tregti ndërkombëtare dykahëshe dhe sourcing strategjik.',
   mk:'Трговска куќа со седиште во Турција за двонасочна глобална трговија и стратешка набавка.',
-  sr:'Trgovinska kuća sa sedištem u Turskoj za dvosmernu globalnu trgovinu i stratešku nabavku.'
+  sr:'Trgovinska kuća sa sedištem u Türkiye za dvosmernu globalnu trgovinu i strateški sourcing.',
+  ro:'Casă de comerț B2B cu sediul în Türkiye pentru comerț global bidirecțional, sourcing strategic și acces pe piețe.',
+  bg:'B2B търговска къща със седалище в Türkiye за двупосочна глобална търговия, стратегическо снабдяване и пазарен достъп.'
 };
 const description = descriptionMap[lang] || descriptionMap.en;
 const copyrightMap: Record<string, string> = {
@@ -33,7 +35,9 @@ const copyrightMap: Record<string, string> = {
   vi:`© ${year} CTSEG. Bảo lưu mọi quyền.`,
   sq:`© ${year} CTSEG. Të gjitha të drejtat të rezervuara.`,
   mk:`© ${year} CTSEG. Сите права се задржани.`,
-  sr:`© ${year} CTSEG. Sva prava zadržana.`
+  sr:`© ${year} CTSEG. Sva prava zadržana.`,
+  ro:`© ${year} CTSEG. Toate drepturile rezervate.`,
+  bg:`© ${year} CTSEG. Всички права запазени.`
 };
 const copyright = copyrightMap[lang] || copyrightMap.en;
 const marketLocales: Array<{ code:string; flagSrc:string; label:string; href:string }> = [
@@ -45,9 +49,12 @@ const marketLocales: Array<{ code:string; flagSrc:string; label:string; href:str
   { code:'ru', flagSrc:'/images/flags/ru.svg', label:'Россия', href:'/ru/' },
   { code:'zh', flagSrc:'/images/flags/cn.svg', label:'中国', href:'/zh/' },
   { code:'vi', flagSrc:'/images/flags/vn.svg', label:'Việt Nam', href:'/vi/' },
+  { code:'ro', flagSrc:'/images/flags/ro.svg', label:'România', href:'/ro/' },
+  { code:'bg', flagSrc:'/images/flags/bg.svg', label:'България', href:'/bg/' },
+  { code:'sr', flagSrc:'/images/flags/rs.svg', label:'Srbija', href:'/sr/' },
   { code:'uk', flagSrc:'/images/flags/ua.svg', label:'Україна', href:'/uk/' }
 ];
-const marketLabel = ({tr:'Global Pazarlar',en:'Global Markets',de:'Globale Märkte',it:'Mercati globali',fa:'بازارهای جهانی',ru:'Глобальные рынки',zh:'全球市场',vi:'Thị trường toàn cầu'} as Record<string,string>)[lang] || 'Global Markets';
+const marketLabel = ({tr:'Global Pazarlar',en:'Global Markets',de:'Globale Märkte',it:'Mercati globali',fa:'بازارهای جهانی',ru:'Глобальные рынки',zh:'全球市场',vi:'Thị trường toàn cầu',ro:'Piețe globale',bg:'Глобални пазари',sr:'Globalna tržišta'} as Record<string,string>)[lang] || 'Global Markets';
 const footerNav = ({
   tr:{portfolio:'Ticaret Portföyü',overview:'Portföyü İnceleyin',sourcing:'Stratejik Tedarik',marketEntry:'İhracat ve Pazara Giriş',intelligence:'Ticaret İçgörüleri'},
   en:{portfolio:'Trade Portfolio',overview:'Explore the Portfolio',sourcing:'Strategic Sourcing',marketEntry:'Export & Market Entry',intelligence:'Trade Intelligence'},
@@ -56,7 +63,10 @@ const footerNav = ({
   ru:{portfolio:'Торговый портфель',overview:'Смотреть портфель',sourcing:'Стратегический сорсинг',marketEntry:'Экспорт и выход на рынок',intelligence:'Торговая аналитика'},
   fa:{portfolio:'سبد تجاری',overview:'مشاهده سبد تجاری',sourcing:'تأمین استراتژیک',marketEntry:'صادرات و ورود به بازار',intelligence:'بینش تجاری'},
   zh:{portfolio:'贸易组合',overview:'查看贸易组合',sourcing:'战略采购',marketEntry:'出口与市场进入',intelligence:'贸易洞察'},
-  vi:{portfolio:'Danh mục thương mại',overview:'Khám phá danh mục',sourcing:'Sourcing chiến lược',marketEntry:'Xuất khẩu & thâm nhập thị trường',intelligence:'Thông tin thương mại'}
+  vi:{portfolio:'Danh mục thương mại',overview:'Khám phá danh mục',sourcing:'Sourcing chiến lược',marketEntry:'Xuất khẩu & thâm nhập thị trường',intelligence:'Thông tin thương mại'},
+  ro:{portfolio:'Portofoliu Comercial',overview:'Vezi portofoliul',sourcing:'Sourcing strategic',marketEntry:'Export și intrare pe piață',intelligence:'Analize comerciale'},
+  bg:{portfolio:'Търговско портфолио',overview:'Виж портфолиото',sourcing:'Стратегическо снабдяване',marketEntry:'Износ и навлизане на пазара',intelligence:'Търговски анализи'},
+  sr:{portfolio:'Trgovinski portfolio',overview:'Pogledaj portfolio',sourcing:'Strateški sourcing',marketEntry:'Izvoz i ulazak na tržište',intelligence:'Trgovinski uvidi'}
 } as Record<string,{portfolio:string;overview:string;sourcing:string;marketEntry:string;intelligence:string}>)[lang] || {portfolio:'Trade Portfolio',overview:'Explore the Portfolio',sourcing:'Strategic Sourcing',marketEntry:'Export & Market Entry',intelligence:'Trade Intelligence'};
 const statementMap: Record<string,string> = {
   tr:'SINIRLARIN ÖTESİNDE TİCARET.',
@@ -66,13 +76,16 @@ const statementMap: Record<string,string> = {
   ru:'ТОРГОВЛЯ БЕЗ ГРАНИЦ.',
   fa:'تجارت فراتر از مرزها',
   zh:'跨越边界，连接贸易。',
-  vi:'THƯƠNG MẠI VƯỢT BIÊN GIỚI.'
+  vi:'THƯƠNG MẠI VƯỢT BIÊN GIỚI.',
+  ro:'COMERȚ DINCOLO DE GRANIȚE.',
+  bg:'ТЪРГОВИЯ ОТВЪД ГРАНИЦИТЕ.',
+  sr:'TRGOVINA BEZ GRANICA.'
 };
 const footerStatement = statementMap[lang] || statementMap.en;
 const focusedCountryHome = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
 const showGenericPortfolio = !focusedCountryHome;
 const showGlassLink = !focusedCountryHome || lang === 'fa';
-const safeGlassLang = (['tr','en','de','it','ru','fa','zh','vi'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
+const safeGlassLang = (['tr','en','de','it','ru','fa','zh','vi','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
 ---
 <footer class="site-footer">
   <div class="footer-markets-wrap"><div class="container footer-markets"><div class="footer-markets-label"><span class="footer-markets-kicker">CTSEG</span><strong>{marketLabel}</strong></div><nav class="footer-market-links" aria-label={marketLabel}>{marketLocales.map((item) => (<a href={item.href} class:list={['footer-market-link', item.code === lang && 'is-active']} aria-current={item.code === lang ? 'page' : undefined} data-footer-locale={item.code}><img aria-hidden="true" class="footer-market-flag" src={item.flagSrc} width="24" height="16" alt="" loading="lazy" decoding="async" /><span>{item.label}</span></a>))}</nav></div></div>
@@ -83,7 +96,7 @@ const safeGlassLang = (['tr','en','de','it','ru','fa','zh','vi'].includes(lang) 
   </div>
   <div class="container footer-main">
     <div class="footer-brand"><a class="brand" href={localizedPath(lang, 'home')}><img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" loading="lazy" decoding="async" /></a><p>{description}</p><div class="footer-company"><strong>{company.name[lang] || company.name.en}</strong><span>{company.foundingYear} · {corporate.footerLocation}</span></div></div>
-    <nav aria-label={footerNav.portfolio}><strong>{focusedCountryHome ? 'CTSEG' : footerNav.portfolio}</strong>{showGenericPortfolio && <a href={localizedPath(lang, 'products')}>{footerNav.overview}</a>}<a href={localizedPath(lang,'services','strategic-sourcing')}>{footerNav.sourcing}</a><a href={localizedPath(lang,'services','market-entry')}>{footerNav.marketEntry}</a>{showGlassLink && <a href={duzceGlassPath(safeGlassLang)}>{({tr:'Düzce Cam Dış Ticaret',en:'Düzce Float Glass Export',de:'Düzce Float Glass Export',it:'Düzce Float Glass Export',fa:'صادرات شیشه Düzce',ru:'Экспорт Düzce Float Glass',zh:'Düzce 浮法玻璃出口',vi:'Xuất khẩu Düzce Float Glass',sq:'Düzce Float Glass',mk:'Düzce Float Glass',sr:'Düzce Float Glass'}[lang] || 'Düzce Float Glass Export')}</a>}<a href={localizedPath(lang, 'markets')}>{t.markets}</a><a href={localizedPath(lang, 'insights')}>{footerNav.intelligence}</a></nav>
+    <nav aria-label={footerNav.portfolio}><strong>{focusedCountryHome ? 'CTSEG' : footerNav.portfolio}</strong>{showGenericPortfolio && <a href={localizedPath(lang, 'products')}>{footerNav.overview}</a>}<a href={localizedPath(lang,'services','strategic-sourcing')}>{footerNav.sourcing}</a><a href={localizedPath(lang,'services','market-entry')}>{footerNav.marketEntry}</a>{showGlassLink && <a href={duzceGlassPath(safeGlassLang)}>{({tr:'Düzce Cam Dış Ticaret',en:'Düzce Float Glass Export',de:'Düzce Float Glass Export',it:'Düzce Float Glass Export',fa:'صادرات شیشه Düzce',ru:'Экспорт Düzce Float Glass',zh:'Düzce 浮法玻璃出口',vi:'Xuất khẩu Düzce Float Glass',ro:'Export Düzce Float Glass',bg:'Износ Düzce Float Glass',sr:'Izvoz Düzce Float Glass',sq:'Düzce Float Glass',mk:'Düzce Float Glass'}[lang] || 'Düzce Float Glass Export')}</a>}<a href={localizedPath(lang, 'markets')}>{t.markets}</a><a href={localizedPath(lang, 'insights')}>{footerNav.intelligence}</a></nav>
     <nav aria-label={t.contact}><strong>CTSEG</strong><a href={localizedPath(lang, 'about')}>{t.about}</a>{(lang === 'tr' || lang === 'en' || lang === 'fa' || lang === 'zh' || lang === 'vi') && <a href={localizedPath(lang,'how-we-work')}>{lang === 'tr' ? 'Nasıl çalışıyoruz?' : lang === 'fa' ? 'چگونه کار می‌کنیم؟' : lang === 'zh' ? '运作模式' : lang === 'vi' ? 'Phương thức hoạt động' : 'How we work'}</a>}<a href={localizedPath(lang, 'contact')}>{t.contact}</a><a href={`mailto:${company.email}`}>{company.email}</a><a href="https://t.me/teyfikgokdemir" target="_blank" rel="noopener noreferrer" aria-label="Telegram: @teyfikgokdemir">Telegram (@teyfikgokdemir)</a></nav>
   </div>
   <div class="container footer-bottom"><p>{copyright}</p><nav aria-label="Legal">{legalIds.map((id) => <a href={localizedPath(lang, 'legal', id)}>{legal[id].titles[lang] || legal[id].titles.en}</a>)}</nav></div>
