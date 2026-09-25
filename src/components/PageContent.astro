@@ -896,10 +896,13 @@ const verifiedLater = {
         <figure class="hero-visual">
           <img
             src="/images/ctseg-global-trade-hero-new.webp"
-            width="640"
-            height="427"
+            srcset="/images/ctseg-global-trade-hero-new.webp 1400w"
+            sizes="(max-width:860px) 100vw, min(53vw, 1400px)"
+            width="1400"
+            height="536"
             alt={homepageHero.altText}
             data-trade-visual={homepageHero.key}
+            style="object-position:center center"
             loading="eager"
             fetchpriority="high"
             decoding="async"
