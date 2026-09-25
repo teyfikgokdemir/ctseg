@@ -33,9 +33,11 @@ export function getRouteRecords(): RouteRecord[] {
     if (lang === 'tr' && chinaTurkiyeContent.tr) records.push({lang,path:chinaTurkiyeContent.tr.slug,key:'china-turkiye'});
     if (lang === 'tr') records.push({lang,path:ukraineTurkiyeContent.slug,key:'ukraine-turkiye'});
     if (lang === 'tr' || lang === 'en') records.push({lang,path:syriaMarketContent[lang].slug,key:'syria-market'});
-    for (const id of searchLandingIds) records.push({
-      lang,path:searchLandingPath(lang,id).replace(`/${lang}/`,'').replace(/^\//,'').replace(/\/$/,''),key:'search-landing',id
-    });
+    if (!['ro','bg','sr'].includes(lang)) {
+      for (const id of searchLandingIds) records.push({
+        lang,path:searchLandingPath(lang,id).replace(`/${lang}/`,'').replace(/^\//,'').replace(/\/$/,''),key:'search-landing',id
+      });
+    }
     for (const key of ['services','products','markets','insights','about','contact']) {
       records.push({ lang, path:sectionSlugs[key][lang], key });
     }
@@ -45,9 +47,11 @@ export function getRouteRecords(): RouteRecord[] {
     for (const id of productIds) records.push({
       lang, path:`${sectionSlugs.products[lang]}/${products[id].slugs[lang]}`, key:'products', id
     });
-    for (const id of insightIds) records.push({
-      lang, path:`${sectionSlugs.insights[lang]}/${insights[id].slugs[lang]}`, key:'insights', id
-    });
+    if (!['ro','bg','sr'].includes(lang)) {
+      for (const id of insightIds) records.push({
+        lang, path:`${sectionSlugs.insights[lang]}/${insights[id].slugs[lang]}`, key:'insights', id
+      });
+    }
     for (const id of legalIds) records.push({
       lang, path:legal[id].slugs[lang], key:'legal', id
     });
@@ -72,6 +76,9 @@ export function getMeta(record: RouteRecord) {
            lang === 'zh' ? `${chinaMarketEntryContent.zh!.title} | CTSEG` :
            lang === 'vi' ? `${vietnamMarketEntryContent.vi!.title} | CTSEG` :
            lang === 'ru' ? `${regionalIntentHomes.ru.title} | CTSEG` :
+           lang === 'ro' ? 'CTSEG | Sourcing strategic în Türkiye, verificare furnizori și intrare pe piață' :
+           lang === 'bg' ? 'CTSEG | Стратегическо снабдяване от Türkiye, проверка на доставчици и пазарен достъп' :
+           lang === 'sr' ? 'CTSEG | Strateški sourcing iz Türkiye, provera dobavljača i ulazak na tržište' :
            'CTSEG | Global Trade, Strategic Sourcing & Market Entry',
     description: lang === 'tr' ? 'CTSEG, Türkiye ile dünya pazarları arasında iki yönlü B2B ticaret, stratejik tedarik, tedarikçi doğrulama, RFQ yönetimi ve ihracat/pazara giriş koordinasyonu yürütür.' :
       lang === 'de' ? regionalIntentHomes.de.description :
@@ -80,6 +87,9 @@ export function getMeta(record: RouteRecord) {
       lang === 'zh' ? chinaMarketEntryContent.zh!.description :
       lang === 'vi' ? vietnamMarketEntryContent.vi!.description :
       lang === 'ru' ? regionalIntentHomes.ru.description :
+      lang === 'ro' ? 'CTSEG conectează România și piețele europene cu producători și furnizori din Türkiye prin sourcing strategic, verificare furnizori, RFQ, analiză TCO și coordonare de intrare pe piață.' :
+      lang === 'bg' ? 'CTSEG свързва България и европейските пазари с производители и доставчици от Türkiye чрез стратегическо снабдяване, проверка на доставчици, RFQ, TCO анализ и координация при навлизане на пазара.' :
+      lang === 'sr' ? 'CTSEG povezuje Srbiju i evropska tržišta sa proizvođačima i dobavljačima iz Türkiye kroz strateški sourcing, proveru dobavljača, RFQ, TCO analizu i koordinaciju ulaska na tržište.' :
       'CTSEG connects Türkiye with international markets through two-way B2B trade, strategic sourcing, supplier verification, RFQ management and market-entry coordination.'
   };
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — B2B Sourcing Advisory | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
