@@ -34,11 +34,11 @@ const isRtl = currentLang === 'fa';
       <div class="duzce-glass-grid">
         <div>
           <small>{d.productsTitle}</small>
-          <ul>{d.products.slice(0,6).map((item) => <li>{item}</li>)}</ul>
+          <ul>{d.products.slice(0,4).map((item) => <li>{item}</li>)}</ul>
         </div>
         <div>
           <small>{d.marketsTitle}</small>
-          <ul>{d.markets.slice(0,6).map((item) => <li>{item}</li>)}</ul>
+          <ul>{d.markets.slice(0,4).map((item) => <li>{item}</li>)}</ul>
         </div>
       </div>
       <a class="duzce-glass-contact" href={contactHref}>{d.primaryCta} <span aria-hidden="true">↗</span></a>
@@ -47,26 +47,26 @@ const isRtl = currentLang === 'fa';
 </section>
 
 <style>
-  .duzce-glass-feature{position:relative;overflow:hidden;background:#101311;border-block:1px solid rgba(255,255,255,.09);padding:clamp(5rem,8vw,8.5rem) 0}
-  .duzce-glass-feature:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(196,240,0,.06),transparent 35%),radial-gradient(circle at 82% 24%,rgba(141,190,176,.12),transparent 28%);pointer-events:none}
-  .duzce-glass-shell{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,.82fr);gap:clamp(3rem,6vw,7rem);align-items:center}
-  .duzce-glass-copy h2{margin:.9rem 0 0;max-width:12ch;color:#fff;font-family:var(--font-heading,'Source Serif 4',Georgia,serif);font-size:clamp(3rem,5vw,6rem);line-height:.96;letter-spacing:-.05em;text-wrap:balance}
-  .duzce-glass-copy .lead{max-width:44rem;margin:1.8rem 0 0;color:#d8ddd7!important;font-size:clamp(1rem,1.15vw,1.18rem);line-height:1.72;opacity:1!important}
+  .duzce-glass-feature{position:relative;overflow:hidden;background:#101311;border-block:1px solid rgba(255,255,255,.09);padding:clamp(3.5rem,5.2vw,5.8rem) 0}
+  .duzce-glass-feature:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(196,240,0,.055),transparent 34%),radial-gradient(circle at 82% 22%,rgba(141,190,176,.10),transparent 28%);pointer-events:none}
+  .duzce-glass-shell{position:relative;display:grid;grid-template-columns:minmax(0,1.03fr) minmax(390px,.97fr);gap:clamp(2.4rem,5vw,5.2rem);align-items:center}
+  .duzce-glass-copy h2{margin:.7rem 0 0;max-width:11.5ch;color:#fff;font-family:var(--font-heading,'Source Serif 4',Georgia,serif);font-size:clamp(2.8rem,4.4vw,5.2rem);line-height:.94;letter-spacing:-.05em;text-wrap:balance}
+  .duzce-glass-copy .lead{max-width:42rem;margin:1.25rem 0 0;color:#d8ddd7!important;font-size:clamp(.98rem,1vw,1.08rem);line-height:1.66;opacity:1!important}
   .duzce-glass-eyebrow{color:#c4f000!important;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
-  .duzce-glass-badges{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:2rem}
-  .duzce-glass-badges span{padding:.58rem .78rem;border:1px solid rgba(255,255,255,.16);border-radius:999px;color:#f0f2ed;font-size:.76rem;font-weight:700;background:rgba(255,255,255,.025)}
-  .duzce-glass-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
-  .duzce-glass-actions .button{min-height:46px}
-  .duzce-glass-panel{border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:0 36px 90px rgba(0,0,0,.3)}
-  .duzce-glass-panel-top{display:flex;justify-content:space-between;gap:1rem;padding:1rem 1.2rem;border-bottom:1px solid rgba(255,255,255,.1);font-size:.66rem;letter-spacing:.12em;color:#dfe4de!important}.duzce-glass-panel-top span{color:#dfe4de!important}
+  .duzce-glass-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.35rem}
+  .duzce-glass-badges span{padding:.5rem .68rem;border:1px solid rgba(255,255,255,.16);border-radius:999px;color:#f0f2ed;font-size:.72rem;font-weight:700;background:rgba(255,255,255,.025)}
+  .duzce-glass-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.35rem}
+  .duzce-glass-actions .button{min-height:44px;padding-inline:1rem}
+  .duzce-glass-panel{border:1px solid rgba(255,255,255,.13);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018));box-shadow:0 28px 70px rgba(0,0,0,.28)}
+  .duzce-glass-panel-top{display:flex;justify-content:space-between;gap:1rem;padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.1);font-size:.63rem;letter-spacing:.12em;color:#dfe4de!important}.duzce-glass-panel-top span{color:#dfe4de!important}
   .duzce-glass-panel-top strong{color:#c4f000}
   .duzce-glass-grid{display:grid;grid-template-columns:1fr 1fr}
-  .duzce-glass-grid>div{padding:1.45rem}
+  .duzce-glass-grid>div{padding:1rem 1.1rem}
   .duzce-glass-grid>div+div{border-inline-start:1px solid rgba(255,255,255,.1)}
-  .duzce-glass-grid small{display:block;margin-bottom:1rem;color:#c4f000!important;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+  .duzce-glass-grid small{display:block;margin-bottom:.75rem;color:#c4f000!important;font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
   .duzce-glass-grid ul{list-style:none;margin:0;padding:0}
-  .duzce-glass-grid li{padding:.62rem 0;border-bottom:1px solid rgba(255,255,255,.075);color:#f2f4ef!important;font-size:.9rem}
-  .duzce-glass-contact{display:flex;align-items:center;justify-content:space-between;padding:1.05rem 1.25rem;background:#c4f000;color:#0b0d0b;text-decoration:none;font-weight:850}
-  @media(max-width:980px){.duzce-glass-shell{grid-template-columns:1fr}.duzce-glass-copy h2{max-width:15ch}.duzce-glass-panel{max-width:780px}}
-  @media(max-width:620px){.duzce-glass-feature{padding:4rem 0}.duzce-glass-grid li{color:#fff!important;opacity:1!important}.duzce-glass-grid small{color:#c4f000!important;opacity:1!important}.duzce-glass-panel{color:#fff!important}.duzce-glass-copy h2{font-size:clamp(2.55rem,11vw,4rem);max-width:100%}.duzce-glass-grid{grid-template-columns:1fr}.duzce-glass-grid>div+div{border-inline-start:0;border-top:1px solid rgba(255,255,255,.1)}}
+  .duzce-glass-grid li{padding:.48rem 0;border-bottom:1px solid rgba(255,255,255,.075);color:#f2f4ef!important;font-size:.84rem}
+  .duzce-glass-contact{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1rem;background:#c4f000;color:#0b0d0b;text-decoration:none;font-size:.88rem;font-weight:850}
+  @media(max-width:980px){.duzce-glass-shell{grid-template-columns:1fr}.duzce-glass-copy h2{max-width:14ch}.duzce-glass-panel{max-width:760px}}
+  @media(max-width:620px){.duzce-glass-feature{padding:3.2rem 0}.duzce-glass-grid li{color:#fff!important;opacity:1!important}.duzce-glass-grid small{color:#c4f000!important;opacity:1!important}.duzce-glass-panel{color:#fff!important}.duzce-glass-copy h2{font-size:clamp(2.45rem,10.5vw,3.8rem);max-width:100%}.duzce-glass-copy .lead{font-size:.96rem}.duzce-glass-grid{grid-template-columns:1fr}.duzce-glass-grid>div+div{border-inline-start:0;border-top:1px solid rgba(255,255,255,.1)}}
 </style>
