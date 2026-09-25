@@ -890,7 +890,7 @@ const verifiedLater = {
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">{platform.eyebrow}</p><h1>{platform.title}</h1><p class="lead">{platform.lead}</p>
+          <p class="eyebrow">{platform.eyebrow}</p>{lang === 'tr' ? <h1 class="home-hero-title home-hero-title--tr"><span>Türkiye’den dünyaya.</span><span>Dünyadan doğru üreticiye.</span></h1> : <h1>{platform.title}</h1>}<p class="lead">{platform.lead}</p>
           <div class="actions trade-intent-actions"><a class="button" href={contactWithIntent('buyer_request')} data-trade-intent="buyer_request">{platform.buyerCta}</a><a class="button button-secondary" href={contactWithIntent('supplier_market_entry')} data-trade-intent="supplier_market_entry">{platform.producerCta}</a></div>
         </div>
         <figure class="hero-visual">
