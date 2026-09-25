@@ -37,15 +37,15 @@ const glassLabel = glassNavLabels[lang] || 'Düzce Float Glass';
 const focusedCountryLp = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
 const solutionLinks = [
   [t.services, localizedPath(lang,'services')],
-  [p.buyerTitle, `${home}#sectors`],
-  [p.producerTitle, `${home}#sectors`],
+  [p.buyerTitle, localizedPath(lang,'services','strategic-sourcing')],
+  [p.producerTitle, localizedPath(lang,'services','market-entry')],
   [methodLabel, localizedPath(lang,'how-we-work')],
   [glassLabel, glassUrl]
 ];
 
 const nav = [
   ['services', navigationCopy.globalTrade, localizedPath(lang,'services')],
-  ['sectors', navigationCopy.industries, `${home}#sectors`],
+  ['sectors', navigationCopy.industries, localizedPath(lang,'markets')],
   ...(!focusedCountryLp ? [['products', navigationCopy.portfolio, localizedPath(lang,'products')]] : []),
   ['insights', navigationCopy.intelligence, localizedPath(lang,'insights')],
   ['about', navigationCopy.company, localizedPath(lang,'about')],
