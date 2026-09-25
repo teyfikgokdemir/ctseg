@@ -11,7 +11,7 @@ main,.site-header,.site-footer{max-width:100%}
 .trade-paths-section,
 .markets-editorial,
 .process-section,
-.reflex-featured-section,
+.duzce-glass-feature,
 .trade-video-section{background-color:#161616!important;color:#fff!important}
 .cta-statement{background:#161616!important;color:#fff!important}
 
@@ -28,7 +28,7 @@ main .section li,
 .trade-paths-section p,.trade-paths-section li,
 .markets-editorial p,.markets-editorial li,
 .process-section p,.process-section li,
-.reflex-featured-section p,.reflex-featured-section li,
+.duzce-glass-feature p,.duzce-glass-feature li,
 .trade-video-section p,.trade-video-section li,
 .cta-statement p,.cta-statement li{color:#d5d5d5!important}
 
@@ -37,7 +37,7 @@ main .section li,
 .platform-sector-grid article p{color:#f0f0f0!important}
 
 /* Secondary CTA contrast must remain explicit on both light and dark panels. */
-.hero .button-secondary,.page-hero .button-secondary,.reflex-page .button-secondary{
+.hero .button-secondary,.page-hero .button-secondary,.duzce-page .button-secondary{
   background:#fff!important;color:#0a0a0a!important;border-color:#4a4a4a!important
 }
 .portfolio-section .button-secondary,.process-section .button-secondary,
@@ -145,7 +145,7 @@ html[data-locale="vi"] .hero h1{
 @media (max-width:430px){html[data-locale="ru"] .hero h1,html[data-locale="de"] .hero h1{font-size:clamp(34px,9.3vw,42px)!important}.container{max-width:100%}}
 
 .hero .lead,.section-head p,.corridors-lead,.markets-editorial .section-head p,.operational-trust p,.company-trust-band p,.scenario-teaser p{color:#343434!important;opacity:1!important}
-.trade-paths-section .section-head p,.trade-paths-grid p,.markets-editorial p,.process-section p,.reflex-featured-section p,.trade-video-section p,.cta-statement p{color:#e2e2e2!important;opacity:1!important}
+.trade-paths-section .section-head p,.trade-paths-grid p,.markets-editorial p,.process-section p,.duzce-glass-feature p,.trade-video-section p,.cta-statement p{color:#e2e2e2!important;opacity:1!important}
 .trade-funnel-desc{opacity:1!important}.trade-funnel-card:not(:nth-child(2)) .trade-funnel-desc{color:#e2e2e2!important}.trade-funnel-card:nth-child(2) .trade-funnel-desc{color:#242424!important}
 .corridor-list span,.market-line span,.operational-trust-panel li span,.card small{opacity:1!important;color:#5f5f5f!important}
 .platform-sector-grid article p{color:#f4f4f4!important;opacity:1!important}.site-footer p,.site-footer span,.site-footer li{opacity:1!important;color:#cfcfcf!important}
@@ -155,7 +155,7 @@ html[data-locale="vi"] .hero h1{
 
 .hero-copy .eyebrow,.section .eyebrow,.trade-funnel-kicker,.platform-sector-grid article span,.market-line span,.corridor-list span{font-weight:800!important;opacity:1!important;letter-spacing:.09em!important}
 .section-head p,.hero .lead{font-weight:500!important}
-.trade-paths-grid p,.trade-funnel-desc,.platform-sector-grid article p,.markets-editorial p,.process-section p,.reflex-featured-section p,.trade-video-section p,.operational-trust p,.company-trust-band p,.scenario-teaser p,.cta-statement p{font-weight:500!important}
+.trade-paths-grid p,.trade-funnel-desc,.platform-sector-grid article p,.markets-editorial p,.process-section p,.duzce-glass-feature p,.trade-video-section p,.operational-trust p,.company-trust-band p,.scenario-teaser p,.cta-statement p{font-weight:500!important}
 
 @media (min-width:1101px){
   .hero h1{font-size:clamp(62px,6.15vw,104px)!important;line-height:.93!important;letter-spacing:-.058em!important;max-width:12ch!important}
@@ -176,10 +176,10 @@ html[data-locale="vi"] .hero h1{
 
 .hero h1{color:#0a0a0a!important;font-weight:800!important;text-shadow:none!important;opacity:1!important}.hero-copy .eyebrow{color:#202020!important;opacity:1!important}.hero .lead{color:#262626!important;font-weight:550!important}.hero::before{background:linear-gradient(90deg,rgba(10,10,10,.06) 0 59%,rgba(227,66,52,.16) 59% 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important}
 
-.trade-paths-section .section-head p,.trade-paths-section .eyebrow,.process-section .section-head p,.process-section .eyebrow,.process-section small,.reflex-featured-section .section-head p,.reflex-featured-section .eyebrow,.reflex-featured-section small,.trade-video-section .section-head p,.trade-video-section .eyebrow,.trade-video-section small,.markets-editorial .section-head p,.markets-editorial .eyebrow,.markets-editorial small,.cta-statement .eyebrow{color:#c4f000!important;opacity:1!important;font-weight:700!important}.process-section p,.reflex-featured-section p,.trade-video-section p,.markets-editorial p{color:#e9e9e9!important;opacity:1!important;font-weight:500!important}
-.site-footer .footer-market-link.is-active,.site-footer .footer-market-link.is-active span{color:#0a0a0a!important}.reflex-page .reflex-hero-lead{color:#c4f000!important;opacity:1!important;font-weight:650!important}.process-section .process-rail strong{color:#c4f000!important;opacity:1!important;font-weight:700!important}
+.trade-paths-section .section-head p,.trade-paths-section .eyebrow,.process-section .section-head p,.process-section .eyebrow,.process-section small,.duzce-glass-feature .section-head p,.duzce-glass-feature .eyebrow,.duzce-glass-feature small,.trade-video-section .section-head p,.trade-video-section .eyebrow,.trade-video-section small,.markets-editorial .section-head p,.markets-editorial .eyebrow,.markets-editorial small,.cta-statement .eyebrow{color:#c4f000!important;opacity:1!important;font-weight:700!important}.process-section p,.duzce-glass-feature p,.trade-video-section p,.markets-editorial p{color:#e9e9e9!important;opacity:1!important;font-weight:500!important}
+.site-footer .footer-market-link.is-active,.site-footer .footer-market-link.is-active span{color:#0a0a0a!important}.process-section .process-rail strong{color:#c4f000!important;opacity:1!important;font-weight:700!important}
 
-/* Markets: premium editorial rails inspired by the REFLEX rhythm, without cards or numbering. */
+/* Markets: premium editorial rails built for premium editorial rhythm, without cards or numbering. */
 .markets-editorial{position:relative;overflow:hidden;background:#10110f!important}.markets-editorial>.container{position:relative;z-index:1}.markets-editorial .section-head{align-items:end!important}.markets-editorial .section-head h2{color:#fff!important;max-width:12ch!important}.markets-editorial .section-head p{color:#c4f000!important;max-width:34em!important}.markets-editorial .market-line{display:grid!important;grid-template-columns:1fr!important;gap:0!important;margin-top:clamp(36px,4vw,64px)!important;border-top:1px solid rgba(255,255,255,.16)!important}.markets-editorial .market-line>div{position:relative!important;display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:clamp(110px,8vw,150px)!important;padding:20px 0!important;border-bottom:1px solid rgba(255,255,255,.16)!important;overflow:hidden!important;background:transparent!important;transition:padding .28s ease,border-color .28s ease!important}.markets-editorial .market-line>div::before{content:"";position:absolute;left:0;top:0;width:5px;height:100%;background:#c4f000;transform:scaleY(0);transform-origin:bottom;transition:transform .28s ease}.markets-editorial .market-line>div::after{content:"↗";font-size:clamp(24px,2vw,34px);line-height:1;color:#c4f000;opacity:.72;transition:transform .28s ease,opacity .28s ease}.markets-editorial .market-line strong{position:relative!important;top:auto!important;left:auto!important;right:auto!important;transform:none!important;margin:0!important;color:#fff!important;font-size:clamp(42px,5vw,76px)!important;line-height:.94!important;letter-spacing:-.055em!important;font-weight:750!important;max-width:14ch!important}.markets-editorial .market-line>div:hover{padding-left:28px!important;border-color:rgba(196,240,0,.48)!important}.markets-editorial .market-line>div:hover::before{transform:scaleY(1)}.markets-editorial .market-line>div:hover::after{transform:translate(4px,-4px);opacity:1}
 @media(max-width:760px){.markets-editorial .market-line>div{min-height:92px!important;padding:16px 0!important}.markets-editorial .market-line strong{font-size:clamp(30px,9vw,42px)!important;max-width:12ch!important}.markets-editorial .market-line>div:hover{padding-left:14px!important}}
 
