@@ -264,8 +264,8 @@ const trendingSectorsData = {
   sr:{title:'Globalni sourcing kapacitet',lead:'Istaknuti industrijski kapaciteti i sektorska tražnja u trgovinskim koridorima kojima upravljamo.',tags:['Industrijska proizvodnja & sirovine ↗','FMCG ↗','Tekstil & tehničke tkanine ↗','Auto-komponente ↗','Građevinski & arhitektonski materijali ↗','Ambalaža & polimeri ↗','Poljoprivredne & prehrambene tehnologije ↗','Medicinska oprema ↗']}
 }[lang];
 const service = id && key === 'services' ? services[id as keyof typeof services] : null;
-const detailedService = service && id && (lang === 'tr' || lang === 'en') && id in serviceDetails[lang]
-  ? serviceDetails[lang][id as keyof typeof serviceDetails[typeof lang]]
+const detailedService = service && id && ['tr','en','ro','bg','sr'].includes(lang) && id in serviceDetails[lang as keyof typeof serviceDetails]
+  ? serviceDetails[lang as keyof typeof serviceDetails][id as keyof typeof serviceDetails[keyof typeof serviceDetails]]
   : null;
 const product = id && key === 'products' ? products[id as keyof typeof products] : null;
 const serviceVisual = service && id && id in serviceTradeVisualKeys
