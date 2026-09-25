@@ -96,9 +96,9 @@ export const pathForSector = (lang:TradeLocale,id:TradeSectorId) => encodeURI(`/
 
 /* Balkan locale rollout: ro, bg, sr */
 Object.assign(tradeUi as any,{
-  ro:{name:'Română',home:'Pagina principală CTSEG',contact:'Trimite o solicitare comercială',related:'Domenii de sourcing conexe',assurance:'Controale care susțin decizia de cumpărare',process:'Proces de sourcing controlat',checks:['Cerință, aplicație și specificație','Verificarea producătorului, capacității și referințelor','Comparația mostrelor, materialelor, calității și ofertelor','Coordonarea ambalării, asigurării, logisticii și livrării']},
+  ro:{name:'Română',home:'Pagina principală CTSEG',contact:'Trimite o solicitare comercială',related:'Domenii conexe de aprovizionare',assurance:'Controale care susțin decizia de cumpărare',process:'Proces controlat de aprovizionare',checks:['Cerință, aplicație și specificație','Verificarea producătorului, capacității și referințelor','Comparația mostrelor, materialelor, calității și ofertelor','Coordonarea ambalării, asigurării, logisticii și livrării']},
   bg:{name:'Български',home:'Начало CTSEG',contact:'Изпрати търговска заявка',related:'Свързани области за снабдяване',assurance:'Контроли в подкрепа на решението за покупка',process:'Контролиран процес на снабдяване',checks:['Нужда, приложение и спецификация','Проверка на производител, капацитет и референции','Сравнение на мостри, материали, качество и оферти','Координация на опаковка, застраховка, логистика и доставка']},
-  sr:{name:'Srpski',home:'CTSEG početna',contact:'Pošalji komercijalni upit',related:'Povezane sourcing oblasti',assurance:'Kontrole koje podržavaju odluku o kupovini',process:'Kontrolisan sourcing proces',checks:['Zahtev, primena i specifikacija','Provera proizvođača, kapaciteta i referenci','Poređenje uzoraka, materijala, kvaliteta i ponuda','Koordinacija pakovanja, osiguranja, logistike i isporuke']}
+  sr:{name:'Srpski',home:'CTSEG početna',contact:'Pošalji komercijalni upit',related:'Povezane oblasti nabavke',assurance:'Kontrole koje podržavaju odluku o kupovini',process:'Kontrolisan proces nabavke',checks:['Zahtev, primena i specifikacija','Provera proizvođača, kapaciteta i referenci','Poređenje uzoraka, materijala, kvaliteta i ponuda','Koordinacija pakovanja, osiguranja, logistike i isporuke']}
 });
 Object.assign(tradeCopy as any,{
   ro:{
