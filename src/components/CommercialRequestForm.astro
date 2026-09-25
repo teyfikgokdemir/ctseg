@@ -189,42 +189,16 @@ const dynamicPlaceholders = {
     <div class="form-honeypot" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off" /></label></div>
     <div class="commercial-intent-cards" role="radiogroup" aria-label={copy.intentLabel}>
       <button type="button" class="intent-card" data-intent-toggle="buyer_request" aria-pressed="false">
-        <span class="intent-card-icon">🛒</span>
-        <div class="intent-card-content">
-          <span class="intent-card-kicker">{lang === 'tr' ? 'ALICI / TEDARİK MASASI' : lang === 'de' ? 'EINKAUF / BESCHAFFUNG' : lang === 'it' ? 'ACQUIRENTE / SOURCING' : lang === 'ru' ? 'ЗАКУПКИ / СОРСИНГ' : lang === 'fa' ? 'خریدار / میز تأمین' : lang === 'zh' ? '跨国买家 / 战略寻源' : lang === 'vi' ? 'BÊN MUA / TÌM NGUỒN CUNG' : 'BUYER / SOURCING DESK'}</span>
-          <strong>{copy.buyerIntent}</strong>
-          <p>{lang === 'tr' ? 'Ürün, üretici doğrulama ve rekabetçi B2B teklif' :
-              lang === 'en' ? 'Product specification, factory verification & commercial quotation' :
-              lang === 'de' ? 'Produktspezifikation, Werksprüfung & kaufmännische Angebote' :
-              lang === 'it' ? 'Specifiche di prodotto, audit produttore e offerta commerciale' :
-              lang === 'ru' ? 'Спецификация продукции, аудит фабрики и коммерческий расчет' :
-              lang === 'fa' ? 'مشخصات فنی کالا، بازرسی کارخانجات و استعلام قیمت بین‌المللی' :
-              lang === 'zh' ? '大宗商品技术规格书、源头工厂审核与多方比价寻源' :
-              'Thông số kỹ thuật, thẩm định nhà máy & báo giá thương mại'}</p>
-        </div>
+        <span class="intent-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 4h2l2 11h10l2-8H6"/><circle cx="9" cy="19" r="1.2"/><circle cx="17" cy="19" r="1.2"/></svg></span>
+        <div class="intent-card-content"><strong>{copy.buyerIntent}</strong></div>
       </button>
       <button type="button" class="intent-card" data-intent-toggle="supplier_market_entry" aria-pressed="false">
-        <span class="intent-card-icon">🏭</span>
-        <div class="intent-card-content">
-          <span class="intent-card-kicker">{lang === 'tr' ? 'ÜRETİCİ / İHRACAT AÇILIMI' : lang === 'de' ? 'HERSTELLER / MARKTZUGANG' : lang === 'it' ? 'PRODUTTORE / EXPORT' : lang === 'ru' ? 'ПРОИЗВОДИТЕЛЬ / ЭКСПОРТ' : lang === 'fa' ? 'تولیدکننده / ورود به بازار' : lang === 'zh' ? '源头工厂 / 出海对接' : lang === 'vi' ? 'NHÀ SẢN XUẤT / XUẤT KHẨU' : 'PRODUCER / MARKET ENTRY'}</span>
-          <strong>{copy.producerIntent}</strong>
-          <p>{lang === 'tr' ? 'Hedef pazar, alıcı eşleştirme ve ihracat geliştirme' :
-              lang === 'en' ? 'Production capacity verification, buyer matching & global export expansion' :
-              lang === 'de' ? 'Kapazitätsprüfung, Einkäufer-Matching & internationale Marktexpansion' :
-              lang === 'it' ? 'Verifica capacità produttiva, matching buyer ed espansione estera' :
-              lang === 'ru' ? 'Верификация мощностей, подбор покупателей и экспортный выход' :
-              lang === 'fa' ? 'اعتبارسنجی ظرفیت تولیدی، اتصال به خریداران جهانی و توسعه صادرات' :
-              lang === 'zh' ? '真实产能认证核验、跨国采购商对接与目标市场准入落地' :
-              'Xác minh năng lực sản xuất, kết nối người mua & mở rộng xuất khẩu'}</p>
-        </div>
+        <span class="intent-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg></span>
+        <div class="intent-card-content"><strong>{copy.producerIntent}</strong></div>
       </button>
       <button type="button" class="intent-card" data-intent-toggle="external_trade_desk" aria-pressed="false">
-        <span class="intent-card-icon">🌐</span>
-        <div class="intent-card-content">
-          <span class="intent-card-kicker">{lang === 'tr' ? 'DIŞ TİCARET MASASI' : lang === 'de' ? 'EXTERNER TRADE DESK' : lang === 'it' ? 'TRADE DESK ESTERNO' : lang === 'ru' ? 'ВНЕШНИЙ TRADE DESK' : lang === 'fa' ? 'میز تجارت خارجی' : lang === 'zh' ? '外包国际贸易团队' : lang === 'vi' ? 'BỘ PHẬN NGOẠI THƯƠNG' : 'EXTERNAL TRADE DESK'}</span>
-          <strong>{lang === 'tr' ? 'Dış ticaret operasyonumu CTSEG yönetsin' : lang === 'de' ? 'CTSEG soll meine Außenhandelsaktivitäten mitsteuern' : lang === 'it' ? 'Voglio affidare a CTSEG la gestione continuativa del commercio estero' : lang === 'ru' ? 'Нужна постоянная внешнеторговая функция от CTSEG' : lang === 'fa' ? 'مدیریت مستمر تجارت خارجی را به CTSEG بسپارم' : lang === 'zh' ? '由 CTSEG 持续运营我的国际贸易业务' : lang === 'vi' ? 'Tôi muốn CTSEG vận hành hoạt động ngoại thương thường xuyên' : 'I need CTSEG as an ongoing external trade function'}</strong>
-          <p>{lang === 'tr' ? 'Sourcing, buyer/distribütör araştırması ve RFQ takibi' : lang === 'de' ? 'Sourcing, Exportentwicklung, Käufer-/Distributoren-Follow-up, RFQ und Reporting' : lang === 'it' ? 'Sourcing, sviluppo export, ricerca buyer/distributori, RFQ e reporting' : lang === 'ru' ? 'Сорсинг, развитие экспорта, поиск покупателей, RFQ и отчетность' : lang === 'fa' ? 'تأمین، توسعه صادرات، شناسایی خریدار، پیگیری RFQ و گزارش‌دهی' : lang === 'zh' ? '供应链开发、出口拓展、买家/经销商跟进、RFQ 与定期报告' : lang === 'vi' ? 'Sourcing, phát triển xuất khẩu, theo dõi buyer/nhà phân phối, RFQ và báo cáo' : 'Ongoing sourcing, export development, buyer/distributor follow-up, RFQ and reporting'}</p>
-        </div>
+        <span class="intent-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4a13 13 0 0 1 0 16M12 4a13 13 0 0 0 0 16"/></svg></span>
+        <div class="intent-card-content"><strong>{lang === 'tr' ? 'Dış ticaret operasyonumu CTSEG yönetsin' : lang === 'de' ? 'CTSEG soll meine Außenhandelsaktivitäten mitsteuern' : lang === 'it' ? 'Voglio affidare a CTSEG la gestione continuativa del commercio estero' : lang === 'ru' ? 'Нужна постоянная внешнеторговая функция от CTSEG' : lang === 'fa' ? 'مدیریت مستمر تجارت خارجی را به CTSEG بسپارم' : lang === 'zh' ? '由 CTSEG 持续运营我的国际贸易业务' : lang === 'vi' ? 'Tôi muốn CTSEG vận hành hoạt động ngoại thương thường xuyên' : 'I need CTSEG as an ongoing external trade function'}</strong></div>
       </button>
     </div>
     <div class="commercial-form-grid commercial-form-grid--core">
@@ -232,11 +206,15 @@ const dynamicPlaceholders = {
       <label class="commercial-field commercial-field--wide"><span>{supportNeedCopy.label}</span><select name="supportNeed" required data-support-need><option value=""></option>{supportNeedCopy.options.map(([value,label])=><option value={value}>{label}</option>)}</select></label>
       <label class="commercial-field"><span>{qualification.tradeDirection}</span><select name="tradeDirection" required data-trade-direction><option value=""></option>{qualification.tradeDirections.map((option)=><option value={option.value}>{option.label}</option>)}</select></label>
       <label class="commercial-field commercial-field--wide"><span>{qualification.productFamily}</span><select name="productFamily" required data-product-family><option value=""></option>{qualification.productFamilies.map((option)=><option value={option.value}>{option.label}</option>)}</select></label>
-      <label class="commercial-field"><span>{copy.name}</span><input type="text" name="name" autocomplete="name" maxlength="120" required /></label>
-      <label class="commercial-field"><span>{copy.company}</span><input type="text" name="company" autocomplete="organization" maxlength="160" required /></label>
-      <label class="commercial-field commercial-field--wide"><span>{copy.contact}</span><input type="text" name="emailOrPhone" autocomplete="email" maxlength="254" required data-contact-field /></label>
-      <label class="commercial-field commercial-field--wide"><span>{copy.message}</span><textarea name="message" maxlength="2000" rows="4" placeholder={dynamicPlaceholders.default} required></textarea></label>
     </div>
+    <button type="button" class="button commercial-form-next" data-reveal-contact-step>{lang === 'tr' ? 'Talebimi Gönder' : copy.submit}<span aria-hidden="true">↗</span></button>
+    <div class="commercial-contact-step" data-contact-step hidden>
+      <div class="commercial-form-grid">
+        <label class="commercial-field"><span>{copy.name}</span><input type="text" name="name" autocomplete="name" maxlength="120" required /></label>
+        <label class="commercial-field"><span>{copy.company}</span><input type="text" name="company" autocomplete="organization" maxlength="160" required /></label>
+        <label class="commercial-field commercial-field--wide"><span>{copy.contact}</span><input type="text" name="emailOrPhone" autocomplete="email" maxlength="254" required data-contact-field /></label>
+        <label class="commercial-field commercial-field--wide"><span>{copy.message}</span><textarea name="message" maxlength="2000" rows="4" placeholder={dynamicPlaceholders.default} required></textarea></label>
+      </div>
     <details class="commercial-details">
       <summary>{copy.details}</summary>
       <div class="commercial-form-grid">
@@ -253,6 +231,7 @@ const dynamicPlaceholders = {
     </details>
     <label class="privacy-check"><input type="checkbox" name="privacy" value="accepted" required /><span>{copy.privacy} <a href={privacyHref}>{copy.privacyLink}</a></span></label>
     <div class="commercial-form-actions"><button class="button" type="submit">{copy.submit}</button></div>
+    </div>
     <p class="form-status" data-form-status role="status" aria-live="polite"></p>
     <div class="form-fallback" data-form-fallback hidden><p>{copy.fallback}</p><button type="button" class="button button-secondary" data-download-summary>{copy.download}</button></div>
   </form>
@@ -366,6 +345,29 @@ const dynamicPlaceholders = {
   .commercial-form-actions{margin-top:12px}.commercial-form-actions .button{width:100%;min-height:42px;background:#c4f000!important;color:#0b0d0b!important;border-color:#c4f000!important}
   .form-status{color:#d9ddd9!important}
   @media(max-width:980px){.commercial-form-panel{grid-template-columns:1fr;max-width:760px}.commercial-form-disclosure{max-width:760px}}
+
+  /* Compact reference form */
+  .commercial-form-disclosure{max-width:520px;margin-inline:auto;border-radius:14px!important;background:linear-gradient(180deg,#111713,#0d120f)!important;box-shadow:0 20px 50px rgba(0,0,0,.25)!important}
+  .commercial-form-disclosure-title{padding:16px 16px 12px!important;border-bottom:0!important;border-left:2px solid #c4f000!important;font-size:16px!important}
+  .commercial-form{padding:0 16px 16px!important}
+  .commercial-intent-cards{grid-template-columns:repeat(3,1fr)!important;gap:10px!important;margin:8px 0 14px!important}
+  .intent-card{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:9px!important;min-height:104px!important;padding:12px 8px!important;border-radius:8px!important;text-align:center!important;background:#121713!important}
+  .intent-card-icon{width:32px!important;height:32px!important;background:transparent!important;border:0!important;color:#cbd1cc!important}
+  .intent-card-icon svg{width:26px;height:26px}
+  .intent-card.is-active .intent-card-icon{color:#c4f000!important}
+  .intent-card-content{padding:0!important;display:block!important}
+  .intent-card strong{display:block!important;color:#f3f4ef!important;font-size:12.5px!important;line-height:1.18!important;font-weight:700!important}
+  .intent-card-kicker,.intent-card p{display:none!important}
+  .intent-card.is-active{border-color:#c4f000!important;box-shadow:inset 0 0 0 1px #c4f000!important}
+  .commercial-form-grid--core{display:block!important}
+  .commercial-form-grid--core .commercial-field{margin-bottom:10px!important}
+  .commercial-field>span{display:block!important;margin-bottom:6px!important;text-transform:none!important;letter-spacing:0!important;font-size:12px!important;font-weight:500!important;color:#d4dad5!important}
+  .commercial-field input,.commercial-field select,.commercial-field textarea{min-height:40px!important;border-radius:6px!important;background:#1b211d!important;border-color:#343c36!important;color:#f1f4f0!important;font-size:13px!important}
+  .commercial-form-next{width:100%!important;min-height:42px!important;margin-top:4px!important;border-radius:6px!important;background:#c4f000!important;color:#0a0d0a!important;font-weight:800!important;text-transform:none!important;letter-spacing:0!important;justify-content:space-between!important;padding-inline:14px!important}
+  .commercial-contact-step{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)}
+  .commercial-contact-step[hidden]{display:none!important}
+  .commercial-form-actions .button{border-radius:6px!important}
+  @media(max-width:620px){.commercial-form-disclosure{max-width:100%}.commercial-intent-cards{grid-template-columns:repeat(3,1fr)!important}.intent-card{min-height:94px!important;padding:10px 6px!important}.intent-card strong{font-size:11.5px!important}}
 </style>
 
 <script define:vars={{ copy, dynamicPlaceholders }}>
