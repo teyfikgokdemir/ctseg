@@ -742,7 +742,7 @@ const authorLabel = {
   fa: 'میز تجارت جهانی CTSEG',
   zh: 'CTSEG 全球贸易与供应链智库',
   vi: 'Ban Nghiên cứu Thương mại CTSEG',
-  ro:'CTSEG Global Trade Desk',bg:'CTSEG Глобален търговски отдел',sr:'CTSEG Global Trade Desk'
+  ro:'Biroul CTSEG pentru Comerț Global',bg:'Глобален търговски отдел на CTSEG',sr:'CTSEG desk za globalnu trgovinu'
 }[lang] || 'CTSEG Trade Desk';
 const relatedServiceKicker = {
   tr: 'İlgili Ticari Hizmet',
@@ -1109,7 +1109,7 @@ const verifiedLater = {
         <ul class="check-list">{tradeDesk.points.map((item)=><li>{item}</li>)}</ul>
       </div>
       <aside class="side-panel">
-        <p class="eyebrow">CTSEG · Trade Desk</p>
+        <p class="eyebrow">CTSEG · {lang === 'ro' ? 'Birou comercial extern' : lang === 'bg' ? 'Външен търговски отдел' : lang === 'sr' ? 'Eksterni trgovinski desk' : 'Trade Desk'}</p>
         <h3>{tradeDesk.title}</h3>
         <a class="button" href={`${sectionHref('contact')}?intent=external_trade_desk&direction=other&category=other#commercial-form`} data-contact-intent="external_trade_desk">{tradeDesk.cta}</a>
       </aside>
@@ -1168,9 +1168,9 @@ const verifiedLater = {
             <div class="content-block"><h2>{detailedService.outcomesTitle}</h2><ul class="check-list">{detailedService.outcomes.map((item) => <li>{item}</li>)}</ul></div>
             <div class="content-block faq"><h2>{t.faq}</h2>{detailedService.faq.map((item,index) => <details open={index === 0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
             <div class="content-block">
-              <h2>{lang === 'tr' ? 'İlgili kaynaklar' : 'Related resources'}</h2>
+              <h2>{lang === 'tr' ? 'İlgili kaynaklar' : lang === 'ro' ? 'Resurse conexe' : lang === 'bg' ? 'Свързани ресурси' : lang === 'sr' ? 'Povezani resursi' : 'Related resources'}</h2>
               <p><a class="text-link" href={sectionHref('services')}>{t.allServices} →</a></p>
-              <p><a class="text-link" href={sectionHref('insights')}>{lang === 'tr' ? 'Satın alma içgörülerini inceleyin' : 'Explore sourcing insights'} →</a></p>
+              <p><a class="text-link" href={sectionHref('insights')}>{lang === 'tr' ? 'Satın alma içgörülerini inceleyin' : lang === 'ro' ? 'Explorează analizele de sourcing' : lang === 'bg' ? 'Разгледайте анализите за снабдяване' : lang === 'sr' ? 'Pogledajte sourcing uvide' : 'Explore sourcing insights'} →</a></p>
               <p><a class="text-link" href={sectionHref('contact')}>{t.contact} →</a></p>
             </div>
           </>
@@ -1279,13 +1279,14 @@ const verifiedLater = {
 )}
 
 {product && (() => {
-  const evidence = (product?.id && productEvidence[product.id as keyof typeof productEvidence]) ? productEvidence[product.id as keyof typeof productEvidence] : null;
+  const rawEvidence = (product?.id && productEvidence[product.id as keyof typeof productEvidence]) ? productEvidence[product.id as keyof typeof productEvidence] : null;
+  const evidence = rawEvidence && (rawEvidence as any).origin?.[lang] ? rawEvidence : null;
   return (
   <>
     <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={product.names[lang]} lead={product.descriptions[lang]} parentHref={sectionHref('products')} parentLabel={t.products} product={product} ctaHref={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} ctaLabel={t.quote} imageNote={editorial.productImageNote} />
     <section class="section product-detail-content"><div class="container content-grid">
       <div class="prose">
-        <div class="content-block product-commercial-facts"><h2>{lang === 'tr' ? 'Ticari değerlendirme bilgileri' : lang === 'en' ? 'Commercial assessment information' : lang === 'de' ? 'Angaben zur kaufmännischen Bewertung' : lang === 'it' ? 'Informazioni per la valutazione commerciale' : lang === 'ru' ? 'Параметры коммерческой оценки' : lang === 'fa' ? 'اطلاعات ارزیابی تجاری' : lang === 'zh' ? '大宗商品商业评估核心参数' : lang === 'vi' ? 'Thông tin đánh giá thương mại' : 'Commercial assessment information'}</h2>
+        <div class="content-block product-commercial-facts"><h2>{lang === 'tr' ? 'Ticari değerlendirme bilgileri' : lang === 'en' ? 'Commercial assessment information' : lang === 'de' ? 'Angaben zur kaufmännischen Bewertung' : lang === 'it' ? 'Informazioni per la valutazione commerciale' : lang === 'ru' ? 'Параметры коммерческой оценки' : lang === 'fa' ? 'اطلاعات ارزیابی تجاری' : lang === 'zh' ? '大宗商品商业评估核心参数' : lang === 'vi' ? 'Thông tin đánh giá thương mại' : lang === 'ro' ? 'Informații pentru evaluarea comercială' : lang === 'bg' ? 'Информация за търговска оценка' : lang === 'sr' ? 'Informacije za komercijalnu procenu' : 'Commercial assessment information'}</h2>
           <dl>{productCommercialLabels.map((label,index) => {
             const values = evidence ? [
               evidence.origin[lang],
@@ -1308,6 +1309,9 @@ const verifiedLater = {
               lang === 'en' ? 'Specification, quantity, packaging, delivery point, target date and document requirements' :
               lang === 'zh' ? '产品技术规格书、采购订购量 (MOQ)、包装方案、目标口岸、交付期及必备单证要求' :
               lang === 'vi' ? 'Thông số kỹ thuật, số lượng, quy cách đóng gói, địa điểm giao hàng, tiến độ và yêu cầu chứng từ' :
+              lang === 'ro' ? 'Specificație, cantitate, ambalare, punct de livrare, dată țintă și cerințe documentare' :
+              lang === 'bg' ? 'Спецификация, количество, опаковка, място на доставка, целева дата и изисквания за документи' :
+              lang === 'sr' ? 'Specifikacija, količina, pakovanje, mesto isporuke, ciljni datum i zahtevi za dokumentaciju' :
               verifiedLater[0]
             ];
             return <div><dt>{label}</dt><dd>{values[index]}</dd></div>;
@@ -1323,7 +1327,11 @@ const verifiedLater = {
                          lang === 'ru' ? 'Торговая верификация и координация сорсинга CTSEG' :
                          lang === 'fa' ? 'ساختار اعتبارسنجی تجاری و راهبری تأمین CTSEG' :
                          lang === 'zh' ? 'CTSEG 独立商业核验与供应链履约治理' :
-                         'Cơ chế thẩm định thương mại & quản trị nguồn cung CTSEG'}</strong>
+                         lang === 'vi' ? 'Cơ chế thẩm định thương mại & quản trị nguồn cung CTSEG' :
+                         lang === 'ro' ? 'Arhitectura CTSEG de verificare comercială și guvernanță a sourcingului' :
+                         lang === 'bg' ? 'CTSEG архитектура за търговска проверка и управление на снабдяването' :
+                         lang === 'sr' ? 'CTSEG arhitektura komercijalne provere i upravljanja sourcingom' :
+                         'CTSEG Trade Verification & Sourcing Governance'}</strong>
                 <p>{lang === 'tr' ? 'CTSEG, doğrudan üretici olmayıp bağımsız ticaret ve tedarik koordinatörü olarak hareket eder. Her sevkiyatta parti analiz sertifikası (COA), akredite laboratuvar testleri ve sözleşme güvencesi CTSEG operasyon mimarisiyle koordine edilir.' :
                     lang === 'en' ? 'CTSEG acts as an independent trade and sourcing coordinator rather than an integrated producer. Every consignment is coordinated with batch analysis certificates (COA), accredited lab tests, and contract fulfillment governance.' :
                     lang === 'de' ? 'CTSEG fungiert als unabhängiger Handels- und Beschaffungskoordinator. Jede Lieferung wird durch Chargenprüfberichte (COA), akkreditierte Labortests und Vertragssicherheit im CTSEG-Rahmen koordiniert.' :
@@ -1331,7 +1339,11 @@ const verifiedLater = {
                     lang === 'ru' ? 'CTSEG действует как независимый координатор торговли и сорсинга. Каждая партия координируется с сертификатами анализа (COA), тестами аккредитованных лаборарий и исполнением контрактов.' :
                     lang === 'fa' ? 'CTSEG به عنوان هماهنگ‌کننده مستقل تجارت و تأمین فعالیت می‌کند. تمامی محموله‌ها با گواهی آنالیز پارت (COA)، آزمون‌های معتبر آزمایشگاهی و تضمین تعهدات قراردادی هماهنگ می‌شوند.' :
                     lang === 'zh' ? 'CTSEG 作为独立国际贸易协同机构，并非单一生产企业。每一批次大宗货物均在 CTSEG 贸易治理体系下执行出厂化验单 (COA) 核验、第三方实验室送检及商事履约保障。' :
-                    'CTSEG hoạt động như một đơn vị điều phối thương mại và thu mua độc lập. Mỗi lô hàng đều được điều phối với chứng nhận phân tích lô (COA), kiểm định phòng lab và bảo đảm thực hiện hợp đồng.'}</p>
+                    lang === 'vi' ? 'CTSEG hoạt động như một đơn vị điều phối thương mại và thu mua độc lập. Mỗi lô hàng đều được điều phối với chứng nhận phân tích lô (COA), kiểm định phòng lab và bảo đảm thực hiện hợp đồng.' :
+                    lang === 'ro' ? 'CTSEG acționează ca operator independent de coordonare comercială și sourcing, nu ca producător integrat. Pentru fiecare livrare, documentele de lot, certificatul de analiză (COA), testele de laborator aplicabile și cerințele contractuale sunt coordonate în cadrul procesului CTSEG.' :
+                    lang === 'bg' ? 'CTSEG действа като независим координатор на търговията и снабдяването, а не като интегриран производител. За всяка доставка партидните документи, сертификатът за анализ (COA), приложимите лабораторни тестове и договорните изисквания се координират в процеса на CTSEG.' :
+                    lang === 'sr' ? 'CTSEG deluje kao nezavisni koordinator trgovine i sourcinga, a ne kao integrisani proizvođač. Za svaku isporuku, dokumentacija serije, sertifikat analize (COA), primenljiva laboratorijska ispitivanja i ugovorni zahtevi koordiniraju se kroz CTSEG proces.' :
+                    'CTSEG acts as an independent trade and sourcing coordinator rather than an integrated producer.'}</p>
               </div>
             </div>
           </div>
