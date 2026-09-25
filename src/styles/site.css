@@ -632,21 +632,29 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
 
 
 /* Homepage visual hero: preserve the supplied wide artwork without cropping. */
-.homepage-trade-hero{padding-top:38px;background:#07090d}
-.homepage-trade-hero .hero-grid{position:relative;display:block}
-.homepage-trade-hero .hero-copy{position:absolute;z-index:3;left:clamp(24px,4vw,56px);top:50%;width:min(42%,540px);transform:translateY(-58%);padding:18px 0}
-.homepage-trade-hero .hero-copy .lead{max-width:36rem;color:#d2d3cf}
+.homepage-trade-hero{padding:0 0 48px;background:#07090d}
+.homepage-trade-hero .hero-grid{display:block}
+.homepage-hero-stage{position:relative;isolation:isolate}
+.homepage-trade-hero .hero-copy{position:absolute;z-index:3;left:clamp(24px,4vw,58px);top:50%;width:min(40%,560px);transform:translateY(-50%);padding:0}
+.homepage-trade-hero .hero-copy .eyebrow{margin-bottom:14px}
+.homepage-trade-hero .hero-copy .lead{max-width:34rem;color:#d7d9d5;font-size:clamp(.98rem,1.18vw,1.14rem);line-height:1.55}
+.homepage-trade-hero .hero-copy .actions{margin-top:24px}
 .homepage-trade-hero .hero-visual{width:100%;max-width:none;justify-self:auto;margin:0}
 .homepage-trade-hero .hero-visual:before{display:none}
 .homepage-trade-hero .hero-visual img{display:block;width:100%;height:auto;max-height:none;aspect-ratio:auto;object-fit:contain;object-position:center;filter:none}
-.homepage-trade-hero .hero-visual figcaption{margin-top:0;border:1px solid var(--line);border-top:0;background:#090c0a}
+.homepage-trade-hero .hero-visual figcaption{margin-top:0;border:1px solid var(--line);border-top:0;background:rgba(9,12,10,.92)}
 .homepage-trade-hero .trade-gateway-banner{margin-top:24px!important}
 @media(max-width:900px){
-  .homepage-trade-hero{padding-top:28px}
-  .homepage-trade-hero .hero-copy{position:relative;left:auto;top:auto;width:auto;max-width:720px;transform:none;padding:0 0 28px}
+  .homepage-trade-hero{padding:0 0 36px}
+  .homepage-hero-stage{display:flex;flex-direction:column}
+  .homepage-trade-hero .hero-copy{position:relative;order:2;left:auto;top:auto;width:auto;max-width:none;transform:none;padding:28px 4px 0}
+  .homepage-trade-hero .hero-visual{order:1}
   .homepage-trade-hero .hero-visual figcaption{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:620px){.homepage-trade-hero .hero-visual figcaption{grid-template-columns:1fr}}
+@media(max-width:620px){
+  .homepage-trade-hero .hero-visual figcaption{grid-template-columns:1fr}
+  .homepage-trade-hero .hero-copy{padding-top:22px}
+}
 
 /* Turkish homepage hero: preserve the established copy in two clean lines. */
 .home-hero-title--tr{max-width:none!important;font-size:clamp(2.55rem,3.25vw,3.85rem)!important;line-height:1.01!important;letter-spacing:-.028em!important}

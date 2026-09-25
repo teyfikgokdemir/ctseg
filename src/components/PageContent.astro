@@ -889,26 +889,28 @@ const verifiedLater = {
   <>
     <section class="hero homepage-trade-hero">
       <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">{platform.eyebrow}</p>{lang === 'tr' ? <h1 class="home-hero-title home-hero-title--tr"><span>Türkiye’den dünyaya.</span><span>Dünyadan doğru üreticiye.</span></h1> : <h1>{platform.title}</h1>}<p class="lead">{platform.lead}</p>
-          <div class="actions trade-intent-actions"><a class="button" href={contactWithIntent('buyer_request')} data-trade-intent="buyer_request">{platform.buyerCta}</a><a class="button button-secondary" href={contactWithIntent('supplier_market_entry')} data-trade-intent="supplier_market_entry">{platform.producerCta}</a></div>
+        <div class="homepage-hero-stage">
+          <div class="hero-copy">
+            <p class="eyebrow">{platform.eyebrow}</p>{lang === 'tr' ? <h1 class="home-hero-title home-hero-title--tr"><span>Türkiye’den dünyaya.</span><span>Dünyadan doğru üreticiye.</span></h1> : <h1>{platform.title}</h1>}<p class="lead">{platform.lead}</p>
+            <div class="actions trade-intent-actions"><a class="button" href={contactWithIntent('buyer_request')} data-trade-intent="buyer_request">{platform.buyerCta}</a><a class="button button-secondary" href={contactWithIntent('supplier_market_entry')} data-trade-intent="supplier_market_entry">{platform.producerCta}</a></div>
+          </div>
+          <figure class="hero-visual">
+            <img
+              src="/images/ctseg-global-trade-hero-new.webp"
+              srcset="/images/ctseg-global-trade-hero-new.webp 1400w"
+              sizes="(max-width:860px) 100vw, min(53vw, 1400px)"
+              width="1400"
+              height="536"
+              alt={homepageHero.altText}
+              data-trade-visual={homepageHero.key}
+              style="object-position:center center"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+            <figcaption>{h.trust.map((item:string,index:number) => <span><small>{indexLabel(index)}</small>{item}</span>)}</figcaption>
+          </figure>
         </div>
-        <figure class="hero-visual">
-          <img
-            src="/images/ctseg-global-trade-hero-new.webp"
-            srcset="/images/ctseg-global-trade-hero-new.webp 1400w"
-            sizes="(max-width:860px) 100vw, min(53vw, 1400px)"
-            width="1400"
-            height="536"
-            alt={homepageHero.altText}
-            data-trade-visual={homepageHero.key}
-            style="object-position:center center"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-          />
-          <figcaption>{h.trust.map((item:string,index:number) => <span><small>{indexLabel(index)}</small>{item}</span>)}</figcaption>
-        </figure>
         <div class="trade-gateway-banner" style="grid-column: 1 / -1; margin-top: 24px;">
           <div class="trade-funnel-card">
             <div>
