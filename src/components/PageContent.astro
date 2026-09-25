@@ -44,7 +44,7 @@ const t = ui[lang];
 const h = homeCopy[lang];
 const gateway = tradeGateway[lang];
 const copy = pageCopy[lang];
-const iranTrade = iranTradeContent[lang];
+const iranTrade = iranTradeContent[lang as keyof typeof iranTradeContent] || iranTradeContent.en;
 const iranTradeHref = lang === 'fa' ? '/fa/' : `/${lang}/${iranTrade.slug}/`;
 const vietnamMarketEntry = vietnamMarketEntryContent.vi;
 const vietnamTurkiye = vietnamTurkiyeContent.tr;
@@ -65,7 +65,10 @@ const operationalTrust = {
   ru:{title:'Что происходит после запроса?',lead:'После уточнения объёма и требований к документам запрос направляется по подходящему пути оценки.',steps:['Уточняются потребность и целевой рынок','Проверяются продукт, контрагент и доступные документы','Сообщаются возможные следующие шаги и недостающие данные','Подтверждаются предложение, образцы и объём координации'],cta:'Посмотреть метод работы'},
   fa:{title:'پس از ارسال درخواست چه اتفاقی می‌افتد؟',lead:'پس از روشن شدن دامنه درخواست و نیازهای اسنادی، هر درخواست به مسیر ارزیابی مناسب هدایت می‌شود.',steps:['نیاز و بازار هدف روشن می‌شود','محصول، طرف معامله و اسناد موجود بررسی می‌شوند','گام‌های بعدی و اطلاعات ناقص اعلام می‌شود','دامنه پیشنهاد، نمونه و هماهنگی با طرفین تأیید می‌شود'],cta:'روش کار را ببینید'},
   zh:{title:'提交采购需求后有哪些后续流程？',lead:'在明确具体采购范畴、规格指标与单证需求后，每一份商业委托均将进入标准化评估路径。',steps:['明确产品技术参数与目标进出口市场','深入核验工厂资质、实际产能与出厂单证','出具可行性评估、比价分析与风险提示','协同买卖双方确认样品检验、报价细节与履约节点'],cta:'查看标准业务流程'},
-  vi:{title:'Điều gì xảy ra sau khi gửi yêu cầu?',lead:'Mỗi yêu cầu thương mại được chuyển đến lộ trình đánh giá phù hợp sau khi làm rõ phạm vi và nhu cầu chứng từ.',steps:['Làm rõ yêu cầu kỹ thuật và thị trường mục tiêu','Đánh giá sản phẩm, đối tác và hồ sơ hiện có','Chia sẻ các bước khả thi tiếp theo và thông tin cần bổ sung','Xác nhận phạm vi báo giá, mẫu thử và điều phối với các bên'],cta:'Xem quy trình làm việc'}
+  vi:{title:'Điều gì xảy ra sau khi gửi yêu cầu?',lead:'Mỗi yêu cầu thương mại được chuyển đến lộ trình đánh giá phù hợp sau khi làm rõ phạm vi và nhu cầu chứng từ.',steps:['Làm rõ yêu cầu kỹ thuật và thị trường mục tiêu','Đánh giá sản phẩm, đối tác và hồ sơ hiện có','Chia sẻ các bước khả thi tiếp theo và thông tin cần bổ sung','Xác nhận phạm vi báo giá, mẫu thử và điều phối với các bên'],cta:'Xem quy trình làm việc'},
+  ro:{title:'Ce se întâmplă după trimiterea unei solicitări?',lead:'Fiecare solicitare comercială este direcționată către evaluarea potrivită după clarificarea domeniului și a documentelor necesare.',steps:['Se clarifică cerința și piața țintă','Se verifică produsul, contrapartea și documentele disponibile','Se comunică pașii fezabili și informațiile lipsă','Se confirmă domeniul ofertei, mostrelor și coordonării'],cta:'Vezi cum lucrăm'},
+  bg:{title:'Какво следва след изпращане на заявка?',lead:'Всяка търговска заявка се насочва към подходящ процес за оценка след изясняване на обхвата и нужната документация.',steps:['Изясняват се нуждата и целевият пазар','Преглеждат се продуктът, контрагентът и наличните документи','Споделят се приложимите следващи стъпки и липсващите данни','Потвърждават се офертата, мострите и обхватът на координацията'],cta:'Виж как работим'},
+  sr:{title:'Šta se dešava nakon slanja zahteva?',lead:'Svaki komercijalni zahtev usmerava se na odgovarajući postupak procene nakon razjašnjenja obima i potrebne dokumentacije.',steps:['Razjašnjavaju se zahtev i ciljno tržište','Pregledaju se proizvod, partner i dostupna dokumentacija','Navode se izvodljivi sledeći koraci i podaci koji nedostaju','Potvrđuju se ponuda, uzorci i obim koordinacije'],cta:'Pogledaj kako radimo'}
 }[lang];
 
 const contactProcessKicker = {
@@ -76,7 +79,10 @@ const contactProcessKicker = {
   ru: 'Гарантия процесса',
   fa: 'اطمینان از فرآیند',
   zh: '全流程履约保障',
-  vi: 'Đảm bảo quy trình'
+  vi: 'Đảm bảo quy trình',
+  ro: 'Siguranța procesului',
+  bg: 'Надеждност на процеса',
+  sr: 'Pouzdanost procesa'
 }[lang];
 
 const turnaroundCallout = {
@@ -119,7 +125,10 @@ const turnaroundCallout = {
     badge: 'Tiêu chuẩn Đánh giá 24-48h',
     title: 'Đánh giá sơ bộ nhanh chóng & Phản hồi thương mại có cấu trúc',
     desc: 'Tất cả các yêu cầu mua hàng thương mại và tiếp cận thị trường đều được bộ phận thương mại CTSEG xem xét sơ bộ trong vòng 24-48 giờ làm việc kèm theo lộ trình thông số kỹ thuật và tính khả thi logistics.'
-  }
+  },
+  ro:{badge:'Standard de evaluare 24–48h',title:'Analiză preliminară rapidă și răspuns structurat',desc:'Solicitările de aprovizionare și intrare pe piață sunt analizate preliminar de biroul comercial CTSEG în 24–48 de ore lucrătoare, cu clarificări privind specificația, fezabilitatea logistică și următorii pași de verificare.'},
+  bg:{badge:'Стандарт за оценка 24–48 ч.',title:'Бърз предварителен преглед и структуриран отговор',desc:'Заявките за снабдяване и навлизане на пазара се разглеждат предварително от търговския екип на CTSEG в рамките на 24–48 работни часа с яснота по спецификацията, логистичната приложимост и следващите стъпки за проверка.'},
+  sr:{badge:'Standard procene 24–48 h',title:'Brza preliminarna procena i strukturisan odgovor',desc:'Zahtevi za nabavku i ulazak na tržište preliminarno se razmatraju u CTSEG trgovinskom desku u roku od 24–48 radnih sati, uz razjašnjenje specifikacije, logističke izvodljivosti i narednih koraka provere.'}
 }[lang];
 
 const completionAbout = aboutEnhancement[lang];
@@ -163,7 +172,10 @@ const aboutGovernance = {
     eyebrow: 'Quản trị doanh nghiệp & Lãnh đạo',
     founderRole: 'Người sáng lập & Giám đốc điều hành',
     complianceKicker: 'Nguyên tắc minh bạch doanh nghiệp'
-  }
+  },
+  ro:{eyebrow:'Guvernanță corporativă și conducere',founderRole:'Fondator și Managing Director',complianceKicker:'Standard de transparență instituțională'},
+  bg:{eyebrow:'Корпоративно управление и ръководство',founderRole:'Основател и управляващ директор',complianceKicker:'Стандарт за институционална прозрачност'},
+  sr:{eyebrow:'Korporativno upravljanje i rukovodstvo',founderRole:'Osnivač i Managing Director',complianceKicker:'Standard institucionalne transparentnosti'}
 }[lang];
 const aboutMandate = {
   tr: {
@@ -229,7 +241,10 @@ const sectorEntry = {
   ru:{title:'Сорсинг иранских ковров и текстиля',lead:'Три профильных направления с оценкой продукта, производителя, образцов, качества и упаковки.'},
   fa:{title:'حوزه‌های تأمین فرش و منسوجات ایرانی',lead:'سه حوزه تخصصی را همراه با معیارهای محصول، تولیدکننده، نمونه، کیفیت، بسته‌بندی و لجستیک بررسی کنید.'},
   zh:{title:'特色手工地毯与大宗纺织寻源专区',lead:'深入探索三大特色品类：产品材质工艺、工厂实地产能、样品打样、质量标准、环保包装及跨境多式联运。'},
-  vi:{title:'Nguồn cung thảm và dệt may chuyên biệt',lead:'Khám phá ba lĩnh vực chuyên sâu qua các tiêu chí sản phẩm, nhà sản xuất, mẫu thử, chất lượng, đóng gói và logistics.'}
+  vi:{title:'Nguồn cung thảm và dệt may chuyên biệt',lead:'Khám phá ba lĩnh vực chuyên sâu qua các tiêu chí sản phẩm, nhà sản xuất, mẫu thử, chất lượng, đóng gói và logistics.'},
+  ro:{title:'Sourcing specializat pentru covoare și textile',lead:'Explorați domeniile prin criterii de produs, producător, mostră, calitate, ambalare și logistică.'},
+  bg:{title:'Специализирано снабдяване с килими и текстил',lead:'Разгледайте направленията по продукт, производител, мостра, качество, опаковка и логистика.'},
+  sr:{title:'Specijalizovani sourcing tepiha i tekstila',lead:'Istražite oblasti prema proizvodu, proizvođaču, uzorku, kvalitetu, pakovanju i logistici.'}
 }[lang];
 
 const trendingSectorsData = {
@@ -240,7 +255,10 @@ const trendingSectorsData = {
   ru: { title: 'Глобальные возможности сорсинга', lead: 'Ключевые промышленные мощности и отраслевой спрос в торговых коридорах, которыми мы управляем.', tags: ['Промышленное производство и сырье ↗', 'Товары повседневного спроса (FMCG) ↗', 'Текстиль и технические ткани ↗', 'Автомобильные компоненты ↗', 'Строительные и архитектурные материалы ↗', 'Упаковка и полимеры ↗', 'Агротехнологии ↗', 'Медицинское оборудование ↗'] },
   fa: { title: 'ظرفیت تأمین جهانی', lead: 'ظرفیت‌های صنعتی برجسته و تقاضای بخش‌های مختلف در کریدورهای تجاری تحت مدیریت ما.', tags: ['تولید صنعتی و مواد اولیه ↗', 'کالاهای تندمصرف (FMCG) ↗', 'منسوجات و پارچه‌های فنی ↗', 'قطعات و لوازم یدکی خودرو ↗', 'مصالح ساختمانی و معماری ↗', 'بسته‌بندی و پلیمرها ↗', 'فناوری‌های کشاورزی ↗', 'تجهیزات پزشکی و مراقبت‌های بهداشتی ↗'] },
   zh: { title: '全球采购能力与重点行业', lead: '我们在核心贸易走廊中积极管理的重点工业产能与行业需求。', tags: ['工业制造与原材料 ↗', '快速消费品 (FMCG) ↗', '纺织品与工业面料 ↗', '汽车零部件 ↗', '建筑与装饰材料 ↗', '包装与聚合物 ↗', '农业技术与设备 ↗', '医疗与健康设备 ↗'] },
-  vi: { title: 'Năng lực thu mua toàn cầu', lead: 'Các năng lực công nghiệp nổi bật và nhu cầu ngành trong các hành lang thương mại mà chúng tôi quản lý.', tags: ['Sản xuất Công nghiệp & Nguyên liệu ↗', 'Hàng tiêu dùng nhanh (FMCG) ↗', 'Dệt may & Vải kỹ thuật ↗', 'Công nghiệp phụ trợ Ô tô ↗', 'Vật liệu Xây dựng & Kiến trúc ↗', 'Bao bì & Polymer ↗', 'Công nghệ Nông nghiệp ↗', 'Thiết bị Y tế & Chăm sóc sức khỏe ↗'] }
+  vi: { title: 'Năng lực thu mua toàn cầu', lead: 'Các năng lực công nghiệp nổi bật và nhu cầu ngành trong các hành lang thương mại mà chúng tôi quản lý.', tags: ['Sản xuất Công nghiệp & Nguyên liệu ↗', 'Hàng tiêu dùng nhanh (FMCG) ↗', 'Dệt may & Vải kỹ thuật ↗', 'Công nghiệp phụ trợ Ô tô ↗', 'Vật liệu Xây dựng & Kiến trúc ↗', 'Bao bì & Polymer ↗', 'Công nghệ Nông nghiệp ↗', 'Thiết bị Y tế & Chăm sóc sức khỏe ↗'] },
+  ro:{title:'Capacitate globală de sourcing',lead:'Capacități industriale și cereri sectoriale relevante în coridoarele comerciale pe care le gestionăm.',tags:['Producție industrială & materii prime ↗','FMCG ↗','Textile & materiale tehnice ↗','Componente auto ↗','Materiale de construcții & arhitectură ↗','Ambalaje & polimeri ↗','Agricultură & tehnologii alimentare ↗','Echipamente medicale ↗']},
+  bg:{title:'Глобален капацитет за снабдяване',lead:'Водещи индустриални мощности и секторно търсене в търговските коридори, които управляваме.',tags:['Индустриално производство & суровини ↗','FMCG ↗','Текстил & технически тъкани ↗','Автомобилни компоненти ↗','Строителни & архитектурни материали ↗','Опаковки & полимери ↗','Земеделски & хранителни технологии ↗','Медицинско оборудване ↗']},
+  sr:{title:'Globalni sourcing kapacitet',lead:'Istaknuti industrijski kapaciteti i sektorska tražnja u trgovinskim koridorima kojima upravljamo.',tags:['Industrijska proizvodnja & sirovine ↗','FMCG ↗','Tekstil & tehničke tkanine ↗','Auto-komponente ↗','Građevinski & arhitektonski materijali ↗','Ambalaža & polimeri ↗','Poljoprivredne & prehrambene tehnologije ↗','Medicinska oprema ↗']}
 }[lang];
 const service = id && key === 'services' ? services[id as keyof typeof services] : null;
 const detailedService = service && id && (lang === 'tr' || lang === 'en') && id in serviceDetails[lang]
@@ -259,10 +277,11 @@ const indexLabel = (index:number) => String(index + 1).padStart(2,'0');
 const marketNames = {
   tr:['Türkiye','Avrupa','Uluslararası'], en:['Türkiye','Europe','International'], de:['Türkei','Europa','International'],
   it:['Turchia','Europa','Internazionale'], ru:['Турция','Европа','Международные рынки'], fa:['ترکیه','اروپا','بین‌المللی'],
-  zh:['土耳其枢纽','欧洲市场','全球大宗贸易走廊'], vi:['Thổ Nhĩ Kỳ','Châu Âu','Thị trường quốc tế']
+  zh:['土耳其枢纽','欧洲市场','全球大宗贸易走廊'], vi:['Thổ Nhĩ Kỳ','Châu Âu','Thị trường quốc tế'],
+  ro:['Türkiye','România și Europa','Internațional'], bg:['Türkiye','България и Европа','Международни пазари'], sr:['Türkiye','Srbija i Evropa','Međunarodna tržišta']
 }[lang];
-const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',ru:'Правовая информация',fa:'حقوقی',zh:'法律政策与合规',vi:'Pháp lý'}[lang];
-const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',ru:'27 июля 2026',fa:'۲۷ ژوئیه ۲۰۲۶',zh:'2026年7月27日',vi:'27 tháng 7, 2026'}[lang];
+const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',ru:'Правовая информация',fa:'حقوقی',zh:'法律政策与合规',vi:'Pháp lý',ro:'Legal',bg:'Правна информация',sr:'Pravne informacije'}[lang];
+const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',ru:'27 июля 2026',fa:'۲۷ ژوئیه ۲۰۲۶',zh:'2026年7月27日',vi:'27 tháng 7, 2026',ro:'27 iulie 2026',bg:'27 юли 2026',sr:'27. jul 2026.'}[lang];
 const showcaseRoles = ['lead','medium','medium','compact','compact','compact'];
 const productFamilies:Record<string,string> = {
   'akbari-pistachio':'pistachio', 'mazafati-dates':'dates', almonds:'nuts',
@@ -757,7 +776,10 @@ const productCommercialLabels = {
   ru:['Происхождение','Тип / сорт','Возможная упаковка','MOQ','Документы качества и анализов','Образец','Собственная торговая марка','Доставка и Incoterms','Срок поставки','Хранение','Целевое применение','Информация для коммерческого предложения'],
   fa:['مبدأ','نوع / واریته محصول','بسته‌بندی احتمالی','حداقل سفارش MOQ','اسناد کیفیت و آزمایشگاهی','نمونه','برند اختصاصی','تحویل و Incoterms','زمان تحویل','شرایط نگهداری','کاربرد هدف','اطلاعات مورد نیاز برای استعلام'],
   zh:['真实原产地','产品品类 / 品种','常规包装形式','最低起订量 (MOQ)','质量认证与 COA 质检单证','样品调样政策','OEM / 贴牌定制 (Private Label)','交货方式与 Incoterms','生产交期排程','仓储与温湿度要求','目标工业/食用用途','发起正式报价所需信息'],
-  vi:['Xuất xứ','Chủng loại / giống','Bao bì khả thi','Số lượng đặt hàng tối thiểu (MOQ)','Chứng từ chất lượng và phân tích','Mẫu thử','Thương hiệu riêng (Private Label)','Giao hàng và Incoterms','Thời gian giao hàng','Bảo quản','Mục đích sử dụng','Thông tin cần thiết để báo giá']
+  vi:['Xuất xứ','Chủng loại / giống','Bao bì khả thi','Số lượng đặt hàng tối thiểu (MOQ)','Chứng từ chất lượng và phân tích','Mẫu thử','Thương hiệu riêng (Private Label)','Giao hàng và Incoterms','Thời gian giao hàng','Bảo quản','Mục đích sử dụng','Thông tin cần thiết để báo giá'],
+  ro:['Origine','Tip / varietate','Ambalare posibilă','MOQ','Documente de calitate și analiză','Mostră','Private label','Livrare și Incoterm','Termen de livrare','Depozitare','Utilizare prevăzută','Informații necesare pentru ofertă'],
+  bg:['Произход','Тип / сорт','Възможна опаковка','MOQ','Документи за качество и анализ','Мостра','Private label','Доставка и Incoterm','Срок за доставка','Съхранение','Предназначение','Информация за оферта'],
+  sr:['Poreklo','Tip / sorta','Moguće pakovanje','MOQ','Dokumentacija kvaliteta i analiza','Uzorak','Private label','Isporuka i Incoterm','Rok isporuke','Skladištenje','Namena','Podaci potrebni za ponudu']
 }[lang];
 const verifiedLater = {
   tr:['Üretici ve sipariş yapısına göre doğrulanır','Teklif aşamasında teyit edilir','Parti bazında belge kontrolü yapılır','Talebe göre değerlendirilir','Üretici ve hedef pazara göre değerlendirilir'],
@@ -767,7 +789,10 @@ const verifiedLater = {
   ru:['Проверяется в зависимости от производителя и структуры заказа','Подтверждается на этапе коммерческого предложения','Документы проверяются по партии','Оценивается по запросу','Оценивается в зависимости от производителя и целевого рынка'],
   fa:['بر اساس تولیدکننده و ساختار سفارش ارزیابی می‌شود','در مرحله استعلام قیمت تأیید می‌شود','بررسی اسناد در سطح محموله انجام می‌شود','بر اساس درخواست بررسی می‌شود','بر اساس تولیدکننده و بازار هدف ارزیابی می‌شود'],
   zh:['依据生产企业资质与具体订单结构核实','在正式询价报价阶段书面确认','逐批次核验第三方检测单证','根据具体业务需求专项评估','依据生产工厂与目标市场准入综合评估'],
-  vi:['Được xác minh theo nhà sản xuất và cấu trúc đơn hàng','Được xác nhận ở giai đoạn báo giá','Chứng từ được kiểm tra theo từng lô hàng','Được đánh giá theo yêu cầu','Được đánh giá theo nhà sản xuất và thị trường mục tiêu']
+  vi:['Được xác minh theo nhà sản xuất và cấu trúc đơn hàng','Được xác nhận ở giai đoạn báo giá','Chứng từ được kiểm tra theo từng lô hàng','Được đánh giá theo yêu cầu','Được đánh giá theo nhà sản xuất và thị trường mục tiêu'],
+  ro:['Se verifică în funcție de producător și structura comenzii','Se confirmă la etapa de ofertare','Documentele se verifică la nivel de lot','Se evaluează la cerere','Se evaluează în funcție de producător și piața țintă'],
+  bg:['Проверява се според производителя и структурата на поръчката','Потвърждава се на етап оферта','Документите се проверяват по партида','Оценява се при запитване','Оценява се според производителя и целевия пазар'],
+  sr:['Proverava se prema proizvođaču i strukturi porudžbine','Potvrđuje se u fazi ponude','Dokumentacija se proverava po seriji','Procenjuje se na zahtev','Procenjuje se prema proizvođaču i ciljnom tržištu']
 }[lang];
 ---
 {key === 'home' && regionalIntentHome && (
