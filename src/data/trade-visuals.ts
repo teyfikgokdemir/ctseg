@@ -201,5 +201,5 @@ export const sourcingTradeVisualKeys = {
 
 export const localizedTradeVisual = (key:TradeVisualKey, locale:TradeVisualLocale) => {
   const visual=tradeVisuals[key];
-  return {...visual,altText:visual.alt[locale]};
+  return {...visual,altText:visual.alt[locale] || visual.alt.en};
 };
