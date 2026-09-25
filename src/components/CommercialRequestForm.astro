@@ -260,7 +260,7 @@ const dynamicPlaceholders = {
 </section>
 
 <style is:global>
-  .commercial-form-panel{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(34px,5vw,82px);overflow:hidden;padding:clamp(38px,5vw,76px);border:1px solid rgba(255,255,255,.1);border-radius:30px;background:#111;color:#fff;box-shadow:0 28px 80px rgba(0,0,0,.16)}
+  .commercial-form-panel{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(28px,3.5vw,52px);overflow:hidden;padding:clamp(28px,3.2vw,46px);border:1px solid rgba(255,255,255,.1);border-radius:30px;background:#111;color:#fff;box-shadow:0 28px 80px rgba(0,0,0,.16)}
   .commercial-form-panel::before{content:"CTSEG";position:absolute;right:-.05em;bottom:-.16em;z-index:-1;font-size:clamp(150px,22vw,360px);font-weight:900;line-height:.8;letter-spacing:-.09em;color:rgba(255,255,255,.022);pointer-events:none;user-select:none}
   .commercial-form-panel::after{content:"";position:absolute;left:0;top:0;width:34%;height:5px;background:#c4f000}
   .commercial-form-intro{align-self:start;position:sticky;top:118px}
@@ -274,27 +274,27 @@ const dynamicPlaceholders = {
   .direct-contact-card small{grid-column:2;color:#aaa!important;margin-top:-10px;overflow-wrap:anywhere}
   .direct-contact-card:hover{transform:translateX(5px);border-color:#c4f000;background:rgba(196,240,0,.06)}
   .commercial-form-disclosure{align-self:start;border:1px solid rgba(255,255,255,.14);border-radius:24px;background:#f6f6f1;color:#111;overflow:hidden;box-shadow:0 22px 60px rgba(0,0,0,.2)}
-  .commercial-form-disclosure-title{padding:22px 26px 18px;border-bottom:1px solid #d8d5cb;background:#f6f6f1;color:#111;font-size:18px;font-weight:800;letter-spacing:-.015em}
-  .commercial-form{padding:0 26px 28px}
+  .commercial-form-disclosure-title{padding:18px 22px 15px;border-bottom:1px solid #d8d5cb;background:#f6f6f1;color:#111;font-size:18px;font-weight:800;letter-spacing:-.015em}
+  .commercial-form{padding:0 22px 22px}
   .commercial-intent-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:24px}
-  .intent-card{position:relative;display:grid;grid-template-columns:38px 1fr;align-items:start;gap:12px;min-height:144px;padding:17px 16px;border:1px solid #d7d3c8;border-radius:0;background:linear-gradient(180deg,#fbfaf6,#f3f1ea);cursor:pointer;text-align:left;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,background .2s ease;font:inherit;overflow:hidden}
+  .intent-card{position:relative;display:grid;grid-template-columns:38px 1fr;align-items:start;gap:12px;min-height:122px;padding:14px 14px;border:1px solid #d7d3c8;border-radius:0;background:linear-gradient(180deg,#fbfaf6,#f3f1ea);cursor:pointer;text-align:left;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease,background .2s ease;font:inherit;overflow:hidden}
   .intent-card::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:#c4f000;transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
   .intent-card:hover{transform:translateY(-2px);border-color:#bbb6aa;background:#fff;box-shadow:0 10px 24px rgba(17,17,17,.06)}
   .intent-card:hover::before,.intent-card.is-active::before{transform:scaleX(1)}
   .intent-card.is-active{border-color:#111;background:#fff;box-shadow:0 10px 26px rgba(17,17,17,.08)}
   .intent-card.is-active::after{content:"✓";position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;background:#c4f000;color:#111;font-size:12px;font-weight:900;display:grid;place-items:center}
-  .intent-card-icon{display:grid;place-items:center;width:36px;height:36px;border:1px solid #d5d1c7;background:#111;color:#fff;font-size:18px;line-height:1;flex-shrink:0;margin:0}
+  .intent-card-icon{display:grid;place-items:center;width:32px;height:32px;border:1px solid #d5d1c7;background:#111;color:#fff;font-size:18px;line-height:1;flex-shrink:0;margin:0}
   .intent-card-content{display:flex;flex-direction:column;gap:5px;min-width:0;padding-right:4px}
   .intent-card-kicker{font-size:9.5px;font-weight:850;letter-spacing:.09em;text-transform:uppercase;color:#77736b}
-  .intent-card strong{font-size:14px;font-weight:800;color:#181816;line-height:1.22}
-  .intent-card p{font-size:11.5px;color:#5f5c55;line-height:1.38;margin:0}
+  .intent-card strong{font-size:13.5px;font-weight:800;color:#181816;line-height:1.22}
+  .intent-card p{font-size:11px;color:#5f5c55;line-height:1.34;margin:0}
   @media(max-width:680px){.commercial-intent-cards{grid-template-columns:1fr}}
   .commercial-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
   .commercial-field{display:flex;flex-direction:column;gap:8px;min-width:0}
   .commercial-field--wide{grid-column:1/-1}
   .commercial-field>span{font-size:12px!important;font-weight:800!important;letter-spacing:.055em;text-transform:uppercase;color:#464640!important}
-  .commercial-field input,.commercial-field select,.commercial-field textarea{width:100%;min-height:52px;padding:13px 14px;border:1px solid #d4d4cc;border-radius:12px;background:#fff;color:#111;font:inherit;outline:none;transition:border-color .2s ease,box-shadow .2s ease}
-  .commercial-field textarea{min-height:120px;resize:vertical}
+  .commercial-field input,.commercial-field select,.commercial-field textarea{width:100%;min-height:46px;padding:10px 12px;border:1px solid #d4d4cc;border-radius:12px;background:#fff;color:#111;font:inherit;outline:none;transition:border-color .2s ease,box-shadow .2s ease}
+  .commercial-field textarea{min-height:96px;resize:vertical}
   .commercial-field input:focus,.commercial-field select:focus,.commercial-field textarea:focus{border-color:#9cbf00;box-shadow:0 0 0 3px rgba(196,240,0,.24)}
   .commercial-details{margin-top:18px;border-top:1px solid #deded7;padding-top:18px}
   .commercial-details>summary{cursor:pointer;font-weight:800;color:#1b1b19;margin-bottom:18px}
