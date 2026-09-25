@@ -15,6 +15,20 @@ import { regionalIntentHomes } from '../data/regional-intent-homes';
 import { termsOfUseCopy } from '../data/legal';
 import { syriaMarketContent } from '../data/syria-market';
 
+const localizedMetaLabels: Record<string,{service:string;product:string;serviceType:string;buyerAudience:string;producerAudience:string}> = {
+  tr:{service:'B2B Tedarik Danışmanlığı',product:'Toptan B2B',serviceType:'İki yönlü küresel ticaret, stratejik tedarik, tedarikçi doğrulama ve pazara giriş',buyerAudience:'Doğrulanmış tedarikçi ve tedarik rotası arayan alıcılar',producerAudience:'Alıcı ve uluslararası pazara giriş arayan üreticiler'},
+  en:{service:'B2B Sourcing Advisory',product:'Wholesale B2B',serviceType:'Two-way global trade, strategic sourcing, supplier verification and market entry',buyerAudience:'Buyers seeking verified suppliers and sourcing routes',producerAudience:'Manufacturers and producers seeking buyers and international market entry'},
+  de:{service:'B2B-Beschaffungsberatung',product:'B2B-Großhandel',serviceType:'Bidirektionaler Welthandel, strategische Beschaffung, Lieferantenprüfung und Markteintritt',buyerAudience:'Käufer auf der Suche nach geprüften Lieferanten und Beschaffungswegen',producerAudience:'Hersteller auf der Suche nach Käufern und internationalem Markteintritt'},
+  it:{service:'Consulenza sourcing B2B',product:'B2B all’ingrosso',serviceType:'Commercio globale bidirezionale, sourcing strategico, verifica fornitori e ingresso sul mercato',buyerAudience:'Acquirenti alla ricerca di fornitori verificati e canali di approvvigionamento',producerAudience:'Produttori alla ricerca di buyer e accesso ai mercati internazionali'},
+  ru:{service:'B2B-консалтинг по снабжению',product:'Оптовый B2B',serviceType:'Двусторонняя международная торговля, стратегический сорсинг, проверка поставщиков и выход на рынок',buyerAudience:'Покупатели, ищущие проверенных поставщиков и маршруты снабжения',producerAudience:'Производители, ищущие покупателей и выход на международные рынки'},
+  fa:{service:'مشاوره تأمین B2B',product:'عمده‌فروشی B2B',serviceType:'تجارت جهانی دوسویه، تأمین راهبردی، اعتبارسنجی تأمین‌کننده و ورود به بازار',buyerAudience:'خریدارانی که به دنبال تأمین‌کنندگان تأییدشده و مسیرهای تأمین هستند',producerAudience:'تولیدکنندگانی که به دنبال خریدار و ورود به بازارهای بین‌المللی هستند'},
+  zh:{service:'B2B 采购咨询',product:'B2B 批发',serviceType:'双向国际贸易、战略采购、供应商核验与市场准入',buyerAudience:'寻找经核验供应商及采购路径的企业买家',producerAudience:'寻找买家及国际市场准入机会的制造商与生产企业'},
+  vi:{service:'Tư vấn sourcing B2B',product:'B2B bán buôn',serviceType:'Thương mại toàn cầu hai chiều, sourcing chiến lược, xác minh nhà cung cấp và thâm nhập thị trường',buyerAudience:'Người mua cần nhà cung cấp đã xác minh và tuyến sourcing phù hợp',producerAudience:'Nhà sản xuất cần buyer và cơ hội thâm nhập thị trường quốc tế'},
+  ro:{service:'Consultanță B2B pentru aprovizionare',product:'Comerț B2B angro',serviceType:'Comerț global bidirecțional, aprovizionare strategică, verificarea furnizorilor și intrare pe piață',buyerAudience:'Cumpărători care caută furnizori verificați și rute de aprovizionare',producerAudience:'Producători care caută cumpărători și acces pe piețe internaționale'},
+  bg:{service:'B2B консултиране за снабдяване',product:'B2B на едро',serviceType:'Двупосочна глобална търговия, стратегическо снабдяване, проверка на доставчици и навлизане на пазара',buyerAudience:'Купувачи, които търсят проверени доставчици и маршрути за снабдяване',producerAudience:'Производители, които търсят купувачи и достъп до международни пазари'},
+  sr:{service:'B2B savetovanje za nabavku',product:'B2B veleprodaja',serviceType:'Dvosmerna globalna trgovina, strateška nabavka, provera dobavljača i ulazak na tržište',buyerAudience:'Kupci koji traže proverene dobavljače i rute nabavke',producerAudience:'Proizvođači koji traže kupce i pristup međunarodnim tržištima'}
+};
+
 export type RouteRecord = {
   lang: Locale;
   path?: string;
@@ -90,8 +104,8 @@ export function getMeta(record: RouteRecord) {
       lang === 'sr' ? 'CTSEG povezuje Srbiju i evropska tržišta sa proizvođačima i dobavljačima iz Türkiye kroz strateški sourcing, proveru dobavljača, RFQ, TCO analizu i koordinaciju ulaska na tržište.' :
       'CTSEG connects Türkiye with international markets through two-way B2B trade, strategic sourcing, supplier verification, RFQ management and market-entry coordination.'
   };
-  if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — B2B Sourcing Advisory | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
-  if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} — Wholesale B2B | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
+  if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — ${localizedMetaLabels[lang].service} | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
+  if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} — ${localizedMetaLabels[lang].product} | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
   if (key === 'insights' && id) return { title:`${insights[id as keyof typeof insights].titles[lang]} | CTSEG`, description:insights[id as keyof typeof insights].descriptions[lang] };
   if (key === 'how-we-work') return {title:`${processPages[lang].title} | CTSEG`,description:processPages[lang].description};
   if (key === 'scenarios') return {title:`${scenarioPages[lang].title} | CTSEG`,description:scenarioPages[lang].description};
@@ -167,12 +181,12 @@ export function tradeMatchingServiceSchema(record:RouteRecord, title:string, des
   return {
     '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#trade-matching-service`,
     name:title,description,url:canonicalFor(record),inLanguage:schemaLanguage(record.lang),
-    serviceType:'Two-way global trade, strategic sourcing, supplier verification and market entry',
+    serviceType:localizedMetaLabels[record.lang].serviceType,
     provider:{'@id':'https://ctseg.com.tr/#organization'},
     areaServed:['Türkiye','Europe','Middle East','Asia','International'],
     audience:[
-      {'@type':'BusinessAudience',name:'Buyers seeking verified suppliers and sourcing routes'},
-      {'@type':'BusinessAudience',name:'Manufacturers and producers seeking buyers and international market entry'}
+      {'@type':'BusinessAudience',name:localizedMetaLabels[record.lang].buyerAudience},
+      {'@type':'BusinessAudience',name:localizedMetaLabels[record.lang].producerAudience}
     ]
   };
 }
