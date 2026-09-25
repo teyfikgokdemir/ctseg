@@ -10,10 +10,11 @@ const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?
 const t = ui[lang] || ui.en;
 const home = localizedPath(lang, 'home');
 const p = tradePlatformCopy[lang] || tradePlatformCopy.en;
-const methodLabel = {tr:'Yöntem',en:'Method',de:'Arbeitsweise',it:'Metodo',fa:'روش کار',ru:'Метод',zh:'运作模式',vi:'Phương thức hoạt động'}[lang] || 'Method';
+const methodLabel = {tr:'Yöntem',en:'Method',de:'Arbeitsweise',it:'Metodo',fa:'روش کار',ru:'Метод',zh:'运作模式',vi:'Phương thức hoạt động',ro:'Metodă',bg:'Метод',sr:'Metod'}[lang] || 'Method';
 const glassNavLabels: Record<string, string> = {
   tr:'Düzce Cam', en:'Düzce Float Glass', de:'Düzce Float Glass', it:'Düzce Float Glass',
-  fa:'شیشه Düzce', ru:'Düzce Float Glass', zh:'Düzce 浮法玻璃', vi:'Düzce Float Glass'
+  fa:'شیشه Düzce', ru:'Düzce Float Glass', zh:'Düzce 浮法玻璃', vi:'Düzce Float Glass',
+  ro:'Düzce Float Glass', bg:'Düzce Float Glass', sr:'Düzce Float Glass'
 };
 const navigationCopy = {
   tr:{globalTrade:'Küresel Ticaret',industries:'Sektörler',portfolio:'Ticaret Portföyü',intelligence:'Ticaret İçgörüleri',company:'Şirket',main:'ANA MENÜ',quick:'HIZLI ERİŞİM',trade:'TİCARET',intro:'İki yönlü ticaret, stratejik tedarik ve pazara giriş yolları'},
@@ -23,10 +24,13 @@ const navigationCopy = {
   ru:{globalTrade:'Глобальная торговля',industries:'Отрасли',portfolio:'Торговый портфель',intelligence:'Торговая аналитика',company:'Компания',main:'ГЛАВНОЕ МЕНЮ',quick:'НАВИГАЦИЯ',trade:'ТОРГОВЛЯ',intro:'Двусторонняя торговля, стратегический сорсинг и выход на рынки'},
   fa:{globalTrade:'تجارت جهانی',industries:'صنایع',portfolio:'سبد تجاری',intelligence:'بینش تجاری',company:'شرکت',main:'منوی اصلی',quick:'دسترسی سریع',trade:'تجارت',intro:'تجارت دوطرفه، تأمین استراتژیک و ورود به بازار'},
   zh:{globalTrade:'全球贸易',industries:'行业',portfolio:'贸易组合',intelligence:'贸易洞察',company:'公司',main:'主菜单',quick:'导航',trade:'贸易',intro:'双向国际贸易、战略采购与市场进入路径'},
-  vi:{globalTrade:'Thương mại toàn cầu',industries:'Ngành',portfolio:'Danh mục thương mại',intelligence:'Thông tin thương mại',company:'Công ty',main:'MENU CHÍNH',quick:'ĐIỀU HƯỚNG',trade:'THƯƠNG MẠI',intro:'Thương mại hai chiều, sourcing chiến lược và thâm nhập thị trường'}
+  vi:{globalTrade:'Thương mại toàn cầu',industries:'Ngành',portfolio:'Danh mục thương mại',intelligence:'Thông tin thương mại',company:'Công ty',main:'MENU CHÍNH',quick:'ĐIỀU HƯỚNG',trade:'THƯƠNG MẠI',intro:'Thương mại hai chiều, sourcing chiến lược và thâm nhập thị trường'},
+  ro:{globalTrade:'Comerț Global',industries:'Industrii',portfolio:'Portofoliu Comercial',intelligence:'Analize Comerciale',company:'Companie',main:'MENIU PRINCIPAL',quick:'NAVIGARE',trade:'COMERȚ',intro:'Comerț bidirecțional, sourcing strategic și acces pe piețe'},
+  bg:{globalTrade:'Глобална търговия',industries:'Сектори',portfolio:'Търговско портфолио',intelligence:'Търговски анализи',company:'Компания',main:'ГЛАВНО МЕНЮ',quick:'НАВИГАЦИЯ',trade:'ТЪРГОВИЯ',intro:'Двупосочна търговия, стратегическо снабдяване и навлизане на пазари'},
+  sr:{globalTrade:'Globalna trgovina',industries:'Sektori',portfolio:'Trgovinski portfolio',intelligence:'Trgovinski uvidi',company:'Kompanija',main:'GLAVNI MENI',quick:'NAVIGACIJA',trade:'TRGOVINA',intro:'Dvosmerna trgovina, strateški sourcing i ulazak na tržište'}
 }[lang] || {globalTrade:'Global Trade',industries:'Industries',portfolio:'Trade Portfolio',intelligence:'Trade Intelligence',company:'Company',main:'MAIN MENU',quick:'NAVIGATION',trade:'TRADE',intro:'Two-way trade, strategic sourcing and market-entry paths'};
 
-const safeGlassLang = (['en','tr','de','it','ru','fa','zh','vi'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
+const safeGlassLang = (['en','tr','de','it','ru','fa','zh','vi','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
 const glassUrl = duzceGlassPath(safeGlassLang);
 const glassLabel = glassNavLabels[lang] || 'Düzce Float Glass';
 
@@ -50,7 +54,7 @@ const nav = [
 
 const globalLocales = [...activeLocaleRegistry.map((entry) => entry.code), 'uk'] as string[];
 const globalLocaleNames: Record<string,string> = {...Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code, entry.label])), uk:'Українська'};
-const globalLocaleFlags: Record<string,string> = {tr:'/images/flags/tr.svg',en:'/images/flags/gb.svg',de:'/images/flags/de.svg',it:'/images/flags/it.svg',fa:'/images/flags/ir.svg',ru:'/images/flags/ru.svg',zh:'/images/flags/cn.svg',vi:'/images/flags/vn.svg',uk:'/images/flags/ua.svg'};
+const globalLocaleFlags: Record<string,string> = {tr:'/images/flags/tr.svg',en:'/images/flags/gb.svg',de:'/images/flags/de.svg',it:'/images/flags/it.svg',fa:'/images/flags/ir.svg',ru:'/images/flags/ru.svg',zh:'/images/flags/cn.svg',vi:'/images/flags/vn.svg',ro:'/images/flags/ro.svg',bg:'/images/flags/bg.svg',sr:'/images/flags/rs.svg',uk:'/images/flags/ua.svg'};
 
 const globalSwitchPath = (target: string): string => {
   if (target === 'uk') return '/uk/';
@@ -64,7 +68,7 @@ const globalSwitchPath = (target: string): string => {
   if (['vietnam-turkiye','china-turkiye','ukraine-turkiye'].includes(pageKey)) return target === 'tr' ? '/' : `/${target}/`;
   if (target === 'fa') return '/fa/';
   if (pageKey === 'glass') {
-    const glassLocales = ['en','tr','de','it','ru','fa','zh','vi'] as const;
+    const glassLocales = ['en','tr','de','it','ru','fa','zh','vi','ro','bg','sr'] as const;
     if ((glassLocales as readonly string[]).includes(target)) return duzceGlassPath(target as DuzceGlassLocale);
     return `/${target}/`;
   }
