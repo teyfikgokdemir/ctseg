@@ -3,7 +3,7 @@ import { duzceGlassData, duzceGlassPath, type DuzceGlassLocale } from '../data/d
 import { localizedPath, type Locale } from '../data/site';
 
 const { lang='en' } = Astro.props as { lang?: string };
-const currentLang = (['tr','en','de','it','ru','fa','zh','vi'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
+const currentLang = (['tr','en','de','it','ru','fa','zh','vi','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
 const d = duzceGlassData[currentLang] || duzceGlassData.en;
 const href = duzceGlassPath(currentLang);
 const contactHref = localizedPath(currentLang as Locale, 'contact');
