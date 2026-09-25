@@ -1040,3 +1040,18 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
     font-size:15px!important;
   }
 }
+
+
+/* HERO TITLE SIZE TUNE 2026-09-25 */
+@media (min-width:901px){
+  .homepage-trade-hero .home-hero-title--tr{
+    font-size:clamp(42px,2.8vw,54px)!important;
+    line-height:1.06!important;
+    max-width:780px!important;
+  }
+}
+@media (min-width:901px) and (max-width:1250px){
+  .homepage-trade-hero .home-hero-title--tr{
+    font-size:42px!important;
+  }
+}
