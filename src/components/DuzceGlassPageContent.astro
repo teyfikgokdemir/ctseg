@@ -1,0 +1,99 @@
+---
+import CommercialRequestForm from './CommercialRequestForm.astro';
+import { duzceGlassData, type DuzceGlassLocale } from '../data/duzce-glass';
+
+const { lang='en' } = Astro.props as { lang?: string };
+const currentLang = (['tr','en','de','it','ru','fa','zh','vi'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
+const d = duzceGlassData[currentLang] || duzceGlassData.en;
+const isRtl = currentLang === 'fa';
+
+const buyerTypes = currentLang === 'tr'
+  ? ['Cam ithalatçıları ve distribütörleri','Isıcam / IGU üreticileri','Cam kesim, temper ve işleme tesisleri','Cephe ve alüminyum sistem firmaları','Pencere ve doğrama üreticileri','Müteahhitler ve proje satın alma ekipleri']
+  : ['Glass importers and distributors','Insulating glass / IGU manufacturers','Glass cutting, tempering and processing plants','Façade and aluminium system companies','Window manufacturers','Contractors and project procurement teams'];
+
+const rfqFields = currentLang === 'tr'
+ ? ['Cam tipi','Kalınlık','Ölçü / ebat','Miktar (m² / ton / konteyner)','Hedef ülke ve şehir/liman','Teslim şekli (Incoterm)','Proje / yeniden satış / işleme amacı','İstenen teslim tarihi']
+ : ['Glass type','Thickness','Dimensions / sheet size','Quantity (m² / MT / container)','Destination country and city/port','Requested Incoterm','Project / resale / processing purpose','Required delivery date'];
+---
+<div class="duzce-page" dir={isRtl ? 'rtl' : 'ltr'}>
+  <section class="duzce-hero section">
+    <div class="container duzce-hero-grid">
+      <div>
+        <span class="eyebrow">{d.eyebrow}</span>
+        <h1>{d.title}</h1>
+        <p class="lead">{d.lead}</p>
+        <div class="duzce-badges">{d.badges.map((badge) => <span>{badge}</span>)}</div>
+        <div class="actions">
+          <a class="button primary" href="#rfq">{d.primaryCta}</a>
+          <a class="button ghost" href="#portfolio">{d.secondaryCta}</a>
+        </div>
+      </div>
+      <aside class="duzce-role-card">
+        <small>{d.roleTitle}</small>
+        <p>{d.roleText}</p>
+        <div class="duzce-role-mark">CTSEG <span>×</span> Düzce Float Glass</div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="portfolio">
+    <div class="container">
+      <div class="section-head"><span class="eyebrow">{d.productsTitle}</span><h2>{d.productsTitle}</h2></div>
+      <div class="duzce-product-grid">
+        {d.products.map((product,index) => <article><span>{String(index+1).padStart(2,'0')}</span><h3>{product}</h3></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section duzce-market-section">
+    <div class="container duzce-two-col">
+      <div>
+        <span class="eyebrow">{d.marketsTitle}</span>
+        <h2>{currentLang === 'tr' ? 'Talebin olduğu pazarlara ülke bazlı satış geliştirme.' : 'Country-led sales development in markets with commercial demand.'}</h2>
+        <div class="duzce-market-list">{d.markets.map((market) => <span>{market}</span>)}</div>
+      </div>
+      <div>
+        <span class="eyebrow">{currentLang === 'tr' ? 'Hedef alıcı profili' : 'Target buyer profile'}</span>
+        <h2>{currentLang === 'tr' ? 'Son kullanıcı değil, ticari hacim üreten alıcılar.' : 'Commercial buyers that can create repeat volume.'}</h2>
+        <ul class="duzce-buyer-list">{buyerTypes.map((item) => <li>{item}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section duzce-rfq-spec" id="rfq">
+    <div class="container duzce-two-col">
+      <div>
+        <span class="eyebrow">{d.rfqTitle}</span>
+        <h2>{d.rfqTitle}</h2>
+        <p class="lead">{d.rfqText}</p>
+      </div>
+      <div class="duzce-rfq-fields">
+        {rfqFields.map((field,index) => <div><span>{String(index+1).padStart(2,'0')}</span><strong>{field}</strong></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <CommercialRequestForm lang={currentLang} />
+    </div>
+  </section>
+</div>
+
+<style>
+  .duzce-page{background:#111310;color:#f3f4ef}
+  .duzce-hero{padding:clamp(5rem,9vw,9rem) 0;background:radial-gradient(circle at 80% 20%,rgba(120,170,160,.12),transparent 30%),#10120f}
+  .duzce-hero-grid,.duzce-two-col{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:clamp(3rem,7vw,7rem);align-items:start}
+  .duzce-hero h1{max-width:13ch;margin:1rem 0 0;font-family:var(--font-heading,'Source Serif 4',Georgia,serif);font-size:clamp(3.2rem,6vw,7rem);line-height:.94;letter-spacing:-.055em;text-wrap:balance}
+  .duzce-hero .lead{max-width:50rem;margin:2rem 0 0;color:#d8ddd7!important;opacity:1!important;font-size:clamp(1rem,1.15vw,1.2rem);line-height:1.75}
+  .duzce-badges{display:flex;flex-wrap:wrap;gap:.6rem;margin:2rem 0}.duzce-badges span,.duzce-market-list span{border:1px solid rgba(255,255,255,.15);padding:.58rem .75rem;border-radius:999px;font-size:.78rem}
+  .duzce-role-card{padding:1.7rem;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.035);position:sticky;top:110px}
+  .duzce-role-card small,.duzce-role-card span,.duzce-product-grid article>span,.duzce-rfq-fields span{color:#c4f000}.duzce-role-card p{font-size:1rem;line-height:1.75;color:#d8ddd7}.duzce-role-mark{margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1);font-size:.72rem;letter-spacing:.13em}
+  .duzce-product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12)}
+  .duzce-product-grid article{min-height:165px;padding:1.25rem;background:#151815}.duzce-product-grid h3{margin:2.4rem 0 0;font-size:1.08rem}
+  .duzce-market-section{background:#151815}.duzce-two-col h2{max-width:14ch;font-family:var(--font-heading,'Source Serif 4',Georgia,serif);font-size:clamp(2.4rem,4vw,4.8rem);line-height:.98;letter-spacing:-.04em}
+  .duzce-market-list{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.8rem}.duzce-buyer-list{margin:1.8rem 0 0;padding:0;list-style:none;border-top:1px solid rgba(255,255,255,.13)}.duzce-buyer-list li{padding:.9rem 0;border-bottom:1px solid rgba(255,255,255,.1);color:#d7ddd6}
+  .duzce-rfq-fields{display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(255,255,255,.12)}.duzce-rfq-fields div{padding:1rem;border-bottom:1px solid rgba(255,255,255,.1)}.duzce-rfq-fields div:nth-child(odd){border-inline-end:1px solid rgba(255,255,255,.1)}.duzce-rfq-fields span{display:block;font-size:.68rem;margin-bottom:.35rem}
+  @media(max-width:900px){.duzce-hero-grid,.duzce-two-col{grid-template-columns:1fr}.duzce-role-card{position:static}.duzce-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:560px){.duzce-product-grid,.duzce-rfq-fields{grid-template-columns:1fr}.duzce-rfq-fields div:nth-child(odd){border-inline-end:0}.duzce-hero h1{font-size:clamp(2.8rem,12vw,4.5rem)}}
+</style>

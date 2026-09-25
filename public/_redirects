@@ -35,10 +35,9 @@
 /fr/sourcing/tapis-en-soie-noues-main/ /en/sourcing/hand-knotted-silk-carpets/ 301
 /fr/sourcing/sourcing-textile-en-gros/ /en/sourcing/wholesale-textile-sourcing/ 301
 /fr/* /en/ 301
-/tr/ticari-urunler/reflex-tek-kullanimlik-eldivenler/ /medical/reflex-disposable-gloves/ 301
-/tr/ticari-urunler/reflex-tek-kullanimlik-eldivenler /medical/reflex-disposable-gloves/ 301
 
 # Country-language LP consolidation: old deep landings -> canonical locale roots
 /fa/تجارت-ایران-ترکیه/ /fa/ 301
 /zh/zhongguo-qiye-jinru-tuerqi-he-ouzhou-shichang/ /zh/ 301
 /vi/xuat-khau-tu-viet-nam-sang-tho-nhi-ky-va-chau-au/ /vi/ 301
+

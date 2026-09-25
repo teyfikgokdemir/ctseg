@@ -13,7 +13,7 @@ const limits = {
 const required = ['intent','supportNeed','tradeDirection','productFamily','name','company','emailOrPhone','message','privacy'];
 const supportNeeds = ['supplier_sourcing','rfq_comparison','private_label','market_entry','document_assessment','external_trade_desk','other'];
 const tradeDirections = ['export_from_turkiye','import_to_turkiye','cross_border_sourcing','market_entry','other'];
-const productFamilies = ['vegetable_oils','nuts_dried_fruit','reflex_gloves','biofuel_feedstock','other'];
+const productFamilies = ['vegetable_oils','nuts_dried_fruit','architectural_glass','biofuel_feedstock','other'];
 
 const json = (body,status=200) => new Response(JSON.stringify(body),{
   status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}

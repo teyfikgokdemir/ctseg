@@ -4,7 +4,7 @@ import { serviceDetails } from '../data/service-details';
 import PageHero from './PageHero.astro';
 import Framework from './Framework.astro';
 import PortfolioBanner from './PortfolioBanner.astro';
-import ReflexSection from './ReflexSection.astro';
+import DuzceGlassSection from './DuzceGlassSection.astro';
 import ProcessRail from './ProcessRail.astro';
 import ProductCard from './ProductCard.astro';
 import ProductMedia from './ProductMedia.astro';
@@ -837,7 +837,7 @@ const verifiedLater = {
         <a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{iranTradeContent.fa.ctaLabel}</a>
       </aside>
     </div></section>
-    <ReflexSection lang="fa" />
+    <DuzceGlassSection lang="fa" />
   </>
 )}
 
@@ -950,7 +950,7 @@ const verifiedLater = {
       <div class="section-head"><h2>{platform.corridorsTitle}</h2><p>{platform.corridorsLead}</p></div>
       <div class="corridor-list">{platform.corridors.map((corridor,index) => <div><span>{indexLabel(index)}</span><strong>{corridor}</strong></div>)}</div>
     </div></section>
-    {(lang !== 'zh' && lang !== 'vi') && <ReflexSection lang={lang} />}
+    {(lang !== 'zh' && lang !== 'vi') && <DuzceGlassSection lang={lang} />}
     <ProcessRail title={platform.processTitle} steps={platform.process} />
     {<div class="container process-detail-link"><a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a></div>}
     <section class="markets-editorial section" id="markets"><div class="container">
