@@ -35,3 +35,20 @@ export const tradeGateway:Record<Locale,{ outbound:Direction; inbound:Direction 
     inbound:{kicker:'TOÀN CẦU → THỔ NHĨ KỲ',title:'Tìm nguồn cung chiến lược và gia nhập thị trường Thổ Nhĩ Kỳ',description:'Nghiên cứu nhà sản xuất và nhà cung cấp theo yêu cầu thương mại; sắp xếp dữ liệu sản phẩm, xuất xứ, hồ sơ và RFQ để so sánh.'}
   }
 };
+
+
+/* Balkan locale rollout: ro, bg, sr */
+Object.assign(tradeGateway as any,{
+  ro:{
+    outbound:{kicker:'TÜRKIYE → ROMÂNIA & PIEȚE GLOBALE',title:'Acces internațional pentru producția din Türkiye',description:'Clarificăm piața țintă și cerința cumpărătorului, apoi evaluăm compatibilitatea produsului, ofertele, documentația și coordonarea comercială.'},
+    inbound:{kicker:'ROMÂNIA / GLOBAL → TÜRKIYE',title:'Sourcing strategic și intrare pe piața din Türkiye',description:'Cercetăm producători și furnizori în raport cu cerința comercială și structurăm produsul, originea, documentele și RFQ-ul pentru comparație.'}
+  },
+  bg:{
+    outbound:{kicker:'TÜRKIYE → БЪЛГАРИЯ & ГЛОБАЛНИ ПАЗАРИ',title:'Международен пазарен достъп за производство от Türkiye',description:'Изясняваме целевия пазар и нуждите на купувача, след което оценяваме продукта, офертите, документите и търговската координация.'},
+    inbound:{kicker:'БЪЛГАРИЯ / ГЛОБАЛНО → TÜRKIYE',title:'Стратегическо снабдяване и навлизане на пазара в Türkiye',description:'Проучваме производители и доставчици спрямо търговската нужда и структурираме продукт, произход, документи и RFQ за сравнение.'}
+  },
+  sr:{
+    outbound:{kicker:'TÜRKIYE → SRBIJA & GLOBALNA TRŽIŠTA',title:'Međunarodni pristup tržištu za proizvodnju iz Türkiye',description:'Razjašnjavamo ciljno tržište i zahtev kupca, zatim procenjujemo proizvod, ponude, dokumentaciju i komercijalnu koordinaciju.'},
+    inbound:{kicker:'SRBIJA / GLOBALNO → TÜRKIYE',title:'Strateški sourcing i ulazak na tržište Türkiye',description:'Istražujemo proizvođače i dobavljače prema komercijalnom zahtevu i strukturiramo proizvod, poreklo, dokumentaciju i RFQ za poređenje.'}
+  }
+});
