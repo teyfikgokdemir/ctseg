@@ -20,31 +20,49 @@ const productImages = [
   'https://duzcecam.com.tr/upload/bw_1182023_5729333758.jpg'
 ] as const;
 
-const buyerTypes = currentLang === 'tr'
-  ? ['Cam ithalatçıları ve distribütörleri','Isıcam / IGU üreticileri','Cam kesim, temper ve işleme tesisleri','Cephe ve alüminyum sistem firmaları','Pencere ve doğrama üreticileri','Müteahhitler ve proje satın alma ekipleri']
-  : ['Glass importers and distributors','Insulating glass / IGU manufacturers','Glass cutting, tempering and processing plants','Façade and aluminium system companies','Window manufacturers','Contractors and project procurement teams'];
+const buyerTypeMap: Record<DuzceGlassLocale,string[]> = {
+  tr:['Cam ithalatçıları ve distribütörleri','Isıcam / IGU üreticileri','Cam kesim, temper ve işleme tesisleri','Cephe ve alüminyum sistem firmaları','Pencere ve doğrama üreticileri','Müteahhitler ve proje satın alma ekipleri'],
+  en:['Glass importers and distributors','Insulating glass / IGU manufacturers','Glass cutting, tempering and processing plants','Façade and aluminium system companies','Window manufacturers','Contractors and project procurement teams'],
+  de:['Glasimporteure und Distributoren','Isolierglas- / IGU-Hersteller','Glaszuschnitt-, Vorspann- und Verarbeitungsbetriebe','Fassaden- und Aluminiumsystemunternehmen','Fenster- und Bauelementhersteller','Bauunternehmen und Projekteinkauf'],
+  it:['Importatori e distributori di vetro','Produttori di vetrocamera / IGU','Impianti di taglio, tempra e lavorazione vetro','Aziende di facciate e sistemi in alluminio','Produttori di finestre e serramenti','General contractor e team acquisti progetto'],
+  ru:['Импортёры и дистрибьюторы стекла','Производители стеклопакетов / IGU','Предприятия резки, закалки и обработки стекла','Фасадные и алюминиевые системные компании','Производители окон и конструкций','Подрядчики и проектные отделы закупок'],
+  fa:['واردکنندگان و توزیع‌کنندگان شیشه','تولیدکنندگان شیشه دوجداره / IGU','کارخانه‌های برش، سکوریت و فرآوری شیشه','شرکت‌های نما و سیستم‌های آلومینیومی','تولیدکنندگان پنجره و درب','پیمانکاران و تیم‌های خرید پروژه'],
+  zh:['玻璃进口商与经销商','中空玻璃 / IGU 制造商','玻璃切割、钢化及深加工企业','幕墙及铝系统公司','门窗制造企业','承包商及项目采购团队'],
+  vi:['Nhà nhập khẩu và phân phối kính','Nhà sản xuất kính hộp / IGU','Nhà máy cắt, tôi và gia công kính','Công ty mặt dựng và hệ nhôm','Nhà sản xuất cửa sổ và cửa đi','Nhà thầu và đội mua hàng dự án'],
+  ro:['Importatori și distribuitori de sticlă','Producători de geam termoizolant / IGU','Unități de tăiere, securizare și prelucrare a sticlei','Companii de fațade și sisteme din aluminiu','Producători de ferestre și tâmplărie','Antreprenori și echipe de achiziții pentru proiecte'],
+  bg:['Вносители и дистрибутори на стъкло','Производители на стъклопакети / IGU','Предприятия за рязане, закаляване и обработка на стъкло','Фасадни и алуминиеви системни компании','Производители на прозорци и дограма','Строителни изпълнители и проектни екипи за снабдяване'],
+  sr:['Uvoznici i distributeri stakla','Proizvođači termoizolacionog stakla / IGU','Pogoni za sečenje, kaljenje i obradu stakla','Kompanije za fasadne i aluminijumske sisteme','Proizvođači prozora i stolarije','Izvođači i projektni timovi nabavke']
+};
+const buyerTypes = buyerTypeMap[currentLang];
 
-const productDescriptions = currentLang === 'tr'
-  ? [
-      'Standart mimari ve endüstriyel kullanımlar için farklı kalınlıklarda düz cam çözümleri.',
-      'Füme, bronz, yeşil ve mavi tonlarda projeye uygun renkli düz cam seçenekleri.',
-      'Enerji verimliliği ve güneş kontrolü gerektiren projeler için kaplamalı cam ürünleri.',
-      'Güvenlik, akustik performans ve proje standardı gerektiren uygulamalar için lamine cam.',
-      'İç mekân, banyo, dekorasyon ve ticari kullanım için ayna çözümleri.',
-      'Fotovoltaik ve özel teknik uygulamalar için solar cam ürün grubu.',
-      'Gizlilik ve dekoratif kullanım için satina cam seçenekleri.',
-      'İç mimari ve tasarım projeleri için boyalı cam çözümleri.'
-    ]
-  : [
-      'Clear float glass solutions for standard architectural and industrial applications.',
-      'Tinted float glass options for project requirements in smoke, bronze, green and blue tones.',
-      'Coated glass products for energy efficiency and solar-control requirements.',
-      'Laminated glass for safety, acoustic performance and specification-driven projects.',
-      'Mirror solutions for interior, bathroom, decorative and commercial applications.',
-      'Solar glass products for photovoltaic and selected technical applications.',
-      'Satin glass options for privacy and decorative use.',
-      'Lacquered glass solutions for interior architecture and design projects.'
-    ];
+const productDescriptionMap: Record<DuzceGlassLocale,string[]> = {
+  tr:['Standart mimari ve endüstriyel kullanımlar için farklı kalınlıklarda düz cam çözümleri.','Füme, bronz, yeşil ve mavi tonlarda projeye uygun renkli düz cam seçenekleri.','Enerji verimliliği ve güneş kontrolü gerektiren projeler için kaplamalı cam ürünleri.','Güvenlik, akustik performans ve proje standardı gerektiren uygulamalar için lamine cam.','İç mekân, banyo, dekorasyon ve ticari kullanım için ayna çözümleri.','Fotovoltaik ve özel teknik uygulamalar için solar cam ürün grubu.','Gizlilik ve dekoratif kullanım için satina cam seçenekleri.','İç mimari ve tasarım projeleri için boyalı cam çözümleri.'],
+  en:['Clear float glass solutions for standard architectural and industrial applications.','Tinted float glass options for project requirements in smoke, bronze, green and blue tones.','Coated glass products for energy efficiency and solar-control requirements.','Laminated glass for safety, acoustic performance and specification-driven projects.','Mirror solutions for interior, bathroom, decorative and commercial applications.','Solar glass products for photovoltaic and selected technical applications.','Satin glass options for privacy and decorative use.','Lacquered glass solutions for interior architecture and design projects.'],
+  de:['Klares Floatglas in unterschiedlichen Dicken für Architektur und Industrie.','Getöntes Floatglas in Rauch-, Bronze-, Grün- und Blautönen für Projektanforderungen.','Beschichtetes Glas für Energieeffizienz und Sonnenschutz.','Verbundglas für Sicherheit, Akustik und spezifikationsgebundene Projekte.','Spiegellösungen für Innenräume, Bad, Dekoration und Gewerbe.','Solarglas für Photovoltaik und ausgewählte technische Anwendungen.','Satiniertes Glas für Sichtschutz und dekorative Anwendungen.','Lackiertes Glas für Innenarchitektur und Designprojekte.'],
+  it:['Vetro float chiaro in diversi spessori per applicazioni architettoniche e industriali.','Vetro float colorato in tonalità fumé, bronzo, verde e blu per esigenze di progetto.','Vetri rivestiti per efficienza energetica e controllo solare.','Vetro laminato per sicurezza, prestazioni acustiche e progetti a specifica.','Soluzioni a specchio per interni, bagno, decorazione e uso commerciale.','Vetro solare per fotovoltaico e applicazioni tecniche selezionate.','Vetro satinato per privacy e applicazioni decorative.','Vetro laccato per interior design e progetti di architettura.'],
+  ru:['Прозрачное флоат-стекло разных толщин для архитектурных и промышленных применений.','Тонированное флоат-стекло дымчатых, бронзовых, зелёных и синих оттенков.','Стекло с покрытием для энергоэффективности и солнцезащиты.','Ламинированное стекло для безопасности, акустики и проектных требований.','Зеркала для интерьеров, ванных комнат, декора и коммерческих объектов.','Солнечное стекло для фотоэлектрических и отдельных технических применений.','Сатинированное стекло для приватности и декора.','Лакированное стекло для интерьерных и дизайнерских проектов.'],
+  fa:['شیشه فلوت شفاف در ضخامت‌های مختلف برای کاربردهای معماری و صنعتی.','شیشه فلوت رنگی در طیف دودی، برنز، سبز و آبی برای نیازهای پروژه.','شیشه‌های پوشش‌دار برای بهره‌وری انرژی و کنترل خورشیدی.','شیشه لمینت برای ایمنی، عملکرد صوتی و پروژه‌های مبتنی بر مشخصات فنی.','راهکارهای آینه برای فضاهای داخلی، حمام، دکوراسیون و کاربرد تجاری.','شیشه سولار برای فتوولتائیک و کاربردهای فنی منتخب.','شیشه ساتینا برای حریم خصوصی و کاربردهای دکوراتیو.','شیشه رنگی/لاک‌شده برای معماری داخلی و پروژه‌های طراحی.'],
+  zh:['适用于标准建筑及工业用途的多厚度透明浮法玻璃。','烟灰、古铜、绿色及蓝色等项目用着色浮法玻璃。','用于节能与太阳能控制的镀膜玻璃。','满足安全、隔音及项目规范要求的夹层玻璃。','适用于室内、卫浴、装饰及商业空间的镜面产品。','用于光伏及特定技术应用的太阳能玻璃。','用于隐私与装饰场景的磨砂玻璃。','适用于室内建筑与设计项目的烤漆玻璃。'],
+  vi:['Kính nổi trong suốt nhiều độ dày cho ứng dụng kiến trúc và công nghiệp.','Kính nổi màu khói, đồng, xanh lá và xanh dương theo yêu cầu dự án.','Kính phủ cho hiệu quả năng lượng và kiểm soát bức xạ mặt trời.','Kính dán an toàn cho yêu cầu an toàn, cách âm và tiêu chuẩn dự án.','Giải pháp gương cho nội thất, phòng tắm, trang trí và thương mại.','Kính năng lượng mặt trời cho quang điện và các ứng dụng kỹ thuật chọn lọc.','Kính satin cho riêng tư và trang trí.','Kính sơn màu cho nội thất và dự án thiết kế.'],
+  ro:['Sticlă float clară, în diferite grosimi, pentru aplicații arhitecturale și industriale.','Sticlă float colorată în nuanțe fumurii, bronz, verde și albastru pentru cerințe de proiect.','Sticlă cu peliculă pentru eficiență energetică și control solar.','Sticlă laminată pentru siguranță, performanță acustică și proiecte cu specificații tehnice.','Soluții de oglindă pentru interior, baie, decor și utilizare comercială.','Sticlă solară pentru aplicații fotovoltaice și tehnice selectate.','Sticlă satinată pentru intimitate și utilizări decorative.','Sticlă lăcuită pentru arhitectură interioară și proiecte de design.'],
+  bg:['Прозрачно флоат стъкло в различни дебелини за архитектурни и индустриални приложения.','Цветно флоат стъкло в опушени, бронзови, зелени и сини нюанси за проектни изисквания.','Покрито стъкло за енергийна ефективност и слънцезащита.','Ламинирано стъкло за безопасност, акустика и проекти по спецификация.','Огледални решения за интериор, бани, декорация и търговски приложения.','Соларно стъкло за фотоволтаични и избрани технически приложения.','Сатинирано стъкло за уединение и декоративни приложения.','Боядисано стъкло за интериорна архитектура и дизайнерски проекти.'],
+  sr:['Providno float staklo u različitim debljinama za arhitektonske i industrijske primene.','Obojeno float staklo u dim, bronzanim, zelenim i plavim tonovima za projektne zahteve.','Premazano staklo za energetsku efikasnost i kontrolu sunčevog zračenja.','Laminirano staklo za bezbednost, akustičke performanse i projekte po specifikaciji.','Ogledala za enterijer, kupatila, dekoraciju i komercijalne primene.','Solarno staklo za fotonaponske i odabrane tehničke primene.','Satinirano staklo za privatnost i dekorativnu upotrebu.','Lakirano staklo za enterijer i dizajnerske projekte.']
+};
+const productDescriptions = productDescriptionMap[currentLang];
+
+const buyerSectionCopy: Record<DuzceGlassLocale,{eyebrow:string;title:string;groups:string}> = {
+  tr:{eyebrow:'Hedef alıcı profili',title:'Son kullanıcı değil, ticari hacim üreten alıcılar.',groups:'Alıcı grupları'},
+  en:{eyebrow:'Target buyer profiles',title:'Commercial buyers that create repeat volume.',groups:'Buyer groups'},
+  de:{eyebrow:'Zielkäuferprofile',title:'Gewerbliche Käufer mit wiederkehrendem Volumen.',groups:'Käufergruppen'},
+  it:{eyebrow:'Profili buyer target',title:'Buyer commerciali in grado di generare volumi ricorrenti.',groups:'Gruppi di buyer'},
+  ru:{eyebrow:'Целевые покупатели',title:'Коммерческие покупатели с повторяемыми объёмами.',groups:'Группы покупателей'},
+  fa:{eyebrow:'پروفایل خریداران هدف',title:'خریداران تجاری با ظرفیت سفارش مستمر.',groups:'گروه‌های خریدار'},
+  zh:{eyebrow:'目标采购商画像',title:'面向可形成持续采购量的商业买家。',groups:'采购商类型'},
+  vi:{eyebrow:'Hồ sơ người mua mục tiêu',title:'Người mua thương mại tạo ra khối lượng mua lặp lại.',groups:'Nhóm người mua'},
+  ro:{eyebrow:'Profiluri de cumpărători țintă',title:'Cumpărători comerciali care generează volume recurente.',groups:'Grupuri de cumpărători'},
+  bg:{eyebrow:'Профили на целеви купувачи',title:'Търговски купувачи, които генерират повтаряеми обеми.',groups:'Групи купувачи'},
+  sr:{eyebrow:'Profili ciljnih kupaca',title:'Komercijalni kupci koji stvaraju ponovljene količine.',groups:'Grupe kupaca'}
+};
 
 ---
 <div class="duzce-page" dir={isRtl ? 'rtl' : 'ltr'}>
@@ -98,8 +116,8 @@ const productDescriptions = currentLang === 'tr'
   <section class="section duzce-market-section">
     <div class="container">
       <div class="duzce-market-intro">
-        <span class="eyebrow">{currentLang === 'tr' ? 'Hedef alıcı profili' : 'Target buyer profile'}</span>
-        <h2>{currentLang === 'tr' ? 'Son kullanıcı değil, ticari hacim üreten alıcılar.' : 'Commercial buyers that create repeat volume.'}</h2>
+        <span class="eyebrow">{buyerSectionCopy[currentLang].eyebrow}</span>
+        <h2>{buyerSectionCopy[currentLang].title}</h2>
       </div>
       <div class="duzce-market-body">
         <div class="duzce-market-panel">
@@ -107,7 +125,7 @@ const productDescriptions = currentLang === 'tr'
           <div class="duzce-market-list">{d.markets.map((market) => <span>{market}</span>)}</div>
         </div>
         <div class="duzce-buyers-panel">
-          <small>{currentLang === 'tr' ? 'Alıcı grupları' : 'Buyer groups'}</small>
+          <small>{buyerSectionCopy[currentLang].groups}</small>
           <ul class="duzce-buyer-list">{buyerTypes.map((item) => <li>{item}</li>)}</ul>
         </div>
       </div>
