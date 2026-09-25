@@ -293,32 +293,32 @@ const productFamilies:Record<string,string> = {
 const catalogueGroups = [
   {
     key:'pistachio',
-    title:{tr:'Fıstık Çeşitleri',en:'Pistachio Varieties',de:'Pistaziensorten',it:'Varietà di pistacchio',ru:'Сорта фисташек',fa:'انواع پسته',zh:'开心果系列',vi:'Các loại hạt dẻ cười'}[lang],
+    title:{tr:'Fıstık Çeşitleri',en:'Pistachio Varieties',de:'Pistaziensorten',it:'Varietà di pistacchio',ru:'Сорта фисташек',fa:'انواع پسته',zh:'开心果系列',vi:'Các loại hạt dẻ cười',ro:'Soiuri de fistic',bg:'Сортове шамфъстък',sr:'Sorte pistaća'}[lang],
     ids:['akbari-pistachio','kaleghouchi-pistachio','green-peeled-pistachio','fandoghi-pistachio','pistachio-granules','ahmad-aghaei-pistachio']
   },
   {
     key:'dates',
-    title:{tr:'Hurma ve Hurma Ürünleri',en:'Dates & Date Products',de:'Datteln & Dattelprodukte',it:'Datteri e derivati',ru:'Финики и производные продукты',fa:'خرما و فرآورده‌های خرما',zh:'椰枣及深加工制品',vi:'Chà là & Sản phẩm từ chà là'}[lang],
+    title:{tr:'Hurma ve Hurma Ürünleri',en:'Dates & Date Products',de:'Datteln & Dattelprodukte',it:'Datteri e derivati',ru:'Финики и производные продукты',fa:'خرما و فرآورده‌های خرما',zh:'椰枣及深加工制品',vi:'Chà là & Sản phẩm từ chà là',ro:'Curmale și produse din curmale',bg:'Фурми и продукти от фурми',sr:'Urme i proizvodi od urmi'}[lang],
     ids:['mazafati-dates','date-paste-syrup']
   },
   {
     key:'nuts',
-    title:{tr:'Kuruyemişler',en:'Nuts',de:'Nüsse',it:'Frutta a guscio',ru:'Орехи',fa:'خشکبار و مغزها',zh:'特色坚果系列',vi:'Các loại hạt'}[lang],
+    title:{tr:'Kuruyemişler',en:'Nuts',de:'Nüsse',it:'Frutta a guscio',ru:'Орехи',fa:'خشکبار و مغزها',zh:'特色坚果系列',vi:'Các loại hạt',ro:'Nuci și semințe oleaginoase',bg:'Ядки',sr:'Orašasti plodovi'}[lang],
     ids:['almonds','walnuts','mixed-nuts']
   },
   {
     key:'dried-fruit',
-    title:{tr:'Kuru Meyveler',en:'Dried Fruits',de:'Trockenfrüchte',it:'Frutta essiccata',ru:'Сухофрукты',fa:'میوه‌های خشک',zh:'脱水干果系列',vi:'Trái cây sấy khô'}[lang],
+    title:{tr:'Kuru Meyveler',en:'Dried Fruits',de:'Trockenfrüchte',it:'Frutta essiccata',ru:'Сухофрукты',fa:'میوه‌های خشک',zh:'脱水干果系列',vi:'Trái cây sấy khô',ro:'Fructe uscate',bg:'Сушени плодове',sr:'Suvo voće'}[lang],
     ids:['raisins','dried-apricots-kernels','dried-mulberries']
   },
   {
     key:'seeds',
-    title:{tr:'Tohumlar',en:'Seeds',de:'Saaten',it:'Semi',ru:'Семена',fa:'تخمه‌ها و دانه‌ها',zh:'大宗籽仁系列',vi:'Các loại hạt giống & hạt xuất khẩu'}[lang],
+    title:{tr:'Tohumlar',en:'Seeds',de:'Saaten',it:'Semi',ru:'Семена',fa:'تخمه‌ها و دانه‌ها',zh:'大宗籽仁系列',vi:'Các loại hạt giống & hạt xuất khẩu',ro:'Semințe',bg:'Семена',sr:'Semenke'}[lang],
     ids:['pumpkin-seeds','sunflower-seeds']
   },
   {
     key:'specialities',
-    title:{tr:'Safran ve Özel Ürünler',en:'Saffron & Specialities',de:'Safran & Spezialitäten',it:'Zafferano e specialità',ru:'Шафран и специализированные продукты',fa:'زعفران و محصولات خاص',zh:'顶级藏红花与天然特色食品',vi:'Saffron & Đặc sản'}[lang],
+    title:{tr:'Safran ve Özel Ürünler',en:'Saffron & Specialities',de:'Safran & Spezialitäten',it:'Zafferano e specialità',ru:'Шафран и специализированные продукты',fa:'زعفران و محصولات خاص',zh:'顶级藏红花与天然特色食品',vi:'Saffron & Đặc sản',ro:'Șofran și specialități',bg:'Шафран и специални продукти',sr:'Šafran i specijaliteti'}[lang],
     ids:['saffron','zereshk']
   }
 ];
@@ -427,6 +427,80 @@ const groupBadges: Record<string, { b1: Record<Locale, string>; b2: Record<Local
     b3: { tr:'Mühürlü Metal / Özel Toptan Kaplar', en:'Tamper-Sealed Bulk Tins', de:'Versiegelte Weißblechdosen', it:'Contenitori sigillati anti-manomissione', ru:'Пломбированная оптовая тара', fa:'ظروف فلزی پلمپ‌شده عمده', zh:'密封防伪马口铁大宗保质包装', vi:'Hộp thiếc niêm phong chuyên dụng' }
   }
 };
+
+/* Balkan catalogue localization */
+Object.assign(categoryLeads.pistachio as any,{
+  ro:'Fistic Akbari, Kalleh Ghouchi, Ahmad Aghaei și Fandoghi din zone de producție consacrate; calibrare pe dimensiuni, control pentru aflatoxine și ambalare de export în vrac sau vid.',
+  bg:'Премиум шамфъстък Akbari, Kalleh Ghouchi, Ahmad Aghaei и Fandoghi от утвърдени райони; калибриране по размер, контрол за афлатоксини и вакуумна или експортна насипна опаковка.',
+  sr:'Premium Akbari, Kalleh Ghouchi, Ahmad Aghaei i Fandoghi pistaći iz etabliranih proizvodnih oblasti; kalibracija po veličini, kontrola aflatoksina i vakuumsko ili izvozno bulk pakovanje.'
+});
+Object.assign(categoryLeads.dates as any,{
+  ro:'Curmale Mazafati proaspete, pastă industrială de curmale și siropuri concentrate, cu respectarea cerințelor de lanț frigorific și a specificațiilor industriei alimentare.',
+  bg:'Пресни фурми Mazafati, индустриална паста от фурми и концентрирани сиропи при спазване на изискванията за студена верига и хранителната промишленост.',
+  sr:'Sveže Mazafati urme, industrijska pasta od urmi i koncentrovani sirupi uz kontrolu hladnog lanca i specifikacije prehrambene industrije.'
+});
+Object.assign(categoryLeads.nuts as any,{
+  ro:'Migdale, miez de nucă și mixuri de nuci configurate pentru cofetărie, snackuri și ambalare, cu evaluarea calității la nivel de lot.',
+  bg:'Бадеми, орехови ядки и ядкови миксове за сладкарство, снакс и пакетиране с оценка на качеството по партиди.',
+  sr:'Badem, jezgra oraha i prilagođene mešavine orašastih plodova za konditorsku industriju, grickalice i pakovanje uz kontrolu kvaliteta po seriji.'
+});
+Object.assign(categoryLeads['dried-fruit'] as any,{
+  ro:'Stafide, caise Malatya și sâmburi de caise, precum și dude uscate; uscare controlată, verificarea umidității și ambalare standard de export.',
+  bg:'Стафиди, кайсии Malatya с ядки и сушени черници; контролирано сушене, проверка на влажността и стандартна експортна опаковка.',
+  sr:'Suvo grožđe, Malatya kajsije sa jezgrima i sušeni dud; kontrolisano sušenje, provera vlage i standardno izvozno pakovanje.'
+});
+Object.assign(categoryLeads.seeds as any,{
+  ro:'Semințe de dovleac și floarea-soarelui; curățate, calibrate și livrate în saci angro cu barieră la umiditate pentru prăjire și procesare.',
+  bg:'Тиквени и слънчогледови семки; почистени, калибрирани и доставяни във влагоустойчиви чували за печене и хранителна преработка.',
+  sr:'Seme bundeve i suncokreta; očišćeno, kalibrisano i isporučeno u veleprodajnim vrećama sa zaštitom od vlage za pečenje i preradu hrane.'
+});
+Object.assign(categoryLeads.specialities as any,{
+  ro:'Șofran certificat Super Negin și Negin și zereshk uscat; documentație de analiză relevantă și ambalare angro sigilată, în funcție de lot și piață.',
+  bg:'Сертифициран шафран Super Negin и Negin и сушен zereshk; релевантни анализи и запечатана опаковка на едро според партидата и пазара.',
+  sr:'Sertifikovani Super Negin i Negin šafran i sušeni zereshk; relevantna analitička dokumentacija i zapečaćeno veleprodajno pakovanje prema seriji i tržištu.'
+});
+
+const balkanGroupBadges:any={
+  pistachio:{
+    ro:['Testare aflatoxine (COA)','Calibrare pe dimensiuni','Ambalare vacuum & export'],
+    bg:['Контрол за афлатоксини (COA)','Калибриране по размер','Вакуумна & експортна опаковка'],
+    sr:['Kontrola aflatoksina (COA)','Kalibracija po veličini','Vakuumsko & izvozno pakovanje']
+  },
+  dates:{
+    ro:['Lanț frigorific controlat','Clase pentru consum & procesare','100% natural · fără zahăr adăugat'],
+    bg:['Контролирана студена верига','Трапезни & индустриални класове','100% натурално · без добавена захар'],
+    sr:['Kontrolisan hladni lanac','Konzumne & industrijske klase','100% prirodno · bez dodatog šećera']
+  },
+  nuts:{
+    ro:['Sortare și calibrare angro','Control al calității pe lot','Ambalare pentru procesare & retail'],
+    bg:['Сортиране & калибриране на едро','Контрол на качеството по партиди','Опаковка за преработка & retail'],
+    sr:['Veleprodajno sortiranje & kalibracija','Kontrola kvaliteta po seriji','Pakovanje za preradu & retail']
+  },
+  'dried-fruit':{
+    ro:['Uscare controlată','Controlul umidității','Cartoane standard de export'],
+    bg:['Контролирано сушене','Контрол на влажността','Стандартни експортни кашони'],
+    sr:['Kontrolisano sušenje','Kontrola vlage','Standardne izvozne kutije']
+  },
+  seeds:{
+    ro:['Curățare și calibrare','Calitate pentru consum & procesare','Saci angro cu protecție la umiditate'],
+    bg:['Почистване & калибриране','Качество за консумация & преработка','Влагоустойчиви чували на едро'],
+    sr:['Čišćenje & kalibracija','Kvalitet za konzumaciju & preradu','Veleprodajne vreće sa zaštitom od vlage']
+  },
+  specialities:{
+    ro:['Analiză și trasabilitate pe lot','Clase premium pentru export','Ambalare sigilată'],
+    bg:['Анализ & проследимост по партида','Премиум експортни класове','Запечатана опаковка'],
+    sr:['Analiza & sledljivost po seriji','Premium izvozne klase','Zapečaćeno pakovanje']
+  }
+};
+for(const [group,langs] of Object.entries(balkanGroupBadges)){
+  for(const langCode of ['ro','bg','sr']){
+    const vals=(langs as any)[langCode];
+    Object.assign((groupBadges as any)[group].b1,{[langCode]:vals[0]});
+    Object.assign((groupBadges as any)[group].b2,{[langCode]:vals[1]});
+    Object.assign((groupBadges as any)[group].b3,{[langCode]:vals[2]});
+  }
+}
+
 const sourcingDeskCopy: Record<Locale, { kicker: string; title: string; lead: string; cta: string; note: string }> = {
   tr: {
     kicker: 'Toptan Tedarik Masası',
