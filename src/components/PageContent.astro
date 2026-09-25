@@ -895,7 +895,7 @@ const verifiedLater = {
             {lang === 'tr' ? <h1 class="home-hero-title home-hero-title--tr"><span>Türkiye’den dünyaya.</span><span>Dünyadan doğru üreticiye.</span></h1> : <h1>{platform.title}</h1>}
             <p class="lead">{platform.lead}</p>
             <div class="hero-proof-pills" aria-label="CTSEG trade capabilities">
-              {h.trust.map((item:string,index:number) => <span><small>{indexLabel(index)}</small>{item}</span>)}
+              {h.trust.map((item:string) => <span>{item}</span>)}
             </div>
             <div class="actions trade-intent-actions"><a class="button" href={contactWithIntent('buyer_request')} data-trade-intent="buyer_request">{platform.buyerCta}</a><a class="button button-secondary" href={contactWithIntent('supplier_market_entry')} data-trade-intent="supplier_market_entry">{platform.producerCta}</a></div>
           </div>
