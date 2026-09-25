@@ -31,7 +31,7 @@ export const contactQualification: Record<ActiveLocale, ContactQualification> = 
     productFamilies: [
       { value: 'vegetable_oils', label: 'Bitkisel yağlar ve gıda' },
       { value: 'nuts_dried_fruit', label: 'Kuruyemiş ve kuru meyve' },
-      { value: 'reflex_gloves', label: 'Tek kullanımlık eldivenler' },
+      { value: 'architectural_glass', label: 'Mimari ve endüstriyel cam' },
       { value: 'biofuel_feedstock', label: 'Biyoyakıt ve enerji hammaddesi' },
       { value: 'other', label: 'Diğer ürün veya hizmet' },
     ],
@@ -53,7 +53,7 @@ export const contactQualification: Record<ActiveLocale, ContactQualification> = 
     productFamilies: [
       { value: 'vegetable_oils', label: 'Vegetable oils and food' },
       { value: 'nuts_dried_fruit', label: 'Nuts and dried fruit' },
-      { value: 'reflex_gloves', label: 'Disposable gloves' },
+      { value: 'architectural_glass', label: 'Architectural and industrial glass' },
       { value: 'biofuel_feedstock', label: 'Biofuel and energy feedstock' },
       { value: 'other', label: 'Other product or service' },
     ],
@@ -75,7 +75,7 @@ export const contactQualification: Record<ActiveLocale, ContactQualification> = 
     productFamilies: [
       { value: 'vegetable_oils', label: 'Pflanzenöle und Lebensmittel' },
       { value: 'nuts_dried_fruit', label: 'Nüsse und Trockenfrüchte' },
-      { value: 'reflex_gloves', label: 'Einweghandschuhe' },
+      { value: 'architectural_glass', label: 'Architektur- und Industrieglas' },
       { value: 'biofuel_feedstock', label: 'Biokraftstoff und Energierohstoffe' },
       { value: 'other', label: 'Anderes Produkt oder Dienstleistung' },
     ],
@@ -97,7 +97,7 @@ export const contactQualification: Record<ActiveLocale, ContactQualification> = 
     productFamilies: [
       { value: 'vegetable_oils', label: 'Oli vegetali e alimentari' },
       { value: 'nuts_dried_fruit', label: 'Frutta a guscio e secca' },
-      { value: 'reflex_gloves', label: 'Guanti monouso' },
+      { value: 'architectural_glass', label: 'Vetro architettonico e industriale' },
       { value: 'biofuel_feedstock', label: 'Biocarburanti e materie prime energetiche' },
       { value: 'other', label: 'Altro prodotto o servizio' },
     ],
@@ -119,7 +119,7 @@ export const contactQualification: Record<ActiveLocale, ContactQualification> = 
     productFamilies: [
       { value: 'vegetable_oils', label: 'Растительные масла и продукты питания' },
       { value: 'nuts_dried_fruit', label: 'Орехи и сухофрукты' },
-      { value: 'reflex_gloves', label: 'Одноразовые перчатки' },
+      { value: 'architectural_glass', label: 'Архитектурное и промышленное стекло' },
       { value: 'biofuel_feedstock', label: 'Биотопливо и энергетическое сырьё' },
       { value: 'other', label: 'Другой товар или услуга' },
     ],
@@ -141,7 +141,7 @@ export const contactQualification: Record<ActiveLocale, ContactQualification> = 
     productFamilies: [
       { value: 'vegetable_oils', label: 'روغن‌های گیاهی و مواد غذایی' },
       { value: 'nuts_dried_fruit', label: 'خشکبار و میوه خشک' },
-      { value: 'reflex_gloves', label: 'دستکش‌های یک‌بارمصرف' },
+      { value: 'architectural_glass', label: 'شیشه معماری و صنعتی' },
       { value: 'biofuel_feedstock', label: 'سوخت زیستی و مواد اولیه انرژی' },
       { value: 'other', label: 'محصول یا خدمت دیگر' },
     ],
@@ -163,7 +163,7 @@ export const contactQualification: Record<ActiveLocale, ContactQualification> = 
     productFamilies: [
       { value: 'vegetable_oils', label: '大宗植物油与食品原料' },
       { value: 'nuts_dried_fruit', label: '特色坚果与脱水干果' },
-      { value: 'reflex_gloves', label: 'REFLEX 一次性医用与防护手套' },
+      { value: 'architectural_glass', label: '建筑及工业玻璃' },
       { value: 'biofuel_feedstock', label: '生物燃料与能源化工原料' },
       { value: 'other', label: '其他大宗商品或工业品' },
     ],
@@ -185,7 +185,7 @@ export const contactQualification: Record<ActiveLocale, ContactQualification> = 
     productFamilies: [
       { value: 'vegetable_oils', label: 'Dầu thực vật và thực phẩm' },
       { value: 'nuts_dried_fruit', label: 'Hạt và trái cây khô' },
-      { value: 'reflex_gloves', label: 'Găng tay dùng một lần' },
+      { value: 'architectural_glass', label: 'Kính kiến trúc và công nghiệp' },
       { value: 'biofuel_feedstock', label: 'Nhiên liệu sinh học & nguyên liệu năng lượng' },
       { value: 'other', label: 'Sản phẩm hoặc dịch vụ khác' },
     ],
