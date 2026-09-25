@@ -63,6 +63,8 @@ const alternateCodes = pageKey === 'glass'
     ? ['tr','en','ro','bg','sr']
     : pageKey === 'home'
     ? ['tr','en','ro','bg','sr']
+    : pageKey === 'insights' && pageId
+    ? ['tr','en','de','it','ru','fa','zh','vi']
     : ['how-we-work','scenarios'].includes(pageKey)
     ? activeLocales
     : pageKey === 'iran-trade' ? ['tr','en','fa']
