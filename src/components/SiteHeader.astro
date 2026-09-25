@@ -1,7 +1,7 @@
 ---
 import { localizedPath, ui, type Locale } from '../data/site';
 import { activeLocaleRegistry } from '../data/locales';
-import { reflexPath, type ReflexLocale } from '../data/reflex-data';
+import { duzceGlassPath, type DuzceGlassLocale } from '../data/duzce-glass';
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 import { tradePlatformCopy } from '../data/trade-platform';
 import { searchLandingPath, type SearchLandingId } from '../data/search-landings';
@@ -11,10 +11,9 @@ const t = ui[lang] || ui.en;
 const home = localizedPath(lang, 'home');
 const p = tradePlatformCopy[lang] || tradePlatformCopy.en;
 const methodLabel = {tr:'Yöntem',en:'Method',de:'Arbeitsweise',it:'Metodo',fa:'روش کار',ru:'Метод',zh:'运作模式',vi:'Phương thức hoạt động'}[lang] || 'Method';
-const medicalNavLabels: Record<string, string> = {
-  tr:'REFLEX Medikal', en:'REFLEX Medical', de:'REFLEX Medizin', it:'REFLEX Medicale',
-  fa:'دستکش پزشکی REFLEX', ru:'REFLEX Медицина', zh:'REFLEX 医用手套', vi:'Găng tay REFLEX',
-  sq:'REFLEX Medikal', mk:'REFLEX Medikal', sr:'REFLEX Medikal'
+const glassNavLabels: Record<string, string> = {
+  tr:'Düzce Cam', en:'Düzce Float Glass', de:'Düzce Float Glass', it:'Düzce Float Glass',
+  fa:'شیشه Düzce', ru:'Düzce Float Glass', zh:'Düzce 浮法玻璃', vi:'Düzce Float Glass'
 };
 const navigationCopy = {
   tr:{globalTrade:'Küresel Ticaret',industries:'Sektörler',portfolio:'Ticaret Portföyü',intelligence:'Ticaret İçgörüleri',company:'Şirket',main:'ANA MENÜ',quick:'HIZLI ERİŞİM',trade:'TİCARET',intro:'İki yönlü ticaret, stratejik tedarik ve pazara giriş yolları'},
@@ -27,9 +26,9 @@ const navigationCopy = {
   vi:{globalTrade:'Thương mại toàn cầu',industries:'Ngành',portfolio:'Danh mục thương mại',intelligence:'Thông tin thương mại',company:'Công ty',main:'MENU CHÍNH',quick:'ĐIỀU HƯỚNG',trade:'THƯƠNG MẠI',intro:'Thương mại hai chiều, sourcing chiến lược và thâm nhập thị trường'}
 }[lang] || {globalTrade:'Global Trade',industries:'Industries',portfolio:'Trade Portfolio',intelligence:'Trade Intelligence',company:'Company',main:'MAIN MENU',quick:'NAVIGATION',trade:'TRADE',intro:'Two-way trade, strategic sourcing and market-entry paths'};
 
-const safeReflexLang = (['en','tr','de','it','ru','fa','zh','vi','sq','mk','sr'].includes(lang) ? lang : 'en') as ReflexLocale;
-const reflexUrl = reflexPath(safeReflexLang);
-const medicalLabel = medicalNavLabels[lang] || 'REFLEX Medical';
+const safeGlassLang = (['en','tr','de','it','ru','fa','zh','vi'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
+const glassUrl = duzceGlassPath(safeGlassLang);
+const glassLabel = glassNavLabels[lang] || 'Düzce Float Glass';
 
 const focusedCountryLp = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
 const solutionLinks = [
@@ -37,7 +36,7 @@ const solutionLinks = [
   [p.buyerTitle, `${home}#sectors`],
   [p.producerTitle, `${home}#sectors`],
   [methodLabel, localizedPath(lang,'how-we-work')],
-  ...(!focusedCountryLp ? [[medicalLabel, reflexUrl]] : [])
+  ...(!focusedCountryLp ? [[glassLabel, glassUrl]] : [])
 ];
 
 const nav = [
@@ -63,9 +62,9 @@ const globalSwitchPath = (target: string): string => {
   }
   if (['vietnam-turkiye','china-turkiye','ukraine-turkiye'].includes(pageKey)) return target === 'tr' ? '/' : `/${target}/`;
   if (target === 'fa') return '/fa/';
-  if (pageKey === 'medical') {
-    const reflexLocales = ['en','tr','de','it','ru','fa'] as const;
-    if ((reflexLocales as readonly string[]).includes(target)) return reflexPath(target as ReflexLocale);
+  if (pageKey === 'glass') {
+    const glassLocales = ['en','tr','de','it','ru','fa','zh','vi'] as const;
+    if ((glassLocales as readonly string[]).includes(target)) return duzceGlassPath(target as DuzceGlassLocale);
     return `/${target}/`;
   }
   const resolved = localizedPath(target as Locale, pageKey, pageId);
