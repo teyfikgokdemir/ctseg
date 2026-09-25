@@ -114,7 +114,7 @@ export const serviceDetails:Record<'tr'|'en'|'ro'|'bg'|'sr',Record<CoreServiceId
         {question:'Can the scope cover both import and export projects?',answer:'Yes. The engagement can focus on source-country selection, importing, exporting, partner verification or entry into a new market.'}
       ]
     }
-,
+  },
   ro: {
     'strategic-sourcing': {
       scopeTitle:'Domeniul serviciului',
