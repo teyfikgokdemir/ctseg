@@ -635,10 +635,12 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
 .homepage-trade-hero{padding:0 0 48px;background:#07090d}
 .homepage-trade-hero .hero-grid{display:block}
 .homepage-hero-stage{position:relative;isolation:isolate}
-.homepage-trade-hero .hero-copy{position:absolute;z-index:3;left:clamp(24px,4vw,58px);top:50%;width:min(40%,560px);transform:translateY(-50%);padding:0}
-.homepage-trade-hero .hero-copy .eyebrow{margin-bottom:14px}
-.homepage-trade-hero .hero-copy .lead{max-width:34rem;color:#d7d9d5;font-size:clamp(.98rem,1.18vw,1.14rem);line-height:1.55}
-.homepage-trade-hero .hero-copy .actions{margin-top:24px}
+.homepage-trade-hero .hero-copy{position:absolute;z-index:3;left:clamp(32px,4.2vw,64px);top:49%;width:min(43%,620px);transform:translateY(-50%);padding:0}
+.homepage-trade-hero .hero-copy .eyebrow{margin-bottom:13px}
+.homepage-trade-hero .hero-copy .lead{max-width:31rem;color:#d7d9d5;font-size:clamp(.94rem,1vw,1.08rem);line-height:1.5}
+.homepage-trade-hero .hero-copy .actions{margin-top:20px}
+.homepage-trade-hero .home-hero-title--tr{max-width:100%!important;margin-bottom:20px!important;font-size:clamp(2.35rem,2.7vw,3.2rem)!important;line-height:.98!important;letter-spacing:-.032em!important}
+.homepage-trade-hero .home-hero-title--tr span{display:block;white-space:nowrap}
 .homepage-trade-hero .hero-visual{width:100%;max-width:none;justify-self:auto;margin:0}
 .homepage-trade-hero .hero-visual:before{display:none}
 .homepage-trade-hero .hero-visual img{display:block;width:100%;height:auto;max-height:none;aspect-ratio:auto;object-fit:contain;object-position:center;filter:none}
@@ -648,6 +650,8 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
   .homepage-trade-hero{padding:0 0 36px}
   .homepage-hero-stage{display:flex;flex-direction:column}
   .homepage-trade-hero .hero-copy{position:relative;order:2;left:auto;top:auto;width:auto;max-width:none;transform:none;padding:28px 4px 0}
+  .homepage-trade-hero .home-hero-title--tr{font-size:clamp(2.2rem,7vw,3rem)!important;line-height:1!important}
+  .homepage-trade-hero .home-hero-title--tr span{white-space:normal}
   .homepage-trade-hero .hero-visual{order:1}
   .homepage-trade-hero .hero-visual figcaption{grid-template-columns:repeat(2,1fr)}
 }
