@@ -16,7 +16,10 @@ const secondaryLabel = ({
   ru:'дополнительный вид продукта',
   fa:'نمای جایگزین محصول',
   zh:'产品另一视图',
-  vi:'góc nhìn sản phẩm khác'
+  vi:'góc nhìn sản phẩm khác',
+  ro:'vedere alternativă a produsului',
+  bg:'алтернативен изглед на продукта',
+  sr:'alternativni prikaz proizvoda'
 } as Record<string,string>)[lang] || 'alternate product view';
 const alt = secondary ? `${product.names[lang]} · ${secondaryLabel}` : product.names[lang];
 const mediaType = product.media.mediaType ?? 'photo';
