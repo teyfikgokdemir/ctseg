@@ -316,7 +316,7 @@ const dynamicPlaceholders = {
   .commercial-form-panel{border-radius:0;box-shadow:none}
   .commercial-form-panel::before{content:none}
   .direct-contact-cards{gap:0;border-top:1px solid rgba(255,255,255,.2)}
-  .direct-contact-card{min-height:68px;padding:12px 0;border:0;border-bottom:1px solid rgba(255,255,255,.2);border-radius:0;background:transparent;box-shadow:none}
+  .direct-contact-card{min-height:58px;padding:9px 0;border:0;border-bottom:1px solid rgba(255,255,255,.2);border-radius:0;background:transparent;box-shadow:none}
   .direct-contact-card>span{width:38px;height:38px;border-radius:0;background:transparent;color:#c4f000!important;border:1px solid rgba(196,240,0,.45)}
   .direct-contact-card>span svg{width:18px;height:18px;display:block;flex-shrink:0}
   .direct-contact-card:hover,.direct-contact-card:focus-visible{transform:none;background:transparent;border-color:#c4f000}
@@ -339,33 +339,33 @@ const dynamicPlaceholders = {
   @media(max-width:980px){.direct-contact-cards{border-top:0}.direct-contact-card{border-top:1px solid rgba(255,255,255,.2)}}
 
   /* Premium compact request desk */
-  .commercial-form-panel{grid-template-columns:minmax(0,.78fr) minmax(520px,1.22fr);gap:clamp(26px,3vw,46px);padding:clamp(26px,3vw,42px);background:#0c100d}
-  .commercial-form-intro h2{font-size:clamp(38px,3.9vw,64px);max-width:9ch;line-height:.96}
-  .commercial-form-intro>p:not(.eyebrow){font-size:15.5px;line-height:1.55}
+  .commercial-form-panel{grid-template-columns:minmax(0,.72fr) minmax(460px,1.08fr);gap:clamp(22px,2.4vw,36px);padding:clamp(22px,2.5vw,34px);background:#0c100d;max-width:1180px;margin-inline:auto}
+  .commercial-form-intro h2{font-size:clamp(34px,3.2vw,54px);max-width:9ch;line-height:.97}
+  .commercial-form-intro>p:not(.eyebrow){font-size:14.5px;line-height:1.5;max-width:30em}
   .commercial-form-disclosure{border:1px solid rgba(255,255,255,.13);background:linear-gradient(180deg,#151a17,#101411);color:#f3f4ef}
-  .commercial-form-disclosure-title{padding:16px 18px 14px;border-bottom:1px solid rgba(255,255,255,.12);background:transparent;color:#f3f4ef;font-size:16px}
-  .commercial-form{padding:0 18px 18px}
-  .commercial-intent-cards{gap:9px;margin:14px 0 18px}
-  .intent-card{grid-template-columns:32px 1fr;gap:10px;min-height:104px;padding:12px;border:1px solid rgba(255,255,255,.12);background:#121713;color:#fff}
+  .commercial-form-disclosure-title{padding:14px 16px 12px;border-bottom:1px solid rgba(255,255,255,.12);background:transparent;color:#f3f4ef;font-size:16px}
+  .commercial-form{padding:0 16px 16px}
+  .commercial-intent-cards{gap:8px;margin:12px 0 14px}
+  .intent-card{grid-template-columns:32px 1fr;gap:10px;min-height:92px;padding:10px;border:1px solid rgba(255,255,255,.12);background:#121713;color:#fff}
   .intent-card:hover{border-color:rgba(196,240,0,.55);background:#151b16;box-shadow:none}
   .intent-card.is-active{border-color:#c4f000;background:#151b16;box-shadow:none}
   .intent-card-icon{width:30px;height:30px;border:1px solid rgba(255,255,255,.14);background:#090c0a;color:#c4f000}
   .intent-card-kicker{color:#9da69e;font-size:8.8px}
-  .intent-card strong{color:#fff;font-size:13px;line-height:1.18}
-  .intent-card p{color:#b7beb8;font-size:10.5px;line-height:1.32}
-  .commercial-form-grid{gap:12px}
+  .intent-card strong{color:#fff;font-size:12.5px;line-height:1.16}
+  .intent-card p{color:#b7beb8;font-size:10px;line-height:1.28}
+  .commercial-form-grid{gap:10px}
   .commercial-field{gap:6px}
   .commercial-field>span{color:#c8cec8!important;font-size:10.5px!important}
-  .commercial-field input,.commercial-field select,.commercial-field textarea{min-height:43px;padding:9px 11px;border:1px solid rgba(255,255,255,.13);background:#0b0f0c;color:#fff}
+  .commercial-field input,.commercial-field select,.commercial-field textarea{min-height:40px;padding:8px 10px;border:1px solid rgba(255,255,255,.13);background:#0b0f0c;color:#fff}
   .commercial-field select{color-scheme:dark}
-  .commercial-field textarea{min-height:82px}
+  .commercial-field textarea{min-height:72px}
   .commercial-field input:focus,.commercial-field select:focus,.commercial-field textarea:focus{border-color:#c4f000;box-shadow:0 0 0 2px rgba(196,240,0,.12)}
-  .commercial-details{margin-top:14px;padding-top:14px;border-color:rgba(255,255,255,.12)}
+  .commercial-details{margin-top:12px;padding-top:12px;border-color:rgba(255,255,255,.12)}
   .commercial-details>summary{color:#e6e9e5;margin-bottom:14px}
-  .privacy-check{margin-top:16px;color:#aeb5af}.privacy-check a{color:#fff}
-  .commercial-form-actions{margin-top:16px}.commercial-form-actions .button{width:100%;min-height:46px;background:#c4f000!important;color:#0b0d0b!important;border-color:#c4f000!important}
+  .privacy-check{margin-top:12px;color:#aeb5af}.privacy-check a{color:#fff}
+  .commercial-form-actions{margin-top:12px}.commercial-form-actions .button{width:100%;min-height:42px;background:#c4f000!important;color:#0b0d0b!important;border-color:#c4f000!important}
   .form-status{color:#d9ddd9!important}
-  @media(max-width:980px){.commercial-form-panel{grid-template-columns:1fr}.commercial-form-disclosure{max-width:760px}}
+  @media(max-width:980px){.commercial-form-panel{grid-template-columns:1fr;max-width:760px}.commercial-form-disclosure{max-width:760px}}
 </style>
 
 <script define:vars={{ copy, dynamicPlaceholders }}>
