@@ -131,7 +131,7 @@ for (const file of htmlFiles) {
   const hreflangs = [...html.matchAll(/hreflang="([^"]+)"/g)].map((match) => match[1]);
   const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
   const rawLang = html.match(/<html lang="([^"]+)"/)?.[1];
-  const lang = rawLang?.startsWith('zh') ? 'zh' : rawLang?.startsWith('vi') ? 'vi' : rawLang?.startsWith('sr') ? 'sr' : rawLang?.startsWith('uk') ? 'uk' : rawLang;
+  const lang = rawLang?.startsWith('zh') ? 'zh' : rawLang?.startsWith('vi') ? 'vi' : rawLang?.startsWith('ro') ? 'ro' : rawLang?.startsWith('bg') ? 'bg' : rawLang?.startsWith('sr') ? 'sr' : rawLang?.startsWith('uk') ? 'uk' : rawLang;
   const expectedCompanyName = companyNames[lang] || companyNames.en;
   const alternates = Object.fromEntries([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
   const jsonLdBlocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((match) => match[1]);
@@ -266,7 +266,7 @@ for (const file of htmlFiles) {
   if (tradeRecord) {
     const expectedCanonical = encodeURI(`https://ctseg.com.tr${tradeRecord.pathname}`);
     const expectedDirection = tradeRecord.lang === 'fa' ? 'rtl' : 'ltr';
-    const expectedTradeHtmlLang = tradeRecord.lang === 'zh' ? 'zh-CN' : tradeRecord.lang === 'vi' ? 'vi-VN' : tradeRecord.lang;
+    const expectedTradeHtmlLang = tradeRecord.lang === 'zh' ? 'zh-CN' : tradeRecord.lang === 'vi' ? 'vi-VN' : tradeRecord.lang === 'ro' ? 'ro-RO' : tradeRecord.lang === 'bg' ? 'bg-BG' : tradeRecord.lang === 'sr' ? 'sr-Latn-RS' : tradeRecord.lang;
     if (lang !== tradeRecord.lang) errors.push(`${label}: sourcing html lang must be ${tradeRecord.lang}`);
     if (!html.includes(`<html lang="${expectedTradeHtmlLang}" dir="${expectedDirection}"`)) errors.push(`${label}: sourcing html direction must be ${expectedDirection}`);
     if (canonical !== expectedCanonical) errors.push(`${label}: sourcing canonical does not match its route family`);
