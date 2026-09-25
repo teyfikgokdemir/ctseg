@@ -185,9 +185,9 @@ for (const file of htmlFiles) {
     for (const field of ['tradeDirection','productFamily','name','company','emailOrPhone','message','privacy']) if (!form.includes(`name="${field}"`)) errors.push(`${label}: qualified short form field ${field} missing`);
     for (const field of ['originMarket','destinationMarket','packaging','incoterm']) if (!form.includes(`name="${field}"`)) errors.push(`${label}: commercial detail field ${field} missing`);
     if (!html.includes('data-contact-whatsapp') || !html.includes('data-contact-email') || !html.includes('<details class="commercial-details">')) errors.push(`${label}: direct contact cards or optional details disclosure missing`);
-    const disclosure = html.match(/<details class="commercial-form-disclosure"[^>]*>/)?.[0] ?? '';
-    if (!disclosure || /\sopen(?:\s|>)/.test(disclosure)) errors.push(`${label}: detailed request form must be initially closed`);
-    if (html.indexOf('data-contact-whatsapp') > html.indexOf('commercial-form-disclosure') || html.indexOf('data-contact-email') > html.indexOf('commercial-form-disclosure')) errors.push(`${label}: WhatsApp and email must precede the form disclosure`);
+    const disclosure = html.match(/<(?:div|details) class="commercial-form-disclosure[^"]*"[^>]*>/)?.[0] ?? '';
+    if (!disclosure) errors.push(`${label}: detailed request form container missing`);
+    if (html.indexOf('data-contact-whatsapp') > html.indexOf('commercial-form-disclosure') || html.indexOf('data-contact-email') > html.indexOf('commercial-form-disclosure')) errors.push(`${label}: WhatsApp and email must precede the request form`);
   }
   if (html.includes('fonts.googleapis.com') || html.includes('fonts.gstatic.com')) errors.push(`${label}: external Google Fonts dependency remains`);
   if (!html.includes('/fonts/dm-sans-latin-ext-variable.woff2') || !html.includes('/fonts/source-serif-4-latin-ext-variable.woff2')) {
@@ -250,8 +250,8 @@ for (const file of htmlFiles) {
     const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
     if (label !== 'uk/index.html' && (desktopLocales.match(/data-locale-option/g) || []).length !== 9) errors.push(`${label}: desktop locale panel must contain nine languages`);
     if (label !== 'uk/index.html' && (mobileLocales.match(/data-locale-option/g) || []).length !== 9) errors.push(`${label}: mobile locale panel must contain nine languages`);
-    if (label !== 'uk/index.html' && (!/class="locale-code">(?:TR|EN|DE|IT|FA|RU|ZH|VI|UK|SQ|MK|SR)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger))) {
-      errors.push(`${label}: desktop language trigger must show only the active locale code`);
+    if (label !== 'uk/index.html' && (!/class="locale-flag"[^>]+src="\/images\/flags\/(?:tr|gb|de|it|ir|ru|cn|vn|ua)\.svg"/.test(desktopTrigger) || /locale-name/.test(desktopTrigger))) {
+      errors.push(`${label}: desktop language trigger must show the active locale flag without a locale name`);
     }
   }
   if (tradeRecord) {
