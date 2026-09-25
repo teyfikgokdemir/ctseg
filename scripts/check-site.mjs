@@ -407,7 +407,7 @@ for (const file of htmlFiles) {
   } else if (navLinks.length && !/<html\b[^>]*\blang="fa"/.test(html)) {
     errors.push(`${label}: Persian landing navigation link must remain English or Persian only`);
   }
-  const isSearchLanding=/\/(?:cozumler|solutions|loesungen|soluzioni|resheniya)\//.test(`/${label}`);
+  const isSearchLanding=/\/(?:cozumler|solutions|loesungen|soluzioni|resheniya|solutii|resenja)\//.test(`/${label}`);
   if (!label.startsWith('404') && label !== persianLandingLabel && label !== 'uk/index.html' && !tradeRecord && !isSearchLanding) {
     const globalFaLinks = [...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].filter((match)=>match[0].includes('hreflang="fa"')&&match[0].includes('href="/fa/"'));
     if (globalFaLinks.length !== 2) errors.push(`${label}: desktop and mobile global locale menus must expose the Persian fallback`);
