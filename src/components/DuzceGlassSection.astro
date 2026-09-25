@@ -1,11 +1,12 @@
 ---
 import { duzceGlassData, duzceGlassPath, type DuzceGlassLocale } from '../data/duzce-glass';
+import { localizedPath, type Locale } from '../data/site';
 
 const { lang='en' } = Astro.props as { lang?: string };
 const currentLang = (['tr','en','de','it','ru','fa','zh','vi'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
 const d = duzceGlassData[currentLang] || duzceGlassData.en;
 const href = duzceGlassPath(currentLang);
-const contactHref = currentLang === 'tr' ? '/iletisim/' : `/${currentLang}/contact/`;
+const contactHref = localizedPath(currentLang as Locale, 'contact');
 const isRtl = currentLang === 'fa';
 ---
 <section class="section duzce-glass-feature" id="duzce-glass" dir={isRtl ? 'rtl' : 'ltr'}>
