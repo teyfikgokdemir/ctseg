@@ -944,3 +944,34 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
     min-height:36px!important;
   }
 }
+
+
+/* HERO FULL-WIDTH FILL 2026-09-25 */
+@media (min-width:901px){
+  .homepage-trade-hero .hero-grid{
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+  }
+  .homepage-trade-hero .homepage-hero-stage{
+    width:100vw!important;
+    max-width:none!important;
+    margin-left:calc(50% - 50vw)!important;
+    margin-right:calc(50% - 50vw)!important;
+  }
+  .homepage-trade-hero .hero-visual{
+    width:100%!important;
+    max-width:none!important;
+  }
+  .homepage-trade-hero .hero-visual img{
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    max-width:none!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+  }
+  .homepage-trade-hero .hero-copy{
+    left:clamp(70px,7vw,120px)!important;
+  }
+}
