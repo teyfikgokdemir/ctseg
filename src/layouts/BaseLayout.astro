@@ -54,13 +54,15 @@ const alternates = pageKey === 'glass' ? duzceGlassAlternates() : pageKey === 'h
   } as Record<string,string> : routeAlternates(pageKey, pageId);
 if (pageKey === 'home') alternates.ru = 'https://ctseg.com.tr/ru/';
 const alternateCodes = pageKey === 'glass'
-  ? ['tr','en','de','it','ru','fa','zh','vi']
+  ? ['tr','en','de','it','ru','fa','zh','vi','ro','bg','sr']
   : (pageKey === 'home' && lang === 'fa'
     ? ['tr','en','fa']
     : pageKey === 'home' && ['de','it','ru','zh','vi'].includes(String(lang))
     ? [String(lang)]
+    : pageKey === 'home' && ['ro','bg','sr'].includes(String(lang))
+    ? ['tr','en','ro','bg','sr']
     : pageKey === 'home'
-    ? ['tr','en']
+    ? ['tr','en','ro','bg','sr']
     : ['how-we-work','scenarios'].includes(pageKey)
     ? activeLocales
     : pageKey === 'iran-trade' ? ['tr','en','fa']
@@ -79,7 +81,10 @@ const organizationDescription = ({
   ru:'CTSEG — независимый B2B торговый дом в Турции, работающий с двусторонней международной торговлей, стратегическим сорсингом, проверкой поставщиков и выходом на рынки.',
   fa:'CTSEG یک خانه تجارت مستقل B2B مستقر در ترکیه برای تجارت دوطرفه جهانی، تأمین استراتژیک، راستی‌آزمایی تأمین‌کنندگان و ورود به بازار است.',
   zh:'CTSEG 是一家立足土耳其的独立 B2B 国际贸易机构，专注双向全球贸易、战略采购、供应商核验与市场进入。',
-  vi:'CTSEG là một trade house B2B độc lập có trụ sở tại Thổ Nhĩ Kỳ, tập trung vào thương mại toàn cầu hai chiều, sourcing chiến lược, thẩm định nhà cung cấp và thâm nhập thị trường.'
+  vi:'CTSEG là một trade house B2B độc lập có trụ sở tại Thổ Nhĩ Kỳ, tập trung vào thương mại toàn cầu hai chiều, sourcing chiến lược, thẩm định nhà cung cấp và thâm nhập thị trường.',
+  ro:'CTSEG este o casă de comerț B2B independentă, cu sediul în Türkiye, specializată în comerț global bidirecțional, sourcing strategic, verificarea furnizorilor și intrare pe piață.',
+  bg:'CTSEG е независима B2B търговска къща със седалище в Türkiye, фокусирана върху двупосочна глобална търговия, стратегическо снабдяване, проверка на доставчици и пазарен достъп.',
+  sr:'CTSEG je nezavisna B2B trgovinska kuća sa sedištem u Türkiye, fokusirana na dvosmernu globalnu trgovinu, strateški sourcing, proveru dobavljača i ulazak na tržište.'
 } as Record<string,string>)[lang] || 'CTSEG is a Türkiye-based independent B2B trade house for two-way global trade, strategic sourcing, supplier verification and market entry.';
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
@@ -127,7 +132,7 @@ const heroSizes = '(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(
 const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
 ---
 <!doctype html>
-<html lang={lang === 'zh' ? 'zh-CN' : lang === 'vi' ? 'vi-VN' : lang} dir={localeDirection(lang)} data-locale={lang}>
+<html lang={lang === 'zh' ? 'zh-CN' : lang === 'vi' ? 'vi-VN' : lang === 'ro' ? 'ro-RO' : lang === 'bg' ? 'bg-BG' : lang === 'sr' ? 'sr-Latn-RS' : lang} dir={localeDirection(lang)} data-locale={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -167,7 +172,7 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
   </head>
   <body>
-    <a class="skip-link" href="#main">{lang === 'ru' ? 'Перейти к содержанию' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : 'Skip to content'}</a>
+    <a class="skip-link" href="#main">{lang === 'ru' ? 'Перейти к содержанию' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : lang === 'ro' ? 'Sari la conținutul principal' : lang === 'bg' ? 'Към основното съдържание' : lang === 'sr' ? 'Pređi na glavni sadržaj' : 'Skip to content'}</a>
     <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
     <main id="main">
       <slot />
