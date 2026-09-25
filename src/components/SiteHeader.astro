@@ -50,6 +50,7 @@ const nav = [
 
 const globalLocales = [...activeLocaleRegistry.map((entry) => entry.code), 'uk'] as string[];
 const globalLocaleNames: Record<string,string> = {...Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code, entry.label])), uk:'Українська'};
+const globalLocaleFlags: Record<string,string> = {tr:'/images/flags/tr.svg',en:'/images/flags/gb.svg',de:'/images/flags/de.svg',it:'/images/flags/it.svg',fa:'/images/flags/ir.svg',ru:'/images/flags/ru.svg',zh:'/images/flags/cn.svg',vi:'/images/flags/vn.svg',uk:'/images/flags/ua.svg'};
 
 const globalSwitchPath = (target: string): string => {
   if (target === 'uk') return '/uk/';
@@ -108,7 +109,7 @@ const globalSwitchPath = (target: string): string => {
                 aria-current={code === lang ? 'true' : undefined}
                 data-locale-option
               >
-                <span class="lang-code">{code.toUpperCase()}</span>
+                <img class="lang-flag" src={globalLocaleFlags[code]} width="28" height="19" alt="" aria-hidden="true" />
                 <span class="lang-name">{globalLocaleNames[code]}</span>
               </a>
             ))}
@@ -164,7 +165,7 @@ const globalSwitchPath = (target: string): string => {
 
         <div class="language-switcher language-switcher-desktop">
           <button type="button" aria-expanded="false" aria-controls="language-panel" aria-label={t.language} data-language-toggle>
-            <span class="locale-code">{lang.toUpperCase()}</span>
+            <img class="locale-flag" src={globalLocaleFlags[lang] || globalLocaleFlags.en} width="26" height="17" alt="" aria-hidden="true" /><span class="sr-only locale-code">{lang.toUpperCase()}</span>
             <span class="locale-chevron" aria-hidden="true"></span>
           </button>
           <div id="language-panel" class="language-menu" data-language-menu>
@@ -175,7 +176,7 @@ const globalSwitchPath = (target: string): string => {
               href={globalSwitchPath(code)}
               aria-current={code === lang ? 'true' : undefined}
               data-locale-option
-            ><span>{code.toUpperCase()}</span><strong>{globalLocaleNames[code]}</strong><i aria-hidden="true"></i></a>)}
+            ><img class="language-menu-flag" src={globalLocaleFlags[code]} width="26" height="17" alt="" aria-hidden="true" /><strong>{globalLocaleNames[code]}</strong><i aria-hidden="true"></i></a>)}
           </div>
         </div>
 

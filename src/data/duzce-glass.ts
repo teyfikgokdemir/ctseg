@@ -40,7 +40,7 @@ export const duzceGlassData: Record<DuzceGlassLocale,DuzceGlassCopy> = {
     eyebrow:'CTSEG × Düzce Cam · Uluslararası Dış Ticaret',
     title:'Türkiye’nin cam üretim gücünü uluslararası pazarlara taşıyoruz.',
     lead:'CTSEG, Düzce Cam ürünleri için seçili dış pazarlarda ticari talep toplama, alıcı geliştirme ve ihracat koordinasyonunu yürütür. İthalatçıları, distribütörleri, cam işleme tesislerini, cephe firmalarını ve proje alıcılarını doğru ürün ve ticari süreçle buluşturur.',
-    primaryCta:'İhracat Teklifi İste', secondaryCta:'Cam Portföyünü İncele',
+    primaryCta:'Ticari Talep Gönder', secondaryCta:'Cam Portföyünü İncele',
     productsTitle:'Cam ürün portföyü', marketsTitle:'Öncelikli ihracat pazarları', roleTitle:'CTSEG dış ticaret rolü',
     roleText:'CTSEG komisyon usulü dış ticaret kanalı olarak çalışır; alıcı taleplerini doğrular, RFQ şartlarını yapılandırır, ticari iletişimi koordine eder ve Düzce Cam ile ihracat fırsatlarının ilerlemesini sağlar.',
     products:['Düz Cam','Renkli Düz Cam','Kaplamalı / Low-E Cam','Lamine Cam','Ayna','Solar Cam','Satina Cam','Boyalı Cam'],

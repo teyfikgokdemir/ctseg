@@ -6,6 +6,7 @@ const { lang='en' } = Astro.props as { lang?: string };
 const currentLang = (['tr','en','de','it','ru','fa','zh','vi'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
 const d = duzceGlassData[currentLang] || duzceGlassData.en;
 const isRtl = currentLang === 'fa';
+const pageHeroTitle = currentLang === 'tr' ? 'Düzce Cam için ticaret ve ihracat koordinasyonu.' : d.title;
 
 const buyerTypes = currentLang === 'tr'
   ? ['Cam ithalatçıları ve distribütörleri','Isıcam / IGU üreticileri','Cam kesim, temper ve işleme tesisleri','Cephe ve alüminyum sistem firmaları','Pencere ve doğrama üreticileri','Müteahhitler ve proje satın alma ekipleri']
@@ -42,7 +43,7 @@ const rfqFields = currentLang === 'tr'
     <div class="container duzce-hero-grid">
       <div>
         <span class="eyebrow">{d.eyebrow}</span>
-        <h1>{d.title}</h1>
+        <h1>{pageHeroTitle}</h1>
         <p class="lead">{d.lead}</p>
         <div class="duzce-badges">{d.badges.map((badge) => <span>{badge}</span>)}</div>
         <div class="actions">
@@ -75,16 +76,20 @@ const rfqFields = currentLang === 'tr'
   </section>
 
   <section class="section duzce-market-section">
-    <div class="container duzce-two-col">
-      <div>
-        <span class="eyebrow">{d.marketsTitle}</span>
-        <h2>{currentLang === 'tr' ? 'Talebin olduğu pazarlara ülke bazlı satış geliştirme.' : 'Country-led sales development in markets with commercial demand.'}</h2>
-        <div class="duzce-market-list">{d.markets.map((market) => <span>{market}</span>)}</div>
-      </div>
-      <div>
+    <div class="container">
+      <div class="duzce-market-intro">
         <span class="eyebrow">{currentLang === 'tr' ? 'Hedef alıcı profili' : 'Target buyer profile'}</span>
-        <h2>{currentLang === 'tr' ? 'Son kullanıcı değil, ticari hacim üreten alıcılar.' : 'Commercial buyers that can create repeat volume.'}</h2>
-        <ul class="duzce-buyer-list">{buyerTypes.map((item) => <li>{item}</li>)}</ul>
+        <h2>{currentLang === 'tr' ? 'Son kullanıcı değil, ticari hacim üreten alıcılar.' : 'Commercial buyers that create repeat volume.'}</h2>
+      </div>
+      <div class="duzce-market-body">
+        <div class="duzce-market-panel">
+          <small>{d.marketsTitle}</small>
+          <div class="duzce-market-list">{d.markets.map((market) => <span>{market}</span>)}</div>
+        </div>
+        <div class="duzce-buyers-panel">
+          <small>{currentLang === 'tr' ? 'Alıcı grupları' : 'Buyer groups'}</small>
+          <ul class="duzce-buyer-list">{buyerTypes.map((item) => <li>{item}</li>)}</ul>
+        </div>
       </div>
     </div>
   </section>
@@ -111,27 +116,36 @@ const rfqFields = currentLang === 'tr'
 
 <style>
   .duzce-page{background:#111310;color:#f3f4ef}
-  .duzce-hero{padding:clamp(5rem,9vw,9rem) 0;background:radial-gradient(circle at 80% 20%,rgba(120,170,160,.12),transparent 30%),#10120f}
-  .duzce-hero-grid,.duzce-two-col{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:clamp(3rem,7vw,7rem);align-items:start}
-  .duzce-hero h1{max-width:13ch;margin:1rem 0 0;color:#f3f4ef!important;font-family:var(--font-heading,'Source Serif 4',Georgia,serif);font-size:clamp(3.2rem,6vw,7rem);line-height:.94;letter-spacing:-.055em;text-wrap:balance}
-  .duzce-hero .lead{max-width:50rem;margin:2rem 0 0;color:#d8ddd7!important;opacity:1!important;font-size:clamp(1rem,1.15vw,1.2rem);line-height:1.75}
-  .duzce-badges{display:flex;flex-wrap:wrap;gap:.6rem;margin:2rem 0}.duzce-badges span,.duzce-market-list span{border:1px solid rgba(255,255,255,.15);padding:.58rem .75rem;border-radius:999px;font-size:.78rem}
-  .duzce-role-card{padding:1.8rem;border:1px solid rgba(255,255,255,.16);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.025));position:sticky;top:110px;box-shadow:0 18px 60px rgba(0,0,0,.16)}
-  .duzce-role-card small,.duzce-role-card span{color:#c4f000!important}.duzce-role-card p{font-size:1rem;line-height:1.8;color:#dfe4de!important;opacity:1!important}.duzce-role-mark{margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.12);font-size:.72rem;letter-spacing:.13em;color:#f3f4ef!important}
-  .duzce-portfolio-section{background:#f2efe7;color:#171914}
-  .duzce-portfolio-section .section-head{margin-bottom:2.2rem}.duzce-portfolio-section .section-head .eyebrow{color:#8b4f3b!important}.duzce-portfolio-section .section-head h2{color:#171914!important;font-family:var(--font-heading,'Source Serif 4',Georgia,serif);font-size:clamp(2.6rem,5vw,5.2rem);line-height:.94;letter-spacing:-.045em}
-  .duzce-product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(17,25,20,.10);border:1px solid rgba(17,25,20,.12)}
-  .duzce-product-card{min-height:240px;padding:1.4rem;background:#121613;display:flex;align-items:center;justify-content:center;transition:transform .22s ease,box-shadow .22s ease,background .22s ease}
-  .duzce-product-card:hover{transform:translateY(-4px);background:#151a16;box-shadow:0 18px 36px rgba(0,0,0,.18)}
-  .duzce-product-card-inner{width:100%;display:grid;gap:.85rem;align-content:center}
-  .duzce-product-grid h3{margin:0;color:#f3f4ef!important;font-size:1.2rem;line-height:1.15;text-wrap:balance}
-  .duzce-product-grid p{margin:0;color:#cfd5cf!important;font-size:.93rem;line-height:1.62;opacity:1!important}
-  .duzce-market-section{background:#121613}.duzce-market-section .eyebrow{color:#c4f000!important}.duzce-market-section .duzce-two-col h2{color:#f3f4ef!important}
+  .duzce-hero{padding:clamp(3.2rem,5vw,5.4rem) 0;background:radial-gradient(circle at 80% 20%,rgba(120,170,160,.12),transparent 30%),#10120f}
+  .duzce-hero-grid,.duzce-two-col{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(340px,.92fr);gap:clamp(2.2rem,5vw,5rem);align-items:center}
+  .duzce-hero h1{max-width:18ch;margin:.7rem 0 0;color:#f3f4ef!important;font-family:'DM Sans',system-ui,sans-serif;font-weight:650;font-size:clamp(2.7rem,3.55vw,4.2rem);line-height:1;letter-spacing:-.022em;text-wrap:balance}
+  .duzce-hero .lead{max-width:50rem;margin:1.35rem 0 0;color:#d8ddd7!important;opacity:1!important;font-size:clamp(.98rem,1vw,1.08rem);font-weight:500;line-height:1.68}
+  .duzce-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.35rem 0}.duzce-badges span,.duzce-market-list span{border:1px solid rgba(255,255,255,.15);padding:.5rem .7rem;border-radius:999px;font-size:.74rem}
+  .duzce-hero .actions{margin-top:1.25rem}
+  .duzce-role-card{padding:1.5rem;border:1px solid rgba(255,255,255,.16);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.022));position:sticky;top:100px;box-shadow:0 18px 60px rgba(0,0,0,.16)}
+  .duzce-role-card small,.duzce-role-card span{color:#c4f000!important}.duzce-role-card p{margin:1rem 0 0;font-size:.96rem;line-height:1.68;color:#dfe4de!important;opacity:1!important}.duzce-role-mark{margin-top:1.45rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.12);font-size:.68rem;letter-spacing:.13em;color:#f3f4ef!important}
+  .duzce-portfolio-section{background:#f2efe7;color:#171914;padding:clamp(3.3rem,5vw,5.4rem) 0}
+  .duzce-portfolio-section .section-head{margin-bottom:1.8rem;text-align:center}.duzce-portfolio-section .section-head .eyebrow{color:#8b4f3b!important}.duzce-portfolio-section .section-head h2{margin:.4rem auto 0;color:#171914!important;font-family:var(--font-heading,'Source Serif 4',Georgia,serif);font-size:clamp(2.5rem,4vw,4.4rem);line-height:.94;letter-spacing:-.045em}
+  .duzce-product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;background:transparent;border:0}
+  .duzce-product-card{position:relative;min-height:178px;padding:1.25rem 1.3rem;background:linear-gradient(155deg,#111612,#151a16);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+  .duzce-product-card:before{content:"";position:absolute;left:1.3rem;top:1.2rem;width:34px;height:2px;background:#c4f000;opacity:.85}
+  .duzce-product-card:hover{transform:translateY(-4px);border-color:rgba(196,240,0,.42);box-shadow:0 16px 34px rgba(0,0,0,.16)}
+  .duzce-product-card-inner{width:100%;display:grid;gap:.68rem;padding-top:1rem}
+  .duzce-product-grid h3{margin:0;color:#f3f4ef!important;font-size:1.08rem;line-height:1.15;text-wrap:balance}
+  .duzce-product-grid p{margin:0;color:#cfd5cf!important;font-size:.86rem;line-height:1.5;opacity:1!important}
+  .duzce-market-section{background:#121613;padding:clamp(3.4rem,5vw,5.6rem) 0}
+  .duzce-market-intro{text-align:center;max-width:none;margin:0 auto 2rem}.duzce-market-intro .eyebrow{color:#c4f000!important}.duzce-market-intro h2{max-width:none;margin:.45rem auto 0;color:#f3f4ef!important;font-family:'DM Sans',system-ui,sans-serif;font-weight:650;font-size:clamp(2.2rem,2.8vw,3.4rem);line-height:1.02;letter-spacing:-.02em;white-space:nowrap}
+  .duzce-market-body{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px;max-width:1180px;margin:0 auto}
+  .duzce-market-panel,.duzce-buyers-panel{padding:1.35rem;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.025)}
+  .duzce-market-panel small,.duzce-buyers-panel small{display:block;margin-bottom:1rem;color:#c4f000!important;font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+  .duzce-market-list{display:flex;flex-wrap:wrap;gap:.55rem}.duzce-market-list span{color:#f1f4ef!important;background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.16);opacity:1!important}
+  .duzce-buyer-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:0;padding:0;list-style:none;border-top:1px solid rgba(255,255,255,.1)}
+  .duzce-buyer-list li{padding:.9rem .75rem .9rem 0;border-bottom:1px solid rgba(255,255,255,.09);color:#dbe1db!important;opacity:1!important;font-size:.92rem;line-height:1.35}
+  .duzce-buyer-list li:nth-child(odd){border-inline-end:1px solid rgba(255,255,255,.09);padding-inline-end:1rem}.duzce-buyer-list li:nth-child(even){padding-inline-start:1rem}
   .duzce-two-col h2{max-width:14ch;font-family:var(--font-heading,'Source Serif 4',Georgia,serif);font-size:clamp(2.4rem,4vw,4.8rem);line-height:.98;letter-spacing:-.04em}
-  .duzce-market-list{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.8rem}.duzce-market-list span{color:#f1f4ef!important;background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.16);opacity:1!important}
-  .duzce-buyer-list{margin:1.8rem 0 0;padding:0;list-style:none;border-top:1px solid rgba(255,255,255,.13)}.duzce-buyer-list li{padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.1);color:#dbe1db!important;opacity:1!important}
   .duzce-rfq-spec{background:#f2efe7;color:#171914}.duzce-rfq-spec .eyebrow{color:#8b4f3b!important}.duzce-rfq-spec h2{color:#171914!important}.duzce-rfq-spec .lead{color:#3f433f!important;opacity:1!important}
   .duzce-rfq-fields{display:grid;grid-template-columns:1fr 1fr;border:1px solid #d2cbbf;background:#f7f4ec}.duzce-rfq-fields div{padding:1rem;border-bottom:1px solid #d2cbbf}.duzce-rfq-fields div:nth-child(odd){border-inline-end:1px solid #d2cbbf}.duzce-rfq-fields strong{color:#171914!important;font-size:.95rem;line-height:1.45}
-  @media(max-width:900px){.duzce-hero-grid,.duzce-two-col{grid-template-columns:1fr}.duzce-role-card{position:static}.duzce-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-  @media(max-width:560px){.duzce-product-grid,.duzce-rfq-fields{grid-template-columns:1fr}.duzce-product-card{min-height:185px;padding:1.2rem;align-items:center}.duzce-product-card-inner{gap:.7rem}.duzce-product-grid h3{font-size:1.06rem}.duzce-product-grid p{font-size:.89rem;line-height:1.56}.duzce-rfq-fields div:nth-child(odd){border-inline-end:0}.duzce-hero h1{font-size:clamp(2.8rem,12vw,4.5rem)}}
+  @media(max-width:1050px){.duzce-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.duzce-market-body{grid-template-columns:1fr}.duzce-buyer-list{grid-template-columns:repeat(2,minmax(0,1fr))}.duzce-market-intro h2{white-space:normal;max-width:16ch}}
+  @media(max-width:900px){.duzce-hero-grid,.duzce-two-col{grid-template-columns:1fr}.duzce-role-card{position:static}.duzce-hero{padding:3.2rem 0}.duzce-hero h1{max-width:12ch}}
+  @media(max-width:560px){.duzce-product-grid,.duzce-rfq-fields,.duzce-buyer-list{grid-template-columns:1fr}.duzce-product-card{min-height:150px;padding:1.1rem}.duzce-product-card:before{left:1.1rem;top:1rem}.duzce-product-card-inner{gap:.58rem;padding-top:.8rem}.duzce-product-grid h3{font-size:1.02rem}.duzce-product-grid p{font-size:.85rem;line-height:1.48}.duzce-buyer-list li,.duzce-buyer-list li:nth-child(odd),.duzce-buyer-list li:nth-child(even){padding:.85rem 0;border-inline-end:0}.duzce-rfq-fields div:nth-child(odd){border-inline-end:0}.duzce-hero h1{font-size:clamp(2.65rem,11vw,4rem)}.duzce-market-intro h2{font-size:clamp(2.4rem,10vw,3.8rem)}}
 </style>
