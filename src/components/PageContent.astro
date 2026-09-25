@@ -894,15 +894,12 @@ const verifiedLater = {
           <div class="actions trade-intent-actions"><a class="button" href={contactWithIntent('buyer_request')} data-trade-intent="buyer_request">{platform.buyerCta}</a><a class="button button-secondary" href={contactWithIntent('supplier_market_entry')} data-trade-intent="supplier_market_entry">{platform.producerCta}</a></div>
         </div>
         <figure class="hero-visual">
-          <ResponsiveImage
-            src={homepageHero.source}
-            widths={FEATURE_IMAGE_WIDTHS}
-            sizes="(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(100vw - 36px), min(53vw,700px)"
-            width={homepageHero.width}
-            height={homepageHero.height}
+          <img
+            src="/images/ctseg-global-trade-hero-new.webp"
+            width="640"
+            height="427"
             alt={homepageHero.altText}
-            focalPosition={homepageHero.focalPosition}
-            visualKey={homepageHero.key}
+            data-trade-visual={homepageHero.key}
             loading="eager"
             fetchpriority="high"
             decoding="async"
