@@ -22,7 +22,7 @@ const {
   lang='tr', title, description, pageKey='home', pageId, canonical,
   schema=[], noindex=false
 } = Astro.props as {
-  lang: Locale | ReflexLocale | DuzceGlassLocale; title: string; description: string; pageKey?: string; pageId?: string;
+  lang: Locale | DuzceGlassLocale; title: string; description: string; pageKey?: string; pageId?: string;
   canonical?: string; schema?: any[] | any; noindex?: boolean;
 };
 const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
