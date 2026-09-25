@@ -1,4 +1,4 @@
-export type TradeDeskLocale = 'tr'|'en'|'de'|'it'|'ru'|'fa'|'zh'|'vi';
+export type TradeDeskLocale = 'tr'|'en'|'de'|'it'|'ru'|'fa'|'zh'|'vi'|'ro'|'bg'|'sr';
 
 export type TradeDeskCopy = {
   eyebrow:string;
@@ -84,3 +84,11 @@ export const tradeDeskCopy: Record<TradeDeskLocale,TradeDeskCopy> = {
     cta:'Trao đổi về Bộ phận Ngoại thương thuê ngoài'
   }
 };
+
+
+/* Balkan locale rollout: ro, bg, sr */
+Object.assign(tradeDeskCopy as any,{
+  ro:{eyebrow:'CTSEG · BIROU EXTERN DE COMERȚ',title:'Operați un birou extern de comerț internațional cu CTSEG',text:'CTSEG poate funcționa ca echipă externă pentru sourcing, dezvoltare export, cercetarea cumpărătorilor și distribuitorilor, urmărirea RFQ și coordonare comercială continuă.',cardTitle:'Birou extern de comerț',cardText:'Gestionăm sourcingul, dezvoltarea exportului, cercetarea cumpărătorilor/distribuitorilor și urmărirea RFQ ca funcție externă.',points:['Retainer lunar pentru suport continuu','Sourcing, dezvoltare export și follow-up cumpărători','E-mail companie, pipeline CRM și raportare periodică'],cta:'Discută un birou extern de comerț'},
+  bg:{eyebrow:'CTSEG · ВЪНШЕН ТЪРГОВСКИ ДЕСК',title:'Външна функция за международна търговия с CTSEG',text:'CTSEG може да работи като външна търговска функция за снабдяване, развитие на износ, проучване на купувачи и дистрибутори, RFQ follow-up и постоянна търговска координация.',cardTitle:'Външен търговски отдел',cardText:'Управляваме снабдяване, развитие на износ, проучване на купувачи/дистрибутори и RFQ follow-up като външна функция.',points:['Месечен retainer за постоянна поддръжка','Снабдяване, развитие на износ и follow-up на купувачи','Фирмен e-mail, CRM pipeline и периодични отчети'],cta:'Обсъдете външен търговски отдел'},
+  sr:{eyebrow:'CTSEG · EKSTERNI TRGOVINSKI DESK',title:'Vodite eksternu funkciju međunarodne trgovine uz CTSEG',text:'CTSEG može raditi kao eksterna trgovinska funkcija za sourcing, razvoj izvoza, istraživanje kupaca i distributera, RFQ praćenje i kontinuiranu komercijalnu koordinaciju.',cardTitle:'Eksterni trgovinski desk',cardText:'Vodimo sourcing, razvoj izvoza, istraživanje kupaca/distributera i RFQ praćenje kao eksternu trgovinsku funkciju.',points:['Mesečni retainer za kontinuiranu podršku','Sourcing, razvoj izvoza i praćenje kupaca','Kompanijski e-mail, CRM pipeline i periodično izveštavanje'],cta:'Razgovarajte o eksternom trgovinskom desku'}
+});
