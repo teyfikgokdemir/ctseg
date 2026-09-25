@@ -1072,3 +1072,108 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
     max-width:640px!important;
   }
 }
+
+
+/* MOBILE HERO REBUILD 2026-09-26 */
+@media (max-width:900px){
+  .homepage-trade-hero{
+    display:block!important;
+    min-height:0!important;
+    padding:0 0 34px!important;
+    align-items:initial!important;
+  }
+  .homepage-trade-hero .hero-grid{
+    display:block!important;
+    width:100%!important;
+    margin:0!important;
+  }
+  .homepage-trade-hero .homepage-hero-stage{
+    display:flex!important;
+    flex-direction:column!important;
+    width:100%!important;
+    min-height:0!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+  }
+  .homepage-trade-hero .hero-visual{
+    order:1!important;
+    display:block!important;
+    width:100vw!important;
+    height:auto!important;
+    min-height:0!important;
+    max-width:none!important;
+    margin:0 0 0 calc(50% - 50vw)!important;
+    padding:0!important;
+    overflow:hidden!important;
+  }
+  .homepage-trade-hero .hero-visual img{
+    display:block!important;
+    width:100%!important;
+    height:clamp(220px,56vw,300px)!important;
+    min-height:0!important;
+    max-height:none!important;
+    margin:0!important;
+    padding:0!important;
+    aspect-ratio:auto!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+    filter:none!important;
+  }
+  .homepage-trade-hero .hero-copy{
+    order:2!important;
+    position:relative!important;
+    inset:auto!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:26px 0 0!important;
+    transform:none!important;
+  }
+  .homepage-trade-hero .hero-copy .eyebrow{
+    margin-bottom:14px!important;
+    font-size:.67rem!important;
+    line-height:1.35!important;
+  }
+  .homepage-trade-hero .home-hero-title--tr{
+    max-width:12ch!important;
+    margin:0 0 18px!important;
+    font-family:'DM Sans',system-ui,sans-serif!important;
+    font-size:clamp(2.15rem,9vw,2.75rem)!important;
+    font-weight:650!important;
+    line-height:1.03!important;
+    letter-spacing:-.035em!important;
+  }
+  .homepage-trade-hero .home-hero-title--tr span{
+    display:block!important;
+    white-space:normal!important;
+  }
+  .homepage-trade-hero .hero-copy .lead{
+    max-width:34rem!important;
+    margin:0!important;
+    font-size:.95rem!important;
+    line-height:1.55!important;
+  }
+  .homepage-trade-hero .hero-proof-pills{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    gap:8px!important;
+    margin-top:18px!important;
+  }
+  .homepage-trade-hero .hero-proof-pills span{
+    min-height:36px!important;
+    padding:0 11px!important;
+    font-size:.72rem!important;
+  }
+  .homepage-trade-hero .hero-copy .actions{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+    margin-top:20px!important;
+  }
+  .homepage-trade-hero .hero-copy .button{
+    width:100%!important;
+    min-height:46px!important;
+  }
+}
