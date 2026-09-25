@@ -104,3 +104,65 @@ export const tradePlatformCopy:Record<PlatformLocale,PlatformCopy> = {
     processTitle:'Quy trình minh bạch và chuẩn mực',process:['Xác định yêu cầu','Nghiên cứu thị trường & đối tác','Thẩm định xác minh','Lập RFQ & báo giá','Mẫu thử & điều phối','Quyết định & các bước tiếp theo']
   }
 };
+
+
+/* Balkan locale rollout: ro, bg, sr */
+Object.assign(tradePlatformCopy as any,{
+  ro:{
+    eyebrow:'CTSEG · Casă de comerț global și sourcing strategic B2B',
+    title:'Din Türkiye către lume. Din lume către sursa potrivită.',
+    lead:'CTSEG ajută companiile să intre pe piețe noi și să ajungă la producători, furnizori și cumpărători instituționali potriviți prin cercetare, verificare, management RFQ și coordonare comercială.',
+    buyerCta:'Caut un furnizor',producerCta:'Vreau să intru pe piețe noi',
+    pathsTitle:'Comerțul funcționează în ambele direcții',pathsLead:'Sprijinim producătorii care se extind din Türkiye către piețele globale și cumpărătorii care caută rute de aprovizionare verificate în Türkiye și regiune.',
+    buyerTitle:'Sourcing strategic',buyerText:'Definim cerința, cercetăm și verificăm producători și furnizori și coordonăm RFQ-urile și comparația ofertelor.',
+    producerTitle:'Export și intrare pe piață',producerText:'Evaluăm pregătirea comercială, cercetăm piețele țintă și profilurile de cumpărători și coordonăm primul contact și ofertele.',
+    sectorsTitle:'Sourcing verificabil în categorii selectate',sectorsLead:'În locul unui catalog fix, evaluăm produsul, contrapartea, documentația și fezabilitatea comercială.',
+    sectors:[
+      {title:'Alimente, orez, cereale și uleiuri',text:'Evaluarea produselor și ofertelor pentru alimente, orez, cereale și uleiuri vegetale fără marcă.'},
+      {title:'Nuci, curmale și fructe uscate',text:'Evaluare comercială prin clasă, calitate, ambalare și compatibilitate cu piața.'},
+      {title:'Covoare și textile',text:'Evaluare specializată pentru covoare iraniene, covoare de mătase lucrate manual, țesături și textile.'},
+      {title:'Ambalaje, inputuri de producție și proiecte',text:'Cercetare și coordonare pentru cerințe definite de ambalare, inputuri tehnice și proiecte.'}
+    ],
+    corridorsTitle:'Coridoare comerciale',corridorsLead:'Conexiuni comerciale bidirecționale între Türkiye, Europa, Orientul Mijlociu, Asia și piețe internaționale selectate.',
+    corridors:['Türkiye ↔ România și Europa','Türkiye ↔ Orientul Mijlociu','Türkiye ↔ Asia','Türkiye ↔ piețe internaționale potrivite'],
+    processTitle:'Proces transparent și măsurat',process:['Definirea cerinței','Cercetarea pieței și contrapărților','Verificare','RFQ și pregătirea ofertei','Mostre și coordonare comercială','Decizie și pașii următori']
+  },
+  bg:{
+    eyebrow:'CTSEG · B2B глобална търговия и стратегическо снабдяване',
+    title:'От Türkiye към света. От света към правилния източник.',
+    lead:'CTSEG помага на компаниите да навлизат на нови пазари и да достигат до подходящи производители, доставчици и институционални купувачи чрез проучване, проверка, RFQ управление и търговска координация.',
+    buyerCta:'Търся доставчик',producerCta:'Искам да навляза на нови пазари',
+    pathsTitle:'Търговията работи в две посоки',pathsLead:'Подкрепяме производители от Türkiye при излизане на глобални пазари и купувачи, търсещи проверими маршрути за снабдяване от Türkiye и региона.',
+    buyerTitle:'Стратегическо снабдяване',buyerText:'Дефинираме нуждата, проучваме и проверяваме производители и доставчици и координираме RFQ и сравнение на оферти.',
+    producerTitle:'Износ и навлизане на пазара',producerText:'Оценяваме търговската готовност, проучваме целеви пазари и профили на купувачи и координираме първоначалния контакт и офертите.',
+    sectorsTitle:'Проверимо снабдяване в избрани категории',sectorsLead:'Вместо фиксиран каталог оценяваме продукт, контрагент, документация и търговска приложимост.',
+    sectors:[
+      {title:'Храни, ориз, зърнени култури и масла',text:'Оценка на продукти и оферти за храни, ориз, зърнени култури и небрандирани растителни масла.'},
+      {title:'Ядки, фурми и сушени плодове',text:'Търговска оценка по клас, качество, опаковка и пригодност за пазара.'},
+      {title:'Килими и текстил',text:'Специализирана оценка за ирански килими, ръчно тъкани копринени килими, тъкани и текстил.'},
+      {title:'Опаковки, производствени материали и проектно снабдяване',text:'Проучване и координация за дефинирани опаковъчни, технически и проектни нужди.'}
+    ],
+    corridorsTitle:'Търговски коридори',corridorsLead:'Двупосочни търговски връзки между Türkiye, България и Европа, Близкия изток, Азия и избрани международни пазари.',
+    corridors:['Türkiye ↔ България и Европа','Türkiye ↔ Близък изток','Türkiye ↔ Азия','Türkiye ↔ подходящи международни пазари'],
+    processTitle:'Прозрачен и контролиран процес',process:['Дефиниране на нуждата','Пазарно и контрагентско проучване','Проверка','RFQ и подготовка на оферти','Мостри и търговска координация','Решение и следващи стъпки']
+  },
+  sr:{
+    eyebrow:'CTSEG · B2B globalna trgovina i strateški sourcing',
+    title:'Iz Türkiye ka svetu. Iz sveta do pravog izvora.',
+    lead:'CTSEG pomaže kompanijama da uđu na nova tržišta i dođu do odgovarajućih proizvođača, dobavljača i institucionalnih kupaca kroz istraživanje, proveru, RFQ upravljanje i komercijalnu koordinaciju.',
+    buyerCta:'Tražim dobavljača',producerCta:'Želim da uđem na nova tržišta',
+    pathsTitle:'Trgovina funkcioniše u oba smera',pathsLead:'Podržavamo proizvođače koji se šire iz Türkiye na globalna tržišta i kupce koji traže proverljive sourcing rute u Türkiye i regionu.',
+    buyerTitle:'Strateški sourcing',buyerText:'Definišemo zahtev, istražujemo i proveravamo proizvođače i dobavljače i koordiniramo RFQ i poređenje ponuda.',
+    producerTitle:'Izvoz i ulazak na tržište',producerText:'Procenjujemo komercijalnu spremnost, istražujemo ciljna tržišta i profile kupaca i koordiniramo prvi kontakt i ponude.',
+    sectorsTitle:'Proverljiv sourcing u odabranim kategorijama',sectorsLead:'Umesto fiksnog kataloga procenjujemo proizvod, partnera, dokumentaciju i komercijalnu izvodljivost.',
+    sectors:[
+      {title:'Hrana, pirinač, žitarice i ulja',text:'Procena proizvoda i ponuda za hranu, pirinač, žitarice i nebrendirana biljna ulja.'},
+      {title:'Orašasti plodovi, urme i suvo voće',text:'Komercijalna procena prema klasi, kvalitetu, pakovanju i tržišnoj podobnosti.'},
+      {title:'Tepisi i tekstil',text:'Specijalistička procena iranskih tepiha, ručno tkanih svilenih tepiha, tkanina i tekstila.'},
+      {title:'Ambalaža, proizvodni inputi i projektna nabavka',text:'Istraživanje i koordinacija za definisane potrebe ambalaže, tehničkih inputa i projekata.'}
+    ],
+    corridorsTitle:'Trgovinski koridori',corridorsLead:'Dvosmerne komercijalne veze između Türkiye, Srbije i Evrope, Bliskog istoka, Azije i odabranih međunarodnih tržišta.',
+    corridors:['Türkiye ↔ Srbija i Evropa','Türkiye ↔ Bliski istok','Türkiye ↔ Azija','Türkiye ↔ odgovarajuća međunarodna tržišta'],
+    processTitle:'Transparentan i kontrolisan proces',process:['Definisanje zahteva','Istraživanje tržišta i partnera','Provera','RFQ i priprema ponuda','Uzorci i komercijalna koordinacija','Odluka i sledeći koraci']
+  }
+});
