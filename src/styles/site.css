@@ -83,8 +83,8 @@ button{font:inherit}
 .text-link{display:inline-block;margin-top:20px;color:var(--accent-soft);font-size:.8rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
 .section-number{color:var(--accent-soft);font-size:.72rem;font-weight:700;letter-spacing:.16em}
 
-.hero{min-height:680px;padding:72px 0 84px;display:flex;align-items:center;background:linear-gradient(118deg,color-mix(in srgb,var(--locale-wash) 70%,transparent),transparent 58%)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,45fr) minmax(0,53fr);align-items:center;gap:clamp(56px,5vw,82px)}
+.hero{min-height:auto;padding:54px 0 64px;display:flex;align-items:center;background:linear-gradient(118deg,color-mix(in srgb,var(--locale-wash) 70%,transparent),transparent 58%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,47fr) minmax(0,53fr);align-items:center;gap:clamp(34px,4vw,58px)}
 .hero-copy{position:relative;z-index:2;min-width:0}
 .eyebrow{margin:0 0 20px;color:var(--accent-soft);font-size:.71rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
 .hero h1,.page-hero h1,.section h2,.section-title{font-family:'Source Serif 4',Georgia,serif;font-weight:500;letter-spacing:-.035em;text-wrap:balance}
@@ -93,9 +93,9 @@ html[data-locale=de] .hero h1,html[data-locale=it] .hero h1,html[data-locale=ru]
 html[data-locale=de] .hero h1{max-width:15ch;hyphens:manual}
 html[data-locale=de] .page-hero h1{hyphens:auto;overflow-wrap:break-word}
 .lead{max-width:var(--measure);margin:0;color:var(--muted);font-size:clamp(1.02rem,1.45vw,1.26rem)}
-.hero-visual{position:relative;margin:0;min-width:0;width:100%;max-width:720px;justify-self:end}
+.hero-visual{position:relative;margin:0;min-width:0;width:100%;max-width:680px;justify-self:end}
 .hero-visual:before{content:"";position:absolute;inset:-16px 30% 42% -16px;border-top:1px solid var(--accent);border-left:1px solid var(--accent);z-index:2;pointer-events:none}
-.hero-visual img{display:block;width:100%;height:auto;max-height:500px;aspect-ratio:3/2;object-fit:cover;object-position:center;filter:saturate(.74) contrast(1.06)}
+.hero-visual img{display:block;width:100%;height:auto;max-height:430px;aspect-ratio:3/2;object-fit:cover;object-position:center;filter:saturate(.74) contrast(1.06)}
 .hero-visual figcaption{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line);margin-top:18px}
 .hero-visual figcaption span{display:flex;gap:11px;padding:13px 15px;border-left:1px solid var(--line);color:#d1cdc4;font-size:.76rem}
 .hero-visual figcaption small{color:var(--accent-soft)}
@@ -632,7 +632,7 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
 
 
 /* Turkish homepage hero: preserve the established copy in two clean lines. */
-.home-hero-title--tr{max-width:none!important;font-size:clamp(2.8rem,3.8vw,4.35rem)!important;line-height:1.02!important;letter-spacing:-.035em!important}
+.home-hero-title--tr{max-width:none!important;font-size:clamp(2.55rem,3.25vw,3.85rem)!important;line-height:1.01!important;letter-spacing:-.028em!important}
 .home-hero-title--tr span{display:block;white-space:nowrap}
 @media(max-width:1050px){.home-hero-title--tr span{white-space:normal}.home-hero-title--tr{max-width:16ch!important}}
 @media(max-width:620px){.home-hero-title--tr{font-size:clamp(2.35rem,10vw,3.15rem)!important;line-height:1.03!important}}
