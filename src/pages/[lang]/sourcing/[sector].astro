@@ -11,7 +11,7 @@ const {lang,id}=Astro.props as {lang:TradeLocale;id:TradeSectorId};
 const copy=tradeCopy[lang][id],ui=tradeUi[lang];
 const canonical=`https://ctseg.com.tr${pathForSector(lang,id)}`;
 const visual=localizedTradeVisual(sourcingTradeVisualKeys[id],lang);
-const contactPage = { tr:'/tr/iletisim/', en:'/en/contact/', de:'/de/kontakt/', it:'/it/contatti/', fa:'/fa/contact/', ru:'/ru/kontakty/', zh:'/zh/contact/', vi:'/vi/contact/' }[lang];
+const contactPage = { tr:'/tr/iletisim/', en:'/en/contact/', de:'/de/kontakt/', it:'/it/contatti/', fa:'/fa/contact/', ru:'/ru/kontakty/', zh:'/zh/contact/', vi:'/vi/contact/', ro:'/ro/contact/', bg:'/bg/kontakt/', sr:'/sr/kontakt/' }[lang];
 const buyerContact = `${contactPage}?intent=buyer_request#commercial-form`;
 const producerContact = `${contactPage}?intent=supplier_market_entry#commercial-form`;
 const home=lang==='tr'?'/':lang==='fa'?'/fa/':`/${lang}/`;
@@ -25,7 +25,10 @@ const chrome = {
   ru: { skip: 'Перейти к содержанию', language: 'Выбор языка', menu: 'Открыть меню языков', close: 'Закрыть меню языков' },
   fa: { skip: 'رفتن به محتوای اصلی', language: 'انتخاب زبان', menu: 'باز کردن منوی زبان', close: 'بستن منوی زبان' },
   zh: { skip: '跳转到主要内容', language: '语言选择', menu: '打开语言菜单', close: '关闭语言菜单' },
-  vi: { skip: 'Chuyển đến nội dung chính', language: 'Chọn ngôn ngữ', menu: 'Mở menu ngôn ngữ', close: 'Đóng menu ngôn ngữ' }
+  vi: { skip: 'Chuyển đến nội dung chính', language: 'Chọn ngôn ngữ', menu: 'Mở menu ngôn ngữ', close: 'Đóng menu ngôn ngữ' },
+  ro:{skip:'Sari la conținutul principal',language:'Selectarea limbii',menu:'Deschide meniul de limbă',close:'Închide meniul de limbă'},
+  bg:{skip:'Към основното съдържание',language:'Избор на език',menu:'Отвори езиковото меню',close:'Затвори езиковото меню'},
+  sr:{skip:'Pređi na glavni sadržaj',language:'Izbor jezika',menu:'Otvori meni jezika',close:'Zatvori meni jezika'}
 }[lang];
 const schema=[
  {'@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',name:company.name[lang] || company.name.en,alternateName:'CTSEG',foundingDate:'2022',founder:{'@type':'Person',name:'Teyfik Gökdemir'},address:{'@type':'PostalAddress',addressLocality:'Tuzla',addressRegion:'İstanbul',addressCountry:'TR'},url:'https://ctseg.com.tr/'},
@@ -34,7 +37,7 @@ const schema=[
  {'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'CTSEG',item:`https://ctseg.com.tr${home}`},{'@type':'ListItem',position:2,name:copy.title,item:canonical}]}
 ];
 ---
-<!doctype html><html lang={lang === 'zh' ? 'zh-CN' : lang === 'vi' ? 'vi-VN' : lang} dir={localeDirection(lang)}><head>
+<!doctype html><html lang={lang === 'zh' ? 'zh-CN' : lang === 'vi' ? 'vi-VN' : lang === 'ro' ? 'ro-RO' : lang === 'bg' ? 'bg-BG' : lang === 'sr' ? 'sr-Latn-RS' : lang} dir={localeDirection(lang)}><head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>{copy.title} | CTSEG</title><meta name="description" content={metaDescription}/><meta name="robots" content="index,follow,max-image-preview:large"/><link rel="canonical" href={canonical}/>
 {tradeLocales.map(code=><link rel="alternate" hreflang={code} href={`https://ctseg.com.tr${pathForSector(code,id)}`}/>)}<link rel="alternate" hreflang="x-default" href={`https://ctseg.com.tr${pathForSector('en',id)}`}/>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin/><link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin/><meta property="og:type" content="website"/><meta property="og:locale" content={localeOg(lang)}/><meta property="og:title" content={copy.title}/><meta property="og:description" content={metaDescription}/><meta property="og:url" content={canonical}/><meta property="og:image" content={`https://ctseg.com.tr${visual.source}`}/><meta property="og:image:alt" content={visual.altText}/><meta property="og:image:width" content={String(visual.width)}/><meta property="og:image:height" content={String(visual.height)}/><meta name="twitter:card" content="summary_large_image"/><script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
@@ -46,7 +49,7 @@ const schema=[
 {producer&&<section class="section producer-section" data-persian-producer-section><div class="container"><div class="producer-intro"><div><p class="eyebrow">CTSEG · توسعه بازار بین‌المللی</p><h2>{producer.title}</h2></div><p>{producer.lead}</p></div><div class="producer-grid"><div><h3>مسیر همکاری</h3><ul>{producer.services.map(item=><li>{item}</li>)}</ul></div><aside><h3>مخاطبان این همکاری</h3><ul>{producer.audiences.map(item=><li>{item}</li>)}</ul><p>{producer.markets}</p></aside></div><div class="producer-terms"><p>{producer.requirements}</p><p>{producer.role}</p><p><strong>{producer.priority}</strong></p></div><div class="producer-ctas" aria-label="اقدام‌های همکاری">{producer.ctas.map((label,index)=><a class:list={['button',{primary:index===0}]} href={producerContact} data-producer-cta>{label}</a>)}</div></div></section>}
 <section class="section related"><div class="container"><h2>{ui.related}</h2><div>{tradeSectorIds.filter(x=>x!==id).map(x=><a href={pathForSector(lang,x)}>{tradeCopy[lang][x].title}<span aria-hidden="true">→</span></a>)}</div></div></section>
 <section class="section trade-cta"><div class="container"><p class="eyebrow">RFQ · CTSEG</p><h2>{copy.cta}</h2><a class="button" href={buyerContact}>{ui.contact}</a></div></section></main>
-<footer class="trade-footer"><div class="container"><div><strong>CTSEG</strong>{lang==='tr'&&<p>Türkiye merkezli uluslararası ticaret eşleştirme ve bağımsız ticari koordinasyon.</p>}{lang==='ru'&&<p>Международный сорсинг и независимая коммерческая координация из Турции.</p>}{lang==='zh'&&<p>立足土耳其的国际贸易匹配与独立商业协调专业机构。</p>}{lang==='vi'&&<p>Kết nối thương mại quốc tế và điều phối thương mại độc lập từ Thổ Nhĩ Kỳ.</p>}</div><span>{lang==='tr'?'© 2026 CTSEG. Tüm hakları saklıdır.':lang==='ru'?'© 2026 CTSEG. Все права защищены.':lang==='zh'?'© 2026 CTSEG. 保留所有权利。':lang==='vi'?'© 2026 CTSEG. Bảo lưu mọi quyền.':'© 2026 CTSEG. All rights reserved.'}</span><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></div></footer>
+<footer class="trade-footer"><div class="container"><div><strong>CTSEG</strong>{lang==='tr'&&<p>Türkiye merkezli uluslararası ticaret eşleştirme ve bağımsız ticari koordinasyon.</p>}{lang==='ru'&&<p>Международный сорсинг и независимая коммерческая координация из Турции.</p>}{lang==='zh'&&<p>立足土耳其的国际贸易匹配与独立商业协调专业机构。</p>}{lang==='vi'&&<p>Kết nối thương mại quốc tế và điều phối thương mại độc lập từ Thổ Nhĩ Kỳ.</p>}{lang==='ro'&&<p>Sourcing internațional și coordonare comercială independentă din Türkiye.</p>}{lang==='bg'&&<p>Международно снабдяване и независима търговска координация от Türkiye.</p>}{lang==='sr'&&<p>Međunarodni sourcing i nezavisna komercijalna koordinacija iz Türkiye.</p>}</div><span>{lang==='tr'?'© 2026 CTSEG. Tüm hakları saklıdır.':lang==='ru'?'© 2026 CTSEG. Все права защищены.':lang==='zh'?'© 2026 CTSEG. 保留所有权利。':lang==='vi'?'© 2026 CTSEG. Bảo lưu mọi quyền.':lang==='ro'?'© 2026 CTSEG. Toate drepturile rezervate.':lang==='bg'?'© 2026 CTSEG. Всички права запазени.':lang==='sr'?'© 2026 CTSEG. Sva prava zadržana.':'© 2026 CTSEG. All rights reserved.'}</span><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></div></footer>
 <script is:inline define:vars={{openLabel:chrome.menu,closeLabel:chrome.close}}>
   const tradeToggle=document.querySelector('[data-trade-menu-toggle]');
   const tradeNav=document.querySelector('[data-trade-locale-nav]');
