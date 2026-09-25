@@ -8,6 +8,18 @@ const d = duzceGlassData[currentLang] || duzceGlassData.en;
 const isRtl = currentLang === 'fa';
 const pageHeroTitle = currentLang === 'tr' ? 'Düzce Cam için ticaret ve ihracat koordinasyonu.' : d.title;
 
+
+const productImages = [
+  'https://duzcecam.com.tr/upload/bw_1182023_924493671.jpg',
+  'https://duzcecam.com.tr/upload/bw_1182023_7989465594.jpg',
+  'https://duzcecam.com.tr/upload/bw_1182023_1988336444.jpg',
+  'https://duzcecam.com.tr/upload/bw_1182023_1134759784.jpg',
+  'https://duzcecam.com.tr/upload/bw_1182023_5639459491.jpg',
+  'https://duzcecam.com.tr/upload/bw_1182023_534326435.jpg',
+  'https://duzcecam.com.tr/upload/bw_1182023_7363702655.jpg',
+  'https://duzcecam.com.tr/upload/bw_1182023_5729333758.jpg'
+] as const;
+
 const buyerTypes = currentLang === 'tr'
   ? ['Cam ithalatçıları ve distribütörleri','Isıcam / IGU üreticileri','Cam kesim, temper ve işleme tesisleri','Cephe ve alüminyum sistem firmaları','Pencere ve doğrama üreticileri','Müteahhitler ve proje satın alma ekipleri']
   : ['Glass importers and distributors','Insulating glass / IGU manufacturers','Glass cutting, tempering and processing plants','Façade and aluminium system companies','Window manufacturers','Contractors and project procurement teams'];
@@ -65,6 +77,17 @@ const rfqFields = currentLang === 'tr'
       <div class="duzce-product-grid">
         {d.products.map((product,index) => (
           <article class="duzce-product-card">
+            <div class="duzce-product-media">
+              <img
+                src={productImages[index]}
+                alt={product}
+                width="1000"
+                height="500"
+                loading="lazy"
+                decoding="async"
+                referrerpolicy="no-referrer"
+              />
+            </div>
             <div class="duzce-product-card-inner">
               <h3>{product}</h3>
               <p>{productDescriptions[index]}</p>
@@ -126,11 +149,14 @@ const rfqFields = currentLang === 'tr'
   .duzce-role-card small,.duzce-role-card span{color:#c4f000!important}.duzce-role-card p{margin:1rem 0 0;font-size:.96rem;line-height:1.68;color:#dfe4de!important;opacity:1!important}.duzce-role-mark{margin-top:1.45rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.12);font-size:.68rem;letter-spacing:.13em;color:#f3f4ef!important}
   .duzce-portfolio-section{background:#f2efe7;color:#171914;padding:clamp(3.3rem,5vw,5.4rem) 0}
   .duzce-portfolio-section .section-head{margin-bottom:1.8rem;text-align:center}.duzce-portfolio-section .section-head .eyebrow{color:#8b4f3b!important}.duzce-portfolio-section .section-head h2{margin:.4rem auto 0;color:#171914!important;font-family:var(--font-heading,'Source Serif 4',Georgia,serif);font-size:clamp(2.5rem,4vw,4.4rem);line-height:.94;letter-spacing:-.045em}
-  .duzce-product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;background:transparent;border:0}
-  .duzce-product-card{position:relative;min-height:178px;padding:1.25rem 1.3rem;background:linear-gradient(155deg,#111612,#151a16);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
-  .duzce-product-card:before{content:"";position:absolute;left:1.3rem;top:1.2rem;width:34px;height:2px;background:#c4f000;opacity:.85}
+  .duzce-product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;background:transparent;border:0}
+  .duzce-product-card{position:relative;overflow:hidden;background:linear-gradient(155deg,#111612,#151a16);border:1px solid rgba(255,255,255,.09);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
   .duzce-product-card:hover{transform:translateY(-4px);border-color:rgba(196,240,0,.42);box-shadow:0 16px 34px rgba(0,0,0,.16)}
-  .duzce-product-card-inner{width:100%;display:grid;gap:.68rem;padding-top:1rem}
+  .duzce-product-media{position:relative;overflow:hidden;aspect-ratio:2/1;background:#d9ddd8}
+  .duzce-product-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 58%,rgba(8,12,9,.22));pointer-events:none}
+  .duzce-product-media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .55s ease}
+  .duzce-product-card:hover .duzce-product-media img{transform:scale(1.035)}
+  .duzce-product-card-inner{width:100%;display:grid;gap:.68rem;padding:1.05rem 1.15rem 1.2rem;border-top:2px solid #c4f000}
   .duzce-product-grid h3{margin:0;color:#f3f4ef!important;font-size:1.08rem;line-height:1.15;text-wrap:balance}
   .duzce-product-grid p{margin:0;color:#cfd5cf!important;font-size:.86rem;line-height:1.5;opacity:1!important}
   .duzce-market-section{background:#121613;padding:clamp(3.4rem,5vw,5.6rem) 0}
@@ -147,5 +173,5 @@ const rfqFields = currentLang === 'tr'
   .duzce-rfq-fields{display:grid;grid-template-columns:1fr 1fr;border:1px solid #d2cbbf;background:#f7f4ec}.duzce-rfq-fields div{padding:1rem;border-bottom:1px solid #d2cbbf}.duzce-rfq-fields div:nth-child(odd){border-inline-end:1px solid #d2cbbf}.duzce-rfq-fields strong{color:#171914!important;font-size:.95rem;line-height:1.45}
   @media(max-width:1050px){.duzce-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.duzce-market-body{grid-template-columns:1fr}.duzce-buyer-list{grid-template-columns:repeat(2,minmax(0,1fr))}.duzce-market-intro h2{white-space:normal;max-width:16ch}}
   @media(max-width:900px){.duzce-hero-grid,.duzce-two-col{grid-template-columns:1fr}.duzce-role-card{position:static}.duzce-hero{padding:3.2rem 0}.duzce-hero h1{max-width:12ch}}
-  @media(max-width:560px){.duzce-product-grid,.duzce-rfq-fields,.duzce-buyer-list{grid-template-columns:1fr}.duzce-product-card{min-height:150px;padding:1.1rem}.duzce-product-card:before{left:1.1rem;top:1rem}.duzce-product-card-inner{gap:.58rem;padding-top:.8rem}.duzce-product-grid h3{font-size:1.02rem}.duzce-product-grid p{font-size:.85rem;line-height:1.48}.duzce-buyer-list li,.duzce-buyer-list li:nth-child(odd),.duzce-buyer-list li:nth-child(even){padding:.85rem 0;border-inline-end:0}.duzce-rfq-fields div:nth-child(odd){border-inline-end:0}.duzce-hero h1{font-size:clamp(2.65rem,11vw,4rem)}.duzce-market-intro h2{font-size:clamp(2.4rem,10vw,3.8rem)}}
+  @media(max-width:560px){.duzce-product-grid,.duzce-rfq-fields,.duzce-buyer-list{grid-template-columns:1fr}.duzce-product-media{aspect-ratio:16/9}.duzce-product-card-inner{gap:.58rem;padding:1rem 1.05rem 1.1rem}.duzce-product-grid h3{font-size:1.02rem}.duzce-product-grid p{font-size:.85rem;line-height:1.48}.duzce-buyer-list li,.duzce-buyer-list li:nth-child(odd),.duzce-buyer-list li:nth-child(even){padding:.85rem 0;border-inline-end:0}.duzce-rfq-fields div:nth-child(odd){border-inline-end:0}.duzce-hero h1{font-size:clamp(2.65rem,11vw,4rem)}.duzce-market-intro h2{font-size:clamp(2.4rem,10vw,3.8rem)}}
 </style>
