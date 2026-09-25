@@ -415,7 +415,7 @@ const dynamicPlaceholders = {
       }
       if(supportNeed instanceof HTMLSelectElement&&['supplier_sourcing','rfq_comparison','private_label','market_entry','document_assessment','external_trade_desk','other'].includes(requestedSupport||''))supportNeed.value=requestedSupport;
       if(tradeDirection instanceof HTMLSelectElement&&['export_from_turkiye','import_to_turkiye','cross_border_sourcing','market_entry','other'].includes(requestedDirection||''))tradeDirection.value=requestedDirection;
-      if(productFamily instanceof HTMLSelectElement&&['vegetable_oils','nuts_dried_fruit','reflex_gloves','biofuel_feedstock','other'].includes(requestedFamily||''))productFamily.value=requestedFamily;
+      if(productFamily instanceof HTMLSelectElement&&['vegetable_oils','nuts_dried_fruit','architectural_glass','biofuel_feedstock','other'].includes(requestedFamily||''))productFamily.value=requestedFamily;
       document.querySelectorAll('[data-fa-intent],[data-contact-intent],[data-trade-intent]').forEach((link)=>link.addEventListener('click',()=>{
         const value=link.getAttribute('data-fa-intent')||link.getAttribute('data-contact-intent')||link.getAttribute('data-trade-intent');
         if(value&&['buyer_request','supplier_market_entry','external_trade_desk'].includes(value)){
