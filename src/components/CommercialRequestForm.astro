@@ -81,7 +81,10 @@ const supportNeedCopy = {
     ['document_assessment','Đánh giá sản phẩm, xuất xứ hoặc hồ sơ lô hàng'],
     ['external_trade_desk','Bộ phận Ngoại thương thuê ngoài dài hạn'],
     ['other','Khác']
-  ]}
+  ]},
+  ro:{label:'Pentru ce aveți nevoie de sprijin?',options:[['supplier_sourcing','Identificarea și verificarea unui producător sau furnizor din Türkiye'],['rfq_comparison','Pregătirea RFQ și compararea ofertelor'],['private_label','Cercetare producător private label / contract manufacturing'],['market_entry','Export și intrare pe o piață nouă'],['document_assessment','Evaluarea produsului, originii sau documentelor de lot'],['external_trade_desk','Birou extern de comerț pe termen lung'],['other','Altele']]},
+  bg:{label:'За какво ви е необходима подкрепа?',options:[['supplier_sourcing','Откриване и проверка на производител или доставчик в Türkiye'],['rfq_comparison','Подготовка на RFQ и сравнение на оферти'],['private_label','Проучване на private label / контрактен производител'],['market_entry','Износ и навлизане на нов пазар'],['document_assessment','Оценка на продукт, произход или партидни документи'],['external_trade_desk','Постоянен външен търговски отдел'],['other','Друго']]},
+  sr:{label:'Za šta vam je potrebna podrška?',options:[['supplier_sourcing','Pronalaženje i provera proizvođača ili dobavljača u Türkiye'],['rfq_comparison','Priprema RFQ-a i poređenje ponuda'],['private_label','Istraživanje private-label / ugovornog proizvođača'],['market_entry','Izvoz i ulazak na novo tržište'],['document_assessment','Procena proizvoda, porekla ili dokumentacije serije'],['external_trade_desk','Kontinuirani eksterni trgovinski desk'],['other','Drugo']]}
 }[lang];
 
 const dynamicPlaceholders = {
@@ -132,7 +135,10 @@ const dynamicPlaceholders = {
     supplier_market_entry: 'Danh mục sản phẩm sản xuất, công suất thực tế hàng tháng/năm, các chứng nhận chất lượng và thị trường xuất khẩu mục tiêu...',
     external_trade_desk: 'Mục tiêu ngoại thương, thị trường mục tiêu, nhóm sản phẩm, cơ cấu đội ngũ hiện tại và phạm vi công việc dài hạn muốn CTSEG quản lý...',
     default: 'Chi tiết yêu cầu thương mại, thông số kỹ thuật và điều kiện giao hàng...'
-  }
+  },
+  ro:{buyer_request:'Specificațiile produsului, volumul estimat (MT / containere), Incoterm-ul preferat și portul de destinație...',supplier_market_entry:'Produsele fabricate, capacitatea lunară/anuală, certificările de calitate și piețele de export vizate...',external_trade_desk:'Obiectivele de comerț exterior, piețele țintă, grupele de produse, structura echipei și activitățile pe care doriți să le gestionați prin CTSEG...',default:'Detaliile solicitării comerciale, specificațiile produsului și cerințele de livrare...'},
+  bg:{buyer_request:'Спецификация на продукта, ориентировъчен обем (тона / контейнери), предпочитан Incoterm и пристанище на местоназначение...',supplier_market_entry:'Произвеждани продуктови линии, месечен/годишен капацитет, сертификати за качество и целеви експортни пазари...',external_trade_desk:'Цели за външна търговия, целеви пазари, продуктови групи, структура на екипа и дейности, които искате CTSEG да управлява...',default:'Детайли за търговската заявка, продуктови спецификации и изисквания за доставка...'},
+  sr:{buyer_request:'Specifikacija proizvoda, procenjeni obim (MT / kontejneri), željeni Incoterm i odredišna luka...',supplier_market_entry:'Proizvodni program, mesečni/godišnji kapacitet, sertifikati kvaliteta i ciljna izvozna tržišta...',external_trade_desk:'Ciljevi spoljne trgovine, ciljna tržišta, grupe proizvoda, struktura tima i obim poslova koje želite da CTSEG vodi...',default:'Detalji komercijalnog zahteva, specifikacije proizvoda i zahtevi isporuke...'}
 }[lang] || {
   buyer_request: 'Required product specifications, estimated volume, preferred Incoterm, and destination...',
   supplier_market_entry: 'Manufactured products, verified production capacity, quality certifications, and target markets...',
