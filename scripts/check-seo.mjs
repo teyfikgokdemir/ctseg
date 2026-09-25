@@ -5,7 +5,7 @@ const dist = resolve('dist');
 const errors = [];
 const origin = 'https://ctseg.com.tr';
 const coreLocales = ['tr','en','de','it','ru','zh','vi'];
-const medicalLocales = ['tr','en','de','it','ru','fa','zh','vi','sq','mk','sr'];
+const glassLocales = ['tr','en','de','it','ru','fa','zh','vi'];
 
 if (!existsSync(dist)) {
   console.error('dist/ not found. Run npm run build first.');
@@ -78,12 +78,12 @@ for (const file of htmlFiles) {
     if (!focusedSelfOnly && !alternates['x-default']) errors.push(`${label}: missing x-default hreflang`);
     if (alternates[lang] !== canonical) errors.push(`${label}: self hreflang does not match canonical`);
   }
-  if (canonical.includes('/medical/reflex-disposable-gloves/')) {
+  if (canonical.includes('/glass/duzce-float-glass/')) {
     const alternates = Object.fromEntries([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
-    for (const locale of medicalLocales) {
-      if (!alternates[locale]) errors.push(`${label}: medical hreflang ${locale} missing`);
+    for (const locale of glassLocales) {
+      if (!alternates[locale]) errors.push(`${label}: glass hreflang ${locale} missing`);
     }
-    if (!html.includes('MEDILEX') || !html.includes('REFLEX')) errors.push(`${label}: REFLEX / MEDILEX product identity markers missing`);
+    if (!html.includes('Düzce') || !html.includes('Float Glass')) errors.push(`${label}: Düzce Glass identity markers missing`);
   }
   for (const match of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/g)) {
     let href = match[1];
@@ -98,8 +98,8 @@ for (const [canonical,page] of indexablePages) {
   const pathname = new URL(canonical).pathname;
   if (!internalLinkCounts.get(pathname)) errors.push(`${page.label}: orphaned canonical has no normal HTML internal link`);
   const alternates = Object.fromEntries([...page.html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
-  const reciprocalLocales = canonical.includes('/medical/reflex-disposable-gloves/')
-    ? medicalLocales
+  const reciprocalLocales = canonical.includes('/glass/duzce-float-glass/')
+    ? glassLocales
     : (page.lang === 'fa' ? [] : coreLocales.filter((code) => alternates[code]));
   for (const locale of reciprocalLocales.filter((code) => alternates[code])) {
     const target = indexablePages.get(alternates[locale]);
