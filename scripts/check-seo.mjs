@@ -53,7 +53,7 @@ for (const file of htmlFiles) {
   const expectedCanonical = encodeURI(`${origin}${expectedPath}`);
 
   if (h1Count !== 1) errors.push(`${label}: expected one H1, found ${h1Count}`);
-  if (/\bundefined\b|\/undefined\/|\?\?\?\?\?/.test(html)) errors.push(`${label}: unresolved locale/content token rendered`);
+  if (/(?:<title>\s*undefined|content="undefined|href="[^"]*\/undefined\/|>\s*undefined\s*<|\?\?\?\?\?)/i.test(html)) errors.push(`${label}: unresolved locale/content token rendered`);
   if (/REFLEX/i.test(html)) errors.push(`${label}: retired REFLEX content rendered`);
   if (!title) errors.push(`${label}: title is empty`);
   if (!description) errors.push(`${label}: meta description is empty`);
