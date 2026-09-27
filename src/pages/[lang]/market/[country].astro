@@ -1,0 +1,240 @@
+---
+import '../../../styles/site.css';
+import { localeDirection, localeOg } from '../../../data/locales';
+import { company, localizedPath, ui } from '../../../data/site';
+import {
+  marketCopy, marketLocales, marketUi, pathForMarket, tradeMarketIds,
+  type MarketLocale, type TradeMarketId
+} from '../../../data/trade-markets';
+
+export function getStaticPaths() {
+  return marketLocales.flatMap(lang =>
+    tradeMarketIds.map(id => ({
+      params: { lang, country: marketCopy[lang][id].slug },
+      props: { lang, id }
+    }))
+  );
+}
+
+const { lang, id } = Astro.props as { lang: MarketLocale; id: TradeMarketId };
+const copy = marketCopy[lang][id];
+const mu = marketUi[lang];
+const t = ui[lang] || ui.en;
+const canonical = `https://ctseg.com.tr${pathForMarket(lang, id)}`;
+const home = lang === 'tr' ? '/' : `/${lang}/`;
+const contact = localizedPath(lang, 'contact');
+const dir = localeDirection(lang);
+const ogLocale = localeOg(lang);
+
+// hreflang alternates — each market has a URL per language
+const alternates = marketLocales.map(code => ({
+  code,
+  href: `https://ctseg.com.tr${pathForMarket(code, id)}`
+}));
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': 'https://ctseg.com.tr/#organization',
+    name: company.name[lang] || company.name.en,
+    alternateName: 'CTSEG',
+    foundingDate: '2022',
+    url: 'https://ctseg.com.tr/',
+    address: { '@type': 'PostalAddress', addressLocality: 'Tuzla', addressRegion: 'İstanbul', addressCountry: 'TR' }
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${canonical}#webpage`,
+    url: canonical,
+    name: copy.title,
+    description: copy.description,
+    inLanguage: lang,
+    isPartOf: { '@id': 'https://ctseg.com.tr/#website' }
+  },
+  {
+    '@type': 'Service',
+    '@id': `${canonical}#service`,
+    name: copy.title,
+    description: copy.description,
+    serviceType: copy.eyebrow,
+    inLanguage: lang,
+    provider: { '@id': 'https://ctseg.com.tr/#organization' },
+    areaServed: ['Türkiye', 'Europe', 'International']
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'CTSEG', item: `https://ctseg.com.tr${home}` },
+      { '@type': 'ListItem', position: 2, name: mu.allMarkets, item: `https://ctseg.com.tr${localizedPath(lang, 'markets')}` },
+      { '@type': 'ListItem', position: 3, name: copy.title, item: canonical }
+    ]
+  }
+];
+---
+<!doctype html>
+<html lang={lang === 'zh' ? 'zh-CN' : lang === 'vi' ? 'vi-VN' : lang} dir={dir}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{copy.title} | CTSEG</title>
+  <meta name="description" content={copy.description} />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href={canonical} />
+  {alternates.map(a => <link rel="alternate" hreflang={a.code} href={a.href} />)}
+  <link rel="alternate" hreflang="x-default" href={`https://ctseg.com.tr${pathForMarket('en', id)}`} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content={ogLocale} />
+  <meta property="og:title" content={copy.title} />
+  <meta property="og:description" content={copy.description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content="https://ctseg.com.tr/images/ctseg-og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</head>
+<body>
+  <header class="mkt-header">
+    <div class="mkt-container mkt-header-inner">
+      <a href={home} class="mkt-brand">
+        <img src="/images/ctseg-logo-transparent.png" width="190" height="61" alt="CTSEG" />
+      </a>
+      <nav class="mkt-lang-nav" aria-label="Language">
+        {alternates.map(a => (
+          <a
+            href={a.href}
+            lang={a.code}
+            hreflang={a.code}
+            class:list={{ active: a.code === lang }}
+            aria-current={a.code === lang ? 'page' : undefined}
+          >{a.code.toUpperCase()}</a>
+        ))}
+      </nav>
+      <a class="mkt-cta-btn" href={contact}>{mu.contact}</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="mkt-hero">
+      <div class="mkt-container">
+        <p class="mkt-eyebrow">{copy.eyebrow}</p>
+        <h1>{copy.title}</h1>
+        <p class="mkt-lead">{copy.lead}</p>
+        <div class="mkt-actions">
+          <a class="mkt-btn" href={contact}>{copy.cta}</a>
+          <a class="mkt-btn mkt-btn-sec" href={home}>{mu.home}</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- BODY -->
+    <section class="mkt-body">
+      <div class="mkt-container mkt-body-grid">
+        <div>
+          <h2>{copy.heading2}</h2>
+          <p>{copy.body2}</p>
+        </div>
+        <aside class="mkt-aside">
+          <p class="mkt-eyebrow">CTSEG</p>
+          <ul>
+            <li>{lang === 'tr' ? 'Fabrika doğrulaması ve denetimi' : lang === 'de' ? 'Fabrikverifizierung und -prüfung' : lang === 'it' ? 'Verifica e ispezione di fabbrica' : lang === 'ru' ? 'Верификация и инспекция заводов' : lang === 'fa' ? 'تأیید و بازرسی کارخانه' : lang === 'zh' ? '工厂核实与审计' : lang === 'vi' ? 'Xác minh và kiểm tra nhà máy' : 'Factory verification & audit'}</li>
+            <li>{lang === 'tr' ? 'Yapılandırılmış RFQ süreci' : lang === 'de' ? 'Strukturierter RFQ-Prozess' : lang === 'it' ? 'Processo RFQ strutturato' : lang === 'ru' ? 'Структурированный процесс RFQ' : lang === 'fa' ? 'فرآیند RFQ ساختاریافته' : lang === 'zh' ? '结构化RFQ流程' : lang === 'vi' ? 'Quy trình RFQ có cấu trúc' : 'Structured RFQ process'}</li>
+            <li>{lang === 'tr' ? 'Sözleşme koordinasyonu' : lang === 'de' ? 'Vertragskoordination' : lang === 'it' ? 'Coordinamento contrattuale' : lang === 'ru' ? 'Координация контрактов' : lang === 'fa' ? 'هماهنگی قرارداد' : lang === 'zh' ? '合同协调' : lang === 'vi' ? 'Điều phối hợp đồng' : 'Contract coordination'}</li>
+            <li>{lang === 'tr' ? 'Bağımsız ticari değerlendirme' : lang === 'de' ? 'Unabhängige Handelsbewertung' : lang === 'it' ? 'Valutazione commerciale indipendente' : lang === 'ru' ? 'Независимая коммерческая оценка' : lang === 'fa' ? 'ارزیابی تجاری مستقل' : lang === 'zh' ? '独立商业评估' : lang === 'vi' ? 'Đánh giá thương mại độc lập' : 'Independent commercial assessment'}</li>
+          </ul>
+          <a class="mkt-btn" href={contact}>{copy.cta}</a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- OTHER MARKETS -->
+    <section class="mkt-related">
+      <div class="mkt-container">
+        <h2>{mu.related}</h2>
+        <div class="mkt-related-grid">
+          {tradeMarketIds.filter(x => x !== id).slice(0, 6).map(x => (
+            <a href={pathForMarket(lang, x)} class="mkt-related-item">
+              <span>{marketCopy[lang][x].title}</span>
+              <i aria-hidden="true">→</i>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mkt-final-cta">
+      <div class="mkt-container">
+        <h2>{copy.cta}</h2>
+        <a class="mkt-btn" href={contact}>{mu.contact}</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mkt-footer">
+    <div class="mkt-container mkt-footer-inner">
+      <span><strong>CTSEG</strong> · {lang === 'tr' ? 'İstanbul, Türkiye' : 'Istanbul, Türkiye'}</span>
+      <a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a>
+      <span>© 2026 CTSEG</span>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{background:#f1ece3;color:#1d1b18;font-family:'DM Sans',system-ui,sans-serif;line-height:1.65}
+  a{text-decoration:none;color:inherit}
+  .mkt-container{max-width:1240px;margin-inline:auto;padding-inline:clamp(1rem,4vw,3rem)}
+  .mkt-eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#9d5435;margin-bottom:1rem}
+  .mkt-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.6rem;border-radius:999px;background:#1d1b18;color:#f1ece3;font-weight:700;font-size:.9rem;transition:background .2s}
+  .mkt-btn:hover{background:#9d5435}
+  .mkt-btn-sec{background:transparent;border:1.5px solid #1d1b18;color:#1d1b18}
+  .mkt-btn-sec:hover{background:#1d1b18;color:#f1ece3}
+  /* HEADER */
+  .mkt-header{position:sticky;top:0;z-index:20;background:#1d1b18e8;backdrop-filter:blur(16px);border-bottom:1px solid #ffffff1f}
+  .mkt-header-inner{min-height:72px;display:flex;align-items:center;gap:1.2rem}
+  .mkt-brand img{display:block;width:140px;height:auto;filter:brightness(0)invert(1)}
+  .mkt-lang-nav{display:flex;flex-wrap:wrap;gap:.2rem;margin-inline-start:auto}
+  .mkt-lang-nav a{min-width:38px;min-height:36px;display:grid;place-items:center;color:#c9c4b9;font-size:.68rem;font-weight:800;border-radius:6px}
+  .mkt-lang-nav a.active{color:#fff;background:#9d5435}
+  .mkt-cta-btn{padding:.55rem 1.1rem;border-radius:999px;background:#9d5435;color:#fff;font-weight:700;font-size:.8rem;white-space:nowrap}
+  /* HERO */
+  .mkt-hero{padding-block:clamp(5rem,10vw,9rem);background:#232520;color:#fff}
+  .mkt-hero .mkt-eyebrow{color:#c4b89a}
+  .mkt-hero h1{font-size:clamp(2.4rem,5vw,5rem);line-height:.95;letter-spacing:-.04em;max-width:900px;margin-bottom:1.4rem}
+  .mkt-lead{max-width:700px;font-size:clamp(1rem,1.4vw,1.2rem);line-height:1.75;color:#d4d0c8;margin-bottom:2rem}
+  .mkt-actions{display:flex;flex-wrap:wrap;gap:.8rem}
+  /* BODY */
+  .mkt-body{padding-block:clamp(4rem,8vw,7rem)}
+  .mkt-body-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(3rem,6vw,6rem);align-items:start}
+  .mkt-body h2{font-size:clamp(2rem,3.5vw,3.5rem);line-height:1;margin-bottom:1.2rem}
+  .mkt-aside{background:#fff;border-radius:24px;padding:2rem}
+  .mkt-aside ul{list-style:none;margin-block:1rem 1.5rem;display:grid;gap:.7rem}
+  .mkt-aside li{padding-left:1.2rem;position:relative;color:#3a3833}
+  .mkt-aside li::before{content:'✓';position:absolute;left:0;color:#9d5435;font-weight:800}
+  /* RELATED */
+  .mkt-related{padding-block:clamp(3rem,6vw,5rem);background:#eae5dc}
+  .mkt-related h2{margin-bottom:1.5rem;font-size:clamp(1.5rem,2.5vw,2.5rem)}
+  .mkt-related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#bdb4a7}
+  .mkt-related-item{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.2rem;background:#f1ece3;font-size:.95rem;font-weight:600;transition:background .2s}
+  .mkt-related-item:hover{background:#fff}
+  .mkt-related-item i{color:#9d5435}
+  /* CTA */
+  .mkt-final-cta{padding-block:clamp(4rem,8vw,7rem);text-align:center;background:#232520;color:#fff}
+  .mkt-final-cta h2{font-size:clamp(2rem,4vw,4rem);margin-bottom:2rem;max-width:700px;margin-inline:auto}
+  /* FOOTER */
+  .mkt-footer{padding-block:1.2rem;background:#161614;color:#c9c4b9}
+  .mkt-footer-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem;font-size:.82rem}
+  /* RTL */
+  html[dir="rtl"] .mkt-aside li{padding-left:0;padding-right:1.2rem}
+  html[dir="rtl"] .mkt-aside li::before{left:auto;right:0}
+  @media(max-width:768px){
+    .mkt-body-grid{grid-template-columns:1fr}
+    .mkt-related-grid{grid-template-columns:1fr}
+    .mkt-lang-nav{display:none}
+  }
+</style>
