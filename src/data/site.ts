@@ -1380,7 +1380,8 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
   const pathLang = key === 'medical' ? lang : safeLang;
   if (key === 'home') return pathLang === 'tr' ? '/' : `/${pathLang}/`;
   if (key === 'medical') return pathLang === 'tr' ? '/medical/reflex-disposable-gloves/' : `/${pathLang}/medical/reflex-disposable-gloves/`;
-  if (key === 'how-we-work') return `/${pathLang}/${specialSlugs['how-we-work'][safeLang]}/`;
+  if (key === 'trade-corridor' && id) return `/${pathLang}/turkey-sourcing-for-${id}/`;
+    if (key === 'how-we-work') return `/${pathLang}/${specialSlugs['how-we-work'][safeLang]}/`;
   if (key === 'scenarios') return `/${pathLang}/${specialSlugs.scenarios[safeLang]}/`;
   if (key === 'guides' && id) {
     if (safeLang === 'tr' || safeLang === 'en') {
