@@ -106,7 +106,7 @@ export const companyCopy: Record<Locale, {
     labels: { name: 'Tên công ty', founder: 'Người sáng lập', founded: 'Năm thành lập', headquarters: 'Trụ sở chính' },
     headquarters: 'Tuzla, Istanbul, Thổ Nhĩ Kỳ',
     footerLocation: 'Tuzla, Istanbul, Thổ Nhĩ Kỳ'
-  },,
+  },
   ro: {
     aboutHeading: 'Poarta dintre Türkiye și piețele internaționale',
     aboutBody: 'CTSEG Industry and Trade Limited Company a fost fondată la Istanbul în 2022. CTSEG coordonează proiecte B2B de sourcing strategic, verificare a furnizorilor, RFQ și intrare pe piață între Türkiye, Balcani, Europa și piețe internaționale.',
