@@ -332,14 +332,25 @@ export const homeCopy: Record<Locale, {
     processTitle: 'Tiến độ được kiểm soát qua bốn bước', process: ['Xác định yêu cầu', 'Thẩm định thị trường & đối tác', 'So sánh toàn diện bức tranh thương mại', 'Giám sát thực thi & hiệu suất'],
     ctaTitle: 'Đưa ra quyết định thu mua tiếp theo dựa trên bằng chứng xác thực.'
   },
-  uk: {
-    description: 'B2B пошук в Туреччині',
-    home: 'Головна',
-    markets: 'Ринки',
-    products: 'Продукти',
-    contact: 'Контакти'
-  }
-};
+    uk: {
+      eyebrow: 'Стратегічний пошук – міжнародна торгівля',
+      title: 'Комерційна визначеність для складних рішень щодо закупівель.',
+      lead: 'Ми поєднуємо пошук виробників, перевірку, якість, загальну вартість та відповідність ринку у дисциплінований процес прийняття рішень.',
+      signal: 'CTSEG Signal Room',
+      live: 'Активна оцінка',
+      signals: [['ПОСТАЧАННЯ', 'Виробник та потужності'], ['ЯКІСТЬ', 'COA та простежуваність'], ['РИНОК', 'Відповідність та логістика']],
+      trust: ['Перевірені контрагенти', 'Прозоре походження', 'B2B дисципліна рішень', 'Україна – Європа – Світ'],
+      servicesTitle: 'Більше, ніж просто список закупівель.',
+      servicesLead: 'Ми структуруємо все рішення: від потреби до перевірки, від пропозиції до виконання.',
+      productsTitle: 'Перевірений портфель комерційних продуктів.',
+      productsLead: 'Вибрані продукти, які прозоро оцінюються за походженням, партіями, параметрами якості та варіантами доставки.',
+      marketsTitle: 'Життєздатні зв\'язки між ринками.',
+      marketsLead: 'Координація закупівель та торгівлі з виходом на європейські та міжнародні ринки.',
+      processTitle: 'Контрольований прогрес у чотири кроки',
+      process: ['Визначення потреби', 'Перевірка ринку та сторін', 'Порівняння загальної картини', 'Моніторинг виконання'],
+      ctaTitle: 'Приймайте наступне рішення на основі доказів.'
+    }
+  };
 
 export const serviceIds = ['strategic-sourcing', 'supplier-verification', 'trade-advisory', 'tco', 'market-entry'] as const;
 export const services: Record<(typeof serviceIds)[number], { slugs: Localized; names: Localized; descriptions: Localized }> = {
