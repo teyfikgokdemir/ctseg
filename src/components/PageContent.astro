@@ -29,13 +29,13 @@ import { productEvidence } from '../data/product-evidence';
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
-const t = ui[lang];
-const h = homeCopy[lang];
-const gateway = tradeGateway[lang];
-const copy = pageCopy[lang];
-const corporate = companyCopy[lang];
-const editorial = editorialCopy[lang];
-const completionHome = homeEnhancement[lang];
+const t = ui[lang] || ui['en'];
+const h = homeCopy[lang] || homeCopy['en'];
+const gateway = tradeGateway[lang] || tradeGateway['en'];
+const copy = pageCopy[lang] || pageCopy['en'];
+const corporate = companyCopy[lang] || companyCopy['en'];
+const editorial = editorialCopy[lang] || editorialCopy['en'];
+const completionHome = homeEnhancement[lang] || homeEnhancement['en'];
 const operationalTrust = {
   tr:{title:'Talep sonrası ne olur?',lead:'Her ticari talep, kapsamı ve belge gereksinimleri netleştirildikten sonra uygun değerlendirme yoluna alınır.',steps:['İhtiyaç ve hedef pazar netleştirilir','Ürün, taraf ve mevcut belge kapsamı incelenir','Uygulanabilir sonraki adımlar ve eksik bilgiler paylaşılır','Teklif, numune ve koordinasyon kapsamı taraflarla teyit edilir'],cta:'Çalışma yöntemini inceleyin'},
   en:{title:'What happens after a request?',lead:'Each commercial request is routed to the right assessment path after its scope and documentation needs are clarified.',steps:['Requirement and target market are clarified','Product, counterparty and available documents are reviewed','Feasible next steps and missing inputs are shared','Quotation, sample and coordination scope are confirmed with the parties'],cta:'Review how we work'},
@@ -101,7 +101,7 @@ const turnaroundCallout = {
   }
 }[lang];
 
-const completionAbout = aboutEnhancement[lang];
+const completionAbout = aboutEnhancement[lang] || aboutEnhancement['en'];
 const aboutGovernance = {
   tr: {
     eyebrow: 'Kurumsal Yönetim ve Liderlik',
@@ -194,9 +194,9 @@ const aboutMandate = {
     tagSourcing: 'Bàn thu mua quốc tế (Năng lực đã kiểm chứng)'
   }
 }[lang];
-const completionMarkets = marketsDetail[lang];
-const platform = tradePlatformCopy[lang];
-const contact = contactCopy[lang];
+const completionMarkets = marketsDetail[lang] || marketsDetail['en'];
+const platform = tradePlatformCopy[lang] || tradePlatformCopy['en'];
+const contact = contactCopy[lang] || contactCopy['en'];
 const homepageHero = localizedTradeVisual('global-trade-hero',lang);
 const homepageSectorVisuals = homeTradeVisualKeys.map((visualKey)=>localizedTradeVisual(visualKey,lang));
 const contactWithIntent = (intent:'buyer_request'|'supplier_market_entry') => `${sectionHref('contact')}?intent=${intent}#commercial-form`;
@@ -668,8 +668,8 @@ const articleRfqDesk = {
     zh: '填写商业需求委托单',
     vi: 'Gửi yêu cầu thương mại', uk:'Надіслати запит'}[lang]
 };
-const processPage = processPages[lang];
-const scenarioPage = scenarioPages[lang];
+const processPage = processPages[lang] || processPages['en'];
+const scenarioPage = scenarioPages[lang] || scenarioPages['en'];
 const processLabels = {
   tr:{boundary:'Rol ve sorumluluk sınırı',answers:'Doğrudan yanıtlar',answerLead:'Tedarik ve ticari koordinasyon hakkında sık sorulan temel sorular.'},
   en:{boundary:'Role and responsibility boundary',answers:'Direct answers',answerLead:'Core questions about sourcing and commercial coordination.'},
