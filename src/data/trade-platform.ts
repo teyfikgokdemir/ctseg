@@ -102,5 +102,12 @@ export const tradePlatformCopy:Record<PlatformLocale,PlatformCopy> = {
     corridorsTitle:'Các hành lang thương mại',corridorsLead:'Kết nối hai chiều giữa Việt Nam, Thổ Nhĩ Kỳ, châu Âu, Trung Đông và các thị trường quốc tế phù hợp.',
     corridors:['Việt Nam ↔ Thổ Nhĩ Kỳ','Thổ Nhĩ Kỳ ↔ Châu Âu','Thổ Nhĩ Kỳ ↔ Trung Đông','Thổ Nhĩ Kỳ ↔ Các thị trường quốc tế phù hợp'],
     processTitle:'Quy trình minh bạch và chuẩn mực',process:['Xác định yêu cầu','Nghiên cứu thị trường & đối tác','Thẩm định xác minh','Lập RFQ & báo giá','Mẫu thử & điều phối','Quyết định & các bước tiếp theo']
+  },
+  uk: {
+    name: 'CTSEG Україна',
+    home: 'Головна',
+    contact: 'Зв\'язатися',
+    assurance: 'Гарантія якості',
+    process: ['Крок 1', 'Крок 2', 'Крок 3', 'Крок 4']
   }
 };

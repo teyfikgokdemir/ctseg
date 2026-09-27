@@ -97,6 +97,13 @@ export const companyCopy: Record<Locale, {
     labels: { name: 'Tên công ty', founder: 'Người sáng lập', founded: 'Năm thành lập', headquarters: 'Trụ sở chính' },
     headquarters: 'Tuzla, Istanbul, Thổ Nhĩ Kỳ',
     footerLocation: 'Tuzla, Istanbul, Thổ Nhĩ Kỳ'
+  },
+  uk: {
+    description: 'B2B пошук в Туреччині',
+    home: 'Головна',
+    markets: 'Ринки',
+    products: 'Продукти',
+    contact: 'Контакти'
   }
 };
 
@@ -221,6 +228,13 @@ export const ui: Record<Locale, {
     complianceText: 'Nguồn gốc thực tế, nhà sản xuất và hồ sơ lô hàng được khai báo minh bạch. CTSEG không hỗ trợ việc che giấu xuất xứ hoặc dán nhãn sai lệch.',
     contactLead: 'Hãy chia sẻ thông tin doanh nghiệp, nhu cầu, sản lượng dự kiến và quốc gia giao hàng. Đội ngũ của chúng tôi sẽ xác định phương án đánh giá thương mại phù hợp.',
     emptyInsights: 'Chưa có bài viết nào bằng ngôn ngữ này.'
+  },
+  uk: {
+    description: 'B2B пошук в Туреччині',
+    home: 'Головна',
+    markets: 'Ринки',
+    products: 'Продукти',
+    contact: 'Контакти'
   }
 };
 
@@ -317,6 +331,13 @@ export const homeCopy: Record<Locale, {
     marketsTitle: 'Kết nối thực thi giữa các thị trường.', marketsLead: 'Điều phối thu mua và thương mại có trụ sở tại Thổ Nhĩ Kỳ, mở rộng sang Châu Âu và các thị trường quốc tế.',
     processTitle: 'Tiến độ được kiểm soát qua bốn bước', process: ['Xác định yêu cầu', 'Thẩm định thị trường & đối tác', 'So sánh toàn diện bức tranh thương mại', 'Giám sát thực thi & hiệu suất'],
     ctaTitle: 'Đưa ra quyết định thu mua tiếp theo dựa trên bằng chứng xác thực.'
+  },
+  uk: {
+    description: 'B2B пошук в Туреччині',
+    home: 'Головна',
+    markets: 'Ринки',
+    products: 'Продукти',
+    contact: 'Контакти'
   }
 };
 
@@ -391,6 +412,13 @@ export const services: Record<(typeof serviceIds)[number], { slugs: Localized; n
       zh:'为出海企业评估目标市场准入门槛、对接合规海外买家与分销渠道，构建清晰务实的落地合作方案。',
       vi:'Mở rộng thị trường mới thông qua sự phù hợp của sản phẩm, đánh giá quy chuẩn, sự sẵn sàng thương mại và kết nối người mua mục tiêu.'
     }
+  },
+  uk: {
+    description: 'B2B пошук в Туреччині',
+    home: 'Головна',
+    markets: 'Ринки',
+    products: 'Продукти',
+    contact: 'Контакти'
   }
 };
 
@@ -602,6 +630,13 @@ export const productDescriptions: Record<(typeof productIds)[number], Localized>
     fa:'ترکیبات سفارشی از انواع مغز پسته، بادام، فندق، گردو و میوه‌های خشک، با بسته‌بندی و فرمولاسیون اختصاصی.',
     zh:'根据跨国买家与品牌商需求，专业定制不同配比与颗粒梯度的开心果、巴旦木、腰果、榛子及脱水干果组合，提供真空大包装、充氮小包装及贴牌代工。',
     vi:'Hỗn hợp tùy chỉnh gồm hạt dẻ cười, hạnh nhân, hạt điều, hạt phỉ và trái cây sấy khô đóng gói theo thông số kỹ thuật thương hiệu riêng.'
+  },
+  uk: {
+    description: 'B2B пошук в Туреччині',
+    home: 'Головна',
+    markets: 'Ринки',
+    products: 'Продукти',
+    contact: 'Контакти'
   }
 };
 
@@ -720,6 +755,13 @@ export const editorialCopy: Record<Locale, {
     portfolioText:'Danh mục này đại diện cho mạng lưới thương mại hai chiều của CTSEG đối với hàng công nghiệp, nông sản nguyên liệu và vật tư tiêu hao đạt chuẩn quốc tế.',
     marketsKicker:'Mở rộng xuất khẩu · Xác minh xuất xứ · Phân tích TCO · Đảm bảo hợp đồng',
     productImageNote:'Hình ảnh đại diện cho danh mục; thông số kỹ thuật được xác thực bằng phiếu thông số kỹ thuật (TDS) và chứng từ lô hàng.'
+  },
+  uk: {
+    description: 'B2B пошук в Туреччині',
+    home: 'Головна',
+    markets: 'Ринки',
+    products: 'Продукти',
+    contact: 'Контакти'
   }
 };
 
@@ -1141,6 +1183,13 @@ export const insights: Record<(typeof insightIds)[number], { slugs: Localized; t
       zh:'现代战略贸易机构坚决摒弃传统倒手掮客的隐蔽高额加价模式；立足于经书面约定的透明服务费体系，协同买卖双方在法定契约下直接签署交易，并全程统筹质量检验、单证流转与违约风控。',
       vi:'Một nhà thương mại chiến lược hoạt động dựa trên các điều khoản dịch vụ minh bạch, kết nối người mua và nhà sản xuất trực tiếp qua hợp đồng chuẩn, loại bỏ biên lợi nhuận ẩn và kiểm soát chất lượng.'
     }
+  },
+  uk: {
+    description: 'B2B пошук в Туреччині',
+    home: 'Головна',
+    markets: 'Ринки',
+    products: 'Продукти',
+    contact: 'Контакти'
   }
 };
 
@@ -1268,6 +1317,13 @@ export const pageCopy: Record<Locale, any> = {
     productQuality:['Yêu cầu kiểm soát độc tố Aflatoxin và dư lượng thuốc BVTV','Độ ẩm, chỉ tiêu vi sinh và bảng thông số kỹ thuật chuẩn','Chứng chỉ phân tích (COA), mã lô hàng và khả năng truy xuất','Tuân thủ đầy đủ quy chuẩn thị trường đích'],
     legalIntro:'Thông báo này cung cấp thông tin minh bạch về việc sử dụng trang web CTSEG và quy trình xử lý dữ liệu liên quan.',
     legalSections:[['Phạm vi và trách nhiệm','CTSEG nỗ lực duy trì tính chính xác của thông tin doanh nghiệp và thương mại trên website này. Yêu cầu liên hệ và bảo vệ dữ liệu có thể gửi về info@ctseg.com.tr.'],['Thông tin xử lý và mục đích','Khi bạn liên hệ, chúng tôi có thể xử lý tên, công ty, email, số điện thoại và thông tin nhu cầu thương mại, cùng các bản ghi kỹ thuật giới hạn để bảo mật. Dữ liệu này dùng để phản hồi, đánh giá quan hệ hợp tác và tuân thủ nghĩa vụ pháp lý.'],['Chia sẻ, lưu trữ và bảo mật dữ liệu','Thông tin chỉ được chia sẻ với các nhà cung cấp dịch vụ lưu trữ, email, hỗ trợ kỹ thuật cần thiết hoặc cơ quan có thẩm quyền theo luật định. Dữ liệu sẽ được xóa hoặc ẩn danh khi hết thời hạn lưu trữ theo luật.'],['Quyền của bạn và thông tin liên hệ','Để thực hiện quyền truy cập, chỉnh sửa, xóa hoặc phản đối xử lý dữ liệu, vui lòng gửi yêu cầu kèm thông tin nhận diện tới info@ctseg.com.tr.']]
+  },
+  uk: {
+    description: 'B2B пошук в Туреччині',
+    home: 'Головна',
+    markets: 'Ринки',
+    products: 'Продукти',
+    contact: 'Контакти'
   }
 };
 
