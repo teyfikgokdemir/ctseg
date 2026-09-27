@@ -123,7 +123,7 @@ export const tradePlatformCopy:Record<PlatformLocale,PlatformCopy> = {
       {title: 'Продукти харчування', text: 'Сільське господарство'}
     ],
     corridorsTitle: 'Торгові коридори',
-    corridorsLead: 'Ми об'єднуємо глобальні ринки.',
+    corridorsLead: 'Ми об\'єднуємо глобальні ринки.',
     corridors: ['Україна - Туреччина', 'Європа - Азія', 'Близький Схід'],
     processTitle: 'Процес',
     process: ['Визначення вимог', 'Пошук', 'Перевірка', 'Замовлення']
