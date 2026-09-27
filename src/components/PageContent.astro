@@ -621,6 +621,7 @@ const sourcingDeskCopy: Record<Locale, { kicker: string; title: string; lead: st
     note: 'Hồ sơ xuất xứ và kiểm định lô hàng luôn được công khai minh bạch ở giai đoạn báo giá.'
   }
 };
+const sourcingDesk = (sourcingDeskCopy as any)[lang] || (sourcingDeskCopy as any).en;
 const featuredInsightLabelMap = {
   tr: 'ÖNE ÇIKAN TİCARİ ANALİZ',
   en: 'FEATURED TRADE INTELLIGENCE',
@@ -1095,11 +1096,11 @@ const verifiedLater = (verifiedLaterMap as any)[lang] || (verifiedLaterMap as an
               <span class="group-index">{String(groupIndex + 1).padStart(2,'0')}</span>
               <h2>{group.title}</h2>
             </div>
-            <p class="group-lead">{categoryLeads[group.key]?.[lang]}</p>
+            <p class="group-lead">{categoryLeads[group.key]?.[lang] || categoryLeads[group.key]?.en}</p>
             <div class="group-trade-badges">
-              <span class="trade-badge">✓ {groupBadges[group.key]?.b1[lang]}</span>
-              <span class="trade-badge">✓ {groupBadges[group.key]?.b2[lang]}</span>
-              <span class="trade-badge">✓ {groupBadges[group.key]?.b3[lang]}</span>
+              <span class="trade-badge">✓ {groupBadges[group.key]?.b1[lang] || groupBadges[group.key]?.b1.en}</span>
+              <span class="trade-badge">✓ {groupBadges[group.key]?.b2[lang] || groupBadges[group.key]?.b2.en}</span>
+              <span class="trade-badge">✓ {groupBadges[group.key]?.b3[lang] || groupBadges[group.key]?.b3.en}</span>
             </div>
           </div>
           <div class="catalogue-grid">{group.ids.map((productId) => <ProductCard
@@ -1113,13 +1114,13 @@ const verifiedLater = (verifiedLaterMap as any)[lang] || (verifiedLaterMap as an
       </div>
       <div class="catalogue-sourcing-desk">
         <div class="sourcing-desk-content">
-          <span class="sourcing-desk-kicker">{sourcingDeskCopy[lang].kicker}</span>
-          <h2 class="sourcing-desk-title">{sourcingDeskCopy[lang].title}</h2>
-          <p class="sourcing-desk-lead">{sourcingDeskCopy[lang].lead}</p>
-          <p class="sourcing-desk-note">🔒 {sourcingDeskCopy[lang].note}</p>
+          <span class="sourcing-desk-kicker">{sourcingDesk.kicker}</span>
+          <h2 class="sourcing-desk-title">{sourcingDesk.title}</h2>
+          <p class="sourcing-desk-lead">{sourcingDesk.lead}</p>
+          <p class="sourcing-desk-note">🔒 {sourcingDesk.note}</p>
         </div>
         <div class="sourcing-desk-actions">
-          <a class="button button-accent" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{sourcingDeskCopy[lang].cta} →</a>
+          <a class="button button-accent" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{sourcingDesk.cta} →</a>
           <a class="button button-secondary" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp Quick Desk ↗</a>
         </div>
       </div>
