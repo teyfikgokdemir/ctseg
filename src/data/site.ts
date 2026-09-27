@@ -1393,10 +1393,10 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
     return localizedPath(safeLang, 'insights');
   }
   const section = sectionSlugs[key]?.[safeLang] || sectionSlugs[key]?.en;
-  if (key === 'services' && id) return `/${pathLang}/${section}/${services[id as keyof typeof services]?.slugs[safeLang] || id}/`;
-  if (key === 'products' && id) return `/${pathLang}/${section}/${products[id as keyof typeof products]?.slugs[safeLang] || id}/`;
-  if (key === 'insights' && id) return `/${pathLang}/${section}/${insights[id as keyof typeof insights]?.slugs[safeLang] || id}/`;
-  if (key === 'legal' && id) return `/${pathLang}/${legal[id as keyof typeof legal]?.slugs[safeLang] || id}/`;
+  if (key === 'services' && id) return `/${pathLang}/${section}/${services[id as keyof typeof services]?.slugs[safeLang] || services[id as keyof typeof services]?.slugs.en || id}/`;
+  if (key === 'products' && id) return `/${pathLang}/${section}/${products[id as keyof typeof products]?.slugs[safeLang] || products[id as keyof typeof products]?.slugs.en || id}/`;
+  if (key === 'insights' && id) return `/${pathLang}/${section}/${insights[id as keyof typeof insights]?.slugs[safeLang] || insights[id as keyof typeof insights]?.slugs.en || id}/`;
+  if (key === 'legal' && id) return `/${pathLang}/${legal[id as keyof typeof legal]?.slugs[safeLang] || legal[id as keyof typeof legal]?.slugs.en || id}/`;
   return `/${pathLang}/${section}/`;
 }
 

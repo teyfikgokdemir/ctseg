@@ -239,7 +239,7 @@ for (const file of htmlFiles) {
     const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
     if ((desktopLocales.match(/data-locale-option/g) || []).length !== 12) errors.push(`${label}: desktop locale panel must contain twelve languages`);
     if ((mobileLocales.match(/data-locale-option/g) || []).length !== 12) errors.push(`${label}: mobile locale panel must contain twelve languages`);
-    if (!/class="locale-code">(?:TR|EN|DE|IT|FA|RU|ZH|VI|SQ|MK|SR)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger)) {
+    if (!/class="locale-code">(?:TR|EN|DE|IT|FA|RU|ZH|VI|UK|RO|BG|SR)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger)) {
       errors.push(`${label}: desktop language trigger must show only the active locale code`);
     }
   }
