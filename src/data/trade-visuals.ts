@@ -106,6 +106,7 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
 export const homeTradeVisualKeys = ['food-oils','nuts-dates','carpets-textiles','textiles-inputs'] as const;
 
 export const sourcingTradeVisualKeys = {
+  'duzce-cam-flat-glass':'global-trade-hero',
   'iranian-carpets':'carpets-textiles',
   'silk-carpets':'carpets-textiles',
   'wholesale-textiles':'textiles-inputs'
@@ -113,5 +114,5 @@ export const sourcingTradeVisualKeys = {
 
 export const localizedTradeVisual = (key:TradeVisualKey, locale:TradeVisualLocale) => {
   const visual=tradeVisuals[key];
-  return {...visual,altText:visual.alt[locale]};
+  return {...visual,altText:visual.alt[locale] || visual.alt.en};
 };

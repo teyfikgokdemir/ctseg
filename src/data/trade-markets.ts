@@ -184,25 +184,52 @@ export const marketCopy: Record<MarketLocale, Record<TradeMarketId, MarketCopy>>
     'serbia': { slug: 'serbia', eyebrow: 'Nguồn cung Balkan', title: 'Thị trường Serbia: Xuất khẩu B2B và Điều phối.', description: 'Tìm nguồn cung nguyên liệu thô công nghiệp và kênh cho Serbia.', lead: 'Chúng tôi cung cấp các giải pháp tìm nguồn cung chiến lược cho ngành công nghiệp Serbia.', heading2: 'Cầu nối cho Công nghiệp Serbia', body2: 'Kết nối người mua ở Serbia với các nhà sản xuất Thổ Nhĩ Kỳ đã được xác minh.', cta: 'Yêu cầu cho Serbia' },
     'macedonia': { slug: 'macedonia', eyebrow: 'Nguồn cung Balkan', title: 'Bắc Macedonia: Cầu nối Thương mại Chiến lược.', description: 'Xuất khẩu hàng dệt may và vật liệu xây dựng sang Bắc Macedonia.', lead: 'Cơ hội thương mại có cấu trúc cho người mua ở Bắc Macedonia.', heading2: 'Logistics hiệu quả', body2: 'Quản lý cung ứng B2B liền mạch tuân thủ các yêu cầu địa phương.', cta: 'Yêu cầu cho Macedonia' },
   },
-  uk: {
-    'germany': { slug: 'nimechchyna', eyebrow: 'Ryrok Німеччини', title: 'Постачання до Німеччини', description: 'Експортні рішення.', lead: 'Надійне B2B постачання.', heading2: 'Можливості', body2: 'Оптимізація ланцюгів.', cta: 'Детальніше' },
-    'italy': { slug: 'italy', eyebrow: 'Ryrok Італії', title: 'Постачання до Італії', description: 'Експортні рішення.', lead: 'Надійне B2B постачання.', heading2: 'Можливості', body2: 'Оптимізація ланцюгів.', cta: 'Детальніше' },
-    'france': { slug: 'france', eyebrow: 'Ryrok Франції', title: 'Постачання до Франції', description: 'Експортні рішення.', lead: 'Надійне B2B постачання.', heading2: 'Можливості', body2: 'Оптимізація ланцюгів.', cta: 'Детальніше' },
-    'uk': { slug: 'velykobrytaniya', eyebrow: 'Ринок Великої Британії', title: 'Постачання до Великої Британії', description: 'Експортні рішення.', lead: 'Надійне B2B постачання.', heading2: 'Можливості', body2: 'Оптимізація ланцюгів.', cta: 'Детальніше' },
-    'netherlands': { slug: 'niderlandy', eyebrow: 'Ринок Нідерландів', title: 'Постачання до Нідерландів', description: 'Експортні рішення.', lead: 'Надійне B2B постачання.', heading2: 'Можливості', body2: 'Оптимізація ланцюгів.', cta: 'Детальніше' },
-    'poland': { slug: 'polshcha', eyebrow: 'Ринок Польщі', title: 'Постачання до Польщі', description: 'Експортні рішення.', lead: 'Надійне B2B постачання.', heading2: 'Можливості', body2: 'Оптимізація ланцюгів.', cta: 'Детальніше' },
-    'uae': { slug: 'oae', eyebrow: 'Ринок ОАЕ', title: 'Постачання до ОАЕ', description: 'Експортні рішення.', lead: 'Надійне B2B постачання.', heading2: 'Можливості', body2: 'Оптимізація ланцюгів.', cta: 'Детальніше' },
-    'saudi-arabia': { slug: 'saudivska-araviya', eyebrow: 'Ринок Саудівської Аравії', title: 'Постачання до Саудівської Аравії', description: 'Експортні рішення.', lead: 'Надійне B2B постачання.', heading2: 'Можливості', body2: 'Оптимізація ланцюгів.', cta: 'Детальніше' },
-    'iran': { slug: 'iran', eyebrow: 'Ринок Ірану', title: 'Постачання до Ірану', description: 'Експортні рішення.', lead: 'Надійне B2B постачання.', heading2: 'Можливості', body2: 'Оптимізація ланцюгів.', cta: 'Детальніше' },
-    'russia': { slug: 'rosiya', eyebrow: 'Ринок Росії', title: 'Постачання до Росії', description: 'Експортні рішення.', lead: 'Надійне B2B постачання.', heading2: 'Можливості', body2: 'Оптимізація ланцюгів.', cta: 'Детальніше' },
-    'china': { slug: 'kytay', eyebrow: 'Ринок Китаю', title: 'Постачання до Китаю', description: 'Експортні рішення.', lead: 'Надійне B2B постачання.', heading2: 'Можливості', body2: 'Оптимізація ланцюгів.', cta: 'Детальніше' },
-    'vietnam': { slug: 'vyetnam', eyebrow: 'Ринок В\'єтнаму', title: 'Постачання до В\'єтнаму', description: 'Експортні рішення.', lead: 'Надійне B2B постачання.', heading2: 'Можливості', body2: 'Оптимізація ланцюгів.', cta: 'Детальніше' },
-    'india': { slug: 'indiya', eyebrow: 'Ринок Індії', title: 'Постачання до Індії', description: 'Експортні рішення.', lead: 'Надійне B2B постачання.', heading2: 'Можливості', body2: 'Оптимізація ланцюгів.', cta: 'Детальніше' },
-    'albania': { slug: 'albaniya', eyebrow: 'Постачання на Балкани', title: 'Ринок Албанії: Надійне постачання B2B.', description: 'Безперебійний ланцюг поставок.', lead: 'Ми забезпечуємо стратегічні поставки.', heading2: 'Прямі рішення для Албанії', body2: 'Гнучкі експортні операції.', cta: 'Запит для Албанії' },
-    'serbia': { slug: 'serbiya', eyebrow: 'Постачання на Балкани', title: 'Ринок Сербії: B2B-експорт.', description: 'Постачання промислової сировини.', lead: 'Стратегічні рішення для підприємств Сербії.', heading2: 'Міст для сербської промисловості', body2: 'Зв\'язок покупців з турецькими виробниками.', cta: 'Запит для Сербії' },
-    'macedonia': { slug: 'makedoniya', eyebrow: 'Постачання на Балкани', title: 'Північна Македонія: Торговий міст.', description: 'Експорт текстилю.', lead: 'Торгові можливості для покупців у Північній Македонії.', heading2: 'Ефективна логістика', body2: 'Керування постачанням B2B.', cta: 'Запит для Македонії' }
-  }
+  uk: Object.fromEntries(tradeMarketIds.map((id) => {
+    const names: Record<TradeMarketId,string> = {
+      germany:'Німеччина', italy:'Італія', france:'Франція', uk:'Велика Британія',
+      netherlands:'Нідерланди', poland:'Польща', uae:'ОАЕ', 'saudi-arabia':'Саудівська Аравія',
+      iran:'Іран', russia:'Росія', china:'Китай', vietnam:'В’єтнам', india:'Індія'
+    };
+    const country = names[id];
+    const slugs: Record<TradeMarketId,string> = {
+      germany:'nimechchyna', italy:'italiya', france:'frantsiya', uk:'velykobrytaniya',
+      netherlands:'niderlandy', poland:'polshcha', uae:'oae', 'saudi-arabia':'saudivska-araviya',
+      iran:'iran', russia:'rosiya', china:'kytay', vietnam:'vyetnam', india:'indiya'
+    };
+    return [id,{
+      slug:slugs[id],
+      eyebrow:`${country} · B2B закупівлі`,
+      title:`Постачання та торгові послуги з Türkiye для ринку ${country}`,
+      description:`Перевірка виробників, структурований RFQ і B2B-координація з Türkiye для компаній, що працюють на ринку ${country}.`,
+      lead:`CTSEG допомагає компаніям на ринку ${country} працювати з перевіреними виробниками Türkiye через структурований процес закупівель і комерційної перевірки.`,
+      heading2:`Торговий коридор ${country}–Türkiye`,
+      body2:'Ми оцінюємо контрагента, документи, якість, загальну вартість, логістику та реалістичність виконання до прийняття комерційного рішення.',
+      cta:`Запросити оцінку для ринку ${country}`
+    }];
+  })) as Record<TradeMarketId,MarketCopy>
 };
 
-marketUi.ro = marketUi.en; marketUi.bg = marketUi.en; marketUi.sr = marketUi.en;
-marketCopy.ro = marketCopy.en; marketCopy.bg = marketCopy.en; marketCopy.sr = marketCopy.en;
+marketUi.ro = { contact:'Solicită evaluare', home:'Acasă', related:'Alte piețe', allMarkets:'Toate piețele' };
+marketUi.bg = { contact:'Поискай оценка', home:'Начало', related:'Други пазари', allMarkets:'Всички пазари' };
+marketUi.sr = { contact:'Zatraži procenu', home:'Početna', related:'Druga tržišta', allMarkets:'Sva tržišta' };
+
+const restoredMarketNames = {
+  ro:{germany:'Germania',italy:'Italia',france:'Franța',uk:'Regatul Unit',netherlands:'Țările de Jos',poland:'Polonia',uae:'Emiratele Arabe Unite','saudi-arabia':'Arabia Saudită',iran:'Iran',russia:'Rusia',china:'China',vietnam:'Vietnam',india:'India'},
+  bg:{germany:'Германия',italy:'Италия',france:'Франция',uk:'Обединеното кралство',netherlands:'Нидерландия',poland:'Полша',uae:'ОАЕ','saudi-arabia':'Саудитска Арабия',iran:'Иран',russia:'Русия',china:'Китай',vietnam:'Виетнам',india:'Индия'},
+  sr:{germany:'Nemačka',italy:'Italija',france:'Francuska',uk:'Ujedinjeno Kraljevstvo',netherlands:'Holandija',poland:'Poljska',uae:'UAE','saudi-arabia':'Saudijska Arabija',iran:'Iran',russia:'Rusija',china:'Kina',vietnam:'Vijetnam',india:'Indija'}
+} as const;
+
+marketCopy.ro = Object.fromEntries(tradeMarketIds.map((id) => {
+  const country = restoredMarketNames.ro[id];
+  return [id,{...marketCopy.en[id],eyebrow:`${country} · Sourcing B2B`,title:`Sourcing și servicii comerciale din Türkiye pentru ${country}`,description:`Verificarea producătorilor, RFQ și coordonare comercială B2B din Türkiye pentru companii din ${country}.`,lead:`CTSEG conectează companiile din ${country} cu producători verificați din Türkiye printr-un proces comercial structurat.`,heading2:`Coridor comercial ${country}–Türkiye`,body2:'Evaluăm furnizorii, documentele, calitatea, costul total și logistica înaintea unei decizii comerciale.',cta:`Solicită evaluare pentru ${country}`}];
+})) as Record<TradeMarketId,MarketCopy>;
+
+marketCopy.bg = Object.fromEntries(tradeMarketIds.map((id) => {
+  const country = restoredMarketNames.bg[id];
+  return [id,{...marketCopy.en[id],eyebrow:`${country} · B2B снабдяване`,title:`Снабдяване и търговски услуги от Türkiye за ${country}`,description:`Проверка на производители, RFQ и B2B търговска координация от Türkiye за компании в ${country}.`,lead:`CTSEG свързва компании от ${country} с проверени производители в Türkiye чрез структуриран търговски процес.`,heading2:`Търговски коридор ${country}–Türkiye`,body2:'Оценяваме доставчици, документи, качество, обща цена и логистика преди търговско решение.',cta:`Поискай оценка за ${country}`}];
+})) as Record<TradeMarketId,MarketCopy>;
+
+marketCopy.sr = Object.fromEntries(tradeMarketIds.map((id) => {
+  const country = restoredMarketNames.sr[id];
+  return [id,{...marketCopy.en[id],eyebrow:`${country} · B2B sourcing`,title:`Sourcing i trgovinske usluge iz Türkiye za ${country}`,description:`Provera proizvođača, RFQ i B2B trgovinska koordinacija iz Türkiye za kompanije u ${country}.`,lead:`CTSEG povezuje kompanije iz ${country} sa proverenim proizvođačima u Türkiye kroz strukturiran komercijalni proces.`,heading2:`Trgovinski koridor ${country}–Türkiye`,body2:'Pre komercijalne odluke procenjujemo dobavljače, dokumentaciju, kvalitet, ukupne troškove i logistiku.',cta:`Zatraži procenu za ${country}`}];
+})) as Record<TradeMarketId,MarketCopy>;

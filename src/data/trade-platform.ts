@@ -104,31 +104,51 @@ export const tradePlatformCopy:Record<PlatformLocale,PlatformCopy> = {
     processTitle:'Quy trình minh bạch và chuẩn mực',process:['Xác định yêu cầu','Nghiên cứu thị trường & đối tác','Thẩm định xác minh','Lập RFQ & báo giá','Mẫu thử & điều phối','Quyết định & các bước tiếp theo']
   },
   uk: {
-    eyebrow: 'CTSEG Україна',
-    title: 'З України у світ. Зі світу в Україну.',
-    lead: 'CTSEG керує виходом компаній на нові ринки та зустріччю з правильними виробниками, постачальниками та корпоративними покупцями.',
-    buyerCta: 'Шукаю постачальника',
-    producerCta: 'Хочу вийти на новий ринок',
-    pathsTitle: 'Ваш комерційний шлях',
-    pathsLead: 'Ми структуруємо вашу операційну модель для досягнення цілей.',
-    buyerTitle: 'Для покупців',
-    buyerText: 'Надійне джерело.',
-    producerTitle: 'Для виробників',
-    producerText: 'Міжнародне зростання.',
-    sectorsTitle: 'Сектори',
-    sectorsLead: 'Ми працюємо з ключовими індустріями.',
-    sectors: [
-      {title: 'Промисловість', text: 'Сировина та обладнання'},
-      {title: 'Текстиль', text: 'Одяг та тканини'},
-      {title: 'Продукти харчування', text: 'Сільське господарство'}
+    eyebrow:'CTSEG · Двостороння глобальна торгівля та стратегічні закупівлі',
+    title:'З Türkiye на міжнародні ринки. З міжнародних ринків — до правильного джерела.',
+    lead:'CTSEG допомагає компаніям виходити на нові ринки та знаходити перевірених виробників, постачальників і корпоративних покупців через дослідження, верифікацію, RFQ та комерційну координацію.',
+    buyerCta:'Шукаю постачальника',producerCta:'Хочу вийти на новий ринок',
+    pathsTitle:'Торгівля працює в обох напрямках',
+    pathsLead:'Ми підтримуємо виробників, які виходять із Türkiye на міжнародні ринки, та покупців, які шукають перевірені джерела постачання в Türkiye і регіоні.',
+    buyerTitle:'Стратегічні закупівлі',
+    buyerText:'Ми визначаємо вимоги, досліджуємо та перевіряємо виробників і постачальників, координуємо RFQ та порівняння комерційних пропозицій.',
+    producerTitle:'Експорт і вихід на ринок',
+    producerText:'Ми оцінюємо комерційну готовність, цільові ринки та профілі покупців, координуємо перший контакт, зразки й пропозиції.',
+    sectorsTitle:'Перевірювані закупівлі у вибраних категоріях',
+    sectorsLead:'Замість фіктивного каталогу ми оцінюємо продукт, контрагента, документи та реалістичність виконання в окремих комерційних категоріях.',
+    sectors:[
+      {title:'Харчові продукти, рис, зернові та олії',text:'Оцінка продукту, специфікації та комерційних пропозицій.'},
+      {title:'Горіхи, фініки та сухофрукти',text:'Оцінка сорту, якості, пакування та придатності для цільового ринку.'},
+      {title:'Килими та текстиль',text:'Спеціалізована оцінка килимів, тканин і текстильної продукції.'},
+      {title:'Пакування, виробничі матеріали та проєктні закупівлі',text:'Дослідження і координація для чітко визначених технічних та проєктних потреб.'}
     ],
-    corridorsTitle: 'Торгові коридори',
-    corridorsLead: 'Ми об\'єднуємо глобальні ринки.',
-    corridors: ['Україна - Туреччина', 'Європа - Азія', 'Близький Схід'],
-    processTitle: 'Процес',
-    process: ['Визначення вимог', 'Пошук', 'Перевірка', 'Замовлення']
+    corridorsTitle:'Торгові коридори',
+    corridorsLead:'Двосторонні комерційні зв’язки між Türkiye, Україною, Європою, Близьким Сходом, Азією та іншими придатними ринками.',
+    corridors:['Україна ↔ Türkiye','Türkiye ↔ Європа','Türkiye ↔ Близький Схід','Türkiye ↔ міжнародні ринки'],
+    processTitle:'Прозорий і структурований процес',
+    process:['Визначення вимог','Дослідження ринку та контрагента','Верифікація','RFQ і пропозиція','Зразки та комерційна координація','Рішення і наступні кроки']
   }
 };
 
 
-tradePlatformCopy.ro = tradePlatformCopy.en; tradePlatformCopy.bg = tradePlatformCopy.en; tradePlatformCopy.sr = tradePlatformCopy.en;
+tradePlatformCopy.ro={
+  eyebrow:'CTSEG · Comerț global bilateral și sourcing strategic',title:'Din Türkiye către lume. Din lume către sursa potrivită.',lead:'CTSEG ajută companiile să intre pe piețe noi și să găsească producători, furnizori și cumpărători instituționali prin cercetare, verificare, RFQ și coordonare comercială.',
+  buyerCta:'Caut un furnizor',producerCta:'Vreau să intru pe piețe noi',pathsTitle:'Comerțul funcționează în ambele direcții',pathsLead:'Sprijinim producătorii care se extind din Türkiye și cumpărătorii care caută surse verificate în Türkiye și regiune.',
+  buyerTitle:'Sourcing strategic',buyerText:'Definim cerința, cercetăm și verificăm producătorii și furnizorii și coordonăm RFQ-urile și comparația ofertelor.',producerTitle:'Export și acces pe piață',producerText:'Evaluăm pregătirea comercială, piețele țintă și profilurile de cumpărători și coordonăm primul contact și oferta.',
+  sectorsTitle:'Sourcing verificabil în categorii selectate',sectorsLead:'Evaluăm produsul, contrapartea, documentația și fezabilitatea, nu prezentăm un catalog fictiv.',sectors:[{title:'Alimente, orez, cereale și uleiuri',text:'Evaluare comercială a produsului și ofertelor.'},{title:'Nuci, curmale și fructe uscate',text:'Evaluare după clasă, calitate, ambalaj și piață.'},{title:'Covoare și textile',text:'Evaluare specializată pentru covoare și textile.'},{title:'Ambalaje, inputuri de producție și proiecte',text:'Cercetare și coordonare pentru cerințe definite.'}],
+  corridorsTitle:'Coridoare comerciale',corridorsLead:'Conexiuni comerciale bilaterale între Türkiye, Europa, Orientul Mijlociu și Asia.',corridors:['Türkiye ↔ Europa','Türkiye ↔ Orientul Mijlociu','Türkiye ↔ Asia','Türkiye ↔ piețe internaționale adecvate'],processTitle:'Proces transparent și măsurat',process:['Definirea cerinței','Cercetarea pieței și a contrapărții','Verificare','RFQ și ofertă','Mostre și coordonare','Decizie și pași următori']
+};
+tradePlatformCopy.bg={
+  eyebrow:'CTSEG · Двупосочна глобална търговия и стратегическо снабдяване',title:'От Türkiye към света. От света към правилния източник.',lead:'CTSEG помага на компании да навлизат на нови пазари и да достигат до подходящи производители, доставчици и институционални купувачи чрез проучване, проверка, RFQ и търговска координация.',
+  buyerCta:'Търся доставчик',producerCta:'Искам да навляза на нови пазари',pathsTitle:'Търговията работи в двете посоки',pathsLead:'Подкрепяме производители, които се разширяват от Türkiye, и купувачи, които търсят проверени източници в Türkiye и региона.',
+  buyerTitle:'Стратегическо снабдяване',buyerText:'Дефинираме нуждата, проучваме и проверяваме производители и доставчици и координираме RFQ и сравнение на оферти.',producerTitle:'Износ и навлизане на пазара',producerText:'Оценяваме търговската готовност, целевите пазари и профилите на купувачите и координираме първия контакт и офертата.',
+  sectorsTitle:'Проверимо снабдяване в избрани категории',sectorsLead:'Оценяваме продукт, контрагент, документи и изпълнимост вместо да показваме фиктивен каталог.',sectors:[{title:'Храни, ориз, зърно и масла',text:'Търговска оценка на продукти и оферти.'},{title:'Ядки, фурми и сушени плодове',text:'Оценка по клас, качество, опаковка и пазар.'},{title:'Килими и текстил',text:'Специализирана оценка на килими и текстил.'},{title:'Опаковки, производствени материали и проекти',text:'Проучване и координация на конкретни изисквания.'}],
+  corridorsTitle:'Търговски коридори',corridorsLead:'Двупосочни връзки между Türkiye, Европа, Близкия изток и Азия.',corridors:['Türkiye ↔ Европа','Türkiye ↔ Близък изток','Türkiye ↔ Азия','Türkiye ↔ подходящи международни пазари'],processTitle:'Прозрачен и структуриран процес',process:['Дефиниране на нуждата','Проучване на пазар и контрагент','Проверка','RFQ и оферта','Мостри и координация','Решение и следващи стъпки']
+};
+tradePlatformCopy.sr={
+  eyebrow:'CTSEG · Dvosmerna globalna trgovina i strateški sourcing',title:'Iz Türkiye ka svetu. Iz sveta ka pravom izvoru.',lead:'CTSEG pomaže kompanijama da uđu na nova tržišta i pronađu odgovarajuće proizvođače, dobavljače i institucionalne kupce kroz istraživanje, proveru, RFQ i komercijalnu koordinaciju.',
+  buyerCta:'Tražim dobavljača',producerCta:'Želim da uđem na nova tržišta',pathsTitle:'Trgovina funkcioniše u oba smera',pathsLead:'Podržavamo proizvođače koji se šire iz Türkiye i kupce koji traže proverene izvore u Türkiye i regionu.',
+  buyerTitle:'Strateški sourcing',buyerText:'Definišemo zahtev, istražujemo i proveravamo proizvođače i dobavljače i koordiniramo RFQ i poređenje ponuda.',producerTitle:'Izvoz i izlazak na tržište',producerText:'Procenjujemo komercijalnu spremnost, ciljna tržišta i profile kupaca i koordiniramo prvi kontakt i ponudu.',
+  sectorsTitle:'Proverljiv sourcing u odabranim kategorijama',sectorsLead:'Procenjujemo proizvod, kontrapartiju, dokumentaciju i izvodljivost umesto prikazivanja fiktivnog kataloga.',sectors:[{title:'Hrana, pirinač, žitarice i ulja',text:'Komercijalna procena proizvoda i ponuda.'},{title:'Orašasti plodovi, urme i suvo voće',text:'Procena prema klasi, kvalitetu, pakovanju i tržištu.'},{title:'Tepisi i tekstil',text:'Specijalistička procena tepiha i tekstila.'},{title:'Ambalaža, proizvodni inputi i projekti',text:'Istraživanje i koordinacija definisanih zahteva.'}],
+  corridorsTitle:'Trgovinski koridori',corridorsLead:'Dvosmerne veze između Türkiye, Evrope, Bliskog istoka i Azije.',corridors:['Türkiye ↔ Evropa','Türkiye ↔ Bliski istok','Türkiye ↔ Azija','Türkiye ↔ odgovarajuća međunarodna tržišta'],processTitle:'Transparentan i strukturiran proces',process:['Definisanje zahteva','Istraživanje tržišta i kontrapartije','Provera','RFQ i ponuda','Uzorci i koordinacija','Odluka i sledeći koraci']
+};
