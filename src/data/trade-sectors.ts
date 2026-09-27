@@ -2,7 +2,7 @@ import { activeLocales, type ActiveLocale } from './locales';
 
 export const tradeLocales = activeLocales;
 export type TradeLocale = ActiveLocale;
-export const tradeSectorIds = ['iranian-carpets', 'silk-carpets', 'wholesale-textiles', 'duzce-cam-flat-glass'] as const;
+export const tradeSectorIds = ['iranian-carpets', 'silk-carpets', 'wholesale-textiles'] as const;
 export type TradeSectorId = (typeof tradeSectorIds)[number];
 
 type Copy = { slug:string; eyebrow:string; title:string; description:string; lead:string; scopeTitle:string; items:string[]; cta:string };
@@ -19,35 +19,115 @@ export const tradeUi: Record<TradeLocale,{name:string;home:string;contact:string
 
 export const tradeCopy: Record<TradeLocale,Record<TradeSectorId,Copy>> = {
  tr:{
+    'duzce-cam-flat-glass': {
+      slug: 'duzce-cam-duz-cam-ve-ayna',
+      eyebrow: 'Düzce Cam · B2B İhracat',
+      title: 'Düzce Cam: Float Cam, Lamine ve Ayna İhracat Koordinasyonu.',
+      description: 'Düzce Cam\'ın günlük 1500 ton kapasiteli düz cam, lamine cam ve ayna üretiminin uluslararası pazarlara güvenli ve yapılandırılmış ihracatı.',
+      lead: 'Avrupa ve bölgesel pazarlar için, Düzce Cam\'ın yüksek teknolojili float hatlarında üretilen düz, renkli, lamine cam ve aynalarını; özel lojistik filosu güvencesiyle stratejik alıcılara ulaştırıyoruz.',
+      scopeTitle: 'Genişletilmiş Cam Portföyü',
+      items: ['3mm - 12mm Float Düz Cam', 'Akustik ve Güvenlikli Lamine Cam', 'Dekoratif ve Mimari Ayna', 'Renkli ve Kaplamalı Solar Cam', 'Özel Tır Filosu ile Lojistik', 'Uluslararası Proje Koordinasyonu'],
+      cta: 'Düzce Cam İhracat Teklifi Al'
+    },
   'iranian-carpets':{slug:'iran-halisi',eyebrow:'İran menşeli B2B halı tedariki',title:'İran halısı tedarikini ürün bilgisinden teslimata kadar yapılandırıyoruz.',description:'El dokuması, ipek, yün, yün-ipek ve makine İran halıları; yolluk, küçük halı, özel ölçü ve proje tedariki.',lead:'Koleksiyon, proje veya toptan alım için menşe, malzeme, ölçü, kalite, adet, termin ve teslim modelini tek ticari değerlendirmede birleştiriyoruz.',scopeTitle:'Geniş ve doğrulanabilir halı kapsamı',items:['El dokuması İran halıları','Saf ipek halılar','Yün ve yün-ipek halılar','Makine halıları','Yolluklar ve küçük halılar','Özel ölçü ve proje bazlı tedarik'],cta:'İran halısı için RFQ oluştur'},
   'silk-carpets':{slug:'el-dokumasi-ipek-hali',eyebrow:'Bağımsız uzmanlık alanı',title:'El dokuması ipek halılarda ayrıntı, menşe ve işçilik görünür olmalı.',description:'El dokuması saf ipek ve ipek karışımlı İran halılarında menşe, işçilik, ölçü, kalite, paketleme ve proje tedariki.',lead:'İpek halıyı genel portföyde kaybolan bir seçenek değil; lif yapısı, düğüm inceliği, parlaklık, desen, işçilik ve taşıması ayrı doğrulanan premium bir kategori olarak yönetiyoruz.',scopeTitle:'İpek halıya özel değerlendirme',items:['Saf ipek el dokuması halılar','İpek çözgü ve ipek hav yapıları','Yün-ipek premium karışımlar','Küçük ölçü ve koleksiyonluk parçalar','Özel desen, renk ve ölçü','Proje bazlı üretim koordinasyonu'],cta:'İpek halı talebini paylaş'},
   'wholesale-textiles':{slug:'toptan-tekstil-tedariki',eyebrow:'B2B tekstil ve private label',title:'Toptan tekstil tedarikini numuneden lojistiğe kadar koordine ediyoruz.',description:'Kumaş, havlu, bornoz, ev tekstili ve hazır giyim için private label, numune, RFQ, üretici doğrulama, kalite, paketleme ve lojistik.',lead:'Markalar, distribütörler, oteller ve proje alıcıları için ürün şartnamesini üretici kapasitesi, numune onayı, kalite kriterleri, paketleme ve teslim planıyla eşleştiriyoruz.',scopeTitle:'Toptan tekstil ürün kapsamı',items:['Kumaş ve teknik şartnameler','Havlu ve bornoz','Ev tekstili koleksiyonları','Hazır giyim üretimi','Private label ve özel paketleme','Numune ve koleksiyon geliştirme'],cta:'Tekstil RFQ talebi gönder'}},
  en:{
+    'duzce-cam-flat-glass': {
+      slug: 'duzce-cam-flat-glass-and-mirror',
+      eyebrow: 'Düzce Cam · B2B Sourcing',
+      title: 'Düzce Cam: Sourcing Float Glass, Laminated Glass and Mirrors.',
+      description: 'Reliable sourcing and export coordination for Düzce Cam\'s flat glass, laminated glass, and mirrors with a 1500-ton daily capacity.',
+      lead: 'We connect international buyers with Düzce Cam\'s high-tech float glass production. From acoustic laminated glass to architectural mirrors, we ensure secure logistics and structured procurement.',
+      scopeTitle: 'Architectural Glass Portfolio',
+      items: ['3mm - 12mm Float Glass', 'Acoustic & Safety Laminated Glass', 'Architectural & Decorative Mirrors', 'Tinted and Solar Coated Glass', 'Dedicated Logistics & Transport', 'International Project Supply'],
+      cta: 'Request a Düzce Cam Quote'
+    },
   'iranian-carpets':{slug:'iranian-carpets',eyebrow:'B2B sourcing from Iran',title:'Iranian carpet sourcing structured from product evidence to delivery.',description:'Hand-knotted, silk, wool, wool-silk and machine-made Iranian carpets, runners, small rugs, custom sizes and project sourcing.',lead:'For collections, projects and wholesale programmes, we align origin, materials, dimensions, quality, quantity, lead time and delivery in one commercial assessment.',scopeTitle:'A broad, verifiable carpet scope',items:['Hand-knotted Iranian carpets','Pure silk carpets','Wool and wool-silk carpets','Machine-made carpets','Runners and small rugs','Custom sizes and project sourcing'],cta:'Create an Iranian carpet RFQ'},
   'silk-carpets':{slug:'hand-knotted-silk-carpets',eyebrow:'A distinct specialist category',title:'Hand-knotted silk carpets require visible evidence of origin and workmanship.',description:'Origin, workmanship, dimensions, quality, packaging and project sourcing for hand-knotted pure-silk and silk-blend Iranian carpets.',lead:'We treat silk carpets as a premium category in their own right, with fibre structure, knot fineness, lustre, pattern, workmanship and transport assessed separately.',scopeTitle:'Silk-specific assessment',items:['Pure-silk hand-knotted carpets','Silk warp and silk pile','Premium wool-silk blends','Small and collectible pieces','Custom pattern, colour and dimensions','Project production coordination'],cta:'Discuss a silk carpet requirement'},
   'wholesale-textiles':{slug:'wholesale-textile-sourcing',eyebrow:'B2B textiles and private label',title:'Wholesale textile sourcing coordinated from sample to logistics.',description:'Fabric, towels, bathrobes, home textiles and apparel with private label, samples, RFQ, producer verification, quality, packaging and logistics.',lead:'For brands, distributors, hospitality and project buyers, we match specifications with producer capacity, sample approval, quality, packaging and delivery.',scopeTitle:'Wholesale textile scope',items:['Fabric and technical specifications','Towels and bathrobes','Home-textile collections','Ready-to-wear production','Private label and custom packaging','Sampling and collection development'],cta:'Submit a textile RFQ'}},
  de:{
+    'duzce-cam-flat-glass': {
+      slug: 'duzce-cam-flachglas-und-spiegel',
+      eyebrow: 'Düzce Cam · B2B-Beschaffung',
+      title: 'Düzce Cam: Beschaffung von Flachglas, Verbundglas und Spiegeln.',
+      description: 'Zuverlässige Beschaffung und Exportkoordination für Flachglas und Spiegel von Düzce Cam (1500 Tonnen Tageskapazität).',
+      lead: 'Wir verbinden internationale Käufer mit der Hightech-Floatglasproduktion von Düzce Cam. Von Akustik-Verbundglas bis hin zu Architekturspiegeln.',
+      scopeTitle: 'Architekturglas-Portfolio',
+      items: ['3mm - 12mm Floatglas', 'Akustik- und Sicherheits-Verbundglas', 'Architektur- und Dekorspiegel', 'Getöntes und solarbeschichtetes Glas', 'Eigene Logistik & Transport', 'Internationale Projektbelieferung'],
+      cta: 'Düzce Cam Angebot anfordern'
+    },
   'iranian-carpets':{slug:'persische-teppiche',eyebrow:'B2B-Beschaffung aus Iran',title:'Beschaffung persischer Teppiche – von Produktnachweisen bis zur Lieferung.',description:'Handgeknüpfte, seidene, wollene, Woll-Seiden- und maschinell gefertigte Teppiche, Läufer, Kleinformate, Sondermaße und Projekte.',lead:'Für Kollektionen, Projekte und Großhandel verbinden wir Herkunft, Material, Maße, Qualität, Menge, Lieferzeit und Logistik.',scopeTitle:'Breites, überprüfbares Sortiment',items:['Handgeknüpfte persische Teppiche','Reine Seidenteppiche','Woll- und Woll-Seiden-Teppiche','Maschinell gefertigte Teppiche','Läufer und Kleinformate','Sondermaße und Projektbeschaffung'],cta:'Teppich-RFQ erstellen'},
   'silk-carpets':{slug:'handgeknuepfte-seidenteppiche',eyebrow:'Eigenständige Spezialkategorie',title:'Bei handgeknüpften Seidenteppichen müssen Herkunft und Handwerk nachvollziehbar sein.',description:'Herkunft, Verarbeitung, Maße, Qualität, Verpackung und Projektbeschaffung für reine Seiden- und Seidenmischteppiche.',lead:'Faseraufbau, Knotendichte, Glanz, Muster, Verarbeitung und Transport werden als eigene Premiumkategorie separat geprüft.',scopeTitle:'Spezifische Prüfung für Seidenteppiche',items:['Reine Seide, handgeknüpft','Seidenkette und Seidenflor','Premium-Woll-Seiden-Mischungen','Kleinformate und Sammlerstücke','Individuelle Muster, Farben und Maße','Projektbezogene Produktion'],cta:'Seidenteppich-Anfrage besprechen'},
   'wholesale-textiles':{slug:'textil-grosshandel-beschaffung',eyebrow:'B2B-Textilien und Private Label',title:'Textilbeschaffung im Großhandel – vom Muster bis zur Logistik.',description:'Stoffe, Handtücher, Bademäntel, Heimtextilien und Bekleidung mit Private Label, Mustern, RFQ, Herstellerprüfung, Qualität, Verpackung und Logistik.',lead:'Wir verbinden Produktspezifikation, Herstellerkapazität, Musterfreigabe, Qualitätskriterien, Verpackung und Lieferung.',scopeTitle:'Sortiment für den Textilgroßhandel',items:['Stoffe und technische Spezifikationen','Handtücher und Bademäntel','Heimtextil-Kollektionen','Konfektionsbekleidung','Private Label und Sonderverpackung','Muster- und Kollektionsentwicklung'],cta:'Textil-RFQ senden'}},
  it:{
+    'duzce-cam-flat-glass': {
+      slug: 'duzce-cam-vetro-piano-e-specchi',
+      eyebrow: 'Düzce Cam · Sourcing B2B',
+      title: 'Düzce Cam: Sourcing di vetro piano, vetro stratificato e specchi.',
+      description: 'Sourcing e coordinamento per il vetro piano e gli specchi di Düzce Cam con capacità di 1500 tonnellate al giorno.',
+      lead: 'Mettiamo in contatto acquirenti internazionali con la produzione di vetro float di Düzce Cam per progetti architettonici.',
+      scopeTitle: 'Portafoglio Vetro Architettonico',
+      items: ['Vetro Float 3mm - 12mm', 'Vetro Stratificato Acustico e di Sicurezza', 'Specchi Architettonici', 'Vetro Colorato e a Controllo Solare', 'Logistica e Trasporti Dedicati', 'Fornitura per Progetti Internazionali'],
+      cta: 'Richiedi un preventivo Düzce Cam'
+    },
   'iranian-carpets':{slug:'tappeti-persiani',eyebrow:'Sourcing B2B dall’Iran',title:'Sourcing di tappeti persiani, dalla verifica del prodotto alla consegna.',description:'Tappeti annodati a mano, in seta, lana, lana-seta o a macchina, passatoie, piccoli formati, misure speciali e progetti.',lead:'Per collezioni, progetti e wholesale coordiniamo origine, materiali, misure, qualità, quantità, tempi e consegna.',scopeTitle:'Una gamma ampia e verificabile',items:['Tappeti persiani annodati a mano','Tappeti in pura seta','Tappeti in lana e lana-seta','Tappeti prodotti a macchina','Passatoie e piccoli tappeti','Misure speciali e progetti'],cta:'Crea un RFQ tappeti'},
   'silk-carpets':{slug:'tappeti-in-seta-annodati-a-mano',eyebrow:'Categoria specialistica distinta',title:'Nei tappeti in seta annodati a mano, origine e lavorazione devono essere verificabili.',description:'Origine, lavorazione, misure, qualità, imballaggio e sourcing per tappeti iraniani in pura seta e misto seta.',lead:'Fibra, finezza del nodo, lucentezza, disegno, lavorazione e trasporto sono verificati come categoria premium autonoma.',scopeTitle:'Valutazione specifica per la seta',items:['Pura seta annodata a mano','Ordito e vello in seta','Miscele premium lana-seta','Piccoli formati da collezione','Disegni, colori e misure su misura','Produzione per progetto'],cta:'Parla del tuo progetto in seta'},
   'wholesale-textiles':{slug:'approvvigionamento-tessile-ingrosso',eyebrow:'Tessile B2B e private label',title:'Sourcing tessile all’ingrosso coordinato dal campione alla logistica.',description:'Tessuti, asciugamani, accappatoi, tessili casa e abbigliamento con private label, campioni, RFQ, verifica, qualità, imballaggio e logistica.',lead:'Abbiniamo specifiche, capacità produttiva, campionatura, qualità, imballaggio e piano di consegna.',scopeTitle:'Gamma tessile all’ingrosso',items:['Tessuti e specifiche tecniche','Asciugamani e accappatoi','Tessili per la casa','Produzione di abbigliamento','Private label e imballaggio','Campioni e sviluppo collezione'],cta:'Invia un RFQ tessile'}},
  ru:{
+    'duzce-cam-flat-glass': {
+      slug: 'duzce-cam-listovoye-steklo-i-zerkala',
+      eyebrow: 'Düzce Cam · B2B-Поставки',
+      title: 'Düzce Cam: Поставки листового стекла, триплекса и зеркал.',
+      description: 'Надежные поставки и экспортная координация листового стекла Düzce Cam.',
+      lead: 'Мы связываем международных покупателей с высокотехнологичным производством флоат-стекла Düzce Cam. От акустического триплекса до архитектурных зеркал.',
+      scopeTitle: 'Портфолио архитектурного стекла',
+      items: ['Флоат-стекло 3мм - 12мм', 'Акустический и безопасный триплекс', 'Архитектурные и декоративные зеркала', 'Тонированное и солнцезащитное стекло', 'Специализированная логистика', 'Международные проектные поставки'],
+      cta: 'Запросить расчет Düzce Cam'
+    },
   'iranian-carpets':{slug:'carpets',eyebrow:'B2B-сорсинг из Ирана',title:'Сорсинг иранских ковров — от проверки характеристик до коммерческого предложения.',description:'Ковры ручной работы, шёлковые, шерстяные, шерстяно-шёлковые и машинные ковры, дорожки, малые форматы, нестандартные размеры и проектные заказы.',lead:'Для коллекций, проектов и оптовых программ мы сопоставляем происхождение, материалы, размеры, качество, объём и сроки в рамках единой коммерческой оценки.',scopeTitle:'Широкий и проверяемый выбор ковров',items:['Иранские ковры ручной работы','Ковры из чистого шёлка','Шерстяные и шерстяно-шёлковые ковры','Ковры машинного производства','Дорожки и малые ковры','Нестандартные размеры и проектный сорсинг'],cta:'Подготовить RFQ на иранские ковры'},
   'silk-carpets':{slug:'hand-knotted-silk-carpets',eyebrow:'Самостоятельная экспертная категория',title:'Для шёлковых ковров ручной работы важны подтверждённые происхождение и качество исполнения.',description:'Оценка происхождения, работы, размеров, качества, упаковки и проектного сорсинга иранских ковров из чистого шёлка и шёлковых смесей.',lead:'Мы рассматриваем шёлковые ковры как отдельную премиальную категорию и проверяем структуру волокна, плотность узлов, блеск, рисунок и качество работы.',scopeTitle:'Оценка с учётом особенностей шёлка',items:['Ковры ручной работы из чистого шёлка','Шёлковая основа и шёлковый ворс','Премиальные смеси шерсти и шёлка','Малые и коллекционные изделия','Индивидуальные рисунки, цвета и размеры','Координация проектного производства'],cta:'Обсудить запрос на шёлковый ковёр'},
   'wholesale-textiles':{slug:'textiles',eyebrow:'B2B-текстиль и private label',title:'Оптовый текстильный сорсинг — от образца до согласованного коммерческого процесса.',description:'Ткани, полотенца, халаты, домашний текстиль и одежда: private label, образцы, RFQ, проверка производителя, качество и упаковка.',lead:'Для брендов, дистрибьюторов, гостиничного сектора и проектных покупателей мы сопоставляем спецификацию с мощностями производителя, образцами, критериями качества и упаковкой.',scopeTitle:'Направления оптового текстиля',items:['Ткани и технические требования','Полотенца и халаты','Коллекции домашнего текстиля','Производство готовой одежды','Private label и индивидуальная упаковка','Образцы и разработка коллекций'],cta:'Отправить RFQ на текстиль'}},
  fa:{
+    'duzce-cam-flat-glass': {
+      slug: 'duzce-cam-shishe-takht-va-ayeneh',
+      eyebrow: 'شیشه دوزجه (Düzce Cam) · تأمین B2B',
+      title: 'دوزجه جام: تأمین شیشه فلوت، شیشه لمینت و آینه.',
+      description: 'تأمین و هماهنگی صادرات شیشه فلوت و آینه شرکت دوزجه جام با ظرفیت روزانه ۱۵۰۰ تن.',
+      lead: 'ما خریداران بین‌المللی را به تولیدات پیشرفته شیشه فلوت دوزجه جام متصل می‌کنیم.',
+      scopeTitle: 'سبد محصولات شیشه معماری',
+      items: ['شیشه فلوت ۳ تا ۱۲ میلی‌متر', 'شیشه لمینت ایمنی و آکوستیک', 'آینه‌های معماری و دکوراتیو', 'شیشه‌های رنگی و کنترل خورشیدی', 'لجستیک و حمل و نقل اختصاصی', 'تأمین پروژه‌های بین‌المللی'],
+      cta: 'درخواست قیمت شیشه دوزجه'
+    },
   'iranian-carpets':{slug:'فرش-ایرانی',eyebrow:'تأمین B2B فرش از ایران',title:'تأمین فرش ایرانی را از شناخت محصول تا تحویل، شفاف و قابل پیگیری می‌کنیم.',description:'تأمین فرش دستباف، ابریشم، پشم، پشم‌وابریشم و ماشینی، کناره، قالیچه، ابعاد سفارشی و سفارش‌های پروژه‌ای.',lead:'برای مجموعه‌ها، پروژه‌های معماری و خرید عمده، اصالت و مبدأ، نوع الیاف، ابعاد، کیفیت، تیراژ، زمان تولید و روش تحویل را یکجا بررسی می‌کنیم.',scopeTitle:'دامنه کامل و قابل راستی‌آزمایی فرش',items:['فرش دستباف ایرانی','فرش تمام‌ابریشم','فرش پشمی و پشم‌وابریشم','فرش ماشینی','کناره و قالیچه','ابعاد سفارشی و تأمین پروژه‌ای'],cta:'درخواست قیمت فرش ایرانی'},
   'silk-carpets':{slug:'فرش-ابریشم-دستباف',eyebrow:'یک حوزه تخصصی مستقل',title:'در فرش ابریشم دستباف، اصالت و ظرافت بافت باید قابل بررسی باشد.',description:'بررسی مبدأ، بافت، ابعاد، کیفیت، بسته‌بندی و تأمین پروژه‌ای فرش تمام‌ابریشم و فرش‌های ترکیبی ابریشم ایران.',lead:'فرش ابریشم یک گزینه فرعی نیست؛ نوع الیاف، ظرافت گره، درخشندگی، نقشه، کیفیت بافت و شرایط حمل آن جداگانه بررسی می‌شود.',scopeTitle:'ارزیابی ویژه فرش ابریشم',items:['فرش دستباف تمام‌ابریشم','چله و پرز ابریشم','ترکیب ممتاز پشم‌وابریشم','قالیچه و قطعات کلکسیونی','نقشه، رنگ و ابعاد سفارشی','هماهنگی تولید پروژه‌ای'],cta:'درخواست فرش ابریشم'},
   'wholesale-textiles':{slug:'تامین-عمده-منسوجات',eyebrow:'منسوجات B2B و تولید با برند شما',title:'تأمین عمده منسوجات را از نمونه‌گیری تا لجستیک هماهنگ می‌کنیم.',description:'پارچه، حوله، حوله تن‌پوش، منسوجات خانگی و پوشاک با برند اختصاصی، نمونه، RFQ، اعتبارسنجی تولیدکننده، کیفیت، بسته‌بندی و لجستیک.',lead:'برای برندها، توزیع‌کنندگان، هتل‌ها و پروژه‌ها، مشخصات محصول را با ظرفیت تولید، تأیید نمونه، کیفیت، بسته‌بندی و تحویل هماهنگ می‌کنیم.',scopeTitle:'دامنه تأمین عمده منسوجات',items:['پارچه و مشخصات فنی','حوله و حوله تن‌پوش','منسوجات خانگی','تولید پوشاک آماده','برند و بسته‌بندی اختصاصی','نمونه‌گیری و توسعه مجموعه'],cta:'ارسال RFQ منسوجات'}},
  zh:{
+    'duzce-cam-flat-glass': {
+      slug: 'duzce-cam-pingban-boli',
+      eyebrow: 'Düzce Cam · B2B 采购',
+      title: 'Düzce Cam: 浮法玻璃、夹层玻璃和镜子采购。',
+      description: '为Düzce Cam的平板玻璃和镜子提供可靠的采购和出口协调。',
+      lead: '我们将国际买家与Düzce Cam的高科技浮法玻璃生产联系起来。',
+      scopeTitle: '建筑玻璃产品组合',
+      items: ['3mm - 12mm 浮法玻璃', '隔音和安全夹层玻璃', '建筑和装饰镜子', '着色和太阳能镀膜玻璃', '专用物流和运输', '国际项目供应'],
+      cta: '索取 Düzce Cam 报价'
+    },
   'iranian-carpets':{slug:'carpets',eyebrow:'B2B 波斯地毯大宗寻源与定制',title:'从产品工艺鉴别到交付落地的波斯地毯专业采购方案。',description:'纯手工打结地毯、真丝地毯、羊毛地毯、毛丝混纺及高精密机织地毯、长条走廊毯、小方毯、非标定制尺寸及工程项目集采。',lead:'面向品牌收藏、高端酒店工程及大宗批发项目，将真实产地、材质构成、规格尺寸、品质等级、起订体量、生产周期与交付模式统筹于同一商业决策评估中。',scopeTitle:'品类完备且真实可查的地毯覆盖范畴',items:['波斯纯手工打结地毯','顶级纯真丝手工地毯','经典羊毛及羊毛真丝混纺地毯','高密度精密机织商业地毯','走廊长条毯与收藏级小方毯','非标尺寸定制与酒店工程项目集采'],cta:'发起波斯地毯大宗 RFQ 询价'},
   'silk-carpets':{slug:'hand-knotted-silk-carpets',eyebrow:'高阶特色垂直专精领域',title:'纯手工真丝地毯：材质细节、真实产地与大师级工艺必须清晰可鉴。',description:'纯手工纯天然真丝及真丝混纺地毯的产地溯源、手工打结工艺、规格尺寸、品质等级、防潮包装及工程定制寻源。',lead:'真丝地毯并非普通通用大宗商品；我们将其作为独立的高阶特色品类进行严格管理，针对蚕丝纤维结构、道数打结精度 (KPS)、光泽度、传统经典纹样、手工工艺及长途恒温防潮运输进行独立专项核验。',scopeTitle:'真丝地毯专项评估与核验维度',items:['100% 纯天然真丝纯手工打结地毯','真丝经纱与真丝绒头高密结构','奢华羊毛真丝高比例混纺地毯','小尺寸精品与名家收藏级珍品','专属花案、色彩搭配与非标尺寸定制','大型豪华工程项目定制生产协调'],cta:'咨询纯手工真丝地毯定制需求'},
   'wholesale-textiles':{slug:'textiles',eyebrow:'B2B 大宗纺织与 OEM 代工定制',title:'从打样确认到跨境物流的全流程大宗纺织品供应链协调。',description:'高品质面料、酒店毛巾浴袍、高档家纺套件及成衣服装制造：支持 OEM / 贴牌定制 (Private Label)、打样确认、标准 RFQ、工厂核验、品质把控及包装物流。',lead:'面向跨国品牌商、区域分销商、星级酒店供应链及工程采购商，将技术规格书与工厂实际产能、样品签样、质量验收标准、定制包装及交付排期进行严谨匹配。',scopeTitle:'大宗纺织品核心业务覆盖范围',items:['特种面料与严苛技术规格书开发','星级酒店及高档家用毛巾与浴袍系列','高支高密家纺套件与床品集合','成衣服装批量制造与精细缝纫','OEM / 贴牌定制与出口专属包装','面料打样、色卡开发与系列产品企划'],cta:'提交大宗纺织品 RFQ 询价需求'}
  },
  vi:{
+    'duzce-cam-flat-glass': {
+      slug: 'duzce-cam-kinh-phang-va-guong',
+      eyebrow: 'Düzce Cam · Nguồn cung B2B',
+      title: 'Düzce Cam: Tìm nguồn cung Kính nổi, Kính dán và Gương.',
+      description: 'Tìm nguồn cung đáng tin cậy và điều phối xuất khẩu cho kính nổi và gương của Düzce Cam.',
+      lead: 'Chúng tôi kết nối người mua quốc tế với dây chuyền sản xuất kính nổi công nghệ cao của Düzce Cam.',
+      scopeTitle: 'Danh mục Kính Kiến trúc',
+      items: ['Kính nổi 3mm - 12mm', 'Kính dán An toàn & Cách âm', 'Gương Kiến trúc & Trang trí', 'Kính màu và Kính cản nhiệt', 'Logistics & Vận tải chuyên dụng', 'Cung cấp cho Dự án Quốc tế'],
+      cta: 'Yêu cầu Báo giá Düzce Cam'
+    },
   'iranian-carpets':{slug:'carpets',eyebrow:'Thu mua thảm B2B',title:'Thu mua thảm Ba Tư được cấu trúc từ bằng chứng sản phẩm đến giao hàng.',description:'Thảm thủ công, lụa, len, len-lụa và dệt máy Ba Tư; thảm hành lang, thảm nhỏ, kích thước tùy chỉnh và thu mua theo dự án.',lead:'Đối với các bộ sưu tập, dự án và bán buôn, chúng tôi kết nối xuất xứ, vật liệu, kích thước, chất lượng, số lượng, tiến độ và giao hàng trong một đánh giá thương mại duy nhất.',scopeTitle:'Danh mục thảm đa dạng và có thể xác minh',items:['Thảm Ba Tư dệt thủ công','Thảm lụa nguyên chất','Thảm len và len-lụa','Thảm dệt máy cao cấp','Thảm hành lang và thảm nhỏ','Kích thước tùy chỉnh và thu mua dự án'],cta:'Lập RFQ thu mua thảm'},
   'silk-carpets':{slug:'hand-knotted-silk-carpets',eyebrow:'Danh mục chuyên biệt cao cấp',title:'Thảm lụa dệt thủ công đòi hỏi bằng chứng rõ ràng về xuất xứ và tay nghề.',description:'Xuất xứ, tay nghề thủ công, kích thước, chất lượng, đóng gói và thu mua dự án cho thảm lụa nguyên chất và lụa pha Ba Tư.',lead:'Chúng tôi xử lý thảm lụa như một danh mục cao cấp độc lập, nơi cấu trúc sợi, độ mịn nút thắt, độ bóng, hoa văn, tay nghề và vận chuyển được thẩm định riêng biệt.',scopeTitle:'Đánh giá chuyên sâu cho thảm lụa',items:['Thảm lụa dệt thủ công 100%','Cấu trúc sợi dọc và sợi tuyết lụa','Hỗn hợp cao cấp len-lụa','Các tác phẩm nhỏ và sưu tầm','Hoa văn, màu sắc và kích thước tùy chỉnh','Điều phối sản xuất cho dự án lớn'],cta:'Trao đổi về yêu cầu thảm lụa'},
   'wholesale-textiles':{slug:'textiles',eyebrow:'Dệt may B2B và nhãn hàng riêng',title:'Thu mua dệt may bán buôn được điều phối từ mẫu thử đến logistics.',description:'Vải, khăn tắm, áo choàng tắm, dệt may gia dụng và may mặc với nhãn hàng riêng (OEM), mẫu thử, RFQ, xác minh nhà sản xuất, chất lượng và logistics.',lead:'Dành cho các thương hiệu, nhà phân phối, khách sạn và dự án, chúng tôi khớp nối thông số kỹ thuật với năng lực nhà máy, duyệt mẫu, chất lượng, bao bì và tiến độ giao hàng.',scopeTitle:'Phạm vi sản phẩm dệt may bán buôn',items:['Vải và thông số kỹ thuật dệt may','Khăn tắm và áo choàng tắm cao cấp','Bộ sưu tập dệt may gia dụng','Sản xuất hàng may mặc sẵn','Gia công OEM và đóng gói tùy chỉnh','Phát triển mẫu và bộ sưu tập mới'],cta:'Gửi yêu cầu RFQ dệt may'}
