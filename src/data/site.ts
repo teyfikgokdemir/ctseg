@@ -431,13 +431,6 @@ export const services: Record<(typeof serviceIds)[number], { slugs: Localized; n
       zh:'为出海企业评估目标市场准入门槛、对接合规海外买家与分销渠道，构建清晰务实的落地合作方案。',
       vi:'Mở rộng thị trường mới thông qua sự phù hợp của sản phẩm, đánh giá quy chuẩn, sự sẵn sàng thương mại và kết nối người mua mục tiêu.'
     }
-  },
-  uk: {
-    description: 'B2B пошук в Туреччині',
-    home: 'Головна',
-    markets: 'Ринки',
-    products: 'Продукти',
-    contact: 'Контакти'
   }
 };
 
@@ -649,13 +642,6 @@ export const productDescriptions: Record<(typeof productIds)[number], Localized>
     fa:'ترکیبات سفارشی از انواع مغز پسته، بادام، فندق، گردو و میوه‌های خشک، با بسته‌بندی و فرمولاسیون اختصاصی.',
     zh:'根据跨国买家与品牌商需求，专业定制不同配比与颗粒梯度的开心果、巴旦木、腰果、榛子及脱水干果组合，提供真空大包装、充氮小包装及贴牌代工。',
     vi:'Hỗn hợp tùy chỉnh gồm hạt dẻ cười, hạnh nhân, hạt điều, hạt phỉ và trái cây sấy khô đóng gói theo thông số kỹ thuật thương hiệu riêng.'
-  },
-  uk: {
-    description: 'B2B пошук в Туреччині',
-    home: 'Головна',
-    markets: 'Ринки',
-    products: 'Продукти',
-    contact: 'Контакти'
   }
 };
 
@@ -774,13 +760,6 @@ export const editorialCopy: Record<Locale, {
     portfolioText:'Danh mục này đại diện cho mạng lưới thương mại hai chiều của CTSEG đối với hàng công nghiệp, nông sản nguyên liệu và vật tư tiêu hao đạt chuẩn quốc tế.',
     marketsKicker:'Mở rộng xuất khẩu · Xác minh xuất xứ · Phân tích TCO · Đảm bảo hợp đồng',
     productImageNote:'Hình ảnh đại diện cho danh mục; thông số kỹ thuật được xác thực bằng phiếu thông số kỹ thuật (TDS) và chứng từ lô hàng.'
-  },
-  uk: {
-    description: 'B2B пошук в Туреччині',
-    home: 'Головна',
-    markets: 'Ринки',
-    products: 'Продукти',
-    contact: 'Контакти'
   }
 };
 
@@ -1202,13 +1181,6 @@ export const insights: Record<(typeof insightIds)[number], { slugs: Localized; t
       zh:'现代战略贸易机构坚决摒弃传统倒手掮客的隐蔽高额加价模式；立足于经书面约定的透明服务费体系，协同买卖双方在法定契约下直接签署交易，并全程统筹质量检验、单证流转与违约风控。',
       vi:'Một nhà thương mại chiến lược hoạt động dựa trên các điều khoản dịch vụ minh bạch, kết nối người mua và nhà sản xuất trực tiếp qua hợp đồng chuẩn, loại bỏ biên lợi nhuận ẩn và kiểm soát chất lượng.'
     }
-  },
-  uk: {
-    description: 'B2B пошук в Туреччині',
-    home: 'Головна',
-    markets: 'Ринки',
-    products: 'Продукти',
-    contact: 'Контакти'
   }
 };
 
