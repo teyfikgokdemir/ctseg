@@ -197,7 +197,6 @@ export const marketCopy: Record<MarketLocale, Record<TradeMarketId, MarketCopy>>
       iran:'iran', russia:'rosiya', china:'kytay', vietnam:'vyetnam', india:'indiya'
     };
     return [id,{
-      ...marketCopy.en[id],
       slug:slugs[id],
       eyebrow:`${country} · B2B закупівлі`,
       title:`Постачання та торгові послуги з Türkiye для ринку ${country}`,
