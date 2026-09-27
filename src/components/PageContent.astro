@@ -397,13 +397,22 @@ const legalPage = id && key === 'legal' ? legal[id as keyof typeof legal] : null
 const originalPost = insight && id ? getPostForInsight(lang, id) : null;
 const homeHref = localizedPath(lang, 'home');
 const sectionHref = (section:string) => localizedPath(lang, section);
+const localValue = <T extends Record<string, any>>(values:T) => (values?.[lang] ?? values?.en);
+const serviceName = (item:any) => localValue(item.names);
+const serviceDescription = (item:any) => localValue(item.descriptions);
+const productName = (item:any) => localValue(item.names);
+const productDescription = (item:any) => localValue(item.descriptions);
+const insightTitle = (item:any) => localValue(item.titles);
+const insightDescription = (item:any) => localValue(item.descriptions);
+const legalTitle = (item:any) => localValue(item.titles);
+const landingIndexCopy = (searchLandingIndexCopy as any)[lang] || (searchLandingIndexCopy as any).en;
 const indexLabel = (index:number) => String(index + 1).padStart(2,'0');
 const marketNames = {
   tr:['Türkiye','Avrupa','Uluslararası'], en:['Türkiye','Europe','International'], de:['Türkei','Europa','International'],
   it:['Turchia','Europa','Internazionale'], ru:['Турция','Европа','Международные рынки'], fa:['ترکیه','اروپا','بین‌المللی'],
-  zh:['土耳其枢纽','欧洲市场','全球大宗贸易走廊'], vi:['Thổ Nhĩ Kỳ','Châu Âu','Thị trường quốc tế'], uk:['Туреччина','Європа','Міжнародні']}[lang]
-const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',ru:'Правовая информация',fa:'حقوقی',zh:'法律政策与合规',vi:'Pháp lý', uk:'Юридичні'}[lang]
-const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',ru:'27 июля 2026',fa:'۲۷ ژوئیه ۲۰۲۶',zh:'2026年7月27日',uk:'27 липня 2026',vi:'27 tháng 7, 2026'}[lang];
+  zh:['土耳其枢纽','欧洲市场','全球大宗贸易走廊'], vi:['Thổ Nhĩ Kỳ','Châu Âu','Thị trường quốc tế'], uk:['Туреччина','Європа','Міжнародні'],ro:['Türkiye','Europa','Internațional'],bg:['Türkiye','Европа','Международни пазари'],sr:['Türkiye','Evropa','Međunarodno']}[lang] || ['Türkiye','Europe','International']
+const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',ru:'Правовая информация',fa:'حقوقی',zh:'法律政策与合规',vi:'Pháp lý',uk:'Юридичні',ro:'Juridic',bg:'Правна информация',sr:'Pravne informacije'}[lang] || 'Legal'
+const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',ru:'27 июля 2026',fa:'۲۷ ژوئیه ۲۰۲۶',zh:'2026年7月27日',uk:'27 липня 2026',vi:'27 tháng 7, 2026',ro:'27 iulie 2026',bg:'27 юли 2026',sr:'27. jul 2026.'}[lang] || '27 July 2026';
 const showcaseRoles = ['lead','medium','medium','compact','compact','compact'];
 const productFamilies:Record<string,string> = {
   'akbari-pistachio':'pistachio', 'mazafati-dates':'dates', almonds:'nuts',
@@ -847,7 +856,7 @@ const processLabels = {
   vi:{boundary:'Ranh giới vai trò và trách nhiệm',answers:'Giải đáp trực tiếp',answerLead:'Các câu hỏi cốt lõi về thu mua và điều phối thương mại.'}, uk:{boundary:'Межі ролі та відповідальності',answers:'Прямі відповіді',answerLead:'Ключові запитання щодо закупівель та координації торгівлі.'}}[lang]
 const scenarioKicker = {tr:'Temsili çalışma',en:'Representative work',de:'Repräsentatives Szenario',it:'Scenario rappresentativo',ru:'Пример сценария',fa:'سناریوی نمونه',zh:'实战案例',vi:'Kịch bản đại diện', uk:'Репрезентативний сценарій'}[lang]
 const guide = key === 'guides' && id ? (guides[id as keyof typeof guides]?.[lang] || guides[id as keyof typeof guides]?.['en'] || null) : null;
-const searchLanding = key === 'search-landing' && id ? searchLandings[id as keyof typeof searchLandings]?.content[lang] : null;
+const searchLanding = key === 'search-landing' && id ? ((searchLandings[id as keyof typeof searchLandings]?.content as any)?.[lang] || (searchLandings[id as keyof typeof searchLandings]?.content as any)?.en || null) : null;
 const workHref = localizedPath(lang,'how-we-work');
 const scenarioHref = localizedPath(lang,'scenarios');
 const productCommercialLabels = {
@@ -964,9 +973,9 @@ const verifiedLater = {
 {key === 'services' && !id && (
   <>
     <PageHero lang={lang} eyebrow={t.services} title={copy.servicesTitle} lead={copy.servicesLead} />
-    <section class="section"><div class="container card-grid">{serviceIds.map((serviceId,index) => <a class="card" href={localizedPath(lang,'services',serviceId)}><small>{indexLabel(index)}</small><h2>{services[serviceId].names[lang]}</h2><p>{services[serviceId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
+    <section class="section"><div class="container card-grid">{serviceIds.map((serviceId,index) => <a class="card" href={localizedPath(lang,'services',serviceId)}><small>{indexLabel(index)}</small><h2>{serviceName(services[serviceId])}</h2><p>{serviceDescription(services[serviceId])}</p><strong>{t.readMore} →</strong></a>)}</div></section>
     <section class="section solution-directory"><div class="container">
-      <div class="section-head"><h2>{searchLandingIndexCopy[lang].title}</h2><p>{searchLandingIndexCopy[lang].lead}</p></div>
+      <div class="section-head"><h2>{landingIndexCopy.title}</h2><p>{landingIndexCopy.lead}</p></div>
       <div class="card-grid">{searchLandingIds.map((landingId,index) => {
         const landing=searchLandings[landingId].content[lang as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']] || searchLandings[landingId].content['en' as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']];
         return <a class="card" href={searchLandingPath(lang,landingId)}><small>{indexLabel(index)}</small><h3>{landing.title}</h3><p>{landing.description}</p><strong>{t.readMore} →</strong></a>;
@@ -979,7 +988,7 @@ const verifiedLater = {
 
 {service && (
   <>
-    <PageHero lang={lang} eyebrow={t.services} title={service.names[lang]} lead={service.descriptions[lang]} parentHref={sectionHref('services')} parentLabel={t.services} />
+    <PageHero lang={lang} eyebrow={t.services} title={serviceName(service)} lead={serviceDescription(service)} parentHref={sectionHref('services')} parentLabel={t.services} />
     <section class="section"><div class="container content-grid">
       <div class="prose">
         {detailedService ? (
@@ -999,7 +1008,7 @@ const verifiedLater = {
           </>
         ) : (
           <>
-            <div class="content-block"><h2>{copy.framework[0]}</h2><p>{service.descriptions[lang]} {copy.aboutLead}</p><ul class="check-list">{copy.framework.map((item:string) => <li>{item}</li>)}</ul></div>
+            <div class="content-block"><h2>{copy.framework[0]}</h2><p>{serviceDescription(service)} {copy.aboutLead}</p><ul class="check-list">{copy.framework.map((item:string) => <li>{item}</li>)}</ul></div>
             <div class="content-block faq"><h2>{t.faq}</h2><details open><summary>{copy.serviceFaq[0]}</summary><p>{copy.serviceFaq[1]}</p></details><details><summary>{copy.serviceFaq[2]}</summary><p>{copy.serviceFaq[3]}</p></details></div>
           </>
         )}
@@ -1104,7 +1113,7 @@ const verifiedLater = {
   const evidence = (product?.id && productEvidence[product.id as keyof typeof productEvidence]) ? productEvidence[product.id as keyof typeof productEvidence] : null;
   return (
   <>
-    <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={product.names[lang]} lead={product.descriptions[lang]} parentHref={sectionHref('products')} parentLabel={t.products} product={product} ctaHref={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} ctaLabel={t.quote} imageNote={editorial.productImageNote} />
+    <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={productName(product)} lead={productDescription(product)} parentHref={sectionHref('products')} parentLabel={t.products} product={product} ctaHref={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} ctaLabel={t.quote} imageNote={editorial.productImageNote} />
     <section class="section product-detail-content"><div class="container content-grid">
       <div class="prose">
         <div class="content-block product-commercial-facts"><h2>{lang === 'tr' ? 'Ticari değerlendirme bilgileri' : lang === 'en' ? 'Commercial assessment information' : lang === 'de' ? 'Angaben zur kaufmännischen Bewertung' : lang === 'it' ? 'Informazioni per la valutazione commerciale' : lang === 'ru' ? 'Параметры коммерческой оценки' : lang === 'fa' ? 'اطلاعات ارزیابی تجاری' : lang === 'zh' ? '大宗商品商业评估核心参数' : lang === 'vi' ? 'Thông tin đánh giá thương mại' : 'Commercial assessment information'}</h2>
@@ -1123,7 +1132,7 @@ const verifiedLater = {
               evidence.intendedUse[lang],
               evidence.quoteRequirements[lang]
             ] : [
-              product.origin,product.names[lang],verifiedLater[0],verifiedLater[1],verifiedLater[2],
+              product.origin,productName(product),verifiedLater[0],verifiedLater[1],verifiedLater[2],
               verifiedLater[3],verifiedLater[4],verifiedLater[1],verifiedLater[1],verifiedLater[0],
               copy.productUses.join(' · '),
               lang === 'tr' ? 'Spesifikasyon, miktar, ambalaj, teslim yeri, hedef tarih ve belge beklentisi' :
@@ -1163,7 +1172,7 @@ const verifiedLater = {
         <div class="content-block"><h2>{t.logistics}</h2><p>{t.contactLead}</p>{product.media.secondary && <ProductMedia product={product} lang={lang} secondary={true} className="secondary-product-media" />}</div>
         <div class="content-block faq"><h2>{t.faq}</h2><details open><summary>{t.origin}</summary><p>{t.complianceText}</p></details><details><summary>{t.samplePolicy}</summary><p>{t.sampleText}</p></details></div>
       </div>
-      <aside class="side-panel"><p class="eyebrow">{t.logistics}</p><h2>{t.quote}</h2><p>{t.contactLead}</p><p><strong>{t.samplePolicy}</strong><br/>{t.sampleText}</p><a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-product-quote data-product-name={product.names[lang]}>{lang === 'tr' ? 'Bu ürün için teklif iste' : lang === 'en' ? 'Request commercial details' : t.quote}</a></aside>
+      <aside class="side-panel"><p class="eyebrow">{t.logistics}</p><h2>{t.quote}</h2><p>{t.contactLead}</p><p><strong>{t.samplePolicy}</strong><br/>{t.sampleText}</p><a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-product-quote data-product-name={productName(product)}>{lang === 'tr' ? 'Bu ürün için teklif iste' : lang === 'en' ? 'Request commercial details' : t.quote}</a></aside>
     </div></section>
   </>
   );
