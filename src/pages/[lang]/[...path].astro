@@ -23,8 +23,8 @@ if (record.key === 'services' && record.id) {
   schemas.push({
     '@context':'https://schema.org','@type':'Service',
     '@id':`${canonicalFor(record)}#service`,url:canonicalFor(record),
-    name:service.names[record.lang],description:service.descriptions[record.lang],
-    serviceType:service.names[record.lang],inLanguage:record.lang,
+    name:(service.names as any)[record.lang] || service.names.en,description:(service.descriptions as any)[record.lang] || service.descriptions.en,
+    serviceType:(service.names as any)[record.lang] || service.names.en,inLanguage:record.lang,
     provider:{'@id':'https://ctseg.com.tr/#organization'},
     areaServed:['Türkiye','Europe','International']
   });
@@ -42,7 +42,7 @@ if (record.key === 'products' && record.id) {
   schemas.push({
     '@context':'https://schema.org','@type':'Product',
     '@id':`${canonicalFor(record)}#product`,url:canonicalFor(record),
-    name:product.names[record.lang],description:product.descriptions[record.lang],image:`https://ctseg.com.tr${product.media.src}`,
+    name:(product.names as any)[record.lang] || product.names.en,description:(product.descriptions as any)[record.lang] || product.descriptions.en,image:`https://ctseg.com.tr${product.media.src}`,
     category:'B2B trade product',inLanguage:record.lang,
     additionalProperty:[
       {'@type':'PropertyValue',name:ui[record.lang].origin,value:product.origin},
@@ -51,8 +51,8 @@ if (record.key === 'products' && record.id) {
   });
   schemas.push({
     '@context':'https://schema.org','@type':'Service',
-    '@id':`${canonicalFor(record)}#product-sourcing-service`,name:`${product.names[record.lang]} sourcing assessment`,
-    description:product.descriptions[record.lang],serviceType:'Specification-led B2B sourcing assessment',
+    '@id':`${canonicalFor(record)}#product-sourcing-service`,name:`${(product.names as any)[record.lang] || product.names.en} sourcing assessment`,
+    description:(product.descriptions as any)[record.lang] || product.descriptions.en,serviceType:'Specification-led B2B sourcing assessment',
     image:`https://ctseg.com.tr${product.media.src}`,
     provider:{'@id':'https://ctseg.com.tr/#organization'},areaServed:['Türkiye','Europe','International'],
     additionalProperty:[
@@ -73,8 +73,8 @@ if (record.key === 'insights' && record.id) {
   const originalPost = record.id ? getPostForInsight(record.lang, record.id) : null;
   schemas.push({
     '@context':'https://schema.org','@type':'BlogPosting',
-    '@id':`${canonicalFor(record)}#article`,url:canonicalFor(record),headline:insight.titles[record.lang],
-    description:insight.descriptions[record.lang],
+    '@id':`${canonicalFor(record)}#article`,url:canonicalFor(record),headline:(insight.titles as any)[record.lang] || insight.titles.en,
+    description:(insight.descriptions as any)[record.lang] || insight.descriptions.en,
     datePublished:originalPost?.date ?? '2026-07-27',dateModified:originalPost?.updated ?? '2026-07-27',
     inLanguage:record.lang,mainEntityOfPage:{'@id':`${canonicalFor(record)}#webpage`},
     author:{'@type':'Person',name:'Teyfik Gökdemir'},
@@ -91,7 +91,7 @@ if (record.key === 'insights' && record.id) {
   }
 }
 if (record.key === 'how-we-work') {
-  const process=processPages[record.lang];
+  const process=(processPages as any)[record.lang] || (processPages as any).en;
   schemas.push({
     '@context':'https://schema.org','@type':'HowTo',name:process.title,description:process.description,
     step:process.steps.map((name,index)=>({'@type':'HowToStep',position:index+1,name}))
@@ -135,8 +135,7 @@ if (record.key === 'guides' && record.id) {
   main .section.trade-paths-section .trade-paths-grid p,
   main .section.markets-editorial p,
   main .section.process-section p,
-  main .section.reflex-featured-section p,
-  main .section.trade-video-section p,
+    main .section.trade-video-section p,
   main .section .cta-statement p {
     color:#d9d9d3!important;
     opacity:1!important;
@@ -144,8 +143,7 @@ if (record.key === 'guides' && record.id) {
   main .section.trade-paths-section .section-head p,
   main .section.markets-editorial .section-head p,
   main .section.process-section .section-head p,
-  main .section.reflex-featured-section .section-head p,
-  main .section.trade-video-section .section-head p,
+    main .section.trade-video-section .section-head p,
   main .section .cta-statement .eyebrow {
     color:#c4f000!important;
     opacity:1!important;

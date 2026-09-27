@@ -5,12 +5,14 @@ type Localized<T> = Record<Locale, T>;
 export const specialSlugs: Record<'how-we-work'|'scenarios', Record<Locale,string>> = {
   'how-we-work': {
     tr:'nasil-calisiyoruz', en:'how-we-work', de:'arbeitsweise', it:'come-lavoriamo',
-    ru:'kak-my-rabotaem', fa:'ravesh-kar', zh:'how-we-work', vi:'quy-trinh-lam-viec'
+    ru:'kak-my-rabotaem', fa:'ravesh-kar', zh:'how-we-work', vi:'quy-trinh-lam-viec',
+    uk:'yak-my-pratsiuiemo', ro:'cum-lucram', bg:'kak-rabotim', sr:'kako-radimo'
   },
   scenarios: {
     tr:'temsili-calisma-senaryolari', en:'representative-work-scenarios', de:'repraesentative-arbeitsszenarien',
     it:'scenari-di-lavoro-rappresentativi', ru:'primery-kommercheskih-scenariev', fa:'senaryo-haye-nemune',
-    zh:'representative-scenarios', vi:'kich-ban-thuong-mai-dai-dien'
+    zh:'representative-scenarios', vi:'kich-ban-thuong-mai-dai-dien',
+    uk:'reprezentatyvni-stsenarii', ro:'scenarii-comerciale-reprezentative', bg:'predstavitelni-targovski-stsenarii', sr:'reprezentativni-trgovinski-scenariji'
   }
 };
 

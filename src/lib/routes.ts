@@ -17,8 +17,8 @@ export function getRouteRecords(): RouteRecord[] {
   const records: RouteRecord[] = [];
   for (const lang of locales) {
     if (lang !== 'tr') records.push({ lang, key:'home' });
-    records.push({lang,path:specialSlugs['how-we-work'][lang],key:'how-we-work'});
-    records.push({lang,path:specialSlugs.scenarios[lang],key:'scenarios'});
+    records.push({lang,path:(specialSlugs['how-we-work'] as any)[lang] || (specialSlugs['how-we-work'] as any).en,key:'how-we-work'});
+    records.push({lang,path:(specialSlugs.scenarios as any)[lang] || (specialSlugs.scenarios as any).en,key:'scenarios'});
     for (const id of searchLandingIds) records.push({
       lang,path:searchLandingPath(lang,id).replace(`/${lang}/`,'').replace(/^\//,'').replace(/\/$/,''),key:'search-landing',id
     });
@@ -39,7 +39,7 @@ export function getRouteRecords(): RouteRecord[] {
     });
     for (const corridor of tradeCorridors) records.push({ lang, path: `turkey-sourcing-for-${corridor.id}`, key: 'trade-corridor', id: corridor.id });
       for (const id of legalIds) records.push({
-      lang, path:legal[id].slugs[lang], key:'legal', id
+      lang, path:(legal[id].slugs as any)[lang] || (legal[id].slugs as any).en, key:'legal', id
     });
     if (lang === 'tr' || lang === 'en') {
       for (const id of guideIds) records.push({
@@ -62,6 +62,10 @@ export function getMeta(record: RouteRecord) {
            lang === 'zh' ? 'CTSEG | 双向全球贸易、战略采购与市场进入' :
            lang === 'vi' ? 'CTSEG | Thương mại Toàn cầu, Sourcing Chiến lược & Thâm nhập Thị trường' :
            lang === 'ru' ? 'CTSEG | Международная торговля, стратегический сорсинг и выход на рынок' :
+           lang === 'uk' ? 'CTSEG | Глобальна торгівля, стратегічне постачання та вихід на ринок' :
+           lang === 'ro' ? 'CTSEG | Comerț global, sourcing strategic și intrare pe piață' :
+           lang === 'bg' ? 'CTSEG | Глобална търговия, стратегическо снабдяване и навлизане на пазара' :
+           lang === 'sr' ? 'CTSEG | Globalna trgovina, strateška nabavka i ulazak na tržište' :
            'CTSEG | Global Trade, Strategic Sourcing & Market Entry',
     description: lang === 'tr' ? 'CTSEG, Türkiye ile dünya pazarları arasında iki yönlü B2B ticaret, stratejik tedarik, tedarikçi doğrulama, RFQ yönetimi ve ihracat/pazara giriş koordinasyonu yürütür.' :
       lang === 'de' ? 'CTSEG verbindet die Türkei mit internationalen Märkten durch bidirektionalen B2B-Handel, strategische Beschaffung, Lieferantenprüfung, RFQ-Management und Markteintritt.' :
@@ -70,14 +74,18 @@ export function getMeta(record: RouteRecord) {
       lang === 'zh' ? 'CTSEG连接土耳其与全球市场，提供双向B2B贸易、战略采购、供应商核验、RFQ管理与跨境市场进入协调。' :
       lang === 'vi' ? 'CTSEG kết nối Thổ Nhĩ Kỳ với thị trường quốc tế thông qua thương mại B2B hai chiều, sourcing chiến lược, thẩm định nhà cung cấp, quản lý RFQ và thâm nhập thị trường.' :
       lang === 'ru' ? 'CTSEG связывает Турцию с международными рынками через двустороннюю B2B-торговлю, стратегический сорсинг, проверку поставщиков, RFQ и сопровождение выхода на рынок.' :
+      lang === 'uk' ? 'CTSEG координує двосторонню B2B торгівлю, стратегічне постачання, перевірку постачальників, RFQ та вихід на ринки між Türkiye, Україною та міжнародними ринками.' :
+      lang === 'ro' ? 'CTSEG coordonează comerț B2B bilateral, sourcing strategic, verificarea furnizorilor, RFQ și intrarea pe piață între Türkiye, România, Balcani și piețele internaționale.' :
+      lang === 'bg' ? 'CTSEG координира двустранна B2B търговия, стратегическо снабдяване, проверка на доставчици, RFQ и навлизане на пазари между Türkiye, България, Балканите и международните пазари.' :
+      lang === 'sr' ? 'CTSEG koordinira dvosmernu B2B trgovinu, stratešku nabavku, proveru dobavljača, RFQ i ulazak na tržište između Türkiye, Srbije, Balkana i međunarodnih tržišta.' :
       'CTSEG connects Türkiye with international markets through two-way B2B trade, strategic sourcing, supplier verification, RFQ management and market-entry coordination.'
   };
-  if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — B2B Sourcing Advisory | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
-  if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} — Wholesale B2B | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
-  if (key === 'insights' && id) return { title:`${insights[id as keyof typeof insights].titles[lang]} | CTSEG`, description:insights[id as keyof typeof insights].descriptions[lang] };
+  if (key === 'services' && id) { const item=services[id as keyof typeof services]; const name=(item.names as any)[lang] || item.names.en; const description=(item.descriptions as any)[lang] || item.descriptions.en; return { title:`${name} — B2B Sourcing Advisory | CTSEG`, description }; }
+  if (key === 'products' && id) { const item=products[id as keyof typeof products]; const name=(item.names as any)[lang] || item.names.en; const description=(item.descriptions as any)[lang] || item.descriptions.en; return { title:`${name} — Wholesale B2B | CTSEG`, description }; }
+  if (key === 'insights' && id) { const item=insights[id as keyof typeof insights]; const title=(item.titles as any)[lang] || item.titles.en; const description=(item.descriptions as any)[lang] || item.descriptions.en; return { title:`${title} | CTSEG`, description }; }
   if (key === 'trade-corridor' && id) { const corridor = tradeCorridors.find(c => c.id === id); if (corridor) return { title: corridor.seoMeta.title, description: corridor.seoMeta.description }; }
-    if (key === 'how-we-work') return {title:`${processPages[lang].title} | CTSEG`,description:processPages[lang].description};
-  if (key === 'scenarios') return {title:`${scenarioPages[lang].title} | CTSEG`,description:scenarioPages[lang].description};
+  if (key === 'how-we-work') { const item=(processPages as any)[lang] || (processPages as any).en; return {title:`${item.title} | CTSEG`,description:item.description}; }
+  if (key === 'scenarios') { const item=(scenarioPages as any)[lang] || (scenarioPages as any).en; return {title:`${item.title} | CTSEG`,description:item.description}; }
   if (key === 'search-landing' && id) {
     const landing=searchLandings[id as keyof typeof searchLandings].content[lang as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']] || searchLandings[id as keyof typeof searchLandings].content['en' as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']];
     return {title:`${landing.title} | CTSEG`,description:landing.description};
@@ -88,8 +96,8 @@ export function getMeta(record: RouteRecord) {
     return {title:`${guide.title} | CTSEG`,description:guide.description};
   }
   if (key === 'legal' && id) return {
-    title:`${legal[id as keyof typeof legal].titles[lang]} | CTSEG`,
-    description:`${legal[id as keyof typeof legal].titles[lang]}. ${copy.legalIntro}`
+    title:`${(legal[id as keyof typeof legal].titles as any)[lang] || legal[id as keyof typeof legal].titles.en} | CTSEG`,
+    description:`${(legal[id as keyof typeof legal].titles as any)[lang] || legal[id as keyof typeof legal].titles.en}. ${copy.legalIntro}`
   };
   const map: Record<string, [string,string]> = {
     services:[copy.servicesTitle,copy.servicesLead], products:[copy.productsTitle,copy.productsLead],

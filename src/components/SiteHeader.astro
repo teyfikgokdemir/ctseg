@@ -9,7 +9,7 @@ const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?
 const t = ui[lang] || ui.en;
 const home = localizedPath(lang, 'home');
 const p = tradePlatformCopy[lang] || tradePlatformCopy.en;
-const methodLabel = {tr:'Yöntem',en:'Method',de:'Arbeitsweise',it:'Metodo',fa:'روش کار',ru:'Метод',zh:'运作模式',vi:'Phương thức hoạt động'}[lang] || 'Method';
+const methodLabel = {tr:'Yöntem',en:'Method',de:'Arbeitsweise',it:'Metodo',fa:'روش کار',ru:'Метод',zh:'运作模式',vi:'Phương thức hoạt động',uk:'Метод',ro:'Metodă',bg:'Метод',sr:'Metod'}[lang] || 'Method';
 const navigationCopy = {
   tr:{globalTrade:'Küresel Ticaret',industries:'Sektörler',portfolio:'Ticaret Portföyü',intelligence:'Ticaret İçgörüleri',company:'Şirket',main:'ANA MENÜ',quick:'HIZLI ERİŞİM',trade:'TİCARET',intro:'İki yönlü ticaret, stratejik tedarik ve pazara giriş yolları'},
   en:{globalTrade:'Global Trade',industries:'Industries',portfolio:'Trade Portfolio',intelligence:'Trade Intelligence',company:'Company',main:'MAIN MENU',quick:'NAVIGATION',trade:'TRADE',intro:'Two-way trade, strategic sourcing and market-entry paths'},
@@ -18,7 +18,11 @@ const navigationCopy = {
   ru:{globalTrade:'Глобальная торговля',industries:'Отрасли',portfolio:'Торговый портфель',intelligence:'Торговая аналитика',company:'Компания',main:'ГЛАВНОЕ МЕНЮ',quick:'НАВИГАЦИЯ',trade:'ТОРГОВЛЯ',intro:'Двусторонняя торговля, стратегический сорсинг и выход на рынки'},
   fa:{globalTrade:'تجارت جهانی',industries:'صنایع',portfolio:'سبد تجاری',intelligence:'بینش تجاری',company:'شرکت',main:'منوی اصلی',quick:'دسترسی سریع',trade:'تجارت',intro:'تجارت دوطرفه، تأمین استراتژیک و ورود به بازار'},
   zh:{globalTrade:'全球贸易',industries:'行业',portfolio:'贸易组合',intelligence:'贸易洞察',company:'公司',main:'主菜单',quick:'导航',trade:'贸易',intro:'双向国际贸易、战略采购与市场进入路径'},
-  vi:{globalTrade:'Thương mại toàn cầu',industries:'Ngành',portfolio:'Danh mục thương mại',intelligence:'Thông tin thương mại',company:'Công ty',main:'MENU CHÍNH',quick:'ĐIỀU HƯỚNG',trade:'THƯƠNG MẠI',intro:'Thương mại hai chiều, sourcing chiến lược và thâm nhập thị trường'}
+  vi:{globalTrade:'Thương mại toàn cầu',industries:'Ngành',portfolio:'Danh mục thương mại',intelligence:'Thông tin thương mại',company:'Công ty',main:'MENU CHÍNH',quick:'ĐIỀU HƯỚNG',trade:'THƯƠNG MẠI',intro:'Thương mại hai chiều, sourcing chiến lược và thâm nhập thị trường'},
+  uk:{globalTrade:'Глобальна торгівля',industries:'Галузі',portfolio:'Торговий портфель',intelligence:'Торгова аналітика',company:'Компанія',main:'ГОЛОВНЕ МЕНЮ',quick:'НАВІГАЦІЯ',trade:'ТОРГІВЛЯ',intro:'Двостороння торгівля, стратегічне постачання та вихід на ринки'},
+  ro:{globalTrade:'Comerț global',industries:'Industrii',portfolio:'Portofoliu comercial',intelligence:'Analize comerciale',company:'Companie',main:'MENIU PRINCIPAL',quick:'NAVIGARE',trade:'COMERȚ',intro:'Comerț bilateral, sourcing strategic și intrare pe piață'},
+  bg:{globalTrade:'Глобална търговия',industries:'Индустрии',portfolio:'Търговско портфолио',intelligence:'Търговски анализи',company:'Компания',main:'ГЛАВНО МЕНЮ',quick:'НАВИГАЦИЯ',trade:'ТЪРГОВИЯ',intro:'Двустранна търговия, стратегическо снабдяване и навлизане на пазара'},
+  sr:{globalTrade:'Globalna trgovina',industries:'Industrije',portfolio:'Trgovinski portfolio',intelligence:'Trgovinski uvidi',company:'Kompanija',main:'GLAVNI MENI',quick:'NAVIGACIJA',trade:'TRGOVINA',intro:'Dvosmerna trgovina, strateška nabavka i ulazak na tržište'}
 }[lang] || {globalTrade:'Global Trade',industries:'Industries',portfolio:'Trade Portfolio',intelligence:'Trade Intelligence',company:'Company',main:'MAIN MENU',quick:'NAVIGATION',trade:'TRADE',intro:'Two-way trade, strategic sourcing and market-entry paths'};
 
 const solutionLinks = [
@@ -47,11 +51,6 @@ const globalLocaleNames = Object.fromEntries(activeLocaleRegistry.map((entry) =>
 const globalSwitchPath = (target: string): string => {
   if (pageKey === 'search-landing' && pageId) return searchLandingPath(target as Locale,pageId as SearchLandingId);
   if (target === 'fa') return '/fa/';
-  if (pageKey === 'medical') {
-    const reflexLocales = ['en','tr','de','it','ru','fa'] as const;
-    if ((reflexLocales as readonly string[]).includes(target)) return reflexPath(target as ReflexLocale);
-    return '/';
-  }
   return localizedPath(target, pageKey, pageId);
 };
 ---
@@ -72,7 +71,7 @@ const globalSwitchPath = (target: string): string => {
             <span class="mobile-nav-title">CTSEG</span>
             <span class="mobile-nav-subtitle">{navigationCopy.main}</span>
           </div>
-          <button class="mobile-nav-close" type="button" aria-label="Close menu" data-mobile-close>
+          <button class="mobile-nav-close" type="button" aria-label={t.close || 'Close menu'} data-mobile-close>
             <span aria-hidden="true">✕</span>
           </button>
         </div>
