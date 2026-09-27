@@ -204,5 +204,25 @@ export const marketCopy: Record<MarketLocale, Record<TradeMarketId, MarketCopy>>
   }
 };
 
-marketUi.ro = marketUi.en; marketUi.bg = marketUi.en; marketUi.sr = marketUi.en;
-marketCopy.ro = marketCopy.en; marketCopy.bg = marketCopy.en; marketCopy.sr = marketCopy.en;
+marketUi.ro = { contact:'Solicită evaluare', home:'Acasă', related:'Alte piețe', allMarkets:'Toate piețele' };
+marketUi.bg = { contact:'Поискайте оценка', home:'Начало', related:'Други пазари', allMarkets:'Всички пазари' };
+marketUi.sr = { contact:'Zatraži procenu', home:'Početna', related:'Druga tržišta', allMarkets:'Sva tržišta' };
+
+const roMarketNames:Record<TradeMarketId,string> = {germany:'Germania',italy:'Italia',france:'Franța',uk:'Regatul Unit',netherlands:'Țările de Jos',poland:'Polonia','uae':'Emiratele Arabe Unite','saudi-arabia':'Arabia Saudită',iran:'Iran',russia:'Rusia',china:'China',vietnam:'Vietnam',india:'India'};
+const bgMarketNames:Record<TradeMarketId,string> = {germany:'Германия',italy:'Италия',france:'Франция',uk:'Обединеното кралство',netherlands:'Нидерландия',poland:'Полша','uae':'Обединените арабски емирства','saudi-arabia':'Саудитска Арабия',iran:'Иран',russia:'Русия',china:'Китай',vietnam:'Виетнам',india:'Индия'};
+const srMarketNames:Record<TradeMarketId,string> = {germany:'Nemačka',italy:'Italija',france:'Francuska',uk:'Ujedinjeno Kraljevstvo',netherlands:'Holandija',poland:'Poljska','uae':'Ujedinjeni Arapski Emirati','saudi-arabia':'Saudijska Arabija',iran:'Iran',russia:'Rusija',china:'Kina',vietnam:'Vijetnam',india:'Indija'};
+
+marketCopy.ro = Object.fromEntries(tradeMarketIds.map((id)=>{
+  const country=roMarketNames[id]; const base=marketCopy.en[id];
+  return [id,{slug:base.slug,eyebrow:`${country} · sourcing B2B`,title:`Sourcing și coordonare comercială între Türkiye și ${country}`,description:`Verificarea producătorilor, RFQ și coordonare comercială pentru companii care operează între Türkiye și ${country}.`,lead:`CTSEG structurează accesul la producători și parteneri comerciali prin cercetare, verificare și un proces RFQ documentat.`,heading2:`Coridor comercial Türkiye–${country}`,body2:`Evaluăm furnizorii, documentele, cerințele pieței și opțiunile de livrare pentru un proces B2B verificabil și executabil.`,cta:`Solicită evaluare pentru ${country}`}];
+})) as Record<TradeMarketId,MarketCopy>;
+
+marketCopy.bg = Object.fromEntries(tradeMarketIds.map((id)=>{
+  const country=bgMarketNames[id]; const base=marketCopy.en[id];
+  return [id,{slug:base.slug,eyebrow:`${country} · B2B снабдяване`,title:`Снабдяване и търговска координация между Türkiye и ${country}`,description:`Проверка на производители, RFQ и търговска координация за компании между Türkiye и ${country}.`,lead:`CTSEG структурира достъпа до производители и търговски партньори чрез проучване, проверка и документиран RFQ процес.`,heading2:`Търговски коридор Türkiye–${country}`,body2:`Оценяваме доставчици, документи, пазарни изисквания и варианти за доставка за проверим и изпълним B2B процес.`,cta:`Поискайте оценка за ${country}`}];
+})) as Record<TradeMarketId,MarketCopy>;
+
+marketCopy.sr = Object.fromEntries(tradeMarketIds.map((id)=>{
+  const country=srMarketNames[id]; const base=marketCopy.en[id];
+  return [id,{slug:base.slug,eyebrow:`${country} · B2B nabavka`,title:`Nabavka i komercijalna koordinacija između Türkiye i ${country}`,description:`Provera proizvođača, RFQ i trgovinska koordinacija za kompanije između Türkiye i ${country}.`,lead:`CTSEG strukturira pristup proizvođačima i poslovnim partnerima kroz istraživanje, proveru i dokumentovan RFQ proces.`,heading2:`Trgovinski koridor Türkiye–${country}`,body2:`Procenjujemo dobavljače, dokumentaciju, zahteve tržišta i opcije isporuke za proverljiv i izvodljiv B2B proces.`,cta:`Zatraži procenu za ${country}`}];
+})) as Record<TradeMarketId,MarketCopy>;
