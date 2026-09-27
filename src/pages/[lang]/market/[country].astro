@@ -157,7 +157,7 @@ const schema = [
         <div class="mkt-related-grid">
           {tradeMarketIds.filter(x => x !== id).slice(0, 6).map(x => (
             <a href={pathForMarket(lang, x)} class="mkt-related-item">
-              <span>{marketCopy[lang][x].title}</span>
+              <span>{(marketCopy[lang] || marketCopy.en)[x].title}</span>
               <i aria-hidden="true">→</i>
             </a>
           ))}

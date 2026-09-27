@@ -17,14 +17,15 @@ export function getStaticPaths() {
 const { record } = Astro.props as { record: RouteRecord };
 const meta = getMeta(record);
 const schemas:any[] = [breadcrumbSchema(record, meta.title)];
+const t = ui[record.lang] || ui.en;
 if (record.key === 'home') schemas.push(tradeMatchingServiceSchema(record,meta.title,meta.description));
 if (record.key === 'services' && record.id) {
   const service = services[record.id as keyof typeof services];
   schemas.push({
     '@context':'https://schema.org','@type':'Service',
     '@id':`${canonicalFor(record)}#service`,url:canonicalFor(record),
-    name:service.names[record.lang],description:service.descriptions[record.lang],
-    serviceType:service.names[record.lang],inLanguage:record.lang,
+    name:service.names[record.lang] || service.names.en,description:service.descriptions[record.lang] || service.descriptions.en,
+    serviceType:service.names[record.lang] || service.names.en,inLanguage:record.lang,
     provider:{'@id':'https://ctseg.com.tr/#organization'},
     areaServed:['Türkiye','Europe','International']
   });
@@ -42,29 +43,29 @@ if (record.key === 'products' && record.id) {
   schemas.push({
     '@context':'https://schema.org','@type':'Product',
     '@id':`${canonicalFor(record)}#product`,url:canonicalFor(record),
-    name:product.names[record.lang],description:product.descriptions[record.lang],image:`https://ctseg.com.tr${product.media.src}`,
+    name:product.names[record.lang] || product.names.en,description:product.descriptions[record.lang] || product.descriptions.en || product.descriptions.en,image:`https://ctseg.com.tr${product.media.src}`,
     category:'B2B trade product',inLanguage:record.lang,
     additionalProperty:[
-      {'@type':'PropertyValue',name:ui[record.lang].origin,value:product.origin},
+      {'@type':'PropertyValue',name:t.origin,value:product.origin},
       {'@type':'PropertyValue',name:'Assessment status',value:'Specification, availability, MOQ, documents and commercial terms verified on request'}
     ]
   });
   schemas.push({
     '@context':'https://schema.org','@type':'Service',
-    '@id':`${canonicalFor(record)}#product-sourcing-service`,name:`${product.names[record.lang]} sourcing assessment`,
-    description:product.descriptions[record.lang],serviceType:'Specification-led B2B sourcing assessment',
+    '@id':`${canonicalFor(record)}#product-sourcing-service`,name:`${product.names[record.lang] || product.names.en} sourcing assessment`,
+    description:product.descriptions[record.lang] || product.descriptions.en,serviceType:'Specification-led B2B sourcing assessment',
     image:`https://ctseg.com.tr${product.media.src}`,
     provider:{'@id':'https://ctseg.com.tr/#organization'},areaServed:['Türkiye','Europe','International'],
     additionalProperty:[
-      {'@type':'PropertyValue',name:ui[record.lang].origin,value:product.origin},
+      {'@type':'PropertyValue',name:t.origin,value:product.origin},
       {'@type':'PropertyValue',name:'Commercial model',value:'Qualification and specification-led B2B assessment'}
     ]
   });
   schemas.push({
     '@context':'https://schema.org','@type':'FAQPage',
     mainEntity:[
-      {'@type':'Question',name:ui[record.lang].origin,acceptedAnswer:{'@type':'Answer',text:ui[record.lang].complianceText}},
-      {'@type':'Question',name:ui[record.lang].samplePolicy,acceptedAnswer:{'@type':'Answer',text:ui[record.lang].sampleText}}
+      {'@type':'Question',name:t.origin,acceptedAnswer:{'@type':'Answer',text:t.complianceText}},
+      {'@type':'Question',name:t.samplePolicy,acceptedAnswer:{'@type':'Answer',text:t.sampleText}}
     ]
   });
 }
@@ -73,8 +74,8 @@ if (record.key === 'insights' && record.id) {
   const originalPost = record.id ? getPostForInsight(record.lang, record.id) : null;
   schemas.push({
     '@context':'https://schema.org','@type':'BlogPosting',
-    '@id':`${canonicalFor(record)}#article`,url:canonicalFor(record),headline:insight.titles[record.lang],
-    description:insight.descriptions[record.lang],
+    '@id':`${canonicalFor(record)}#article`,url:canonicalFor(record),headline:insight.titles[record.lang] || insight.titles.en,
+    description:insight.descriptions[record.lang] || insight.descriptions.en,
     datePublished:originalPost?.date ?? '2026-07-27',dateModified:originalPost?.updated ?? '2026-07-27',
     inLanguage:record.lang,mainEntityOfPage:{'@id':`${canonicalFor(record)}#webpage`},
     author:{'@type':'Person',name:'Teyfik Gökdemir'},
@@ -91,7 +92,7 @@ if (record.key === 'insights' && record.id) {
   }
 }
 if (record.key === 'how-we-work') {
-  const process=processPages[record.lang];
+  const process=processPages[record.lang] || processPages.en;
   schemas.push({
     '@context':'https://schema.org','@type':'HowTo',name:process.title,description:process.description,
     step:process.steps.map((name,index)=>({'@type':'HowToStep',position:index+1,name}))

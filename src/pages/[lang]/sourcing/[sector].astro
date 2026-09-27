@@ -8,10 +8,10 @@ import { FEATURE_IMAGE_WIDTHS } from '../../../lib/responsive-images';
 import { localeDirection, localeOg } from '../../../data/locales';
 export function getStaticPaths(){return tradeLocales.flatMap(lang=>tradeSectorIds.map(id=>({params:{lang,sector:tradeCopy[lang][id].slug},props:{lang,id}})))}
 const {lang,id}=Astro.props as {lang:TradeLocale;id:TradeSectorId};
-const copy=tradeCopy[lang][id],ui=tradeUi[lang];
+const copy=(tradeCopy[lang] || tradeCopy.en)[id],ui=tradeUi[lang] || tradeUi.en;
 const canonical=`https://ctseg.com.tr${pathForSector(lang,id)}`;
 const visual=localizedTradeVisual(sourcingTradeVisualKeys[id],lang);
-const contact = { tr:'/tr/iletisim/', en:'/en/contact/', de:'/de/kontakt/', it:'/it/contatti/', fa:'/fa/#contact', ru:'/ru/#contact', zh:'/zh/contact/', vi:'/vi/contact/' }[lang];
+const contact = { tr:'/tr/iletisim/', en:'/en/contact/', de:'/de/kontakt/', it:'/it/contatti/', fa:'/fa/contact/', ru:'/ru/kontakty/', zh:'/zh/contact/', vi:'/vi/contact/', uk:'/uk/contact/', ro:'/ro/contact/', bg:'/bg/kontakt/', sr:'/sr/kontakt/' }[lang] || '/en/contact/';
 const home=lang==='tr'?'/':lang==='fa'?'/fa/':`/${lang}/`;
 const producer=lang==='fa'?persianProducerCopy[id]:null;
 const metaDescription=producer?`${copy.description} ${producer.lead}`:copy.description;
@@ -43,7 +43,7 @@ const schema=[
 <section class="section"><div class="container"><div class="section-head"><h2>{copy.scopeTitle}</h2><p>{copy.description}</p></div><div class="trade-grid">{copy.items.map((item,index)=><article><span>{String(index+1).padStart(2,'0')}</span><h3>{item}</h3></article>)}</div></div></section>
 <section class="section trade-assurance"><div class="container trade-split"><div><p class="eyebrow">CTSEG</p><h2>{ui.assurance}</h2><p>{copy.lead}</p></div><div><p class="eyebrow">{ui.process}</p><ol>{ui.checks.map((step,index)=><li><span>{String(index+1).padStart(2,'0')}</span>{step}</li>)}</ol></div></div></section>
 {producer&&<section class="section producer-section" data-persian-producer-section><div class="container"><div class="producer-intro"><div><p class="eyebrow">CTSEG · توسعه بازار بین‌المللی</p><h2>{producer.title}</h2></div><p>{producer.lead}</p></div><div class="producer-grid"><div><h3>مسیر همکاری</h3><ul>{producer.services.map(item=><li>{item}</li>)}</ul></div><aside><h3>مخاطبان این همکاری</h3><ul>{producer.audiences.map(item=><li>{item}</li>)}</ul><p>{producer.markets}</p></aside></div><div class="producer-terms"><p>{producer.requirements}</p><p>{producer.role}</p><p><strong>{producer.priority}</strong></p></div><div class="producer-ctas" aria-label="اقدام‌های همکاری">{producer.ctas.map((label,index)=><a class:list={['button',{primary:index===0}]} href={contact} data-producer-cta>{label}</a>)}</div></div></section>}
-<section class="section related"><div class="container"><h2>{ui.related}</h2><div>{tradeSectorIds.filter(x=>x!==id).map(x=><a href={pathForSector(lang,x)}>{tradeCopy[lang][x].title}<span aria-hidden="true">→</span></a>)}</div></div></section>
+<section class="section related"><div class="container"><h2>{ui.related}</h2><div>{tradeSectorIds.filter(x=>x!==id).map(x=><a href={pathForSector(lang,x)}>{(tradeCopy[lang] || tradeCopy.en)[x].title}<span aria-hidden="true">→</span></a>)}</div></div></section>
 <section class="section trade-cta"><div class="container"><p class="eyebrow">RFQ · CTSEG</p><h2>{copy.cta}</h2><a class="button" href={contact}>{ui.contact}</a></div></section></main>
 <footer class="trade-footer"><div class="container"><div><strong>CTSEG</strong>{lang==='tr'&&<p>Türkiye merkezli uluslararası ticaret eşleştirme ve bağımsız ticari koordinasyon.</p>}{lang==='ru'&&<p>Международный сорсинг и независимая коммерческая координация из Турции.</p>}{lang==='zh'&&<p>立足土耳其的国际贸易匹配与独立商业协调专业机构。</p>}{lang==='vi'&&<p>Kết nối thương mại quốc tế và điều phối thương mại độc lập từ Thổ Nhĩ Kỳ.</p>}</div><span>{lang==='tr'?'© 2026 CTSEG. Tüm hakları saklıdır.':lang==='ru'?'© 2026 CTSEG. Все права защищены.':lang==='zh'?'© 2026 CTSEG. 保留所有权利。':lang==='vi'?'© 2026 CTSEG. Bảo lưu mọi quyền.':'© 2026 CTSEG. All rights reserved.'}</span><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></div></footer>
 <script is:inline define:vars={{openLabel:chrome?.menu || 'Open language menu',closeLabel:chrome?.close || 'Close language menu'}}>
