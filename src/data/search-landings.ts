@@ -1,4 +1,5 @@
 import type { Locale } from './site';
+import { activeLocales } from './locales';
 
 export type SearchLandingId = 'turkiye-supplier-sourcing' | 'private-label-manufacturer' | 'rfq-bid-comparison' | 'food-origin-compliance';
 export type SearchLandingContent = {
@@ -53,6 +54,9 @@ export const searchLandingIndexCopy = {
     "title": "Рішення для конкретних комерційних завдань",
     "lead": "Спеціалізовані сторінки для компаній, яким потрібен постачальник, виробник, порівнянний RFQ або задокументована оцінка закупівель харчових продуктів."
   }
+  ,"ro":{"title":"Soluții pentru decizii comerciale specifice","lead":"Pagini dedicate companiilor care au nevoie de un furnizor, producător, RFQ comparabil sau evaluare documentată a sourcingului alimentar."}
+  ,"bg":{"title":"Решения за конкретни търговски решения","lead":"Фокусирани страници за компании, които търсят доставчик, производител, сравним RFQ или документирана оценка на снабдяването с храни."}
+  ,"sr":{"title":"Rešenja za konkretne komercijalne odluke","lead":"Fokusirane stranice za kompanije kojima je potreban dobavljač, proizvođač, uporediv RFQ ili dokumentovana procena nabavke hrane."}
 } as Record<Locale,{title:string;lead:string}>;
 
 export const searchLandings = {
@@ -1498,6 +1502,6 @@ export function searchLandingPath(lang:Locale,id:SearchLandingId):string {
 }
 
 export function searchLandingAlternates(id:string):Record<Locale,string> {
-  const landing=searchLandings[id as SearchLandingId];
-  return Object.fromEntries(Object.entries(landing.paths).map(([lang,path])=>[lang,`https://ctseg.com.tr${path}`])) as Record<Locale,string>;
+  const landingId=id as SearchLandingId;
+  return Object.fromEntries(activeLocales.map((lang)=>[lang,`https://ctseg.com.tr${searchLandingPath(lang,landingId)}`])) as Record<Locale,string>;
 }
