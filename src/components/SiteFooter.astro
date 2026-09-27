@@ -8,16 +8,16 @@ const year = new Date().getFullYear();
 const descriptionMap: Record<string, string> = {
   tr:'Türkiye merkezli uluslararası ticaret eşleştirme ve bağımsız ticari koordinasyon.',
   en:'A Türkiye-based two-way global trade and strategic sourcing house connecting companies, manufacturers and buyers across markets.',
-  de:'Ein in der Türkei ansässiges, beidseitig arbeitendes Haus für globalen Handel, Nearshoring und strategische Beschaffung.',
+  de:'Ein in der Türkei ansässiges Haus für globalen Handel, Nearshoring und strategische Beschaffung.',
   it:'Una trade house con base in Turchia per commercio globale bidirezionale, market entry e sourcing strategico.',
-  fr:'Une maison de commerce basée en Turquie pour le sourcing stratégique et les échanges internationaux bidirectionnels.',
   ru:'Торговый дом в Турции для двусторонней международной торговли, выхода на рынки и стратегического сорсинга.',
   fa:'خانه تجارت و تأمین استراتژیک مستقر در ترکیه برای تجارت دوطرفه میان ترکیه و بازارهای جهانی.',
   zh:'立足土耳其、连接中国与土耳其、欧洲及全球市场的双向国际贸易与战略采购服务机构。',
   vi:'Nhà thương mại và sourcing chiến lược hai chiều có trụ sở tại Thổ Nhĩ Kỳ, kết nối doanh nghiệp Việt Nam với Thổ Nhĩ Kỳ, châu Âu và các thị trường toàn cầu.',
-  sq:'Shtëpi tregtare me bazë në Turqi për tregti ndërkombëtare dykahëshe dhe sourcing strategjik.',
-  mk:'Трговска куќа со седиште во Турција за двонасочна глобална трговија и стратешка набавка.',
-  sr:'Trgovinska kuća sa sedištem u Turskoj za dvosmernu globalnu trgovinu i stratešku nabavku.'
+  uk:'Незалежний B2B торговий дім у Türkiye для стратегічного постачання, перевірки контрагентів і міжнародної торгівлі.',
+  ro:'Casă de comerț B2B cu sediul în Türkiye pentru sourcing strategic, verificarea furnizorilor și comerț internațional.',
+  bg:'B2B търговска къща в Türkiye за стратегическо снабдяване, проверка на доставчици и международна търговия.',
+  sr:'B2B trgovinska kuća u Türkiye za stratešku nabavku, proveru dobavljača i međunarodnu trgovinu.'
 };
 const description = descriptionMap[lang] || descriptionMap.en;
 const copyrightMap: Record<string, string> = {
@@ -25,13 +25,13 @@ const copyrightMap: Record<string, string> = {
   en:`© ${year} CTSEG. All rights reserved.`,
   de:`© ${year} CTSEG. Alle Rechte vorbehalten.`,
   it:`© ${year} CTSEG. Tutti i diritti riservati.`,
-  fr:`© ${year} CTSEG. Tous droits réservés.`,
   ru:`© ${year} CTSEG. Все права защищены.`,
   fa:`© ${year} CTSEG. تمامی حقوق محفوظ است.`,
   zh:`© ${year} CTSEG. 保留所有权利。`,
   vi:`© ${year} CTSEG. Bảo lưu mọi quyền.`,
-  sq:`© ${year} CTSEG. Të gjitha të drejtat të rezervuara.`,
-  mk:`© ${year} CTSEG. Сите права се задржани.`,
+  uk:`© ${year} CTSEG. Усі права захищені.`,
+  ro:`© ${year} CTSEG. Toate drepturile rezervate.`,
+  bg:`© ${year} CTSEG. Всички права запазени.`,
   sr:`© ${year} CTSEG. Sva prava zadržana.`
 };
 const copyright = copyrightMap[lang] || copyrightMap.en;
@@ -43,9 +43,13 @@ const marketLocales: Array<{ code: Locale; flag:string; label:string; href:strin
   { code:'fa', flag:'🇮🇷', label:'ایران', href:'/fa/' },
   { code:'ru', flag:'🇷🇺', label:'Россия', href:'/ru/' },
   { code:'zh', flag:'🇨🇳', label:'中国', href:'/zh/' },
-  { code:'vi', flag:'🇻🇳', label:'Việt Nam', href:'/vi/' }
+  { code:'vi', flag:'🇻🇳', label:'Việt Nam', href:'/vi/' },
+  { code:'uk', flag:'🇺🇦', label:'Україна', href:'/uk/' },
+  { code:'ro', flag:'🇷🇴', label:'România', href:'/ro/' },
+  { code:'bg', flag:'🇧🇬', label:'България', href:'/bg/' },
+  { code:'sr', flag:'🇷🇸', label:'Srbija', href:'/sr/' }
 ];
-const marketLabel = ({tr:'Global Pazarlar',en:'Global Markets',de:'Globale Märkte',it:'Mercati globali',fa:'بازارهای جهانی',ru:'Глобальные рынки',zh:'全球市场',vi:'Thị trường toàn cầu'} as Record<string,string>)[lang] || 'Global Markets';
+const marketLabel = ({tr:'Global Pazarlar',en:'Global Markets',de:'Globale Märkte',it:'Mercati globali',fa:'بازارهای جهانی',ru:'Глобальные рынки',zh:'全球市场',vi:'Thị trường toàn cầu',uk:'Глобальні ринки',ro:'Piețe globale',bg:'Глобални пазари',sr:'Globalna tržišta'} as Record<string,string>)[lang] || 'Global Markets';
 const footerNav = ({
   tr:{portfolio:'Ticaret Portföyü',overview:'Portföyü İnceleyin',sourcing:'Stratejik Tedarik',marketEntry:'İhracat ve Pazara Giriş',intelligence:'Ticaret İçgörüleri'},
   en:{portfolio:'Trade Portfolio',overview:'Explore the Portfolio',sourcing:'Strategic Sourcing',marketEntry:'Export & Market Entry',intelligence:'Trade Intelligence'},
@@ -54,7 +58,11 @@ const footerNav = ({
   ru:{portfolio:'Торговый портфель',overview:'Смотреть портфель',sourcing:'Стратегический сорсинг',marketEntry:'Экспорт и выход на рынок',intelligence:'Торговая аналитика'},
   fa:{portfolio:'سبد تجاری',overview:'مشاهده سبد تجاری',sourcing:'تأمین استراتژیک',marketEntry:'صادرات و ورود به بازار',intelligence:'بینش تجاری'},
   zh:{portfolio:'贸易组合',overview:'查看贸易组合',sourcing:'战略采购',marketEntry:'出口与市场进入',intelligence:'贸易洞察'},
-  vi:{portfolio:'Danh mục thương mại',overview:'Khám phá danh mục',sourcing:'Sourcing chiến lược',marketEntry:'Xuất khẩu & thâm nhập thị trường',intelligence:'Thông tin thương mại'}
+  vi:{portfolio:'Danh mục thương mại',overview:'Khám phá danh mục',sourcing:'Sourcing chiến lược',marketEntry:'Xuất khẩu & thâm nhập thị trường',intelligence:'Thông tin thương mại'},
+  uk:{portfolio:'Торговий портфель',overview:'Переглянути портфель',sourcing:'Стратегічне постачання',marketEntry:'Експорт і вихід на ринок',intelligence:'Торгова аналітика'},
+  ro:{portfolio:'Portofoliu comercial',overview:'Explorează portofoliul',sourcing:'Sourcing strategic',marketEntry:'Export și intrare pe piață',intelligence:'Analize comerciale'},
+  bg:{portfolio:'Търговско портфолио',overview:'Разгледайте портфолиото',sourcing:'Стратегическо снабдяване',marketEntry:'Износ и навлизане на пазара',intelligence:'Търговски анализи'},
+  sr:{portfolio:'Trgovinski portfolio',overview:'Istraži portfolio',sourcing:'Strateška nabavka',marketEntry:'Izvoz i ulazak na tržište',intelligence:'Trgovinski uvidi'}
 } as Record<string,{portfolio:string;overview:string;sourcing:string;marketEntry:string;intelligence:string}>)[lang] || {portfolio:'Trade Portfolio',overview:'Explore the Portfolio',sourcing:'Strategic Sourcing',marketEntry:'Export & Market Entry',intelligence:'Trade Intelligence'};
 const statementMap: Record<string,string> = {
   tr:'SINIRLARIN ÖTESİNDE TİCARET.',
@@ -64,7 +72,11 @@ const statementMap: Record<string,string> = {
   ru:'ТОРГОВЛЯ БЕЗ ГРАНИЦ.',
   fa:'تجارت فراتر از مرزها',
   zh:'跨越边界，连接贸易。',
-  vi:'THƯƠNG MẠI VƯỢT BIÊN GIỚI.'
+  vi:'THƯƠNG MẠI VƯỢT BIÊN GIỚI.',
+  uk:'ТОРГІВЛЯ БЕЗ КОРДОНІВ.',
+  ro:'COMERȚ FĂRĂ FRONTIERE.',
+  bg:'ТЪРГОВИЯ БЕЗ ГРАНИЦИ.',
+  sr:'TRGOVINA BEZ GRANICA.'
 };
 const footerStatement = statementMap[lang] || statementMap.en;
 ---
@@ -83,7 +95,7 @@ const footerStatement = statementMap[lang] || statementMap.en;
   <div class="container footer-bottom"><p>{copyright}</p><nav aria-label="Legal">{legalIds.map((id) => <a href={localizedPath(lang, 'legal', id)}>{legal[id].titles[lang] || legal[id].titles.en}</a>)}</nav></div>
 </footer>
 <style is:global>
-  .footer-markets-wrap{border-bottom:1px solid rgba(255,255,255,.14);border-top:1px solid rgba(255,255,255,.1);background:#111}.footer-markets{display:grid;grid-template-columns:minmax(180px,.8fr) minmax(0,2.7fr);gap:32px;align-items:center;padding-top:28px;padding-bottom:28px}.footer-markets-label{display:flex;align-items:baseline;gap:12px;min-width:0}.footer-markets-kicker{font-size:11px;line-height:1;letter-spacing:.18em;text-transform:uppercase;color:#c4f000;font-weight:800}.footer-markets-label strong{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#fff;white-space:nowrap}.footer-market-links{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;min-width:0}.footer-market-link{display:flex;align-items:center;justify-content:center;gap:7px;min-width:0;padding:11px 8px;border:1px solid rgba(255,255,255,.14);border-radius:999px;color:#d8d8d8;text-decoration:none;font-size:12px;line-height:1;white-space:nowrap;transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease}.footer-market-link:hover,.footer-market-link:focus-visible{border-color:#c4f000;color:#fff;transform:translateY(-1px)}.footer-market-link.is-active{background:#c4f000;border-color:#c4f000;color:#0a0a0a;font-weight:800}.footer-market-flag{font-size:15px;line-height:1}
+  .footer-markets-wrap{border-bottom:1px solid rgba(255,255,255,.14);border-top:1px solid rgba(255,255,255,.1);background:#111}.footer-markets{display:grid;grid-template-columns:minmax(180px,.8fr) minmax(0,2.7fr);gap:32px;align-items:center;padding-top:28px;padding-bottom:28px}.footer-markets-label{display:flex;align-items:baseline;gap:12px;min-width:0}.footer-markets-kicker{font-size:11px;line-height:1;letter-spacing:.18em;text-transform:uppercase;color:#c4f000;font-weight:800}.footer-markets-label strong{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#fff;white-space:nowrap}.footer-market-links{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;min-width:0}.footer-market-link{display:flex;align-items:center;justify-content:center;gap:7px;min-width:0;padding:11px 8px;border:1px solid rgba(255,255,255,.14);border-radius:999px;color:#d8d8d8;text-decoration:none;font-size:12px;line-height:1;white-space:nowrap;transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .2s ease}.footer-market-link:hover,.footer-market-link:focus-visible{border-color:#c4f000;color:#fff;transform:translateY(-1px)}.footer-market-link.is-active{background:#c4f000;border-color:#c4f000;color:#0a0a0a;font-weight:800}.footer-market-flag{font-size:15px;line-height:1}
   .footer-statement{position:relative;display:grid;gap:18px;padding-top:clamp(54px,6vw,90px);padding-bottom:clamp(54px,6vw,90px);border-bottom:1px solid rgba(255,255,255,.12);overflow:hidden}.footer-statement::after{content:"CTSEG";position:absolute;right:-.035em;bottom:-.12em;font-size:clamp(130px,18vw,300px);font-weight:900;line-height:.76;letter-spacing:-.08em;color:rgba(255,255,255,.025);pointer-events:none}.footer-statement>span,.footer-statement>strong,.footer-statement>i{position:relative;z-index:1}.footer-statement>span{color:#c4f000;font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}.footer-statement>strong{max-width:13ch;color:#fff;font-size:clamp(48px,7.5vw,116px);font-weight:780;line-height:.88;letter-spacing:-.065em;text-wrap:balance}.footer-statement>i{color:#a8a8a1;font-size:12px;font-style:normal;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
   .hero-visual figcaption small,.platform-sector-grid article>div>span,.market-line>div>span,.detailed-process li>span,.scenario-heading>span,.market-role-grid article>span,.card>small,.trust-facts dt{display:none!important}.market-line>div,.detailed-process li,.scenario-heading{grid-template-columns:minmax(0,1fr)!important}
   .card-grid{gap:18px!important;align-items:stretch}.card-grid .card,.market-role-grid article,.answer-grid article,.scenario-list article,.detailed-process li{position:relative!important;border:1px solid #dedcd5!important;border-radius:22px!important;background:linear-gradient(145deg,#fff 0%,#f8f7f3 100%)!important;box-shadow:0 18px 48px rgba(12,12,12,.055)!important;overflow:hidden!important;transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease!important}.card-grid .card{min-height:310px!important;padding:32px 30px!important;display:flex!important;flex-direction:column!important;text-decoration:none!important}.card-grid .card::before,.market-role-grid article::before,.answer-grid article::before,.scenario-list article::before,.detailed-process li::before{content:"";position:absolute;left:0;top:0;width:100%;height:4px;background:#c4f000;transform:scaleX(.18);transform-origin:left center;transition:transform .3s ease}.card-grid .card::after{content:"↗";position:absolute;top:24px;right:26px;font-size:20px;line-height:1;color:#aaa79d;transition:transform .25s ease,color .25s ease}.card-grid .card h2,.card-grid .card h3{margin:22px 0 14px!important;max-width:15ch;font-size:clamp(25px,2.25vw,38px)!important;line-height:1.02!important;letter-spacing:-.035em!important;color:#111!important}.card-grid .card p{margin:0 0 28px!important;max-width:34em;color:#4c4c49!important;line-height:1.6!important}.card-grid .card>strong{margin-top:auto!important;width:max-content;padding:9px 13px;border-radius:999px;background:#151515;color:#fff!important;font-size:12px!important;letter-spacing:.04em;text-transform:uppercase}.card-grid .card:hover,.market-role-grid article:hover,.answer-grid article:hover,.scenario-list article:hover,.detailed-process li:hover{transform:translateY(-5px);border-color:#c4f000!important;box-shadow:0 24px 60px rgba(12,12,12,.09)!important}.card-grid .card:hover::before,.market-role-grid article:hover::before,.answer-grid article:hover::before,.scenario-list article:hover::before,.detailed-process li:hover::before{transform:scaleX(1)}.card-grid .card:hover::after{transform:translate(3px,-3px);color:#111}
