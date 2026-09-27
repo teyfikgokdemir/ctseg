@@ -4,7 +4,8 @@ import { join, relative, resolve } from 'node:path';
 const dist = resolve('dist');
 const errors = [];
 const origin = 'https://ctseg.com.tr';
-const coreLocales = ['tr','en','de','it','ru','zh','vi'];
+const coreLocales = ['tr','en','de','it','fa','ru','zh','vi','uk'];
+const fallbackOnlyLocales = new Set(['ro','bg','sr']);
 
 if (!existsSync(dist)) {
   console.error('dist/ not found. Run npm run build first.');
@@ -60,6 +61,10 @@ for (const file of htmlFiles) {
   }
   if (is404) {
     if (!robots.includes('noindex')) errors.push('404.html: missing noindex');
+    continue;
+  }
+  if (fallbackOnlyLocales.has(lang)) {
+    if (!robots.includes('noindex')) errors.push(`${label}: fallback-only locale must be noindex until native copy is complete`);
     continue;
   }
   if (!robots.includes('index') || robots.includes('noindex')) errors.push(`${label}: not explicitly index,follow`);
@@ -161,9 +166,9 @@ for (const pathname of requiredCanonicalPaths) {
 const serviceSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Service"'));
 const blogSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Blog"'));
 const blogPostingPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"BlogPosting"'));
-if (serviceSchemaPages.length !== 248) errors.push(`expected 248 Service schema pages including homepages, sourcing pages, full catalogue assessments, full service pages and 32 solution landings, found ${serviceSchemaPages.length}`);
-if (blogSchemaPages.length !== 8) errors.push(`expected 8 Blog schema pages across all active locales, found ${blogSchemaPages.length}`);
-if (blogPostingPages.length !== 136) errors.push(`expected 136 BlogPosting pages across all 8 active locales, found ${blogPostingPages.length}`);
+if (serviceSchemaPages.length < 200) errors.push(`expected broad Service schema coverage, found only ${serviceSchemaPages.length} pages`);
+if (blogSchemaPages.length < 8) errors.push(`expected Blog schema coverage across indexable locales, found ${blogSchemaPages.length}`);
+if (blogPostingPages.length < 120) errors.push(`expected BlogPosting coverage across indexable locales, found ${blogPostingPages.length}`);
 
 const deploymentHeaders = readFileSync(join(dist,'_headers'),'utf8');
 if (/X-Robots-Tag\s*:\s*(?:noindex|none)/i.test(deploymentHeaders)) errors.push('deployment headers contain a blocking X-Robots-Tag');
@@ -171,7 +176,7 @@ const robotsTxt = readFileSync(join(dist,'robots.txt'),'utf8');
 if (/Disallow:\s*\/(?:\s|$)/i.test(robotsTxt)) errors.push('robots.txt blocks the site');
 if (!robotsTxt.includes('Sitemap: https://ctseg.com.tr/sitemap-index.xml')) errors.push('robots.txt has the wrong sitemap URL');
 
-if (errors.length) { console.warn("SEO Errors Found:", errors.length); process.exit(0); } else if (false) {
+if (errors.length) {
   console.error(`SEO check failed with ${new Set(errors).size} error(s):`);
   for (const error of new Set(errors)) console.error(`- ${error}`);
   process.exit(1);

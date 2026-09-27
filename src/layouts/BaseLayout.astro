@@ -6,7 +6,6 @@ import FloatingActions from '../components/FloatingActions.astro';
 import TradeVideo from '../components/TradeVideo.astro';
 import TradeHouseStatement from '../components/TradeHouseStatement.astro';
 import { company, locales, localizedPath, products, routeAlternates, ui, type Locale } from '../data/site';
-import type { ReflexLocale } from '../data/reflex-data';
 import { activeLocales, localeDirection, localeOg } from '../data/locales';
 import { FEATURE_IMAGE_WIDTHS, generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
 import { localizedTradeVisual } from '../data/trade-visuals';
@@ -16,7 +15,7 @@ const {
   lang='tr', title, description, pageKey='home', pageId, canonical,
   schema=[], noindex=false
 } = Astro.props as {
-  lang: Locale | ReflexLocale; title: string; description: string; pageKey?: string; pageId?: string;
+  lang: Locale; title: string; description: string; pageKey?: string; pageId?: string;
   canonical?: string; schema?: any[] | any; noindex?: boolean;
 };
 const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
@@ -25,11 +24,12 @@ if (pageKey === 'home') alternates.fa = 'https://ctseg.com.tr/fa/';
 if (pageKey === 'home') alternates.ru = 'https://ctseg.com.tr/ru/';
 if (pageKey === 'home') alternates.zh = 'https://ctseg.com.tr/zh/';
 if (pageKey === 'home') alternates.vi = 'https://ctseg.com.tr/vi/';
-const alternateCodes = pageKey === 'medical'
-  ? ['tr','en','de','it','ru','fa','zh','vi','sq','mk','sr']
-  : (pageKey === 'home' || ['how-we-work','scenarios'].includes(pageKey)
-    ? activeLocales
-    : pageKey === 'guides' ? ['tr','en'] : locales);
+const fallbackOnlyLocales = ['ro','bg','sr'] as const;
+const indexableLocales = activeLocales.filter((code) => !(fallbackOnlyLocales as readonly string[]).includes(code));
+const effectiveNoindex = noindex || (fallbackOnlyLocales as readonly string[]).includes(lang);
+const alternateCodes = (pageKey === 'home' || ['how-we-work','scenarios'].includes(pageKey))
+  ? indexableLocales
+  : pageKey === 'guides' ? ['tr','en'] : indexableLocales;
 const organizationDescription = ({
   tr:'CTSEG, Türkiye merkezli iki yönlü küresel ticaret, stratejik tedarik, tedarikçi doğrulama ve pazara giriş çalışmaları yürüten bağımsız bir B2B ticaret evidir.',
   en:'CTSEG is a Türkiye-based independent B2B trade house for two-way global trade, strategic sourcing, supplier verification and market entry.',
@@ -92,7 +92,7 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1'} />
+    <meta name="robots" content={effectiveNoindex ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1'} />
     <link rel="canonical" href={canonicalUrl} />
     {alternateCodes.map((code) => <link rel="alternate" hreflang={code} href={alternates[code as Locale]} />)}
     <link rel="alternate" hreflang="x-default" href={alternates.en} />
@@ -100,7 +100,7 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..700&display=swap" rel="stylesheet">
-    {pageKey === 'home' && !noindex && <link
+    {pageKey === 'home' && !effectiveNoindex && <link
       rel="preload"
       as="image"
       imagesrcset={heroSrcset}
@@ -127,7 +127,7 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
   </head>
   <body>
-    <a class="skip-link" href="#main">{lang === 'ru' ? 'Перейти к содержанию' : lang === 'uk' ? 'Перейти до основного контенту' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : 'Skip to content'}</a>
+    <a class="skip-link" href="#main">{lang === 'ru' ? 'Перейти к содержанию' : lang === 'uk' ? 'Перейти до основного контенту' : lang === 'ro' ? 'Mergi la conținut' : lang === 'bg' ? 'Към основното съдържание' : lang === 'sr' ? 'Pređi na sadržaj' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : 'Skip to content'}</a>
     <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
     <main id="main">
       <slot />

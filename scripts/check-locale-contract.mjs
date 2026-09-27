@@ -3,8 +3,9 @@ import { join, resolve } from 'node:path';
 
 const dist=resolve('dist');
 const errors=[];
-const active=['tr','en','de','it','fa','ru','zh','vi'];
-const homes={tr:'index.html',en:'en/index.html',de:'de/index.html',it:'it/index.html',fa:'fa/index.html',ru:'ru/index.html',zh:'zh/index.html',vi:'vi/index.html'};
+const active=['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','sr'];
+const indexable=['tr','en','de','it','fa','ru','zh','vi','uk'];
+const homes={tr:'index.html',en:'en/index.html',de:'de/index.html',it:'it/index.html',fa:'fa/index.html',ru:'ru/index.html',zh:'zh/index.html',vi:'vi/index.html',uk:'uk/index.html',ro:'ro/index.html',bg:'bg/index.html',sr:'sr/index.html'};
 const ruSourcing=['ru/sourcing/carpets/index.html','ru/sourcing/hand-knotted-silk-carpets/index.html','ru/sourcing/textiles/index.html'];
 const ruCore=[
   'ru/uslugi/index.html','ru/tovary/index.html','ru/rynki/index.html','ru/materialy/index.html','ru/o-kompanii/index.html','ru/kontakty/index.html',
@@ -23,7 +24,9 @@ for(const [locale,path] of Object.entries(homes)){
   const links=[...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].map((match)=>match[0]);
   for(const code of active)if(!links.some((tag)=>tag.includes(`hreflang="${code}"`)))errors.push(`${path}: locale switcher missing ${code}`);
   if(links.some((tag)=>tag.includes('hreflang="fr"')))errors.push(`${path}: French remains in locale switcher`);
-  if(!html.includes(`hreflang="${locale}"`)||!html.includes('hreflang="x-default"'))errors.push(`${path}: homepage hreflang contract incomplete`);
+  if(indexable.includes(locale) && (!html.includes(`hreflang="${locale}"`)||!html.includes('hreflang="x-default"')))errors.push(`${path}: homepage hreflang contract incomplete`);
+  if(['ro','bg','sr'].includes(locale) && !html.includes('meta name="robots" content="noindex,follow"'))errors.push(`${path}: fallback-only locale must be noindex`);
+  if(/<title>\s*undefined\b/i.test(html))errors.push(`${path}: undefined title regression`);
 }
 
 const ruHome=read(homes.ru);
@@ -43,7 +46,7 @@ for(const path of ruSourcing){
   const html=read(path);
   const canonical=`https://ctseg.com.tr/${path.replace(/index\.html$/,'')}`;
   if(!html.includes(`<link rel="canonical" href="${canonical}"`))errors.push(`${path}: canonical incorrect`);
-  for(const code of [...active,'x-default'])if(!html.includes(`hreflang="${code}"`))errors.push(`${path}: hreflang ${code} missing`);
+  for(const code of [...indexable,'x-default'])if(!html.includes(`hreflang="${code}"`))errors.push(`${path}: hreflang ${code} missing`);
   if(!html.includes('property="og:locale" content="ru_RU"'))errors.push(`${path}: OG locale incorrect`);
   if(!html.includes('<html lang="ru" dir="ltr"'))errors.push(`${path}: lang/direction incorrect`);
   if((html.match(/<h1\b/g)||[]).length!==1)errors.push(`${path}: expected one H1`);
@@ -54,7 +57,7 @@ for(const path of ruCore){
   if(!existsSync(join(dist,path))){errors.push(`${path}: Russian parity route missing`);continue}
   const html=read(path);
   if(!html.includes('<html lang="ru" dir="ltr"'))errors.push(`${path}: Russian lang/direction incorrect`);
-  for(const code of [...active,'x-default'])if(!html.includes(`hreflang="${code}"`))errors.push(`${path}: hreflang ${code} missing`);
+  for(const code of [...indexable,'x-default'])if(!html.includes(`hreflang="${code}"`))errors.push(`${path}: hreflang ${code} missing`);
 }
 const walk=(dir)=>readdirSync(dir,{withFileTypes:true}).flatMap((entry)=>entry.isDirectory()?walk(join(dir,entry.name)):[join(dir,entry.name)]);
 const ruHtml=walk(join(dist,'ru')).filter((path)=>path.endsWith('.html'));
@@ -88,4 +91,4 @@ for(const rule of requiredRedirects){
 }
 
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log('Locale contract passed: 8 active locales, 61-page Russian parity, localized solution landings, French cleanup and one-hop redirects.');
+console.log('Locale contract passed: 12 switcher locales, 9 indexable locales, fallback-locale noindex policy, Russian parity and UK title/content regression guards.');

@@ -34,5 +34,19 @@
 /fr/sourcing/tapis-en-soie-noues-main/ /en/sourcing/hand-knotted-silk-carpets/ 301
 /fr/sourcing/sourcing-textile-en-gros/ /en/sourcing/wholesale-textile-sourcing/ 301
 /fr/* /en/ 301
-/tr/ticari-urunler/reflex-tek-kullanimlik-eldivenler/ /medical/reflex-disposable-gloves/ 301
-/tr/ticari-urunler/reflex-tek-kullanimlik-eldivenler /medical/reflex-disposable-gloves/ 301
+/tr/ticari-urunler/reflex-tek-kullanimlik-eldivenler/ /tr/ticari-urunler/ 301
+/tr/ticari-urunler/reflex-tek-kullanimlik-eldivenler /tr/ticari-urunler/ 301
+
+# Retired REFLEX landing routes
+/medical/reflex-disposable-gloves/ /tr/ticari-urunler/ 301
+/en/medical/reflex-disposable-gloves/ /en/trade-products/ 301
+/de/medical/reflex-disposable-gloves/ /de/handelsprodukte/ 301
+/it/medical/reflex-disposable-gloves/ /it/prodotti-commerciali/ 301
+/fa/medical/reflex-disposable-gloves/ /fa/trade-products/ 301
+/ru/medical/reflex-disposable-gloves/ /ru/tovary/ 301
+/zh/medical/reflex-disposable-gloves/ /zh/trade-products/ 301
+/vi/medical/reflex-disposable-gloves/ /vi/trade-products/ 301
+/uk/medical/reflex-disposable-gloves/ /uk/trade-products/ 301
+/sq/medical/reflex-disposable-gloves/ /en/trade-products/ 301
+/mk/medical/reflex-disposable-gloves/ /en/trade-products/ 301
+/sr/medical/reflex-disposable-gloves/ /sr/trgovinski-proizvodi/ 301

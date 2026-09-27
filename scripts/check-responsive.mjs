@@ -46,8 +46,6 @@ try {
     { name:'desktop-tr-insights', path:'/tr/icgoruler/', width:1440, height:1000 },
     { name:'desktop-tr-about', path:'/tr/hakkimizda/', width:1440, height:1000 },
     { name:'desktop-tr-contact', path:'/tr/iletisim/', width:1440, height:1000 },
-    { name:'desktop-tr-reflex', path:'/medical/reflex-disposable-gloves/', width:1440, height:1000 },
-    { name:'mobile-tr-reflex', path:'/medical/reflex-disposable-gloves/', width:390, height:844 },
     { name:'desktop-en-contact', path:'/en/contact/', width:1440, height:1000 },
     { name:'desktop-de-contact', path:'/de/kontakt/', width:1440, height:1000 },
     { name:'desktop-it-contact', path:'/it/contatti/', width:1440, height:1000 },
@@ -124,7 +122,7 @@ try {
     ,{ name:'desktop1440-vi-home', path:'/vi/', width:1440, height:1000 }
     ,{ name:'mobile390-vi-home', path:'/vi/', width:390, height:844 }
   ];
-  const sourcingLocales = ['tr','en','de','it','fa','ru','zh','vi'];
+  const sourcingLocales = ['tr','en','de','it','fa','ru','zh','vi','uk'];
   const sourcingFamilies = {
     carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/'},
     silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/'},
@@ -526,7 +524,7 @@ try {
       result.persian.rootDirection !== 'rtl' || result.persian.bodyDirection !== 'rtl' || result.persian.h1s !== 1 ||
       result.persian.details !== 8 || result.persian.fields !== 12 || !['intent','name','company','emailOrPhone','message','privacy','country','product','quantity','delivery','targetDate','requirements'].every((name)=>result.persian.fieldNames.includes(name)) || !result.persian.labeled || !result.persian.companyVisible ||
       !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 8 || result.persian.activeLocale !== 'fa' ||
-      !['tr','en','de','it','fa','ru','zh','vi'].every((code)=>result.persian.localePaths[code]) ||
+      !['tr','en','de','it','fa','ru','zh','vi','uk'].every((code)=>result.persian.localePaths[code]) ||
       !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl || result.persian.chipCount < 1 || result.persian.chipContrastMin < 4.5 ||
       result.persian.heroMedia.imageNaturalWidth < 1 || result.persian.heroMedia.imageNaturalHeight < 1 || result.persian.heroMedia.objectFit !== 'cover' ||
       (testCase.width <= 560 && (result.persian.heroMedia.imageHeight < 160 || result.persian.heroMedia.imageHeight > 210 || result.persian.heroMedia.visualHeight > 330 || result.persian.heroMedia.captionHeight > 120 || result.persian.heroMedia.captionRowMax > 42)) ||
@@ -599,7 +597,7 @@ try {
           visibleOptions:links.filter(visible).length,
           overflow:document.documentElement.scrollWidth-window.innerWidth,
           canonical:document.querySelector('link[rel="canonical"]')?.href??null,
-          coreAlternates:['tr','en','de','it','fa','ru','zh','vi','x-default'].every(code=>document.querySelector(`link[rel="alternate"][hreflang="${code}"]`))
+          coreAlternates:['tr','en','de','it','fa','ru','zh','vi','uk','x-default'].every(code=>document.querySelector(`link[rel="alternate"][hreflang="${code}"]`))
         };
       },{lang:entry.lang,targets:entry.targets,mobile:viewport.name==='mobile'});
       const statuses=[];

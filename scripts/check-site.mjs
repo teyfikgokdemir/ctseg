@@ -49,6 +49,8 @@ let productSchemaPages = 0;
 let productAssessmentServicePages = 0;
 let contactEmailPanels = 0;
 let searchLandingPages = 0;
+const indexableLocaleCodes = ['tr','en','de','it','fa','ru','zh','vi','uk'];
+const switcherLocaleCodes = [...indexableLocaleCodes,'ro','bg','sr'];
 const companyNames = {
   tr: 'CTSEG Sanayi ve Ticaret Limited Şirketi',
   en: 'CTSEG Industry and Trade Limited Company',
@@ -60,7 +62,10 @@ const companyNames = {
   vi: 'Công ty TNHH Công nghiệp và Thương mại CTSEG',
   sq: 'CTSEG Industry and Trade Limited Company',
   mk: 'CTSEG Industry and Trade Limited Company',
-  sr: 'CTSEG Industry and Trade Limited Company'
+  sr: 'CTSEG Industry and Trade Limited Company',
+  ro: 'CTSEG Industry and Trade Limited Company',
+  bg: 'CTSEG Industry and Trade Limited Company',
+  uk: 'CTSEG Промислово-Торгова Компанія з Обмеженою Відповідальністю'
 };
 const aboutPages = new Set([
   'tr/hakkimizda/index.html',
@@ -93,7 +98,7 @@ const productCatalogs = new Set([
 ]);
 const persianLandingLabel = 'fa/index.html';
 const persianLandingCanonical = 'https://ctseg.com.tr/fa/';
-const tradeLocaleCodes = ['tr','en','de','it','fa','ru','zh','vi'];
+const tradeLocaleCodes = indexableLocaleCodes;
 const tradeRouteFamilies = {
   carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/'},
   silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/'},
@@ -138,9 +143,9 @@ for (const file of htmlFiles) {
   const organization = organizations[0];
   const isTurkishPage = label === 'index.html' || label.startsWith('tr/');
   const isPersianLanding = label === persianLandingLabel;
-  const isHomepage = ['index.html','en/index.html','de/index.html','it/index.html','fa/index.html','ru/index.html','zh/index.html','vi/index.html'].includes(label);
+  const isHomepage = ['index.html',...switcherLocaleCodes.filter((code)=>code!=='tr').map((code)=>`${code}/index.html`)].includes(label);
   const tradeRecord = tradeRecordsByLabel.get(label);
-  if (!label.startsWith('404') && canonical && ['tr','en','de','it','ru','fa','zh','vi'].includes(lang)) pageRecords.push({ label, canonical, lang, alternates });
+  if (!label.startsWith('404') && canonical && indexableLocaleCodes.includes(lang)) pageRecords.push({ label, canonical, lang, alternates });
   if (titleCount !== 1) errors.push(`${label}: expected one title, found ${titleCount}`);
   if ((html.match(/<meta charset="UTF-8">/g) || []).length !== 1) errors.push(`${label}: expected exactly one UTF-8 charset declaration`);
   if (!/<meta name="description" content="[^"]+"/.test(html)) errors.push(`${label}: missing description`);
@@ -197,7 +202,7 @@ for (const file of htmlFiles) {
   }
   const expectedLang = label === 'index.html' ? 'tr' : label.split('/')[0];
   const expectedHtmlLang = expectedLang === 'zh' ? 'zh-CN' : expectedLang === 'vi' ? 'vi-VN' : expectedLang;
-  if (['tr','en','de','it','fa','ru','zh','vi'].includes(expectedLang) && !html.includes(`<html lang="${expectedHtmlLang}"`)) {
+  if (switcherLocaleCodes.includes(expectedLang) && !html.includes(`<html lang="${expectedHtmlLang}"`)) {
     errors.push(`${label}: incorrect html lang`);
   }
   if (productCatalogs.has(label)) {
@@ -214,7 +219,7 @@ for (const file of htmlFiles) {
     const catalogueGroups = [...html.matchAll(/data-catalogue-group="([^"]+)"/g)].map((match) => match[1]);
     if (catalogueGroups.length !== 6 || new Set(catalogueGroups).size !== 6) errors.push(`${label}: expected six unique catalogue groups`);
   }
-  const isHome = ['index.html','en/index.html','de/index.html','it/index.html','fa/index.html','ru/index.html','zh/index.html','vi/index.html'].includes(label);
+  const isHome = ['index.html',...switcherLocaleCodes.filter((code)=>code!=='tr').map((code)=>`${code}/index.html`)].includes(label);
   if (isHome && !/(?:class="hero-visual"|class="fa-hero-visual")[\s\S]*?srcset="[^"]*\/images\/generated\/ctseg-global-trade-hero-premium-640\.webp/.test(html)) {
     errors.push(`${label}: responsive premium homepage hero missing`);
   }
@@ -232,8 +237,8 @@ for (const file of htmlFiles) {
     const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
     const mobileLocales = html.match(/class="mobile-lang-grid"[\s\S]*?<\/div>/)?.[0] ?? '';
     const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
-    if ((desktopLocales.match(/data-locale-option/g) || []).length !== 8) errors.push(`${label}: desktop locale panel must contain eight languages`);
-    if ((mobileLocales.match(/data-locale-option/g) || []).length !== 8) errors.push(`${label}: mobile locale panel must contain eight languages`);
+    if ((desktopLocales.match(/data-locale-option/g) || []).length !== 12) errors.push(`${label}: desktop locale panel must contain twelve languages`);
+    if ((mobileLocales.match(/data-locale-option/g) || []).length !== 12) errors.push(`${label}: mobile locale panel must contain twelve languages`);
     if (!/class="locale-code">(?:TR|EN|DE|IT|FA|RU|ZH|VI|SQ|MK|SR)<\/span>/.test(desktopTrigger) || /locale-name/.test(desktopTrigger)) {
       errors.push(`${label}: desktop language trigger must show only the active locale code`);
     }
@@ -421,7 +426,7 @@ for (const locale of ['tr','en','de','it','ru','fa','zh','vi']) {
 
 const pagesByCanonical = new Map(pageRecords.map((page) => [page.canonical,page]));
 for (const page of pageRecords) {
-  for (const code of ['tr','en','de','it','ru','zh','vi'].filter((locale) => page.alternates[locale])) {
+  for (const code of indexableLocaleCodes.filter((locale) => page.alternates[locale])) {
     const targetUrl = page.alternates[code];
     const target = pagesByCanonical.get(targetUrl);
     if (!target) {
@@ -439,4 +444,4 @@ if (errors.length) {
   for (const error of [...new Set(errors)]) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Site check passed: ${htmlFiles.length} HTML pages, two stable intent flows, 32 localized high-intent search landings, all 24 sourcing routes with explicit locale/canonical/hreflang/x-default/H1/chrome/Persian-content assertions and reciprocal eight-locale counterparts, ${checkedLinks} internal links, 144 Product + 144 catalogue sourcing Service schemas, sitemap/llms coverage and complete metadata checks.`);
+console.log(`Site check passed: ${htmlFiles.length} HTML pages, 12-locale switcher, 9-locale indexable hreflang contract, stable intent flows, internal links, schema, sitemap and metadata checks.`);

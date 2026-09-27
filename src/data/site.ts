@@ -20,7 +20,10 @@ export const company = {
     ru: 'CTSEG Промышленно-Торговая Компания с Ограниченной Ответственностью',
     zh: 'CTSEG 工业与贸易有限公司',
     vi: 'Công ty TNHH Công nghiệp và Thương mại CTSEG',
-    uk: 'CTSEG Промислово-Торгова Компанія з Обмеженою Відповідальністю'
+    uk: 'CTSEG Промислово-Торгова Компанія з Обмеженою Відповідальністю',
+    ro: 'CTSEG Industry and Trade Limited Company',
+    bg: 'CTSEG Industry and Trade Limited Company',
+    sr: 'CTSEG Industry and Trade Limited Company'
   },
   alternateName: 'CTSEG',
   founder: 'Teyfik Gökdemir',
@@ -103,35 +106,36 @@ export const companyCopy: Record<Locale, {
     labels: { name: 'Tên công ty', founder: 'Người sáng lập', founded: 'Năm thành lập', headquarters: 'Trụ sở chính' },
     headquarters: 'Tuzla, Istanbul, Thổ Nhĩ Kỳ',
     footerLocation: 'Tuzla, Istanbul, Thổ Nhĩ Kỳ'
+  },  ro: {
+    aboutHeading: 'Poartă comercială bidirecțională și sourcing strategic',
+    aboutBody: 'CTSEG conectează producători, cumpărători și piețe internaționale prin sourcing strategic, verificarea furnizorilor, management RFQ și coordonare comercială B2B.',
+    labels: { name: 'Denumirea companiei', founder: 'Fondator', founded: 'Anul înființării', headquarters: 'Sediu' },
+    headquarters: 'Tuzla, Istanbul, Türkiye',
+    footerLocation: 'Tuzla, Istanbul, Türkiye'
   },
-  uk: {
-      servicesTitle: 'Експертиза для кожного етапу прийняття рішень щодо постачання.',
-      servicesLead: 'Ми поєднуємо стратегію, верифікацію, комерційний аналіз та виконання в рамках єдиної дисципліни прийняття рішень.',
-      productsTitle: 'Портфоліо комерційних продуктів',
-      productsLead: 'Один і той самий каталог оцінюється на кожному ринку завдяки прозорому походженню, якості на рівні партії та умовам, що підлягають перевірці.',
-      marketsTitle: 'З Туреччини на європейські та міжнародні ринки.',
-      marketsLead: 'Ми узгоджуємо місцеві виробничі реалії з регулюванням цільового ринку, очікуваннями покупців та моделями доставки.',
-      aboutTitle: 'Незалежний партнер з прийняття рішень, що зменшує невизначеність у торгівлі.',
-      aboutLead: 'CTSEG працює на основі доказів, прозорості та здійсненності у стратегічному пошуку постачальників.',
-      contactTitle: 'Почніть свій комерційний запит з чіткої оцінки.',
-      insightsTitle: 'Практична інформація для керівників.',
-      insightsLead: 'Короткі посібники на основі доказів щодо постачання, загальних витрат, походження, якості та комерційних ризиків.',
-      framework: ['Вимоги та специфікації', 'Перевірка контрагента та документів', 'Порівняння якості, вартості та ризиків', 'Прозорі рішення та облік'],
-      serviceFaq: ['Як розпочинається проект?', 'Масштаб, мета, ринок та терміни узгоджуються під час короткого кваліфікаційного дзвінка.', 'Чи діє CTSEG від імені постачальника?', 'CTSEG чітко заявляє про свої повноваження та комерційну роль.'],
-      productUses: ['Виробництво продуктів харчування', 'Оптова дистрибуція', 'HORECA та спеціалізований роздріб'],
-      productQuality: ['Вимоги щодо афлатоксинів', 'Вологість та мікробіологія', 'COA, код партії', 'Відповідність цільовому ринку'],
-      legalIntro: 'Це повідомлення містить прозору інформацію про використання веб-сайту CTSEG.',
-      legalSections: [['Сфера дії', 'CTSEG працює над тим, щоб корпоративна інформація була точною.'], ['Інформація та цілі', 'Ми обробляємо дані для відповіді на запити.'], ['Зберігання', 'Інформація надається лише необхідним провайдерам.'], ['Права', 'Для реалізації прав напишіть на info@ctseg.com.tr.']]
-    }
+  bg: {
+    aboutHeading: 'Двупосочен търговски портал и стратегически sourcing',
+    aboutBody: 'CTSEG свързва производители, купувачи и международни пазари чрез стратегическо снабдяване, проверка на доставчици, управление на RFQ и B2B търговска координация.',
+    labels: { name: 'Име на компанията', founder: 'Основател', founded: 'Година на основаване', headquarters: 'Седалище' },
+    headquarters: 'Тузла, Истанбул, Турция',
+    footerLocation: 'Тузла, Истанбул, Турция'
+  },
+  sr: {
+    aboutHeading: 'Dvosmerni trgovinski portal i strateški sourcing',
+    aboutBody: 'CTSEG povezuje proizvođače, kupce i međunarodna tržišta kroz strateško snabdevanje, proveru dobavljača, RFQ upravljanje i B2B trgovinsku koordinaciju.',
+    labels: { name: 'Naziv kompanije', founder: 'Osnivač', founded: 'Godina osnivanja', headquarters: 'Sedište' },
+    headquarters: 'Tuzla, Istanbul, Turska',
+    footerLocation: 'Tuzla, Istanbul, Turska'
+  }
 };
 
 export const sectionSlugs: Record<string, Localized> = {
-  services: { tr: 'hizmetler', en: 'services', de: 'dienstleistungen', it: 'servizi', ru: 'uslugi', fa: 'services', zh: 'services', vi: 'services', uk: 'services' },
-  products: { tr: 'ticari-urunler', en: 'trade-products', de: 'handelsprodukte', it: 'prodotti-commerciali', ru: 'tovary', fa: 'trade-products', zh: 'trade-products', vi: 'trade-products', uk: 'trade-products' },
-  markets: { tr: 'pazarlar', en: 'markets', de: 'maerkte', it: 'mercati', ru: 'rynki', fa: 'markets', zh: 'markets', vi: 'markets', uk: 'markets' },
-  insights: { tr: 'icgoruler', en: 'insights', de: 'einblicke', it: 'approfondimenti', ru: 'materialy', fa: 'insights', zh: 'insights', vi: 'insights', uk: 'insights' },
-  about: { tr: 'hakkimizda', en: 'about', de: 'ueber-uns', it: 'chi-siamo', ru: 'o-kompanii', fa: 'about', zh: 'about', vi: 'about', uk: 'about' },
-  contact: { tr: 'iletisim', en: 'contact', de: 'kontakt', it: 'contatti', ru: 'kontakty', fa: 'contact', zh: 'contact', vi: 'contact', uk: 'contact' }
+  services: { tr: 'hizmetler', en: 'services', de: 'dienstleistungen', it: 'servizi', ru: 'uslugi', fa: 'services', zh: 'services', vi: 'services', uk: 'services', ro: 'servicii', bg: 'uslugi', sr: 'usluge' },
+  products: { tr: 'ticari-urunler', en: 'trade-products', de: 'handelsprodukte', it: 'prodotti-commerciali', ru: 'tovary', fa: 'trade-products', zh: 'trade-products', vi: 'trade-products', uk: 'trade-products', ro: 'produse-comerciale', bg: 'targovski-produkti', sr: 'trgovinski-proizvodi' },
+  markets: { tr: 'pazarlar', en: 'markets', de: 'maerkte', it: 'mercati', ru: 'rynki', fa: 'markets', zh: 'markets', vi: 'markets', uk: 'markets', ro: 'piete', bg: 'pazari', sr: 'trzista' },
+  insights: { tr: 'icgoruler', en: 'insights', de: 'einblicke', it: 'approfondimenti', ru: 'materialy', fa: 'insights', zh: 'insights', vi: 'insights', uk: 'insights', ro: 'analize', bg: 'analizi', sr: 'uvidi' },
+  about: { tr: 'hakkimizda', en: 'about', de: 'ueber-uns', it: 'chi-siamo', ru: 'o-kompanii', fa: 'about', zh: 'about', vi: 'about', uk: 'about', ro: 'despre-noi', bg: 'za-nas', sr: 'o-nama' },
+  contact: { tr: 'iletisim', en: 'contact', de: 'kontakt', it: 'contatti', ru: 'kontakty', fa: 'contact', zh: 'contact', vi: 'contact', uk: 'contact', ro: 'contact', bg: 'kontakt', sr: 'kontakt' }
 };
 
 export const ui: Record<string, {
@@ -145,7 +149,7 @@ export const ui: Record<string, {
 }> = {
   tr: {
     home: 'Ana Sayfa', services: 'Hizmetler', products: 'Ticari Ürünler', markets: 'Pazarlar', insights: 'İçgörüler',
-    about: 'Hakkımızda', contact: 'İletişim', quote: 'Teklif İste', menu: 'Menüyü aç', close: 'Menüyü kapat', medicalLabel: 'REFLEX Medikal',
+    about: 'Hakkımızda', contact: 'İletişim', quote: 'Teklif İste', menu: 'Menüyü aç', close: 'Menüyü kapat', medicalLabel: 'Medikal Ürünler',
     language: 'Dil seçimi', readMore: 'İncele', allProducts: 'Tüm ürünleri görüntüle', allServices: 'Tüm hizmetleri görüntüle',
     origin: 'Menşe şeffaflığı', quality: 'Kalite ve uyum', logistics: 'Ticari değerlendirme', applications: 'Kullanım alanları',
     faq: 'Sık sorulan sorular', related: 'İlgili çözümler', updated: 'Son güncelleme', details: 'Detaylar',
@@ -158,7 +162,7 @@ export const ui: Record<string, {
   },
   en: {
     home: 'Home', services: 'Services', products: 'Trade Products', markets: 'Markets', insights: 'Insights',
-    about: 'About', contact: 'Contact', quote: 'Request a Quote', menu: 'Open menu', close: 'Close menu', medicalLabel: 'REFLEX Medical',
+    about: 'About', contact: 'Contact', quote: 'Request a Quote', menu: 'Open menu', close: 'Close menu', medicalLabel: 'Medical Products',
     language: 'Language selection', readMore: 'Explore', allProducts: 'View all products', allServices: 'View all services',
     origin: 'Origin transparency', quality: 'Quality & compliance', logistics: 'Commercial assessment', applications: 'Applications',
     faq: 'Frequently asked questions', related: 'Related solutions', updated: 'Last updated', details: 'Details',
@@ -171,7 +175,7 @@ export const ui: Record<string, {
   },
   de: {
     home: 'Startseite', services: 'Dienstleistungen', products: 'Handelsprodukte', markets: 'Märkte', insights: 'Einblicke',
-    about: 'Über uns', contact: 'Kontakt', quote: 'Angebot anfragen', menu: 'Menü öffnen', close: 'Menü schließen', medicalLabel: 'REFLEX Medizin',
+    about: 'Über uns', contact: 'Kontakt', quote: 'Angebot anfragen', menu: 'Menü öffnen', close: 'Menü schließen', medicalLabel: 'Medizinprodukte',
     language: 'Sprachauswahl', readMore: 'Entdecken', allProducts: 'Alle Produkte ansehen', allServices: 'Alle Dienstleistungen ansehen',
     origin: 'Transparente Herkunft', quality: 'Qualität & Konformität', logistics: 'Kaufmännische Bewertung', applications: 'Anwendungen',
     faq: 'Häufig gestellte Fragen', related: 'Verwandte Lösungen', updated: 'Letzte Aktualisierung', details: 'Details',
@@ -184,7 +188,7 @@ export const ui: Record<string, {
   },
   it: {
     home: 'Home', services: 'Servizi', products: 'Prodotti commerciali', markets: 'Mercati', insights: 'Approfondimenti',
-    about: 'Chi siamo', contact: 'Contatti', quote: 'Richiedi un’offerta', menu: 'Apri menu', close: 'Chiudi menu', medicalLabel: 'REFLEX Medicale',
+    about: 'Chi siamo', contact: 'Contatti', quote: 'Richiedi un’offerta', menu: 'Apri menu', close: 'Chiudi menu', medicalLabel: 'Prodotti medicali',
     language: 'Selezione lingua', readMore: 'Scopri', allProducts: 'Vedi tutti i prodotti', allServices: 'Vedi tutti i servizi',
     origin: 'Trasparenza dell’origine', quality: 'Qualità e conformità', logistics: 'Valutazione commerciale', applications: 'Applicazioni',
     faq: 'Domande frequenti', related: 'Soluzioni correlate', updated: 'Ultimo aggiornamento', details: 'Dettagli',
@@ -197,7 +201,7 @@ export const ui: Record<string, {
   },
   ru: {
     home: 'Главная', services: 'Услуги', products: 'Товары', markets: 'Рынки', insights: 'Материалы',
-    about: 'О компании', contact: 'Контакты', quote: 'Запросить коммерческое предложение', menu: 'Открыть меню', close: 'Закрыть меню', medicalLabel: 'REFLEX Медицина',
+    about: 'О компании', contact: 'Контакты', quote: 'Запросить коммерческое предложение', menu: 'Открыть меню', close: 'Закрыть меню', medicalLabel: 'Медицинские товары',
     language: 'Выбор языка', readMore: 'Подробнее', allProducts: 'Все направления', allServices: 'Все услуги',
     origin: 'Прозрачность происхождения', quality: 'Качество и стандарты', logistics: 'Коммерческая оценка', applications: 'Области применения',
     faq: 'Частые вопросы', related: 'Связанные решения', updated: 'Обновлено', details: 'Подробнее',
@@ -210,7 +214,7 @@ export const ui: Record<string, {
   },
   fa: {
     home: 'صفحه اصلی', services: 'خدمات', products: 'محصولات تجاری', markets: 'بازارها', insights: 'تحلیل‌ها',
-    about: 'درباره ما', contact: 'تماس', quote: 'درخواست پیش‌فاکتور', menu: 'باز کردن منو', close: 'بستن منو', medicalLabel: 'دستکش‌های پزشکی REFLEX',
+    about: 'درباره ما', contact: 'تماس', quote: 'درخواست پیش‌فاکتور', menu: 'باز کردن منو', close: 'بستن منو', medicalLabel: 'محصولات پزشکی',
     language: 'انتخاب زبان', readMore: 'مشاهده', allProducts: 'مشاهده همه محصولات', allServices: 'مشاهده همه خدمات',
     origin: 'شفافیت مبدأ', quality: 'کیفیت و انطباق', logistics: 'ارزیابی تجاری', applications: 'کاربردها',
     faq: 'پرسش‌های متداول', related: 'راهکارهای مرتبط', updated: 'آخرین به‌روزرسانی', details: 'جزئیات',
@@ -223,7 +227,7 @@ export const ui: Record<string, {
   },
   zh: {
     home: '首页', services: '核心业务', products: '大宗与特色商品', markets: '贸易走廊', insights: '商业内参',
-    about: '关于我们', contact: '商务对接', quote: '发起询价', menu: '打开导航', close: '关闭导航', medicalLabel: 'REFLEX 医用手套',
+    about: '关于我们', contact: '商务对接', quote: '发起询价', menu: '打开导航', close: '关闭导航', medicalLabel: '医疗产品',
     language: '语言选择', readMore: '了解详情', allProducts: '查看全部产品', allServices: '查看全部业务',
     origin: '产地与溯源透明度', quality: '品质与合规标准', logistics: '商业可行性评估', applications: '应用场景',
     faq: '常见商务问答', related: '相关解决方案', updated: '最近更新', details: '详细说明',
@@ -236,7 +240,7 @@ export const ui: Record<string, {
   },
   vi: {
     home: 'Trang chủ', services: 'Dịch vụ', products: 'Sản phẩm thương mại', markets: 'Thị trường', insights: 'Góc nhìn chuyên sâu',
-    about: 'Về chúng tôi', contact: 'Liên hệ', quote: 'Yêu cầu báo giá', menu: 'Mở menu', close: 'Đóng menu', medicalLabel: 'Găng tay REFLEX',
+    about: 'Về chúng tôi', contact: 'Liên hệ', quote: 'Yêu cầu báo giá', menu: 'Mở menu', close: 'Đóng menu', medicalLabel: 'Sản phẩm y tế',
     language: 'Chọn ngôn ngữ', readMore: 'Khám phá', allProducts: 'Xem tất cả sản phẩm', allServices: 'Xem tất cả dịch vụ',
     origin: 'Minh bạch nguồn gốc', quality: 'Chất lượng & tuân thủ', logistics: 'Đánh giá thương mại', applications: 'Ứng dụng',
     faq: 'Câu hỏi thường gặp', related: 'Giải pháp liên quan', updated: 'Cập nhật lần cuối', details: 'Chi tiết',
@@ -1375,12 +1379,11 @@ export const pageCopy: Record<Locale, any> = {
 
 export function localizedPath(lang: Locale | string, key: string, id?: string): string {
   const safeLang = (locales as readonly string[]).includes(lang) ? (lang as Locale) : 'en';
-  const pathLang = key === 'medical' ? lang : safeLang;
+  const pathLang = safeLang;
   if (key === 'home') return pathLang === 'tr' ? '/' : `/${pathLang}/`;
-  if (key === 'medical') return pathLang === 'tr' ? '/medical/reflex-disposable-gloves/' : `/${pathLang}/medical/reflex-disposable-gloves/`;
   if (key === 'trade-corridor' && id) return `/${pathLang}/turkey-sourcing-for-${id}/`;
-    if (key === 'how-we-work') return `/${pathLang}/${specialSlugs['how-we-work'][safeLang]}/`;
-  if (key === 'scenarios') return `/${pathLang}/${specialSlugs.scenarios[safeLang]}/`;
+    if (key === 'how-we-work') return `/${pathLang}/${(specialSlugs['how-we-work'][safeLang] || specialSlugs['how-we-work'].en)}/`;
+  if (key === 'scenarios') return `/${pathLang}/${(specialSlugs.scenarios[safeLang] || specialSlugs.scenarios.en)}/`;
   if (key === 'guides' && id) {
     if (safeLang === 'tr' || safeLang === 'en') {
       const guideSlug = guideSlugs[id as GuideId]?.[safeLang];
@@ -1397,29 +1400,10 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
 }
 
 export function routeAlternates(key: string, id?: string): Record<string, string> {
-  if (key === 'medical') {
-    return {
-      tr: 'https://ctseg.com.tr/medical/reflex-disposable-gloves/',
-      en: 'https://ctseg.com.tr/en/medical/reflex-disposable-gloves/',
-      de: 'https://ctseg.com.tr/de/medical/reflex-disposable-gloves/',
-      it: 'https://ctseg.com.tr/it/medical/reflex-disposable-gloves/',
-      ru: 'https://ctseg.com.tr/ru/medical/reflex-disposable-gloves/',
-      fa: 'https://ctseg.com.tr/fa/medical/reflex-disposable-gloves/',
-      zh: 'https://ctseg.com.tr/zh/medical/reflex-disposable-gloves/',
-      vi: 'https://ctseg.com.tr/vi/medical/reflex-disposable-gloves/',
-      sq: 'https://ctseg.com.tr/sq/medical/reflex-disposable-gloves/',
-      mk: 'https://ctseg.com.tr/mk/medical/reflex-disposable-gloves/',
-      sr: 'https://ctseg.com.tr/sr/medical/reflex-disposable-gloves/'
-    };
-  }
   return Object.fromEntries(locales.map((lang) => [lang, `https://ctseg.com.tr${localizedPath(lang, key, id)}`])) as Record<Locale, string>;
 }
 
 
-
-ui.ro = ui.en; ui.bg = ui.en; ui.sr = ui.en;
-company.name.ro = company.name.en; company.name.bg = company.name.en; company.name.sr = company.name.en;
-
-
-ui.ro = ui.en; ui.bg = ui.en; ui.sr = ui.en;
-company.name.ro = company.name.en; company.name.bg = company.name.en; company.name.sr = company.name.en;
+ui.ro = {...ui.en, home:'Acasă', services:'Servicii', products:'Produse comerciale', markets:'Piețe', insights:'Analize', about:'Despre noi', contact:'Contact', quote:'Solicită ofertă', menu:'Deschide meniul', close:'Închide meniul', language:'Selectare limbă', readMore:'Detalii', allProducts:'Vezi toate produsele', allServices:'Vezi toate serviciile', faq:'Întrebări frecvente', related:'Soluții asociate', updated:'Ultima actualizare', details:'Detalii', accept:'Acceptă', reject:'Respinge', rights:'Toate drepturile rezervate.', contactLead:'Spune-ne compania, cerința, volumul estimativ și țara de livrare pentru o evaluare comercială.'};
+ui.bg = {...ui.en, home:'Начало', services:'Услуги', products:'Търговски продукти', markets:'Пазари', insights:'Анализи', about:'За нас', contact:'Контакт', quote:'Поискайте оферта', menu:'Отвори менюто', close:'Затвори менюто', language:'Избор на език', readMore:'Виж повече', allProducts:'Всички продукти', allServices:'Всички услуги', faq:'Често задавани въпроси', related:'Свързани решения', updated:'Последна актуализация', details:'Детайли', accept:'Приемам', reject:'Отказвам', rights:'Всички права запазени.', contactLead:'Споделете компанията, изискването, приблизителния обем и държавата за доставка за търговска оценка.'};
+ui.sr = {...ui.en, home:'Početna', services:'Usluge', products:'Trgovinski proizvodi', markets:'Tržišta', insights:'Uvidi', about:'O nama', contact:'Kontakt', quote:'Zatražite ponudu', menu:'Otvori meni', close:'Zatvori meni', language:'Izbor jezika', readMore:'Detalji', allProducts:'Svi proizvodi', allServices:'Sve usluge', faq:'Česta pitanja', related:'Povezana rešenja', updated:'Poslednje ažuriranje', details:'Detalji', accept:'Prihvati', reject:'Odbij', rights:'Sva prava zadržana.', contactLead:'Pošaljite podatke o kompaniji, zahtevu, okvirnoj količini i zemlji isporuke radi komercijalne procene.'};

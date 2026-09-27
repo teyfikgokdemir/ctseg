@@ -17,8 +17,8 @@ export function getRouteRecords(): RouteRecord[] {
   const records: RouteRecord[] = [];
   for (const lang of locales) {
     if (lang !== 'tr') records.push({ lang, key:'home' });
-    records.push({lang,path:specialSlugs['how-we-work'][lang],key:'how-we-work'});
-    records.push({lang,path:specialSlugs.scenarios[lang],key:'scenarios'});
+    records.push({lang,path:specialSlugs['how-we-work'][lang] || specialSlugs['how-we-work'].en,key:'how-we-work'});
+    records.push({lang,path:specialSlugs.scenarios[lang] || specialSlugs.scenarios.en,key:'scenarios'});
     for (const id of searchLandingIds) records.push({
       lang,path:searchLandingPath(lang,id).replace(`/${lang}/`,'').replace(/^\//,'').replace(/\/$/,''),key:'search-landing',id
     });
@@ -39,7 +39,7 @@ export function getRouteRecords(): RouteRecord[] {
     });
     for (const corridor of tradeCorridors) records.push({ lang, path: `turkey-sourcing-for-${corridor.id}`, key: 'trade-corridor', id: corridor.id });
       for (const id of legalIds) records.push({
-      lang, path:legal[id].slugs[lang], key:'legal', id
+      lang, path:(legal[id].slugs[lang] || legal[id].slugs.en), key:'legal', id
     });
     if (lang === 'tr' || lang === 'en') {
       for (const id of guideIds) records.push({
@@ -72,12 +72,12 @@ export function getMeta(record: RouteRecord) {
       lang === 'ru' ? 'CTSEG связывает Турцию с международными рынками через двустороннюю B2B-торговлю, стратегический сорсинг, проверку поставщиков, RFQ и сопровождение выхода на рынок.' :
       'CTSEG connects Türkiye with international markets through two-way B2B trade, strategic sourcing, supplier verification, RFQ management and market-entry coordination.'
   };
-  if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — B2B Sourcing Advisory | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
-  if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} — Wholesale B2B | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
-  if (key === 'insights' && id) return { title:`${insights[id as keyof typeof insights].titles[lang]} | CTSEG`, description:insights[id as keyof typeof insights].descriptions[lang] };
+  if (key === 'services' && id) return { title:`${(services[id as keyof typeof services].names[lang] || services[id as keyof typeof services].names.en)} — B2B Sourcing Advisory | CTSEG`, description:(services[id as keyof typeof services].descriptions[lang] || services[id as keyof typeof services].descriptions.en) };
+  if (key === 'products' && id) return { title:`${(products[id as keyof typeof products].names[lang] || products[id as keyof typeof products].names.en)} — Wholesale B2B | CTSEG`, description:(products[id as keyof typeof products].descriptions[lang] || products[id as keyof typeof products].descriptions.en) };
+  if (key === 'insights' && id) return { title:`${(insights[id as keyof typeof insights].titles[lang] || insights[id as keyof typeof insights].titles.en)} | CTSEG`, description:(insights[id as keyof typeof insights].descriptions[lang] || insights[id as keyof typeof insights].descriptions.en) };
   if (key === 'trade-corridor' && id) { const corridor = tradeCorridors.find(c => c.id === id); if (corridor) return { title: corridor.seoMeta.title, description: corridor.seoMeta.description }; }
-    if (key === 'how-we-work') return {title:`${processPages[lang].title} | CTSEG`,description:processPages[lang].description};
-  if (key === 'scenarios') return {title:`${scenarioPages[lang].title} | CTSEG`,description:scenarioPages[lang].description};
+    if (key === 'how-we-work') return {title:`${(processPages[lang] || processPages.en).title} | CTSEG`,description:(processPages[lang] || processPages.en).description};
+  if (key === 'scenarios') return {title:`${(scenarioPages[lang] || scenarioPages.en).title} | CTSEG`,description:(scenarioPages[lang] || scenarioPages.en).description};
   if (key === 'search-landing' && id) {
     const landing=searchLandings[id as keyof typeof searchLandings].content[lang as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']] || searchLandings[id as keyof typeof searchLandings].content['en' as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']];
     return {title:`${landing.title} | CTSEG`,description:landing.description};
@@ -88,8 +88,8 @@ export function getMeta(record: RouteRecord) {
     return {title:`${guide.title} | CTSEG`,description:guide.description};
   }
   if (key === 'legal' && id) return {
-    title:`${legal[id as keyof typeof legal].titles[lang]} | CTSEG`,
-    description:`${legal[id as keyof typeof legal].titles[lang]}. ${copy.legalIntro}`
+    title:`${(legal[id as keyof typeof legal].titles[lang] || legal[id as keyof typeof legal].titles.en)} | CTSEG`,
+    description:`${(legal[id as keyof typeof legal].titles[lang] || legal[id as keyof typeof legal].titles.en)}. ${copy.legalIntro}`
   };
   const map: Record<string, [string,string]> = {
     services:[copy.servicesTitle,copy.servicesLead], products:[copy.productsTitle,copy.productsLead],
@@ -111,7 +111,7 @@ export function breadcrumbSchema(record: RouteRecord, title: string) {
   return {
     '@context':'https://schema.org','@type':'BreadcrumbList',
     itemListElement:[
-      {'@type':'ListItem',position:1,name:ui[record.lang].home,item:`https://ctseg.com.tr${home}`},
+      {'@type':'ListItem',position:1,name:(ui[record.lang] || ui.en).home,item:`https://ctseg.com.tr${home}`},
       {'@type':'ListItem',position:2,name:title,item:canonical}
     ]
   };
