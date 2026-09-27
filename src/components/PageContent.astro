@@ -28,6 +28,103 @@ import { contactCopy } from '../data/contact-experience';
 import { searchLandingIds, searchLandingIndexCopy, searchLandings, searchLandingPath } from '../data/search-landings';
 import { productEvidence } from '../data/product-evidence';
 
+
+const corridorLocales: Record<string, any> = {
+  en: {
+    sourcing: "Sourcing from Turkey to {country}",
+    sourcingLead: "Turkey offers unparalleled manufacturing quality and strategic logistics to {country}. We bridge the gap by providing direct access to verified manufacturers, reducing supply chain risks, and ensuring full compliance.",
+    industries: "Key Export Industries",
+    logistics: "Logistics & Transit",
+    transitTime: "Average Transit Time",
+    compliance: "Trade Compliance",
+    ready: "Ready to source for {country}?",
+    cta: "Connect with verified Turkish suppliers for the {country} market",
+  },
+  ru: {
+    sourcing: "Прямые поставки из Турции в {country}",
+    sourcingLead: "Турция предлагает высочайшее качество производства и надежную логистику для направления {country}. Мы обеспечиваем прямой доступ к проверенным заводам, снижая риски и гарантируя полное соответствие нормам.",
+    industries: "Ключевые отрасли экспорта",
+    logistics: "Логистика и транзит",
+    transitTime: "Среднее время в пути",
+    compliance: "Торговое соответствие",
+    ready: "Готовы начать поставки в {country}?",
+    cta: "Свяжитесь с проверенными турецкими заводами для рынка {country}",
+  },
+  tr: {
+    sourcing: "Türkiye'den {country} Pazarına Tedarik",
+    sourcingLead: "Türkiye, {country} pazarı için yüksek üretim kalitesi ve lojistik avantajlar sunar. Doğrulanmış üreticilere aracısız erişim sağlayarak tedarik zinciri risklerinizi sıfırlıyoruz.",
+    industries: "Öne Çıkan Sektörler",
+    logistics: "Lojistik ve Taşıma",
+    transitTime: "Ortalama Transit Süresi",
+    compliance: "Ticaret Uyumluluğu",
+    ready: "{country} için tedariğe başlamaya hazır mısınız?",
+    cta: "{country} pazarı için doğrulanmış Türk üreticilerle hemen bağlantı kurun",
+  },
+  de: {
+    sourcing: "Beschaffung aus der Türkei nach {country}",
+    sourcingLead: "Die Türkei bietet erstklassige Fertigungsqualität und strategische Logistik nach {country}. Wir bieten direkten Zugang zu geprüften Herstellern.",
+    industries: "Wichtigste Exportbranchen",
+    logistics: "Logistik & Transit",
+    transitTime: "Durchschnittliche Transitzeit",
+    compliance: "Handelskonformität",
+    ready: "Bereit für die Beschaffung nach {country}?",
+    cta: "Vernetzen Sie sich mit geprüften türkischen Lieferanten",
+  },
+  it: {
+    sourcing: "Sourcing dalla Turchia verso {country}",
+    sourcingLead: "La Turchia offre qualità manifatturiera e logistica strategica verso {country}. Forniamo accesso diretto a produttori verificati.",
+    industries: "Settori chiave di esportazione",
+    logistics: "Logistica e transito",
+    transitTime: "Tempo medio di transito",
+    compliance: "Conformità commerciale",
+    ready: "Pronto per il sourcing verso {country}?",
+    cta: "Connettiti con fornitori turchi verificati",
+  },
+  fa: {
+    sourcing: "تامین کالا از ترکیه به {country}",
+    sourcingLead: "ترکیه کیفیت تولید بی‌نظیر و لجستیک استراتژیک را برای {country} ارائه می‌دهد. ما دسترسی مستقیم به تولیدکنندگان معتبر را فراهم می‌کنیم.",
+    industries: "صنایع کلیدی صادرات",
+    logistics: "لجستیک و حمل و نقل",
+    transitTime: "میانگین زمان ترانزیت",
+    compliance: "انطباق تجاری",
+    ready: "آماده تامین کالا برای {country} هستید؟",
+    cta: "با تامین‌کنندگان معتبر ترک ارتباط برقرار کنید",
+  },
+  zh: {
+    sourcing: "从土耳其采购至 {country}",
+    sourcingLead: "土耳其为 {country} 提供无与伦比的制造质量和战略物流。我们提供与经过验证的制造商的直接联系。",
+    industries: "主要出口行业",
+    logistics: "物流与运输",
+    transitTime: "平均运输时间",
+    compliance: "贸易合规",
+    ready: "准备好为 {country} 采购了吗？",
+    cta: "联系经过验证的土耳其供应商",
+  },
+  vi: {
+    sourcing: "Tìm nguồn cung ứng từ Thổ Nhĩ Kỳ đến {country}",
+    sourcingLead: "Thổ Nhĩ Kỳ cung cấp chất lượng sản xuất và hậu cần chiến lược đến {country}. Chúng tôi cung cấp quyền truy cập trực tiếp vào các nhà sản xuất đã được xác minh.",
+    industries: "Các ngành xuất khẩu chính",
+    logistics: "Hậu cần & Vận chuyển",
+    transitTime: "Thời gian vận chuyển trung bình",
+    compliance: "Tuân thủ thương mại",
+    ready: "Sẵn sàng tìm nguồn cung ứng cho {country}?",
+    cta: "Kết nối với các nhà cung cấp Thổ Nhĩ Kỳ đã được xác minh",
+  }
+};
+
+const getCountryName = (countryId: string, locale: string) => {
+  const map: Record<string, string> = {
+    romania: 'RO', bulgaria: 'BG', serbia: 'RS', germany: 'DE',
+    italy: 'IT', russia: 'RU', iran: 'IR', syria: 'SY', 'united-kingdom': 'GB'
+  };
+  const code = map[countryId] || 'TR';
+  try {
+    return new Intl.DisplayNames([locale], { type: 'region' }).of(code) || countryId;
+  } catch(e) {
+    return countryId;
+  }
+};
+
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
 const t = ui[lang] || ui['en'];
