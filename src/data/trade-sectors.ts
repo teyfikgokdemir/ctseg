@@ -133,31 +133,10 @@ export const tradeCopy: Record<TradeLocale,Record<TradeSectorId,Copy>> = {
   'wholesale-textiles':{slug:'textiles',eyebrow:'Dệt may B2B và nhãn hàng riêng',title:'Thu mua dệt may bán buôn được điều phối từ mẫu thử đến logistics.',description:'Vải, khăn tắm, áo choàng tắm, dệt may gia dụng và may mặc với nhãn hàng riêng (OEM), mẫu thử, RFQ, xác minh nhà sản xuất, chất lượng và logistics.',lead:'Dành cho các thương hiệu, nhà phân phối, khách sạn và dự án, chúng tôi khớp nối thông số kỹ thuật với năng lực nhà máy, duyệt mẫu, chất lượng, bao bì và tiến độ giao hàng.',scopeTitle:'Phạm vi sản phẩm dệt may bán buôn',items:['Vải và thông số kỹ thuật dệt may','Khăn tắm và áo choàng tắm cao cấp','Bộ sưu tập dệt may gia dụng','Sản xuất hàng may mặc sẵn','Gia công OEM và đóng gói tùy chỉnh','Phát triển mẫu và bộ sưu tập mới'],cta:'Gửi yêu cầu RFQ dệt may'}
  },
   uk: {
-    'akbari-pistachio': { slug: 'akbari-pistachio', name: 'Фісташки Акбарі', hsCode: '080251', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'kaleghouchi-pistachio': { slug: 'kaleghouchi-pistachio', name: 'Фісташки Калегучі', hsCode: '080251', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'fandoghi-pistachio': { slug: 'fandoghi-pistachio', name: 'Фісташки Фандогі', hsCode: '080251', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'ahmad-aghaei-pistachio': { slug: 'ahmad-aghaei-pistachio', name: 'Фісташки Ахмад Агаеї', hsCode: '080251', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'green-peeled-pistachio': { slug: 'green-peeled-pistachio', name: 'Очищені фісташки', hsCode: '080252', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'pistachio-granules': { slug: 'pistachio-granules', name: 'Фісташкові гранули', hsCode: '080252', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'mazafati-dates': { slug: 'mazafati-dates', name: 'Фініки Мазафаті', hsCode: '080410', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'date-paste-syrup': { slug: 'date-paste-syrup', name: 'Фінікова паста', hsCode: '200799', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'raisins': { slug: 'raisins', name: 'Родзинки', hsCode: '080620', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'almonds': { slug: 'almonds', name: 'Мигдаль', hsCode: '080212', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'walnuts': { slug: 'walnuts', name: 'Волоські горіхи', hsCode: '080232', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'dried-apricots-kernels': { slug: 'dried-apricots-kernels', name: 'Курага', hsCode: '081310', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'pumpkin-seeds': { slug: 'pumpkin-seeds', name: 'Гарбузове насіння', hsCode: '121299', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'sunflower-seeds': { slug: 'sunflower-seeds', name: 'Соняшникове насіння', hsCode: '120600', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'saffron': { slug: 'saffron', name: 'Шафран', hsCode: '091020', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'dried-mulberries': { slug: 'dried-mulberries', name: 'Сушена шовковиця', hsCode: '081340', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'zereshk': { slug: 'zereshk', name: 'Барбарис', hsCode: '081340', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'mixed-nuts': { slug: 'mixed-nuts', name: 'Суміш горіхів', hsCode: '081350', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'iranian-carpets': { slug: 'iranian-carpets', name: 'Іранські килими', hsCode: '570110', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Снеки'] },
-    'duzce-cam-flat-glass': { slug: 'duzce-cam-flat-glass', name: 'Düzce Cam Flat Glass', hsCode: '700529', origin: 'Türkiye', description: 'High-quality float glass from Düzce Cam for architectural and industrial applications.', shortDesc: 'Float glass from Düzce Cam.', applications: ['Architecture', 'Automotive', 'Industrial'] },
-    'hotel-textiles': { slug: 'hotel-textiles', name: 'Текстиль', hsCode: '6302', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Готель'] },
-    'towels-bathrobes': { slug: 'towels-bathrobes', name: 'Текстиль', hsCode: '6302', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Готель'] },
-    'industrial-workwear': { slug: 'industrial-workwear', name: 'Текстиль', hsCode: '6302', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Готель'] },
-    'medical-textiles': { slug: 'medical-textiles', name: 'Текстиль', hsCode: '6302', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Готель'] },
-    'apparel-manufacturing': { slug: 'apparel-manufacturing', name: 'Текстиль', hsCode: '6302', origin: 'Туреччина', description: 'Опис', shortDesc: 'Короткий опис', applications: ['Готель'] }
+    'iranian-carpets': { slug: 'iranian-carpets', eyebrow: 'Килими', title: 'Іранські килими', description: 'Опис', lead: 'Лід', scopeTitle: 'Сфера', items: [], cta: 'Запит' },
+    'silk-carpets': { slug: 'silk-carpets', eyebrow: 'Килими', title: 'Шовкові килими', description: 'Опис', lead: 'Лід', scopeTitle: 'Сфера', items: [], cta: 'Запит' },
+    'wholesale-textiles': { slug: 'wholesale-textiles', eyebrow: 'Текстиль', title: 'Оптовий текстиль', description: 'Опис', lead: 'Лід', scopeTitle: 'Сфера', items: [], cta: 'Запит' },
+    'duzce-cam-flat-glass': { slug: 'duzce-cam-flat-glass', eyebrow: 'Скло', title: 'Düzce Cam', description: 'Опис', lead: 'Лід', scopeTitle: 'Сфера', items: [], cta: 'Запит' }
   }
 };
 export const persianProducerCopy: Record<TradeSectorId, {
