@@ -25,7 +25,7 @@ type MarketCopy = {
 };
 
 export const pathForMarket = (lang: MarketLocale, id: TradeMarketId) =>
-  `/${lang}/market/${marketCopy[lang][id].slug}/`;
+  `/${lang}/market/${(marketCopy[lang] || marketCopy.en)[id].slug}/`;
 
 export const marketUi: Record<MarketLocale, { contact: string; home: string; related: string; allMarkets: string }> = {
   tr: { contact: 'Teklif Al', home: 'Ana Sayfa', related: 'Diğer Pazarlar', allMarkets: 'Tüm Pazarlar' },

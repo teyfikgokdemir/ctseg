@@ -10,15 +10,15 @@ import {
 export function getStaticPaths() {
   return marketLocales.flatMap(lang =>
     tradeMarketIds.map(id => ({
-      params: { lang, country: marketCopy[lang][id].slug },
+      params: { lang, country: (marketCopy[lang] || marketCopy.en)[id].slug },
       props: { lang, id }
     }))
   );
 }
 
 const { lang, id } = Astro.props as { lang: MarketLocale; id: TradeMarketId };
-const copy = marketCopy[lang][id];
-const mu = marketUi[lang];
+const copy = (marketCopy[lang] || marketCopy.en)[id];
+const mu = marketUi[lang] || marketUi.en;
 const t = ui[lang] || ui.en;
 const canonical = `https://ctseg.com.tr${pathForMarket(lang, id)}`;
 const home = lang === 'tr' ? '/' : `/${lang}/`;
