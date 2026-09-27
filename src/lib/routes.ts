@@ -73,7 +73,12 @@ export function getRouteRecords(): RouteRecord[] {
       });
     }
   }
-  return records;
+  // The generator consumes the same resolver as cards, menus and related links.
+  const sharedKeys = new Set(['home','services','products','markets','insights','about','contact','how-we-work','scenarios','legal','guides','syria-market']);
+  return records.map(record => sharedKeys.has(record.key) ? {
+    ...record,
+    path: localizedPath(record.lang,record.key,record.id).replace(new RegExp(`^/${record.lang}/`),'').replace(/^\/+|\/+$/g,'') || undefined
+  } : record);
 }
 
 export function getMeta(record: RouteRecord) {

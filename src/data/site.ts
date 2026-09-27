@@ -1,13 +1,12 @@
 import { guideSlugs, specialSlugs, type GuideId } from './completion';
 import { activeLocales, localeByCode, siteLocales, type SiteLocale } from './locales';
 import { syriaMarketContent } from './syria-market';
+import { localizedSlug } from '../lib/localized-slug';
 
 export const locales = siteLocales;
 export type Locale = SiteLocale;
 
-export const localeNames: Record<Locale, string> = {
-  tr: localeByCode.tr.label, en: localeByCode.en.label, de: localeByCode.de.label, it: localeByCode.it.label, fa: localeByCode.fa.label, ru: localeByCode.ru.label, zh: localeByCode.zh.label, vi: localeByCode.vi.label
-};
+export const localeNames = Object.fromEntries(activeLocales.map(code => [code, localeByCode[code].label]));
 
 export { activeLocales };
 
@@ -1276,9 +1275,11 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
   const safeLang = (locales as readonly string[]).includes(lang) ? (lang as Locale) : 'en';
   const pathLang = safeLang;
   if (key === 'home') return pathLang === 'tr' ? '/' : `/${pathLang}/`;
-  if (key === 'how-we-work') return `/${pathLang}/${specialSlugs['how-we-work'][safeLang]}/`;
-  if (key === 'scenarios') return `/${pathLang}/${specialSlugs.scenarios[safeLang]}/`;
-  if (key === 'syria-market' && (safeLang === 'tr' || safeLang === 'en')) return `/${safeLang}/${syriaMarketContent[safeLang].slug}/`;
+  if (key === 'how-we-work') return `/${pathLang}/${localizedSlug(specialSlugs['how-we-work'],safeLang)}/`;
+  if (key === 'scenarios') return `/${pathLang}/${localizedSlug(specialSlugs.scenarios,safeLang)}/`;
+  if (key === 'syria-market') return (safeLang === 'tr' || safeLang === 'en')
+    ? `/${safeLang}/${syriaMarketContent[safeLang].slug}/`
+    : localizedPath(safeLang,'markets');
   if (key === 'guides' && id) {
     if (safeLang === 'tr' || safeLang === 'en') {
       const guideSlug = guideSlugs[id as GuideId]?.[safeLang];
@@ -1286,11 +1287,11 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
     }
     return localizedPath(safeLang, 'insights');
   }
-  const section = sectionSlugs[key]?.[safeLang] || sectionSlugs[key]?.en;
-  if (key === 'services' && id) return `/${pathLang}/${section}/${services[id as keyof typeof services]?.slugs[safeLang] || id}/`;
-  if (key === 'products' && id) return `/${pathLang}/${section}/${products[id as keyof typeof products]?.slugs[safeLang] || id}/`;
-  if (key === 'insights' && id) return `/${pathLang}/${section}/${insights[id as keyof typeof insights]?.slugs[safeLang] || id}/`;
-  if (key === 'legal' && id) return `/${pathLang}/${legal[id as keyof typeof legal]?.slugs[safeLang] || id}/`;
+  if (key === 'legal' && id) return `/${pathLang}/${localizedSlug(legal[id as keyof typeof legal]?.slugs,safeLang,id)}/`;
+  const section = localizedSlug(sectionSlugs[key],safeLang);
+  if (key === 'services' && id) return `/${pathLang}/${section}/${localizedSlug(services[id as keyof typeof services]?.slugs,safeLang,id)}/`;
+  if (key === 'products' && id) return `/${pathLang}/${section}/${localizedSlug(products[id as keyof typeof products]?.slugs,safeLang,id)}/`;
+  if (key === 'insights' && id) return `/${pathLang}/${section}/${localizedSlug(insights[id as keyof typeof insights]?.slugs,safeLang,id)}/`;
   return `/${pathLang}/${section}/`;
 }
 
@@ -1307,7 +1308,6 @@ export function routeAlternates(key: string, id?: string): Record<string, string
 
 
 /* Balkan locale rollout: ro, bg, sr */
-Object.assign(localeNames as any, { ro:'Română', bg:'Български', sr:'Srpski' });
 Object.assign(company.name as any, {
   ro:'CTSEG Companie de Industrie și Comerț',
   bg:'CTSEG Индустрия и Търговия',

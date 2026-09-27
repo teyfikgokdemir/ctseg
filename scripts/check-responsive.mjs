@@ -26,7 +26,8 @@ const server = createServer(async (request, response) => {
   if (!extname(file)) file = join(file, 'index.html');
   try {
     const body = await readFile(file);
-    const type = extname(file) === '.html' ? 'text/html; charset=utf-8' : extname(file) === '.css' ? 'text/css' : extname(file) === '.png' ? 'image/png' : extname(file) === '.webp' ? 'image/webp' : 'application/octet-stream';
+    const contentTypes = {'.html':'text/html; charset=utf-8','.css':'text/css','.js':'text/javascript','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp','.jpg':'image/jpeg','.jpeg':'image/jpeg','.woff2':'font/woff2','.mp4':'video/mp4'};
+    const type = contentTypes[extname(file)] ?? 'application/octet-stream';
     response.writeHead(200, { 'content-type':type }); response.end(body);
   } catch {
     response.writeHead(404); response.end('Not found');
@@ -159,7 +160,12 @@ try {
       window.scrollTo(0,0);
     });
     await page.waitForFunction(() => window.scrollY === 0);
-    await page.waitForFunction(() => [...document.images].every((image) => image.complete && image.naturalWidth > 0), undefined, { timeout:10000 });
+    try {
+      await page.waitForFunction(() => [...document.images].every((image) => image.complete && image.naturalWidth > 0), undefined, { timeout:10000 });
+    } catch (error) {
+      const incomplete = await page.evaluate(() => [...document.images].filter(image => !image.complete || image.naturalWidth === 0).map(image => ({src:image.currentSrc || image.src,complete:image.complete})));
+      throw new Error(`${testCase.name}: images failed to load: ${JSON.stringify(incomplete)}`, {cause:error});
+    }
     await page.waitForTimeout(250);
     let mobileMenu = true;
     let bodyScrollLocked = true;
