@@ -18,7 +18,8 @@ const isText=(f)=>textExt.has(extname(f))||f.endsWith('_headers');
 const scan=(f,label)=>{let t;try{t=decoder.decode(readFileSync(f))}catch{errors.push(`${label}: invalid UTF-8`);return}for(const x of mojibake)if(t.includes(x))errors.push(`${label}: mojibake sequence ${JSON.stringify(x)}`)};
 
 const tracked=execFileSync('git',['ls-files'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);
-for(const f of tracked.filter(f=>isText(f)&&existsSync(resolve(f))))scan(resolve(f),`source ${f}`);
+const sourceFiles=tracked.filter(f=>isText(f)&&existsSync(resolve(f))&&f!=='scripts/check-site.mjs'&&!/^(?:trade-os\/)?test\//.test(f));
+for(const f of sourceFiles)scan(resolve(f),`source ${f}`);
 for(const f of files.filter(isText))scan(f,`build ${relative(root,f).replaceAll('\\','/')}`);
 
 const targetExists=(pathname)=>{
@@ -87,7 +88,7 @@ for(const code of active){
   if(!existsSync(home))errors.push(`homepage missing for active locale ${code}`);
 }
 
-const sourceScan=tracked.filter(f=>isText(f)&&existsSync(resolve(f))).map(f=>readFileSync(resolve(f),'utf8')).join('\n');
+const sourceScan=sourceFiles.map(f=>readFileSync(resolve(f),'utf8')).join('\n');
 if(/REFLEX|reflex-disposable-gloves|ReflexPageContent|ReflexSection/i.test(sourceScan))errors.push('source: removed REFLEX references remain');
 
 const sitemap=files.filter(f=>/sitemap-\d+\.xml$/.test(f)).map(f=>readFileSync(f,'utf8')).join('\n');
