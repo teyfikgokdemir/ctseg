@@ -104,4 +104,72 @@ export const tradeCorridors: CorridorData[] = [
     },
     customCta: 'Partner with verified Turkish manufacturers for Italy'
   }
+  ,{
+    id: 'russia',
+    targetCountry: 'Russia',
+    direction: 'sourcing',
+    logistics: {
+      mode: 'Maritime (Ro-Ro to Novorossiysk) & Road (via Georgia)',
+      transitTime: '5-8 Days',
+      description: 'Reliable multi-modal transit routes bypassing restricted zones, ensuring steady flow of FMCG, machinery, and textiles.'
+    },
+    keyIndustries: ['Apparel & Textiles', 'Industrial Machinery', 'FMCG', 'Construction Materials'],
+    compliance: 'Fully transparent, sanctions-compliant sourcing. Direct manufacturer coordination for safe and legal B2B procurement.',
+    seoMeta: {
+      title: 'Turkey Sourcing for Russia | Secure & Direct B2B Trade',
+      description: 'Source securely from Turkey to Russia. Access verified manufacturers, robust logistics via Novorossiysk, and fully compliant trade channels.'
+    },
+    customCta: 'Connect with verified Turkish suppliers for the Russian market'
+  },
+  {
+    id: 'iran',
+    targetCountry: 'Iran',
+    direction: 'sourcing',
+    logistics: {
+      mode: 'Road Freight (via Gürbulak/Bazargan)',
+      transitTime: '3-5 Days',
+      description: 'Direct land border crossing facilitates high-volume, rapid transit for industrial inputs and raw materials.'
+    },
+    keyIndustries: ['Chemicals', 'Automotive Components', 'Industrial Machinery', 'Raw Materials'],
+    compliance: 'Bilateral trade agreement optimization. Expert handling of regional financial and customs documentation.',
+    seoMeta: {
+      title: 'Turkey Sourcing for Iran | Industrial Supply & Logistics',
+      description: 'Optimize your industrial procurement from Turkey to Iran. 3-5 day direct road freight, verified suppliers, and bilateral trade expertise.'
+    },
+    customCta: 'Explore industrial sourcing opportunities from Turkey'
+  },
+  {
+    id: 'syria',
+    targetCountry: 'Syria',
+    direction: 'sourcing',
+    logistics: {
+      mode: 'Road Freight (via Cilvegözü/Öncüpınar)',
+      transitTime: '1-3 Days',
+      description: 'Essential cross-border logistics providing rapid delivery of construction materials and basic staples to regional hubs.'
+    },
+    keyIndustries: ['Construction Materials', 'Basic Food Staples', 'FMCG', 'Packaging'],
+    compliance: 'Strict adherence to cross-border commercial regulations and essential goods trade protocols.',
+    seoMeta: {
+      title: 'Turkey Sourcing for Syria | Construction & Essential Goods',
+      description: 'Direct sourcing from Turkey to Syria. Access verified suppliers for construction materials, food staples, and fast cross-border logistics.'
+    },
+    customCta: 'Source essential goods and materials directly from Turkey'
+  },
+  {
+    id: 'united-kingdom',
+    targetCountry: 'United Kingdom',
+    direction: 'sourcing',
+    logistics: {
+      mode: 'Road & Intermodal / Maritime (to Felixstowe/London)',
+      transitTime: '7-10 Days',
+      description: 'Flexible options combining cost-effective sea freight with rapid intermodal road solutions across Europe.'
+    },
+    keyIndustries: ['Apparel & Fashion', 'Home Textiles', 'Automotive OEM', 'Packaging'],
+    compliance: 'Post-Brexit UK-Turkey Free Trade Agreement (FTA) optimization. UKCA marking and quality standards verification.',
+    seoMeta: {
+      title: 'Turkey Sourcing for the UK | FTA Optimized Supply Chain',
+      description: 'Leverage the UK-Turkey FTA. Source high-quality textiles, packaging, and automotive parts with verified manufacturers and seamless logistics.'
+    },
+    customCta: 'Build a post-Brexit resilient supply chain with Turkey'
+  }
 ];
