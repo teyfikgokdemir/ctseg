@@ -23,7 +23,8 @@ const chrome = {
   ru: { skip: 'Перейти к содержанию', language: 'Выбор языка', menu: 'Открыть меню языков', close: 'Закрыть меню языков' },
   fa: { skip: 'رفتن به محتوای اصلی', language: 'انتخاب زبان', menu: 'باز کردن منوی زبان', close: 'بستن منوی زبان' },
   zh: { skip: '跳转到主要内容', language: '语言选择', menu: '打开语言菜单', close: '关闭语言菜单' },
-  vi: { skip: 'Chuyển đến nội dung chính', language: 'Chọn ngôn ngữ', menu: 'Mở menu ngôn ngữ', close: 'Đóng menu ngôn ngữ' }
+  vi: { skip: 'Chuyển đến nội dung chính', language: 'Chọn ngôn ngữ', menu: 'Mở menu ngôn ngữ', close: 'Đóng menu ngôn ngữ' },
+  uk: { skip: 'Перейти до основного контенту', language: 'Вибір мови', menu: 'Відкрити мовне меню', close: 'Закрити мовне меню' }
 }[lang];
 const schema=[
  {'@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',name:company.name[lang] || company.name.en,alternateName:'CTSEG',foundingDate:'2022',founder:{'@type':'Person',name:'Teyfik Gökdemir'},address:{'@type':'PostalAddress',addressLocality:'Tuzla',addressRegion:'İstanbul',addressCountry:'TR'},url:'https://ctseg.com.tr/'},

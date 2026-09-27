@@ -127,7 +127,7 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
   </head>
   <body>
-    <a class="skip-link" href="#main">{lang === 'ru' ? 'Перейти к содержанию' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : 'Skip to content'}</a>
+    <a class="skip-link" href="#main">{lang === 'ru' ? 'Перейти к содержанию' : lang === 'uk' ? 'Перейти до основного контенту' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : 'Skip to content'}</a>
     <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
     <main id="main">
       <slot />
