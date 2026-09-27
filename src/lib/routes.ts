@@ -17,8 +17,8 @@ export function getRouteRecords(): RouteRecord[] {
   const records: RouteRecord[] = [];
   for (const lang of locales) {
     if (lang !== 'tr') records.push({ lang, key:'home' });
-    records.push({lang,path:specialSlugs['how-we-work'][lang],key:'how-we-work'});
-    records.push({lang,path:specialSlugs.scenarios[lang],key:'scenarios'});
+    records.push({lang,path:(specialSlugs['how-we-work'] as any)[lang] || (specialSlugs['how-we-work'] as any).en,key:'how-we-work'});
+    records.push({lang,path:(specialSlugs.scenarios as any)[lang] || (specialSlugs.scenarios as any).en,key:'scenarios'});
     for (const id of searchLandingIds) records.push({
       lang,path:searchLandingPath(lang,id).replace(`/${lang}/`,'').replace(/^\//,'').replace(/\/$/,''),key:'search-landing',id
     });
@@ -39,7 +39,7 @@ export function getRouteRecords(): RouteRecord[] {
     });
     for (const corridor of tradeCorridors) records.push({ lang, path: `turkey-sourcing-for-${corridor.id}`, key: 'trade-corridor', id: corridor.id });
       for (const id of legalIds) records.push({
-      lang, path:legal[id].slugs[lang], key:'legal', id
+      lang, path:(legal[id].slugs as any)[lang] || (legal[id].slugs as any).en, key:'legal', id
     });
     if (lang === 'tr' || lang === 'en') {
       for (const id of guideIds) records.push({
@@ -62,6 +62,10 @@ export function getMeta(record: RouteRecord) {
            lang === 'zh' ? 'CTSEG | 双向全球贸易、战略采购与市场进入' :
            lang === 'vi' ? 'CTSEG | Thương mại Toàn cầu, Sourcing Chiến lược & Thâm nhập Thị trường' :
            lang === 'ru' ? 'CTSEG | Международная торговля, стратегический сорсинг и выход на рынок' :
+           lang === 'uk' ? 'CTSEG | Глобальна торгівля, стратегічне постачання та вихід на ринок' :
+           lang === 'ro' ? 'CTSEG | Comerț global, sourcing strategic și intrare pe piață' :
+           lang === 'bg' ? 'CTSEG | Глобална търговия, стратегическо снабдяване и навлизане на пазара' :
+           lang === 'sr' ? 'CTSEG | Globalna trgovina, strateška nabavka i ulazak na tržište' :
            'CTSEG | Global Trade, Strategic Sourcing & Market Entry',
     description: lang === 'tr' ? 'CTSEG, Türkiye ile dünya pazarları arasında iki yönlü B2B ticaret, stratejik tedarik, tedarikçi doğrulama, RFQ yönetimi ve ihracat/pazara giriş koordinasyonu yürütür.' :
       lang === 'de' ? 'CTSEG verbindet die Türkei mit internationalen Märkten durch bidirektionalen B2B-Handel, strategische Beschaffung, Lieferantenprüfung, RFQ-Management und Markteintritt.' :
@@ -70,6 +74,10 @@ export function getMeta(record: RouteRecord) {
       lang === 'zh' ? 'CTSEG连接土耳其与全球市场，提供双向B2B贸易、战略采购、供应商核验、RFQ管理与跨境市场进入协调。' :
       lang === 'vi' ? 'CTSEG kết nối Thổ Nhĩ Kỳ với thị trường quốc tế thông qua thương mại B2B hai chiều, sourcing chiến lược, thẩm định nhà cung cấp, quản lý RFQ và thâm nhập thị trường.' :
       lang === 'ru' ? 'CTSEG связывает Турцию с международными рынками через двустороннюю B2B-торговлю, стратегический сорсинг, проверку поставщиков, RFQ и сопровождение выхода на рынок.' :
+      lang === 'uk' ? 'CTSEG координує двосторонню B2B торгівлю, стратегічне постачання, перевірку постачальників, RFQ та вихід на ринки між Türkiye, Україною та міжнародними ринками.' :
+      lang === 'ro' ? 'CTSEG coordonează comerț B2B bilateral, sourcing strategic, verificarea furnizorilor, RFQ și intrarea pe piață între Türkiye, România, Balcani și piețele internaționale.' :
+      lang === 'bg' ? 'CTSEG координира двустранна B2B търговия, стратегическо снабдяване, проверка на доставчици, RFQ и навлизане на пазари между Türkiye, България, Балканите и международните пазари.' :
+      lang === 'sr' ? 'CTSEG koordinira dvosmernu B2B trgovinu, stratešku nabavku, proveru dobavljača, RFQ i ulazak na tržište između Türkiye, Srbije, Balkana i međunarodnih tržišta.' :
       'CTSEG connects Türkiye with international markets through two-way B2B trade, strategic sourcing, supplier verification, RFQ management and market-entry coordination.'
   };
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — B2B Sourcing Advisory | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
