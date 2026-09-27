@@ -29,6 +29,15 @@ for(const [locale,path] of Object.entries(homes)){
   if(/<title>\s*undefined\b/i.test(html))errors.push(`${path}: undefined title regression`);
 }
 
+const ukSourceGuards = [
+  ['src/data/trade-markets.ts', /\bRyrok\b|description:\s*'Експортні рішення\.'|lead:\s*'Надійне B2B постачання\.'/],
+  ['src/data/trade-sectors.ts', /description:\s*'Опис'|lead:\s*'Лід'|items:\s*\[\]/],
+];
+for (const [source, pattern] of ukSourceGuards) {
+  const content=readFileSync(resolve(source),'utf8');
+  if(pattern.test(content))errors.push(`${source}: Ukrainian placeholder copy remains`);
+}
+
 const ruHome=read(homes.ru);
 if(!ruHome.includes('<html lang="ru" dir="ltr"'))errors.push('Russian homepage lang/direction incorrect');
 const ruH1Matches=[...ruHome.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)];

@@ -1,7 +1,7 @@
 ---
 import { contactCopy, whatsappHref, type ContactLocale } from '../data/contact-experience';
 const { lang } = Astro.props as { lang:ContactLocale };
-const copy = contactCopy[lang];
+const copy = contactCopy[lang] || contactCopy.en;
 ---
 <nav class="floating-actions" aria-label={copy.floatingLabel} data-floating-actions>
   <button class="floating-action back-to-top" type="button" aria-label={copy.backToTop} aria-hidden="true" tabindex="-1" data-back-to-top>

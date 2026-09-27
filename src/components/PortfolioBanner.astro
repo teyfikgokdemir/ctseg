@@ -3,7 +3,7 @@ import { editorialCopy, type Locale } from '../data/site';
 import ResponsiveImage from './ResponsiveImage.astro';
 import { FEATURE_IMAGE_WIDTHS, PORTFOLIO_IMAGE } from '../lib/responsive-images';
 const { lang } = Astro.props as { lang:Locale };
-const copy = editorialCopy[lang];
+const copy = editorialCopy[lang] || editorialCopy.en;
 const content = ({
   tr:{label:'Ticari portföy ve seçili çalışma alanları',eyebrow:'CTSEG · Seçili çalışma alanları',tag:'CTSEG / TRADE HOUSE',sectors:['Gıda & Tarım','Endüstriyel Tedarik','Medikal','Tekstil & Ev Yaşam']},
   en:{label:'Trade portfolio and selected mandates',eyebrow:'CTSEG · Selected mandates',tag:'CTSEG / TRADE HOUSE',sectors:['Food & Agriculture','Industrial Sourcing','Medical','Textiles & Home']},
