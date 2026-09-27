@@ -20,7 +20,10 @@ export const company = {
     ru: 'CTSEG Промышленно-Торговая Компания с Ограниченной Ответственностью',
     zh: 'CTSEG 工业与贸易有限公司',
     vi: 'Công ty TNHH Công nghiệp và Thương mại CTSEG',
-    uk: 'CTSEG Промислово-Торгова Компанія з Обмеженою Відповідальністю'
+    uk: 'CTSEG Промислово-Торгова Компанія з Обмеженою Відповідальністю',
+    ro: 'CTSEG Industry and Trade Limited Company',
+    bg: 'CTSEG Industry and Trade Limited Company',
+    sr: 'CTSEG Industry and Trade Limited Company'
   },
   alternateName: 'CTSEG',
   founder: 'Teyfik Gökdemir',
@@ -103,35 +106,37 @@ export const companyCopy: Record<Locale, {
     labels: { name: 'Tên công ty', founder: 'Người sáng lập', founded: 'Năm thành lập', headquarters: 'Trụ sở chính' },
     headquarters: 'Tuzla, Istanbul, Thổ Nhĩ Kỳ',
     footerLocation: 'Tuzla, Istanbul, Thổ Nhĩ Kỳ'
+  },,
+  ro: {
+    aboutHeading: 'Poarta dintre Türkiye și piețele internaționale',
+    aboutBody: 'CTSEG Industry and Trade Limited Company a fost fondată la Istanbul în 2022. CTSEG coordonează proiecte B2B de sourcing strategic, verificare a furnizorilor, RFQ și intrare pe piață între Türkiye, Balcani, Europa și piețe internaționale.',
+    labels: { name: 'Denumirea companiei', founder: 'Fondator', founded: 'Anul înființării', headquarters: 'Sediu' },
+    headquarters: 'Tuzla, Istanbul, Türkiye',
+    footerLocation: 'Tuzla, Istanbul, Türkiye'
   },
-  uk: {
-      servicesTitle: 'Експертиза для кожного етапу прийняття рішень щодо постачання.',
-      servicesLead: 'Ми поєднуємо стратегію, верифікацію, комерційний аналіз та виконання в рамках єдиної дисципліни прийняття рішень.',
-      productsTitle: 'Портфоліо комерційних продуктів',
-      productsLead: 'Один і той самий каталог оцінюється на кожному ринку завдяки прозорому походженню, якості на рівні партії та умовам, що підлягають перевірці.',
-      marketsTitle: 'З Туреччини на європейські та міжнародні ринки.',
-      marketsLead: 'Ми узгоджуємо місцеві виробничі реалії з регулюванням цільового ринку, очікуваннями покупців та моделями доставки.',
-      aboutTitle: 'Незалежний партнер з прийняття рішень, що зменшує невизначеність у торгівлі.',
-      aboutLead: 'CTSEG працює на основі доказів, прозорості та здійсненності у стратегічному пошуку постачальників.',
-      contactTitle: 'Почніть свій комерційний запит з чіткої оцінки.',
-      insightsTitle: 'Практична інформація для керівників.',
-      insightsLead: 'Короткі посібники на основі доказів щодо постачання, загальних витрат, походження, якості та комерційних ризиків.',
-      framework: ['Вимоги та специфікації', 'Перевірка контрагента та документів', 'Порівняння якості, вартості та ризиків', 'Прозорі рішення та облік'],
-      serviceFaq: ['Як розпочинається проект?', 'Масштаб, мета, ринок та терміни узгоджуються під час короткого кваліфікаційного дзвінка.', 'Чи діє CTSEG від імені постачальника?', 'CTSEG чітко заявляє про свої повноваження та комерційну роль.'],
-      productUses: ['Виробництво продуктів харчування', 'Оптова дистрибуція', 'HORECA та спеціалізований роздріб'],
-      productQuality: ['Вимоги щодо афлатоксинів', 'Вологість та мікробіологія', 'COA, код партії', 'Відповідність цільовому ринку'],
-      legalIntro: 'Це повідомлення містить прозору інформацію про використання веб-сайту CTSEG.',
-      legalSections: [['Сфера дії', 'CTSEG працює над тим, щоб корпоративна інформація була точною.'], ['Інформація та цілі', 'Ми обробляємо дані для відповіді на запити.'], ['Зберігання', 'Інформація надається лише необхідним провайдерам.'], ['Права', 'Для реалізації прав напишіть на info@ctseg.com.tr.']]
-    }
+  bg: {
+    aboutHeading: 'Търговски мост между Türkiye и международните пазари',
+    aboutBody: 'CTSEG Industry and Trade Limited Company е основана в Истанбул през 2022 г. CTSEG координира B2B стратегическо снабдяване, проверка на доставчици, RFQ процеси и навлизане на пазари между Türkiye, Балканите, Европа и международни пазари.',
+    labels: { name: 'Име на компанията', founder: 'Основател', founded: 'Година на основаване', headquarters: 'Централа' },
+    headquarters: 'Тузла, Истанбул, Türkiye',
+    footerLocation: 'Тузла, Истанбул, Türkiye'
+  },
+  sr: {
+    aboutHeading: 'Trgovinski most između Türkiye i međunarodnih tržišta',
+    aboutBody: 'CTSEG Industry and Trade Limited Company osnovan je u Istanbulu 2022. godine. CTSEG koordinira B2B stratešku nabavku, proveru dobavljača, RFQ procese i ulazak na tržište između Türkiye, Balkana, Evrope i međunarodnih tržišta.',
+    labels: { name: 'Naziv kompanije', founder: 'Osnivač', founded: 'Godina osnivanja', headquarters: 'Sedište' },
+    headquarters: 'Tuzla, Istanbul, Türkiye',
+    footerLocation: 'Tuzla, Istanbul, Türkiye'
+  }
 };
 
 export const sectionSlugs: Record<string, Localized> = {
-  services: { tr: 'hizmetler', en: 'services', de: 'dienstleistungen', it: 'servizi', ru: 'uslugi', fa: 'services', zh: 'services', vi: 'services', uk: 'services' },
-  products: { tr: 'ticari-urunler', en: 'trade-products', de: 'handelsprodukte', it: 'prodotti-commerciali', ru: 'tovary', fa: 'trade-products', zh: 'trade-products', vi: 'trade-products', uk: 'trade-products' },
-  markets: { tr: 'pazarlar', en: 'markets', de: 'maerkte', it: 'mercati', ru: 'rynki', fa: 'markets', zh: 'markets', vi: 'markets', uk: 'markets' },
-  insights: { tr: 'icgoruler', en: 'insights', de: 'einblicke', it: 'approfondimenti', ru: 'materialy', fa: 'insights', zh: 'insights', vi: 'insights', uk: 'insights' },
-  about: { tr: 'hakkimizda', en: 'about', de: 'ueber-uns', it: 'chi-siamo', ru: 'o-kompanii', fa: 'about', zh: 'about', vi: 'about', uk: 'about' },
-  contact: { tr: 'iletisim', en: 'contact', de: 'kontakt', it: 'contatti', ru: 'kontakty', fa: 'contact', zh: 'contact', vi: 'contact', uk: 'contact' }
+  services: { tr: 'hizmetler', en: 'services', de: 'dienstleistungen', it: 'servizi', ru: 'uslugi', fa: 'services', zh: 'services', vi: 'services', uk: 'services', ro: 'servicii', bg: 'uslugi', sr: 'usluge' },
+  products: { tr: 'ticari-urunler', en: 'trade-products', de: 'handelsprodukte', it: 'prodotti-commerciali', ru: 'tovary', fa: 'trade-products', zh: 'trade-products', vi: 'trade-products', uk: 'trade-products', ro: 'produse-comerciale', bg: 'targovski-produkti', sr: 'trgovinski-proizvodi' },
+  markets: { tr: 'pazarlar', en: 'markets', de: 'maerkte', it: 'mercati', ru: 'rynki', fa: 'markets', zh: 'markets', vi: 'markets', uk: 'markets', ro: 'piete', bg: 'pazari', sr: 'trzista' },
+  insights: { tr: 'icgoruler', en: 'insights', de: 'einblicke', it: 'approfondimenti', ru: 'materialy', fa: 'insights', zh: 'insights', vi: 'insights', uk: 'insights', ro: 'analize', bg: 'analizi', sr: 'uvidi' },
+  about: { tr: 'hakkimizda', en: 'about', de: 'ueber-uns', it: 'chi-siamo', ru: 'o-kompanii', fa: 'about', zh: 'about', vi: 'about', uk: 'about', ro: 'despre-noi', bg: 'za-nas', sr: 'o-nama' },
+  contact: { tr: 'iletisim', en: 'contact', de: 'kontakt', it: 'contatti', ru: 'kontakty', fa: 'contact', zh: 'contact', vi: 'contact', uk: 'contact', ro: 'contact', bg: 'kontakti', sr: 'kontakt' }
 };
 
 export const ui: Record<string, {
@@ -247,12 +252,58 @@ export const ui: Record<string, {
     contactLead: 'Hãy chia sẻ thông tin doanh nghiệp, nhu cầu, sản lượng dự kiến và quốc gia giao hàng. Đội ngũ của chúng tôi sẽ xác định phương án đánh giá thương mại phù hợp.',
     emptyInsights: 'Chưa có bài viết nào bằng ngôn ngữ này.'
   },
+
   uk: {
-    description: 'B2B пошук в Туреччині',
-    home: 'Головна',
-    markets: 'Ринки',
-    products: 'Продукти',
-    contact: 'Контакти'
+    home: 'Головна', services: 'Послуги', products: 'Торговий портфель', markets: 'Ринки', insights: 'Аналітика',
+    about: 'Про компанію', contact: 'Контакти', quote: 'Надіслати запит', menu: 'Відкрити меню', close: 'Закрити меню', medicalLabel: '',
+    language: 'Вибір мови', readMore: 'Детальніше', allProducts: 'Переглянути всі продукти', allServices: 'Переглянути всі послуги',
+    origin: 'Прозоре походження', quality: 'Якість і відповідність', logistics: 'Комерційна оцінка', applications: 'Сфери застосування',
+    faq: 'Поширені запитання', related: 'Пов’язані рішення', updated: 'Останнє оновлення', details: 'Деталі',
+    cookieTitle: 'Налаштування cookies', cookieCopy: 'Аналітичні cookies використовуються лише за вашою згодою. Необхідні cookies завжди активні.',
+    accept: 'Прийняти', reject: 'Відхилити', rights: 'Усі права захищені.',
+    samplePolicy: 'Політика зразків', sampleText: 'Зразки розглядаються після попередньої кваліфікації серйозних B2B покупців із підтвердженими даними компанії, застосуванням, орієнтовним обсягом і країною доставки.',
+    complianceText: 'Фактичне походження, виробник і документи партії декларуються прозоро. CTSEG не підтримує приховування походження або оманливе перемаркування.',
+    contactLead: 'Вкажіть компанію, потребу, орієнтовний обсяг і країну доставки. Наша команда визначить відповідний шлях комерційної оцінки.',
+    emptyInsights: 'Цією мовою аналітичні матеріали ще не опубліковані.'
+  },
+  ro: {
+    home: 'Acasă', services: 'Servicii', products: 'Portofoliu comercial', markets: 'Piețe', insights: 'Analize',
+    about: 'Despre noi', contact: 'Contact', quote: 'Solicită ofertă', menu: 'Deschide meniul', close: 'Închide meniul', medicalLabel: '',
+    language: 'Selectarea limbii', readMore: 'Detalii', allProducts: 'Vezi toate produsele', allServices: 'Vezi toate serviciile',
+    origin: 'Origine transparentă', quality: 'Calitate și conformitate', logistics: 'Evaluare comercială', applications: 'Aplicații',
+    faq: 'Întrebări frecvente', related: 'Soluții conexe', updated: 'Ultima actualizare', details: 'Detalii',
+    cookieTitle: 'Preferințe cookie', cookieCopy: 'Folosim cookie-uri analitice doar cu acordul dvs. Cookie-urile esențiale sunt întotdeauna active.',
+    accept: 'Acceptă', reject: 'Respinge', rights: 'Toate drepturile rezervate.',
+    samplePolicy: 'Politica de mostre', sampleText: 'Mostrele sunt evaluate după precalificarea cumpărătorilor B2B serioși, cu compania, aplicația, volumul estimativ și țara de livrare verificate.',
+    complianceText: 'Originea reală, producătorul și documentele de lot sunt declarate transparent. CTSEG nu sprijină ascunderea originii sau reetichetarea înșelătoare.',
+    contactLead: 'Trimiteți compania, cerința, volumul estimativ și țara de livrare. Echipa noastră va stabili traseul de evaluare comercială potrivit.',
+    emptyInsights: 'Nu există încă analize publicate în această limbă.'
+  },
+  bg: {
+    home: 'Начало', services: 'Услуги', products: 'Търговско портфолио', markets: 'Пазари', insights: 'Анализи',
+    about: 'За нас', contact: 'Контакти', quote: 'Поискайте оферта', menu: 'Отвори меню', close: 'Затвори меню', medicalLabel: '',
+    language: 'Избор на език', readMore: 'Виж повече', allProducts: 'Всички продукти', allServices: 'Всички услуги',
+    origin: 'Прозрачен произход', quality: 'Качество и съответствие', logistics: 'Търговска оценка', applications: 'Приложения',
+    faq: 'Често задавани въпроси', related: 'Свързани решения', updated: 'Последна актуализация', details: 'Детайли',
+    cookieTitle: 'Настройки за бисквитки', cookieCopy: 'Използваме аналитични бисквитки само с ваше съгласие. Необходимите бисквитки са винаги активни.',
+    accept: 'Приемам', reject: 'Отказвам', rights: 'Всички права запазени.',
+    samplePolicy: 'Политика за мостри', sampleText: 'Мостри се разглеждат след предварителна квалификация на сериозни B2B купувачи с потвърдени фирмени данни, приложение, ориентировъчен обем и държава на доставка.',
+    complianceText: 'Реалният произход, производителят и партидните документи се декларират прозрачно. CTSEG не подкрепя прикриване на произход или подвеждащо преетикетиране.',
+    contactLead: 'Споделете фирмата, нуждата, ориентировъчния обем и държавата на доставка. Екипът ни ще определи подходящия път за търговска оценка.',
+    emptyInsights: 'Все още няма публикувани анализи на този език.'
+  },
+  sr: {
+    home: 'Početna', services: 'Usluge', products: 'Trgovinski portfolio', markets: 'Tržišta', insights: 'Uvidi',
+    about: 'O nama', contact: 'Kontakt', quote: 'Zatraži ponudu', menu: 'Otvori meni', close: 'Zatvori meni', medicalLabel: '',
+    language: 'Izbor jezika', readMore: 'Detaljnije', allProducts: 'Pogledaj sve proizvode', allServices: 'Pogledaj sve usluge',
+    origin: 'Transparentno poreklo', quality: 'Kvalitet i usklađenost', logistics: 'Komercijalna procena', applications: 'Primene',
+    faq: 'Česta pitanja', related: 'Povezana rešenja', updated: 'Poslednje ažuriranje', details: 'Detalji',
+    cookieTitle: 'Podešavanja kolačića', cookieCopy: 'Analitičke kolačiće koristimo samo uz vaš pristanak. Neophodni kolačići su uvek aktivni.',
+    accept: 'Prihvati', reject: 'Odbij', rights: 'Sva prava zadržana.',
+    samplePolicy: 'Politika uzoraka', sampleText: 'Uzorci se razmatraju nakon predkvalifikacije ozbiljnih B2B kupaca sa potvrđenim podacima o kompaniji, nameni, okvirnom obimu i zemlji isporuke.',
+    complianceText: 'Stvarno poreklo, proizvođač i dokumentacija serije navode se transparentno. CTSEG ne podržava prikrivanje porekla ili obmanjujuće preetiketiranje.',
+    contactLead: 'Pošaljite podatke o kompaniji, potrebi, okvirnom obimu i zemlji isporuke. Naš tim će definisati odgovarajući put komercijalne procene.',
+    emptyInsights: 'Još nema objavljenih uvida na ovom jeziku.'
   }
 };
 
@@ -367,6 +418,39 @@ export const homeCopy: Record<Locale, {
       processTitle: 'Контрольований прогрес у чотири кроки',
       process: ['Визначення потреби', 'Перевірка ринку та сторін', 'Порівняння загальної картини', 'Моніторинг виконання'],
       ctaTitle: 'Приймайте наступне рішення на основі доказів.'
+    },
+    ro: {
+      eyebrow: 'Sourcing strategic · comerț internațional', title: 'Claritate comercială pentru decizii complexe de aprovizionare.',
+      lead: 'Combinăm identificarea producătorilor, verificarea, calitatea, costul total și potrivirea cu piața într-un proces disciplinat de decizie.',
+      signal: 'CTSEG Signal Room', live: 'Evaluare activă', signals: [['SOURCING', 'Producător și capacitate'], ['CALITATE', 'COA și trasabilitate'], ['PIAȚĂ', 'Conformitate și livrare']],
+      trust: ['Contrapărți verificate', 'Origine transparentă', 'Disciplină B2B', 'Türkiye · Balcani · Europa'],
+      servicesTitle: 'Mai mult decât o listă de achiziții.', servicesLead: 'Structurăm întregul proces, de la cerință și verificare până la ofertă și execuție.',
+      productsTitle: 'Un portofoliu comercial verificabil.', productsLead: 'Produse evaluate transparent după origine, lot, parametri de calitate și opțiuni de livrare.',
+      marketsTitle: 'Legături comerciale aplicabile între piețe.', marketsLead: 'Coordonare de sourcing și comerț din Türkiye către Balcani, Europa și piețe internaționale.',
+      processTitle: 'Progres controlat în patru pași', process: ['Definirea cerinței', 'Verificarea pieței și a părților', 'Compararea tabloului comercial total', 'Monitorizarea execuției'],
+      ctaTitle: 'Fundamentați următoarea decizie comercială pe dovezi.'
+    },
+    bg: {
+      eyebrow: 'Стратегическо снабдяване · международна търговия', title: 'Търговска яснота при сложни решения за снабдяване.',
+      lead: 'Обединяваме откриване на производители, проверка, качество, обща цена и пазарна пригодност в дисциплиниран процес за вземане на решения.',
+      signal: 'CTSEG Signal Room', live: 'Активна оценка', signals: [['СНАБДЯВАНЕ', 'Производител и капацитет'], ['КАЧЕСТВО', 'COA и проследимост'], ['ПАЗАР', 'Съответствие и доставка']],
+      trust: ['Проверени контрагенти', 'Прозрачен произход', 'B2B дисциплина', 'Türkiye · Балкани · Европа'],
+      servicesTitle: 'Повече от списък за покупки.', servicesLead: 'Структурираме целия процес — от изискването и проверката до офертата и изпълнението.',
+      productsTitle: 'Проверимо търговско портфолио.', productsLead: 'Продукти, оценявани прозрачно по произход, партида, качество и възможности за доставка.',
+      marketsTitle: 'Практични връзки между пазари.', marketsLead: 'Координация на снабдяване и търговия от Türkiye към Балканите, Европа и международни пазари.',
+      processTitle: 'Контролиран напредък в четири стъпки', process: ['Определяне на нуждата', 'Проверка на пазара и страните', 'Сравнение на общата търговска картина', 'Мониторинг на изпълнението'],
+      ctaTitle: 'Основавайте следващото си решение на проверими данни.'
+    },
+    sr: {
+      eyebrow: 'Strateška nabavka · međunarodna trgovina', title: 'Komercijalna jasnoća za složene odluke o nabavci.',
+      lead: 'Povezujemo pronalaženje proizvođača, proveru, kvalitet, ukupni trošak i tržišnu usklađenost u disciplinovan proces odlučivanja.',
+      signal: 'CTSEG Signal Room', live: 'Aktivna procena', signals: [['NABAVKA', 'Proizvođač i kapacitet'], ['KVALITET', 'COA i sledljivost'], ['TRŽIŠTE', 'Usklađenost i isporuka']],
+      trust: ['Provereni partneri', 'Transparentno poreklo', 'B2B disciplina', 'Türkiye · Balkan · Evropa'],
+      servicesTitle: 'Više od spiska za nabavku.', servicesLead: 'Strukturišemo ceo proces — od zahteva i provere do ponude i realizacije.',
+      productsTitle: 'Proverljiv trgovinski portfolio.', productsLead: 'Proizvodi procenjeni transparentno prema poreklu, seriji, kvalitetu i opcijama isporuke.',
+      marketsTitle: 'Primenljive veze između tržišta.', marketsLead: 'Koordinacija nabavke i trgovine iz Türkiye ka Balkanu, Evropi i međunarodnim tržištima.',
+      processTitle: 'Kontrolisan napredak u četiri koraka', process: ['Definisanje zahteva', 'Provera tržišta i strana', 'Poređenje ukupne komercijalne slike', 'Praćenje realizacije'],
+      ctaTitle: 'Zasnujte sledeću komercijalnu odluku na dokazima.'
     }
   };
 
@@ -1370,6 +1454,45 @@ export const pageCopy: Record<Locale, any> = {
     productQuality:['Вимоги до контролю афлатоксинів та залишків пестицидів','Вологість, мікробіологія та стандартні фізичні характеристики','Сертифікат аналізу (COA), код партії та відстежуваність','Повна відповідність нормам цільового ринку'],
     legalIntro:'Це повідомлення забезпечує прозорість щодо використання веб-сайту CTSEG і пов\'язаної обробки даних.',
     legalSections:[['Сфера та відповідальність','CTSEG прагне підтримувати точність корпоративної та комерційної інформації на цьому веб-сайті. Запити щодо конфіденційності та захисту даних можна надсилати на info@ctseg.com.tr.'],['Обробка інформації та цілі','Коли ви звертаєтеся до нас, ми можемо обробляти ваше ім\'я, компанію, електронну адресу, номер телефону та інформацію про комерційні потреби, а також технічні журнали в межах цілей безпеки. Ці дані використовуються для відповіді на запити, оцінки партнерства та виконання правових зобов\'язань.'],['Обмін даними, зберігання та безпека','Інформація надається лише необхідним постачальникам послуг хостингу, електронної пошти чи ІТ-підтримки, або уповноваженим органам відповідно до вимог законодавства. Дані будуть видалені або анонімізовані, коли юридичний термін зберігання закінчиться.'],['Ваші права та контакти','Щоб скористатися своїм правом на доступ, виправлення, видалення або заперечення проти обробки даних, надішліть свій запит із ідентифікаційною інформацією на info@ctseg.com.tr.']]
+  },
+  ro:{
+    servicesTitle:'Expertiză pentru fiecare etapă a deciziei de sourcing.',servicesLead:'Combinăm strategia, verificarea, analiza comercială și execuția într-o singură disciplină de decizie.',
+    productsTitle:'Portofoliu de produse comerciale',productsLead:'Același portofoliu este evaluat prin origine transparentă, calitate la nivel de lot și termeni comerciali verificabili.',
+    marketsTitle:'Din Türkiye către Balcani, Europa și piețe internaționale.',marketsLead:'Corelăm realitatea producției cu reglementările pieței țintă, așteptările cumpărătorilor și modelele de livrare executabile.',
+    aboutTitle:'Partener independent de decizie care reduce incertitudinea în comerț.',aboutLead:'CTSEG lucrează cu dovezi, transparență și fezabilitate în proiecte de sourcing strategic și comerț internațional.',
+    contactTitle:'Începeți cererea comercială cu o evaluare clară.',insightsTitle:'Analize practice pentru decidenți.',insightsLead:'Ghiduri concise bazate pe dovezi despre sourcing, cost total, origine, calitate și risc comercial.',
+    framework:['Cerințe și specificații','Verificarea părților și documentelor','Compararea calității, costului și riscului','Decizie transparentă și urmărirea execuției'],
+    serviceFaq:['Cum începe proiectul?','Domeniul, obiectivul, piața și calendarul sunt clarificate într-o scurtă discuție de calificare.','CTSEG acționează în numele furnizorului?','CTSEG își declară clar mandatul și rolul comercial și documentează criteriile de evaluare.'],
+    productUses:['Producție alimentară și aplicații industriale','Distribuție angro și private label','HORECA și retail specializat'],
+    productQuality:['Cerințe de aflatoxine și pesticide','Umiditate, microbiologie și specificații','COA, cod lot și trasabilitate','Conformitate cu piața țintă'],
+    legalIntro:'Această notificare oferă informații transparente despre utilizarea site-ului CTSEG.',
+    legalSections:[['Domeniu','CTSEG urmărește menținerea exactității informațiilor corporative și comerciale.'],['Date și scop','Datele furnizate sunt prelucrate pentru a răspunde solicitărilor comerciale.'],['Păstrare și securitate','Datele sunt partajate doar cu furnizorii necesari și conform legislației aplicabile.'],['Drepturi','Pentru exercitarea drepturilor, contactați info@ctseg.com.tr.']]
+  },
+  bg:{
+    servicesTitle:'Експертиза за всеки етап от решението за снабдяване.',servicesLead:'Обединяваме стратегия, проверка, търговски анализ и изпълнение в единна дисциплина за вземане на решения.',
+    productsTitle:'Търговско продуктово портфолио',productsLead:'Едно и също портфолио се оценява чрез прозрачен произход, качество на ниво партида и проверими търговски условия.',
+    marketsTitle:'От Türkiye към Балканите, Европа и международните пазари.',marketsLead:'Свързваме местното производство с регулациите на целевия пазар, очакванията на купувачите и изпълними модели за доставка.',
+    aboutTitle:'Независим партньор за решения, който намалява несигурността в търговията.',aboutLead:'CTSEG работи чрез доказателства, прозрачност и изпълнимост в стратегическото снабдяване и международната търговия.',
+    contactTitle:'Започнете търговското си запитване с ясна оценка.',insightsTitle:'Практични анализи за вземащите решения.',insightsLead:'Кратки ръководства, базирани на доказателства, за снабдяване, обща цена, произход, качество и търговски риск.',
+    framework:['Изисквания и спецификации','Проверка на контрагент и документи','Сравнение на качество, цена и риск','Прозрачно решение и проследяване'],
+    serviceFaq:['Как започва проектът?','Обхватът, целта, пазарът и сроковете се уточняват в кратък квалификационен разговор.','CTSEG действа ли от името на доставчик?','CTSEG ясно декларира своя мандат и търговска роля и документира критериите за оценка.'],
+    productUses:['Хранително производство и индустриални приложения','Дистрибуция на едро и private label','HORECA и специализиран ритейл'],
+    productQuality:['Изисквания за афлатоксини и пестициди','Влажност, микробиология и спецификация','COA, партиден код и проследимост','Съответствие с целевия пазар'],
+    legalIntro:'Това уведомление предоставя прозрачна информация за използването на сайта CTSEG.',
+    legalSections:[['Обхват','CTSEG се стреми да поддържа точна корпоративна и търговска информация.'],['Данни и цел','Предоставените данни се обработват за отговор на търговски запитвания.'],['Съхранение и сигурност','Данните се споделят само с необходимите доставчици съгласно приложимото право.'],['Права','За упражняване на права пишете на info@ctseg.com.tr.']]
+  },
+  sr:{
+    servicesTitle:'Ekspertiza za svaku fazu odluke o nabavci.',servicesLead:'Povezujemo strategiju, proveru, komercijalnu analizu i realizaciju u jednu disciplinu odlučivanja.',
+    productsTitle:'Trgovinski portfolio proizvoda',productsLead:'Isti portfolio se procenjuje kroz transparentno poreklo, kvalitet na nivou serije i proverljive komercijalne uslove.',
+    marketsTitle:'Iz Türkiye ka Balkanu, Evropi i međunarodnim tržištima.',marketsLead:'Povezujemo realnost proizvodnje sa pravilima ciljnog tržišta, očekivanjima kupaca i izvodljivim modelima isporuke.',
+    aboutTitle:'Nezavisan partner za odluke koji smanjuje neizvesnost u trgovini.',aboutLead:'CTSEG radi kroz dokaze, transparentnost i izvodljivost u strateškoj nabavci i međunarodnoj trgovini.',
+    contactTitle:'Započnite komercijalni zahtev jasnom procenom.',insightsTitle:'Praktični uvidi za donosioce odluka.',insightsLead:'Kratki vodiči zasnovani na dokazima o nabavci, ukupnom trošku, poreklu, kvalitetu i komercijalnom riziku.',
+    framework:['Zahtevi i specifikacije','Provera partnera i dokumenata','Poređenje kvaliteta, troška i rizika','Transparentna odluka i praćenje realizacije'],
+    serviceFaq:['Kako počinje projekat?','Obim, cilj, tržište i rokovi definišu se kroz kratak kvalifikacioni razgovor.','Da li CTSEG zastupa dobavljača?','CTSEG jasno navodi mandat i komercijalnu ulogu i dokumentuje kriterijume procene.'],
+    productUses:['Prehrambena proizvodnja i industrijske primene','Veleprodajna distribucija i private label','HORECA i specijalizovana maloprodaja'],
+    productQuality:['Zahtevi za aflatoksine i pesticide','Vlaga, mikrobiologija i specifikacija','COA, kod serije i sledljivost','Usklađenost sa ciljnim tržištem'],
+    legalIntro:'Ovo obaveštenje pruža transparentne informacije o korišćenju CTSEG sajta.',
+    legalSections:[['Obim','CTSEG nastoji da korporativne i komercijalne informacije budu tačne.'],['Podaci i svrha','Dostavljeni podaci obrađuju se radi odgovora na komercijalne zahteve.'],['Čuvanje i bezbednost','Podaci se dele samo sa neophodnim pružaocima usluga u skladu sa važećim pravom.'],['Prava','Za ostvarivanje prava pišite na info@ctseg.com.tr.']]
   }
 };
 
@@ -1397,29 +1520,10 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
 }
 
 export function routeAlternates(key: string, id?: string): Record<string, string> {
-  if (key === 'medical') {
-    return {
-      tr: 'https://ctseg.com.tr/medical/reflex-disposable-gloves/',
-      en: 'https://ctseg.com.tr/en/medical/reflex-disposable-gloves/',
-      de: 'https://ctseg.com.tr/de/medical/reflex-disposable-gloves/',
-      it: 'https://ctseg.com.tr/it/medical/reflex-disposable-gloves/',
-      ru: 'https://ctseg.com.tr/ru/medical/reflex-disposable-gloves/',
-      fa: 'https://ctseg.com.tr/fa/medical/reflex-disposable-gloves/',
-      zh: 'https://ctseg.com.tr/zh/medical/reflex-disposable-gloves/',
-      vi: 'https://ctseg.com.tr/vi/medical/reflex-disposable-gloves/',
-      sq: 'https://ctseg.com.tr/sq/medical/reflex-disposable-gloves/',
-      mk: 'https://ctseg.com.tr/mk/medical/reflex-disposable-gloves/',
-      sr: 'https://ctseg.com.tr/sr/medical/reflex-disposable-gloves/'
-    };
-  }
   return Object.fromEntries(locales.map((lang) => [lang, `https://ctseg.com.tr${localizedPath(lang, key, id)}`])) as Record<Locale, string>;
 }
 
 
 
-ui.ro = ui.en; ui.bg = ui.en; ui.sr = ui.en;
-company.name.ro = company.name.en; company.name.bg = company.name.en; company.name.sr = company.name.en;
 
 
-ui.ro = ui.en; ui.bg = ui.en; ui.sr = ui.en;
-company.name.ro = company.name.en; company.name.bg = company.name.en; company.name.sr = company.name.en;
