@@ -80,12 +80,12 @@ export function getMeta(record: RouteRecord) {
       lang === 'sr' ? 'CTSEG koordinira dvosmernu B2B trgovinu, stratešku nabavku, proveru dobavljača, RFQ i ulazak na tržište između Türkiye, Srbije, Balkana i međunarodnih tržišta.' :
       'CTSEG connects Türkiye with international markets through two-way B2B trade, strategic sourcing, supplier verification, RFQ management and market-entry coordination.'
   };
-  if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — B2B Sourcing Advisory | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
-  if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} — Wholesale B2B | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
-  if (key === 'insights' && id) return { title:`${insights[id as keyof typeof insights].titles[lang]} | CTSEG`, description:insights[id as keyof typeof insights].descriptions[lang] };
+  if (key === 'services' && id) { const item=services[id as keyof typeof services]; const name=(item.names as any)[lang] || item.names.en; const description=(item.descriptions as any)[lang] || item.descriptions.en; return { title:`${name} — B2B Sourcing Advisory | CTSEG`, description }; }
+  if (key === 'products' && id) { const item=products[id as keyof typeof products]; const name=(item.names as any)[lang] || item.names.en; const description=(item.descriptions as any)[lang] || item.descriptions.en; return { title:`${name} — Wholesale B2B | CTSEG`, description }; }
+  if (key === 'insights' && id) { const item=insights[id as keyof typeof insights]; const title=(item.titles as any)[lang] || item.titles.en; const description=(item.descriptions as any)[lang] || item.descriptions.en; return { title:`${title} | CTSEG`, description }; }
   if (key === 'trade-corridor' && id) { const corridor = tradeCorridors.find(c => c.id === id); if (corridor) return { title: corridor.seoMeta.title, description: corridor.seoMeta.description }; }
-    if (key === 'how-we-work') return {title:`${processPages[lang].title} | CTSEG`,description:processPages[lang].description};
-  if (key === 'scenarios') return {title:`${scenarioPages[lang].title} | CTSEG`,description:scenarioPages[lang].description};
+  if (key === 'how-we-work') { const item=(processPages as any)[lang] || (processPages as any).en; return {title:`${item.title} | CTSEG`,description:item.description}; }
+  if (key === 'scenarios') { const item=(scenarioPages as any)[lang] || (scenarioPages as any).en; return {title:`${item.title} | CTSEG`,description:item.description}; }
   if (key === 'search-landing' && id) {
     const landing=searchLandings[id as keyof typeof searchLandings].content[lang as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']] || searchLandings[id as keyof typeof searchLandings].content['en' as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']];
     return {title:`${landing.title} | CTSEG`,description:landing.description};
@@ -96,8 +96,8 @@ export function getMeta(record: RouteRecord) {
     return {title:`${guide.title} | CTSEG`,description:guide.description};
   }
   if (key === 'legal' && id) return {
-    title:`${legal[id as keyof typeof legal].titles[lang]} | CTSEG`,
-    description:`${legal[id as keyof typeof legal].titles[lang]}. ${copy.legalIntro}`
+    title:`${(legal[id as keyof typeof legal].titles as any)[lang] || legal[id as keyof typeof legal].titles.en} | CTSEG`,
+    description:`${(legal[id as keyof typeof legal].titles as any)[lang] || legal[id as keyof typeof legal].titles.en}. ${copy.legalIntro}`
   };
   const map: Record<string, [string,string]> = {
     services:[copy.servicesTitle,copy.servicesLead], products:[copy.productsTitle,copy.productsLead],
