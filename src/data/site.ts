@@ -150,7 +150,7 @@ export const ui: Record<string, {
 }> = {
   tr: {
     home: 'Ana Sayfa', services: 'Hizmetler', products: 'Ticari Ürünler', markets: 'Pazarlar', insights: 'İçgörüler',
-    about: 'Hakkımızda', contact: 'İletişim', quote: 'Teklif İste', menu: 'Menüyü aç', close: 'Menüyü kapat', medicalLabel: 'REFLEX Medikal',
+    about: 'Hakkımızda', contact: 'İletişim', quote: 'Teklif İste', menu: 'Menüyü aç', close: 'Menüyü kapat', medicalLabel: '',
     language: 'Dil seçimi', readMore: 'İncele', allProducts: 'Tüm ürünleri görüntüle', allServices: 'Tüm hizmetleri görüntüle',
     origin: 'Menşe şeffaflığı', quality: 'Kalite ve uyum', logistics: 'Ticari değerlendirme', applications: 'Kullanım alanları',
     faq: 'Sık sorulan sorular', related: 'İlgili çözümler', updated: 'Son güncelleme', details: 'Detaylar',
@@ -163,7 +163,7 @@ export const ui: Record<string, {
   },
   en: {
     home: 'Home', services: 'Services', products: 'Trade Products', markets: 'Markets', insights: 'Insights',
-    about: 'About', contact: 'Contact', quote: 'Request a Quote', menu: 'Open menu', close: 'Close menu', medicalLabel: 'REFLEX Medical',
+    about: 'About', contact: 'Contact', quote: 'Request a Quote', menu: 'Open menu', close: 'Close menu', medicalLabel: '',
     language: 'Language selection', readMore: 'Explore', allProducts: 'View all products', allServices: 'View all services',
     origin: 'Origin transparency', quality: 'Quality & compliance', logistics: 'Commercial assessment', applications: 'Applications',
     faq: 'Frequently asked questions', related: 'Related solutions', updated: 'Last updated', details: 'Details',
@@ -176,7 +176,7 @@ export const ui: Record<string, {
   },
   de: {
     home: 'Startseite', services: 'Dienstleistungen', products: 'Handelsprodukte', markets: 'Märkte', insights: 'Einblicke',
-    about: 'Über uns', contact: 'Kontakt', quote: 'Angebot anfragen', menu: 'Menü öffnen', close: 'Menü schließen', medicalLabel: 'REFLEX Medizin',
+    about: 'Über uns', contact: 'Kontakt', quote: 'Angebot anfragen', menu: 'Menü öffnen', close: 'Menü schließen', medicalLabel: '',
     language: 'Sprachauswahl', readMore: 'Entdecken', allProducts: 'Alle Produkte ansehen', allServices: 'Alle Dienstleistungen ansehen',
     origin: 'Transparente Herkunft', quality: 'Qualität & Konformität', logistics: 'Kaufmännische Bewertung', applications: 'Anwendungen',
     faq: 'Häufig gestellte Fragen', related: 'Verwandte Lösungen', updated: 'Letzte Aktualisierung', details: 'Details',
@@ -189,7 +189,7 @@ export const ui: Record<string, {
   },
   it: {
     home: 'Home', services: 'Servizi', products: 'Prodotti commerciali', markets: 'Mercati', insights: 'Approfondimenti',
-    about: 'Chi siamo', contact: 'Contatti', quote: 'Richiedi un’offerta', menu: 'Apri menu', close: 'Chiudi menu', medicalLabel: 'REFLEX Medicale',
+    about: 'Chi siamo', contact: 'Contatti', quote: 'Richiedi un’offerta', menu: 'Apri menu', close: 'Chiudi menu', medicalLabel: '',
     language: 'Selezione lingua', readMore: 'Scopri', allProducts: 'Vedi tutti i prodotti', allServices: 'Vedi tutti i servizi',
     origin: 'Trasparenza dell’origine', quality: 'Qualità e conformità', logistics: 'Valutazione commerciale', applications: 'Applicazioni',
     faq: 'Domande frequenti', related: 'Soluzioni correlate', updated: 'Ultimo aggiornamento', details: 'Dettagli',
@@ -202,7 +202,7 @@ export const ui: Record<string, {
   },
   ru: {
     home: 'Главная', services: 'Услуги', products: 'Товары', markets: 'Рынки', insights: 'Материалы',
-    about: 'О компании', contact: 'Контакты', quote: 'Запросить коммерческое предложение', menu: 'Открыть меню', close: 'Закрыть меню', medicalLabel: 'REFLEX Медицина',
+    about: 'О компании', contact: 'Контакты', quote: 'Запросить коммерческое предложение', menu: 'Открыть меню', close: 'Закрыть меню', medicalLabel: '',
     language: 'Выбор языка', readMore: 'Подробнее', allProducts: 'Все направления', allServices: 'Все услуги',
     origin: 'Прозрачность происхождения', quality: 'Качество и стандарты', logistics: 'Коммерческая оценка', applications: 'Области применения',
     faq: 'Частые вопросы', related: 'Связанные решения', updated: 'Обновлено', details: 'Подробнее',
@@ -215,7 +215,7 @@ export const ui: Record<string, {
   },
   fa: {
     home: 'صفحه اصلی', services: 'خدمات', products: 'محصولات تجاری', markets: 'بازارها', insights: 'تحلیل‌ها',
-    about: 'درباره ما', contact: 'تماس', quote: 'درخواست پیش‌فاکتور', menu: 'باز کردن منو', close: 'بستن منو', medicalLabel: 'دستکش‌های پزشکی REFLEX',
+    about: 'درباره ما', contact: 'تماس', quote: 'درخواست پیش‌فاکتور', menu: 'باز کردن منو', close: 'بستن منو', medicalLabel: '',
     language: 'انتخاب زبان', readMore: 'مشاهده', allProducts: 'مشاهده همه محصولات', allServices: 'مشاهده همه خدمات',
     origin: 'شفافیت مبدأ', quality: 'کیفیت و انطباق', logistics: 'ارزیابی تجاری', applications: 'کاربردها',
     faq: 'پرسش‌های متداول', related: 'راهکارهای مرتبط', updated: 'آخرین به‌روزرسانی', details: 'جزئیات',
@@ -228,7 +228,7 @@ export const ui: Record<string, {
   },
   zh: {
     home: '首页', services: '核心业务', products: '大宗与特色商品', markets: '贸易走廊', insights: '商业内参',
-    about: '关于我们', contact: '商务对接', quote: '发起询价', menu: '打开导航', close: '关闭导航', medicalLabel: 'REFLEX 医用手套',
+    about: '关于我们', contact: '商务对接', quote: '发起询价', menu: '打开导航', close: '关闭导航', medicalLabel: '',
     language: '语言选择', readMore: '了解详情', allProducts: '查看全部产品', allServices: '查看全部业务',
     origin: '产地与溯源透明度', quality: '品质与合规标准', logistics: '商业可行性评估', applications: '应用场景',
     faq: '常见商务问答', related: '相关解决方案', updated: '最近更新', details: '详细说明',
@@ -241,7 +241,7 @@ export const ui: Record<string, {
   },
   vi: {
     home: 'Trang chủ', services: 'Dịch vụ', products: 'Sản phẩm thương mại', markets: 'Thị trường', insights: 'Góc nhìn chuyên sâu',
-    about: 'Về chúng tôi', contact: 'Liên hệ', quote: 'Yêu cầu báo giá', menu: 'Mở menu', close: 'Đóng menu', medicalLabel: 'Găng tay REFLEX',
+    about: 'Về chúng tôi', contact: 'Liên hệ', quote: 'Yêu cầu báo giá', menu: 'Mở menu', close: 'Đóng menu', medicalLabel: '',
     language: 'Chọn ngôn ngữ', readMore: 'Khám phá', allProducts: 'Xem tất cả sản phẩm', allServices: 'Xem tất cả dịch vụ',
     origin: 'Minh bạch nguồn gốc', quality: 'Chất lượng & tuân thủ', logistics: 'Đánh giá thương mại', applications: 'Ứng dụng',
     faq: 'Câu hỏi thường gặp', related: 'Giải pháp liên quan', updated: 'Cập nhật lần cuối', details: 'Chi tiết',
@@ -1498,9 +1498,8 @@ export const pageCopy: Record<Locale, any> = {
 
 export function localizedPath(lang: Locale | string, key: string, id?: string): string {
   const safeLang = (locales as readonly string[]).includes(lang) ? (lang as Locale) : 'en';
-  const pathLang = key === 'medical' ? lang : safeLang;
+  const pathLang = safeLang;
   if (key === 'home') return pathLang === 'tr' ? '/' : `/${pathLang}/`;
-  if (key === 'medical') return pathLang === 'tr' ? '/medical/reflex-disposable-gloves/' : `/${pathLang}/medical/reflex-disposable-gloves/`;
   if (key === 'trade-corridor' && id) return `/${pathLang}/turkey-sourcing-for-${id}/`;
     if (key === 'how-we-work') return `/${pathLang}/${specialSlugs['how-we-work'][safeLang]}/`;
   if (key === 'scenarios') return `/${pathLang}/${specialSlugs.scenarios[safeLang]}/`;
@@ -1512,10 +1511,10 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
     return localizedPath(safeLang, 'insights');
   }
   const section = sectionSlugs[key]?.[safeLang] || sectionSlugs[key]?.en;
-  if (key === 'services' && id) return `/${pathLang}/${section}/${services[id as keyof typeof services]?.slugs[safeLang] || id}/`;
-  if (key === 'products' && id) return `/${pathLang}/${section}/${products[id as keyof typeof products]?.slugs[safeLang] || id}/`;
-  if (key === 'insights' && id) return `/${pathLang}/${section}/${insights[id as keyof typeof insights]?.slugs[safeLang] || id}/`;
-  if (key === 'legal' && id) return `/${pathLang}/${legal[id as keyof typeof legal]?.slugs[safeLang] || id}/`;
+  if (key === 'services' && id) return `/${pathLang}/${section}/${services[id as keyof typeof services]?.slugs[safeLang] || services[id as keyof typeof services]?.slugs.en || id}/`;
+  if (key === 'products' && id) return `/${pathLang}/${section}/${products[id as keyof typeof products]?.slugs[safeLang] || products[id as keyof typeof products]?.slugs.en || id}/`;
+  if (key === 'insights' && id) return `/${pathLang}/${section}/${insights[id as keyof typeof insights]?.slugs[safeLang] || insights[id as keyof typeof insights]?.slugs.en || id}/`;
+  if (key === 'legal' && id) return `/${pathLang}/${legal[id as keyof typeof legal]?.slugs[safeLang] || legal[id as keyof typeof legal]?.slugs.en || id}/`;
   return `/${pathLang}/${section}/`;
 }
 
