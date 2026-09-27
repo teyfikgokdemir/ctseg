@@ -21,7 +21,8 @@ export const company = {
     fa: 'CTSEG (شرکت با مسئولیت محدود صنعتی و تجاری)',
     ru: 'CTSEG Промышленно-Торговая Компания с Ограниченной Ответственностью',
     zh: 'CTSEG 工业与贸易有限公司',
-    vi: 'Công ty TNHH Công nghiệp và Thương mại CTSEG'
+    vi: 'Công ty TNHH Công nghiệp và Thương mại CTSEG',
+    uk: 'CTSEG Промислово-Торгова Компанія з Обмеженою Відповідальністю'
   },
   alternateName: 'CTSEG',
   founder: 'Teyfik Gökdemir',
@@ -90,6 +91,13 @@ export const companyCopy: Record<Locale, {
     labels: { name: '公司名称', founder: '创始人', founded: '创立年份', headquarters: '总部地址' },
     headquarters: '土耳其伊斯坦布尔图兹拉 (Tuzla, Istanbul, Türkiye)',
     footerLocation: '土耳其伊斯坦布尔图兹拉'
+  },
+  uk: {
+    aboutHeading: 'Двосторонній глобальний торговий та стратегічний шлюз',
+    aboutBody: 'Компанія CTSEG Industry and Trade Limited була заснована в Стамбулі у 2022 році. CTSEG сприяє виходу турецьких виробників на експортні ринки, одночасно надаючи міжнародним покупцям незалежні перевірки заводів та управління закупівлями.',
+    labels: { name: 'Назва компанії', founder: 'Засновник', founded: 'Рік заснування', headquarters: 'Штаб-квартира' },
+    headquarters: 'Тузла, Стамбул, Туреччина',
+    footerLocation: 'Тузла, Стамбул, Туреччина'
   },
   vi: {
     aboutHeading: 'Cầu Nối Thương Mại Hai Chiều & Thu Mua Chiến Lược Toàn Cầu',

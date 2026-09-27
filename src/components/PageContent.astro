@@ -44,6 +44,7 @@ const operationalTrust = {
   ru:{title:'Что происходит после запроса?',lead:'После уточнения объёма и требований к документам запрос направляется по подходящему пути оценки.',steps:['Уточняются потребность и целевой рынок','Проверяются продукт, контрагент и доступные документы','Сообщаются возможные следующие шаги и недостающие данные','Подтверждаются предложение, образцы и объём координации'],cta:'Посмотреть метод работы'},
   fa:{title:'پس از ارسال درخواست چه اتفاقی می‌افتد؟',lead:'پس از روشن شدن دامنه درخواست و نیازهای اسنادی، هر درخواست به مسیر ارزیابی مناسب هدایت می‌شود.',steps:['نیاز و بازار هدف روشن می‌شود','محصول، طرف معامله و اسناد موجود بررسی می‌شوند','گام‌های بعدی و اطلاعات ناقص اعلام می‌شود','دامنه پیشنهاد، نمونه و هماهنگی با طرفین تأیید می‌شود'],cta:'روش کار را ببینید'},
   zh:{title:'提交采购需求后有哪些后续流程？',lead:'在明确具体采购范畴、规格指标与单证需求后，每一份商业委托均将进入标准化评估路径。',steps:['明确产品技术参数与目标进出口市场','深入核验工厂资质、实际产能与出厂单证','出具可行性评估、比价分析与风险提示','协同买卖双方确认样品检验、报价细节与履约节点'],cta:'查看标准业务流程'},
+  uk:{title:'Що відбувається після запиту?',lead:'Кожен комерційний запит направляється на відповідний шлях оцінки після уточнення його обсягу та потреб у документації.',steps:['Уточнюються вимоги та цільовий ринок','Перевіряються продукт, контрагент та наявні документи','Повідомляються можливі наступні кроки та відсутні дані','Підтверджуються обсяги пропозиції, зразків та координації з обома сторонами'],cta:'Переглянути, як ми працюємо'},
   vi:{title:'Điều gì xảy ra sau khi gửi yêu cầu?',lead:'Mỗi yêu cầu thương mại được chuyển đến lộ trình đánh giá phù hợp sau khi làm rõ phạm vi và nhu cầu chứng từ.',steps:['Làm rõ yêu cầu kỹ thuật và thị trường mục tiêu','Đánh giá sản phẩm, đối tác và hồ sơ hiện có','Chia sẻ các bước khả thi tiếp theo và thông tin cần bổ sung','Xác nhận phạm vi báo giá, mẫu thử và điều phối với các bên'],cta:'Xem quy trình làm việc'}
 }[lang];
 
@@ -55,6 +56,7 @@ const contactProcessKicker = {
   ru: 'Гарантия процесса',
   fa: 'اطمینان از فرآیند',
   zh: '全流程履约保障',
+  uk: 'Гарантія процесу',
   vi: 'Đảm bảo quy trình'
 }[lang];
 
@@ -93,6 +95,11 @@ const turnaroundCallout = {
     badge: '24-48小时响应标准',
     title: '快速初步合规审核与结构化贸易反馈',
     desc: 'CTSEG交易台对所有提交的买家寻源与工厂出海申请在24至48个工作小时内完成初步审核，并就技术规格、物流可行性与交易对手合规出具明确推进路线。'
+  },
+  uk: {
+    badge: 'Стандарт оцінки 24-48 год',
+    title: 'Швидкий попередній огляд і структурована відповідь',
+    desc: 'Усі комерційні запити щодо закупівель та виходу на ринок обробляються комерційним відділом CTSEG протягом 24-48 робочих годин.'
   },
   vi: {
     badge: 'Tiêu chuẩn Đánh giá 24-48h',
@@ -137,6 +144,11 @@ const aboutGovernance = {
     eyebrow: '公司治理与管理架构',
     founderRole: '创始人兼常务董事',
     complianceKicker: '机构透明度与治理准则'
+  },
+  uk: {
+    eyebrow: 'Корпоративне управління та керівництво',
+    founderRole: 'Засновник і керуючий директор',
+    complianceKicker: 'Принцип корпоративної прозорості'
   },
   vi: {
     eyebrow: 'Quản trị doanh nghiệp & Lãnh đạo',
@@ -186,6 +198,12 @@ const aboutMandate = {
     desc: 'CTSEG 一方面协助土耳其优质制造企业拓展欧洲、海湾国家及亚洲新兴出口市场；另一方面为跨国采购商在土耳其与区域走廊统筹独立验厂、专业 RFQ 横向对标及端到端履约协同。',
     tagExport: '土耳其制造业出海 (欧洲 · 海湾 · 亚洲)',
     tagSourcing: '全球买家战略直采中心 (真实验厂与产能保障)'
+  },
+  uk: {
+    title: 'Двостороння місія глобальної торгівлі',
+    desc: 'CTSEG координує розширення експорту турецьких виробників до Європи, країн Перської затоки та Азії, одночасно забезпечуючи незалежний аудит заводів, порівняння RFQ та наскрізні закупівлі для міжнародних покупців.',
+    tagExport: 'Експорт з Туреччини (Європа · Перська затока · Азія)',
+    tagSourcing: 'Стіл закупівель (Перевірені потужності)'
   },
   vi: {
     title: 'Sứ mệnh thương mại toàn cầu hai chiều',
@@ -239,7 +257,7 @@ const marketNames = {
   it:['Turchia','Europa','Internazionale'], ru:['Турция','Европа','Международные рынки'], fa:['ترکیه','اروپا','بین‌المللی'],
   zh:['土耳其枢纽','欧洲市场','全球大宗贸易走廊'], vi:['Thổ Nhĩ Kỳ','Châu Âu','Thị trường quốc tế'], uk:['Туреччина','Європа','Міжнародні']}[lang]
 const legalLabel = {tr:'Yasal',en:'Legal',de:'Rechtliches',it:'Note legali',ru:'Правовая информация',fa:'حقوقی',zh:'法律政策与合规',vi:'Pháp lý', uk:'Юридичні'}[lang]
-const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',ru:'27 июля 2026',fa:'۲۷ ژوئیه ۲۰۲۶',zh:'2026年7月27日',vi:'27 tháng 7, 2026'}[lang];
+const updatedDate = {tr:'27 Temmuz 2026',en:'27 July 2026',de:'27. Juli 2026',it:'27 luglio 2026',ru:'27 июля 2026',fa:'۲۷ ژوئیه ۲۰۲۶',zh:'2026年7月27日',uk:'27 липня 2026',vi:'27 tháng 7, 2026'}[lang];
 const showcaseRoles = ['lead','medium','medium','compact','compact','compact'];
 const productFamilies:Record<string,string> = {
   'akbari-pistachio':'pistachio', 'mazafati-dates':'dates', almonds:'nuts',
@@ -785,7 +803,7 @@ const verifiedLater = {
       <div class="operational-trust-panel"><ol>{operationalTrust.steps.map((step,index)=><li><span>{indexLabel(index)}</span><strong>{step}</strong></li>)}</ol><a class="button button-secondary" href={workHref} data-how-we-work-cta>{operationalTrust.cta} →</a></div>
     </div></section>
     <section class="section company-trust-band" id="company"><div class="container">
-      <div class="company-trust-heading"><h2>{completionHome.trustTitle}</h2><p>{company.name[lang] || company.name.en}</p></div>
+      <div class="company-trust-heading"><h2>{completionHome.trustTitle}</h2><p>{company?.name?.[lang] || company.name.en}</p></div>
       <dl class="trust-facts">
         <div><dt>01</dt><dd>{completionHome.established}</dd></div>
         <div><dt>02</dt><dd>{completionHome.founder}</dd></div>
@@ -1243,8 +1261,8 @@ const verifiedLater = {
       <div class="prose">
         <div class="content-block">
           <p class="eyebrow">{company.alternateName} · {company.foundingYear}</p>
-          <h2>{corporate.aboutHeading}</h2>
-          <p>{corporate.aboutBody}</p>
+          <h2>{corporate?.aboutHeading}</h2>
+          <p>{corporate?.aboutBody}</p>
         </div>
         <div class="about-mandate-card">
           <div class="about-mandate-header">
@@ -1258,16 +1276,16 @@ const verifiedLater = {
           </div>
         </div>
       </div>
-      <aside class="company-card" aria-label={corporate.labels.name}>
+      <aside class="company-card" aria-label={corporate?.labels?.name}>
         <div class="company-card-header">
           <span class="company-badge">Institutional Registry</span>
-          <h3>{company.name[lang] || company.name.en}</h3>
+          <h3>{company?.name?.[lang] || company.name.en}</h3>
         </div>
         <dl class="company-meta-dl">
-          <div><dt>{corporate.labels.founder}</dt><dd><strong>{company.founder}</strong></dd></div>
-          <div><dt>{corporate.labels.founded}</dt><dd>{company.foundingYear}</dd></div>
-          <div><dt>{corporate.labels.headquarters}</dt><dd>{corporate.headquarters}</dd></div>
-          <div><dt>{corporate.labels.name}</dt><dd>{company.name[lang] || company.name.en}</dd></div>
+          <div><dt>{corporate?.labels?.founder}</dt><dd><strong>{company.founder}</strong></dd></div>
+          <div><dt>{corporate?.labels?.founded}</dt><dd>{company.foundingYear}</dd></div>
+          <div><dt>{corporate?.labels?.headquarters}</dt><dd>{corporate?.headquarters}</dd></div>
+          <div><dt>{corporate?.labels?.name}</dt><dd>{company?.name?.[lang] || company.name.en}</dd></div>
         </dl>
       </aside>
     </div></section>
@@ -1275,31 +1293,31 @@ const verifiedLater = {
       <div class="about-pillars-stack">
         <article class="about-pillar-card">
           <div class="pillar-kicker">01 / Identity</div>
-          <h2>{completionAbout.whoTitle}</h2>
-          <p>{completionAbout.who}</p>
+          <h2>{completionAbout?.whoTitle}</h2>
+          <p>{completionAbout?.who}</p>
         </article>
         <article class="about-pillar-card">
           <div class="pillar-kicker">02 / Capabilities</div>
-          <h2>{completionAbout.workTitle}</h2>
+          <h2>{completionAbout?.workTitle}</h2>
           <ul class="about-capabilities-grid">
-            {completionAbout.work.map((item) => (
+            {completionAbout?.work.map((item) => (
               <li><span class="check-icon">✓</span> <span>{item}</span></li>
             ))}
           </ul>
         </article>
         <article class="about-pillar-card">
           <div class="pillar-kicker">03 / Methodology</div>
-          <h2>{completionAbout.methodTitle}</h2>
-          <p>{completionAbout.method}</p>
+          <h2>{completionAbout?.methodTitle}</h2>
+          <p>{completionAbout?.method}</p>
           <div class="about-method-action">
             <a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a>
           </div>
         </article>
         <article class="about-pillar-card about-pillar-ethics">
           <div class="pillar-kicker">04 / Ethical Boundaries</div>
-          <h2>{completionAbout.ethicsTitle}</h2>
+          <h2>{completionAbout?.ethicsTitle}</h2>
           <ul class="about-ethics-list">
-            {completionAbout.ethics.map((item) => (
+            {completionAbout?.ethics.map((item) => (
               <li><span class="ethics-bullet">⊘</span> <span>{item}</span></li>
             ))}
           </ul>
@@ -1311,7 +1329,7 @@ const verifiedLater = {
           <h2>{company.founder}</h2>
           <p class="founder-role">{aboutGovernance.founderRole}</p>
           <div class="founder-divider"></div>
-          <p class="founder-bio">{completionAbout.founder}</p>
+          <p class="founder-bio">{completionAbout?.founder}</p>
           <div class="founder-compliance-badge">
             <span class="compliance-icon">⚖</span>
             <span>{aboutGovernance.complianceKicker}</span>
