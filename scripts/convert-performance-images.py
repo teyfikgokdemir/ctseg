@@ -3,7 +3,6 @@ from PIL import Image
 
 root = Path('public')
 assets = [
-    root / 'images/reflex/reflex-slider1.jpg',
     root / 'videos/ctseg-trade-coordination-poster.jpg',
 ]
 for source in assets:

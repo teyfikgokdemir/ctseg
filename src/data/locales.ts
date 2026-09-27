@@ -19,6 +19,8 @@ export type LocaleDirection = (typeof localeRegistry)[number]['direction'];
 export const activeLocaleRegistry = localeRegistry.filter((entry) => entry.active).sort((a,b) => a.order-b.order);
 export const activeLocales = activeLocaleRegistry.map((entry) => entry.code) as ActiveLocale[];
 export const siteLocales = activeLocales;
+export const SUPPORTED_LOCALES = siteLocales;
+export const INDEXABLE_LOCALES = siteLocales;
 export const localeByCode = Object.fromEntries(localeRegistry.map((entry) => [entry.code,entry])) as Record<ActiveLocale,(typeof localeRegistry)[number]>;
 
 export const localeLabel = (code: string) => localeByCode[code as ActiveLocale]?.label ?? 'English';
