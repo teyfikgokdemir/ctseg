@@ -73,7 +73,7 @@ export function getMeta(record: RouteRecord) {
   if (key === 'how-we-work') return {title:`${processPages[lang].title} | CTSEG`,description:processPages[lang].description};
   if (key === 'scenarios') return {title:`${scenarioPages[lang].title} | CTSEG`,description:scenarioPages[lang].description};
   if (key === 'search-landing' && id) {
-    const landing=searchLandings[id as keyof typeof searchLandings].content[lang];
+    const landing=searchLandings[id as keyof typeof searchLandings].content[lang as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']] || searchLandings[id as keyof typeof searchLandings].content['en' as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']];
     return {title:`${landing.title} | CTSEG`,description:landing.description};
   }
   if (key === 'guides' && id) {

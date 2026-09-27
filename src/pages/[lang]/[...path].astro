@@ -102,7 +102,7 @@ if (record.key === 'how-we-work') {
   });
 }
 if (record.key === 'search-landing' && record.id) {
-  const landing=searchLandings[record.id as keyof typeof searchLandings].content[record.lang];
+  const landing=searchLandings[record.id as keyof typeof searchLandings].content[record.lang as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']] || searchLandings[record.id as keyof typeof searchLandings].content['en' as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']];
   schemas.push({
     '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#service`,
     url:canonicalFor(record),name:landing.title,description:landing.description,inLanguage:record.lang,

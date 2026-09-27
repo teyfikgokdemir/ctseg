@@ -1,0 +1,34 @@
+---
+import { homeCopy, homeEnhancement, contactCopy, companyCopy, editorialCopy } from '../data/site';
+import { tradePlatformCopy, tradeGateway } from '../data/trade-platform';
+import { marketUi, marketCopy } from '../data/trade-markets';
+
+const lang = 'uk';
+const platform = tradePlatformCopy[lang];
+const h = homeCopy[lang];
+
+console.log('platform.corridors:', platform?.corridors);
+console.log('h.trust:', h?.trust);
+console.log('platform.sectors:', platform?.sectors);
+
+const marketNames = {
+  tr:['TǬrkiye','Avrupa','Uluslararas'], en:['TǬrkiye','Europe','International'], de:['TǬrkei','Europa','International'],
+  it:['Turchia','Europa','Internazionale'], ru:['Турция','Европа','Международные'], fa:['ترکیه','اروپا','بین‌المللی'],
+  zh:['土耳其','欧洲','国际市场'], vi:['Thổ Nhĩ Kỳ','Châu Âu','Thị trường quốc tế'], uk:['Туреччина','Європа','Міжнародні']
+}[lang];
+console.log('marketNames:', marketNames);
+
+const trendingSectorsData = {
+    uk: { title: 'Глобальні закупівельні потужності', lead: 'Провідні промислові потужності та галузеві потреби у торгових коридорах, якими ми активно керуємо.', tags: ['Промислове виробництво та сировина ↗', 'Товари швидкого попиту (FMCG) ↗', 'Текстиль та технічні тканини ↗', 'Автомобільні компоненти ↗', 'Будівельні та архітектурні матеріали ↗', 'Пакування та полімери ↗', 'Агротехнології ↗', 'Медичне та оздоровче обладнання ↗'] }
+}[lang];
+console.log('trendingSectorsData.tags:', trendingSectorsData?.tags);
+
+console.log('platform.process:', platform?.process);
+
+const processLabels = {
+    vi:{boundary:'Ranh giới...',answers:'...',answerLead:'...'},
+    uk:{boundary:'Межі',answers:'Відповіді',answerLead:'...'}
+}[lang];
+console.log('processLabels:', processLabels);
+---
+<div>Debug</div>

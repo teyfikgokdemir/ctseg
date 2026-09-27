@@ -108,12 +108,12 @@ export const companyCopy: Record<Locale, {
 };
 
 export const sectionSlugs: Record<string, Localized> = {
-  services: { tr: 'hizmetler', en: 'services', de: 'dienstleistungen', it: 'servizi', ru: 'uslugi', fa: 'services', zh: 'services', vi: 'services' },
-  products: { tr: 'ticari-urunler', en: 'trade-products', de: 'handelsprodukte', it: 'prodotti-commerciali', ru: 'tovary', fa: 'trade-products', zh: 'trade-products', vi: 'trade-products' },
-  markets: { tr: 'pazarlar', en: 'markets', de: 'maerkte', it: 'mercati', ru: 'rynki', fa: 'markets', zh: 'markets', vi: 'markets' },
-  insights: { tr: 'icgoruler', en: 'insights', de: 'einblicke', it: 'approfondimenti', ru: 'materialy', fa: 'insights', zh: 'insights', vi: 'insights' },
-  about: { tr: 'hakkimizda', en: 'about', de: 'ueber-uns', it: 'chi-siamo', ru: 'o-kompanii', fa: 'about', zh: 'about', vi: 'about' },
-  contact: { tr: 'iletisim', en: 'contact', de: 'kontakt', it: 'contatti', ru: 'kontakty', fa: 'contact', zh: 'contact', vi: 'contact' }
+  services: { tr: 'hizmetler', en: 'services', de: 'dienstleistungen', it: 'servizi', ru: 'uslugi', fa: 'services', zh: 'services', vi: 'services', uk: 'services' },
+  products: { tr: 'ticari-urunler', en: 'trade-products', de: 'handelsprodukte', it: 'prodotti-commerciali', ru: 'tovary', fa: 'trade-products', zh: 'trade-products', vi: 'trade-products', uk: 'trade-products' },
+  markets: { tr: 'pazarlar', en: 'markets', de: 'maerkte', it: 'mercati', ru: 'rynki', fa: 'markets', zh: 'markets', vi: 'markets', uk: 'markets' },
+  insights: { tr: 'icgoruler', en: 'insights', de: 'einblicke', it: 'approfondimenti', ru: 'materialy', fa: 'insights', zh: 'insights', vi: 'insights', uk: 'insights' },
+  about: { tr: 'hakkimizda', en: 'about', de: 'ueber-uns', it: 'chi-siamo', ru: 'o-kompanii', fa: 'about', zh: 'about', vi: 'about', uk: 'about' },
+  contact: { tr: 'iletisim', en: 'contact', de: 'kontakt', it: 'contatti', ru: 'kontakty', fa: 'contact', zh: 'contact', vi: 'contact', uk: 'contact' }
 };
 
 export const ui: Record<Locale, {
@@ -1334,7 +1334,24 @@ export const pageCopy: Record<Locale, any> = {
     home: 'Головна',
     markets: 'Ринки',
     products: 'Продукти',
-    contact: 'Контакти'
+    contact: 'Контакти',
+    servicesTitle:'Експертиза для кожного етапу прийняття рішень щодо закупівель.',
+    servicesLead:'Ми поєднуємо стратегію, перевірку, комерційний аналіз та виконання в єдиній дисципліні прийняття рішень.',
+    productsTitle:'Комерційний каталог перевірених продуктів',
+    productsLead:'Один і той самий перевірений каталог на всіх ринках із прозорим походженням, якістю кожної партії та реальними комерційними умовами.',
+    marketsTitle:'Від Туреччини до Європи та міжнародних ринків.',
+    marketsLead:'Ми поєднуємо місцеві виробничі реалії з цільовими нормами, очікуваннями покупців та прийнятними моделями доставки.',
+    aboutTitle:'Незалежний партнер із прийняття рішень, який знижує невизначеність у торгівлі.',
+    aboutLead:'CTSEG працює на основі доказів, прозорості та здатності до виконання у стратегічних закупівлях та міжнародних торгових проектах.',
+    contactTitle:'Почніть свій комерційний запит із чіткої оцінки.',
+    insightsTitle:'Практичний аналіз для керівників та менеджерів із закупівель.',
+    insightsLead:'Короткі, обґрунтовані посібники щодо закупівель, загальної вартості, походження, якості та управління ризиками.',
+    framework:['Визначення вимог та специфікацій','Оцінка контрагентів та юридичні докази','Порівняння якості, загальної вартості та ризиків','Прозоре досьє рішення та журнал виконання'],
+    serviceFaq:['Як починається проект?','Масштаб, цілі, продукт/послуга, ринок і передумови для прийняття рішень з\'ясовуються під час короткого онлайн-дзвінка.','Чи є CTSEG представником постачальника?','CTSEG відкрито заявляє про свої комерційні завдання та роль, одночасно письмово документуючи всі незалежні критерії оцінки.'],
+    productUses:['Виробництво харчових продуктів і застосування промислової сировини','Оптова дистрибуція та власна торгова марка (Private Label)','Канали HORECA та спеціалізована роздрібна торгівля'],
+    productQuality:['Вимоги до контролю афлатоксинів та залишків пестицидів','Вологість, мікробіологія та стандартні фізичні характеристики','Сертифікат аналізу (COA), код партії та відстежуваність','Повна відповідність нормам цільового ринку'],
+    legalIntro:'Це повідомлення забезпечує прозорість щодо використання веб-сайту CTSEG і пов\'язаної обробки даних.',
+    legalSections:[['Сфера та відповідальність','CTSEG прагне підтримувати точність корпоративної та комерційної інформації на цьому веб-сайті. Запити щодо конфіденційності та захисту даних можна надсилати на info@ctseg.com.tr.'],['Обробка інформації та цілі','Коли ви звертаєтеся до нас, ми можемо обробляти ваше ім\'я, компанію, електронну адресу, номер телефону та інформацію про комерційні потреби, а також технічні журнали в межах цілей безпеки. Ці дані використовуються для відповіді на запити, оцінки партнерства та виконання правових зобов\'язань.'],['Обмін даними, зберігання та безпека','Інформація надається лише необхідним постачальникам послуг хостингу, електронної пошти чи ІТ-підтримки, або уповноваженим органам відповідно до вимог законодавства. Дані будуть видалені або анонімізовані, коли юридичний термін зберігання закінчиться.'],['Ваші права та контакти','Щоб скористатися своїм правом на доступ, виправлення, видалення або заперечення проти обробки даних, надішліть свій запит із ідентифікаційною інформацією на info@ctseg.com.tr.']]
   }
 };
 
