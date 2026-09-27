@@ -129,3 +129,6 @@ export const tradePlatformCopy:Record<PlatformLocale,PlatformCopy> = {
     process: ['Визначення вимог', 'Пошук', 'Перевірка', 'Замовлення']
   }
 };
+
+
+tradePlatformCopy.ro = tradePlatformCopy.en; tradePlatformCopy.bg = tradePlatformCopy.en; tradePlatformCopy.sr = tradePlatformCopy.en;

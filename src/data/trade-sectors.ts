@@ -178,3 +178,7 @@ export const persianProducerCopy: Record<TradeSectorId, {
   }
 };
 export const pathForSector = (lang:TradeLocale,id:TradeSectorId) => encodeURI(`/${lang}/sourcing/${tradeCopy[lang][id].slug}/`);
+
+
+tradeUi.ro = tradeUi.en; tradeUi.bg = tradeUi.en; tradeUi.sr = tradeUi.en;
+tradeCopy.ro = tradeCopy.en; tradeCopy.bg = tradeCopy.en; tradeCopy.sr = tradeCopy.en;

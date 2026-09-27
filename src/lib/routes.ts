@@ -25,14 +25,17 @@ export function getRouteRecords(): RouteRecord[] {
     for (const key of ['services','products','markets','insights','about','contact']) {
       records.push({ lang, path:sectionSlugs[key][lang], key });
     }
+    const servicesSlug = (sectionSlugs['services'] as any)[lang] || (sectionSlugs['services'] as any)['en'];
+    const productsSlug = (sectionSlugs['products'] as any)[lang] || (sectionSlugs['products'] as any)['en'];
+    const insightsSlug = (sectionSlugs['insights'] as any)[lang] || (sectionSlugs['insights'] as any)['en'];
     for (const id of serviceIds) records.push({
-      lang, path:`${sectionSlugs.services[lang]}/${services[id].slugs[lang]}`, key:'services', id
+      lang, path:`${servicesSlug}/${(services[id].slugs as any)[lang] || (services[id].slugs as any)['en']}`, key:'services', id
     });
     for (const id of productIds) records.push({
-      lang, path:`${sectionSlugs.products[lang]}/${products[id].slugs[lang]}`, key:'products', id
+      lang, path:`${productsSlug}/${(products[id].slugs as any)[lang] || (products[id].slugs as any)['en']}`, key:'products', id
     });
     for (const id of insightIds) records.push({
-      lang, path:`${sectionSlugs.insights[lang]}/${insights[id].slugs[lang]}`, key:'insights', id
+      lang, path:`${insightsSlug}/${(insights[id].slugs as any)[lang] || (insights[id].slugs as any)['en']}`, key:'insights', id
     });
     for (const corridor of tradeCorridors) records.push({ lang, path: `turkey-sourcing-for-${corridor.id}`, key: 'trade-corridor', id: corridor.id });
       for (const id of legalIds) records.push({
@@ -40,7 +43,7 @@ export function getRouteRecords(): RouteRecord[] {
     });
     if (lang === 'tr' || lang === 'en') {
       for (const id of guideIds) records.push({
-        lang,path:`${sectionSlugs.insights[lang]}/${guideSlugs[id][lang]}`,key:'guides',id
+        lang,path:`${insightsSlug}/${(guideSlugs[id] as any)[lang] || (guideSlugs[id] as any)['en']}`,key:'guides',id
       });
     }
   }
@@ -49,8 +52,8 @@ export function getRouteRecords(): RouteRecord[] {
 
 export function getMeta(record: RouteRecord) {
   const { lang, key, id } = record;
-  const copy = pageCopy[lang];
-  const t = ui[lang];
+  const copy = pageCopy[lang] || pageCopy['en'];
+  const t = ui[lang] || ui['en'];
   if (key === 'home') return {
     title: lang === 'tr' ? 'CTSEG | Küresel Ticaret, Stratejik Tedarik ve Pazara Giriş' :
            lang === 'de' ? 'CTSEG | Globaler Handel, strategische Beschaffung & Markteintritt' :

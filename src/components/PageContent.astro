@@ -1108,7 +1108,7 @@ const verifiedLater = {
     <section class="section product-detail-content"><div class="container content-grid">
       <div class="prose">
         <div class="content-block product-commercial-facts"><h2>{lang === 'tr' ? 'Ticari değerlendirme bilgileri' : lang === 'en' ? 'Commercial assessment information' : lang === 'de' ? 'Angaben zur kaufmännischen Bewertung' : lang === 'it' ? 'Informazioni per la valutazione commerciale' : lang === 'ru' ? 'Параметры коммерческой оценки' : lang === 'fa' ? 'اطلاعات ارزیابی تجاری' : lang === 'zh' ? '大宗商品商业评估核心参数' : lang === 'vi' ? 'Thông tin đánh giá thương mại' : 'Commercial assessment information'}</h2>
-          <dl>{productCommercialLabels.map((label,index) => {
+          <dl>{(productCommercialLabels || []).map((label,index) => {
             const values = evidence ? [
               evidence.origin[lang],
               evidence.variety[lang],
@@ -1158,8 +1158,8 @@ const verifiedLater = {
             </div>
           </div>
         </div>
-        <div class="content-block"><h2>{t.applications}</h2><ul class="check-list">{copy.productUses.map((item:string) => <li>{item}</li>)}</ul></div>
-        <div class="content-block"><h2>{t.quality}</h2><ul class="check-list">{copy.productQuality.map((item:string) => <li>{item}</li>)}</ul><div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div></div>
+        <div class="content-block"><h2>{t.applications}</h2><ul class="check-list">{(copy.productUses || []).map((item:string) => <li>{item}</li>)}</ul></div>
+        <div class="content-block"><h2>{t.quality}</h2><ul class="check-list">{(copy.productQuality || []).map((item:string) => <li>{item}</li>)}</ul><div class="origin-note"><strong>{t.origin}</strong><p>{t.complianceText}</p></div></div>
         <div class="content-block"><h2>{t.logistics}</h2><p>{t.contactLead}</p>{product.media.secondary && <ProductMedia product={product} lang={lang} secondary={true} className="secondary-product-media" />}</div>
         <div class="content-block faq"><h2>{t.faq}</h2><details open><summary>{t.origin}</summary><p>{t.complianceText}</p></details><details><summary>{t.samplePolicy}</summary><p>{t.sampleText}</p></details></div>
       </div>

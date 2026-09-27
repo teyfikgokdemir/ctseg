@@ -134,7 +134,7 @@ export const sectionSlugs: Record<string, Localized> = {
   contact: { tr: 'iletisim', en: 'contact', de: 'kontakt', it: 'contatti', ru: 'kontakty', fa: 'contact', zh: 'contact', vi: 'contact', uk: 'contact' }
 };
 
-export const ui: Record<Locale, {
+export const ui: Record<string, {
   home: string; services: string; products: string; markets: string; insights: string;
   about: string; contact: string; quote: string; menu: string; close: string; medicalLabel: string;
   language: string; readMore: string; allProducts: string; allServices: string;
@@ -1415,3 +1415,11 @@ export function routeAlternates(key: string, id?: string): Record<string, string
   return Object.fromEntries(locales.map((lang) => [lang, `https://ctseg.com.tr${localizedPath(lang, key, id)}`])) as Record<Locale, string>;
 }
 
+
+
+ui.ro = ui.en; ui.bg = ui.en; ui.sr = ui.en;
+company.name.ro = company.name.en; company.name.bg = company.name.en; company.name.sr = company.name.en;
+
+
+ui.ro = ui.en; ui.bg = ui.en; ui.sr = ui.en;
+company.name.ro = company.name.en; company.name.bg = company.name.en; company.name.sr = company.name.en;

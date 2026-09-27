@@ -203,3 +203,6 @@ export const marketCopy: Record<MarketLocale, Record<TradeMarketId, MarketCopy>>
     'macedonia': { slug: 'makedoniya', eyebrow: 'Постачання на Балкани', title: 'Північна Македонія: Торговий міст.', description: 'Експорт текстилю.', lead: 'Торгові можливості для покупців у Північній Македонії.', heading2: 'Ефективна логістика', body2: 'Керування постачанням B2B.', cta: 'Запит для Македонії' }
   }
 };
+
+marketUi.ro = marketUi.en; marketUi.bg = marketUi.en; marketUi.sr = marketUi.en;
+marketCopy.ro = marketCopy.en; marketCopy.bg = marketCopy.en; marketCopy.sr = marketCopy.en;
