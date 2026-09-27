@@ -187,7 +187,7 @@ const getCountryName = (countryId: string, locale: string) => {
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
-const displayLang: Locale = (['ro','bg','sr'] as string[]).includes(lang) ? 'en' : lang;
+const displayLang: Locale = (['uk','ro','bg','sr'] as string[]).includes(lang) ? 'en' : lang;
 const t = ui[lang] || ui['en'];
 const h = homeCopy[lang] || homeCopy['en'];
 const gateway = tradeGateway[displayLang] || tradeGateway['en'];
