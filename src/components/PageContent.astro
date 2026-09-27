@@ -220,7 +220,9 @@ const trendingSectorsData = {
   fa: { title: 'ظرفیت تأمین جهانی', lead: 'ظرفیت‌های صنعتی برجسته و تقاضای بخش‌های مختلف در کریدورهای تجاری تحت مدیریت ما.', tags: ['تولید صنعتی و مواد اولیه ↗', 'کالاهای تندمصرف (FMCG) ↗', 'منسوجات و پارچه‌های فنی ↗', 'قطعات و لوازم یدکی خودرو ↗', 'مصالح ساختمانی و معماری ↗', 'بسته‌بندی و پلیمرها ↗', 'فناوری‌های کشاورزی ↗', 'تجهیزات پزشکی و مراقبت‌های بهداشتی ↗'] },
   zh: { title: '全球采购能力与重点行业', lead: '我们在核心贸易走廊中积极管理的重点工业产能与行业需求。', tags: ['工业制造与原材料 ↗', '快速消费品 (FMCG) ↗', '纺织品与工业面料 ↗', '汽车零部件 ↗', '建筑与装饰材料 ↗', '包装与聚合物 ↗', '农业技术与设备 ↗', '医疗与健康设备 ↗'] },
   vi: { title: 'Năng lực thu mua toàn cầu', lead: 'Các năng lực công nghiệp nổi bật và nhu cầu ngành trong các hành lang thương mại mà chúng tôi quản lý.', tags: ['Sản xuất Công nghiệp & Nguyên liệu ↗', 'Hàng tiêu dùng nhanh (FMCG) ↗', 'Dệt may & Vải kỹ thuật ↗', 'Công nghiệp phụ trợ Ô tô ↗', 'Vật liệu Xây dựng & Kiến trúc ↗', 'Bao bì & Polymer ↗', 'Công nghệ Nông nghiệp ↗', 'Thiết bị Y tế & Chăm sóc sức khỏe ↗'] }
-}[lang];
+,
+    uk: { title: 'Глобальні закупівельні потужності', lead: 'Провідні промислові потужності та галузеві потреби у торгових коридорах, якими ми активно керуємо.', tags: ['Промислове виробництво та сировина ↗', 'Товари швидкого попиту (FMCG) ↗', 'Текстиль та технічні тканини ↗', 'Автомобільні компоненти ↗', 'Будівельні та архітектурні матеріали ↗', 'Пакування та полімери ↗', 'Агротехнології ↗', 'Медичне та оздоровче обладнання ↗'] }
+  }[lang];
 const service = id && key === 'services' ? services[id as keyof typeof services] : null;
 const detailedService = service && id && (lang === 'tr' || lang === 'en') && id in serviceDetails[lang]
   ? serviceDetails[lang][id as keyof typeof serviceDetails[typeof lang]]
