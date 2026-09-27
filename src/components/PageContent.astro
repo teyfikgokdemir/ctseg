@@ -182,7 +182,7 @@ const copy = pageCopy[lang] || pageCopy['en'];
 const corporate = companyCopy[lang] || companyCopy['en'];
 const editorial = editorialCopy[lang] || editorialCopy['en'];
 const completionHome = homeEnhancement[lang] || homeEnhancement['en'];
-const operationalTrust = {
+const operationalTrustMap = {
   tr:{title:'Talep sonrası ne olur?',lead:'Her ticari talep, kapsamı ve belge gereksinimleri netleştirildikten sonra uygun değerlendirme yoluna alınır.',steps:['İhtiyaç ve hedef pazar netleştirilir','Ürün, taraf ve mevcut belge kapsamı incelenir','Uygulanabilir sonraki adımlar ve eksik bilgiler paylaşılır','Teklif, numune ve koordinasyon kapsamı taraflarla teyit edilir'],cta:'Çalışma yöntemini inceleyin'},
   en:{title:'What happens after a request?',lead:'Each commercial request is routed to the right assessment path after its scope and documentation needs are clarified.',steps:['Requirement and target market are clarified','Product, counterparty and available documents are reviewed','Feasible next steps and missing inputs are shared','Quotation, sample and coordination scope are confirmed with the parties'],cta:'Review how we work'},
   de:{title:'Was passiert nach einer Anfrage?',lead:'Jede Anfrage wird nach Klärung von Umfang und Dokumentationsbedarf dem passenden Bewertungsweg zugeordnet.',steps:['Bedarf und Zielmarkt werden geklärt','Produkt, Gegenpartei und vorhandene Unterlagen werden geprüft','Machbare nächste Schritte und fehlende Angaben werden mitgeteilt','Angebots-, Muster- und Koordinationsumfang wird bestätigt'],cta:'Arbeitsweise ansehen'},
@@ -192,9 +192,10 @@ const operationalTrust = {
   zh:{title:'提交采购需求后有哪些后续流程？',lead:'在明确具体采购范畴、规格指标与单证需求后，每一份商业委托均将进入标准化评估路径。',steps:['明确产品技术参数与目标进出口市场','深入核验工厂资质、实际产能与出厂单证','出具可行性评估、比价分析与风险提示','协同买卖双方确认样品检验、报价细节与履约节点'],cta:'查看标准业务流程'},
   uk:{title:'Що відбувається після запиту?',lead:'Кожен комерційний запит направляється на відповідний шлях оцінки після уточнення його обсягу та потреб у документації.',steps:['Уточнюються вимоги та цільовий ринок','Перевіряються продукт, контрагент та наявні документи','Повідомляються можливі наступні кроки та відсутні дані','Підтверджуються обсяги пропозиції, зразків та координації з обома сторонами'],cta:'Переглянути, як ми працюємо'},
   vi:{title:'Điều gì xảy ra sau khi gửi yêu cầu?',lead:'Mỗi yêu cầu thương mại được chuyển đến lộ trình đánh giá phù hợp sau khi làm rõ phạm vi và nhu cầu chứng từ.',steps:['Làm rõ yêu cầu kỹ thuật và thị trường mục tiêu','Đánh giá sản phẩm, đối tác và hồ sơ hiện có','Chia sẻ các bước khả thi tiếp theo và thông tin cần bổ sung','Xác nhận phạm vi báo giá, mẫu thử và điều phối với các bên'],cta:'Xem quy trình làm việc'}
-}[lang];
+};
+const operationalTrust = (operationalTrustMap as any)[lang] || (operationalTrustMap as any).en;
 
-const contactProcessKicker = {
+const contactProcessKickerMap = {
   tr: 'Süreç Güvencesi',
   en: 'Process Assurance',
   de: 'Prozesssicherheit',
@@ -204,9 +205,10 @@ const contactProcessKicker = {
   zh: '全流程履约保障',
   uk: 'Гарантія процесу',
   vi: 'Đảm bảo quy trình'
-}[lang];
+};
+const contactProcessKicker = (contactProcessKickerMap as any)[lang] || (contactProcessKickerMap as any).en;
 
-const turnaroundCallout = {
+const turnaroundCalloutMap = {
   tr: {
     badge: '24-48 Saat Değerlendirme Standardı',
     title: 'Hızlı Ön İnceleme ve Yapılandırılmış Yanıt',
@@ -252,10 +254,11 @@ const turnaroundCallout = {
     title: 'Đánh giá sơ bộ nhanh chóng & Phản hồi thương mại có cấu trúc',
     desc: 'Tất cả các yêu cầu mua hàng thương mại và tiếp cận thị trường đều được bộ phận thương mại CTSEG xem xét sơ bộ trong vòng 24-48 giờ làm việc kèm theo lộ trình thông số kỹ thuật và tính khả thi logistics.'
   }
-}[lang];
+};
+const turnaroundCallout = (turnaroundCalloutMap as any)[lang] || (turnaroundCalloutMap as any).en;
 
 const completionAbout = aboutEnhancement[lang] || aboutEnhancement['en'];
-const aboutGovernance = {
+const aboutGovernanceMap = {
   tr: {
     eyebrow: 'Kurumsal Yönetim ve Liderlik',
     founderRole: 'Kurucu ve Yönetici Ortak',
@@ -301,8 +304,9 @@ const aboutGovernance = {
     founderRole: 'Người sáng lập & Giám đốc điều hành',
     complianceKicker: 'Nguyên tắc minh bạch doanh nghiệp'
   }
-}[lang];
-const aboutMandate = {
+};
+const aboutGovernance = (aboutGovernanceMap as any)[lang] || (aboutGovernanceMap as any).en;
+const aboutMandateMap = {
   tr: {
     title: 'İki Yönlü Küresel Ticaret Mimarisi',
     desc: 'CTSEG; bir yandan Türk üreticilerinin Avrupa, Körfez ve Asya pazarlarına doğrudan ihracat açılımını yapılandırırken, diğer yandan küresel alıcılar için Türkiye ve bölgesel ticaret koridorlarında bağımsız fabrika denetimi, RFQ karşılaştırması ve uçtan uca tedarik koordinasyonu sağlar.',
@@ -357,14 +361,15 @@ const aboutMandate = {
     tagExport: 'Mở rộng xuất khẩu Thổ Nhĩ Kỳ (Châu Âu · Vùng Vịnh · Châu Á)',
     tagSourcing: 'Bàn thu mua quốc tế (Năng lực đã kiểm chứng)'
   }
-}[lang];
+};
+const aboutMandate = (aboutMandateMap as any)[lang] || (aboutMandateMap as any).en;
 const completionMarkets = marketsDetail[lang] || marketsDetail['en'];
 const platform = tradePlatformCopy[lang] || tradePlatformCopy['en'];
 const contact = contactCopy[lang] || contactCopy['en'];
 const homepageHero = localizedTradeVisual('global-trade-hero',lang);
 const homepageSectorVisuals = homeTradeVisualKeys.map((visualKey)=>localizedTradeVisual(visualKey,lang));
 const contactWithIntent = (intent:'buyer_request'|'supplier_market_entry') => `${sectionHref('contact')}?intent=${intent}#commercial-form`;
-const sectorEntry = {
+const sectorEntryMap = {
   tr:{title:'İran halısı ve tekstil tedarik alanları',lead:'Üç uzmanlık alanını; ürün, üretici, numune, kalite, paketleme ve lojistik koşullarıyla birlikte inceleyin.'},
   en:{title:'Iranian carpet and textile sourcing',lead:'Explore three specialist areas through product, producer, sample, quality, packaging and logistics criteria.'},
   de:{title:'Beschaffung iranischer Teppiche und Textilien',lead:'Drei Fachbereiche mit Produkt-, Hersteller-, Muster-, Qualitäts-, Verpackungs- und Logistikkriterien.'},
@@ -373,9 +378,10 @@ const sectorEntry = {
   fa:{title:'حوزه‌های تأمین فرش و منسوجات ایرانی',lead:'سه حوزه تخصصی را همراه با معیارهای محصول، تولیدکننده، نمونه، کیفیت، بسته‌بندی و لجستیک بررسی کنید.'},
   zh:{title:'特色手工地毯与大宗纺织寻源专区',lead:'深入探索三大特色品类：产品材质工艺、工厂实地产能、样品打样、质量标准、环保包装及跨境多式联运。'},
   vi:{title:'Nguồn cung thảm và dệt may chuyên biệt',lead:'Khám phá ba lĩnh vực chuyên sâu qua các tiêu chí sản phẩm, nhà sản xuất, mẫu thử, chất lượng, đóng gói và logistics.'}
-}[lang];
+};
+const sectorEntry = (sectorEntryMap as any)[lang] || (sectorEntryMap as any).en;
 
-const trendingSectorsData = {
+const trendingSectorsDataMap = {
   tr: { title: 'Küresel Tedarik Kapasitesi & Trendler', lead: 'Aktif olarak yönettiğimiz ticaret koridorlarında öne çıkan endüstriyel kapasiteler ve sektörel talepler.', tags: ['Endüstriyel Üretim & Hammadde ↗', 'Tüketici Ürünleri (FMCG) ↗', 'Tekstil & Teknik Kumaş ↗', 'Otomotiv Yan Sanayi ↗', 'İnşaat & Mimari Malzemeler ↗', 'Ambalaj & Polimer ↗', 'Tarım & Gıda Teknolojileri ↗', 'Medikal & Sağlık Ekipmanları ↗'] },
   en: { title: 'Global Sourcing Capacity', lead: 'Prominent industrial capacities and sector demands in the trade corridors we actively manage.', tags: ['Industrial Manufacturing & Raw Materials ↗', 'Fast-Moving Consumer Goods (FMCG) ↗', 'Textiles & Technical Fabrics ↗', 'Automotive Sub-Industry ↗', 'Construction & Architectural Materials ↗', 'Packaging & Polymers ↗', 'Agricultural Technologies ↗', 'Medical & Healthcare Equipment ↗'] },
   de: { title: 'Globale Beschaffungskapazität', lead: 'Hervorragende industrielle Kapazitäten und Branchennachfragen in den von uns verwalteten Handelskorridoren.', tags: ['Industrielle Fertigung & Rohstoffe ↗', 'Schnelldrehende Konsumgüter (FMCG) ↗', 'Textilien & Technische Gewebe ↗', 'Automobilzulieferindustrie ↗', 'Bau- & Architekturmaterialien ↗', 'Verpackungen & Polymere ↗', 'Agrartechnologien ↗', 'Medizin- & Gesundheitsausrüstung ↗'] },
@@ -386,7 +392,8 @@ const trendingSectorsData = {
   vi: { title: 'Năng lực thu mua toàn cầu', lead: 'Các năng lực công nghiệp nổi bật và nhu cầu ngành trong các hành lang thương mại mà chúng tôi quản lý.', tags: ['Sản xuất Công nghiệp & Nguyên liệu ↗', 'Hàng tiêu dùng nhanh (FMCG) ↗', 'Dệt may & Vải kỹ thuật ↗', 'Công nghiệp phụ trợ Ô tô ↗', 'Vật liệu Xây dựng & Kiến trúc ↗', 'Bao bì & Polymer ↗', 'Công nghệ Nông nghiệp ↗', 'Thiết bị Y tế & Chăm sóc sức khỏe ↗'] }
 ,
     uk: { title: 'Глобальні закупівельні потужності', lead: 'Провідні промислові потужності та галузеві потреби у торгових коридорах, якими ми активно керуємо.', tags: ['Промислове виробництво та сировина ↗', 'Товари швидкого попиту (FMCG) ↗', 'Текстиль та технічні тканини ↗', 'Автомобільні компоненти ↗', 'Будівельні та архітектурні матеріали ↗', 'Пакування та полімери ↗', 'Агротехнології ↗', 'Медичне та оздоровче обладнання ↗'] }
-  }[lang];
+  };
+const trendingSectorsData = (trendingSectorsDataMap as any)[lang] || (trendingSectorsDataMap as any).en;
 const service = id && key === 'services' ? services[id as keyof typeof services] : null;
 const detailedService = service && id && (lang === 'tr' || lang === 'en') && id in serviceDetails[lang]
   ? serviceDetails[lang][id as keyof typeof serviceDetails[typeof lang]]
@@ -421,37 +428,37 @@ const productFamilies:Record<string,string> = {
 const catalogueGroups = [
   {
     key:'pistachio',
-    title:{tr:'Fıstık Çeşitleri',en:'Pistachio Varieties',de:'Pistaziensorten',it:'Varietà di pistacchio',ru:'Сорта фисташек',fa:'انواع پسته',zh:'开心果系列',vi:'Các loại hạt dẻ cười', uk:'Сорти фісташок'}[lang],
+    title:{tr:'Fıstık Çeşitleri',en:'Pistachio Varieties',de:'Pistaziensorten',it:'Varietà di pistacchio',ru:'Сорта фисташек',fa:'انواع پسته',zh:'开心果系列',vi:'Các loại hạt dẻ cười', uk:'Сорти фісташок'}[lang] || 'Portfolio',
     ids:['akbari-pistachio','kaleghouchi-pistachio','green-peeled-pistachio','fandoghi-pistachio','pistachio-granules','ahmad-aghaei-pistachio']
   },
   {
     key:'dates',
-    title:{tr:'Hurma ve Hurma Ürünleri',en:'Dates & Date Products',de:'Datteln & Dattelprodukte',it:'Datteri e derivati',ru:'Финики и производные продукты',fa:'خرما و فرآورده‌های خرما',zh:'椰枣及深加工制品',vi:'Chà là & Sản phẩm từ chà là', uk:'Фініки та продукти з фініків'}[lang],
+    title:{tr:'Hurma ve Hurma Ürünleri',en:'Dates & Date Products',de:'Datteln & Dattelprodukte',it:'Datteri e derivati',ru:'Финики и производные продукты',fa:'خرما و فرآورده‌های خرما',zh:'椰枣及深加工制品',vi:'Chà là & Sản phẩm từ chà là', uk:'Фініки та продукти з фініків'}[lang] || 'Portfolio',
     ids:['mazafati-dates','date-paste-syrup']
   },
   {
     key:'nuts',
-    title:{tr:'Kuruyemişler',en:'Nuts',de:'Nüsse',it:'Frutta a guscio',ru:'Орехи',fa:'خشکبار و مغزها',zh:'特色坚果系列',vi:'Các loại hạt', uk:'Горіхи'}[lang],
+    title:{tr:'Kuruyemişler',en:'Nuts',de:'Nüsse',it:'Frutta a guscio',ru:'Орехи',fa:'خشکبار و مغزها',zh:'特色坚果系列',vi:'Các loại hạt', uk:'Горіхи'}[lang] || 'Portfolio',
     ids:['almonds','walnuts','mixed-nuts']
   },
   {
     key:'dried-fruit',
-    title:{tr:'Kuru Meyveler',en:'Dried Fruits',de:'Trockenfrüchte',it:'Frutta essiccata',ru:'Сухофрукты',fa:'میوه‌های خشک',zh:'脱水干果系列',vi:'Trái cây sấy khô', uk:'Сухофрукти'}[lang],
+    title:{tr:'Kuru Meyveler',en:'Dried Fruits',de:'Trockenfrüchte',it:'Frutta essiccata',ru:'Сухофрукты',fa:'میوه‌های خشک',zh:'脱水干果系列',vi:'Trái cây sấy khô', uk:'Сухофрукти'}[lang] || 'Portfolio',
     ids:['raisins','dried-apricots-kernels','dried-mulberries']
   },
   {
     key:'seeds',
-    title:{tr:'Tohumlar',en:'Seeds',de:'Saaten',it:'Semi',ru:'Семена',fa:'تخمه‌ها و دانه‌ها',zh:'大宗籽仁系列',vi:'Các loại hạt giống & hạt xuất khẩu', uk:'Насіння'}[lang],
+    title:{tr:'Tohumlar',en:'Seeds',de:'Saaten',it:'Semi',ru:'Семена',fa:'تخمه‌ها و دانه‌ها',zh:'大宗籽仁系列',vi:'Các loại hạt giống & hạt xuất khẩu', uk:'Насіння'}[lang] || 'Portfolio',
     ids:['pumpkin-seeds','sunflower-seeds']
   },
   {
     key:'specialities',
-    title:{tr:'Safran ve Özel Ürünler',en:'Saffron & Specialities',de:'Safran & Spezialitäten',it:'Zafferano e specialità',ru:'Шафран и специализированные продукты',fa:'زعفران و محصولات خاص',zh:'顶级藏红花与天然特色食品',vi:'Saffron & Đặc sản', uk:'Шафран та спеціалітети'}[lang],
+    title:{tr:'Safran ve Özel Ürünler',en:'Saffron & Specialities',de:'Safran & Spezialitäten',it:'Zafferano e specialità',ru:'Шафран и специализированные продукты',fa:'زعفران و محصولات خاص',zh:'顶级藏红花与天然特色食品',vi:'Saffron & Đặc sản', uk:'Шафран та спеціалітети'}[lang] || 'Portfolio',
     ids:['saffron','zereshk']
   }
 ];
 const catalogueOrder = catalogueGroups.flatMap((group) => group.ids);
-const jumpLabel = {
+const jumpLabelMap = {
   tr: 'Kategoriye Git',
   en: 'Jump to Category',
   de: 'Zur Kategorie springen',
@@ -459,7 +466,8 @@ const jumpLabel = {
   ru: 'Перейти к категории',
   fa: 'پرش به دسته‌بندی',
   zh: '品类快速直达',
-  vi: 'Chuyển đến danh mục', uk:'Категорії'}[lang];
+  vi: 'Chuyển đến danh mục', uk:'Категорії'};
+const jumpLabel = (jumpLabelMap as any)[lang] || (jumpLabelMap as any).en;
 const categoryLeads: Record<string, Record<Locale, string>> = {
   pistachio: {
     tr: 'İran ve bölgesel havzaların birinci sınıf Akbari, Kalleh Ghouchi, Ahmad Aghaei ve Fandoghi fıstıkları; kalibre tasnifi, aflatoksin analizleri ve vakumlu ihracat ambalajlarıyla toptan tedarik edilir.',
@@ -613,7 +621,7 @@ const sourcingDeskCopy: Record<Locale, { kicker: string; title: string; lead: st
     note: 'Hồ sơ xuất xứ và kiểm định lô hàng luôn được công khai minh bạch ở giai đoạn báo giá.'
   }
 };
-const featuredInsightLabel = {
+const featuredInsightLabelMap = {
   tr: 'ÖNE ÇIKAN TİCARİ ANALİZ',
   en: 'FEATURED TRADE INTELLIGENCE',
   de: 'FOKUS-HANDELSANALYSE',
@@ -621,8 +629,9 @@ const featuredInsightLabel = {
   ru: 'ГЛАВНЫЙ АНАЛИТИЧЕСКИЙ МАТЕРИАЛ',
   fa: 'تحلیل برگزیده تجاری',
   zh: '核心商贸研判报告',
-  vi: 'PHÂN TÍCH THƯƠNG MẠI TIÊU BIỂU', uk:'Вибраний аналіз'}[lang];
-const readArticleLabel = {
+  vi: 'PHÂN TÍCH THƯƠNG MẠI TIÊU BIỂU', uk:'Вибраний аналіз'};
+const featuredInsightLabel = (featuredInsightLabelMap as any)[lang] || (featuredInsightLabelMap as any).en;
+const readArticleLabelMap = {
   tr: 'Analizin Tamamını Oku',
   en: 'Read Full Analysis',
   de: 'Vollständige Analyse lesen',
@@ -630,7 +639,8 @@ const readArticleLabel = {
   ru: 'Читать анализ полностью',
   fa: 'مطالعه کامل تحلیل',
   zh: '阅读完整研报',
-  vi: 'Đọc toàn bộ bài viết', uk:'Читати статтю'}[lang];
+  vi: 'Đọc toàn bộ bài viết', uk:'Читати статтю'};
+const readArticleLabel = (readArticleLabelMap as any)[lang] || (readArticleLabelMap as any).en;
 const insightCategories: Record<string, Record<Locale, string>> = {
   'strategic-vs-procurement': {
     tr: 'Stratejik Tedarik', en: 'Strategic Sourcing', de: 'Strategische Beschaffung',
@@ -769,7 +779,7 @@ const advisoryDeskCopy: Record<Locale, { kicker: string; title: string; lead: st
     cta: 'Yêu cầu tư vấn thương mại'
   }
 };
-const executiveSummaryLabel = {
+const executiveSummaryLabelMap = {
   tr: 'YÖNETİCİ ÖZETİ & STRATEJİK ÇIKARIM',
   en: 'EXECUTIVE SUMMARY & STRATEGIC TAKEAWAY',
   de: 'EXECUTIVE SUMMARY & KERNAUSSAGE',
@@ -777,8 +787,9 @@ const executiveSummaryLabel = {
   ru: 'РЕЗЮМЕ ДЛЯ РУКОВОДИТЕЛЕЙ',
   fa: 'خلاصه مدیریتی و دستاورد استراتژیک',
   zh: '管理层摘要与核心研判',
-  vi: 'TÓM TẮT ĐIỀU HÀNH & KẾT LUẬN CHIẾN LƯỢC', uk:'Короткий зміст'}[lang];
-const authorLabel = {
+  vi: 'TÓM TẮT ĐIỀU HÀNH & KẾT LUẬN CHIẾN LƯỢC', uk:'Короткий зміст'};
+const executiveSummaryLabel = (executiveSummaryLabelMap as any)[lang] || (executiveSummaryLabelMap as any).en;
+const authorLabelMap = {
   tr: 'CTSEG Küresel Ticaret Masası',
   en: 'CTSEG Global Trade Desk',
   de: 'CTSEG Globaler Handelsdesk',
@@ -786,8 +797,9 @@ const authorLabel = {
   ru: 'Отдел глобальной торговли CTSEG',
   fa: 'میز تجارت جهانی CTSEG',
   zh: 'CTSEG 全球贸易与供应链智库',
-  vi: 'Ban Nghiên cứu Thương mại CTSEG', uk:'CTSEG Trade Desk'}[lang];
-const relatedServiceKicker = {
+  vi: 'Ban Nghiên cứu Thương mại CTSEG', uk:'CTSEG Trade Desk'};
+const authorLabel = (authorLabelMap as any)[lang] || (authorLabelMap as any).en;
+const relatedServiceKickerMap = {
   tr: 'İlgili Ticari Hizmet',
   en: 'Related Commercial Capability',
   de: 'Verwandte Handelsdienstleistung',
@@ -795,8 +807,9 @@ const relatedServiceKicker = {
   ru: 'Связанная коммерческая услуга',
   fa: 'خدمت تجاری مرتبط',
   zh: '关联商贸服务与落地支持',
-  vi: 'Năng lực thương mại liên quan', uk:'Пов\'язані послуги'}[lang];
-const relatedInsightsHeading = {
+  vi: 'Năng lực thương mại liên quan', uk:'Пов\'язані послуги'};
+const relatedServiceKicker = (relatedServiceKickerMap as any)[lang] || (relatedServiceKickerMap as any).en;
+const relatedInsightsHeadingMap = {
   tr: 'Diğer Stratejik Analizler',
   en: 'Related Trade Intelligence',
   de: 'Weitere Handelsanalysen',
@@ -804,7 +817,8 @@ const relatedInsightsHeading = {
   ru: 'Другие аналитические материалы',
   fa: 'سایر تحلیل‌های استراتژیک',
   zh: '更多贸易研报与行业洞察',
-  vi: 'Các phân tích thương mại khác', uk:'Схожі матеріали'}[lang];
+  vi: 'Các phân tích thương mại khác', uk:'Схожі матеріали'};
+const relatedInsightsHeading = (relatedInsightsHeadingMap as any)[lang] || (relatedInsightsHeadingMap as any).en;
 const articleRfqDesk = {
   kicker: {
     tr: 'Ticari İnceleme & Teklif',
@@ -814,7 +828,7 @@ const articleRfqDesk = {
     ru: 'Коммерческая оценка и запрос',
     fa: 'بررسی تجاری و استعلام',
     zh: '商业研判与委托询价',
-    vi: 'Đánh giá thương mại & Báo giá', uk:'Комерційна оцінка'}[lang],
+    vi: 'Đánh giá thương mại & Báo giá', uk:'Комерційна оцінка'}[lang] || 'Commercial Assessment & RFQ',
   title: {
     tr: 'Tedarik zincirinizi veya ihracat rotanızı doğrulamak ister misiniz?',
     en: 'Need to verify your supply chain or explore new trade routes?',
@@ -823,7 +837,7 @@ const articleRfqDesk = {
     ru: 'Хотите проверить цепочку поставок или открыть новые торговые маршруты?',
     fa: 'آیا مایلید زنجیره تأمین یا مسیرهای صادراتی خود را اعتبارسنجی کنید؟',
     zh: '需要对目标供应链开展深度验厂或开拓泛欧贸易走廊？',
-    vi: 'Bạn cần xác minh chuỗi cung ứng hoặc mở rộng tuyến thương mại mới?', uk:'Потрібно перевірити ланцюг постачання?'}[lang],
+    vi: 'Bạn cần xác minh chuỗi cung ứng hoặc mở rộng tuyến thương mại mới?', uk:'Потрібно перевірити ланцюг постачання?'}[lang] || 'Need to verify your supply chain or explore new trade routes?',
   lead: {
     tr: 'Fabrika doğrulaması, TCO maliyet analizi, numune denetimi veya Incoterms sözleşme mimarisi için ticari talebinizi iletin.',
     en: 'Submit your commercial inquiry for factory verification, TCO cost modeling, batch inspections, or Incoterms contract governance.',
@@ -832,7 +846,7 @@ const articleRfqDesk = {
     ru: 'Отправьте запрос на аудит фабрик, расчёт TCO, инспекцию партий или контрактное сопровождение сделок.',
     fa: 'درخواست تجاری خود را برای اعتبارسنجی کارخانه، مدل‌سازی TCO، بازرسی پارت یا قراردادهای Incoterms ارسال کنید.',
     zh: '欢迎提交具体业务委托，获取工厂实地考察报告、到岸 TCO 测算、样品实验室检测及国际贸易合同风控方案。',
-    vi: 'Gửi yêu cầu thương mại của bạn để được thẩm định nhà xưởng, lập mô hình chi phí TCO, kiểm định lô hàng và quản trị hợp đồng.', uk:'Надішліть свій комерційний запит.'}[lang],
+    vi: 'Gửi yêu cầu thương mại của bạn để được thẩm định nhà xưởng, lập mô hình chi phí TCO, kiểm định lô hàng và quản trị hợp đồng.', uk:'Надішліть свій комерційний запит.'}[lang] || 'Submit your commercial inquiry for supplier verification, cost modeling and trade coordination.',
   cta: {
     tr: 'Ticari Talep Formu',
     en: 'Submit Commercial Request',
@@ -841,11 +855,11 @@ const articleRfqDesk = {
     ru: 'Отправить запрос',
     fa: 'ارسال درخواست تجاری',
     zh: '填写商业需求委托单',
-    vi: 'Gửi yêu cầu thương mại', uk:'Надіслати запит'}[lang]
+    vi: 'Gửi yêu cầu thương mại', uk:'Надіслати запит'}[lang] || 'Submit Commercial Request'
 };
 const processPage = processPages[lang] || processPages['en'];
 const scenarioPage = scenarioPages[lang] || scenarioPages['en'];
-const processLabels = {
+const processLabelsMap = {
   tr:{boundary:'Rol ve sorumluluk sınırı',answers:'Doğrudan yanıtlar',answerLead:'Tedarik ve ticari koordinasyon hakkında sık sorulan temel sorular.'},
   en:{boundary:'Role and responsibility boundary',answers:'Direct answers',answerLead:'Core questions about sourcing and commercial coordination.'},
   de:{boundary:'Rollen- und Verantwortungsgrenze',answers:'Direkte Antworten',answerLead:'Kernfragen zu Beschaffung und kommerzieller Koordination.'},
@@ -853,13 +867,15 @@ const processLabels = {
   ru:{boundary:'Границы роли и ответственности',answers:'Прямые ответы',answerLead:'Основные вопросы о сорсинге и коммерческой координации.'},
   fa:{boundary:'حدود نقش و مسئولیت',answers:'پاسخ‌های مستقیم',answerLead:'پرسش‌های اصلی درباره تأمین و هماهنگی تجاری.'},
   zh:{boundary:'机构角色定位与权责边界',answers:'常见商务问题直截解答',answerLead:'关于跨境战略采购、主体核验与供应链协调的核心解答。'},
-  vi:{boundary:'Ranh giới vai trò và trách nhiệm',answers:'Giải đáp trực tiếp',answerLead:'Các câu hỏi cốt lõi về thu mua và điều phối thương mại.'}, uk:{boundary:'Межі ролі та відповідальності',answers:'Прямі відповіді',answerLead:'Ключові запитання щодо закупівель та координації торгівлі.'}}[lang]
-const scenarioKicker = {tr:'Temsili çalışma',en:'Representative work',de:'Repräsentatives Szenario',it:'Scenario rappresentativo',ru:'Пример сценария',fa:'سناریوی نمونه',zh:'实战案例',vi:'Kịch bản đại diện', uk:'Репрезентативний сценарій'}[lang]
+  vi:{boundary:'Ranh giới vai trò và trách nhiệm',answers:'Giải đáp trực tiếp',answerLead:'Các câu hỏi cốt lõi về thu mua và điều phối thương mại.'}, uk:{boundary:'Межі ролі та відповідальності',answers:'Прямі відповіді',answerLead:'Ключові запитання щодо закупівель та координації торгівлі.'}};
+const processLabels = (processLabelsMap as any)[lang] || (processLabelsMap as any).en;
+const scenarioKickerMap = {tr:'Temsili çalışma',en:'Representative work',de:'Repräsentatives Szenario',it:'Scenario rappresentativo',ru:'Пример сценария',fa:'سناریوی نمونه',zh:'实战案例',vi:'Kịch bản đại diện', uk:'Репрезентативний сценарій'};
+const scenarioKicker = (scenarioKickerMap as any)[lang] || (scenarioKickerMap as any).en;
 const guide = key === 'guides' && id ? (guides[id as keyof typeof guides]?.[lang] || guides[id as keyof typeof guides]?.['en'] || null) : null;
 const searchLanding = key === 'search-landing' && id ? ((searchLandings[id as keyof typeof searchLandings]?.content as any)?.[lang] || (searchLandings[id as keyof typeof searchLandings]?.content as any)?.en || null) : null;
 const workHref = localizedPath(lang,'how-we-work');
 const scenarioHref = localizedPath(lang,'scenarios');
-const productCommercialLabels = {
+const productCommercialLabelsMap = {
   tr:['Menşe','Ürün tipi / çeşit','Olası ambalaj','MOQ','Kalite ve analiz belgeleri','Numune','Private label','Teslim ve Incoterm','Termin','Depolama','Hedef kullanım','Teklif için gerekli bilgiler'],
   en:['Origin','Product type / variety','Potential packaging','MOQ','Quality and analysis documents','Sample','Private label','Delivery and Incoterm','Lead time','Storage','Intended use','Information required for quotation'],
   de:['Herkunft','Produkttyp / Sorte','Mögliche Verpackung','MOQ','Qualitäts- und Analysedokumente','Muster','Eigenmarke','Lieferung und Incoterm','Lieferzeit','Lagerung','Zielanwendung','Angaben für ein Angebot'],
@@ -867,8 +883,9 @@ const productCommercialLabels = {
   ru:['Происхождение','Тип / сорт','Возможная упаковка','MOQ','Документы качества и анализов','Образец','Собственная торговая марка','Доставка и Incoterms','Срок поставки','Хранение','Целевое применение','Информация для коммерческого предложения'],
   fa:['مبدأ','نوع / واریته محصول','بسته‌بندی احتمالی','حداقل سفارش MOQ','اسناد کیفیت و آزمایشگاهی','نمونه','برند اختصاصی','تحویل و Incoterms','زمان تحویل','شرایط نگهداری','کاربرد هدف','اطلاعات مورد نیاز برای استعلام'],
   zh:['真实原产地','产品品类 / 品种','常规包装形式','最低起订量 (MOQ)','质量认证与 COA 质检单证','样品调样政策','OEM / 贴牌定制 (Private Label)','交货方式与 Incoterms','生产交期排程','仓储与温湿度要求','目标工业/食用用途','发起正式报价所需信息'],
-  vi:['Xuất xứ','Chủng loại / giống','Bao bì khả thi','Số lượng đặt hàng tối thiểu (MOQ)','Chứng từ chất lượng và phân tích','Mẫu thử','Thương hiệu riêng (Private Label)','Giao hàng và Incoterms','Thời gian giao hàng','Bảo quản','Mục đích sử dụng','Thông tin cần thiết để báo giá'], uk:['Походження','Сорт / різновид','Життєздатне пакування','Мінімальна партія (MOQ)','Документи щодо якості','Зразки','Власна торгова марка (OEM)','Доставка та Incoterms','Час виконання','Зберігання','Цільове призначення','Необхідна інформація для ціноутворення']}[lang]
-const verifiedLater = {
+  vi:['Xuất xứ','Chủng loại / giống','Bao bì khả thi','Số lượng đặt hàng tối thiểu (MOQ)','Chứng từ chất lượng và phân tích','Mẫu thử','Thương hiệu riêng (Private Label)','Giao hàng và Incoterms','Thời gian giao hàng','Bảo quản','Mục đích sử dụng','Thông tin cần thiết để báo giá'], uk:['Походження','Сорт / різновид','Життєздатне пакування','Мінімальна партія (MOQ)','Документи щодо якості','Зразки','Власна торгова марка (OEM)','Доставка та Incoterms','Час виконання','Зберігання','Цільове призначення','Необхідна інформація для ціноутворення']};
+const productCommercialLabels = (productCommercialLabelsMap as any)[lang] || (productCommercialLabelsMap as any).en;
+const verifiedLaterMap = {
   tr:['Üretici ve sipariş yapısına göre doğrulanır','Teklif aşamasında teyit edilir','Parti bazında belge kontrolü yapılır','Talebe göre değerlendirilir','Üretici ve hedef pazara göre değerlendirilir'],
   en:['Verified according to producer and order structure','Confirmed at quotation stage','Documents checked at batch level','Assessed on request','Assessed by producer and target market'],
   de:['Nach Hersteller und Auftragsstruktur zu prüfen','In der Angebotsphase zu bestätigen','Dokumentenprüfung je Charge','Auf Anfrage zu bewerten','Nach Hersteller und Zielmarkt zu bewerten'],
@@ -876,7 +893,8 @@ const verifiedLater = {
   ru:['Проверяется в зависимости от производителя и структуры заказа','Подтверждается на этапе коммерческого предложения','Документы проверяются по партии','Оценивается по запросу','Оценивается в зависимости от производителя и целевого рынка'],
   fa:['بر اساس تولیدکننده و ساختار سفارش ارزیابی می‌شود','در مرحله استعلام قیمت تأیید می‌شود','بررسی اسناد در سطح محموله انجام می‌شود','بر اساس درخواست بررسی می‌شود','بر اساس تولیدکننده و بازار هدف ارزیابی می‌شود'],
   zh:['依据生产企业资质与具体订单结构核实','在正式询价报价阶段书面确认','逐批次核验第三方检测单证','根据具体业务需求专项评估','依据生产工厂与目标市场准入综合评估'],
-  vi:['Được xác minh theo nhà sản xuất và cấu trúc đơn hàng','Được xác nhận ở giai đoạn báo giá','Chứng từ được kiểm tra theo từng lô hàng','Được đánh giá theo yêu cầu','Được đánh giá theo nhà sản xuất và thị trường mục tiêu'], uk:['Перевірено на основі виробника та структури замовлення','Затверджено на етапі котирування','Перевіряється для кожної партії','Оцінюється за запитом','Оцінюється на основі виробника та цільового ринку']}[lang]
+  vi:['Được xác minh theo nhà sản xuất và cấu trúc đơn hàng','Được xác nhận ở giai đoạn báo giá','Chứng từ được kiểm tra theo từng lô hàng','Được đánh giá theo yêu cầu','Được đánh giá theo nhà sản xuất và thị trường mục tiêu'], uk:['Перевірено на основі виробника та структури замовлення','Затверджено на етапі котирування','Перевіряється для кожної партії','Оцінюється за запитом','Оцінюється на основі виробника та цільового ринку']};
+const verifiedLater = (verifiedLaterMap as any)[lang] || (verifiedLaterMap as any).en;
 ---
 {key === 'home' && (
   <>
