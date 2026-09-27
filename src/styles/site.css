@@ -344,8 +344,6 @@ body{background:var(--bg);color:var(--text)}body:before{display:none}
 .primary-nav>a:hover,.primary-nav>a.active,.nav-market-parent:hover,.nav-market-parent:focus-visible,.nav-market-parent.active{color:#f2efe7}
 .primary-nav>a:after{box-shadow:none}.nav-market-menu,.language-menu{background:#34372f;box-shadow:0 12px 28px rgba(34,35,31,.18);backdrop-filter:none}
 .menu-toggle span:not(.sr-only){background:#f2efe7}.language-switcher>button{color:#f2efe7}
-.button{border-color:var(--accent);background:var(--accent);color:#f2efe7!important}.button:hover{background:var(--accent-soft)}
-.button-secondary{border-color:#8f8b80;background:transparent;color:#22231f!important}.button-secondary:hover{border-color:var(--accent);color:var(--accent)!important}
 .hero,.page-hero{background:#272923;color:#f2efe7}
 .hero .eyebrow,.page-hero .eyebrow,.portfolio-section .eyebrow,.process-section .eyebrow,.site-footer .eyebrow,.cta-statement .eyebrow{color:var(--accent-on-dark)}
 .hero .button,.page-hero .button,.portfolio-section .button,.process-section .button,.site-footer .button{background:var(--accent-on-dark);border-color:var(--accent-on-dark);color:#171914!important}
