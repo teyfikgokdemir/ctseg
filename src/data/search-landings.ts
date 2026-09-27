@@ -1490,7 +1490,7 @@ export const searchLandings = {
 }>;
 
 export function searchLandingPath(lang:Locale,id:SearchLandingId):string {
-  return searchLandings[id].paths[lang];
+  return searchLandings[id].paths[lang] || searchLandings[id].paths['en'].replace('/en/', '/' + lang + '/');
 }
 
 export function searchLandingAlternates(id:string):Record<Locale,string> {

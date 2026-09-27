@@ -36,6 +36,7 @@ export const marketUi: Record<MarketLocale, { contact: string; home: string; rel
   fa: { contact: 'درخواست ارزیابی', home: 'صفحه اصلی', related: 'بازارهای دیگر', allMarkets: 'همه بازارها' },
   zh: { contact: '申请评估', home: '首页', related: '其他市场', allMarkets: '所有市场' },
   vi: { contact: 'Yêu cầu đánh giá', home: 'Trang chủ', related: 'Thị trường khác', allMarkets: 'Tất cả thị trường' },
+  uk: { contact: 'Запит', home: 'Головна', related: 'Інші ринки', allMarkets: 'Всі ринки' },
 };
 
 export const marketCopy: Record<MarketLocale, Record<TradeMarketId, MarketCopy>> = {
