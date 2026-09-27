@@ -37,6 +37,10 @@ const nav = [
   ['contact', t.contact, localizedPath(lang,'contact')]
 ];
 
+const flags: Record<string, string> = {
+  tr: '🇹🇷', en: '🇬🇧', de: '🇩🇪', it: '🇮🇹', fa: '🇮🇷',
+  ru: '🇷🇺', zh: '🇨🇳', vi: '🇻🇳', uk: '🇺🇦'
+};
 const globalLocales = activeLocaleRegistry.map((entry) => entry.code);
 const globalLocaleNames = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code, entry.label])) as Record<ActiveLocale,string>;
 
@@ -88,7 +92,7 @@ const globalSwitchPath = (target: string): string => {
                 aria-current={code === lang ? 'true' : undefined}
                 data-locale-option
               >
-                <span class="lang-code">{code.toUpperCase()}</span>
+                <span class="lang-code" style="font-size: 1.2em;">{flags[code] || code.toUpperCase()}</span>
                 <span class="lang-name">{globalLocaleNames[code]}</span>
               </a>
             ))}
@@ -144,7 +148,7 @@ const globalSwitchPath = (target: string): string => {
 
         <div class="language-switcher language-switcher-desktop">
           <button type="button" aria-expanded="false" aria-controls="language-panel" aria-label={t.language} data-language-toggle>
-            <span class="locale-code">{lang.toUpperCase()}</span>
+            <span class="locale-code" style="font-size: 1.2em;">{flags[lang] || lang.toUpperCase()}</span>
             <span class="locale-chevron" aria-hidden="true"></span>
           </button>
           <div id="language-panel" class="language-menu" data-language-menu>
@@ -155,7 +159,7 @@ const globalSwitchPath = (target: string): string => {
               href={globalSwitchPath(code)}
               aria-current={code === lang ? 'true' : undefined}
               data-locale-option
-            ><span>{code.toUpperCase()}</span><strong>{globalLocaleNames[code]}</strong><i aria-hidden="true"></i></a>)}
+            ><span style="font-size: 1.2em;">{flags[code] || code.toUpperCase()}</span><strong>{globalLocaleNames[code]}</strong><i aria-hidden="true"></i></a>)}
           </div>
         </div>
 
