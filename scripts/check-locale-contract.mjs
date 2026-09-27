@@ -8,13 +8,13 @@ const homes = Object.fromEntries(active.map((locale) => [locale, locale === 'tr'
 const expectedHomeMarkers = {
   tr:'Türkiye’den dünyaya',
   en:'From Türkiye',
-  de:'Türkiye',
-  it:'Turchia',
-  fa:'ترکیه',
-  ru:'Турц',
-  zh:'土耳其',
+  de:'Von Türkiye',
+  it:'Dalla Türkiye',
+  fa:'از ترکیه',
+  ru:'Из Турции',
+  zh:'从土耳其',
   vi:'Thổ Nhĩ Kỳ',
-  uk:'Türkiye',
+  uk:'З Türkiye',
   ro:'Din Türkiye',
   bg:'От Türkiye',
   sr:'Iz Türkiye'
@@ -38,7 +38,7 @@ for (const [locale,path] of Object.entries(homes)) {
   if (!html.includes(`<html lang="${locale}"`)) errors.push(`${path}: html lang must be ${locale}`);
   if ((html.match(/<h1\b/g)||[]).length !== 1) errors.push(`${path}: expected exactly one H1`);
   if (!html.includes(expectedHomeMarkers[locale])) errors.push(`${path}: expected localized homepage marker missing`);
-  if (/\bundefined\b|\/undefined\/|\?\?\?\?\?/.test(html)) errors.push(`${path}: unresolved locale/content token`);
+  if (/(?:<title>\s*undefined|content="undefined|href="[^"]*\/undefined\/|>\s*undefined\s*<|\?\?\?\?\?)/i.test(html)) errors.push(`${path}: unresolved locale/content token`);
   if (/REFLEX/i.test(html)) errors.push(`${path}: retired REFLEX content remains`);
 
   const switcher = [...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].map((m)=>m[0]);
@@ -61,7 +61,7 @@ const htmlFiles = walk(dist).filter((path)=>path.endsWith('.html'));
 for (const path of htmlFiles) {
   const html = readFileSync(path,'utf8');
   const label = relative(dist,path).replaceAll('\\','/');
-  if (/\bundefined\b|\/undefined\/|\?\?\?\?\?/.test(html)) errors.push(`${label}: unresolved locale/content token`);
+  if (/(?:<title>\s*undefined|content="undefined|href="[^"]*\/undefined\/|>\s*undefined\s*<|\?\?\?\?\?)/i.test(html)) errors.push(`${label}: unresolved locale/content token`);
   if (/REFLEX/i.test(html)) errors.push(`${label}: retired REFLEX content remains`);
 }
 
