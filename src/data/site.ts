@@ -4,9 +4,7 @@ import { activeLocales, localeByCode, siteLocales, type SiteLocale } from './loc
 export const locales = siteLocales;
 export type Locale = SiteLocale;
 
-export const localeNames: Record<Locale, string> = {
-  tr: localeByCode.tr.label, en: localeByCode.en.label, de: localeByCode.de.label, it: localeByCode.it.label, fa: localeByCode.fa.label, ru: localeByCode.ru.label, zh: localeByCode.zh.label, vi: localeByCode.vi.label
-};
+export const localeNames = Object.fromEntries(activeLocales.map(code => [code, localeByCode[code].label])) as Record<Locale, string>;
 
 export { activeLocales };
 
