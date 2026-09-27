@@ -1398,8 +1398,8 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
   const pathLang = safeLang;
   if (key === 'home') return pathLang === 'tr' ? '/' : `/${pathLang}/`;
   if (key === 'trade-corridor' && id) return `/${pathLang}/turkey-sourcing-for-${id}/`;
-    if (key === 'how-we-work') return `/${pathLang}/${specialSlugs['how-we-work'][safeLang]}/`;
-  if (key === 'scenarios') return `/${pathLang}/${specialSlugs.scenarios[safeLang]}/`;
+    if (key === 'how-we-work') return `/${pathLang}/${(specialSlugs['how-we-work'] as any)[safeLang] || (specialSlugs['how-we-work'] as any).en}/`;
+  if (key === 'scenarios') return `/${pathLang}/${(specialSlugs.scenarios as any)[safeLang] || (specialSlugs.scenarios as any).en}/`;
   if (key === 'guides' && id) {
     if (safeLang === 'tr' || safeLang === 'en') {
       const guideSlug = guideSlugs[id as GuideId]?.[safeLang];
@@ -1408,10 +1408,10 @@ export function localizedPath(lang: Locale | string, key: string, id?: string): 
     return localizedPath(safeLang, 'insights');
   }
   const section = sectionSlugs[key]?.[safeLang] || sectionSlugs[key]?.en;
-  if (key === 'services' && id) return `/${pathLang}/${section}/${services[id as keyof typeof services]?.slugs[safeLang] || id}/`;
-  if (key === 'products' && id) return `/${pathLang}/${section}/${products[id as keyof typeof products]?.slugs[safeLang] || id}/`;
-  if (key === 'insights' && id) return `/${pathLang}/${section}/${insights[id as keyof typeof insights]?.slugs[safeLang] || id}/`;
-  if (key === 'legal' && id) return `/${pathLang}/${legal[id as keyof typeof legal]?.slugs[safeLang] || id}/`;
+  if (key === 'services' && id) return `/${pathLang}/${section}/${(services[id as keyof typeof services]?.slugs as any)?.[safeLang] || services[id as keyof typeof services]?.slugs.en || id}/`;
+  if (key === 'products' && id) return `/${pathLang}/${section}/${(products[id as keyof typeof products]?.slugs as any)?.[safeLang] || products[id as keyof typeof products]?.slugs.en || id}/`;
+  if (key === 'insights' && id) return `/${pathLang}/${section}/${(insights[id as keyof typeof insights]?.slugs as any)?.[safeLang] || insights[id as keyof typeof insights]?.slugs.en || id}/`;
+  if (key === 'legal' && id) return `/${pathLang}/${(legal[id as keyof typeof legal]?.slugs as any)?.[safeLang] || legal[id as keyof typeof legal]?.slugs.en || id}/`;
   return `/${pathLang}/${section}/`;
 }
 
