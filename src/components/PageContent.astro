@@ -431,6 +431,7 @@ const sourcingDeskCopy: Record<Locale, { kicker: string; title: string; lead: st
     cta: '提交大宗采购与贸易问询',
     note: '原产地证明与批次检验文件均在商业报价阶段如实透明提供。'
   },
+  uk: { kicker: 'Стіл оптових закупівель', title: 'Інституційні оптові закупівлі та цінові пропозиції', lead: 'Ми готуємо комерційні пропозиції для всіх товарів з повними специфікаціями, сертифікатами (COA), приватними марками та умовами Incoterms.', cta: 'Надіслати комерційний запит', note: 'Документи про походження та перевірку партії прозоро надаються на етапі ціноутворення.' },
   vi: {
     kicker: 'Bàn thu mua bán sỉ',
     title: 'Bộ phận thu mua số lượng lớn & Báo giá thương mại',
@@ -587,6 +588,7 @@ const advisoryDeskCopy: Record<Locale, { kicker: string; title: string; lead: st
     lead: 'CTSEG 在土耳其、泛欧与泛亚跨境贸易通道中，提供独立工厂背调、到岸总拥有成本 (TCO) 精算、批次留样复验及跨国合同履约合规保障。',
     cta: '预约跨境商贸战略咨询'
   },
+  uk: { kicker: 'Стіл стратегічного консультування', title: 'Потрібні індивідуальні ринкові дослідження або перевірка фабрики?', lead: 'CTSEG забезпечує незалежний аудит виробників, моделювання загальної вартості (TCO), інспекцію партій та контроль контрактів.', cta: 'Запитати комерційну консультацію' },
   vi: {
     kicker: 'Bàn tư vấn chiến lược',
     title: 'Cần nghiên cứu thị trường chuyên biệt hoặc thẩm định nhà xưởng?',
@@ -802,7 +804,7 @@ const verifiedLater = {
     <section class="section solution-directory"><div class="container">
       <div class="section-head"><h2>{searchLandingIndexCopy[lang].title}</h2><p>{searchLandingIndexCopy[lang].lead}</p></div>
       <div class="card-grid">{searchLandingIds.map((landingId,index) => {
-        const landing=searchLandings[landingId].content[lang];
+        const landing=searchLandings[landingId].content[lang as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']] || searchLandings[landingId].content['en' as keyof (typeof searchLandings)[keyof typeof searchLandings]['content']];
         return <a class="card" href={searchLandingPath(lang,landingId)}><small>{indexLabel(index)}</small><h3>{landing.title}</h3><p>{landing.description}</p><strong>{t.readMore} →</strong></a>;
       })}</div>
     </div></section>

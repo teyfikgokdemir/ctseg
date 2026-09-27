@@ -48,6 +48,10 @@ export const searchLandingIndexCopy = {
   "vi": {
     "title": "Giải pháp cho các quyết định thương mại chuyên biệt",
     "lead": "Các trang chuyên sâu dành cho doanh nghiệp cần tìm nhà cung cấp, nhà sản xuất OEM, lập RFQ so sánh chuẩn hóa hoặc đánh giá nguồn cung thực phẩm có chứng từ."
+  },
+  "uk": {
+    "title": "Рішення для конкретних комерційних завдань",
+    "lead": "Спеціалізовані сторінки для компаній, яким потрібен постачальник, виробник, порівнянний RFQ або задокументована оцінка закупівель харчових продуктів."
   }
 } as Record<Locale,{title:string;lead:string}>;
 
