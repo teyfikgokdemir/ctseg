@@ -2,7 +2,7 @@ import { activeLocales, type ActiveLocale } from './locales';
 
 export const tradeLocales = activeLocales;
 export type TradeLocale = ActiveLocale;
-export const tradeSectorIds = ['iranian-carpets', 'silk-carpets', 'wholesale-textiles'] as const;
+export const tradeSectorIds = ['iranian-carpets', 'silk-carpets', 'wholesale-textiles', 'duzce-cam-flat-glass'] as const;
 export type TradeSectorId = (typeof tradeSectorIds)[number];
 
 type Copy = { slug:string; eyebrow:string; title:string; description:string; lead:string; scopeTitle:string; items:string[]; cta:string };
