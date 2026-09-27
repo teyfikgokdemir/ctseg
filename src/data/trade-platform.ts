@@ -104,10 +104,28 @@ export const tradePlatformCopy:Record<PlatformLocale,PlatformCopy> = {
     processTitle:'Quy trình minh bạch và chuẩn mực',process:['Xác định yêu cầu','Nghiên cứu thị trường & đối tác','Thẩm định xác minh','Lập RFQ & báo giá','Mẫu thử & điều phối','Quyết định & các bước tiếp theo']
   },
   uk: {
-    name: 'CTSEG Україна',
-    home: 'Головна',
-    contact: 'Зв\'язатися',
-    assurance: 'Гарантія якості',
-    process: ['Крок 1', 'Крок 2', 'Крок 3', 'Крок 4']
+    eyebrow: 'CTSEG Україна',
+    title: 'З України у світ. Зі світу в Україну.',
+    lead: 'CTSEG керує виходом компаній на нові ринки та зустріччю з правильними виробниками, постачальниками та корпоративними покупцями.',
+    buyerCta: 'Шукаю постачальника',
+    producerCta: 'Хочу вийти на новий ринок',
+    pathsTitle: 'Ваш комерційний шлях',
+    pathsLead: 'Ми структуруємо вашу операційну модель для досягнення цілей.',
+    buyerTitle: 'Для покупців',
+    buyerText: 'Надійне джерело.',
+    producerTitle: 'Для виробників',
+    producerText: 'Міжнародне зростання.',
+    sectorsTitle: 'Сектори',
+    sectorsLead: 'Ми працюємо з ключовими індустріями.',
+    sectors: [
+      {title: 'Промисловість', text: 'Сировина та обладнання'},
+      {title: 'Текстиль', text: 'Одяг та тканини'},
+      {title: 'Продукти харчування', text: 'Сільське господарство'}
+    ],
+    corridorsTitle: 'Торгові коридори',
+    corridorsLead: 'Ми об'єднуємо глобальні ринки.',
+    corridors: ['Україна - Туреччина', 'Європа - Азія', 'Близький Схід'],
+    processTitle: 'Процес',
+    process: ['Визначення вимог', 'Пошук', 'Перевірка', 'Замовлення']
   }
 };
