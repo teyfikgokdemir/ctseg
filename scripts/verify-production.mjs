@@ -54,7 +54,7 @@ const pageChecks = [
     label: 'Chinese market-entry hub',
     verify: (response, body) =>
       response.ok &&
-      body.includes('<html lang="zh"') &&
+      body.includes('<html lang="zh-CN"') &&
       body.includes('hreflang="vi"') &&
       body.includes('hreflang="uk"') &&
       !/reflex/i.test(body),
@@ -64,7 +64,7 @@ const pageChecks = [
     label: 'Vietnam market-entry hub',
     verify: (response, body) =>
       response.ok &&
-      body.includes('<html lang="vi"') &&
+      body.includes('<html lang="vi-VN"') &&
       body.includes('hreflang="zh"') &&
       body.includes('hreflang="ro"') &&
       !/reflex/i.test(body),
