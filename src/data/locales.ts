@@ -7,9 +7,10 @@ export const localeRegistry = [
   { code:'ru', label:'Русский', locale:'ru-RU', direction:'ltr', prefix:'/ru/', ogLocale:'ru_RU', active:true, order:6 },
   { code:'zh', label:'中文', locale:'zh-CN', direction:'ltr', prefix:'/zh/', ogLocale:'zh_CN', active:true, order:7 },
   { code:'vi', label:'Tiếng Việt', locale:'vi-VN', direction:'ltr', prefix:'/vi/', ogLocale:'vi_VN', active:true, order:8 },
-  { code:'ro', label:'Română', locale:'ro-RO', direction:'ltr', prefix:'/ro/', ogLocale:'ro_RO', active:true, order:9 },
-  { code:'bg', label:'Български', locale:'bg-BG', direction:'ltr', prefix:'/bg/', ogLocale:'bg_BG', active:true, order:10 },
-  { code:'sr', label:'Srpski', locale:'sr-Latn-RS', direction:'ltr', prefix:'/sr/', ogLocale:'sr_RS', active:true, order:11 }
+  { code:'uk', label:'Українська', locale:'uk-UA', direction:'ltr', prefix:'/uk/', ogLocale:'uk_UA', active:true, order:9 },
+  { code:'ro', label:'Română', locale:'ro-RO', direction:'ltr', prefix:'/ro/', ogLocale:'ro_RO', active:true, order:10 },
+  { code:'bg', label:'Български', locale:'bg-BG', direction:'ltr', prefix:'/bg/', ogLocale:'bg_BG', active:true, order:11 },
+  { code:'sr', label:'Srpski', locale:'sr-Latn-RS', direction:'ltr', prefix:'/sr/', ogLocale:'sr_RS', active:true, order:12 }
 ] as const;
 
 export type ActiveLocale = (typeof localeRegistry)[number]['code'];

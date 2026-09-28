@@ -3,13 +3,13 @@ import { duzceGlassData, duzceGlassPath, type DuzceGlassLocale } from '../data/d
 import { localizedPath, type Locale } from '../data/site';
 
 const { lang='en' } = Astro.props as { lang?: string };
-const currentLang = (['tr','en','de','it','ru','fa','zh','vi','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
+const currentLang = (['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
 const d = duzceGlassData[currentLang] || duzceGlassData.en;
 const href = duzceGlassPath(currentLang);
 const contactHref = localizedPath(currentLang as Locale, 'contact');
 const isRtl = currentLang === 'fa';
 const homeTitle = currentLang === 'tr' ? 'Düzce Cam için uluslararası ticaret kanalı.' : d.title;
-const exportDeskLabel = currentLang === 'tr' ? 'CTSEG / İHRACAT MASASI' : currentLang === 'ro' ? 'CTSEG / BIROU EXPORT' : currentLang === 'bg' ? 'CTSEG / ЕКСПОРТЕН ОТДЕЛ' : currentLang === 'sr' ? 'CTSEG / IZVOZNI DESK' : 'CTSEG / EXPORT DESK';
+const exportDeskLabel = currentLang === 'tr' ? 'CTSEG / İHRACAT MASASI' : currentLang === 'uk' ? 'CTSEG / ЕКСПОРТНИЙ ВІДДІЛ' : currentLang === 'ro' ? 'CTSEG / BIROU EXPORT' : currentLang === 'bg' ? 'CTSEG / ЕКСПОРТЕН ОТДЕЛ' : currentLang === 'sr' ? 'CTSEG / IZVOZNI DESK' : 'CTSEG / EXPORT DESK';
 ---
 <section class="section duzce-glass-feature" id="duzce-glass" dir={isRtl ? 'rtl' : 'ltr'}>
   <div class="container duzce-glass-shell">

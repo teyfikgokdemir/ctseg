@@ -24,6 +24,7 @@ const localizedMetaLabels: Record<string,{service:string;product:string;serviceT
   fa:{service:'مشاوره تأمین B2B',product:'عمده‌فروشی B2B',serviceType:'تجارت جهانی دوسویه، تأمین راهبردی، اعتبارسنجی تأمین‌کننده و ورود به بازار',buyerAudience:'خریدارانی که به دنبال تأمین‌کنندگان تأییدشده و مسیرهای تأمین هستند',producerAudience:'تولیدکنندگانی که به دنبال خریدار و ورود به بازارهای بین‌المللی هستند'},
   zh:{service:'B2B 采购咨询',product:'B2B 批发',serviceType:'双向国际贸易、战略采购、供应商核验与市场准入',buyerAudience:'寻找经核验供应商及采购路径的企业买家',producerAudience:'寻找买家及国际市场准入机会的制造商与生产企业'},
   vi:{service:'Tư vấn sourcing B2B',product:'B2B bán buôn',serviceType:'Thương mại toàn cầu hai chiều, sourcing chiến lược, xác minh nhà cung cấp và thâm nhập thị trường',buyerAudience:'Người mua cần nhà cung cấp đã xác minh và tuyến sourcing phù hợp',producerAudience:'Nhà sản xuất cần buyer và cơ hội thâm nhập thị trường quốc tế'},
+  uk:{service:'B2B-консалтинг із постачання',product:'Оптовий B2B-продукт',serviceType:'Двостороння міжнародна торгівля, стратегічне постачання, перевірка постачальників і вихід на ринок',buyerAudience:'Покупці, які шукають перевірених постачальників і маршрути постачання',producerAudience:'Виробники, які шукають покупців і вихід на міжнародні ринки'},
   ro:{service:'Consultanță B2B pentru aprovizionare',product:'Comerț B2B angro',serviceType:'Comerț global bidirecțional, aprovizionare strategică, verificarea furnizorilor și intrare pe piață',buyerAudience:'Cumpărători care caută furnizori verificați și rute de aprovizionare',producerAudience:'Producători care caută cumpărători și acces pe piețe internaționale'},
   bg:{service:'B2B консултиране за снабдяване',product:'B2B на едро',serviceType:'Двупосочна глобална търговия, стратегическо снабдяване, проверка на доставчици и навлизане на пазара',buyerAudience:'Купувачи, които търсят проверени доставчици и маршрути за снабдяване',producerAudience:'Производители, които търсят купувачи и достъп до международни пазари'},
   sr:{service:'B2B savetovanje za nabavku',product:'B2B veleprodaja',serviceType:'Dvosmerna globalna trgovina, strateška nabavka, provera dobavljača i ulazak na tržište',buyerAudience:'Kupci koji traže proverene dobavljače i rute nabavke',producerAudience:'Proizvođači koji traže kupce i pristup međunarodnim tržištima'}
@@ -92,6 +93,7 @@ export function getMeta(record: RouteRecord) {
            lang === 'fa' ? `${iranTradeContent.fa.title} | CTSEG` :
            lang === 'zh' ? `${chinaMarketEntryContent.zh!.title} | CTSEG` :
            lang === 'vi' ? `${vietnamMarketEntryContent.vi!.title} | CTSEG` :
+           lang === 'uk' ? 'CTSEG | Україна — Türkiye: стратегічне постачання й торговельна координація' :
            lang === 'ru' ? `${regionalIntentHomes.ru.title} | CTSEG` :
            lang === 'ro' ? 'CTSEG | Sourcing strategic în Türkiye, verificare furnizori și intrare pe piață' :
            lang === 'bg' ? 'CTSEG | Стратегическо снабдяване от Türkiye, проверка на доставчици и пазарен достъп' :
@@ -103,6 +105,7 @@ export function getMeta(record: RouteRecord) {
       lang === 'fa' ? iranTradeContent.fa.description :
       lang === 'zh' ? chinaMarketEntryContent.zh!.description :
       lang === 'vi' ? vietnamMarketEntryContent.vi!.description :
+      lang === 'uk' ? 'CTSEG координує пошук і перевірку виробників, RFQ, документи, зразки та комерційне постачання між Україною, Türkiye, ЄС і міжнародними ринками.' :
       lang === 'ru' ? regionalIntentHomes.ru.description :
       lang === 'ro' ? 'CTSEG conectează România și piețele europene cu producători și furnizori din Türkiye prin sourcing strategic, verificare furnizori, RFQ, analiză TCO și coordonare de intrare pe piață.' :
       lang === 'bg' ? 'CTSEG свързва България и европейските пазари с производители и доставчици от Türkiye чрез стратегическо снабдяване, проверка на доставчици, RFQ, TCO анализ и координация при навлизане на пазара.' :

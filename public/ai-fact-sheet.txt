@@ -23,7 +23,7 @@ The current site presents selected sourcing areas including food and agricultura
 
 ## Current languages
 
-The site uses 11 active full-site locales (Turkish, English, German, Italian, Persian, Russian, Chinese, Vietnamese, Romanian, Bulgarian and Serbian) plus a focused Ukrainian market landing page. Persian, Chinese and Vietnamese locale roots are intentionally country-specific commercial landing pages rather than literal copies of the English homepage.
+The site uses 12 active full-site production locales: Turkish, English, German, Italian, Persian, Russian, Chinese, Vietnamese, Ukrainian, Romanian, Bulgarian and Serbian. Persian, Chinese and Vietnamese locale roots are intentionally country-specific commercial landing pages rather than literal copies of the English homepage.
 
 - Turkish: https://ctseg.com.tr/
 - English: https://ctseg.com.tr/en/
@@ -36,7 +36,7 @@ The site uses 11 active full-site locales (Turkish, English, German, Italian, Pe
 - Romanian: https://ctseg.com.tr/ro/
 - Bulgarian: https://ctseg.com.tr/bg/
 - Serbian: https://ctseg.com.tr/sr/
-- Ukrainian focused landing: https://ctseg.com.tr/uk/
+- Ukrainian full-site locale: https://ctseg.com.tr/uk/
 
 
 ## Country landing intent
@@ -75,3 +75,4 @@ Old analyses may describe a narrower or different sector list. Current selected-
 ## External Trade Desk
 
 CTSEG also offers an outsourced international trade function for companies that need ongoing sourcing, export development, buyer/distributor research, RFQ follow-up and commercial coordination without building a full internal trade team. The operating model can include a monthly retainer, company-owned email, CRM/pipeline management and periodic reporting, with CTSEG's external role disclosed transparently.
+

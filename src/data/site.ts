@@ -2,6 +2,7 @@ import { guideSlugs, specialSlugs, type GuideId } from './completion';
 import { activeLocales, localeByCode, siteLocales, type SiteLocale } from './locales';
 import { syriaMarketContent } from './syria-market';
 import { localizedSlug } from '../lib/localized-slug';
+import { ukCore, ukInsightTitles, ukLegal, ukProducts, ukServices } from './uk-content';
 
 export const locales = siteLocales;
 export type Locale = SiteLocale;
@@ -1270,6 +1271,38 @@ export const pageCopy: Record<Locale, any> = {
     legalSections:[['Phạm vi và trách nhiệm','CTSEG nỗ lực duy trì tính chính xác của thông tin doanh nghiệp và thương mại trên website này. Yêu cầu liên hệ và bảo vệ dữ liệu có thể gửi về info@ctseg.com.tr.'],['Thông tin xử lý và mục đích','Khi bạn liên hệ, chúng tôi có thể xử lý tên, công ty, email, số điện thoại và thông tin nhu cầu thương mại, cùng các bản ghi kỹ thuật giới hạn để bảo mật. Dữ liệu này dùng để phản hồi, đánh giá quan hệ hợp tác và tuân thủ nghĩa vụ pháp lý.'],['Chia sẻ, lưu trữ và bảo mật dữ liệu','Thông tin chỉ được chia sẻ với các nhà cung cấp dịch vụ lưu trữ, email, hỗ trợ kỹ thuật cần thiết hoặc cơ quan có thẩm quyền theo luật định. Dữ liệu sẽ được xóa hoặc ẩn danh khi hết thời hạn lưu trữ theo luật.'],['Quyền của bạn và thông tin liên hệ','Để thực hiện quyền truy cập, chỉnh sửa, xóa hoặc phản đối xử lý dữ liệu, vui lòng gửi yêu cầu kèm thông tin nhận diện tới info@ctseg.com.tr.']]
   }
 };
+
+/* Ukrainian production locale: native copy with canonical English slugs only where a dedicated slug is unnecessary. */
+Object.assign(company.name,{uk:ukCore.companyName});
+Object.assign(companyCopy,{uk:ukCore.company});
+for (const [key,slug] of Object.entries(ukCore.sections)) Object.assign(sectionSlugs[key],{uk:slug});
+Object.assign(ui,{uk:ukCore.ui});
+Object.assign(homeCopy,{uk:ukCore.home});
+Object.assign(editorialCopy,{uk:ukCore.editorial});
+Object.assign(pageCopy,{uk:ukCore.page});
+
+for (const id of serviceIds) {
+  const [slug,name,description]=ukServices[id];
+  Object.assign(services[id].slugs,{uk:slug});
+  Object.assign(services[id].names,{uk:name});
+  Object.assign(services[id].descriptions,{uk:description});
+}
+for (const id of productIds) {
+  const [name,description]=ukProducts[id];
+  Object.assign(productNames[id],{uk:name});
+  Object.assign(productDescriptions[id],{uk:description});
+}
+insightIds.forEach((id,index)=>{
+  const title=ukInsightTitles[index];
+  Object.assign(insights[id].titles,{uk:title});
+  Object.assign(insights[id].descriptions,{uk:`Практичний матеріал для B2B-компаній: ${title.toLocaleLowerCase('uk-UA')}. Критерії перевірки, вартості, документів і виконання рішення.`});
+  Object.assign(insights[id].answers,{uk:`Рішення слід будувати на чіткій специфікації, перевірці контрагента й документів, порівнюваному RFQ, сукупній вартості та зафіксованих умовах виконання. CTSEG застосовує ці критерії до теми «${title}» і документує обмеження до комерційного рішення.`});
+});
+for (const id of legalIds) {
+  const [slug,title]=ukLegal[id];
+  Object.assign(legal[id].slugs,{uk:slug});
+  Object.assign(legal[id].titles,{uk:title});
+}
 
 export function localizedPath(lang: Locale | string, key: string, id?: string): string {
   const safeLang = (locales as readonly string[]).includes(lang) ? (lang as Locale) : 'en';

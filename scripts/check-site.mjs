@@ -58,7 +58,7 @@ const companyNames = {
   ru: 'CTSEG Промышленно-Торговая Компания с Ограниченной Ответственностью',
   zh: 'CTSEG 工业与贸易有限公司',
   vi: 'Công ty TNHH Công nghiệp và Thương mại CTSEG',
-  uk: 'CTSEG Sanayi ve Ticaret Limited Şirketi',
+  uk: 'CTSEG Промислово-Торгова Компанія з Обмеженою Відповідальністю',
   sq: 'CTSEG Industry and Trade Limited Company',
   mk: 'CTSEG Industry and Trade Limited Company',
   sr: 'CTSEG Industrija i Trgovina',
@@ -76,7 +76,8 @@ const aboutPages = new Set([
   'vi/about/index.html',
   'ro/despre-noi/index.html',
   'bg/za-nas/index.html',
-  'sr/o-nama/index.html'
+  'sr/o-nama/index.html',
+  'uk/pro-nas/index.html'
 ]);
 const contactPages = new Set([
   'tr/iletisim/index.html',
@@ -85,7 +86,7 @@ const contactPages = new Set([
   'it/contatti/index.html',
   'fa/contact/index.html','ru/kontakty/index.html',
   'zh/contact/index.html','vi/contact/index.html',
-  'ro/contact/index.html','bg/kontakt/index.html','sr/kontakt/index.html',
+  'ro/contact/index.html','bg/kontakt/index.html','sr/kontakt/index.html','uk/kontakty/index.html',
   'index.html','en/index.html'
 ]);
 const productCatalogs = new Set([
@@ -99,15 +100,16 @@ const productCatalogs = new Set([
   'vi/trade-products/index.html',
   'ro/produse-comerciale/index.html',
   'bg/targovski-produkti/index.html',
-  'sr/trgovinski-proizvodi/index.html'
+  'sr/trgovinski-proizvodi/index.html',
+  'uk/torhovi-produkty/index.html'
 ]);
 const persianLandingLabel = 'fa/index.html';
 const persianLandingCanonical = 'https://ctseg.com.tr/fa/';
-const tradeLocaleCodes = ['tr','en','de','it','fa','ru','zh','vi','ro','bg','sr'];
+const tradeLocaleCodes = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','sr'];
 const tradeRouteFamilies = {
-  carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/',ro:'/ro/sourcing/covoare-iraniene/',bg:'/bg/sourcing/iranski-kilimi/',sr:'/sr/sourcing/iranski-tepisi/'},
-  silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/',ro:'/ro/sourcing/covoare-matase-lucrate-manual/',bg:'/bg/sourcing/rachno-takani-koprineni-kilimi/',sr:'/sr/sourcing/rucno-cvorovani-svileni-tepisi/'},
-  textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/',zh:'/zh/sourcing/textiles/',vi:'/vi/sourcing/textiles/',ro:'/ro/sourcing/sourcing-textile-angro/',bg:'/bg/sourcing/sourcing-tekstili-na-edro/',sr:'/sr/sourcing/veleprodajni-sourcing-tekstila/'}
+  carpets:{uk:'/uk/sourcing/iranian-carpets/',tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/',ro:'/ro/sourcing/covoare-iraniene/',bg:'/bg/sourcing/iranski-kilimi/',sr:'/sr/sourcing/iranski-tepisi/'},
+  silk:{uk:'/uk/sourcing/silk-carpets/',tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/',ro:'/ro/sourcing/covoare-matase-lucrate-manual/',bg:'/bg/sourcing/rachno-takani-koprineni-kilimi/',sr:'/sr/sourcing/rucno-cvorovani-svileni-tepisi/'},
+  textiles:{uk:'/uk/sourcing/wholesale-textiles/',tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/',zh:'/zh/sourcing/textiles/',vi:'/vi/sourcing/textiles/',ro:'/ro/sourcing/sourcing-textile-angro/',bg:'/bg/sourcing/sourcing-tekstili-na-edro/',sr:'/sr/sourcing/veleprodajni-sourcing-tekstila/'}
 };
 const tradeRecordsByLabel = new Map(Object.entries(tradeRouteFamilies).flatMap(([family,routes]) =>
   Object.entries(routes).map(([lang,pathname]) => [decodeURI(pathname).replace(/^\//,'') + 'index.html',{family,lang,pathname,routes}])
@@ -150,9 +152,9 @@ for (const file of htmlFiles) {
   const isPersianLanding = label === persianLandingLabel;
   const isHomepage = ['index.html','en/index.html','de/index.html','it/index.html','fa/index.html','ru/index.html','zh/index.html','vi/index.html','ro/index.html','bg/index.html','sr/index.html','uk/index.html'].includes(label);
   const isGenericHomepage = ['index.html','en/index.html'].includes(label);
-  const isFocusedHomepage = ['de/index.html','it/index.html','fa/index.html','ru/index.html','zh/index.html','vi/index.html','uk/index.html'].includes(label);
+  const isFocusedHomepage = ['de/index.html','it/index.html','fa/index.html','ru/index.html','zh/index.html','vi/index.html'].includes(label);
   const tradeRecord = tradeRecordsByLabel.get(label);
-  if (!label.startsWith('404') && canonical && ['tr','en','de','it','ru','fa','zh','vi','ro','bg','sr'].includes(lang)) pageRecords.push({ label, canonical, lang, alternates });
+  if (!label.startsWith('404') && canonical && ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr'].includes(lang)) pageRecords.push({ label, canonical, lang, alternates });
   if (titleCount !== 1) errors.push(`${label}: expected one title, found ${titleCount}`);
   if ((html.match(/<meta charset="UTF-8">/g) || []).length !== 1) errors.push(`${label}: expected exactly one UTF-8 charset declaration`);
   if (!/<meta name="description" content="[^"]+"/.test(html)) errors.push(`${label}: missing description`);
@@ -210,8 +212,6 @@ for (const file of htmlFiles) {
     ? [lang]
     : label === 'fa/index.html'
     ? ['tr','en','fa','x-default']
-    : label === 'uk/index.html'
-    ? ['uk']
     : ['tr/cinden-turkiyeye-ithalat-ve-tedarik/index.html','tr/vietnamdan-turkiyeye-ithalat-ve-tedarik/index.html','tr/ukraynadan-turkiyeye-tedarik-ve-ticaret/index.html'].includes(label)
     ? ['tr']
     : (hreflangs.includes('ru') || hreflangs.includes('fa') || hreflangs.includes('zh') || hreflangs.includes('vi'))
@@ -230,7 +230,7 @@ for (const file of htmlFiles) {
       .map((match) => match[1].replace(/<[^>]+>/g, '').trim());
     if (descriptions.length !== 18) errors.push(`${label}: expected 18 product-card descriptions, found ${descriptions.length}`);
     if (new Set(descriptions).size !== descriptions.length) errors.push(`${label}: duplicate product-card description`);
-    if (!html.includes('Kalleh Ghouchi') && !html.includes('Kalleh-Ghouchi') && expectedLang !== 'zh' && expectedLang !== 'vi') errors.push(`${label}: corrected Kalleh Ghouchi name missing`);
+    if (!html.includes('Kalleh Ghouchi') && !html.includes('Kalleh-Ghouchi') && !html.includes('Калле-Гучі') && expectedLang !== 'zh' && expectedLang !== 'vi') errors.push(`${label}: corrected Kalleh Ghouchi name missing`);
     const cardBlocks = [...html.matchAll(/<a class="product-card[^"]*"[^>]*>[\s\S]*?<\/a>/g)].map((match) => match[0]);
     const catalogueImages = cardBlocks
       .map((card) => card.match(/<img[^>]+src="([^"]+)"/)?.[1])
@@ -257,16 +257,16 @@ for (const file of htmlFiles) {
     const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
     const mobileLocales = html.match(/class="mobile-lang-grid"[\s\S]*?<\/div>/)?.[0] ?? '';
     const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
-    if (label !== 'uk/index.html' && (desktopLocales.match(/data-locale-option/g) || []).length !== 12) errors.push(`${label}: desktop locale panel must contain twelve languages`);
-    if (label !== 'uk/index.html' && (mobileLocales.match(/data-locale-option/g) || []).length !== 12) errors.push(`${label}: mobile locale panel must contain twelve languages`);
-    if (label !== 'uk/index.html' && (!/class="locale-flag"[^>]+src="\/images\/flags\/(?:tr|gb|de|it|ir|ru|cn|vn|ro|bg|rs|ua)\.svg"/.test(desktopTrigger) || /locale-name/.test(desktopTrigger))) {
+    if ((desktopLocales.match(/data-locale-option/g) || []).length !== 12) errors.push(`${label}: desktop locale panel must contain twelve languages`);
+    if ((mobileLocales.match(/data-locale-option/g) || []).length !== 12) errors.push(`${label}: mobile locale panel must contain twelve languages`);
+    if ((!/class="locale-flag"[^>]+src="\/images\/flags\/(?:tr|gb|de|it|ir|ru|cn|vn|ro|bg|rs|ua)\.svg"/.test(desktopTrigger) || /locale-name/.test(desktopTrigger))) {
       errors.push(`${label}: desktop language trigger must show the active locale flag without a locale name`);
     }
   }
   if (tradeRecord) {
     const expectedCanonical = encodeURI(`https://ctseg.com.tr${tradeRecord.pathname}`);
     const expectedDirection = tradeRecord.lang === 'fa' ? 'rtl' : 'ltr';
-    const expectedTradeHtmlLang = tradeRecord.lang === 'zh' ? 'zh-CN' : tradeRecord.lang === 'vi' ? 'vi-VN' : tradeRecord.lang === 'ro' ? 'ro-RO' : tradeRecord.lang === 'bg' ? 'bg-BG' : tradeRecord.lang === 'sr' ? 'sr-Latn-RS' : tradeRecord.lang;
+    const expectedTradeHtmlLang = tradeRecord.lang === 'zh' ? 'zh-CN' : tradeRecord.lang === 'vi' ? 'vi-VN' : tradeRecord.lang === 'ro' ? 'ro-RO' : tradeRecord.lang === 'bg' ? 'bg-BG' : tradeRecord.lang === 'sr' ? 'sr-Latn-RS' : tradeRecord.lang === 'uk' ? 'uk-UA' : tradeRecord.lang;
     if (lang !== tradeRecord.lang) errors.push(`${label}: sourcing html lang must be ${tradeRecord.lang}`);
     if (!html.includes(`<html lang="${expectedTradeHtmlLang}" dir="${expectedDirection}"`)) errors.push(`${label}: sourcing html direction must be ${expectedDirection}`);
     if (canonical !== expectedCanonical) errors.push(`${label}: sourcing canonical does not match its route family`);
@@ -275,8 +275,8 @@ for (const file of htmlFiles) {
       errors.push(`${label}: sourcing mobile locale menu controls missing`);
     }
     const localeTags = [...html.matchAll(/<a\b[^>]*data-trade-locale="([^"]+)"[^>]*>/g)].map((match) => ({code:match[1],tag:match[0]}));
-    if (localeTags.length !== 11 || !tradeLocaleCodes.every((code) => localeTags.some((item) => item.code === code))) {
-      errors.push(`${label}: sourcing locale navigation must expose all eleven full-site languages`);
+    if (localeTags.length !== 12 || !tradeLocaleCodes.every((code) => localeTags.some((item) => item.code === code))) {
+      errors.push(`${label}: sourcing locale navigation must expose all twelve full-site languages`);
     }
     const activeLocales = localeTags.filter((item) => item.tag.includes('aria-current="page"'));
     if (activeLocales.length !== 1 || activeLocales[0]?.code !== tradeRecord.lang) errors.push(`${label}: sourcing active locale is incorrect`);
@@ -321,7 +321,7 @@ for (const file of htmlFiles) {
     productAssessmentServicePages++;
     if (!html.includes('"@type":"Service"') || !html.includes('"serviceType":"Specification-led B2B sourcing assessment"')) errors.push(`${label}: product route must use sourcing Service schema`);
   }
-  if (/https:\/\/ctseg\.com\.tr\/(?:tr\/cozumler|en\/solutions|de\/loesungen|it\/soluzioni|ru\/resheniya|fa\/solutions|zh\/solutions|vi\/solutions|ro\/solutii|bg\/resheniya|sr\/resenja)\//.test(canonical || '')) {
+  if (/https:\/\/ctseg\.com\.tr\/(?:tr\/cozumler|en\/solutions|de\/loesungen|it\/soluzioni|ru\/resheniya|uk\/rishennia|fa\/solutions|zh\/solutions|vi\/solutions|ro\/solutii|bg\/resheniya|sr\/resenja)\//.test(canonical || '')) {
     searchLandingPages++;
     if (!html.includes('"@type":"Service"') || !html.includes('"@type":"FAQPage"')) errors.push(`${label}: search landing Service or FAQ schema missing`);
     if (!html.includes('direct-answer') || (html.match(/<details/g) || []).length < 3) errors.push(`${label}: search landing direct answer or FAQ content missing`);
@@ -356,7 +356,7 @@ for (const file of htmlFiles) {
   }
 }
 const builtTradeRecords = [...tradeRecordsByLabel.entries()].filter(([label]) => existsSync(join(root, label)));
-if (builtTradeRecords.length !== 33) errors.push(`expected 33 sourcing routes, found ${builtTradeRecords.length}`);
+if (builtTradeRecords.length !== 36) errors.push(`expected 36 sourcing routes, found ${builtTradeRecords.length}`);
 for (const [sourceLabel, sourceRecord] of builtTradeRecords) {
   const sourceHtml = readFileSync(join(root, sourceLabel), 'utf8');
   const sourceCanonical = sourceHtml.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
@@ -374,10 +374,10 @@ for (const [sourceLabel, sourceRecord] of builtTradeRecords) {
     }
   }
 }
-if (productSchemaPages !== 198) errors.push(`expected 198 Product schemas with verifiable specification semantics, found ${productSchemaPages}`);
-if (productAssessmentServicePages !== 198) errors.push(`expected 198 specification-led product sourcing Service schemas across eleven full catalogue locales, found ${productAssessmentServicePages}`);
-if (searchLandingPages !== 44) errors.push(`expected 44 localized high-intent search landings, found ${searchLandingPages}`);
-if (contactEmailPanels !== 13) errors.push(`expected 13 localized contact email panels across two generic homepages and eleven full contact pages, found ${contactEmailPanels}`);
+if (productSchemaPages !== 216) errors.push(`expected 216 Product schemas with verifiable specification semantics, found ${productSchemaPages}`);
+if (productAssessmentServicePages !== 216) errors.push(`expected 216 specification-led product sourcing Service schemas across twelve full catalogue locales, found ${productAssessmentServicePages}`);
+if (searchLandingPages !== 48) errors.push(`expected 48 localized high-intent search landings, found ${searchLandingPages}`);
+if (contactEmailPanels !== 14) errors.push(`expected 14 localized contact email panels across two generic homepages and twelve full contact pages, found ${contactEmailPanels}`);
 if (!existsSync(join(root, persianLandingLabel))) errors.push('standalone Persian landing page build output missing');
 const sitemapXml = files.filter((file) => /sitemap-\d+\.xml$/.test(file)).map((file) => readFileSync(file,'utf8')).join('\n');
 if (!sitemapXml.includes(`<loc>${persianLandingCanonical}</loc>`)) errors.push('Persian landing canonical missing from sitemap');
@@ -407,8 +407,8 @@ for (const file of htmlFiles) {
   } else if (navLinks.length && !/<html\b[^>]*\blang="fa"/.test(html)) {
     errors.push(`${label}: Persian landing navigation link must remain English or Persian only`);
   }
-  const isSearchLanding=/\/(?:cozumler|solutions|loesungen|soluzioni|resheniya|solutii|resenja)\//.test(`/${label}`);
-  if (!label.startsWith('404') && label !== persianLandingLabel && label !== 'uk/index.html' && !tradeRecord && !isSearchLanding) {
+  const isSearchLanding=/\/(?:cozumler|solutions|loesungen|soluzioni|resheniya|rishennia|solutii|resenja)\//.test(`/${label}`);
+  if (!label.startsWith('404') && label !== persianLandingLabel && !tradeRecord && !isSearchLanding) {
     const globalFaLinks = [...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].filter((match)=>match[0].includes('hreflang="fa"')&&match[0].includes('href="/fa/"'));
     if (globalFaLinks.length !== 2) errors.push(`${label}: desktop and mobile global locale menus must expose the Persian fallback`);
   }
@@ -464,4 +464,8 @@ if (errors.length) {
   for (const error of [...new Set(errors)]) console.error(`- ${error}`);
   process.exit(1);
 }
-console.log(`Site check passed: ${htmlFiles.length} HTML pages, three generic commercial intent flows plus focused country landing architecture, 32 localized high-intent search landings, all 24 sourcing routes with explicit locale/canonical/hreflang/x-default/H1/chrome/Persian-content assertions and reciprocal eight-locale counterparts, ${checkedLinks} internal links, 144 Product + 144 catalogue sourcing Service schemas, sitemap/llms coverage and complete metadata checks.`);
+console.log(`Site check passed: ${htmlFiles.length} HTML pages, three generic commercial intent flows plus focused country landing architecture, 48 localized high-intent search landings, all 36 sourcing routes with explicit locale/canonical/hreflang/x-default/H1/chrome/Persian-content assertions and reciprocal twelve-locale counterparts, ${checkedLinks} internal links, 216 Product + 216 catalogue sourcing Service schemas, sitemap/llms coverage and complete metadata checks.`);
+
+
+
+

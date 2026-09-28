@@ -39,6 +39,10 @@ export const tradeGateway:Record<Locale,{ outbound:Direction; inbound:Direction 
 
 /* Balkan locale rollout: ro, bg, sr */
 Object.assign(tradeGateway as any,{
+  uk:{
+    outbound:{kicker:'ТУРЕЧЧИНА → УКРАЇНА ТА СВІТОВІ РИНКИ',title:'Міжнародний доступ для виробників із Туреччини',description:'Уточнюємо цільовий ринок і вимоги покупця, а потім оцінюємо відповідність продукції, пропозиції, документи та обсяг комерційної координації.'},
+    inbound:{kicker:'УКРАЇНА / СВІТ → ТУРЕЧЧИНА',title:'Стратегічне постачання та вихід на ринок Туреччини',description:'Досліджуємо виробників і постачальників відповідно до комерційної потреби та структуруємо дані про продукцію, походження, документи й RFQ для порівняння.'}
+  },
   ro:{
     outbound:{kicker:'TÜRKIYE → ROMÂNIA & PIEȚE GLOBALE',title:'Acces internațional pentru producția din Türkiye',description:'Clarificăm piața țintă și cerința cumpărătorului, apoi evaluăm compatibilitatea produsului, ofertele, documentația și coordonarea comercială.'},
     inbound:{kicker:'ROMÂNIA / GLOBAL → TÜRKIYE',title:'Sourcing strategic și intrare pe piața din Türkiye',description:'Cercetăm producători și furnizori în raport cu cerința comercială și structurăm produsul, originea, documentele și RFQ-ul pentru comparație.'}
