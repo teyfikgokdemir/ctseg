@@ -42,7 +42,7 @@
 /vi/xuat-khau-tu-viet-nam-sang-tho-nhi-ky-va-chau-au/ /vi/ 301
 
 # Retired REFLEX / disposable-glove routes
-/medical/reflex-disposable-gloves/ /glass/duzce-float-glass/ 301
-/medical/reflex-disposable-gloves/* /glass/duzce-float-glass/ 301
-/en/medical/reflex-disposable-gloves/ /en/glass/duzce-float-glass/ 301
-/en/medical/reflex-disposable-gloves/* /en/glass/duzce-float-glass/ 301
+/medical/reflex-disposable-gloves/ /tr/ticari-urunler/ 301
+/medical/reflex-disposable-gloves/* /tr/ticari-urunler/ 301
+/en/medical/reflex-disposable-gloves/ /en/trade-products/ 301
+/en/medical/reflex-disposable-gloves/* /en/trade-products/ 301
