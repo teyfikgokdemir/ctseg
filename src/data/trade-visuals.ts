@@ -229,7 +229,20 @@ export const sourcingTradeVisualKeys = {
   'wholesale-textiles':'textiles-inputs'
 } as const;
 
+const ukrainianTradeVisualAlt:Record<TradeVisualKey,string> = {
+  'global-trade-hero':'Порт і зразки продукції, що представляють міжнародні торговельні потоки',
+  'food-oils':'Немарковані зразки рослинної олії та харчової сировини для комерційного оцінювання',
+  'nuts-dates':'Зразки горіхів і сухофруктів для оцінювання якості та сорту',
+  'carpets-textiles':'Килими ручної роботи для оцінювання матеріалів і якості плетіння',
+  'textiles-inputs':'Зразки тканин, рушників і текстилю на столі комерційного оцінювання',
+  'strategic-sourcing':'Зразки продукції та документи для порівняльного оцінювання постачальників',
+  'supplier-verification':'Документи й виробничі дані для перевірки постачальника',
+  'trade-advisory':'Комерційні документи та карта міжнародних торговельних маршрутів',
+  'tco-analysis':'Розрахунок сукупної вартості міжнародного постачання',
+  'market-entry':'Аналіз цільового ринку та каналів виходу на нього'
+};
+
 export const localizedTradeVisual = (key:TradeVisualKey, locale:TradeVisualLocale) => {
   const visual=tradeVisuals[key];
-  return {...visual,altText:visual.alt[locale] || visual.alt.en};
+  return {...visual,altText:locale === 'uk' ? ukrainianTradeVisualAlt[key] : visual.alt[locale] || visual.alt.en};
 };

@@ -83,7 +83,7 @@ const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
   name:company.name[lang as Locale] || company.name.en,alternateName:company.alternateName,foundingDate:company.foundingYear,
   description:organizationDescription,
-  slogan:'Two-Way Global Trade & Strategic Sourcing House',
+  slogan:lang === 'uk' ? 'Двостороння міжнародна торгівля та стратегічне постачання' : 'Two-Way Global Trade & Strategic Sourcing House',
   founder:{'@type':'Person',name:company.founder},
   address:{
     '@type':'PostalAddress',
@@ -94,9 +94,14 @@ const organization = {
   },
   url:'https://ctseg.com.tr/',logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
   email:company.email,telephone:company.phone,
-  areaServed:['Türkiye','Europe','Middle East','Asia','International'],
+  areaServed:lang === 'uk' ? ['Україна','Туреччина','Європа','Близький Схід','Азія','Міжнародні ринки'] : ['Türkiye','Europe','Middle East','Asia','International'],
   knowsLanguage:activeLocales,
-  knowsAbout:[
+  knowsAbout:lang === 'uk' ? [
+    'Двостороння міжнародна торгівля','Стратегічне постачання','Пошук і перевірка постачальників','Перевірка виробників і контрагентів',
+    'Управління міжнародними RFQ','Вихід на експортні ринки','Пошук B2B-покупців','Комерційна координація','Постачання з Туреччини',
+    'Торговельна аналітика','Аналіз сукупної вартості','Постачання харчової та аграрної продукції','Текстиль і домашній текстиль',
+    'Пакування та промислові матеріали','Україна — Туреччина: торговельний коридор','Постачання для відбудови України'
+  ] : [
     'Two-way global trade','Strategic sourcing','Supplier sourcing and verification','Factory and counterparty verification',
     'International RFQ management','Export market entry','B2B buyer research','Commercial coordination','Nearshoring from Türkiye',
     'Trade intelligence','Total cost of ownership analysis','Food and agricultural sourcing','Textiles and home textiles',

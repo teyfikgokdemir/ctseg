@@ -1353,7 +1353,7 @@ const verifiedLater = {
     <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={product.names[lang]} lead={product.descriptions[lang]} parentHref={sectionHref('products')} parentLabel={t.products} product={product} ctaHref={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} ctaLabel={t.quote} imageNote={editorial.productImageNote} />
     <section class="section product-detail-content"><div class="container content-grid">
       <div class="prose">
-        <div class="content-block product-commercial-facts"><h2>{lang === 'tr' ? 'Ticari değerlendirme bilgileri' : lang === 'en' ? 'Commercial assessment information' : lang === 'de' ? 'Angaben zur kaufmännischen Bewertung' : lang === 'it' ? 'Informazioni per la valutazione commerciale' : lang === 'ru' ? 'Параметры коммерческой оценки' : lang === 'fa' ? 'اطلاعات ارزیابی تجاری' : lang === 'zh' ? '大宗商品商业评估核心参数' : lang === 'vi' ? 'Thông tin đánh giá thương mại' : lang === 'ro' ? 'Informații pentru evaluarea comercială' : lang === 'bg' ? 'Информация за търговска оценка' : lang === 'sr' ? 'Informacije za komercijalnu procenu' : 'Commercial assessment information'}</h2>
+        <div class="content-block product-commercial-facts"><h2>{lang === 'tr' ? 'Ticari değerlendirme bilgileri' : lang === 'en' ? 'Commercial assessment information' : lang === 'de' ? 'Angaben zur kaufmännischen Bewertung' : lang === 'it' ? 'Informazioni per la valutazione commerciale' : lang === 'ru' ? 'Параметры коммерческой оценки' : lang === 'fa' ? 'اطلاعات ارزیابی تجاری' : lang === 'zh' ? '大宗商品商业评估核心参数' : lang === 'vi' ? 'Thông tin đánh giá thương mại' : lang === 'uk' ? 'Інформація для комерційного оцінювання' : lang === 'ro' ? 'Informații pentru evaluarea comercială' : lang === 'bg' ? 'Информация за търговска оценка' : lang === 'sr' ? 'Informacije za komercijalnu procenu' : 'Commercial assessment information'}</h2>
           <dl>{productCommercialLabels.map((label,index) => {
             const values = evidence ? [
               evidence.origin[lang],
@@ -1369,13 +1369,14 @@ const verifiedLater = {
               evidence.intendedUse[lang],
               evidence.quoteRequirements[lang]
             ] : [
-              product.origin,product.names[lang],verifiedLater[0],verifiedLater[1],verifiedLater[2],
+              lang === 'uk' && product.origin === 'Iran' ? 'Іран' : product.origin,product.names[lang],verifiedLater[0],verifiedLater[1],verifiedLater[2],
               verifiedLater[3],verifiedLater[4],verifiedLater[1],verifiedLater[1],verifiedLater[0],
               copy.productUses.join(' · '),
               lang === 'tr' ? 'Spesifikasyon, miktar, ambalaj, teslim yeri, hedef tarih ve belge beklentisi' :
               lang === 'en' ? 'Specification, quantity, packaging, delivery point, target date and document requirements' :
               lang === 'zh' ? '产品技术规格书、采购订购量 (MOQ)、包装方案、目标口岸、交付期及必备单证要求' :
               lang === 'vi' ? 'Thông số kỹ thuật, số lượng, quy cách đóng gói, địa điểm giao hàng, tiến độ và yêu cầu chứng từ' :
+              lang === 'uk' ? 'Специфікація, кількість, пакування, місце постачання, цільова дата та вимоги до документів' :
               lang === 'ro' ? 'Specificație, cantitate, ambalare, punct de livrare, dată țintă și cerințe documentare' :
               lang === 'bg' ? 'Спецификация, количество, опаковка, място на доставка, целева дата и изисквания за документи' :
               lang === 'sr' ? 'Specifikacija, količina, pakovanje, mesto isporuke, ciljni datum i zahtevi za dokumentaciju' :
@@ -1395,6 +1396,7 @@ const verifiedLater = {
                          lang === 'fa' ? 'ساختار اعتبارسنجی تجاری و راهبری تأمین CTSEG' :
                          lang === 'zh' ? 'CTSEG 独立商业核验与供应链履约治理' :
                          lang === 'vi' ? 'Cơ chế thẩm định thương mại & quản trị nguồn cung CTSEG' :
+                         lang === 'uk' ? 'Система торговельної перевірки та управління постачанням CTSEG' :
                          lang === 'ro' ? 'Arhitectura CTSEG de verificare comercială și guvernanță a sourcingului' :
                          lang === 'bg' ? 'CTSEG архитектура за търговска проверка и управление на снабдяването' :
                          lang === 'sr' ? 'CTSEG arhitektura komercijalne provere i upravljanja sourcingom' :
@@ -1407,6 +1409,7 @@ const verifiedLater = {
                     lang === 'fa' ? 'CTSEG به عنوان هماهنگ‌کننده مستقل تجارت و تأمین فعالیت می‌کند. تمامی محموله‌ها با گواهی آنالیز پارت (COA)، آزمون‌های معتبر آزمایشگاهی و تضمین تعهدات قراردادی هماهنگ می‌شوند.' :
                     lang === 'zh' ? 'CTSEG 作为独立国际贸易协同机构，并非单一生产企业。每一批次大宗货物均在 CTSEG 贸易治理体系下执行出厂化验单 (COA) 核验、第三方实验室送检及商事履约保障。' :
                     lang === 'vi' ? 'CTSEG hoạt động như một đơn vị điều phối thương mại và thu mua độc lập. Mỗi lô hàng đều được điều phối với chứng nhận phân tích lô (COA), kiểm định phòng lab và bảo đảm thực hiện hợp đồng.' :
+                    lang === 'uk' ? 'CTSEG діє як незалежний координатор торгівлі та постачання, а не як інтегрований виробник. Для кожної партії в процесі CTSEG координуються документи, сертифікат аналізу (COA), необхідні лабораторні випробування та договірні вимоги.' :
                     lang === 'ro' ? 'CTSEG acționează ca operator independent de coordonare comercială și sourcing, nu ca producător integrat. Pentru fiecare livrare, documentele de lot, certificatul de analiză (COA), testele de laborator aplicabile și cerințele contractuale sunt coordonate în cadrul procesului CTSEG.' :
                     lang === 'bg' ? 'CTSEG действа като независим координатор на търговията и снабдяването, а не като интегриран производител. За всяка доставка партидните документи, сертификатът за анализ (COA), приложимите лабораторни тестове и договорните изисквания се координират в процеса на CTSEG.' :
                     lang === 'sr' ? 'CTSEG deluje kao nezavisni koordinator trgovine i sourcinga, a ne kao integrisani proizvođač. Za svaku isporuku, dokumentacija serije, sertifikat analize (COA), primenljiva laboratorijska ispitivanja i ugovorni zahtevi koordiniraju se kroz CTSEG proces.' :

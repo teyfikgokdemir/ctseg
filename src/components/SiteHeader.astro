@@ -88,14 +88,14 @@ const globalSwitchPath = (target: string): string => {
       <span class="sr-only">{t.menu}</span><span></span><span></span>
     </button>
 
-    <nav id="primary-nav" class="primary-nav" aria-label="Primary" data-primary-nav>
+    <nav id="primary-nav" class="primary-nav" aria-label={lang === 'uk' ? 'Основна навігація' : 'Primary'} data-primary-nav>
       <div class="mobile-only-panel">
         <div class="mobile-nav-head">
           <div class="mobile-nav-brand">
             <span class="mobile-nav-title">CTSEG</span>
             <span class="mobile-nav-subtitle">{navigationCopy.main}</span>
           </div>
-          <button class="mobile-nav-close" type="button" aria-label="Close menu" data-mobile-close>
+          <button class="mobile-nav-close" type="button" aria-label={t.close || 'Close menu'} data-mobile-close>
             <span aria-hidden="true">✕</span>
           </button>
         </div>

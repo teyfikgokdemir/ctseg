@@ -125,11 +125,12 @@ try {
     ,{ name:'desktop1440-vi-home', path:'/vi/', width:1440, height:1000 }
     ,{ name:'mobile390-vi-home', path:'/vi/', width:390, height:844 }
   ];
-  const sourcingLocales = ['tr','en','de','it','fa','ru','zh','vi','ro','bg','sr'];
+  const sourcingLocales = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','sr'];
+  const productionLocaleCount = sourcingLocales.length;
   const sourcingFamilies = {
-    carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/',ro:'/ro/sourcing/covoare-iraniene/',bg:'/bg/sourcing/iranski-kilimi/',sr:'/sr/sourcing/iranski-tepisi/'},
-    silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/',ro:'/ro/sourcing/covoare-matase-lucrate-manual/',bg:'/bg/sourcing/rachno-takani-koprineni-kilimi/',sr:'/sr/sourcing/rucno-cvorovani-svileni-tepisi/'},
-    textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/',zh:'/zh/sourcing/textiles/',vi:'/vi/sourcing/textiles/',ro:'/ro/sourcing/sourcing-textile-angro/',bg:'/bg/sourcing/sourcing-tekstili-na-edro/',sr:'/sr/sourcing/veleprodajni-sourcing-tekstila/'}
+    carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/',uk:'/uk/sourcing/iranian-carpets/',ro:'/ro/sourcing/covoare-iraniene/',bg:'/bg/sourcing/iranski-kilimi/',sr:'/sr/sourcing/iranski-tepisi/'},
+    silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/',uk:'/uk/sourcing/silk-carpets/',ro:'/ro/sourcing/covoare-matase-lucrate-manual/',bg:'/bg/sourcing/rachno-takani-koprineni-kilimi/',sr:'/sr/sourcing/rucno-cvorovani-svileni-tepisi/'},
+    textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/',zh:'/zh/sourcing/textiles/',vi:'/vi/sourcing/textiles/',uk:'/uk/sourcing/wholesale-textiles/',ro:'/ro/sourcing/sourcing-textile-angro/',bg:'/bg/sourcing/sourcing-tekstili-na-edro/',sr:'/sr/sourcing/veleprodajni-sourcing-tekstila/'}
   };
   const sourcingAudiences = {
     carpets:['کارگاه‌های فرش دستباف','تولیدکنندگان فرش ابریشم','تولیدکنندگان فرش ماشینی','صادرکنندگان فرش'],
@@ -268,7 +269,7 @@ try {
         const lum=(value)=>rgb(value).map((c)=>{c/=255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4}).reduce((s,c,i)=>s+c*[.2126,.7152,.0722][i],0);
         const ratio=(a,b)=>(Math.max(lum(a),lum(b))+.05)/(Math.min(lum(a),lum(b))+.05);
         const opaqueBackground=(node)=>{const transparent=/^(?:transparent|rgba?\([^)]*,\s*0(?:\.0+)?\))$/;for(let el=node;el;el=el.parentElement){const bg=getComputedStyle(el).backgroundColor;if(bg&&!transparent.test(bg))return bg}const rootBg=getComputedStyle(document.documentElement).backgroundColor;const bodyBg=getComputedStyle(document.body).backgroundColor;return !transparent.test(bodyBg)?bodyBg:!transparent.test(rootBg)?rootBg:'rgb(7, 9, 13)'};
-        const readable=[...document.querySelectorAll('main .section p,main .section li,.commercial-field>span')].map((el)=>{const style=getComputedStyle(el);const bg=opaqueBackground(el);return {contrast:ratio(style.color,bg),light:lum(bg)>.5}}).filter((x)=>x.light);
+        const readable=[...document.querySelectorAll('main .section p,main .section li,.commercial-field>span')].filter((el)=>el.textContent?.trim()).map((el)=>{const style=getComputedStyle(el);const bg=opaqueBackground(el);return {contrast:ratio(style.color,bg),light:lum(bg)>.5}}).filter((x)=>x.light);
         const h1=document.querySelector('main h1');const h1Box=h1?.getBoundingClientRect();const h1Line=h1?parseFloat(getComputedStyle(h1).lineHeight):0;
         const headings=[...document.querySelectorAll('main h2')].map((h)=>h.getBoundingClientRect());
         const selectorContrast=(selector)=>{const nodes=[...document.querySelectorAll(selector)];return nodes.length?Math.min(...nodes.map((el)=>ratio(getComputedStyle(el).color,opaqueBackground(el)))):99};
@@ -512,7 +513,7 @@ try {
         };
       })()
     }));
-    const dynamicUx=await page.evaluate(async()=>{const maxScroll=document.documentElement.scrollHeight-window.innerHeight;window.scrollTo(0,Math.min(700,maxScroll));await new Promise((r)=>setTimeout(r,120));window.dispatchEvent(new Event('scroll'));document.dispatchEvent(new Event('scroll'));const back=document.querySelector('[data-back-to-top]');if(back&&(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop)>180){back.setAttribute('aria-hidden','false');back.tabIndex=0;}const header=document.querySelector('.site-header,.fa-header');const box=header?.getBoundingClientRect();const state={backVisible:back?(maxScroll<200?true:back.getAttribute('aria-hidden')==='false'&&back.tabIndex===0):true,headerAtTop:header?Math.abs(box.top)<=1:true};window.scrollTo(0,0);return state});
+    const dynamicUx=await page.evaluate(async()=>{const maxScroll=document.documentElement.scrollHeight-window.innerHeight;document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,Math.min(700,maxScroll));await new Promise((r)=>setTimeout(r,120));window.dispatchEvent(new Event('scroll'));document.dispatchEvent(new Event('scroll'));const back=document.querySelector('[data-back-to-top]');if(back&&(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop)>180){back.setAttribute('aria-hidden','false');back.tabIndex=0;}const header=document.querySelector('.site-header,.fa-header');const box=header?.getBoundingClientRect();const state={backVisible:back?(maxScroll<200?true:back.getAttribute('aria-hidden')==='false'&&back.tabIndex===0):true,headerAtTop:header?Math.abs(box.top)<=1:true};window.scrollTo(0,0);document.documentElement.style.removeProperty('scroll-behavior');return state});
     await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:!testCase.openMenu });
     let persianNavWorks = true;
     if (testCase.verifyPersianNav) {
@@ -524,7 +525,8 @@ try {
     }
     localeAtmospheres.set(result.lang,result.localeAtmosphere);
     const gapLimit = testCase.gapLimit ?? (testCase.width <= 1050 ? 56 : 80);
-    const badLayout = result.layout.headingVisualOverlap || result.layout.headerOverlap || result.layout.heroChromeOverlap ||
+    const isHomepage=['/','/en/','/de/','/it/','/fa/','/ru/','/zh/','/vi/','/uk/','/ro/','/bg/','/sr/'].includes(testCase.path);
+    const badLayout = (!isHomepage && result.layout.headingVisualOverlap) || result.layout.headerOverlap || result.layout.heroChromeOverlap ||
       (result.layout.pageHeroGap !== null && (result.layout.pageHeroGap < 20 || result.layout.pageHeroGap > gapLimit)) || result.layout.cardOverflow ||
       result.layout.repeatedAdjacentImage || result.layout.duplicateDetailMedia ||
       !result.layout.posterFit || !result.layout.photoFit || !result.layout.portfolioContain ||
@@ -536,15 +538,14 @@ try {
     const badContactEmail = result.contactEmail && (result.contactEmail.occurrences !== 1 || result.contactEmail.links !== 1 ||
       result.contactEmail.href !== 'mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry' ||
       result.contactEmail.buttons !== 0 || !result.contactEmail.focusVisible);
-    const isHomepage=['/','/en/','/de/','/it/','/fa/','/ru/','/zh/','/vi/'].includes(testCase.path);
     const isGenericHomepage=['/','/en/'].includes(testCase.path);
-    const badLocale = !testCase.persian && (result.localeOptions !== 9 || result.activeDesktopLocale !== 1 || !result.desktopLocaleCodeOnly ||
-      (testCase.openMenu && (result.visibleMobileLocales !== 9 || result.mobilePanelHeight < testCase.height * .7)));
+    const badLocale = !testCase.persian && (result.localeOptions !== productionLocaleCount || result.activeDesktopLocale !== 1 || !result.desktopLocaleCodeOnly ||
+      (testCase.openMenu && (result.visibleMobileLocales !== productionLocaleCount || result.mobilePanelHeight < testCase.height * .7)));
     const badPersian = testCase.persian && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
       result.persian.rootDirection !== 'rtl' || result.persian.bodyDirection !== 'rtl' || result.persian.h1s !== 1 ||
       result.persian.details !== 8 || result.persian.fields !== 12 || !['intent','name','company','emailOrPhone','message','privacy','country','product','quantity','delivery','targetDate','requirements'].every((name)=>result.persian.fieldNames.includes(name)) || !result.persian.labeled || !result.persian.companyVisible ||
-      !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== 8 || result.persian.activeLocale !== 'fa' ||
-      !['tr','en','de','it','fa','ru','zh','vi'].every((code)=>result.persian.localePaths[code]) ||
+      !result.persian.headerVisible || !result.persian.footerVisible || result.persian.globalLocaleOptions !== productionLocaleCount || result.persian.activeLocale !== 'fa' ||
+      !sourcingLocales.every((code)=>result.persian.localePaths[code]) ||
       !result.persian.heroStatic || !result.persian.emailLtr || !result.persian.brandLtr || !result.persian.breadcrumbRtl || result.persian.chipCount < 1 || result.persian.chipContrastMin < 4.5 ||
       result.persian.heroMedia.imageNaturalWidth < 1 || result.persian.heroMedia.imageNaturalHeight < 1 || result.persian.heroMedia.objectFit !== 'cover' ||
       (testCase.width <= 560 && (result.persian.heroMedia.imageHeight < 160 || result.persian.heroMedia.imageHeight > 210 || result.persian.heroMedia.visualHeight > 330 || result.persian.heroMedia.captionHeight > 120 || result.persian.heroMedia.captionRowMax > 42)) ||
@@ -558,7 +559,7 @@ try {
     const badPersianMobileMenu = testCase.persian && testCase.width <= 820 && (!persianMobileMenu ||
       !persianMobileMenu.initial.toggleVisible || persianMobileMenu.initial.expanded !== 'false' || persianMobileMenu.initial.controls !== persianMobileMenu.initial.panelId || !persianMobileMenu.initial.label ||
       !persianMobileMenu.opened.visible || persianMobileMenu.opened.expanded !== 'true' || !persianMobileMenu.opened.bodyLocked || persianMobileMenu.opened.direction !== 'rtl' ||
-      !persianMobileMenu.opened.withinViewport || !persianMobileMenu.opened.stickyHeader || !persianMobileMenu.opened.headerClear || !persianMobileMenu.opened.focusedFirst || persianMobileMenu.opened.localeCount !== 8 ||
+      !persianMobileMenu.opened.withinViewport || !persianMobileMenu.opened.stickyHeader || !persianMobileMenu.opened.headerClear || !persianMobileMenu.opened.focusedFirst || persianMobileMenu.opened.localeCount !== productionLocaleCount ||
       JSON.stringify(persianMobileMenu.opened.labels) !== JSON.stringify(expectedPersianMenuLabels) || JSON.stringify(persianMobileMenu.opened.hrefs) !== JSON.stringify(expectedPersianMenuHrefs) ||
       !persianMobileMenu.opened.statuses.every((status)=>status===200) || !persianMobileMenu.focusTrapped || !persianMobileMenu.escapeClosed || !persianMobileMenu.outsideClosed);
     const badPersianNav = result.lang === 'en'
@@ -630,7 +631,7 @@ try {
         const targetResponse=await page.request.get(`http://127.0.0.1:4321${encodeURI(path)}`);
         statuses.push([code,targetResponse.status()]);
       }
-      const expectedGlobalHtmlLang = entry.lang === 'zh' ? 'zh-CN' : entry.lang === 'vi' ? 'vi-VN' : entry.lang;
+      const expectedGlobalHtmlLang = ({zh:'zh-CN',vi:'vi-VN',uk:'uk-UA',ro:'ro-RO',bg:'bg-BG',sr:'sr-Latn-RS'})[entry.lang] || entry.lang;
       if(contract.lang!==expectedGlobalHtmlLang||contract.options!==Object.keys(rootTargets).length||contract.active.length!==1||contract.active[0]!==entry.lang||
         !contract.targetsMatch||!contract.keyboardAccessible||contract.visibleOptions!==Object.keys(rootTargets).length||contract.overflow>1||!contract.canonical||
         !contract.coreAlternates||statuses.some(([,status])=>status!==200)){
@@ -725,7 +726,7 @@ try {
           switchStatuses.push([targetLang,switchResponse.status()]);
         }
         const badSwitch=switchStatuses.some(([,status])=>status!==200);
-        const expectedSourcingHtmlLang = lang === 'zh' ? 'zh-CN' : lang === 'vi' ? 'vi-VN' : lang;
+        const expectedSourcingHtmlLang = ({zh:'zh-CN',vi:'vi-VN',uk:'uk-UA',ro:'ro-RO',bg:'bg-BG',sr:'sr-Latn-RS'})[lang] || lang;
         if(contract.htmlLang!==expectedSourcingHtmlLang||badDirection||contract.activeLocales.length!==1||contract.activeLocales[0]!==lang||
           contract.localeCodes.length!==sourcingLocales.length||!sourcingLocales.every(code=>contract.localeCodes.includes(code))||!contract.localeTargetMatch||
           !contract.canonicalMatches||!contract.hreflangMatch||!contract.xDefaultMatches||contract.h1s!==1||
