@@ -1187,12 +1187,12 @@ const verifiedLater = {
 {key === 'services' && !id && (
   <>
     <PageHero lang={lang} eyebrow={t.services} title={copy.servicesTitle} lead={copy.servicesLead} />
-    <section class="section"><div class="container card-grid">{serviceIds.map((serviceId,index) => <a class="card" href={localizedPath(lang,'services',serviceId)}><small>{indexLabel(index)}</small><h2>{services[serviceId].names[lang]}</h2><p>{services[serviceId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
+    <section class="section"><div class="container card-grid">{serviceIds.map((serviceId) => <a class="card" href={localizedPath(lang,'services',serviceId)}><h2>{services[serviceId].names[lang]}</h2><p>{services[serviceId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
     <section class="section solution-directory"><div class="container">
       <div class="section-head"><h2>{searchLandingIndexCopy[lang].title}</h2><p>{searchLandingIndexCopy[lang].lead}</p></div>
-      <div class="card-grid">{searchLandingIds.map((landingId,index) => {
+      <div class="card-grid">{searchLandingIds.map((landingId) => {
         const landing=searchLandings[landingId].content[lang];
-        return <a class="card" href={searchLandingPath(lang,landingId)}><small>{indexLabel(index)}</small><h3>{landing.title}</h3><p>{landing.description}</p><strong>{t.readMore} →</strong></a>;
+        return <a class="card" href={searchLandingPath(lang,landingId)}><h3>{landing.title}</h3><p>{landing.description}</p><strong>{t.readMore} →</strong></a>;
       })}</div>
     </div></section>
     <Framework lang={lang} />
@@ -1282,7 +1282,7 @@ const verifiedLater = {
           const visual=homepageSectorVisuals[index];
           return <article data-sector-visual={visual.key}>
             <ResponsiveImage src={visual.source} widths={FEATURE_IMAGE_WIDTHS} sizes="(max-width:620px) calc(100vw - 26px), (max-width:860px) 46vw, 25vw" width={visual.width} height={visual.height} alt={visual.altText} focalPosition={visual.focalPosition} visualKey={visual.key} loading="lazy" decoding="async" />
-            <div><span>{indexLabel(index)}</span><h3>{sector.title}</h3><p>{sector.text}</p></div>
+            <div><h3>{sector.title}</h3><p>{sector.text}</p></div>
           </article>;
         })}
       </div>
@@ -1732,7 +1732,7 @@ const verifiedLater = {
   <>
     <PageHero lang={lang} eyebrow={t.markets} title={copy.marketsTitle} lead={copy.marketsLead} />
     <section class="section"><div class="container">
-      <div class="market-role-grid">{completionMarkets.map((market,index) => <article><span>{indexLabel(index)}</span><h2>{market.title}</h2><ul>{market.items.map((item)=><li>{item}</li>)}</ul></article>)}</div>
+      <div class="market-role-grid">{completionMarkets.map((market) => <article><h2>{market.title}</h2><ul>{market.items.map((item)=><li>{item}</li>)}</ul></article>)}</div>
     </div></section>
     <ProcessRail steps={copy.framework} />
     {lang === 'zh' && chinaMarketEntry && (
@@ -1886,10 +1886,9 @@ const verifiedLater = {
               <p>{lang === 'tr' ? 'RFQ, kalite belgesi ve toplam maliyet için uygulanabilir kontrol listeleri.' : 'Practical checklists for RFQs, quality documents and total cost.'}</p>
             </div>
             <div class="guide-grid">
-              {Object.entries(guides).map(([guideId,item],index)=>(
+              {Object.entries(guides).map(([guideId,item])=>(
                 <a class="guide-card" href={localizedPath(lang,'guides',guideId)}>
                   <div class="guide-card-header">
-                    <span class="guide-index">{indexLabel(index)}</span>
                     <span class="guide-badge">{lang === 'tr' ? 'Kontrol Listesi' : 'Checklist'}</span>
                   </div>
                   <h3>{item[lang].title}</h3>
