@@ -31,7 +31,6 @@ jobs:
   visual-qa:
     name: Responsive visual QA
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -41,5 +40,4 @@ jobs:
       - run: npm ci
       - run: npm run build
       - name: Run responsive audit
-        continue-on-error: true
         run: npm run check:responsive
