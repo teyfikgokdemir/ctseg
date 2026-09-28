@@ -52,6 +52,7 @@ for (const file of htmlFiles) {
   const h1Count = (html.match(/<h1\b/g) || []).length;
   const expectedPath = outputPath(file);
   const expectedCanonical = encodeURI(`${origin}${expectedPath}`);
+  if (/\breflex\b/i.test(html)) errors.push(`${label}: retired REFLEX entity leaked into built HTML`);
 
   if (h1Count !== 1) errors.push(`${label}: expected one H1, found ${h1Count}`);
   if (!title) errors.push(`${label}: title is empty`);
@@ -154,6 +155,8 @@ const requiredRedirects = {
   ,'/fa/tamin-beynolmelali-iran/':'/fa/'
   ,'/zh/zhongguo-qiye-jinru-tuerqi-he-ouzhou-shichang/':'/zh/'
   ,'/vi/xuat-khau-tu-viet-nam-sang-tho-nhi-ky-va-chau-au/':'/vi/'
+  ,'/medical/reflex-disposable-gloves/':'/tr/ticari-urunler/'
+  ,'/en/medical/reflex-disposable-gloves/':'/en/trade-products/'
 };
 for (const [source,target] of Object.entries(requiredRedirects)) {
   const rule = redirectsBySource.get(source);
