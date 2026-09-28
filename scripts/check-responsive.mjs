@@ -579,7 +579,7 @@ try {
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);
     await page.close();
   }
-  const rootTargets={tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/',uk:'/uk/'};
+  const rootTargets={tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/',uk:'/uk/',ro:'/ro/',bg:'/bg/',sr:'/sr/'};
   const globalLocaleEntries = [
     {lang:'tr',path:'/',targets:rootTargets,alternates:['tr','en','x-default']},
     {lang:'en',path:'/en/',targets:rootTargets,alternates:['tr','en','x-default']},
@@ -588,7 +588,11 @@ try {
     {lang:'fa',path:'/fa/',targets:rootTargets,alternates:['tr','en','fa','x-default']},
     {lang:'ru',path:'/ru/',targets:rootTargets,alternates:['ru']},
     {lang:'zh',path:'/zh/',targets:rootTargets,alternates:['zh']},
-    {lang:'vi',path:'/vi/',targets:rootTargets,alternates:['vi']}
+    {lang:'vi',path:'/vi/',targets:rootTargets,alternates:['vi']},
+    {lang:'uk',path:'/uk/',targets:rootTargets,alternates:['uk']},
+    {lang:'ro',path:'/ro/',targets:rootTargets,alternates:['ro']},
+    {lang:'bg',path:'/bg/',targets:rootTargets,alternates:['bg']},
+    {lang:'sr',path:'/sr/',targets:rootTargets,alternates:['sr']}
   ];
   let globalLocaleChecks=0;
   for(const entry of globalLocaleEntries){
@@ -627,8 +631,8 @@ try {
         statuses.push([code,targetResponse.status()]);
       }
       const expectedGlobalHtmlLang = entry.lang === 'zh' ? 'zh-CN' : entry.lang === 'vi' ? 'vi-VN' : entry.lang;
-      if(contract.lang!==expectedGlobalHtmlLang||contract.options!==9||contract.active.length!==1||contract.active[0]!==entry.lang||
-        !contract.targetsMatch||!contract.keyboardAccessible||contract.visibleOptions!==9||contract.overflow>1||!contract.canonical||
+      if(contract.lang!==expectedGlobalHtmlLang||contract.options!==Object.keys(rootTargets).length||contract.active.length!==1||contract.active[0]!==entry.lang||
+        !contract.targetsMatch||!contract.keyboardAccessible||contract.visibleOptions!==Object.keys(rootTargets).length||contract.overflow>1||!contract.canonical||
         !contract.coreAlternates||statuses.some(([,status])=>status!==200)){
         failures.push(`global locale ${entry.lang}/${viewport.name}: ${JSON.stringify({...contract,statuses})}`);
       }
@@ -636,7 +640,8 @@ try {
       await page.close();
     }
   }
-  if(globalLocaleChecks!==16)failures.push(`expected 16 global locale viewport checks, ran ${globalLocaleChecks}`);
+  const expectedGlobalLocaleChecks=globalLocaleEntries.length*2;
+  if(globalLocaleChecks!==expectedGlobalLocaleChecks)failures.push(`expected ${expectedGlobalLocaleChecks} global locale viewport checks, ran ${globalLocaleChecks}`);
   const sourcingViewports = [
     {name:'desktop',width:1440,height:1000},
     {name:'mobile',width:390,height:844}
@@ -722,7 +727,7 @@ try {
         const badSwitch=switchStatuses.some(([,status])=>status!==200);
         const expectedSourcingHtmlLang = lang === 'zh' ? 'zh-CN' : lang === 'vi' ? 'vi-VN' : lang;
         if(contract.htmlLang!==expectedSourcingHtmlLang||badDirection||contract.activeLocales.length!==1||contract.activeLocales[0]!==lang||
-          contract.localeCodes.length!==8||!sourcingLocales.every(code=>contract.localeCodes.includes(code))||!contract.localeTargetMatch||
+          contract.localeCodes.length!==sourcingLocales.length||!sourcingLocales.every(code=>contract.localeCodes.includes(code))||!contract.localeTargetMatch||
           !contract.canonicalMatches||!contract.hreflangMatch||!contract.xDefaultMatches||contract.h1s!==1||
           contract.headers!==1||contract.footers!==1||!contract.headerVisible||!contract.footerVisible||contract.overflow>0||contract.tradeVisual.count!==1||contract.tradeVisual.naturalWidth<1||contract.tradeVisual.naturalHeight<1||contract.tradeVisual.width<=0||contract.tradeVisual.height<=0||!contract.tradeVisual.alt||!contract.tradeVisual.srcset||!contract.tradeVisual.sizes||!contract.tradeVisual.dimensions||contract.tradeVisual.objectFit!=='cover'||!contract.tradeVisual.objectPosition||contract.tradeVisual.fetchPriority!=='high'||
           (viewport.name==='desktop'&&!contract.localeNavVisible)||badProducer||badSwitch){
@@ -733,7 +738,8 @@ try {
       }
     }
   }
-  if(sourcingChecks!==48) failures.push(`expected 48 sourcing viewport checks, ran ${sourcingChecks}`);
+  const expectedSourcingChecks=Object.keys(sourcingFamilies).length*sourcingLocales.length*sourcingViewports.length;
+  if(sourcingChecks!==expectedSourcingChecks) failures.push(`expected ${expectedSourcingChecks} sourcing viewport checks, ran ${sourcingChecks}`);
   if (localeAtmospheres.size < 6) {
     failures.push(`locale treatments are incomplete or insufficiently distinct: ${JSON.stringify(Object.fromEntries(localeAtmospheres))}`);
   }
