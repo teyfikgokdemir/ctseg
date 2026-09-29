@@ -2115,3 +2115,39 @@ html[data-locale=zh] .button *{
   -webkit-text-fill-color:#fff!important;
   border-color:#111!important;
 }
+
+
+/* SOLUTION DIRECTORY TITLE WRAP FIX 2026-09-29 */
+.solution-directory .card{
+  min-width:0!important;
+  overflow:hidden!important;
+}
+.solution-directory .card h2,
+.solution-directory .card h3{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0 auto 10px!important;
+  padding-inline:4px!important;
+  font-size:clamp(1.02rem,1.3vw,1.28rem)!important;
+  line-height:1.14!important;
+  letter-spacing:-.02em!important;
+  text-align:center!important;
+  white-space:normal!important;
+  text-wrap:balance!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  word-break:normal!important;
+  overflow-wrap:break-word!important;
+  hyphens:none!important;
+}
+.solution-directory .card p{
+  max-width:50ch!important;
+  margin-inline:auto!important;
+  text-align:center!important;
+}
+@media(max-width:900px){
+  .solution-directory .card h2,
+  .solution-directory .card h3{
+    font-size:clamp(1.05rem,4.8vw,1.3rem)!important;
+  }
+}
