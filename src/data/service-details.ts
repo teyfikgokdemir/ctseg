@@ -1,3 +1,5 @@
+import { activeLocales, services } from './site';
+
 export type ServiceDetail = {
   scopeTitle:string;
   scope:string;
@@ -12,9 +14,9 @@ export type ServiceDetail = {
   faq:{ question:string; answer:string }[];
 };
 
-type CoreServiceId = 'strategic-sourcing' | 'supplier-verification' | 'trade-advisory';
+type ServiceId = 'strategic-sourcing' | 'supplier-verification' | 'trade-advisory' | 'tco' | 'market-entry';
 
-export const serviceDetails:Record<'tr'|'en'|'ro'|'bg'|'sr',Record<CoreServiceId,ServiceDetail>> = {
+const curatedServiceDetails:Partial<Record<string,Partial<Record<ServiceId,ServiceDetail>>>> = {
   tr: {
     'strategic-sourcing': {
       scopeTitle:'Hizmetin kapsamı',
@@ -209,3 +211,110 @@ export const serviceDetails:Record<'tr'|'en'|'ro'|'bg'|'sr',Record<CoreServiceId
     }
   }
 };
+
+
+const serviceDetailScaffolds:Record<string,{
+  scopeTitle:string; problemTitle:string; audienceTitle:string; outcomesTitle:string; processTitle:string;
+  problem:string; audience:string; outcomes:string[]; process:string[];
+  faq:{question:string;answer:string}[];
+}> = {
+  tr:{scopeTitle:'Hizmetin kapsamı',problemTitle:'Hangi sorunu çözer?',audienceTitle:'Kimler için uygundur?',outcomesTitle:'Beklenen çıktılar',processTitle:'Çalışma süreci',
+    problem:'Eksik veri, doğrulanmamış karşı taraflar ve dağınık maliyet ya da uygunluk girdileri ticari kararı zayıflatır. Bu çalışma mevcut kanıtları kayıtlı ve karşılaştırılabilir bir karar çerçevesine dönüştürür.',
+    audience:'Tedarikçi, kaynak ülke, maliyet modeli veya pazara giriş kararını ticari taahhüt öncesinde daha kontrollü değerlendirmek isteyen B2B şirketler için uygundur.',
+    outcomes:['Netleştirilmiş ihtiyaç ve değerlendirme ölçütleri','Belgelenmiş bulgular ve açık riskler','Karşılaştırılabilir ticari seçenekler','Sorumluları ve sonraki adımları gösteren uygulama planı'],
+    process:['Amaç, spesifikasyon, hacim ve hedef pazarı netleştirme','İlgili pazar, taraf ve belge kanıtlarını toplama ve doğrulama','Ticari, operasyonel ve risk senaryolarını karşılaştırma','Kararı, sorumluları ve sonraki adımları belgeleme'],
+    faq:[{question:'Her çalışma aynı kapsamda mı yürütülür?',answer:'Hayır. Kapsam ürün, pazar, taraflar, belge ihtiyacı ve karar riskine göre yapılandırılır.'},{question:'Bu çalışma hukuk veya gümrük müşavirliği yerine geçer mi?',answer:'Hayır. CTSEG ticari değerlendirme ve koordinasyon çerçevesini kurar; yetki gerektiren hukuki, mali veya gümrük konuları ilgili uzmanlarla yürütülmelidir.'}]},
+  en:{scopeTitle:'Scope of the service',problemTitle:'The problem it solves',audienceTitle:'Who it is for',outcomesTitle:'Expected deliverables',processTitle:'How the engagement works',
+    problem:'Incomplete data, unverified counterparties and fragmented cost or compliance inputs weaken commercial decisions. The engagement turns available evidence into a documented and comparable decision framework.',
+    audience:'Suitable for B2B companies that need to assess a supplier, source country, cost model or market-entry decision before making a commercial commitment.',
+    outcomes:['Clarified requirement and evaluation criteria','Documented findings and open risks','Comparable commercial options','Execution plan with owners and next steps'],
+    process:['Clarify objective, specification, volume and target market','Collect and verify relevant market, counterparty and document evidence','Compare commercial, operational and risk scenarios','Document the decision, responsibilities and next steps'],
+    faq:[{question:'Is every engagement delivered with the same scope?',answer:'No. Scope is structured around the product, market, counterparties, documentation needs and decision risk.'},{question:'Does this replace legal or customs advice?',answer:'No. CTSEG structures the commercial assessment and coordination framework; legal, tax or customs matters requiring authorisation should be handled by the relevant specialists.'}]},
+  de:{scopeTitle:'Leistungsumfang',problemTitle:'Welches Problem wird gelöst?',audienceTitle:'Für wen ist die Leistung geeignet?',outcomesTitle:'Erwartete Ergebnisse',processTitle:'Ablauf der Zusammenarbeit',
+    problem:'Unvollständige Daten, ungeprüfte Geschäftspartner sowie verstreute Kosten- oder Compliance-Informationen schwächen Geschäftsentscheidungen. Die Leistung überführt verfügbare Nachweise in einen dokumentierten und vergleichbaren Entscheidungsrahmen.',
+    audience:'Geeignet für B2B-Unternehmen, die Lieferanten, Beschaffungsländer, Kostenmodelle oder Markteintrittsentscheidungen vor einer geschäftlichen Bindung strukturiert bewerten möchten.',
+    outcomes:['Geklärter Bedarf und definierte Bewertungskriterien','Dokumentierte Erkenntnisse und offene Risiken','Vergleichbare kommerzielle Optionen','Umsetzungsplan mit Verantwortlichkeiten und nächsten Schritten'],
+    process:['Ziel, Spezifikation, Volumen und Zielmarkt klären','Relevante Markt-, Gegenparteien- und Dokumentennachweise sammeln und prüfen','Kommerzielle, operative und Risikoszenarien vergleichen','Entscheidung, Verantwortlichkeiten und nächste Schritte dokumentieren'],
+    faq:[{question:'Hat jede Zusammenarbeit denselben Umfang?',answer:'Nein. Der Umfang richtet sich nach Produkt, Markt, Gegenparteien, Dokumentationsbedarf und Entscheidungsrisiko.'},{question:'Ersetzt die Leistung Rechts- oder Zollberatung?',answer:'Nein. CTSEG strukturiert die kommerzielle Bewertung und Koordination; rechtliche, steuerliche oder zollrechtliche Themen mit Zulassungspflicht gehören zu den zuständigen Fachleuten.'}]},
+  it:{scopeTitle:'Ambito del servizio',problemTitle:'Quale problema risolve?',audienceTitle:'Per chi è adatto?',outcomesTitle:'Risultati attesi',processTitle:'Come si svolge il lavoro',
+    problem:'Dati incompleti, controparti non verificate e informazioni frammentate su costi o conformità indeboliscono le decisioni commerciali. Il servizio trasforma le evidenze disponibili in un quadro decisionale documentato e comparabile.',
+    audience:'Adatto alle aziende B2B che devono valutare un fornitore, un paese di sourcing, un modello di costo o una decisione di ingresso sul mercato prima di assumere un impegno commerciale.',
+    outcomes:['Esigenza e criteri di valutazione chiariti','Risultati documentati e rischi aperti','Opzioni commerciali comparabili','Piano operativo con responsabili e passi successivi'],
+    process:['Chiarire obiettivo, specifiche, volume e mercato target','Raccogliere e verificare evidenze su mercato, controparti e documenti','Confrontare scenari commerciali, operativi e di rischio','Documentare decisione, responsabilità e passi successivi'],
+    faq:[{question:'Ogni incarico ha lo stesso perimetro?',answer:'No. Il perimetro viene definito in base a prodotto, mercato, controparti, documentazione necessaria e rischio decisionale.'},{question:'Sostituisce la consulenza legale o doganale?',answer:'No. CTSEG struttura la valutazione commerciale e il coordinamento; gli aspetti legali, fiscali o doganali soggetti ad abilitazione devono essere gestiti da specialisti autorizzati.'}]},
+  ru:{scopeTitle:'Объём услуги',problemTitle:'Какую проблему решает?',audienceTitle:'Для кого подходит?',outcomesTitle:'Ожидаемые результаты',processTitle:'Как проходит работа',
+    problem:'Неполные данные, непроверенные контрагенты и разрозненная информация о затратах или соответствии ослабляют коммерческие решения. Работа превращает доступные доказательства в документированную и сопоставимую систему принятия решений.',
+    audience:'Подходит B2B-компаниям, которым необходимо оценить поставщика, страну закупки, модель затрат или решение о выходе на рынок до принятия коммерческих обязательств.',
+    outcomes:['Уточнённая потребность и критерии оценки','Документированные выводы и открытые риски','Сопоставимые коммерческие варианты','План реализации с ответственными и следующими шагами'],
+    process:['Уточнение цели, спецификации, объёма и целевого рынка','Сбор и проверка данных о рынке, контрагентах и документах','Сравнение коммерческих, операционных и рисковых сценариев','Документирование решения, ответственности и следующих шагов'],
+    faq:[{question:'Все проекты выполняются в одинаковом объёме?',answer:'Нет. Объём формируется с учётом продукта, рынка, контрагентов, требований к документам и уровня риска.'},{question:'Заменяет ли услуга юридическую или таможенную консультацию?',answer:'Нет. CTSEG формирует коммерческую оценку и координацию; юридические, налоговые и таможенные вопросы, требующие полномочий, должны вести профильные специалисты.'}]},
+  fa:{scopeTitle:'دامنه خدمات',problemTitle:'چه مسئله‌ای را حل می‌کند؟',audienceTitle:'برای چه شرکت‌هایی مناسب است؟',outcomesTitle:'خروجی‌های مورد انتظار',processTitle:'فرآیند همکاری',
+    problem:'داده‌های ناقص، طرف‌های تجاری تأییدنشده و اطلاعات پراکنده درباره هزینه یا انطباق، تصمیم تجاری را ضعیف می‌کند. این خدمت شواهد موجود را به چارچوبی مستند و قابل مقایسه برای تصمیم‌گیری تبدیل می‌کند.',
+    audience:'برای شرکت‌های B2B مناسب است که پیش از تعهد تجاری نیاز دارند تأمین‌کننده، کشور مبدأ، مدل هزینه یا تصمیم ورود به بازار را به‌صورت ساختاریافته ارزیابی کنند.',
+    outcomes:['نیاز و معیارهای ارزیابی روشن','یافته‌های مستند و ریسک‌های باز','گزینه‌های تجاری قابل مقایسه','برنامه اجرایی با مسئولیت‌ها و گام‌های بعدی'],
+    process:['شفاف‌سازی هدف، مشخصات، حجم و بازار هدف','جمع‌آوری و اعتبارسنجی شواهد بازار، طرف معامله و اسناد','مقایسه سناریوهای تجاری، عملیاتی و ریسک','ثبت تصمیم، مسئولیت‌ها و گام‌های بعدی'],
+    faq:[{question:'آیا دامنه همه پروژه‌ها یکسان است؟',answer:'خیر. دامنه بر اساس محصول، بازار، طرف‌های معامله، نیاز اسنادی و سطح ریسک تصمیم تنظیم می‌شود.'},{question:'آیا این خدمت جایگزین مشاوره حقوقی یا گمرکی است؟',answer:'خیر. CTSEG چارچوب ارزیابی و هماهنگی تجاری را ایجاد می‌کند؛ موضوعات حقوقی، مالیاتی یا گمرکی که نیازمند مجوز تخصصی هستند باید توسط متخصصان مربوطه انجام شوند.'}]},
+  zh:{scopeTitle:'服务范围',problemTitle:'解决什么问题？',audienceTitle:'适合哪些企业？',outcomesTitle:'预期交付成果',processTitle:'合作流程',
+    problem:'信息不完整、交易对手未经核验，以及成本或合规资料分散，都会削弱商业决策质量。本服务将现有证据转化为可记录、可比较的决策框架。',
+    audience:'适用于需要在正式商业承诺前，对供应商、采购来源国、成本模型或市场准入决策进行系统评估的B2B企业。',
+    outcomes:['明确的需求与评估标准','已记录的调查结果与待处理风险','可比较的商业方案','包含责任人和下一步工作的执行计划'],
+    process:['明确目标、规格、数量与目标市场','收集并核验市场、交易对手与单证证据','比较商业、运营与风险情景','记录决策、责任分工与下一步计划'],
+    faq:[{question:'所有项目的服务范围都相同吗？',answer:'不同。服务范围会根据产品、市场、交易对手、单证要求及决策风险进行配置。'},{question:'本服务是否替代法律或海关专业意见？',answer:'不替代。CTSEG负责商业评估与协调框架；涉及法律、税务或海关执业资格的事项应由相应授权专业人士处理。'}]},
+  vi:{scopeTitle:'Phạm vi dịch vụ',problemTitle:'Giải quyết vấn đề gì?',audienceTitle:'Phù hợp với ai?',outcomesTitle:'Kết quả dự kiến',processTitle:'Quy trình làm việc',
+    problem:'Dữ liệu thiếu, đối tác chưa được xác minh và thông tin chi phí hoặc tuân thủ rời rạc làm suy yếu quyết định thương mại. Dịch vụ chuyển các bằng chứng hiện có thành một khung quyết định được ghi nhận và có thể so sánh.',
+    audience:'Phù hợp với doanh nghiệp B2B cần đánh giá nhà cung cấp, quốc gia nguồn, mô hình chi phí hoặc quyết định thâm nhập thị trường trước khi đưa ra cam kết thương mại.',
+    outcomes:['Yêu cầu và tiêu chí đánh giá được làm rõ','Kết quả xác minh và rủi ro mở được ghi nhận','Các phương án thương mại có thể so sánh','Kế hoạch triển khai với trách nhiệm và bước tiếp theo'],
+    process:['Làm rõ mục tiêu, thông số, khối lượng và thị trường mục tiêu','Thu thập và xác minh bằng chứng về thị trường, đối tác và chứng từ','So sánh kịch bản thương mại, vận hành và rủi ro','Ghi nhận quyết định, trách nhiệm và các bước tiếp theo'],
+    faq:[{question:'Mọi dự án có cùng phạm vi không?',answer:'Không. Phạm vi được thiết kế theo sản phẩm, thị trường, đối tác, nhu cầu chứng từ và mức độ rủi ro của quyết định.'},{question:'Dịch vụ này có thay thế tư vấn pháp lý hoặc hải quan không?',answer:'Không. CTSEG xây dựng khung đánh giá và điều phối thương mại; các vấn đề pháp lý, thuế hoặc hải quan cần thẩm quyền phải do chuyên gia có thẩm quyền xử lý.'}]},
+  uk:{scopeTitle:'Обсяг послуги',problemTitle:'Яку проблему вирішує?',audienceTitle:'Для кого підходить?',outcomesTitle:'Очікувані результати',processTitle:'Як проходить робота',
+    problem:'Неповні дані, неперевірені контрагенти та розрізнена інформація щодо витрат або відповідності послаблюють комерційні рішення. Послуга перетворює доступні докази на документовану та порівнювану систему прийняття рішень.',
+    audience:'Підходить B2B-компаніям, яким потрібно оцінити постачальника, країну закупівлі, модель витрат або рішення щодо виходу на ринок до прийняття комерційних зобов’язань.',
+    outcomes:['Уточнена потреба та критерії оцінювання','Документовані висновки та відкриті ризики','Порівнювані комерційні варіанти','План реалізації з відповідальними та наступними кроками'],
+    process:['Уточнення мети, специфікації, обсягу та цільового ринку','Збір і перевірка даних про ринок, контрагентів і документи','Порівняння комерційних, операційних і ризикових сценаріїв','Документування рішення, відповідальності та наступних кроків'],
+    faq:[{question:'Чи однаковий обсяг у всіх проєктах?',answer:'Ні. Обсяг формується відповідно до продукту, ринку, контрагентів, вимог до документів і ризику рішення.'},{question:'Чи замінює послуга юридичну або митну консультацію?',answer:'Ні. CTSEG формує рамку комерційної оцінки та координації; юридичні, податкові або митні питання, що потребують повноважень, мають вести відповідні фахівці.'}]},
+  ro:{scopeTitle:'Domeniul serviciului',problemTitle:'Ce problemă rezolvă?',audienceTitle:'Pentru cine este potrivit?',outcomesTitle:'Livrabile așteptate',processTitle:'Cum decurge colaborarea',
+    problem:'Datele incomplete, contrapărțile neverificate și informațiile fragmentate despre costuri sau conformitate slăbesc deciziile comerciale. Serviciul transformă dovezile disponibile într-un cadru de decizie documentat și comparabil.',
+    audience:'Potrivit companiilor B2B care trebuie să evalueze un furnizor, o țară sursă, un model de cost sau o decizie de intrare pe piață înainte de un angajament comercial.',
+    outcomes:['Cerință și criterii de evaluare clarificate','Constatări documentate și riscuri deschise','Opțiuni comerciale comparabile','Plan de execuție cu responsabili și pași următori'],
+    process:['Clarificarea obiectivului, specificației, volumului și pieței țintă','Colectarea și verificarea dovezilor despre piață, contrapărți și documente','Compararea scenariilor comerciale, operaționale și de risc','Documentarea deciziei, responsabilităților și pașilor următori'],
+    faq:[{question:'Fiecare proiect are același domeniu?',answer:'Nu. Domeniul se configurează în funcție de produs, piață, contrapărți, documentație și riscul deciziei.'},{question:'Înlocuiește consultanța juridică sau vamală?',answer:'Nu. CTSEG structurează evaluarea și coordonarea comercială; aspectele juridice, fiscale sau vamale care necesită autorizare trebuie gestionate de specialiștii competenți.'}]},
+  bg:{scopeTitle:'Обхват на услугата',problemTitle:'Какъв проблем решава?',audienceTitle:'За кого е подходяща?',outcomesTitle:'Очаквани резултати',processTitle:'Работен процес',
+    problem:'Непълни данни, непроверени контрагенти и разпокъсана информация за разходи или съответствие отслабват търговските решения. Услугата превръща наличните доказателства в документирана и сравнима рамка за решение.',
+    audience:'Подходяща е за B2B компании, които трябва да оценят доставчик, държава източник, модел на разходите или решение за навлизане на пазар преди търговски ангажимент.',
+    outcomes:['Изяснена нужда и критерии за оценка','Документирани констатации и открити рискове','Сравними търговски опции','План за изпълнение с отговорници и следващи стъпки'],
+    process:['Изясняване на цел, спецификация, обем и целеви пазар','Събиране и проверка на данни за пазар, контрагенти и документи','Сравнение на търговски, оперативни и рискови сценарии','Документиране на решението, отговорностите и следващите стъпки'],
+    faq:[{question:'Всички проекти ли са с еднакъв обхват?',answer:'Не. Обхватът се определя според продукта, пазара, контрагентите, документалните нужди и риска на решението.'},{question:'Замества ли правна или митническа консултация?',answer:'Не. CTSEG структурира търговската оценка и координация; правни, данъчни или митнически въпроси, изискващи правоспособност, трябва да се водят от съответните специалисти.'}]},
+  sr:{scopeTitle:'Obim usluge',problemTitle:'Koji problem rešava?',audienceTitle:'Kome je namenjeno?',outcomesTitle:'Očekivani rezultati',processTitle:'Tok angažmana',
+    problem:'Nepotpuni podaci, neprovereni partneri i razdvojene informacije o troškovima ili usklađenosti slabe komercijalne odluke. Usluga pretvara dostupne dokaze u dokumentovan i uporediv okvir za odlučivanje.',
+    audience:'Namenjeno B2B kompanijama koje treba da procene dobavljača, zemlju izvora, model troškova ili odluku o ulasku na tržište pre komercijalnog obavezivanja.',
+    outcomes:['Razjašnjen zahtev i kriterijumi procene','Dokumentovani nalazi i otvoreni rizici','Uporedive komercijalne opcije','Plan realizacije sa odgovornima i narednim koracima'],
+    process:['Razjašnjenje cilja, specifikacije, obima i ciljnog tržišta','Prikupljanje i provera tržišnih, partnerskih i dokumentacionih dokaza','Poređenje komercijalnih, operativnih i rizičnih scenarija','Dokumentovanje odluke, odgovornosti i narednih koraka'],
+    faq:[{question:'Da li svaki projekat ima isti obim?',answer:'Ne. Obim se prilagođava proizvodu, tržištu, partnerima, dokumentaciji i nivou rizika odluke.'},{question:'Da li usluga zamenjuje pravno ili carinsko savetovanje?',answer:'Ne. CTSEG strukturira komercijalnu procenu i koordinaciju; pravna, poreska ili carinska pitanja koja zahtevaju ovlašćenje vode odgovarajući stručnjaci.'}]}
+};
+
+export const serviceDetails:Record<string,Record<ServiceId,ServiceDetail>> = Object.fromEntries(
+  activeLocales.map((lang) => {
+    const scaffold = serviceDetailScaffolds[lang] || serviceDetailScaffolds.en;
+    const byService = Object.fromEntries(
+      (Object.keys(services) as ServiceId[]).map((id) => {
+        const curated = curatedServiceDetails[lang]?.[id];
+        if (curated) return [id,curated];
+        const svc = services[id];
+        return [id,{
+          scopeTitle:scaffold.scopeTitle,
+          scope:`${svc.descriptions[lang]} ${scaffold.audience}`,
+          problemTitle:scaffold.problemTitle,
+          problem:scaffold.problem,
+          audienceTitle:scaffold.audienceTitle,
+          audience:scaffold.audience,
+          outcomesTitle:scaffold.outcomesTitle,
+          outcomes:scaffold.outcomes,
+          processTitle:scaffold.processTitle,
+          process:scaffold.process,
+          faq:scaffold.faq
+        } satisfies ServiceDetail];
+      })
+    ) as Record<ServiceId,ServiceDetail>;
+    return [lang,byService];
+  })
+);
