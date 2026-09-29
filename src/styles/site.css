@@ -1798,3 +1798,110 @@ html[data-locale=zh] .button *{
     white-space:normal!important;
   }
 }
+
+
+/* INSIGHTS FINAL COMPACT CARDS 2026-09-29 */
+.insight-section .insight-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:18px!important;
+  align-items:stretch!important;
+}
+.insight-section .insight-card{
+  min-height:0!important;
+  height:auto!important;
+  padding:20px 20px 18px!important;
+  border:1px solid #d9d6cf!important;
+  border-bottom:1px solid #b8b4aa!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  box-shadow:0 8px 22px rgba(17,17,17,.035)!important;
+  overflow:hidden!important;
+}
+.insight-section .insight-card:hover,
+.insight-section .insight-card:focus-visible{
+  transform:translateY(-3px)!important;
+  border-color:#b9b5ab!important;
+  box-shadow:0 14px 30px rgba(17,17,17,.07)!important;
+}
+.insight-section .insight-card-meta{
+  margin:0 0 14px!important;
+  padding:0 0 10px!important;
+}
+.insight-section .insight-category-tag{
+  font-size:10px!important;
+  line-height:1.2!important;
+}
+.insight-section .insight-read-time{
+  font-size:10.5px!important;
+}
+.insight-section .insight-card-title{
+  margin:0 0 10px!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:clamp(18px,1.28vw,21px)!important;
+  font-weight:700!important;
+  font-variation-settings:"wght" 700!important;
+  line-height:1.16!important;
+  letter-spacing:-.025em!important;
+  color:#111!important;
+  text-wrap:balance!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+}
+.insight-section .insight-card-desc{
+  margin:0 0 16px!important;
+  font-size:12.5px!important;
+  line-height:1.5!important;
+  color:#5b5954!important;
+}
+.insight-section .insight-card-footer{
+  margin-top:auto!important;
+  padding-top:12px!important;
+}
+.insight-section .insight-read-action{
+  font-size:11px!important;
+}
+.insight-section .insight-featured{
+  margin-bottom:30px!important;
+  padding:30px 30px 28px!important;
+  border-radius:14px!important;
+}
+.insight-section .featured-title{
+  max-width:980px!important;
+  margin:0 0 12px!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:clamp(24px,2vw,32px)!important;
+  font-weight:700!important;
+  font-variation-settings:"wght" 700!important;
+  line-height:1.12!important;
+  letter-spacing:-.03em!important;
+}
+.insight-section .featured-lead{
+  font-size:14px!important;
+  line-height:1.55!important;
+}
+@media(max-width:960px){
+  .insight-section .insight-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:640px){
+  .insight-section .insight-grid{
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+  }
+  .insight-section .insight-card{
+    padding:18px 16px 16px!important;
+  }
+  .insight-section .insight-card-title{
+    font-size:19px!important;
+    line-height:1.18!important;
+  }
+  .insight-section .insight-featured{
+    padding:22px 18px!important;
+  }
+  .insight-section .featured-title{
+    font-size:clamp(22px,7vw,28px)!important;
+  }
+}
