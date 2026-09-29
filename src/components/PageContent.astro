@@ -1188,7 +1188,7 @@ const verifiedLater = {
 {key === 'services' && !id && (
   <>
     <PageHero lang={lang} eyebrow={t.services} title={copy.servicesTitle} lead={copy.servicesLead} />
-    <section class="section"><div class="container card-grid">{serviceIds.map((serviceId) => <a class="card" href={localizedPath(lang,'services',serviceId)}><h2>{services[serviceId].names[lang]}</h2><p>{services[serviceId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
+    <section class="section services-directory"><div class="container card-grid">{serviceIds.map((serviceId) => <a class="card" href={localizedPath(lang,'services',serviceId)}><h2>{services[serviceId].names[lang]}</h2><p>{services[serviceId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
     <section class="section solution-directory"><div class="container">
       <div class="section-head"><h2>{searchLandingIndexCopy[lang].title}</h2><p>{searchLandingIndexCopy[lang].lead}</p></div>
       <div class="card-grid">{searchLandingIds.map((landingId) => {
