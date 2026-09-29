@@ -2325,3 +2325,70 @@ html[data-locale=zh] .button *{
     min-height:0!important;
   }
 }
+
+
+/* SERVICES DIRECTORY FLEX LAYOUT FINAL 2026-09-29 */
+/* Five service cards: equal-width 3 + centered 2, no grid-column edge cases. */
+.services-directory .card-grid{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  align-items:stretch!important;
+  gap:16px!important;
+  max-width:1220px!important;
+  margin-inline:auto!important;
+}
+.services-directory .card-grid>.card,
+.services-directory .card-grid>.card:nth-child(4),
+.services-directory .card-grid>.card:nth-child(5),
+.services-directory .card-grid>.card:last-child:nth-child(odd),
+.services-directory .card-grid>.card:first-child:nth-last-child(odd){
+  grid-column:auto!important;
+  justify-self:auto!important;
+  flex:0 1 calc((100% - 32px)/3)!important;
+  width:auto!important;
+  min-width:0!important;
+  min-height:148px!important;
+  height:auto!important;
+  padding:20px 22px!important;
+  box-sizing:border-box!important;
+}
+.services-directory .card h2,
+.services-directory .card h3{
+  max-width:100%!important;
+  margin:0 auto 8px!important;
+  font-size:clamp(1rem,1.1vw,1.16rem)!important;
+  line-height:1.16!important;
+  white-space:normal!important;
+  text-wrap:balance!important;
+  overflow:visible!important;
+}
+.services-directory .card p{
+  max-width:42ch!important;
+  margin-inline:auto!important;
+}
+@media(max-width:1050px){
+  .services-directory .card-grid>.card,
+  .services-directory .card-grid>.card:nth-child(4),
+  .services-directory .card-grid>.card:nth-child(5),
+  .services-directory .card-grid>.card:last-child:nth-child(odd),
+  .services-directory .card-grid>.card:first-child:nth-last-child(odd){
+    flex:0 1 calc((100% - 16px)/2)!important;
+    width:auto!important;
+  }
+}
+@media(max-width:680px){
+  .services-directory .card-grid{
+    gap:12px!important;
+  }
+  .services-directory .card-grid>.card,
+  .services-directory .card-grid>.card:nth-child(4),
+  .services-directory .card-grid>.card:nth-child(5),
+  .services-directory .card-grid>.card:last-child:nth-child(odd),
+  .services-directory .card-grid>.card:first-child:nth-last-child(odd){
+    flex:1 1 100%!important;
+    width:100%!important;
+    min-height:0!important;
+    padding:18px 16px!important;
+  }
+}
