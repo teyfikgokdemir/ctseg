@@ -290,8 +290,8 @@ const trendingSectorsData = {
   uk: { title: 'Глобальні закупівельні потужності', lead: 'Провідні промислові потужності та галузеві потреби у торгових коридорах, якими ми активно керуємо.', tags: ['Промислове виробництво та сировина ↗', 'Товари швидкого попиту (FMCG) ↗', 'Текстиль та технічні тканини ↗', 'Автомобільні компоненти ↗', 'Будівельні та архітектурні матеріали ↗', 'Пакування та полімери ↗', 'Агротехнології ↗', 'Медичне та оздоровче обладнання ↗'] }
 }[lang];
 const service = id && key === 'services' ? services[id as keyof typeof services] : null;
-const detailedService = service && id && ['tr','en','ro','bg','sr'].includes(lang) && id in serviceDetails[lang as keyof typeof serviceDetails]
-  ? serviceDetails[lang as keyof typeof serviceDetails][id as keyof typeof serviceDetails[keyof typeof serviceDetails]]
+const detailedService = service && id && serviceDetails[lang]?.[id as keyof typeof serviceDetails[string]]
+  ? serviceDetails[lang][id as keyof typeof serviceDetails[string]]
   : null;
 const product = id && key === 'products' ? products[id as keyof typeof products] : null;
 const serviceVisual = service && id && id in serviceTradeVisualKeys
