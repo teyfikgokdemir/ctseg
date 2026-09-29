@@ -2021,3 +2021,63 @@ html[data-locale=zh] .button *{
     font-size:.86rem!important;
   }
 }
+
+
+/* BUTTON + DARK INSIGHT CONTRAST PASS 2026-09-29 */
+/* Service directory: use a refined text action instead of a heavy black pill. */
+.services-directory .card strong{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  margin:16px auto 0!important;
+  padding:0 0 3px!important;
+  background:transparent!important;
+  color:#151515!important;
+  border:0!important;
+  border-bottom:1px solid #b5db00!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:.69rem!important;
+  font-weight:700!important;
+  font-variation-settings:"wght" 700!important;
+  line-height:1.2!important;
+  letter-spacing:.07em!important;
+  text-transform:uppercase!important;
+}
+.services-directory .card:hover strong,
+.services-directory .card:focus-visible strong{
+  color:#6f8700!important;
+  border-bottom-color:#6f8700!important;
+}
+
+/* Featured insights: force readable foregrounds on the dark editorial panel. */
+.insight-section .insight-featured .featured-lead{
+  color:rgba(255,255,255,.78)!important;
+}
+.insight-section .insight-featured .featured-meta{
+  color:rgba(255,255,255,.58)!important;
+}
+.insight-section .insight-featured .featured-key-takeaway{
+  background:rgba(196,240,0,.07)!important;
+  border-left-color:#c4f000!important;
+}
+.insight-section .insight-featured .featured-key-takeaway p{
+  color:rgba(255,255,255,.82)!important;
+}
+.insight-section .insight-featured .featured-key-takeaway strong{
+  color:#c4f000!important;
+}
+.insight-section .insight-featured .featured-action .button{
+  background:#c4f000!important;
+  color:#111!important;
+  border-color:#c4f000!important;
+  box-shadow:none!important;
+}
+.insight-section .insight-featured .featured-action .button:hover,
+.insight-section .insight-featured .featured-action .button:focus-visible{
+  background:#d2ff00!important;
+  border-color:#d2ff00!important;
+  color:#111!important;
+}
