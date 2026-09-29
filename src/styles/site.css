@@ -3127,3 +3127,39 @@ html[data-locale=zh] .button *{
     padding:16px!important;
   }
 }
+
+
+/* HOW WE WORK CENTERING + REMOVE DOUBLE SECTION RULES 2026-09-29 */
+.process-overview-section{
+  border-top:0!important;
+  border-bottom:0!important;
+}
+.process-overview-section::before,
+.process-overview-section::after{
+  display:none!important;
+  content:none!important;
+}
+.process-overview-section .container{
+  border-top:0!important;
+  border-bottom:0!important;
+}
+.process-overview-section .detailed-process>li,
+.process-overview-section .detailed-process>li:nth-child(2n),
+.process-overview-section .detailed-process>li:nth-child(3n){
+  justify-content:center!important;
+  text-align:center!important;
+}
+.process-overview-section .detailed-process>li::before{
+  flex:0 0 24px!important;
+}
+.process-overview-section .detailed-process>li>h2{
+  text-align:center!important;
+  margin-inline:auto!important;
+}
+.process-overview-section .role-boundary{
+  text-align:center!important;
+}
+.process-overview-section .role-boundary strong,
+.process-overview-section .role-boundary p{
+  text-align:center!important;
+}
