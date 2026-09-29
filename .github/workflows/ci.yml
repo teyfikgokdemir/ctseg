@@ -21,6 +21,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npm run check:analytics
       - run: npm run build
       - run: npm run check:site
       - run: npm run check:seo

@@ -433,8 +433,11 @@ const dynamicPlaceholders = {
       }
 
       started.value=String(Date.now());
-      const attribution=window.__ctsegAttribution||{landing_path:location.pathname};
-      form.querySelectorAll('[data-attribution]').forEach((input)=>{input.value=input.dataset.attribution==='page_path'?location.pathname:(attribution[input.dataset.attribution]||'')});
+      const refreshAttribution=()=>{
+        const attribution=window.__ctsegAttribution||{};
+        form.querySelectorAll('[data-attribution]').forEach((input)=>{input.value=input.dataset.attribution==='page_path'?location.pathname:(attribution[input.dataset.attribution]||'')});
+      };
+      refreshAttribution();
       const savedProduct=sessionStorage.getItem('ctseg-product-request');
       if(savedProduct&&product instanceof HTMLInputElement){product.value=savedProduct;sessionStorage.removeItem('ctseg-product-request')}
       const requestParams=new URLSearchParams(location.search);
@@ -463,6 +466,7 @@ const dynamicPlaceholders = {
       download?.addEventListener('click',()=>{track('form_fallback_download');const blob=new Blob([`CTSEG short commercial request\n\n${summary()}\n`],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='ctseg-commercial-request.txt';link.click();URL.revokeObjectURL(url)});
       form.addEventListener('submit',async(event)=>{
         event.preventDefault();fallback.hidden=true;status.textContent='';if(!form.reportValidity())return;
+        refreshAttribution();
         track('contact_form_submit_attempt');const submit=form.querySelector('[type="submit"]');submit.disabled=true;
         try{const response=await fetch(form.action,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(form)))});const result=await response.json().catch(()=>({}));if(!response.ok)throw new Error(result.code||'request_failed');status.textContent=copy.success;track('contact_form_success');track('generate_lead');window.dispatchEvent(new CustomEvent('ctseg:form-success'));if(document.documentElement.lang==='fa')window.dispatchEvent(new CustomEvent('ctseg:fa-form-success'));form.reset();started.value=String(Date.now())}
         catch{status.textContent=`${copy.error} ${copy.fallback}`;fallback.hidden=false;track('contact_form_error')}
