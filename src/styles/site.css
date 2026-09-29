@@ -2670,3 +2670,161 @@ html[data-locale=zh] .button *{
     padding:14px 16px!important;
   }
 }
+
+
+/* HOW WE WORK CLEAN EDITORIAL RAIL 2026-09-29 */
+/* Final process treatment: compact editorial rail, no oversized cards or dark-mode contrast risk. */
+.detailed-process{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:0!important;
+  max-width:1180px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  list-style:none!important;
+  border-top:1px solid #cfcac0!important;
+  border-bottom:1px solid #cfcac0!important;
+  border-radius:0!important;
+  overflow:visible!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.detailed-process li,
+.detailed-process li:nth-child(2n),
+.detailed-process li:nth-child(3n){
+  position:relative!important;
+  min-height:92px!important;
+  padding:20px 24px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  border:0!important;
+  border-right:1px solid #d8d3c8!important;
+  border-bottom:1px solid #d8d3c8!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  text-align:center!important;
+  transform:none!important;
+}
+.detailed-process li:nth-child(3n){
+  border-right:0!important;
+}
+.detailed-process li:nth-child(n+7){
+  border-bottom:0!important;
+}
+.detailed-process li:hover{
+  background:#ece9e1!important;
+  transform:none!important;
+  box-shadow:none!important;
+}
+.detailed-process li::before{
+  content:""!important;
+  display:block!important;
+  width:34px!important;
+  height:3px!important;
+  margin:0 auto 4px!important;
+  border-radius:999px!important;
+  background:var(--accent)!important;
+}
+.detailed-process span{
+  display:none!important;
+}
+.detailed-process h2{
+  width:100%!important;
+  max-width:24ch!important;
+  margin:0 auto!important;
+  color:#171815!important;
+  -webkit-text-fill-color:#171815!important;
+  opacity:1!important;
+  mix-blend-mode:normal!important;
+  filter:none!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:clamp(.98rem,1.12vw,1.14rem)!important;
+  font-weight:700!important;
+  font-variation-settings:"wght" 700!important;
+  line-height:1.16!important;
+  letter-spacing:-.018em!important;
+  text-align:center!important;
+  text-wrap:balance!important;
+  white-space:normal!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+}
+.role-boundary{
+  max-width:980px!important;
+  margin:20px auto 0!important;
+  padding:14px 18px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:14px!important;
+  border:1px solid #d8d3c8!important;
+  border-left:3px solid var(--accent)!important;
+  border-radius:10px!important;
+  background:#f7f5ef!important;
+  text-align:center!important;
+}
+.role-boundary strong{
+  flex:0 0 auto!important;
+  margin:0!important;
+  color:#171815!important;
+  -webkit-text-fill-color:#171815!important;
+  font-size:.72rem!important;
+  letter-spacing:.06em!important;
+  text-transform:uppercase!important;
+}
+.role-boundary p{
+  margin:0!important;
+  color:#5a5c56!important;
+  -webkit-text-fill-color:#5a5c56!important;
+  font-size:.84rem!important;
+  line-height:1.45!important;
+}
+@media(max-width:980px){
+  .detailed-process{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .detailed-process li,
+  .detailed-process li:nth-child(2n),
+  .detailed-process li:nth-child(3n){
+    border-right:1px solid #d8d3c8!important;
+    border-bottom:1px solid #d8d3c8!important;
+  }
+  .detailed-process li:nth-child(2n){
+    border-right:0!important;
+  }
+  .detailed-process li:nth-last-child(-n+1){
+    border-bottom:0!important;
+  }
+}
+@media(max-width:680px){
+  .detailed-process{
+    grid-template-columns:1fr!important;
+  }
+  .detailed-process li,
+  .detailed-process li:nth-child(2n),
+  .detailed-process li:nth-child(3n){
+    min-height:74px!important;
+    padding:15px 16px!important;
+    border-right:0!important;
+    border-bottom:1px solid #d8d3c8!important;
+  }
+  .detailed-process li:last-child{
+    border-bottom:0!important;
+  }
+  .detailed-process h2{
+    max-width:100%!important;
+    font-size:1rem!important;
+  }
+  .role-boundary{
+    display:block!important;
+    text-align:center!important;
+  }
+  .role-boundary strong{
+    display:block!important;
+    margin-bottom:5px!important;
+  }
+}
