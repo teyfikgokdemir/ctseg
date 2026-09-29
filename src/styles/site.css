@@ -2392,3 +2392,30 @@ html[data-locale=zh] .button *{
     padding:18px 16px!important;
   }
 }
+
+
+/* SERVICE DETAIL CENTERED EDITORIAL PASS 2026-09-29 */
+.service-detail-content-section{padding-top:46px!important;padding-bottom:58px!important}
+.service-detail-content-section .content-grid{display:block!important;max-width:1080px!important;margin-inline:auto!important}
+.service-detail-content-section .prose{width:100%!important;max-width:980px!important;margin-inline:auto!important}
+.service-detail-content-section .content-block{width:100%!important;max-width:980px!important;margin-inline:auto!important;padding:34px 0!important;text-align:center!important}
+.service-detail-content-section .content-block:first-child{padding-top:0!important}
+.service-detail-content-section .content-block>h2{max-width:16ch!important;margin:0 auto 16px!important;font-size:clamp(2rem,3vw,3.25rem)!important;line-height:1.04!important;text-align:center!important;text-wrap:balance!important}
+.service-detail-content-section .content-block>p{max-width:72ch!important;margin:0 auto!important;font-size:1rem!important;line-height:1.7!important;text-align:center!important;color:#4f514b!important}
+.service-detail-content-section .check-list{width:min(100%,860px)!important;margin:24px auto 0!important;text-align:left!important}
+.service-detail-content-section .faq{max-width:880px!important;margin-inline:auto!important}
+.service-detail-content-section .faq>h2{margin-inline:auto!important;text-align:center!important}
+.service-detail-content-section .faq summary{text-align:center!important}
+.service-detail-content-section .faq details p{max-width:70ch!important;margin:0 auto 22px!important;text-align:center!important}
+.service-detail-content-section .side-panel{position:static!important;width:min(100%,720px)!important;max-width:720px!important;margin:46px auto 0!important;padding:24px 26px!important;border:1px solid #d3cec1!important;border-top:2px solid var(--accent)!important;border-radius:14px!important;background:#f7f5ef!important;text-align:center!important}
+.service-detail-content-section .side-panel .eyebrow,.service-detail-content-section .side-panel h2,.service-detail-content-section .side-panel p{text-align:center!important}
+.service-detail-content-section .side-panel h2{margin:6px auto 10px!important;font-size:clamp(1.65rem,2.2vw,2.15rem)!important}
+.service-detail-content-section .side-panel p{max-width:52ch!important;margin:0 auto 16px!important}
+.service-detail-content-section .side-panel .button{margin-inline:auto!important}
+@media(max-width:700px){
+  .service-detail-content-section{padding-top:34px!important;padding-bottom:44px!important}
+  .service-detail-content-section .content-block{padding:28px 0!important}
+  .service-detail-content-section .content-block>h2{max-width:100%!important;font-size:clamp(1.8rem,8vw,2.45rem)!important}
+  .service-detail-content-section .check-list{grid-template-columns:1fr!important}
+  .service-detail-content-section .side-panel{margin-top:34px!important;padding:20px 18px!important}
+}
