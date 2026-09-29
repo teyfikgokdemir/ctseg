@@ -181,7 +181,7 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <SiteFooter lang={lang} pageKey={pageKey} />
     {pageKey === 'home' && <FloatingActions lang={lang} />}
     <aside class="cookie-consent" data-cookie-consent hidden aria-label={t.cookieTitle}>
-      <div><strong>{t.cookieTitle}</strong><p>{t.cookieCopy} {analyticsDisclosure[lang] || analyticsDisclosure.en}</p><a href={cookieHref}>{t.details}</a></div>
+      <div class="cookie-copy-inline"><strong>{t.cookieTitle}</strong><span>{t.cookieCopy}</span><a href={cookieHref}>{t.details}</a></div>
       <div class="cookie-actions"><button type="button" data-cookie-reject>{t.reject}</button><button type="button" class="accept" data-cookie-accept>{t.accept}</button></div>
     </aside>
     <script>
