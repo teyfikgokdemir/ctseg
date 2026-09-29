@@ -4472,3 +4472,235 @@ html[data-locale=zh] .button *{
     grid-template-columns:1fr!important;
   }
 }
+
+
+/* COUNTRY DETAIL PAGES FINAL CONSOLIDATION 2026-09-29 */
+.page-hero--market-detail{
+  padding-block:clamp(44px,4.8vw,72px)!important;
+}
+.page-hero--market-detail>.container{
+  max-width:1440px!important;
+}
+.page-hero--market-detail .breadcrumb{
+  margin-bottom:22px!important;
+}
+.page-hero--market-detail .eyebrow{
+  margin-bottom:12px!important;
+}
+.page-hero--market-detail h1{
+  max-width:1450px!important;
+  width:100%!important;
+  margin-inline:auto!important;
+  font-size:clamp(2.1rem,3.2vw,3.75rem)!important;
+  line-height:1.08!important;
+  letter-spacing:-.04em!important;
+  white-space:normal!important;
+  text-wrap:balance!important;
+}
+.page-hero--market-detail .lead{
+  max-width:1180px!important;
+  margin-top:16px!important;
+  font-size:clamp(.96rem,1.08vw,1.08rem)!important;
+  line-height:1.55!important;
+}
+@media(min-width:1180px){
+  .page-hero--market-detail h1{
+    max-width:1360px!important;
+  }
+}
+.market-detail-section{
+  padding-top:42px!important;
+  padding-bottom:48px!important;
+}
+.market-detail-section .content-grid{
+  display:block!important;
+  max-width:1180px!important;
+  margin-inline:auto!important;
+}
+.market-detail-section .prose{
+  width:100%!important;
+  max-width:980px!important;
+  margin-inline:auto!important;
+}
+.market-detail-section .content-block{
+  max-width:920px!important;
+  margin-inline:auto!important;
+  padding:28px 0!important;
+  text-align:center!important;
+}
+.market-detail-section .content-block>h2{
+  max-width:none!important;
+  margin:0 auto 12px!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:clamp(1.65rem,2.15vw,2.35rem)!important;
+  font-weight:700!important;
+  font-variation-settings:"wght" 700!important;
+  line-height:1.1!important;
+  letter-spacing:-.03em!important;
+  text-align:center!important;
+  text-wrap:balance!important;
+}
+.market-detail-section .content-block>p{
+  max-width:76ch!important;
+  margin:0 auto!important;
+  color:#565750!important;
+  font-size:.92rem!important;
+  line-height:1.62!important;
+  text-align:center!important;
+}
+.market-detail-section .direct-answer{
+  max-width:980px!important;
+  padding:24px 26px!important;
+  border:1px solid #d5d0c5!important;
+  border-top:2px solid var(--accent)!important;
+  border-radius:14px!important;
+  background:#f4f1e9!important;
+}
+.market-detail-section .direct-answer h2{
+  font-size:clamp(1.75rem,2.25vw,2.45rem)!important;
+}
+.market-detail-section .check-list{
+  width:min(100%,820px)!important;
+  margin:18px auto 0!important;
+  padding:0!important;
+  display:grid!important;
+  gap:8px!important;
+  list-style:none!important;
+  text-align:left!important;
+}
+.market-detail-section .check-list li{
+  position:relative!important;
+  padding:10px 12px 10px 34px!important;
+  border:1px solid #ddd8ce!important;
+  border-radius:10px!important;
+  background:#faf8f2!important;
+  color:#2f302b!important;
+  font-size:.86rem!important;
+  line-height:1.5!important;
+}
+.market-detail-section .check-list li::before{
+  content:"✓"!important;
+  position:absolute!important;
+  left:12px!important;
+  top:10px!important;
+  color:#708600!important;
+  font-weight:800!important;
+}
+.market-detail-section .check-list li strong{
+  font-weight:700!important;
+}
+.market-detail-section .check-list li span{
+  color:#62635d!important;
+  font-size:.82rem!important;
+}
+.market-detail-section .origin-note{
+  max-width:920px!important;
+  padding:22px 24px!important;
+  border:1px solid #d6d1c7!important;
+  border-left:3px solid var(--accent)!important;
+  border-radius:12px!important;
+  background:#f5f2ea!important;
+  text-align:center!important;
+}
+.market-detail-section .origin-note h2,
+.market-detail-section .origin-note p{
+  text-align:center!important;
+}
+.market-detail-section .content-block .button{
+  margin:16px auto 0!important;
+}
+.market-detail-section .faq{
+  max-width:900px!important;
+}
+.market-detail-section .faq details{
+  border-top:1px solid #d7d2c8!important;
+}
+.market-detail-section .faq summary{
+  padding:17px 0!important;
+  text-align:center!important;
+  font-size:.88rem!important;
+}
+.market-detail-section .faq details p{
+  max-width:72ch!important;
+  margin:0 auto 18px!important;
+  text-align:center!important;
+  font-size:.85rem!important;
+  line-height:1.58!important;
+}
+.market-detail-section .side-panel{
+  position:static!important;
+  width:min(100%,720px)!important;
+  max-width:720px!important;
+  margin:34px auto 0!important;
+  padding:22px 24px!important;
+  border:1px solid #d6d1c7!important;
+  border-top:2px solid var(--accent)!important;
+  border-radius:14px!important;
+  background:#f5f2ea!important;
+  text-align:center!important;
+}
+.market-detail-section .side-panel .eyebrow,
+.market-detail-section .side-panel h2,
+.market-detail-section .side-panel p{
+  text-align:center!important;
+}
+.market-detail-section .side-panel h2{
+  max-width:none!important;
+  margin:6px auto 10px!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:clamp(1.4rem,1.8vw,1.8rem)!important;
+  font-weight:700!important;
+  line-height:1.14!important;
+  letter-spacing:-.02em!important;
+}
+.market-detail-section .side-panel p{
+  max-width:58ch!important;
+  margin:0 auto 12px!important;
+  font-size:.84rem!important;
+  line-height:1.55!important;
+}
+.market-detail-section .side-panel .button{
+  margin:6px auto 0!important;
+}
+@media(min-width:1100px){
+  .market-detail-section .content-block>h2{
+    white-space:nowrap!important;
+  }
+}
+@media(max-width:1099px){
+  .market-detail-section .content-block>h2{
+    white-space:normal!important;
+  }
+}
+@media(max-width:700px){
+  .page-hero--market-detail{
+    padding-block:38px!important;
+  }
+  .page-hero--market-detail h1{
+    font-size:clamp(1.9rem,9vw,2.7rem)!important;
+    line-height:1.1!important;
+  }
+  .page-hero--market-detail .lead{
+    font-size:.92rem!important;
+  }
+  .market-detail-section{
+    padding-top:30px!important;
+    padding-bottom:38px!important;
+  }
+  .market-detail-section .content-block{
+    padding:22px 0!important;
+  }
+  .market-detail-section .content-block>h2{
+    font-size:clamp(1.45rem,7.5vw,2rem)!important;
+  }
+  .market-detail-section .direct-answer{
+    padding:20px 16px!important;
+  }
+  .market-detail-section .check-list li{
+    padding:10px 10px 10px 32px!important;
+  }
+  .market-detail-section .side-panel{
+    margin-top:26px!important;
+    padding:18px 16px!important;
+  }
+}
