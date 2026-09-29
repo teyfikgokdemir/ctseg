@@ -3412,3 +3412,31 @@ html[data-locale=zh] .button *{
     font-size:.88rem!important;
   }
 }
+
+
+/* TRADE PRODUCT CATEGORY LEADS SINGLE-LINE DESKTOP 2026-09-29 */
+.catalogue-section .catalogue-group-heading{
+  max-width:1480px!important;
+}
+.catalogue-section .group-lead{
+  width:100%!important;
+  max-width:1380px!important;
+  margin:0 auto!important;
+  font-size:clamp(.82rem,.92vw,.96rem)!important;
+  line-height:1.45!important;
+  text-align:center!important;
+}
+@media(min-width:1200px){
+  .catalogue-section .group-lead{
+    white-space:nowrap!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+  }
+}
+@media(max-width:1199px){
+  .catalogue-section .group-lead{
+    max-width:82ch!important;
+    white-space:normal!important;
+    text-wrap:balance!important;
+  }
+}
