@@ -17,7 +17,7 @@ const statusLabel = ({tr:'Kontrollü ilerleme',en:'Controlled progression',de:'K
         <small>{statusLabel}</small>
       </div>
     </div>
-    <ol class="process-rail" aria-label={sequenceLabel}>
+    <ol class:list={['process-rail', steps.length === 4 && 'process-rail--four']} aria-label={sequenceLabel}>
       {steps.map((step) => (
         <li>
           <strong>{step}</strong>
@@ -32,6 +32,15 @@ const statusLabel = ({tr:'Kontrollü ilerleme',en:'Controlled progression',de:'K
   .process-section{position:relative;overflow:hidden;background:#111!important;color:#fff!important;border-block:1px solid rgba(255,255,255,.09)}
   .process-section::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(118deg,rgba(196,240,0,.035),transparent 34%),radial-gradient(circle at 84% 16%,rgba(255,255,255,.045),transparent 24%)}
   .process-shell{position:relative;z-index:1;display:grid;grid-template-columns:minmax(300px,.72fr) minmax(560px,1.28fr);gap:clamp(52px,7vw,120px);align-items:start}
+  .process-rail--four{grid-template-columns:repeat(4,minmax(0,1fr));grid-column:1/-1}
+  .process-rail--four li{min-height:118px;padding:24px 20px}
+  .process-rail--four strong{font-size:clamp(18px,1.4vw,24px);max-width:24ch}
+  .process-shell:has(.process-rail--four){grid-template-columns:1fr;gap:30px}
+  .process-shell:has(.process-rail--four) .process-heading{position:static;max-width:900px;margin:0 auto;text-align:center}
+  .process-shell:has(.process-rail--four) .process-kicker{justify-content:center}
+  .process-shell:has(.process-rail--four) .process-heading .section-title{max-width:18ch;margin-inline:auto;font-size:clamp(38px,3.5vw,56px)!important}
+  .process-shell:has(.process-rail--four) .process-caption{max-width:62em;margin:18px auto 0}
+  .process-shell:has(.process-rail--four) .process-status{justify-content:center;margin-top:18px}
   .process-heading{position:sticky;top:118px;max-width:520px;padding-top:4px}
   .process-kicker{display:inline-flex;align-items:center;gap:10px;margin-bottom:24px;color:#c4f000;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
   .process-kicker::before{content:"";width:32px;height:2px;background:#c4f000}
@@ -51,7 +60,7 @@ const statusLabel = ({tr:'Kontrollü ilerleme',en:'Controlled progression',de:'K
   :global(html[dir="rtl"]) .process-status small{letter-spacing:0;text-transform:none}
   :global(html[dir="rtl"]) .process-rail strong{text-align:right;max-width:32ch}
   :global(html[dir="rtl"]) .process-rail li:hover .process-arrow{transform:translate(-3px,-3px)}
-  @media(max-width:1100px){.process-shell{grid-template-columns:1fr;gap:38px}.process-heading{position:static;max-width:760px}.process-heading .section-title{max-width:15ch}.process-caption{max-width:48em}.process-rail{max-width:900px}.process-rail li{min-height:104px}}
+  @media(max-width:1100px){.process-shell{grid-template-columns:1fr;gap:38px}.process-heading{position:static;max-width:760px}.process-heading .section-title{max-width:15ch}.process-caption{max-width:48em}.process-rail{max-width:900px}.process-rail li{min-height:104px}.process-rail--four{grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px;margin-inline:auto}.process-shell:has(.process-rail--four) .process-heading{max-width:760px}}
   @media(max-width:720px){.process-section{padding-block:60px}.process-heading .section-title{max-width:100%;font-size:clamp(34px,9vw,46px)!important}.process-caption{margin-top:20px}.process-status{margin-top:18px}.process-rail{grid-template-columns:1fr;border-left:0}.process-rail li{grid-template-columns:minmax(0,1fr) 24px;gap:14px;min-height:92px;padding:19px 0 19px 22px;border-right:0}.process-rail li:hover{padding-left:26px;padding-right:7px}.process-rail strong{max-width:100%;font-size:clamp(19px,5.7vw,25px)}.process-arrow{font-size:18px}}
   @media(prefers-reduced-motion:reduce){.process-rail li,.process-arrow{transition:none}}
 </style>
