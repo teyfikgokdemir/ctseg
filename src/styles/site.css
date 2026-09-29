@@ -4066,3 +4066,49 @@ html[data-locale=zh] .button *{
     width:100%!important;
   }
 }
+
+
+/* ABOUT FINAL CTA SINGLE-LINE COMPACT 2026-09-29 */
+.about-final-cta{
+  padding:34px 0 38px!important;
+}
+.about-final-cta .cta-statement{
+  max-width:1180px!important;
+  margin:0 auto!important;
+  padding:34px 28px!important;
+  text-align:center!important;
+}
+.about-final-cta .cta-statement h2{
+  max-width:none!important;
+  margin:0 auto 18px!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:clamp(1.85rem,2.45vw,2.75rem)!important;
+  font-weight:700!important;
+  font-variation-settings:"wght" 700!important;
+  line-height:1.08!important;
+  letter-spacing:-.03em!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+}
+.about-final-cta .cta-statement .button{
+  margin-inline:auto!important;
+}
+@media(max-width:980px){
+  .about-final-cta .cta-statement h2{
+    font-size:clamp(1.7rem,4vw,2.3rem)!important;
+    white-space:normal!important;
+    text-wrap:balance!important;
+  }
+}
+@media(max-width:640px){
+  .about-final-cta{
+    padding:26px 0 30px!important;
+  }
+  .about-final-cta .cta-statement{
+    padding:26px 18px!important;
+  }
+  .about-final-cta .cta-statement h2{
+    font-size:clamp(1.5rem,7.5vw,2rem)!important;
+    line-height:1.12!important;
+  }
+}
