@@ -2419,3 +2419,21 @@ html[data-locale=zh] .button *{
   .service-detail-content-section .check-list{grid-template-columns:1fr!important}
   .service-detail-content-section .side-panel{margin-top:34px!important;padding:20px 18px!important}
 }
+
+
+/* SERVICE DETAIL SINGLE-LINE HEADINGS 2026-09-29 */
+@media(min-width:900px){
+  .service-detail-content-section .content-block>h2{
+    max-width:none!important;
+    white-space:nowrap!important;
+    text-wrap:nowrap!important;
+    font-size:clamp(1.9rem,2.55vw,2.75rem)!important;
+    line-height:1.05!important;
+  }
+}
+@media(max-width:899px){
+  .service-detail-content-section .content-block>h2{
+    white-space:normal!important;
+    text-wrap:balance!important;
+  }
+}
