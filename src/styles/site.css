@@ -3235,3 +3235,19 @@ html[data-locale=zh] .button *{
     line-height:1.04!important;
   }
 }
+
+
+/* MARKET CORRIDOR HEADING LINE-HEIGHT TUNE 2026-09-29 */
+.market-corridor-card .cta-statement h2{
+  line-height:1.08!important;
+}
+@media(max-width:900px){
+  .market-corridor-card .cta-statement h2{
+    line-height:1.1!important;
+  }
+}
+@media(max-width:600px){
+  .market-corridor-card .cta-statement h2{
+    line-height:1.08!important;
+  }
+}
