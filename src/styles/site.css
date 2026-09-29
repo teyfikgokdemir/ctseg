@@ -3270,3 +3270,145 @@ html[data-locale=zh] .button *{
     line-height:1.12!important;
   }
 }
+
+
+/* TRADE PRODUCTS CATEGORY EDITORIAL ALIGNMENT 2026-09-29 */
+.catalogue-section .catalogue-category-nav{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:10px!important;
+  max-width:1280px!important;
+  margin:28px auto 46px!important;
+  padding:14px 16px!important;
+  border:1px solid #343532!important;
+  border-radius:12px!important;
+  background:#171816!important;
+}
+.catalogue-section .category-nav-label{
+  margin:0 4px 0 0!important;
+  color:#9a9b95!important;
+  font-size:.69rem!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+}
+.catalogue-section .category-nav-list{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  gap:8px!important;
+}
+.catalogue-section .category-nav-pill{
+  min-height:34px!important;
+  padding:7px 12px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  border:1px solid #3c3d39!important;
+  border-radius:999px!important;
+  background:#1c1d1b!important;
+  color:#f4f4ef!important;
+  font-size:.74rem!important;
+  line-height:1!important;
+}
+.catalogue-section .category-nav-pill:hover,
+.catalogue-section .category-nav-pill:focus-visible{
+  border-color:#c4f000!important;
+  color:#c4f000!important;
+}
+.catalogue-section .pill-count{
+  color:#96988f!important;
+  font-size:.68rem!important;
+}
+.catalogue-section .catalogue-directory{
+  max-width:1400px!important;
+  margin-inline:auto!important;
+}
+.catalogue-section .catalogue-group{
+  padding:44px 0 54px!important;
+  border-top:1px solid #2f302d!important;
+}
+.catalogue-section .catalogue-group-heading{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:10px!important;
+  max-width:1180px!important;
+  margin:0 auto 28px!important;
+  text-align:center!important;
+}
+.catalogue-section .group-heading-top{
+  width:100%!important;
+  text-align:center!important;
+}
+.catalogue-section .catalogue-group-heading h2{
+  max-width:100%!important;
+  margin:0 auto!important;
+  color:#f5f5f0!important;
+  -webkit-text-fill-color:#f5f5f0!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:clamp(1.8rem,2.3vw,2.65rem)!important;
+  font-weight:700!important;
+  font-variation-settings:"wght" 700!important;
+  line-height:1.06!important;
+  letter-spacing:-.03em!important;
+  text-align:center!important;
+  text-wrap:balance!important;
+  white-space:normal!important;
+}
+.catalogue-section .group-lead{
+  max-width:76ch!important;
+  margin:0 auto!important;
+  color:#b8b9b2!important;
+  font-size:.93rem!important;
+  line-height:1.55!important;
+  text-align:center!important;
+}
+.catalogue-section .group-trade-badges{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  gap:8px!important;
+  margin-top:4px!important;
+}
+.catalogue-section .trade-badge{
+  padding:7px 11px!important;
+  border:1px solid #373833!important;
+  border-radius:999px!important;
+  background:#171816!important;
+  color:#e7e7e1!important;
+  font-size:.68rem!important;
+  letter-spacing:.03em!important;
+}
+@media(min-width:1100px){
+  .catalogue-section .catalogue-group-heading h2{
+    white-space:nowrap!important;
+  }
+}
+@media(max-width:1099px){
+  .catalogue-section .catalogue-group-heading h2{
+    white-space:normal!important;
+  }
+}
+@media(max-width:680px){
+  .catalogue-section .catalogue-category-nav{
+    margin:20px auto 32px!important;
+    padding:12px!important;
+  }
+  .catalogue-section .category-nav-label{
+    width:100%!important;
+    text-align:center!important;
+  }
+  .catalogue-section .catalogue-group{
+    padding:34px 0 42px!important;
+  }
+  .catalogue-section .catalogue-group-heading h2{
+    font-size:clamp(1.55rem,8vw,2.15rem)!important;
+  }
+  .catalogue-section .group-lead{
+    font-size:.88rem!important;
+  }
+}
