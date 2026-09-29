@@ -1430,6 +1430,9 @@ strong{font-weight:700}
 .market-corridor-card{
   padding-block:clamp(32px,4vw,48px);
 }
+.market-corridor-card>.container{
+  width:min(1500px,calc(100% - 48px));
+}
 .market-corridor-card .cta-statement{
   width:min(100%,1460px);
   padding:clamp(44px,5vw,66px) clamp(28px,5vw,72px);
