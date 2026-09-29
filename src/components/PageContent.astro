@@ -2150,11 +2150,11 @@ const verifiedLater = {
 {key === 'how-we-work' && processPage && (
   <>
     <PageHero lang={lang} eyebrow="CTSEG" title={processPage.title} lead={processPage.description} />
-    <section class="section"><div class="container">
+    <section class="section process-overview-section"><div class="container">
       <ol class="detailed-process">{processPage.steps.map((step,index)=><li><span>{indexLabel(index)}</span><h2>{step}</h2></li>)}</ol>
       <div class="role-boundary"><strong>{processLabels.boundary}</strong><p>{processPage.role}</p></div>
     </div></section>
-    <section class="section answer-section"><div class="container">
+    <section class="section answer-section process-answer-section"><div class="container">
       <div class="section-head"><h2>{processLabels.answers}</h2><p>{processLabels.answerLead}</p></div>
       <div class="answer-grid">{processPage.faq.map(([question,answer])=><article><h3>{question}</h3><p>{answer}</p></article>)}</div>
       <div class="actions"><a class="button" href={sectionHref('contact')}>{completionHome.commercialCta}</a></div>
