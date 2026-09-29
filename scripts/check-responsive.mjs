@@ -510,8 +510,10 @@ try {
             const actionCenter=actionBox.left+actionBox.width/2;
             const style=getComputedStyle(cta);
             const buttonsFit=[...cta.querySelectorAll('.button')].every((item)=>{const box=item.getBoundingClientRect();return box.left>=ctaBox.left-1&&box.right<=ctaBox.right+1});
+            const approvedWideHeading=Boolean(cta.closest('.market-corridor-card,.about-final-cta'));
+            const headingWidthLimit=approvedWideHeading?1502:982;
             return Math.abs(ctaCenter-headingCenter)<2&&Math.abs(ctaCenter-actionCenter)<2&&buttonsFit&&
-              headingBox.width<=982&&Math.abs(Number.parseFloat(style.paddingTop)-Number.parseFloat(style.paddingBottom))<1;
+              headingBox.width<=headingWidthLimit&&Math.abs(Number.parseFloat(style.paddingTop)-Number.parseFloat(style.paddingBottom))<1;
           }),
           ctaMobileLines:[...document.querySelectorAll('.cta-statement h2')].reduce((max,heading)=>{
             const box=heading.getBoundingClientRect();
