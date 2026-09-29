@@ -1643,3 +1643,53 @@ html[data-locale=zh] .button,
 html[data-locale=zh] .button *{
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
 }
+
+
+/* MOBILE HERO SPACING REFINEMENT 2026-09-29 */
+@media (max-width:620px){
+  .homepage-trade-hero{
+    padding:14px 0 24px!important;
+  }
+  .homepage-trade-hero .hero-grid{
+    width:calc(100% - 24px)!important;
+    margin-inline:auto!important;
+  }
+  .homepage-trade-hero .homepage-hero-stage{
+    overflow:hidden!important;
+    border:1px solid rgba(255,255,255,.08)!important;
+    border-radius:18px!important;
+    background:#0b0e0d!important;
+  }
+  .homepage-trade-hero .hero-visual{
+    width:100%!important;
+    margin:0!important;
+  }
+  .homepage-trade-hero .hero-visual img{
+    width:100%!important;
+    border-radius:0!important;
+  }
+  .homepage-trade-hero .hero-copy{
+    padding:24px 18px 22px!important;
+  }
+  .homepage-trade-hero .hero-copy .eyebrow{
+    margin-bottom:14px!important;
+  }
+  .homepage-trade-hero .home-hero-title--tr{
+    margin-bottom:18px!important;
+  }
+  .homepage-trade-hero .hero-proof-pills{
+    margin-top:16px!important;
+  }
+  .homepage-trade-hero .hero-copy .actions{
+    margin-top:18px!important;
+    gap:10px!important;
+  }
+  .homepage-trade-hero .hero-copy .button{
+    width:100%!important;
+    min-height:48px!important;
+    border-radius:12px!important;
+  }
+  .homepage-trade-hero .trade-gateway-banner{
+    margin-top:18px!important;
+  }
+}
