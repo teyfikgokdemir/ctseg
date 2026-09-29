@@ -1358,3 +1358,285 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
     font-size:clamp(1.15rem,4.8vw,1.45rem);
   }
 }
+
+
+/* CTSEG live QA refinements — 2026-09-29 */
+
+/* Typography normalization */
+html,body{font-synthesis:none;text-rendering:optimizeLegibility}
+.button,.primary-nav,.nav-solutions-parent,.text-link,.guide-link-action,.insight-read-action{
+  font-variation-settings:"wght" 700;
+}
+strong{font-weight:700}
+
+/* Service detail pages: center editorial hierarchy while keeping useful lists readable. */
+.service-detail-content-section .content-grid{
+  grid-template-columns:minmax(0,1fr) minmax(240px,.28fr);
+  gap:clamp(48px,6vw,82px);
+}
+.service-detail-content-section .prose{
+  max-width:920px;
+  width:100%;
+}
+.service-detail-content-section .content-block{
+  text-align:center;
+}
+.service-detail-content-section .content-block>h2,
+.service-detail-content-section .content-block>p,
+.service-detail-content-section .content-block>.eyebrow{
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+.service-detail-content-section .content-block>p{
+  max-width:74ch;
+}
+.service-detail-content-section .check-list{
+  max-width:860px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:left;
+}
+.service-detail-content-section .faq{
+  margin-left:auto;
+  margin-right:auto;
+}
+.service-detail-content-section .faq>h2,
+.service-detail-content-section .faq details p{
+  text-align:center;
+}
+.service-detail-content-section .faq summary{
+  text-align:center;
+}
+.service-detail-content-section .text-link{
+  margin-inline:auto;
+}
+@media(max-width:980px){
+  .service-detail-content-section .content-grid{grid-template-columns:1fr}
+  .service-detail-content-section .side-panel{
+    position:static;
+    max-width:620px;
+    margin-inline:auto;
+    text-align:center;
+  }
+}
+@media(max-width:640px){
+  .service-detail-content-section .check-list{
+    grid-template-columns:1fr;
+  }
+}
+
+/* Market corridor cards: wider copy, smaller headings, less wasted lateral space. */
+.market-corridor-card{
+  padding-block:clamp(32px,4vw,48px);
+}
+.market-corridor-card .cta-statement{
+  width:min(100%,1460px);
+  padding:clamp(44px,5vw,66px) clamp(28px,5vw,72px);
+}
+.market-corridor-card .cta-statement>div{
+  width:100%;
+}
+.market-corridor-card .cta-statement h2{
+  max-width:1180px;
+  margin:10px auto 18px;
+  font-size:clamp(2.45rem,4.3vw,4.9rem);
+  line-height:.98;
+  text-wrap:balance;
+}
+.market-corridor-card .cta-statement p:not(.eyebrow){
+  max-width:1080px;
+  margin-inline:auto;
+  text-align:center;
+  line-height:1.58;
+}
+.market-corridor-card .cta-statement .button{
+  margin-top:26px;
+}
+@media(max-width:760px){
+  .market-corridor-card .cta-statement{
+    padding:34px 18px;
+  }
+  .market-corridor-card .cta-statement h2{
+    font-size:clamp(2.15rem,10vw,3.25rem);
+    line-height:1.02;
+  }
+}
+
+/* Trade products catalogue: remove decorative numbering and center category hierarchy. */
+.catalogue-category-nav{
+  justify-content:center;
+}
+.category-nav-list{
+  justify-content:center;
+}
+.category-nav-pill{
+  justify-content:center;
+}
+.catalogue-group-heading{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  margin-bottom:34px;
+  text-align:center;
+}
+.group-heading-top{
+  display:block;
+  width:100%;
+  text-align:center;
+}
+.catalogue-group-heading h2{
+  max-width:100%;
+  margin-inline:auto!important;
+  font-size:clamp(1.85rem,2.75vw,3.05rem)!important;
+  line-height:1.06!important;
+  text-align:center;
+  text-wrap:balance;
+}
+.group-lead{
+  max-width:78ch;
+  margin-inline:auto;
+  text-align:center;
+}
+.group-trade-badges{
+  justify-content:center;
+  margin-top:2px;
+}
+@media(min-width:900px){
+  .catalogue-group-heading h2{
+    white-space:nowrap;
+  }
+}
+@media(max-width:899px){
+  .catalogue-group-heading h2{
+    white-space:normal;
+  }
+}
+
+/* Trade insights: calmer editorial density. */
+.insight-card{
+  padding:24px 22px 20px;
+}
+.insight-card-title{
+  font-size:clamp(17px,1.35vw,21px);
+  line-height:1.24;
+  letter-spacing:-.018em;
+}
+.insight-card-desc{
+  font-size:13px;
+  line-height:1.56;
+}
+.featured-title{
+  font-size:clamp(22px,2.25vw,34px);
+  line-height:1.14;
+}
+.guide-directory-section{
+  margin-top:52px;
+  padding-top:40px;
+}
+.guide-directory-section .section-head{
+  display:block;
+  max-width:900px;
+  margin:0 auto 30px;
+  text-align:center;
+}
+.guide-directory-section .section-head .eyebrow,
+.guide-directory-section .section-head h2,
+.guide-directory-section .section-head p{
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+.guide-directory-section .section-head h2{
+  margin-top:8px;
+  font-size:clamp(2rem,3vw,3.2rem);
+}
+.guide-directory-section .section-head p{
+  max-width:62ch;
+  margin-top:14px;
+}
+.guide-grid{
+  gap:18px;
+  margin-top:24px;
+}
+.guide-card{
+  min-height:210px;
+  padding:22px 20px;
+  text-align:center;
+  align-items:center;
+}
+.guide-card-header{
+  justify-content:center;
+}
+.guide-badge{
+  padding:3px 8px;
+  border-radius:999px;
+  background:#efebe2;
+  font-size:9.5px;
+  letter-spacing:.045em;
+}
+.guide-card h3{
+  font-size:clamp(17px,1.25vw,20px);
+  line-height:1.22;
+  text-align:center;
+}
+.guide-card p{
+  max-width:44ch;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+.guide-link-action{
+  margin-top:auto;
+}
+.insight-advisory-desk{
+  margin-top:58px;
+  padding:38px 34px;
+}
+.insight-advisory-desk .advisory-title{
+  color:#fff!important;
+}
+.insight-advisory-desk .advisory-lead{
+  color:rgba(255,255,255,.76)!important;
+}
+.insight-advisory-desk .button-secondary{
+  color:#fff!important;
+  border-color:rgba(255,255,255,.34)!important;
+}
+.insight-advisory-desk .button-secondary:hover{
+  color:#c4f000!important;
+  border-color:#c4f000!important;
+}
+@media(max-width:640px){
+  .insight-card-title{font-size:19px}
+  .guide-card{min-height:0}
+}
+
+/* Dark sourcing desk contrast safety. */
+.catalogue-sourcing-desk .sourcing-desk-lead{
+  color:rgba(255,255,255,.78)!important;
+}
+.catalogue-sourcing-desk .sourcing-desk-note{
+  color:rgba(255,255,255,.58)!important;
+}
+.catalogue-sourcing-desk .button-secondary{
+  color:#fff!important;
+  border-color:rgba(255,255,255,.34)!important;
+}
+
+/* Keep CTA text weights consistent across Turkish glyphs and all locales. */
+.button,
+.button *{
+  font-family:'DM Sans',system-ui,sans-serif;
+  font-weight:700!important;
+  font-variation-settings:"wght" 700;
+}
+html[data-locale=fa] .button,
+html[data-locale=fa] .button *{
+  font-family:"Tahoma","Segoe UI","Arial Unicode MS",system-ui,sans-serif;
+}
+html[data-locale=zh] .button,
+html[data-locale=zh] .button *{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;
+}
