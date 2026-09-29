@@ -2081,3 +2081,37 @@ html[data-locale=zh] .button *{
   border-color:#d2ff00!important;
   color:#111!important;
 }
+
+
+/* SERVICE CTA VISIBILITY FIX 2026-09-29 */
+.services-directory .card strong{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:34px!important;
+  margin:16px auto 0!important;
+  padding:8px 13px!important;
+  background:#f3f1ea!important;
+  color:#111!important;
+  -webkit-text-fill-color:#111!important;
+  border:1px solid #cfcac0!important;
+  border-radius:10px!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  mix-blend-mode:normal!important;
+  filter:none!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:.69rem!important;
+  font-weight:700!important;
+  font-variation-settings:"wght" 700!important;
+  line-height:1!important;
+  letter-spacing:.065em!important;
+  text-transform:uppercase!important;
+}
+.services-directory .card:hover strong,
+.services-directory .card:focus-visible strong{
+  background:#111!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  border-color:#111!important;
+}
