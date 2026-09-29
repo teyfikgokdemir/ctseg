@@ -3163,3 +3163,75 @@ html[data-locale=zh] .button *{
 .process-overview-section .role-boundary p{
   text-align:center!important;
 }
+
+
+/* MARKET CORRIDOR WIDE 1-2 LINE HEADINGS 2026-09-29 */
+.market-corridor-card>.container{
+  width:min(1640px,calc(100% - 32px))!important;
+  max-width:none!important;
+}
+.market-corridor-card .cta-statement{
+  width:100%!important;
+  max-width:1600px!important;
+  margin-inline:auto!important;
+  padding:42px 38px 46px!important;
+  text-align:center!important;
+}
+.market-corridor-card .cta-statement>div{
+  width:100%!important;
+  max-width:none!important;
+}
+.market-corridor-card .cta-statement .eyebrow{
+  text-align:center!important;
+}
+.market-corridor-card .cta-statement h2{
+  width:100%!important;
+  max-width:1500px!important;
+  margin:10px auto 16px!important;
+  font-size:clamp(2.15rem,3.15vw,3.85rem)!important;
+  line-height:1.02!important;
+  letter-spacing:-.035em!important;
+  text-align:center!important;
+  text-wrap:balance!important;
+  white-space:normal!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+}
+.market-corridor-card .cta-statement p:not(.eyebrow){
+  max-width:1200px!important;
+  margin:0 auto!important;
+  font-size:clamp(.95rem,1.05vw,1.08rem)!important;
+  line-height:1.5!important;
+  text-align:center!important;
+}
+.market-corridor-card .cta-statement .button{
+  margin:22px auto 0!important;
+}
+@media(min-width:1200px){
+  .market-corridor-card .cta-statement h2{
+    max-width:1480px!important;
+  }
+}
+@media(max-width:900px){
+  .market-corridor-card>.container{
+    width:min(100% - 24px,1000px)!important;
+  }
+  .market-corridor-card .cta-statement{
+    padding:34px 22px 38px!important;
+  }
+  .market-corridor-card .cta-statement h2{
+    font-size:clamp(2rem,6vw,3.15rem)!important;
+  }
+}
+@media(max-width:600px){
+  .market-corridor-card>.container{
+    width:calc(100% - 18px)!important;
+  }
+  .market-corridor-card .cta-statement{
+    padding:28px 16px 32px!important;
+  }
+  .market-corridor-card .cta-statement h2{
+    font-size:clamp(1.85rem,9vw,2.55rem)!important;
+    line-height:1.04!important;
+  }
+}
