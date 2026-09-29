@@ -1225,7 +1225,7 @@ const verifiedLater = {
         </div>
       </section>
     )}
-    <section class="section"><div class="container content-grid">
+    <section class="section service-detail-content-section"><div class="container content-grid">
       <div class="prose">
         {detailedService ? (
           <>
@@ -1300,7 +1300,6 @@ const verifiedLater = {
         <div class="category-nav-list">
           {catalogueGroups.map((group, groupIndex) => (
             <a class="category-nav-pill" href={`#group-${group.key}`}>
-              <span class="pill-num">{String(groupIndex + 1).padStart(2, '0')}</span>
               <span class="pill-title">{group.title}</span>
               <span class="pill-count">({group.ids.length})</span>
             </a>
@@ -1311,7 +1310,6 @@ const verifiedLater = {
         {catalogueGroups.map((group,groupIndex) => <div class="catalogue-group" id={`group-${group.key}`} data-catalogue-group={group.key}>
           <div class="catalogue-group-heading">
             <div class="group-heading-top">
-              <span class="group-index">{String(groupIndex + 1).padStart(2,'0')}</span>
               <h2>{group.title}</h2>
             </div>
             <p class="group-lead">{categoryLeads[group.key]?.[lang]}</p>
@@ -1737,7 +1735,7 @@ const verifiedLater = {
     </div></section>
     <ProcessRail steps={copy.framework} />
     {lang === 'zh' && chinaMarketEntry && (
-      <section class="section compact-link-section"><div class="container cta-statement">
+      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
         <div>
           <p class="eyebrow">{chinaMarketEntry.eyebrow}</p>
           <h2>{chinaMarketEntry.title}</h2>
@@ -1747,7 +1745,7 @@ const verifiedLater = {
       </div></section>
     )}
     {lang === 'tr' && ukraineTurkiye && (
-      <section class="section compact-link-section"><div class="container cta-statement">
+      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
         <div>
           <p class="eyebrow">{ukraineTurkiye.eyebrow}</p>
           <h2>{ukraineTurkiye.title}</h2>
@@ -1757,7 +1755,7 @@ const verifiedLater = {
       </div></section>
     )}
     {lang === 'tr' && chinaTurkiye && (
-      <section class="section compact-link-section"><div class="container cta-statement">
+      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
         <div>
           <p class="eyebrow">{chinaTurkiye.eyebrow}</p>
           <h2>{chinaTurkiye.title}</h2>
@@ -1767,7 +1765,7 @@ const verifiedLater = {
       </div></section>
     )}
     {lang === 'tr' && vietnamTurkiye && (
-      <section class="section compact-link-section"><div class="container cta-statement">
+      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
         <div>
           <p class="eyebrow">{vietnamTurkiye.eyebrow}</p>
           <h2>{vietnamTurkiye.title}</h2>
@@ -1777,7 +1775,7 @@ const verifiedLater = {
       </div></section>
     )}
     {lang === 'vi' && vietnamMarketEntry && (
-      <section class="section compact-link-section"><div class="container cta-statement">
+      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
         <div>
           <p class="eyebrow">{vietnamMarketEntry.eyebrow}</p>
           <h2>{vietnamMarketEntry.title}</h2>
@@ -1787,7 +1785,7 @@ const verifiedLater = {
       </div></section>
     )}
     {(lang === 'tr' || lang === 'en') && syriaMarket && (
-      <section class="section compact-link-section"><div class="container cta-statement">
+      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
         <div>
           <p class="eyebrow">{syriaMarket.eyebrow}</p>
           <h2>{syriaMarket.title}</h2>
@@ -1797,7 +1795,7 @@ const verifiedLater = {
       </div></section>
     )}
     {(lang === 'tr' || lang === 'en' || lang === 'fa') && (
-      <section class="section compact-link-section"><div class="container cta-statement">
+      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
         <div>
           <p class="eyebrow">{iranTrade.eyebrow}</p>
           <h2>{iranTrade.title}</h2>
