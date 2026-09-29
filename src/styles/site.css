@@ -3440,3 +3440,150 @@ html[data-locale=zh] .button *{
     text-wrap:balance!important;
   }
 }
+
+
+/* INSIGHT GUIDE DIRECTORY PREMIUM COMPACT 2026-09-29 */
+.guide-directory-section{
+  margin-top:48px!important;
+  padding:38px 0 0!important;
+  border-top:1px solid #d8d3c8!important;
+}
+.guide-directory-section .section-head{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  max-width:980px!important;
+  margin:0 auto 24px!important;
+  text-align:center!important;
+}
+.guide-directory-section .section-head .eyebrow{
+  margin:0!important;
+  color:#6d8500!important;
+  font-size:.68rem!important;
+  font-weight:800!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+}
+.guide-directory-section .section-head h2{
+  margin:0!important;
+  max-width:none!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:clamp(1.9rem,2.5vw,2.7rem)!important;
+  font-weight:700!important;
+  line-height:1.04!important;
+  letter-spacing:-.03em!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+}
+.guide-directory-section .section-head p{
+  margin:0!important;
+  max-width:72ch!important;
+  font-size:.92rem!important;
+  line-height:1.5!important;
+  text-align:center!important;
+}
+.guide-directory-section .guide-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:14px!important;
+  max-width:1180px!important;
+  margin:0 auto!important;
+}
+.guide-directory-section .guide-card{
+  min-height:170px!important;
+  padding:18px 18px 16px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  text-align:center!important;
+  border:1px solid #d8d3c8!important;
+  border-radius:14px!important;
+  background:linear-gradient(180deg,#fff 0%,#faf8f2 100%)!important;
+  box-shadow:0 8px 22px rgba(17,17,17,.035)!important;
+}
+.guide-directory-section .guide-card:hover{
+  transform:translateY(-2px)!important;
+  border-color:#b9bdad!important;
+  box-shadow:0 12px 26px rgba(17,17,17,.06)!important;
+}
+.guide-directory-section .guide-card-header{
+  margin:0 0 10px!important;
+}
+.guide-directory-section .guide-badge{
+  padding:4px 9px!important;
+  border:1px solid #d5d0c5!important;
+  border-radius:999px!important;
+  background:#efebe2!important;
+  color:#2b2c28!important;
+  font-size:.59rem!important;
+  line-height:1!important;
+  letter-spacing:.07em!important;
+}
+.guide-directory-section .guide-card h3{
+  margin:0 0 8px!important;
+  max-width:28ch!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:clamp(.98rem,1.15vw,1.12rem)!important;
+  font-weight:700!important;
+  line-height:1.18!important;
+  letter-spacing:-.018em!important;
+  text-align:center!important;
+  text-wrap:balance!important;
+}
+.guide-directory-section .guide-card p{
+  max-width:42ch!important;
+  margin:0 auto 14px!important;
+  color:#5c5d57!important;
+  font-size:.81rem!important;
+  line-height:1.48!important;
+  text-align:center!important;
+}
+.guide-directory-section .guide-link-action{
+  margin-top:auto!important;
+  padding-top:10px!important;
+  color:#171815!important;
+  font-size:.7rem!important;
+  font-weight:700!important;
+  letter-spacing:.04em!important;
+  text-transform:uppercase!important;
+  border-top:1px solid #e2ded5!important;
+  width:100%!important;
+  text-align:center!important;
+}
+.guide-directory-section .guide-card:hover .guide-link-action{
+  color:#718700!important;
+}
+@media(max-width:960px){
+  .guide-directory-section .guide-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  .guide-directory-section .guide-card:last-child:nth-child(odd){
+    grid-column:1 / -1!important;
+    width:min(100%,520px)!important;
+    justify-self:center!important;
+  }
+}
+@media(max-width:640px){
+  .guide-directory-section{
+    margin-top:38px!important;
+    padding-top:30px!important;
+  }
+  .guide-directory-section .section-head h2{
+    font-size:clamp(1.7rem,8vw,2.2rem)!important;
+    white-space:normal!important;
+  }
+  .guide-directory-section .guide-grid{
+    grid-template-columns:1fr!important;
+    gap:12px!important;
+  }
+  .guide-directory-section .guide-card,
+  .guide-directory-section .guide-card:last-child:nth-child(odd){
+    grid-column:auto!important;
+    width:100%!important;
+    min-height:0!important;
+    padding:16px!important;
+  }
+}
