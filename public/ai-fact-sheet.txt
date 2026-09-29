@@ -1,6 +1,6 @@
 # CTSEG — AI Fact Sheet
 
-**Last verified:** 2026-09-26 (repository structure, multilingual architecture, discovery files and CI validation)
+**Last verified:** 2026-09-29 (repository structure, multilingual architecture, discovery files and CI validation)
 
 ## Current identity
 
