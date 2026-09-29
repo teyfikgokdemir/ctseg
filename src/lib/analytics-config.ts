@@ -1,0 +1,1 @@
+export const analyticsConfig = { hostname: 'ctseg.com.tr', site: 'ctseg', ga: 'G-B8BLQ7KK2T', advanced: true, clarityCookieless: true, gtm: import.meta.env.PUBLIC_GTM_ID ?? 'GTM-5MZKVF9B', clarity: import.meta.env.PUBLIC_CLARITY_ID ?? 'yoaesxwndk' };

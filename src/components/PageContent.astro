@@ -1,4 +1,5 @@
 ---
+import { analyticsDisclosure } from "../lib/analytics-disclosure";
 import { getPosts, getPostForInsight } from '../data/blog';
 import { serviceDetails } from '../data/service-details';
 import PageHero from './PageHero.astro';
@@ -2207,7 +2208,7 @@ const verifiedLater = {
   return (
     <>
       <PageHero lang={lang} eyebrow={`CTSEG · ${legalLabel}`} title={legalPage.titles[lang]} lead={legalCopy.intro} />
-      <section class="section"><article class="container prose"><p class="eyebrow">{t.updated}: {updatedDate}</p>{legalCopy.sections.map((section:string[]) => <section class="content-block"><h2>{section[0]}</h2><p>{section[1]}</p></section>)}</article></section>
+      <section class="section"><article class="container prose"><p class="eyebrow">{t.updated}: {updatedDate}</p>{(id === 'cookies' || id === 'privacy') && <p>{analyticsDisclosure[lang] || analyticsDisclosure.en}</p>}{legalCopy.sections.map((section:string[]) => <section class="content-block"><h2>{section[0]}</h2><p>{section[1]}</p></section>)}</article></section>
     </>
   );
 })()}
