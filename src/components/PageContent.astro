@@ -1029,7 +1029,7 @@ const verifiedLater = {
     <section class="section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer"><h2>{chinaMarketEntry.directAnswerTitle}</h2><p>{chinaMarketEntry.directAnswer}</p></div>
-        <div class="content-block" id="sectors"><h2>{chinaMarketEntry.sectorsTitle}</h2><p>{chinaMarketEntry.sectorsLead}</p><ol class="check-list">{chinaMarketEntry.sectors.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}</ol></div>
+        <div class="content-block" id="sectors"><h2>{chinaMarketEntry.sectorsTitle}</h2><p>{chinaMarketEntry.sectorsLead}</p><ul class="check-list">{chinaMarketEntry.sectors.map((item)=><li>{item}</li>)}</ul></div>
         <div class="content-block"><h2>{chinaMarketEntry.supportTitle}</h2><p>{chinaMarketEntry.supportLead}</p><ul class="check-list">{chinaMarketEntry.support.map((item)=><li>{item}</li>)}</ul></div>
         <div class="content-block origin-note"><h2>{chinaMarketEntry.complianceTitle}</h2><p>{chinaMarketEntry.complianceText}</p></div>
         <div class="content-block"><h2>{chinaMarketEntry.processTitle}</h2><ol class="check-list">{chinaMarketEntry.process.map((item)=><li>{item}</li>)}</ol></div>
@@ -1051,7 +1051,7 @@ const verifiedLater = {
     <section class="section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer"><h2>{vietnamMarketEntry.directAnswerTitle}</h2><p>{vietnamMarketEntry.directAnswer}</p></div>
-        <div class="content-block" id="sectors"><h2>{vietnamMarketEntry.sectorsTitle}</h2><p>{vietnamMarketEntry.sectorsLead}</p><ol class="check-list">{vietnamMarketEntry.sectors.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}</ol></div>
+        <div class="content-block" id="sectors"><h2>{vietnamMarketEntry.sectorsTitle}</h2><p>{vietnamMarketEntry.sectorsLead}</p><ul class="check-list">{vietnamMarketEntry.sectors.map((item)=><li>{item}</li>)}</ul></div>
         <div class="content-block"><h2>{vietnamMarketEntry.supportTitle}</h2><p>{vietnamMarketEntry.supportLead}</p><ul class="check-list">{vietnamMarketEntry.support.map((item)=><li>{item}</li>)}</ul></div>
         <div class="content-block origin-note"><h2>{vietnamMarketEntry.complianceTitle}</h2><p>{vietnamMarketEntry.complianceText}</p></div>
         <div class="content-block"><h2>{vietnamMarketEntry.processTitle}</h2><ol class="check-list">{vietnamMarketEntry.process.map((item)=><li>{item}</li>)}</ol></div>
@@ -1430,8 +1430,8 @@ const verifiedLater = {
 
 {key === 'china-market-entry' && chinaMarketEntry && (
   <>
-    <PageHero lang={lang} eyebrow={chinaMarketEntry.eyebrow} title={chinaMarketEntry.title} lead={chinaMarketEntry.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
-    <section class="section"><div class="container content-grid">
+    <PageHero lang={lang} eyebrow={chinaMarketEntry.eyebrow} title={chinaMarketEntry.title} lead={chinaMarketEntry.description} parentHref={sectionHref('markets')} parentLabel={t.markets} marketDetail={true} />
+    <section class="section market-detail-section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer">
           <h2>{chinaMarketEntry.directAnswerTitle}</h2>
@@ -1472,8 +1472,8 @@ const verifiedLater = {
 
 {key === 'ukraine-turkiye' && ukraineTurkiye && (
   <>
-    <PageHero lang={lang} eyebrow={ukraineTurkiye.eyebrow} title={ukraineTurkiye.title} lead={ukraineTurkiye.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
-    <section class="section"><div class="container content-grid">
+    <PageHero lang={lang} eyebrow={ukraineTurkiye.eyebrow} title={ukraineTurkiye.title} lead={ukraineTurkiye.description} parentHref={sectionHref('markets')} parentLabel={t.markets} marketDetail={true} />
+    <section class="section market-detail-section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer">
           <h2>{ukraineTurkiye.directAnswerTitle}</h2>
@@ -1481,7 +1481,7 @@ const verifiedLater = {
         </div>
         <div class="content-block">
           <h2>{ukraineTurkiye.productsTitle}</h2>
-          <ol class="check-list">{ukraineTurkiye.products.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}</ol>
+          <ul class="check-list">{ukraineTurkiye.products.map((item)=><li>{item}</li>)}</ul>
         </div>
         <div class="content-block origin-note">
           <h2>{ukraineTurkiye.complianceTitle}</h2>
@@ -1504,8 +1504,8 @@ const verifiedLater = {
 
 {key === 'china-turkiye' && chinaTurkiye && (
   <>
-    <PageHero lang={lang} eyebrow={chinaTurkiye.eyebrow} title={chinaTurkiye.title} lead={chinaTurkiye.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
-    <section class="section"><div class="container content-grid">
+    <PageHero lang={lang} eyebrow={chinaTurkiye.eyebrow} title={chinaTurkiye.title} lead={chinaTurkiye.description} parentHref={sectionHref('markets')} parentLabel={t.markets} marketDetail={true} />
+    <section class="section market-detail-section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer">
           <h2>{chinaTurkiye.directAnswerTitle}</h2>
@@ -1515,7 +1515,7 @@ const verifiedLater = {
           <h2>{chinaTurkiye.productsTitle}</h2>
           <p>{chinaTurkiye.productsLead}</p>
           <ol class="check-list">
-            {chinaTurkiye.products.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')} · {item.name}</strong><br/><span>{item.signal}</span></li>)}
+            {chinaTurkiye.products.map((item)=><li><strong>{item.name}</strong><br/><span>{item.signal}</span></li>)}
           </ol>
         </div>
         <div class="content-block">
@@ -1547,8 +1547,8 @@ const verifiedLater = {
 
 {key === 'vietnam-turkiye' && vietnamTurkiye && (
   <>
-    <PageHero lang={lang} eyebrow={vietnamTurkiye.eyebrow} title={vietnamTurkiye.title} lead={vietnamTurkiye.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
-    <section class="section"><div class="container content-grid">
+    <PageHero lang={lang} eyebrow={vietnamTurkiye.eyebrow} title={vietnamTurkiye.title} lead={vietnamTurkiye.description} parentHref={sectionHref('markets')} parentLabel={t.markets} marketDetail={true} />
+    <section class="section market-detail-section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer">
           <h2>{vietnamTurkiye.directAnswerTitle}</h2>
@@ -1562,7 +1562,7 @@ const verifiedLater = {
           <h2>{vietnamTurkiye.productsTitle}</h2>
           <p>{vietnamTurkiye.productsLead}</p>
           <ol class="check-list">
-            {vietnamTurkiye.products.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')} · {item.name}</strong><br/><span>{item.signal}</span></li>)}
+            {vietnamTurkiye.products.map((item)=><li><strong>{item.name}</strong><br/><span>{item.signal}</span></li>)}
           </ol>
         </div>
         <div class="content-block">
@@ -1594,8 +1594,8 @@ const verifiedLater = {
 
 {key === 'vietnam-market-entry' && vietnamMarketEntry && (
   <>
-    <PageHero lang={lang} eyebrow={vietnamMarketEntry.eyebrow} title={vietnamMarketEntry.title} lead={vietnamMarketEntry.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
-    <section class="section"><div class="container content-grid">
+    <PageHero lang={lang} eyebrow={vietnamMarketEntry.eyebrow} title={vietnamMarketEntry.title} lead={vietnamMarketEntry.description} parentHref={sectionHref('markets')} parentLabel={t.markets} marketDetail={true} />
+    <section class="section market-detail-section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer">
           <h2>{vietnamMarketEntry.directAnswerTitle}</h2>
@@ -1636,8 +1636,8 @@ const verifiedLater = {
 
 {key === 'syria-market' && syriaMarket && (
   <>
-    <PageHero lang={lang} eyebrow={syriaMarket.eyebrow} title={syriaMarket.title} lead={syriaMarket.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
-    <section class="section"><div class="container content-grid">
+    <PageHero lang={lang} eyebrow={syriaMarket.eyebrow} title={syriaMarket.title} lead={syriaMarket.description} parentHref={sectionHref('markets')} parentLabel={t.markets} marketDetail={true} />
+    <section class="section market-detail-section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer">
           <h2>{syriaMarket.directAnswerTitle}</h2>
@@ -1687,8 +1687,8 @@ const verifiedLater = {
 
 {key === 'iran-trade' && (
   <>
-    <PageHero lang={lang} eyebrow={iranTrade.eyebrow} title={iranTrade.title} lead={iranTrade.description} parentHref={sectionHref('markets')} parentLabel={t.markets} />
-    <section class="section"><div class="container content-grid">
+    <PageHero lang={lang} eyebrow={iranTrade.eyebrow} title={iranTrade.title} lead={iranTrade.description} parentHref={sectionHref('markets')} parentLabel={t.markets} marketDetail={true} />
+    <section class="section market-detail-section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer">
           <h2>{iranTrade.directAnswerTitle}</h2>
@@ -1697,7 +1697,7 @@ const verifiedLater = {
         <div class="content-block">
           <h2>{iranTrade.inboundTitle}</h2>
           <p>{iranTrade.inboundLead}</p>
-          <ol class="check-list">{iranTrade.inboundItems.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}</ol>
+          <ul class="check-list">{iranTrade.inboundItems.map((item)=><li>{item}</li>)}</ul>
         </div>
         <div class="content-block">
           <h2>{iranTrade.outboundTitle}</h2>
