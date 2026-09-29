@@ -1196,7 +1196,7 @@ const verifiedLater = {
         return <a class="card" href={searchLandingPath(lang,landingId)}><h3>{landing.title}</h3><p>{landing.description}</p><strong>{t.readMore} →</strong></a>;
       })}</div>
     </div></section>
-    <Framework lang={lang} />
+    <div class="about-framework-section"><Framework lang={lang} /></div>
     {<section class="section compact-link-section"><div class="container cta-statement"><h2>{processPage?.title}</h2><a class="button" href={workHref} data-how-we-work-cta>{processPage.title}</a></div></section>}
   </>
 )}
@@ -2070,12 +2070,10 @@ const verifiedLater = {
     <section class="section about-detail-section"><div class="container content-grid">
       <div class="about-pillars-stack">
         <article class="about-pillar-card">
-          <div class="pillar-kicker">01 / Identity</div>
           <h2>{completionAbout.whoTitle}</h2>
           <p>{completionAbout.who}</p>
         </article>
         <article class="about-pillar-card">
-          <div class="pillar-kicker">02 / Capabilities</div>
           <h2>{completionAbout.workTitle}</h2>
           <ul class="about-capabilities-grid">
             {completionAbout.work.map((item) => (
@@ -2084,7 +2082,6 @@ const verifiedLater = {
           </ul>
         </article>
         <article class="about-pillar-card">
-          <div class="pillar-kicker">03 / Methodology</div>
           <h2>{completionAbout.methodTitle}</h2>
           <p>{completionAbout.method}</p>
           <div class="about-method-action">
@@ -2092,7 +2089,6 @@ const verifiedLater = {
           </div>
         </article>
         <article class="about-pillar-card about-pillar-ethics">
-          <div class="pillar-kicker">04 / Ethical Boundaries</div>
           <h2>{completionAbout.ethicsTitle}</h2>
           <ul class="about-ethics-list">
             {completionAbout.ethics.map((item) => (
