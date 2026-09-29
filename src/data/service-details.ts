@@ -302,7 +302,7 @@ export const serviceDetails:Record<string,Record<ServiceId,ServiceDetail>> = Obj
         const svc = services[id];
         return [id,{
           scopeTitle:scaffold.scopeTitle,
-          scope:`${svc.descriptions[lang]} ${scaffold.audience}`,
+          scope:`${svc.descriptions[lang] || ''} ${scaffold.audience}`.trim(),
           problemTitle:scaffold.problemTitle,
           problem:scaffold.problem,
           audienceTitle:scaffold.audienceTitle,
