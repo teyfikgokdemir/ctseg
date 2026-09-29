@@ -4750,3 +4750,41 @@ html body main .market-corridor-card .cta-statement{
     padding-bottom:30px!important;
   }
 }
+
+
+/* FINAL CONTRAST QA FIX 2026-09-29 */
+/* Avoid semi-transparent light-looking surfaces that fail real contrast measurement. */
+.insight-section .featured-key-takeaway{
+  background:#20251a!important;
+}
+.insight-section .featured-key-takeaway p{
+  color:#f0eee7!important;
+  -webkit-text-fill-color:#f0eee7!important;
+}
+.insight-section .guide-directory-section .eyebrow{
+  color:#526300!important;
+  -webkit-text-fill-color:#526300!important;
+}
+.insight-section .guide-directory-section .section-head>p:not(.eyebrow){
+  color:#4b4d47!important;
+  -webkit-text-fill-color:#4b4d47!important;
+}
+.insight-section .guide-card p{
+  color:#4b4d47!important;
+  -webkit-text-fill-color:#4b4d47!important;
+}
+
+/* Solid dark answer cards keep text contrast deterministic across browsers and QA. */
+.process-answer-section .answer-grid article{
+  background:#2b2e27!important;
+  color:#f4f2ec!important;
+}
+.process-answer-section .answer-grid h3,
+.process-answer-section .answer-grid p{
+  color:#f4f2ec!important;
+  -webkit-text-fill-color:#f4f2ec!important;
+}
+.process-answer-section .section-head>p{
+  color:#d8d9d4!important;
+  -webkit-text-fill-color:#d8d9d4!important;
+}
