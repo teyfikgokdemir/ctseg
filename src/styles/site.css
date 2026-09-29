@@ -4112,3 +4112,363 @@ html[data-locale=zh] .button *{
     line-height:1.12!important;
   }
 }
+
+
+/* ABOUT PAGE FULL PREMIUM CONSOLIDATION 2026-09-29 */
+.company-profile-section{
+  padding-top:44px!important;
+  padding-bottom:34px!important;
+}
+.company-profile-section .content-grid{
+  grid-template-columns:minmax(0,1.22fr) minmax(330px,.78fr)!important;
+  gap:28px!important;
+  align-items:start!important;
+  max-width:1180px!important;
+  margin-inline:auto!important;
+}
+.company-profile-section .prose{
+  max-width:none!important;
+}
+.company-profile-section .content-block{
+  padding:0!important;
+  text-align:left!important;
+}
+.company-profile-section .content-block .eyebrow{
+  margin-bottom:8px!important;
+}
+.company-profile-section .content-block h2{
+  margin:0 0 12px!important;
+  max-width:28ch!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:clamp(1.9rem,2.5vw,2.85rem)!important;
+  font-weight:700!important;
+  font-variation-settings:"wght" 700!important;
+  line-height:1.08!important;
+  letter-spacing:-.03em!important;
+}
+.company-profile-section .content-block p{
+  max-width:72ch!important;
+  margin:0!important;
+  font-size:.94rem!important;
+  line-height:1.62!important;
+}
+.about-mandate-card{
+  margin-top:20px!important;
+  padding:20px 22px!important;
+  border:1px solid #d2cdc2!important;
+  border-left:3px solid var(--accent)!important;
+  border-radius:12px!important;
+  background:#f7f4ed!important;
+}
+.about-mandate-header{
+  gap:4px!important;
+  margin-bottom:8px!important;
+}
+.about-mandate-badge{
+  font-size:.64rem!important;
+  letter-spacing:.1em!important;
+}
+.about-mandate-card h3{
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:1.08rem!important;
+  font-weight:700!important;
+  line-height:1.28!important;
+}
+.about-mandate-card p{
+  font-size:.86rem!important;
+  line-height:1.55!important;
+}
+.about-mandate-tags{
+  gap:7px!important;
+  margin-top:12px!important;
+}
+.about-tag{
+  padding:5px 10px!important;
+  border-radius:999px!important;
+  font-size:.68rem!important;
+}
+.company-profile-section .company-card{
+  padding:22px!important;
+  border:1px solid #2b2c29!important;
+  border-top:2px solid var(--accent)!important;
+  border-radius:14px!important;
+  background:#151614!important;
+  box-shadow:0 14px 32px rgba(17,17,17,.08)!important;
+}
+.company-profile-section .company-card-header{
+  margin-bottom:14px!important;
+  padding-bottom:12px!important;
+}
+.company-profile-section .company-badge{
+  margin-bottom:5px!important;
+  font-size:.63rem!important;
+  letter-spacing:.1em!important;
+}
+.company-profile-section .company-card-header h3{
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:1.08rem!important;
+  font-weight:700!important;
+  line-height:1.25!important;
+}
+.company-profile-section .company-meta-dl{
+  gap:10px!important;
+}
+.company-profile-section .company-meta-dl>div{
+  display:grid!important;
+  grid-template-columns:minmax(100px,.45fr) minmax(0,.55fr)!important;
+  gap:14px!important;
+  padding-bottom:9px!important;
+}
+.company-profile-section .company-meta-dl dt{
+  font-size:.64rem!important;
+}
+.company-profile-section .company-meta-dl dd{
+  font-size:.82rem!important;
+  line-height:1.4!important;
+}
+
+.about-detail-section{
+  padding-top:20px!important;
+  padding-bottom:34px!important;
+}
+.about-detail-section .content-grid{
+  grid-template-columns:minmax(0,1fr) minmax(300px,.42fr)!important;
+  gap:24px!important;
+  align-items:start!important;
+  max-width:1180px!important;
+  margin-inline:auto!important;
+}
+.about-pillars-stack{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:14px!important;
+}
+.about-pillar-card{
+  min-height:190px!important;
+  padding:22px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-start!important;
+  border:1px solid #d3cec3!important;
+  border-radius:14px!important;
+  background:#f7f4ed!important;
+  box-shadow:0 8px 20px rgba(17,17,17,.025)!important;
+}
+.about-pillar-card h2{
+  margin:0 0 10px!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:clamp(1.2rem,1.55vw,1.55rem)!important;
+  font-weight:700!important;
+  font-variation-settings:"wght" 700!important;
+  line-height:1.15!important;
+  letter-spacing:-.02em!important;
+  text-align:left!important;
+}
+.about-pillar-card p{
+  font-size:.87rem!important;
+  line-height:1.56!important;
+}
+.about-capabilities-grid{
+  margin-top:8px!important;
+  grid-template-columns:1fr!important;
+  gap:7px!important;
+}
+.about-capabilities-grid li,
+.about-ethics-list li{
+  font-size:.82rem!important;
+  line-height:1.4!important;
+}
+.about-ethics-list{
+  margin-top:8px!important;
+  gap:7px!important;
+}
+.about-pillar-ethics{
+  border-left:3px solid #242522!important;
+  background:#f0ece2!important;
+}
+.about-method-action{
+  margin-top:auto!important;
+  padding-top:14px!important;
+}
+.about-method-action .text-link{
+  font-size:.78rem!important;
+}
+.founder-panel{
+  position:sticky!important;
+  top:calc(var(--header-height) + 24px)!important;
+}
+.founder-panel-card{
+  padding:22px!important;
+  border:1px solid #d3cec3!important;
+  border-top:2px solid var(--accent)!important;
+  border-radius:14px!important;
+  background:#f7f4ed!important;
+  box-shadow:0 8px 20px rgba(17,17,17,.025)!important;
+}
+.founder-eyebrow{
+  margin-bottom:6px!important;
+  font-size:.64rem!important;
+  letter-spacing:.1em!important;
+}
+.founder-panel h2{
+  margin:0 0 4px!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:clamp(1.35rem,1.8vw,1.7rem)!important;
+  font-weight:700!important;
+  line-height:1.15!important;
+  letter-spacing:-.02em!important;
+}
+.founder-role{
+  margin-bottom:12px!important;
+  font-size:.7rem!important;
+  line-height:1.4!important;
+}
+.founder-divider{
+  margin:12px 0!important;
+}
+.founder-bio{
+  margin-bottom:14px!important;
+  font-size:.83rem!important;
+  line-height:1.55!important;
+}
+.founder-compliance-badge{
+  padding:6px 9px!important;
+  border-radius:999px!important;
+  font-size:.67rem!important;
+}
+
+.about-framework-section{
+  margin-top:0!important;
+}
+.about-framework-section .process-section{
+  padding-top:34px!important;
+  padding-bottom:38px!important;
+}
+.about-framework-section .process-shell{
+  max-width:1180px!important;
+  margin-inline:auto!important;
+}
+.about-framework-section .process-heading{
+  position:static!important;
+  max-width:860px!important;
+  margin:0 auto 22px!important;
+  text-align:center!important;
+}
+.about-framework-section .process-heading .eyebrow,
+.about-framework-section .process-heading h2,
+.about-framework-section .process-heading p{
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.about-framework-section .process-heading h2{
+  max-width:none!important;
+  font-family:'DM Sans',system-ui,sans-serif!important;
+  font-size:clamp(1.9rem,2.6vw,2.8rem)!important;
+  font-weight:700!important;
+  font-variation-settings:"wght" 700!important;
+  line-height:1.06!important;
+  letter-spacing:-.03em!important;
+}
+.about-framework-section .process-heading p{
+  max-width:68ch!important;
+  font-size:.88rem!important;
+  line-height:1.55!important;
+}
+.about-framework-section .process-rail{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:10px!important;
+  grid-column:1 / -1!important;
+}
+.about-framework-section .process-rail li{
+  min-height:112px!important;
+  padding:16px!important;
+  border-radius:12px!important;
+}
+.about-framework-section .process-rail li h3{
+  font-size:clamp(.95rem,1.15vw,1.08rem)!important;
+  line-height:1.24!important;
+}
+.about-framework-section .process-rail li p{
+  font-size:.78rem!important;
+  line-height:1.45!important;
+}
+.about-framework-section .process-status{
+  justify-content:center!important;
+}
+@media(max-width:1050px){
+  .company-profile-section .content-grid,
+  .about-detail-section .content-grid{
+    grid-template-columns:1fr!important;
+  }
+  .company-profile-section .company-card{
+    max-width:720px!important;
+    width:100%!important;
+    margin-inline:auto!important;
+  }
+  .founder-panel{
+    position:static!important;
+  }
+  .founder-panel-card{
+    max-width:720px!important;
+    margin-inline:auto!important;
+  }
+  .about-framework-section .process-rail{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:720px){
+  .company-profile-section{
+    padding-top:30px!important;
+  }
+  .company-profile-section .content-block{
+    text-align:center!important;
+  }
+  .company-profile-section .content-block h2,
+  .company-profile-section .content-block p{
+    margin-left:auto!important;
+    margin-right:auto!important;
+    text-align:center!important;
+  }
+  .about-mandate-card{
+    text-align:center!important;
+  }
+  .about-mandate-tags{
+    justify-content:center!important;
+  }
+  .company-profile-section .company-meta-dl>div{
+    grid-template-columns:1fr!important;
+    gap:3px!important;
+  }
+  .about-pillars-stack{
+    grid-template-columns:1fr!important;
+  }
+  .about-pillar-card{
+    min-height:0!important;
+    text-align:center!important;
+  }
+  .about-pillar-card h2,
+  .about-pillar-card p{
+    text-align:center!important;
+  }
+  .about-capabilities-grid,
+  .about-ethics-list{
+    max-width:520px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    text-align:left!important;
+  }
+  .about-method-action{
+    text-align:center!important;
+  }
+  .founder-panel-card{
+    text-align:center!important;
+  }
+  .founder-compliance-badge{
+    margin-inline:auto!important;
+  }
+  .about-framework-section .process-rail{
+    grid-template-columns:1fr!important;
+  }
+}
