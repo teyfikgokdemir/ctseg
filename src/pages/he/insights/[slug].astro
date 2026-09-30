@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-const articles = {
+export function getStaticPaths(){
+  const articles = {
   'private-label-food-turkiye-israel': {
     title:'ייצור מותג פרטי בטורקיה ליבואנים מישראל | CTSEG',
     description:'מדריך מסחרי לבניית פרויקט Private Label בטורקיה: יצרן, MOQ, אריזה, כשרות, RFQ, דוגמאות, COA ותנאי אספקה.',
@@ -41,7 +42,6 @@ const articles = {
     ]
   }
 };
-export function getStaticPaths(){
   return Object.entries(articles).map(([slug,data])=>({params:{slug},props:{data,slug}}));
 }
 const {data,slug}=Astro.props;
