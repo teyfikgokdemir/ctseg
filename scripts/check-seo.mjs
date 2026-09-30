@@ -4,8 +4,8 @@ import { join, relative, resolve } from 'node:path';
 const dist = resolve('dist');
 const errors = [];
 const origin = 'https://ctseg.com.tr';
-const coreLocales = ['tr','en','de','it','ru','zh','vi','ro','bg','sr'];
-const glassLocales = ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr'];
+const coreLocales = ['tr','en','de','it','ru','zh','vi','ro','bg'];
+const glassLocales = ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg'];
 
 if (!existsSync(dist)) {
   console.error('dist/ not found. Run npm run build first.');
@@ -48,7 +48,7 @@ for (const file of htmlFiles) {
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1]?.trim() ?? '';
   const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1]?.trim() ?? '';
   const rawLang = html.match(/<html lang="([^"]+)"/)?.[1] ?? '';
-  const lang = rawLang.startsWith('zh') ? 'zh' : rawLang.startsWith('vi') ? 'vi' : rawLang.startsWith('ro') ? 'ro' : rawLang.startsWith('bg') ? 'bg' : rawLang.startsWith('sr') ? 'sr' : rawLang.startsWith('uk') ? 'uk' : rawLang;
+  const lang = rawLang.startsWith('zh') ? 'zh' : rawLang.startsWith('vi') ? 'vi' : rawLang.startsWith('ro') ? 'ro' : rawLang.startsWith('bg') ? 'bg' : rawLang.startsWith('he') ? 'he' : rawLang.startsWith('uk') ? 'uk' : rawLang;
   const h1Count = (html.match(/<h1\b/g) || []).length;
   const expectedPath = outputPath(file);
   const expectedCanonical = encodeURI(`${origin}${expectedPath}`);
@@ -75,7 +75,7 @@ for (const file of htmlFiles) {
 
   if (lang !== 'fa') {
     const alternates = Object.fromEntries([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
-    const focusedSelfOnly = ['/de/','/it/','/ru/','/zh/','/vi/','/tr/cinden-turkiyeye-ithalat-ve-tedarik/','/tr/vietnamdan-turkiyeye-ithalat-ve-tedarik/','/tr/ukraynadan-turkiyeye-tedarik-ve-ticaret/'].includes(expectedPath);
+    const focusedSelfOnly = ['/de/','/it/','/ru/','/zh/','/vi/','/tr/cinden-turkiyeye-ithalat-ve-tedarik/','/tr/vietnamdan-turkiyeye-ithalat-ve-tedarik/','/tr/ukraynadan-turkiyeye-tedarik-ve-ticaret/'].includes(expectedPath) || expectedPath.startsWith('/he/insights/');
     if (!focusedSelfOnly && !alternates['x-default']) errors.push(`${label}: missing x-default hreflang`);
     if (alternates[lang] !== canonical) errors.push(`${label}: self hreflang does not match canonical`);
   }
@@ -180,7 +180,7 @@ const serviceSchemaPages = [...indexablePages.values()].filter((page) => page.ht
 const blogSchemaPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"Blog"'));
 const blogPostingPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"BlogPosting"'));
 if (serviceSchemaPages.length < 245) errors.push(`expected at least 245 Service schema pages across core services, sourcing, country LPs, catalogue assessments and solution landings, found ${serviceSchemaPages.length}`);
-if (blogSchemaPages.length !== 12) errors.push(`expected 12 Blog schema pages across all full-site locales, found ${blogSchemaPages.length}`);
+if (blogSchemaPages.length !== 11) errors.push(`expected 11 Blog schema pages across the full-site locales, found ${blogSchemaPages.length}`);
 if (blogPostingPages.length !== 153) errors.push(`expected 153 BlogPosting pages across the nine translated article locales, found ${blogPostingPages.length}`);
 
 const deploymentHeaders = readFileSync(join(dist,'_headers'),'utf8');
