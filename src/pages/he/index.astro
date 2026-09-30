@@ -126,6 +126,8 @@ const schemas=[
       <form class="commercial-form he-commercial-form" data-he-form>
         <label>סוג הבקשה<select name="intent" required><option value="buyer_request">איתור ספק / יצרן</option><option value="supplier_market_entry">איתור קונים / כניסה לשוק</option><option value="external_trade_desk">ניהול פעילות סחר חוץ</option></select></label>
         <label>כיוון הסחר<select name="tradeDirection" required><option value="export_from_turkiye">טורקיה → ישראל</option><option value="import_to_turkiye">ישראל → טורקיה</option><option value="cross_border_sourcing">מסחר בינלאומי אחר</option></select></label>
+        <label>השירות הנדרש<select name="supportNeed" required><option value="supplier_sourcing">איתור ואימות ספק</option><option value="rfq_comparison">RFQ והשוואת הצעות</option><option value="private_label">Private Label / OEM</option><option value="market_entry">כניסה לשוק ופיתוח קונים</option><option value="document_assessment">בדיקת מוצר ומסמכים</option><option value="external_trade_desk">External Trade Desk</option><option value="other">אחר</option></select></label>
+        <label>קטגוריית מוצר<select name="productFamily" required><option value="nuts_dried_fruit">אגוזים, פירות יבשים ומזון</option><option value="vegetable_oils">שמנים ומוצרי מזון</option><option value="architectural_glass">זכוכית וחומרי בנייה</option><option value="biofuel_feedstock">חומרי גלם לאנרגיה ולתעשייה</option><option value="other">קטגוריה אחרת</option></select></label>
         <label>שם מלא<input name="name" required autocomplete="name" /></label>
         <label>חברה<input name="company" required autocomplete="organization" /></label>
         <label>אימייל או טלפון<input name="emailOrPhone" required dir="ltr" /></label>
