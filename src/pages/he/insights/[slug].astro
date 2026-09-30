@@ -1,6 +1,7 @@
 ---
 import HebrewLayout from '../../../layouts/HebrewLayout.astro';
-const articles = {
+export function getStaticPaths(){
+  const articles = {
   'private-label-food-turkiye-israel': {
     title:'ייצור מותג פרטי בטורקיה ליבואנים מישראל | CTSEG',
     description:'מדריך מסחרי לבניית פרויקט private label בטורקיה: יצרן, MOQ, אריזה, כשרות, RFQ, דוגמאות, COA ותנאי אספקה.',
@@ -38,7 +39,8 @@ const articles = {
     ]
   }
 };
-export function getStaticPaths(){return Object.entries(articles).map(([slug,data])=>({params:{slug},props:{data,slug}}))}
+  return Object.entries(articles).map(([slug,data])=>({params:{slug},props:{data,slug}}));
+}
 const {data,slug}=Astro.props;
 const canonical=`https://ctseg.com.tr/he/insights/${slug}/`;
 ---
