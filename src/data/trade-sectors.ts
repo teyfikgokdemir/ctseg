@@ -1,6 +1,6 @@
 import { activeLocales, type ActiveLocale } from './locales';
 
-export const tradeLocales = activeLocales;
+export const tradeLocales = activeLocales.filter((code) => code !== 'he') as ActiveLocale[];
 export type TradeLocale = ActiveLocale;
 export const tradeSectorIds = ['iranian-carpets', 'silk-carpets', 'wholesale-textiles'] as const;
 export type TradeSectorId = (typeof tradeSectorIds)[number];
