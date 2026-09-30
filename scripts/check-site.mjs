@@ -124,6 +124,27 @@ const targetExists = (pathname) => {
 for (const file of htmlFiles) {
   const html = readFileSync(file, 'utf8');
   const label = relative(root, file).replaceAll('\\','/');
+  // Hebrew full-locale content parity guards
+  if (label === 'he/אודות/index.html') {
+    if (!html.includes('OPERATING PRINCIPLES') || !html.includes('GOVERNANCE') || (html.match(/<section/g)||[]).length < 4) {
+      errors.push('he/about: content depth regressed; expected governance, principles and multi-section structure');
+    }
+  }
+  if (label === 'he/יצירת-קשר/index.html') {
+    if (!html.includes('24–48') || !html.includes('data-he-form') || (html.match(/<label/g)||[]).length < 10) {
+      errors.push('he/contact: qualification, response standard or commercial form depth is incomplete');
+    }
+  }
+  if (label === 'he/שירותים/רכש-אסטרטגי/index.html') {
+    if (!html.includes('שאלות נפוצות') || (html.match(/class="content-block/g)||[]).length < 6 || (html.match(/<li/g)||[]).length < 8) {
+      errors.push('he/service-detail: strategic sourcing page is missing parity sections');
+    }
+  }
+  if (label === 'he/מוצרים-מסחריים/mixed-nuts/index.html') {
+    if (!html.includes('מידע להערכת RFQ') || (html.match(/<dt/g)||[]).length < 10 || !html.includes('Private Label')) {
+      errors.push('he/product-detail: mixed nuts page is missing commercial assessment depth');
+    }
+  }
   const titleCount = (html.match(/<title>/g) || []).length;
   const canonicalCount = (html.match(/rel="canonical"/g) || []).length;
   const headerCount = (html.match(/<header\b/g) || []).length;
