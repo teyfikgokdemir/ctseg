@@ -183,7 +183,7 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <main id="main">
       <slot />
       {pageKey === 'home' && !['de','it','ru','fa','zh','vi','he'].includes(String(lang)) && <TradeHouseStatement lang={lang as Locale} />}
-      {pageKey === 'home' && !['de','it','ru','fa','zh','vi'].includes(String(lang)) && <TradeVideo lang={lang} />}
+      {pageKey === 'home' && !['de','it','ru','fa','zh','vi','he'].includes(String(lang)) && <TradeVideo lang={lang} />}
     </main>
     <SiteFooter lang={lang} pageKey={pageKey} />
     {pageKey === 'home' && String(lang) !== 'he' && <FloatingActions lang={lang} />}
