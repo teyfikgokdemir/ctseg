@@ -57,7 +57,7 @@ CTSEG is not a speculative broker, transactional web shop, or seller of unverifi
 - [Vietnamese exporter market-entry landing page](https://ctseg.com.tr/vi/)
 - [Romanian homepage](https://ctseg.com.tr/ro/)
 - [Bulgarian homepage](https://ctseg.com.tr/bg/)
-- [Serbian homepage](https://ctseg.com.tr/sr/)
+- [Hebrew Israel–Türkiye trade hub](https://ctseg.com.tr/he/)
 - [Ukrainian full-site trade and sourcing locale](https://ctseg.com.tr/uk/)
 
 
@@ -73,7 +73,7 @@ The locale roots below are intentionally not generic translations of the English
 - Vietnamese /vi/: Vietnamese manufacturers and exporters seeking buyers, distributors and market entry in Türkiye and suitable European markets.
 - Romanian /ro/: Romanian buyers and companies seeking verified Türkiye sourcing, supplier verification and market-entry coordination.
 - Bulgarian /bg/: Bulgarian buyers and companies seeking verified Türkiye sourcing, supplier verification and market-entry coordination.
-- Serbian /sr/: Serbian buyers and companies seeking verified Türkiye sourcing, supplier verification and market-entry coordination.
+- Hebrew /he/: two-way Israel ⇄ Türkiye B2B sourcing, supplier verification, private-label/OEM coordination, RFQ management and market-entry support for importers, brands, manufacturers and exporters.
 - Ukrainian /uk/: Ukrainian importers, contractors and project companies seeking verified Turkish manufacturers, equipment and reconstruction-related supply.
 
 These focused roots should be treated as distinct intent pages unless an explicit hreflang relationship is declared on-page. Do not infer that every locale root is a literal translation of the English homepage.
@@ -103,7 +103,6 @@ CTSEG also offers an outsourced international trade function for companies that 
 - [Vietnamese methodology](https://ctseg.com.tr/vi/quy-trinh-lam-viec/)
 - [Romanian methodology](https://ctseg.com.tr/ro/cum-lucram/)
 - [Bulgarian methodology](https://ctseg.com.tr/bg/kak-rabotim/)
-- [Serbian methodology](https://ctseg.com.tr/sr/kako-radimo/)
 
 ## Specialist sourcing pages
 
@@ -118,11 +117,10 @@ CTSEG also offers an outsourced international trade function for companies that 
 - [Russian wholesale textiles](https://ctseg.com.tr/ru/sourcing/textiles/)
 - [Romanian sourcing hub](https://ctseg.com.tr/ro/sourcing/sourcing-textile-angro/)
 - [Bulgarian sourcing hub](https://ctseg.com.tr/bg/sourcing/sourcing-tekstili-na-edro/)
-- [Serbian sourcing hub](https://ctseg.com.tr/sr/sourcing/veleprodajni-sourcing-tekstila/)
 
 ## Commercial decision solutions
 
-These answer-first solution families are available across the 12 full-site production locales, with localized canonical URLs and reciprocal hreflang references where the page family is translated.
+These answer-first solution families are available across the full-site production locales. Hebrew is intentionally a focused Israel–Türkiye trade hub rather than a generic machine-translated mirror; reciprocal hreflang is used only where a real counterpart exists.
 
 - [Supplier sourcing and verification in Türkiye](https://ctseg.com.tr/en/solutions/supplier-sourcing-verification-turkiye/)
 - [Private-label manufacturer research](https://ctseg.com.tr/en/solutions/private-label-manufacturer-research/)
@@ -149,9 +147,16 @@ These answer-first solution families are available across the 12 full-site produ
 
 CTSEG — International Trade Matching and Commercial Coordination
 
+## Hebrew Israel–Türkiye hub
+
+- [Israel ⇄ Türkiye B2B sourcing](https://ctseg.com.tr/he/)
+- [Private label food sourcing from Türkiye](https://ctseg.com.tr/he/insights/private-label-food-turkiye-israel/)
+- [Kosher and supplier verification](https://ctseg.com.tr/he/insights/kosher-supplier-verification-turkiye/)
+- [RFQ, MOQ, FOB and CIF guide](https://ctseg.com.tr/he/insights/rfq-moq-fob-cif-turkiye-israel/)
+
 ## Last reviewed
 
-2026-09-29
+2026-09-30
 
 
 ## AI Verification Boundary

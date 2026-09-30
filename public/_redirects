@@ -46,3 +46,15 @@
 /medical/reflex-disposable-gloves/* /tr/ticari-urunler/ 301
 /en/medical/reflex-disposable-gloves/ /en/trade-products/ 301
 /en/medical/reflex-disposable-gloves/* /en/trade-products/ 301
+
+
+# Serbian locale retirement -> nearest English equivalents
+/sr /en/ 301
+/sr/ /en/ 301
+/sr/usluge/ /en/services/ 301
+/sr/trgovinski-proizvodi/ /en/trade-products/ 301
+/sr/trzista/ /en/markets/ 301
+/sr/uvidi/ /en/insights/ 301
+/sr/o-nama/ /en/about/ 301
+/sr/kontakt/ /en/contact/ 301
+/sr/* /en/ 301

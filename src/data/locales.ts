@@ -10,7 +10,7 @@ export const localeRegistry = [
   { code:'uk', label:'Українська', locale:'uk-UA', direction:'ltr', prefix:'/uk/', ogLocale:'uk_UA', active:true, order:9 },
   { code:'ro', label:'Română', locale:'ro-RO', direction:'ltr', prefix:'/ro/', ogLocale:'ro_RO', active:true, order:10 },
   { code:'bg', label:'Български', locale:'bg-BG', direction:'ltr', prefix:'/bg/', ogLocale:'bg_BG', active:true, order:11 },
-  { code:'sr', label:'Srpski', locale:'sr-Latn-RS', direction:'ltr', prefix:'/sr/', ogLocale:'sr_RS', active:true, order:12 }
+  { code:'he', label:'עברית', locale:'he-IL', direction:'rtl', prefix:'/he/', ogLocale:'he_IL', active:true, order:12 }
 ] as const;
 
 export type ActiveLocale = (typeof localeRegistry)[number]['code'];
@@ -19,7 +19,7 @@ export type LocaleDirection = (typeof localeRegistry)[number]['direction'];
 
 export const activeLocaleRegistry = localeRegistry.filter((entry) => entry.active).sort((a,b) => a.order-b.order);
 export const activeLocales = activeLocaleRegistry.map((entry) => entry.code) as ActiveLocale[];
-export const siteLocales = activeLocales;
+export const siteLocales = activeLocales.filter((code) => code !== 'he') as ActiveLocale[];
 export const SUPPORTED_LOCALES = siteLocales;
 export const INDEXABLE_LOCALES = siteLocales;
 export const localeByCode = Object.fromEntries(localeRegistry.map((entry) => [entry.code,entry])) as Record<ActiveLocale,(typeof localeRegistry)[number]>;
@@ -28,4 +28,4 @@ export const localeLabel = (code: string) => localeByCode[code as ActiveLocale]?
 export const localeDirection = (code: string) => localeByCode[code as ActiveLocale]?.direction ?? 'ltr';
 export const localeOg = (code: string) => localeByCode[code as ActiveLocale]?.ogLocale ?? 'en_GB';
 
-export const schemaLanguage = (code: string) => code === 'zh' ? 'zh-CN' : code === 'vi' ? 'vi-VN' : code === 'ro' ? 'ro-RO' : code === 'bg' ? 'bg-BG' : code === 'sr' ? 'sr-Latn-RS' : code === 'uk' ? 'uk-UA' : code;
+export const schemaLanguage = (code: string) => code === 'zh' ? 'zh-CN' : code === 'vi' ? 'vi-VN' : code === 'ro' ? 'ro-RO' : code === 'bg' ? 'bg-BG' : code === 'he' ? 'he-IL' : code === 'sr' ? 'sr-Latn-RS' : code === 'uk' ? 'uk-UA' : code;

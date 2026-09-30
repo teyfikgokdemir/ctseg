@@ -53,7 +53,7 @@ const marketLocales: Array<{ code:string; flagSrc:string; label:string; href:str
   { code:'vi', flagSrc:'/images/flags/vn.svg', label:'Việt Nam', href:'/vi/' },
   { code:'ro', flagSrc:'/images/flags/ro.svg', label:'România', href:'/ro/' },
   { code:'bg', flagSrc:'/images/flags/bg.svg', label:'България', href:'/bg/' },
-  { code:'sr', flagSrc:'/images/flags/rs.svg', label:'Srbija', href:'/sr/' },
+  { code:'he', flagSrc:'', label:'עברית', href:'/he/' },
   { code:'uk', flagSrc:'/images/flags/ua.svg', label:'Україна', href:'/uk/' }
 ];
 const marketLabel = ({tr:'Global Pazarlar',en:'Global Markets',de:'Globale Märkte',it:'Mercati globali',fa:'بازارهای جهانی',ru:'Глобальные рынки',zh:'全球市场',vi:'Thị trường toàn cầu',uk:'Міжнародні ринки',ro:'Piețe globale',bg:'Глобални пазари',sr:'Globalna tržišta'} as Record<string,string>)[lang] || 'Global Markets';
@@ -89,10 +89,10 @@ const footerStatement = statementMap[lang] || statementMap.en;
 const focusedCountryHome = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
 const showGenericPortfolio = !focusedCountryHome;
 const showGlassLink = !focusedCountryHome || lang === 'fa';
-const safeGlassLang = (['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
+const safeGlassLang = (['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
 ---
 <footer class="site-footer">
-  <div class="footer-markets-wrap"><div class="container footer-markets"><div class="footer-markets-label"><span class="footer-markets-kicker">CTSEG</span><strong>{marketLabel}</strong></div><nav class="footer-market-links" aria-label={marketLabel}>{marketLocales.map((item) => (<a href={item.href} class:list={['footer-market-link', item.code === lang && 'is-active']} aria-current={item.code === lang ? 'page' : undefined} data-footer-locale={item.code}><img aria-hidden="true" class="footer-market-flag" src={item.flagSrc} width="24" height="16" alt="" loading="lazy" decoding="async" /><span>{item.label}</span></a>))}</nav></div></div>
+  <div class="footer-markets-wrap"><div class="container footer-markets"><div class="footer-markets-label"><span class="footer-markets-kicker">CTSEG</span><strong>{marketLabel}</strong></div><nav class="footer-market-links" aria-label={marketLabel}>{marketLocales.map((item) => (<a href={item.href} class:list={['footer-market-link', item.code === lang && 'is-active']} aria-current={item.code === lang ? 'page' : undefined} data-footer-locale={item.code}><span>{item.label}</span></a>))}</nav></div></div>
   <div class="container footer-statement" aria-hidden="true">
     <span>{lang === 'uk' ? 'CTSEG · МІЖНАРОДНИЙ ТОРГОВИЙ ДІМ' : 'CTSEG · GLOBAL TRADE HOUSE'}</span>
     <strong>{footerStatement}</strong>

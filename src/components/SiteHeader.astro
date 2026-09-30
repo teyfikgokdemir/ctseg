@@ -32,7 +32,7 @@ const navigationCopy = {
   sr:{globalTrade:'Globalna trgovina',industries:'Sektori',portfolio:'Trgovinski portfolio',intelligence:'Trgovinski uvidi',company:'Kompanija',main:'GLAVNI MENI',quick:'NAVIGACIJA',trade:'TRGOVINA',intro:'Dvosmerna trgovina, strateški sourcing i ulazak na tržište'}
 }[lang] || {globalTrade:'Global Trade',industries:'Industries',portfolio:'Trade Portfolio',intelligence:'Trade Intelligence',company:'Company',main:'MAIN MENU',quick:'NAVIGATION',trade:'TRADE',intro:'Two-way trade, strategic sourcing and market-entry paths'};
 
-const safeGlassLang = (['en','tr','de','it','ru','fa','zh','vi','uk','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
+const safeGlassLang = (['en','tr','de','it','ru','fa','zh','vi','uk','ro','bg'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
 const glassUrl = duzceGlassPath(safeGlassLang);
 const glassLabel = glassNavLabels[lang] || 'Düzce Float Glass';
 
@@ -54,11 +54,10 @@ const nav = [
   ['contact', t.contact, localizedPath(lang,'contact')]
 ];
 
-const globalLocales = activeLocaleRegistry.map((entry) => entry.code) as string[];
+const globalLocales = activeLocaleRegistry.filter((entry) => entry.code !== 'he' || pageKey === 'home').map((entry) => entry.code) as string[];
 const globalLocaleNames: Record<string,string> = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code, entry.label]));
-const globalLocaleFlags: Record<string,string> = {tr:'/images/flags/tr.svg',en:'/images/flags/gb.svg',de:'/images/flags/de.svg',it:'/images/flags/it.svg',fa:'/images/flags/ir.svg',ru:'/images/flags/ru.svg',zh:'/images/flags/cn.svg',vi:'/images/flags/vn.svg',ro:'/images/flags/ro.svg',bg:'/images/flags/bg.svg',sr:'/images/flags/rs.svg',uk:'/images/flags/ua.svg'};
-
 const globalSwitchPath = (target: string): string => {
+  if (target === 'he') return '/he/';
   if (pageKey === 'search-landing' && pageId) return searchLandingPath(target as Locale,pageId as SearchLandingId);
   if (pageKey === 'insights' && pageId && ['ro','bg','sr'].includes(target)) return localizedPath(target as Locale,'insights');
   if (pageKey === 'iran-trade') {
@@ -70,7 +69,7 @@ const globalSwitchPath = (target: string): string => {
   if (['vietnam-turkiye','china-turkiye','ukraine-turkiye'].includes(pageKey)) return target === 'tr' ? '/' : `/${target}/`;
   if (target === 'fa') return '/fa/';
   if (pageKey === 'glass') {
-    const glassLocales = ['en','tr','de','it','ru','fa','zh','vi','ro','bg','sr'] as const;
+    const glassLocales = ['en','tr','de','it','ru','fa','zh','vi','ro','bg'] as const;
     if ((glassLocales as readonly string[]).includes(target)) return duzceGlassPath(target as DuzceGlassLocale);
     return `/${target}/`;
   }
@@ -115,7 +114,6 @@ const globalSwitchPath = (target: string): string => {
                 aria-current={code === lang ? 'true' : undefined}
                 data-locale-option
               >
-                <img class="lang-flag" src={globalLocaleFlags[code]} width="28" height="19" alt="" aria-hidden="true" />
                 <span class="lang-name">{globalLocaleNames[code]}</span>
               </a>
             ))}
@@ -171,7 +169,7 @@ const globalSwitchPath = (target: string): string => {
 
         <div class="language-switcher language-switcher-desktop">
           <button type="button" aria-expanded="false" aria-controls="language-panel" aria-label={t.language} data-language-toggle>
-            <img class="locale-flag" src={globalLocaleFlags[lang] || globalLocaleFlags.en} width="26" height="17" alt="" aria-hidden="true" /><span class="sr-only locale-code">{lang.toUpperCase()}</span>
+            <span class="locale-globe" aria-hidden="true"></span><span class="sr-only locale-code">{lang.toUpperCase()}</span>
             <span class="locale-chevron" aria-hidden="true"></span>
           </button>
           <div id="language-panel" class="language-menu" data-language-menu>
@@ -182,7 +180,7 @@ const globalSwitchPath = (target: string): string => {
               href={globalSwitchPath(code)}
               aria-current={code === lang ? 'true' : undefined}
               data-locale-option
-            ><img class="language-menu-flag" src={globalLocaleFlags[code]} width="26" height="17" alt="" aria-hidden="true" /><strong>{globalLocaleNames[code]}</strong><i aria-hidden="true"></i></a>)}
+            ><strong>{globalLocaleNames[code]}</strong><i aria-hidden="true"></i></a>)}
           </div>
         </div>
 

@@ -49,7 +49,10 @@ const alternates = pageKey === 'glass' ? duzceGlassAlternates() :
     en:`https://ctseg.com.tr/en/${iranTradeContent.en.slug}/`,
     fa:'https://ctseg.com.tr/fa/'
   } as Record<string,string> : routeAlternates(pageKey, pageId);
-if (pageKey === 'home') alternates.ru = 'https://ctseg.com.tr/ru/';
+if (pageKey === 'home') {
+  alternates.ru = 'https://ctseg.com.tr/ru/';
+  alternates.he = 'https://ctseg.com.tr/he/';
+}
 const alternateCodes = pageKey === 'glass'
   ? ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr']
   : (pageKey === 'home'
@@ -78,7 +81,7 @@ const organizationDescription = ({
   uk:'CTSEG — незалежний B2B торговий дім у Туреччині, що координує двосторонню міжнародну торгівлю, стратегічне постачання, перевірку постачальників і вихід на ринки.',
   ro:'CTSEG este o casă de comerț B2B independentă, cu sediul în Türkiye, specializată în comerț global bidirecțional, sourcing strategic, verificarea furnizorilor și intrare pe piață.',
   bg:'CTSEG е независима B2B търговска къща със седалище в Türkiye, фокусирана върху двупосочна глобална търговия, стратегическо снабдяване, проверка на доставчици и пазарен достъп.',
-  sr:'CTSEG je nezavisna B2B trgovinska kuća sa sedištem u Türkiye, fokusirana na dvosmernu globalnu trgovinu, strateški sourcing, proveru dobavljača i ulazak na tržište.'
+  he:'CTSEG היא חברת B2B עצמאית מטורקיה המתמחה בסחר דו־כיווני, איתור ואימות ספקים, RFQ וכניסה לשווקים.'
 } as Record<string,string>)[lang] || 'CTSEG is a Türkiye-based independent B2B trade house for two-way global trade, strategic sourcing, supplier verification and market entry.';
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',

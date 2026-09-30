@@ -3,9 +3,9 @@ import { join, resolve } from 'node:path';
 
 const dist=resolve('dist');
 const errors=[];
-const active=['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','sr'];
+const active=['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','he'];
 const switchLocales=[...active];
-const homes={tr:'index.html',en:'en/index.html',de:'de/index.html',it:'it/index.html',fa:'fa/index.html',ru:'ru/index.html',zh:'zh/index.html',vi:'vi/index.html',uk:'uk/index.html',ro:'ro/index.html',bg:'bg/index.html',sr:'sr/index.html'};
+const homes={tr:'index.html',en:'en/index.html',de:'de/index.html',it:'it/index.html',fa:'fa/index.html',ru:'ru/index.html',zh:'zh/index.html',vi:'vi/index.html',uk:'uk/index.html',ro:'ro/index.html',bg:'bg/index.html',he:'he/index.html'};
 const ruSourcing=['ru/sourcing/carpets/index.html','ru/sourcing/hand-knotted-silk-carpets/index.html','ru/sourcing/textiles/index.html'];
 const ruCore=[
   'ru/uslugi/index.html','ru/tovary/index.html','ru/rynki/index.html','ru/materialy/index.html','ru/o-kompanii/index.html','ru/kontakty/index.html',
@@ -87,5 +87,5 @@ for(const rule of requiredRedirects){
 }
 
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log('Locale contract passed: 12 full-site production locales, intent-specific locale roots, 61-page Russian parity, localized solution landings, French cleanup and one-hop redirects.');
+console.log('Locale contract passed: 11 full-site production locales plus the focused Hebrew Israel↔Türkiye trade hub, Russian parity, localized solution landings, legacy cleanup and one-hop redirects.');
 
