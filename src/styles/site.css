@@ -22,6 +22,8 @@ html[data-locale=zh] h1,html[data-locale=zh] h2,html[data-locale=zh] h3,html[dat
 /* FA (Persian/RTL): DM Sans has no Arabic glyphs; fall back to system Naskh-style fonts */
 html[data-locale=fa] body{font-family:"Tahoma","Segoe UI","Arial Unicode MS","DejaVu Sans",system-ui,sans-serif}
 html[data-locale=fa] h1,html[data-locale=fa] h2,html[data-locale=fa] h3,html[data-locale=fa] .section-title{font-family:"Tahoma","Segoe UI","Arial Unicode MS",system-ui,sans-serif;letter-spacing:0}
+html[data-locale=he] body{font-family:"Segoe UI",Arial,"Arial Hebrew",system-ui,sans-serif}
+html[data-locale=he] h1,html[data-locale=he] h2,html[data-locale=he] h3,html[data-locale=he] .section-title{font-family:"Segoe UI",Arial,"Arial Hebrew",system-ui,sans-serif;letter-spacing:0}
 /* RU (Russian/Cyrillic): Source Serif 4 is Latin-only; ensure Cyrillic OS fallback */
 html[data-locale=ru] body{font-family:system-ui,"Segoe UI","Helvetica Neue","Arial Unicode MS",sans-serif}
 
