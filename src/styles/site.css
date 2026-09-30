@@ -5288,3 +5288,31 @@ html[data-locale=he] .he-insights .card-grid .card strong{
   color:#c4f000!important;
   -webkit-text-fill-color:#c4f000!important;
 }
+
+/* HE FOOTER ACTIVE LOCALE + CARD META LEGIBILITY — 2026-10-01 */
+html[data-locale=he] .site-footer .footer-market-link.is-active,
+html[data-locale=he] .site-footer .footer-market-link.is-active span{
+  color:#0a0a0a!important;
+  -webkit-text-fill-color:#0a0a0a!important;
+  opacity:1!important;
+  font-weight:800!important;
+}
+html[data-locale=he] .site-footer .footer-market-link.is-active{
+  background:#c4f000!important;
+  border-color:#c4f000!important;
+}
+html[data-locale=he] .he-product-card>span{
+  font-size:clamp(15px,.95vw,16px)!important;
+  line-height:1.35!important;
+  font-weight:850!important;
+  letter-spacing:.025em!important;
+  color:#575d57!important;
+  -webkit-text-fill-color:#575d57!important;
+  opacity:1!important;
+}
+html[data-locale=he] .he-product-card h3{
+  margin-top:14px!important;
+}
+@media(max-width:700px){
+  html[data-locale=he] .he-product-card>span{font-size:15px!important}
+}
