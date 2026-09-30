@@ -284,7 +284,7 @@ for (const file of htmlFiles) {
     const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
     const mobileLocales = html.match(/class="mobile-lang-grid"[\s\S]*?<\/div>/)?.[0] ?? '';
     const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
-    const expectedLocaleCount = label.startsWith('he/insights/') ? 1 : 12;
+    const expectedLocaleCount = 12;
     if ((desktopLocales.match(/data-locale-option/g) || []).length !== expectedLocaleCount) errors.push(`${label}: desktop locale panel must contain ${expectedLocaleCount} languages`);
     if ((mobileLocales.match(/data-locale-option/g) || []).length !== expectedLocaleCount) errors.push(`${label}: mobile locale panel must contain ${expectedLocaleCount} languages`);
     if ((!/class="locale-flag"[^>]+src="\/images\/flags\/(?:tr|gb|de|it|ir|ru|cn|vn|ro|bg|il|ua)\.svg"/.test(desktopTrigger) || /locale-name/.test(desktopTrigger))) {
