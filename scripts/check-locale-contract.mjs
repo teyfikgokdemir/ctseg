@@ -5,6 +5,7 @@ const dist=resolve('dist');
 const errors=[];
 const active=['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','he'];
 const switchLocales=[...active];
+const fullSiteLocales=active.filter((code)=>code!=='he');
 const homes={tr:'index.html',en:'en/index.html',de:'de/index.html',it:'it/index.html',fa:'fa/index.html',ru:'ru/index.html',zh:'zh/index.html',vi:'vi/index.html',uk:'uk/index.html',ro:'ro/index.html',bg:'bg/index.html',he:'he/index.html'};
 const ruSourcing=['ru/sourcing/carpets/index.html','ru/sourcing/hand-knotted-silk-carpets/index.html','ru/sourcing/textiles/index.html'];
 const ruCore=[
@@ -42,7 +43,7 @@ for(const path of ruSourcing){
   const html=read(path);
   const canonical=`https://ctseg.com.tr/${path.replace(/index\.html$/,'')}`;
   if(!html.includes(`<link rel="canonical" href="${canonical}"`))errors.push(`${path}: canonical incorrect`);
-  for(const code of [...active,'x-default'])if(!html.includes(`hreflang="${code}"`))errors.push(`${path}: hreflang ${code} missing`);
+  for(const code of [...fullSiteLocales,'x-default'])if(!html.includes(`hreflang="${code}"`))errors.push(`${path}: hreflang ${code} missing`);
   if(!html.includes('property="og:locale" content="ru_RU"'))errors.push(`${path}: OG locale incorrect`);
   if(!html.includes('<html lang="ru" dir="ltr"'))errors.push(`${path}: lang/direction incorrect`);
   if((html.match(/<h1\b/g)||[]).length!==1)errors.push(`${path}: expected one H1`);
@@ -53,7 +54,7 @@ for(const path of ruCore){
   if(!existsSync(join(dist,path))){errors.push(`${path}: Russian parity route missing`);continue}
   const html=read(path);
   if(!html.includes('<html lang="ru" dir="ltr"'))errors.push(`${path}: Russian lang/direction incorrect`);
-  for(const code of [...active,'x-default'])if(!html.includes(`hreflang="${code}"`))errors.push(`${path}: hreflang ${code} missing`);
+  for(const code of [...fullSiteLocales,'x-default'])if(!html.includes(`hreflang="${code}"`))errors.push(`${path}: hreflang ${code} missing`);
 }
 const walk=(dir)=>readdirSync(dir,{withFileTypes:true}).flatMap((entry)=>entry.isDirectory()?walk(join(dir,entry.name)):[join(dir,entry.name)]);
 const ruHtml=walk(join(dist,'ru')).filter((path)=>path.endsWith('.html'));
