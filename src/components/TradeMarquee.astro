@@ -33,7 +33,7 @@ const loopItems = Array.from({length:4},()=>items).flat();
 .trade-marquee__track{display:flex;width:max-content;will-change:transform;animation:ctseg-marquee 42s linear infinite}
 .trade-marquee--rtl .trade-marquee__track{animation-name:ctseg-marquee-rtl}
 .trade-marquee__group{display:flex;align-items:center;flex:0 0 auto;white-space:nowrap;min-width:max-content}
-.trade-marquee__group span{display:inline-flex;align-items:center;min-height:58px;padding-inline:26px;font-size:clamp(20px,2.35vw,38px);line-height:1;font-weight:900;letter-spacing:-.025em}
+.trade-marquee__group span{display:inline-flex;align-items:center;min-height:58px;padding-inline:26px;font-family:'DM Sans',Arial,sans-serif;font-size:clamp(20px,2.35vw,38px);line-height:1;font-weight:800;font-style:normal;font-synthesis:none;font-variation-settings:'wght' 800;letter-spacing:-.015em;text-rendering:geometricPrecision}
 .trade-marquee__group span::before{content:"•";margin-inline-end:22px;font-size:.65em}
 @keyframes ctseg-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes ctseg-marquee-rtl{from{transform:translateX(-50%)}to{transform:translateX(0)}}
