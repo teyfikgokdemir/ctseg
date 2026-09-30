@@ -251,11 +251,15 @@ for (const file of htmlFiles) {
     if (!html.includes('direct-answer') || !html.includes('id="sectors"') || !html.includes('"@type":"Service"') || !html.includes('"@type":"FAQPage"')) errors.push(`${label}: focused country landing architecture missing`);
   }
   if (!tradeRecord && !label.startsWith('404')) {
-    const isHebrewPage = label === 'he/index.html' || label.startsWith('he/');
-    if (isHebrewPage) {
+    const isHebrewHome = label === 'he/index.html';
+    const isHebrewArticle = label.startsWith('he/insights/');
+    if (isHebrewHome) {
       const localeOptions = (html.match(/data-locale-option/g) || []).length;
       if (localeOptions !== 12) errors.push(`${label}: Hebrew locale control must contain twelve languages`);
       if (!html.includes('locale-globe')) errors.push(`${label}: Hebrew locale control must use the globe treatment`);
+    } else if (isHebrewArticle) {
+      if (html.includes('data-locale-option')) errors.push(`${label}: Hebrew article must not advertise false translated counterparts`);
+      if (!html.includes('href="/he/"') || !html.includes('he-lang-home')) errors.push(`${label}: Hebrew article must provide a clear return to the Hebrew trade hub`);
     } else {
       const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
       const mobileLocales = html.match(/class="mobile-lang-grid"[\s\S]*?<\/div>/)?.[0] ?? '';

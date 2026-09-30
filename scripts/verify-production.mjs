@@ -25,7 +25,7 @@ const pageChecks = [
       body.includes('<html lang="tr"') &&
       body.includes('https://ctseg.com.tr/en/') &&
       body.includes('hreflang="fa"') &&
-      body.includes('hreflang="sr"') &&
+      body.includes('hreflang="he"') &&
       !/reflex/i.test(body),
   },
   {
@@ -67,6 +67,19 @@ const pageChecks = [
       body.includes('<html lang="vi-VN"') &&
       body.includes('hreflang="zh"') &&
       body.includes('hreflang="ro"') &&
+      !/reflex/i.test(body),
+  },
+  {
+    url: 'https://ctseg.com.tr/he/',
+    label: 'Hebrew Israel-Türkiye hub',
+    verify: (response, body) =>
+      response.ok &&
+      body.includes('<html lang="he-IL" dir="rtl"') &&
+      body.includes('hreflang="he"') &&
+      body.includes('locale-globe') &&
+      body.includes('Israel ⇄ Türkiye') &&
+      body.includes('RFQ') &&
+      body.includes('Kosher') &&
       !/reflex/i.test(body),
   },
 ];
