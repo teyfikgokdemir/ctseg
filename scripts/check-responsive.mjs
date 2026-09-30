@@ -275,10 +275,12 @@ try {
       })
       ,localeAtmosphere:[getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),getComputedStyle(document.documentElement).getPropertyValue('--locale-wash').trim()].join('|')
       ,ux:(()=>{
-        const rgb=(value)=>value.match(/[\d.]+/g)?.slice(0,3).map(Number) ?? [0,0,0];
+        const rgb=(value)=>Array.isArray(value)?value:value.match(/[\d.]+/g)?.slice(0,3).map(Number) ?? [0,0,0];
         const lum=(value)=>rgb(value).map((c)=>{c/=255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4}).reduce((s,c,i)=>s+c*[.2126,.7152,.0722][i],0);
         const ratio=(a,b)=>(Math.max(lum(a),lum(b))+.05)/(Math.min(lum(a),lum(b))+.05);
-        const opaqueBackground=(node)=>{const transparent=/^(?:transparent|rgba?\([^)]*,\s*0(?:\.0+)?\))$/;for(let el=node;el;el=el.parentElement){const bg=getComputedStyle(el).backgroundColor;if(bg&&!transparent.test(bg))return bg}const rootBg=getComputedStyle(document.documentElement).backgroundColor;const bodyBg=getComputedStyle(document.body).backgroundColor;return !transparent.test(bodyBg)?bodyBg:!transparent.test(rootBg)?rootBg:'rgb(7, 9, 13)'};
+        const rgba=(value)=>{if(!value||value==='transparent')return [0,0,0,0];const parts=value.match(/[\d.]+/g)?.map(Number)??[];return [parts[0]??0,parts[1]??0,parts[2]??0,parts.length>3?parts[3]:1]};
+        const composite=(top,bottom)=>{const a=top[3]+bottom[3]*(1-top[3]);if(a<=0)return [0,0,0,0];return [(top[0]*top[3]+bottom[0]*bottom[3]*(1-top[3]))/a,(top[1]*top[3]+bottom[1]*bottom[3]*(1-top[3]))/a,(top[2]*top[3]+bottom[2]*bottom[3]*(1-top[3]))/a,a]};
+        const opaqueBackground=(node)=>{const layers=[];for(let el=node;el;el=el.parentElement)layers.push(rgba(getComputedStyle(el).backgroundColor));let result=[7,9,13,1];for(const layer of layers.reverse())if(layer[3]>0)result=composite(layer,result);return result.slice(0,3)};
         const readable=[...document.querySelectorAll('main .section p,main .section li,.commercial-field>span')].filter((el)=>el.textContent?.trim()).map((el)=>{const style=getComputedStyle(el);const bg=opaqueBackground(el);return {contrast:ratio(style.color,bg),light:lum(bg)>.5}}).filter((x)=>x.light);
         const h1=document.querySelector('main h1');const h1Box=h1?.getBoundingClientRect();const h1Line=h1?parseFloat(getComputedStyle(h1).lineHeight):0;
         const headings=[...document.querySelectorAll('main h2')].map((h)=>h.getBoundingClientRect());
