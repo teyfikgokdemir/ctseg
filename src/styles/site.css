@@ -5205,3 +5205,26 @@ html[data-locale=he] .site-footer .footer-credit a{color:#c4f000!important;-webk
   html[data-locale=he] :is(.eyebrow,.trade-funnel-kicker,.header-house-label){font-size:13px!important}
   html[data-locale=he] .button{width:100%;min-height:48px!important;padding-inline:18px!important}
 }
+
+/* TURKISH TYPOGRAPHY WEIGHT NORMALIZATION — 2026-10-01 */
+html[data-locale=tr],
+html[data-locale=tr] body{
+  font-synthesis:none;
+  font-kerning:normal;
+  text-rendering:optimizeLegibility;
+}
+html[data-locale=tr] body,
+html[data-locale=tr] :is(p,li,dd,dt,input,select,textarea,label){
+  font-family:'DM Sans',system-ui,sans-serif;
+  font-weight:450;
+}
+html[data-locale=tr] :is(.button,button,.text-link,.eyebrow,.trade-funnel-kicker,.hero-proof-pills span,.primary-nav a,.nav-solutions-parent){
+  font-family:'DM Sans',system-ui,sans-serif;
+  font-weight:700!important;
+}
+html[data-locale=tr] :is(h1,h2,h3,h4,.trade-funnel-title,.corridor-list strong){
+  font-family:'Source Serif 4',Georgia,serif;
+  font-weight:600!important;
+  font-synthesis:none;
+}
+html[data-locale=tr] strong{font-weight:700}
