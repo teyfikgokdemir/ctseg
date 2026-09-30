@@ -89,7 +89,7 @@ const organizationDescription = ({
 } as Record<string,string>)[lang] || 'CTSEG is a Türkiye-based independent B2B trade house for two-way global trade, strategic sourcing, supplier verification and market entry.';
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
-  name:company.name[lang as Locale] || company.name.en,alternateName:company.alternateName,foundingDate:company.foundingYear,
+  name:String(lang) === 'he' ? 'CTSEG Sanayi ve Ticaret Limited Şirketi' : (company.name[lang as Locale] || company.name.en),alternateName:company.alternateName,foundingDate:company.foundingYear,
   description:organizationDescription,
   slogan:lang === 'uk' ? 'Двостороння міжнародна торгівля та стратегічне постачання' : 'Two-Way Global Trade & Strategic Sourcing House',
   founder:{'@type':'Person',name:company.founder},
