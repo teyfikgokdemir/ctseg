@@ -99,8 +99,8 @@ const footerStatement = statementMap[lang] || statementMap.en;
 const footerPath = (key:string,id?:string) => {
   if (lang !== 'he') return localizedPath(lang,key,id);
   const map:Record<string,string> = {
-    home:'/he/', products:'/he/#private-label', services:'/he/#sourcing', markets:'/he/#sectors',
-    insights:'/he/#insights', about:'/he/#about', contact:'/he/#contact', 'how-we-work':'/he/#process'
+    home:'/he/', products:'/he/מוצרים-מסחריים/', services:'/he/שירותים/', markets:'/he/שווקים/',
+    insights:'/he/תובנות/', about:'/he/אודות/', contact:'/he/יצירת-קשר/', 'how-we-work':'/he/איך-אנחנו-עובדים/'
   };
   return map[key] || '/he/';
 };
@@ -121,7 +121,7 @@ const safeGlassLang = (['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg'].
     <nav aria-label={footerNav.portfolio}><strong>{focusedCountryHome ? 'CTSEG' : footerNav.portfolio}</strong>{showGenericPortfolio && <a href={footerPath('products')}>{footerNav.overview}</a>}<a href={footerPath('services','strategic-sourcing')}>{footerNav.sourcing}</a><a href={footerPath('services','market-entry')}>{footerNav.marketEntry}</a>{showGlassLink && <a href={duzceGlassPath(safeGlassLang)}>{({tr:'Düzce Cam Dış Ticaret',en:'Düzce Float Glass Export',de:'Düzce Float Glass Export',it:'Düzce Float Glass Export',fa:'صادرات شیشه Düzce',ru:'Экспорт Düzce Float Glass',zh:'Düzce 浮法玻璃出口',vi:'Xuất khẩu Düzce Float Glass',uk:'Експорт флоат-скла Düzce',ro:'Export Düzce Float Glass',bg:'Износ Düzce Float Glass',sr:'Izvoz Düzce Float Glass',sq:'Düzce Float Glass',mk:'Düzce Float Glass'}[lang] || 'Düzce Float Glass Export')}</a>}<a href={footerPath('markets')}>{t.markets}</a><a href={footerPath('insights')}>{footerNav.intelligence}</a></nav>
     <nav aria-label={t.contact}><strong>CTSEG</strong><a href={footerPath('about')}>{t.about}</a>{(lang === 'tr' || lang === 'en' || lang === 'fa' || lang === 'zh' || lang === 'vi' || lang === 'ro' || lang === 'bg' || lang === 'sr' || lang === 'he') && <a href={footerPath('how-we-work')}>{lang === 'tr' ? 'Nasıl çalışıyoruz?' : lang === 'fa' ? 'چگونه کار می‌کنیم؟' : lang === 'zh' ? '运作模式' : lang === 'vi' ? 'Phương thức hoạt động' : lang === 'ro' ? 'Cum lucrăm' : lang === 'bg' ? 'Как работим' : lang === 'sr' ? 'Kako radimo' : lang === 'he' ? 'איך אנחנו עובדים' : 'How we work'}</a>}<a href={footerPath('contact')}>{t.contact}</a><a href={`mailto:${company.email}`}>{company.email}</a><a href="https://t.me/teyfikgokdemir" target="_blank" rel="noopener noreferrer" aria-label="Telegram: @teyfikgokdemir">Telegram (@teyfikgokdemir)</a></nav>
   </div>
-  <div class="container footer-bottom"><p>{copyright}</p><nav aria-label={lang === 'uk' ? 'Правова інформація' : 'Legal'}>{legalIds.map((id) => <a href={lang === 'he' ? '/en/'+legal[id].slugs.en+'/' : localizedPath(lang, 'legal', id)}>{legal[id].titles[lang] || legal[id].titles.en}</a>)}</nav></div>
+  <div class="container footer-bottom"><p>{copyright}</p><nav aria-label={lang === 'uk' ? 'Правова інформація' : 'Legal'}>{legalIds.map((id) => <a href={lang === 'he' ? ({privacy:'/he/מדיניות-פרטיות/',cookies:'/he/מדיניות-עוגיות/',terms:'/he/תנאי-שימוש/','data-protection':'/he/הודעת-הגנת-מידע/'} as Record<string,string>)[id] : localizedPath(lang, 'legal', id)}>{legal[id].titles[lang] || legal[id].titles.en}</a>)}</nav></div>
 <div style="text-align:center;padding:12px 20px"><button type="button" data-cookie-settings style="font:inherit;color:inherit;background:transparent;border:0;text-decoration:underline;min-height:44px;padding:8px 12px;cursor:pointer">{t.cookieTitle}</button></div>
 </footer>
 <style is:global>

@@ -43,10 +43,10 @@ const glassLabel = glassNavLabels[lang] || 'Düzce Float Glass';
 
 const focusedCountryLp = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
 const solutionLinks = lang === 'he' ? [
-  ['איתור ואימות ספקים','/he/#sourcing'],
-  ['מותג פרטי / OEM','/he/#private-label'],
-  ['כניסה לשוק','/he/#market-entry'],
-  [methodLabel,'/he/#process'],
+  ['איתור ואימות ספקים','/he/שירותים/איתור-ואימות-ספקים/'],
+  ['רכש אסטרטגי','/he/שירותים/רכש-אסטרטגי/'],
+  ['כניסה לשוק','/he/שירותים/כניסה-לשוק/'],
+  [methodLabel,'/he/איך-אנחנו-עובדים/'],
   [glassLabel,glassUrl]
 ] : [
   [t.services, localizedPath(lang,'services')],
@@ -57,12 +57,12 @@ const solutionLinks = lang === 'he' ? [
 ];
 
 const nav = lang === 'he' ? [
-  ['services', navigationCopy.globalTrade, '/he/#sourcing'],
-  ['sectors', navigationCopy.industries, '/he/#sectors'],
-  ['products', navigationCopy.portfolio, '/he/#private-label'],
-  ['insights', navigationCopy.intelligence, '/he/#insights'],
-  ['about', navigationCopy.company, '/he/#about'],
-  ['contact', t.contact, '/he/#contact']
+  ['services', navigationCopy.globalTrade, '/he/שירותים/'],
+  ['sectors', navigationCopy.industries, '/he/שווקים/'],
+  ['products', navigationCopy.portfolio, '/he/מוצרים-מסחריים/'],
+  ['insights', navigationCopy.intelligence, '/he/תובנות/'],
+  ['about', navigationCopy.company, '/he/אודות/'],
+  ['contact', t.contact, '/he/יצירת-קשר/']
 ] : [
   ['services', navigationCopy.globalTrade, localizedPath(lang,'services')],
   ['sectors', navigationCopy.industries, localizedPath(lang,'markets')],
@@ -72,13 +72,30 @@ const nav = lang === 'he' ? [
   ['contact', t.contact, localizedPath(lang,'contact')]
 ];
 
-const globalLocales = (pageKey === 'he-insight' ? activeLocaleRegistry.filter((entry) => entry.code === 'he') : activeLocaleRegistry).map((entry) => entry.code) as string[];
+const globalLocales = activeLocaleRegistry.map((entry) => entry.code) as string[];
 const globalLocaleNames: Record<string,string> = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code, entry.label]));
 const globalLocaleFlags: Record<string,string> = {tr:'/images/flags/tr.svg',en:'/images/flags/gb.svg',de:'/images/flags/de.svg',it:'/images/flags/it.svg',fa:'/images/flags/ir.svg',ru:'/images/flags/ru.svg',zh:'/images/flags/cn.svg',vi:'/images/flags/vn.svg',ro:'/images/flags/ro.svg',bg:'/images/flags/bg.svg',he:'/images/flags/il.svg',uk:'/images/flags/ua.svg'};
 
+const heServicePaths:Record<string,string> = {
+  'strategic-sourcing':'/he/שירותים/רכש-אסטרטגי/',
+  'supplier-verification':'/he/שירותים/איתור-ואימות-ספקים/',
+  'trade-advisory':'/he/שירותים/ייעוץ-סחר-בינלאומי/',
+  'tco':'/he/שירותים/אופטימיזציית-עלות-tco/',
+  'market-entry':'/he/שירותים/כניסה-לשוק/'
+};
+const hePagePaths:Record<string,string> = {
+  home:'/he/',services:'/he/שירותים/',products:'/he/מוצרים-מסחריים/',markets:'/he/שווקים/',
+  insights:'/he/תובנות/',about:'/he/אודות/',contact:'/he/יצירת-קשר/','how-we-work':'/he/איך-אנחנו-עובדים/',
+  scenarios:'/he/תרחישים-מסחריים/',legal:'/he/'
+};
 const globalSwitchPath = (target: string): string => {
   if (pageKey === 'search-landing' && pageId) return searchLandingPath(target as Locale,pageId as SearchLandingId);
-  if (target === 'he') return '/he/';
+  if (target === 'he') {
+    if (pageKey === 'services' && pageId && heServicePaths[pageId]) return heServicePaths[pageId];
+    if (pageKey === 'products' && pageId) return `/he/מוצרים-מסחריים/${pageId}/`;
+    if (pageKey === 'legal') return '/he/';
+    return hePagePaths[pageKey] || '/he/';
+  }
   if (pageKey === 'insights' && pageId && ['ro','bg'].includes(target)) return localizedPath(target as Locale,'insights');
   if (pageKey === 'iran-trade') {
     if (target === 'tr') return '/tr/iran-turkiye-ticaret/';

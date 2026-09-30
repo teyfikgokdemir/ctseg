@@ -4790,3 +4790,48 @@ html body main .market-corridor-card .cta-statement{
   color:#d8d9d4!important;
   -webkit-text-fill-color:#d8d9d4!important;
 }
+
+/* Hebrew full-locale visual contract */
+html[data-locale=he] body{direction:rtl}
+html[data-locale=he] .section-head{text-align:center}
+html[data-locale=he] .section-head>p{max-width:820px;margin-inline:auto}
+html[data-locale=he] .he-service-card{background:#171a18!important;border-color:#333a35!important;color:#f4f1e8!important;box-shadow:none!important}
+html[data-locale=he] .he-service-card h2,
+html[data-locale=he] .he-service-card h3{color:#fff!important}
+html[data-locale=he] .he-service-card p{color:#d7d7d0!important;opacity:1!important}
+html[data-locale=he] .he-process-rail article{background:#171a18;color:#f4f1e8}
+html[data-locale=he] .he-process-rail strong{color:#fff}
+html[data-locale=he] .he-process-rail p{color:#d0d1cb!important;opacity:1!important}
+html[data-locale=he] .commercial-form label{color:#e8e8e1}
+html[data-locale=he] .commercial-form input,
+html[data-locale=he] .commercial-form select,
+html[data-locale=he] .commercial-form textarea{
+  border:1px solid #3a403c!important;
+  background:#111513!important;
+  color:#f8f8f2!important;
+  box-shadow:none!important;
+  color-scheme:dark;
+}
+html[data-locale=he] .commercial-form input::placeholder,
+html[data-locale=he] .commercial-form textarea::placeholder{color:#8f958f!important}
+html[data-locale=he] .commercial-form select option{background:#111513;color:#fff}
+html[data-locale=he] .commercial-form input:focus,
+html[data-locale=he] .commercial-form select:focus,
+html[data-locale=he] .commercial-form textarea:focus{border-color:#c4f000!important;outline:1px solid #c4f000!important}
+html[data-locale=he] .company-trust-band p,
+html[data-locale=he] .company-trust-band .he-about-copy p{color:#d7d4cc!important}
+html[data-locale=he] .site-footer{direction:rtl}
+html[data-locale=he] .site-footer p,
+html[data-locale=he] .site-footer a,
+html[data-locale=he] .site-footer span{color:#d2d2cc}
+html[data-locale=he] .footer-main nav a:hover{color:#c4f000}
+html[data-locale=he] .card p{color:#575952!important}
+html[data-locale=he] .page-hero .lead{color:#d0d1cb}
+html[data-locale=he] .he-detail-grid>article,
+html[data-locale=he] .he-detail-grid>div{background:#171a18!important;color:#f4f1e8!important;border-color:#343a36!important}
+html[data-locale=he] .he-detail-grid h2{color:#fff!important}
+html[data-locale=he] .he-detail-grid p{color:#d4d5ce!important;opacity:1!important}
+@media(max-width:620px){
+  html[data-locale=he] .page-hero h1{font-size:clamp(34px,10vw,48px)!important}
+  html[data-locale=he] .footer-main{gap:30px}
+}

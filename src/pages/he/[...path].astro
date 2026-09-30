@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const serviceMap = {
+  'strategic-sourcing': {slug:'רכש-אסטרטגי',name:'רכש אסטרטגי',desc:'מחקר שוק ספקים, בניית RFQ, אימות יצרנים, השוואת הצעות ותיאום מסחרי לקבלת החלטות רכש מבוססות.'},
+  'supplier-verification': {slug:'איתור-ואימות-ספקים',name:'איתור ואימות ספקים',desc:'איתור יצרנים ובדיקה צולבת של זהות החברה, מפעל, יכולת, מסמכים, ניסיון ותנאים מסחריים.'},
+  'trade-advisory': {slug:'ייעוץ-סחר-בינלאומי',name:'ייעוץ סחר בינלאומי',desc:'תמיכה בהחלטות חוצות גבולות בנושאי מקור, Incoterms, תשלום, מסמכים, מסלול מסחרי והיתכנות העסקה.'},
+  'tco': {slug:'אופטימיזציית-עלות-tco',name:'אופטימיזציית עלות כוללת (TCO)',desc:'בחינת העלות הכוללת מעבר למחיר יחידה: הובלה, איכות, מלאי, מימון, פסילות, סיכון וזמן אספקה.'},
+  'market-entry': {slug:'כניסה-לשוק',name:'כניסה לשוק ופיתוח קונים',desc:'בחינת התאמת מוצר, מיפוי שוק, איתור קונים ומפיצים ותיאום מסחרי ראשוני בישראל, בטורקיה ובשווקים בינלאומיים.'}
+};
+
+const productMap = {
+  'akbari-pistachio':['פיסטוק אקברי','פיסטוק איראני ארוך למכירה קמעונאית פרימיום, מארזי מתנה וערוצי HoReCa.'],
+  'kaleghouchi-pistachio':['פיסטוק Kalleh Ghouchi (Jumbo)','פיסטוק גדול ועגול במידות Jumbo לתערובות אגוזים ומכירה קמעונאית פרימיום.'],
+  'fandoghi-pistachio':['פיסטוק Fandoghi','פיסטוק עגול וקומפקטי לעיבוד תעשייתי, קונדיטוריה, גלידה ואריזה בנפח גבוה.'],
+  'ahmad-aghaei-pistachio':['פיסטוק Ahmad Aghaei','פיסטוק מאורך ואחיד עבור קמעונאות, תערובות אגוזים ואריזות פרימיום.'],
+  'green-peeled-pistachio':['גרעיני פיסטוק ירוקים קלופים','גרעיני פיסטוק ירוקים לשימוש בקונדיטוריה, גלידה, מאפה ומזון תעשייתי.'],
+  'pistachio-granules':['גרעיני פיסטוק וגרנולות','גרעינים, שברים וגרנולות במפרטים שונים ליישומי מזון תעשייתיים.'],
+  'mazafati-dates':['תמרי Mazafati','תמרי Mazafati רכים וממותקים למכירה קמעונאית, סיטונאית ואריזה פרטית.'],
+  'date-paste-syrup':['מחית וסירופ תמרים','מחית וסירופ תמרים ליצרני מזון, מאפיות, קונדיטוריה ויישומים תעשייתיים.'],
+  'raisins':['צימוקים','צימוקים במפרטים ודרגות איכות שונות לייצור מזון, סיטונאות ואריזה קמעונאית.'],
+  'almonds':['שקדים','שקדים טבעיים ומעובדים למזון, קונדיטוריה, סיטונאות ומותג פרטי.'],
+  'walnuts':['אגוזי מלך','אגוזי מלך בקליפה או כגרעינים, בדרגות מיון המתאימות למסחר B2B.'],
+  'dried-apricots-kernels':['משמשים מיובשים וגרעינים','משמשים מיובשים וגרעיני משמש ליישומי מזון, סיטונאות ואריזה.'],
+  'pumpkin-seeds':['גרעיני דלעת','גרעיני דלעת לשוק החטיפים, תעשיית המזון ואריזות מותג פרטי.'],
+  'sunflower-seeds':['גרעיני חמנייה','גרעיני חמנייה לשימוש אכיל או תעשייתי בהתאם למפרט, מקור ואיכות נדרשים.'],
+  'saffron':['זעפרן','זעפרן במפרטי איכות שונים למסחר B2B, אריזה קמעונאית ויישומי מזון.'],
+  'dried-mulberries':['תותי עץ מיובשים','תותי עץ מיובשים טבעיים עבור קמעונאות, תערובות פירות יבשים וסיטונאות.'],
+  'zereshk':['זרשק (Berberis מיובש)','ברבריס מיובש לשימוש קולינרי, קמעונאי וסיטונאי בהתאם למפרט ולדרגת ניקיון.'],
+  'mixed-nuts':['תערובות אגוזים ומוצרים מיוחדים','תערובות אגוזים מותאמות, Private Label ואריזות קמעונאיות לפי מפרט, MOQ ושוק יעד.']
+};
+
+const legalMap = {
+  privacy:{slug:'מדיניות-פרטיות',title:'מדיניות פרטיות'},
+  cookies:{slug:'מדיניות-עוגיות',title:'מדיניות עוגיות'},
+  terms:{slug:'תנאי-שימוש',title:'תנאי שימוש'},
+  'data-protection':{slug:'הודעת-הגנת-מידע',title:'הודעת הגנת מידע'}
+};
+
+const staticPages = [
+  {path:'שירותים',key:'services',title:'שירותי סחר ורכש',lead:'מ־sourcing ואימות ספקים ועד RFQ, TCO וכניסה לשוק — תהליך אחד, שקוף וניתן לבקרה.'},
+  {path:'מוצרים-מסחריים',key:'products',title:'פורטפוליו מוצרים מסחריים',lead:'קטגוריות B2B הנבחנות לפי מקור, מפרט, מסמכים, איכות אצווה ותנאים מסחריים.'},
+  {path:'שווקים',key:'markets',title:'שווקים ומסדרונות סחר',lead:'ישראל ⇄ טורקיה, אירופה ושווקים בינלאומיים — עם בדיקת התאמה מסחרית לכל מסלול.'},
+  {path:'תובנות',key:'insights',title:'תובנות מסחריות',lead:'מדריכים קצרים ומעשיים על sourcing, אימות, Private Label, RFQ ועלות כוללת.'},
+  {path:'אודות',key:'about',title:'אודות CTSEG',lead:'בית מסחר B2B עצמאי מטורקיה, המתמקד ברכש אסטרטגי, אימות ספקים וכניסה לשווקים.'},
+  {path:'יצירת-קשר',key:'contact',title:'יצירת קשר',lead:'התחילו דרישה מסחרית עם מוצר, כמות, שוק יעד ותנאי אספקה ברורים.'},
+  {path:'איך-אנחנו-עובדים',key:'how-we-work',title:'איך אנחנו עובדים',lead:'מתרגמים דרישה מסחרית לתהליך מסודר: אפיון, מחקר, אימות, RFQ, השוואה ותיאום.'},
+  {path:'תרחישים-מסחריים',key:'scenarios',title:'תרחישים מסחריים',lead:'דוגמאות מייצגות לאופן שבו CTSEG בונה מסגרת החלטה למסחר חוצה גבולות.'}
+];
+
+export function getStaticPaths(){
+  const paths = staticPages.map(p=>({params:{path:p.path},props:{type:'static',data:p}}));
+  for(const [id,s] of Object.entries(serviceMap)) paths.push({params:{path:`שירותים/${s.slug}`},props:{type:'service',data:{...s,id}}});
+  for(const [id,p] of Object.entries(productMap)) paths.push({params:{path:`מוצרים-מסחריים/${id}`},props:{type:'product',data:{id,name:p[0],desc:p[1]}}});
+  for(const [id,l] of Object.entries(legalMap)) paths.push({params:{path:l.slug},props:{type:'legal',data:{...l,id}}});
+  return paths;
+}
+const {type,data}=Astro.props;
+const canonical=`https://ctseg.com.tr/he/${Astro.params.path}/`;
+const pageKey = type === 'service' ? 'services' : type === 'product' ? 'products' : type === 'legal' ? 'legal' : data.key;
+const pageId = type === 'service' || type === 'product' || type === 'legal' ? data.id : undefined;
+const title=`${data.title || data.name} | CTSEG`;
+const description=data.lead || data.desc || 'CTSEG · Israel ⇄ Türkiye B2B trade, sourcing, supplier verification and market entry.';
+const services=Object.entries(serviceMap);
+const products=Object.entries(productMap);
+---
+<BaseLayout lang="he" title={title} description={description} pageKey={pageKey} pageId={pageId} canonical={canonical}>
+<section class="page-hero he-standard-page"><div class="container">
+  <p class="eyebrow">CTSEG · ISRAEL ⇄ TÜRKİYE</p>
+  <h1>{data.title || data.name}</h1>
+  <p class="lead">{data.lead || data.desc}</p>
+</div></section>
+
+{type === 'static' && data.key === 'services' && <section class="section"><div class="container"><div class="card-grid">
+  {services.map(([id,s])=><a class="card" href={`/he/שירותים/${s.slug}/`}><h2>{s.name}</h2><p>{s.desc}</p><strong>לפרטים →</strong></a>)}
+</div></div></section>}
+
+{type === 'service' && <section class="section"><div class="container content-grid">
+  <article class="prose"><h2>מה כולל השירות</h2><p>{data.desc}</p><div class="he-detail-grid"><div><strong>אפיון הדרישה</strong><p>מוצר, מפרט, שוק יעד, כמות, מסמכים, תקציב ולוחות זמנים.</p></div><div><strong>מחקר ואימות</strong><p>איתור גורמים רלוונטיים ובדיקת זהות, יכולת, ניסיון ותיעוד מסחרי.</p></div><div><strong>השוואה ותיאום</strong><p>RFQ, תנאים, עלויות, סיכונים והגדרת הצעד המסחרי הבא.</p></div></div></article>
+  <aside class="side-panel"><p class="eyebrow">CTSEG · COMMERCIAL DESK</p><h3>יש לכם דרישה ספציפית?</h3><p>שלחו מוצר, כמות ושוק יעד ונבחן את מסלול העבודה המתאים.</p><a class="button" href="/he/יצירת-קשר/">שליחת בקשה</a></aside>
+</div></section>}
+
+{type === 'static' && data.key === 'products' && <section class="section"><div class="container"><div class="card-grid">
+  {products.map(([id,p])=><a class="card" href={`/he/מוצרים-מסחריים/${id}/`}><h2>{p[0]}</h2><p>{p[1]}</p><strong>לפרטים →</strong></a>)}
+</div></div></section>}
+
+{type === 'product' && <section class="section"><div class="container content-grid">
+  <article class="prose"><h2>מסגרת מסחרית</h2><p>{data.desc}</p><h2>מה נבדק לפני הצעת מחיר</h2><ul><li>מקור, יצרן ומפרט מוצר</li><li>MOQ וכמות מסחרית</li><li>אריזה, Private Label וחיי מדף כאשר רלוונטי</li><li>COA, מסמכי איכות ועקיבות</li><li>EXW / FOB / CIF ויעד אספקה</li></ul></article>
+  <aside class="side-panel"><p class="eyebrow">RFQ</p><h3>בקשת מחיר למוצר</h3><p>ציינו כמות, אריזה, יעד ודרישות מסמכים כדי לקבל הערכה מסחרית מדויקת יותר.</p><a class="button" href="/he/יצירת-קשר/">פתיחת RFQ</a></aside>
+</div></section>}
+
+{type === 'static' && data.key === 'markets' && <section class="section"><div class="container">
+  <div class="he-detail-grid"><article><h2>טורקיה → ישראל</h2><p>איתור יצרנים, Private Label, מסמכים, כשרות כאשר נדרשת, דוגמאות ותיאום תנאי אספקה.</p></article><article><h2>ישראל → טורקיה</h2><p>מיפוי שוק, איתור קונים ומפיצים ותיאום מסחרי עבור חברות, יצרנים וספקי פתרונות מישראל.</p></article><article><h2>שווקים בינלאומיים</h2><p>מחקר sourcing ומסלולי שוק נוספים בהתאם למוצר, מקור, רגולציה והיתכנות מסחרית.</p></article></div>
+</div></section>}
+
+{type === 'static' && data.key === 'insights' && <section class="section"><div class="container"><div class="card-grid">
+  <a class="card" href="/he/insights/private-label-food-turkiye-israel/"><h2>Private Label בטורקיה ליבואנים מישראל</h2><p>יצרן, MOQ, אריזה, כשרות, דוגמאות ו־RFQ.</p></a>
+  <a class="card" href="/he/insights/kosher-supplier-verification-turkiye/"><h2>כשרות ואימות ספקים בטורקיה</h2><p>מה לבדוק במפעל, במסמכים ובמוצר.</p></a>
+  <a class="card" href="/he/insights/rfq-moq-fob-cif-turkiye-israel/"><h2>RFQ, MOQ, FOB ו־CIF</h2><p>איך להשוות הצעות על בסיס מסחרי אחיד.</p></a>
+</div></div></section>}
+
+{type === 'static' && data.key === 'about' && <section class="section"><div class="container content-grid">
+  <article class="prose"><h2>בית מסחר עצמאי</h2><p>CTSEG פועלת מטורקיה ומחברת בין קונים, יצרנים ושותפים מסחריים באמצעות sourcing, אימות, RFQ ופיתוח שוק. במסדרון ישראל ⇄ טורקיה אנחנו עובדים בשני הכיוונים.</p><h2>עקרונות עבודה</h2><p>מקור שקוף, תפקיד מסחרי ברור, מסמכים ניתנים לבדיקה והשוואת תנאים על בסיס אחיד.</p></article>
+  <aside class="side-panel"><p class="eyebrow">CTSEG · 2022</p><h3>Tuzla, İstanbul, Türkiye</h3><p>CTSEG Sanayi ve Ticaret Limited Şirketi</p></aside>
+</div></section>}
+
+{type === 'static' && data.key === 'how-we-work' && <section class="section"><div class="container"><div class="he-process-rail">
+  <article><strong>הגדרת הדרישה</strong><p>מוצר, מפרט, כמות, יעד ותנאים.</p></article><article><strong>מחקר שוק</strong><p>יצרנים, ספקים, קונים או מפיצים רלוונטיים.</p></article><article><strong>אימות</strong><p>ישות, יכולת, מסמכים, ניסיון ומוצר.</p></article><article><strong>RFQ והשוואה</strong><p>מחיר, MOQ, תשלום, lead time ו־Incoterms.</p></article><article><strong>תיאום</strong><p>דוגמאות, מסמכים, שאלות ומו״מ מסחרי.</p></article>
+</div></div></section>}
+
+{type === 'static' && data.key === 'scenarios' && <section class="section"><div class="container"><div class="he-detail-grid">
+  <article><h2>יבואן ישראלי מחפש יצרן בטורקיה</h2><p>הגדרת מוצר ו־MOQ, איתור מפעלים, אימות, RFQ, דוגמאות, כשרות כאשר נדרשת ותנאי FOB/CIF.</p></article>
+  <article><h2>חברה ישראלית נכנסת לשוק הטורקי</h2><p>מיפוי קטגוריה, איתור קונים/מפיצים, חומר מסחרי ותיאום פניות.</p></article>
+  <article><h2>השוואת ספקים בינלאומית</h2><p>השוואה על בסיס מפרט, מחיר כולל, מסמכים, סיכון וזמן אספקה.</p></article>
+</div></div></section>}
+
+{type === 'static' && data.key === 'contact' && <section class="section"><div class="container he-contact-layout">
+  <aside class="side-panel"><p class="eyebrow">CTSEG · COMMERCIAL DESK</p><h2>ערוצי קשר</h2><p dir="ltr">info@ctseg.com.tr</p><p dir="ltr">WhatsApp · +90 545 678 26 55</p></aside>
+  <form class="commercial-form he-commercial-form" data-he-form>
+    <label>סוג הבקשה<select name="intent" required><option value="buyer_request">איתור ספק / יצרן</option><option value="supplier_market_entry">איתור קונים / כניסה לשוק</option><option value="external_trade_desk">ניהול סחר חוץ</option></select></label>
+    <label>השירות הנדרש<select name="supportNeed" required><option value="supplier_sourcing">איתור ואימות ספק</option><option value="rfq_comparison">RFQ והשוואה</option><option value="private_label">Private Label / OEM</option><option value="market_entry">כניסה לשוק</option><option value="document_assessment">בדיקת מסמכים</option><option value="external_trade_desk">External Trade Desk</option><option value="other">אחר</option></select></label>
+    <label>כיוון הסחר<select name="tradeDirection" required><option value="export_from_turkiye">טורקיה → ישראל</option><option value="import_to_turkiye">ישראל → טורקיה</option><option value="cross_border_sourcing">מסחר בינלאומי אחר</option></select></label>
+    <label>קטגוריה<select name="productFamily" required><option value="nuts_dried_fruit">אגוזים, פירות יבשים ומזון</option><option value="vegetable_oils">שמנים ומזון</option><option value="architectural_glass">זכוכית וחומרי בנייה</option><option value="biofuel_feedstock">חומרי גלם לתעשייה/אנרגיה</option><option value="other">אחר</option></select></label>
+    <label>שם מלא<input name="name" required /></label><label>חברה<input name="company" required /></label>
+    <label>אימייל או טלפון<input name="emailOrPhone" required dir="ltr" /></label><label>מוצר / שירות<input name="product" /></label>
+    <label class="he-full">פרטי הבקשה<textarea name="message" required></textarea></label>
+    <input type="text" name="website" tabindex="-1" class="he-honeypot" aria-hidden="true" />
+    <label class="he-consent"><input type="checkbox" name="privacy" value="accepted" required /> אני מאשר/ת שימוש בפרטים לצורך בחינת הבקשה.</label>
+    <button class="button he-submit" type="submit">שליחת הבקשה</button><div class="he-form-status" data-he-status></div>
+  </form>
+</div></section>}
+
+{type === 'legal' && <section class="section"><div class="container"><article class="prose he-legal">
+  <h2>היקף ומטרת המסמך</h2><p>מסמך זה מספק מידע שקוף על השימוש באתר CTSEG, עיבוד מידע רלוונטי וזכויות המשתמשים. לפניות ניתן לכתוב ל־info@ctseg.com.tr.</p>
+  <h2>מידע שעשוי להיאסף</h2><p>בעת יצירת קשר אנו עשויים לעבד שם, חברה, אימייל, טלפון ופרטי דרישה מסחרית, וכן מידע טכני מוגבל לצורכי אבטחה ותפעול.</p>
+  <h2>שימוש, שמירה ואבטחה</h2><p>המידע משמש למענה לפניות, בחינת קשר עסקי, אבטחת האתר ועמידה בחובות החלות. הוא נשמר רק למשך הזמן הנדרש למטרה ולדין החל.</p>
+  <h2>זכויות ויצירת קשר</h2><p>לבקשות גישה, תיקון, מחיקה או התנגדות ניתן לפנות ל־info@ctseg.com.tr עם פרטים מספקים לזיהוי הבקשה.</p>
+</article></div></section>}
+
+<script>
+const form=document.querySelector('[data-he-form]');const status=document.querySelector('[data-he-status]');
+if(form){const startedAt=Date.now();form.addEventListener('submit',async(e)=>{e.preventDefault();status.textContent='שולח…';const fd=new FormData(form);const payload=Object.fromEntries(fd.entries());payload.locale='he';payload.startedAt=String(startedAt);payload.pagePath=location.pathname;payload.landingPath=sessionStorage.getItem('ctseg-landing-path')||location.pathname;payload.referrerHost=document.referrer?new URL(document.referrer).hostname:'';try{const r=await fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw new Error();form.reset();status.textContent='הבקשה התקבלה. צוות CTSEG יחזור אליכם לאחר בדיקה ראשונית.';}catch{status.textContent='לא ניתן היה לשלוח כרגע. אפשר לפנות ישירות ב‑WhatsApp או באימייל.'}})}
+</script>
+</BaseLayout>
+
+<style is:global>
+html[data-locale="he"] .he-standard-page{text-align:right}
+html[data-locale="he"] .he-standard-page h1{max-width:980px;font-size:clamp(40px,5vw,72px);line-height:1.02;letter-spacing:-.03em}
+html[data-locale="he"] .he-standard-page .lead{max-width:820px}
+.he-detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.he-detail-grid>div,.he-detail-grid>article{padding:28px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.025)}
+.he-detail-grid h2,.he-detail-grid strong{color:inherit}.he-detail-grid p{color:inherit;opacity:.82}
+.he-process-rail{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid rgba(255,255,255,.14)}
+.he-process-rail article{padding:24px;border-inline-end:1px solid rgba(255,255,255,.14)}.he-process-rail article:last-child{border-inline-end:0}
+.he-process-rail strong{display:block;margin-bottom:12px;font-size:18px}.he-process-rail p{margin:0;opacity:.8}
+.he-legal{max-width:880px;margin-inline:auto}.he-legal h2{margin-top:38px}
+@media(max-width:900px){.he-detail-grid,.he-process-rail{grid-template-columns:1fr}.he-process-rail article{border-inline-end:0;border-bottom:1px solid rgba(255,255,255,.14)}}
+</style>
