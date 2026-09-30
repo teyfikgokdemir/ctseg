@@ -18,7 +18,13 @@ const canonical=`https://ctseg.com.tr/he/${Astro.params.path}/`;
 const pageKey = type === 'service' ? 'services' : type === 'product' ? 'products' : type === 'legal' ? 'legal' : data.key;
 const pageId = type === 'service' || type === 'product' || type === 'legal' ? data.id : undefined;
 const title=`${data.title || data.name} | CTSEG`;
-const description=data.lead || data.desc || 'CTSEG · סחר B2B בין ישראל לטורקיה, איתור ורכש, אימות ספקים וכניסה לשוק.';
+const legalDescriptions:Record<string,string> = {
+  privacy:'מדיניות הפרטיות של CTSEG מסבירה כיצד מידע אישי ופניות מסחריות נאספים, משמשים ונשמרים באתר.',
+  cookies:'מדיניות העוגיות של CTSEG מסבירה שימוש בעוגיות חיוניות, מדידה והעדפות משתמש באתר.',
+  terms:'תנאי השימוש באתר CTSEG מגדירים את אופי המידע המסחרי, מגבלות השימוש והאחריות.',
+  'data-protection':'הודעת הגנת המידע של CTSEG מפרטת עיבוד מידע, אבטחה, שמירה וזכויות משתמשים.'
+};
+const description=type === 'legal' ? legalDescriptions[data.id] : (data.lead || data.desc || 'CTSEG · סחר B2B בין ישראל לטורקיה, איתור ורכש, אימות ספקים וכניסה לשוק.');
 const services=Object.entries(serviceMap);
 const products=Object.entries(productMap).filter(([id])=>israelProductIds.includes(id));
 const productProfile = type === 'product' ? productProfiles[data.id] : null;

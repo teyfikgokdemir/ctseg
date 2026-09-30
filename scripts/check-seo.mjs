@@ -4,6 +4,14 @@ import { join, relative, resolve } from 'node:path';
 const dist = resolve('dist');
 const errors = [];
 const origin = 'https://ctseg.com.tr';
+const normalizeUrl = (value) => {
+  if (!value) return value;
+  try { return new URL(value, origin).href; } catch { return value; }
+};
+const alternatesFromHtml = (html) => Object.fromEntries(
+  [...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)]
+    .map((match) => [match[1], normalizeUrl(match[2])])
+);
 const coreLocales = ['tr','en','de','it','ru','zh','vi','ro','bg'];
 const glassLocales = ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg'];
 
@@ -43,7 +51,7 @@ for (const file of htmlFiles) {
   const html = readFileSync(file,'utf8');
   const label = relative(dist,file).replaceAll('\\','/');
   const is404 = label === '404.html';
-  const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+  const canonical = normalizeUrl(html.match(/<link rel="canonical" href="([^"]+)"/)?.[1]);
   const robots = html.match(/<meta name="robots" content="([^"]+)"/)?.[1] ?? '';
   const title = html.match(/<title>([^<]+)<\/title>/)?.[1]?.trim() ?? '';
   const description = html.match(/<meta name="description" content="([^"]+)"/)?.[1]?.trim() ?? '';
@@ -74,7 +82,7 @@ for (const file of htmlFiles) {
   addUnique(descriptionOwners,description,label,'description',lang);
 
   if (lang !== 'fa') {
-    const alternates = Object.fromEntries([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
+    const alternates = alternatesFromHtml(html);
     const focusedSelfOnly = ['/de/','/it/','/ru/','/zh/','/vi/','/tr/cinden-turkiyeye-ithalat-ve-tedarik/','/tr/vietnamdan-turkiyeye-ithalat-ve-tedarik/','/tr/ukraynadan-turkiyeye-tedarik-ve-ticaret/'].includes(expectedPath) || expectedPath.startsWith('/he/insights/');
     if (!focusedSelfOnly && !alternates['x-default']) errors.push(`${label}: missing x-default hreflang`);
     if (alternates[lang] !== canonical) errors.push(`${label}: self hreflang does not match canonical`);
@@ -90,7 +98,7 @@ for (const file of htmlFiles) {
     let href = match[1];
     if (href.startsWith(`${origin}/`)) href = new URL(href).pathname;
     if (!href.startsWith('/')) continue;
-    const pathname = href.split(/[?#]/)[0];
+    const pathname = new URL(href, origin).pathname;
     internalLinkCounts.set(pathname,(internalLinkCounts.get(pathname) ?? 0) + 1);
   }
 }
@@ -98,7 +106,7 @@ for (const file of htmlFiles) {
 for (const [canonical,page] of indexablePages) {
   const pathname = new URL(canonical).pathname;
   if (!internalLinkCounts.get(pathname)) errors.push(`${page.label}: orphaned canonical has no normal HTML internal link`);
-  const alternates = Object.fromEntries([...page.html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
+  const alternates = alternatesFromHtml(page.html);
   const reciprocalLocales = canonical.includes('/glass/duzce-float-glass/')
     ? glassLocales
     : (page.lang === 'fa' ? [] : coreLocales.filter((code) => alternates[code]));
@@ -108,14 +116,14 @@ for (const [canonical,page] of indexablePages) {
       errors.push(`${page.label}: hreflang ${locale} target is not indexable`);
       continue;
     }
-    const reciprocal = Object.fromEntries([...target.html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
+    const reciprocal = alternatesFromHtml(target.html);
     if (reciprocal[page.lang] !== canonical) errors.push(`${page.label}: hreflang ${locale} is not reciprocal`);
   }
 }
 
 const sitemapFiles = files.filter((file) => /sitemap-\d+\.xml$/.test(file));
 const sitemapUrls = sitemapFiles.flatMap((file) =>
-  [...readFileSync(file,'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1])
+  [...readFileSync(file,'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => normalizeUrl(match[1]))
 );
 if (new Set(sitemapUrls).size !== sitemapUrls.length) errors.push('sitemap contains duplicate URLs');
 for (const url of sitemapUrls) {
