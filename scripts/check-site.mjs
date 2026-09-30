@@ -251,6 +251,15 @@ for (const file of htmlFiles) {
     if (!html.includes('direct-answer') || !html.includes('id="sectors"') || !html.includes('"@type":"Service"') || !html.includes('"@type":"FAQPage"')) errors.push(`${label}: focused country landing architecture missing`);
   }
   if (!tradeRecord && !label.startsWith('404')) {
+    const isHebrewPage = label === 'he/index.html' || label.startsWith('he/');
+    if (isHebrewPage) {
+      if (!html.includes('class="site-header"') || !html.includes('class="site-footer"')) errors.push(`${label}: Hebrew page must use the standard CTSEG site chrome`);
+      if (!html.includes('dir="rtl"')) errors.push(`${label}: Hebrew page must remain RTL`);
+    }
+    if (label === 'he/index.html') {
+      if (!html.includes('homepage-trade-hero') || !html.includes('/images/ctseg-global-trade-hero-new.webp')) errors.push(`${label}: Hebrew homepage must use the standard CTSEG homepage hero system`);
+      if (!html.includes('/images/flags/il.svg')) errors.push(`${label}: Hebrew homepage Israel locale flag missing`);
+    }
     const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
     const mobileLocales = html.match(/class="mobile-lang-grid"[\s\S]*?<\/div>/)?.[0] ?? '';
     const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
