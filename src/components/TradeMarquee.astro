@@ -16,22 +16,23 @@ const copy:Record<string,string[]> = {
   sr:['STRATEŠKI SOURCING','ULAZAK NA TRŽIŠTE','PRONALAŽENJE DOBAVLJAČA']
 };
 const items=copy[lang] || copy.en;
+const loopItems = Array.from({length:4},()=>items).flat();
 ---
 <div class:list={['trade-marquee',{'trade-marquee--rtl':lang==='he'||lang==='fa'}]} data-trade-marquee aria-label={items.join(' · ')}>
   <div class="trade-marquee__track">
     <div class="trade-marquee__group" data-marquee-group>
-      {items.map((item)=><span><bdi dir={lang==='he'||lang==='fa'?'rtl':'auto'}>{item}</bdi></span>)}
+      {loopItems.map((item)=><span><bdi dir={lang==='he'||lang==='fa'?'rtl':'auto'}>{item}</bdi></span>)}
     </div>
     <div class="trade-marquee__group" data-marquee-group aria-hidden="true">
-      {items.map((item)=><span><bdi dir={lang==='he'||lang==='fa'?'rtl':'auto'}>{item}</bdi></span>)}
+      {loopItems.map((item)=><span><bdi dir={lang==='he'||lang==='fa'?'rtl':'auto'}>{item}</bdi></span>)}
     </div>
   </div>
 </div>
 <style is:global>
 .trade-marquee{position:relative;width:100%;overflow:hidden;background:#c4f000;color:#080a08;border-block:1px solid #9ebf00;direction:ltr}
-.trade-marquee__track{display:flex;width:max-content;will-change:transform;animation:ctseg-marquee 26s linear infinite}
+.trade-marquee__track{display:flex;width:max-content;will-change:transform;animation:ctseg-marquee 42s linear infinite}
 .trade-marquee--rtl .trade-marquee__track{animation-name:ctseg-marquee-rtl}
-.trade-marquee__group{display:flex;align-items:center;flex:0 0 auto;white-space:nowrap}
+.trade-marquee__group{display:flex;align-items:center;flex:0 0 auto;white-space:nowrap;min-width:max-content}
 .trade-marquee__group span{display:inline-flex;align-items:center;min-height:58px;padding-inline:26px;font-size:clamp(20px,2.35vw,38px);line-height:1;font-weight:900;letter-spacing:-.025em}
 .trade-marquee__group span::before{content:"•";margin-inline-end:22px;font-size:.65em}
 @keyframes ctseg-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
