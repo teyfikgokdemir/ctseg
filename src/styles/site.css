@@ -4788,14 +4788,3 @@ html body main .market-corridor-card .cta-statement{
   color:#d8d9d4!important;
   -webkit-text-fill-color:#d8d9d4!important;
 }
-
-/* 2026-09 HE locale + flagless language controls */
-.locale-globe{position:relative;display:inline-block;width:20px;height:20px;border:1.5px solid currentColor;border-radius:50%;opacity:.92}
-.locale-globe:before,.locale-globe:after{content:"";position:absolute;inset:3px 6px;border-left:1px solid currentColor;border-right:1px solid currentColor;border-radius:50%}
-.locale-globe:after{inset:9px 2px auto;height:0;border:0;border-top:1px solid currentColor;border-radius:0}
-.language-menu a{grid-template-columns:1fr 8px}
-.mobile-lang-item{min-height:50px;align-content:center}
-.footer-market-link{padding-inline:12px}
-html[data-locale=he]{--accent:#6f8f83;--accent-soft:#b9d7cc;--locale-wash:#13231f;--locale-surface:#10201c;--locale-line:rgba(150,197,181,.35)}
-html[data-locale=he] body{font-family:"Arial Hebrew","Noto Sans Hebrew","Segoe UI",Arial,sans-serif}
-html[data-locale=he] h1,html[data-locale=he] h2,html[data-locale=he] h3{font-family:"Arial Hebrew","Noto Sans Hebrew","Segoe UI",Arial,sans-serif;letter-spacing:0}
