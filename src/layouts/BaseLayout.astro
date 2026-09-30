@@ -128,8 +128,15 @@ const webpage = {
 };
 const extra = Array.isArray(schema) ? schema : [schema];
 const schemas = [organization, website, webpage, ...extra.filter(Boolean)];
-const t = ui[lang] || ui.en;
-const cookieHref = localizedPath(lang in ui ? lang : 'en', 'legal', 'cookies');
+const t = String(lang) === 'he' ? {
+  ...ui.en,
+  cookieTitle:'העדפות עוגיות',
+  cookieCopy:'אנחנו משתמשים בעוגיות אנליטיות רק בהתאם להעדפות שלכם. עוגיות חיוניות נשארות פעילות.',
+  details:'פרטים',
+  accept:'אישור',
+  reject:'דחייה'
+} : (ui[lang] || ui.en);
+const cookieHref = String(lang) === 'he' ? '/en/cookie-policy/' : localizedPath(lang in ui ? lang : 'en', 'legal', 'cookies');
 const homeHero = localizedTradeVisual('global-trade-hero',lang);
 const socialImage = pageKey === 'products' && pageId && products[pageId as keyof typeof products]
   ? products[pageId as keyof typeof products].media.src
