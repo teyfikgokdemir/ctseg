@@ -27,6 +27,37 @@ const {
   canonical?: string; schema?: any[] | any; noindex?: boolean;
 };
 const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
+const hebrewCounterpart = (() => {
+  const serviceMap:Record<string,string> = {
+    'strategic-sourcing':'/he/שירותים/רכש-אסטרטגי/',
+    'supplier-verification':'/he/שירותים/איתור-ואימות-ספקים/',
+    'trade-advisory':'/he/שירותים/ייעוץ-סחר-בינלאומי/',
+    'tco':'/he/שירותים/אופטימיזציית-עלות-tco/',
+    'market-entry':'/he/שירותים/כניסה-לשוק/'
+  };
+  const legalMap:Record<string,string> = {
+    privacy:'/he/מדיניות-פרטיות/',
+    cookies:'/he/מדיניות-עוגיות/',
+    terms:'/he/תנאי-שימוש/',
+    'data-protection':'/he/הודעת-הגנת-מידע/'
+  };
+  const pageMap:Record<string,string> = {
+    home:'/he/',
+    services:'/he/שירותים/',
+    products:'/he/מוצרים-מסחריים/',
+    markets:'/he/שווקים/',
+    insights:'/he/תובנות/',
+    about:'/he/אודות/',
+    contact:'/he/יצירת-קשר/',
+    'how-we-work':'/he/איך-אנחנו-עובדים/',
+    scenarios:'/he/תרחישים-מסחריים/'
+  };
+  if (pageKey === 'services' && pageId && serviceMap[pageId]) return `https://ctseg.com.tr${serviceMap[pageId]}`;
+  if (pageKey === 'products' && pageId) return `https://ctseg.com.tr/he/מוצרים-מסחריים/${pageId}/`;
+  if (pageKey === 'legal' && pageId && legalMap[pageId]) return `https://ctseg.com.tr${legalMap[pageId]}`;
+  if (pageKey === 'insights' && pageId) return '';
+  return pageMap[pageKey] ? `https://ctseg.com.tr${pageMap[pageKey]}` : '';
+})();
 const alternates = String(lang) === 'he' && pageKey === 'he-insight' ? { he: canonicalUrl } as Record<string,string> :
   pageKey === 'glass' ? duzceGlassAlternates() :
   pageKey === 'search-landing' && pageId ? searchLandingAlternates(pageId) :
@@ -55,6 +86,7 @@ if (pageKey === 'home') {
   alternates.he = 'https://ctseg.com.tr/he/';
 }
 if (String(lang) === 'he') alternates.he = canonicalUrl;
+else if (hebrewCounterpart) alternates.he = hebrewCounterpart;
 const alternateCodes = pageKey === 'glass'
   ? ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr']
   : (String(lang) === 'he' && pageKey === 'he-insight'
@@ -72,7 +104,9 @@ const alternateCodes = pageKey === 'glass'
     : pageKey === 'china-market-entry' ? ['zh']
     : pageKey === 'china-turkiye' ? ['tr']
     : pageKey === 'ukraine-turkiye' ? ['tr']
-    : pageKey === 'guides' ? ['tr','en'] : locales);
+    : pageKey === 'guides' ? ['tr','en']
+    : hebrewCounterpart ? [...locales,'he']
+    : locales);
 const organizationDescription = ({
   tr:'CTSEG, Türkiye merkezli iki yönlü küresel ticaret, stratejik tedarik, tedarikçi doğrulama ve pazara giriş çalışmaları yürüten bağımsız bir B2B ticaret evidir.',
   en:'CTSEG is a Türkiye-based independent B2B trade house for two-way global trade, strategic sourcing, supplier verification and market entry.',
