@@ -104,6 +104,36 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
     html body main .detailed-process li:nth-child(2n){border-right:0!important}
     html body .site-footer .footer-statement>strong{font-size:clamp(34px,5.8vw,54px)!important;text-wrap:balance!important;white-space:normal!important;max-width:18ch!important}
   }
+  /* Vietnamese: long natural headings must wrap; use stable static glyph rendering for diacritics. */
+  html[data-locale="vi"] body main .page-hero:not(.product-page-hero) h1{
+    width:min(100%,1120px)!important;
+    max-width:1120px!important;
+    margin-inline:auto!important;
+    white-space:normal!important;
+    text-wrap:balance!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+    hyphens:none!important;
+    font-family:"Segoe UI",Arial,sans-serif!important;
+    font-size:clamp(36px,3vw,52px)!important;
+    font-weight:700!important;
+    font-variation-settings:normal!important;
+    font-synthesis:none!important;
+    letter-spacing:-.025em!important;
+    line-height:1.08!important;
+    text-rendering:auto!important;
+    -webkit-font-smoothing:antialiased;
+  }
+  html[data-locale="vi"] body main .page-hero :is(.eyebrow,.lead,.breadcrumb){
+    font-family:"Segoe UI",Arial,sans-serif!important;
+    font-variation-settings:normal!important;
+    font-synthesis:none!important;
+    text-rendering:auto!important;
+    -webkit-font-smoothing:antialiased;
+  }
+  html[data-locale="vi"] body main .page-hero .eyebrow{font-weight:700!important}
+  html[data-locale="vi"] body main .page-hero .lead{font-weight:500!important}
+
   @media(max-width:620px){
     html body main .page-hero{padding-block:58px!important}
     html body main .page-hero.page-hero--compact{padding-block:40px!important}
