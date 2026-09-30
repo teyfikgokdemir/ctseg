@@ -5228,3 +5228,63 @@ html[data-locale=tr] :is(h1,h2,h3,h4,.trade-funnel-title,.corridor-list strong){
   font-synthesis:none;
 }
 html[data-locale=tr] strong{font-weight:700}
+
+/* HE TARGETED FORM + INSIGHT CONTRAST FIX — 2026-10-01 */
+html[data-locale=he] .he-standard-form-section .commercial-form{
+  color:#f5f6f1!important;
+}
+html[data-locale=he] .he-standard-form-section .commercial-intent-cards .intent-card{
+  background:#171b18!important;
+  border-color:#3b423c!important;
+  color:#f5f6f1!important;
+}
+html[data-locale=he] .he-standard-form-section .commercial-intent-cards .intent-card strong,
+html[data-locale=he] .he-standard-form-section .commercial-intent-cards .intent-card .intent-card-content,
+html[data-locale=he] .he-standard-form-section .commercial-intent-cards .intent-card .intent-card-icon{
+  color:#f5f6f1!important;
+  -webkit-text-fill-color:#f5f6f1!important;
+  opacity:1!important;
+}
+html[data-locale=he] .he-standard-form-section .commercial-intent-cards .intent-card[aria-pressed="true"]{
+  border-color:#c4f000!important;
+  background:#20251d!important;
+}
+html[data-locale=he] .he-standard-form-section .commercial-intent-cards .intent-card[aria-pressed="true"] strong,
+html[data-locale=he] .he-standard-form-section .commercial-intent-cards .intent-card[aria-pressed="true"] .intent-card-icon{
+  color:#c4f000!important;
+  -webkit-text-fill-color:#c4f000!important;
+}
+html[data-locale=he] .he-standard-form-section .commercial-field>span,
+html[data-locale=he] .he-standard-form-section .commercial-form-disclosure-title,
+html[data-locale=he] .he-standard-form-section .privacy-check{
+  color:#eef0ea!important;
+  -webkit-text-fill-color:#eef0ea!important;
+  opacity:1!important;
+  font-weight:700!important;
+}
+html[data-locale=he] .he-standard-form-section .commercial-field select,
+html[data-locale=he] .he-standard-form-section .commercial-field input,
+html[data-locale=he] .he-standard-form-section .commercial-field textarea{
+  background:#fffdf8!important;
+  color:#171917!important;
+  -webkit-text-fill-color:#171917!important;
+  border-color:#b8b1a5!important;
+}
+html[data-locale=he] .he-insights .card-grid .card{
+  background:#181b18!important;
+  border-color:#3b423c!important;
+  color:#f5f6f1!important;
+}
+html[data-locale=he] .he-insights .card-grid .card :is(h3,p,strong){
+  color:#f5f6f1!important;
+  -webkit-text-fill-color:#f5f6f1!important;
+  opacity:1!important;
+}
+html[data-locale=he] .he-insights .card-grid .card p{
+  color:#d7dbd5!important;
+  -webkit-text-fill-color:#d7dbd5!important;
+}
+html[data-locale=he] .he-insights .card-grid .card strong{
+  color:#c4f000!important;
+  -webkit-text-fill-color:#c4f000!important;
+}

@@ -19,7 +19,7 @@
 
   const initMarquee = () => {
     const tradePaths = document.querySelector('.trade-paths-section');
-    if (!tradePaths || document.querySelector('.premium-trade-marquee')) return;
+    if (!tradePaths || document.querySelector('[data-trade-marquee]') || document.querySelector('.premium-trade-marquee')) return;
 
     const locale = document.documentElement.dataset.locale || document.documentElement.lang || 'en';
     const copy = {
