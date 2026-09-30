@@ -53,7 +53,10 @@ const hebrewCounterpart = (() => {
     scenarios:'/he/תרחישים-מסחריים/'
   };
   if (pageKey === 'services' && pageId && serviceMap[pageId]) return `https://ctseg.com.tr${serviceMap[pageId]}`;
-  if (pageKey === 'products' && pageId) return `https://ctseg.com.tr/he/מוצרים-מסחריים/${pageId}/`;
+  if (pageKey === 'products' && pageId) {
+    const heProducts = new Set(['almonds','walnuts','mixed-nuts','raisins','dried-apricots-kernels','pumpkin-seeds','sunflower-seeds']);
+    return heProducts.has(pageId) ? `https://ctseg.com.tr/he/מוצרים-מסחריים/${pageId}/` : '';
+  }
   if (pageKey === 'legal' && pageId && legalMap[pageId]) return `https://ctseg.com.tr${legalMap[pageId]}`;
   if (pageKey === 'insights' && pageId) return '';
   return pageMap[pageKey] ? `https://ctseg.com.tr${pageMap[pageKey]}` : '';

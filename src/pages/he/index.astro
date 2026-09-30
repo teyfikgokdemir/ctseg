@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import CommercialRequestForm from '../../components/CommercialRequestForm.astro';
 const title='CTSEG | סחר B2B בין ישראל לטורקיה';
 const description='CTSEG מנהלת סחר B2B דו־כיווני בין ישראל לטורקיה: איתור ואימות ספקים, מותג פרטי/OEM, RFQ, MOQ, כשרות, FOB/CIF וכניסה לשוק.';
 const schemas=[
@@ -114,49 +115,17 @@ const schemas=[
     <div class="he-about-copy"><p>CTSEG פועלת מטורקיה כגוף מסחרי עצמאי המחבר בין יצרנים, קונים ושותפים עסקיים. במסדרון ישראל ⇄ טורקיה המיקוד הוא על תהליך שניתן לבדוק: דרישה ברורה, ספק מתאים, מסמכים, הצעה מסחרית וצעדים הבאים.</p></div>
   </div></section>
 
-  <section class="section commercial-form-section" id="contact"><div class="container">
-    <div class="section-head"><h2>שלחו דרישה מסחרית.</h2><p>חברה, מוצר או שירות, כמות משוערת, מקור/יעד, אריזה, מסמכים נדרשים ותנאי אספקה מועדפים.</p></div>
-    <div class="he-contact-layout">
-      <aside class="side-panel">
-        <p class="eyebrow">CTSEG · צוות מסחרי</p>
-        <h3>ערוצי קשר ישירים</h3>
-        <p dir="ltr"><a href="https://wa.me/905456782655">WhatsApp · +90 545 678 26 55</a></p>
-        <p dir="ltr"><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></p>
-      </aside>
-      <form class="commercial-form he-commercial-form" data-he-form>
-        <label>סוג הבקשה<select name="intent" required><option value="buyer_request">איתור ספק / יצרן</option><option value="supplier_market_entry">איתור קונים / כניסה לשוק</option><option value="external_trade_desk">ניהול פעילות סחר חוץ</option></select></label>
-        <label>כיוון הסחר<select name="tradeDirection" required><option value="export_from_turkiye">טורקיה → ישראל</option><option value="import_to_turkiye">ישראל → טורקיה</option><option value="cross_border_איתור ורכש">מסחר בינלאומי אחר</option></select></label>
-        <label>השירות הנדרש<select name="supportNeed" required><option value="supplier_איתור ורכש">איתור ואימות ספק</option><option value="rfq_comparison">RFQ והשוואת הצעות</option><option value="private_label">מותג פרטי / OEM</option><option value="market_entry">כניסה לשוק ופיתוח קונים</option><option value="document_assessment">בדיקת מוצר ומסמכים</option><option value="external_trade_desk">External Trade Desk</option><option value="other">אחר</option></select></label>
-        <label>קטגוריית מוצר<select name="productFamily" required><option value="nuts_dried_fruit">אגוזים, פירות יבשים ומזון</option><option value="vegetable_oils">שמנים ומוצרי מזון</option><option value="architectural_glass">זכוכית וחומרי בנייה</option><option value="biofuel_feedstock">חומרי גלם לאנרגיה ולתעשייה</option><option value="other">קטגוריה אחרת</option></select></label>
-        <label>שם מלא<input name="name" required autocomplete="name" /></label>
-        <label>חברה<input name="company" required autocomplete="organization" /></label>
-        <label>אימייל או טלפון<input name="emailOrPhone" required dir="ltr" /></label>
-        <label>מוצר / שירות<input name="product" /></label>
-        <label>כמות משוערת<input name="quantity" dir="ltr" placeholder="MT / units / containers" /></label>
-        <label>Incoterm מועדף<input name="incoterm" dir="ltr" placeholder="EXW / FOB / CIF" /></label>
-        <label class="he-full">דרישות איכות / כשרות / מסמכים<input name="requirements" placeholder="כשרות, COA, חיי מדף, אישורים…" /></label>
-        <label class="he-full">פרטי הבקשה<textarea name="message" required></textarea></label>
-        <input type="text" name="website" tabindex="-1" autocomplete="off" class="he-honeypot" aria-hidden="true" />
-        <label class="he-consent"><input type="checkbox" name="privacy" value="accepted" required /> אני מאשר/ת שימוש בפרטים לצורך בחינת הבקשה המסחרית.</label>
-        <button class="button he-submit" type="submit">שליחת הבקשה</button>
-        <div class="he-form-status" role="status" aria-live="polite" data-he-status></div>
-      </form>
-    </div>
-  </div></section>
+  <section class="section he-standard-form-section" id="contact"><div class="container"><CommercialRequestForm lang="he" /></div></section>
 
-  <script>
-    const form=document.querySelector('[data-he-form]');const status=document.querySelector('[data-he-status]');
-    if(form){const startedAt=Date.now();form.addEventListener('submit',async(e)=>{e.preventDefault();status.textContent='שולח…';const fd=new FormData(form);const payload=Object.fromEntries(fd.entries());payload.locale='he';payload.startedAt=String(startedAt);payload.pagePath=location.pathname;payload.landingPath=sessionStorage.getItem('ctseg-landing-path')||location.pathname;payload.referrerHost=document.referrer?new URL(document.referrer).hostname:'';try{const r=await fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw new Error('request_failed');form.reset();status.textContent='הבקשה התקבלה. צוות CTSEG יחזור אליכם לאחר בדיקה ראשונית.';}catch{status.textContent='לא ניתן היה לשלוח כרגע. אפשר לפנות ישירות ב‑WhatsApp או באימייל.'}})}
-  </script>
 </BaseLayout>
 
 <style is:global>
 html[data-locale="he"] body{direction:rtl}
 html[data-locale="he"] .site-header,html[data-locale="he"] .site-footer{direction:rtl}
 html[data-locale="he"] .homepage-hero-stage,html[data-locale="he"] .trade-gateway-banner{direction:rtl}
-html[data-locale="he"] .hero-copy{text-align:right}
-html[data-locale="he"] .he-home-title{font-size:clamp(38px,4.7vw,68px)!important;line-height:1.02!important;letter-spacing:-.035em!important;max-width:760px!important;margin-inline:0!important}
-html[data-locale="he"] .he-home .lead{max-width:760px}
+html[data-locale="he"] .hero-copy{text-align:center}
+html[data-locale="he"] .he-home-title{font-size:clamp(38px,4.7vw,68px)!important;line-height:1.02!important;letter-spacing:-.035em!important;max-width:760px!important;margin-inline:auto!important}
+html[data-locale="he"] .he-home .lead{max-width:760px;margin-inline:auto;text-align:center}
 html[data-locale="he"] bdi,html[data-locale="he"] [dir="ltr"]{unicode-bidi:isolate}
 .he-service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .he-service-card{min-height:210px;padding:28px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.025);display:flex;flex-direction:column;justify-content:flex-end}

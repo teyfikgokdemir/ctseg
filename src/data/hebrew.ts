@@ -113,14 +113,13 @@ export const productProfiles = {
   'mixed-nuts':{group:'מותג פרטי / אגוזים',formats:'תערובת מותאמת, משקל יחידה, יחס רכיבים ואריזת קמעונאות',quality:'אימות כל רכיב, אחידות, חיי מדף, אלרגנים, כשרות כאשר נדרשת ומסמכי איכות',uses:'מותג פרטי, קמעונאות, מארזי מתנה, מסחר אלקטרוני והפצה'}
 };
 
+export const israelProductIds = ['almonds','walnuts','mixed-nuts','raisins','dried-apricots-kernels','pumpkin-seeds','sunflower-seeds'];
+
 export const productGroups = [
-  {title:'פיסטוקים וגרעיני פיסטוק',ids:['akbari-pistachio','kaleghouchi-pistachio','fandoghi-pistachio','ahmad-aghaei-pistachio','green-peeled-pistachio','pistachio-גרנולות'],lead:'זנים, גרעינים וגרנולות לפי גודל, איכות, שימוש, אריזה ומסמכי אצווה.'},
-  {title:'תמרים ומוצרי תמרים',ids:['mazafati-dates','date-מחית-syrup'],lead:'פרי שלם ומוצרי עיבוד עבור קמעונאות, HoReCa ותעשיית המזון.'},
-  {title:'אגוזים',ids:['almonds','walnuts','mixed-nuts'],lead:'שקדים, אגוזי מלך ותערובות מותאמות עבור סיטונאות, קמעונאות ו-מותג פרטי.'},
-  {title:'פירות יבשים',ids:['raisins','dried-apricots-kernels','dried-mulberries'],lead:'מפרט מסחרי מבוסס לחות, מיון, ניקיון, אריזה ושוק יעד.'},
-  {title:'זרעים',ids:['pumpkin-seeds','sunflower-seeds'],lead:'גרעינים לשוק חטיפים, מאפייה, עיבוד ואריזה סיטונאית.'},
-  {title:'מוצרים מיוחדים',ids:['saffron','zereshk'],lead:'קטגוריות הדורשות תשומת לב למקור, דרגת איכות, מסמכים ואחסון.'}
-];
+  {title:'אגוזים ותערובות',ids:['almonds','walnuts','mixed-nuts'],lead:'שקדים, אגוזי מלך ותערובות מותאמות עבור סיטונאות, קמעונאות ומותג פרטי — לפי מקור מאושר, מפרט ושוק יעד.'},
+  {title:'פירות יבשים',ids:['raisins','dried-apricots-kernels'],lead:'קטגוריות מזון הנבחנות לפי לחות, מיון, ניקיון, אריזה, מסמכי איכות ושוק יעד.'},
+  {title:'זרעים',ids:['pumpkin-seeds','sunflower-seeds'],lead:'גרעינים לשוק החטיפים, מאפייה, עיבוד ואריזה סיטונאית — לפי מפרט ומקור מסחרי מתאים.'}
+]
 
 export const staticPages = [
   {path:'שירותים',key:'services',title:'שירותי סחר ורכש',lead:'מ־איתור ורכש ואימות ספקים ועד RFQ, TCO וכניסה לשוק — תהליך אחד, שקוף וניתן לבקרה.'},

@@ -76,6 +76,7 @@ const globalLocales = activeLocaleRegistry.map((entry) => entry.code) as string[
 const globalLocaleNames: Record<string,string> = Object.fromEntries(activeLocaleRegistry.map((entry) => [entry.code, entry.label]));
 const globalLocaleFlags: Record<string,string> = {tr:'/images/flags/tr.svg',en:'/images/flags/gb.svg',de:'/images/flags/de.svg',it:'/images/flags/it.svg',fa:'/images/flags/ir.svg',ru:'/images/flags/ru.svg',zh:'/images/flags/cn.svg',vi:'/images/flags/vn.svg',ro:'/images/flags/ro.svg',bg:'/images/flags/bg.svg',he:'/images/flags/il.svg',uk:'/images/flags/ua.svg'};
 
+const heVisibleProductIds = new Set(['almonds','walnuts','mixed-nuts','raisins','dried-apricots-kernels','pumpkin-seeds','sunflower-seeds']);
 const heServicePaths:Record<string,string> = {
   'strategic-sourcing':'/he/שירותים/רכש-אסטרטגי/',
   'supplier-verification':'/he/שירותים/איתור-ואימות-ספקים/',
@@ -97,7 +98,7 @@ const globalSwitchPath = (target: string): string => {
   if (pageKey === 'search-landing' && pageId) return searchLandingPath(target as Locale,pageId as SearchLandingId);
   if (target === 'he') {
     if (pageKey === 'services' && pageId && heServicePaths[pageId]) return heServicePaths[pageId];
-    if (pageKey === 'products' && pageId) return `/he/מוצרים-מסחריים/${pageId}/`;
+    if (pageKey === 'products' && pageId) return heVisibleProductIds.has(pageId) ? `/he/מוצרים-מסחריים/${pageId}/` : '/he/מוצרים-מסחריים/';
     if (pageKey === 'legal') {
       const heLegal:Record<string,string> = {privacy:'/he/מדיניות-פרטיות/',cookies:'/he/מדיניות-עוגיות/',terms:'/he/תנאי-שימוש/','data-protection':'/he/הודעת-הגנת-מידע/'};
       return pageId && heLegal[pageId] ? heLegal[pageId] : '/he/';
