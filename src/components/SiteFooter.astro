@@ -3,8 +3,14 @@ import { company, companyCopy, legal, legalIds, localizedPath, ui, type Locale }
 import { duzceGlassPath, type DuzceGlassLocale } from '../data/duzce-glass';
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 const { lang, pageKey } = Astro.props as { lang: Locale; pageKey?: string };
-const t = ui[lang] || ui.en;
-const corporate = companyCopy[lang] || companyCopy.en;
+const t = lang === 'he' ? {
+  ...ui.en, home:'בית', services:'סחר גלובלי', products:'תחומי סחר', markets:'שווקים',
+  insights:'תובנות', about:'אודות', contact:'יצירת קשר', quote:'שליחת בקשה',
+  cookieTitle:'העדפות עוגיות'
+} : (ui[lang] || ui.en);
+const corporate = lang === 'he'
+  ? { ...companyCopy.en, footerLocation:'Tuzla, İstanbul, Türkiye' }
+  : (companyCopy[lang] || companyCopy.en);
 const year = new Date().getFullYear();
 const descriptionMap: Record<string, string> = {
   tr:'Türkiye merkezli uluslararası ticaret eşleştirme ve bağımsız ticari koordinasyon.',
@@ -21,7 +27,8 @@ const descriptionMap: Record<string, string> = {
   mk:'Трговска куќа со седиште во Турција за двонасочна глобална трговија и стратешка набавка.',
   sr:'Trgovinska kuća sa sedištem u Türkiye za dvosmernu globalnu trgovinu i strateški sourcing.',
   ro:'Casă de comerț B2B cu sediul în Türkiye pentru comerț global bidirecțional, sourcing strategic și acces pe piețe.',
-  bg:'B2B търговска къща със седалище в Türkiye за двупосочна глобална търговия, стратегическо снабдяване и пазарен достъп.'
+  bg:'B2B търговска къща със седалище в Türkiye за двупосочна глобална търговия, стратегическо снабдяване и пазарен достъп.',
+  he:'בית מסחר B2B מבוסס טורקיה לסחר דו־כיווני, איתור ואימות ספקים וכניסה לשווקים בין ישראל לטורקיה.'
 };
 const description = descriptionMap[lang] || descriptionMap.en;
 const copyrightMap: Record<string, string> = {
@@ -39,7 +46,8 @@ const copyrightMap: Record<string, string> = {
   mk:`© ${year} CTSEG. Сите права се задржани.`,
   sr:`© ${year} CTSEG. Sva prava zadržana.`,
   ro:`© ${year} CTSEG. Toate drepturile rezervate.`,
-  bg:`© ${year} CTSEG. Всички права запазени.`
+  bg:`© ${year} CTSEG. Всички права запазени.`,
+  he:`© ${year} CTSEG. כל הזכויות שמורות.`
 };
 const copyright = copyrightMap[lang] || copyrightMap.en;
 const marketLocales: Array<{ code:string; flagSrc:string; label:string; href:string }> = [
@@ -56,7 +64,7 @@ const marketLocales: Array<{ code:string; flagSrc:string; label:string; href:str
   { code:'he', flagSrc:'/images/flags/il.svg', label:'עברית', href:'/he/' },
   { code:'uk', flagSrc:'/images/flags/ua.svg', label:'Україна', href:'/uk/' }
 ];
-const marketLabel = ({tr:'Global Pazarlar',en:'Global Markets',de:'Globale Märkte',it:'Mercati globali',fa:'بازارهای جهانی',ru:'Глобальные рынки',zh:'全球市场',vi:'Thị trường toàn cầu',uk:'Міжнародні ринки',ro:'Piețe globale',bg:'Глобални пазари',sr:'Globalna tržišta'} as Record<string,string>)[lang] || 'Global Markets';
+const marketLabel = ({tr:'Global Pazarlar',en:'Global Markets',de:'Globale Märkte',it:'Mercati globali',fa:'بازارهای جهانی',ru:'Глобальные рынки',zh:'全球市场',vi:'Thị trường toàn cầu',uk:'Міжнародні ринки',ro:'Piețe globale',bg:'Глобални пазари',sr:'Globalna tržišta',he:'שווקים גלובליים'} as Record<string,string>)[lang] || 'Global Markets';
 const footerNav = ({
   tr:{portfolio:'Ticaret Portföyü',overview:'Portföyü İnceleyin',sourcing:'Stratejik Tedarik',marketEntry:'İhracat ve Pazara Giriş',intelligence:'Ticaret İçgörüleri'},
   en:{portfolio:'Trade Portfolio',overview:'Explore the Portfolio',sourcing:'Strategic Sourcing',marketEntry:'Export & Market Entry',intelligence:'Trade Intelligence'},
@@ -69,7 +77,8 @@ const footerNav = ({
   uk:{portfolio:'Торговельний портфель',overview:'Переглянути портфель',sourcing:'Стратегічне постачання',marketEntry:'Експорт і вихід на ринок',intelligence:'Торговельна аналітика'},
   ro:{portfolio:'Portofoliu Comercial',overview:'Vezi portofoliul',sourcing:'Sourcing strategic',marketEntry:'Export și intrare pe piață',intelligence:'Analize comerciale'},
   bg:{portfolio:'Търговско портфолио',overview:'Виж портфолиото',sourcing:'Стратегическо снабдяване',marketEntry:'Износ и навлизане на пазара',intelligence:'Търговски анализи'},
-  sr:{portfolio:'Trgovinski portfolio',overview:'Pogledaj portfolio',sourcing:'Strateški sourcing',marketEntry:'Izvoz i ulazak na tržište',intelligence:'Trgovinski uvidi'}
+  sr:{portfolio:'Trgovinski portfolio',overview:'Pogledaj portfolio',sourcing:'Strateški sourcing',marketEntry:'Izvoz i ulazak na tržište',intelligence:'Trgovinski uvidi'},
+  he:{portfolio:'סחר ופתרונות',overview:'תחומי סחר',sourcing:'איתור ואימות ספקים',marketEntry:'כניסה לשוק',intelligence:'תובנות מסחריות'}
 } as Record<string,{portfolio:string;overview:string;sourcing:string;marketEntry:string;intelligence:string}>)[lang] || {portfolio:'Trade Portfolio',overview:'Explore the Portfolio',sourcing:'Strategic Sourcing',marketEntry:'Export & Market Entry',intelligence:'Trade Intelligence'};
 const statementMap: Record<string,string> = {
   tr:'SINIRLARIN ÖTESİNDE TİCARET.',
@@ -83,9 +92,18 @@ const statementMap: Record<string,string> = {
   uk:'ТОРГІВЛЯ БЕЗ КОРДОНІВ.',
   ro:'COMERȚ DINCOLO DE GRANIȚE.',
   bg:'ТЪРГОВИЯ ОТВЪД ГРАНИЦИТЕ.',
-  sr:'TRGOVINA BEZ GRANICA.'
+  sr:'TRGOVINA BEZ GRANICA.',
+  he:'סחר ללא גבולות.'
 };
 const footerStatement = statementMap[lang] || statementMap.en;
+const footerPath = (key:string,id?:string) => {
+  if (lang !== 'he') return localizedPath(lang,key,id);
+  const map:Record<string,string> = {
+    home:'/he/', products:'/he/#private-label', services:'/he/#sourcing', markets:'/he/#sectors',
+    insights:'/he/#insights', about:'/he/#about', contact:'/he/#contact', 'how-we-work':'/he/#process'
+  };
+  return map[key] || '/he/';
+};
 const focusedCountryHome = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
 const showGenericPortfolio = !focusedCountryHome;
 const showGlassLink = !focusedCountryHome || lang === 'fa';
@@ -99,11 +117,11 @@ const safeGlassLang = (['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg'].
     <i>{lang === 'uk' ? 'Türkiye ↔ Європа ↔ Близький Схід ↔ Азія' : 'Türkiye ↔ Europe ↔ Middle East ↔ Asia'}</i>
   </div>
   <div class="container footer-main">
-    <div class="footer-brand"><a class="brand" href={localizedPath(lang, 'home')}><img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" loading="lazy" decoding="async" /></a><p>{description}</p><div class="footer-company"><strong>{company.name[lang] || company.name.en}</strong><span>{company.foundingYear} · {corporate.footerLocation}</span></div></div>
-    <nav aria-label={footerNav.portfolio}><strong>{focusedCountryHome ? 'CTSEG' : footerNav.portfolio}</strong>{showGenericPortfolio && <a href={localizedPath(lang, 'products')}>{footerNav.overview}</a>}<a href={localizedPath(lang,'services','strategic-sourcing')}>{footerNav.sourcing}</a><a href={localizedPath(lang,'services','market-entry')}>{footerNav.marketEntry}</a>{showGlassLink && <a href={duzceGlassPath(safeGlassLang)}>{({tr:'Düzce Cam Dış Ticaret',en:'Düzce Float Glass Export',de:'Düzce Float Glass Export',it:'Düzce Float Glass Export',fa:'صادرات شیشه Düzce',ru:'Экспорт Düzce Float Glass',zh:'Düzce 浮法玻璃出口',vi:'Xuất khẩu Düzce Float Glass',uk:'Експорт флоат-скла Düzce',ro:'Export Düzce Float Glass',bg:'Износ Düzce Float Glass',sr:'Izvoz Düzce Float Glass',sq:'Düzce Float Glass',mk:'Düzce Float Glass'}[lang] || 'Düzce Float Glass Export')}</a>}<a href={localizedPath(lang, 'markets')}>{t.markets}</a><a href={localizedPath(lang, 'insights')}>{footerNav.intelligence}</a></nav>
-    <nav aria-label={t.contact}><strong>CTSEG</strong><a href={localizedPath(lang, 'about')}>{t.about}</a>{(lang === 'tr' || lang === 'en' || lang === 'fa' || lang === 'zh' || lang === 'vi' || lang === 'ro' || lang === 'bg' || lang === 'sr') && <a href={localizedPath(lang,'how-we-work')}>{lang === 'tr' ? 'Nasıl çalışıyoruz?' : lang === 'fa' ? 'چگونه کار می‌کنیم؟' : lang === 'zh' ? '运作模式' : lang === 'vi' ? 'Phương thức hoạt động' : lang === 'ro' ? 'Cum lucrăm' : lang === 'bg' ? 'Как работим' : lang === 'sr' ? 'Kako radimo' : 'How we work'}</a>}<a href={localizedPath(lang, 'contact')}>{t.contact}</a><a href={`mailto:${company.email}`}>{company.email}</a><a href="https://t.me/teyfikgokdemir" target="_blank" rel="noopener noreferrer" aria-label="Telegram: @teyfikgokdemir">Telegram (@teyfikgokdemir)</a></nav>
+    <div class="footer-brand"><a class="brand" href={footerPath('home')}><img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" loading="lazy" decoding="async" /></a><p>{description}</p><div class="footer-company"><strong>{lang === 'he' ? 'CTSEG Sanayi ve Ticaret Limited Şirketi' : (company.name[lang] || company.name.en)}</strong><span>{company.foundingYear} · {corporate.footerLocation}</span></div></div>
+    <nav aria-label={footerNav.portfolio}><strong>{focusedCountryHome ? 'CTSEG' : footerNav.portfolio}</strong>{showGenericPortfolio && <a href={footerPath('products')}>{footerNav.overview}</a>}<a href={footerPath('services','strategic-sourcing')}>{footerNav.sourcing}</a><a href={footerPath('services','market-entry')}>{footerNav.marketEntry}</a>{showGlassLink && <a href={duzceGlassPath(safeGlassLang)}>{({tr:'Düzce Cam Dış Ticaret',en:'Düzce Float Glass Export',de:'Düzce Float Glass Export',it:'Düzce Float Glass Export',fa:'صادرات شیشه Düzce',ru:'Экспорт Düzce Float Glass',zh:'Düzce 浮法玻璃出口',vi:'Xuất khẩu Düzce Float Glass',uk:'Експорт флоат-скла Düzce',ro:'Export Düzce Float Glass',bg:'Износ Düzce Float Glass',sr:'Izvoz Düzce Float Glass',sq:'Düzce Float Glass',mk:'Düzce Float Glass'}[lang] || 'Düzce Float Glass Export')}</a>}<a href={footerPath('markets')}>{t.markets}</a><a href={footerPath('insights')}>{footerNav.intelligence}</a></nav>
+    <nav aria-label={t.contact}><strong>CTSEG</strong><a href={footerPath('about')}>{t.about}</a>{(lang === 'tr' || lang === 'en' || lang === 'fa' || lang === 'zh' || lang === 'vi' || lang === 'ro' || lang === 'bg' || lang === 'sr' || lang === 'he') && <a href={footerPath('how-we-work')}>{lang === 'tr' ? 'Nasıl çalışıyoruz?' : lang === 'fa' ? 'چگونه کار می‌کنیم؟' : lang === 'zh' ? '运作模式' : lang === 'vi' ? 'Phương thức hoạt động' : lang === 'ro' ? 'Cum lucrăm' : lang === 'bg' ? 'Как работим' : lang === 'sr' ? 'Kako radimo' : lang === 'he' ? 'איך אנחנו עובדים' : 'How we work'}</a>}<a href={footerPath('contact')}>{t.contact}</a><a href={`mailto:${company.email}`}>{company.email}</a><a href="https://t.me/teyfikgokdemir" target="_blank" rel="noopener noreferrer" aria-label="Telegram: @teyfikgokdemir">Telegram (@teyfikgokdemir)</a></nav>
   </div>
-  <div class="container footer-bottom"><p>{copyright}</p><nav aria-label={lang === 'uk' ? 'Правова інформація' : 'Legal'}>{legalIds.map((id) => <a href={localizedPath(lang, 'legal', id)}>{legal[id].titles[lang] || legal[id].titles.en}</a>)}</nav></div>
+  <div class="container footer-bottom"><p>{copyright}</p><nav aria-label={lang === 'uk' ? 'Правова інформація' : 'Legal'}>{legalIds.map((id) => <a href={lang === 'he' ? '/en/'+legal[id].slugs.en+'/' : localizedPath(lang, 'legal', id)}>{legal[id].titles[lang] || legal[id].titles.en}</a>)}</nav></div>
 <div style="text-align:center;padding:12px 20px"><button type="button" data-cookie-settings style="font:inherit;color:inherit;background:transparent;border:0;text-decoration:underline;min-height:44px;padding:8px 12px;cursor:pointer">{t.cookieTitle}</button></div>
 </footer>
 <style is:global>

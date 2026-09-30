@@ -662,17 +662,22 @@ try {
     const response=await page.goto('http://127.0.0.1:4321/he/',{waitUntil:'domcontentloaded'});
     if(response?.status()!==200)failures.push(`Hebrew hub/${viewport.name}: HTTP ${response?.status()??'none'}`);
     const contract=await page.evaluate(()=>{
-      const options=[...document.querySelectorAll('.he-lang [data-locale-option]')];
+      const selector=window.innerWidth<700?'.mobile-lang-grid [data-locale-option]':'#language-panel [data-locale-option]';
+      const options=[...document.querySelectorAll(selector)];
       return {
         lang:document.documentElement.lang,dir:document.documentElement.dir,
         bodyDirection:getComputedStyle(document.body).direction,
-        options:options.length,hasGlobe:Boolean(document.querySelector('.he-lang .locale-globe')),
+        options:options.length,
+        active:options.filter(link=>link.getAttribute('aria-current')==='page').length,
+        hasIsraelFlag:Boolean(document.querySelector('img[src="/images/flags/il.svg"]')),
         h1s:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth-window.innerWidth,
         hasForm:Boolean(document.querySelector('[data-he-form]')),
-        hasReverseTrade:document.body.innerText.includes('ישראל → טורקיה')
+        hasReverseTrade:document.body.innerText.includes('ישראל → טורקיה'),
+        usesStandardHeader:Boolean(document.querySelector('.site-header')),
+        usesStandardFooter:Boolean(document.querySelector('.site-footer'))
       };
     });
-    if(contract.lang!=='he-IL'||contract.dir!=='rtl'||contract.bodyDirection!=='rtl'||contract.options!==rootLocaleCount||!contract.hasGlobe||contract.h1s!==1||contract.overflow>1||!contract.hasForm||!contract.hasReverseTrade){
+    if(contract.lang!=='he-IL'||contract.dir!=='rtl'||contract.bodyDirection!=='rtl'||contract.options!==rootLocaleCount||contract.active!==1||!contract.hasIsraelFlag||contract.h1s!==1||contract.overflow>1||!contract.hasForm||!contract.hasReverseTrade||!contract.usesStandardHeader||!contract.usesStandardFooter){
       failures.push(`Hebrew hub/${viewport.name}: ${JSON.stringify(contract)}`);
     }
     console.log(`hebrew-hub-${viewport.name}: options=${contract.options}, overflow=${contract.overflow}px`);

@@ -53,9 +53,12 @@ if (pageKey === 'home') {
   alternates.ru = 'https://ctseg.com.tr/ru/';
   alternates.he = 'https://ctseg.com.tr/he/';
 }
+if (String(lang) === 'he') alternates.he = canonicalUrl;
 const alternateCodes = pageKey === 'glass'
   ? ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr']
-  : (pageKey === 'home'
+  : (String(lang) === 'he' && pageKey === 'he-insight'
+    ? ['he']
+    : pageKey === 'home'
     ? activeLocales
     : pageKey === 'insights' && pageId
     ? ['tr','en','de','it','ru','fa','zh','vi','uk']
@@ -174,15 +177,15 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
   </head>
   <body>
-    <a class="skip-link" href="#main">{lang === 'uk' ? 'Перейти до основного вмісту' : lang === 'ru' ? 'Перейти к содержанию' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : lang === 'ro' ? 'Sari la conținutul principal' : lang === 'bg' ? 'Към основното съдържание' : lang === 'sr' ? 'Pređi na glavni sadržaj' : 'Skip to content'}</a>
+    <a class="skip-link" href="#main">{lang === 'uk' ? 'Перейти до основного вмісту' : lang === 'ru' ? 'Перейти к содержанию' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : lang === 'ro' ? 'Sari la conținutul principal' : lang === 'bg' ? 'Към основното съдържание' : lang === 'sr' ? 'Pređi na glavni sadržaj' : lang === 'he' ? 'דלג לתוכן הראשי' : 'Skip to content'}</a>
     <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
     <main id="main">
       <slot />
-      {pageKey === 'home' && !['de','it','ru','fa','zh','vi'].includes(String(lang)) && <TradeHouseStatement lang={lang as Locale} />}
+      {pageKey === 'home' && !['de','it','ru','fa','zh','vi','he'].includes(String(lang)) && <TradeHouseStatement lang={lang as Locale} />}
       {pageKey === 'home' && !['de','it','ru','fa','zh','vi'].includes(String(lang)) && <TradeVideo lang={lang} />}
     </main>
     <SiteFooter lang={lang} pageKey={pageKey} />
-    {pageKey === 'home' && <FloatingActions lang={lang} />}
+    {pageKey === 'home' && String(lang) !== 'he' && <FloatingActions lang={lang} />}
     <aside class="cookie-consent" data-cookie-consent hidden aria-label={t.cookieTitle}>
       <div class="cookie-copy-inline"><strong>{t.cookieTitle}</strong><span>{t.cookieCopy}</span><a href={cookieHref}>{t.details}</a></div>
       <div class="cookie-actions"><button type="button" data-cookie-reject>{t.reject}</button><button type="button" class="accept" data-cookie-accept>{t.accept}</button></div>

@@ -76,7 +76,7 @@ const pageChecks = [
       response.ok &&
       body.includes('<html lang="he-IL" dir="rtl"') &&
       body.includes('hreflang="he"') &&
-      body.includes('locale-globe') &&
+      body.includes('/images/flags/il.svg') &&
       body.includes('Israel ⇄ Türkiye') &&
       body.includes('RFQ') &&
       body.includes('Kosher') &&

@@ -1,77 +1,174 @@
 ---
-import HebrewLayout from '../../layouts/HebrewLayout.astro';
-const title='CTSEG | סחר B2B, איתור ספקים וכניסה לשוק בין ישראל לטורקיה';
-const description='CTSEG מנהלת סחר B2B דו־כיווני בין ישראל לטורקיה: איתור ואימות יצרנים וספקים, RFQ, מותג פרטי, MOQ, כשרות, FOB/CIF, פיתוח קונים וכניסה לשוק.';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const title='CTSEG | סחר B2B בין ישראל לטורקיה';
+const description='CTSEG מנהלת סחר B2B דו־כיווני בין ישראל לטורקיה: איתור ואימות ספקים, Private Label/OEM, RFQ, MOQ, כשרות, FOB/CIF וכניסה לשוק.';
+const schemas=[
+  {'@context':'https://schema.org','@type':'Service','@id':'https://ctseg.com.tr/he/#israel-turkiye-trade',name:'Israel ⇄ Türkiye B2B Sourcing & Market Entry',description,inLanguage:'he-IL',provider:{'@id':'https://ctseg.com.tr/#organization'},areaServed:['Israel','Türkiye'],serviceType:'Two-way B2B sourcing, supplier verification, private label, RFQ and market entry'},
+  {'@context':'https://schema.org','@type':'FAQPage',mainEntity:[
+    {'@type':'Question',name:'האם CTSEG עובדת גם מישראל לטורקיה?',acceptedAnswer:{'@type':'Answer',text:'כן. CTSEG מנהלת גם איתור קונים, מפיצים ושותפים בטורקיה עבור חברות מישראל, לצד sourcing וייבוא מטורקיה לישראל.'}},
+    {'@type':'Question',name:'האם ניתן לנהל פרויקט Private Label?',acceptedAnswer:{'@type':'Answer',text:'כן. ניתן לתאם יצרן, MOQ, אריזה, מסמכי איכות, דרישות כשרות, דוגמאות ותנאי EXW/FOB/CIF לפי הפרויקט.'}}
+  ]}
+];
 ---
-<HebrewLayout title={title} description={description} canonical="https://ctseg.com.tr/he/">
-<section class="he-hero"><div class="he-shell">
-<p class="he-eyebrow" style="text-align:center">CTSEG · ISRAEL ⇄ TÜRKİYE</p>
-<h1>סחר B2B בין ישראל לטורקיה, עם תהליך מסחרי מסודר.</h1>
-<p class="lead">איתור ספקים ויצרנים, אימות מפעלים, ניהול <bdi>RFQ</bdi>, ייצור מותג פרטי, דרישות כשרות, <bdi>MOQ</bdi>, תנאי <bdi>FOB / CIF</bdi> ופיתוח שוק — בשני כיווני הסחר.</p>
-<div class="he-actions"><a class="he-button" href="#contact">שליחת בקשה מסחרית</a><a class="he-button alt" href="#sourcing">איך אנחנו עובדים</a></div>
-<div class="he-kpis"><span>ישראל ⇄ טורקיה</span><span>Supplier Verification</span><span>Private Label / OEM</span><span>RFQ & Bid Comparison</span><span>Kosher Requirements</span><span>FOB / CIF</span></div>
-</div></section>
+<BaseLayout lang="he" title={title} description={description} pageKey="home" canonical="https://ctseg.com.tr/he/" schema={schemas}>
+  <section class="hero homepage-trade-hero he-home">
+    <div class="container hero-grid">
+      <div class="homepage-hero-stage">
+        <div class="hero-copy">
+          <p class="eyebrow">CTSEG · ISRAEL ⇄ TÜRKİYE</p>
+          <h1 class="he-home-title">סחר B2B בין ישראל לטורקיה.</h1>
+          <p class="lead">איתור ואימות ספקים, ניהול <bdi>RFQ</bdi>, מותג פרטי, <bdi>MOQ</bdi>, דרישות כשרות, תנאי <bdi>FOB / CIF</bdi> וכניסה לשוק — בשני כיווני המסחר.</p>
+          <div class="hero-proof-pills" aria-label="יכולות מסחריות">
+            <span>Supplier Verification</span><span>Private Label / OEM</span><span>RFQ & MOQ</span><span>Kosher Requirements</span>
+          </div>
+          <div class="actions trade-intent-actions">
+            <a class="button" href="#contact">שליחת בקשה מסחרית</a>
+            <a class="button button-secondary" href="#sourcing">איך אנחנו עובדים</a>
+          </div>
+        </div>
+        <figure class="hero-visual">
+          <img src="/images/ctseg-global-trade-hero-new.webp" width="1400" height="536" alt="סחר בינלאומי בין ישראל לטורקיה" loading="eager" fetchpriority="high" decoding="async" />
+        </figure>
+      </div>
+      <div class="trade-gateway-banner">
+        <div class="trade-funnel-card">
+          <div><span class="trade-funnel-kicker">TÜRKİYE → ISRAEL</span><h3 class="trade-funnel-title">איתור ספקים וייצור בטורקיה</h3><p class="trade-funnel-desc">יצרנים מאומתים, Private Label, מסמכים, דוגמאות, אריזה, כשרות ותנאי אספקה לישראל.</p></div>
+          <a class="button" href="#contact">בקשת sourcing →</a>
+        </div>
+        <div class="trade-funnel-card">
+          <div><span class="trade-funnel-kicker">ISRAEL → TÜRKİYE</span><h3 class="trade-funnel-title">כניסה לשוק ופיתוח קונים בטורקיה</h3><p class="trade-funnel-desc">איתור מפיצים, קונים ושותפים מסחריים עבור יצרנים, מותגים וספקי פתרונות מישראל.</p></div>
+          <a class="button button-secondary" href="#market-entry">פיתוח שוק →</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="he-section" id="sourcing"><div class="he-shell">
-<h2>מסחר דו־כיווני, לא רק יצוא מטורקיה.</h2>
-<p class="he-lead">המודל של CTSEG בנוי גם עבור יבואנים וקונים בישראל שמחפשים יצרנים בטורקיה, וגם עבור חברות ישראליות שמבקשות להיכנס לשוק הטורקי או לאתר קונים ושותפים מסחריים.</p>
-<div class="he-band">
-<article><h3>טורקיה → ישראל</h3><p>איתור יצרן, אימות ספק, בקשת הצעת מחיר, מותג פרטי, מסמכי מוצר ואצווה, דרישות כשרות, דוגמאות, אריזה ותיאום תנאי אספקה לישראל.</p></article>
-<article><h3>ישראל → טורקיה</h3><p>איתור לקוחות, מפיצים ושותפים בטורקיה, בחינת התאמה מסחרית, תיאום פגישות, RFQ ותמיכה בכניסה לשוק עבור יצרנים וספקי פתרונות מישראל.</p></article>
-</div></div></section>
+  <section class="section trade-paths-section" id="sourcing"><div class="container">
+    <div class="section-head"><h2>מסחר דו־כיווני עם תהליך מסחרי ברור.</h2><p>CTSEG אינה מציגה רשימת ספקים בלבד. אנחנו בונים דרישה, מאמתים את הצד המסחרי ומרכזים את נקודות ההחלטה לפני התחייבות.</p></div>
+    <div class="he-service-grid">
+      <article class="he-service-card"><h3>איתור ואימות ספקים</h3><p>זהות חברה, מפעל, יכולת ייצור, ניסיון יצוא, מסמכים והתאמה למפרט.</p></article>
+      <article class="he-service-card"><h3>Private Label / OEM</h3><p>מוצר, אריזה, משקל יחידה, חיי מדף, MOQ, דוגמאות, לוחות זמנים ודרישות מותג.</p></article>
+      <article class="he-service-card"><h3>RFQ והשוואת הצעות</h3><p>השוואה מסודרת של מחיר, תנאי תשלום, MOQ, lead time ו־EXW/FOB/CIF על בסיס אחיד.</p></article>
+    </div>
+  </div></section>
 
-<section class="he-section" id="private-label"><div class="he-shell">
-<h2>מותג פרטי ומזון: מהנוסחה ועד הצעת המחיר.</h2>
-<p class="he-lead">בפרויקטי מזון ו־private label אנחנו בונים בקשה מסחרית שניתנת להשוואה — לא רק רשימת מפעלים.</p>
-<div class="he-grid">
-<article class="he-card"><h3>יצרן מתאים</h3><p>בדיקת זהות החברה, יכולת ייצור, ניסיון יצוא, התאמת קו הייצור והיכולת לעבוד תחת מותג הלקוח.</p></article>
-<article class="he-card"><h3>כשרות ומסמכים</h3><p>בדיקת סטטוס ותוקף מסמכי כשרות בהתאם למוצר ולמפעל, לצד מפרט, <bdi>COA</bdi>, עקיבות ואישורי איכות רלוונטיים.</p></article>
-<article class="he-card"><h3>MOQ ואריזה</h3><p>מינימום הזמנה, גודל יחידה, קרטון, חומרי אריזה, שפה על התווית, חיי מדף ולוחות זמנים לייצור.</p></article>
-<article class="he-card"><h3>RFQ מסודר</h3><p>אותה דרישה נשלחת לספקים בצורה אחידה, כך שמחיר, תנאי תשלום, קיבולת וזמן אספקה יהיו באמת ניתנים להשוואה.</p></article>
-<article class="he-card"><h3>FOB / CIF</h3><p>בחינת בסיס המחיר, נמל יציאה, יעד, הובלה ותנאי Incoterms בלי לערבב עלויות שאינן ברות השוואה.</p></article>
-<article class="he-card"><h3>דוגמאות ואימות</h3><p>תיאום דוגמאות והשלמת בדיקות לפני מעבר להזמנה מסחרית, בהתאם לסיכון, למוצר ולדרישות היבואן.</p></article>
-</div></div></section>
+  <section class="section trending-sectors" id="sectors"><div class="container">
+    <div class="section-head"><h2>תחומי סחר רלוונטיים לישראל ⇄ טורקיה</h2><p>הבדיקה מתבצעת לפי מוצר, יצרן, שוק יעד ודרישות מסחריות — לא לפי קטלוג קבוע.</p></div>
+    <div class="trending-tags-grid">
+      <div class="trending-tag"><span>מזון, אגוזים ופירות יבשים ↗</span></div>
+      <div class="trending-tag"><span>Private Label & FMCG ↗</span></div>
+      <div class="trending-tag"><span>זכוכית וחומרי בנייה ↗</span></div>
+      <div class="trending-tag"><span>טקסטיל וייצור קבלני ↗</span></div>
+      <div class="trending-tag"><span>ציוד ומוצרים תעשייתיים ↗</span></div>
+      <div class="trending-tag"><span>אריזה וחומרי גלם ↗</span></div>
+    </div>
+  </div></section>
 
-<section class="he-section" id="market-entry"><div class="he-shell">
-<h2>כניסה לשוק ופיתוח קונים.</h2>
-<p class="he-lead">ליצרנים מישראל ומטורקיה אנחנו בוחנים את השוק, פרופיל הקונה המתאים והמסלול המסחרי לפני פנייה רחבה ולא ממוקדת.</p>
-<div class="he-grid">
-<article class="he-card"><h3>מיפוי שוק</h3><p>קטגוריה, מתחרים, סוגי קונים, ערוצי מכירה והיתכנות מסחרית.</p></article>
-<article class="he-card"><h3>איתור קונים ומפיצים</h3><p>בניית רשימת חברות רלוונטיות וסינון לפי התאמה מסחרית, לא לפי כמות לידים בלבד.</p></article>
-<article class="he-card"><h3>תיאום מסחרי</h3><p>הצגה ראשונית, מסמכים, הצעה, דוגמאות, שאלות טכניות ומעקב אחרי הצעד הבא.</p></article>
-</div></div></section>
+  <section class="section he-private-label" id="private-label"><div class="container content-grid">
+    <div class="prose">
+      <p class="eyebrow">PRIVATE LABEL · FOOD · FMCG</p>
+      <h2>מותג פרטי מתחיל במפרט, לא במחיר.</h2>
+      <p>בפרויקטי מזון ו־Private Label אנחנו מרכזים את הנתונים שהיצרן צריך כדי לתת הצעה אמיתית: מוצר, נוסחה או מפרט, אריזה, MOQ, תווית, חיי מדף, דוגמאות, מסמכי איכות ודרישות כשרות כאשר הן נדרשות.</p>
+      <div class="he-proof-list">
+        <span><bdi>MOQ</bdi> למוצר ולאריזה</span><span>כשרות ומסמכי מפעל</span><span><bdi>COA</bdi> ומפרט</span><span><bdi>FOB / CIF</bdi> ויעד</span>
+      </div>
+    </div>
+    <aside class="side-panel">
+      <p class="eyebrow">CTSEG · COMMERCIAL DESK</p>
+      <h3>בקשת מחיר שניתנת להשוואה.</h3>
+      <p>אותה דרישה מסחרית מועברת בצורה עקבית כדי למנוע השוואה בין הצעות עם בסיסי מחיר ותנאים שונים.</p>
+      <a class="button" href="#contact">בניית RFQ</a>
+    </aside>
+  </div></section>
 
-<section class="he-section" id="insights"><div class="he-shell">
-<h2>תובנות מסחריות לישראל ⇄ טורקיה</h2>
-<div class="he-grid">
-<a class="he-card" href="/he/insights/private-label-food-turkiye-israel/"><h3>ייצור מותג פרטי בטורקיה ליבואנים מישראל</h3><p>כיצד לבנות RFQ נכון עבור מזון, אגוזים, אריזה ומותג פרטי.</p></a>
-<a class="he-card" href="/he/insights/kosher-supplier-verification-turkiye/"><h3>כשרות ואימות ספקים בטורקיה</h3><p>מה לבדוק במפעל, במסמכים ובמוצר לפני החלטת רכש.</p></a>
-<a class="he-card" href="/he/insights/rfq-moq-fob-cif-turkiye-israel/"><h3>RFQ, MOQ, FOB ו־CIF</h3><p>איך להשוות הצעות מטורקיה בצורה מסחרית אמיתית.</p></a>
-</div></div></section>
+  <section class="section" id="market-entry"><div class="container">
+    <div class="section-head"><h2>מישראל לטורקיה: כניסה לשוק ופיתוח קונים.</h2><p>לחברות מישראל אנחנו יכולים לבחון התאמה לשוק הטורקי, לאתר קונים ומפיצים ולרכז את התקשורת המסחרית הראשונית.</p></div>
+    <div class="he-service-grid">
+      <article class="he-service-card"><h3>מיפוי שוק</h3><p>קטגוריה, מתחרים, ערוצי מכירה וסוגי קונים רלוונטיים.</p></article>
+      <article class="he-service-card"><h3>איתור קונים ומפיצים</h3><p>רשימת חברות ממוקדת לפי התאמה מסחרית ולא לפי נפח לידים בלבד.</p></article>
+      <article class="he-service-card"><h3>תיאום מסחרי</h3><p>הצגה, מסמכים, דוגמאות, שאלות טכניות ומעקב אחרי הצעד הבא.</p></article>
+    </div>
+  </div></section>
 
-<section class="he-section" id="contact"><div class="he-shell">
-<h2>שלחו דרישה מסחרית.</h2>
-<p class="he-lead">לבדיקה ראשונית צרפו חברה, מוצר או שירות, כמות משוערת, מקור/יעד, אריזה, מסמכים נדרשים ותנאי אספקה מועדפים.</p>
-<div class="he-contact-grid">
-<aside class="he-contact-copy"><h3>CTSEG · Commercial Desk</h3><p>WhatsApp: <a href="https://wa.me/905456782655">+90 545 678 26 55</a></p><p>Email: <a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></p><p>מענה ראשוני לבקשות B2B לאחר בחינת התאמה מסחרית ופרטי החברה.</p></aside>
-<form class="he-form" data-he-form>
-<label>סוג הבקשה<select name="intent" required><option value="buyer_request">אני מחפש ספק / יצרן</option><option value="supplier_market_entry">אני מחפש קונים / כניסה לשוק</option><option value="external_trade_desk">ניהול פעילות סחר חוץ מתמשכת</option></select></label>
-<label>התמיכה הנדרשת<select name="supportNeed" required><option value="supplier_sourcing">איתור ואימות ספק</option><option value="private_label">מותג פרטי / ייצור קבלני</option><option value="rfq_comparison">RFQ והשוואת הצעות</option><option value="market_entry">כניסה לשוק ופיתוח קונים</option><option value="document_assessment">בדיקת מוצר ומסמכים</option><option value="external_trade_desk">External Trade Desk</option><option value="other">אחר</option></select></label>
-<label>כיוון הסחר<select name="tradeDirection" required><option value="export_from_turkiye">מטורקיה לישראל / לשוק אחר</option><option value="import_to_turkiye">מישראל לטורקיה</option><option value="cross_border_sourcing">איתור בינלאומי</option><option value="market_entry">כניסה לשוק</option><option value="other">אחר</option></select></label>
-<label>קטגוריית מוצר<select name="productFamily" required><option value="nuts_dried_fruit">אגוזים ופירות יבשים</option><option value="vegetable_oils">מזון ושמנים צמחיים</option><option value="architectural_glass">זכוכית אדריכלית ותעשייתית</option><option value="biofuel_feedstock">חומרי גלם לאנרגיה וביודלק</option><option value="other">מוצר / שירות אחר</option></select></label>
-<label>שם מלא<input name="name" required autocomplete="name" /></label><label>חברה<input name="company" required autocomplete="organization" /></label>
-<label>אימייל או טלפון<input name="emailOrPhone" required /></label><label>מוצר / שירות<input name="product" /></label>
-<label>מדינת מקור / יציאה<input name="originMarket" placeholder="Türkiye / Israel / …" /></label><label>שוק יעד<input name="destinationMarket" placeholder="Israel / Türkiye / …" /></label>
-<label>כמות משוערת<input name="quantity" placeholder="MT / containers / units" /></label><label>אריזה<input name="packaging" placeholder="150g, 5L PET, cartons…" /></label>
-<label>Incoterm מועדף<input name="incoterm" placeholder="EXW / FOB / CIF" /></label><label>מקום אספקה<input name="delivery" /></label>
-<label class="full">דרישות איכות / כשרות / מסמכים<input name="requirements" placeholder="Kosher, COA, shelf life, certifications…" /></label>
-<label class="full">פרטי הבקשה<textarea name="message" required placeholder="מפרט, MOQ מבוקש, יעד, לוחות זמנים ודרישות מסחריות…"></textarea></label>
-<input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;opacity:0;pointer-events:none" aria-hidden="true" />
-<label class="check"><input type="checkbox" name="privacy" value="accepted" required /> אני מאשר/ת שימוש בפרטים לצורך בחינת הבקשה המסחרית.</label>
-<button class="he-button" type="submit">שליחת הבקשה</button><div class="he-form-status" role="status" aria-live="polite" data-he-status></div>
-</form></div></div></section>
-<script>
-const form=document.querySelector('[data-he-form]');const status=document.querySelector('[data-he-status]');
-if(form){const startedAt=Date.now();form.addEventListener('submit',async(e)=>{e.preventDefault();status.textContent='שולח…';const fd=new FormData(form);const payload=Object.fromEntries(fd.entries());payload.locale='he';payload.startedAt=String(startedAt);payload.pagePath=location.pathname;payload.landingPath=sessionStorage.getItem('ctseg-landing-path')||location.pathname;payload.referrerHost=document.referrer?new URL(document.referrer).hostname:'';try{const r=await fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw new Error('request_failed');form.reset();status.textContent='הבקשה התקבלה. צוות CTSEG יחזור אליכם לאחר בדיקה ראשונית.';}catch{status.textContent='לא ניתן היה לשלוח את הבקשה כרגע. אפשר לפנות ישירות ב‑WhatsApp או באימייל.'}})}
-</script>
-</HebrewLayout>
+  <section class="section process-section" id="process"><div class="container">
+    <div class="section-head"><h2>תהליך העבודה</h2><p>קצר, שקוף ומבוסס החלטה.</p></div>
+    <div class="he-process-rail">
+      <article><strong>הגדרת הדרישה</strong><p>מוצר, כמות, יעד, אריזה, מסמכים ותנאים מסחריים.</p></article>
+      <article><strong>סינון ואימות</strong><p>יצרן, יכולת, ניסיון, מסמכים והתאמת מוצר.</p></article>
+      <article><strong>RFQ והשוואה</strong><p>מחיר, MOQ, תשלום, זמן אספקה ו־Incoterms.</p></article>
+      <article><strong>תיאום מסחרי</strong><p>דוגמאות, מסמכים, שאלות פתוחות והמשך מו״מ.</p></article>
+    </div>
+  </div></section>
+
+  <section class="section he-insights" id="insights"><div class="container">
+    <div class="section-head"><h2>תובנות מסחריות לישראל ⇄ טורקיה</h2><p>מדריכים ממוקדים לפני פנייה ליצרן או פתיחת RFQ.</p></div>
+    <div class="card-grid">
+      <a class="card" href="/he/insights/private-label-food-turkiye-israel/"><h3>ייצור מותג פרטי בטורקיה ליבואנים מישראל</h3><p>יצרן, MOQ, אריזה, כשרות, דוגמאות ו־RFQ.</p><strong>לקריאה →</strong></a>
+      <a class="card" href="/he/insights/kosher-supplier-verification-turkiye/"><h3>כשרות ואימות ספקים בטורקיה</h3><p>מה לבדוק במפעל, במסמכים ובמוצר לפני החלטת רכש.</p><strong>לקריאה →</strong></a>
+      <a class="card" href="/he/insights/rfq-moq-fob-cif-turkiye-israel/"><h3>RFQ, MOQ, FOB ו־CIF</h3><p>איך להשוות הצעות ספקים על בסיס מסחרי אחיד.</p><strong>לקריאה →</strong></a>
+    </div>
+  </div></section>
+
+  <section class="section company-trust-band" id="about"><div class="container">
+    <div class="company-trust-heading"><h2>CTSEG · Global Trade House</h2><p>סחר B2B, sourcing, אימות ספקים וכניסה לשווקים.</p></div>
+    <div class="he-about-copy"><p>CTSEG פועלת מטורקיה כגוף מסחרי עצמאי המחבר בין יצרנים, קונים ושותפים עסקיים. במסדרון ישראל ⇄ טורקיה המיקוד הוא על תהליך שניתן לבדוק: דרישה ברורה, ספק מתאים, מסמכים, הצעה מסחרית וצעדים הבאים.</p></div>
+  </div></section>
+
+  <section class="section commercial-form-section" id="contact"><div class="container">
+    <div class="section-head"><h2>שלחו דרישה מסחרית.</h2><p>חברה, מוצר או שירות, כמות משוערת, מקור/יעד, אריזה, מסמכים נדרשים ותנאי אספקה מועדפים.</p></div>
+    <div class="he-contact-layout">
+      <aside class="side-panel">
+        <p class="eyebrow">CTSEG · COMMERCIAL DESK</p>
+        <h3>ערוצי קשר ישירים</h3>
+        <p dir="ltr"><a href="https://wa.me/905456782655">WhatsApp · +90 545 678 26 55</a></p>
+        <p dir="ltr"><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></p>
+      </aside>
+      <form class="commercial-form he-commercial-form" data-he-form>
+        <label>סוג הבקשה<select name="intent" required><option value="buyer_request">איתור ספק / יצרן</option><option value="supplier_market_entry">איתור קונים / כניסה לשוק</option><option value="external_trade_desk">ניהול פעילות סחר חוץ</option></select></label>
+        <label>כיוון הסחר<select name="tradeDirection" required><option value="export_from_turkiye">טורקיה → ישראל</option><option value="import_to_turkiye">ישראל → טורקיה</option><option value="cross_border_sourcing">מסחר בינלאומי אחר</option></select></label>
+        <label>שם מלא<input name="name" required autocomplete="name" /></label>
+        <label>חברה<input name="company" required autocomplete="organization" /></label>
+        <label>אימייל או טלפון<input name="emailOrPhone" required dir="ltr" /></label>
+        <label>מוצר / שירות<input name="product" /></label>
+        <label>כמות משוערת<input name="quantity" dir="ltr" placeholder="MT / units / containers" /></label>
+        <label>Incoterm מועדף<input name="incoterm" dir="ltr" placeholder="EXW / FOB / CIF" /></label>
+        <label class="he-full">דרישות איכות / כשרות / מסמכים<input name="requirements" placeholder="Kosher, COA, shelf life, certifications…" /></label>
+        <label class="he-full">פרטי הבקשה<textarea name="message" required></textarea></label>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="he-honeypot" aria-hidden="true" />
+        <label class="he-consent"><input type="checkbox" name="privacy" value="accepted" required /> אני מאשר/ת שימוש בפרטים לצורך בחינת הבקשה המסחרית.</label>
+        <button class="button he-submit" type="submit">שליחת הבקשה</button>
+        <div class="he-form-status" role="status" aria-live="polite" data-he-status></div>
+      </form>
+    </div>
+  </div></section>
+
+  <script>
+    const form=document.querySelector('[data-he-form]');const status=document.querySelector('[data-he-status]');
+    if(form){const startedAt=Date.now();form.addEventListener('submit',async(e)=>{e.preventDefault();status.textContent='שולח…';const fd=new FormData(form);const payload=Object.fromEntries(fd.entries());payload.locale='he';payload.startedAt=String(startedAt);payload.pagePath=location.pathname;payload.landingPath=sessionStorage.getItem('ctseg-landing-path')||location.pathname;payload.referrerHost=document.referrer?new URL(document.referrer).hostname:'';try{const r=await fetch('/api/contact',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw new Error('request_failed');form.reset();status.textContent='הבקשה התקבלה. צוות CTSEG יחזור אליכם לאחר בדיקה ראשונית.';}catch{status.textContent='לא ניתן היה לשלוח כרגע. אפשר לפנות ישירות ב‑WhatsApp או באימייל.'}})}
+  </script>
+</BaseLayout>
+
+<style is:global>
+html[data-locale="he"] body{direction:rtl}
+html[data-locale="he"] .site-header,html[data-locale="he"] .site-footer{direction:rtl}
+html[data-locale="he"] .homepage-hero-stage,html[data-locale="he"] .trade-gateway-banner{direction:rtl}
+html[data-locale="he"] .hero-copy{text-align:right}
+html[data-locale="he"] .he-home-title{font-size:clamp(38px,4.7vw,68px)!important;line-height:1.02!important;letter-spacing:-.035em!important;max-width:760px!important;margin-inline:0!important}
+html[data-locale="he"] .he-home .lead{max-width:760px}
+html[data-locale="he"] bdi,html[data-locale="he"] [dir="ltr"]{unicode-bidi:isolate}
+.he-service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.he-service-card{min-height:210px;padding:28px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.025);display:flex;flex-direction:column;justify-content:flex-end}
+.he-service-card h3{margin:0 0 12px;color:#fff;font-size:clamp(21px,2vw,27px)}.he-service-card p{margin:0;color:#d9d9d3}
+.he-proof-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.he-proof-list span{border:1px solid rgba(196,240,0,.32);padding:10px 13px;border-radius:999px}
+.he-process-rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid rgba(255,255,255,.14)}
+.he-process-rail article{padding:26px;border-inline-end:1px solid rgba(255,255,255,.14)}.he-process-rail article:last-child{border-inline-end:0}.he-process-rail strong{color:#fff;font-size:18px}.he-process-rail p{margin-bottom:0;color:#d9d9d3}
+.he-about-copy{max-width:900px;margin-top:22px}.he-about-copy p{color:#d9d9d3}
+.he-contact-layout{display:grid;grid-template-columns:minmax(260px,.65fr) minmax(0,1.35fr);gap:24px;align-items:start}
+.he-commercial-form{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px!important}
+.he-commercial-form label{display:grid;gap:8px}.he-commercial-form input,.he-commercial-form select,.he-commercial-form textarea{direction:rtl;text-align:right}
+.he-commercial-form [dir="ltr"]{direction:ltr;text-align:left}.he-commercial-form .he-full,.he-commercial-form .he-consent,.he-commercial-form .he-submit,.he-commercial-form .he-form-status{grid-column:1/-1}
+.he-commercial-form .he-consent{display:flex;align-items:flex-start;gap:10px}.he-commercial-form .he-consent input{width:auto;margin-top:4px}
+.he-honeypot{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;opacity:0!important;pointer-events:none!important}
+@media(max-width:900px){.he-service-grid,.he-process-rail,.he-contact-layout{grid-template-columns:1fr}.he-process-rail article{border-inline-end:0;border-bottom:1px solid rgba(255,255,255,.14)}.he-process-rail article:last-child{border-bottom:0}}
+@media(max-width:620px){html[data-locale="he"] .he-home-title{font-size:clamp(34px,10vw,48px)!important}.he-commercial-form{grid-template-columns:1fr}.he-commercial-form .he-full,.he-commercial-form .he-consent,.he-commercial-form .he-submit,.he-commercial-form .he-form-status{grid-column:1}.he-service-card{min-height:0;padding:22px}}
+</style>
