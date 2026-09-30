@@ -12,6 +12,7 @@ import ProductMedia from './ProductMedia.astro';
 import ResponsiveImage from './ResponsiveImage.astro';
 import CommercialRequestForm from './CommercialRequestForm.astro';
 import HomepagePromoVideo from './HomepagePromoVideo.astro';
+import TradeMarquee from './TradeMarquee.astro';
 import { FEATURE_IMAGE_WIDTHS } from '../lib/responsive-images';
 import { homeTradeVisualKeys, localizedTradeVisual, serviceTradeVisualKeys } from '../data/trade-visuals';
 import {
@@ -955,6 +956,7 @@ const verifiedLater = {
 {key === 'home' && regionalIntentHome && (
   <>
     <PageHero lang={lang} eyebrow={regionalIntentHome.eyebrow} title={regionalIntentHome.title} lead={regionalIntentHome.description} />
+    <TradeMarquee lang={lang} />
     <section class="section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer">
@@ -1003,6 +1005,7 @@ const verifiedLater = {
 {key === 'home' && lang === 'fa' && (
   <>
     <PageHero lang={lang} eyebrow={iranTradeContent.fa.eyebrow} title={iranTradeContent.fa.title} lead={iranTradeContent.fa.description} />
+    <TradeMarquee lang={lang} />
     <section class="section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer"><h2>{iranTradeContent.fa.directAnswerTitle}</h2><p>{iranTradeContent.fa.directAnswer}</p></div>
@@ -1026,6 +1029,7 @@ const verifiedLater = {
 {key === 'home' && lang === 'zh' && chinaMarketEntry && (
   <>
     <PageHero lang={lang} eyebrow={chinaMarketEntry.eyebrow} title={chinaMarketEntry.title} lead={chinaMarketEntry.description} />
+    <TradeMarquee lang={lang} />
     <section class="section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer"><h2>{chinaMarketEntry.directAnswerTitle}</h2><p>{chinaMarketEntry.directAnswer}</p></div>
@@ -1048,6 +1052,7 @@ const verifiedLater = {
 {key === 'home' && lang === 'vi' && vietnamMarketEntry && (
   <>
     <PageHero lang={lang} eyebrow={vietnamMarketEntry.eyebrow} title={vietnamMarketEntry.title} lead={vietnamMarketEntry.description} />
+    <TradeMarquee lang={lang} />
     <section class="section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block direct-answer"><h2>{vietnamMarketEntry.directAnswerTitle}</h2><p>{vietnamMarketEntry.directAnswer}</p></div>
@@ -1117,6 +1122,7 @@ const verifiedLater = {
         </div>
       </div>
     </section>
+    <TradeMarquee lang={lang} />
     {lang === 'tr' && <HomepagePromoVideo />}
     <section class="section trade-paths-section" id="trade-paths"><div class="container">
       <div class="section-head"><h2>{platform.pathsTitle}</h2><p>{platform.pathsLead}</p></div>

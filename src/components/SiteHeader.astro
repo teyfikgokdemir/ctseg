@@ -157,7 +157,7 @@ const globalSwitchPath = (target: string): string => {
                 hreflang={code}
                 class:list={['mobile-lang-item', { active: code === lang }]}
                 href={globalSwitchPath(code)}
-                aria-current={code === lang ? 'true' : undefined}
+                aria-current={code === lang ? 'page' : undefined}
                 data-locale-option
               >
                 <img class="lang-flag" src={globalLocaleFlags[code]} width="28" height="19" alt="" aria-hidden="true" />
@@ -225,7 +225,7 @@ const globalSwitchPath = (target: string): string => {
               hreflang={code}
               class:list={{ active: code === lang }}
               href={globalSwitchPath(code)}
-              aria-current={code === lang ? 'true' : undefined}
+              aria-current={code === lang ? 'page' : undefined}
               data-locale-option
             ><img class="language-menu-flag" src={globalLocaleFlags[code]} width="26" height="17" alt="" aria-hidden="true" /><strong>{globalLocaleNames[code]}</strong><i aria-hidden="true"></i></a>)}
           </div>

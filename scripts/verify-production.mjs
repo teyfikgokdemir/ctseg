@@ -77,9 +77,10 @@ const pageChecks = [
       body.includes('<html lang="he-IL" dir="rtl"') &&
       body.includes('hreflang="he"') &&
       body.includes('/images/flags/il.svg') &&
-      body.includes('Israel ⇄ Türkiye') &&
+      body.includes('ישראל ⇄ טורקיה') &&
       body.includes('RFQ') &&
-      body.includes('Kosher') &&
+      body.includes('כשרות') &&
+      body.includes('data-trade-marquee') &&
       !/reflex/i.test(body),
   },
 ];

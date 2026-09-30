@@ -671,13 +671,15 @@ try {
         active:options.filter(link=>link.getAttribute('aria-current')==='page').length,
         hasIsraelFlag:Boolean(document.querySelector('img[src="/images/flags/il.svg"]')),
         h1s:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth-window.innerWidth,
-        hasForm:Boolean(document.querySelector('[data-he-form]')),
+        hasForm:Boolean(document.querySelector('.commercial-form')),
+        hasMarquee:Boolean(document.querySelector('[data-trade-marquee]')),
+        marqueeGroups:document.querySelectorAll('[data-marquee-group]').length,
         hasReverseTrade:document.body.innerText.includes('ישראל → טורקיה'),
         usesStandardHeader:Boolean(document.querySelector('.site-header')),
         usesStandardFooter:Boolean(document.querySelector('.site-footer'))
       };
     });
-    if(contract.lang!=='he-IL'||contract.dir!=='rtl'||contract.bodyDirection!=='rtl'||contract.options!==rootLocaleCount||contract.active!==1||!contract.hasIsraelFlag||contract.h1s!==1||contract.overflow>1||!contract.hasForm||!contract.hasReverseTrade||!contract.usesStandardHeader||!contract.usesStandardFooter){
+    if(contract.lang!=='he-IL'||contract.dir!=='rtl'||contract.bodyDirection!=='rtl'||contract.options!==rootLocaleCount||contract.active!==1||!contract.hasIsraelFlag||contract.h1s!==1||contract.overflow>1||!contract.hasForm||!contract.hasMarquee||contract.marqueeGroups!==2||!contract.hasReverseTrade||!contract.usesStandardHeader||!contract.usesStandardFooter){
       failures.push(`Hebrew hub/${viewport.name}: ${JSON.stringify(contract)}`);
     }
     console.log(`hebrew-hub-${viewport.name}: options=${contract.options}, overflow=${contract.overflow}px`);

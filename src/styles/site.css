@@ -5042,3 +5042,166 @@ html[data-locale=he] .direct-contact-card:hover{transform:translateX(-5px)}
   html[data-locale=he] .he-market-grid .he-rich-card{min-height:0!important}
   html[data-locale=he] .he-standard-page h1{font-size:clamp(34px,10vw,48px)!important}
 }
+
+/* HEBREW FINAL READABILITY CONTRACT — 2026-10-01 */
+html[data-locale=he] body{font-size:17px}
+html[data-locale=he] :is(.eyebrow,.trade-funnel-kicker,.header-house-label,.he-product-card>span,.summary-kicker){
+  font-size:max(14px,.82rem)!important;
+  line-height:1.35!important;
+  font-weight:800!important;
+  opacity:1!important;
+}
+html[data-locale=he] :is(.prose p,.content-block p,.side-panel p,.trade-funnel-desc,.he-rich-card p,.he-product-card p,.he-market-grid p,.he-market-grid li,.he-scenario-card p,.he-scenario-card li){
+  font-size:max(16px,1rem)!important;
+  line-height:1.65!important;
+  opacity:1!important;
+}
+html[data-locale=he] .site-footer :is(p,a,span,li){
+  font-size:max(14px,.875rem)!important;
+  line-height:1.55!important;
+  opacity:1!important;
+}
+
+/* deterministic light surfaces */
+html[data-locale=he] :is(.he-section-light,.he-private-label,.company-profile-section,.scenario-teaser,.operational-trust){
+  background:#f2eee5!important;
+  color:#171917!important;
+}
+html[data-locale=he] :is(.he-section-light,.he-private-label,.company-profile-section,.scenario-teaser,.operational-trust) :is(p,li,dd,small){
+  color:#3f443f!important;
+  -webkit-text-fill-color:#3f443f!important;
+  opacity:1!important;
+}
+html[data-locale=he] :is(.he-section-light,.he-private-label,.company-profile-section,.scenario-teaser,.operational-trust) :is(h1,h2,h3,h4,strong,summary){
+  color:#111311!important;
+  -webkit-text-fill-color:#111311!important;
+  opacity:1!important;
+}
+html[data-locale=he] .he-private-label .side-panel{
+  background:#f8f5ee!important;
+  border-color:#cfc8bb!important;
+}
+html[data-locale=he] .he-private-label .side-panel :is(p,h3,strong){
+  color:#22251f!important;
+  -webkit-text-fill-color:#22251f!important;
+}
+
+/* deterministic dark surfaces */
+html[data-locale=he] :is(.he-section-dark,.he-standard-form-section,.company-trust-band,.he-insights,.process-section,.trade-paths-section){
+  background:#111411!important;
+  color:#f7f7f2!important;
+}
+html[data-locale=he] :is(.he-section-dark,.he-standard-form-section,.company-trust-band,.he-insights,.process-section,.trade-paths-section) :is(p,li,dd,small){
+  color:#d9ddd7!important;
+  -webkit-text-fill-color:#d9ddd7!important;
+  opacity:1!important;
+}
+html[data-locale=he] :is(.he-section-dark,.he-standard-form-section,.company-trust-band,.he-insights,.process-section,.trade-paths-section) :is(h1,h2,h3,h4,strong,summary){
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  opacity:1!important;
+}
+html[data-locale=he] :is(.he-section-dark,.he-standard-form-section,.company-trust-band,.he-insights,.process-section,.trade-paths-section) .eyebrow{
+  color:#c4f000!important;
+  -webkit-text-fill-color:#c4f000!important;
+}
+
+/* cards on dark surfaces */
+html[data-locale=he] :is(.he-service-card,.he-rich-card,.he-process-rail article){
+  background:#181b18!important;
+  color:#f7f7f2!important;
+  border-color:#3a403b!important;
+}
+html[data-locale=he] :is(.he-service-card,.he-rich-card,.he-process-rail article) :is(p,li){
+  color:#d9ddd7!important;
+  -webkit-text-fill-color:#d9ddd7!important;
+  opacity:1!important;
+}
+html[data-locale=he] :is(.he-service-card,.he-rich-card,.he-process-rail article) :is(h2,h3,strong){
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
+
+/* consistent CTSEG buttons */
+html[data-locale=he] .button{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:50px!important;
+  padding:0 24px!important;
+  font-size:15px!important;
+  line-height:1.15!important;
+  font-weight:850!important;
+  letter-spacing:0!important;
+  opacity:1!important;
+  text-align:center!important;
+  -webkit-text-fill-color:currentColor!important;
+}
+html[data-locale=he] .button:not(.button-secondary),
+html[data-locale=he] .button-accent{
+  background:#c4f000!important;
+  border-color:#c4f000!important;
+  color:#090b09!important;
+}
+html[data-locale=he] :is(.he-section-dark,.he-standard-form-section,.company-trust-band,.trade-paths-section) .button-secondary,
+html[data-locale=he] .trade-funnel-card .button-secondary{
+  background:transparent!important;
+  border-color:rgba(255,255,255,.58)!important;
+  color:#fff!important;
+}
+html[data-locale=he] .trade-funnel-card .button{
+  min-width:180px!important;
+  align-self:center!important;
+}
+
+/* section-heading standard */
+html[data-locale=he] .section-head h2{
+  max-width:1000px!important;
+  margin-inline:auto!important;
+  text-align:center!important;
+  text-wrap:balance!important;
+}
+html[data-locale=he] .section-head>p:not(.eyebrow){
+  max-width:820px!important;
+  margin-inline:auto!important;
+  text-align:center!important;
+}
+
+/* standard form: keep it visually identical to the core CTSEG form */
+html[data-locale=he] .he-standard-form-section .commercial-form-panel{
+  background:#f3efe6!important;
+  color:#171917!important;
+}
+html[data-locale=he] .he-standard-form-section .commercial-form-panel :is(h2,h3,strong,label,.commercial-field>span){
+  color:#171917!important;
+  -webkit-text-fill-color:#171917!important;
+}
+html[data-locale=he] .he-standard-form-section .commercial-form-panel :is(p,small){
+  color:#4b504b!important;
+  -webkit-text-fill-color:#4b504b!important;
+}
+html[data-locale=he] .he-standard-form-section .commercial-field :is(input,select,textarea){
+  background:#fffdf8!important;
+  color:#171917!important;
+  -webkit-text-fill-color:#171917!important;
+  border-color:#aaa397!important;
+  min-height:50px!important;
+}
+html[data-locale=he] .he-standard-form-section .commercial-field textarea{min-height:130px!important}
+html[data-locale=he] .he-standard-form-section .commercial-field :is(input,textarea)::placeholder{
+  color:#747972!important;
+  -webkit-text-fill-color:#747972!important;
+  opacity:1!important;
+}
+
+/* footer retains dark contract */
+html[data-locale=he] .site-footer{background:#151615!important;color:#f5f5f0!important}
+html[data-locale=he] .site-footer :is(p,a,span,li){color:#d8d9d4!important;-webkit-text-fill-color:#d8d9d4!important}
+html[data-locale=he] .site-footer :is(h2,h3,strong){color:#fff!important;-webkit-text-fill-color:#fff!important}
+html[data-locale=he] .site-footer .footer-credit a{color:#c4f000!important;-webkit-text-fill-color:#c4f000!important}
+
+@media(max-width:700px){
+  html[data-locale=he] body{font-size:16px}
+  html[data-locale=he] :is(.eyebrow,.trade-funnel-kicker,.header-house-label){font-size:13px!important}
+  html[data-locale=he] .button{width:100%;min-height:48px!important;padding-inline:18px!important}
+}
