@@ -127,7 +127,7 @@ const globalSwitchPath = (target: string): string => {
     <a class="brand" href={home} aria-label={`CTSEG · ${t.home}`}>
       <img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" decoding="async" />
     </a>
-    <span class="header-house-label" aria-hidden="true">GLOBAL TRADE HOUSE</span>
+    <span class="header-house-label" aria-hidden="true">{lang === 'he' ? 'בית מסחר בינלאומי' : 'GLOBAL TRADE HOUSE'}</span>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label={t.menu || 'Menu'} data-menu-toggle>
       <span class="sr-only">{t.menu}</span><span></span><span></span>
     </button>

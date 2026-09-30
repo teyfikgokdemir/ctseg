@@ -4835,3 +4835,76 @@ html[data-locale=he] .he-detail-grid p{color:#d4d5ce!important;opacity:1!importa
   html[data-locale=he] .page-hero h1{font-size:clamp(34px,10vw,48px)!important}
   html[data-locale=he] .footer-main{gap:30px}
 }
+
+/* Hebrew final contrast + density pass */
+html[data-locale=he] .he-section-dark :is(p,li,dd,.lead),
+html[data-locale=he] .he-rich-card :is(p,li),
+html[data-locale=he] .he-market-grid :is(p,li),
+html[data-locale=he] .he-process-stack p,
+html[data-locale=he] .he-contact-form-section p,
+html[data-locale=he] .he-contact-intro p,
+html[data-locale=he] .side-panel p{
+  color:#d8dad4!important;
+  opacity:1!important;
+}
+html[data-locale=he] .he-section-dark :is(h1,h2,h3,h4,strong,summary),
+html[data-locale=he] .he-contact-form-section :is(h1,h2,h3,h4,strong),
+html[data-locale=he] .he-contact-intro :is(h1,h2,h3,h4,strong){
+  color:#fff!important;
+  opacity:1!important;
+}
+html[data-locale=he] .he-section-dark .eyebrow,
+html[data-locale=he] .he-rich-card .eyebrow,
+html[data-locale=he] .he-contact-form-section .eyebrow{
+  color:#c4f000!important;
+  opacity:1!important;
+}
+html[data-locale=he] .he-section-light :is(p,li,dd),
+html[data-locale=he] .company-trust-band :is(p,li),
+html[data-locale=he] .he-product-card p{
+  color:#454a45!important;
+  opacity:1!important;
+}
+html[data-locale=he] .company-trust-band :is(h1,h2,h3,strong){color:#111!important}
+html[data-locale=he] .he-market-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:14px!important;
+}
+html[data-locale=he] .he-market-grid .he-rich-card{
+  min-height:220px!important;
+  padding:22px!important;
+}
+html[data-locale=he] .he-market-grid .he-rich-card h2{
+  font-size:clamp(1.45rem,1.7vw,2rem)!important;
+  line-height:1.05!important;
+}
+html[data-locale=he] .he-market-grid .he-rich-card p,
+html[data-locale=he] .he-market-grid .he-rich-card li{
+  font-size:.93rem!important;
+  line-height:1.55!important;
+}
+html[data-locale=he] .he-process-stack article{
+  grid-template-columns:1fr!important;
+  padding:24px 26px!important;
+}
+html[data-locale=he] .he-process-stack article>span{display:none!important}
+html[data-locale=he] .footer-credit{
+  margin:0;
+  font-size:12px;
+  color:#aaa!important;
+  white-space:nowrap;
+}
+html[data-locale=he] .footer-credit a{
+  color:#c4f000!important;
+  font-weight:800;
+  text-decoration:none;
+}
+html[data-locale=he] .footer-credit a:hover{text-decoration:underline}
+@media(max-width:1200px){
+  html[data-locale=he] .he-market-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:700px){
+  html[data-locale=he] .he-market-grid{grid-template-columns:1fr!important}
+  html[data-locale=he] .he-market-grid .he-rich-card{min-height:0!important}
+  html[data-locale=he] .footer-credit{white-space:normal}
+}
