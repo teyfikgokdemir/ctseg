@@ -27,7 +27,8 @@ const {
   canonical?: string; schema?: any[] | any; noindex?: boolean;
 };
 const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
-const alternates = pageKey === 'glass' ? duzceGlassAlternates() :
+const alternates = String(lang) === 'he' && pageKey === 'he-insight' ? { he: canonicalUrl } as Record<string,string> :
+  pageKey === 'glass' ? duzceGlassAlternates() :
   pageKey === 'search-landing' && pageId ? searchLandingAlternates(pageId) :
   pageKey === 'vietnam-market-entry' && vietnamMarketEntryContent.vi ? {
     vi:`https://ctseg.com.tr/vi/${vietnamMarketEntryContent.vi.slug}/`
