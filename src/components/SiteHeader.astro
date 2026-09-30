@@ -88,12 +88,20 @@ const hePagePaths:Record<string,string> = {
   insights:'/he/תובנות/',about:'/he/אודות/',contact:'/he/יצירת-קשר/','how-we-work':'/he/איך-אנחנו-עובדים/',
   scenarios:'/he/תרחישים-מסחריים/',legal:'/he/'
 };
+const currentPath = Astro.url.pathname;
 const globalSwitchPath = (target: string): string => {
+  if (pageKey === 'he-insight') {
+    if (target === 'he') return currentPath;
+    return localizedPath(target as Locale,'insights');
+  }
   if (pageKey === 'search-landing' && pageId) return searchLandingPath(target as Locale,pageId as SearchLandingId);
   if (target === 'he') {
     if (pageKey === 'services' && pageId && heServicePaths[pageId]) return heServicePaths[pageId];
     if (pageKey === 'products' && pageId) return `/he/מוצרים-מסחריים/${pageId}/`;
-    if (pageKey === 'legal') return '/he/';
+    if (pageKey === 'legal') {
+      const heLegal:Record<string,string> = {privacy:'/he/מדיניות-פרטיות/',cookies:'/he/מדיניות-עוגיות/',terms:'/he/תנאי-שימוש/','data-protection':'/he/הודעת-הגנת-מידע/'};
+      return pageId && heLegal[pageId] ? heLegal[pageId] : '/he/';
+    }
     return hePagePaths[pageKey] || '/he/';
   }
   if (pageKey === 'insights' && pageId && ['ro','bg'].includes(target)) return localizedPath(target as Locale,'insights');
