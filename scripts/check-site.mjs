@@ -212,7 +212,7 @@ for (const file of htmlFiles) {
     : ['tr/cinden-turkiyeye-ithalat-ve-tedarik/index.html','tr/vietnamdan-turkiyeye-ithalat-ve-tedarik/index.html','tr/ukraynadan-turkiyeye-tedarik-ve-ticaret/index.html'].includes(label)
     ? ['tr']
     : (hreflangs.includes('ru') || hreflangs.includes('fa') || hreflangs.includes('zh') || hreflangs.includes('vi'))
-    ? [...tradeLocaleCodes,'x-default']
+    ? (hreflangs.includes('ro') || hreflangs.includes('bg') ? [...tradeLocaleCodes,'x-default'] : ['tr','en','de','it','ru','fa','zh','vi','uk','x-default'])
     : ['tr','en','ro','bg','x-default'];
   if (!label.startsWith('404') && !requiredHreflangs.every((code) => hreflangs.includes(code))) {
     errors.push(`${label}: incomplete hreflang set`);
