@@ -250,7 +250,7 @@ for (const file of htmlFiles) {
   if (isFocusedHomepage) {
     if (!html.includes('direct-answer') || !html.includes('id="sectors"') || !html.includes('"@type":"Service"') || !html.includes('"@type":"FAQPage"')) errors.push(`${label}: focused country landing architecture missing`);
   }
-  if (!tradeRecord) {
+  if (!tradeRecord && !label.startsWith('404')) {
     const isHebrewPage = label === 'he/index.html' || label.startsWith('he/');
     if (isHebrewPage) {
       const localeOptions = (html.match(/data-locale-option/g) || []).length;
@@ -360,7 +360,7 @@ for (const file of htmlFiles) {
   }
 }
 const builtTradeRecords = [...tradeRecordsByLabel.entries()].filter(([label]) => existsSync(join(root, label)));
-if (builtTradeRecords.length !== 36) errors.push(`expected 36 sourcing routes, found ${builtTradeRecords.length}`);
+if (builtTradeRecords.length !== 33) errors.push(`expected 33 sourcing routes across eleven translated sourcing locales, found ${builtTradeRecords.length}`);
 for (const [sourceLabel, sourceRecord] of builtTradeRecords) {
   const sourceHtml = readFileSync(join(root, sourceLabel), 'utf8');
   const sourceCanonical = sourceHtml.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
@@ -378,10 +378,10 @@ for (const [sourceLabel, sourceRecord] of builtTradeRecords) {
     }
   }
 }
-if (productSchemaPages !== 216) errors.push(`expected 216 Product schemas with verifiable specification semantics, found ${productSchemaPages}`);
-if (productAssessmentServicePages !== 216) errors.push(`expected 216 specification-led product sourcing Service schemas across twelve full catalogue locales, found ${productAssessmentServicePages}`);
-if (searchLandingPages !== 48) errors.push(`expected 48 localized high-intent search landings, found ${searchLandingPages}`);
-if (contactEmailPanels !== 14) errors.push(`expected 14 localized contact email panels across two generic homepages and twelve full contact pages, found ${contactEmailPanels}`);
+if (productSchemaPages !== 198) errors.push(`expected 198 Product schemas with verifiable specification semantics, found ${productSchemaPages}`);
+if (productAssessmentServicePages !== 198) errors.push(`expected 198 specification-led product sourcing Service schemas across eleven full catalogue locales, found ${productAssessmentServicePages}`);
+if (searchLandingPages !== 44) errors.push(`expected 44 localized high-intent search landings, found ${searchLandingPages}`);
+if (contactEmailPanels !== 13) errors.push(`expected 13 localized contact email panels across two generic homepages and eleven full contact pages, found ${contactEmailPanels}`);
 if (!existsSync(join(root, persianLandingLabel))) errors.push('standalone Persian landing page build output missing');
 const sitemapXml = files.filter((file) => /sitemap-\d+\.xml$/.test(file)).map((file) => readFileSync(file,'utf8')).join('\n');
 if (!sitemapXml.includes(`<loc>${persianLandingCanonical}</loc>`)) errors.push('Persian landing canonical missing from sitemap');
@@ -412,7 +412,7 @@ for (const file of htmlFiles) {
     errors.push(`${label}: Persian landing navigation link must remain English or Persian only`);
   }
   const isSearchLanding=/\/(?:cozumler|solutions|loesungen|soluzioni|resheniya|rishennia|solutii|resenja)\//.test(`/${label}`);
-  if (!label.startsWith('404') && label !== persianLandingLabel && !tradeRecord && !isSearchLanding) {
+  if (!label.startsWith('404') && label !== persianLandingLabel && !label.startsWith('he/') && !tradeRecord && !isSearchLanding) {
     const globalFaLinks = [...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].filter((match)=>match[0].includes('hreflang="fa"')&&match[0].includes('href="/fa/"'));
     if (globalFaLinks.length !== 2) errors.push(`${label}: desktop and mobile global locale menus must expose the Persian fallback`);
   }
