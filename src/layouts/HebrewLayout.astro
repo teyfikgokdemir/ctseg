@@ -7,6 +7,13 @@ const alternates = [
   ['zh','中文','https://ctseg.com.tr/zh/'],['vi','Tiếng Việt','https://ctseg.com.tr/vi/'],['uk','Українська','https://ctseg.com.tr/uk/'],
   ['ro','Română','https://ctseg.com.tr/ro/'],['bg','Български','https://ctseg.com.tr/bg/'],['he','עברית','https://ctseg.com.tr/he/']
 ];
+const organization = {
+  '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
+  name:'CTSEG Sanayi ve Ticaret Limited Şirketi',alternateName:'CTSEG',foundingDate:'2022',
+  founder:{'@type':'Person',name:'Teyfik Gökdemir'},
+  address:{'@type':'PostalAddress',addressLocality:'Tuzla',addressRegion:'İstanbul',addressCountry:'TR'},
+  url:'https://ctseg.com.tr/'
+};
 const schema = article ? {
   '@context':'https://schema.org','@type':'Article',headline:title,description,inLanguage:'he-IL',mainEntityOfPage:canonical,
   author:{'@type':'Person',name:'Teyfik Gökdemir'},publisher:{'@type':'Organization','@id':'https://ctseg.com.tr/#organization',name:'CTSEG'}
@@ -19,17 +26,19 @@ const schema = article ? {
 <!doctype html>
 <html lang="he-IL" dir="rtl" data-locale="he">
 <head>
-<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>{title}</title><meta name="description" content={description} />
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1" />
 <link rel="canonical" href={canonical} /><link rel="alternate" hreflang="he" href={canonical} />
 {!article && alternates.map(([code,,href]) => <link rel="alternate" hreflang={code} href={href} />)}
 {!article && <link rel="alternate" hreflang="x-default" href="https://ctseg.com.tr/en/" />}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
 <meta property="og:type" content={article?'article':'website'} /><meta property="og:title" content={title} />
 <meta property="og:description" content={description} /><meta property="og:url" content={canonical} />
 <meta property="og:locale" content="he_IL" /><meta property="og:image" content="https://ctseg.com.tr/images/ctseg-logo-transparent.png" />
-<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+<script type="application/ld+json" set:html={JSON.stringify([organization,schema])}></script>
 </head>
 <body class="he-site">
 <header class="he-header">
@@ -39,7 +48,7 @@ const schema = article ? {
 </header>
 <main><slot /></main>
 <footer class="he-footer">
-<div><img src="/images/ctseg-logo-transparent.png" alt="CTSEG" width="180" height="58" /><p>סחר B2B דו־כיווני, איתור ספקים, אימות יצרנים וכניסה לשווקים בין ישראל לטורקיה.</p></div>
+<div><img src="/images/ctseg-logo-transparent.png" alt="CTSEG" width="180" height="58" /><p>סחר B2B דו־כיווני, איתור ספקים, אימות יצרנים וכניסה לשווקים בין ישראל לטורקיה.</p><strong>CTSEG Sanayi ve Ticaret Limited Şirketi</strong><span>Tuzla, İstanbul, Türkiye · 2022</span></div>
 <div><strong>CTSEG</strong><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a><a href="https://wa.me/905456782655" rel="noopener">WhatsApp</a></div>
 <div><strong>שפות</strong>{alternates.map(([code,label,href]) => <a href={href} lang={code} hreflang={code}>{label}</a>)}</div>
 </footer>
