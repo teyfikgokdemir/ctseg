@@ -237,7 +237,8 @@
     if (header) gsap.set(header,{ yPercent:0, clearProps:'transform' });
   };
 
-  // Keep motion dependency-free: CSP no longer needs to permit a third-party animation CDN.
-  // The native IntersectionObserver/Web Animations fallback preserves reveal motion and the marquee.
-  initFallback();
+  Promise.all([
+    loadScript('https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js'),
+    loadScript('https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js')
+  ]).then(init).catch(initFallback);
 })();
