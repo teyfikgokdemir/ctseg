@@ -7,8 +7,9 @@
         data-ctseg-home-promo-video
         loop
         playsinline
-        autoplay
-        preload="metadata"
+        muted
+        preload="none"
+        poster="/videos/ctseg-trade-coordination-poster.webp"
         aria-label="CTSEG stratejik tedarik, ticaret ve operasyon tanıtım videosu"
       >
         <source src="/videos/Ctseg_tanitim.mp4" type="video/mp4" />
@@ -46,7 +47,7 @@
     if(!video)return;
     const soundButton=document.querySelector('[data-ctseg-video-sound]') as HTMLButtonElement | null;
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-    video.muted=false;
+    video.muted=true;
     let audibleLoops=0;
     const updateSoundButton=()=>{
       if(!soundButton)return;
