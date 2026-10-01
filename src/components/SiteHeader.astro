@@ -19,7 +19,8 @@ const glassNavLabels: Record<string, string> = {
   tr:'Düzce Cam', en:'Düzce Float Glass', de:'Düzce Float Glass', it:'Düzce Float Glass',
   fa:'شیشه Düzce', ru:'Düzce Float Glass', zh:'Düzce 浮法玻璃', vi:'Düzce Float Glass',
   uk:'Скло Düzce',
-  ro:'Düzce Float Glass', bg:'Düzce Float Glass', sr:'Düzce Float Glass'
+  ro:'Düzce Float Glass', bg:'Düzce Float Glass', sr:'Düzce Float Glass',
+  he:'Düzce Float Glass (English)'
 };
 const navigationCopy = {
   tr:{globalTrade:'Küresel Ticaret',industries:'Sektörler',portfolio:'Ticaret Portföyü',intelligence:'Ticaret İçgörüleri',company:'Şirket',main:'ANA MENÜ',quick:'HIZLI ERİŞİM',trade:'TİCARET',intro:'İki yönlü ticaret, stratejik tedarik ve pazara giriş yolları'},
@@ -34,7 +35,7 @@ const navigationCopy = {
   ro:{globalTrade:'Comerț Global',industries:'Industrii',portfolio:'Portofoliu Comercial',intelligence:'Analize Comerciale',company:'Companie',main:'MENIU PRINCIPAL',quick:'NAVIGARE',trade:'COMERȚ',intro:'Comerț bidirecțional, sourcing strategic și acces pe piețe'},
   bg:{globalTrade:'Глобална търговия',industries:'Сектори',portfolio:'Търговско портфолио',intelligence:'Търговски анализи',company:'Компания',main:'ГЛАВНО МЕНЮ',quick:'НАВИГАЦИЯ',trade:'ТЪРГОВИЯ',intro:'Двупосочна търговия, стратегическо снабдяване и навлизане на пазари'},
   sr:{globalTrade:'Globalna trgovina',industries:'Sektori',portfolio:'Trgovinski portfolio',intelligence:'Trgovinski uvidi',company:'Kompanija',main:'GLAVNI MENI',quick:'NAVIGACIJA',trade:'TRGOVINA',intro:'Dvosmerna trgovina, strateški sourcing i ulazak na tržište'},
-  he:{globalTrade:'סחר גלובלי',industries:'תחומים',portfolio:'מותג פרטי',intelligence:'תובנות מסחריות',company:'CTSEG',main:'תפריט ראשי',quick:'ניווט',trade:'סחר',intro:'סחר דו־כיווני, איתור ספקים וכניסה לשוק בין ישראל לטורקיה'}
+  he:{globalTrade:'סחר גלובלי',industries:'שווקים',portfolio:'תחומי סחר',intelligence:'תובנות מסחריות',company:'CTSEG',main:'תפריט ראשי',quick:'ניווט',trade:'סחר',intro:'סחר דו־כיווני, איתור ספקים וכניסה לשוק בין ישראל לטורקיה'}
 }[lang] || {globalTrade:'Global Trade',industries:'Industries',portfolio:'Trade Portfolio',intelligence:'Trade Intelligence',company:'Company',main:'MAIN MENU',quick:'NAVIGATION',trade:'TRADE',intro:'Two-way trade, strategic sourcing and market-entry paths'};
 
 const safeGlassLang = (['en','tr','de','it','ru','fa','zh','vi','uk','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
@@ -175,7 +176,7 @@ const globalSwitchPath = (target: string): string => {
           <div class="mobile-solutions-grid">
             {solutionLinks.map(([solutionLabel, solutionHref]) => (
               <a href={solutionHref} class="mobile-solution-item">
-                <strong class="sol-title">{solutionLabel}</strong><span aria-hidden="true">↗</span>
+                <strong class="sol-title">{solutionLabel}</strong><span aria-hidden="true">{lang === 'he' ? '↖' : '↗'}</span>
               </a>
             ))}
           </div>
@@ -189,7 +190,7 @@ const globalSwitchPath = (target: string): string => {
           <div class="mobile-nav-grid">
             {nav.filter(([key]) => key !== 'services').map(([key, label, href]) => (
               <a href={href} class:list={['mobile-nav-item', { active: pageKey === key }]}>
-                <strong>{label}</strong><span aria-hidden="true">↗</span>
+                <strong>{label}</strong><span aria-hidden="true">{lang === 'he' ? '↖' : '↗'}</span>
               </a>
             ))}
           </div>
@@ -205,7 +206,7 @@ const globalSwitchPath = (target: string): string => {
           <div id="solutions-panel" class="nav-solutions-menu" aria-label={navigationCopy.globalTrade} data-solutions-menu>
             <div class="nav-solutions-intro"><strong>CTSEG · {navigationCopy.globalTrade}</strong><span>{navigationCopy.intro}</span></div>
             <div class="desktop-solutions-grid">
-              {solutionLinks.map(([solutionLabel, solutionHref]) => <a href={solutionHref} class="desktop-solution-item"><span>{solutionLabel}</span><i aria-hidden="true">↗</i></a>)}
+              {solutionLinks.map(([solutionLabel, solutionHref]) => <a href={solutionHref} class="desktop-solution-item"><span>{solutionLabel}</span><i aria-hidden="true">{lang === 'he' ? '↖' : '↗'}</i></a>)}
             </div>
           </div>
         </div>
@@ -231,7 +232,7 @@ const globalSwitchPath = (target: string): string => {
           </div>
         </div>
 
-        <a class="button button-small nav-cta" href={localizedPath(lang, 'contact')}>{t.quote}</a>
+        <a class="button button-small nav-cta" href={lang === 'he' ? '/he/יצירת-קשר/' : localizedPath(lang, 'contact')}>{t.quote}</a>
       </div>
       {(lang === 'en' || lang === 'fa') && (
         <a class="fa-market-nav-link fa-nav-promo" href="/fa/" data-fa-nav-link data-fa-landing-link>
@@ -390,6 +391,9 @@ const globalSwitchPath = (target: string): string => {
     .desktop-solutions-grid .desktop-solution-item:hover i{background:#c4f000;color:#0a0a0a;transform:translate(2px,-2px)}
     .language-switcher-desktop button{border-color:rgba(255,255,255,.18)!important;background:rgba(255,255,255,.04)!important}
     .nav-cta{padding-inline:16px!important;white-space:nowrap!important}
+    html[data-locale="he"] .desktop-only-nav a,html[data-locale="he"] .desktop-nav-link,html[data-locale="he"] .nav-solutions-parent,html[data-locale="he"] .nav-market-parent{font-size:14px!important;font-weight:600!important;letter-spacing:0!important;text-transform:none!important;line-height:1.45!important}
+    html[data-locale="he"] .nav-solutions-intro strong{font-size:13px!important;letter-spacing:0!important;text-transform:none!important}
+    html[data-locale="he"] .header-house-label{font-size:12px!important;letter-spacing:0!important}
     .fa-nav-promo{display:grid!important;gap:2px!important;min-width:134px!important;padding:7px 10px!important;border-left:1px solid rgba(196,240,0,.35)!important;color:#fff!important;line-height:1.2!important}
     .fa-nav-promo strong{font-size:10px!important;color:#c4f000!important}
     .fa-nav-promo span{font-size:9px!important;color:#d5d5d0!important}
