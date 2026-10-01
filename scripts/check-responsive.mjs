@@ -554,7 +554,9 @@ try {
       result.contactEmail.href !== 'mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry' ||
       result.contactEmail.buttons !== 0 || !result.contactEmail.focusVisible);
     const isGenericHomepage=['/','/en/'].includes(testCase.path);
-    const expectedLocaleCount = isHomepage ? rootLocaleCount : productionLocaleCount;
+    // The standard global header exposes the full locale set, including Hebrew, on every route.
+    // Sourcing-specific locale coverage is validated separately below with sourcingLocales.
+    const expectedLocaleCount = rootLocaleCount;
     const badLocale = !testCase.persian && (result.localeOptions !== expectedLocaleCount || result.activeDesktopLocale !== 1 || !result.desktopLocaleCodeOnly ||
       (testCase.openMenu && (result.visibleMobileLocales !== expectedLocaleCount || result.mobilePanelHeight < testCase.height * .7)));
     const badPersian = testCase.persian && (!result.persian || result.persian.lang !== 'fa' || result.persian.dir !== 'rtl' ||
