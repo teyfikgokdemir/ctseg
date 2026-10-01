@@ -115,7 +115,7 @@ const footerPath = (key:string,id?:string) => {
 const focusedCountryHome = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
 const showGenericPortfolio = !focusedCountryHome;
 const showGlassLink = !focusedCountryHome || lang === 'fa';
-const safeGlassLang = (['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
+const safeGlassLang = (['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
 ---
 <footer class="site-footer">
   <div class="footer-markets-wrap"><div class="container footer-markets"><div class="footer-markets-label"><span class="footer-markets-kicker">CTSEG</span><strong>{marketLabel}</strong></div><nav class="footer-market-links" aria-label={marketLabel}>{marketLocales.map((item) => (<a href={item.href} class:list={['footer-market-link', item.code === lang && 'is-active']} aria-current={item.code === lang ? 'page' : undefined} data-footer-locale={item.code}><img aria-hidden="true" class="footer-market-flag" src={item.flagSrc} width="24" height="16" alt="" loading="lazy" decoding="async" /><span>{item.label}</span></a>))}</nav></div></div>
