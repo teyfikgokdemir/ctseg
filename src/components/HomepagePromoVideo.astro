@@ -14,7 +14,7 @@
       >
         <source src="/videos/Ctseg_tanitim.mp4" type="video/mp4" />
       </video>
-      <button class="ctseg-home-promo-video__sound" type="button" data-ctseg-video-sound aria-pressed="false" aria-label="Videonun sesini aç">
+      <button class="ctseg-home-promo-video__sound" type="button" data-ctseg-video-sound aria-pressed="false" aria-label="Sesi aç">
         <span aria-hidden="true">🔇</span><strong>Sesi aç</strong>
       </button>
     </figure>
@@ -52,7 +52,7 @@
     const updateSoundButton=()=>{
       if(!soundButton)return;
       soundButton.setAttribute('aria-pressed',String(!video.muted));
-      soundButton.setAttribute('aria-label',video.muted?'Videonun sesini aç':'Videonun sesini kapat');
+      soundButton.setAttribute('aria-label',video.muted?'Sesi aç':'Sesi kapat');
       const icon=soundButton.querySelector('span');
       const label=soundButton.querySelector('strong');
       if(icon) icon.textContent=video.muted?'🔇':'🔊';
