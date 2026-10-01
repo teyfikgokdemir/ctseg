@@ -5318,9 +5318,6 @@ html[data-locale=he] .he-product-card h3{
 }
 
 /* VIETNAMESE TYPOGRAPHY + OVERFLOW CONTRACT — 2026-10-01 */
-html[data-locale=vi]{
-  overflow-x:clip;
-}
 html[data-locale=vi] :is(.hero-grid,.page-hero-grid,.section-head,.content-grid,.card-grid)>*{
   min-width:0;
 }
