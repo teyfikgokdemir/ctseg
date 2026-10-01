@@ -98,6 +98,14 @@ const statementMap: Record<string,string> = {
 const footerStatement = statementMap[lang] || statementMap.en;
 const footerPath = (key:string,id?:string) => {
   if (lang !== 'he') return localizedPath(lang,key,id);
+  if (key === 'services' && id) {
+    const serviceMap:Record<string,string> = {
+      'strategic-sourcing':'/he/שירותים/רכש-אסטרטגי/',
+      'supplier-verification':'/he/שירותים/איתור-ואימות-ספקים/',
+      'market-entry':'/he/שירותים/כניסה-לשוק/'
+    };
+    if (serviceMap[id]) return serviceMap[id];
+  }
   const map:Record<string,string> = {
     home:'/he/', products:'/he/מוצרים-מסחריים/', services:'/he/שירותים/', markets:'/he/שווקים/',
     insights:'/he/תובנות/', about:'/he/אודות/', contact:'/he/יצירת-קשר/', 'how-we-work':'/he/איך-אנחנו-עובדים/'
@@ -123,7 +131,7 @@ const safeGlassLang = (['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg'].
   </div>
   <div class="container footer-bottom">
     <p>{copyright}</p>
-    <nav aria-label={lang === 'he' ? 'מידע משפטי' : lang === 'uk' ? 'Правова інформація' : 'Legal'}>{legalIds.map((id) => <a href={lang === 'he' ? ({privacy:'/he/מדיניות-פרטיות/',cookies:'/he/מדיניות-עוגיות/',terms:'/he/תנאי-שימוש/','data-protection':'/he/הודעת-הגנת-מידע/'} as Record<string,string>)[id] : localizedPath(lang, 'legal', id)}>{lang === 'he' ? ({privacy:'מדיניות פרטיות',cookies:'מדיניות עוגיות',terms:'תנאי שימוש','data-protection':'הודעת הגנת מידע'} as Record<string,string>)[id] : (legal[id].titles[lang] || legal[id].titles.en)}</a>)}</nav>
+    <nav aria-label={lang === 'he' ? 'מידע משפטי' : lang === 'uk' ? 'Правова інформація' : 'Legal'}>{legalIds.map((id) => <a href={lang === 'he' ? ({privacy:'/he/מדיניות-פרטיות/',cookies:'/he/מדיניות-עוגיות/',terms:'/he/תנאי-שימוש/','data-protection':'/he/הודעת-הגנת-מידע/'} as Record<string,string>)[id] : localizedPath(lang, 'legal', id)}>{lang === 'he' ? ({privacy:'מדיניות פרטיות',cookies:'מדיניות עוגיות',terms:'תנאי שימוש','data-protection':'הודעת פרטיות'} as Record<string,string>)[id] : (legal[id].titles[lang] || legal[id].titles.en)}</a>)}</nav>
     <p class="footer-credit">{lang === 'he' ? 'עיצוב ופיתוח אתר:' : lang === 'tr' ? 'Web sitesi tasarım ve geliştirme:' : 'Website design & development:'} <a href="https://qctcommerce.com/" target="_blank" rel="noopener noreferrer">QCT Commerce</a></p>
   </div>
 </footer>
