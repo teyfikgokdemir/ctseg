@@ -1,6 +1,6 @@
 export type DuzceGlassLocale = 'tr' | 'en' | 'de' | 'it' | 'ru' | 'fa' | 'zh' | 'vi' | 'uk' | 'ro' | 'bg' | 'sr';
 
-export const duzceGlassLocales: DuzceGlassLocale[] = ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg'];
+export const duzceGlassLocales: DuzceGlassLocale[] = ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr'];
 
 export function duzceGlassPath(lang: DuzceGlassLocale): string {
   return lang === 'tr' ? '/glass/duzce-float-glass/' : `/${lang}/glass/duzce-float-glass/`;
