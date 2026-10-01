@@ -6,6 +6,12 @@ import { contactQualification } from '../data/contact-qualification';
 
 const { lang } = Astro.props as { lang:ContactLocale };
 const copy = contactCopy[lang];
+const websiteLabel: Record<string,string> = {
+  tr:'Web sitesi', en:'Website', de:'Website des Unternehmens', it:'Sito web aziendale',
+  ru:'Сайт компании', fa:'وب‌سایت شرکت', zh:'公司网站', vi:'Website doanh nghiệp',
+  uk:'Вебсайт компанії', ro:'Site-ul companiei', bg:'Уебсайт на компанията',
+  sr:'Veb-sajt kompanije', he:'אתר החברה'
+};
 const qualification = contactQualification[lang];
 const privacyHref = lang === 'fa' ? '/fa/privacy/' : lang === 'he' ? '/he/מדיניות-פרטיות/' : localizedPath(lang,'legal','privacy');
 
@@ -196,7 +202,7 @@ const dynamicPlaceholders = {
     <input type="hidden" name="utmContent" value="" data-attribution="utm_content" />
     <input type="hidden" name="utmTerm" value="" data-attribution="utm_term" />
     <input type="hidden" name="clickId" value="" data-attribution="click_id" />
-    <div class="form-honeypot" aria-hidden="true"><label>{lang === 'he' ? 'אתר החברה' : 'Website'}<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+    <div class="form-honeypot" aria-hidden="true"><label>{websiteLabel[lang] || websiteLabel.en}<input name="website" tabindex="-1" autocomplete="off" /></label></div>
     <div class="commercial-intent-cards" role="radiogroup" aria-label={copy.intentLabel}>
       <button type="button" class="intent-card" data-intent-toggle="buyer_request" aria-pressed="false">
         <span class="intent-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 4h2l2 11h10l2-8H6"/><circle cx="9" cy="19" r="1.2"/><circle cx="17" cy="19" r="1.2"/></svg></span>
