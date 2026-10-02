@@ -3,6 +3,7 @@ import CommercialRequestForm from './CommercialRequestForm.astro';
 import { glassSeoPages } from '../data/glass-seo';
 import { glassHubLocaleCopy, type GlassHubLocale } from '../data/glass-hub-locales';
 import { localizedGlassProductCopy, localizedGlassSlugs, type LocalizedGlassLocale } from '../data/glass-product-locales';
+import { glassMarketPages, glassMarketSlugs } from '../data/glass-market-seo';
 const { lang='tr' }=Astro.props as {lang?:string}; const tr=lang==='tr'; const en=lang==='en';
 const c=tr?{
 eyebrow:'Cam Tedariki · Türkiye & Global',title:'Türkiye’de cam tedarikçisi, üretici ve işleme kapasitesi bulma.',lead:'CTSEG; float, temperli, lamine, Low-E, IGU, extra clear ve işlenmiş cam ihtiyaçlarında uygun üretici, tedarikçi ve cam işleme kapasitesini eşleştirir; RFQ, paketleme, ihracat ve teslim koordinasyonunu tek ticari akışta yönetir.',
@@ -24,6 +25,9 @@ faqTitle:'Glass sourcing FAQ',faq:[['What information is needed for a quotation?
   : localizedGlassSlugs.map((slug)=><a href={`/${lang}/glass/${slug}/`}><strong>{localizedGlassProductCopy[lang as LocalizedGlassLocale].products[slug].name}</strong><span>↗</span></a>)
 }
 </div></div></section>
+{(tr||en) && <section class="section market-pathways"><div class="container"><div class="head"><h2>{tr?'Pazar bazlı cam tedarik yolları':'Market-specific glass sourcing'}</h2></div><div class="path-grid">
+{glassMarketSlugs.map((slug)=><a href={`${tr?'/glass/markets':'/en/glass/markets'}/${slug}/`}><strong>{glassMarketPages[slug][lang as 'tr'|'en'].title}</strong><span>↗</span></a>)}
+</div></div></section>}
 <section class="section commercial"><div class="container two"><div><h2>{c.processTitle}</h2><ul>{c.process.map(x=><li>{x}</li>)}</ul></div><div><h2>{c.buyersTitle}</h2><ul>{c.buyers.map(x=><li>{x}</li>)}</ul></div></div></section>
 <section class="section faq"><div class="container"><div class="head"><h2>{c.faqTitle}</h2></div><div class="faqs">{c.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div></div></section>
 <section class="section form" id="glass-rfq"><div class="container"><CommercialRequestForm lang={lang}/></div></section></div>
