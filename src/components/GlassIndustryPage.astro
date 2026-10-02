@@ -2,6 +2,7 @@
 import CommercialRequestForm from './CommercialRequestForm.astro';
 import { glassSeoPages } from '../data/glass-seo';
 import { glassHubLocaleCopy, type GlassHubLocale } from '../data/glass-hub-locales';
+import { localizedGlassProductCopy, localizedGlassSlugs, type LocalizedGlassLocale } from '../data/glass-product-locales';
 const { lang='tr' }=Astro.props as {lang?:string}; const tr=lang==='tr'; const en=lang==='en';
 const c=tr?{
 eyebrow:'Cam Tedariki · Türkiye & Global',title:'Cam tedariği için tek ticari koordinasyon noktası.',lead:'CTSEG; mimari, endüstriyel ve proje bazlı cam ihtiyaçlarında ürün eşleştirme, tedarikçi koordinasyonu, RFQ, ihracat ve teslim sürecini B2B alıcılar için tek akışta yönetir.',
@@ -17,7 +18,12 @@ faqTitle:'Glass sourcing FAQ',faq:[['What information is needed for a quotation?
 ---
 <div class="glass-hub"><section class="glass-hero section"><div class="container center"><span class="eyebrow">{c.eyebrow}</span><h1>{c.title}</h1><p class="lead">{c.lead}</p><a class="button primary" href="#glass-rfq">{c.cta}</a></div></section>
 <section class="section products"><div class="container"><div class="head"><h2>{c.productsTitle}</h2></div><div class="grid">{c.products.map(([n,t])=><article><h3>{n}</h3><p>{t}</p></article>)}</div></div></section>
-{(tr || en) && <section class="section pathways"><div class="container"><div class="head"><h2>{tr?'Ürün bazlı cam tedarik sayfaları':'Product-specific glass sourcing'}</h2></div><div class="path-grid">{glassSeoPages.map((page)=><a href={`${tr?'/glass':'/en/glass'}/${page.slug}/`}><strong>{page[lang as 'tr'|'en'].title}</strong><span>↗</span></a>)}</div></div></section>}
+<section class="section pathways"><div class="container"><div class="head"><h2>{tr?'Ürün bazlı cam tedarik sayfaları':en?'Product-specific glass sourcing':c.productsTitle}</h2></div><div class="path-grid">
+{(tr||en)
+  ? glassSeoPages.map((page)=><a href={`${tr?'/glass':'/en/glass'}/${page.slug}/`}><strong>{page[lang as 'tr'|'en'].title}</strong><span>↗</span></a>)
+  : localizedGlassSlugs.map((slug)=><a href={`/${lang}/glass/${slug}/`}><strong>{localizedGlassProductCopy[lang as LocalizedGlassLocale].products[slug].name}</strong><span>↗</span></a>)
+}
+</div></div></section>
 <section class="section commercial"><div class="container two"><div><h2>{c.processTitle}</h2><ul>{c.process.map(x=><li>{x}</li>)}</ul></div><div><h2>{c.buyersTitle}</h2><ul>{c.buyers.map(x=><li>{x}</li>)}</ul></div></div></section>
 <section class="section faq"><div class="container"><div class="head"><h2>{c.faqTitle}</h2></div><div class="faqs">{c.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div></div></section>
 <section class="section form" id="glass-rfq"><div class="container"><CommercialRequestForm lang={lang}/></div></section></div>
