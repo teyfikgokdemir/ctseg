@@ -1209,7 +1209,7 @@ const verifiedLater = {
 
 {service && (
   <>
-    <PageHero lang={lang} eyebrow={t.services} title={service.names[lang]} lead={service.descriptions[lang]} parentHref={sectionHref('services')} parentLabel={t.services} />
+    <PageHero lang={lang} eyebrow={t.services} title={service.names[lang]} lead={service.descriptions[lang]} parentHref={sectionHref('services')} parentLabel={t.services} compact={true} />
     {serviceVisual && (
       <section class="service-visual-band" data-service-visual-band>
         <div class="container">
