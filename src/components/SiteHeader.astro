@@ -395,6 +395,37 @@ const globalSwitchPath = (target: string): string => {
     languageToggle?.setAttribute('aria-expanded', 'false');
     languageMenu?.classList.remove('open');
   };
+  const languageScrollKey = 'ctseg:language-scroll';
+  const restoreLanguageScroll = () => {
+    try {
+      const raw = sessionStorage.getItem(languageScrollKey);
+      if (!raw) return;
+      const saved = JSON.parse(raw) as { path?:string; ratio?:number };
+      if (saved.path !== window.location.pathname || typeof saved.ratio !== 'number') return;
+      sessionStorage.removeItem(languageScrollKey);
+      const apply = () => {
+        const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        window.scrollTo({ top: Math.round(maxScroll * Math.min(1, Math.max(0, saved.ratio!))), behavior: 'instant' });
+      };
+      requestAnimationFrame(() => requestAnimationFrame(apply));
+      window.addEventListener('load', apply, { once:true });
+    } catch {
+      sessionStorage.removeItem(languageScrollKey);
+    }
+  };
+
+  restoreLanguageScroll();
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-locale-option]').forEach((link) => {
+    link.addEventListener('click', () => {
+      try {
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const ratio = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+        const target = new URL(link.href, window.location.href);
+        sessionStorage.setItem(languageScrollKey, JSON.stringify({ path:target.pathname, ratio }));
+      } catch {}
+    });
+  });
 
   mobileBreakpoint.addEventListener('change', syncNavigationAccessibility);
   toggle?.addEventListener('click', () => {
