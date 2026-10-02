@@ -3,19 +3,20 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import GlassIndustryPage from '../../../components/GlassIndustryPage.astro';
 import { glassHubLocaleCopy, type GlassHubLocale } from '../../../data/glass-hub-locales';
 import { localizedGlassProductCopy, localizedGlassSlugs } from '../../../data/glass-product-locales';
+import { arGlassProductCopy } from '../../../data/glass-product-ar';
 
 export function getStaticPaths(){
-  return ['de','it','ru','fa','zh','vi','uk','ro','bg','he'].map((lang)=>({params:{lang}}));
+  return ['de','it','ru','fa','zh','vi','uk','ro','bg','he','ar'].map((lang)=>({params:{lang}}));
 }
 
-const { lang } = Astro.params as {lang:GlassHubLocale};
+const { lang } = Astro.params as {lang:GlassHubLocale|'ar'};
 const c = glassHubLocaleCopy[lang];
 const canonical = `https://ctseg.com.tr/${lang}/glass/`;
 const schema = [
   {
     '@context':'https://schema.org','@type':'CollectionPage','@id':canonical+'#glass-sourcing',
     name:c.metaTitle,description:c.description,url:canonical,
-    about:localizedGlassSlugs.map((slug)=>localizedGlassProductCopy[lang].products[slug].name)
+    about:localizedGlassSlugs.map((slug)=>(lang==='ar'?arGlassProductCopy:localizedGlassProductCopy[lang as keyof typeof localizedGlassProductCopy]).products[slug].name)
   },
   {
     '@context':'https://schema.org','@type':'FAQPage',
