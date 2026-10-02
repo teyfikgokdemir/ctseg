@@ -178,7 +178,7 @@ const schema=[{'@context':'https://schema.org','@type':'Service','name':c.title,
       </div>
     </div></section>
 
-    <section class="section rfq-brief"><div class="container"><div class="center head"><h2>{tr?'Doğru teklif için RFQ bilgileri':'RFQ inputs for an accurate quotation'}</h2></div><div class="brief-grid">{c.rfq.map(x=><article><h3>{x}</h3></article>)}</div></div></section>
+    <section class="section rfq-brief"><div class="container"><div class="center head"><h2>{tr?'Doğru teklif için gerekli bilgiler':'Information needed for an accurate quotation'}</h2></div><div class="brief-grid">{c.rfq.map(x=><article><h3>{x}</h3></article>)}</div></div></section>
     <section class="section related"><div class="container"><div class="center head"><h2>{tr?'İlgili cam tedarik sayfaları':'Related glass sourcing pages'}</h2></div><div class="links">{relatedPages.map(x=><a href={`${base}/${x.slug}/`}><strong>{x[lang].title}</strong><span>↗</span></a>)}</div></div></section>
     <section class="section faq"><div class="container"><div class="center head"><h2>{tr?'Sık sorulanlar':'Frequently asked questions'}</h2></div><div class="faqs">{c.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div></div></section>
     <section class="section form" id="rfq"><div class="container"><CommercialRequestForm lang={lang}/></div></section>
