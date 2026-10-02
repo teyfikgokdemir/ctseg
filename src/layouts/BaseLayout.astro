@@ -93,6 +93,8 @@ if (String(lang) === 'he') alternates.he = canonicalUrl;
 else if (hebrewCounterpart) alternates.he = hebrewCounterpart;
 const alternateCodes = pageKey === 'glass-industry'
   ? activeLocales
+  : pageKey === 'glass-product'
+  ? activeLocales
   : pageKey === 'glass'
   ? ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr']
   : (String(lang) === 'he' && pageKey === 'he-insight'
