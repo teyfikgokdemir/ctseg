@@ -5,6 +5,7 @@ import { duzceGlassPath, type DuzceGlassLocale } from '../data/duzce-glass';
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 import { tradePlatformCopy } from '../data/trade-platform';
 import { searchLandingPath, type SearchLandingId } from '../data/search-landings';
+import { getGlassSeoPage } from '../data/glass-seo';
 
 const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?: string; pageId?: string };
 const t = lang === 'he' ? {
@@ -41,6 +42,16 @@ const navigationCopy = {
 const safeGlassLang = (['en','tr','de','it','ru','fa','zh','vi','uk','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
 const glassUrl = lang === 'tr' ? '/glass/' : lang === 'en' ? '/en/glass/' : duzceGlassPath(safeGlassLang);
 const glassLabel = glassNavLabels[lang] || 'Düzce Float Glass';
+const glassMenuLinks = (lang === 'tr' || lang === 'en') ? [
+  [glassLabel, glassUrl],
+  ...['float-glass','tempered-glass','laminated-glass','low-e-coated-glass','insulated-glass-igu','architectural-project-glass']
+    .map((slug) => {
+      const page = getGlassSeoPage(slug);
+      if (!page) return null;
+      return [page[lang].title.replace(' Tedariki','').replace(' Sourcing',''), `${lang === 'tr' ? '/glass' : '/en/glass'}/${slug}/`];
+    })
+    .filter(Boolean)
+] as [string,string][] : [[glassLabel, glassUrl]] as [string,string][];
 
 const focusedCountryLp = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
 const solutionLinks = lang === 'he' ? [
@@ -48,13 +59,13 @@ const solutionLinks = lang === 'he' ? [
   ['רכש אסטרטגי','/he/שירותים/רכש-אסטרטגי/'],
   ['כניסה לשוק','/he/שירותים/כניסה-לשוק/'],
   [methodLabel,'/he/איך-אנחנו-עובדים/'],
-  [glassLabel,glassUrl]
+  ...glassMenuLinks
 ] : [
   [t.services, localizedPath(lang,'services')],
   [p.buyerTitle, localizedPath(lang,'services','strategic-sourcing')],
   [p.producerTitle, localizedPath(lang,'services','market-entry')],
   [methodLabel, localizedPath(lang,'how-we-work')],
-  [glassLabel, glassUrl]
+  ...glassMenuLinks
 ];
 
 const nav = lang === 'he' ? [
