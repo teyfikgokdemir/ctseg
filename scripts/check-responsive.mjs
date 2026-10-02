@@ -246,7 +246,10 @@ try {
       persianMobileMenu={initial,opened,focusTrapped,escapeClosed,outsideClosed};
     }
     if (testCase.openLanguage) await page.locator('[data-language-toggle]').click();
-    if (testCase.openPersianNav) await page.locator('[data-fa-nav-link]').hover();
+    if (testCase.openPersianNav) {
+      const persianNav = page.locator('[data-fa-nav-link]');
+      if (await persianNav.count() && await persianNav.isVisible()) await persianNav.hover();
+    }
     const contactEmailLink = page.locator('.contact-email-link');
     if (await contactEmailLink.count()) {
       await page.keyboard.press('Tab');
