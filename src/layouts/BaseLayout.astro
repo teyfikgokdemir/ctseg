@@ -95,6 +95,8 @@ const alternateCodes = pageKey === 'glass-industry'
   ? activeLocales
   : pageKey === 'glass-product'
   ? activeLocales
+  : pageKey === 'glass-market'
+  ? activeLocales
   : pageKey === 'glass'
   ? ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr']
   : (String(lang) === 'he' && pageKey === 'he-insight'
@@ -127,7 +129,8 @@ const organizationDescription = ({
   uk:'CTSEG — незалежний B2B торговий дім у Туреччині, що координує двосторонню міжнародну торгівлю, стратегічне постачання, перевірку постачальників і вихід на ринки.',
   ro:'CTSEG este o casă de comerț B2B independentă, cu sediul în Türkiye, specializată în comerț global bidirecțional, sourcing strategic, verificarea furnizorilor și intrare pe piață.',
   bg:'CTSEG е независима B2B търговска къща със седалище в Türkiye, фокусирана върху двупосочна глобална търговия, стратегическо снабдяване, проверка на доставчици и пазарен достъп.',
-  he:'CTSEG היא חברת B2B עצמאית מטורקיה המתמחה בסחר דו־כיווני, איתור ואימות ספקים, RFQ וכניסה לשווקים.'
+  he:'CTSEG היא חברת B2B עצמאית מטורקיה המתמחה בסחר דו־כיווני, איתור ואימות ספקים, RFQ וכניסה לשווקים.',
+  ar:'CTSEG هي شركة تجارة B2B مستقلة مقرها Türkiye، متخصصة في التجارة ثنائية الاتجاه والتوريد الاستراتيجي والتحقق من الموردين ودخول الأسواق.'
 } as Record<string,string>)[lang] || 'CTSEG is a Türkiye-based independent B2B trade house for two-way global trade, strategic sourcing, supplier verification and market entry.';
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
