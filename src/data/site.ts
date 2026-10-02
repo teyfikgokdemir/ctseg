@@ -3,6 +3,7 @@ import { activeLocales, localeByCode, siteLocales, type SiteLocale } from './loc
 import { syriaMarketContent } from './syria-market';
 import { localizedSlug } from '../lib/localized-slug';
 import { ukCore, ukInsightTitles, ukLegal, ukProducts, ukServices } from './uk-content';
+import { arCore, arInsightTitles, arLegal, arProducts, arServices } from './ar-content';
 
 export const locales = siteLocales;
 export type Locale = SiteLocale;
@@ -1271,6 +1272,38 @@ export const pageCopy: Record<Locale, any> = {
     legalSections:[['Phạm vi và trách nhiệm','CTSEG nỗ lực duy trì tính chính xác của thông tin doanh nghiệp và thương mại trên website này. Yêu cầu liên hệ và bảo vệ dữ liệu có thể gửi về info@ctseg.com.tr.'],['Thông tin xử lý và mục đích','Khi bạn liên hệ, chúng tôi có thể xử lý tên, công ty, email, số điện thoại và thông tin nhu cầu thương mại, cùng các bản ghi kỹ thuật giới hạn để bảo mật. Dữ liệu này dùng để phản hồi, đánh giá quan hệ hợp tác và tuân thủ nghĩa vụ pháp lý.'],['Chia sẻ, lưu trữ và bảo mật dữ liệu','Thông tin chỉ được chia sẻ với các nhà cung cấp dịch vụ lưu trữ, email, hỗ trợ kỹ thuật cần thiết hoặc cơ quan có thẩm quyền theo luật định. Dữ liệu sẽ được xóa hoặc ẩn danh khi hết thời hạn lưu trữ theo luật.'],['Quyền của bạn và thông tin liên hệ','Để thực hiện quyền truy cập, chỉnh sửa, xóa hoặc phản đối xử lý dữ liệu, vui lòng gửi yêu cầu kèm thông tin nhận diện tới info@ctseg.com.tr.']]
   }
 };
+
+/* Arabic production locale: native MSA copy for Gulf, Middle East and international B2B audiences. */
+Object.assign(company.name,{ar:arCore.companyName});
+Object.assign(companyCopy,{ar:arCore.company});
+for (const [key,slug] of Object.entries(arCore.sections)) Object.assign(sectionSlugs[key],{ar:slug});
+Object.assign(ui,{ar:arCore.ui});
+Object.assign(homeCopy,{ar:arCore.home});
+Object.assign(editorialCopy,{ar:arCore.editorial});
+Object.assign(pageCopy,{ar:arCore.page});
+
+for (const id of serviceIds) {
+  const [slug,name,description]=arServices[id];
+  Object.assign(services[id].slugs,{ar:slug});
+  Object.assign(services[id].names,{ar:name});
+  Object.assign(services[id].descriptions,{ar:description});
+}
+for (const id of productIds) {
+  const [name,description]=arProducts[id];
+  Object.assign(productNames[id],{ar:name});
+  Object.assign(productDescriptions[id],{ar:description});
+}
+insightIds.forEach((id,index)=>{
+  const title=arInsightTitles[index];
+  Object.assign(insights[id].titles,{ar:title});
+  Object.assign(insights[id].descriptions,{ar:`مادة عملية لفرق الشراء والتجارة الدولية حول «${title}»، مع التركيز على التحقق والتكلفة والوثائق وقابلية التنفيذ.`});
+  Object.assign(insights[id].answers,{ar:`ينبغي بناء القرار على مواصفات واضحة، والتحقق من الطرف المقابل والوثائق، ومقارنة العروض على أساس موحّد، وتحليل التكلفة الكلية وشروط التنفيذ. تطبق CTSEG هذه المنهجية على موضوع «${title}» قبل اتخاذ القرار التجاري.`});
+});
+for (const id of legalIds) {
+  const [slug,title]=arLegal[id];
+  Object.assign(legal[id].slugs,{ar:slug});
+  Object.assign(legal[id].titles,{ar:title});
+}
 
 /* Ukrainian production locale: native copy with canonical English slugs only where a dedicated slug is unnecessary. */
 Object.assign(company.name,{uk:ukCore.companyName});
