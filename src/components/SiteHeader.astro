@@ -115,6 +115,11 @@ const globalSwitchPath = (target: string): string => {
   }
   if (['vietnam-turkiye','china-turkiye','ukraine-turkiye'].includes(pageKey)) return target === 'tr' ? '/' : `/${target}/`;
   if (target === 'fa') return '/fa/';
+  if (pageKey === 'glass-industry') {
+    if (target === 'tr') return '/glass/';
+    if (target === 'en') return '/en/glass/';
+    return `/${target}/`;
+  }
   if (pageKey === 'glass') {
     const glassLocales = ['en','tr','de','it','ru','fa','zh','vi','ro','bg'] as const;
     if ((glassLocales as readonly string[]).includes(target)) return duzceGlassPath(target as DuzceGlassLocale);
