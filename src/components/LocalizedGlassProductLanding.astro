@@ -4,12 +4,14 @@ import CommercialRequestForm from './CommercialRequestForm.astro';
 import { activeLocales } from '../data/locales';
 import { localizedGlassProductCopy, localizedGlassSlugs, getLocalizedGlassProductDetail, type LocalizedGlassLocale, type LocalizedGlassSlug } from '../data/glass-product-locales';
 import { getGlassSeoPage } from '../data/glass-seo';
+import { arGlassProductCopy, arGlassPremium, getArGlassProductDetail } from '../data/glass-product-ar';
 
-const { lang, slug } = Astro.props as {lang:LocalizedGlassLocale;slug:LocalizedGlassSlug};
-const localeCopy=localizedGlassProductCopy[lang];
+const { lang, slug } = Astro.props as {lang:LocalizedGlassLocale|'ar';slug:LocalizedGlassSlug};
+const isAr=lang==='ar';
+const localeCopy=isAr?arGlassProductCopy:localizedGlassProductCopy[lang as LocalizedGlassLocale];
 const product=localeCopy.products[slug];
 const longHeroTitle=product.name.length>28;
-const detailCopy=getLocalizedGlassProductDetail(lang,slug);
+const detailCopy=isAr?getArGlassProductDetail(slug):getLocalizedGlassProductDetail(lang as LocalizedGlassLocale,slug);
 const canonical=`https://ctseg.com.tr/${lang}/glass/${slug}/`;
 const alt=Object.fromEntries([
   ['tr',`https://ctseg.com.tr/glass/${slug}/`],
@@ -124,12 +126,13 @@ const premiumUi:Record<LocalizedGlassLocale,{
   bg:{eyebrow:'CTSEG · СНАБДЯВАНЕ СЪС СТЪКЛО',all:'Всички решения за стъкло',ecosystem:'Приложения и направления за снабдяване',network:'МРЕЖА ЗА СТЪКЛО TÜRKİYE',networkTitle:'Утвърдени търговски отношения с водещи производители и преработватели',networkText:'Производственият маршрут се избира според продукта, обработката, документите и условията за доставка.',trust:['Силна мрежа от производители','Проектно и търговско снабдяване','Техническа съвместимост','Глобална координация на доставките'],features:['Техническо съпоставяне','Капацитет за обработка','Проектно снабдяване','Проверка на документи','Глобална логистика']},
   he:{eyebrow:'CTSEG · אספקת זכוכית',all:'כל פתרונות הזכוכית',ecosystem:'יישומים ותחומי אספקה',network:'רשת הזכוכית של TÜRKİYE',networkTitle:'קשרים מסחריים מבוססים עם יצרנים ומעבדים מובילים',networkText:'מסלול הייצור נבחר לפי סוג המוצר, עיבוד, מסמכים ותנאי אספקה.',trust:['רשת יצרנים חזקה','אספקת פרויקטים ומסחר','התאמה טכנית','תיאום אספקה גלובלי'],features:['התאמה טכנית','יכולת עיבוד','אספקת פרויקטים','בדיקת מסמכים','לוגיסטיקה גלובלית']}
 };
-const pu=premiumUi[lang];
+const pu=isAr?arGlassPremium:premiumUi[lang as LocalizedGlassLocale];
+const partnerNote=isAr?arGlassPremium.partnerNote:partnerNotes[lang as LocalizedGlassLocale];
 const visualCards=related.slice(0,4).map((relatedSlug)=>({slug:relatedSlug,name:localeCopy.products[relatedSlug].name,image:visualMap[relatedSlug]||'/images/glass/glass-applications-turkey.webp'}));
 
 ---
 <BaseLayout lang={lang as any} title={product.metaTitle} description={product.description} canonical={canonical} alternates={alt} schema={schema} pageKey="glass-product" pageId={slug}>
-  <main class="glass-product" dir={lang==='fa'||lang==='he'?'rtl':'ltr'}>
+  <main class="glass-product" dir={lang==='fa'||lang==='he'||lang==='ar'?'rtl':'ltr'}>
     <section class:list={['hero',{'hero--long-title':longHeroTitle}]}>
       <div class="hero-media" style={`--hero-pos:${heroCrop.position};--hero-scale:${heroCrop.scale}`}><img src={visual} alt={product.name} width="1600" height="900" loading="eager" fetchpriority="high" decoding="async"/></div>
       <div class="hero-shade"></div>
@@ -138,7 +141,7 @@ const visualCards=related.slice(0,4).map((relatedSlug)=>({slug:relatedSlug,name:
           <span class="eyebrow">{pu.eyebrow}</span>
           <h1>{product.name}</h1>
           <p class="hero-lead">{product.lead}</p>
-          <p class="partner-note">{partnerNotes[lang]}</p>
+          <p class="partner-note">{partnerNote}</p>
           <div class="hero-actions">
             <a class="button primary" href="#rfq">{localeCopy.rfq}</a>
             <a class="button ghost" href={`/${lang}/glass/`}>{pu.all}</a>
@@ -147,7 +150,7 @@ const visualCards=related.slice(0,4).map((relatedSlug)=>({slug:relatedSlug,name:
         <aside class="trust-panel">
           {pu.trust.map((title,index)=><div class="trust-item">
             <span class="trust-icon" aria-hidden="true"></span>
-            <div><strong>{title}</strong><p>{index===0?partnerNotes[lang]:index===1?detailCopy.buyers[0]:index===2?detailCopy.applications[0]:detailCopy.rfqItems[3]}</p></div>
+            <div><strong>{title}</strong><p>{index===0?partnerNote:index===1?detailCopy.buyers[0]:index===2?detailCopy.applications[0]:detailCopy.rfqItems[3]}</p></div>
           </div>)}
         </aside>
       </div>
@@ -171,7 +174,7 @@ const visualCards=related.slice(0,4).map((relatedSlug)=>({slug:relatedSlug,name:
       <div>
         <span class="eyebrow dark">{pu.network}</span>
         <h2>{pu.networkTitle}</h2>
-        <p>{partnerNotes[lang]}</p><p>{pu.networkText}</p>
+        <p>{partnerNote}</p><p>{pu.networkText}</p>
         <a class="button dark-btn" href="#rfq">{localeCopy.rfq}</a>
       </div>
       <div class="partner-gallery">
