@@ -64,7 +64,7 @@ const companyNames = {
   he: 'CTSEG Sanayi ve Ticaret Limited Şirketi',
   ro: 'CTSEG Companie de Industrie și Comerț',
   bg: 'CTSEG Индустрия и Търговия',
-  ar: 'شركة CTSEG للصناعة والتجارة المحدودة'
+  ar: 'شركة CTSEG للصناعة والتجارة ذات المسؤولية المحدودة'
 };
 const aboutPages = new Set([
   'tr/hakkimizda/index.html',
@@ -232,7 +232,7 @@ for (const file of htmlFiles) {
   if (!html.includes('/fonts/dm-sans-latin-ext-variable.woff2') || !html.includes('/fonts/source-serif-4-latin-ext-variable.woff2')) {
     errors.push(`${label}: local font preloads missing`);
   }
-  const homeHreflangs = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','he','x-default'];
+  const homeHreflangs = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','he','ar','x-default'];
   const requiredHreflangs = tradeRecord
     ? [...tradeLocaleCodes,'x-default']
     : isHomepage
@@ -248,8 +248,8 @@ for (const file of htmlFiles) {
     errors.push(`${label}: incomplete hreflang set`);
   }
   const expectedLang = label === 'index.html' ? 'tr' : label.split('/')[0];
-  const expectedHtmlLang = expectedLang === 'zh' ? 'zh-CN' : expectedLang === 'vi' ? 'vi-VN' : expectedLang === 'ro' ? 'ro-RO' : expectedLang === 'bg' ? 'bg-BG' : expectedLang === 'he' ? 'he-IL' : expectedLang === 'uk' ? 'uk-UA' : expectedLang;
-  if (['tr','en','de','it','fa','ru','zh','vi','ro','bg','he','uk'].includes(expectedLang) && !html.includes(`<html lang="${expectedHtmlLang}"`)) {
+  const expectedHtmlLang = expectedLang === 'zh' ? 'zh-CN' : expectedLang === 'vi' ? 'vi-VN' : expectedLang === 'ro' ? 'ro-RO' : expectedLang === 'bg' ? 'bg-BG' : expectedLang === 'he' ? 'he-IL' : expectedLang === 'uk' ? 'uk-UA' : expectedLang === 'ar' ? 'ar-SA' : expectedLang;
+  if (['tr','en','de','it','fa','ru','zh','vi','ro','bg','he','uk','ar'].includes(expectedLang) && !html.includes(`<html lang="${expectedHtmlLang}"`)) {
     errors.push(`${label}: incorrect html lang`);
   }
   if (productCatalogs.has(label)) {
@@ -257,7 +257,7 @@ for (const file of htmlFiles) {
       .map((match) => match[1].replace(/<[^>]+>/g, '').trim());
     if (descriptions.length !== 18) errors.push(`${label}: expected 18 product-card descriptions, found ${descriptions.length}`);
     if (new Set(descriptions).size !== descriptions.length) errors.push(`${label}: duplicate product-card description`);
-    if (!html.includes('Kalleh Ghouchi') && !html.includes('Kalleh-Ghouchi') && !html.includes('Калле-Гучі') && expectedLang !== 'zh' && expectedLang !== 'vi') errors.push(`${label}: corrected Kalleh Ghouchi name missing`);
+    if (!html.includes('Kalleh Ghouchi') && !html.includes('Kalleh-Ghouchi') && !html.includes('Калле-Гучі') && !html.includes('فستق كله غوتشي') && expectedLang !== 'zh' && expectedLang !== 'vi') errors.push(`${label}: corrected Kalleh Ghouchi name missing`);
     const cardBlocks = [...html.matchAll(/<a class="product-card[^"]*"[^>]*>[\s\S]*?<\/a>/g)].map((match) => match[0]);
     const catalogueImages = cardBlocks
       .map((card) => card.match(/<img[^>]+src="([^"]+)"/)?.[1])
@@ -393,7 +393,7 @@ for (const file of htmlFiles) {
   }
 }
 const builtTradeRecords = [...tradeRecordsByLabel.entries()].filter(([label]) => existsSync(join(root, label)));
-if (builtTradeRecords.length !== 33) errors.push(`expected 33 sourcing routes across eleven translated sourcing locales, found ${builtTradeRecords.length}`);
+if (builtTradeRecords.length !== 36) errors.push(`expected 36 sourcing routes across twelve translated sourcing locales, found ${builtTradeRecords.length}`);
 for (const [sourceLabel, sourceRecord] of builtTradeRecords) {
   const sourceHtml = readFileSync(join(root, sourceLabel), 'utf8');
   const sourceCanonical = sourceHtml.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
