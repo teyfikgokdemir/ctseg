@@ -1,5 +1,5 @@
 export type LocalizedGlassLocale='de'|'it'|'ru'|'fa'|'zh'|'vi'|'uk'|'ro'|'bg'|'he';
-export const localizedGlassSlugs=['float-glass','tempered-glass','heat-strengthened-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass','mirror-decorative-glass','patterned-frosted-satin-glass','processed-glass-cut-to-size','glass-processing-services','curved-glass','ceramic-printed-glass','architectural-project-glass'] as const;
+export const localizedGlassSlugs=['float-glass','tempered-glass','heat-strengthened-glass','heat-soak-tested-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass','mirror-decorative-glass','patterned-frosted-satin-glass','processed-glass-cut-to-size','glass-processing-services','curved-glass','ceramic-printed-glass','fire-rated-glass','architectural-project-glass'] as const;
 export type LocalizedGlassSlug=(typeof localizedGlassSlugs)[number];
 
 type ProductCopy={name:string;metaTitle:string;description:string;lead:string};
@@ -250,6 +250,53 @@ he:{name:'אספקת זכוכית מעוטרת, חלבית וסאטן',metaTitle
 };
 for(const locale of Object.keys(localizedPatternedGlass) as LocalizedGlassLocale[]){
   localizedGlassProductCopy[locale].products['patterned-frosted-satin-glass']=localizedPatternedGlass[locale];
+}
+
+
+const localizedTechnicalSafetyGlass:Record<LocalizedGlassLocale,Record<'heat-soak-tested-glass'|'fire-rated-glass',ProductCopy>>={
+de:{
+'heat-soak-tested-glass':{name:'Heat-Soak getestetes Glas',metaTitle:'Heat-Soak Glas Türkei | EN 14179 B2B | CTSEG',description:'Beschaffung von heat-soak getestetem Einscheibensicherheitsglas aus der Türkei für Fassaden und anspruchsvolle Architekturprojekte.',lead:'Anfragen werden nach Glasart, Dicke, Abmessungen, Beschichtung, Bearbeitung, Prüfstandard, Dokumentation und Projektanforderung strukturiert.'},
+'fire-rated-glass':{name:'Brandschutzglas-Beschaffung',metaTitle:'Brandschutzglas Türkei | E EW EI B2B | CTSEG',description:'Technische Beschaffung von Brandschutzglas und geprüften Verglasungssystemen aus der Türkei nach E/EW/EI-Klasse, Dauer und Projektdokumentation.',lead:'Brandschutzglas wird nach geforderter E/EW/EI-Klasse, Widerstandsdauer, Prüfstandard, Systemkompatibilität, Abmessungen und Dokumentation spezifiziert.'}
+},
+it:{
+'heat-soak-tested-glass':{name:'Vetro con Heat Soak Test',metaTitle:'Vetro Heat Soak Test Turchia | EN 14179 | CTSEG',description:'Sourcing di vetro temperato sottoposto a heat soak test dalla Turchia per facciate e progetti architettonici critici.',lead:'Le richieste vengono definite per tipo vetro, spessore, dimensioni, coating, lavorazioni, standard di prova, documentazione e requisiti di progetto.'},
+'fire-rated-glass':{name:'Sourcing vetro resistente al fuoco',metaTitle:'Vetro Resistente al Fuoco Turchia | E EW EI | CTSEG',description:'Sourcing tecnico dalla Turchia per vetro fire-rated e sistemi vetrati certificati secondo classe E/EW/EI, durata e documentazione di progetto.',lead:'La richiesta viene strutturata in base a classe E/EW/EI, durata, standard di prova, compatibilità del sistema, dimensioni e documentazione.'}
+},
+ru:{
+'heat-soak-tested-glass':{name:'Стекло с Heat Soak Test',metaTitle:'Heat Soak стекло из Турции | EN 14179 | CTSEG',description:'Поставка закалённого стекла с heat soak test из Турции для фасадов и ответственных архитектурных проектов.',lead:'Запрос формируется по типу стекла, толщине, размерам, покрытию, обработке, стандарту испытаний, документации и требованиям проекта.'},
+'fire-rated-glass':{name:'Поставка огнестойкого стекла',metaTitle:'Огнестойкое стекло из Турции | E EW EI | CTSEG',description:'Технический сорсинг огнестойкого стекла и сертифицированных систем из Турции по классам E/EW/EI, времени стойкости и проектной документации.',lead:'Требование структурируется по классу E/EW/EI, времени огнестойкости, стандарту испытаний, совместимости системы, размерам и документам.'}
+},
+fa:{
+'heat-soak-tested-glass':{name:'تأمین شیشه Heat Soak Test',metaTitle:'شیشه Heat Soak Test ترکیه | EN 14179 | CTSEG',description:'تأمین شیشه سکوریت دارای heat soak test از ترکیه برای نما و پروژه‌های معماری حساس.',lead:'درخواست بر اساس نوع شیشه، ضخامت، ابعاد، coating، فرآوری، استاندارد آزمون، مدارک و نیاز پروژه تنظیم می‌شود.'},
+'fire-rated-glass':{name:'تأمین شیشه مقاوم در برابر حریق',metaTitle:'شیشه Fire-Rated ترکیه | E EW EI | CTSEG',description:'تأمین فنی شیشه مقاوم در برابر حریق و سیستم‌های glazing دارای گواهی از ترکیه بر اساس کلاس E/EW/EI، مدت مقاومت و مدارک پروژه.',lead:'درخواست بر اساس کلاس E/EW/EI، مدت مقاومت، استاندارد آزمون، سازگاری سیستم، ابعاد و مستندات تنظیم می‌شود.'}
+},
+zh:{
+'heat-soak-tested-glass':{name:'均质处理 / Heat Soak测试玻璃采购',metaTitle:'土耳其Heat Soak测试玻璃 | EN 14179 | CTSEG',description:'从土耳其采购用于幕墙及关键建筑项目的Heat Soak测试钢化玻璃。',lead:'按玻璃类型、厚度、尺寸、镀膜、加工、测试标准、文件及项目要求组织RFQ。'},
+'fire-rated-glass':{name:'防火玻璃采购',metaTitle:'土耳其防火玻璃 | E EW EI | CTSEG',description:'从土耳其采购按E/EW/EI等级、耐火时间及项目文件要求配置的防火玻璃和认证玻璃系统。',lead:'按E/EW/EI等级、耐火时间、测试标准、系统兼容性、尺寸和文件要求组织RFQ。'}
+},
+vi:{
+'heat-soak-tested-glass':{name:'Sourcing kính Heat Soak Test',metaTitle:'Kính Heat Soak Test Thổ Nhĩ Kỳ | EN 14179 | CTSEG',description:'Sourcing kính cường lực đã heat soak test từ Thổ Nhĩ Kỳ cho mặt dựng và dự án kiến trúc quan trọng.',lead:'RFQ được cấu trúc theo loại kính, độ dày, kích thước, coating, gia công, tiêu chuẩn thử nghiệm, tài liệu và yêu cầu dự án.'},
+'fire-rated-glass':{name:'Sourcing kính chống cháy',metaTitle:'Kính Chống Cháy Thổ Nhĩ Kỳ | E EW EI | CTSEG',description:'Sourcing kỹ thuật kính chống cháy và hệ glazing được chứng nhận từ Thổ Nhĩ Kỳ theo cấp E/EW/EI, thời gian chịu lửa và tài liệu dự án.',lead:'Yêu cầu được cấu trúc theo cấp E/EW/EI, thời gian chịu lửa, tiêu chuẩn thử nghiệm, tính tương thích hệ thống, kích thước và hồ sơ.'}
+},
+uk:{
+'heat-soak-tested-glass':{name:'Постачання скла з Heat Soak Test',metaTitle:'Heat Soak скло з Туреччини | EN 14179 | CTSEG',description:'Постачання загартованого скла з heat soak test з Туреччини для фасадів і відповідальних архітектурних проєктів.',lead:'Запит формується за типом скла, товщиною, розмірами, покриттям, обробкою, стандартом випробувань, документацією та вимогами проєкту.'},
+'fire-rated-glass':{name:'Постачання вогнестійкого скла',metaTitle:'Вогнестійке скло з Туреччини | E EW EI | CTSEG',description:'Технічне постачання вогнестійкого скла та сертифікованих систем з Туреччини за класами E/EW/EI, часом стійкості та проєктною документацією.',lead:'Вимога структурується за класом E/EW/EI, часом вогнестійкості, стандартом випробувань, сумісністю системи, розмірами та документами.'}
+},
+ro:{
+'heat-soak-tested-glass':{name:'Sourcing sticlă cu Heat Soak Test',metaTitle:'Sticlă Heat Soak Test Türkiye | EN 14179 | CTSEG',description:'Sourcing de sticlă securizată cu heat soak test din Türkiye pentru fațade și proiecte arhitecturale critice.',lead:'Solicitarea este structurată după tipul sticlei, grosime, dimensiuni, coating, procesare, standard de testare, documente și cerințele proiectului.'},
+'fire-rated-glass':{name:'Sourcing sticlă rezistentă la foc',metaTitle:'Sticlă Rezistentă la Foc Türkiye | E EW EI | CTSEG',description:'Sourcing tehnic de sticlă fire-rated și sisteme vitrate certificate din Türkiye după clase E/EW/EI, durată și documentația proiectului.',lead:'Cerința este structurată după clasa E/EW/EI, durata de rezistență, standardul de testare, compatibilitatea sistemului, dimensiuni și documente.'}
+},
+bg:{
+'heat-soak-tested-glass':{name:'Снабдяване със стъкло с Heat Soak Test',metaTitle:'Heat Soak стъкло от Türkiye | EN 14179 | CTSEG',description:'Снабдяване със закалено стъкло с heat soak test от Türkiye за фасади и критични архитектурни проекти.',lead:'Заявката се структурира по тип стъкло, дебелина, размери, покритие, обработка, стандарт за изпитване, документация и проектни изисквания.'},
+'fire-rated-glass':{name:'Снабдяване с огнеустойчиво стъкло',metaTitle:'Огнеустойчиво стъкло от Türkiye | E EW EI | CTSEG',description:'Техническо снабдяване с fire-rated стъкло и сертифицирани системи от Türkiye по клас E/EW/EI, продължителност и проектна документация.',lead:'Изискването се структурира по клас E/EW/EI, време на устойчивост, стандарт за изпитване, съвместимост на системата, размери и документи.'}
+},
+he:{
+'heat-soak-tested-glass':{name:'אספקת זכוכית עם Heat Soak Test',metaTitle:'זכוכית Heat Soak מטורקיה | EN 14179 | CTSEG',description:'אספקת זכוכית מחוסמת שעברה heat soak test מטורקיה לחזיתות ולפרויקטים אדריכליים קריטיים.',lead:'ה-RFQ נבנה לפי סוג זכוכית, עובי, מידות, coating, עיבוד, תקן בדיקה, תיעוד ודרישות הפרויקט.'},
+'fire-rated-glass':{name:'אספקת זכוכית עמידת אש',metaTitle:'זכוכית עמידת אש מטורקיה | E EW EI | CTSEG',description:'אספקה טכנית של זכוכית fire-rated ומערכות זיגוג מאושרות מטורקיה לפי סיווג E/EW/EI, משך עמידות ותיעוד הפרויקט.',lead:'הדרישה נבנית לפי סיווג E/EW/EI, משך העמידות, תקן הבדיקה, התאמת המערכת, מידות ותיעוד.'}
+}
+};
+for(const locale of Object.keys(localizedTechnicalSafetyGlass) as LocalizedGlassLocale[]){
+  Object.assign(localizedGlassProductCopy[locale].products,localizedTechnicalSafetyGlass[locale]);
 }
 
 export function getLocalizedGlassProduct(locale:LocalizedGlassLocale,slug:LocalizedGlassSlug){
