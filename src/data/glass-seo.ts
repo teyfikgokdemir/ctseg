@@ -153,6 +153,105 @@ export const glassSeoPages: GlassSeoPage[] = [
         ['Can certification and test reports be checked before quotation?','Yes. Availability and applicability of documentation for the required performance class and system configuration should be verified before commercial commitment.']
       ]
     }
+  },
+  {
+    slug:'shower-enclosure-glass',
+    tr:{
+      title:'Duşakabin ve Shower Enclosure Camı Tedariki',
+      metaTitle:'Duşakabin Camı Türkiye | Shower Enclosure Glass B2B | CTSEG',
+      description:'Duşakabin, walk-in shower ve banyo sistemleri için Türkiye’den özel ölçü temperli cam, delik/çentik/CNC işleme ve OEM B2B tedarik koordinasyonu.',
+      eyebrow:'Shower Enclosure Glass · OEM & Project Sourcing',
+      lead:'Duşakabin camı taleplerini yalnız “temperli cam” olarak değil; net ölçü, kalınlık, renk/yüzey, delik ve menteşe işleme, kenar kalitesi, baskı/kaplama, seri adet ve paketleme yapısıyla üretime hazır RFQ’ya dönüştürüyoruz.',
+      applications:['Frameless ve framed duşakabin sistemleri','Walk-in shower panelleri','Otel ve konut banyo projeleri','OEM duşakabin üretimi','Özel ölçü banyo camı'],
+      buyers:['Duşakabin üreticileri ve markaları','Banyo sistemi distribütörleri','Otel ve konut proje ekipleri','OEM/private-label alıcıları','Cam ve aksesuar toptancıları'],
+      rfq:['Net cam ölçüsü / teknik çizim','Cam kalınlığı ve renk/yüzey','Delik, çentik, menteşe ve CNC detayları','Kenar işleme ve temperleme','Baskı / kaplama / nano yüzey ihtiyacı','Model başına adet ve paketleme'],
+      faq:[
+        ['Duşakabin camı için yalnız en-boy ölçüsü yeterli mi?','Basit panellerde başlangıç olabilir; ancak menteşe, kulp, sabitleme ve özel geometri varsa delik/çentik konumlarını gösteren çizim gerekir.'],
+        ['OEM veya private-label seri üretim yapılabilir mi?','Uygun processor ve sistem üreticisi bulunduğunda model, adet, kalite standardı, paketleme ve markalama gereksinimine göre seri RFQ yürütülebilir.'],
+        ['Renkli, frosted veya baskılı duşakabin camı değerlendirilebilir mi?','Evet. Yüzey, renk, baskı ve temperleme uyumluluğu ürün bazında doğrulanmalıdır.']
+      ]
+    },
+    en:{
+      title:'Shower Enclosure Glass Sourcing',
+      metaTitle:'Shower Enclosure Glass Supplier Türkiye | OEM B2B | CTSEG',
+      description:'B2B sourcing from Türkiye for custom-size tempered shower-enclosure glass with holes, notches, CNC processing, decorative finishes and OEM packing coordination.',
+      eyebrow:'Shower Enclosure Glass · OEM & Project Sourcing',
+      lead:'We structure shower-glass requirements around finished dimensions, thickness, tint/finish, holes and hinge processing, edge quality, printing/coating, serial quantities and packing rather than treating the requirement as generic tempered glass.',
+      applications:['Frameless and framed shower enclosures','Walk-in shower panels','Hotel and residential bathroom projects','OEM shower-enclosure production','Custom-size bathroom glazing'],
+      buyers:['Shower-enclosure manufacturers and brands','Bathroom-system distributors','Hotel and residential project teams','OEM/private-label buyers','Glass and hardware wholesalers'],
+      rfq:['Finished glass dimensions / drawing','Glass thickness and tint/finish','Hole, notch, hinge and CNC details','Edge processing and tempering','Print / coating / surface requirement','Quantity by model and packing'],
+      faq:[
+        ['Are width and height enough for a shower-glass quotation?','They may be enough for simple panels, but hinge, handle, fixing and custom-geometry requirements should be supported by drawings showing holes and notches.'],
+        ['Can OEM or private-label serial production be sourced?','Yes. Where suitable processor and system capacity exists, RFQs can be structured around model, quantity, quality standard, packing and branding requirements.'],
+        ['Can tinted, frosted or printed shower glass be evaluated?','Yes. Surface, colour, print and tempering compatibility should be confirmed by product.']
+      ]
+    }
+  },
+  {
+    slug:'balustrade-railing-glass',
+    tr:{
+      title:'Korkuluk ve Railing Camı Tedariki',
+      metaTitle:'Korkuluk Camı Türkiye | Balustrade Railing Glass B2B | CTSEG',
+      description:'Balkon, merdiven, teras ve korkuluk sistemleri için Türkiye’den temperli, lamine, heat-soak testli ve özel işlenmiş railing glass tedariki.',
+      eyebrow:'Balustrade & Railing Glass · Safety Glazing',
+      lead:'Korkuluk camı taleplerini cam build-up, temper/heat-strengthened seçimi, lamine ara katman, heat soak test, kenar kalitesi, delik/bağlantı noktaları ve montaj sistemiyle birlikte RFQ’ya dönüştürüyoruz.',
+      applications:['Balkon ve teras korkulukları','Merdiven ve galeri boşluğu korkulukları','Havuz çevresi camları','AVM ve otel railing sistemleri','Frameless ve point-fixed korkuluklar'],
+      buyers:['Railing ve balustrade sistem üreticileri','Alüminyum ve paslanmaz sistem firmaları','Cephe ve glazing yüklenicileri','Proje satın alma ekipleri','Yapı ürünleri distribütörleri'],
+      rfq:['Cam build-up ve kalınlık','Temperli / heat-strengthened / lamine gereksinimi','Ara katman tipi veya performans hedefi','Net ölçü, delik ve bağlantı detayları','Kenar işleme / polisaj','HST, test veya belge gereksinimi'],
+      faq:[
+        ['Korkuluk camı tek kat temperli olabilir mi?','Uygun yapı proje, montaj sistemi ve yerel gereksinimlere bağlıdır. Güvenlik kritik uygulamalarda lamine yapı ve kırılma sonrası davranış özellikle değerlendirilmelidir.'],
+        ['Heat soak test her railing projesinde gerekli midir?','Hayır. Proje şartnamesi, cam yapısı ve risk yaklaşımına göre istenebilir; talep varsa RFQ’da açıkça belirtilmelidir.'],
+        ['Delik ve kenar işleme neden önemlidir?','Point-fixed veya özel bağlantılı sistemlerde delik konumu, tolerans ve kenar kalitesi montaj uyumu ve cam performansı açısından kritiktir.']
+      ]
+    },
+    en:{
+      title:'Balustrade & Railing Glass Sourcing',
+      metaTitle:'Balustrade Railing Glass Supplier Türkiye | B2B | CTSEG',
+      description:'B2B sourcing from Türkiye for tempered, laminated, heat-soak tested and custom-processed glass used in balconies, stairs, terraces and railing systems.',
+      eyebrow:'Balustrade & Railing Glass · Safety Glazing',
+      lead:'We structure railing-glass RFQs around glass build-up, tempered or heat-strengthened selection, laminate interlayer, heat-soak testing, edge quality, holes/fixings and the intended mounting system.',
+      applications:['Balcony and terrace balustrades','Stair and void-edge railings','Pool-surround glazing','Mall and hospitality railing systems','Frameless and point-fixed balustrades'],
+      buyers:['Railing and balustrade-system manufacturers','Aluminium and stainless-system companies','Façade and glazing contractors','Project procurement teams','Building-product distributors'],
+      rfq:['Glass build-up and thickness','Tempered / heat-strengthened / laminated requirement','Interlayer type or performance target','Finished dimensions, holes and fixing details','Edge processing / polishing','HST, test or documentation requirement'],
+      faq:[
+        ['Can balustrade glass be a single tempered lite?','The appropriate build-up depends on the project, mounting system and local requirements. In safety-critical applications, laminated construction and post-breakage behaviour require particular attention.'],
+        ['Is heat-soak testing required for every railing project?','No. It may be specified depending on the project, glass build-up and risk approach; if required it should be stated explicitly in the RFQ.'],
+        ['Why do holes and edge processing matter?','For point-fixed or special mounting systems, hole position, tolerances and edge quality are critical to installation compatibility and glass performance.']
+      ]
+    }
+  },
+  {
+    slug:'office-partition-interior-glass',
+    tr:{
+      title:'Ofis Bölme ve İç Mimari Cam Tedariki',
+      metaTitle:'Ofis Bölme Camı Türkiye | Interior Partition Glass B2B | CTSEG',
+      description:'Ofis, toplantı odası, retail ve iç mimari bölme sistemleri için Türkiye’den temperli, lamine, akustik, frosted ve baskılı cam tedariki.',
+      eyebrow:'Interior & Partition Glass · Project Sourcing',
+      lead:'İç mimari ve ofis bölme camı taleplerini güvenlik, akustik hedef, mahremiyet, kapı/sistem entegrasyonu, net ölçü, delik/kenar işleme ve görsel yüzey gereksinimleriyle birlikte yapılandırıyoruz.',
+      applications:['Tek ve çift cam ofis bölmeleri','Toplantı odası ve yönetici ofisleri','Retail ve showroom bölmeleri','Otel ve ticari iç mekânlar','Cam kapı ve frameless iç sistemler'],
+      buyers:['Ofis bölme sistemi üreticileri','İç mimari ve fit-out firmaları','Cam kapı/sistem üreticileri','Mobilya ve contract üreticileri','Proje satın alma ekipleri'],
+      rfq:['Tek / çift cam sistem bilgisi','Temperli veya lamine yapı','Akustik veya privacy hedefi','Net ölçü / panel schedule','Delik, çentik, kapı ve fitting detayları','Frosted / baskı / renk / dekoratif yüzey'],
+      faq:[
+        ['Temperli mi lamine mi tercih edilmeli?','Seçim panel boyutu, darbe riski, güvenlik, akustik hedef ve sistem detayına bağlıdır; bazı projelerde farklı cam tipleri birlikte kullanılır.'],
+        ['Akustik hedef RFQ’da belirtilmeli mi?','Evet. Özellikle toplantı odası ve yönetici bölmelerinde sistem performansı yalnız cam kalınlığına bağlı değildir; hedef değer ve sistem yapısı birlikte verilmelidir.'],
+        ['Frosted veya baskılı privacy cam koordine edilebilir mi?','Evet. Matlık, desen, baskı alanı, renk ve numune onayı gereksinimi RFQ’da tanımlanabilir.']
+      ]
+    },
+    en:{
+      title:'Office Partition & Interior Glass Sourcing',
+      metaTitle:'Office Partition Glass Supplier Türkiye | Interior B2B | CTSEG',
+      description:'B2B sourcing from Türkiye for tempered, laminated, acoustic, frosted and printed glass used in offices, meeting rooms, retail and interior partition systems.',
+      eyebrow:'Interior & Partition Glass · Project Sourcing',
+      lead:'We structure interior and office-partition glass requirements around safety, acoustic targets, privacy, door/system integration, finished sizes, holes/edgework and visual-surface requirements.',
+      applications:['Single- and double-glazed office partitions','Meeting rooms and executive offices','Retail and showroom partitions','Hospitality and commercial interiors','Glass doors and frameless interior systems'],
+      buyers:['Office-partition system manufacturers','Interior and fit-out companies','Glass-door and system manufacturers','Furniture and contract manufacturers','Project procurement teams'],
+      rfq:['Single / double glazing system information','Tempered or laminated build-up','Acoustic or privacy target','Finished dimensions / panel schedule','Hole, notch, door and fitting details','Frosted / print / colour / decorative finish'],
+      faq:[
+        ['Should partition glass be tempered or laminated?','Selection depends on panel size, impact risk, safety, acoustic target and system detail; some projects combine different glass types.'],
+        ['Should an acoustic target be included in the RFQ?','Yes. Particularly for meeting and executive rooms, system performance depends on more than glass thickness, so the target and system build-up should be stated together.'],
+        ['Can frosted or printed privacy glass be coordinated?','Yes. Opacity, pattern, print coverage, colour and sample-approval requirements can be defined in the RFQ.']
+      ]
+    }
   }
 ];
 
