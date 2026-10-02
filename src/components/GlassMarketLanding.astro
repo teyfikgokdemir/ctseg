@@ -4,6 +4,7 @@ import CommercialRequestForm from './CommercialRequestForm.astro';
 import { glassMarketPages, glassMarketSlugs, type GlassMarketLocale, type GlassMarketSlug } from '../data/glass-market-seo';
 import { getLocalizedGlassMarketPage, type LocalizedGlassMarketLocale } from '../data/glass-market-locales';
 import { localizedGlassProductCopy, type LocalizedGlassLocale } from '../data/glass-product-locales';
+import { arGlassProductCopy } from '../data/glass-product-ar';
 import { getGlassSeoPage } from '../data/glass-seo';
 
 type MarketLang=GlassMarketLocale|LocalizedGlassMarketLocale;
@@ -11,7 +12,7 @@ const { lang, slug }=Astro.props as {lang:MarketLang;slug:GlassMarketSlug};
 const c=(lang==='tr'||lang==='en') ? glassMarketPages[slug][lang] : getLocalizedGlassMarketPage(lang,slug);
 const base=lang==='tr'?'/glass/markets':`/${lang}/glass/markets`;
 const canonical=`https://ctseg.com.tr${base}/${slug}/`;
-const marketLocales:MarketLang[]=['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','he'];
+const marketLocales:MarketLang[]=['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','he','ar'];
 const alt=Object.fromEntries([
   ...marketLocales.map((code)=>[code,`https://ctseg.com.tr${code==='tr'?'/glass/markets':`/${code}/glass/markets`}/${slug}/`]),
   ['x-default',`https://ctseg.com.tr/en/glass/markets/${slug}/`]
@@ -58,8 +59,8 @@ const schema=[
             const page=getGlassSeoPage(productSlug);
             return page?<a href={`${lang==='tr'?'/glass':'/en/glass'}/${productSlug}/`}><strong>{page[lang].title}</strong><span>↗</span></a>:null;
           }
-          const locale=lang as LocalizedGlassLocale;
-          const product=localizedGlassProductCopy[locale]?.products[productSlug];
+          const locale=lang as LocalizedGlassLocale|'ar';
+          const product=(locale==='ar'?arGlassProductCopy:localizedGlassProductCopy[locale as LocalizedGlassLocale])?.products[productSlug];
           return product?<a href={`/${lang}/glass/${productSlug}/`}><strong>{product.name}</strong><span>↗</span></a>:null;
         })}
         {glassMarketSlugs.filter((marketSlug)=>marketSlug!==slug).map((marketSlug)=>{
