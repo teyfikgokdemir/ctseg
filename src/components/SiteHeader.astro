@@ -130,6 +130,10 @@ const globalSwitchPath = (target: string): string => {
     if (target === 'tr') return '/glass/';
     return `/${target}/glass/`;
   }
+  if (pageKey === 'glass-product' && pageId) {
+    if (target === 'tr') return `/glass/${pageId}/`;
+    return `/${target}/glass/${pageId}/`;
+  }
   if (pageKey === 'glass') {
     const glassLocales = ['en','tr','de','it','ru','fa','zh','vi','ro','bg'] as const;
     if ((glassLocales as readonly string[]).includes(target)) return duzceGlassPath(target as DuzceGlassLocale);
