@@ -400,6 +400,16 @@ const globalSwitchPath = (target: string): string => {
     .fa-nav-promo span{font-size:9px!important;color:#d5d5d0!important}
   }
 
+  @media (min-width: 1051px) and (max-width: 1500px) {
+    .header-house-label{display:none!important}
+    .desktop-only-nav{gap:8px!important}
+    .desktop-only-nav a,.desktop-nav-link,.nav-solutions-parent,.nav-market-parent{
+      font-size:.74rem!important;letter-spacing:0!important
+    }
+    .nav-cta{display:none!important}
+    .fa-nav-promo{display:none!important}
+  }
+
   @media (max-width: 1050px) {
     .desktop-only-nav,.header-house-label{display:none!important}
     .mobile-only-panel{display:flex!important;flex-direction:column!important;gap:12px!important;width:100%!important}
