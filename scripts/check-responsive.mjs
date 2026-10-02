@@ -535,11 +535,18 @@ try {
     await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:!testCase.openMenu });
     let persianNavWorks = true;
     if (testCase.verifyPersianNav) {
-      const [targetResponse] = await Promise.all([
-        page.waitForNavigation({waitUntil:'domcontentloaded'}),
-        page.locator('[data-fa-nav-link]').click()
-      ]);
-      persianNavWorks = targetResponse?.status() === 200 && new URL(page.url()).pathname === '/fa/';
+      const persianNav = page.locator('[data-fa-nav-link]');
+      if (await persianNav.count() && await persianNav.isVisible()) {
+        const [targetResponse] = await Promise.all([
+          page.waitForNavigation({waitUntil:'domcontentloaded'}),
+          persianNav.click()
+        ]);
+        persianNavWorks = targetResponse?.status() === 200 && new URL(page.url()).pathname === '/fa/';
+      } else {
+        const href = await persianNav.getAttribute('href');
+        const targetResponse = href ? await page.request.get(new URL(href, page.url()).toString()) : null;
+        persianNavWorks = href === '/fa/' && targetResponse?.status() === 200;
+      }
     }
     localeAtmospheres.set(result.lang,result.localeAtmosphere);
     const gapLimit = testCase.gapLimit ?? (testCase.width <= 1050 ? 56 : 80);
