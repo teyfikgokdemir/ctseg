@@ -135,13 +135,13 @@ try {
     ,{ name:'desktop1440-vi-home', path:'/vi/', width:1440, height:1000 }
     ,{ name:'mobile390-vi-home', path:'/vi/', width:390, height:844 }
   ];
-  const sourcingLocales = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg'];
+  const sourcingLocales = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','ar'];
   const productionLocaleCount = sourcingLocales.length;
   const rootLocaleCount = productionLocaleCount + 1;
   const sourcingFamilies = {
-    carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/',uk:'/uk/sourcing/iranian-carpets/',ro:'/ro/sourcing/covoare-iraniene/',bg:'/bg/sourcing/iranski-kilimi/'},
-    silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/',uk:'/uk/sourcing/silk-carpets/',ro:'/ro/sourcing/covoare-matase-lucrate-manual/',bg:'/bg/sourcing/rachno-takani-koprineni-kilimi/'},
-    textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/',zh:'/zh/sourcing/textiles/',vi:'/vi/sourcing/textiles/',uk:'/uk/sourcing/wholesale-textiles/',ro:'/ro/sourcing/sourcing-textile-angro/',bg:'/bg/sourcing/sourcing-tekstili-na-edro/'}
+    carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/',uk:'/uk/sourcing/iranian-carpets/',ro:'/ro/sourcing/covoare-iraniene/',bg:'/bg/sourcing/iranski-kilimi/',ar:'/ar/sourcing/iranian-carpets/'},
+    silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/',uk:'/uk/sourcing/silk-carpets/',ro:'/ro/sourcing/covoare-matase-lucrate-manual/',bg:'/bg/sourcing/rachno-takani-koprineni-kilimi/',ar:'/ar/sourcing/hand-knotted-silk-carpets/'},
+    textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/',zh:'/zh/sourcing/textiles/',vi:'/vi/sourcing/textiles/',uk:'/uk/sourcing/wholesale-textiles/',ro:'/ro/sourcing/sourcing-textile-angro/',bg:'/bg/sourcing/sourcing-tekstili-na-edro/',ar:'/ar/sourcing/wholesale-textile-sourcing/'}
   };
   const sourcingAudiences = {
     carpets:['کارگاه‌های فرش دستباف','تولیدکنندگان فرش ابریشم','تولیدکنندگان فرش ماشینی','صادرکنندگان فرش'],
@@ -752,7 +752,7 @@ try {
             expectedLang
           };
         },{expectedLang:lang,expectedPath:path,familyRoutes:routes,audiences:sourcingAudiences[family]});
-        const badDirection=lang==='fa'
+        const badDirection=['fa','ar'].includes(lang)
           ? contract.htmlDir!=='rtl'||contract.rootDirection!=='rtl'||contract.bodyDirection!=='rtl'
           : contract.htmlDir!=='ltr'||contract.rootDirection!=='ltr'||contract.bodyDirection!=='ltr';
         const badProducer=lang==='fa'
@@ -773,7 +773,7 @@ try {
           switchStatuses.push([targetLang,switchResponse.status()]);
         }
         const badSwitch=switchStatuses.some(([,status])=>status!==200);
-        const expectedSourcingHtmlLang = ({zh:'zh-CN',vi:'vi-VN',uk:'uk-UA',ro:'ro-RO',bg:'bg-BG'})[lang] || lang;
+        const expectedSourcingHtmlLang = ({zh:'zh-CN',vi:'vi-VN',uk:'uk-UA',ro:'ro-RO',bg:'bg-BG',ar:'ar-SA'})[lang] || lang;
         if(contract.htmlLang!==expectedSourcingHtmlLang||badDirection||contract.activeLocales.length!==1||contract.activeLocales[0]!==lang||
           contract.localeCodes.length!==sourcingLocales.length||!sourcingLocales.every(code=>contract.localeCodes.includes(code))||!contract.localeTargetMatch||
           !contract.canonicalMatches||!contract.hreflangMatch||!contract.xDefaultMatches||contract.h1s!==1||
