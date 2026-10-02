@@ -16,13 +16,14 @@ const t = lang === 'he' ? {
 } : (ui[lang] || ui.en);
 const home = lang === 'he' ? '/he/' : localizedPath(lang, 'home');
 const p = tradePlatformCopy[lang] || tradePlatformCopy.en;
-const methodLabel = {tr:'Yöntem',en:'Method',de:'Arbeitsweise',it:'Metodo',fa:'روش کار',ru:'Метод',zh:'运作模式',vi:'Phương thức hoạt động',uk:'Метод роботи',ro:'Metodă',bg:'Метод',sr:'Metod',he:'שיטת עבודה'}[lang] || 'Method';
+const methodLabel = {tr:'Yöntem',en:'Method',de:'Arbeitsweise',it:'Metodo',fa:'روش کار',ru:'Метод',zh:'运作模式',vi:'Phương thức hoạt động',uk:'Метод роботи',ro:'Metodă',bg:'Метод',sr:'Metod',he:'שיטת עבודה',ar:'طريقة العمل'}[lang] || 'Method';
 const glassNavLabels: Record<string, string> = {
   tr:'Cam Tedariki', en:'Glass Sourcing', de:'Glasbeschaffung', it:'Sourcing Vetro',
   fa:'تأمین شیشه', ru:'Поставка стекла', zh:'玻璃采购', vi:'Tìm nguồn cung kính',
   uk:'Постачання скла',
   ro:'Aprovizionare cu sticlă', bg:'Снабдяване със стъкло', sr:'Nabavka stakla',
-  he:'איתור ואספקת זכוכית'
+  he:'איתור ואספקת זכוכית',
+  ar:'توريد الزجاج'
 };
 const navigationCopy = {
   tr:{globalTrade:'Küresel Ticaret',industries:'Sektörler',portfolio:'Ticaret Portföyü',intelligence:'Ticaret İçgörüleri',company:'Şirket',main:'ANA MENÜ',quick:'HIZLI ERİŞİM',trade:'TİCARET',intro:'İki yönlü ticaret, stratejik tedarik ve pazara giriş yolları'},
@@ -37,7 +38,8 @@ const navigationCopy = {
   ro:{globalTrade:'Comerț Global',industries:'Industrii',portfolio:'Portofoliu Comercial',intelligence:'Analize Comerciale',company:'Companie',main:'MENIU PRINCIPAL',quick:'NAVIGARE',trade:'COMERȚ',intro:'Comerț bidirecțional, sourcing strategic și acces pe piețe'},
   bg:{globalTrade:'Глобална търговия',industries:'Сектори',portfolio:'Търговско портфолио',intelligence:'Търговски анализи',company:'Компания',main:'ГЛАВНО МЕНЮ',quick:'НАВИГАЦИЯ',trade:'ТЪРГОВИЯ',intro:'Двупосочна търговия, стратегическо снабдяване и навлизане на пазари'},
   sr:{globalTrade:'Globalna trgovina',industries:'Sektori',portfolio:'Trgovinski portfolio',intelligence:'Trgovinski uvidi',company:'Kompanija',main:'GLAVNI MENI',quick:'NAVIGACIJA',trade:'TRGOVINA',intro:'Dvosmerna trgovina, strateški sourcing i ulazak na tržište'},
-  he:{globalTrade:'סחר גלובלי',industries:'שווקים',portfolio:'תחומי סחר',intelligence:'תובנות מסחריות',company:'CTSEG',main:'תפריט ראשי',quick:'ניווט',trade:'סחר',intro:'סחר דו־כיווני, איתור ספקים וכניסה לשוק בין ישראל לטורקיה'}
+  he:{globalTrade:'סחר גלובלי',industries:'שווקים',portfolio:'תחומי סחר',intelligence:'תובנות מסחריות',company:'CTSEG',main:'תפריט ראשי',quick:'ניווט',trade:'סחר',intro:'סחר דו־כיווני, איתור ספקים וכניסה לשוק בין ישראל לטורקיה'},
+  ar:{globalTrade:'التجارة العالمية',industries:'القطاعات',portfolio:'المحفظة التجارية',intelligence:'الرؤى التجارية',company:'الشركة',main:'القائمة الرئيسية',quick:'تنقل سريع',trade:'التجارة',intro:'تجارة ثنائية الاتجاه، توريد استراتيجي ودخول الأسواق'}
 }[lang] || {globalTrade:'Global Trade',industries:'Industries',portfolio:'Trade Portfolio',intelligence:'Trade Intelligence',company:'Company',main:'MAIN MENU',quick:'NAVIGATION',trade:'TRADE',intro:'Two-way trade, strategic sourcing and market-entry paths'};
 
 const safeGlassLang = (['en','tr','de','it','ru','fa','zh','vi','uk','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
