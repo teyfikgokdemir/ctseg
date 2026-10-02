@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CommercialRequestForm from './CommercialRequestForm.astro';
+import { activeLocales } from '../data/locales';
+import { localizedGlassProductCopy, localizedGlassSlugs, type LocalizedGlassLocale, type LocalizedGlassSlug } from '../data/glass-product-locales';
+import { getGlassSeoPage } from '../data/glass-seo';
+
+const { lang, slug } = Astro.props as {lang:LocalizedGlassLocale;slug:LocalizedGlassSlug};
+const localeCopy=localizedGlassProductCopy[lang];
+const product=localeCopy.products[slug];
+const canonical=`https://ctseg.com.tr/${lang}/glass/${slug}/`;
+const alt=Object.fromEntries([
+  ['tr',`https://ctseg.com.tr/glass/${slug}/`],
+  ['en',`https://ctseg.com.tr/en/glass/${slug}/`],
+  ...activeLocales.filter((code)=>!['tr','en'].includes(code)).map((code)=>[code,`https://ctseg.com.tr/${code}/glass/${slug}/`]),
+  ['x-default',`https://ctseg.com.tr/en/glass/${slug}/`]
+]);
+const schema=[
+  {'@context':'https://schema.org','@type':'Service','name':product.name,'description':product.description,'url':canonical,'areaServed':'Worldwide','provider':{'@type':'Organization','name':'CTSEG','url':'https://ctseg.com.tr/'}},
+  {'@context':'https://schema.org','@type':'FAQPage','mainEntity':localeCopy.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))}
+];
+const related=localizedGlassSlugs.filter((item)=>item!==slug);
+---
+<BaseLayout lang={lang as any} title={product.metaTitle} description={product.description} canonical={canonical} alternates={alt} schema={schema} pageKey="glass-product" pageId={slug}>
+  <main class="glass-product" dir={lang==='fa'||lang==='he'?'rtl':'ltr'}>
+    <section class="hero section"><div class="container center">
+      <span class="eyebrow">CTSEG · GLASS SOURCING</span>
+      <h1>{product.name}</h1>
+      <p>{product.lead}</p>
+      <a class="button primary" href="#rfq">{localeCopy.rfq}</a>
+    </div></section>
+    <section class="section"><div class="container split">
+      <div><h2>{localeCopy.applicationsTitle}</h2><ul>{localeCopy.applications.map((x)=><li>{x}</li>)}</ul></div>
+      <div><h2>{localeCopy.buyersTitle}</h2><ul>{localeCopy.buyers.map((x)=><li>{x}</li>)}</ul></div>
+    </div></section>
+    <section class="section rfq-brief"><div class="container">
+      <div class="center head"><h2>{localeCopy.rfqTitle}</h2></div>
+      <div class="brief-grid">{localeCopy.rfqItems.map((x)=><article><h3>{x}</h3></article>)}</div>
+    </div></section>
+    <section class="section related"><div class="container">
+      <div class="center head"><h2>{localeCopy.relatedTitle}</h2></div>
+      <div class="links">
+        {related.map((relatedSlug)=><a href={`/${lang}/glass/${relatedSlug}/`}><strong>{localeCopy.products[relatedSlug].name}</strong><span aria-hidden="true">↗</span></a>)}
+        <a href={`/${lang}/glass/`}><strong>{lang==='de'?'Alle Glasgruppen':lang==='it'?'Tutti i gruppi vetro':lang==='ru'?'Все группы стекла':lang==='fa'?'همه گروه‌های شیشه':lang==='zh'?'全部玻璃类别':lang==='vi'?'Tất cả nhóm kính':lang==='uk'?'Усі групи скла':lang==='ro'?'Toate grupele de sticlă':lang==='bg'?'Всички групи стъкло':'כל קבוצות הזכוכית'}</strong><span aria-hidden="true">↗</span></a>
+      </div>
+    </div></section>
+    <section class="section faq"><div class="container">
+      <div class="center head"><h2>{localeCopy.faqTitle}</h2></div>
+      <div class="faqs">{localeCopy.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div>
+    </div></section>
+    <section class="section form" id="rfq"><div class="container"><CommercialRequestForm lang={lang as any}/></div></section>
+  </main>
+</BaseLayout>
+<style>
+.glass-product{background:#f2efe7;color:#171914}.hero{background:#10120f;color:#f4f5ef;padding:clamp(4rem,7vw,7rem) 0}.center{text-align:center}.hero h1,.head h2{max-width:1180px;margin:.65rem auto 0;text-align:center;text-wrap:balance}.hero h1{color:#f4f5ef!important;font-size:clamp(2.35rem,4.2vw,4.75rem);line-height:1.02}.hero p{max-width:850px;margin:1.25rem auto 1.5rem;color:#d8ddd7!important;line-height:1.7}.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem)}.split h2,.head h2{font-size:clamp(2rem,3vw,3.4rem);line-height:1.06}.split ul{list-style:none;margin:1.3rem 0 0;padding:0}.split li{padding:.9rem 0;border-bottom:1px solid rgba(0,0,0,.14)}.rfq-brief{background:#e7e2d7}.brief-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:2rem}.brief-grid article{background:#121712;color:#f4f5ef;padding:1.5rem;min-height:130px;display:flex;align-items:flex-end}.brief-grid h3{margin:0;color:#f4f5ef!important;font-size:1rem}.links{max-width:960px;margin:2rem auto 0}.links a{display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;border-top:1px solid rgba(0,0,0,.15);color:inherit;text-decoration:none}.links a:last-child{border-bottom:1px solid rgba(0,0,0,.15)}.faqs{max-width:920px;margin:2rem auto 0}.faqs details{padding:1.1rem 0;border-top:1px solid rgba(0,0,0,.15)}.faqs details:last-child{border-bottom:1px solid rgba(0,0,0,.15)}.faqs summary{font-weight:750;cursor:pointer}.faqs p{line-height:1.7}.form{background:#10120f}@media(max-width:900px){.brief-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:720px){.split,.brief-grid{grid-template-columns:1fr}.hero h1{font-size:clamp(2.05rem,9vw,3rem)}}
+</style>
