@@ -126,3 +126,56 @@ Object.assign(tradeCopy as any,{
     'wholesale-textiles':{slug:'veleprodajni-sourcing-tekstila',eyebrow:'B2B tekstil i private label',title:'Veleprodajni sourcing tekstila koordinisan od uzorka do logistike.',description:'Tkanine, peškiri, bade mantili, kućni tekstil i odeća uz private label, uzorke, RFQ, proveru proizvođača, kvalitet, pakovanje i logistiku.',lead:'Za brendove, distributere, hotele i projektne kupce usklađujemo specifikaciju sa kapacitetom proizvođača, odobrenjem uzorka, kvalitetom, pakovanjem i isporukom.',scopeTitle:'Obuhvat veleprodajnog tekstila',items:['Tkanine i tehničke specifikacije','Peškiri i bade mantili','Kolekcije kućnog tekstila','Proizvodnja gotove odeće','Private label i prilagođeno pakovanje','Uzorci i razvoj kolekcije'],cta:'Pošalji RFQ za tekstil'}
   }
 });
+
+
+/* Arabic full-site rollout */
+Object.assign(tradeUi as any,{
+  ar:{
+    name:'العربية',
+    home:'الرئيسية · CTSEG',
+    contact:'إنشاء طلب تجاري',
+    related:'مجالات توريد ذات صلة',
+    assurance:'ضوابط تدعم قرار الشراء',
+    process:'مسار توريد منضبط',
+    checks:[
+      'تحديد الاحتياج والاستخدام والمواصفات الفنية',
+      'التحقق من المنتج والطاقة والسجل التجاري',
+      'مقارنة العينات والمواد والجودة والعروض',
+      'تنسيق التعبئة والتأمين واللوجستيات والتسليم'
+    ]
+  }
+});
+Object.assign(tradeCopy as any,{
+  ar:{
+    'iranian-carpets':{
+      slug:'iranian-carpets',
+      eyebrow:'توريد B2B من إيران',
+      title:'توريد السجاد الإيراني من التحقق من المنتج حتى التسليم.',
+      description:'سجاد إيراني يدوي ومعقود، حرير، صوف، صوف-حرير وسجاد آلي، إضافة إلى الممرات والمقاسات الخاصة والتوريد للمشاريع.',
+      lead:'للمجموعات والمشاريع والشراء بالجملة، نربط المنشأ والخامة والمقاس والجودة والكمية والمهلة ونموذج التسليم ضمن تقييم تجاري واحد.',
+      scopeTitle:'نطاق واسع وقابل للتحقق من السجاد',
+      items:['سجاد إيراني معقود يدوياً','سجاد من الحرير الخالص','سجاد صوف وصوف-حرير','سجاد مصنع آلياً','ممرات وقطع صغيرة','مقاسات خاصة وتوريد للمشاريع'],
+      cta:'إنشاء طلب للسجاد الإيراني'
+    },
+    'silk-carpets':{
+      slug:'hand-knotted-silk-carpets',
+      eyebrow:'فئة متخصصة مستقلة',
+      title:'السجاد الحريري اليدوي يتطلب وضوحاً في المنشأ والحرفية.',
+      description:'تقييم المنشأ والحرفية والمقاسات والجودة والتغليف والتوريد للمشاريع في السجاد الإيراني من الحرير الخالص والخلطات الحريرية.',
+      lead:'نتعامل مع السجاد الحريري كفئة ممتازة مستقلة؛ حيث يتم تقييم بنية الألياف ودقة العقد واللمعان والنقشة والحرفية والنقل بشكل منفصل.',
+      scopeTitle:'تقييم متخصص للسجاد الحريري',
+      items:['سجاد يدوي من الحرير الخالص','سدى ووبر حريري','خلطات ممتازة من الصوف والحرير','قطع صغيرة ومقتنيات','نقشات وألوان ومقاسات مخصصة','تنسيق إنتاج للمشاريع'],
+      cta:'مشاركة متطلبات السجاد الحريري'
+    },
+    'wholesale-textiles':{
+      slug:'wholesale-textile-sourcing',
+      eyebrow:'منسوجات B2B وعلامة خاصة',
+      title:'توريد المنسوجات بالجملة من العينة حتى اللوجستيات.',
+      description:'أقمشة ومناشف وأرواب ومنسوجات منزلية وملابس مع العلامة الخاصة والعينات والتحقق من المنتج والجودة والتغليف واللوجستيات.',
+      lead:'للعلامات التجارية والموزعين والفنادق ومشتري المشاريع، نطابق المواصفات مع طاقة المنتج واعتماد العينة ومعايير الجودة والتغليف وخطة التسليم.',
+      scopeTitle:'نطاق المنسوجات بالجملة',
+      items:['أقمشة ومواصفات فنية','مناشف وأرواب','مجموعات منسوجات منزلية','إنتاج ملابس جاهزة','علامة خاصة وتغليف مخصص','عينات وتطوير مجموعات'],
+      cta:'إنشاء طلب للمنسوجات'
+    }
+  }
+});
