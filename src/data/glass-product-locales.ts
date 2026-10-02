@@ -403,6 +403,126 @@ for(const locale of Object.keys(localizedIndustrialOemGlass) as LocalizedGlassLo
   Object.assign(localizedGlassProductCopy[locale].products,localizedIndustrialOemGlass[locale]);
 }
 
+
+type LocalizedGlassDetail={
+  applications:string[];
+  buyers:string[];
+  rfqItems:string[];
+  faq:[string,string][];
+};
+
+const localizedDetailLabels:Record<LocalizedGlassLocale,{
+  app:string[]; buyers:string[]; rfq:string[];
+  q1:(name:string)=>string; a1:(name:string,lead:string)=>string;
+  q2:(name:string)=>string; a2:(name:string)=>string;
+}> = {
+  de:{
+    app:['Architektur und Projektanwendungen','Verarbeitung und Weiterveredelung','Fenster-, Fassaden- oder IGU-Systeme','Handels- und Distributionsprojekte'],
+    buyers:['Importeure und Distributoren','Glasverarbeiter und Systemhersteller','Fassaden-, Fenster- und Projektunternehmen','Technische Einkaufs- und Projektteams'],
+    rfq:['Produkttyp / Aufbau','Dicke, Maße und Bearbeitung','Menge, Verpackung und Wiederholbedarf','Zielort, Incoterm und Termin'],
+    q1:(n)=>`Welche Angaben sind für eine belastbare RFQ zu ${n} entscheidend?`,
+    a1:(n,l)=>`${l} Für eine belastbare RFQ sollten außerdem Maße, Menge, Verarbeitung, Verpackung und Lieferziel klar definiert sein.`,
+    q2:(n)=>`Kann ${n} projektbezogen oder wiederkehrend beschafft werden?`,
+    a2:(n)=>`Ja. ${n} kann je nach technischer Eignung, verfügbarer Kapazität, Dokumentation und Lieferplan als Projekt- oder wiederkehrende B2B-Beschaffung strukturiert werden.`
+  },
+  it:{
+    app:['Applicazioni architettoniche e di progetto','Trasformazione e lavorazioni successive','Sistemi serramento, facciata o IGU','Progetti commerciali e distribuzione'],
+    buyers:['Importatori e distributori','Trasformatori e produttori di sistemi','Aziende facciate, serramenti e progetto','Team tecnici, acquisti e project procurement'],
+    rfq:['Tipo prodotto / composizione','Spessore, dimensioni e lavorazioni','Quantità, imballaggio e fabbisogno ricorrente','Destinazione, Incoterm e tempistica'],
+    q1:(n)=>`Quali dati sono essenziali per una RFQ accurata di ${n}?`,
+    a1:(n,l)=>`${l} Per una RFQ accurata vanno inoltre definiti dimensioni, quantità, lavorazioni, imballaggio e destinazione.`,
+    q2:(n)=>`${n} può essere gestito per progetto o come fornitura ricorrente?`,
+    a2:(n)=>`Sì. ${n} può essere strutturato come fornitura B2B di progetto o ricorrente in base a compatibilità tecnica, capacità, documentazione e piano di consegna.`
+  },
+  ru:{
+    app:['Архитектурные и проектные применения','Обработка и дальнейшая переработка','Оконные, фасадные или IGU-системы','Коммерческие и дистрибьюторские проекты'],
+    buyers:['Импортёры и дистрибьюторы','Переработчики стекла и системные производители','Фасадные, оконные и проектные компании','Технические и закупочные команды'],
+    rfq:['Тип продукта / состав','Толщина, размеры и обработка','Количество, упаковка и регулярность закупки','Пункт назначения, Incoterm и срок'],
+    q1:(n)=>`Какие данные критичны для точного RFQ по ${n}?`,
+    a1:(n,l)=>`${l} Для точного RFQ также следует указать размеры, количество, обработку, упаковку и место доставки.`,
+    q2:(n)=>`Можно ли поставлять ${n} под проект или регулярно?`,
+    a2:(n)=>`Да. ${n} может быть организован как проектная или регулярная B2B-поставка при наличии технической совместимости, мощности, документации и согласованного графика.`
+  },
+  fa:{
+    app:['کاربردهای معماری و پروژه‌ای','فرآوری و عملیات تکمیلی شیشه','سیستم‌های پنجره، نما یا IGU','پروژه‌های تجاری و توزیعی'],
+    buyers:['واردکنندگان و توزیع‌کنندگان','واحدهای فرآوری و سازندگان سیستم','شرکت‌های نما، پنجره و پروژه','تیم‌های فنی، خرید و تدارکات پروژه'],
+    rfq:['نوع محصول / ساختار شیشه','ضخامت، ابعاد و فرآوری','مقدار، بسته‌بندی و نیاز دوره‌ای','مقصد، Incoterm و زمان‌بندی'],
+    q1:(n)=>`برای RFQ دقیق ${n} چه اطلاعاتی ضروری است؟`,
+    a1:(n,l)=>`${l} برای RFQ دقیق باید ابعاد، مقدار، فرآوری، بسته‌بندی و مقصد تحویل نیز مشخص باشد.`,
+    q2:(n)=>`آیا ${n} برای پروژه یا تأمین دوره‌ای قابل هماهنگی است؟`,
+    a2:(n)=>`بله. ${n} با توجه به انطباق فنی، ظرفیت، اسناد و برنامه تحویل می‌تواند به‌صورت پروژه‌ای یا تأمین دوره‌ای B2B ساختاربندی شود.`
+  },
+  zh:{
+    app:['建筑与项目应用','玻璃深加工与后续处理','门窗、幕墙或IGU系统','商业与分销项目'],
+    buyers:['进口商与分销商','玻璃加工商与系统制造商','幕墙、门窗与项目公司','技术、采购与项目采购团队'],
+    rfq:['产品类型 / 玻璃结构','厚度、尺寸与加工要求','数量、包装与持续采购需求','目的地、Incoterm与交期'],
+    q1:(n)=>`${n} 的准确RFQ需要哪些关键信息？`,
+    a1:(n,l)=>`${l} 同时应明确尺寸、数量、加工、包装及交付目的地，以便形成准确RFQ。`,
+    q2:(n)=>`${n} 是否可按项目或长期周期采购？`,
+    a2:(n)=>`可以。可根据技术匹配、产能、文件要求和交付计划，将 ${n} 组织为项目型或持续性B2B采购。`
+  },
+  vi:{
+    app:['Ứng dụng kiến trúc và dự án','Gia công và xử lý kính tiếp theo','Hệ cửa, mặt dựng hoặc IGU','Dự án thương mại và phân phối'],
+    buyers:['Nhà nhập khẩu và phân phối','Đơn vị gia công kính và nhà sản xuất hệ thống','Công ty mặt dựng, cửa và dự án','Đội kỹ thuật, thu mua và procurement dự án'],
+    rfq:['Loại sản phẩm / cấu hình kính','Độ dày, kích thước và gia công','Số lượng, đóng gói và nhu cầu định kỳ','Điểm đến, Incoterm và tiến độ'],
+    q1:(n)=>`Thông tin nào quan trọng cho RFQ chính xác của ${n}?`,
+    a1:(n,l)=>`${l} RFQ chính xác cũng cần nêu rõ kích thước, số lượng, gia công, đóng gói và điểm giao hàng.`,
+    q2:(n)=>`${n} có thể sourcing theo dự án hoặc định kỳ không?`,
+    a2:(n)=>`Có. ${n} có thể được cấu trúc thành nguồn cung B2B theo dự án hoặc định kỳ tùy mức phù hợp kỹ thuật, năng lực, chứng từ và kế hoạch giao hàng.`
+  },
+  uk:{
+    app:['Архітектурні та проєктні застосування','Обробка та подальша переробка скла','Віконні, фасадні або IGU-системи','Комерційні та дистриб’юторські проєкти'],
+    buyers:['Імпортери та дистриб’ютори','Переробники скла та системні виробники','Фасадні, віконні та проєктні компанії','Технічні та закупівельні команди'],
+    rfq:['Тип продукту / склад','Товщина, розміри та обробка','Кількість, пакування та регулярність закупівлі','Місце призначення, Incoterm і термін'],
+    q1:(n)=>`Які дані критичні для точного RFQ щодо ${n}?`,
+    a1:(n,l)=>`${l} Для точного RFQ також слід визначити розміри, кількість, обробку, пакування та місце доставки.`,
+    q2:(n)=>`Чи можна постачати ${n} під проєкт або регулярно?`,
+    a2:(n)=>`Так. ${n} може бути організовано як проєктне або регулярне B2B-постачання залежно від технічної відповідності, потужності, документації та графіка доставки.`
+  },
+  ro:{
+    app:['Aplicații arhitecturale și de proiect','Procesare și prelucrare ulterioară','Sisteme de ferestre, fațade sau IGU','Proiecte comerciale și de distribuție'],
+    buyers:['Importatori și distribuitori','Procesatori de sticlă și producători de sisteme','Companii de fațade, ferestre și proiect','Echipe tehnice, achiziții și project procurement'],
+    rfq:['Tip produs / configurație','Grosime, dimensiuni și procesare','Cantitate, ambalare și necesar recurent','Destinație, Incoterm și termen'],
+    q1:(n)=>`Ce informații sunt esențiale pentru un RFQ corect pentru ${n}?`,
+    a1:(n,l)=>`${l} Pentru un RFQ corect trebuie definite și dimensiunile, cantitatea, procesarea, ambalarea și destinația.`,
+    q2:(n)=>`${n} poate fi furnizat pe proiect sau recurent?`,
+    a2:(n)=>`Da. ${n} poate fi structurat ca aprovizionare B2B pe proiect sau recurentă în funcție de compatibilitatea tehnică, capacitate, documentație și planul de livrare.`
+  },
+  bg:{
+    app:['Архитектурни и проектни приложения','Обработка и последваща преработка','Прозоречни, фасадни или IGU системи','Търговски и дистрибуторски проекти'],
+    buyers:['Вносители и дистрибутори','Преработватели на стъкло и системни производители','Фасадни, прозоречни и проектни компании','Технически и снабдителни екипи'],
+    rfq:['Тип продукт / структура','Дебелина, размери и обработка','Количество, опаковка и регулярна нужда','Дестинация, Incoterm и срок'],
+    q1:(n)=>`Кои данни са критични за точен RFQ за ${n}?`,
+    a1:(n,l)=>`${l} За точен RFQ трябва да се уточнят и размери, количество, обработка, опаковка и място на доставка.`,
+    q2:(n)=>`Може ли ${n} да се доставя проектно или регулярно?`,
+    a2:(n)=>`Да. ${n} може да се структурира като проектна или регулярна B2B доставка според техническата съвместимост, капацитета, документацията и графика.`
+  },
+  he:{
+    app:['יישומים אדריכליים ופרויקטליים','עיבוד והמשך עיבוד זכוכית','מערכות חלונות, חזית או IGU','פרויקטים מסחריים והפצה'],
+    buyers:['יבואנים ומפיצים','מעבדי זכוכית ויצרני מערכות','חברות חזיתות, חלונות ופרויקטים','צוותים טכניים, רכש ורכש פרויקטים'],
+    rfq:['סוג מוצר / מבנה זכוכית','עובי, מידות ועיבוד','כמות, אריזה וצריכה חוזרת','יעד, Incoterm ולוח זמנים'],
+    q1:(n)=>`אילו נתונים חיוניים ל-RFQ מדויק עבור ${n}?`,
+    a1:(n,l)=>`${l} ל-RFQ מדויק יש להגדיר גם מידות, כמות, עיבוד, אריזה ויעד אספקה.`,
+    q2:(n)=>`האם ניתן לספק ${n} לפרויקט או באספקה חוזרת?`,
+    a2:(n)=>`כן. ניתן לבנות אספקת ${n} כפרויקט B2B או כאספקה חוזרת בהתאם להתאמה הטכנית, הקיבולת, המסמכים ותכנית המשלוחים.`
+  }
+};
+
+export function getLocalizedGlassProductDetail(locale:LocalizedGlassLocale,slug:LocalizedGlassSlug):LocalizedGlassDetail{
+  const base=localizedGlassProductCopy[locale];
+  const product=base.products[slug];
+  const l=localizedDetailLabels[locale];
+  return {
+    applications:l.app.map((item,index)=>index===0?`${product.name} · ${item}`:item),
+    buyers:l.buyers,
+    rfqItems:l.rfq.map((item,index)=>index===0?`${product.name} · ${item}`:item),
+    faq:[
+      [l.q1(product.name),l.a1(product.name,product.lead)],
+      [l.q2(product.name),l.a2(product.name)]
+    ]
+  };
+}
+
 export function getLocalizedGlassProduct(locale:LocalizedGlassLocale,slug:LocalizedGlassSlug){
   return localizedGlassProductCopy[locale]?.products[slug];
 }
