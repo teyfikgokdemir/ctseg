@@ -87,6 +87,72 @@ export const glassSeoPages: GlassSeoPage[] = [
     slug:'patterned-frosted-satin-glass',
     tr:{title:'Desenli, Buzlu ve Satina Cam Tedariki',metaTitle:'Desenli Buzlu Satina Cam Türkiye | B2B Tedarik | CTSEG',description:'Mahremiyet, dekorasyon ve iç mimari uygulamalar için Türkiye’den desenli, buzlu/frosted ve satina cam tedariki; numune, ebat, renk ve B2B RFQ koordinasyonu.',eyebrow:'Patterned · Frosted · Satin Glass',lead:'Desenli, buzlu ve satina cam taleplerini desen/yüzey, renk, kalınlık, ebat, temperleme ihtiyacı, numune onayı ve paketleme gereksinimine göre uygun tedarik veya işleme kanalıyla eşleştiriyoruz.',applications:['İç mekân bölmeleri ve kapılar','Banyo ve mahremiyet camları','Mobilya ve dolap kapakları','Retail ve otel iç mimarisi','Dekoratif panel ve aydınlatma uygulamaları'],buyers:['İç mimari ve fit-out firmaları','Mobilya üreticileri','Cam distribütörleri','Kapı ve bölme sistemi üreticileri','Proje satın alma ekipleri'],rfq:['Desen / yüzey referansı','Renk veya ton','Kalınlık ve levha / net ölçü','Temperleme veya işleme ihtiyacı','Miktar ve numune beklentisi'],faq:[['Patterned ve frosted glass aynı şey midir?','Hayır. Yüzey veya üretim yöntemi farklı olabilir; RFQ’da istenen desen, matlık ve görünüm referansı açıkça tanımlanmalıdır.'],['Seri sipariş öncesi numune istenebilir mi?','Renk, desen ve mahremiyet seviyesi kritikse mevcut numune veya referans onayı seri sipariş öncesi faydalıdır.']]},
     en:{title:'Patterned, Frosted & Satin Glass Sourcing',metaTitle:'Patterned Frosted Satin Glass Türkiye | B2B Supplier | CTSEG',description:'B2B sourcing from Türkiye for patterned, frosted and satin glass used in privacy, decorative and interior applications, including sample, size, colour and export coordination.',eyebrow:'Patterned · Frosted · Satin Glass',lead:'We match patterned, frosted and satin-glass requirements with suitable supply or processing capacity based on pattern/finish, colour, thickness, dimensions, tempering need, sample approval and packing.',applications:['Interior partitions and doors','Bathroom and privacy glazing','Furniture and cabinet fronts','Retail and hospitality interiors','Decorative panels and lighting applications'],buyers:['Interior and fit-out companies','Furniture manufacturers','Glass distributors','Door and partition-system manufacturers','Project procurement teams'],rfq:['Pattern / surface reference','Colour or tint','Thickness and sheet / finished size','Tempering or processing need','Quantity and sample expectation'],faq:[['Are patterned and frosted glass the same?','No. Surface and production methods may differ, so the required pattern, opacity and appearance should be clearly referenced in the RFQ.'],['Can samples be requested before a production order?','Where colour, pattern and privacy level are critical, sample or reference approval is useful before serial production.']]}
+  },
+  {
+    slug:'heat-soak-tested-glass',
+    tr:{
+      title:'Heat Soak Testli Cam Tedariki',
+      metaTitle:'Heat Soak Testli Cam Türkiye | EN 14179 B2B | CTSEG',
+      description:'Cephe ve kritik mimari uygulamalar için Türkiye’den heat soak testli temperli cam tedariki; EN 14179 odaklı processor araştırması, teknik RFQ ve proje koordinasyonu.',
+      eyebrow:'Heat Soak Tested Glass · Façade Safety',
+      lead:'Heat soak test gerektiren temperli cam taleplerini cam tipi, kalınlık, ebat, kaplama, işleme, test standardı, raporlama ve proje teslim gereksinimlerine göre uygun processor kapasitesiyle eşleştiriyoruz.',
+      applications:['Yüksek katlı cephe ve curtain-wall projeleri','Spandrel ve dış cephe camları','Kritik güvenlik gereksinimli temperli cam uygulamaları','Proje şartnamesinde heat soak test istenen mimari camlar'],
+      buyers:['Cephe yüklenicileri ve sistem firmaları','Mimari cam processorları','Ana yüklenici ve proje satın alma ekipleri','Façade consultant ve teknik ofisler'],
+      rfq:['Cam tipi, kalınlık ve net ölçü','Kaplama / baskı / diğer işlem bilgisi','Temperleme ve heat soak test standardı','Panel listesi / glass schedule','Test raporu veya dokümantasyon beklentisi','Teslim lokasyonu ve proje fazı'],
+      faq:[
+        ['Heat soak test temperleme ile aynı işlem midir?','Hayır. Heat soak test, temperlenmiş camda belirli inklüzyon kaynaklı spontan kırılma riskini azaltmaya yönelik ilave bir test sürecidir; proje standardı ayrıca belirtilmelidir.'],
+        ['Heat soak test için hangi standardın yazılması gerekir?','Proje ve pazar gereksinimine göre ilgili standardın RFQ’da açıkça belirtilmesi gerekir; Avrupa projelerinde EN 14179 referansı sık görülür.'],
+        ['Test raporu veya izlenebilirlik istenebilir mi?','Proje şartnamesi gerektiriyorsa raporlama, panel işaretleme ve izlenebilirlik beklentisi RFQ aşamasında processor ile doğrulanmalıdır.']
+      ]
+    },
+    en:{
+      title:'Heat-Soak Tested Glass Sourcing',
+      metaTitle:'Heat-Soak Tested Glass Türkiye | EN 14179 B2B | CTSEG',
+      description:'Technical sourcing from Türkiye for heat-soak tested tempered glass used in façades and critical architectural applications, including EN 14179-oriented processor matching and RFQ coordination.',
+      eyebrow:'Heat-Soak Tested Glass · Façade Safety',
+      lead:'We match heat-soak tested tempered-glass requirements with suitable processing capacity according to glass type, thickness, dimensions, coating, processing, test standard, reporting and project-delivery requirements.',
+      applications:['High-rise façade and curtain-wall projects','Spandrel and exterior architectural glazing','Tempered glazing with enhanced risk-control requirements','Architectural glass specified with heat-soak testing'],
+      buyers:['Façade contractors and system companies','Architectural glass processors','Main contractors and project procurement teams','Façade consultants and technical offices'],
+      rfq:['Glass type, thickness and finished dimensions','Coating / print / other processing details','Tempering and heat-soak test standard','Panel list / glass schedule','Test report or traceability requirement','Destination and project phase'],
+      faq:[
+        ['Is heat-soak testing the same as tempering?','No. Heat-soak testing is an additional process applied to tempered glass to reduce the risk associated with certain inclusions; the project test requirement should be specified separately.'],
+        ['Which standard should be referenced?','The applicable project and market standard should be stated explicitly in the RFQ; EN 14179 is commonly referenced for European project requirements.'],
+        ['Can test reporting and traceability be requested?','Where required by the project, reporting, panel identification and traceability expectations should be confirmed with the processor at RFQ stage.']
+      ]
+    }
+  },
+  {
+    slug:'fire-rated-glass',
+    tr:{
+      title:'Yangına Dayanımlı / Fire-Rated Cam Tedariki',
+      metaTitle:'Yangına Dayanımlı Cam Türkiye | Fire Rated Glass B2B | CTSEG',
+      description:'Türkiye’den yangına dayanımlı cam ve sertifikalı fire-rated glazing çözümleri için teknik sourcing; E/EW/EI sınıfları, test dokümanı, RFQ ve proje tedarik koordinasyonu.',
+      eyebrow:'Fire-Rated Glass · Certified Project Glazing',
+      lead:'Yangına dayanımlı cam taleplerini yalnız cam kalınlığına göre değil; E/EW/EI performans sınıfı, süre, test standardı, çerçeve/sistem uyumu, net ölçü ve proje dokümantasyonuna göre uygun tedarik kanalıyla eşleştiriyoruz.',
+      applications:['Yangın kapıları ve kaçış koridorları','Ofis ve otel bölme sistemleri','Hastane, okul ve kamu yapıları','Atrium, iç cephe ve yangın bölümlendirme sistemleri','Proje şartnamesinde E/EW/EI sınıfı istenen glazing sistemleri'],
+      buyers:['Yangın kapısı ve bölme sistemi üreticileri','Cephe ve glazing yüklenicileri','Ana yüklenici ve proje satın alma ekipleri','Mimar, danışman ve teknik ofisler','Yapı malzemesi ithalatçıları ve distribütörler'],
+      rfq:['Gerekli sınıf: E / EW / EI','Gerekli dayanım süresi','Cam veya sistem ölçüleri','Çerçeve / kapı / bölme sistemi bilgisi','Uygulanacak standard ve gerekli test dokümanı','Adet, proje lokasyonu ve teslim fazı'],
+      faq:[
+        ['Fire-rated camda yalnız cam ürününü seçmek yeterli midir?','Her zaman değil. Yangın performansı çoğu projede cam, çerçeve, conta ve montaj detaylarıyla birlikte test edilmiş sistem kapsamında değerlendirilir.'],
+        ['E, EW ve EI sınıfları aynı performansı mı ifade eder?','Hayır. Bütünlük, radyasyon ve ısı yalıtımı kriterleri farklıdır; proje şartnamesindeki sınıf ve süre aynen RFQ’ya aktarılmalıdır.'],
+        ['Sertifika ve test raporları teklif öncesi doğrulanabilir mi?','Evet. Talep edilen performans sınıfı ve sistem konfigürasyonuna ait uygun dokümantasyonun mevcut olup olmadığı teklif öncesi kontrol edilmelidir.']
+      ]
+    },
+    en:{
+      title:'Fire-Rated Glass Sourcing',
+      metaTitle:'Fire-Rated Glass Supplier Türkiye | E EW EI Project Glass | CTSEG',
+      description:'Technical sourcing from Türkiye for fire-rated glass and certified glazing systems, structured around E/EW/EI classifications, test documentation, RFQs and project-delivery requirements.',
+      eyebrow:'Fire-Rated Glass · Certified Project Glazing',
+      lead:'We structure fire-rated glass requirements around the required E/EW/EI performance class, duration, test standard, frame/system compatibility, finished dimensions and project documentation rather than treating fire glass as a generic thickness-based product.',
+      applications:['Fire doors and protected escape routes','Office and hospitality partition systems','Hospitals, schools and public buildings','Atriums, internal façades and fire-compartment systems','Glazing systems specified with E/EW/EI performance'],
+      buyers:['Fire-door and partition-system manufacturers','Façade and glazing contractors','Main contractors and project procurement teams','Architects, consultants and technical offices','Building-product importers and distributors'],
+      rfq:['Required class: E / EW / EI','Required resistance duration','Glass or system dimensions','Frame / door / partition system information','Applicable standard and required test documentation','Quantity, project location and delivery phase'],
+      faq:[
+        ['Is selecting only the glass product enough for fire-rated glazing?','Not always. Fire performance is often assessed for a tested system combining glass, frame, seals and installation details.'],
+        ['Do E, EW and EI represent the same performance?','No. Integrity, radiation and insulation criteria differ, so the specified class and duration should be transferred accurately into the RFQ.'],
+        ['Can certification and test reports be checked before quotation?','Yes. Availability and applicability of documentation for the required performance class and system configuration should be verified before commercial commitment.']
+      ]
+    }
   }
 ];
 
