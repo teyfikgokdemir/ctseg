@@ -3,10 +3,10 @@ import { join, resolve } from 'node:path';
 
 const dist=resolve('dist');
 const errors=[];
-const active=['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','he'];
+const active=['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','he','ar'];
 const switchLocales=[...active];
 const fullSiteLocales=active.filter((code)=>code!=='he');
-const homes={tr:'index.html',en:'en/index.html',de:'de/index.html',it:'it/index.html',fa:'fa/index.html',ru:'ru/index.html',zh:'zh/index.html',vi:'vi/index.html',uk:'uk/index.html',ro:'ro/index.html',bg:'bg/index.html',he:'he/index.html'};
+const homes={tr:'index.html',en:'en/index.html',de:'de/index.html',it:'it/index.html',fa:'fa/index.html',ru:'ru/index.html',zh:'zh/index.html',vi:'vi/index.html',uk:'uk/index.html',ro:'ro/index.html',bg:'bg/index.html',he:'he/index.html',ar:'ar/index.html'};
 const ruSourcing=['ru/sourcing/carpets/index.html','ru/sourcing/hand-knotted-silk-carpets/index.html','ru/sourcing/textiles/index.html'];
 const ruCore=[
   'ru/uslugi/index.html','ru/tovary/index.html','ru/rynki/index.html','ru/materialy/index.html','ru/o-kompanii/index.html','ru/kontakty/index.html',
@@ -28,6 +28,13 @@ for(const [locale,path] of Object.entries(homes)){
   const requiredAlternates = [...active,'x-default'];
   for(const code of requiredAlternates)if(!html.includes(`hreflang="${code}"`))errors.push(`${path}: homepage hreflang ${code} missing`);
 }
+
+const arHome=read(homes.ar);
+if(!arHome.includes('<html lang="ar" dir="rtl"'))errors.push('Arabic homepage lang/direction incorrect');
+const arH1Text=([...arHome.matchAll(/<h1\\b[^>]*>([\\s\\S]*?)<\\/h1>/g)][0]?.[1]??'').replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim();
+if(!/[\\u0600-\\u06FF]/.test(arH1Text))errors.push('Arabic homepage H1 is not localized');
+if(!/[\\u0600-\\u06FF]/.test(arHome))errors.push('Arabic homepage has no Arabic content');
+for(const englishMarker of ['Trade needs disciplined coordination','We turn international trade','Quick contact','Global Sourcing Capacity'])if(arHome.includes(englishMarker))errors.push('Arabic homepage contains English fallback marker: '+englishMarker);
 
 const ruHome=read(homes.ru);
 if(!ruHome.includes('<html lang="ru" dir="ltr"'))errors.push('Russian homepage lang/direction incorrect');
@@ -88,5 +95,5 @@ for(const rule of requiredRedirects){
 }
 
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log('Locale contract passed: 11 full-site production locales plus the focused Hebrew Israel↔Türkiye trade hub, Russian parity, localized solution landings, legacy cleanup and one-hop redirects.');
+console.log('Locale contract passed: Arabic is enforced as a full-site RTL locale alongside the existing production locales, with Russian parity, localized solution landings, legacy cleanup and one-hop redirects.');
 
