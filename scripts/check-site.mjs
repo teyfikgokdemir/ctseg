@@ -63,7 +63,8 @@ const companyNames = {
   mk: 'CTSEG Industry and Trade Limited Company',
   he: 'CTSEG Sanayi ve Ticaret Limited Şirketi',
   ro: 'CTSEG Companie de Industrie și Comerț',
-  bg: 'CTSEG Индустрия и Търговия'
+  bg: 'CTSEG Индустрия и Търговия',
+  ar: 'شركة CTSEG للصناعة والتجارة المحدودة'
 };
 const aboutPages = new Set([
   'tr/hakkimizda/index.html',
@@ -76,7 +77,8 @@ const aboutPages = new Set([
   'vi/about/index.html',
   'ro/despre-noi/index.html',
   'bg/za-nas/index.html',
-  'uk/pro-nas/index.html'
+  'uk/pro-nas/index.html',
+  'ar/about/index.html'
 ]);
 const contactPages = new Set([
   'tr/iletisim/index.html',
@@ -85,7 +87,7 @@ const contactPages = new Set([
   'it/contatti/index.html',
   'fa/contact/index.html','ru/kontakty/index.html',
   'zh/contact/index.html','vi/contact/index.html',
-  'ro/contact/index.html','bg/kontakt/index.html','uk/kontakty/index.html',
+  'ro/contact/index.html','bg/kontakt/index.html','uk/kontakty/index.html','ar/contact/index.html',
   'index.html','en/index.html'
 ]);
 const productCatalogs = new Set([
@@ -99,7 +101,8 @@ const productCatalogs = new Set([
   'vi/trade-products/index.html',
   'ro/produse-comerciale/index.html',
   'bg/targovski-produkti/index.html',
-  'uk/torhovi-produkty/index.html'
+  'uk/torhovi-produkty/index.html',
+  'ar/trade-products/index.html'
 ]);
 const persianLandingLabel = 'fa/index.html';
 const persianLandingCanonical = 'https://ctseg.com.tr/fa/';
@@ -175,11 +178,11 @@ for (const file of htmlFiles) {
   const organization = organizations[0];
   const isTurkishPage = label === 'index.html' || label.startsWith('tr/');
   const isPersianLanding = label === persianLandingLabel;
-  const isHomepage = ['index.html','en/index.html','de/index.html','it/index.html','fa/index.html','ru/index.html','zh/index.html','vi/index.html','ro/index.html','bg/index.html','he/index.html','uk/index.html'].includes(label);
+  const isHomepage = ['index.html','en/index.html','de/index.html','it/index.html','fa/index.html','ru/index.html','zh/index.html','vi/index.html','ro/index.html','bg/index.html','he/index.html','uk/index.html','ar/index.html'].includes(label);
   const isGenericHomepage = ['index.html','en/index.html'].includes(label);
   const isFocusedHomepage = ['de/index.html','it/index.html','fa/index.html','ru/index.html','zh/index.html','vi/index.html'].includes(label);
   const tradeRecord = tradeRecordsByLabel.get(label);
-  if (!label.startsWith('404') && canonical && ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','he'].includes(lang)) pageRecords.push({ label, canonical, lang, alternates });
+  if (!label.startsWith('404') && canonical && ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','he','ar'].includes(lang)) pageRecords.push({ label, canonical, lang, alternates });
   if (titleCount !== 1) errors.push(`${label}: expected one title, found ${titleCount}`);
   if ((html.match(/<meta charset="UTF-8">/g) || []).length !== 1) errors.push(`${label}: expected exactly one UTF-8 charset declaration`);
   if (!/<meta name="description" content="[^"]+"/.test(html)) errors.push(`${label}: missing description`);
@@ -290,16 +293,16 @@ for (const file of htmlFiles) {
     const desktopLocales = html.match(/id="language-panel"[\s\S]*?<\/div>/)?.[0] ?? '';
     const mobileLocales = html.match(/class="mobile-lang-grid"[\s\S]*?<\/div>/)?.[0] ?? '';
     const desktopTrigger = html.match(/<button[^>]+data-language-toggle[\s\S]*?<\/button>/)?.[0] ?? '';
-    const expectedLocaleCount = 12;
+    const expectedLocaleCount = 13;
     if ((desktopLocales.match(/data-locale-option/g) || []).length !== expectedLocaleCount) errors.push(`${label}: desktop locale panel must contain ${expectedLocaleCount} languages`);
     if ((mobileLocales.match(/data-locale-option/g) || []).length !== expectedLocaleCount) errors.push(`${label}: mobile locale panel must contain ${expectedLocaleCount} languages`);
-    if ((!/class="locale-flag"[^>]+src="\/images\/flags\/(?:tr|gb|de|it|ir|ru|cn|vn|ro|bg|il|ua)\.svg"/.test(desktopTrigger) || /locale-name/.test(desktopTrigger))) {
+    if ((!/class="locale-flag"[^>]+src="\/images\/flags\/(?:tr|gb|de|it|ir|ru|cn|vn|ro|bg|il|ua|ar)\.svg"/.test(desktopTrigger) || /locale-name/.test(desktopTrigger))) {
       errors.push(`${label}: desktop language trigger must show the active locale flag without a locale name`);
     }
   }
   if (tradeRecord) {
     const expectedCanonical = encodeURI(`https://ctseg.com.tr${tradeRecord.pathname}`);
-    const expectedDirection = tradeRecord.lang === 'fa' ? 'rtl' : 'ltr';
+    const expectedDirection = ['fa','ar'].includes(tradeRecord.lang) ? 'rtl' : 'ltr';
     const expectedTradeHtmlLang = tradeRecord.lang === 'zh' ? 'zh-CN' : tradeRecord.lang === 'vi' ? 'vi-VN' : tradeRecord.lang === 'ro' ? 'ro-RO' : tradeRecord.lang === 'bg' ? 'bg-BG' : tradeRecord.lang === 'sr' ? 'sr-Latn-RS' : tradeRecord.lang === 'uk' ? 'uk-UA' : tradeRecord.lang;
     if (lang !== tradeRecord.lang) errors.push(`${label}: sourcing html lang must be ${tradeRecord.lang}`);
     if (!html.includes(`<html lang="${expectedTradeHtmlLang}" dir="${expectedDirection}"`)) errors.push(`${label}: sourcing html direction must be ${expectedDirection}`);
@@ -408,10 +411,10 @@ for (const [sourceLabel, sourceRecord] of builtTradeRecords) {
     }
   }
 }
-if (productSchemaPages !== 198) errors.push(`expected 198 Product schemas with verifiable specification semantics, found ${productSchemaPages}`);
-if (productAssessmentServicePages !== 198) errors.push(`expected 198 specification-led product sourcing Service schemas across eleven full catalogue locales, found ${productAssessmentServicePages}`);
-if (searchLandingPages !== 44) errors.push(`expected 44 localized high-intent search landings, found ${searchLandingPages}`);
-if (contactEmailPanels !== 13) errors.push(`expected 13 localized contact email panels across two generic homepages and eleven full contact pages, found ${contactEmailPanels}`);
+if (productSchemaPages !== 216) errors.push(`expected 216 Product schemas with verifiable specification semantics, found ${productSchemaPages}`);
+if (productAssessmentServicePages !== 216) errors.push(`expected 216 specification-led product sourcing Service schemas across twelve full catalogue locales, found ${productAssessmentServicePages}`);
+if (searchLandingPages !== 48) errors.push(`expected 48 localized high-intent search landings, found ${searchLandingPages}`);
+if (contactEmailPanels !== 14) errors.push(`expected 14 localized contact email panels across two generic homepages and twelve full contact pages, found ${contactEmailPanels}`);
 if (!existsSync(join(root, persianLandingLabel))) errors.push('standalone Persian landing page build output missing');
 const sitemapXml = files.filter((file) => /sitemap-\d+\.xml$/.test(file)).map((file) => readFileSync(file,'utf8')).join('\n');
 if (!sitemapXml.includes(`<loc>${persianLandingCanonical}</loc>`)) errors.push('Persian landing canonical missing from sitemap');
@@ -443,8 +446,8 @@ for (const file of htmlFiles) {
   }
   const isSearchLanding=/\/(?:cozumler|solutions|loesungen|soluzioni|resheniya|rishennia|solutii|resenja)\//.test(`/${label}`);
   if (!label.startsWith('404') && label !== persianLandingLabel && !label.startsWith('he/') && !tradeRecord && !isSearchLanding) {
-    const globalFaLinks = [...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].filter((match)=>match[0].includes('hreflang="fa"')&&match[0].includes('href="/fa/"'));
-    if (globalFaLinks.length !== 2) errors.push(`${label}: desktop and mobile global locale menus must expose the Persian fallback`);
+    const globalFaLinks = [...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].filter((match)=>match[0].includes('hreflang="fa"')&&/href="\/fa\//.test(match[0]));
+    if (globalFaLinks.length !== 2) errors.push(`${label}: desktop and mobile global locale menus must expose the Persian locale`);
   }
 }
 for (const localizedMarkets of [
