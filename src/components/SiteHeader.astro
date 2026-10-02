@@ -63,14 +63,12 @@ const solutionLinks = lang === 'he' ? [
   ['איתור ואימות ספקים','/he/שירותים/איתור-ואימות-ספקים/'],
   ['רכש אסטרטגי','/he/שירותים/רכש-אסטרטגי/'],
   ['כניסה לשוק','/he/שירותים/כניסה-לשוק/'],
-  [methodLabel,'/he/איך-אנחנו-עובדים/'],
-  ...glassMenuLinks
+  [methodLabel,'/he/איך-אנחנו-עובדים/']
 ] : [
   [t.services, localizedPath(lang,'services')],
   [p.buyerTitle, localizedPath(lang,'services','strategic-sourcing')],
   [p.producerTitle, localizedPath(lang,'services','market-entry')],
-  [methodLabel, localizedPath(lang,'how-we-work')],
-  ...glassMenuLinks
+  [methodLabel, localizedPath(lang,'how-we-work')]
 ];
 
 const nav = lang === 'he' ? [
@@ -157,10 +155,10 @@ const globalSwitchPath = (target: string): string => {
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href={home} aria-label={`CTSEG · ${t.home}`}>
+    <a class="brand brand-stack" href={home} aria-label={`CTSEG · ${t.home}`}>
       <img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" decoding="async" />
+      <span class="header-house-label" aria-hidden="true">{lang === 'he' ? 'בית סחר בינלאומי' : 'GLOBAL TRADE HOUSE'}</span>
     </a>
-    <span class="header-house-label" aria-hidden="true">{lang === 'he' ? 'בית סחר בינלאומי' : 'GLOBAL TRADE HOUSE'}</span>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label={t.menu || 'Menu'} data-menu-toggle>
       <span class="sr-only">{t.menu}</span><span></span><span></span>
     </button>
@@ -242,6 +240,22 @@ const globalSwitchPath = (target: string): string => {
           </div>
         </div>
 
+        <div class="nav-glass-group" data-glass-nav-group>
+          <button class:list={['nav-glass-parent',{ active: ['glass-industry','glass-product','glass-market','glass'].includes(pageKey) }]} type="button" aria-expanded="false" aria-controls="glass-panel" data-glass-toggle>
+            <span>{lang==='tr'?'Cam':lang==='en'?'Glass':glassLabel}</span>
+            <span class="desktop-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div id="glass-panel" class="nav-glass-menu" data-glass-menu>
+            <div class="nav-glass-intro">
+              <strong>{lang==='tr'?'CTSEG · CAM TEDARİKİ':lang==='en'?'CTSEG · GLASS SOURCING':glassLabel}</strong>
+              <span>{lang==='tr'?'Ürün, işleme ve proje bazlı cam tedariki':lang==='en'?'Product, processing and project glass sourcing':''}</span>
+            </div>
+            <div class="nav-glass-links">
+              {glassMenuLinks.map(([label,href]) => <a href={href}><span>{label}</span><i aria-hidden="true">↗</i></a>)}
+            </div>
+          </div>
+        </div>
+
         {nav.filter(([key]) => key !== 'services').map(([key, label, href]) => (
           <a class:list={['desktop-nav-link', { active: pageKey === key }]} href={href}>{label}</a>
         ))}
@@ -283,6 +297,8 @@ const globalSwitchPath = (target: string): string => {
   const languageMenu = document.querySelector('[data-language-menu]');
   const solutionsToggle = document.querySelector('[data-solutions-toggle]');
   const solutionsGroup = document.querySelector('[data-solutions-nav-group]');
+  const glassToggle = document.querySelector('[data-glass-toggle]');
+  const glassGroup = document.querySelector('[data-glass-nav-group]');
 
   let previousScroll = 0;
   let previousFocus: HTMLElement | null = null;
@@ -311,12 +327,18 @@ const globalSwitchPath = (target: string): string => {
     if (restoreFocus) (solutionsToggle as HTMLElement)?.focus();
   };
 
+  const closeGlass = () => {
+    glassToggle?.setAttribute('aria-expanded', 'false');
+    glassGroup?.classList.remove('is-open');
+  };
+
   const closeNavigation = () => {
     if (!nav || !nav.classList.contains('open')) return;
     toggle?.setAttribute('aria-expanded', 'false');
     nav.classList.remove('open');
     syncNavigationAccessibility();
     closeSolutions();
+    closeGlass();
     setTimeout(() => {
       document.body.classList.remove('menu-open');
       window.scrollTo({ top: previousScroll, behavior: 'instant' });
@@ -353,6 +375,13 @@ const globalSwitchPath = (target: string): string => {
     solutionsToggle.setAttribute('aria-expanded', String(!open));
     solutionsGroup?.classList.toggle('is-open', !open);
   });
+  glassToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = glassToggle.getAttribute('aria-expanded') === 'true';
+    closeSolutions();
+    glassToggle.setAttribute('aria-expanded', String(!open));
+    glassGroup?.classList.toggle('is-open', !open);
+  });
   languageToggle?.addEventListener('click', () => {
     const open = languageToggle.getAttribute('aria-expanded') === 'true';
     languageToggle.setAttribute('aria-expanded', String(!open));
@@ -363,11 +392,13 @@ const globalSwitchPath = (target: string): string => {
     if (!(event.target instanceof Node)) return;
     if (!document.querySelector('.language-switcher')?.contains(event.target)) closeLanguageMenu();
     if (!document.querySelector('.nav-solutions-group')?.contains(event.target)) closeSolutions();
+    if (!document.querySelector('.nav-glass-group')?.contains(event.target)) closeGlass();
   });
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && nav?.classList.contains('open')) {
       closeLanguageMenu();
       closeSolutions(true);
+      closeGlass();
       closeNavigation();
     }
     if (event.key === 'Tab' && nav?.classList.contains('open')) {
@@ -388,8 +419,10 @@ const globalSwitchPath = (target: string): string => {
 </script>
 
 <style is:global>
-  .header-house-label{display:none;color:#9f9f9a;font-size:9px;font-weight:850;line-height:1;letter-spacing:.15em;white-space:nowrap}
-  @media (min-width: 1280px){.header-house-label{display:block;margin-left:10px}}
+  .brand-stack{display:flex!important;flex-direction:column!important;align-items:center!important;gap:3px!important}
+  .brand-stack img{display:block!important}
+  .header-house-label{display:block;color:#9f9f9a;font-size:8px;font-weight:850;line-height:1;letter-spacing:.18em;white-space:nowrap;text-align:center}
+  @media (max-width:1050px){.header-house-label{font-size:7px}}
 
   @media (min-width: 1051px) {
     .mobile-only-panel,.mobile-nav-head,.mobile-myth-card,.mobile-cta-btn{display:none!important}
@@ -420,7 +453,17 @@ const globalSwitchPath = (target: string): string => {
     .desktop-solutions-grid .desktop-solution-item i{display:grid;width:28px;height:28px;place-items:center;border-radius:50%;background:rgba(196,240,0,.1);color:#c4f000;font-style:normal;transition:background .2s ease,color .2s ease,transform .25s ease}
     .desktop-solutions-grid .desktop-solution-item:hover{padding-left:10px!important;background:transparent!important;border-color:rgba(196,240,0,.4)!important;color:#c4f000!important;transform:none!important}
     .desktop-solutions-grid .desktop-solution-item:hover i{background:#c4f000;color:#0a0a0a;transform:translate(2px,-2px)}
-    .language-switcher-desktop button{border-color:rgba(255,255,255,.18)!important;background:rgba(255,255,255,.04)!important}
+    .nav-glass-group{position:relative!important}
+    .nav-glass-parent{appearance:none;border:0;background:transparent;color:#fff;cursor:pointer;display:flex;align-items:center;font-size:clamp(.8rem,.82vw,.88rem)!important;font-weight:700!important;letter-spacing:.02em!important;text-transform:uppercase!important}
+    .nav-glass-parent:hover,.nav-glass-parent.active{color:#c4f000!important}
+    .nav-glass-parent[aria-expanded="true"] .desktop-chevron{transform:rotate(180deg)!important}
+    .nav-glass-menu{position:absolute;top:calc(100% + 18px);left:50%;transform:translateX(-45%);width:390px;display:none;background:rgba(15,16,14,.99);border:1px solid rgba(196,240,0,.22);border-radius:20px;box-shadow:0 28px 80px rgba(0,0,0,.48);padding:16px;z-index:1200;backdrop-filter:blur(20px)}
+    .nav-glass-group.is-open .nav-glass-menu{display:block}
+    .nav-glass-intro{display:grid;gap:6px;padding:3px 3px 14px;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:4px}
+    .nav-glass-intro strong{color:#c4f000;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}.nav-glass-intro span{color:#c9cec8;font-size:.78rem;line-height:1.45;text-transform:none;letter-spacing:0}
+    .nav-glass-links{display:grid}.nav-glass-links a{display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:46px!important;padding:10px 3px!important;border-bottom:1px solid rgba(255,255,255,.08)!important;color:#fff!important;text-transform:none!important;font-size:.84rem!important;letter-spacing:0!important}
+    .nav-glass-links a:last-child{border-bottom:0!important}.nav-glass-links a:hover{color:#c4f000!important}.nav-glass-links i{font-style:normal;color:#c4f000}
+        .language-switcher-desktop button{border-color:rgba(255,255,255,.18)!important;background:rgba(255,255,255,.04)!important}
     .language-menu a strong{font-size:14px!important;line-height:1.4!important}
     .nav-cta{padding-inline:16px!important;white-space:nowrap!important}
     html[data-locale="he"] .desktop-only-nav a,html[data-locale="he"] .desktop-nav-link,html[data-locale="he"] .nav-solutions-parent,html[data-locale="he"] .nav-market-parent{font-size:14px!important;font-weight:600!important;letter-spacing:0!important;text-transform:none!important;line-height:1.45!important}
