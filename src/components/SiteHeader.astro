@@ -6,6 +6,7 @@ import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 import { tradePlatformCopy } from '../data/trade-platform';
 import { searchLandingPath, type SearchLandingId } from '../data/search-landings';
 import { getGlassSeoPage } from '../data/glass-seo';
+import { localizedGlassProductCopy, localizedGlassSlugs, type LocalizedGlassLocale } from '../data/glass-product-locales';
 
 const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?: string; pageId?: string };
 const t = lang === 'he' ? {
@@ -51,7 +52,10 @@ const glassMenuLinks = (lang === 'tr' || lang === 'en') ? [
       return [page[lang].title.replace(' Tedariki','').replace(' Sourcing',''), `${lang === 'tr' ? '/glass' : '/en/glass'}/${slug}/`];
     })
     .filter(Boolean)
-] as [string,string][] : [[glassLabel, glassUrl]] as [string,string][];
+] as [string,string][] : (lang !== 'sr' && localizedGlassProductCopy[lang as LocalizedGlassLocale]) ? [
+  [glassLabel, glassUrl],
+  ...localizedGlassSlugs.map((slug)=>[localizedGlassProductCopy[lang as LocalizedGlassLocale].products[slug].name, `/${lang}/glass/${slug}/`] as [string,string])
+] : [[glassLabel, glassUrl]] as [string,string][];
 
 const focusedCountryLp = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
 const solutionLinks = lang === 'he' ? [
