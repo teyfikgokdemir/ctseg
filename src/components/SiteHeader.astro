@@ -135,8 +135,10 @@ const globalSwitchPath = (target: string): string => {
     return `/${target}/glass/`;
   }
   if (pageKey === 'glass-product' && pageId) {
+    const hasLocalizedProduct=(localizedGlassSlugs as readonly string[]).includes(pageId);
     if (target === 'tr') return `/glass/${pageId}/`;
-    return `/${target}/glass/${pageId}/`;
+    if (target === 'en') return `/en/glass/${pageId}/`;
+    return hasLocalizedProduct ? `/${target}/glass/${pageId}/` : `/${target}/glass/`;
   }
   if (pageKey === 'glass') {
     const glassLocales = ['en','tr','de','it','ru','fa','zh','vi','ro','bg'] as const;
