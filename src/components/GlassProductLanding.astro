@@ -10,6 +10,31 @@ const c=page[lang]; const tr=lang==='tr';
 const base=tr?'/glass':'/en/glass'; const canonical=`https://ctseg.com.tr${base}/${page.slug}/`;
 const isLocalizedProduct=(localizedGlassSlugs as readonly string[]).includes(page.slug);
 const alt=Object.fromEntries([['tr',`https://ctseg.com.tr/glass/${page.slug}/`],['en',`https://ctseg.com.tr/en/glass/${page.slug}/`],...(isLocalizedProduct?activeLocales.filter((code)=>!['tr','en'].includes(code)).map((code)=>[code,`https://ctseg.com.tr/${code}/glass/${page.slug}/`]):[]),['x-default',`https://ctseg.com.tr/en/glass/${page.slug}/`]]);
+const relatedMap:Record<string,string[]>={
+  'float-glass':['low-iron-extra-clear-glass','tempered-glass','laminated-glass','low-e-coated-glass','processed-glass-cut-to-size'],
+  'tempered-glass':['heat-strengthened-glass','heat-soak-tested-glass','laminated-glass','shower-enclosure-glass','balustrade-railing-glass'],
+  'heat-strengthened-glass':['tempered-glass','heat-soak-tested-glass','laminated-glass','architectural-project-glass','insulated-glass-igu'],
+  'heat-soak-tested-glass':['tempered-glass','heat-strengthened-glass','balustrade-railing-glass','architectural-project-glass','fire-rated-glass'],
+  'laminated-glass':['tempered-glass','balustrade-railing-glass','office-partition-interior-glass','fire-rated-glass','architectural-project-glass'],
+  'low-e-coated-glass':['solar-control-glass','insulated-glass-igu','architectural-project-glass','float-glass','low-iron-extra-clear-glass'],
+  'solar-control-glass':['low-e-coated-glass','insulated-glass-igu','architectural-project-glass','float-glass','ceramic-printed-glass'],
+  'insulated-glass-igu':['low-e-coated-glass','solar-control-glass','tempered-glass','architectural-project-glass','office-partition-interior-glass'],
+  'low-iron-extra-clear-glass':['float-glass','laminated-glass','balustrade-railing-glass','furniture-retail-glass','architectural-project-glass'],
+  'mirror-decorative-glass':['patterned-frosted-satin-glass','ceramic-printed-glass','furniture-retail-glass','office-partition-interior-glass','processed-glass-cut-to-size'],
+  'patterned-frosted-satin-glass':['mirror-decorative-glass','ceramic-printed-glass','office-partition-interior-glass','shower-enclosure-glass','furniture-retail-glass'],
+  'processed-glass-cut-to-size':['glass-processing-services','curved-glass','ceramic-printed-glass','furniture-retail-glass','household-appliance-glass'],
+  'glass-processing-services':['processed-glass-cut-to-size','curved-glass','ceramic-printed-glass','household-appliance-glass','furniture-retail-glass'],
+  'curved-glass':['glass-processing-services','processed-glass-cut-to-size','laminated-glass','architectural-project-glass','furniture-retail-glass'],
+  'ceramic-printed-glass':['glass-processing-services','patterned-frosted-satin-glass','household-appliance-glass','furniture-retail-glass','architectural-project-glass'],
+  'fire-rated-glass':['laminated-glass','office-partition-interior-glass','architectural-project-glass','heat-soak-tested-glass'],
+  'shower-enclosure-glass':['tempered-glass','patterned-frosted-satin-glass','glass-processing-services','processed-glass-cut-to-size','furniture-retail-glass'],
+  'balustrade-railing-glass':['laminated-glass','tempered-glass','heat-soak-tested-glass','low-iron-extra-clear-glass','architectural-project-glass'],
+  'office-partition-interior-glass':['tempered-glass','laminated-glass','patterned-frosted-satin-glass','fire-rated-glass','furniture-retail-glass'],
+  'household-appliance-glass':['ceramic-printed-glass','glass-processing-services','processed-glass-cut-to-size','tempered-glass','furniture-retail-glass'],
+  'furniture-retail-glass':['processed-glass-cut-to-size','glass-processing-services','mirror-decorative-glass','patterned-frosted-satin-glass','household-appliance-glass'],
+  'architectural-project-glass':['tempered-glass','laminated-glass','low-e-coated-glass','insulated-glass-igu','heat-soak-tested-glass','fire-rated-glass']
+};
+const relatedPages=(relatedMap[page.slug]||[]).map((slug)=>glassSeoPages.find((item)=>item.slug===slug)).filter(Boolean) as GlassSeoPage[];
 const schema=[{'@context':'https://schema.org','@type':'Service','name':c.title,'description':c.description,'url':canonical,'areaServed':'Worldwide','provider':{'@type':'Organization','name':'CTSEG','url':'https://ctseg.com.tr/'}},{'@context':'https://schema.org','@type':'FAQPage','mainEntity':c.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))},{'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':tr?'Cam Tedariki':'Glass Sourcing','item':`https://ctseg.com.tr${base}/`},{'@type':'ListItem','position':2,'name':c.title,'item':canonical}]}];
 ---
 <BaseLayout lang={lang} title={c.metaTitle} description={c.description} canonical={canonical} alternates={alt} schema={schema} pageKey="glass-product" pageId={page.slug}>
@@ -17,7 +42,7 @@ const schema=[{'@context':'https://schema.org','@type':'Service','name':c.title,
     <section class="hero section"><div class="container center"><span class="eyebrow">{c.eyebrow}</span><h1>{c.title}</h1><p>{c.lead}</p><a class="button primary" href="#rfq">{tr?'Cam RFQ Gönder':'Send Glass RFQ'}</a></div></section>
     <section class="section"><div class="container split"><div><h2>{tr?'Uygulama alanları':'Applications'}</h2><ul>{c.applications.map(x=><li>{x}</li>)}</ul></div><div><h2>{tr?'Hedef alıcı profili':'Buyer profiles'}</h2><ul>{c.buyers.map(x=><li>{x}</li>)}</ul></div></div></section>
     <section class="section rfq-brief"><div class="container"><div class="center head"><h2>{tr?'Doğru teklif için RFQ bilgileri':'RFQ inputs for an accurate quotation'}</h2></div><div class="brief-grid">{c.rfq.map(x=><article><h3>{x}</h3></article>)}</div></div></section>
-    <section class="section related"><div class="container"><div class="center head"><h2>{tr?'İlgili cam tedarik sayfaları':'Related glass sourcing pages'}</h2></div><div class="links">{glassSeoPages.filter(x=>x.slug!==page.slug).map(x=><a href={`${base}/${x.slug}/`}><strong>{x[lang].title}</strong><span>↗</span></a>)}</div></div></section>
+    <section class="section related"><div class="container"><div class="center head"><h2>{tr?'İlgili cam tedarik sayfaları':'Related glass sourcing pages'}</h2></div><div class="links">{relatedPages.map(x=><a href={`${base}/${x.slug}/`}><strong>{x[lang].title}</strong><span>↗</span></a>)}</div></div></section>
     <section class="section faq"><div class="container"><div class="center head"><h2>{tr?'Sık sorulanlar':'Frequently asked questions'}</h2></div><div class="faqs">{c.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div></div></section>
     <section class="section form" id="rfq"><div class="container"><CommercialRequestForm lang={lang}/></div></section>
   </main>
