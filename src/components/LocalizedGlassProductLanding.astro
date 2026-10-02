@@ -2,12 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CommercialRequestForm from './CommercialRequestForm.astro';
 import { activeLocales } from '../data/locales';
-import { localizedGlassProductCopy, localizedGlassSlugs, type LocalizedGlassLocale, type LocalizedGlassSlug } from '../data/glass-product-locales';
+import { localizedGlassProductCopy, localizedGlassSlugs, getLocalizedGlassProductDetail, type LocalizedGlassLocale, type LocalizedGlassSlug } from '../data/glass-product-locales';
 import { getGlassSeoPage } from '../data/glass-seo';
 
 const { lang, slug } = Astro.props as {lang:LocalizedGlassLocale;slug:LocalizedGlassSlug};
 const localeCopy=localizedGlassProductCopy[lang];
 const product=localeCopy.products[slug];
+const detailCopy=getLocalizedGlassProductDetail(lang,slug);
 const canonical=`https://ctseg.com.tr/${lang}/glass/${slug}/`;
 const alt=Object.fromEntries([
   ['tr',`https://ctseg.com.tr/glass/${slug}/`],
@@ -145,14 +146,14 @@ const visualCards=related.slice(0,4).map((relatedSlug)=>({slug:relatedSlug,name:
         <aside class="trust-panel">
           {pu.trust.map((title,index)=><div class="trust-item">
             <span class="trust-icon">{String(index+1).padStart(2,'0')}</span>
-            <div><strong>{title}</strong><p>{index===0?partnerNotes[lang]:index===1?localeCopy.buyersTitle:index===2?localeCopy.applicationsTitle:pu.features[4]}</p></div>
+            <div><strong>{title}</strong><p>{index===0?partnerNotes[lang]:index===1?detailCopy.buyers[0]:index===2?detailCopy.applications[0]:detailCopy.rfqItems[3]}</p></div>
           </div>)}
         </aside>
       </div>
     </section>
 
     <section class="feature-strip"><div class="container feature-grid">
-      {pu.features.map((title,index)=><div class="feature-item"><strong>{title}</strong><span>{index<localeCopy.applications.length?localeCopy.applications[index]:localeCopy.buyers[index-localeCopy.applications.length]||title}</span></div>)}
+      {pu.features.map((title,index)=><div class="feature-item"><strong>{title}</strong><span>{index<4?detailCopy.applications[index]:detailCopy.rfqItems[3]}</span></div>)}
     </div></section>
 
     <section class="section applications"><div class="container">
@@ -179,9 +180,9 @@ const visualCards=related.slice(0,4).map((relatedSlug)=>({slug:relatedSlug,name:
       </div>
     </div></section>
 
-    <section class="section rfq-brief"><div class="container"><div class="center head"><h2>{localeCopy.rfqTitle}</h2></div><div class="brief-grid">{localeCopy.rfqItems.map((x)=><article><h3>{x}</h3></article>)}</div></div></section>
+    <section class="section rfq-brief"><div class="container"><div class="center head"><h2>{localeCopy.rfqTitle}</h2></div><div class="brief-grid">{detailCopy.rfqItems.map((x)=><article><h3>{x}</h3></article>)}</div></div></section>
     <section class="section related"><div class="container"><div class="center head"><h2>{localeCopy.relatedTitle}</h2></div><div class="links">{related.map((relatedSlug)=><a href={`/${lang}/glass/${relatedSlug}/`}><strong>{localeCopy.products[relatedSlug].name}</strong><span>↗</span></a>)}</div></div></section>
-    <section class="section faq"><div class="container"><div class="center head"><h2>{localeCopy.faqTitle}</h2></div><div class="faqs">{localeCopy.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div></div></section>
+    <section class="section faq"><div class="container"><div class="center head"><h2>{localeCopy.faqTitle}</h2></div><div class="faqs">{detailCopy.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div></div></section>
     <section class="section form" id="rfq"><div class="container"><CommercialRequestForm lang={lang as any}/></div></section>
   </main>
 </BaseLayout>
