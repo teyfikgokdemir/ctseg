@@ -303,7 +303,7 @@ for (const file of htmlFiles) {
   if (tradeRecord) {
     const expectedCanonical = encodeURI(`https://ctseg.com.tr${tradeRecord.pathname}`);
     const expectedDirection = ['fa','ar'].includes(tradeRecord.lang) ? 'rtl' : 'ltr';
-    const expectedTradeHtmlLang = tradeRecord.lang === 'zh' ? 'zh-CN' : tradeRecord.lang === 'vi' ? 'vi-VN' : tradeRecord.lang === 'ro' ? 'ro-RO' : tradeRecord.lang === 'bg' ? 'bg-BG' : tradeRecord.lang === 'sr' ? 'sr-Latn-RS' : tradeRecord.lang === 'uk' ? 'uk-UA' : tradeRecord.lang;
+    const expectedTradeHtmlLang = tradeRecord.lang === 'zh' ? 'zh-CN' : tradeRecord.lang === 'vi' ? 'vi-VN' : tradeRecord.lang === 'ro' ? 'ro-RO' : tradeRecord.lang === 'bg' ? 'bg-BG' : tradeRecord.lang === 'sr' ? 'sr-Latn-RS' : tradeRecord.lang === 'uk' ? 'uk-UA' : tradeRecord.lang === 'ar' ? 'ar-SA' : tradeRecord.lang;
     if (lang !== tradeRecord.lang) errors.push(`${label}: sourcing html lang must be ${tradeRecord.lang}`);
     if (!html.includes(`<html lang="${expectedTradeHtmlLang}" dir="${expectedDirection}"`)) errors.push(`${label}: sourcing html direction must be ${expectedDirection}`);
     if (canonical !== expectedCanonical) errors.push(`${label}: sourcing canonical does not match its route family`);
