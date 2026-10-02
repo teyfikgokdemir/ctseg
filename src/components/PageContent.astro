@@ -372,7 +372,8 @@ const catalogueGroups = [
   {
     key:'specialities',
     title:{tr:'Safran ve Özel Ürünler',en:'Saffron & Specialities',de:'Safran & Spezialitäten',it:'Zafferano e specialità',ru:'Шафран и специализированные продукты',fa:'زعفران و محصولات خاص',zh:'顶级藏红花与天然特色食品',vi:'Saffron & Đặc sản',ro:'Șofran și specialități',bg:'Шафран и специални продукти',sr:'Šafran i specijaliteti',
-      uk:'Шафран та спеціалітети'
+      uk:'Шафран та спеціалітети',
+      ar:'الزعفران والمنتجات المتخصصة'
     }[lang],
     ids:['saffron','zereshk']
   }
@@ -431,7 +432,8 @@ const categoryLeads: Record<string, Record<Locale, string>> = {
     ru: 'Изюм, малатийская курага с косточками и сушёная шелковица; естественная сушка, контроль влажности и экспортная упаковка.',
     fa: 'کشمش، زردآلو و مغز هسته زردآلو و توت خشک؛ خشک‌شده با روش‌های استاندارد، کنترل رطوبت و تحویل در کارتن‌های صادراتی.',
     zh: '特级脱水葡萄干、马拉蒂亚原产优质杏干与杏仁及天然桑葚干；自然风干控水、理化指标均一，按出口标准箱规打托发运。',
-    vi: 'Nho khô, mơ sấy Malatya kèm nhân hạt và dâu tằm sấy; quy trình sấy tự nhiên, kiểm soát độ ẩm và đóng thùng carton xuất khẩu chuẩn.'
+    vi: 'Nho khô, mơ sấy Malatya kèm nhân hạt và dâu tằm sấy; quy trình sấy tự nhiên, kiểm soát độ ẩm và đóng thùng carton xuất khẩu chuẩn.',
+    ar: 'فواكه مجففة مختارة وفق المنشأ وطريقة التجفيف والرطوبة والدرجة والتعبئة، مع تقييم الوثائق ومتطلبات السوق المستهدف.'
   },
   seeds: {
     tr: 'Kabak çekirdeği ve ayçekirdeği çeşitleri; yabancı maddelerden arındırılmış, boylanmış ve yüksek yağ/tüketim kalitesinde toptan torbalarda sevk edilir.',
@@ -454,7 +456,22 @@ const categoryLeads: Record<string, Record<Locale, string>> = {
     vi: 'Nhụy hoa nghệ tây (Saffron) Super Negin chuẩn chứng nhận và quả barberry sấy (zereshk); kèm phiếu kiểm nghiệm ISO 3632 Cấp 1 trong bao bì niêm phong.'
   }
 };
-const groupBadges: Record<string, { b1: Record<Locale, string>; b2: Record<Locale, string>; b3: Record<Locale, string> }> = {
+const groupBadges: Record<string, { b1: Record<Locale, string>; b2: Record<Locale, string>; b3: Record<Locale, string> }
+
+/* ARABIC CATALOGUE BADGES */
+for (const [group,badges] of Object.entries({
+  pistachio:['تحليل الأفلاتوكسين (COA)','فرز ومعايرة الأحجام','تعبئة تصدير مفرغة أو بالجملة'],
+  dates:['إدارة سلسلة التبريد','درجات للمائدة والتصنيع','طبيعي 100% دون سكر مضاف'],
+  nuts:['فرز ومعايرة بالجملة','درجة مناسبة للصناعات الغذائية والحلويات','تعبئة حاجزة للرطوبة'],
+  'dried-fruit':['اختيار حسب المنشأ والمنطقة','تجفيف طبيعي','عبوات تصدير على منصات'],
+  seeds:['نقاوة ونسبة امتلاء مرتفعة','فرز بصري وإزالة الغبار','أكياس PP بوزن 25 / 50 كغ'],
+  specialities:['تحليل وفق ISO 3632 عند الاقتضاء','قوة لونية مرتفعة للكروسين','عبوات جملة مختومة']
+} as Record<string,string[]>)){
+  (groupBadges[group].b1 as any).ar=badges[0];
+  (groupBadges[group].b2 as any).ar=badges[1];
+  (groupBadges[group].b3 as any).ar=badges[2];
+}
+> = {
   pistachio: {
     b1: { tr:'Aflatoksin Analizli (COA)', en:'Aflatoxin Tested (COA)', de:'Aflatoxin-geprüft (COA)', it:'Analisi aflatossine (COA)', ru:'Контроль афлатоксинов (COA)', fa:'سنجش آفلاتوکسین (COA)', zh:'黄曲霉毒素严格检测 (COA)', vi:'Kiểm định độc tố Aflatoxin (COA)' },
     b2: { tr:'Kalibre Tasnifi (20/22 - 30/32)', en:'Calibrated Sizes (20/22 - 30/32)', de:'Kalibersortierung (20/22 - 30/32)', it:'Calibratura (20/22 - 30/32)', ru:'Калибровка (20/22 - 30/32)', fa:'درجه‌بندی انس (۲۰/۲۲ تا ۳۰/۳۲)', zh:'标准尺寸颗粒筛分 (20/22 - 30/32)', vi:'Phân cỡ chuẩn (20/22 - 30/32)' },
@@ -491,17 +508,20 @@ const groupBadges: Record<string, { b1: Record<Locale, string>; b2: Record<Local
 Object.assign(categoryLeads.pistachio as any,{
   ro:'Fistic Akbari, Kalleh Ghouchi, Ahmad Aghaei și Fandoghi din zone de producție consacrate; calibrare pe dimensiuni, control pentru aflatoxine și ambalare de export în vrac sau vid.',
   bg:'Премиум шамфъстък Akbari, Kalleh Ghouchi, Ahmad Aghaei и Fandoghi от утвърдени райони; калибриране по размер, контрол за афлатоксини и вакуумна или експортна насипна опаковка.',
-  sr:'Premium Akbari, Kalleh Ghouchi, Ahmad Aghaei i Fandoghi pistaći iz etabliranih proizvodnih oblasti; kalibracija po veličini, kontrola aflatoksina i vakuumsko ili izvozno bulk pakovanje.'
+  sr:'Premium Akbari, Kalleh Ghouchi, Ahmad Aghaei i Fandoghi pistaći iz etabliranih proizvodnih oblasti; kalibracija po veličini, kontrola aflatoksina i vakuumsko ili izvozno bulk pakovanje.',
+  ar:'فستق أكبري وكله قوچي وأحمد آقائي وفندقي من مناطق إنتاج معروفة؛ مع فرز حسب العيار، والتحقق من الأفلاتوكسين، وخيارات تعبئة بالجملة أو بالتفريغ الهوائي للتصدير.'
 });
 Object.assign(categoryLeads.dates as any,{
   ro:'Curmale Mazafati proaspete, pastă industrială de curmale și siropuri concentrate, cu respectarea cerințelor de lanț frigorific și a specificațiilor industriei alimentare.',
   bg:'Пресни фурми Mazafati, индустриална паста от фурми и концентрирани сиропи при спазване на изискванията за студена верига и хранителната промишленост.',
-  sr:'Sveže Mazafati urme, industrijska pasta od urmi i koncentrovani sirupi uz kontrolu hladnog lanca i specifikacije prehrambene industrije.'
+  sr:'Sveže Mazafati urme, industrijska pasta od urmi i koncentrovani sirupi uz kontrolu hladnog lanca i specifikacije prehrambene industrije.',
+  ar:'تمور مضافتي طازجة ومعجون تمر صناعي وشراب مركز، مع مراعاة متطلبات سلسلة التبريد ومواصفات الصناعات الغذائية.'
 });
 Object.assign(categoryLeads.nuts as any,{
   ro:'Migdale, miez de nucă și mixuri de nuci configurate pentru cofetărie, snackuri și ambalare, cu evaluarea calității la nivel de lot.',
   bg:'Бадеми, орехови ядки и ядкови миксове за сладкарство, снакс и пакетиране с оценка на качеството по партиди.',
-  sr:'Badem, jezgra oraha i prilagođene mešavine orašastih plodova za konditorsku industriju, grickalice i pakovanje uz kontrolu kvaliteta po seriji.'
+  sr:'Badem, jezgra oraha i prilagođene mešavine orašastih plodova za konditorsku industriju, grickalice i pakovanje uz kontrolu kvaliteta po seriji.',
+  ar:'لوز ولب الجوز وخلطات مكسرات مخصصة لقطاعات الحلويات والوجبات الخفيفة والتعبئة، مع تقييم الجودة على مستوى الدفعة.'
 });
 Object.assign(categoryLeads['dried-fruit'] as any,{
   ro:'Stafide, caise Malatya și sâmburi de caise, precum și dude uscate; uscare controlată, verificarea umidității și ambalare standard de export.',
@@ -511,12 +531,14 @@ Object.assign(categoryLeads['dried-fruit'] as any,{
 Object.assign(categoryLeads.seeds as any,{
   ro:'Semințe de dovleac și floarea-soarelui; curățate, calibrate și livrate în saci angro cu barieră la umiditate pentru prăjire și procesare.',
   bg:'Тиквени и слънчогледови семки; почистени, калибрирани и доставяни във влагоустойчиви чували за печене и хранителна преработка.',
-  sr:'Seme bundeve i suncokreta; očišćeno, kalibrisano i isporučeno u veleprodajnim vrećama sa zaštitom od vlage za pečenje i preradu hrane.'
+  sr:'Seme bundeve i suncokreta; očišćeno, kalibrisano i isporučeno u veleprodajnim vrećama sa zaštitom od vlage za pečenje i preradu hrane.',
+  ar:'بذور ولب دوار الشمس واليقطين بمتطلبات نقاوة وفرز وتعبئة مخصصة للتجارة بالجملة والتصدير.'
 });
 Object.assign(categoryLeads.specialities as any,{
   ro:'Șofran certificat Super Negin și Negin și zereshk uscat; documentație de analiză relevantă și ambalare angro sigilată, în funcție de lot și piață.',
   bg:'Сертифициран шафран Super Negin и Negin и сушен zereshk; релевантни анализи и запечатана опаковка на едро според партидата и пазара.',
-  sr:'Sertifikovani Super Negin i Negin šafran i sušeni zereshk; relevantna analitička dokumentacija i zapečaćeno veleprodajno pakovanje prema seriji i tržištu.'
+  sr:'Sertifikovani Super Negin i Negin šafran i sušeni zereshk; relevantna analitička dokumentacija i zapečaćeno veleprodajno pakovanje prema seriji i tržištu.',
+  ar:'زعفران ومنتجات متخصصة تُقيّم وفق الدرجة والمواصفات والتحاليل والتعبئة ومتطلبات التتبع والسوق المستهدف.'
 });
 
 const balkanGroupBadges:any={
@@ -621,7 +643,8 @@ const sourcingDeskCopy: Record<Locale, { kicker: string; title: string; lead: st
   bg:{kicker:'Отдел за снабдяване на едро',title:'Институционално снабдяване и търговски оферти',lead:'Структурираме търговски оферти за продуктовото портфолио с пълни спецификации, сертификат за анализ (COA), private label опции и условия Incoterms.',cta:'Изпрати търговска заявка',note:'Произходът и партидните документи се предоставят прозрачно на етап оферта.'},
   sr:{kicker:'Veleprodajni sourcing desk',title:'Institucionalni sourcing velikih količina i ponude',lead:'Strukturišemo komercijalne ponude za portfolio uz pune specifikacije, sertifikat analize (COA), private-label opcije i Incoterms uslove isporuke.',cta:'Pošalji komercijalni zahtev',note:'Poreklo i dokumentacija serije prikazuju se transparentno u fazi ponude.'}
 ,
-  uk: { kicker: 'Стіл оптових закупівель', title: 'Інституційні оптові закупівлі та цінові пропозиції', lead: 'Ми готуємо комерційні пропозиції для всіх товарів з повними специфікаціями, сертифікатами (COA), приватними марками та умовами Incoterms.', cta: 'Надіслати комерційний запит', note: 'Документи про походження та перевірку партії прозоро надаються на етапі ціноутворення.' }
+  uk: { kicker: 'Стіл оптових закупівель', title: 'Інституційні оптові закупівлі та цінові пропозиції', lead: 'Ми готуємо комерційні пропозиції для всіх товарів з повними специфікаціями, сертифікатами (COA), приватними марками та умовами Incoterms.', cta: 'Надіслати комерційний запит', note: 'Документи про походження та перевірку партії прозоро надаються на етапі ціноутворення.' },
+  ar:{kicker:'مكتب التوريد بالجملة',title:'مكتب التوريد المؤسسي والعروض التجارية للكميات الكبيرة',lead:'ننظم عروضاً تجارية لمنتجات المحفظة تشمل المواصفات ووثائق تحليل الدفعة (COA) وخيارات العلامة الخاصة وشروط التسليم وفق Incoterms.',cta:'إرسال طلب تجاري',note:'يتم الإفصاح عن المنشأ ووثائق الدفعة بشفافية في مرحلة العرض.'}
 };
 const featuredInsightLabel = {
   tr: 'ÖNE ÇIKAN TİCARİ ANALİZ',
