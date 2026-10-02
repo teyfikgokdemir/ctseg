@@ -61,6 +61,34 @@ const visualMap:Record<string,string>={
 };
 const visual=visualMap[page.slug]||'/images/glass/glass-applications-turkey.webp';
 const visualAlt=tr?`${c.title} için Türkiye cam tedarik ağı görseli`:`${c.title} sourcing network in Türkiye`;
+const visualCards=relatedPages.slice(0,4).map((item)=>({
+  ...item,
+  image:visualMap[item.slug]||'/images/glass/glass-applications-turkey.webp'
+}));
+const trustItems=tr?[
+  ['Türkiye’de Güçlü Üretici Ağı','Önde gelen cam üreticileri ve güvenilir processorlarla kurulmuş ticari ilişkiler'],
+  ['Proje ve Ticari Tedarik','Tek seferlik projeden düzenli B2B tedarike kadar uygun kanal eşleştirmesi'],
+  ['Teknik Uygunluk','Standart, işleme, ölçü ve dokümantasyon gereksinimlerinin RFQ bazında kontrolü'],
+  ['Global Teslimat Koordinasyonu','Avrupa, Balkanlar, Orta Doğu ve diğer pazarlara uygun lojistik planlama']
+]:[
+  ['Established Turkish Supply Network','Commercial relationships with leading glass manufacturers and trusted processors'],
+  ['Project & Commercial Supply','Supplier matching from project orders to recurring B2B requirements'],
+  ['Technical Fit','Standards, processing, dimensions and documentation checked at RFQ level'],
+  ['Global Delivery Coordination','Logistics planning for Europe, the Balkans, Middle East and wider markets']
+];
+const featureItems=tr?[
+  ['Teknik Eşleştirme','Talebe uygun cam tipi ve build-up'],
+  ['İşleme Kabiliyeti','Kesim, delik, kenar, CNC ve özel işlemler'],
+  ['Proje Tedariki','Mimari, endüstriyel ve OEM talepler'],
+  ['Belge Kontrolü','Talep edilen standart ve dokümanların doğrulanması'],
+  ['Global Lojistik','Teslim noktası ve Incoterm bazlı koordinasyon']
+]:[
+  ['Technical Matching','Glass type and build-up matched to the requirement'],
+  ['Processing Capability','Cutting, drilling, edging, CNC and special processing'],
+  ['Project Supply','Architectural, industrial and OEM requirements'],
+  ['Document Check','Requested standards and documentation verified'],
+  ['Global Logistics','Delivery-point and Incoterm-based coordination']
+];
 const partnerNote=tr
   ? 'CTSEG üretici değildir. Türkiye’nin önde gelen cam üreticileri ve güvenilir işleme tesisleriyle kurulmuş ticari iş birlikleri üzerinden doğru üretim kanalını eşleştirir.'
   : 'CTSEG is not a manufacturer. We work through established commercial relationships with leading Turkish glass manufacturers and trusted processors to match each requirement with the right production route.';
@@ -68,11 +96,62 @@ const schema=[{'@context':'https://schema.org','@type':'Service','name':c.title,
 ---
 <BaseLayout lang={lang} title={c.metaTitle} description={c.description} canonical={canonical} alternates={alt} schema={schema} pageKey="glass-product" pageId={page.slug}>
   <main class="glass-product">
-    <section class="hero section"><div class="container hero-grid">
-      <div class="hero-copy"><span class="eyebrow">{c.eyebrow}</span><h1>{c.title}</h1><p>{c.lead}</p><p class="partner-note">{partnerNote}</p><a class="button primary" href="#rfq">{tr?'Cam RFQ Gönder':'Send Glass RFQ'}</a></div>
-      <figure class="hero-visual"><img src={visual} alt={visualAlt} width="1600" height="900" loading="eager" fetchpriority="high" decoding="async"/></figure>
+    <section class="hero">
+      <div class="hero-media"><img src={visual} alt={visualAlt} width="1600" height="900" loading="eager" fetchpriority="high" decoding="async"/></div>
+      <div class="hero-shade"></div>
+      <div class="container hero-content">
+        <div class="hero-copy">
+          <span class="eyebrow">{c.eyebrow}</span>
+          <h1>{c.title}</h1>
+          <p class="hero-lead">{c.lead}</p>
+          <p class="partner-note">{partnerNote}</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#rfq">{tr?'Cam RFQ Gönder':'Send Glass RFQ'}</a>
+            <a class="button ghost" href={tr?'/glass/':'/en/glass/'}>{tr?'Tüm Cam Çözümleri':'All Glass Solutions'}</a>
+          </div>
+        </div>
+        <aside class="trust-panel">
+          {trustItems.map(([title,text],index)=><div class="trust-item">
+            <span class="trust-icon">{String(index+1).padStart(2,'0')}</span>
+            <div><strong>{title}</strong><p>{text}</p></div>
+          </div>)}
+        </aside>
+      </div>
+    </section>
+
+    <section class="feature-strip"><div class="container feature-grid">
+      {featureItems.map(([title,text])=><div class="feature-item"><strong>{title}</strong><span>{text}</span></div>)}
     </div></section>
-    <section class="section"><div class="container split"><div><h2>{tr?'Uygulama alanları':'Applications'}</h2><ul>{c.applications.map(x=><li>{x}</li>)}</ul></div><div><h2>{tr?'Hedef alıcı profili':'Buyer profiles'}</h2><ul>{c.buyers.map(x=><li>{x}</li>)}</ul></div></div></section>
+
+    <section class="section applications"><div class="container">
+      <div class="section-intro">
+        <div><span class="eyebrow dark">{tr?'CAM TEDARİK EKOSİSTEMİ':'GLASS SOURCING ECOSYSTEM'}</span><h2>{tr?'İlgili kullanım ve tedarik alanları':'Related applications & sourcing areas'}</h2></div>
+        <p>{tr?'Ürün gereksiniminizi yalnız tek bir cam kategorisi olarak değil, kullanım alanı ve işleme ihtiyacıyla birlikte değerlendiriyoruz.':'We evaluate the requirement together with its application and processing needs rather than treating it as a standalone glass category.'}</p>
+      </div>
+      <div class="application-grid">
+        {visualCards.map((item)=><a class="application-card" href={`${base}/${item.slug}/`}>
+          <img src={item.image} alt={item[lang].title} width="1600" height="900" loading="lazy" decoding="async"/>
+          <span class="card-shade"></span>
+          <div class="card-copy"><strong>{item[lang].title}</strong><span>↗</span></div>
+        </a>)}
+      </div>
+    </div></section>
+
+    <section class="section partner-network"><div class="container partner-grid">
+      <div>
+        <span class="eyebrow dark">{tr?'TÜRKİYE CAM TEDARİK AĞI':'TÜRKİYE GLASS SUPPLY NETWORK'}</span>
+        <h2>{tr?'Önde gelen üretici ve processorlarla kurulu ticari ilişkiler':'Established commercial relationships with leading manufacturers and processors'}</h2>
+        <p>{partnerNote}</p>
+        <p>{tr?'Amaç tek bir üreticiyi öne çıkarmak değil; ürün tipi, kapasite, işleme kabiliyeti, belge gereksinimi ve teslim koşuluna göre doğru üretim kanalını seçmektir.':'The objective is not to promote a single manufacturer, but to select the right production route according to product type, capacity, processing capability, documentation and delivery requirements.'}</p>
+        <a class="button dark-btn" href="#rfq">{tr?'Tedarik Talebi Oluştur':'Start a Sourcing Request'}</a>
+      </div>
+      <div class="partner-gallery">
+        <img src="/images/glass/glass-processing-line-turkey.webp" alt={tr?'Türkiye cam işleme hattı':'Glass processing line in Türkiye'} width="1600" height="900" loading="lazy"/>
+        <img src="/images/glass/glass-cnc-processing-turkey.webp" alt={tr?'Cam CNC işleme':'Glass CNC processing'} width="1600" height="900" loading="lazy"/>
+        <img src="/images/glass/architectural-glass-facade-turkey.webp" alt={tr?'Mimari cam uygulaması':'Architectural glass application'} width="1600" height="900" loading="lazy"/>
+      </div>
+    </div></section>
+
     <section class="section rfq-brief"><div class="container"><div class="center head"><h2>{tr?'Doğru teklif için RFQ bilgileri':'RFQ inputs for an accurate quotation'}</h2></div><div class="brief-grid">{c.rfq.map(x=><article><h3>{x}</h3></article>)}</div></div></section>
     <section class="section related"><div class="container"><div class="center head"><h2>{tr?'İlgili cam tedarik sayfaları':'Related glass sourcing pages'}</h2></div><div class="links">{relatedPages.map(x=><a href={`${base}/${x.slug}/`}><strong>{x[lang].title}</strong><span>↗</span></a>)}</div></div></section>
     <section class="section faq"><div class="container"><div class="center head"><h2>{tr?'Sık sorulanlar':'Frequently asked questions'}</h2></div><div class="faqs">{c.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div></div></section>
@@ -80,5 +159,5 @@ const schema=[{'@context':'https://schema.org','@type':'Service','name':c.title,
   </main>
 </BaseLayout>
 <style>
-.glass-product{background:#f2efe7;color:#171914}.hero{background:#10120f;color:#f4f5ef;padding:clamp(3.5rem,6vw,6rem) 0;overflow:hidden}.hero-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(420px,1.08fr);gap:clamp(2rem,5vw,5rem);align-items:center}.hero-copy{text-align:left}.hero h1,.head h2{max-width:1180px;margin:.65rem auto 0;text-align:center;text-wrap:balance}.hero h1{color:#f4f5ef!important;font-size:clamp(2.35rem,4.2vw,4.75rem);line-height:1.02;margin:.65rem 0 0;text-align:left}.hero p{max-width:760px;margin:1.15rem 0;color:#d8ddd7!important;line-height:1.7}.partner-note{font-size:.9rem;color:#b8c1ba!important;border-left:2px solid #c7ff38;padding-left:1rem}.hero-visual{margin:0;border:1px solid rgba(255,255,255,.1);border-radius:20px;overflow:hidden;background:#171a16;box-shadow:0 24px 60px rgba(0,0,0,.24);max-width:760px;justify-self:end}.hero-visual img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem)}.split h2,.head h2{font-size:clamp(2rem,3vw,3.4rem);line-height:1.06}.split ul{list-style:none;margin:1.3rem 0 0;padding:0}.split li{padding:.9rem 0;border-bottom:1px solid rgba(0,0,0,.14)}.rfq-brief{background:#e7e2d7}.brief-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:2rem}.brief-grid article{background:#121712;color:#f4f5ef;padding:1.5rem;min-height:130px;display:flex;align-items:flex-end}.brief-grid h3{margin:0;color:#f4f5ef!important;font-size:1rem}.links{max-width:960px;margin:2rem auto 0}.links a{display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;border-top:1px solid rgba(0,0,0,.15);color:inherit;text-decoration:none}.links a:last-child{border-bottom:1px solid rgba(0,0,0,.15)}.faqs{max-width:920px;margin:2rem auto 0}.faqs details{padding:1.1rem 0;border-top:1px solid rgba(0,0,0,.15)}.faqs details:last-child{border-bottom:1px solid rgba(0,0,0,.15)}.faqs summary{font-weight:750;cursor:pointer}.faqs p{line-height:1.7}.form{background:#10120f}@media(max-width:980px){.hero-grid{grid-template-columns:1fr}.hero-copy{text-align:center}.hero h1{text-align:center}.hero p{margin-left:auto;margin-right:auto}.partner-note{border-left:0;border-top:2px solid #c7ff38;padding:1rem 0 0}.hero-visual{max-width:900px;margin:0 auto}.brief-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:720px){.split,.brief-grid{grid-template-columns:1fr}.hero h1{font-size:clamp(2.05rem,9vw,3rem)}}
+.glass-product{background:#f4f1e9;color:#171914}.hero{position:relative;min-height:640px;background:#0d110e;color:#f4f5ef;overflow:hidden}.hero-media{position:absolute;inset:0 0 0 42%;z-index:0}.hero-media img{width:100%;height:100%;object-fit:cover;display:block}.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,#0b0e0c 0%,#0b0e0c 36%,rgba(11,14,12,.92) 48%,rgba(11,14,12,.25) 74%,rgba(11,14,12,.08) 100%);z-index:1}.hero-content{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,.9fr) minmax(320px,.52fr);gap:clamp(2rem,5vw,5rem);align-items:center;min-height:640px;padding-top:3rem;padding-bottom:3rem}.hero-copy{max-width:690px}.hero h1{color:#f4f5ef!important;font-size:clamp(2.7rem,5vw,5.5rem);line-height:.98;margin:.7rem 0 1rem;letter-spacing:-.045em}.hero-lead{font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.55;color:#eef1eb!important;max-width:650px}.partner-note{font-size:.9rem;line-height:1.65;color:#bfc7c0!important;border-left:2px solid #c7ff38;padding-left:1rem;max-width:650px}.hero-actions{display:flex;gap:.85rem;flex-wrap:wrap;margin-top:1.4rem}.button.ghost{background:#f3f4ef!important;color:#101410!important;border-color:#f3f4ef!important}.trust-panel{background:rgba(8,24,20,.88);border:1px solid rgba(199,255,56,.18);backdrop-filter:blur(16px);padding:1.25rem;border-radius:18px;box-shadow:0 25px 65px rgba(0,0,0,.28)}.trust-item{display:grid;grid-template-columns:46px 1fr;gap:.9rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.1)}.trust-item:last-child{border-bottom:0}.trust-icon{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(199,255,56,.4);color:#c7ff38;font-size:.72rem;font-weight:800}.trust-item strong{display:block;color:#fff;font-size:.95rem}.trust-item p{margin:.25rem 0 0;color:#aeb9b1;font-size:.78rem;line-height:1.5}.feature-strip{background:#fff;border-bottom:1px solid #dddcd5}.feature-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}.feature-item{padding:1.25rem 1rem;border-right:1px solid #e5e4df}.feature-item:last-child{border-right:0}.feature-item strong{display:block;font-size:.88rem}.feature-item span{display:block;margin-top:.35rem;color:#5c625d;font-size:.74rem;line-height:1.45}.section{padding:clamp(4rem,7vw,7rem) 0}.eyebrow.dark{color:#596059!important}.section-intro{display:grid;grid-template-columns:minmax(0,.85fr) minmax(320px,.65fr);gap:3rem;align-items:end;margin-bottom:2rem}.section-intro h2,.partner-network h2,.head h2{font-size:clamp(2rem,3vw,3.45rem);line-height:1.04;margin:.55rem 0 0;letter-spacing:-.035em}.section-intro p,.partner-network p{color:#555e58;line-height:1.75}.application-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.application-card{position:relative;aspect-ratio:4/3;border-radius:16px;overflow:hidden;color:#fff;text-decoration:none;background:#111}.application-card img{width:100%;height:100%;object-fit:cover;transition:transform .35s ease}.application-card:hover img{transform:scale(1.035)}.card-shade{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(4,10,7,.86) 100%)}.card-copy{position:absolute;left:1rem;right:1rem;bottom:1rem;display:flex;justify-content:space-between;gap:1rem;align-items:end}.card-copy strong{font-size:1rem;line-height:1.2}.card-copy span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.65)}.partner-network{background:#e9f0ed}.partner-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(420px,1.15fr);gap:clamp(2rem,5vw,5rem);align-items:center}.dark-btn{background:#101b17!important;color:#fff!important}.partner-gallery{display:grid;grid-template-columns:1.05fr .75fr .75fr;gap:10px}.partner-gallery img{width:100%;height:280px;object-fit:cover;border-radius:12px}.partner-gallery img:nth-child(2),.partner-gallery img:nth-child(3){height:280px}.rfq-brief{background:#dfdbd0}.center{text-align:center}.brief-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:2rem}.brief-grid article{background:#121712;color:#f4f5ef;padding:1.5rem;min-height:130px;display:flex;align-items:flex-end}.brief-grid h3{margin:0;color:#f4f5ef!important;font-size:1rem}.links{max-width:960px;margin:2rem auto 0}.links a{display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;border-top:1px solid rgba(0,0,0,.15);color:inherit;text-decoration:none}.links a:last-child{border-bottom:1px solid rgba(0,0,0,.15)}.faqs{max-width:920px;margin:2rem auto 0}.faqs details{padding:1.1rem 0;border-top:1px solid rgba(0,0,0,.15)}.faqs details:last-child{border-bottom:1px solid rgba(0,0,0,.15)}.faqs summary{font-weight:750;cursor:pointer}.faqs p{line-height:1.7}.form{background:#10120f}@media(max-width:1050px){.hero-media{inset:0}.hero-shade{background:linear-gradient(180deg,rgba(8,11,9,.94) 0%,rgba(8,11,9,.76) 65%,rgba(8,11,9,.9) 100%)}.hero-content{grid-template-columns:1fr;min-height:auto;padding-top:5rem}.hero-copy{max-width:760px}.trust-panel{max-width:760px}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.feature-item{border-bottom:1px solid #e5e4df}.application-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.partner-grid{grid-template-columns:1fr}.partner-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:720px){.hero{min-height:auto}.hero-content{padding-top:4rem;padding-bottom:3rem}.hero h1{font-size:clamp(2.3rem,11vw,3.5rem)}.hero-actions{flex-direction:column}.hero-actions .button{width:100%;justify-content:center}.trust-panel{padding:.9rem}.feature-grid,.application-grid,.brief-grid,.section-intro{grid-template-columns:1fr}.partner-gallery{grid-template-columns:1fr}.partner-gallery img,.partner-gallery img:nth-child(2),.partner-gallery img:nth-child(3){height:220px}.section-intro{gap:1rem}.feature-item{border-right:0}.partner-note{border-left:0;border-top:2px solid #c7ff38;padding:1rem 0 0}}
 </style>
