@@ -252,6 +252,72 @@ export const glassSeoPages: GlassSeoPage[] = [
         ['Can frosted or printed privacy glass be coordinated?','Yes. Opacity, pattern, print coverage, colour and sample-approval requirements can be defined in the RFQ.']
       ]
     }
+  },
+  {
+    slug:'household-appliance-glass',
+    tr:{
+      title:'Beyaz Eşya ve Household Appliance Camı Tedariki',
+      metaTitle:'Beyaz Eşya Camı Türkiye | Oven Refrigerator Glass B2B | CTSEG',
+      description:'Fırın, ocak, davlumbaz, buzdolabı ve beyaz eşya uygulamaları için Türkiye’den temperli, baskılı, özel ölçü ve OEM cam parça tedariki.',
+      eyebrow:'Household Appliance Glass · OEM Supply',
+      lead:'Beyaz eşya camı taleplerini net parça çizimi, cam tipi, kalınlık, temperleme, seramik baskı, delik/çentik, kenar işleme, tolerans, seri adet ve OEM paketleme gereksinimleriyle üretime hazır RFQ’ya dönüştürüyoruz.',
+      applications:['Fırın ve ocak camları','Davlumbaz camları','Buzdolabı raf ve kapı camları','Beyaz eşya kontrol / dekoratif panelleri','OEM cihaz cam parçaları'],
+      buyers:['Beyaz eşya üreticileri','OEM/ODM cihaz üreticileri','Tier tedarikçiler','Endüstriyel parça distribütörleri','Private-label cihaz markaları'],
+      rfq:['Teknik çizim / parça numarası','Cam tipi, kalınlık ve renk','Temperleme / ısıl işlem','Seramik baskı / enamel / logo alanı','Delik, çentik ve kenar işleme','Tolerans, adet, paketleme ve kalite kontrol beklentisi'],
+      faq:[
+        ['Beyaz eşya camı için teknik çizim gerekli mi?','Seri üretim ve montaj uyumu için parça geometrisi, delikler, toleranslar ve yüzey detaylarını gösteren teknik çizim güçlü biçimde önerilir.'],
+        ['Seramik baskı veya enamel cam koordine edilebilir mi?','Uygun processor kapasitesinde renk, artwork, baskı alanı ve ısıl işlem gereksinimine göre değerlendirilebilir.'],
+        ['Numune veya pilot seri yapılabilir mi?','Üretici kapasitesi ve proje modeline göre numune, ilk parça onayı veya pilot seri koşulları RFQ aşamasında değerlendirilebilir.']
+      ]
+    },
+    en:{
+      title:'Household Appliance Glass Sourcing',
+      metaTitle:'Household Appliance Glass Supplier Türkiye | OEM | CTSEG',
+      description:'B2B sourcing from Türkiye for tempered, printed, custom-size and OEM glass parts used in ovens, hoods, refrigerators and household appliances.',
+      eyebrow:'Household Appliance Glass · OEM Supply',
+      lead:'We convert appliance-glass requirements into production-ready RFQs using finished-part drawings, glass type, thickness, tempering, ceramic printing, holes/notches, edgework, tolerances, serial quantities and OEM packing requirements.',
+      applications:['Oven and cooking-appliance glass','Cooker-hood glass','Refrigerator shelf and door glass','Appliance control / decorative panels','OEM appliance glass components'],
+      buyers:['Household-appliance manufacturers','OEM/ODM appliance producers','Tier suppliers','Industrial component distributors','Private-label appliance brands'],
+      rfq:['Technical drawing / part number','Glass type, thickness and colour','Tempering / heat treatment','Ceramic print / enamel / logo area','Hole, notch and edge processing','Tolerance, quantity, packing and quality-control expectations'],
+      faq:[
+        ['Is a technical drawing required for appliance glass?','For serial production and assembly compatibility, a drawing showing geometry, holes, tolerances and surface details is strongly recommended.'],
+        ['Can ceramic printing or enamelled glass be coordinated?','Where suitable processor capacity exists, colour, artwork, print coverage and heat-treatment requirements can be evaluated together.'],
+        ['Can samples or pilot production be requested?','Depending on supplier capability and project model, sample, first-article approval or pilot-run conditions can be evaluated at RFQ stage.']
+      ]
+    }
+  },
+  {
+    slug:'furniture-retail-glass',
+    tr:{
+      title:'Mobilya, Retail ve OEM Cam Tedariki',
+      metaTitle:'Mobilya Camı Türkiye | Furniture Retail Glass B2B | CTSEG',
+      description:'Mobilya, mağaza ekipmanı ve retail uygulamaları için Türkiye’den temperli, aynalı, renkli, frosted, baskılı ve özel ölçü OEM cam tedariki.',
+      eyebrow:'Furniture & Retail Glass · OEM Sourcing',
+      lead:'Mobilya ve retail camı taleplerini parça listesi, ebat, cam/ayna tipi, kenar profili, delik/CNC, temperleme, dekoratif yüzey, seri adet, montaj sırası ve paketleme yapısına göre processor kapasitesiyle eşleştiriyoruz.',
+      applications:['Masa ve sehpa camları','Dolap ve mobilya kapakları','Raf ve vitrin camları','Retail display ve mağaza ekipmanları','Ayna ve dekoratif mobilya parçaları','OEM flat-pack ürün camları'],
+      buyers:['Mobilya üreticileri','Retail fixture üreticileri','Contract ve hospitality firmaları','OEM/private-label markaları','Mobilya aksesuarı ve cam distribütörleri'],
+      rfq:['Parça listesi / teknik çizim','Cam veya ayna tipi ve renk','Kalınlık ve net ölçü','Kenar profili / bevel / polisaj','Delik, CNC, baskı veya dekoratif yüzey','Adet, setleme, etiketleme ve paketleme'],
+      faq:[
+        ['Mobilya camı teklifinde parça listesi yeterli mi?','Basit dikdörtgen parçalarda yeterli olabilir; özel şekil, delik, bevel, CNC veya sıkı tolerans varsa çizim gerekir.'],
+        ['Cam parçaları set veya montaj sırasına göre paketlenebilir mi?','Uygun üretim ve lojistik akışında ürün kodu, set, kutu veya montaj sırasına göre etiketleme/paketleme talep edilebilir.'],
+        ['Ayna ve dekoratif cam aynı RFQ içinde değerlendirilebilir mi?','Evet. Aynı ürün ailesinde farklı cam/ayna, yüzey ve işleme kalemleri parça bazında ayrılarak tek ticari RFQ’da toplanabilir.']
+      ]
+    },
+    en:{
+      title:'Furniture, Retail & OEM Glass Sourcing',
+      metaTitle:'Furniture Glass Supplier Türkiye | Retail OEM Glass B2B | CTSEG',
+      description:'B2B sourcing from Türkiye for tempered, mirrored, tinted, frosted, printed and custom-size OEM glass used in furniture, retail displays and fixtures.',
+      eyebrow:'Furniture & Retail Glass · OEM Sourcing',
+      lead:'We match furniture and retail-glass requirements with suitable processor capacity based on part lists, dimensions, glass/mirror type, edge profile, holes/CNC, tempering, decorative finish, serial quantities, assembly sequence and packing.',
+      applications:['Tabletop and coffee-table glass','Cabinet and furniture doors','Shelf and display-case glass','Retail displays and shopfitting','Mirror and decorative furniture components','OEM flat-pack product glass'],
+      buyers:['Furniture manufacturers','Retail-fixture manufacturers','Contract and hospitality companies','OEM/private-label brands','Furniture-hardware and glass distributors'],
+      rfq:['Part list / technical drawing','Glass or mirror type and colour','Thickness and finished size','Edge profile / bevel / polish','Hole, CNC, print or decorative finish','Quantity, kitting, labelling and packing'],
+      faq:[
+        ['Is a part list enough for furniture-glass quotation?','It may be enough for simple rectangular pieces, but custom shapes, holes, bevels, CNC work or tight tolerances should be supported by drawings.'],
+        ['Can glass parts be packed by kit or assembly sequence?','Where production and logistics allow, labelling and packing can be requested by product code, kit, carton or assembly sequence.'],
+        ['Can mirrors and decorative glass be included in the same RFQ?','Yes. Different glass/mirror, finish and processing items can be separated by part number and consolidated into one commercial RFQ.']
+      ]
+    }
   }
 ];
 
