@@ -20,11 +20,11 @@ import { chinaTurkiyeContent } from '../data/china-turkiye';
 import { ukraineTurkiyeContent } from '../data/ukraine-market';
 
 const {
-  lang='tr', title, description, pageKey='home', pageId, canonical,
+  lang='tr', title, description, pageKey='home', pageId, canonical, alternates: alternatesProp,
   schema=[], noindex=false
 } = Astro.props as {
   lang: Locale | DuzceGlassLocale; title: string; description: string; pageKey?: string; pageId?: string;
-  canonical?: string; schema?: any[] | any; noindex?: boolean;
+  canonical?: string; alternates?: Record<string,string>; schema?: any[] | any; noindex?: boolean;
 };
 const canonicalUrl = canonical ?? `https://ctseg.com.tr${localizedPath(lang, pageKey, pageId)}`;
 const hebrewCounterpart = (() => {
@@ -61,7 +61,7 @@ const hebrewCounterpart = (() => {
   if (pageKey === 'insights' && pageId) return '';
   return pageMap[pageKey] ? `https://ctseg.com.tr${pageMap[pageKey]}` : '';
 })();
-const alternates = String(lang) === 'he' && pageKey === 'he-insight' ? { he: canonicalUrl } as Record<string,string> :
+const alternates = alternatesProp ? { ...alternatesProp } : String(lang) === 'he' && pageKey === 'he-insight' ? { he: canonicalUrl } as Record<string,string> :
   pageKey === 'glass' ? duzceGlassAlternates() :
   pageKey === 'glass-industry' ? {tr:'https://ctseg.com.tr/glass/',en:'https://ctseg.com.tr/en/glass/','x-default':'https://ctseg.com.tr/en/glass/'} as Record<string,string> :
   pageKey === 'search-landing' && pageId ? searchLandingAlternates(pageId) :
