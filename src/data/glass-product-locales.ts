@@ -1,12 +1,12 @@
 export type LocalizedGlassLocale='de'|'it'|'ru'|'fa'|'zh'|'vi'|'uk'|'ro'|'bg'|'he';
-export const localizedGlassSlugs=['float-glass','tempered-glass','laminated-glass','low-e-coated-glass','insulated-glass-igu','architectural-project-glass'] as const;
+export const localizedGlassSlugs=['float-glass','tempered-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass','mirror-decorative-glass','processed-glass-cut-to-size','architectural-project-glass'] as const;
 export type LocalizedGlassSlug=(typeof localizedGlassSlugs)[number];
 
 type ProductCopy={name:string;metaTitle:string;description:string;lead:string};
 type LocaleCopy={
   rfq:string;applicationsTitle:string;buyersTitle:string;rfqTitle:string;relatedTitle:string;faqTitle:string;
   applications:string[];buyers:string[];rfqItems:string[];faq:[string,string][];
-  products:Record<LocalizedGlassSlug,ProductCopy>;
+  products:Record<string,ProductCopy>;
 };
 
 export const localizedGlassProductCopy:Record<LocalizedGlassLocale,LocaleCopy>={
@@ -91,6 +91,74 @@ he:{rfq:'שליחת RFQ לזכוכית',applicationsTitle:'יישומים',buyer
 'architectural-project-glass':{name:'זכוכית אדריכלית ופרויקטלית',metaTitle:'ספק זכוכית אדריכלית מטורקיה | CTSEG',description:'אספקה לפי מפרט של זכוכית אדריכלית, חזיתות ופרויקטים מטורקיה.',lead:'התיאום מתבצע לפי מפרט, glass schedule, עיבוד, ערכי ביצועים ושלבי אספקה.'}
 }}
 };
+
+
+const localizedGlassExtraProducts:Record<LocalizedGlassLocale,Record<string,ProductCopy>>={
+de:{
+'solar-control-glass':{name:'Sonnenschutzglas-Beschaffung',metaTitle:'Sonnenschutzglas Lieferant Türkei | B2B | CTSEG',description:'Beschaffung von Sonnenschutzglas aus der Türkei für Fassaden, Fenster und energiebezogene Projektanforderungen.',lead:'Anfragen werden nach Beschichtung, Lichttransmission, g-Wert, Verarbeitbarkeit, Aufbau und Projektziel strukturiert.'},
+'low-iron-extra-clear-glass':{name:'Low-Iron / Extra-Clear Glas',metaTitle:'Low-Iron Extra-Clear Glas Türkei | B2B | CTSEG',description:'Beschaffung von eisenarmem Extra-Clear Glas aus der Türkei für Architektur, Interieur, Vitrinen und Solar-Anwendungen.',lead:'Die Auswahl richtet sich nach Dicke, Format, optischer Neutralität, Verarbeitung und Endanwendung.'},
+'mirror-decorative-glass':{name:'Spiegel- & Dekorglas-Beschaffung',metaTitle:'Spiegel & Dekorglas Lieferant Türkei | CTSEG',description:'B2B-Beschaffung von Spiegeln und dekorativem Glas aus der Türkei für Innenausbau, Möbel und Handelsprojekte.',lead:'Anfragen werden nach Substrat, Oberfläche, Farbe, Abmessungen, Verarbeitung und Verpackung abgestimmt.'},
+'processed-glass-cut-to-size':{name:'Bearbeitetes & zugeschnittenes Glas',metaTitle:'Zuschnitt Glas Türkei | Bearbeitetes Glas B2B | CTSEG',description:'Beschaffung von zugeschnittenem, geschliffenem, gebohrtem, vorgespanntem oder laminiertem Glas nach Zeichnung.',lead:'Zeichnungen und Stücklisten werden in produktionsreife RFQs mit Toleranzen, Bearbeitung und Verpackung übersetzt.'}
+},
+it:{
+'solar-control-glass':{name:'Sourcing vetro a controllo solare',metaTitle:'Fornitore Vetro Controllo Solare Turchia | CTSEG',description:'Sourcing dalla Turchia per vetro a controllo solare destinato a facciate, serramenti e progetti energetici.',lead:'Le richieste vengono definite per coating, trasmissione luminosa, fattore solare, lavorabilità e obiettivi di progetto.'},
+'low-iron-extra-clear-glass':{name:'Sourcing vetro Low-Iron / Extra Clear',metaTitle:'Vetro Low-Iron Extra Clear Turchia | B2B | CTSEG',description:'Sourcing di vetro extra-clear a basso contenuto di ferro dalla Turchia per architettura, interior, retail e solar.',lead:'La selezione considera spessore, formato, neutralità ottica, lavorazioni e uso finale.'},
+'mirror-decorative-glass':{name:'Sourcing specchi e vetro decorativo',metaTitle:'Specchi e Vetro Decorativo Turchia | CTSEG',description:'Sourcing B2B dalla Turchia per specchi e vetro decorativo destinati a interior, arredo e progetti retail.',lead:'Le richieste sono strutturate per supporto, finitura, colore, dimensioni, lavorazioni e imballaggio.'},
+'processed-glass-cut-to-size':{name:'Vetro lavorato e tagliato su misura',metaTitle:'Vetro Tagliato su Misura Turchia | B2B | CTSEG',description:'Sourcing di vetro tagliato, molato, forato, temperato o stratificato secondo disegno tecnico.',lead:'Disegni e cut list vengono trasformati in RFQ pronte per la produzione con tolleranze, lavorazioni e packaging.'}
+},
+ru:{
+'solar-control-glass':{name:'Поставка солнцезащитного стекла',metaTitle:'Солнцезащитное стекло из Турции | B2B | CTSEG',description:'Поставка солнцезащитного стекла из Турции для фасадов, оконных систем и энергоэффективных проектов.',lead:'Запрос формируется по покрытию, светопропусканию, солнечному фактору, обработке и целям проекта.'},
+'low-iron-extra-clear-glass':{name:'Поставка Low-Iron / Extra-Clear стекла',metaTitle:'Low-Iron Extra-Clear стекло из Турции | CTSEG',description:'Поставка низкожелезистого extra-clear стекла из Турции для архитектуры, интерьеров, витрин и solar-применений.',lead:'Подбор выполняется по толщине, формату, оптической нейтральности, обработке и конечному применению.'},
+'mirror-decorative-glass':{name:'Поставка зеркал и декоративного стекла',metaTitle:'Зеркала и декоративное стекло из Турции | CTSEG',description:'B2B-поставка зеркал и декоративного стекла из Турции для интерьеров, мебели и retail-проектов.',lead:'Запросы структурируются по основе, отделке, цвету, размерам, обработке и упаковке.'},
+'processed-glass-cut-to-size':{name:'Обработанное стекло по размерам',metaTitle:'Стекло по размерам из Турции | B2B | CTSEG',description:'Поставка резаного, шлифованного, сверлёного, закалённого или ламинированного стекла по чертежу.',lead:'Чертежи и cut list переводятся в производственный RFQ с допусками, обработкой и упаковкой.'}
+},
+fa:{
+'solar-control-glass':{name:'تأمین شیشه کنترل خورشیدی',metaTitle:'تأمین‌کننده شیشه Solar Control ترکیه | CTSEG',description:'تأمین شیشه کنترل خورشیدی از ترکیه برای نما، پنجره و پروژه‌های با هدف عملکرد انرژی.',lead:'درخواست بر اساس نوع پوشش، عبور نور، ضریب خورشیدی، قابلیت فرآوری و هدف پروژه تنظیم می‌شود.'},
+'low-iron-extra-clear-glass':{name:'تأمین شیشه Low-Iron / Extra Clear',metaTitle:'شیشه Low-Iron Extra Clear از ترکیه | CTSEG',description:'تأمین شیشه کم‌آهن extra-clear از ترکیه برای معماری، دکوراسیون داخلی، ویترین و کاربردهای خورشیدی.',lead:'انتخاب بر اساس ضخامت، ابعاد، شفافیت و خنثی بودن رنگ، فرآوری و کاربرد نهایی انجام می‌شود.'},
+'mirror-decorative-glass':{name:'تأمین آینه و شیشه دکوراتیو',metaTitle:'آینه و شیشه دکوراتیو از ترکیه | B2B | CTSEG',description:'تأمین B2B آینه و شیشه دکوراتیو از ترکیه برای پروژه‌های داخلی، مبلمان و فروشگاهی.',lead:'درخواست بر اساس substrate، پرداخت سطح، رنگ، ابعاد، فرآوری و بسته‌بندی تنظیم می‌شود.'},
+'processed-glass-cut-to-size':{name:'شیشه فرآوری‌شده و برش سفارشی',metaTitle:'شیشه برش سفارشی ترکیه | B2B | CTSEG',description:'تأمین شیشه برش‌خورده، لبه‌زنی، سوراخ‌کاری، سکوریت یا لمینت طبق نقشه فنی.',lead:'نقشه و cut list به RFQ آماده تولید با تلرانس، فرآوری و مشخصات بسته‌بندی تبدیل می‌شود.'}
+},
+zh:{
+'solar-control-glass':{name:'阳光控制玻璃采购',metaTitle:'土耳其阳光控制玻璃供应商 | B2B | CTSEG',description:'从土耳其采购用于幕墙、门窗及节能项目的阳光控制玻璃。',lead:'根据镀膜类型、可见光透过率、太阳得热指标、可加工性和项目目标组织RFQ。'},
+'low-iron-extra-clear-glass':{name:'Low-Iron / 超白玻璃采购',metaTitle:'土耳其Low-Iron超白玻璃供应商 | CTSEG',description:'从土耳其采购低铁超白玻璃，用于建筑、室内、展示及太阳能应用。',lead:'按厚度、尺寸、光学中性色、加工方式和最终用途进行匹配。'},
+'mirror-decorative-glass':{name:'镜面与装饰玻璃采购',metaTitle:'土耳其镜面与装饰玻璃供应商 | CTSEG',description:'从土耳其采购面向室内、家具和零售项目的镜面及装饰玻璃。',lead:'按基材、表面效果、颜色、尺寸、加工和包装要求组织需求。'},
+'processed-glass-cut-to-size':{name:'深加工与定尺寸玻璃采购',metaTitle:'土耳其定尺寸加工玻璃供应商 | B2B | CTSEG',description:'按图纸采购切割、磨边、钻孔、钢化或夹层等深加工玻璃。',lead:'将图纸和cut list转换为包含公差、加工和包装要求的生产级RFQ。'}
+},
+vi:{
+'solar-control-glass':{name:'Sourcing kính solar control',metaTitle:'Nhà cung cấp kính Solar Control Thổ Nhĩ Kỳ | CTSEG',description:'Sourcing kính kiểm soát năng lượng mặt trời từ Thổ Nhĩ Kỳ cho mặt dựng, cửa và dự án tiết kiệm năng lượng.',lead:'RFQ được cấu trúc theo coating, truyền sáng, hệ số năng lượng mặt trời, khả năng gia công và mục tiêu dự án.'},
+'low-iron-extra-clear-glass':{name:'Sourcing kính Low-Iron / Extra Clear',metaTitle:'Kính Low-Iron Extra Clear Thổ Nhĩ Kỳ | CTSEG',description:'Sourcing kính low-iron extra-clear từ Thổ Nhĩ Kỳ cho kiến trúc, nội thất, trưng bày và solar.',lead:'Lựa chọn dựa trên độ dày, kích thước, độ trung tính quang học, gia công và mục đích sử dụng.'},
+'mirror-decorative-glass':{name:'Sourcing gương và kính trang trí',metaTitle:'Gương & Kính Trang Trí Thổ Nhĩ Kỳ | CTSEG',description:'Sourcing B2B gương và kính trang trí từ Thổ Nhĩ Kỳ cho nội thất, đồ gỗ và retail.',lead:'Yêu cầu được xác định theo nền kính, hoàn thiện bề mặt, màu, kích thước, gia công và đóng gói.'},
+'processed-glass-cut-to-size':{name:'Kính gia công và cắt theo kích thước',metaTitle:'Kính Cắt Theo Kích Thước Thổ Nhĩ Kỳ | CTSEG',description:'Sourcing kính cắt, mài cạnh, khoan, cường lực hoặc laminated theo bản vẽ kỹ thuật.',lead:'Bản vẽ và cut list được chuyển thành RFQ sẵn sàng sản xuất với dung sai, gia công và đóng gói.'}
+},
+uk:{
+'solar-control-glass':{name:'Постачання сонцезахисного скла',metaTitle:'Сонцезахисне скло з Туреччини | B2B | CTSEG',description:'Постачання сонцезахисного скла з Туреччини для фасадів, віконних систем та енергоефективних проєктів.',lead:'Запит формується за покриттям, світлопропусканням, сонячним фактором, обробкою та ціллю проєкту.'},
+'low-iron-extra-clear-glass':{name:'Постачання Low-Iron / Extra-Clear скла',metaTitle:'Low-Iron Extra-Clear скло з Туреччини | CTSEG',description:'Постачання low-iron extra-clear скла з Туреччини для архітектури, інтер’єрів, вітрин і solar-застосувань.',lead:'Підбір виконується за товщиною, форматом, оптичною нейтральністю, обробкою та кінцевим застосуванням.'},
+'mirror-decorative-glass':{name:'Постачання дзеркал і декоративного скла',metaTitle:'Дзеркала та декоративне скло з Туреччини | CTSEG',description:'B2B-постачання дзеркал і декоративного скла з Туреччини для інтер’єру, меблів і retail-проєктів.',lead:'Запит визначається за основою, оздобленням, кольором, розмірами, обробкою та пакуванням.'},
+'processed-glass-cut-to-size':{name:'Оброблене скло за розміром',metaTitle:'Скло за розміром з Туреччини | B2B | CTSEG',description:'Постачання різаного, шліфованого, свердленого, загартованого або ламінованого скла за кресленням.',lead:'Креслення та cut list перетворюються на виробничий RFQ з допусками, обробкою та пакуванням.'}
+},
+ro:{
+'solar-control-glass':{name:'Sourcing sticlă control solar',metaTitle:'Furnizor Sticlă Control Solar Türkiye | CTSEG',description:'Sourcing din Türkiye pentru sticlă de control solar destinată fațadelor, ferestrelor și proiectelor eficiente energetic.',lead:'Solicitarea este structurată după coating, transmisie luminoasă, factor solar, procesabilitate și obiectivul proiectului.'},
+'low-iron-extra-clear-glass':{name:'Sourcing sticlă Low-Iron / Extra Clear',metaTitle:'Sticlă Low-Iron Extra Clear Türkiye | CTSEG',description:'Sourcing de sticlă low-iron extra-clear din Türkiye pentru arhitectură, interior, vitrine și aplicații solare.',lead:'Selecția ține cont de grosime, format, neutralitate optică, procesare și utilizare finală.'},
+'mirror-decorative-glass':{name:'Sourcing oglinzi și sticlă decorativă',metaTitle:'Oglinzi și Sticlă Decorativă Türkiye | CTSEG',description:'Sourcing B2B din Türkiye pentru oglinzi și sticlă decorativă destinate interiorului, mobilierului și retailului.',lead:'Cerința se definește după substrat, finisaj, culoare, dimensiuni, procesare și ambalare.'},
+'processed-glass-cut-to-size':{name:'Sticlă procesată și debitată la dimensiune',metaTitle:'Sticlă Debitata la Dimensiune Türkiye | CTSEG',description:'Sourcing de sticlă tăiată, cantuită, găurită, securizată sau laminată după desen tehnic.',lead:'Desenele și listele de debitare sunt transformate în RFQ de producție cu toleranțe, procesare și ambalare.'}
+},
+bg:{
+'solar-control-glass':{name:'Снабдяване със слънцезащитно стъкло',metaTitle:'Слънцезащитно стъкло от Türkiye | B2B | CTSEG',description:'Снабдяване със слънцезащитно стъкло от Türkiye за фасади, прозорци и енергийно ефективни проекти.',lead:'Заявката се структурира по покритие, светлопропускане, соларен фактор, обработваемост и цел на проекта.'},
+'low-iron-extra-clear-glass':{name:'Снабдяване с Low-Iron / Extra-Clear стъкло',metaTitle:'Low-Iron Extra-Clear стъкло от Türkiye | CTSEG',description:'Снабдяване с low-iron extra-clear стъкло от Türkiye за архитектура, интериор, витрини и solar приложения.',lead:'Подборът се прави по дебелина, формат, оптична неутралност, обработка и крайно приложение.'},
+'mirror-decorative-glass':{name:'Снабдяване с огледала и декоративно стъкло',metaTitle:'Огледала и декоративно стъкло от Türkiye | CTSEG',description:'B2B снабдяване с огледала и декоративно стъкло от Türkiye за интериор, мебели и retail проекти.',lead:'Заявката се определя по основа, финиш, цвят, размери, обработка и опаковка.'},
+'processed-glass-cut-to-size':{name:'Обработено стъкло по размер',metaTitle:'Стъкло по размер от Türkiye | B2B | CTSEG',description:'Снабдяване с рязано, кантирано, пробито, закалено или ламинирано стъкло по чертеж.',lead:'Чертежи и cut list се превръщат в производствен RFQ с толеранси, обработка и опаковка.'}
+},
+he:{
+'solar-control-glass':{name:'אספקת זכוכית בקרת שמש',metaTitle:'ספק זכוכית בקרת שמש מטורקיה | CTSEG',description:'אספקת זכוכית לבקרת שמש מטורקיה עבור חזיתות, חלונות ופרויקטים חסכוניים באנרגיה.',lead:'הבקשה נבנית לפי coating, העברת אור, solar factor, יכולת עיבוד ויעד הפרויקט.'},
+'low-iron-extra-clear-glass':{name:'אספקת זכוכית Low-Iron / Extra Clear',metaTitle:'זכוכית Low-Iron Extra Clear מטורקיה | CTSEG',description:'אספקת זכוכית low-iron extra-clear מטורקיה לאדריכלות, פנים, תצוגה ויישומי solar.',lead:'ההתאמה נעשית לפי עובי, פורמט, ניטרליות אופטית, עיבוד ושימוש סופי.'},
+'mirror-decorative-glass':{name:'אספקת מראות וזכוכית דקורטיבית',metaTitle:'מראות וזכוכית דקורטיבית מטורקיה | CTSEG',description:'אספקת B2B של מראות וזכוכית דקורטיבית מטורקיה לפרויקטי פנים, ריהוט ו-retail.',lead:'הדרישה מוגדרת לפי מצע, גימור, צבע, מידות, עיבוד ואריזה.'},
+'processed-glass-cut-to-size':{name:'זכוכית מעובדת וחיתוך לפי מידה',metaTitle:'זכוכית לפי מידה מטורקיה | B2B | CTSEG',description:'אספקת זכוכית חתוכה, מלוטשת, קדוחה, מחוסמת או למינציה לפי שרטוט טכני.',lead:'שרטוטים ו-cut list מתורגמים ל-RFQ מוכן לייצור עם טולרנסים, עיבוד ואריזה.'}
+}
+};
+
+for(const locale of Object.keys(localizedGlassExtraProducts) as LocalizedGlassLocale[]){
+  Object.assign(localizedGlassProductCopy[locale].products,localizedGlassExtraProducts[locale]);
+}
 
 export function getLocalizedGlassProduct(locale:LocalizedGlassLocale,slug:LocalizedGlassSlug){
   return localizedGlassProductCopy[locale]?.products[slug];
