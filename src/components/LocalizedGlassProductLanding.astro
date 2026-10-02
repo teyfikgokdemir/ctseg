@@ -8,6 +8,7 @@ import { getGlassSeoPage } from '../data/glass-seo';
 const { lang, slug } = Astro.props as {lang:LocalizedGlassLocale;slug:LocalizedGlassSlug};
 const localeCopy=localizedGlassProductCopy[lang];
 const product=localeCopy.products[slug];
+const longHeroTitle=product.name.length>28;
 const detailCopy=getLocalizedGlassProductDetail(lang,slug);
 const canonical=`https://ctseg.com.tr/${lang}/glass/${slug}/`;
 const alt=Object.fromEntries([
@@ -129,7 +130,7 @@ const visualCards=related.slice(0,4).map((relatedSlug)=>({slug:relatedSlug,name:
 ---
 <BaseLayout lang={lang as any} title={product.metaTitle} description={product.description} canonical={canonical} alternates={alt} schema={schema} pageKey="glass-product" pageId={slug}>
   <main class="glass-product" dir={lang==='fa'||lang==='he'?'rtl':'ltr'}>
-    <section class="hero">
+    <section class:list={['hero',{'hero--long-title':longHeroTitle}]}>
       <div class="hero-media" style={`--hero-pos:${heroCrop.position};--hero-scale:${heroCrop.scale}`}><img src={visual} alt={product.name} width="1600" height="900" loading="eager" fetchpriority="high" decoding="async"/></div>
       <div class="hero-shade"></div>
       <div class="container hero-content">
@@ -229,29 +230,34 @@ const visualCards=related.slice(0,4).map((relatedSlug)=>({slug:relatedSlug,name:
   color:#f4f5ef!important;
   font-size:clamp(2rem,3vw,3.35rem);
   line-height:.92;
-  margin:.32rem 0 .5rem;
+  margin:.28rem 0 .45rem;
   letter-spacing:-.04em;
-  max-width:14.5ch;
+  max-width:16.5ch;
   text-wrap:balance;
   text-align:start;
 }
+.hero--long-title h1{
+  font-size:clamp(1.85rem,2.55vw,2.9rem)!important;
+  max-width:18ch!important;
+  line-height:.93!important;
+}
 .hero-lead{
-  font-size:clamp(.88rem,.98vw,1rem);
-  line-height:1.4;
+  font-size:clamp(.84rem,.92vw,.96rem);
+  line-height:1.36;
   color:#eef1eb!important;
   max-width:700px;
   margin:.45rem 0;
 }
 .partner-note{
-  font-size:.72rem;
-  line-height:1.36;
+  font-size:.68rem;
+  line-height:1.32;
   color:#bfc7c0!important;
   border-inline-start:2px solid #c7ff38;
   padding-inline-start:.75rem;
   max-width:700px;
   margin:.45rem 0;
 }
-.hero-actions{display:flex;gap:.55rem;flex-wrap:wrap;margin-top:.6rem}
+.hero-actions{display:flex;gap:.55rem;flex-wrap:wrap;margin-top:.45rem}
 .hero-actions .button{
   padding:10px 16px!important;
   min-height:40px!important;
