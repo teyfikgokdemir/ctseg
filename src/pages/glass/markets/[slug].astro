@@ -1,0 +1,7 @@
+---
+import GlassMarketLanding from '../../../components/GlassMarketLanding.astro';
+import { glassMarketSlugs, type GlassMarketSlug } from '../../../data/glass-market-seo';
+export function getStaticPaths(){ return glassMarketSlugs.map((slug)=>({params:{slug}})); }
+const {slug}=Astro.params as {slug:GlassMarketSlug};
+---
+<GlassMarketLanding lang="tr" slug={slug}/>
