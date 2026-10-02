@@ -1,0 +1,11 @@
+---
+import LocalizedGlassProductLanding from '../../../../components/LocalizedGlassProductLanding.astro';
+import { localizedGlassSlugs, type LocalizedGlassLocale, type LocalizedGlassSlug } from '../../../../data/glass-product-locales';
+
+export function getStaticPaths(){
+  const locales:LocalizedGlassLocale[]=['de','it','ru','fa','zh','vi','uk','ro','bg','he'];
+  return locales.flatMap((lang)=>localizedGlassSlugs.map((slug)=>({params:{lang,slug}})));
+}
+const {lang,slug}=Astro.params as {lang:LocalizedGlassLocale;slug:LocalizedGlassSlug};
+---
+<LocalizedGlassProductLanding lang={lang} slug={slug}/>
