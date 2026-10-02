@@ -13,12 +13,13 @@ const copy:Record<string,string[]> = {
   ro:['SOURCING STRATEGIC','INTRARE PE PIAȚĂ','IDENTIFICARE FURNIZORI'],
   bg:['СТРАТЕГИЧЕСКО СНАБДЯВАНЕ','НАВЛИЗАНЕ НА ПАЗАРА','ОТКРИВАНЕ НА ДОСТАВЧИЦИ'],
   he:['איתור ורכש אסטרטגי','כניסה לשוק','איתור ספקים'],
-  sr:['STRATEŠKI SOURCING','ULAZAK NA TRŽIŠTE','PRONALAŽENJE DOBAVLJAČA']
+  sr:['STRATEŠKI SOURCING','ULAZAK NA TRŽIŠTE','PRONALAŽENJE DOBAVLJAČA'],
+  ar:['التوريد الاستراتيجي','دخول الأسواق','البحث عن الموردين والتحقق منهم']
 };
 const items=copy[lang] || copy.en;
 const loopItems = Array.from({length:4},()=>items).flat();
 ---
-<div class:list={['trade-marquee',{'trade-marquee--rtl':lang==='he'||lang==='fa'}]} data-trade-marquee aria-label={items.join(' · ')}>
+<div class:list={['trade-marquee',{'trade-marquee--rtl':lang==='he'||lang==='fa'||lang==='ar'}]} data-trade-marquee aria-label={items.join(' · ')}>
   <div class="trade-marquee__track">
     <div class="trade-marquee__group" data-marquee-group>
       {loopItems.map((item)=><span><bdi dir={lang==='he'||lang==='fa'?'rtl':'auto'}>{item}</bdi></span>)}
