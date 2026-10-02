@@ -106,11 +106,11 @@ const productCatalogs = new Set([
 ]);
 const persianLandingLabel = 'fa/index.html';
 const persianLandingCanonical = 'https://ctseg.com.tr/fa/';
-const tradeLocaleCodes = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg'];
+const tradeLocaleCodes = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','ar'];
 const tradeRouteFamilies = {
-  carpets:{uk:'/uk/sourcing/iranian-carpets/',tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/',ro:'/ro/sourcing/covoare-iraniene/',bg:'/bg/sourcing/iranski-kilimi/'},
-  silk:{uk:'/uk/sourcing/silk-carpets/',tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/',ro:'/ro/sourcing/covoare-matase-lucrate-manual/',bg:'/bg/sourcing/rachno-takani-koprineni-kilimi/'},
-  textiles:{uk:'/uk/sourcing/wholesale-textiles/',tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/',zh:'/zh/sourcing/textiles/',vi:'/vi/sourcing/textiles/',ro:'/ro/sourcing/sourcing-textile-angro/',bg:'/bg/sourcing/sourcing-tekstili-na-edro/'}
+  carpets:{uk:'/uk/sourcing/iranian-carpets/',tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/',ro:'/ro/sourcing/covoare-iraniene/',bg:'/bg/sourcing/iranski-kilimi/',ar:'/ar/sourcing/iranian-carpets/'},
+  silk:{uk:'/uk/sourcing/silk-carpets/',tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/',ro:'/ro/sourcing/covoare-matase-lucrate-manual/',bg:'/bg/sourcing/rachno-takani-koprineni-kilimi/',ar:'/ar/sourcing/hand-knotted-silk-carpets/'},
+  textiles:{uk:'/uk/sourcing/wholesale-textiles/',tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/',zh:'/zh/sourcing/textiles/',vi:'/vi/sourcing/textiles/',ro:'/ro/sourcing/sourcing-textile-angro/',bg:'/bg/sourcing/sourcing-tekstili-na-edro/',ar:'/ar/sourcing/wholesale-textile-sourcing/'}
 };
 const tradeRecordsByLabel = new Map(Object.entries(tradeRouteFamilies).flatMap(([family,routes]) =>
   Object.entries(routes).map(([lang,pathname]) => [decodeURI(pathname).replace(/^\//,'') + 'index.html',{family,lang,pathname,routes}])
@@ -161,7 +161,7 @@ for (const file of htmlFiles) {
   const hreflangs = [...html.matchAll(/hreflang="([^"]+)"/g)].map((match) => match[1]);
   const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
   const rawLang = html.match(/<html lang="([^"]+)"/)?.[1];
-  const lang = rawLang?.startsWith('zh') ? 'zh' : rawLang?.startsWith('vi') ? 'vi' : rawLang?.startsWith('ro') ? 'ro' : rawLang?.startsWith('bg') ? 'bg' : rawLang?.startsWith('he') ? 'he' : rawLang?.startsWith('uk') ? 'uk' : rawLang;
+  const lang = rawLang?.startsWith('zh') ? 'zh' : rawLang?.startsWith('vi') ? 'vi' : rawLang?.startsWith('ro') ? 'ro' : rawLang?.startsWith('bg') ? 'bg' : rawLang?.startsWith('he') ? 'he' : rawLang?.startsWith('uk') ? 'uk' : rawLang?.startsWith('ar') ? 'ar' : rawLang;
   const expectedCompanyName = companyNames[lang] || companyNames.en;
   const alternates = Object.fromEntries([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1],match[2]]));
   const jsonLdBlocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((match) => match[1]);
@@ -296,7 +296,7 @@ for (const file of htmlFiles) {
     const expectedLocaleCount = 13;
     if ((desktopLocales.match(/data-locale-option/g) || []).length !== expectedLocaleCount) errors.push(`${label}: desktop locale panel must contain ${expectedLocaleCount} languages`);
     if ((mobileLocales.match(/data-locale-option/g) || []).length !== expectedLocaleCount) errors.push(`${label}: mobile locale panel must contain ${expectedLocaleCount} languages`);
-    if ((!/class="locale-flag"[^>]+src="\/images\/flags\/(?:tr|gb|de|it|ir|ru|cn|vn|ro|bg|il|ua|ar)\.svg"/.test(desktopTrigger) || /locale-name/.test(desktopTrigger))) {
+    if ((!/class="locale-flag"[^>]+src="\/images\/flags\/(?:tr|gb|de|it|ir|ru|cn|vn|ro|bg|il|ua|sa)\.svg"/.test(desktopTrigger) || /locale-name/.test(desktopTrigger))) {
       errors.push(`${label}: desktop language trigger must show the active locale flag without a locale name`);
     }
   }
@@ -358,7 +358,7 @@ for (const file of htmlFiles) {
     productAssessmentServicePages++;
     if (!html.includes('"@type":"Service"') || !html.includes('"serviceType":"Specification-led B2B sourcing assessment"')) errors.push(`${label}: product route must use sourcing Service schema`);
   }
-  if (/https:\/\/ctseg\.com\.tr\/(?:tr\/cozumler|en\/solutions|de\/loesungen|it\/soluzioni|ru\/resheniya|uk\/rishennia|fa\/solutions|zh\/solutions|vi\/solutions|ro\/solutii|bg\/resheniya|sr\/resenja)\//.test(canonical || '')) {
+  if (/https:\/\/ctseg\.com\.tr\/(?:tr\/cozumler|en\/solutions|de\/loesungen|it\/soluzioni|ru\/resheniya|uk\/rishennia|fa\/solutions|zh\/solutions|vi\/solutions|ro\/solutii|bg\/resheniya|sr\/resenja|ar\/solutions)\//.test(canonical || '')) {
     searchLandingPages++;
     if (!html.includes('"@type":"Service"') || !html.includes('"@type":"FAQPage"')) errors.push(`${label}: search landing Service or FAQ schema missing`);
     if (!html.includes('direct-answer') || (html.match(/<details/g) || []).length < 3) errors.push(`${label}: search landing direct answer or FAQ content missing`);
