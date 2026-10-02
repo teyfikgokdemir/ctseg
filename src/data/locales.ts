@@ -10,7 +10,8 @@ export const localeRegistry = [
   { code:'uk', label:'Українська', locale:'uk-UA', direction:'ltr', prefix:'/uk/', ogLocale:'uk_UA', active:true, order:9 },
   { code:'ro', label:'Română', locale:'ro-RO', direction:'ltr', prefix:'/ro/', ogLocale:'ro_RO', active:true, order:10 },
   { code:'bg', label:'Български', locale:'bg-BG', direction:'ltr', prefix:'/bg/', ogLocale:'bg_BG', active:true, order:11 },
-  { code:'he', label:'עברית', locale:'he-IL', direction:'rtl', prefix:'/he/', ogLocale:'he_IL', active:true, order:12 }
+  { code:'he', label:'עברית', locale:'he-IL', direction:'rtl', prefix:'/he/', ogLocale:'he_IL', active:true, order:12 },
+  { code:'ar', label:'العربية', locale:'ar-SA', direction:'rtl', prefix:'/ar/', ogLocale:'ar_SA', active:true, order:13 }
 ] as const;
 
 export type ActiveLocale = (typeof localeRegistry)[number]['code'];
@@ -28,4 +29,4 @@ export const localeLabel = (code: string) => localeByCode[code as ActiveLocale]?
 export const localeDirection = (code: string) => localeByCode[code as ActiveLocale]?.direction ?? 'ltr';
 export const localeOg = (code: string) => localeByCode[code as ActiveLocale]?.ogLocale ?? 'en_GB';
 
-export const schemaLanguage = (code: string) => code === 'zh' ? 'zh-CN' : code === 'vi' ? 'vi-VN' : code === 'ro' ? 'ro-RO' : code === 'bg' ? 'bg-BG' : code === 'he' ? 'he-IL' : code === 'sr' ? 'sr-Latn-RS' : code === 'uk' ? 'uk-UA' : code;
+export const schemaLanguage = (code: string) => code === 'zh' ? 'zh-CN' : code === 'vi' ? 'vi-VN' : code === 'ro' ? 'ro-RO' : code === 'bg' ? 'bg-BG' : code === 'he' ? 'he-IL' : code === 'ar' ? 'ar-SA' : code === 'sr' ? 'sr-Latn-RS' : code === 'uk' ? 'uk-UA' : code;
