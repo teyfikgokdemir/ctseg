@@ -1,5 +1,5 @@
 export type LocalizedGlassLocale='de'|'it'|'ru'|'fa'|'zh'|'vi'|'uk'|'ro'|'bg'|'he';
-export const localizedGlassSlugs=['float-glass','tempered-glass','heat-strengthened-glass','heat-soak-tested-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass','mirror-decorative-glass','patterned-frosted-satin-glass','processed-glass-cut-to-size','glass-processing-services','curved-glass','ceramic-printed-glass','fire-rated-glass','shower-enclosure-glass','balustrade-railing-glass','office-partition-interior-glass','architectural-project-glass'] as const;
+export const localizedGlassSlugs=['float-glass','tempered-glass','heat-strengthened-glass','heat-soak-tested-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass','mirror-decorative-glass','patterned-frosted-satin-glass','processed-glass-cut-to-size','glass-processing-services','curved-glass','ceramic-printed-glass','fire-rated-glass','shower-enclosure-glass','balustrade-railing-glass','office-partition-interior-glass','household-appliance-glass','furniture-retail-glass','architectural-project-glass'] as const;
 export type LocalizedGlassSlug=(typeof localizedGlassSlugs)[number];
 
 type ProductCopy={name:string;metaTitle:string;description:string;lead:string};
@@ -354,6 +354,53 @@ he:{
 };
 for(const locale of Object.keys(localizedApplicationGlass) as LocalizedGlassLocale[]){
   Object.assign(localizedGlassProductCopy[locale].products,localizedApplicationGlass[locale]);
+}
+
+
+const localizedIndustrialOemGlass:Record<LocalizedGlassLocale,Record<'household-appliance-glass'|'furniture-retail-glass',ProductCopy>>={
+de:{
+'household-appliance-glass':{name:'Haushaltsgeräte- & Applianceglas',metaTitle:'Haushaltsgeräte Glas Türkei | OEM B2B | CTSEG',description:'Beschaffung von vorgespanntem, bedrucktem und maßgefertigtem OEM-Glas aus der Türkei für Backöfen, Hauben, Kühlschränke und Haushaltsgeräte.',lead:'Anfragen werden nach Zeichnung, Glasart, Dicke, Vorspannung, Keramikdruck, Bohrungen, Kanten, Toleranzen, Serienmenge und OEM-Verpackung strukturiert.'},
+'furniture-retail-glass':{name:'Möbel-, Retail- & OEM-Glas',metaTitle:'Möbelglas Türkei | Retail OEM Glass B2B | CTSEG',description:'Beschaffung von vorgespanntem, verspiegeltem, getöntem, satiniertem, bedrucktem und maßgefertigtem Glas für Möbel und Retail.',lead:'RFQs werden nach Stückliste, Abmessung, Glas-/Spiegeltyp, Kantenprofil, CNC, Vorspannung, Dekoroberfläche, Serienmenge und Verpackung strukturiert.'}
+},
+it:{
+'household-appliance-glass':{name:'Vetro per elettrodomestici',metaTitle:'Vetro Elettrodomestici Turchia | OEM B2B | CTSEG',description:'Sourcing dalla Turchia di vetro temperato, stampato e su misura per forni, cappe, frigoriferi ed elettrodomestici OEM.',lead:'Le richieste vengono definite per disegno, tipo vetro, spessore, tempera, stampa ceramica, fori, bordi, tolleranze, quantità e packaging OEM.'},
+'furniture-retail-glass':{name:'Vetro per mobili, retail e OEM',metaTitle:'Vetro per Mobili Turchia | Retail OEM B2B | CTSEG',description:'Sourcing di vetro temperato, specchio, colorato, satinato, stampato e su misura dalla Turchia per mobili e retail.',lead:'Le RFQ vengono strutturate per distinta pezzi, misure, tipo vetro/specchio, profilo bordo, CNC, tempera, finitura, quantità e imballaggio.'}
+},
+ru:{
+'household-appliance-glass':{name:'Стекло для бытовой техники',metaTitle:'Стекло для Бытовой Техники из Турции | OEM | CTSEG',description:'Поставка закалённого, печатного и размерного OEM-стекла из Турции для духовок, вытяжек, холодильников и бытовой техники.',lead:'Запрос формируется по чертежу, типу стекла, толщине, закалке, керамической печати, отверстиям, кромке, допускам, серии и OEM-упаковке.'},
+'furniture-retail-glass':{name:'Стекло для мебели, retail и OEM',metaTitle:'Мебельное стекло из Турции | Retail OEM | CTSEG',description:'Поставка закалённого, зеркального, тонированного, матового, печатного и размерного стекла из Турции для мебели и retail.',lead:'RFQ формируется по спецификации деталей, размерам, типу стекла/зеркала, кромке, CNC, закалке, декору, серии и упаковке.'}
+},
+fa:{
+'household-appliance-glass':{name:'تأمین شیشه لوازم خانگی',metaTitle:'شیشه لوازم خانگی ترکیه | OEM B2B | CTSEG',description:'تأمین شیشه سکوریت، چاپی و سفارشی OEM از ترکیه برای فر، هود، یخچال و لوازم خانگی.',lead:'درخواست بر اساس نقشه، نوع شیشه، ضخامت، سکوریت، چاپ سرامیکی، سوراخ، لبه، تلرانس، تیراژ و بسته‌بندی OEM تنظیم می‌شود.'},
+'furniture-retail-glass':{name:'تأمین شیشه مبلمان، retail و OEM',metaTitle:'شیشه مبلمان ترکیه | Retail OEM | CTSEG',description:'تأمین شیشه سکوریت، آینه، رنگی، مات، چاپی و سفارشی از ترکیه برای مبلمان و retail.',lead:'RFQ بر اساس لیست قطعات، ابعاد، نوع شیشه/آینه، پروفیل لبه، CNC، سکوریت، سطح دکوراتیو، تیراژ و بسته‌بندی تنظیم می‌شود.'}
+},
+zh:{
+'household-appliance-glass':{name:'家电玻璃采购',metaTitle:'土耳其家电玻璃 | OEM B2B | CTSEG',description:'从土耳其采购用于烤箱、油烟机、冰箱和家电的钢化、印刷、定制OEM玻璃。',lead:'按图纸、玻璃类型、厚度、钢化、陶瓷印刷、孔位、边部、公差、批量和OEM包装组织RFQ。'},
+'furniture-retail-glass':{name:'家具、零售与OEM玻璃采购',metaTitle:'土耳其家具玻璃 | Retail OEM B2B | CTSEG',description:'从土耳其采购用于家具和零售的钢化、镜面、着色、磨砂、印刷及定尺寸玻璃。',lead:'按零件清单、尺寸、玻璃/镜面类型、边部、CNC、钢化、装饰表面、批量和包装组织RFQ。'}
+},
+vi:{
+'household-appliance-glass':{name:'Sourcing kính thiết bị gia dụng',metaTitle:'Kính Thiết Bị Gia Dụng Thổ Nhĩ Kỳ | OEM | CTSEG',description:'Sourcing kính cường lực, in và theo kích thước từ Thổ Nhĩ Kỳ cho lò nướng, máy hút mùi, tủ lạnh và thiết bị gia dụng OEM.',lead:'RFQ được cấu trúc theo bản vẽ, loại kính, độ dày, cường lực, in ceramic, lỗ, cạnh, dung sai, số lượng và đóng gói OEM.'},
+'furniture-retail-glass':{name:'Sourcing kính nội thất, retail và OEM',metaTitle:'Kính Nội Thất Thổ Nhĩ Kỳ | Retail OEM | CTSEG',description:'Sourcing kính cường lực, gương, màu, mờ, in và cắt theo kích thước từ Thổ Nhĩ Kỳ cho đồ nội thất và retail.',lead:'RFQ được cấu trúc theo danh sách chi tiết, kích thước, loại kính/gương, cạnh, CNC, cường lực, bề mặt, số lượng và đóng gói.'}
+},
+uk:{
+'household-appliance-glass':{name:'Постачання скла для побутової техніки',metaTitle:'Скло для Побутової Техніки з Туреччини | OEM | CTSEG',description:'Постачання загартованого, друкованого та розмірного OEM-скла з Туреччини для духовок, витяжок, холодильників і побутової техніки.',lead:'Запит формується за кресленням, типом скла, товщиною, загартуванням, керамічним друком, отворами, кромкою, допусками, серією та OEM-пакуванням.'},
+'furniture-retail-glass':{name:'Скло для меблів, retail та OEM',metaTitle:'Меблеве скло з Туреччини | Retail OEM | CTSEG',description:'Постачання загартованого, дзеркального, тонованого, матового, друкованого та розмірного скла з Туреччини для меблів і retail.',lead:'RFQ формується за списком деталей, розмірами, типом скла/дзеркала, кромкою, CNC, загартуванням, декором, серією та пакуванням.'}
+},
+ro:{
+'household-appliance-glass':{name:'Sourcing sticlă pentru electrocasnice',metaTitle:'Sticlă Electrocasnice Türkiye | OEM B2B | CTSEG',description:'Sourcing din Türkiye pentru sticlă securizată, imprimată și la dimensiune pentru cuptoare, hote, frigidere și electrocasnice OEM.',lead:'Solicitarea este structurată după desen, tip sticlă, grosime, securizare, print ceramic, găuri, cant, toleranțe, serie și ambalare OEM.'},
+'furniture-retail-glass':{name:'Sourcing sticlă pentru mobilier, retail și OEM',metaTitle:'Sticlă Mobilier Türkiye | Retail OEM | CTSEG',description:'Sourcing de sticlă securizată, oglindă, colorată, mată, imprimată și la dimensiune din Türkiye pentru mobilier și retail.',lead:'RFQ-ul este structurat după lista de piese, dimensiuni, tip sticlă/oglindă, cant, CNC, securizare, finisaj, serie și ambalare.'}
+},
+bg:{
+'household-appliance-glass':{name:'Снабдяване със стъкло за домакински уреди',metaTitle:'Стъкло за Домакински Уреди от Türkiye | OEM | CTSEG',description:'Снабдяване със закалено, печатно и размерно OEM стъкло от Türkiye за фурни, аспиратори, хладилници и домакински уреди.',lead:'Заявката се структурира по чертеж, тип стъкло, дебелина, закаляване, керамичен печат, отвори, кант, толеранси, серия и OEM опаковка.'},
+'furniture-retail-glass':{name:'Стъкло за мебели, retail и OEM',metaTitle:'Мебелно стъкло от Türkiye | Retail OEM | CTSEG',description:'Снабдяване със закалено, огледално, оцветено, матирано, печатно и размерно стъкло от Türkiye за мебели и retail.',lead:'RFQ се структурира по списък детайли, размери, тип стъкло/огледало, кант, CNC, закаляване, декор, серия и опаковка.'}
+},
+he:{
+'household-appliance-glass':{name:'אספקת זכוכית למכשירי חשמל ביתיים',metaTitle:'זכוכית למכשירי חשמל מטורקיה | OEM | CTSEG',description:'אספקת זכוכית מחוסמת, מודפסת ולפי מידה מטורקיה לתנורים, קולטי אדים, מקררים ומכשירי חשמל OEM.',lead:'ה-RFQ נבנה לפי שרטוט, סוג זכוכית, עובי, חיסום, הדפסה קרמית, חורים, קנטים, טולרנסים, סדרה ואריזת OEM.'},
+'furniture-retail-glass':{name:'אספקת זכוכית לריהוט, retail ו-OEM',metaTitle:'זכוכית לריהוט מטורקיה | Retail OEM | CTSEG',description:'אספקת זכוכית מחוסמת, מראות, כהה, חלבית, מודפסת ולפי מידה מטורקיה לריהוט ו-retail.',lead:'ה-RFQ נבנה לפי רשימת חלקים, מידות, סוג זכוכית/מראה, קנטים, CNC, חיסום, גימור, סדרה ואריזה.'}
+}
+};
+for(const locale of Object.keys(localizedIndustrialOemGlass) as LocalizedGlassLocale[]){
+  Object.assign(localizedGlassProductCopy[locale].products,localizedIndustrialOemGlass[locale]);
 }
 
 export function getLocalizedGlassProduct(locale:LocalizedGlassLocale,slug:LocalizedGlassSlug){
