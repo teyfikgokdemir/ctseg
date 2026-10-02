@@ -1,5 +1,5 @@
 export type LocalizedGlassLocale='de'|'it'|'ru'|'fa'|'zh'|'vi'|'uk'|'ro'|'bg'|'he';
-export const localizedGlassSlugs=['float-glass','tempered-glass','heat-strengthened-glass','heat-soak-tested-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass','mirror-decorative-glass','patterned-frosted-satin-glass','processed-glass-cut-to-size','glass-processing-services','curved-glass','ceramic-printed-glass','fire-rated-glass','architectural-project-glass'] as const;
+export const localizedGlassSlugs=['float-glass','tempered-glass','heat-strengthened-glass','heat-soak-tested-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass','mirror-decorative-glass','patterned-frosted-satin-glass','processed-glass-cut-to-size','glass-processing-services','curved-glass','ceramic-printed-glass','fire-rated-glass','shower-enclosure-glass','balustrade-railing-glass','office-partition-interior-glass','architectural-project-glass'] as const;
 export type LocalizedGlassSlug=(typeof localizedGlassSlugs)[number];
 
 type ProductCopy={name:string;metaTitle:string;description:string;lead:string};
@@ -297,6 +297,63 @@ he:{
 };
 for(const locale of Object.keys(localizedTechnicalSafetyGlass) as LocalizedGlassLocale[]){
   Object.assign(localizedGlassProductCopy[locale].products,localizedTechnicalSafetyGlass[locale]);
+}
+
+
+const localizedApplicationGlass:Record<LocalizedGlassLocale,Record<'shower-enclosure-glass'|'balustrade-railing-glass'|'office-partition-interior-glass',ProductCopy>>={
+de:{
+'shower-enclosure-glass':{name:'Duschkabinen-Glas',metaTitle:'Duschkabinen Glas Türkei | OEM B2B | CTSEG',description:'Beschaffung von maßgefertigtem ESG für Duschkabinen aus der Türkei mit Bohrungen, Ausschnitten, CNC, Oberflächen und OEM-Verpackung.',lead:'Anfragen werden nach Fertigmaß, Dicke, Farbe/Oberfläche, Bohrungen, Beschlägen, Kantenqualität, Druck/Beschichtung, Serienmenge und Verpackung strukturiert.'},
+'balustrade-railing-glass':{name:'Geländer- & Brüstungsglas',metaTitle:'Geländerglas Türkei | Balustrade Glass B2B | CTSEG',description:'Beschaffung von vorgespanntem, laminiertem, heat-soak getestetem und bearbeitetem Glas für Balkone, Treppen, Terrassen und Geländersysteme.',lead:'RFQs werden nach Glasaufbau, Vorspannung, Laminat, HST, Kantenqualität, Bohrungen und Befestigungssystem strukturiert.'},
+'office-partition-interior-glass':{name:'Bürotrennwand- & Interiorglas',metaTitle:'Bürotrennwand Glas Türkei | Interior B2B | CTSEG',description:'Beschaffung von ESG, VSG, Akustik-, Matt- und bedrucktem Glas für Büros, Besprechungsräume, Retail und Innenausbau.',lead:'Anfragen werden nach Sicherheit, Akustik, Sichtschutz, Tür-/Systemintegration, Fertigmaßen, Bohrungen und Oberfläche strukturiert.'}
+},
+it:{
+'shower-enclosure-glass':{name:'Vetro per box doccia',metaTitle:'Vetro Box Doccia Turchia | OEM B2B | CTSEG',description:'Sourcing dalla Turchia di vetro temperato su misura per box doccia con fori, tacche, CNC, finiture e packaging OEM.',lead:'Le richieste vengono definite per misura finita, spessore, colore/finitura, fori, ferramenta, bordi, stampa/coating, quantità e imballaggio.'},
+'balustrade-railing-glass':{name:'Vetro per parapetti e ringhiere',metaTitle:'Vetro Parapetto Turchia | Balustrade B2B | CTSEG',description:'Sourcing di vetro temperato, stratificato, heat-soak tested e lavorato per balconi, scale, terrazze e sistemi di parapetto.',lead:'Le RFQ vengono strutturate per composizione, tempera, laminazione, HST, qualità bordi, fori e sistema di fissaggio.'},
+'office-partition-interior-glass':{name:'Vetro per pareti divisorie e interior',metaTitle:'Vetro Pareti Divisorie Turchia | Interior B2B | CTSEG',description:'Sourcing di vetro temperato, stratificato, acustico, satinato e stampato per uffici, meeting room, retail e interior.',lead:'Le richieste vengono definite per sicurezza, acustica, privacy, integrazione porte/sistemi, misure, fori e finiture.'}
+},
+ru:{
+'shower-enclosure-glass':{name:'Стекло для душевых кабин',metaTitle:'Стекло для душевых из Турции | OEM B2B | CTSEG',description:'Поставка закалённого стекла по размерам для душевых кабин из Турции с отверстиями, вырезами, CNC, отделкой и OEM-упаковкой.',lead:'Запрос формируется по готовым размерам, толщине, цвету/поверхности, отверстиям, фурнитуре, кромке, печати/покрытию, серии и упаковке.'},
+'balustrade-railing-glass':{name:'Стекло для ограждений и перил',metaTitle:'Стекло для ограждений из Турции | B2B | CTSEG',description:'Поставка закалённого, ламинированного, heat-soak tested и обработанного стекла для балконов, лестниц, террас и ограждений.',lead:'RFQ формируется по составу стекла, закалке, ламинации, HST, качеству кромки, отверстиям и системе крепления.'},
+'office-partition-interior-glass':{name:'Стекло для офисных перегородок и интерьера',metaTitle:'Стекло для офисных перегородок Турция | CTSEG',description:'Поставка закалённого, ламинированного, акустического, матового и печатного стекла для офисов, переговорных, retail и интерьеров.',lead:'Запрос структурируется по безопасности, акустике, приватности, интеграции дверей/систем, размерам, отверстиям и поверхности.'}
+},
+fa:{
+'shower-enclosure-glass':{name:'تأمین شیشه کابین دوش',metaTitle:'شیشه کابین دوش ترکیه | OEM B2B | CTSEG',description:'تأمین شیشه سکوریت سفارشی برای کابین دوش از ترکیه با سوراخ، برش، CNC، سطح و بسته‌بندی OEM.',lead:'درخواست بر اساس ابعاد نهایی، ضخامت، رنگ/سطح، سوراخ، یراق، کیفیت لبه، چاپ/coating، تیراژ و بسته‌بندی تنظیم می‌شود.'},
+'balustrade-railing-glass':{name:'تأمین شیشه نرده و بالکن',metaTitle:'شیشه نرده و بالکن ترکیه | B2B | CTSEG',description:'تأمین شیشه سکوریت، لمینت، heat-soak tested و فرآوری‌شده برای بالکن، پله، تراس و سیستم‌های نرده.',lead:'RFQ بر اساس ساختار شیشه، سکوریت، لمینت، HST، کیفیت لبه، سوراخ و سیستم اتصال تنظیم می‌شود.'},
+'office-partition-interior-glass':{name:'تأمین شیشه پارتیشن اداری و داخلی',metaTitle:'شیشه پارتیشن اداری ترکیه | Interior B2B | CTSEG',description:'تأمین شیشه سکوریت، لمینت، آکوستیک، مات و چاپی برای دفتر، اتاق جلسه، retail و معماری داخلی.',lead:'درخواست بر اساس ایمنی، آکوستیک، حریم خصوصی، ادغام در/سیستم، ابعاد نهایی، سوراخ و سطح تنظیم می‌شود.'}
+},
+zh:{
+'shower-enclosure-glass':{name:'淋浴房玻璃采购',metaTitle:'土耳其淋浴房玻璃 | OEM B2B | CTSEG',description:'从土耳其采购定制钢化淋浴房玻璃，包含钻孔、缺口、CNC、表面处理及OEM包装。',lead:'按成品尺寸、厚度、颜色/表面、孔位、五金、边部质量、印刷/镀层、批量和包装组织RFQ。'},
+'balustrade-railing-glass':{name:'栏杆与护栏玻璃采购',metaTitle:'土耳其栏杆玻璃 | Balustrade B2B | CTSEG',description:'从土耳其采购用于阳台、楼梯、露台及栏杆系统的钢化、夹层、Heat Soak测试及深加工玻璃。',lead:'按玻璃结构、钢化/夹层、HST、边部质量、孔位及安装系统组织RFQ。'},
+'office-partition-interior-glass':{name:'办公隔断与室内玻璃采购',metaTitle:'土耳其办公隔断玻璃 | Interior B2B | CTSEG',description:'从土耳其采购用于办公室、会议室、零售及室内的钢化、夹层、声学、磨砂及印刷玻璃。',lead:'按安全、声学、隐私、门/系统集成、成品尺寸、孔位及表面要求组织RFQ。'}
+},
+vi:{
+'shower-enclosure-glass':{name:'Sourcing kính phòng tắm',metaTitle:'Kính Shower Enclosure Thổ Nhĩ Kỳ | OEM | CTSEG',description:'Sourcing kính cường lực theo kích thước cho shower enclosure từ Thổ Nhĩ Kỳ với lỗ, notch, CNC, bề mặt và đóng gói OEM.',lead:'RFQ được cấu trúc theo kích thước thành phẩm, độ dày, màu/bề mặt, lỗ, phụ kiện, cạnh, in/coating, số lượng và đóng gói.'},
+'balustrade-railing-glass':{name:'Sourcing kính lan can và railing',metaTitle:'Kính Lan Can Thổ Nhĩ Kỳ | B2B | CTSEG',description:'Sourcing kính cường lực, laminated, heat-soak tested và gia công cho ban công, cầu thang, sân thượng và hệ railing.',lead:'RFQ được cấu trúc theo build-up, tempering, lamination, HST, chất lượng cạnh, lỗ và hệ liên kết.'},
+'office-partition-interior-glass':{name:'Sourcing kính vách ngăn văn phòng và nội thất',metaTitle:'Kính Vách Ngăn Văn Phòng Thổ Nhĩ Kỳ | CTSEG',description:'Sourcing kính cường lực, laminated, acoustic, frosted và printed cho văn phòng, phòng họp, retail và nội thất.',lead:'Yêu cầu được cấu trúc theo an toàn, âm học, riêng tư, tích hợp cửa/hệ, kích thước, lỗ và bề mặt.'}
+},
+uk:{
+'shower-enclosure-glass':{name:'Постачання скла для душових кабін',metaTitle:'Скло для душових з Туреччини | OEM | CTSEG',description:'Постачання загартованого скла за розміром для душових кабін з Туреччини з отворами, вирізами, CNC, поверхнями та OEM-пакуванням.',lead:'Запит формується за готовими розмірами, товщиною, кольором/поверхнею, отворами, фурнітурою, кромкою, друком/coating, серією та пакуванням.'},
+'balustrade-railing-glass':{name:'Постачання скла для огорож і поручнів',metaTitle:'Скло для огорож з Туреччини | B2B | CTSEG',description:'Постачання загартованого, ламінованого, heat-soak tested та обробленого скла для балконів, сходів, терас і railing-систем.',lead:'RFQ формується за складом скла, загартуванням, ламінуванням, HST, якістю кромки, отворами та системою кріплення.'},
+'office-partition-interior-glass':{name:'Скло для офісних перегородок та інтер’єру',metaTitle:'Скло для офісних перегородок Туреччина | CTSEG',description:'Постачання загартованого, ламінованого, акустичного, матового та друкованого скла для офісів, переговорних, retail та інтер’єру.',lead:'Запит структурується за безпекою, акустикою, приватністю, інтеграцією дверей/систем, розмірами, отворами та поверхнею.'}
+},
+ro:{
+'shower-enclosure-glass':{name:'Sourcing sticlă pentru cabine de duș',metaTitle:'Sticlă Cabină Duș Türkiye | OEM B2B | CTSEG',description:'Sourcing din Türkiye pentru sticlă securizată la dimensiune pentru cabine de duș cu găuri, decupaje, CNC, finisaje și ambalare OEM.',lead:'Solicitarea este structurată după dimensiuni finale, grosime, culoare/finisaj, găuri, feronerie, cant, print/coating, serie și ambalare.'},
+'balustrade-railing-glass':{name:'Sourcing sticlă pentru balustrade',metaTitle:'Sticlă Balustradă Türkiye | B2B | CTSEG',description:'Sourcing de sticlă securizată, laminată, heat-soak tested și procesată pentru balcoane, scări, terase și sisteme de balustradă.',lead:'RFQ-ul este structurat după build-up, securizare, laminare, HST, calitatea cantului, găuri și sistemul de fixare.'},
+'office-partition-interior-glass':{name:'Sourcing sticlă pentru compartimentări și interior',metaTitle:'Sticlă Compartimentare Birou Türkiye | CTSEG',description:'Sourcing de sticlă securizată, laminată, acustică, mată și imprimată pentru birouri, săli de ședință, retail și interior.',lead:'Solicitarea este structurată după siguranță, acustică, intimitate, integrarea ușilor/sistemului, dimensiuni, găuri și finisaje.'}
+},
+bg:{
+'shower-enclosure-glass':{name:'Снабдяване със стъкло за душ кабини',metaTitle:'Стъкло за Душ Кабини от Türkiye | OEM | CTSEG',description:'Снабдяване със закалено стъкло по размер за душ кабини от Türkiye с отвори, изрези, CNC, повърхности и OEM опаковка.',lead:'Заявката се структурира по крайни размери, дебелина, цвят/повърхност, отвори, обков, кант, печат/coating, серия и опаковка.'},
+'balustrade-railing-glass':{name:'Снабдяване със стъкло за парапети',metaTitle:'Стъкло за Парапети от Türkiye | B2B | CTSEG',description:'Снабдяване със закалено, ламинирано, heat-soak tested и обработено стъкло за балкони, стълби, тераси и railing системи.',lead:'RFQ се структурира по състав, закаляване, ламиниране, HST, качество на кант, отвори и система за монтаж.'},
+'office-partition-interior-glass':{name:'Стъкло за офис прегради и интериор',metaTitle:'Стъкло за Офис Прегради Türkiye | CTSEG',description:'Снабдяване със закалено, ламинирано, акустично, матирано и печатно стъкло за офиси, meeting rooms, retail и интериор.',lead:'Заявката се структурира по безопасност, акустика, уединение, интеграция на врати/система, размери, отвори и повърхност.'}
+},
+he:{
+'shower-enclosure-glass':{name:'אספקת זכוכית למקלחונים',metaTitle:'זכוכית למקלחונים מטורקיה | OEM | CTSEG',description:'אספקת זכוכית מחוסמת לפי מידה למקלחונים מטורקיה עם חורים, חיתוכים, CNC, גימורים ואריזת OEM.',lead:'ה-RFQ נבנה לפי מידות סופיות, עובי, צבע/גימור, חורים, פרזול, קנטים, הדפסה/coating, סדרה ואריזה.'},
+'balustrade-railing-glass':{name:'אספקת זכוכית למעקות',metaTitle:'זכוכית למעקות מטורקיה | B2B | CTSEG',description:'אספקת זכוכית מחוסמת, למינציה, heat-soak tested ומעובדת למרפסות, מדרגות, טרסות ומערכות מעקה.',lead:'ה-RFQ נבנה לפי מבנה זכוכית, חיסום, למינציה, HST, איכות קנטים, חורים ומערכת קיבוע.'},
+'office-partition-interior-glass':{name:'אספקת זכוכית למחיצות משרד ופנים',metaTitle:'זכוכית למחיצות משרד מטורקיה | CTSEG',description:'אספקת זכוכית מחוסמת, למינציה, אקוסטית, חלבית ומודפסת למשרדים, חדרי ישיבות, retail ופנים.',lead:'הדרישה נבנית לפי בטיחות, אקוסטיקה, פרטיות, שילוב דלת/מערכת, מידות, חורים וגימור.'}
+}
+};
+for(const locale of Object.keys(localizedApplicationGlass) as LocalizedGlassLocale[]){
+  Object.assign(localizedGlassProductCopy[locale].products,localizedApplicationGlass[locale]);
 }
 
 export function getLocalizedGlassProduct(locale:LocalizedGlassLocale,slug:LocalizedGlassSlug){
