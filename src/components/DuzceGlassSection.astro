@@ -1,6 +1,7 @@
 ---
 import { duzceGlassData, duzceGlassPath, type DuzceGlassLocale } from '../data/duzce-glass';
 import { localizedPath, type Locale } from '../data/site';
+import { glassSeoPages } from '../data/glass-seo';
 
 const { lang='en' } = Astro.props as { lang?: string };
 const currentLang = (['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
@@ -8,42 +9,58 @@ const d = duzceGlassData[currentLang] || duzceGlassData.en;
 const href = duzceGlassPath(currentLang);
 const contactHref = localizedPath(currentLang as Locale, 'contact');
 const isRtl = currentLang === 'fa';
-const homeTitle = currentLang === 'tr' ? 'Düzce Cam için uluslararası ticaret kanalı.' : d.title;
-const exportDeskLabel = currentLang === 'tr' ? 'CTSEG / İHRACAT MASASI' : currentLang === 'uk' ? 'CTSEG / ЕКСПОРТНИЙ ВІДДІЛ' : currentLang === 'ro' ? 'CTSEG / BIROU EXPORT' : currentLang === 'bg' ? 'CTSEG / ЕКСПОРТЕН ОТДЕЛ' : currentLang === 'sr' ? 'CTSEG / IZVOZNI DESK' : 'CTSEG / EXPORT DESK';
+const isGenericGlass = currentLang === 'tr' || currentLang === 'en';
+const homeTitle = currentLang === 'tr' ? 'Türkiye’den cam tedariki ve global ihracat koordinasyonu.' : currentLang === 'en' ? 'Glass sourcing from Türkiye for global B2B markets.' : d.title;
+const homeLead = currentLang === 'tr'
+  ? 'CTSEG; float, temperli, lamine, Low-E, solar control, IGU, extra clear ve işlenmiş cam taleplerinde üretici/işlemeci eşleştirme, RFQ, paketleme ve ihracat sürecini koordine eder. Düzce Cam iş birliği bu daha geniş tedarik ağının üretici kanallarından biridir.'
+  : currentLang === 'en'
+  ? 'CTSEG coordinates supplier and processor matching, RFQs, packing and export flows for float, tempered, laminated, Low-E, solar-control, IGU, extra-clear and processed glass. The Düzce Glass relationship is one producer channel within this broader sourcing network.'
+  : d.lead;
+const sectionEyebrow = currentLang === 'tr' ? 'CAM SEKTÖRÜ · TÜRKİYE & GLOBAL' : currentLang === 'en' ? 'GLASS INDUSTRY · TÜRKİYE & GLOBAL' : d.eyebrow;
+const primaryHref = currentLang === 'tr' ? '/glass/#glass-rfq' : currentLang === 'en' ? '/en/glass/#glass-rfq' : `${href}#rfq`;
+const secondaryHref = currentLang === 'tr' ? '/glass/' : currentLang === 'en' ? '/en/glass/' : href;
+const primaryLabel = currentLang === 'tr' ? 'Cam RFQ Gönder' : currentLang === 'en' ? 'Send Glass RFQ' : d.primaryCta;
+const secondaryLabel = currentLang === 'tr' ? 'Cam Tedarik Merkezini İncele' : currentLang === 'en' ? 'Explore Glass Sourcing Hub' : d.secondaryCta;
+const productList = isGenericGlass ? glassSeoPages.slice(0,5).map((page)=>page[currentLang as 'tr'|'en'].title) : d.products.slice(0,4);
+const marketList = isGenericGlass
+  ? (currentLang === 'tr' ? ['Avrupa & Balkanlar','Orta Doğu & Körfez','Kafkasya & Orta Asya','Global proje ve distribütör talepleri'] : ['Europe & Balkans','Middle East & Gulf','Caucasus & Central Asia','Global project & distributor demand'])
+  : d.markets.slice(0,4);
+const panelBrand = isGenericGlass ? (currentLang === 'tr' ? 'CTSEG CAM TEDARİK AĞI' : 'CTSEG GLASS SOURCING NETWORK') : 'DÜZCE FLOAT GLASS';
+const exportDeskLabel = currentLang === 'tr' ? 'B2B / RFQ / İHRACAT' : currentLang === 'en' ? 'B2B / RFQ / EXPORT' : currentLang === 'uk' ? 'CTSEG / ЕКСПОРТНИЙ ВІДДІЛ' : currentLang === 'ro' ? 'CTSEG / BIROU EXPORT' : currentLang === 'bg' ? 'CTSEG / ЕКСПОРТЕН ОТДЕЛ' : currentLang === 'sr' ? 'CTSEG / IZVOZNI DESK' : 'CTSEG / EXPORT DESK';
 ---
 <section class="section duzce-glass-feature" id="duzce-glass" dir={isRtl ? 'rtl' : 'ltr'}>
   <div class="container duzce-glass-shell">
     <div class="duzce-glass-copy">
-      <span class="eyebrow duzce-glass-eyebrow">{d.eyebrow}</span>
+      <span class="eyebrow duzce-glass-eyebrow">{sectionEyebrow}</span>
       <h2>{homeTitle}</h2>
-      <p class="lead">{d.lead}</p>
+      <p class="lead">{homeLead}</p>
 
-      <div class="duzce-glass-badges" aria-label={d.eyebrow}>
-        {d.badges.map((badge) => <span>{badge}</span>)}
+      <div class="duzce-glass-badges" aria-label={sectionEyebrow}>
+        {(isGenericGlass ? (currentLang === 'tr' ? ['Üretici & işlemeci eşleştirme','Teknik RFQ','Konteyner & paketleme','İhracat koordinasyonu'] : ['Supplier & processor matching','Technical RFQ','Container & packing','Export coordination']) : d.badges).map((badge) => <span>{badge}</span>)}
       </div>
 
       <div class="actions duzce-glass-actions">
-        <a class="button primary" href={`${href}#rfq`}>{d.primaryCta}</a>
-        <a class="button ghost" href={href}>{d.secondaryCta}</a>
+        <a class="button primary" href={primaryHref}>{primaryLabel}</a>
+        <a class="button ghost" href={secondaryHref}>{secondaryLabel}</a>
       </div>
     </div>
 
     <div class="duzce-glass-panel">
       <div class="duzce-glass-panel-top">
-        <span>DÜZCE FLOAT GLASS</span>
+        <span>{panelBrand}</span>
         <strong>{exportDeskLabel}</strong>
       </div>
       <div class="duzce-glass-grid">
         <div>
-          <small>{d.productsTitle}</small>
-          <ul>{d.products.slice(0,4).map((item) => <li>{item}</li>)}</ul>
+          <small>{isGenericGlass ? (currentLang === 'tr' ? 'Cam ürün ve işleme grupları' : 'Glass product & processing groups') : d.productsTitle}</small>
+          <ul>{productList.map((item) => <li>{item}</li>)}</ul>
         </div>
         <div>
-          <small>{d.marketsTitle}</small>
-          <ul>{d.markets.slice(0,4).map((item) => <li>{item}</li>)}</ul>
+          <small>{isGenericGlass ? (currentLang === 'tr' ? 'Ticari pazar kapsamı' : 'Commercial market coverage') : d.marketsTitle}</small>
+          <ul>{marketList.map((item) => <li>{item}</li>)}</ul>
         </div>
       </div>
-      <a class="duzce-glass-contact" href={contactHref}>{d.primaryCta} <span aria-hidden="true">↗</span></a>
+      <a class="duzce-glass-contact" href={isGenericGlass ? primaryHref : contactHref}>{primaryLabel} <span aria-hidden="true">↗</span></a>
     </div>
   </div>
 </section>
