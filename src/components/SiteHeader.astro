@@ -123,8 +123,7 @@ const globalSwitchPath = (target: string): string => {
   }
   if (pageKey === 'glass-market' && pageId) {
     if (target === 'tr') return `/glass/markets/${pageId}/`;
-    if (target === 'en') return `/en/glass/markets/${pageId}/`;
-    return `/${target}/glass/`;
+    return `/${target}/glass/markets/${pageId}/`;
   }
   if (target === 'he') {
     if (pageKey === 'services' && pageId && heServicePaths[pageId]) return heServicePaths[pageId];
@@ -156,8 +155,7 @@ const globalSwitchPath = (target: string): string => {
   }
   if (pageKey === 'glass-market' && pageId) {
     if (target === 'tr') return `/glass/markets/${pageId}/`;
-    if (target === 'en') return `/en/glass/markets/${pageId}/`;
-    return `/${target}/glass/`;
+    return `/${target}/glass/markets/${pageId}/`;
   }
   if (pageKey === 'glass') {
     const glassLocales = ['en','tr','de','it','ru','fa','zh','vi','ro','bg'] as const;
