@@ -43,6 +43,7 @@ const navigationCopy = {
 const safeGlassLang = (['en','tr','de','it','ru','fa','zh','vi','uk','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
 const glassUrl = lang === 'tr' ? '/glass/' : `/${lang}/glass/`;
 const glassLabel = glassNavLabels[lang] || 'Düzce Float Glass';
+const glassMenuCoreSlugs=['float-glass','tempered-glass','laminated-glass','low-e-coated-glass','insulated-glass-igu','architectural-project-glass'] as const;
 const glassMenuLinks = (lang === 'tr' || lang === 'en') ? [
   [glassLabel, glassUrl],
   ...['float-glass','tempered-glass','laminated-glass','low-e-coated-glass','insulated-glass-igu','architectural-project-glass']
@@ -54,7 +55,7 @@ const glassMenuLinks = (lang === 'tr' || lang === 'en') ? [
     .filter(Boolean)
 ] as [string,string][] : (lang !== 'sr' && localizedGlassProductCopy[lang as LocalizedGlassLocale]) ? [
   [glassLabel, glassUrl],
-  ...localizedGlassSlugs.map((slug)=>[localizedGlassProductCopy[lang as LocalizedGlassLocale].products[slug].name, `/${lang}/glass/${slug}/`] as [string,string])
+  ...glassMenuCoreSlugs.map((slug)=>[localizedGlassProductCopy[lang as LocalizedGlassLocale].products[slug].name, `/${lang}/glass/${slug}/`] as [string,string])
 ] : [[glassLabel, glassUrl]] as [string,string][];
 
 const focusedCountryLp = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
