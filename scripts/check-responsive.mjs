@@ -598,7 +598,7 @@ try {
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);
     await page.close();
   }
-  const rootTargets={tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/',uk:'/uk/',ro:'/ro/',bg:'/bg/',he:'/he/'};
+  const rootTargets={tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/',uk:'/uk/',ro:'/ro/',bg:'/bg/',he:'/he/',ar:'/ar/'};
   const globalLocaleEntries = [
     {lang:'tr',path:'/',targets:rootTargets,alternates:['tr','en','x-default']},
     {lang:'en',path:'/en/',targets:rootTargets,alternates:['tr','en','x-default']},
@@ -610,7 +610,8 @@ try {
     {lang:'vi',path:'/vi/',targets:rootTargets,alternates:['vi']},
     {lang:'uk',path:'/uk/',targets:rootTargets,alternates:['uk']},
     {lang:'ro',path:'/ro/',targets:rootTargets,alternates:['ro']},
-    {lang:'bg',path:'/bg/',targets:rootTargets,alternates:['bg']}
+    {lang:'bg',path:'/bg/',targets:rootTargets,alternates:['bg']},
+    {lang:'ar',path:'/ar/',targets:rootTargets,alternates:['ar']}
   ];
   let globalLocaleChecks=0;
   for(const entry of globalLocaleEntries){
@@ -648,7 +649,7 @@ try {
         const targetResponse=await page.request.get(`http://127.0.0.1:4321${encodeURI(path)}`);
         statuses.push([code,targetResponse.status()]);
       }
-      const expectedGlobalHtmlLang = ({zh:'zh-CN',vi:'vi-VN',uk:'uk-UA',ro:'ro-RO',bg:'bg-BG'})[entry.lang] || entry.lang;
+      const expectedGlobalHtmlLang = ({zh:'zh-CN',vi:'vi-VN',uk:'uk-UA',ro:'ro-RO',bg:'bg-BG',ar:'ar-SA'})[entry.lang] || entry.lang;
       if(contract.lang!==expectedGlobalHtmlLang||contract.options!==Object.keys(rootTargets).length||contract.active.length!==1||contract.active[0]!==entry.lang||
         !contract.targetsMatch||!contract.keyboardAccessible||contract.visibleOptions!==Object.keys(rootTargets).length||contract.overflow>1||!contract.canonical||
         !contract.coreAlternates||statuses.some(([,status])=>status!==200)){
