@@ -3,13 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import CommercialRequestForm from './CommercialRequestForm.astro';
 import { glassMarketPages, glassMarketSlugs, type GlassMarketLocale, type GlassMarketSlug } from '../data/glass-market-seo';
 import { getLocalizedGlassMarketPage, type LocalizedGlassMarketLocale } from '../data/glass-market-locales';
+import { getArGlassMarketPage } from '../data/glass-market-ar';
 import { localizedGlassProductCopy, type LocalizedGlassLocale } from '../data/glass-product-locales';
 import { arGlassProductCopy } from '../data/glass-product-ar';
 import { getGlassSeoPage } from '../data/glass-seo';
 
-type MarketLang=GlassMarketLocale|LocalizedGlassMarketLocale;
+type MarketLang=GlassMarketLocale|LocalizedGlassMarketLocale|'ar';
 const { lang, slug }=Astro.props as {lang:MarketLang;slug:GlassMarketSlug};
-const c=(lang==='tr'||lang==='en') ? glassMarketPages[slug][lang] : getLocalizedGlassMarketPage(lang,slug);
+const c=lang==='ar' ? getArGlassMarketPage(slug) : (lang==='tr'||lang==='en') ? glassMarketPages[slug][lang] : getLocalizedGlassMarketPage(lang as LocalizedGlassMarketLocale,slug);
 const base=lang==='tr'?'/glass/markets':`/${lang}/glass/markets`;
 const canonical=`https://ctseg.com.tr${base}/${slug}/`;
 const marketLocales:MarketLang[]=['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','he','ar'];
@@ -64,7 +65,7 @@ const schema=[
           return product?<a href={`/${lang}/glass/${productSlug}/`}><strong>{product.name}</strong><span>↗</span></a>:null;
         })}
         {glassMarketSlugs.filter((marketSlug)=>marketSlug!==slug).map((marketSlug)=>{
-          const label=(lang==='tr'||lang==='en')?glassMarketPages[marketSlug][lang].title:getLocalizedGlassMarketPage(lang as LocalizedGlassMarketLocale,marketSlug).title;
+          const label=lang==='ar'?getArGlassMarketPage(marketSlug).title:(lang==='tr'||lang==='en')?glassMarketPages[marketSlug][lang].title:getLocalizedGlassMarketPage(lang as LocalizedGlassMarketLocale,marketSlug).title;
           return <a href={`${base}/${marketSlug}/`}><strong>{label}</strong><span>↗</span></a>;
         })}
       </div>
