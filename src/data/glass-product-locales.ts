@@ -1,5 +1,5 @@
 export type LocalizedGlassLocale='de'|'it'|'ru'|'fa'|'zh'|'vi'|'uk'|'ro'|'bg'|'he';
-export const localizedGlassSlugs=['float-glass','tempered-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass','mirror-decorative-glass','processed-glass-cut-to-size','architectural-project-glass'] as const;
+export const localizedGlassSlugs=['float-glass','tempered-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass','mirror-decorative-glass','processed-glass-cut-to-size','glass-processing-services','curved-glass','ceramic-printed-glass','architectural-project-glass'] as const;
 export type LocalizedGlassSlug=(typeof localizedGlassSlugs)[number];
 
 type ProductCopy={name:string;metaTitle:string;description:string;lead:string};
@@ -158,6 +158,64 @@ he:{
 
 for(const locale of Object.keys(localizedGlassExtraProducts) as LocalizedGlassLocale[]){
   Object.assign(localizedGlassProductCopy[locale].products,localizedGlassExtraProducts[locale]);
+}
+
+
+const localizedGlassCapabilityProducts:Record<LocalizedGlassLocale,Record<string,ProductCopy>>={
+de:{
+'glass-processing-services':{name:'Glasbearbeitung & Processor-Sourcing',metaTitle:'Glasbearbeitung Türkei | CNC, Kanten, Bohrungen | CTSEG',description:'Sourcing von Glasbearbeitung in der Türkei für CNC, Kantenbearbeitung, Bohren, Ausschnitte, Zuschnitt, Vorspannen und Laminieren.',lead:'Bearbeitungsanfragen werden anhand von Zeichnungen, Toleranzen, Kanten, Bohrungen, CNC, Vorspannung, Laminierung und Verpackung strukturiert.'},
+'curved-glass':{name:'Gebogenes Glas',metaTitle:'Gebogenes Glas Lieferant Türkei | Curved Glass | CTSEG',description:'Beschaffung von gebogenem Glas aus der Türkei für Architektur, Innenausbau, Möbel und Sonderprojekte.',lead:'Anfragen werden nach Radius, Geometrie, Dicke, Maßen, Vorspannung/Laminierung, Formbedarf und Stückzahl abgestimmt.'},
+'ceramic-printed-glass':{name:'Keramisch bedrucktes Glas',metaTitle:'Keramikdruck Glas Türkei | Digital Printed Glass | CTSEG',description:'Beschaffung von keramisch digital bedrucktem, emailliertem und siebbedrucktem Glas aus der Türkei.',lead:'Druckanfragen werden nach Motiv, Farbe, Druckfläche, Glasart, Vorspannung, Abmessung und Freigabeprozess strukturiert.'}
+},
+it:{
+'glass-processing-services':{name:'Lavorazioni vetro & processor sourcing',metaTitle:'Lavorazioni Vetro Turchia | CNC, Bordi, Fori | CTSEG',description:'Sourcing di lavorazioni vetro in Turchia per CNC, molatura, foratura, tacche, taglio, tempera e laminazione.',lead:'Le richieste vengono strutturate con disegni, tolleranze, bordi, fori, CNC, tempera, laminazione e packaging.'},
+'curved-glass':{name:'Sourcing vetro curvo',metaTitle:'Vetro Curvo Turchia | Curved Glass B2B | CTSEG',description:'Sourcing di vetro curvo dalla Turchia per architettura, interior, arredo e progetti speciali.',lead:'Le richieste vengono definite per raggio, geometria, spessore, dimensioni, tempera/laminazione, stampo e quantità.'},
+'ceramic-printed-glass':{name:'Vetro ceramico stampato',metaTitle:'Vetro Stampato Ceramico Turchia | CTSEG',description:'Sourcing di vetro con stampa digitale ceramica, smaltato e serigrafato dalla Turchia.',lead:'Le richieste vengono strutturate per grafica, colore, copertura di stampa, tipo vetro, tempera, dimensioni e approvazione visiva.'}
+},
+ru:{
+'glass-processing-services':{name:'Обработка стекла и поиск процессора',metaTitle:'Обработка стекла в Турции | CNC, кромка, отверстия | CTSEG',description:'Поиск мощностей в Турции для CNC-обработки, кромки, сверления, вырезов, резки, закалки и ламинации стекла.',lead:'Запрос формируется по чертежам, допускам, кромке, отверстиям, CNC, закалке, ламинации и упаковке.'},
+'curved-glass':{name:'Поставка гнутого стекла',metaTitle:'Гнутое стекло из Турции | Curved Glass | CTSEG',description:'Поставка гнутого стекла из Турции для архитектуры, интерьеров, мебели и специальных проектов.',lead:'Запрос задаётся по радиусу, геометрии, толщине, размерам, закалке/ламинации, форме и количеству.'},
+'ceramic-printed-glass':{name:'Стекло с керамической печатью',metaTitle:'Керамическая печать на стекле Турция | CTSEG',description:'Поставка цифрового керамического, эмалированного и шелкографического стекла из Турции.',lead:'Запрос формируется по макету, цвету, площади печати, типу стекла, закалке, размерам и процессу согласования.'}
+},
+fa:{
+'glass-processing-services':{name:'خدمات فرآوری شیشه و یافتن processor',metaTitle:'فرآوری شیشه ترکیه | CNC، لبه‌زنی، سوراخ‌کاری | CTSEG',description:'یافتن ظرفیت فرآوری شیشه در ترکیه برای CNC، لبه‌زنی، سوراخ، برش، سکوریت و لمینت.',lead:'درخواست بر اساس نقشه، تلرانس، نوع لبه، سوراخ، CNC، سکوریت، لمینت و بسته‌بندی تنظیم می‌شود.'},
+'curved-glass':{name:'تأمین شیشه خم / Curved',metaTitle:'شیشه خم از ترکیه | Curved Glass B2B | CTSEG',description:'تأمین شیشه خم از ترکیه برای معماری، دکوراسیون داخلی، مبلمان و پروژه‌های خاص.',lead:'درخواست بر اساس radius، هندسه، ضخامت، ابعاد، سکوریت/لمینت، قالب و تعداد ساختاربندی می‌شود.'},
+'ceramic-printed-glass':{name:'شیشه چاپ سرامیکی',metaTitle:'شیشه چاپ سرامیکی ترکیه | Digital Printed Glass | CTSEG',description:'تأمین شیشه چاپ دیجیتال سرامیکی، enamel و silk-screen از ترکیه.',lead:'درخواست بر اساس artwork، رنگ، سطح چاپ، نوع شیشه، سکوریت، ابعاد و فرآیند تأیید بصری تنظیم می‌شود.'}
+},
+zh:{
+'glass-processing-services':{name:'玻璃深加工与加工厂匹配',metaTitle:'土耳其玻璃深加工 | CNC、磨边、钻孔 | CTSEG',description:'在土耳其匹配CNC、磨边、钻孔、开槽、切割、钢化和夹层等玻璃深加工能力。',lead:'根据图纸、公差、边型、孔位、CNC、钢化、夹层及包装要求组织RFQ。'},
+'curved-glass':{name:'弯弧玻璃采购',metaTitle:'土耳其弯弧玻璃供应商 | Curved Glass | CTSEG',description:'从土耳其采购用于建筑、室内、家具及特殊项目的弯弧玻璃。',lead:'按半径、几何、厚度、尺寸、钢化/夹层、模具需求和数量组织RFQ。'},
+'ceramic-printed-glass':{name:'陶瓷数码打印玻璃采购',metaTitle:'土耳其陶瓷打印玻璃 | Digital Printed Glass | CTSEG',description:'从土耳其采购陶瓷数码打印、釉面和丝网印刷玻璃。',lead:'按图稿、颜色、打印覆盖率、玻璃类型、钢化、尺寸和视觉审批流程组织需求。'}
+},
+vi:{
+'glass-processing-services':{name:'Gia công kính & sourcing processor',metaTitle:'Gia Công Kính Thổ Nhĩ Kỳ | CNC, Mài Cạnh, Khoan | CTSEG',description:'Sourcing năng lực gia công kính tại Thổ Nhĩ Kỳ cho CNC, mài cạnh, khoan, cắt, cường lực và laminated.',lead:'RFQ được cấu trúc theo bản vẽ, dung sai, cạnh, lỗ, CNC, cường lực, laminated và đóng gói.'},
+'curved-glass':{name:'Sourcing kính cong',metaTitle:'Kính Cong Thổ Nhĩ Kỳ | Curved Glass B2B | CTSEG',description:'Sourcing kính cong từ Thổ Nhĩ Kỳ cho kiến trúc, nội thất, đồ gỗ và dự án đặc biệt.',lead:'Yêu cầu được định nghĩa theo bán kính, hình học, độ dày, kích thước, cường lực/laminated, khuôn và số lượng.'},
+'ceramic-printed-glass':{name:'Sourcing kính in ceramic',metaTitle:'Kính In Ceramic Thổ Nhĩ Kỳ | Digital Printed Glass | CTSEG',description:'Sourcing kính in kỹ thuật số ceramic, enamel và silk-screen từ Thổ Nhĩ Kỳ.',lead:'Yêu cầu được cấu trúc theo artwork, màu, phạm vi in, loại kính, cường lực, kích thước và quy trình duyệt mẫu.'}
+},
+uk:{
+'glass-processing-services':{name:'Обробка скла та пошук процесора',metaTitle:'Обробка скла в Туреччині | CNC, кромка, отвори | CTSEG',description:'Пошук потужностей у Туреччині для CNC, кромки, свердління, вирізів, різання, загартування та ламінування скла.',lead:'Запит формується за кресленнями, допусками, кромкою, отворами, CNC, загартуванням, ламінуванням і пакуванням.'},
+'curved-glass':{name:'Постачання гнутого скла',metaTitle:'Гнуте скло з Туреччини | Curved Glass | CTSEG',description:'Постачання гнутого скла з Туреччини для архітектури, інтер’єрів, меблів і спеціальних проєктів.',lead:'Запит задається за радіусом, геометрією, товщиною, розмірами, загартуванням/ламінацією, формою та кількістю.'},
+'ceramic-printed-glass':{name:'Скло з керамічним друком',metaTitle:'Керамічний друк на склі Туреччина | CTSEG',description:'Постачання цифрового керамічного, емальованого та шовкотрафаретного скла з Туреччини.',lead:'Запит формується за макетом, кольором, площею друку, типом скла, загартуванням, розмірами та процесом погодження.'}
+},
+ro:{
+'glass-processing-services':{name:'Procesare sticlă & sourcing procesator',metaTitle:'Procesare Sticlă Türkiye | CNC, Cant, Găuri | CTSEG',description:'Sourcing de procesare a sticlei în Türkiye pentru CNC, cant, găuri, decupaje, debitare, securizare și laminare.',lead:'Solicitarea este structurată după desene, toleranțe, canturi, găuri, CNC, securizare, laminare și ambalare.'},
+'curved-glass':{name:'Sourcing sticlă curbată',metaTitle:'Sticlă Curbată Türkiye | Curved Glass B2B | CTSEG',description:'Sourcing de sticlă curbată din Türkiye pentru arhitectură, interior, mobilier și proiecte speciale.',lead:'Solicitarea este definită prin rază, geometrie, grosime, dimensiuni, securizare/laminare, matriță și cantitate.'},
+'ceramic-printed-glass':{name:'Sourcing sticlă imprimată ceramic',metaTitle:'Sticlă Imprimată Ceramic Türkiye | CTSEG',description:'Sourcing de sticlă cu print digital ceramic, emailată și serigrafiată din Türkiye.',lead:'Solicitarea este structurată după artwork, culoare, acoperire, tip sticlă, securizare, dimensiuni și aprobare vizuală.'}
+},
+bg:{
+'glass-processing-services':{name:'Обработка на стъкло и processor sourcing',metaTitle:'Обработка на стъкло Türkiye | CNC, кант, отвори | CTSEG',description:'Снабдяване с капацитет за CNC, кант, пробиване, изрязване, рязане, закаляване и ламиниране в Türkiye.',lead:'Заявката се структурира по чертежи, толеранси, кант, отвори, CNC, закаляване, ламиниране и опаковка.'},
+'curved-glass':{name:'Снабдяване с огънато стъкло',metaTitle:'Огънато стъкло от Türkiye | Curved Glass | CTSEG',description:'Снабдяване с огънато стъкло от Türkiye за архитектура, интериор, мебели и специални проекти.',lead:'Заявката се определя по радиус, геометрия, дебелина, размери, закаляване/ламиниране, форма и количество.'},
+'ceramic-printed-glass':{name:'Керамично печатано стъкло',metaTitle:'Керамично печатано стъкло Türkiye | CTSEG',description:'Снабдяване с дигитално керамично, емайлирано и ситопечатно стъкло от Türkiye.',lead:'Заявката се структурира по artwork, цвят, покритие, тип стъкло, закаляване, размери и процес на одобрение.'}
+},
+he:{
+'glass-processing-services':{name:'עיבוד זכוכית ואיתור processor',metaTitle:'עיבוד זכוכית מטורקיה | CNC, קנטים, קידוחים | CTSEG',description:'איתור יכולות עיבוד זכוכית בטורקיה עבור CNC, קנטים, קידוחים, חיתוך, חיסום ולמינציה.',lead:'ה-RFQ נבנה לפי שרטוטים, טולרנסים, קנטים, חורים, CNC, חיסום, למינציה ואריזה.'},
+'curved-glass':{name:'אספקת זכוכית מעוגלת',metaTitle:'זכוכית מעוגלת מטורקיה | Curved Glass | CTSEG',description:'אספקת זכוכית מעוגלת מטורקיה לאדריכלות, פנים, ריהוט ופרויקטים מיוחדים.',lead:'הדרישה מוגדרת לפי רדיוס, גיאומטריה, עובי, מידות, חיסום/למינציה, תבנית וכמות.'},
+'ceramic-printed-glass':{name:'זכוכית מודפסת קרמית',metaTitle:'זכוכית מודפסת קרמית מטורקיה | CTSEG',description:'אספקת זכוכית בהדפסה דיגיטלית קרמית, אמייל והדפסת משי מטורקיה.',lead:'הדרישה נבנית לפי artwork, צבע, כיסוי הדפסה, סוג זכוכית, חיסום, מידות ותהליך אישור חזותי.'}
+}
+};
+
+for(const locale of Object.keys(localizedGlassCapabilityProducts) as LocalizedGlassLocale[]){
+  Object.assign(localizedGlassProductCopy[locale].products,localizedGlassCapabilityProducts[locale]);
 }
 
 export function getLocalizedGlassProduct(locale:LocalizedGlassLocale,slug:LocalizedGlassSlug){
