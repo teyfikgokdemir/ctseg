@@ -35,9 +35,31 @@ const relatedMap:Record<string,string[]>={
   'architectural-project-glass':['tempered-glass','laminated-glass','low-e-coated-glass','insulated-glass-igu','heat-soak-tested-glass','fire-rated-glass']
 };
 const relatedPages=(relatedMap[page.slug]||[]).map((slug)=>glassSeoPages.find((item)=>item.slug===slug)).filter(Boolean) as GlassSeoPage[];
-const safetySlugs=new Set(['heat-soak-tested-glass','fire-rated-glass','tempered-glass','heat-strengthened-glass','laminated-glass']);
-const applicationSlugs=new Set(['shower-enclosure-glass','balustrade-railing-glass','office-partition-interior-glass','household-appliance-glass','furniture-retail-glass']);
-const visual=safetySlugs.has(page.slug)?'/images/glass/glass-safety-certified.svg':applicationSlugs.has(page.slug)?'/images/glass/glass-applications-oem.svg':'/images/glass/glass-core-performance.svg';
+const visualMap:Record<string,string>={
+  'float-glass':'/images/glass/glass-applications-turkey.webp',
+  'tempered-glass':'/images/glass/tempered-glass-production-turkey.webp',
+  'heat-strengthened-glass':'/images/glass/glass-processing-line-turkey.webp',
+  'heat-soak-tested-glass':'/images/glass/clear-glass-balustrade-turkey.webp',
+  'laminated-glass':'/images/glass/laminated-glass-canopy-turkey.webp',
+  'low-e-coated-glass':'/images/glass/low-e-coated-glass-production-turkey.webp',
+  'solar-control-glass':'/images/glass/low-e-solar-control-glass-turkey.webp',
+  'insulated-glass-igu':'/images/glass/insulated-glass-igu-production-turkey.webp',
+  'low-iron-extra-clear-glass':'/images/glass/architectural-glass-facade-turkey.webp',
+  'mirror-decorative-glass':'/images/glass/commercial-entrance-glass-turkey.webp',
+  'patterned-frosted-satin-glass':'/images/glass/shopping-mall-storefront-glass-turkey.webp',
+  'processed-glass-cut-to-size':'/images/glass/glass-cnc-processing-turkey.webp',
+  'glass-processing-services':'/images/glass/glass-processing-line-turkey.webp',
+  'curved-glass':'/images/glass/curved-bent-glass-production-turkey.webp',
+  'ceramic-printed-glass':'/images/glass/shopping-mall-storefront-glass-turkey.webp',
+  'fire-rated-glass':'/images/glass/fire-rated-glass-turkey.webp',
+  'shower-enclosure-glass':'/images/glass/shower-enclosure-glass-turkey.webp',
+  'balustrade-railing-glass':'/images/glass/balustrade-railing-glass-turkey.webp',
+  'office-partition-interior-glass':'/images/glass/office-partition-glass-turkey.webp',
+  'household-appliance-glass':'/images/glass/glass-applications-turkey.webp',
+  'furniture-retail-glass':'/images/glass/shopping-mall-storefront-glass-turkey.webp',
+  'architectural-project-glass':'/images/glass/architectural-glass-facade-turkey.webp'
+};
+const visual=visualMap[page.slug]||'/images/glass/glass-applications-turkey.webp';
 const visualAlt=tr?`${c.title} için Türkiye cam tedarik ağı görseli`:`${c.title} sourcing network in Türkiye`;
 const partnerNote=tr
   ? 'CTSEG üretici değildir. Türkiye’nin önde gelen cam üreticileri ve güvenilir işleme tesisleriyle kurulmuş ticari iş birlikleri üzerinden doğru üretim kanalını eşleştirir.'
