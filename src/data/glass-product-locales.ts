@@ -1,5 +1,5 @@
 export type LocalizedGlassLocale='de'|'it'|'ru'|'fa'|'zh'|'vi'|'uk'|'ro'|'bg'|'he';
-export const localizedGlassSlugs=['float-glass','tempered-glass','heat-strengthened-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass','mirror-decorative-glass','processed-glass-cut-to-size','glass-processing-services','curved-glass','ceramic-printed-glass','architectural-project-glass'] as const;
+export const localizedGlassSlugs=['float-glass','tempered-glass','heat-strengthened-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass','mirror-decorative-glass','patterned-frosted-satin-glass','processed-glass-cut-to-size','glass-processing-services','curved-glass','ceramic-printed-glass','architectural-project-glass'] as const;
 export type LocalizedGlassSlug=(typeof localizedGlassSlugs)[number];
 
 type ProductCopy={name:string;metaTitle:string;description:string;lead:string};
@@ -233,6 +233,23 @@ he:{name:'אספקת זכוכית Heat-Strengthened',metaTitle:'זכוכית Hea
 };
 for(const locale of Object.keys(localizedHeatStrengthened) as LocalizedGlassLocale[]){
   localizedGlassProductCopy[locale].products['heat-strengthened-glass']=localizedHeatStrengthened[locale];
+}
+
+
+const localizedPatternedGlass:Record<LocalizedGlassLocale,ProductCopy>={
+de:{name:'Ornament-, Matt- & Satiniertes Glas',metaTitle:'Ornamentglas Mattglas Türkei | B2B | CTSEG',description:'Beschaffung von Ornament-, Matt- und satiniertem Glas aus der Türkei für Sichtschutz, Interior und dekorative Anwendungen.',lead:'Anfragen werden nach Muster/Oberfläche, Farbe, Dicke, Abmessung, Vorspannung, Musterfreigabe und Verpackung strukturiert.'},
+it:{name:'Vetro stampato, satinato e opaco',metaTitle:'Vetro Stampato Satinato Turchia | B2B | CTSEG',description:'Sourcing di vetro patterned, frosted e satinato dalla Turchia per privacy, interior e applicazioni decorative.',lead:'Le richieste vengono definite per motivo/finitura, colore, spessore, dimensioni, tempera, campione e packaging.'},
+ru:{name:'Узорчатое, матовое и сатинированное стекло',metaTitle:'Узорчатое и матовое стекло из Турции | CTSEG',description:'Поставка узорчатого, frosted и сатинированного стекла из Турции для приватности, интерьера и декора.',lead:'Запрос формируется по рисунку/поверхности, цвету, толщине, размерам, закалке, образцу и упаковке.'},
+fa:{name:'تأمین شیشه طرح‌دار، مات و ساتینا',metaTitle:'شیشه طرح‌دار و مات ترکیه | B2B | CTSEG',description:'تأمین شیشه patterned، frosted و ساتینا از ترکیه برای حریم خصوصی، دکوراسیون و معماری داخلی.',lead:'درخواست بر اساس طرح/سطح، رنگ، ضخامت، ابعاد، سکوریت، نمونه و بسته‌بندی تنظیم می‌شود.'},
+zh:{name:'压花、磨砂与缎面玻璃采购',metaTitle:'土耳其压花磨砂缎面玻璃 | B2B | CTSEG',description:'从土耳其采购用于隐私、室内及装饰应用的压花、磨砂和缎面玻璃。',lead:'按图案/表面、颜色、厚度、尺寸、钢化、样品确认和包装要求组织RFQ。'},
+vi:{name:'Sourcing kính hoa văn, mờ và satin',metaTitle:'Kính Hoa Văn Kính Mờ Thổ Nhĩ Kỳ | CTSEG',description:'Sourcing kính patterned, frosted và satin từ Thổ Nhĩ Kỳ cho riêng tư, nội thất và trang trí.',lead:'RFQ được cấu trúc theo hoa văn/bề mặt, màu, độ dày, kích thước, cường lực, mẫu và đóng gói.'},
+uk:{name:'Постачання візерункового, матового та сатинованого скла',metaTitle:'Візерункове та матове скло з Туреччини | CTSEG',description:'Постачання patterned, frosted і сатинованого скла з Туреччини для приватності, інтер’єру та декору.',lead:'Запит формується за рисунком/поверхнею, кольором, товщиною, розмірами, загартуванням, зразком і пакуванням.'},
+ro:{name:'Sourcing sticlă ornament, mată și satinată',metaTitle:'Sticlă Ornament Mată Türkiye | B2B | CTSEG',description:'Sourcing de sticlă patterned, frosted și satinată din Türkiye pentru intimitate, interior și aplicații decorative.',lead:'Solicitarea este structurată după model/suprafață, culoare, grosime, dimensiuni, securizare, probă și ambalare.'},
+bg:{name:'Снабдяване с орнаментно, матово и сатинирано стъкло',metaTitle:'Орнаментно и матово стъкло от Türkiye | CTSEG',description:'Снабдяване с patterned, frosted и сатинирано стъкло от Türkiye за уединение, интериор и декор.',lead:'Заявката се структурира по десен/повърхност, цвят, дебелина, размери, закаляване, мостра и опаковка.'},
+he:{name:'אספקת זכוכית מעוטרת, חלבית וסאטן',metaTitle:'זכוכית מעוטרת וחלבית מטורקיה | CTSEG',description:'אספקת זכוכית patterned, frosted ו-satin מטורקיה לפרטיות, פנים ועיצוב.',lead:'ה-RFQ נבנה לפי דוגמה/גימור, צבע, עובי, מידות, חיסום, אישור דוגמה ואריזה.'}
+};
+for(const locale of Object.keys(localizedPatternedGlass) as LocalizedGlassLocale[]){
+  localizedGlassProductCopy[locale].products['patterned-frosted-satin-glass']=localizedPatternedGlass[locale];
 }
 
 export function getLocalizedGlassProduct(locale:LocalizedGlassLocale,slug:LocalizedGlassSlug){
