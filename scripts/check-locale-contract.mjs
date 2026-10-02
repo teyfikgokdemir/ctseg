@@ -30,10 +30,10 @@ for(const [locale,path] of Object.entries(homes)){
 }
 
 const arHome=read(homes.ar);
-if(!arHome.includes('<html lang="ar" dir="rtl"'))errors.push('Arabic homepage lang/direction incorrect');
-const arH1Text=([...arHome.matchAll(/<h1\\b[^>]*>([\\s\\S]*?)<\\/h1>/g)][0]?.[1]??'').replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').trim();
-if(!/[\\u0600-\\u06FF]/.test(arH1Text))errors.push('Arabic homepage H1 is not localized');
-if(!/[\\u0600-\\u06FF]/.test(arHome))errors.push('Arabic homepage has no Arabic content');
+if(!arHome.includes('<html lang="ar-SA" dir="rtl"'))errors.push('Arabic homepage lang/direction incorrect');
+const arH1Text=([...arHome.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)][0]?.[1]??'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+if(!/[\u0600-\u06FF]/.test(arH1Text))errors.push('Arabic homepage H1 is not localized');
+if(!/[\u0600-\u06FF]/.test(arHome))errors.push('Arabic homepage has no Arabic content');
 for(const englishMarker of ['Trade needs disciplined coordination','We turn international trade','Quick contact','Global Sourcing Capacity'])if(arHome.includes(englishMarker))errors.push('Arabic homepage contains English fallback marker: '+englishMarker);
 
 const ruHome=read(homes.ru);
