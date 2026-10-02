@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GlassIndustryPage from '../../../components/GlassIndustryPage.astro';
+import { glassHubLocaleCopy, type GlassHubLocale } from '../../../data/glass-hub-locales';
+
+export function getStaticPaths(){
+  return ['de','it','ru','fa','zh','vi','uk','ro','bg','he'].map((lang)=>({params:{lang}}));
+}
+
+const { lang } = Astro.params as {lang:GlassHubLocale};
+const c = glassHubLocaleCopy[lang];
+const canonical = `https://ctseg.com.tr/${lang}/glass/`;
+const schema = [
+  {
+    '@context':'https://schema.org','@type':'CollectionPage','@id':canonical+'#glass-sourcing',
+    name:c.metaTitle,description:c.description,url:canonical,
+    about:c.products.map(([name])=>name)
+  },
+  {
+    '@context':'https://schema.org','@type':'FAQPage',
+    mainEntity:c.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))
+  }
+];
+---
+<BaseLayout lang={lang as any} title={c.metaTitle} description={c.description} pageKey="glass-industry" canonical={canonical} schema={schema}>
+  <GlassIndustryPage lang={lang}/>
+</BaseLayout>
