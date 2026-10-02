@@ -655,6 +655,8 @@ const featuredInsightLabel = {
   vi: 'PHÂN TÍCH THƯƠNG MẠI TIÊU BIỂU', ro:'ANALIZĂ COMERCIALĂ SELECTATĂ', bg:'ИЗБРАН ТЪРГОВСКИ АНАЛИЗ', sr:'IZDVOJENA TRGOVINSKA ANALIZA'
 ,
   uk:'Вибраний аналіз'
+,
+  ar:"تحليل تجاري مميز"
 }[lang] || 'Featured Analysis';
 const readArticleLabel = {
   tr: 'Analizin Tamamını Oku',
@@ -667,6 +669,8 @@ const readArticleLabel = {
   vi: 'Đọc toàn bộ bài viết', ro:'Citește analiza completă', bg:'Прочети целия анализ', sr:'Pročitaj celu analizu'
 ,
   uk:'Читати статтю'
+,
+  ar:"اقرأ التحليل كاملاً"
 }[lang] || 'Read Article';
 const insightCategories: Record<string, Record<Locale, string>> = {
   'strategic-vs-procurement': {
@@ -755,6 +759,12 @@ const insightCategories: Record<string, Record<Locale, string>> = {
     zh: '国际贸易治理模式', vi: 'Quản trị thương mại'
   }
 };
+/* Arabic insight category localization */
+const arabicInsightCategories:Record<string,string>={
+  'strategic-vs-procurement':'التوريد الاستراتيجي','supplier-selection':'اختيار الموردين','supplier-risk':'المخاطر والتحقق','total-cost':'التكلفة وTCO','rfq':'هيكلة RFQ','supply-chain-risk':'مخاطر سلسلة التوريد','origin-compliance':'المنشأ والامتثال','nearshoring-europe-turkey':'القرب الجغرافي والخدمات اللوجستية','turkey-manufacturer-sourcing':'المصانع والتحقق','china-vs-turkey-sourcing':'مقارنة أسواق التوريد','vietnam-turkey-trade-routes':'ممرات التجارة','iran-turkey-commodity-corridors':'السلع والمواد الخام','private-label-contract-manufacturing':'العلامة الخاصة وOEM','supplier-due-diligence':'العناية الواجبة بالمورد'
+};
+for(const [id,label] of Object.entries(arabicInsightCategories)) if(insightCategories[id]) (insightCategories[id] as any).ar=label;
+
 const advisoryDeskCopy: Record<Locale, { kicker: string; title: string; lead: string; cta: string }> = {
   tr: {
     kicker: 'Stratejik Ticaret Masası',
@@ -808,7 +818,8 @@ const advisoryDeskCopy: Record<Locale, { kicker: string; title: string; lead: st
   bg:{kicker:'Стратегически консултантски отдел',title:'Нуждаете се от пазарно проучване или проверка на производител?',lead:'CTSEG структурира независимо проучване, проверка на производители, TCO анализ и търговска координация между Türkiye, България, Европа и международни пазари.',cta:'Поискай търговска консултация'},
   sr:{kicker:'Strateški savetodavni desk',title:'Potrebno vam je istraživanje tržišta ili provera proizvođača?',lead:'CTSEG strukturira nezavisno istraživanje, proveru proizvođača, TCO analizu i komercijalnu koordinaciju između Türkiye, Srbije, Evrope i međunarodnih tržišta.',cta:'Zatraži trgovinsko savetovanje'}
 ,
-  uk: { kicker: 'Стіл стратегічного консультування', title: 'Потрібні індивідуальні ринкові дослідження або перевірка фабрики?', lead: 'CTSEG забезпечує незалежний аудит виробників, моделювання загальної вартості (TCO), інспекцію партій та контроль контрактів.', cta: 'Запитати комерційну консультацію' }
+  uk: { kicker: 'Стіл стратегічного консультування', title: 'Потрібні індивідуальні ринкові дослідження або перевірка фабрики?', lead: 'CTSEG забезпечує незалежний аудит виробників, моделювання загальної вартості (TCO), інспекцію партій та контроль контрактів.', cta: 'Запитати комерційну консультацію' },
+  ar:{kicker:'مكتب الاستشارات الاستراتيجية',title:'هل تحتاج إلى بحث سوق مخصص أو تحقق من مصنع؟',lead:'تقدم CTSEG بحثاً مستقلاً للمصنّعين، وتحليل التكلفة الكلية TCO، ومراجعة الدفعات والتنسيق التجاري عبر ممرات Türkiye وأوروبا وآسيا والأسواق الإقليمية.',cta:'طلب استشارة تجارية'}
 };
 const executiveSummaryLabel = {
   tr: 'YÖNETİCİ ÖZETİ & STRATEJİK ÇIKARIM',
@@ -822,6 +833,8 @@ const executiveSummaryLabel = {
   ro:'REZUMAT EXECUTIV & CONCLUZIE STRATEGICĂ',bg:'РЕЗЮМЕ & СТРАТЕГИЧЕСКИ ИЗВОД',sr:'IZVRŠNI SAŽETAK & STRATEŠKI ZAKLJUČAK'
 ,
   uk:'Короткий зміст'
+,
+  ar:"الملخص التنفيذي والخلاصة الاستراتيجية"
 }[lang] || 'Executive Summary';
 const authorLabel = {
   tr: 'CTSEG Küresel Ticaret Masası',
@@ -835,6 +848,8 @@ const authorLabel = {
   ro:'Biroul CTSEG pentru Comerț Global',bg:'Глобален търговски отдел на CTSEG',sr:'CTSEG desk za globalnu trgovinu'
 ,
   uk:'Торговельний відділ CTSEG'
+,
+  ar:"مكتب التجارة العالمية في CTSEG"
 }[lang] || 'CTSEG Trade Desk';
 const relatedServiceKicker = {
   tr: 'İlgili Ticari Hizmet',
@@ -848,6 +863,8 @@ const relatedServiceKicker = {
   ro:'Capabilitate comercială conexă',bg:'Свързана търговска услуга',sr:'Povezana komercijalna usluga'
 ,
   uk:'Пов\'язані послуги'
+,
+  ar:"خدمة تجارية ذات صلة"
 }[lang] || 'Related Service';
 const relatedInsightsHeading = {
   tr: 'Diğer Stratejik Analizler',
@@ -860,6 +877,8 @@ const relatedInsightsHeading = {
   vi: 'Các phân tích thương mại khác', ro:'Analize comerciale conexe', bg:'Свързани търговски анализи', sr:'Povezani trgovinski uvidi'
 ,
   uk:'Схожі матеріали'
+,
+  ar:"تحليلات تجارية ذات صلة"
 }[lang] || 'Related Intelligence';
 const articleRfqDesk = {
   kicker: {
@@ -873,6 +892,8 @@ const articleRfqDesk = {
     vi: 'Đánh giá thương mại & Báo giá',ro:'Evaluare comercială & RFQ',bg:'Търговска оценка & RFQ',sr:'Komercijalna procena & RFQ'
   ,
     uk:'Комерційна оцінка'
+  ,
+    ar:"التقييم التجاري وطلب التسعير"
   }[lang] || 'Commercial Assessment',
   title: {
     tr: 'Tedarik zincirinizi veya ihracat rotanızı doğrulamak ister misiniz?',
@@ -885,6 +906,8 @@ const articleRfqDesk = {
     vi: 'Bạn cần xác minh chuỗi cung ứng hoặc mở rộng tuyến thương mại mới?',ro:'Trebuie să verificați lanțul de aprovizionare sau să deschideți rute comerciale noi?',bg:'Трябва да проверите веригата за доставки или да отворите нови търговски маршрути?',sr:'Treba da proverite lanac snabdevanja ili otvorite nove trgovinske rute?'
   ,
     uk:'Потрібно перевірити ланцюг постачання?'
+  ,
+    ar:"هل تحتاج إلى التحقق من سلسلة التوريد أو استكشاف مسارات تجارية جديدة؟"
   }[lang] || 'Need to verify your supply chain?',
   lead: {
     tr: 'Fabrika doğrulaması, TCO maliyet analizi, numune denetimi veya Incoterms sözleşme mimarisi için ticari talebinizi iletin.',
@@ -897,6 +920,8 @@ const articleRfqDesk = {
     vi: 'Gửi yêu cầu thương mại của bạn để được thẩm định nhà xưởng, lập mô hình chi phí TCO, kiểm định lô hàng và quản trị hợp đồng.',ro:'Trimiteți solicitarea pentru verificarea fabricii, modelare TCO, verificarea loturilor sau coordonare contractuală Incoterms.',bg:'Изпратете заявка за проверка на фабрика, TCO моделиране, инспекция на партиди или договорна координация по Incoterms.',sr:'Pošaljite zahtev za proveru fabrike, TCO modeliranje, pregled serije ili ugovornu koordinaciju po Incoterms pravilima.'
   ,
     uk:'Надішліть свій комерційний запит.'
+  ,
+    ar:"أرسل طلبك التجاري للتحقق من المصانع أو نمذجة TCO أو مراجعة الدفعات أو تنسيق شروط Incoterms."
   }[lang] || 'Submit your commercial inquiry.',
   cta: {
     tr: 'Ticari Talep Formu',
@@ -909,6 +934,8 @@ const articleRfqDesk = {
     vi: 'Gửi yêu cầu thương mại',ro:'Trimite solicitarea',bg:'Изпрати заявка',sr:'Pošalji zahtev'
   ,
     uk:'Надіслати запит'
+  ,
+    ar:"إرسال طلب تجاري"
   }[lang] || 'Submit Request'
 };
 const processPage = processPages[lang];
