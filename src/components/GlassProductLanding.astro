@@ -61,7 +61,28 @@ const visualMap:Record<string,string>={
 };
 const visual=visualMap[page.slug]||'/images/glass/glass-applications-turkey.webp';
 const heroCropMap:Record<string,{position:string;scale:number}>={
-  'low-e-coated-glass':{position:'56% 48%',scale:1.14}
+  'float-glass':{position:'50% 49%',scale:1.12},
+  'tempered-glass':{position:'52% 49%',scale:1.13},
+  'heat-strengthened-glass':{position:'53% 48%',scale:1.13},
+  'heat-soak-tested-glass':{position:'50% 47%',scale:1.12},
+  'laminated-glass':{position:'50% 46%',scale:1.12},
+  'low-e-coated-glass':{position:'56% 48%',scale:1.14},
+  'solar-control-glass':{position:'52% 48%',scale:1.12},
+  'insulated-glass-igu':{position:'52% 49%',scale:1.13},
+  'low-iron-extra-clear-glass':{position:'50% 47%',scale:1.11},
+  'mirror-decorative-glass':{position:'50% 46%',scale:1.11},
+  'patterned-frosted-satin-glass':{position:'50% 48%',scale:1.10},
+  'processed-glass-cut-to-size':{position:'51% 49%',scale:1.14},
+  'glass-processing-services':{position:'53% 49%',scale:1.13},
+  'curved-glass':{position:'52% 48%',scale:1.13},
+  'ceramic-printed-glass':{position:'50% 47%',scale:1.11},
+  'fire-rated-glass':{position:'52% 48%',scale:1.11},
+  'shower-enclosure-glass':{position:'52% 47%',scale:1.10},
+  'balustrade-railing-glass':{position:'50% 48%',scale:1.10},
+  'office-partition-interior-glass':{position:'50% 47%',scale:1.10},
+  'household-appliance-glass':{position:'50% 49%',scale:1.11},
+  'furniture-retail-glass':{position:'50% 47%',scale:1.10},
+  'architectural-project-glass':{position:'50% 47%',scale:1.10}
 };
 const heroCrop=heroCropMap[page.slug]||{position:'50% 50%',scale:1};
 const visualAlt=tr?`${c.title} için Türkiye cam tedarik ağı görseli`:`${c.title} sourcing network in Türkiye`;
