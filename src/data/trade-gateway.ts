@@ -56,3 +56,12 @@ Object.assign(tradeGateway as any,{
     inbound:{kicker:'SRBIJA / GLOBALNO → TÜRKIYE',title:'Strateški sourcing i ulazak na tržište Türkiye',description:'Istražujemo proizvođače i dobavljače prema komercijalnom zahtevu i strukturiramo proizvod, poreklo, dokumentaciju i RFQ za poređenje.'}
   }
 });
+
+
+/* ARABIC LOCALE ROLLOUT */
+Object.assign(tradeGateway as any,{
+  ar:{
+    outbound:{kicker:'TÜRKIYE → الأسواق العالمية',title:'وصول دولي للإنتاج التركي',description:'نحدد السوق المستهدف واحتياج المشتري، ثم نقيّم ملاءمة المنتج والعروض والوثائق وخطوات التنسيق التجاري.'},
+    inbound:{kicker:'العالم → TÜRKIYE',title:'توريد استراتيجي ودخول إلى سوق Türkiye',description:'نبحث خيارات المصنّعين والموردين وفق الحاجة التجارية، وننظم بيانات المنتج والمنشأ والوثائق وطلب التسعير لتصبح قابلة للمقارنة.'}
+  }
+});
