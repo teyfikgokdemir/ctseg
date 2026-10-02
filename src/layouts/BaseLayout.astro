@@ -63,6 +63,7 @@ const hebrewCounterpart = (() => {
 })();
 const alternates = String(lang) === 'he' && pageKey === 'he-insight' ? { he: canonicalUrl } as Record<string,string> :
   pageKey === 'glass' ? duzceGlassAlternates() :
+  pageKey === 'glass-industry' ? {tr:'https://ctseg.com.tr/glass/',en:'https://ctseg.com.tr/en/glass/','x-default':'https://ctseg.com.tr/en/glass/'} as Record<string,string> :
   pageKey === 'search-landing' && pageId ? searchLandingAlternates(pageId) :
   pageKey === 'vietnam-market-entry' && vietnamMarketEntryContent.vi ? {
     vi:`https://ctseg.com.tr/vi/${vietnamMarketEntryContent.vi.slug}/`
@@ -90,7 +91,9 @@ if (pageKey === 'home') {
 }
 if (String(lang) === 'he') alternates.he = canonicalUrl;
 else if (hebrewCounterpart) alternates.he = hebrewCounterpart;
-const alternateCodes = pageKey === 'glass'
+const alternateCodes = pageKey === 'glass-industry'
+  ? ['tr','en']
+  : pageKey === 'glass'
   ? ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr']
   : (String(lang) === 'he' && pageKey === 'he-insight'
     ? ['he']
