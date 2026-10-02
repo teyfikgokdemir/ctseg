@@ -323,3 +323,14 @@ html[data-locale="vi"] .hero h1{
     padding-bottom:26px!important;
   }
 }
+
+/* Desktop header resilience: keep long translated navigation inside viewport. */
+@media (min-width:1051px) and (max-width:1500px){
+  .site-header .header-inner{gap:clamp(10px,1.15vw,18px)!important}
+  .site-header .brand img{width:clamp(124px,10vw,148px)!important}
+  .site-header .primary-nav{min-width:0!important;gap:clamp(8px,.75vw,12px)!important}
+  .site-header .desktop-only-nav{min-width:0!important;gap:clamp(7px,.65vw,11px)!important}
+  .site-header .desktop-only-nav a,.site-header .desktop-nav-link,.site-header .nav-solutions-parent,.site-header .nav-market-parent{font-size:clamp(.68rem,.72vw,.79rem)!important;letter-spacing:0!important}
+  .site-header .nav-cta{padding-inline:10px!important;font-size:clamp(.66rem,.7vw,.76rem)!important}
+  .site-header .fa-nav-promo{min-width:116px!important;padding-inline:7px!important}
+}
