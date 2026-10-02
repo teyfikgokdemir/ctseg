@@ -1,0 +1,7 @@
+---
+import GlassProductLanding from '../../../components/GlassProductLanding.astro';
+import { glassSeoPages } from '../../../data/glass-seo';
+export function getStaticPaths(){ return glassSeoPages.map(page=>({params:{slug:page.slug},props:{page}})); }
+const {page}=Astro.props;
+---
+<GlassProductLanding page={page} lang="en"/>
