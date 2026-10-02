@@ -4,10 +4,12 @@ import CommercialRequestForm from './CommercialRequestForm.astro';
 import type { GlassSeoPage, GlassSeoLocale } from '../data/glass-seo';
 import { glassSeoPages } from '../data/glass-seo';
 import { activeLocales } from '../data/locales';
+import { localizedGlassSlugs } from '../data/glass-product-locales';
 const { page, lang='tr' }=Astro.props as {page:GlassSeoPage;lang?:GlassSeoLocale};
 const c=page[lang]; const tr=lang==='tr';
 const base=tr?'/glass':'/en/glass'; const canonical=`https://ctseg.com.tr${base}/${page.slug}/`;
-const alt=Object.fromEntries([['tr',`https://ctseg.com.tr/glass/${page.slug}/`],['en',`https://ctseg.com.tr/en/glass/${page.slug}/`],...activeLocales.filter((code)=>!['tr','en'].includes(code)).map((code)=>[code,`https://ctseg.com.tr/${code}/glass/${page.slug}/`]),['x-default',`https://ctseg.com.tr/en/glass/${page.slug}/`]]);
+const isLocalizedProduct=(localizedGlassSlugs as readonly string[]).includes(page.slug);
+const alt=Object.fromEntries([['tr',`https://ctseg.com.tr/glass/${page.slug}/`],['en',`https://ctseg.com.tr/en/glass/${page.slug}/`],...(isLocalizedProduct?activeLocales.filter((code)=>!['tr','en'].includes(code)).map((code)=>[code,`https://ctseg.com.tr/${code}/glass/${page.slug}/`]):[]),['x-default',`https://ctseg.com.tr/en/glass/${page.slug}/`]]);
 const schema=[{'@context':'https://schema.org','@type':'Service','name':c.title,'description':c.description,'url':canonical,'areaServed':'Worldwide','provider':{'@type':'Organization','name':'CTSEG','url':'https://ctseg.com.tr/'}},{'@context':'https://schema.org','@type':'FAQPage','mainEntity':c.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))}];
 ---
 <BaseLayout lang={lang} title={c.metaTitle} description={c.description} canonical={canonical} alternates={alt} schema={schema} pageKey="glass-product" pageId={page.slug}>
