@@ -48,9 +48,13 @@ export function getRouteRecords(): RouteRecord[] {
     if (lang === 'tr' && chinaTurkiyeContent.tr) records.push({lang,path:chinaTurkiyeContent.tr.slug,key:'china-turkiye'});
     if (lang === 'tr') records.push({lang,path:ukraineTurkiyeContent.slug,key:'ukraine-turkiye'});
     if (lang === 'tr' || lang === 'en') records.push({lang,path:syriaMarketContent[lang].slug,key:'syria-market'});
-    for (const id of searchLandingIds) records.push({
-      lang,path:searchLandingPath(lang,id).replace(`/${lang}/`,'').replace(/^\//,'').replace(/\/$/,''),key:'search-landing',id
-    });
+    for (const id of searchLandingIds) {
+      const landingPath=searchLandingPath(lang,id);
+      if (!landingPath) continue;
+      records.push({
+        lang,path:landingPath.replace(`/${lang}/`,'').replace(/^\//,'').replace(/\/$/,''),key:'search-landing',id
+      });
+    }
     for (const key of ['services','products','markets','insights','about','contact']) {
       records.push({ lang, path:sectionSlugs[key][lang], key });
     }
