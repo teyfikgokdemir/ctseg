@@ -1,5 +1,5 @@
 export type LocalizedGlassLocale='de'|'it'|'ru'|'fa'|'zh'|'vi'|'uk'|'ro'|'bg'|'he';
-export const localizedGlassSlugs=['float-glass','tempered-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass','mirror-decorative-glass','processed-glass-cut-to-size','glass-processing-services','curved-glass','ceramic-printed-glass','architectural-project-glass'] as const;
+export const localizedGlassSlugs=['float-glass','tempered-glass','heat-strengthened-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass','mirror-decorative-glass','processed-glass-cut-to-size','glass-processing-services','curved-glass','ceramic-printed-glass','architectural-project-glass'] as const;
 export type LocalizedGlassSlug=(typeof localizedGlassSlugs)[number];
 
 type ProductCopy={name:string;metaTitle:string;description:string;lead:string};
@@ -216,6 +216,23 @@ he:{
 
 for(const locale of Object.keys(localizedGlassCapabilityProducts) as LocalizedGlassLocale[]){
   Object.assign(localizedGlassProductCopy[locale].products,localizedGlassCapabilityProducts[locale]);
+}
+
+
+const localizedHeatStrengthened:Record<LocalizedGlassLocale,ProductCopy>={
+de:{name:'Heat-Strengthened Glas',metaTitle:'Heat-Strengthened Glas Türkei | B2B | CTSEG',description:'Beschaffung von heat-strengthened Glas aus der Türkei für Fassaden, IGU und Projektverglasung.',lead:'Anfragen werden nach Dicke, Abmessung, Aufbau, Beschichtung, Kantenbearbeitung und Projektstandard strukturiert.'},
+it:{name:'Vetro heat-strengthened',metaTitle:'Vetro Heat-Strengthened Turchia | B2B | CTSEG',description:'Sourcing di vetro heat-strengthened dalla Turchia per facciate, IGU e progetti.',lead:'Le richieste vengono definite per spessore, dimensioni, composizione, coating, lavorazione bordi e standard di progetto.'},
+ru:{name:'Heat-strengthened стекло',metaTitle:'Heat-Strengthened стекло из Турции | B2B | CTSEG',description:'Поставка heat-strengthened стекла из Турции для фасадов, IGU и проектного остекления.',lead:'Запрос формируется по толщине, размерам, составу, покрытию, обработке кромки и стандарту проекта.'},
+fa:{name:'تأمین شیشه Heat-Strengthened',metaTitle:'شیشه Heat-Strengthened ترکیه | B2B | CTSEG',description:'تأمین شیشه heat-strengthened از ترکیه برای نما، IGU و پروژه‌های معماری.',lead:'درخواست بر اساس ضخامت، ابعاد، ساختار، coating، لبه‌زنی و استاندارد پروژه تنظیم می‌شود.'},
+zh:{name:'热增强玻璃采购',metaTitle:'土耳其热增强玻璃 | Heat-Strengthened Glass | CTSEG',description:'从土耳其采购用于幕墙、IGU及工程项目的热增强玻璃。',lead:'按厚度、尺寸、玻璃结构、镀膜、边部加工和项目标准组织RFQ。'},
+vi:{name:'Sourcing kính heat-strengthened',metaTitle:'Kính Heat-Strengthened Thổ Nhĩ Kỳ | CTSEG',description:'Sourcing kính heat-strengthened từ Thổ Nhĩ Kỳ cho mặt dựng, IGU và dự án.',lead:'RFQ được cấu trúc theo độ dày, kích thước, cấu tạo, coating, gia công cạnh và tiêu chuẩn dự án.'},
+uk:{name:'Постачання heat-strengthened скла',metaTitle:'Heat-Strengthened скло з Туреччини | CTSEG',description:'Постачання heat-strengthened скла з Туреччини для фасадів, IGU та проєктного скління.',lead:'Запит формується за товщиною, розмірами, складом, покриттям, обробкою кромки та стандартом проєкту.'},
+ro:{name:'Sourcing sticlă heat-strengthened',metaTitle:'Sticlă Heat-Strengthened Türkiye | B2B | CTSEG',description:'Sourcing de sticlă heat-strengthened din Türkiye pentru fațade, IGU și proiecte.',lead:'Solicitarea este structurată după grosime, dimensiuni, compoziție, coating, procesarea cantului și standardul proiectului.'},
+bg:{name:'Снабдяване с heat-strengthened стъкло',metaTitle:'Heat-Strengthened стъкло от Türkiye | CTSEG',description:'Снабдяване с heat-strengthened стъкло от Türkiye за фасади, IGU и проекти.',lead:'Заявката се структурира по дебелина, размери, състав, покритие, обработка на кант и проектен стандарт.'},
+he:{name:'אספקת זכוכית Heat-Strengthened',metaTitle:'זכוכית Heat-Strengthened מטורקיה | CTSEG',description:'אספקת זכוכית heat-strengthened מטורקיה לחזיתות, IGU ופרויקטים.',lead:'ה-RFQ נבנה לפי עובי, מידות, מבנה, coating, עיבוד קנטים ותקן הפרויקט.'}
+};
+for(const locale of Object.keys(localizedHeatStrengthened) as LocalizedGlassLocale[]){
+  localizedGlassProductCopy[locale].products['heat-strengthened-glass']=localizedHeatStrengthened[locale];
 }
 
 export function getLocalizedGlassProduct(locale:LocalizedGlassLocale,slug:LocalizedGlassSlug){
