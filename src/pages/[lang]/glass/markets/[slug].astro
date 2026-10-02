@@ -1,0 +1,12 @@
+---
+import GlassMarketLanding from '../../../../components/GlassMarketLanding.astro';
+import { glassMarketSlugs, type GlassMarketSlug } from '../../../../data/glass-market-seo';
+import type { LocalizedGlassMarketLocale } from '../../../../data/glass-market-locales';
+
+export function getStaticPaths(){
+  const locales:LocalizedGlassMarketLocale[]=['de','it','ru','fa','zh','vi','uk','ro','bg','he'];
+  return locales.flatMap((lang)=>glassMarketSlugs.map((slug)=>({params:{lang,slug}})));
+}
+const {lang,slug}=Astro.params as {lang:LocalizedGlassMarketLocale;slug:GlassMarketSlug};
+---
+<GlassMarketLanding lang={lang} slug={slug}/>
