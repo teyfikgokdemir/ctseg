@@ -2,23 +2,26 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CommercialRequestForm from './CommercialRequestForm.astro';
 import { glassMarketPages, glassMarketSlugs, type GlassMarketLocale, type GlassMarketSlug } from '../data/glass-market-seo';
+import { getLocalizedGlassMarketPage, type LocalizedGlassMarketLocale } from '../data/glass-market-locales';
+import { localizedGlassProductCopy, type LocalizedGlassLocale } from '../data/glass-product-locales';
 import { getGlassSeoPage } from '../data/glass-seo';
 
-const { lang, slug }=Astro.props as {lang:GlassMarketLocale;slug:GlassMarketSlug};
-const c=glassMarketPages[slug][lang];
-const base=lang==='tr'?'/glass/markets':'/en/glass/markets';
+type MarketLang=GlassMarketLocale|LocalizedGlassMarketLocale;
+const { lang, slug }=Astro.props as {lang:MarketLang;slug:GlassMarketSlug};
+const c=(lang==='tr'||lang==='en') ? glassMarketPages[slug][lang] : getLocalizedGlassMarketPage(lang,slug);
+const base=lang==='tr'?'/glass/markets':`/${lang}/glass/markets`;
 const canonical=`https://ctseg.com.tr${base}/${slug}/`;
-const alt={
-  tr:`https://ctseg.com.tr/glass/markets/${slug}/`,
-  en:`https://ctseg.com.tr/en/glass/markets/${slug}/`,
-  'x-default':`https://ctseg.com.tr/en/glass/markets/${slug}/`
-};
+const marketLocales:MarketLang[]=['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','he'];
+const alt=Object.fromEntries([
+  ...marketLocales.map((code)=>[code,`https://ctseg.com.tr${code==='tr'?'/glass/markets':`/${code}/glass/markets`}/${slug}/`]),
+  ['x-default',`https://ctseg.com.tr/en/glass/markets/${slug}/`]
+]);
 const relatedProductSlugs=['float-glass','tempered-glass','laminated-glass','low-e-coated-glass','insulated-glass-igu','architectural-project-glass'] as const;
 const schema=[
   {'@context':'https://schema.org','@type':'Service','name':c.title,'description':c.description,'url':canonical,'areaServed':'Worldwide','provider':{'@type':'Organization','name':'CTSEG','url':'https://ctseg.com.tr/'}},
   {'@context':'https://schema.org','@type':'FAQPage','mainEntity':c.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))},
   {'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[
-    {'@type':'ListItem','position':1,'name':lang==='tr'?'Cam Tedariki':'Glass Sourcing','item':`https://ctseg.com.tr${lang==='tr'?'/glass/':'/en/glass/'}`},
+    {'@type':'ListItem','position':1,'name':lang==='tr'?'Cam Tedariki':lang==='en'?'Glass Sourcing':c.eyebrow.split('·')[0].trim(),'item':`https://ctseg.com.tr${lang==='tr'?'/glass/':`/${lang}/glass/`}`},
     {'@type':'ListItem','position':2,'name':c.title,'item':canonical}
   ]}
 ];
@@ -48,13 +51,21 @@ const schema=[
     </div></section>
 
     <section class="section related"><div class="container">
-      <div class="center head"><h2>{lang==='tr'?'İlgili cam ürünleri ve pazar yolları':'Related glass products and market routes'}</h2></div>
+      <div class="center head"><h2>{lang==='tr'?'İlgili cam ürünleri ve pazar yolları':lang==='en'?'Related glass products and market routes':c.scopeTitle}</h2></div>
       <div class="links">
         {relatedProductSlugs.map((productSlug)=>{
-          const page=getGlassSeoPage(productSlug);
-          return page?<a href={`${lang==='tr'?'/glass':'/en/glass'}/${productSlug}/`}><strong>{page[lang].title}</strong><span>↗</span></a>:null;
+          if(lang==='tr'||lang==='en'){
+            const page=getGlassSeoPage(productSlug);
+            return page?<a href={`${lang==='tr'?'/glass':'/en/glass'}/${productSlug}/`}><strong>{page[lang].title}</strong><span>↗</span></a>:null;
+          }
+          const locale=lang as LocalizedGlassLocale;
+          const product=localizedGlassProductCopy[locale]?.products[productSlug];
+          return product?<a href={`/${lang}/glass/${productSlug}/`}><strong>{product.name}</strong><span>↗</span></a>:null;
         })}
-        {glassMarketSlugs.filter((marketSlug)=>marketSlug!==slug).map((marketSlug)=><a href={`${base}/${marketSlug}/`}><strong>{glassMarketPages[marketSlug][lang].title}</strong><span>↗</span></a>)}
+        {glassMarketSlugs.filter((marketSlug)=>marketSlug!==slug).map((marketSlug)=>{
+          const label=(lang==='tr'||lang==='en')?glassMarketPages[marketSlug][lang].title:getLocalizedGlassMarketPage(lang as LocalizedGlassMarketLocale,marketSlug).title;
+          return <a href={`${base}/${marketSlug}/`}><strong>{label}</strong><span>↗</span></a>;
+        })}
       </div>
     </div></section>
 
