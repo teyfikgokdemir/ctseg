@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CommercialRequestForm from './CommercialRequestForm.astro';
+import { glassMarketPages, type GlassMarketLocale, type GlassMarketSlug } from '../data/glass-market-seo';
+
+const { lang, slug }=Astro.props as {lang:GlassMarketLocale;slug:GlassMarketSlug};
+const c=glassMarketPages[slug][lang];
+const base=lang==='tr'?'/glass/markets':'/en/glass/markets';
+const canonical=`https://ctseg.com.tr${base}/${slug}/`;
+const alt={
+  tr:`https://ctseg.com.tr/glass/markets/${slug}/`,
+  en:`https://ctseg.com.tr/en/glass/markets/${slug}/`,
+  'x-default':`https://ctseg.com.tr/en/glass/markets/${slug}/`
+};
+const schema=[
+  {'@context':'https://schema.org','@type':'Service','name':c.title,'description':c.description,'url':canonical,'areaServed':'Worldwide','provider':{'@type':'Organization','name':'CTSEG','url':'https://ctseg.com.tr/'}},
+  {'@context':'https://schema.org','@type':'FAQPage','mainEntity':c.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))},
+  {'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[
+    {'@type':'ListItem','position':1,'name':lang==='tr'?'Cam Tedariki':'Glass Sourcing','item':`https://ctseg.com.tr${lang==='tr'?'/glass/':'/en/glass/'}`},
+    {'@type':'ListItem','position':2,'name':c.title,'item':canonical}
+  ]}
+];
+---
+<BaseLayout lang={lang} title={c.metaTitle} description={c.description} canonical={canonical} alternates={alt} schema={schema} pageKey="glass-market" pageId={slug}>
+  <main class="glass-market">
+    <section class="hero section"><div class="container center">
+      <span class="eyebrow">{c.eyebrow}</span>
+      <h1>{c.title}</h1>
+      <p>{c.lead}</p>
+      <a class="button primary" href="#rfq">{c.ctaLabel}</a>
+    </div></section>
+
+    <section class="section"><div class="container split">
+      <div><h2>{c.buyersTitle}</h2><ul>{c.buyers.map((x)=><li>{x}</li>)}</ul></div>
+      <div><h2>{c.scopeTitle}</h2><ul>{c.scope.map((x)=><li>{x}</li>)}</ul></div>
+    </div></section>
+
+    <section class="section logistics"><div class="container">
+      <div class="center head"><h2>{c.logisticsTitle}</h2></div>
+      <div class="grid">{c.logistics.map((x)=><article><p>{x}</p></article>)}</div>
+    </div></section>
+
+    <section class="section"><div class="container">
+      <div class="center head"><h2>{c.rfqTitle}</h2></div>
+      <div class="rfq-grid">{c.rfq.map((x)=><article><h3>{x}</h3></article>)}</div>
+    </div></section>
+
+    <section class="section faq"><div class="container">
+      <div class="center head"><h2>{c.faqTitle}</h2></div>
+      <div class="faqs">{c.faq.map(([q,a])=><details><summary>{q}</summary><p>{a}</p></details>)}</div>
+    </div></section>
+
+    <section class="section cta" id="rfq"><div class="container cta-wrap">
+      <div><h2>{c.ctaTitle}</h2><p>{c.ctaText}</p></div>
+      <CommercialRequestForm lang={lang}/>
+    </div></section>
+  </main>
+</BaseLayout>
+<style>
+.glass-market{background:#f2efe7;color:#171914}.hero{background:#10120f;color:#f4f5ef;padding:clamp(4.5rem,7vw,7rem) 0}.center{text-align:center}.hero h1,.head h2{max-width:1100px;margin:.65rem auto 0;text-align:center;text-wrap:balance}.hero h1{color:#f4f5ef!important;font-size:clamp(2.4rem,4.7vw,5rem);line-height:1.02}.hero p{max-width:880px;margin:1.2rem auto 1.6rem;color:#d8ddd7!important;line-height:1.72}.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem)}.split h2,.head h2,.cta h2{font-size:clamp(2rem,3vw,3.4rem);line-height:1.06}.split ul{list-style:none;margin:1.25rem 0 0;padding:0}.split li{padding:.9rem 0;border-bottom:1px solid rgba(0,0,0,.14)}.logistics{background:#e7e2d7}.grid,.rfq-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:2rem}.grid article,.rfq-grid article{border:1px solid rgba(0,0,0,.14);padding:1.3rem;background:rgba(255,255,255,.28)}.grid p{margin:0;line-height:1.65}.rfq-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.rfq-grid article{background:#121712;color:#f4f5ef;min-height:120px;display:flex;align-items:flex-end}.rfq-grid h3{margin:0;color:#f4f5ef!important;font-size:1rem}.faqs{max-width:920px;margin:2rem auto 0}.faqs details{padding:1.1rem 0;border-top:1px solid rgba(0,0,0,.15)}.faqs details:last-child{border-bottom:1px solid rgba(0,0,0,.15)}.faqs summary{font-weight:750;cursor:pointer}.faqs p{line-height:1.7}.cta{background:#10120f;color:#f4f5ef}.cta-wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(2rem,5vw,5rem);align-items:start}.cta h2{color:#f4f5ef!important;margin-top:0}.cta p{color:#d8ddd7!important;line-height:1.7}@media(max-width:900px){.rfq-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cta-wrap{grid-template-columns:1fr}}@media(max-width:720px){.split,.grid,.rfq-grid{grid-template-columns:1fr}.hero h1{font-size:clamp(2.05rem,9vw,3.1rem)}}
+</style>
