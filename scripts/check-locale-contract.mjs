@@ -58,7 +58,7 @@ for(const path of ruCore){
 }
 const walk=(dir)=>readdirSync(dir,{withFileTypes:true}).flatMap((entry)=>entry.isDirectory()?walk(join(dir,entry.name)):[join(dir,entry.name)]);
 const ruHtml=walk(join(dist,'ru')).filter((path)=>path.endsWith('.html'));
-if(ruHtml.length!==72)errors.push(`expected 72 indexable Russian HTML pages, found ${ruHtml.length}`);
+if(ruHtml.length!==75)errors.push(`expected 75 indexable Russian HTML pages, found ${ruHtml.length}`);
 const frenchLeak=/\b(?:Accueil|Français|fournisseurs?|produits?|marchés?|données|confidentialité|conditions|utilisation|recherche|approvisionnement|conformité|origine|demander|offre|politique|notre|votre|avec|pour|dans|sur|une|des|les)\b/i;
 for(const path of ruHtml){
   const visibleText=readFileSync(path,'utf8').replace(/<script[\s\S]*?<\/script>/gi,'').replace(/<style[\s\S]*?<\/style>/gi,'').replace(/<[^>]+>/g,' ');
