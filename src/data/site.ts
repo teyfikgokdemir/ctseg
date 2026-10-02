@@ -23,7 +23,8 @@ export const company = {
     fa: 'CTSEG (شرکت با مسئولیت محدود صنعتی و تجاری)',
     ru: 'CTSEG Промышленно-Торговая Компания с Ограниченной Ответственностью',
     zh: 'CTSEG 工业与贸易有限公司',
-    vi: 'Công ty TNHH Công nghiệp và Thương mại CTSEG'
+    vi: 'Công ty TNHH Công nghiệp và Thương mại CTSEG',
+    ar: 'شركة CTSEG للصناعة والتجارة المحدودة'
   },
   alternateName: 'CTSEG',
   founder: 'Teyfik Gökdemir',
