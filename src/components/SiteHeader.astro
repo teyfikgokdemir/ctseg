@@ -16,7 +16,7 @@ const home = lang === 'he' ? '/he/' : localizedPath(lang, 'home');
 const p = tradePlatformCopy[lang] || tradePlatformCopy.en;
 const methodLabel = {tr:'Yöntem',en:'Method',de:'Arbeitsweise',it:'Metodo',fa:'روش کار',ru:'Метод',zh:'运作模式',vi:'Phương thức hoạt động',uk:'Метод роботи',ro:'Metodă',bg:'Метод',sr:'Metod',he:'שיטת עבודה'}[lang] || 'Method';
 const glassNavLabels: Record<string, string> = {
-  tr:'Düzce Cam', en:'Düzce Float Glass', de:'Düzce Float Glass', it:'Düzce Float Glass',
+  tr:'Cam Tedariki', en:'Glass Sourcing', de:'Düzce Float Glass', it:'Düzce Float Glass',
   fa:'شیشه Düzce', ru:'Düzce Float Glass', zh:'Düzce 浮法玻璃', vi:'Düzce Float Glass',
   uk:'Скло Düzce',
   ro:'Düzce Float Glass', bg:'Düzce Float Glass', sr:'Düzce Float Glass',
@@ -39,7 +39,7 @@ const navigationCopy = {
 }[lang] || {globalTrade:'Global Trade',industries:'Industries',portfolio:'Trade Portfolio',intelligence:'Trade Intelligence',company:'Company',main:'MAIN MENU',quick:'NAVIGATION',trade:'TRADE',intro:'Two-way trade, strategic sourcing and market-entry paths'};
 
 const safeGlassLang = (['en','tr','de','it','ru','fa','zh','vi','uk','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
-const glassUrl = duzceGlassPath(safeGlassLang);
+const glassUrl = lang === 'tr' ? '/glass/' : lang === 'en' ? '/en/glass/' : duzceGlassPath(safeGlassLang);
 const glassLabel = glassNavLabels[lang] || 'Düzce Float Glass';
 
 const focusedCountryLp = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
