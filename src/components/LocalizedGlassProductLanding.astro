@@ -20,7 +20,31 @@ const schema=[
   {'@context':'https://schema.org','@type':'FAQPage','mainEntity':localeCopy.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))},
   {'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':localeCopy.relatedTitle,'item':`https://ctseg.com.tr/${lang}/glass/`},{'@type':'ListItem','position':2,'name':product.name,'item':canonical}]}
 ];
-const related=localizedGlassSlugs.filter((item)=>item!==slug);
+const relatedMap:Record<string,string[]>={
+  'float-glass':['low-iron-extra-clear-glass','tempered-glass','laminated-glass','low-e-coated-glass','processed-glass-cut-to-size'],
+  'tempered-glass':['heat-strengthened-glass','heat-soak-tested-glass','laminated-glass','shower-enclosure-glass','balustrade-railing-glass'],
+  'heat-strengthened-glass':['tempered-glass','heat-soak-tested-glass','laminated-glass','architectural-project-glass','insulated-glass-igu'],
+  'heat-soak-tested-glass':['tempered-glass','heat-strengthened-glass','balustrade-railing-glass','architectural-project-glass','fire-rated-glass'],
+  'laminated-glass':['tempered-glass','balustrade-railing-glass','office-partition-interior-glass','fire-rated-glass','architectural-project-glass'],
+  'low-e-coated-glass':['solar-control-glass','insulated-glass-igu','architectural-project-glass','float-glass','low-iron-extra-clear-glass'],
+  'solar-control-glass':['low-e-coated-glass','insulated-glass-igu','architectural-project-glass','float-glass','ceramic-printed-glass'],
+  'insulated-glass-igu':['low-e-coated-glass','solar-control-glass','tempered-glass','architectural-project-glass','office-partition-interior-glass'],
+  'low-iron-extra-clear-glass':['float-glass','laminated-glass','balustrade-railing-glass','furniture-retail-glass','architectural-project-glass'],
+  'mirror-decorative-glass':['patterned-frosted-satin-glass','ceramic-printed-glass','furniture-retail-glass','office-partition-interior-glass','processed-glass-cut-to-size'],
+  'patterned-frosted-satin-glass':['mirror-decorative-glass','ceramic-printed-glass','office-partition-interior-glass','shower-enclosure-glass','furniture-retail-glass'],
+  'processed-glass-cut-to-size':['glass-processing-services','curved-glass','ceramic-printed-glass','furniture-retail-glass','household-appliance-glass'],
+  'glass-processing-services':['processed-glass-cut-to-size','curved-glass','ceramic-printed-glass','household-appliance-glass','furniture-retail-glass'],
+  'curved-glass':['glass-processing-services','processed-glass-cut-to-size','laminated-glass','architectural-project-glass','furniture-retail-glass'],
+  'ceramic-printed-glass':['glass-processing-services','patterned-frosted-satin-glass','household-appliance-glass','furniture-retail-glass','architectural-project-glass'],
+  'fire-rated-glass':['laminated-glass','office-partition-interior-glass','architectural-project-glass','heat-soak-tested-glass'],
+  'shower-enclosure-glass':['tempered-glass','patterned-frosted-satin-glass','glass-processing-services','processed-glass-cut-to-size','furniture-retail-glass'],
+  'balustrade-railing-glass':['laminated-glass','tempered-glass','heat-soak-tested-glass','low-iron-extra-clear-glass','architectural-project-glass'],
+  'office-partition-interior-glass':['tempered-glass','laminated-glass','patterned-frosted-satin-glass','fire-rated-glass','furniture-retail-glass'],
+  'household-appliance-glass':['ceramic-printed-glass','glass-processing-services','processed-glass-cut-to-size','tempered-glass','furniture-retail-glass'],
+  'furniture-retail-glass':['processed-glass-cut-to-size','glass-processing-services','mirror-decorative-glass','patterned-frosted-satin-glass','household-appliance-glass'],
+  'architectural-project-glass':['tempered-glass','laminated-glass','low-e-coated-glass','insulated-glass-igu','heat-soak-tested-glass','fire-rated-glass']
+};
+const related=(relatedMap[slug]||[]).filter((item)=>(localizedGlassSlugs as readonly string[]).includes(item)) as LocalizedGlassSlug[];
 ---
 <BaseLayout lang={lang as any} title={product.metaTitle} description={product.description} canonical={canonical} alternates={alt} schema={schema} pageKey="glass-product" pageId={slug}>
   <main class="glass-product" dir={lang==='fa'||lang==='he'?'rtl':'ltr'}>
