@@ -1,0 +1,6 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'; import GlassIndustryPage from '../../components/GlassIndustryPage.astro';
+const canonical='https://ctseg.com.tr/glass/';
+const schema=[{'@context':'https://schema.org','@type':'CollectionPage','@id':canonical+'#glass-sourcing',name:'Cam Tedariki ve Cam İhracatı | CTSEG',description:'Türkiye ve global pazarlar için float cam, lamine cam, Low-E, solar control, ayna ve proje bazlı cam tedariği.',url:canonical,about:['Float glass','Laminated glass','Low-E glass','Solar control glass','Mirror','Architectural glass']},{'@context':'https://schema.org','@type':'FAQPage',mainEntity:[['Teklif için hangi bilgiler gerekli?','Ürün tipi, kalınlık, ebat, miktar, teslim noktası ve Incoterm bilgileriyle RFQ başlatılabilir.'],['Konteyner bazlı teklif alınabilir mi?','Evet. Yükleme modeli ürün ebat, kalınlık, paketleme ve ağırlık sınırlarına göre planlanır.']].map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))}];
+---
+<BaseLayout lang="tr" title="Cam Tedariki ve Cam İhracatı | CTSEG" description="Float cam, lamine cam, Low-E, solar control, ayna ve proje bazlı cam için Türkiye ve global B2B tedarik, RFQ ve ihracat koordinasyonu." pageKey="glass-industry" canonical={canonical} schema={schema}><GlassIndustryPage lang="tr"/></BaseLayout>
