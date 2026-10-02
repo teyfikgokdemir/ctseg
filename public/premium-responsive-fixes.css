@@ -323,3 +323,10 @@ html[data-locale="vi"] .hero h1{
     padding-bottom:26px!important;
   }
 }
+
+
+/* 1440px locale QA: keep long English hero copy clear of the visual column. */
+@media (min-width:1051px) and (max-width:1500px){
+  html[data-locale="en"] .hero-grid{grid-template-columns:minmax(0,1fr) minmax(420px,.92fr)!important}
+  html[data-locale="en"] .hero h1{font-size:clamp(48px,4.5vw,68px)!important;line-height:.96!important;max-width:12ch!important}
+}
