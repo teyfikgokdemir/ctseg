@@ -5452,3 +5452,105 @@ html[data-locale=vi] :is(.primary-nav a,.nav-market-parent,.nav-solutions-parent
 html[data-locale=vi] :is(.section h2,.section-title,.content-block h2,.side-panel h2,.side-panel h3,.card h2,.card h3){
   font-weight:700!important;
 }
+
+
+/* Trade products listing — compact sector visuals and catalogue cards */
+@media (min-width:981px){
+  main .platform-sectors{
+    padding-block:clamp(54px,5vw,82px)!important;
+  }
+  main .platform-sectors .section-head{
+    margin-bottom:32px!important;
+  }
+  main .platform-sectors .platform-sector-grid{
+    gap:18px!important;
+    align-items:stretch!important;
+  }
+  main .platform-sectors .platform-sector-grid article{
+    min-height:360px!important;
+    height:360px!important;
+    margin-top:0!important;
+    border-radius:16px!important;
+  }
+  main .platform-sectors .platform-sector-grid article picture,
+  main .platform-sectors .platform-sector-grid article>img{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+  }
+  main .platform-sectors .platform-sector-grid article img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+  }
+  main .platform-sectors .platform-sector-grid article>div{
+    padding:26px!important;
+  }
+  main .platform-sectors .platform-sector-grid article h3{
+    font-size:clamp(30px,2.5vw,42px)!important;
+    line-height:.98!important;
+    max-width:13ch!important;
+  }
+  main .platform-sectors .platform-sector-grid article p{
+    font-size:14px!important;
+    line-height:1.48!important;
+    max-width:34ch!important;
+  }
+
+  main .catalogue-section{
+    padding-block:clamp(54px,5vw,84px)!important;
+  }
+  main .catalogue-section .catalogue-directory{
+    margin-top:38px!important;
+  }
+  main .catalogue-section .catalogue-group{
+    padding:42px 0!important;
+  }
+  main .catalogue-section .catalogue-group-heading{
+    margin-bottom:22px!important;
+  }
+  main .catalogue-section .catalogue-grid{
+    gap:28px 22px!important;
+  }
+  main .catalogue-section .catalogue-grid .product-card .product-media{
+    aspect-ratio:16/10!important;
+  }
+  main .catalogue-section .catalogue-grid .product-card-copy{
+    padding:15px 17px 17px!important;
+  }
+  main .catalogue-section .catalogue-grid .product-card-meta{
+    margin-bottom:10px!important;
+    padding-bottom:8px!important;
+  }
+  main .catalogue-section .catalogue-grid .product-card h2{
+    font-size:clamp(19px,1.35vw,24px)!important;
+    margin-bottom:7px!important;
+  }
+  main .catalogue-section .catalogue-grid .product-card p{
+    font-size:12.5px!important;
+    line-height:1.48!important;
+    margin-bottom:12px!important;
+  }
+  main .catalogue-section .catalogue-grid .product-card-trade-footer{
+    padding-top:10px!important;
+  }
+  main .catalogue-section .catalogue-grid .product-card .variety-panel{
+    min-height:210px!important;
+    padding:22px!important;
+  }
+  main .catalogue-section .catalogue-grid .product-card .variety-panel strong{
+    font-size:clamp(23px,2vw,31px)!important;
+  }
+}
+
+@media (max-width:980px) and (min-width:621px){
+  main .platform-sectors .platform-sector-grid article{
+    min-height:320px!important;
+    height:320px!important;
+    margin-top:0!important;
+  }
+  main .catalogue-section .catalogue-grid .product-card .product-media{
+    aspect-ratio:16/10!important;
+  }
+}
