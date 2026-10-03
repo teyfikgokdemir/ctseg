@@ -640,6 +640,7 @@ try {
           keyboardAccessible:links.every(link=>link.tabIndex>=0),
           visibleOptions:links.filter(visible).length,
           overflow:document.documentElement.scrollWidth-window.innerWidth,
+          overflowNodes:[...document.querySelectorAll('body *')].filter((element)=>{const box=element.getBoundingClientRect();return box.right>window.innerWidth+1||box.left<-1}).slice(0,12).map((element)=>{const box=element.getBoundingClientRect();return {tag:element.tagName.toLowerCase(),class:[...element.classList].join('.'),left:Math.round(box.left),right:Math.round(box.right),width:Math.round(box.width)}}),
           canonical:document.querySelector('link[rel="canonical"]')?.href??null,
           coreAlternates:alternates.every(code=>document.querySelector(`link[rel="alternate"][hreflang="${code}"]`))
         };
