@@ -37,7 +37,7 @@ if(!/[\u0600-\u06FF]/.test(arHome))errors.push('Arabic homepage has no Arabic co
 for(const englishMarker of ['Trade needs disciplined coordination','We turn international trade','Quick contact','Global Sourcing Capacity'])if(arHome.includes(englishMarker))errors.push('Arabic homepage contains English fallback marker: '+englishMarker);
 for(const requiredArabicHomeBlock of ['id="for-buyers"','id="for-producers"','id="external-trade-desk"','مكتب التجارة الخارجية'])if(!arHome.includes(requiredArabicHomeBlock))errors.push('Arabic homepage missing required trade path block: '+requiredArabicHomeBlock);
 for(const ArabicNavLabel of ['التوريد الاستراتيجي','البحث عن الموردين والتحقق منهم','استشارات التجارة الدولية','تحليل وتحسين التكلفة الكلية TCO','دخول الأسواق','طريقة العمل','سيناريوهات عمل تمثيلية'])if(!arHome.includes(ArabicNavLabel))errors.push('Arabic navigation missing required item: '+ArabicNavLabel);
-for(const ArabicHubHref of ['/ar/services/','/ar/trade-products/','/ar/markets/','/ar/insights/','/ar/about/','/ar/contact/'])if(!arHome.includes(\`href="\${ArabicHubHref}"\`))errors.push('Arabic navigation missing hub link: '+ArabicHubHref);
+for(const ArabicHubHref of ['/ar/services/','/ar/trade-products/','/ar/markets/','/ar/insights/','/ar/about/','/ar/contact/'])if(!arHome.includes(`href="${ArabicHubHref}"`))errors.push('Arabic navigation missing hub link: '+ArabicHubHref);
 
 
 const arCore=[
