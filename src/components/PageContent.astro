@@ -1275,7 +1275,7 @@ const verifiedLater = {
         <ul class="check-list">{tradeDesk.points.map((item)=><li>{item}</li>)}</ul>
       </div>
       <aside class="side-panel">
-        <p class="eyebrow">CTSEG · {lang === 'ro' ? 'Birou comercial extern' : lang === 'bg' ? 'Външен търговски отдел' : lang === 'sr' ? 'Eksterni trgovinski desk' : 'Trade Desk'}</p>
+        <p class="eyebrow">CTSEG · {lang === 'ro' ? 'Birou comercial extern' : lang === 'bg' ? 'Външен търговски отдел' : lang === 'sr' ? 'Eksterni trgovinski desk' : lang === 'ar' ? 'مكتب التجارة الخارجية' : 'Trade Desk'}</p>
         <h3>{tradeDesk.title}</h3>
         <a class="button" href={`${sectionHref('contact')}?intent=external_trade_desk&direction=other&category=other#commercial-form`} data-contact-intent="external_trade_desk">{tradeDesk.cta}</a>
       </aside>
@@ -1466,7 +1466,7 @@ const verifiedLater = {
               evidence.intendedUse[lang],
               evidence.quoteRequirements[lang]
             ] : [
-              lang === 'uk' && product.origin === 'Iran' ? 'Іран' : product.origin,product.names[lang],verifiedLater[0],verifiedLater[1],verifiedLater[2],
+              lang === 'uk' && product.origin === 'Iran' ? 'Іран' : lang === 'ar' ? (product.origin === 'Iran' ? 'إيران' : 'Türkiye / إيران / مصدر موثّق') : product.origin,product.names[lang],verifiedLater[0],verifiedLater[1],verifiedLater[2],
               verifiedLater[3],verifiedLater[4],verifiedLater[1],verifiedLater[1],verifiedLater[0],
               copy.productUses.join(' · '),
               lang === 'tr' ? 'Spesifikasyon, miktar, ambalaj, teslim yeri, hedef tarih ve belge beklentisi' :
@@ -1497,6 +1497,7 @@ const verifiedLater = {
                          lang === 'ro' ? 'Arhitectura CTSEG de verificare comercială și guvernanță a sourcingului' :
                          lang === 'bg' ? 'CTSEG архитектура за търговска проверка и управление на снабдяването' :
                          lang === 'sr' ? 'CTSEG arhitektura komercijalne provere i upravljanja sourcingom' :
+                         lang === 'ar' ? 'منظومة CTSEG للتحقق التجاري وحوكمة التوريد' :
                          'CTSEG Trade Verification & Sourcing Governance'}</strong>
                 <p>{lang === 'tr' ? 'CTSEG, doğrudan üretici olmayıp bağımsız ticaret ve tedarik koordinatörü olarak hareket eder. Her sevkiyatta parti analiz sertifikası (COA), akredite laboratuvar testleri ve sözleşme güvencesi CTSEG operasyon mimarisiyle koordine edilir.' :
                     lang === 'en' ? 'CTSEG acts as an independent trade and sourcing coordinator rather than an integrated producer. Every consignment is coordinated with batch analysis certificates (COA), accredited lab tests, and contract fulfillment governance.' :
@@ -1510,6 +1511,7 @@ const verifiedLater = {
                     lang === 'ro' ? 'CTSEG acționează ca operator independent de coordonare comercială și sourcing, nu ca producător integrat. Pentru fiecare livrare, documentele de lot, certificatul de analiză (COA), testele de laborator aplicabile și cerințele contractuale sunt coordonate în cadrul procesului CTSEG.' :
                     lang === 'bg' ? 'CTSEG действа като независим координатор на търговията и снабдяването, а не като интегриран производител. За всяка доставка партидните документи, сертификатът за анализ (COA), приложимите лабораторни тестове и договорните изисквания се координират в процеса на CTSEG.' :
                     lang === 'sr' ? 'CTSEG deluje kao nezavisni koordinator trgovine i sourcinga, a ne kao integrisani proizvođač. Za svaku isporuku, dokumentacija serije, sertifikat analize (COA), primenljiva laboratorijska ispitivanja i ugovorni zahtevi koordiniraju se kroz CTSEG proces.' :
+                    lang === 'ar' ? 'تعمل CTSEG كمنسق مستقل للتجارة والتوريد وليست منتجاً متكاملاً. يتم تنسيق وثائق كل دفعة وشهادة التحليل COA والاختبارات المخبرية المطلوبة ومتطلبات التنفيذ التعاقدي ضمن عملية CTSEG.' :
                     'CTSEG acts as an independent trade and sourcing coordinator rather than an integrated producer.'}</p>
               </div>
             </div>
