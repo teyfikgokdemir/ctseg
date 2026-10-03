@@ -1320,9 +1320,9 @@ const verifiedLater = {
             <div class="content-block"><h2>{detailedService.outcomesTitle}</h2><ul class="check-list">{detailedService.outcomes.map((item) => <li>{item}</li>)}</ul></div>
             <div class="content-block faq"><h2>{t.faq}</h2>{detailedService.faq.map((item,index) => <details open={index === 0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
             <div class="content-block">
-              <h2>{lang === 'tr' ? 'İlgili kaynaklar' : lang === 'ro' ? 'Resurse conexe' : lang === 'bg' ? 'Свързани ресурси' : lang === 'sr' ? 'Povezani resursi' : 'Related resources'}</h2>
+              <h2>{lang === 'tr' ? 'İlgili kaynaklar' : lang === 'ro' ? 'Resurse conexe' : lang === 'bg' ? 'Свързани ресурси' : lang === 'sr' ? 'Povezani resursi' : lang === 'ar' ? 'موارد ذات صلة' : 'Related resources'}</h2>
               <p><a class="text-link" href={sectionHref('services')}>{t.allServices} →</a></p>
-              <p><a class="text-link" href={sectionHref('insights')}>{lang === 'tr' ? 'Satın alma içgörülerini inceleyin' : lang === 'ro' ? 'Explorează analizele de sourcing' : lang === 'bg' ? 'Разгледайте анализите за снабдяване' : lang === 'sr' ? 'Pogledajte sourcing uvide' : 'Explore sourcing insights'} →</a></p>
+              <p><a class="text-link" href={sectionHref('insights')}>{lang === 'tr' ? 'Satın alma içgörülerini inceleyin' : lang === 'ro' ? 'Explorează analizele de sourcing' : lang === 'bg' ? 'Разгледайте анализите за снабдяване' : lang === 'sr' ? 'Pogledajte sourcing uvide' : lang === 'ar' ? 'استكشف رؤى التوريد' : 'Explore sourcing insights'} →</a></p>
               <p><a class="text-link" href={sectionHref('contact')}>{t.contact} →</a></p>
             </div>
           </>
@@ -1436,7 +1436,7 @@ const verifiedLater = {
     <PageHero lang={lang} eyebrow={`${t.products} · B2B`} title={product.names[lang]} lead={product.descriptions[lang]} parentHref={sectionHref('products')} parentLabel={t.products} product={product} ctaHref={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} ctaLabel={t.quote} imageNote={editorial.productImageNote} />
     <section class="section product-detail-content"><div class="container content-grid">
       <div class="prose">
-        <div class="content-block product-commercial-facts"><h2>{lang === 'tr' ? 'Ticari değerlendirme bilgileri' : lang === 'en' ? 'Commercial assessment information' : lang === 'de' ? 'Angaben zur kaufmännischen Bewertung' : lang === 'it' ? 'Informazioni per la valutazione commerciale' : lang === 'ru' ? 'Параметры коммерческой оценки' : lang === 'fa' ? 'اطلاعات ارزیابی تجاری' : lang === 'zh' ? '大宗商品商业评估核心参数' : lang === 'vi' ? 'Thông tin đánh giá thương mại' : lang === 'uk' ? 'Інформація для комерційного оцінювання' : lang === 'ro' ? 'Informații pentru evaluarea comercială' : lang === 'bg' ? 'Информация за търговска оценка' : lang === 'sr' ? 'Informacije za komercijalnu procenu' : 'Commercial assessment information'}</h2>
+        <div class="content-block product-commercial-facts"><h2>{lang === 'tr' ? 'Ticari değerlendirme bilgileri' : lang === 'en' ? 'Commercial assessment information' : lang === 'de' ? 'Angaben zur kaufmännischen Bewertung' : lang === 'it' ? 'Informazioni per la valutazione commerciale' : lang === 'ru' ? 'Параметры коммерческой оценки' : lang === 'fa' ? 'اطلاعات ارزیابی تجاری' : lang === 'zh' ? '大宗商品商业评估核心参数' : lang === 'vi' ? 'Thông tin đánh giá thương mại' : lang === 'uk' ? 'Інформація для комерційного оцінювання' : lang === 'ro' ? 'Informații pentru evaluarea comercială' : lang === 'bg' ? 'Информация за търговска оценка' : lang === 'sr' ? 'Informacije za komercijalnu procenu' : lang === 'ar' ? 'معلومات التقييم التجاري' : 'Commercial assessment information'}</h2>
           <dl>{productCommercialLabels.map((label,index) => {
             const values = evidence ? [
               evidence.origin[lang],
