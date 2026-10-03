@@ -136,7 +136,7 @@ const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
   name:String(lang) === 'he' ? 'CTSEG Sanayi ve Ticaret Limited Şirketi' : (company.name[lang as Locale] || company.name.en),alternateName:company.alternateName,foundingDate:company.foundingYear,
   description:organizationDescription,
-  slogan:lang === 'uk' ? 'Двостороння міжнародна торгівля та стратегічне постачання' : 'Two-Way Global Trade & Strategic Sourcing House',
+  slogan:lang === 'uk' ? 'Двостороння міжнародна торгівля та стратегічне постачання' : lang === 'ar' ? 'بيت تجارة عالمي للتجارة الثنائية والتوريد الاستراتيجي' : 'Two-Way Global Trade & Strategic Sourcing House',
   founder:{'@type':'Person',name:company.founder},
   address:{
     '@type':'PostalAddress',
@@ -147,13 +147,18 @@ const organization = {
   },
   url:'https://ctseg.com.tr/',logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
   email:company.email,telephone:company.phone,
-  areaServed:lang === 'he' ? ['Israel','Türkiye','International'] : lang === 'uk' ? ['Україна','Туреччина','Європа','Близький Схід','Азія','Міжнародні ринки'] : ['Türkiye','Europe','Middle East','Asia','International'],
+  areaServed:lang === 'he' ? ['Israel','Türkiye','International'] : lang === 'uk' ? ['Україна','Туреччина','Європа','Близький Схід','Азія','Міжнародні ринки'] : lang === 'ar' ? ['Türkiye','الخليج','الشرق الأوسط','أوروبا','آسيا','الأسواق الدولية'] : ['Türkiye','Europe','Middle East','Asia','International'],
   knowsLanguage:activeLocales,
   knowsAbout:lang === 'he' ? ['סחר דו־כיווני ישראל–טורקיה','איתור ספקים','אימות ספקים','ניהול RFQ','מותג פרטי','כניסה לשוק','פיתוח קונים ומפיצים','תיאום מסחרי'] : lang === 'uk' ? [
     'Двостороння міжнародна торгівля','Стратегічне постачання','Пошук і перевірка постачальників','Перевірка виробників і контрагентів',
     'Управління міжнародними RFQ','Вихід на експортні ринки','Пошук B2B-покупців','Комерційна координація','Постачання з Туреччини',
     'Торговельна аналітика','Аналіз сукупної вартості','Постачання харчової та аграрної продукції','Текстиль і домашній текстиль',
     'Пакування та промислові матеріали','Україна — Туреччина: торговельний коридор','Постачання для відбудови України'
+  ] : lang === 'ar' ? [
+    'التجارة العالمية ثنائية الاتجاه','التوريد الاستراتيجي','البحث عن الموردين والتحقق منهم','التحقق من المصانع والأطراف المقابلة',
+    'إدارة طلبات RFQ الدولية','دخول أسواق التصدير','البحث عن المشترين بين الشركات','التنسيق التجاري','التوريد من Türkiye',
+    'الرؤى التجارية','تحليل التكلفة الكلية للملكية TCO','توريد المنتجات الغذائية والزراعية','المنسوجات والمنسوجات المنزلية',
+    'مواد التعبئة والمدخلات الصناعية','توريد الزجاج للمشاريع','التجارة بين Türkiye والخليج والشرق الأوسط'
   ] : [
     'Two-way global trade','Strategic sourcing','Supplier sourcing and verification','Factory and counterparty verification',
     'International RFQ management','Export market entry','B2B buyer research','Commercial coordination','Nearshoring from Türkiye',
@@ -230,7 +235,7 @@ const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
     <script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
   </head>
   <body>
-    <a class="skip-link" href="#main">{lang === 'uk' ? 'Перейти до основного вмісту' : lang === 'ru' ? 'Перейти к содержанию' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : lang === 'ro' ? 'Sari la conținutul principal' : lang === 'bg' ? 'Към основното съдържание' : lang === 'sr' ? 'Pređi na glavni sadržaj' : lang === 'he' ? 'דלג לתוכן הראשי' : 'Skip to content'}</a>
+    <a class="skip-link" href="#main">{lang === 'uk' ? 'Перейти до основного вмісту' : lang === 'ru' ? 'Перейти к содержанию' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : lang === 'ro' ? 'Sari la conținutul principal' : lang === 'bg' ? 'Към основното съдържание' : lang === 'sr' ? 'Pređi na glavni sadržaj' : lang === 'he' ? 'דלג לתוכן הראשי' : lang === 'ar' ? 'تجاوز إلى المحتوى الرئيسي' : 'Skip to content'}</a>
     <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
     <main id="main">
       <slot />
