@@ -83,6 +83,20 @@ const pageChecks = [
       body.includes('data-trade-marquee') &&
       !/reflex/i.test(body),
   },
+  {
+    url: 'https://ctseg.com.tr/ar/',
+    label: 'Arabic full-site hub',
+    verify: (response, body) =>
+      response.ok &&
+      body.includes('<html lang="ar-SA" dir="rtl"') &&
+      body.includes('hreflang="ar"') &&
+      body.includes('/images/flags/sa.svg') &&
+      body.includes('التوريد الاستراتيجي') &&
+      body.includes('/ar/services/') &&
+      body.includes('/ar/trade-products/') &&
+      body.includes('/ar/insights/') &&
+      !/reflex/i.test(body),
+  },
 ];
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -143,6 +157,33 @@ for (const check of pageChecks) {
   });
   if (response.status !== 405) throw new Error(`Production verification failed: contact API GET contract. status=${response.status}`);
   console.log('PASS: contact API method contract');
+}
+
+{
+  const response = await fetch('https://ctseg.com.tr/robots.txt', { headers: { 'user-agent':'CTSEG-Production-QA/2.0', 'cache-control':'no-cache' } });
+  const body = await response.text();
+  if (!response.ok || !body.includes('Sitemap: https://ctseg.com.tr/sitemap-index.xml') || !body.includes('OAI-SearchBot') || !body.includes('GPTBot')) {
+    throw new Error(`Production verification failed: robots/AI crawler discovery. status=${response.status}`);
+  }
+  console.log('PASS: robots and AI crawler discovery');
+}
+
+{
+  const response = await fetch('https://ctseg.com.tr/llms.txt', { headers: { 'user-agent':'CTSEG-Production-QA/2.0', 'cache-control':'no-cache' } });
+  const body = await response.text();
+  if (!response.ok || !body.includes('https://ctseg.com.tr/ar/') || !body.includes('AI Verification Boundary') || !body.includes('https://ctseg.com.tr/ai-fact-sheet.txt')) {
+    throw new Error(`Production verification failed: llms discovery file. status=${response.status}`);
+  }
+  console.log('PASS: llms discovery file');
+}
+
+{
+  const response = await fetch('https://ctseg.com.tr/sitemap-index.xml', { headers: { 'user-agent':'CTSEG-Production-QA/2.0', 'cache-control':'no-cache' } });
+  const body = await response.text();
+  if (!response.ok || !body.includes('<sitemapindex') || !body.includes('sitemap-0.xml')) {
+    throw new Error(`Production verification failed: sitemap index. status=${response.status}`);
+  }
+  console.log('PASS: sitemap index');
 }
 
 {
