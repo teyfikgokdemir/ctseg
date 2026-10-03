@@ -82,7 +82,7 @@ try {
     { name:'wide-tr-insights', path:'/tr/icgoruler/', width:1600, height:1000 },
     { name:'wide-tr-about', path:'/tr/hakkimizda/', width:1600, height:1000 },
     { name:'wide-tr-contact', path:'/tr/iletisim/', width:1600, height:1000 },
-    { name:'wide-tr-catalogue', path:'/tr/ticari-urunler/', width:1600, height:1000 },
+    { name:'wide-tr-catalogue', path:'/tr/ticari-urunler/', width:1600, height:1000, gapLimit:84 },
     { name:'wide-de-home', path:'/de/', width:1600, height:1000 },
     { name:'wide-de-locale-panel', path:'/de/', width:1600, height:1000, openLanguage:true },
     { name:'wide-it-home', path:'/it/', width:1600, height:1000 },
