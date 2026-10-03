@@ -185,7 +185,7 @@ const globalSwitchPath = (target: string): string => {
   <div class="container header-inner">
     <a class="brand brand-stack" href={home} aria-label={`CTSEG · ${t.home}`}>
       <img src={generatedImageSrc(LOGO_IMAGE,320)} width="320" height="103" alt="CTSEG" decoding="async" />
-      <span class="header-house-label" aria-hidden="true">{lang === 'he' ? 'בית סחר בינלאומי' : 'GLOBAL TRADE HOUSE'}</span>
+      <span class="header-house-label" aria-hidden="true">{lang === 'he' ? 'בית סחר בינלאומי' : lang === 'ar' ? 'بيت تجارة عالمي' : 'GLOBAL TRADE HOUSE'}</span>
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label={t.menu || 'Menu'} data-menu-toggle>
       <span class="sr-only">{t.menu}</span><span></span><span></span>
@@ -232,7 +232,7 @@ const globalSwitchPath = (target: string): string => {
         <details class="mobile-accordion mobile-accordion--glass" open={['glass-industry','glass-product','glass-market','glass'].includes(pageKey)}>
           <summary>
             <span class="mobile-accordion-title">{lang==='he'?'זכוכית':lang==='tr'?'CAM':glassLabel}</span>
-            <span class="mobile-accordion-badge">{lang==='he'?'זכוכית':lang==='tr'?'CAM':'GLASS'}</span>
+            <span class="mobile-accordion-badge">{lang==='he'?'זכוכית':lang==='tr'?'CAM':lang==='ar'?'زجاج':'GLASS'}</span>
             <span class="mobile-accordion-chevron" aria-hidden="true">⌄</span>
           </summary>
           <div class="mobile-accordion-links">
@@ -262,7 +262,7 @@ const globalSwitchPath = (target: string): string => {
         <details class="mobile-accordion mobile-accordion--quick">
           <summary>
             <span class="mobile-accordion-title">{navigationCopy.quick}</span>
-            <span class="mobile-accordion-badge">NAV</span>
+            <span class="mobile-accordion-badge">{lang === 'ar' ? 'تنقل' : 'NAV'}</span>
             <span class="mobile-accordion-chevron" aria-hidden="true">⌄</span>
           </summary>
           <div class="mobile-accordion-links">
