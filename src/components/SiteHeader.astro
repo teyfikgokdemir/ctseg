@@ -66,6 +66,15 @@ const solutionLinks = lang === 'he' ? [
   ['רכש אסטרטגי','/he/שירותים/רכש-אסטרטגי/'],
   ['כניסה לשוק','/he/שירותים/כניסה-לשוק/'],
   [methodLabel,'/he/איך-אנחנו-עובדים/']
+] : lang === 'ar' ? [
+  [t.services, localizedPath(lang,'services')],
+  ['التوريد الاستراتيجي', localizedPath(lang,'services','strategic-sourcing')],
+  ['البحث عن الموردين والتحقق منهم', localizedPath(lang,'services','supplier-verification')],
+  ['استشارات التجارة الدولية', localizedPath(lang,'services','trade-advisory')],
+  ['تحليل وتحسين التكلفة الكلية TCO', localizedPath(lang,'services','tco')],
+  ['دخول الأسواق', localizedPath(lang,'services','market-entry')],
+  [methodLabel, localizedPath(lang,'how-we-work')],
+  ['سيناريوهات عمل تمثيلية', localizedPath(lang,'scenarios')]
 ] : [
   [t.services, localizedPath(lang,'services')],
   [p.buyerTitle, localizedPath(lang,'services','strategic-sourcing')],
