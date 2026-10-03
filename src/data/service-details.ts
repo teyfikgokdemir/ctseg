@@ -289,7 +289,13 @@ const serviceDetailScaffolds:Record<string,{
     audience:'Namenjeno B2B kompanijama koje treba da procene dobavljača, zemlju izvora, model troškova ili odluku o ulasku na tržište pre komercijalnog obavezivanja.',
     outcomes:['Razjašnjen zahtev i kriterijumi procene','Dokumentovani nalazi i otvoreni rizici','Uporedive komercijalne opcije','Plan realizacije sa odgovornima i narednim koracima'],
     process:['Razjašnjenje cilja, specifikacije, obima i ciljnog tržišta','Prikupljanje i provera tržišnih, partnerskih i dokumentacionih dokaza','Poređenje komercijalnih, operativnih i rizičnih scenarija','Dokumentovanje odluke, odgovornosti i narednih koraka'],
-    faq:[{question:'Da li svaki projekat ima isti obim?',answer:'Ne. Obim se prilagođava proizvodu, tržištu, partnerima, dokumentaciji i nivou rizika odluke.'},{question:'Da li usluga zamenjuje pravno ili carinsko savetovanje?',answer:'Ne. CTSEG strukturira komercijalnu procenu i koordinaciju; pravna, poreska ili carinska pitanja koja zahtevaju ovlašćenje vode odgovarajući stručnjaci.'}]}
+    faq:[{question:'Da li svaki projekat ima isti obim?',answer:'Ne. Obim se prilagođava proizvodu, tržištu, partnerima, dokumentaciji i nivou rizika odluke.'},{question:'Da li usluga zamenjuje pravno ili carinsko savetovanje?',answer:'Ne. CTSEG strukturira komercijalnu procenu i koordinaciju; pravna, poreska ili carinska pitanja koja zahtevaju ovlašćenje vode odgovarajući stručnjaci.'}]},
+  ar:{scopeTitle:'نطاق الخدمة',problemTitle:'ما المشكلة التي تعالجها؟',audienceTitle:'لمن تناسب هذه الخدمة؟',outcomesTitle:'المخرجات المتوقعة',processTitle:'آلية العمل',
+    problem:'تؤدي البيانات غير المكتملة والأطراف غير الموثقة وتشتت معلومات التكلفة أو الامتثال إلى إضعاف القرار التجاري. تحوّل هذه الخدمة الأدلة المتاحة إلى إطار قرار موثق وقابل للمقارنة.',
+    audience:'مناسبة لشركات B2B التي تحتاج إلى تقييم مورد أو بلد مصدر أو نموذج تكلفة أو قرار دخول سوق قبل الالتزام التجاري.',
+    outcomes:['متطلبات ومعايير تقييم واضحة','نتائج موثقة ومخاطر مفتوحة','خيارات تجارية قابلة للمقارنة','خطة تنفيذ تتضمن المسؤوليات والخطوات التالية'],
+    process:['تحديد الهدف والمواصفات والحجم والسوق المستهدف','جمع الأدلة المتعلقة بالسوق والطرف المقابل والوثائق والتحقق منها','مقارنة السيناريوهات التجارية والتشغيلية والمخاطر','توثيق القرار والمسؤوليات والخطوات التالية'],
+    faq:[{question:'هل كل مشروع له النطاق نفسه؟',answer:'لا. يتم تحديد النطاق بحسب المنتج والسوق والأطراف والوثائق المطلوبة ومستوى مخاطر القرار.'},{question:'هل تحل هذه الخدمة محل الاستشارة القانونية أو الجمركية؟',answer:'لا. تنظم CTSEG إطار التقييم والتنسيق التجاري، أما المسائل القانونية أو الضريبية أو الجمركية التي تتطلب ترخيصاً فيجب أن يتولاها المختصون المعتمدون.'}]}
 };
 
 export const serviceDetails:Record<string,Record<ServiceId,ServiceDetail>> = Object.fromEntries(
