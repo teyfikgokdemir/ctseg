@@ -1435,7 +1435,7 @@ const verifiedLater = {
         </div>
         <div class="sourcing-desk-actions">
           <a class="button button-accent" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{sourcingDeskCopy[lang].cta} →</a>
-          <a class="button button-secondary" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp Quick Desk ↗</a>
+          <a class="button button-secondary" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noopener noreferrer">{lang === 'ar' ? 'مكتب WhatsApp السريع ↖' : 'WhatsApp Quick Desk ↗'}</a>
         </div>
       </div>
     </div></section>
@@ -2008,7 +2008,7 @@ const verifiedLater = {
               {advisoryDeskCopy[lang].cta} →
             </a>
             <a class="button button-secondary" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noopener noreferrer">
-              WhatsApp Direct Desk ↗
+              {lang === 'ar' ? 'تواصل مباشر عبر WhatsApp ↖' : 'WhatsApp Direct Desk ↗'}
             </a>
           </div>
         </div>
@@ -2121,7 +2121,7 @@ const verifiedLater = {
               {articleRfqDesk.cta} →
             </a>
             <a class="button button-secondary" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noopener noreferrer">
-              WhatsApp Direct Desk ↗
+              {lang === 'ar' ? 'تواصل مباشر عبر WhatsApp ↖' : 'WhatsApp Direct Desk ↗'}
             </a>
           </div>
         </div>
@@ -2142,7 +2142,7 @@ const verifiedLater = {
         </div>
         <div class="about-mandate-card">
           <div class="about-mandate-header">
-            <span class="about-mandate-badge">Trade Architecture</span>
+            <span class="about-mandate-badge">{lang === 'ar' ? 'هيكل التجارة' : 'Trade Architecture'}</span>
             <h3>{aboutMandate.title}</h3>
           </div>
           <p>{aboutMandate.desc}</p>
@@ -2154,7 +2154,7 @@ const verifiedLater = {
       </div>
       <aside class="company-card" aria-label={corporate.labels.name}>
         <div class="company-card-header">
-          <span class="company-badge">Institutional Registry</span>
+          <span class="company-badge">{lang === 'ar' ? 'السجل المؤسسي' : 'Institutional Registry'}</span>
           <h3>{company.name[lang] || company.name.en}</h3>
         </div>
         <dl class="company-meta-dl">
