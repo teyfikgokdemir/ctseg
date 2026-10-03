@@ -1962,7 +1962,7 @@ const verifiedLater = {
               <a class="insight-card" href={localizedPath(lang,'insights',insightId)}>
                 <div class="insight-card-meta">
                   <span class="insight-category-tag">{category}</span>
-                  <span class="insight-read-time">{post?.readingTime || (lang === 'tr' ? '8 dk' : '8 min')}</span>
+                  <span class="insight-read-time">{post?.readingTime || (lang === 'tr' ? '8 dk' : lang === 'ar' ? '8 دقائق' : '8 min')}</span>
                 </div>
                 <h2 class="insight-card-title">{insights[insightId].titles[lang]}</h2>
                 <p class="insight-card-desc">{insights[insightId].descriptions[lang]}</p>
