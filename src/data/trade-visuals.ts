@@ -242,7 +242,20 @@ const ukrainianTradeVisualAlt:Record<TradeVisualKey,string> = {
   'market-entry':'Аналіз цільового ринку та каналів виходу на нього'
 };
 
+const arabicTradeVisualAlt:Record<TradeVisualKey,string> = {
+  'global-trade-hero':'ميناء وعينات منتجات تمثل تدفقات التجارة الدولية',
+  'food-oils':'عينات غير موسومة من الزيوت النباتية ومكونات غذائية للتقييم التجاري',
+  'nuts-dates':'عينات من المكسرات والفواكه المجففة لتقييم الجودة والدرجة',
+  'carpets-textiles':'سجاد معقود يدوياً لتقييم المواد وجودة النسيج',
+  'textiles-inputs':'عينات أقمشة ومناشف ومنسوجات على طاولة تقييم تجاري',
+  'strategic-sourcing':'مختص مشتريات يقارن خيارات التوريد الصناعي وعروض RFQ',
+  'supplier-verification':'مختص جودة وتوريد يجري التحقق من المنتج الصناعي والمورد',
+  'trade-advisory':'مختص تجارة دولية ينسق العمليات التجارية وخطة الشحن',
+  'tco-analysis':'فريق مشتريات يراجع المنتجات الصناعية وفق التكلفة الكلية والمعايير التجارية',
+  'market-entry':'اجتماع لدخول السوق بين مصنع ومشترٍ دولي'
+};
+
 export const localizedTradeVisual = (key:TradeVisualKey, locale:TradeVisualLocale) => {
   const visual=tradeVisuals[key];
-  return {...visual,altText:locale === 'uk' ? ukrainianTradeVisualAlt[key] : visual.alt[locale] || visual.alt.en};
+  return {...visual,altText:locale === 'uk' ? ukrainianTradeVisualAlt[key] : locale === 'ar' ? arabicTradeVisualAlt[key] : visual.alt[locale] || visual.alt.en};
 };
