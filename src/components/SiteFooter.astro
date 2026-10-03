@@ -28,7 +28,8 @@ const descriptionMap: Record<string, string> = {
   sr:'Trgovinska kuća sa sedištem u Türkiye za dvosmernu globalnu trgovinu i strateški sourcing.',
   ro:'Casă de comerț B2B cu sediul în Türkiye pentru comerț global bidirecțional, sourcing strategic și acces pe piețe.',
   bg:'B2B търговска къща със седалище в Türkiye за двупосочна глобална търговия, стратегическо снабдяване и пазарен достъп.',
-  he:'בית מסחר B2B מבוסס טורקיה לסחר דו־כיווני, איתור ואימות ספקים וכניסה לשווקים בין ישראל לטורקיה.'
+  he:'בית מסחר B2B מבוסס טורקיה לסחר דו־כיווני, איתור ואימות ספקים וכניסה לשווקים בין ישראל לטורקיה.',
+  ar:'بيت تجارة B2B مقره Türkiye للتجارة ثنائية الاتجاه والتوريد الاستراتيجي والتحقق من الموردين ودخول الأسواق.'
 };
 const description = descriptionMap[lang] || descriptionMap.en;
 const copyrightMap: Record<string, string> = {
@@ -47,7 +48,8 @@ const copyrightMap: Record<string, string> = {
   sr:`© ${year} CTSEG. Sva prava zadržana.`,
   ro:`© ${year} CTSEG. Toate drepturile rezervate.`,
   bg:`© ${year} CTSEG. Всички права запазени.`,
-  he:`© ${year} CTSEG. כל הזכויות שמורות.`
+  he:`© ${year} CTSEG. כל הזכויות שמורות.`,
+  ar:`© ${year} CTSEG. جميع الحقوق محفوظة.`
 };
 const copyright = copyrightMap[lang] || copyrightMap.en;
 const marketLocales: Array<{ code:string; flagSrc:string; label:string; href:string }> = [
@@ -62,9 +64,10 @@ const marketLocales: Array<{ code:string; flagSrc:string; label:string; href:str
   { code:'ro', flagSrc:'/images/flags/ro.svg', label:'România', href:'/ro/' },
   { code:'bg', flagSrc:'/images/flags/bg.svg', label:'България', href:'/bg/' },
   { code:'he', flagSrc:'/images/flags/il.svg', label:'עברית', href:'/he/' },
-  { code:'uk', flagSrc:'/images/flags/ua.svg', label:'Україна', href:'/uk/' }
+  { code:'uk', flagSrc:'/images/flags/ua.svg', label:'Україна', href:'/uk/' },
+  { code:'ar', flagSrc:'/images/flags/sa.svg', label:'العربية', href:'/ar/' }
 ];
-const marketLabel = ({tr:'Global Pazarlar',en:'Global Markets',de:'Globale Märkte',it:'Mercati globali',fa:'بازارهای جهانی',ru:'Глобальные рынки',zh:'全球市场',vi:'Thị trường toàn cầu',uk:'Міжнародні ринки',ro:'Piețe globale',bg:'Глобални пазари',sr:'Globalna tržišta',he:'שווקים גלובליים'} as Record<string,string>)[lang] || 'Global Markets';
+const marketLabel = ({tr:'Global Pazarlar',en:'Global Markets',de:'Globale Märkte',it:'Mercati globali',fa:'بازارهای جهانی',ru:'Глобальные рынки',zh:'全球市场',vi:'Thị trường toàn cầu',uk:'Міжнародні ринки',ro:'Piețe globale',bg:'Глобални пазари',sr:'Globalna tržišta',he:'שווקים גלובליים',ar:'الأسواق العالمية'} as Record<string,string>)[lang] || 'Global Markets';
 const footerNav = ({
   tr:{portfolio:'Ticaret Portföyü',overview:'Portföyü İnceleyin',sourcing:'Stratejik Tedarik',marketEntry:'İhracat ve Pazara Giriş',intelligence:'Ticaret İçgörüleri'},
   en:{portfolio:'Trade Portfolio',overview:'Explore the Portfolio',sourcing:'Strategic Sourcing',marketEntry:'Export & Market Entry',intelligence:'Trade Intelligence'},
@@ -78,7 +81,8 @@ const footerNav = ({
   ro:{portfolio:'Portofoliu Comercial',overview:'Vezi portofoliul',sourcing:'Sourcing strategic',marketEntry:'Export și intrare pe piață',intelligence:'Analize comerciale'},
   bg:{portfolio:'Търговско портфолио',overview:'Виж портфолиото',sourcing:'Стратегическо снабдяване',marketEntry:'Износ и навлизане на пазара',intelligence:'Търговски анализи'},
   sr:{portfolio:'Trgovinski portfolio',overview:'Pogledaj portfolio',sourcing:'Strateški sourcing',marketEntry:'Izvoz i ulazak na tržište',intelligence:'Trgovinski uvidi'},
-  he:{portfolio:'תחומי סחר',overview:'מוצרים מסחריים',sourcing:'איתור ואימות ספקים',marketEntry:'כניסה לשוק',intelligence:'תובנות מסחריות'}
+  he:{portfolio:'תחומי סחר',overview:'מוצרים מסחריים',sourcing:'איתור ואימות ספקים',marketEntry:'כניסה לשוק',intelligence:'תובנות מסחריות'},
+  ar:{portfolio:'المحفظة التجارية',overview:'استكشف المحفظة',sourcing:'التوريد الاستراتيجي',marketEntry:'التصدير ودخول الأسواق',intelligence:'الرؤى التجارية'}
 } as Record<string,{portfolio:string;overview:string;sourcing:string;marketEntry:string;intelligence:string}>)[lang] || {portfolio:'Trade Portfolio',overview:'Explore the Portfolio',sourcing:'Strategic Sourcing',marketEntry:'Export & Market Entry',intelligence:'Trade Intelligence'};
 const statementMap: Record<string,string> = {
   tr:'SINIRLARIN ÖTESİNDE TİCARET.',
@@ -93,7 +97,8 @@ const statementMap: Record<string,string> = {
   ro:'COMERȚ DINCOLO DE GRANIȚE.',
   bg:'ТЪРГОВИЯ ОТВЪД ГРАНИЦИТЕ.',
   sr:'TRGOVINA BEZ GRANICA.',
-  he:'סחר ללא גבולות.'
+  he:'סחר ללא גבולות.',
+  ar:'تجارة بلا حدود.'
 };
 const footerStatement = statementMap[lang] || statementMap.en;
 const footerPath = (key:string,id?:string) => {
@@ -117,7 +122,7 @@ const showGenericPortfolio = !focusedCountryHome;
 const showGlassLink = !focusedCountryHome || lang === 'fa';
 const safeGlassLang = (['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
 const footerGlassHref = lang === 'tr' ? '/glass/' : lang === 'en' ? '/en/glass/' : duzceGlassPath(safeGlassLang);
-const footerGlassLabel = lang === 'tr' ? 'Cam Tedariki ve İhracat' : lang === 'en' ? 'Glass Sourcing & Export' : ({de:'Düzce Float Glass Export',it:'Düzce Float Glass Export',fa:'صادرات شیشه Düzce',ru:'Экспорт Düzce Float Glass',zh:'Düzce 浮法玻璃出口',vi:'Xuất khẩu Düzce Float Glass',uk:'Експорт флоат-скла Düzce',ro:'Export Düzce Float Glass',bg:'Износ Düzce Float Glass',sr:'Izvoz Düzce Float Glass',sq:'Düzce Float Glass',mk:'Düzce Float Glass',he:'Düzce Float Glass (English)'}[lang] || 'Glass Sourcing');
+const footerGlassLabel = lang === 'tr' ? 'Cam Tedariki ve İhracat' : lang === 'en' ? 'Glass Sourcing & Export' : ({de:'Düzce Float Glass Export',it:'Düzce Float Glass Export',fa:'صادرات شیشه Düzce',ru:'Экспорт Düzce Float Glass',zh:'Düzce 浮法玻璃出口',vi:'Xuất khẩu Düzce Float Glass',uk:'Експорт флоат-скла Düzce',ro:'Export Düzce Float Glass',bg:'Износ Düzce Float Glass',sr:'Izvoz Düzce Float Glass',sq:'Düzce Float Glass',mk:'Düzce Float Glass',he:'Düzce Float Glass (English)',ar:'توريد زجاج Düzce'}[lang] || 'Glass Sourcing');
 ---
 <footer class="site-footer">
   <div class="footer-markets-wrap"><div class="container footer-markets"><div class="footer-markets-label"><span class="footer-markets-kicker">CTSEG</span><strong>{marketLabel}</strong></div><nav class="footer-market-links" aria-label={marketLabel}>{marketLocales.map((item) => (<a href={item.href} class:list={['footer-market-link', item.code === lang && 'is-active']} aria-current={item.code === lang ? 'page' : undefined} data-footer-locale={item.code}><img aria-hidden="true" class="footer-market-flag" src={item.flagSrc} width="24" height="16" alt="" loading="lazy" decoding="async" /><span>{item.label}</span></a>))}</nav></div></div>

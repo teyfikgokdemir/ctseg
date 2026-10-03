@@ -3,6 +3,7 @@ import CommercialRequestForm from './CommercialRequestForm.astro';
 import { glassSeoPages } from '../data/glass-seo';
 import { glassHubLocaleCopy, type GlassHubLocale } from '../data/glass-hub-locales';
 import { localizedGlassProductCopy, localizedGlassSlugs, type LocalizedGlassLocale } from '../data/glass-product-locales';
+import { arGlassProductCopy } from '../data/glass-product-ar';
 import { glassMarketPages, glassMarketSlugs } from '../data/glass-market-seo';
 const glassPathGroups=[
   {key:'core',slugs:['float-glass','tempered-glass','heat-strengthened-glass','laminated-glass','low-e-coated-glass','solar-control-glass','insulated-glass-igu','low-iron-extra-clear-glass']},
@@ -22,7 +23,8 @@ const glassGroupLabels:Record<string,Record<string,string>>={
   uk:{core:'Базове та функціональне скло',processing:'Оброблене та декоративне скло',safety:'Безпечне та сертифіковане проєктне скло',applications:'Скло для застосувань та OEM'},
   ro:{core:'Sticlă de bază și performanță',processing:'Sticlă procesată și decorativă',safety:'Sticlă de siguranță și certificată',applications:'Sticlă pentru aplicații și OEM'},
   bg:{core:'Основно и високоефективно стъкло',processing:'Обработено и декоративно стъкло',safety:'Безопасно и сертифицирано проектно стъкло',applications:'Стъкло за приложения и OEM'},
-  he:{core:'זכוכית בסיס וביצועים',processing:'זכוכית מעובדת ודקורטיבית',safety:'זכוכית בטיחות ופרויקטים מאושרת',applications:'זכוכית ליישומים ו-OEM'}
+  he:{core:'זכוכית בסיס וביצועים',processing:'זכוכית מעובדת ודקורטיבית',safety:'זכוכית בטיחות ופרויקטים מאושרת',applications:'זכוכית ליישומים ו-OEM'},
+  ar:{core:'الزجاج الأساسي وزجاج الأداء',processing:'الزجاج المعالج والديكوري',safety:'زجاج الأمان وزجاج المشاريع المعتمد',applications:'زجاج التطبيقات وOEM'}
 };
 const productCardSlugs=['float-glass','float-glass','low-e-coated-glass','solar-control-glass','laminated-glass','tempered-glass','mirror-decorative-glass','architectural-project-glass'] as const;
 const productCardImages=[
@@ -63,7 +65,7 @@ faqTitle:'Glass sourcing FAQ',faq:[['Is CTSEG a glass manufacturer?','No. CTSEG 
         const page=glassSeoPages.find((item)=>item.slug===slug);
         return page?<a href={`${tr?'/glass':'/en/glass'}/${slug}/`}><strong>{page[lang as 'tr'|'en'].title}</strong><span>↗</span></a>:null;
       }
-      const product=localizedGlassProductCopy[lang as LocalizedGlassLocale]?.products[slug];
+      const product=(lang==='ar'?arGlassProductCopy:localizedGlassProductCopy[lang as LocalizedGlassLocale])?.products[slug];
       return product?<a href={`/${lang}/glass/${slug}/`}><strong>{product.name}</strong><span>↗</span></a>:null;
     })}
   </div>

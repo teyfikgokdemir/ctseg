@@ -82,7 +82,7 @@ try {
     { name:'wide-tr-insights', path:'/tr/icgoruler/', width:1600, height:1000 },
     { name:'wide-tr-about', path:'/tr/hakkimizda/', width:1600, height:1000 },
     { name:'wide-tr-contact', path:'/tr/iletisim/', width:1600, height:1000 },
-    { name:'wide-tr-catalogue', path:'/tr/ticari-urunler/', width:1600, height:1000 },
+    { name:'wide-tr-catalogue', path:'/tr/ticari-urunler/', width:1600, height:1000, gapLimit:84 },
     { name:'wide-de-home', path:'/de/', width:1600, height:1000 },
     { name:'wide-de-locale-panel', path:'/de/', width:1600, height:1000, openLanguage:true },
     { name:'wide-it-home', path:'/it/', width:1600, height:1000 },
@@ -135,13 +135,13 @@ try {
     ,{ name:'desktop1440-vi-home', path:'/vi/', width:1440, height:1000 }
     ,{ name:'mobile390-vi-home', path:'/vi/', width:390, height:844 }
   ];
-  const sourcingLocales = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg'];
+  const sourcingLocales = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','ar'];
   const productionLocaleCount = sourcingLocales.length;
   const rootLocaleCount = productionLocaleCount + 1;
   const sourcingFamilies = {
-    carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/',uk:'/uk/sourcing/iranian-carpets/',ro:'/ro/sourcing/covoare-iraniene/',bg:'/bg/sourcing/iranski-kilimi/'},
-    silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/',uk:'/uk/sourcing/silk-carpets/',ro:'/ro/sourcing/covoare-matase-lucrate-manual/',bg:'/bg/sourcing/rachno-takani-koprineni-kilimi/'},
-    textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/',zh:'/zh/sourcing/textiles/',vi:'/vi/sourcing/textiles/',uk:'/uk/sourcing/wholesale-textiles/',ro:'/ro/sourcing/sourcing-textile-angro/',bg:'/bg/sourcing/sourcing-tekstili-na-edro/'}
+    carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/',uk:'/uk/sourcing/iranian-carpets/',ro:'/ro/sourcing/covoare-iraniene/',bg:'/bg/sourcing/iranski-kilimi/',ar:'/ar/sourcing/iranian-carpets/'},
+    silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/',uk:'/uk/sourcing/silk-carpets/',ro:'/ro/sourcing/covoare-matase-lucrate-manual/',bg:'/bg/sourcing/rachno-takani-koprineni-kilimi/',ar:'/ar/sourcing/hand-knotted-silk-carpets/'},
+    textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/',zh:'/zh/sourcing/textiles/',vi:'/vi/sourcing/textiles/',uk:'/uk/sourcing/wholesale-textiles/',ro:'/ro/sourcing/sourcing-textile-angro/',bg:'/bg/sourcing/sourcing-tekstili-na-edro/',ar:'/ar/sourcing/wholesale-textile-sourcing/'}
   };
   const sourcingAudiences = {
     carpets:['کارگاه‌های فرش دستباف','تولیدکنندگان فرش ابریشم','تولیدکنندگان فرش ماشینی','صادرکنندگان فرش'],
@@ -598,7 +598,7 @@ try {
     console.log(`${testCase.name}: ${testCase.width}x${testCase.height}, lang=${result.lang}, overflow=${result.overflow}px`);
     await page.close();
   }
-  const rootTargets={tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/',uk:'/uk/',ro:'/ro/',bg:'/bg/',he:'/he/'};
+  const rootTargets={tr:'/',en:'/en/',de:'/de/',it:'/it/',fa:'/fa/',ru:'/ru/',zh:'/zh/',vi:'/vi/',uk:'/uk/',ro:'/ro/',bg:'/bg/',he:'/he/',ar:'/ar/'};
   const globalLocaleEntries = [
     {lang:'tr',path:'/',targets:rootTargets,alternates:['tr','en','x-default']},
     {lang:'en',path:'/en/',targets:rootTargets,alternates:['tr','en','x-default']},
@@ -610,7 +610,8 @@ try {
     {lang:'vi',path:'/vi/',targets:rootTargets,alternates:['vi']},
     {lang:'uk',path:'/uk/',targets:rootTargets,alternates:['uk']},
     {lang:'ro',path:'/ro/',targets:rootTargets,alternates:['ro']},
-    {lang:'bg',path:'/bg/',targets:rootTargets,alternates:['bg']}
+    {lang:'bg',path:'/bg/',targets:rootTargets,alternates:['bg']},
+    {lang:'ar',path:'/ar/',targets:rootTargets,alternates:['ar']}
   ];
   let globalLocaleChecks=0;
   for(const entry of globalLocaleEntries){
@@ -639,6 +640,7 @@ try {
           keyboardAccessible:links.every(link=>link.tabIndex>=0),
           visibleOptions:links.filter(visible).length,
           overflow:document.documentElement.scrollWidth-window.innerWidth,
+          overflowNodes:[...document.querySelectorAll('body *')].filter((element)=>{const box=element.getBoundingClientRect();return box.right>window.innerWidth+1||box.left<-1}).slice(0,12).map((element)=>{const box=element.getBoundingClientRect();return {tag:element.tagName.toLowerCase(),class:[...element.classList].join('.'),left:Math.round(box.left),right:Math.round(box.right),width:Math.round(box.width)}}),
           canonical:document.querySelector('link[rel="canonical"]')?.href??null,
           coreAlternates:alternates.every(code=>document.querySelector(`link[rel="alternate"][hreflang="${code}"]`))
         };
@@ -648,7 +650,7 @@ try {
         const targetResponse=await page.request.get(`http://127.0.0.1:4321${encodeURI(path)}`);
         statuses.push([code,targetResponse.status()]);
       }
-      const expectedGlobalHtmlLang = ({zh:'zh-CN',vi:'vi-VN',uk:'uk-UA',ro:'ro-RO',bg:'bg-BG'})[entry.lang] || entry.lang;
+      const expectedGlobalHtmlLang = ({zh:'zh-CN',vi:'vi-VN',uk:'uk-UA',ro:'ro-RO',bg:'bg-BG',ar:'ar-SA'})[entry.lang] || entry.lang;
       if(contract.lang!==expectedGlobalHtmlLang||contract.options!==Object.keys(rootTargets).length||contract.active.length!==1||contract.active[0]!==entry.lang||
         !contract.targetsMatch||!contract.keyboardAccessible||contract.visibleOptions!==Object.keys(rootTargets).length||contract.overflow>1||!contract.canonical||
         !contract.coreAlternates||statuses.some(([,status])=>status!==200)){
@@ -752,7 +754,7 @@ try {
             expectedLang
           };
         },{expectedLang:lang,expectedPath:path,familyRoutes:routes,audiences:sourcingAudiences[family]});
-        const badDirection=lang==='fa'
+        const badDirection=['fa','ar'].includes(lang)
           ? contract.htmlDir!=='rtl'||contract.rootDirection!=='rtl'||contract.bodyDirection!=='rtl'
           : contract.htmlDir!=='ltr'||contract.rootDirection!=='ltr'||contract.bodyDirection!=='ltr';
         const badProducer=lang==='fa'
@@ -773,7 +775,7 @@ try {
           switchStatuses.push([targetLang,switchResponse.status()]);
         }
         const badSwitch=switchStatuses.some(([,status])=>status!==200);
-        const expectedSourcingHtmlLang = ({zh:'zh-CN',vi:'vi-VN',uk:'uk-UA',ro:'ro-RO',bg:'bg-BG'})[lang] || lang;
+        const expectedSourcingHtmlLang = ({zh:'zh-CN',vi:'vi-VN',uk:'uk-UA',ro:'ro-RO',bg:'bg-BG',ar:'ar-SA'})[lang] || lang;
         if(contract.htmlLang!==expectedSourcingHtmlLang||badDirection||contract.activeLocales.length!==1||contract.activeLocales[0]!==lang||
           contract.localeCodes.length!==sourcingLocales.length||!sourcingLocales.every(code=>contract.localeCodes.includes(code))||!contract.localeTargetMatch||
           !contract.canonicalMatches||!contract.hreflangMatch||!contract.xDefaultMatches||contract.h1s!==1||

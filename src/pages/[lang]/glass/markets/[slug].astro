@@ -4,9 +4,9 @@ import { glassMarketSlugs, type GlassMarketSlug } from '../../../../data/glass-m
 import type { LocalizedGlassMarketLocale } from '../../../../data/glass-market-locales';
 
 export function getStaticPaths(){
-  const locales:LocalizedGlassMarketLocale[]=['de','it','ru','fa','zh','vi','uk','ro','bg','he'];
+  const locales:(LocalizedGlassMarketLocale|'ar')[]=['de','it','ru','fa','zh','vi','uk','ro','bg','he','ar'];
   return locales.flatMap((lang)=>glassMarketSlugs.map((slug)=>({params:{lang,slug}})));
 }
-const {lang,slug}=Astro.params as {lang:LocalizedGlassMarketLocale;slug:GlassMarketSlug};
+const {lang,slug}=Astro.params as {lang:LocalizedGlassMarketLocale|'ar';slug:GlassMarketSlug};
 ---
 <GlassMarketLanding lang={lang} slug={slug}/>

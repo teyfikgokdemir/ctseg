@@ -12,7 +12,7 @@ const showcaseSizes = {
   compact:'(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(50vw - 27px), min(33vw,420px)'
 } as Record<string,string>;
 const imageSizes = displayRole ? showcaseSizes[displayRole] : catalogueSizes;
-const portfolioLabel = {tr:'Ticaret Portföyü',en:'Trade Portfolio',de:'Handelsportfolio',it:'Portafoglio commerciale',ru:'Торговый портфель',fa:'سبد تجاری',zh:'贸易组合',vi:'Danh mục thương mại',ro:'Portofoliu comercial',bg:'Търговско портфолио',sr:'Trgovinski portfolio'}[lang] || ui[lang].products;
+const portfolioLabel = {tr:'Ticaret Portföyü',en:'Trade Portfolio',de:'Handelsportfolio',it:'Portafoglio commerciale',ru:'Торговый портфель',fa:'سبد تجاری',zh:'贸易组合',vi:'Danh mục thương mại',ro:'Portofoliu comercial',bg:'Търговско портфолио',sr:'Trgovinski portfolio',ar:'المحفظة التجارية'}[lang] || ui[lang].products;
 const rfqPrompt = {
   tr:'Ticari İnceleme & Teklif',
   en:'Commercial Review & RFQ',
@@ -24,7 +24,8 @@ const rfqPrompt = {
   vi:'Đánh giá & Báo giá',
   ro:'Evaluare comercială & RFQ',
   bg:'Търговска оценка & RFQ',
-  sr:'Komercijalna procena & RFQ'
+  sr:'Komercijalna procena & RFQ',
+  ar:'تقييم تجاري وطلب تسعير'
 }[lang] || 'RFQ';
 const originDisplay = {
   tr: product.origin,
@@ -37,7 +38,8 @@ const originDisplay = {
   vi: product.origin === 'Iran' ? 'Iran' : 'Thổ Nhĩ Kỳ / Iran / nguồn xác minh',
   ro: product.origin === 'Iran' ? 'Iran' : 'Türkiye / Iran / sursă verificată',
   bg: product.origin === 'Iran' ? 'Иран' : 'Türkiye / Иран / проверен източник',
-  sr: product.origin === 'Iran' ? 'Iran' : 'Türkiye / Iran / provereni izvor'
+  sr: product.origin === 'Iran' ? 'Iran' : 'Türkiye / Iran / provereni izvor',
+  ar: product.origin === 'Iran' ? 'إيران' : 'Türkiye / إيران / مصدر موثّق'
 }[lang] || product.origin;
 ---
 <a

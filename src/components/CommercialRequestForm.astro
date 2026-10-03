@@ -10,7 +10,7 @@ const websiteLabel: Record<string,string> = {
   tr:'Web sitesi', en:'Website', de:'Website des Unternehmens', it:'Sito web aziendale',
   ru:'Сайт компании', fa:'وب‌سایت شرکت', zh:'公司网站', vi:'Website doanh nghiệp',
   uk:'Вебсайт компанії', ro:'Site-ul companiei', bg:'Уебсайт на компанията',
-  sr:'Veb-sajt kompanije', he:'אתר החברה'
+  sr:'Veb-sajt kompanije', he:'אתר החברה', ar:'موقع الشركة'
 };
 const qualification = contactQualification[lang];
 const privacyHref = lang === 'fa' ? '/fa/privacy/' : lang === 'he' ? '/he/מדיניות-פרטיות/' : localizedPath(lang,'legal','privacy');
@@ -93,6 +93,8 @@ const supportNeedCopy = {
   bg:{label:'За какво ви е необходима подкрепа?',options:[['supplier_sourcing','Откриване и проверка на производител или доставчик в Türkiye'],['rfq_comparison','Подготовка на RFQ и сравнение на оферти'],['private_label','Проучване на производител за собствена марка / договорно производство'],['market_entry','Износ и навлизане на нов пазар'],['document_assessment','Оценка на продукт, произход или партидни документи'],['external_trade_desk','Постоянен външен търговски отдел'],['other','Друго']]},
   sr:{label:'Za šta vam je potrebna podrška?',options:[['supplier_sourcing','Pronalaženje i provera proizvođača ili dobavljača u Türkiye'],['rfq_comparison','Priprema RFQ-a i poređenje ponuda'],['private_label','Istraživanje proizvođača za robnu marku naručioca / ugovornu proizvodnju'],['market_entry','Izvoz i ulazak na novo tržište'],['document_assessment','Procena proizvoda, porekla ili dokumentacije serije'],['external_trade_desk','Kontinuirani eksterni trgovinski desk'],['other','Drugo']]},
   he:{label:'באיזה תחום אתם זקוקים לתמיכה?',options:[['supplier_sourcing','איתור ואימות יצרן או ספק'],['rfq_comparison','בניית RFQ והשוואת הצעות'],['private_label','איתור יצרן למותג פרטי / OEM'],['market_entry','כניסה לשוק ופיתוח קונים'],['document_assessment','בדיקת מוצר, מקור או מסמכי אצווה'],['external_trade_desk','ניהול פעילות סחר חוץ מתמשכת'],['other','אחר']]}
+,
+  ar:{label:'ما نوع الدعم الذي تحتاجه؟',options:[['supplier_sourcing','البحث عن مصنع أو مورد والتحقق منه في Türkiye'],['rfq_comparison','إعداد RFQ ومقارنة العروض'],['private_label','البحث عن مصنع للعلامة الخاصة / التصنيع التعاقدي'],['market_entry','التصدير ودخول سوق جديد'],['document_assessment','تقييم المنتج أو المنشأ أو وثائق الدفعة'],['external_trade_desk','مكتب تجارة خارجية مستمر'],['other','أخرى']]}
 }[lang];
 
 const dynamicPlaceholders = {
@@ -149,6 +151,8 @@ const dynamicPlaceholders = {
   bg:{buyer_request:'Спецификация на продукта, ориентировъчен обем (тона / контейнери), предпочитан Incoterm и пристанище на местоназначение...',supplier_market_entry:'Произвеждани продуктови линии, месечен/годишен капацитет, сертификати за качество и целеви експортни пазари...',external_trade_desk:'Цели за външна търговия, целеви пазари, продуктови групи, структура на екипа и дейности, които искате CTSEG да управлява...',default:'Детайли за търговската заявка, продуктови спецификации и изисквания за доставка...'},
   sr:{buyer_request:'Specifikacija proizvoda, procenjeni obim (MT / kontejneri), željeni Incoterm i odredišna luka...',supplier_market_entry:'Proizvodni program, mesečni/godišnji kapacitet, sertifikati kvaliteta i ciljna izvozna tržišta...',external_trade_desk:'Ciljevi spoljne trgovine, ciljna tržišta, grupe proizvoda, struktura tima i obim poslova koje želite da CTSEG vodi...',default:'Detalji komercijalnog zahteva, specifikacije proizvoda i zahtevi isporuke...'},
   he:{buyer_request:'מפרט המוצר, כמות משוערת, תנאי מסירה מועדפים ויעד...',supplier_market_entry:'המוצרים שלכם, יכולת אספקה, מסמכי איכות ושוקי היעד...',external_trade_desk:'יעדי הסחר, שווקים, קבוצות מוצרים והיקף הפעילות שתרצו להעביר לניהול CTSEG...',default:'פרטי הבקשה המסחרית, מפרט, כמות, יעד ודרישות אספקה...'}
+,
+  ar:{buyer_request:'مواصفات المنتج المطلوبة، الحجم التقديري (طن / حاويات)، Incoterm المفضل (FOB/CIF) وميناء الوجهة...',supplier_market_entry:'خطوط المنتجات المصنّعة، الطاقة الإنتاجية الشهرية/السنوية، شهادات الجودة والأسواق التصديرية المستهدفة...',external_trade_desk:'أهداف التجارة الخارجية للشركة، الأسواق المستهدفة، مجموعات المنتجات، هيكل الفريق ونطاق العمليات التي تريد من CTSEG إدارتها...',default:'تفاصيل الطلب التجاري، مواصفات المنتج ومتطلبات التسليم...'}
 }[lang] || {
   buyer_request: 'Required product specifications, estimated volume, preferred Incoterm, and destination...',
   supplier_market_entry: 'Manufactured products, verified production capacity, quality certifications, and target markets...',

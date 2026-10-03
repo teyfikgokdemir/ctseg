@@ -21,7 +21,7 @@ const alt=Object.fromEntries([
 ]);
 const schema=[
   {'@context':'https://schema.org','@type':'Service','name':product.name,'description':product.description,'url':canonical,'areaServed':'Worldwide','provider':{'@type':'Organization','name':'CTSEG','url':'https://ctseg.com.tr/'}},
-  {'@context':'https://schema.org','@type':'FAQPage','mainEntity':localeCopy.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))},
+  {'@context':'https://schema.org','@type':'FAQPage','mainEntity':detailCopy.faq.map(([name,text])=>({'@type':'Question',name,acceptedAnswer:{'@type':'Answer',text}}))},
   {'@context':'https://schema.org','@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':localeCopy.relatedTitle,'item':`https://ctseg.com.tr/${lang}/glass/`},{'@type':'ListItem','position':2,'name':product.name,'item':canonical}]}
 ];
 const relatedMap:Record<string,string[]>={
