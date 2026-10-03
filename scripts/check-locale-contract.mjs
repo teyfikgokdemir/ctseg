@@ -45,7 +45,7 @@ const arCore=[
   'ar/services/strategic-sourcing/index.html','ar/services/supplier-sourcing-and-verification/index.html','ar/services/international-trade-advisory/index.html','ar/services/cost-optimisation-tco/index.html','ar/services/market-entry/index.html',
   'ar/solutions/turkiye-supplier-sourcing/index.html','ar/solutions/private-label-manufacturer/index.html','ar/solutions/rfq-bid-comparison/index.html','ar/solutions/food-origin-batch-documents/index.html',
   'ar/privacy/index.html','ar/cookies/index.html','ar/terms/index.html','ar/data-protection/index.html',
-  'ar/كيف-نعمل/index.html','ar/سيناريوهات-عمل-تمثيلية/index.html',
+  'ar/how-we-work/index.html','ar/representative-work-scenarios/index.html',
   'ar/trade-products/akbari-pistachio/index.html','ar/insights/strategic-sourcing-vs-procurement/index.html',
   'ar/glass/index.html','ar/glass/float-glass/index.html','ar/glass/markets/gulf-middle-east/index.html',
   'ar/sourcing/iranian-carpets/index.html','ar/sourcing/hand-knotted-silk-carpets/index.html','ar/sourcing/wholesale-textile-sourcing/index.html'
