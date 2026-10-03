@@ -64,6 +64,12 @@ const arService=read('ar/services/strategic-sourcing/index.html');
 if((arService.match(/class="content-block/g)||[]).length<6||!arService.includes('الأسئلة الشائعة'))errors.push('Arabic strategic-sourcing detail depth incomplete');
 const arProduct=read('ar/trade-products/akbari-pistachio/index.html');
 if((arProduct.match(/<dt>/g)||[]).length<12||!arProduct.includes('معلومات التقييم التجاري'))errors.push('Arabic product-detail commercial facts incomplete');
+for(const marker of ['CTSEG Trade Verification & Sourcing Governance','CTSEG acts as an independent trade and sourcing coordinator','alternate product view'])if(arProduct.includes(marker))errors.push('Arabic product detail contains English fallback marker: '+marker);
+const arAbout=read('ar/about/index.html');
+for(const marker of ['Trade Architecture','Institutional Registry'])if(arAbout.includes(marker))errors.push('Arabic about page contains English fallback marker: '+marker);
+const arContact=read('ar/contact/index.html');
+for(const marker of ['I need CTSEG as an ongoing external trade function','External Trade Desk'])if(arContact.includes(marker))errors.push('Arabic contact page contains English fallback marker: '+marker);
+
 const arInsight=read('ar/insights/strategic-sourcing-vs-procurement/index.html');
 if((arInsight.match(/class="content-block article-block"/g)||[]).length<4||!arInsight.includes('التوريد الاستراتيجي'))errors.push('Arabic insight detail content/category incomplete');
 const arGlass=read('ar/glass/index.html');
