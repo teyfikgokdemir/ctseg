@@ -39,6 +39,35 @@ for(const requiredArabicHomeBlock of ['id="for-buyers"','id="for-producers"','id
 for(const ArabicNavLabel of ['التوريد الاستراتيجي','البحث عن الموردين والتحقق منهم','استشارات التجارة الدولية','تحليل وتحسين التكلفة الكلية TCO','دخول الأسواق','طريقة العمل','سيناريوهات عمل تمثيلية'])if(!arHome.includes(ArabicNavLabel))errors.push('Arabic navigation missing required item: '+ArabicNavLabel);
 for(const ArabicHubHref of ['/ar/services/','/ar/trade-products/','/ar/markets/','/ar/insights/','/ar/about/','/ar/contact/'])if(!arHome.includes(\`href="\${ArabicHubHref}"\`))errors.push('Arabic navigation missing hub link: '+ArabicHubHref);
 
+
+const arCore=[
+  'ar/services/index.html','ar/trade-products/index.html','ar/markets/index.html','ar/insights/index.html','ar/about/index.html','ar/contact/index.html',
+  'ar/services/strategic-sourcing/index.html','ar/services/supplier-sourcing-and-verification/index.html','ar/services/international-trade-advisory/index.html','ar/services/cost-optimisation-tco/index.html','ar/services/market-entry/index.html',
+  'ar/solutions/turkiye-supplier-sourcing/index.html','ar/solutions/private-label-manufacturer/index.html','ar/solutions/rfq-bid-comparison/index.html','ar/solutions/food-origin-batch-documents/index.html',
+  'ar/privacy/index.html','ar/cookies/index.html','ar/terms/index.html','ar/data-protection/index.html',
+  'ar/كيف-نعمل/index.html','ar/سيناريوهات-عمل-تمثيلية/index.html',
+  'ar/trade-products/akbari-pistachio/index.html','ar/insights/strategic-sourcing-vs-procurement/index.html',
+  'ar/glass/index.html','ar/glass/float-glass/index.html','ar/glass/markets/gulf-middle-east/index.html',
+  'ar/sourcing/iranian-carpets/index.html','ar/sourcing/hand-knotted-silk-carpets/index.html','ar/sourcing/wholesale-textile-sourcing/index.html'
+];
+for(const path of arCore){
+  if(!existsSync(join(dist,path))){errors.push(`${path}: Arabic parity route missing`);continue}
+  const html=read(path);
+  if(!html.includes('dir="rtl"'))errors.push(`${path}: Arabic direction missing`);
+  if(!html.includes('lang="ar-SA"')&&!html.includes('lang="ar"'))errors.push(`${path}: Arabic lang missing`);
+  const visibleText=html.replace(/<script[\s\S]*?<\/script>/gi,'').replace(/<style[\s\S]*?<\/style>/gi,'').replace(/<[^>]+>/g,' ');
+  if(!/[\u0600-\u06FF]/.test(visibleText))errors.push(`${path}: Arabic visible content missing`);
+  for(const marker of ['Commercial assessment information','Related resources','Explore sourcing insights','Trade Intelligence','Submit Commercial Request','Quick contact'])if(visibleText.includes(marker))errors.push(`${path}: English fallback marker remains (${marker})`);
+}
+const arService=read('ar/services/strategic-sourcing/index.html');
+if((arService.match(/class="content-block/g)||[]).length<6||!arService.includes('الأسئلة الشائعة'))errors.push('Arabic strategic-sourcing detail depth incomplete');
+const arProduct=read('ar/trade-products/akbari-pistachio/index.html');
+if((arProduct.match(/<dt>/g)||[]).length<12||!arProduct.includes('معلومات التقييم التجاري'))errors.push('Arabic product-detail commercial facts incomplete');
+const arInsight=read('ar/insights/strategic-sourcing-vs-procurement/index.html');
+if((arInsight.match(/class="content-block article-block"/g)||[]).length<4||!arInsight.includes('التوريد الاستراتيجي'))errors.push('Arabic insight detail content/category incomplete');
+const arGlass=read('ar/glass/index.html');
+if(!arGlass.includes('الزجاج')||!arGlass.includes('dir="rtl"'))errors.push('Arabic glass hub localization incomplete');
+
 const ruHome=read(homes.ru);
 if(!ruHome.includes('<html lang="ru" dir="ltr"'))errors.push('Russian homepage lang/direction incorrect');
 const ruH1Matches=[...ruHome.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)];
@@ -79,6 +108,8 @@ for(const path of ruHtml){
 const sitemapFiles=readdirSync(dist).filter((name)=>name.startsWith('sitemap-')&&name.endsWith('.xml'));
 const sitemap=sitemapFiles.map((name)=>readFileSync(join(dist,name),'utf8')).join('\n');
 if(!sitemap.includes('https://ctseg.com.tr/ru/'))errors.push('Russian homepage missing from sitemap');
+if(!sitemap.includes('https://ctseg.com.tr/ar/'))errors.push('Arabic homepage missing from sitemap');
+for(const path of arCore)if(!sitemap.includes(`https://ctseg.com.tr/${path.replace(/index\.html$/,'')}`))errors.push(`${path}: missing from sitemap`);
 for(const path of ruSourcing)if(!sitemap.includes(`https://ctseg.com.tr/${path.replace(/index\.html$/,'')}`))errors.push(`${path}: missing from sitemap`);
 for(const path of ruCore)if(!sitemap.includes(`https://ctseg.com.tr/${path.replace(/index\.html$/,'')}`))errors.push(`${path}: missing from sitemap`);
 if(sitemap.includes('https://ctseg.com.tr/fr/'))errors.push('French URL remains in sitemap');
