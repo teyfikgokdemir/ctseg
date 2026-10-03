@@ -72,7 +72,7 @@ button{font:inherit}
 .language-menu a>img{justify-self:start}.language-menu a span{color:var(--muted);font-size:.7rem;letter-spacing:.12em}.language-menu a strong{font-size:.84rem;font-weight:500}.language-menu a i{width:5px;height:5px;border-radius:50%;background:transparent}
 .language-menu a:hover{color:var(--accent-soft);background:color-mix(in srgb,var(--accent) 9%,transparent)}
 .language-menu a.active{border-left-color:var(--accent);color:#fff;background:color-mix(in srgb,var(--accent) 7%,transparent)}.language-menu a.active i{background:var(--accent-soft)}
-html[dir="rtl"] .language-menu{right:auto;left:5px}
+html[data-locale="ar"] .language-switcher-desktop .language-menu{left:12px!important;right:auto!important;max-width:calc(100vw - 24px)}
 html[dir="rtl"] .language-menu a{border-left-color:transparent;border-right:1px solid transparent}
 html[dir="rtl"] .language-menu a.active{border-right-color:var(--accent)}
 .mobile-locales{display:none}
