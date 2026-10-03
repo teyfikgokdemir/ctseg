@@ -14,5 +14,6 @@ export const analyticsDisclosure: Record<string, string> = {
   "ro": "GA4 și Clarity funcționează atât la acceptare, cât și la refuz. La refuz, măsurarea este limitată și fără cookie-uri. Acceptarea activează cookie-urile analitice și Google Tag Manager. Clarity maschează textul. Puteți modifica alegerea ulterior.",
   "bg": "GA4 и Clarity работят както при приемане, така и при отказ. При отказ измерването е ограничено и без бисквитки. Приемането активира аналитични бисквитки и Google Tag Manager. Clarity маскира текста. Можете да промените избора си по-късно.",
   "ka": "GA4 და Clarity მუშაობს თანხმობისა და უარის შემთხვევაშიც. უარისას გაზომვა შეზღუდულია და ქუქიებს არ იყენებს. თანხმობა ააქტიურებს ანალიტიკურ ქუქიებსა და Google Tag Manager-ს. Clarity ტექსტს ნიღბავს. არჩევანის შეცვლა მოგვიანებითაც შეგიძლიათ.",
-  "az": "GA4 və Clarity qəbul və ya rədd zamanı işləyir. Rədd zamanı ölçüm kukisiz və məhduddur. Qəbul analitik kukiləri və Google Tag Manager-i aktivləşdirir. Clarity mətnləri maskalayır. Seçiminizi sonradan dəyişə bilərsiniz."
+  "az": "GA4 və Clarity qəbul və ya rədd zamanı işləyir. Rədd zamanı ölçüm kukisiz və məhduddur. Qəbul analitik kukiləri və Google Tag Manager-i aktivləşdirir. Clarity mətnləri maskalayır. Seçiminizi sonradan dəyişə bilərsiniz.",
+  "ar": "تعمل خدمات GA4 وClarity سواء وافقت على ملفات الارتباط التحليلية أو رفضتها. عند الرفض يظل القياس محدوداً ومن دون ملفات تعريف ارتباط تحليلية. عند الموافقة يتم تفعيل ملفات الارتباط التحليلية وGoogle Tag Manager. تقوم Clarity بإخفاء النصوص الحساسة، ويمكنك تغيير اختيارك لاحقاً."
 };
