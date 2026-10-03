@@ -103,6 +103,7 @@ export function getMeta(record: RouteRecord) {
            lang === 'ro' ? 'CTSEG | Sourcing strategic în Türkiye, verificare furnizori și intrare pe piață' :
            lang === 'bg' ? 'CTSEG | Стратегическо снабдяване от Türkiye, проверка на доставчици и пазарен достъп' :
            lang === 'sr' ? 'CTSEG | Strateški sourcing iz Türkiye, provera dobavljača i ulazak na tržište' :
+           lang === 'ar' ? 'CTSEG | التجارة العالمية والتوريد الاستراتيجي ودخول الأسواق' :
            'CTSEG | Global Trade, Strategic Sourcing & Market Entry',
     description: lang === 'tr' ? 'CTSEG, Türkiye ile dünya pazarları arasında iki yönlü B2B ticaret, stratejik tedarik, tedarikçi doğrulama, RFQ yönetimi ve ihracat/pazara giriş koordinasyonu yürütür.' :
       lang === 'de' ? regionalIntentHomes.de.description :
@@ -115,6 +116,7 @@ export function getMeta(record: RouteRecord) {
       lang === 'ro' ? 'CTSEG conectează România și piețele europene cu producători și furnizori din Türkiye prin sourcing strategic, verificare furnizori, RFQ, analiză TCO și coordonare de intrare pe piață.' :
       lang === 'bg' ? 'CTSEG свързва България и европейските пазари с производители и доставчици от Türkiye чрез стратегическо снабдяване, проверка на доставчици, RFQ, TCO анализ и координация при навлизане на пазара.' :
       lang === 'sr' ? 'CTSEG povezuje Srbiju i evropska tržišta sa proizvođačima i dobavljačima iz Türkiye kroz strateški sourcing, proveru dobavljača, RFQ, TCO analizu i koordinaciju ulaska na tržište.' :
+      lang === 'ar' ? 'تربط CTSEG بين Türkiye والأسواق الدولية عبر التجارة الثنائية بين الشركات، والتوريد الاستراتيجي، والتحقق من الموردين، وإدارة RFQ، وتنسيق دخول الأسواق.' :
       'CTSEG connects Türkiye with international markets through two-way B2B trade, strategic sourcing, supplier verification, RFQ management and market-entry coordination.'
   };
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — ${localizedMetaLabels[lang].service} | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
