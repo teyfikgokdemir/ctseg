@@ -761,7 +761,7 @@ const insightCategories: Record<string, Record<Locale, string>> = {
 };
 /* Arabic insight category localization */
 const arabicInsightCategories:Record<string,string>={
-  'strategic-vs-procurement':'التوريد الاستراتيجي','supplier-selection':'اختيار الموردين','supplier-risk':'المخاطر والتحقق','total-cost':'التكلفة وTCO','rfq':'هيكلة RFQ','supply-chain-risk':'مخاطر سلسلة التوريد','origin-compliance':'المنشأ والامتثال','nearshoring-europe-turkey':'القرب الجغرافي والخدمات اللوجستية','turkey-manufacturer-sourcing':'المصانع والتحقق','china-vs-turkey-sourcing':'مقارنة أسواق التوريد','vietnam-turkey-trade-routes':'ممرات التجارة','iran-turkey-commodity-corridors':'السلع والمواد الخام','private-label-contract-manufacturing':'العلامة الخاصة وOEM','supplier-due-diligence':'العناية الواجبة بالمورد'
+  'strategic-vs-procurement':'التوريد الاستراتيجي','supplier-selection':'اختيار الموردين','supplier-risk':'المخاطر والتحقق','total-cost':'التكلفة وTCO','rfq':'هيكلة RFQ','supply-chain-risk':'مخاطر سلسلة التوريد','origin-compliance':'المنشأ والامتثال','nearshoring-europe-turkey':'القرب الجغرافي والخدمات اللوجستية','turkey-manufacturer-sourcing':'المصانع والتحقق','china-vs-turkey-sourcing':'مقارنة أسواق التوريد','vietnam-turkey-trade-routes':'ممرات التجارة','iran-turkey-commodity-corridors':'السلع والمواد الخام','private-label-contract-manufacturing':'العلامة الخاصة وOEM','supplier-due-diligence':'العناية الواجبة بالمورد','turkey-export-market-entry':'دخول الأسواق وتطوير الصادرات','landed-cost-moq-optimization':'التكلفة الواصلة وتحسين MOQ','trade-house-vs-broker':'نموذج بيت التجارة'
 };
 for(const [id,label] of Object.entries(arabicInsightCategories)) if(insightCategories[id]) (insightCategories[id] as any).ar=label;
 
@@ -962,26 +962,6 @@ const scenarioKicker = {tr:'Temsili çalışma',en:'Representative work',de:'Rep
 ,
   ar:'سيناريو تمثيلي'
 }[lang];
-
-const arabicInsightCategories:Record<string,string> = {
-  'strategic-vs-procurement':'التوريد الاستراتيجي',
-  'supplier-selection':'اختيار الموردين',
-  'supplier-risk':'المخاطر والتحقق',
-  'total-cost':'التكلفة وTCO',
-  'rfq':'هيكلة RFQ',
-  'supply-chain-risk':'مخاطر سلسلة التوريد',
-  'origin-compliance':'المنشأ والامتثال',
-  'nearshoring-europe-turkey':'التوريد القريب واللوجستيات',
-  'turkey-manufacturer-sourcing':'المصانع والتحقق',
-  'china-vs-turkey-sourcing':'مقارنة أسواق التوريد',
-  'vietnam-turkey-trade-routes':'مسارات التجارة الدولية',
-  'iran-turkey-commodity-corridors':'ممرات السلع والتوريد',
-  'private-label-contract-manufacturing':'العلامة الخاصة والتصنيع التعاقدي',
-  'supplier-due-diligence':'العناية الواجبة بالمورد',
-  'turkey-export-market-entry':'دخول الأسواق وتطوير الصادرات',
-  'landed-cost-moq-optimization':'التكلفة الواصلة وتحسين MOQ',
-  'trade-house-vs-broker':'نموذج بيت التجارة'
-};
 
 const representativeRfq = lang === 'tr' ? {
   eyebrow:'Temsili çıktı · RFQ karşılaştırması',
