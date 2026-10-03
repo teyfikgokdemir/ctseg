@@ -34,7 +34,7 @@ if(!arHome.includes('<html lang="ar-SA" dir="rtl"'))errors.push('Arabic homepage
 const arH1Text=([...arHome.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)][0]?.[1]??'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
 if(!/[\u0600-\u06FF]/.test(arH1Text))errors.push('Arabic homepage H1 is not localized');
 if(!/[\u0600-\u06FF]/.test(arHome))errors.push('Arabic homepage has no Arabic content');
-for(const englishMarker of ['Trade needs disciplined coordination','We turn international trade','Quick contact','Global Sourcing Capacity'])if(arHome.includes(englishMarker))errors.push('Arabic homepage contains English fallback marker: '+englishMarker);
+for(const englishMarker of ['Trade needs disciplined coordination','We turn international trade','Quick contact','Global Sourcing Capacity','Glass sourcing from Türkiye for global B2B markets','Glass product & processing groups','Commercial market coverage','CTSEG GLASS SOURCING NETWORK'])if(arHome.includes(englishMarker))errors.push('Arabic homepage contains English fallback marker: '+englishMarker);
 for(const requiredArabicHomeBlock of ['id="for-buyers"','id="for-producers"','id="external-trade-desk"','مكتب التجارة الخارجية'])if(!arHome.includes(requiredArabicHomeBlock))errors.push('Arabic homepage missing required trade path block: '+requiredArabicHomeBlock);
 for(const ArabicNavLabel of ['التوريد الاستراتيجي','البحث عن الموردين والتحقق منهم','استشارات التجارة الدولية','تحليل وتحسين التكلفة الكلية TCO','دخول الأسواق','طريقة العمل','سيناريوهات عمل تمثيلية'])if(!arHome.includes(ArabicNavLabel))errors.push('Arabic navigation missing required item: '+ArabicNavLabel);
 for(const ArabicGlassHref of ['/ar/glass/','/ar/glass/float-glass/','/ar/glass/tempered-glass/','/ar/glass/laminated-glass/','/ar/glass/low-e-coated-glass/','/ar/glass/insulated-glass-igu/','/ar/glass/architectural-project-glass/'])if(!arHome.includes(`href="${ArabicGlassHref}"`))errors.push('Arabic glass navigation missing item: '+ArabicGlassHref);
@@ -68,6 +68,9 @@ const arInsight=read('ar/insights/strategic-sourcing-vs-procurement/index.html')
 if((arInsight.match(/class="content-block article-block"/g)||[]).length<4||!arInsight.includes('التوريد الاستراتيجي'))errors.push('Arabic insight detail content/category incomplete');
 const arGlass=read('ar/glass/index.html');
 if(!arGlass.includes('الزجاج')||!arGlass.includes('dir="rtl"'))errors.push('Arabic glass hub localization incomplete');
+const arPrivacy=read('ar/privacy/index.html');
+const arCookies=read('ar/cookies/index.html');
+for(const [path,html] of [['ar/privacy/index.html',arPrivacy],['ar/cookies/index.html',arCookies]])if(!html.includes('تعمل خدمات GA4 وClarity'))errors.push(`${path}: Arabic analytics disclosure missing`);
 
 const ruHome=read(homes.ru);
 if(!ruHome.includes('<html lang="ru" dir="ltr"'))errors.push('Russian homepage lang/direction incorrect');
