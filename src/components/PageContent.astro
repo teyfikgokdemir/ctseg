@@ -963,6 +963,26 @@ const scenarioKicker = {tr:'Temsili çalışma',en:'Representative work',de:'Rep
   ar:'سيناريو تمثيلي'
 }[lang];
 
+const arabicInsightCategories:Record<string,string> = {
+  'strategic-vs-procurement':'التوريد الاستراتيجي',
+  'supplier-selection':'اختيار الموردين',
+  'supplier-risk':'المخاطر والتحقق',
+  'total-cost':'التكلفة وTCO',
+  'rfq':'هيكلة RFQ',
+  'supply-chain-risk':'مخاطر سلسلة التوريد',
+  'origin-compliance':'المنشأ والامتثال',
+  'nearshoring-europe-turkey':'التوريد القريب واللوجستيات',
+  'turkey-manufacturer-sourcing':'المصانع والتحقق',
+  'china-vs-turkey-sourcing':'مقارنة أسواق التوريد',
+  'vietnam-turkey-trade-routes':'مسارات التجارة الدولية',
+  'iran-turkey-commodity-corridors':'ممرات السلع والتوريد',
+  'private-label-contract-manufacturing':'العلامة الخاصة والتصنيع التعاقدي',
+  'supplier-due-diligence':'العناية الواجبة بالمورد',
+  'turkey-export-market-entry':'دخول الأسواق وتطوير الصادرات',
+  'landed-cost-moq-optimization':'التكلفة الواصلة وتحسين MOQ',
+  'trade-house-vs-broker':'نموذج بيت التجارة'
+};
+
 const representativeRfq = lang === 'tr' ? {
   eyebrow:'Temsili çıktı · RFQ karşılaştırması',
   title:'Teklifleri aynı ticari zeminde karşılaştırma örneği',
@@ -991,6 +1011,20 @@ const representativeRfq = lang === 'tr' ? {
     ['Commercial risk note','Keep documentation scope open','Compare delivery scope','Do not progress before missing data is closed']
   ],
   cta:'Submit your RFQ or quotations for assessment'
+} : lang === 'ar' ? {
+  eyebrow:'مخرج تمثيلي · مقارنة RFQ',
+  title:'مثال على توحيد العروض ضمن أساس تجاري واحد',
+  note:'هذا الجدول ليس نتيجة حقيقية لعميل أو مورد أو تسعير منجز، بل مثال تمثيلي يوضح الحقول التي تستخدمها CTSEG لتوحيد العروض التجارية.',
+  headers:['بند المقارنة','المورد A','المورد B','المورد C'],
+  rows:[
+    ['المواصفة الفنية','ملائم / يحتاج تأكيداً','ملائم','معلومات جزئية'],
+    ['MOQ','يؤكد في العرض','يؤكد في العرض','تحتاج المعلومات إلى استكمال'],
+    ['Incoterm ونقطة التسليم','تأكيد FOB','خيار CIF','تأكيد EXW'],
+    ['COA / المنشأ / وثائق الدفعة','تتحقق على مستوى الدفعة','وثيقة أولية متاحة','قائمة الوثائق معلقة'],
+    ['مدة التنفيذ','تؤكد بعرض مكتوب','تؤكد بعرض مكتوب','يلزم تأكيد الطاقة'],
+    ['ملاحظة المخاطر التجارية','إبقاء نطاق الوثائق واضحاً','مقارنة نطاق التسليم','عدم التقدم قبل استكمال البيانات الناقصة']
+  ],
+  cta:'أرسل RFQ أو عروضك للتقييم'
 } : null;
 const guide = key === 'guides' && id ? (guides[id as keyof typeof guides]?.[lang] || guides[id as keyof typeof guides]?.['en'] || null) : null;
 const searchLanding = key === 'search-landing' && id ? searchLandings[id as keyof typeof searchLandings]?.content[lang] : null;
@@ -2007,7 +2041,7 @@ const verifiedLater = {
   const relatedServiceKey = id === 'total-cost' ? 'tco' : id === 'supplier-selection' || id === 'supplier-risk' ? 'supplier-verification' : 'strategic-sourcing';
   const relatedService = services[relatedServiceKey];
   const relatedIds = insightIds.filter((item) => item !== id).slice(0, 2);
-  const currentCategory = insightCategories[id]?.[lang] || 'Trade Intelligence';
+  const currentCategory = (lang === 'ar' ? arabicInsightCategories[id] : insightCategories[id]?.[lang]) || (lang === 'ar' ? 'رؤى تجارية' : 'Trade Intelligence');
   const answerText = originalPost?.answer ?? insight.answers[lang];
 
   return (
@@ -2085,7 +2119,7 @@ const verifiedLater = {
               return (
                 <a class="related-insight-card" href={localizedPath(lang,'insights',relId)}>
                   <div class="rel-meta">
-                    <span class="rel-category">{insightCategories[relId]?.[lang]}</span>
+                    <span class="rel-category">{lang === 'ar' ? arabicInsightCategories[relId] : insightCategories[relId]?.[lang]}</span>
                     {relPost?.readingTime && <span class="rel-time">{relPost.readingTime}</span>}
                   </div>
                   <h3>{insights[relId].titles[lang]}</h3>
