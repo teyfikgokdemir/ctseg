@@ -1,4 +1,4 @@
-export type TradeDeskLocale = 'tr'|'en'|'de'|'it'|'ru'|'fa'|'zh'|'vi'|'ro'|'bg'|'sr';
+export type TradeDeskLocale = 'tr'|'en'|'de'|'it'|'ru'|'fa'|'zh'|'vi'|'ro'|'bg'|'sr'|'ar';
 
 export type TradeDeskCopy = {
   eyebrow:string;
@@ -82,6 +82,15 @@ export const tradeDeskCopy: Record<TradeDeskLocale,TradeDeskCopy> = {
     cardText:'Chúng tôi phụ trách sourcing, phát triển xuất khẩu, nghiên cứu buyer/nhà phân phối và theo dõi RFQ như một bộ phận bên ngoài.',
     points:['Retainer hàng tháng cho hỗ trợ liên tục','Sourcing, phát triển xuất khẩu và theo dõi buyer/nhà phân phối','Email doanh nghiệp, pipeline CRM và báo cáo định kỳ'],
     cta:'Trao đổi về Bộ phận Ngoại thương thuê ngoài'
+  },
+  ar:{
+    eyebrow:'CTSEG · مكتب التجارة الخارجية',
+    title:'أدر عمليات التجارة الخارجية لشركتك عبر مكتب CTSEG الخارجي',
+    text:'يمكن لـ CTSEG العمل كوظيفة تجارة خارجية مستمرة لشركتك، تشمل التوريد، تطوير الصادرات، البحث عن المشترين والموزعين، متابعة طلبات الأسعار RFQ والتنسيق التجاري. وعند الحاجة يمكن تنفيذ العمل عبر بريد إلكتروني مملوك للشركة مع توضيح دور CTSEG بشكل شفاف.',
+    cardTitle:'مكتب التجارة الخارجية',
+    cardText:'ندير التوريد وتطوير الصادرات والبحث عن المشترين والموزعين ومتابعة RFQ كوظيفة تجارة خارجية مستمرة.',
+    points:['نموذج اشتراك شهري لدعم تجاري مستمر','التوريد وتطوير الصادرات ومتابعة المشترين والموزعين','بريد الشركة وخط CRM وتقارير دورية لتنفيذ شفاف'],
+    cta:'ناقش إنشاء مكتب تجارة خارجية'
   }
 };
 
