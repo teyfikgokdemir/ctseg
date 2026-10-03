@@ -7,6 +7,7 @@ import { tradePlatformCopy } from '../data/trade-platform';
 import { searchLandingPath, type SearchLandingId } from '../data/search-landings';
 import { getGlassSeoPage } from '../data/glass-seo';
 import { localizedGlassProductCopy, localizedGlassSlugs, type LocalizedGlassLocale } from '../data/glass-product-locales';
+import { arGlassProductCopy } from '../data/glass-product-ar';
 
 const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?: string; pageId?: string };
 const t = lang === 'he' ? {
@@ -55,7 +56,10 @@ const glassMenuLinks = (lang === 'tr' || lang === 'en') ? [
       return [page[lang].title.replace(' Tedariki','').replace(' Sourcing',''), `${lang === 'tr' ? '/glass' : '/en/glass'}/${slug}/`];
     })
     .filter(Boolean)
-] as [string,string][] : (lang !== 'sr' && localizedGlassProductCopy[lang as LocalizedGlassLocale]) ? [
+] as [string,string][] : lang === 'ar' ? [
+  [glassLabel, glassUrl],
+  ...glassMenuCoreSlugs.map((slug)=>[arGlassProductCopy.products[slug].name, `/ar/glass/${slug}/`] as [string,string])
+] : (lang !== 'sr' && localizedGlassProductCopy[lang as LocalizedGlassLocale]) ? [
   [glassLabel, glassUrl],
   ...glassMenuCoreSlugs.map((slug)=>[localizedGlassProductCopy[lang as LocalizedGlassLocale].products[slug].name, `/${lang}/glass/${slug}/`] as [string,string])
 ] : [[glassLabel, glassUrl]] as [string,string][];
