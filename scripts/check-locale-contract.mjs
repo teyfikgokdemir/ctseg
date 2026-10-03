@@ -35,6 +35,7 @@ const arH1Text=([...arHome.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)][0]?.[1]??''
 if(!/[\u0600-\u06FF]/.test(arH1Text))errors.push('Arabic homepage H1 is not localized');
 if(!/[\u0600-\u06FF]/.test(arHome))errors.push('Arabic homepage has no Arabic content');
 for(const englishMarker of ['Trade needs disciplined coordination','We turn international trade','Quick contact','Global Sourcing Capacity'])if(arHome.includes(englishMarker))errors.push('Arabic homepage contains English fallback marker: '+englishMarker);
+for(const requiredArabicHomeBlock of ['id="for-buyers"','id="for-producers"','id="external-trade-desk"','مكتب التجارة الخارجية'])if(!arHome.includes(requiredArabicHomeBlock))errors.push('Arabic homepage missing required trade path block: '+requiredArabicHomeBlock);
 
 const ruHome=read(homes.ru);
 if(!ruHome.includes('<html lang="ru" dir="ltr"'))errors.push('Russian homepage lang/direction incorrect');
