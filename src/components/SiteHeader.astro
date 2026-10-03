@@ -187,7 +187,7 @@ const globalSwitchPath = (target: string): string => {
       <span class="sr-only">{t.menu}</span><span></span><span></span>
     </button>
 
-    <nav id="primary-nav" class="primary-nav" aria-label={lang === 'uk' ? 'Основна навігація' : 'Primary'} data-primary-nav>
+    <nav id="primary-nav" class="primary-nav" aria-label={lang === 'uk' ? 'Основна навігація' : lang === 'ar' ? 'التنقل الرئيسي' : 'Primary'} data-primary-nav>
       <div class="mobile-only-panel">
         <div class="mobile-nav-head">
           <div class="mobile-nav-brand">
@@ -234,7 +234,7 @@ const globalSwitchPath = (target: string): string => {
           <div class="mobile-accordion-links">
             {glassMenuLinks.map(([label,href]) => (
               <a href={href}>
-                <strong>{label}</strong><span aria-hidden="true">{lang === 'he' || lang === 'fa' ? '↖' : '↗'}</span>
+                <strong>{label}</strong><span aria-hidden="true">{['he','fa','ar'].includes(lang) ? '↖' : '↗'}</span>
               </a>
             ))}
           </div>
@@ -249,7 +249,7 @@ const globalSwitchPath = (target: string): string => {
           <div class="mobile-accordion-links">
             {solutionLinks.map(([solutionLabel, solutionHref]) => (
               <a href={solutionHref}>
-                <strong>{solutionLabel}</strong><span aria-hidden="true">{lang === 'he' || lang === 'fa' ? '↖' : '↗'}</span>
+                <strong>{solutionLabel}</strong><span aria-hidden="true">{['he','fa','ar'].includes(lang) ? '↖' : '↗'}</span>
               </a>
             ))}
           </div>
@@ -264,7 +264,7 @@ const globalSwitchPath = (target: string): string => {
           <div class="mobile-accordion-links">
             {nav.filter(([key]) => key !== 'services').map(([key, label, href]) => (
               <a href={href} class:list={{ active: pageKey === key }}>
-                <strong>{label}</strong><span aria-hidden="true">{lang === 'he' || lang === 'fa' ? '↖' : '↗'}</span>
+                <strong>{label}</strong><span aria-hidden="true">{['he','fa','ar'].includes(lang) ? '↖' : '↗'}</span>
               </a>
             ))}
           </div>
@@ -280,7 +280,7 @@ const globalSwitchPath = (target: string): string => {
           <div id="solutions-panel" class="nav-solutions-menu" aria-label={navigationCopy.globalTrade} data-solutions-menu>
             <div class="nav-solutions-intro"><strong>CTSEG · {navigationCopy.globalTrade}</strong><span>{navigationCopy.intro}</span></div>
             <div class="desktop-solutions-grid">
-              {solutionLinks.map(([solutionLabel, solutionHref]) => <a href={solutionHref} class="desktop-solution-item"><span>{solutionLabel}</span><i aria-hidden="true">{lang === 'he' ? '↖' : '↗'}</i></a>)}
+              {solutionLinks.map(([solutionLabel, solutionHref]) => <a href={solutionHref} class="desktop-solution-item"><span>{solutionLabel}</span><i aria-hidden="true">{['he','fa','ar'].includes(lang) ? '↖' : '↗'}</i></a>)}
             </div>
           </div>
         </div>
@@ -293,7 +293,7 @@ const globalSwitchPath = (target: string): string => {
           <div id="glass-panel" class="nav-glass-menu" data-glass-menu>
             <div class="nav-glass-intro">
               <strong>{lang==='tr'?'CTSEG · CAM TEDARİKİ':lang==='en'?'CTSEG · GLASS SOURCING':lang==='he'?'CTSEG · איתור ואספקת זכוכית':glassLabel}</strong>
-              <span>{lang==='tr'?'Ürün, işleme ve proje bazlı cam tedariki':lang==='en'?'Product, processing and project glass sourcing':lang==='he'?'אספקת זכוכית לפי מוצר, עיבוד ופרויקט':''}</span>
+              <span>{lang==='tr'?'Ürün, işleme ve proje bazlı cam tedariki':lang==='en'?'Product, processing and project glass sourcing':lang==='he'?'אספקת זכוכית לפי מוצר, עיבוד ופרויקט':lang==='ar'?'توريد الزجاج حسب المنتج والمعالجة ومتطلبات المشروع':''}</span>
             </div>
             <div class="nav-glass-links">
               {glassMenuLinks.map(([label,href]) => <a href={href}><span>{label}</span><i aria-hidden="true">↗</i></a>)}
