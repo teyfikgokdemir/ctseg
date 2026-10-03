@@ -268,6 +268,10 @@ html[data-locale=de] .page-hero h1,html[data-locale=it] .page-hero h1,html[data-
 @media(max-width:1320px){
   .primary-nav{gap:16px;font-size:.74rem}.nav-cta{display:none}
 }
+@media(min-width:1051px){
+  html[data-locale=ar] .primary-nav{gap:14px;font-size:.72rem}
+  html[data-locale=ar] .header-inner{gap:22px}
+}
 @media(max-width:1100px){
   .primary-nav{gap:14px;font-size:.72rem}
   .hero-grid{grid-template-columns:minmax(0,45fr) minmax(0,53fr);gap:48px}
