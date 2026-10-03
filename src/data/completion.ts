@@ -557,8 +557,8 @@ Object.assign(formCopy as any,{uk:{title:'Запит на комерційну �
 
 
 /* ARABIC COMPLETION ROLLOUT */
-Object.assign(specialSlugs['how-we-work'] as any,{ar:'كيف-نعمل'});
-Object.assign(specialSlugs.scenarios as any,{ar:'سيناريوهات-عمل-تمثيلية'});
+Object.assign(specialSlugs['how-we-work'] as any,{ar:'how-we-work'});
+Object.assign(specialSlugs.scenarios as any,{ar:'representative-work-scenarios'});
 Object.assign(homeEnhancement as any,{
   ar:{trustTitle:'الهوية المؤسسية',established:'تأسست عام 2022',founder:'المؤسس: Teyfik Gökdemir',headquarters:'المقر: توزلا، إسطنبول، Türkiye',tradeTitle:'تنسيق تجاري ثنائي الاتجاه',tradeLead:'تعمل CTSEG بين المشترين وأسواق التوريد على أساس منشأ قابل للتحقق ومتطلبات واضحة وشروط تجارية قابلة للتنفيذ.',outbound:'تقييم منتجات ومصادر موثوقة للمشترين الدوليين.',inbound:'دعم الشركات في توريد المنتجات والمواد الخام والتعبئة ومدخلات الإنتاج من Türkiye والأسواق الدولية المناسبة.',scenarioTitle:'سيناريوهات عملية لاتخاذ القرار',scenarioLead:'توضح السيناريوهات معايير التقييم ومراحل العمل والمخرجات التجارية التي يمكن لـ CTSEG تنظيمها.',scenarioCta:'استعرض السيناريوهات',commercialCta:'أنشئ طلباً تجارياً'}
 });
