@@ -3,6 +3,8 @@ import manifest from '../../public/images/generated/manifest.json';
 export const PRODUCT_IMAGE_WIDTHS = [360,540,720,768,960] as const;
 export const FEATURE_IMAGE_WIDTHS = [640,768,960,1280,1536] as const;
 export const HERO_IMAGE = '/images/ctseg-global-trade-hero-premium.webp';
+export const HOME_HERO_IMAGE = '/images/ctseg-global-trade-hero-new.webp';
+export const HOME_HERO_WIDTHS = [640,768,960,1280,1400] as const;
 export const PORTFOLIO_IMAGE = '/images/2.webp';
 export const LOGO_IMAGE = '/images/publicimagesctseg-brand-20260916.png';
 

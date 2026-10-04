@@ -9,7 +9,7 @@ import TradeHouseStatement from '../components/TradeHouseStatement.astro';
 import { company, locales, localizedPath, products, routeAlternates, ui, type Locale } from '../data/site';
 import { duzceGlassAlternates, type DuzceGlassLocale } from '../data/duzce-glass';
 import { activeLocales, localeDirection, localeOg, schemaLanguage } from '../data/locales';
-import { FEATURE_IMAGE_WIDTHS, generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
+import { HOME_HERO_IMAGE, HOME_HERO_WIDTHS, generatedImageSrc, generatedImageSrcset } from '../lib/responsive-images';
 import { localizedTradeVisual } from '../data/trade-visuals';
 import { searchLandingAlternates } from '../data/search-landings';
 import { iranTradeContent } from '../data/iran-trade';
@@ -195,8 +195,8 @@ const homeHero = localizedTradeVisual('global-trade-hero',lang);
 const socialImage = pageKey === 'products' && pageId && products[pageId as keyof typeof products]
   ? products[pageId as keyof typeof products].media.src
   : homeHero.source;
-const heroSizes = '(max-width:620px) calc(100vw - 26px), (max-width:860px) calc(100vw - 36px), min(53vw,700px)';
-const heroSrcset = generatedImageSrcset(homeHero.source,FEATURE_IMAGE_WIDTHS);
+const heroSizes = '(max-width:860px) 100vw, min(53vw, 1400px)';
+const heroSrcset = generatedImageSrcset(HOME_HERO_IMAGE,HOME_HERO_WIDTHS);
 ---
 <!doctype html>
 <html lang={schemaLanguage(lang)} dir={localeDirection(lang)} data-locale={lang}>

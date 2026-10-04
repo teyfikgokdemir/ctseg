@@ -13,7 +13,7 @@ import ResponsiveImage from './ResponsiveImage.astro';
 import CommercialRequestForm from './CommercialRequestForm.astro';
 import HomepagePromoVideo from './HomepagePromoVideo.astro';
 import TradeMarquee from './TradeMarquee.astro';
-import { FEATURE_IMAGE_WIDTHS } from '../lib/responsive-images';
+import { FEATURE_IMAGE_WIDTHS, HOME_HERO_IMAGE, HOME_HERO_WIDTHS, generatedImageSrcset } from '../lib/responsive-images';
 import { homeTradeVisualKeys, localizedTradeVisual, serviceTradeVisualKeys } from '../data/trade-visuals';
 import {
   aboutEnhancement, guides, homeEnhancement, marketsDetail, processPages, scenarioPages
@@ -1180,8 +1180,8 @@ const verifiedLater = {
           </div>
           <figure class="hero-visual">
             <img
-              src="/images/ctseg-global-trade-hero-new.webp"
-              srcset="/images/ctseg-global-trade-hero-new.webp 1400w"
+              src={HOME_HERO_IMAGE}
+              srcset={generatedImageSrcset(HOME_HERO_IMAGE,HOME_HERO_WIDTHS)}
               sizes="(max-width:860px) 100vw, min(53vw, 1400px)"
               width="1400"
               height="536"
