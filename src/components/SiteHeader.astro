@@ -1,7 +1,7 @@
 ---
 import { localizedPath, ui, type Locale } from '../data/site';
 import { activeLocaleRegistry } from '../data/locales';
-import { duzceGlassPath, type DuzceGlassLocale } from '../data/duzce-glass';
+import { duzceGlassPath, duzceGlassLocales, type DuzceGlassLocale } from '../data/duzce-glass';
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 import { tradePlatformCopy } from '../data/trade-platform';
 import { searchLandingPath, type SearchLandingId } from '../data/search-landings';
@@ -125,7 +125,7 @@ const globalSwitchPath = (target: string): string => {
     if (target === 'he') return currentPath;
     return localizedPath(target as Locale,'insights');
   }
-  if (pageKey === 'search-landing' && pageId) return searchLandingPath(target as Locale,pageId as SearchLandingId);
+  if (pageKey === 'search-landing' && pageId) return searchLandingPath(target as Locale,pageId as SearchLandingId) || (target === 'he' ? '/he/' : localizedPath(target as Locale,'home'));
   if (pageKey === 'glass-industry') {
     if (target === 'tr') return '/glass/';
     return `/${target}/glass/`;
@@ -157,7 +157,6 @@ const globalSwitchPath = (target: string): string => {
     return `/${target}/`;
   }
   if (['vietnam-turkiye','china-turkiye','ukraine-turkiye'].includes(pageKey)) return target === 'tr' ? '/' : `/${target}/`;
-  if (target === 'fa') return '/fa/';
   if (pageKey === 'glass-industry') {
     if (target === 'tr') return '/glass/';
     return `/${target}/glass/`;
@@ -173,7 +172,7 @@ const globalSwitchPath = (target: string): string => {
     return `/${target}/glass/markets/${pageId}/`;
   }
   if (pageKey === 'glass') {
-    const glassLocales = ['en','tr','de','it','ru','fa','zh','vi','ro','bg'] as const;
+    const glassLocales = duzceGlassLocales;
     if ((glassLocales as readonly string[]).includes(target)) return duzceGlassPath(target as DuzceGlassLocale);
     return `/${target}/`;
   }

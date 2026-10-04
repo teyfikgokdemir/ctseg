@@ -61,6 +61,8 @@ const hebrewCounterpart = (() => {
   if (pageKey === 'insights' && pageId) return '';
   return pageMap[pageKey] ? `https://ctseg.com.tr${pageMap[pageKey]}` : '';
 })();
+// The Persian home renders iranTradeContent.fa, not the generic trade-house home.
+const isIranTradePage = pageKey === 'iran-trade' || (pageKey === 'home' && String(lang) === 'fa');
 const alternates = alternatesProp ? { ...alternatesProp } : String(lang) === 'he' && pageKey === 'he-insight' ? { he: canonicalUrl } as Record<string,string> :
   pageKey === 'glass' ? duzceGlassAlternates() :
   pageKey === 'glass-industry' ? Object.fromEntries([['tr','https://ctseg.com.tr/glass/'], ...activeLocales.filter((code)=>code!=='tr').map((code)=>[code,`https://ctseg.com.tr/${code}/glass/`]), ['x-default','https://ctseg.com.tr/en/glass/']]) as Record<string,string> :
@@ -80,12 +82,13 @@ const alternates = alternatesProp ? { ...alternatesProp } : String(lang) === 'he
   pageKey === 'ukraine-turkiye' ? {
     tr:`https://ctseg.com.tr/tr/${ukraineTurkiyeContent.slug}/`
   } as Record<string,string> :
-  pageKey === 'iran-trade' ? {
+  isIranTradePage ? {
     tr:`https://ctseg.com.tr/tr/${iranTradeContent.tr.slug}/`,
     en:`https://ctseg.com.tr/en/${iranTradeContent.en.slug}/`,
     fa:'https://ctseg.com.tr/fa/'
   } as Record<string,string> : routeAlternates(pageKey, pageId);
 if (pageKey === 'home') {
+  if (!isIranTradePage) delete alternates.fa;
   alternates.ru = 'https://ctseg.com.tr/ru/';
   alternates.he = 'https://ctseg.com.tr/he/';
 }
@@ -101,6 +104,7 @@ const alternateCodes = pageKey === 'glass-industry'
   ? ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr']
   : (String(lang) === 'he' && pageKey === 'he-insight'
     ? ['he']
+    : isIranTradePage ? ['tr','en','fa']
     : pageKey === 'home'
     ? activeLocales
     : pageKey === 'insights' && pageId
