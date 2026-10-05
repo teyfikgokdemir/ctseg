@@ -5561,3 +5561,74 @@ html[data-locale=vi] :is(.section h2,.section-title,.content-block h2,.side-pane
     aspect-ratio:16/10!important;
   }
 }
+
+/* Homepage hero locale typography: Turkish remains the visual reference. */
+@media (min-width:901px){
+  .homepage-trade-hero .hero-copy h1:not(.home-hero-title--tr){
+    width:min(42vw,640px)!important;
+    max-width:18ch!important;
+    margin:0 0 20px!important;
+    font-size:clamp(2.1rem,2.55vw,3.1rem)!important;
+    line-height:1.05!important;
+    letter-spacing:-.032em!important;
+    text-wrap:balance!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+    hyphens:none!important;
+  }
+  html[data-locale="ru"] .homepage-trade-hero .hero-copy h1,
+  html[data-locale="uk"] .homepage-trade-hero .hero-copy h1,
+  html[data-locale="ro"] .homepage-trade-hero .hero-copy h1,
+  html[data-locale="bg"] .homepage-trade-hero .hero-copy h1{
+    width:min(38vw,590px)!important;
+    max-width:17ch!important;
+    font-size:clamp(2rem,2.3vw,2.8rem)!important;
+    line-height:1.08!important;
+  }
+  html[data-locale="he"] .homepage-trade-hero .hero-copy h1{
+    width:min(40vw,620px)!important;
+    max-width:19ch!important;
+    font-size:clamp(2.2rem,2.6vw,3.15rem)!important;
+    line-height:1.13!important;
+  }
+  html[data-locale="ar"] .homepage-trade-hero .hero-copy{
+    width:min(37vw,570px)!important;
+    text-align:right!important;
+  }
+  html[data-locale="ar"] .homepage-trade-hero .hero-copy h1{
+    width:100%!important;
+    max-width:18ch!important;
+    font-size:clamp(1.95rem,2.25vw,2.7rem)!important;
+    line-height:1.22!important;
+  }
+  html[dir="rtl"] .homepage-trade-hero .hero-copy :is(.eyebrow,.lead){text-align:right!important}
+  html[dir="rtl"] .homepage-trade-hero .hero-copy .actions{justify-content:flex-start!important}
+}
+@media (max-width:900px){
+  .homepage-trade-hero .hero-copy h1:not(.home-hero-title--tr){
+    width:min(100%,17ch)!important;
+    max-width:17ch!important;
+    margin:0 0 18px!important;
+    font-size:clamp(2rem,8.35vw,2.7rem)!important;
+    line-height:1.08!important;
+    letter-spacing:-.03em!important;
+    text-wrap:balance!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+    hyphens:none!important;
+  }
+  html[data-locale="ru"] .homepage-trade-hero .hero-copy h1,
+  html[data-locale="uk"] .homepage-trade-hero .hero-copy h1,
+  html[data-locale="ro"] .homepage-trade-hero .hero-copy h1,
+  html[data-locale="bg"] .homepage-trade-hero .hero-copy h1{width:100%!important;max-width:100%!important;font-size:clamp(1.9rem,7.8vw,2.5rem)!important}
+  html[data-locale="he"] .homepage-trade-hero .hero-copy h1{max-width:18ch!important;font-size:clamp(2.1rem,8.6vw,2.8rem)!important;line-height:1.14!important}
+  html[data-locale="ar"] .homepage-trade-hero .hero-copy h1{max-width:17ch!important;font-size:clamp(1.85rem,7.6vw,2.45rem)!important;line-height:1.25!important}
+  html:not([data-locale="tr"]) .homepage-trade-hero .hero-copy{display:flex!important;flex-direction:column!important}
+  html:not([data-locale="tr"]) .homepage-trade-hero .hero-copy .eyebrow{order:1}
+  html:not([data-locale="tr"]) .homepage-trade-hero .hero-copy h1{order:2}
+  html:not([data-locale="tr"]) .homepage-trade-hero .hero-copy .lead{order:3}
+  html:not([data-locale="tr"]) .homepage-trade-hero .hero-copy .actions{order:4;margin-top:18px!important}
+  html:not([data-locale="tr"]) .homepage-trade-hero .hero-copy .hero-proof-pills{order:5;margin-top:16px!important}
+  html[dir="rtl"] .homepage-trade-hero .hero-copy :is(.eyebrow,h1,.lead){text-align:right!important}
+  html[dir="rtl"] .homepage-trade-hero .hero-copy .actions{justify-content:stretch!important}
+}

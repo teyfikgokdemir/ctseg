@@ -1,12 +1,12 @@
 ---
 import { localizedPath, ui, type Locale } from '../data/site';
 import ProductMedia from './ProductMedia.astro';
-const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, ctaLabel, imageNote, compact=false, marketDetail=false } = Astro.props as {
+const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, ctaLabel, imageNote, compact=false, marketDetail=false, homepage=false } = Astro.props as {
   lang: Locale; eyebrow: string; title: string; lead: string; parentHref?: string; parentLabel?: string;
-  product?:any; ctaHref?:string; ctaLabel?:string; imageNote?:string; compact?:boolean; marketDetail?:boolean;
+  product?:any; ctaHref?:string; ctaLabel?:string; imageNote?:string; compact?:boolean; marketDetail?:boolean; homepage?:boolean;
 };
 ---
-<section class:list={['page-hero', { 'product-page-hero':product, 'page-hero--compact':compact, 'page-hero--market-detail':marketDetail }]} data-page-hero>
+<section class:list={['page-hero', { 'homepage-page-hero':homepage, 'product-page-hero':product, 'page-hero--compact':compact, 'page-hero--market-detail':marketDetail }]} data-page-hero>
   <div class:list={['container', { 'page-hero-grid':product }]}>
     <div class="page-hero-copy">
       <nav class="breadcrumb" aria-label={lang === 'uk' ? 'Навігаційний ланцюжок' : lang === 'ar' ? 'مسار التنقل' : 'Breadcrumb'}>
@@ -151,5 +151,42 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
     html body main .answer-grid article::before{margin-bottom:24px}
     html body .site-footer .footer-statement>strong{font-size:clamp(34px,10.5vw,48px)!important;line-height:1!important;max-width:12ch!important}
     html body .site-footer .footer-statement::after{font-size:clamp(90px,30vw,150px)!important}
+  }
+
+  /* Homepage-only locale typography. Inner-page hero rules intentionally remain unchanged. */
+  html body main .homepage-page-hero{padding-block:clamp(64px,7vw,104px)!important}
+  html body main .homepage-page-hero:not(.product-page-hero) h1{
+    width:min(100%,22ch)!important;
+    max-width:22ch!important;
+    white-space:normal!important;
+    text-wrap:balance!important;
+    overflow-wrap:normal!important;
+    font-size:clamp(2.25rem,3.15vw,3.5rem)!important;
+    line-height:1.06!important;
+  }
+  html[data-locale="de"] body main .homepage-page-hero h1,
+  html[data-locale="it"] body main .homepage-page-hero h1,
+  html[data-locale="ru"] body main .homepage-page-hero h1,
+  html[data-locale="fa"] body main .homepage-page-hero h1,
+  html[data-locale="vi"] body main .homepage-page-hero h1{
+    width:min(100%,19ch)!important;
+    max-width:19ch!important;
+    font-size:clamp(2.1rem,2.8vw,3.15rem)!important;
+    line-height:1.08!important;
+  }
+  html[data-locale="zh"] body main .homepage-page-hero h1{max-width:16ch!important;font-size:clamp(2.3rem,3vw,3.35rem)!important}
+  html[dir="rtl"] body main .homepage-page-hero:not(.product-page-hero) .page-hero-copy,
+  html[dir="rtl"] body main .homepage-page-hero:not(.product-page-hero) :is(.breadcrumb,.eyebrow,h1,.lead){text-align:right!important}
+  html[dir="rtl"] body main .homepage-page-hero:not(.product-page-hero) .breadcrumb{justify-content:flex-start!important}
+  @media(max-width:620px){
+    html body main .homepage-page-hero{padding-block:52px!important}
+    html body main .homepage-page-hero:not(.product-page-hero) h1{
+      width:min(100%,16ch)!important;
+      max-width:16ch!important;
+      font-size:clamp(2rem,8.7vw,2.75rem)!important;
+      line-height:1.08!important;
+    }
+    html[data-locale="vi"] body main .homepage-page-hero:not(.product-page-hero) h1{width:100%!important;max-width:21ch!important;font-size:clamp(1.9rem,7.8vw,2.45rem)!important}
+    html[data-locale="zh"] body main .homepage-page-hero h1{max-width:13ch!important}
   }
 </style>
