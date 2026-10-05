@@ -742,6 +742,24 @@ html[dir="rtl"] .table-scroll-wrapper th,html[dir="rtl"] .table-scroll-wrapper t
   }
 }
 
+/* Turkish reference hero: keep both CTAs inside the first small-screen viewport. */
+@media (max-width:620px){
+  html[data-locale="tr"] .homepage-trade-hero .hero-copy{padding-top:4px!important}
+  html[data-locale="tr"] .homepage-trade-hero .home-hero-title--tr{margin-bottom:12px!important}
+  html[data-locale="tr"] .homepage-trade-hero .hero-copy .lead{line-height:1.5!important}
+  html[data-locale="tr"] .homepage-trade-hero .hero-copy .actions{margin-top:4px!important}
+  html[data-locale="tr"]:has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy{display:flex!important;flex-direction:column!important}
+  html[data-locale="tr"]:has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy .eyebrow{order:1}
+  html[data-locale="tr"]:has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy h1{order:2;margin-bottom:6px!important}
+  html[data-locale="tr"]:has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy .lead{order:3}
+  html[data-locale="tr"]:has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy .actions{order:4;gap:6px!important}
+  html[data-locale="tr"]:has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy .hero-proof-pills{order:5}
+}
+
+
+@media (max-width:390px){
+  html[data-locale="tr"]:has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy .actions{gap:0!important}
+}
 
 /* HERO REFERENCE LAYOUT 2026-09-25 */
 @media (min-width:901px){
@@ -5560,6 +5578,17 @@ html[data-locale=vi] :is(.section h2,.section-title,.content-block h2,.side-pane
   main .catalogue-section .catalogue-grid .product-card .product-media{
     aspect-ratio:16/10!important;
   }
+}
+
+/* Cookie-open mobile homepages: compact the long-copy rhythm within usable height. */
+@media (max-width:430px){
+  html:is([data-locale="en"],[data-locale="uk"],[data-locale="bg"]):has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy{padding:0 12px 22px!important}
+  html:is([data-locale="en"],[data-locale="uk"],[data-locale="bg"]):has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy .eyebrow{margin-bottom:4px!important}
+  html:is([data-locale="en"],[data-locale="uk"],[data-locale="bg"]):has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy h1{width:100%!important;max-width:100%!important;margin-bottom:3px!important}
+  html:is([data-locale="en"],[data-locale="uk"],[data-locale="bg"]):has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy .lead{line-height:1.45!important}
+  html:is([data-locale="en"],[data-locale="uk"],[data-locale="bg"]):has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy .actions{margin-top:0!important;gap:6px!important}
+  html[data-locale="bg"]:has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy .lead{line-height:1.4!important}
+  html[data-locale="ro"]:has(.cookie-consent:not([hidden])) .homepage-trade-hero .hero-copy .actions{margin-top:4px!important;gap:6px!important}
 }
 
 /* Homepage hero locale typography: Turkish remains the visual reference. */
