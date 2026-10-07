@@ -163,6 +163,13 @@ export async function onRequestPost(context) {
       temperature: 0.1,
       max_completion_tokens: 350
     });
+    console.log('CTSEG assistant response schema', JSON.stringify({
+      keys: Object.keys(result || {}),
+      responseType: typeof result?.response,
+      responseKeys: result?.response && typeof result.response === 'object' ? Object.keys(result.response) : [],
+      choiceKeys: result?.choices?.[0] ? Object.keys(result.choices[0]) : [],
+      messageKeys: result?.choices?.[0]?.message ? Object.keys(result.choices[0].message) : []
+    }));
     const answer = clean(extractAnswer(result), 4_000);
     if (!answer) return json({ code: 'empty_model_response' }, 502);
     return json({ answer, sources: sources.map(({ path }) => path) });
