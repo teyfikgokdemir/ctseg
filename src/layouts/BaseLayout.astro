@@ -4,6 +4,7 @@ import '../styles/site.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import FloatingActions from '../components/FloatingActions.astro';
+import TradeAssistant from '../components/TradeAssistant.astro';
 import TradeVideo from '../components/TradeVideo.astro';
 import TradeHouseStatement from '../components/TradeHouseStatement.astro';
 import { company, locales, localizedPath, products, routeAlternates, ui, type Locale } from '../data/site';
@@ -248,6 +249,7 @@ const heroSrcset = generatedImageSrcset(HOME_HERO_IMAGE,HOME_HERO_WIDTHS);
     </main>
     <SiteFooter lang={lang} pageKey={pageKey} />
     {pageKey === 'home' && String(lang) !== 'he' && <FloatingActions lang={lang} />}
+    <TradeAssistant lang={lang} />
     <aside class="cookie-consent" data-cookie-consent hidden aria-label={t.cookieTitle}>
       <div class="cookie-copy-inline"><strong>{t.cookieTitle}</strong><span>{t.cookieCopy}</span><a href={cookieHref}>{t.details}</a></div>
       <div class="cookie-actions"><button type="button" data-cookie-reject>{t.reject}</button><button type="button" class="accept" data-cookie-accept>{t.accept}</button></div>
