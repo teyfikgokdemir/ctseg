@@ -1,5 +1,5 @@
 const SITE_ORIGIN = 'https://ctseg.com.tr';
-const MODEL = '@cf/zai-org/glm-4.7-flash';
+const MODEL = '@cf/meta/llama-3.1-8b-instruct-fp8';
 const MAX_MESSAGE_LENGTH = 1_200;
 const MAX_PAGE_PATH_LENGTH = 220;
 const memoryRateLimit = new Map();
@@ -159,16 +159,9 @@ export async function onRequestPost(context) {
 
   try {
     const result = await context.env.AI.run(MODEL, {
-      messages: [{ role: 'system', content: system }, { role: 'user', content: message }],
+      prompt: `${system}\n\nVISITOR QUESTION:\n${message}`,
       temperature: 0.1,
-      max_completion_tokens: 350
-    });
-    console.log('CTSEG assistant response schema', JSON.stringify({
-      keys: Object.keys(result || {}),
-      responseType: typeof result?.response,
-      responseKeys: result?.response && typeof result.response === 'object' ? Object.keys(result.response) : [],
-      choiceKeys: result?.choices?.[0] ? Object.keys(result.choices[0]) : [],
-      messageKeys: result?.choices?.[0]?.message ? Object.keys(result.choices[0].message) : []
+      max_tokens: 350
     }));
     const answer = clean(extractAnswer(result), 4_000);
     if (!answer) return json({ code: 'empty_model_response' }, 502);
