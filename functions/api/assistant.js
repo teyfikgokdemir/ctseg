@@ -162,7 +162,7 @@ export async function onRequestPost(context) {
       prompt: `${system}\n\nVISITOR QUESTION:\n${message}`,
       temperature: 0.1,
       max_tokens: 350
-    });
+    }));
     const answer = clean(extractAnswer(result), 4_000);
     if (!answer) return json({ code: 'empty_model_response' }, 502);
     return json({ answer, sources: sources.map(({ path }) => path) });
