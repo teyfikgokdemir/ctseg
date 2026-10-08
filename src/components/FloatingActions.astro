@@ -74,6 +74,7 @@ const copy = contactCopy[lang];
       const top=actions.querySelector('[data-back-to-top]');
       if(!(top instanceof HTMLButtonElement))return;
       let scrollStopTimer;
+      const idleDelay=2000;
       const setTopVisible=(visible)=>{
         top.classList.toggle('visible',visible);
         top.setAttribute('aria-hidden',String(!visible));
@@ -83,11 +84,19 @@ const copy = contactCopy[lang];
         const pastIntro=(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop)>180;
         clearTimeout(scrollStopTimer);
         setTopVisible(pastIntro);
-        if(pastIntro)scrollStopTimer=setTimeout(()=>setTopVisible(false),650);
+        if(pastIntro)scrollStopTimer=setTimeout(()=>{
+          if(!top.matches(':hover, :focus-visible'))setTopVisible(false);
+        },idleDelay);
       };
       setTopVisible(false);
       addEventListener('scroll',update,{passive:true});
       top.addEventListener('click',()=>scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'}));
+      top.addEventListener('pointerleave',()=>{
+        if(window.scrollY>180){clearTimeout(scrollStopTimer);scrollStopTimer=setTimeout(()=>{if(!top.matches(':focus-visible'))setTopVisible(false)},idleDelay)}
+      });
+      top.addEventListener('focusout',()=>{
+        if(window.scrollY>180){clearTimeout(scrollStopTimer);scrollStopTimer=setTimeout(()=>{if(!top.matches(':hover'))setTopVisible(false)},idleDelay)}
+      });
       const cookie=document.querySelector('[data-cookie-consent],.fa-cookie');
       const updateCookieOffset=()=>{
         const visible=cookie instanceof HTMLElement&&!cookie.hidden&&!document.body.classList.contains('fa-menu-open');
