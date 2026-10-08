@@ -112,21 +112,10 @@ async function fetchSources(message, currentPath) {
   return results.filter(Boolean);
 }
 
-const textFromContent = (content) => {
-  if (typeof content === 'string') return content;
-  if (Array.isArray(content)) return content.map(textFromContent).filter(Boolean).join('\n');
-  if (content && typeof content === 'object') return textFromContent(content.text || content.content || content.value);
-  return '';
-};
-
-// Workers AI text models can return either a string or OpenAI-style content parts.
-const extractAnswer = (result) => textFromContent(
-  result?.response
+const extractAnswer = (result) => result?.response
   || result?.choices?.[0]?.message?.content
   || result?.choices?.[0]?.text
-  || result?.output_text
-  || result?.result?.response
-);
+  || '';
 
 export async function onRequestPost(context) {
   const origin = context.request.headers.get('origin') || '';
