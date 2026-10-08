@@ -1483,6 +1483,7 @@ strong{font-weight:700}
 .market-corridor-card .cta-statement .button{
   margin-top:26px;
 }
+.poultry-market-card{background:#272923;color:#f2efe7}.poultry-market-card__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.82fr);gap:clamp(28px,5vw,76px);align-items:center}.poultry-market-card__copy{padding-block:clamp(28px,5vw,64px)}.poultry-market-card__copy h2{max-width:14ch;font-size:clamp(2.35rem,4.5vw,4.9rem);line-height:.98;text-wrap:balance}.poultry-market-card__copy p:not(.eyebrow){max-width:62ch;color:#d9d9d3;line-height:1.62}.poultry-market-card__copy .button{margin-top:20px}.poultry-market-card img{width:100%;min-height:360px;object-fit:cover;filter:saturate(.78) contrast(1.04)}html[dir="rtl"] .poultry-market-card__grid{direction:rtl}@media(max-width:760px){.poultry-market-card__grid{grid-template-columns:1fr;gap:0}.poultry-market-card__copy{padding:36px 18px 24px}.poultry-market-card__copy h2{font-size:clamp(2.15rem,10vw,3.25rem)}.poultry-market-card img{min-height:245px;max-height:320px;object-position:68% center}}
 @media(max-width:760px){
   .market-corridor-card .cta-statement{
     padding:34px 18px;
