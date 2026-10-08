@@ -385,7 +385,7 @@ if (record.key === 'guides' && record.id) {
 ---
 <BaseLayout lang={record.lang} title={meta.title} description={meta.description} pageKey={record.key} pageId={record.id} canonical={canonicalFor(record)} schema={schemas}>
   {record.key === 'poultry-feed' && record.id && (record.lang === 'tr' || record.lang === 'en' || record.lang === 'ar')
-    ? <PoultryFeedPage lang={record.lang as PoultryFeedLocale} page={poultryFeedContent[record.lang as PoultryFeedLocale][record.id as PoultryFeedId]} />
+    ? <PoultryFeedPage lang={record.lang as PoultryFeedLocale} id={record.id} page={poultryFeedContent[record.lang as PoultryFeedLocale][record.id as PoultryFeedId]} />
     : <PageContent record={record} />}
 </BaseLayout>
 <style is:global>
