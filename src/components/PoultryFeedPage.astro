@@ -17,7 +17,7 @@ const imageAlt={tr:'Kanatlı yemi tedarik ve belge değerlendirme süreci',en:'P
   <div class="content-block poultry-card"><h2>{page.assessmentTitle}</h2><p>{page.assessment}</p><ul class="check-list">{common.checks.map((item)=><li>{item}</li>)}</ul></div>
   <div class="content-block origin-note poultry-market-note"><h2>{page.marketTitle}</h2><p>{page.market}</p></div>
   <div class="content-block faq poultry-faq"><h2>{labels.faq}</h2>{faqs.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
-</div><aside class="side-panel poultry-side-panel"><figure class="poultry-side-panel__image"><img src="/images/poultry-feed-rfq-desk.png" width="1122" height="1536" loading="lazy" decoding="async" alt={imageAlt}/></figure><p class="eyebrow">{labels.note}</p><h2>{page.scopeTitle}</h2><p>{common.footer}</p><a class="button" href={common.contact} data-contact-intent="buyer_request">{page.cta}</a></aside></div></section>
+</div><aside class="side-panel poultry-side-panel"><figure class="poultry-side-panel__image"><img src="/images/poultry-feed-rfq-desk.png" width="1122" height="1536" loading="eager" decoding="async" alt={imageAlt}/></figure><p class="eyebrow">{labels.note}</p><h2>{page.scopeTitle}</h2><p>{common.footer}</p><a class="button" href={common.contact} data-contact-intent="buyer_request">{page.cta}</a></aside></div></section>
 <style is:global>
   .poultry-hero{position:relative;isolation:isolate;display:grid;align-items:center;min-height:clamp(580px,70vh,680px);padding:68px 0;overflow:hidden}
   .poultry-hero .hero-grid{width:min(1360px,calc(100% - 112px));margin-inline:auto}
