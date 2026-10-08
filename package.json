@@ -29,6 +29,6 @@
   "devDependencies": {
     "lighthouse": "^13.4.1",
     "playwright-core": "^1.62.0",
-    "sharp": "0.35.4"
+    "sharp": "0.35.5"
   }
 }
