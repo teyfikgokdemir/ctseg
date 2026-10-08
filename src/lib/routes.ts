@@ -14,6 +14,7 @@ import { ukraineTurkiyeContent } from '../data/ukraine-market';
 import { regionalIntentHomes } from '../data/regional-intent-homes';
 import { termsOfUseCopy } from '../data/legal';
 import { syriaMarketContent } from '../data/syria-market';
+import { poultryFeedContent, poultryFeedIds, type PoultryFeedId, type PoultryFeedLocale } from '../data/poultry-feed';
 
 const localizedMetaLabels: Record<string,{service:string;product:string;serviceType:string;buyerAudience:string;producerAudience:string}> = {
   tr:{service:'B2B Tedarik Danışmanlığı',product:'Toptan B2B',serviceType:'İki yönlü küresel ticaret, stratejik tedarik, tedarikçi doğrulama ve pazara giriş',buyerAudience:'Doğrulanmış tedarikçi ve tedarik rotası arayan alıcılar',producerAudience:'Alıcı ve uluslararası pazara giriş arayan üreticiler'},
@@ -49,6 +50,7 @@ export function getRouteRecords(): RouteRecord[] {
     if (lang === 'tr' && chinaTurkiyeContent.tr) records.push({lang,path:chinaTurkiyeContent.tr.slug,key:'china-turkiye'});
     if (lang === 'tr') records.push({lang,path:ukraineTurkiyeContent.slug,key:'ukraine-turkiye'});
     if (lang === 'tr' || lang === 'en') records.push({lang,path:syriaMarketContent[lang].slug,key:'syria-market'});
+    if (lang === 'tr' || lang === 'en' || lang === 'ar') for (const id of poultryFeedIds) records.push({lang,path:poultryFeedContent[lang as PoultryFeedLocale][id].slug,key:'poultry-feed',id});
     for (const id of searchLandingIds) {
       const landingPath=searchLandingPath(lang,id);
       if (!landingPath) continue;
@@ -149,6 +151,10 @@ export function getMeta(record: RouteRecord) {
   }
   if (key === 'syria-market' && (lang === 'tr' || lang === 'en')) {
     const page=syriaMarketContent[lang];
+    return {title:`${page.title} | CTSEG`,description:page.description};
+  }
+  if (key === 'poultry-feed' && id && (lang === 'tr' || lang === 'en' || lang === 'ar')) {
+    const page=poultryFeedContent[lang as PoultryFeedLocale][id as PoultryFeedId];
     return {title:`${page.title} | CTSEG`,description:page.description};
   }
   if (key === 'search-landing' && id) {

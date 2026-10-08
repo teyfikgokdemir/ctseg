@@ -1,0 +1,22 @@
+---
+import type { PoultryFeedPage as Page, PoultryFeedLocale } from '../data/poultry-feed';
+import { poultryFeedCommon } from '../data/poultry-feed';
+
+const { lang, page } = Astro.props as { lang:PoultryFeedLocale; page:Page };
+const common=poultryFeedCommon[lang];
+const labels={tr:{faq:'Sık sorulan sorular',note:'CTSEG · BAĞIMSIZ B2B KOORDİNASYON'},en:{faq:'Frequently asked questions',note:'CTSEG · INDEPENDENT B2B COORDINATION'},ar:{faq:'الأسئلة الشائعة',note:'CTSEG · تنسيق B2B مستقل'}}[lang];
+const programmePages=new Set(['chick-starter-0-14-days','chick-starter-0-30-days','broiler-grower-finisher-feed','commercial-layer-feed','breeder-feed']);
+const image=programmePages.has((Astro.props as { id?:string }).id || '') ? '/images/poultry-feed-document-review.png' : '/images/poultry-feed-sourcing-warehouse.png';
+const imageAlt={tr:'Kanatlı yemi tedarik ve belge değerlendirme süreci',en:'Poultry-feed sourcing and document-review process',ar:'عملية توريد أعلاف الدواجن ومراجعة الوثائق'}[lang];
+---
+<section class="hero poultry-hero"><img class="poultry-hero__image" src={image} width="1920" height="1080" alt={imageAlt} loading="eager" decoding="async"/><div class="poultry-hero__veil"></div><div class="container hero-grid"><div class="hero-copy"><p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p class="hero-lead">{page.lead}</p><a class="button" href={common.contact} data-contact-intent="buyer_request">{page.cta}</a></div></div></section>
+<section class="section"><div class="container content-grid"><div class="prose">
+  <div class="content-block direct-answer"><p>{page.description}</p></div>
+  <div class="content-block"><h2>{page.scopeTitle}</h2><ul class="check-list">{page.scope.map((item)=><li>{item}</li>)}</ul></div>
+  <div class="content-block"><h2>{page.assessmentTitle}</h2><p>{page.assessment}</p><ul class="check-list">{common.checks.map((item)=><li>{item}</li>)}</ul></div>
+  <div class="content-block origin-note"><h2>{page.marketTitle}</h2><p>{page.market}</p></div>
+  <div class="content-block faq"><h2>{labels.faq}</h2>{page.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
+</div><aside class="side-panel"><p class="eyebrow">{labels.note}</p><h2>{page.scopeTitle}</h2><p>{common.footer}</p><a class="button" href={common.contact} data-contact-intent="buyer_request">{page.cta}</a></aside></div></section>
+<style is:global>
+  .poultry-hero{position:relative;isolation:isolate;overflow:hidden}.poultry-hero__image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2}.poultry-hero__veil{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(17,19,16,.93) 0%,rgba(17,19,16,.7) 43%,rgba(17,19,16,.18) 100%)}html[dir="rtl"] .poultry-hero__veil{background:linear-gradient(270deg,rgba(17,19,16,.93) 0%,rgba(17,19,16,.7) 43%,rgba(17,19,16,.18) 100%)}@media(max-width:700px){.poultry-hero__veil{background:linear-gradient(180deg,rgba(17,19,16,.62),rgba(17,19,16,.94) 70%)}.poultry-hero__image{object-position:68% center}}
+</style>

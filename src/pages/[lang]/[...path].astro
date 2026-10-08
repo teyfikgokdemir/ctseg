@@ -15,6 +15,8 @@ import { ukraineTurkiyeContent } from '../../data/ukraine-market';
 import { regionalIntentHomes } from '../../data/regional-intent-homes';
 import { tradeDeskCopy } from '../../data/trade-desk';
 import { syriaMarketContent } from '../../data/syria-market';
+import { poultryFeedContent, type PoultryFeedId, type PoultryFeedLocale } from '../../data/poultry-feed';
+import PoultryFeedPage from '../../components/PoultryFeedPage.astro';
 import { breadcrumbSchema, canonicalFor, getMeta, getRouteRecords, tradeMatchingServiceSchema, type RouteRecord } from '../../lib/routes';
 
 export function getStaticPaths() {
@@ -143,6 +145,11 @@ if (record.key === 'syria-market' && (record.lang === 'tr' || record.lang === 'e
     '@context':'https://schema.org','@type':'FAQPage',
     mainEntity:page.faq.map((item)=>({'@type':'Question',name:item.question,acceptedAnswer:{'@type':'Answer',text:item.answer}}))
   });
+}
+if (record.key === 'poultry-feed' && record.id && (record.lang === 'tr' || record.lang === 'en' || record.lang === 'ar')) {
+  const page=poultryFeedContent[record.lang as PoultryFeedLocale][record.id as PoultryFeedId];
+  schemas.push({ '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#poultry-feed-sourcing`,url:canonicalFor(record),name:page.title,description:page.description,inLanguage:schemaLanguage(record.lang),serviceType:'Independent B2B poultry-feed sourcing and export coordination',provider:{'@id':'https://ctseg.com.tr/#organization'},areaServed:['Türkiye','Syria','Iraq'],audience:{'@type':'BusinessAudience',name:'Poultry businesses and B2B feed buyers'}});
+  schemas.push({ '@context':'https://schema.org','@type':'FAQPage',mainEntity:page.faq.map((item)=>({'@type':'Question',name:item.question,acceptedAnswer:{'@type':'Answer',text:item.answer}})) });
 }
 if (record.key === 'services' && record.id) {
   const service = services[record.id as keyof typeof services];
@@ -377,7 +384,9 @@ if (record.key === 'guides' && record.id) {
 }
 ---
 <BaseLayout lang={record.lang} title={meta.title} description={meta.description} pageKey={record.key} pageId={record.id} canonical={canonicalFor(record)} schema={schemas}>
-  <PageContent record={record} />
+  {record.key === 'poultry-feed' && record.id && (record.lang === 'tr' || record.lang === 'en' || record.lang === 'ar')
+    ? <PoultryFeedPage lang={record.lang as PoultryFeedLocale} id={record.id} page={poultryFeedContent[record.lang as PoultryFeedLocale][record.id as PoultryFeedId]} />
+    : <PageContent record={record} />}
 </BaseLayout>
 <style is:global>
   /* Dark-surface copy must outrank the generic `.section p` light-surface rule. */

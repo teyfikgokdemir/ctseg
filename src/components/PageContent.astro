@@ -39,6 +39,7 @@ import { regionalIntentHomes } from '../data/regional-intent-homes';
 import { tradeDeskCopy } from '../data/trade-desk';
 import { termsOfUseCopy } from '../data/legal';
 import { syriaMarketContent } from '../data/syria-market';
+import { poultryFeedContent, poultryFeedPath, type PoultryFeedLocale } from '../data/poultry-feed';
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
@@ -54,6 +55,7 @@ const chinaMarketEntry = chinaMarketEntryContent.zh;
 const chinaTurkiye = chinaTurkiyeContent.tr;
 const ukraineTurkiye = ukraineTurkiyeContent;
 const syriaMarket = (lang === 'tr' || lang === 'en') ? syriaMarketContent[lang] : null;
+const poultryFeed = (lang === 'tr' || lang === 'en' || lang === 'ar') ? poultryFeedContent[lang as PoultryFeedLocale]['turkiye-poultry-feed-sourcing'] : null;
 const regionalIntentHome = (['de','it','ru'].includes(lang) ? regionalIntentHomes[lang as 'de'|'it'|'ru'] : null);
 const tradeDesk = tradeDeskCopy[lang as keyof typeof tradeDeskCopy];
 const corporate = companyCopy[lang];
@@ -1834,6 +1836,12 @@ const verifiedLater = {
       <div class="market-role-grid">{completionMarkets.map((market) => <article><h2>{market.title}</h2><ul>{market.items.map((item)=><li>{item}</li>)}</ul></article>)}</div>
     </div></section>
     <ProcessRail steps={copy.framework} />
+    {poultryFeed && (
+      <section class="section poultry-market-card"><div class="container poultry-market-card__grid">
+        <div class="poultry-market-card__copy"><p class="eyebrow">{poultryFeed.eyebrow}</p><h2>{poultryFeed.title}</h2><p>{poultryFeed.description}</p><a class="button" href={poultryFeedPath(lang as PoultryFeedLocale,'turkiye-poultry-feed-sourcing')}>{lang === 'ar' ? 'استكشف توريد أعلاف الدواجن' : lang === 'tr' ? 'Kanatlı yemi tedarikini inceleyin' : 'Explore poultry-feed sourcing'}</a></div>
+        <img src="/images/poultry-feed-sourcing-warehouse.png" width="1920" height="1080" loading="lazy" decoding="async" alt={lang === 'ar' ? 'توريد أعلاف الدواجن من تركيا' : lang === 'tr' ? 'Türkiye’den kanatlı yemi tedariki' : 'Poultry-feed sourcing from Türkiye'} />
+      </div></section>
+    )}
     {lang === 'zh' && chinaMarketEntry && (
       <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
         <div>
