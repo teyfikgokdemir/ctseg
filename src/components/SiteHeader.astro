@@ -87,6 +87,12 @@ const solutionLinks = lang === 'he' ? [
   [methodLabel, localizedPath(lang,'how-we-work')]
 ];
 
+const poultryFeedNav = ({
+  tr:{label:'Kanatlı Yemi',href:poultryFeedPath('tr','turkiye-poultry-feed-sourcing')},
+  en:{label:'Poultry Feed',href:poultryFeedPath('en','turkiye-poultry-feed-sourcing')},
+  ar:{label:'أعلاف الدواجن',href:poultryFeedPath('ar','turkiye-poultry-feed-sourcing')}
+} as Partial<Record<PoultryFeedLocale,{label:string;href:string}>>)[lang as PoultryFeedLocale];
+
 const nav = lang === 'he' ? [
   ['services', navigationCopy.globalTrade, '/he/שירותים/'],
   ['sectors', navigationCopy.industries, '/he/שווקים/'],
@@ -98,6 +104,7 @@ const nav = lang === 'he' ? [
   ['services', navigationCopy.globalTrade, localizedPath(lang,'services')],
   ['sectors', navigationCopy.industries, localizedPath(lang,'markets')],
   ...(!focusedCountryLp ? [['products', navigationCopy.portfolio, localizedPath(lang,'products')]] : []),
+  ...(poultryFeedNav ? [['poultry-feed', poultryFeedNav.label, poultryFeedNav.href]] : []),
   ['insights', navigationCopy.intelligence, localizedPath(lang,'insights')],
   ['about', navigationCopy.company, localizedPath(lang,'about')],
   ['contact', t.contact, localizedPath(lang,'contact')]
@@ -270,7 +277,7 @@ const globalSwitchPath = (target: string): string => {
             <span class="mobile-accordion-chevron" aria-hidden="true">⌄</span>
           </summary>
           <div class="mobile-accordion-links">
-            {nav.filter(([key]) => key !== 'services').map(([key, label, href]) => (
+            {nav.filter(([key]) => key !== 'services' && key !== 'insights').map(([key, label, href]) => (
               <a href={href} class:list={{ active: pageKey === key }}>
                 <strong>{label}</strong><span aria-hidden="true">{['he','fa','ar'].includes(lang) ? '↖' : '↗'}</span>
               </a>
@@ -309,7 +316,7 @@ const globalSwitchPath = (target: string): string => {
           </div>
         </div>
 
-        {nav.filter(([key]) => key !== 'services').map(([key, label, href]) => (
+        {nav.filter(([key]) => key !== 'services' && key !== 'insights').map(([key, label, href]) => (
           <a class:list={['desktop-nav-link', { active: pageKey === key }]} href={href}>{label}</a>
         ))}
 
