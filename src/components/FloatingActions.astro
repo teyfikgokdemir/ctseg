@@ -73,13 +73,19 @@ const copy = contactCopy[lang];
       actions.dataset.enhanced='true';
       const top=actions.querySelector('[data-back-to-top]');
       if(!(top instanceof HTMLButtonElement))return;
-      const update=()=>{
-        const visible=(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop)>180;
+      let scrollStopTimer;
+      const setTopVisible=(visible)=>{
         top.classList.toggle('visible',visible);
         top.setAttribute('aria-hidden',String(!visible));
         top.tabIndex=visible?0:-1;
       };
-      update();
+      const update=()=>{
+        const pastIntro=(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop)>180;
+        clearTimeout(scrollStopTimer);
+        setTopVisible(pastIntro);
+        if(pastIntro)scrollStopTimer=setTimeout(()=>setTopVisible(false),650);
+      };
+      setTopVisible(false);
       addEventListener('scroll',update,{passive:true});
       top.addEventListener('click',()=>scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'}));
       const cookie=document.querySelector('[data-cookie-consent],.fa-cookie');
