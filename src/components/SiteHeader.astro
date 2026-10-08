@@ -8,6 +8,7 @@ import { searchLandingPath, type SearchLandingId } from '../data/search-landings
 import { getGlassSeoPage } from '../data/glass-seo';
 import { localizedGlassProductCopy, localizedGlassSlugs, type LocalizedGlassLocale } from '../data/glass-product-locales';
 import { arGlassProductCopy } from '../data/glass-product-ar';
+import { poultryFeedPath, type PoultryFeedId, type PoultryFeedLocale } from '../data/poultry-feed';
 
 const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?: string; pageId?: string };
 const t = lang === 'he' ? {
@@ -154,6 +155,10 @@ const globalSwitchPath = (target: string): string => {
     if (target === 'tr') return '/tr/iran-turkiye-ticaret/';
     if (target === 'en') return '/en/iran-turkiye-europe-trade/';
     if (target === 'fa') return '/fa/';
+    return `/${target}/`;
+  }
+  if (pageKey === 'poultry-feed' && pageId) {
+    if (target === 'tr' || target === 'en' || target === 'ar') return poultryFeedPath(target as PoultryFeedLocale,pageId as PoultryFeedId);
     return `/${target}/`;
   }
   if (['vietnam-turkiye','china-turkiye','ukraine-turkiye'].includes(pageKey)) return target === 'tr' ? '/' : `/${target}/`;

@@ -1,0 +1,16 @@
+---
+import type { PoultryFeedPage as Page, PoultryFeedLocale } from '../data/poultry-feed';
+import { poultryFeedCommon } from '../data/poultry-feed';
+
+const { lang, page } = Astro.props as { lang:PoultryFeedLocale; page:Page };
+const common=poultryFeedCommon[lang];
+const labels={tr:{faq:'Sık sorulan sorular',note:'CTSEG · BAĞIMSIZ B2B KOORDİNASYON'},en:{faq:'Frequently asked questions',note:'CTSEG · INDEPENDENT B2B COORDINATION'},ar:{faq:'الأسئلة الشائعة',note:'CTSEG · تنسيق B2B مستقل'}}[lang];
+---
+<section class="hero poultry-hero"><div class="container hero-grid"><div class="hero-copy"><p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p class="hero-lead">{page.lead}</p><a class="button" href={common.contact} data-contact-intent="buyer_request">{page.cta}</a></div></div></section>
+<section class="section"><div class="container content-grid"><div class="prose">
+  <div class="content-block direct-answer"><p>{page.description}</p></div>
+  <div class="content-block"><h2>{page.scopeTitle}</h2><ul class="check-list">{page.scope.map((item)=><li>{item}</li>)}</ul></div>
+  <div class="content-block"><h2>{page.assessmentTitle}</h2><p>{page.assessment}</p><ul class="check-list">{common.checks.map((item)=><li>{item}</li>)}</ul></div>
+  <div class="content-block origin-note"><h2>{page.marketTitle}</h2><p>{page.market}</p></div>
+  <div class="content-block faq"><h2>{labels.faq}</h2>{page.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
+</div><aside class="side-panel"><p class="eyebrow">{labels.note}</p><h2>{page.scopeTitle}</h2><p>{common.footer}</p><a class="button" href={common.contact} data-contact-intent="buyer_request">{page.cta}</a></aside></div></section>
