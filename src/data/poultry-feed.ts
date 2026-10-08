@@ -35,6 +35,27 @@ const common = {
     contact:'/ar/contact/?intent=buyer_request&support=supplier_sourcing&direction=cross_border_sourcing#commercial-form'}
 } as const;
 
+export const poultryFeedSupplementalFaqs: Record<PoultryFeedLocale, { question:string; answer:string }[]> = {
+  tr:[
+    {question:'CTSEG hangi ticari rolü üstlenir?',answer:'CTSEG üretici değildir. Talebi netleştirir, uygun adayların ve belgelerin değerlendirilmesini koordine eder; nihai seçim ve sözleşme ticari taraflara aittir.'},
+    {question:'Teknik föy ve COA ne zaman incelenir?',answer:'Üretici adayından güncel belge mevcut olduğunda, teklif öncesi ve parti/ürün bazında talep kapsamında incelenir.'},
+    {question:'Suriye ve Irak için etiket ile ithalat belgeleri nasıl ele alınır?',answer:'Hedef ülke, ithalatçı ve ürün için geçerli gereklilikler işlem bazında teyit edilir. CTSEG doğrulanmamış bir belge veya uygunluk iddiası sunmaz.'},
+    {question:'RFQ süreci nasıl başlar?',answer:'Tür, yaş programı, miktar, ambalaj, teslim noktası, hedef ülke ve belge beklentisi paylaşıldıktan sonra karşılaştırılabilir bir talep çerçevesi hazırlanır.'}
+  ],
+  en:[
+    {question:'What commercial role does CTSEG take?',answer:'CTSEG is not a manufacturer. It clarifies the requirement and coordinates assessment of suitable candidates and documents; supplier selection and contracting remain with the commercial parties.'},
+    {question:'When are technical sheets and COAs reviewed?',answer:'They are requested and reviewed before quotation where current producer documentation is available, always against the specific product and batch context.'},
+    {question:'How are labels and import documents addressed for Syria and Iraq?',answer:'Applicable requirements are confirmed per product, importer and destination. CTSEG does not make unverified document or compliance claims.'},
+    {question:'How does an RFQ begin?',answer:'A comparable request is prepared after the species, age programme, quantity, packaging, delivery point, destination and document expectations are shared.'}
+  ],
+  ar:[
+    {question:'ما الدور التجاري الذي تتولاه CTSEG؟',answer:'لا تُعد CTSEG منتجاً. فهي توضح الاحتياج وتنسق تقييم المرشحين والوثائق؛ أما اختيار المورد والتعاقد فيبقيان للطرفين التجاريين.'},
+    {question:'متى تُراجع أوراق المواصفات وCOA؟',answer:'تُطلب وتُراجع قبل العرض عند توفر وثائق حديثة من المنتج، وبحسب المنتج والدفعة محل الطلب.'},
+    {question:'كيف تُعالج الملصقات ووثائق الاستيراد لسوريا والعراق؟',answer:'تُؤكد المتطلبات بحسب المنتج والمستورد والوجهة. ولا تقدم CTSEG ادعاءً غير متحقق عن وثيقة أو مطابقة.'},
+    {question:'كيف يبدأ طلب عرض الأسعار RFQ؟',answer:'يُعد إطار طلب قابل للمقارنة بعد مشاركة نوع الطيور والبرنامج والكمية والتعبئة ونقطة التسليم والوجهة ومتطلبات الوثائق.'}
+  ]
+};
+
 const pages:Record<PoultryFeedLocale,Record<PoultryFeedId,PoultryFeedPage>> = {
 tr:{
  'turkiye-poultry-feed-sourcing':{slug:'turkiyeden-kanatli-yemi-tedariki',eyebrow:'TÜRKİYE · KANATLI YEMİ TEDARİK VE İHRACAT KOORDİNASYONU',title:'Türkiye’den kanatlı yemi tedariki ve ihracat koordinasyonu',description:'Suriye ve Irak önceliğiyle Türkiye’den kanatlı yemi tedariki için bağımsız B2B üretici araştırması, RFQ, belge incelemesi ve sevkiyat koordinasyonu.',lead:'Kanatlı yemi alımında ürün adı tek başına yeterli değildir. CTSEG, ihtiyacı yaş programı, hedef tür, parti belgeleri, paketleme, teslim noktası ve ticari koşullarla birlikte değerlendirir; uygun üretici seçeneklerini karşılaştırılabilir bir RFQ çerçevesinde koordine eder.',scope:['Civciv, broyler, yumurtacı ve damızlık programlarına göre ihtiyaç toplama','Türkiye’deki üretici ve tedarikçi adaylarının ticari araştırması','Teknik föy, COA, etiket ve hedef pazar belgesi talebinin ortak formatta incelenmesi','Ambalaj, yükleme, lojistik ve teslim şekli seçeneklerinin RFQ içinde ayrıştırılması'],assessment:'Akgül Yem kataloğu, ürün programlarını ve talep başlıklarını anlamak için bir karşılaştırma referansı olarak kullanılabilir. Ancak herhangi bir markanın üretim kapasitesi, besin değeri, analiz sonucu, stok durumu veya fiyatı site üzerinden iddia edilmez; bunlar yalnızca üretici ve parti bazında doğrulanır.',marketTitle:'Suriye ve Irak için ticari yaklaşım',market:'Suriye birincil, Irak ikincil hedef pazardır. Her talepte ithalatçı, teslim şehri, gümrük sınıflandırması, etiket dili, hayvan sağlığı ve yem mevzuatı, ödeme ve sevkiyat koşulları ayrıca değerlendirilir.',cta:'Kanatlı yemi talebinizi paylaşın',faq:[{question:'CTSEG kanatlı yemi üreticisi mi?',answer:'Hayır. CTSEG bağımsız tedarik ve ihracat koordinatörüdür; üreticileri, belgeleri ve RFQ seçeneklerini talep bazında değerlendirir.'},{question:'Teklif için hangi bilgiler gerekir?',answer:'Tür, yaş programı, yaklaşık miktar, ambalaj tercihi, teslim noktası, hedef ülke ve ihtiyaç duyulan belgeler başlangıç için yeterlidir.'}]},
@@ -81,3 +102,4 @@ export const poultryFeedCommon = common;
 export const poultryFeedContent = pages;
 export const poultryFeedLocales: PoultryFeedLocale[] = ['tr','en','ar'];
 export const poultryFeedPath = (lang:PoultryFeedLocale,id:PoultryFeedId) => `/${lang}/${pages[lang][id].slug}/`;
+export const poultryFeedFaqs = (lang:PoultryFeedLocale, page:PoultryFeedPage) => [...page.faq, ...poultryFeedSupplementalFaqs[lang]];
