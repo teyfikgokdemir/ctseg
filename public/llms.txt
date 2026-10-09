@@ -172,3 +172,7 @@ CTSEG — International Trade Matching and Commercial Coordination
 - Historical reports must be checked against the live site, sitemap and deployment before being treated as current.
 - For claim-by-claim verification, consult: https://ctseg.com.tr/ai-fact-sheet.txt
 
+## Machine-readable AI discovery
+
+- [ARD manifest](https://ctseg.com.tr/.well-known/ard.json)
+- [AI catalog compatibility manifest](https://ctseg.com.tr/.well-known/ai-catalog.json)
