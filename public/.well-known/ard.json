@@ -1,0 +1,35 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "CTSEG",
+    "identifier": "did:web:ctseg.com.tr",
+    "documentationUrl": "https://ctseg.com.tr/llms.txt"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:ctseg.com.tr:resource:llms",
+      "displayName": "CTSEG AI Information",
+      "type": "text/plain",
+      "url": "https://ctseg.com.tr/llms.txt",
+      "description": "Verified overview of CTSEG international trade matching, sourcing, producer qualification and multilingual resources.",
+      "tags": [
+        "international-trade",
+        "strategic-sourcing",
+        "supplier-verification",
+        "b2b",
+        "turkiye"
+      ],
+      "capabilities": [
+        "SiteDiscovery",
+        "ServiceCatalog",
+        "CanonicalLinks"
+      ],
+      "representativeQueries": [
+        "What does CTSEG do?",
+        "How can international buyers source verified suppliers in Türkiye?"
+      ],
+      "version": "1.0.0",
+      "updatedAt": "2026-10-09T00:00:00Z"
+    }
+  ]
+}
