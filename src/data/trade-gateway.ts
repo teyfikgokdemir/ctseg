@@ -4,11 +4,11 @@ type Direction = { kicker:string; title:string; description:string };
 export const tradeGateway:Record<Locale,{ outbound:Direction; inbound:Direction }> = {
   tr:{
     outbound:{kicker:'TÜRKİYE → GLOBAL PAZARLAR',title:'Türk üretimi için uluslararası pazar erişimi',description:'Hedef pazar ve alıcı ihtiyacını netleştirir; ürün uygunluğu, teklif, belge ve ticari koordinasyon adımlarını birlikte değerlendiririz.'},
-    inbound:{kicker:'GLOBAL → TÜRKİYE',title:'Türkiye pazarı için stratejik tedarik ve giriş',description:'Üretici ve tedarikçi seçeneklerini ticari gereksinime göre araştırır; ürün, menşe, belge ve RFQ kapsamını karşılaştırılabilir hale getiririz.'}
+    inbound:{kicker:'GLOBAL → TÜRKİYE',title:'Türkiye’den üretici ve tedarikçi bulma',description:'Türkiye’den ithalat yapmak isteyen alıcılar için ürün şartnamesi, üretici ve tedarikçi araştırması, belge kontrolü ve teklif (RFQ) koordinasyonunu sektör bağımsız yürütürüz.'}
   },
   en:{
     outbound:{kicker:'TÜRKIYE → GLOBAL MARKETS',title:'International market access for Turkish production',description:'We clarify the target market and buyer requirement, then assess product fit, quotations, documentation and commercial coordination.'},
-    inbound:{kicker:'GLOBAL → TÜRKIYE',title:'Strategic sourcing and market entry in Türkiye',description:'We research manufacturer and supplier options against the commercial requirement and structure product, origin, documentation and RFQ inputs for comparison.'}
+    inbound:{kicker:'GLOBAL → TÜRKIYE',title:'Find manufacturers and suppliers in Türkiye',description:'For international buyers sourcing from Turkey, we coordinate cross-sector supplier research, manufacturer qualification, product specifications, document checks and RFQ comparison.'}
   },
   de:{
     outbound:{kicker:'TÜRKEI → INTERNATIONALE MÄRKTE',title:'Internationaler Marktzugang für türkische Hersteller',description:'Wir klären Zielmarkt und Käuferbedarf und bewerten Produkteignung, Angebote, Unterlagen und kaufmännische Abstimmung.'},
