@@ -5,7 +5,7 @@ import { breadcrumbSchema, tradeMatchingServiceSchema } from '../lib/routes';
 const record = { lang:'tr' as const, key:'home' };
 const meta = {
   title: 'CTSEG | Stratejik Tedarik, B2B Ticaret ve Pazara Giriş',
-  description: 'CTSEG; Türkiye ile uluslararası pazarlar arasında stratejik tedarik, tedarikçi doğrulama, RFQ yönetimi, alıcı araştırması ve B2B pazara giriş koordinasyonu yürütür.',
+  description: 'CTSEG, Türkiye ve uluslararası pazarlarda üretici ve tedarikçi araştırması, ithalat-ihracat eşleştirmesi, B2B teklif (RFQ) ve teslim koordinasyonu sunar.',
 };
 const schema = [breadcrumbSchema(record,meta.title),tradeMatchingServiceSchema(record,meta.title,meta.description)];
 const socialImage = 'https://ctseg.com.tr/images/ctseg-global-trade-hero-premium.webp';
