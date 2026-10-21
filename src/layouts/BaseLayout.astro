@@ -67,6 +67,8 @@ const isIranTradePage = pageKey === 'iran-trade' || (pageKey === 'home' && Strin
 const alternates = alternatesProp ? { ...alternatesProp } : String(lang) === 'he' && pageKey === 'he-insight' ? { he: canonicalUrl } as Record<string,string> :
   pageKey === 'glass' ? duzceGlassAlternates() :
   pageKey === 'glass-industry' ? Object.fromEntries([['tr','https://ctseg.com.tr/glass/'], ...activeLocales.filter((code)=>code!=='tr').map((code)=>[code,`https://ctseg.com.tr/${code}/glass/`]), ['x-default','https://ctseg.com.tr/en/glass/']]) as Record<string,string> :
+  pageKey === 'natural-oils' ? Object.fromEntries([...activeLocales.map((code)=>[code,`https://ctseg.com.tr/${code}/natural-oils/`]), ['x-default','https://ctseg.com.tr/en/natural-oils/']]) as Record<string,string> :
+  pageKey === 'natural-oils-product' && pageId ? Object.fromEntries([...activeLocales.map((code)=>[code,`https://ctseg.com.tr/${code}/natural-oils/${pageId}/`]), ['x-default',`https://ctseg.com.tr/en/natural-oils/${pageId}/`]]) as Record<string,string> :
   pageKey === 'search-landing' && pageId ? searchLandingAlternates(pageId) :
   pageKey === 'vietnam-market-entry' && vietnamMarketEntryContent.vi ? {
     vi:`https://ctseg.com.tr/vi/${vietnamMarketEntryContent.vi.slug}/`
@@ -101,6 +103,10 @@ const alternateCodes = pageKey === 'glass-industry'
   : pageKey === 'glass-product'
   ? activeLocales
   : pageKey === 'glass-market'
+  ? activeLocales
+  : pageKey === 'natural-oils'
+  ? activeLocales
+  : pageKey === 'natural-oils-product'
   ? activeLocales
   : pageKey === 'glass'
   ? ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr']

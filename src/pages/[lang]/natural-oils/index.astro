@@ -1,52 +1,795 @@
 ---
-import '../../../styles/site.css';
-import { oilLanguages, oilCopy, oilContact, oilPath, type OilLanguage } from '../../../data/natural-oils';
-import { localeDirection, localeOg, schemaLanguage } from '../../../data/locales';
-export function getStaticPaths(){return oilLanguages.map(lang=>({params:{lang},props:{lang}}));}
-const {lang}=Astro.props as {lang:OilLanguage};
-const t=oilCopy[lang];
-const url='https://ctseg.com.tr'+oilPath(lang);
-const hreflangs=oilLanguages.map(code=>({code,href:'https://ctseg.com.tr'+oilPath(code)}));
-const schema=[
- {'@context':'https://schema.org','@type':'WebPage','@id':url+'#webpage',url,name:t.title,description:t.description,inLanguage:schemaLanguage(lang)},
- {'@context':'https://schema.org','@type':'Service','@id':url+'#service',name:t.title,description:t.description,serviceType:'B2B botanical ingredients sourcing and RFQ coordination',provider:{'@id':'https://ctseg.com.tr/#organization'},areaServed:'International',inLanguage:schemaLanguage(lang)},
- {'@context':'https://schema.org','@type':'ItemList',name:t.scope,itemListElement:t.categories.map((name,i)=>({'@type':'ListItem',position:i+1,name}))},
- {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'CTSEG',item:'https://ctseg.com.tr/'+lang+'/'},{'@type':'ListItem',position:2,name:t.title,item:url}]}
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CommercialRequestForm from '../../../components/CommercialRequestForm.astro';
+import {
+  oilLanguages,
+  oilCopy,
+  oilPath,
+  oilContact,
+  naturalOilUi,
+  naturalOilSlugs,
+  naturalOilProducts,
+  naturalOilProductPath,
+  naturalOilVisualMap,
+  naturalOilImageSrcset,
+  type OilLanguage
+} from '../../../data/natural-oils';
+
+export function getStaticPaths() {
+  return oilLanguages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params as { lang: OilLanguage };
+const c = oilCopy[lang] || oilCopy.en;
+const ui = naturalOilUi[lang] || naturalOilUi.en;
+const products = naturalOilProducts[lang] || naturalOilProducts.en;
+const isRtl = ['ar', 'fa', 'he'].includes(lang);
+const arrow = isRtl ? '↖' : '↗';
+
+const canonical = `https://ctseg.com.tr${oilPath(lang)}`;
+const alternates = Object.fromEntries([
+  ...oilLanguages.map((code) => [code, `https://ctseg.com.tr${oilPath(code)}`]),
+  ['x-default', 'https://ctseg.com.tr/en/natural-oils/']
+]);
+
+const homeUrl = lang === 'tr' ? 'https://ctseg.com.tr/' : `https://ctseg.com.tr/${lang}/`;
+const contactHref = `${oilContact(lang)}?intent=buyer_request#commercial-form`;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: c.title,
+    description: c.description,
+    url: canonical,
+    areaServed: 'Worldwide',
+    provider: {
+      '@type': 'Organization',
+      name: 'CTSEG',
+      url: 'https://ctseg.com.tr/'
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: c.title,
+    description: c.description,
+    url: canonical,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: naturalOilSlugs.map((slug, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: products[slug].name,
+        url: `https://ctseg.com.tr${naturalOilProductPath(lang, slug)}`
+      }))
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: ui.hubFaqs.map(([question, answer]) => ({
+      '@type': 'Question',
+      name: question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: answer
+      }
+    }))
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'CTSEG', item: homeUrl },
+      { '@type': 'ListItem', position: 2, name: ui.hubBreadcrumb, item: canonical }
+    ]
+  }
 ];
+
+const heroImage = naturalOilVisualMap.hero;
 ---
-<!doctype html>
-<html lang={schemaLanguage(lang)} dir={localeDirection(lang)}>
-<head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>{t.title} | CTSEG</title><meta name="description" content={t.description}/><meta name="robots" content="index,follow,max-image-preview:large"/><link rel="canonical" href={url}/>
-{hreflangs.map(x=><link rel="alternate" hreflang={x.code} href={x.href}/>)}<link rel="alternate" hreflang="x-default" href={hreflangs.find(x=>x.code==='en')?.href}/>
-<meta property="og:type" content="website"/><meta property="og:locale" content={localeOg(lang)}/><meta property="og:title" content={t.title}/><meta property="og:description" content={t.description}/><meta property="og:url" content={url}/>
-<meta name="twitter:card" content="summary"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
-<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
-</head>
-<body>
-<a class="skip-link" href="#main">{lang==='tr'?'İçeriğe geç':'Skip to content'}</a>
-<header class="oils-header"><div class="container oils-header__inner">
-<a href={lang==='he'?'/he/':lang==='tr'?'/':'/'+lang+'/'} aria-label="CTSEG home"><img src="/images/ctseg-logo-transparent.png" width="145" height="47" alt="CTSEG"/></a>
-<nav aria-label="Languages">{oilLanguages.map(code=><a href={oilPath(code)} lang={code} aria-current={code===lang?'page':undefined}>{code.toUpperCase()}</a>)}</nav>
-</div></header>
-<main id="main">
-<section class="oils-hero"><div class="container">
-<p class="oils-eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p class="oils-lead">{t.lead}</p>
-<div class="oils-actions"><a class="oils-button" href={oilContact(lang)+(lang==='he'?'':'?intent=buyer_request#commercial-form')}>{t.cta} →</a><a class="oils-textlink" href="#scope">{t.scope} ↓</a></div>
-</div></section>
-<section id="scope" class="oils-section"><div class="container"><div class="oils-heading"><span class="oils-number">01 / 03</span><h2>{t.scope}</h2></div><div class="oils-grid">{t.categories.map((name,index)=><article class="oils-card"><span>{String(index+1).padStart(2,'0')}</span><h3>{name}</h3></article>)}</div></div></section>
-<section class="oils-section oils-dark"><div class="container"><div class="oils-heading"><span class="oils-number">02 / 03</span><h2>{t.process}</h2></div><ol class="oils-steps">{t.steps.map((s,i)=><li><span>{String(i+1).padStart(2,'0')}</span><p>{s}</p></li>)}</ol></div></section>
-<section class="oils-section"><div class="container oils-proof"><div><span class="oils-number">03 / 03</span><h2>{t.proof}</h2><p>{t.note}</p></div><aside><p>CTSEG · B2B RFQ</p><a class="oils-button" href={oilContact(lang)+'?intent=buyer_request#commercial-form'}>{t.cta} →</a></aside></div></section>
-</main>
-<footer class="oils-footer"><div class="container"><span>© 2026 CTSEG</span><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></div></footer>
-</body></html>
+<BaseLayout
+  lang={lang as any}
+  title={`${c.title} | CTSEG`}
+  description={c.description}
+  canonical={canonical}
+  alternates={alternates}
+  schema={schema}
+  pageKey="natural-oils"
+>
+  <div class="oils-hub" dir={isRtl ? 'rtl' : 'ltr'}>
+    <section class="oils-hero">
+      <div class="oils-hero__media">
+        <img
+          src={heroImage}
+          srcset={naturalOilImageSrcset(heroImage)}
+          sizes="(max-width: 1050px) 100vw, 58vw"
+          width="1200"
+          height="900"
+          alt={c.title}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+      <div class="oils-hero__shade"></div>
+      <div class="container oils-hero__grid">
+        <div class="oils-hero__copy">
+          <span class="eyebrow">{c.eyebrow}</span>
+          <h1>{c.title}</h1>
+          <p class="oils-hero__lead">{c.lead}</p>
+          <p class="oils-hero__note">{c.note}</p>
+          <div class="oils-hero__actions">
+            <a class="button primary" href="#rfq">{c.cta}</a>
+            <a class="button ghost" href={contactHref}>{ui.contactCta}</a>
+          </div>
+        </div>
+        <aside class="oils-trust-panel" aria-label={ui.partnerBannerKicker}>
+          <span class="oils-trust-panel__kicker">{ui.partnerBannerKicker}</span>
+          {ui.trustBadges.map((badge, index) => (
+            <div class="oils-trust-item">
+              <span class="oils-trust-dot" aria-hidden="true"></span>
+              <div>
+                <strong>{badge}</strong>
+                <p>{c.steps[index]}</p>
+              </div>
+            </div>
+          ))}
+        </aside>
+      </div>
+    </section>
+
+    <section class="oils-feature-strip">
+      <div class="container oils-feature-grid">
+        {ui.featureStrip.map((label, idx) => (
+          <div class="oils-feature-item">
+            <strong>{label}</strong>
+            <span>{c.categories[idx] || c.categories[0]}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="oils-section oils-products-section" id="product-groups">
+      <div class="container">
+        <div class="oils-section-head">
+          <span class="eyebrow dark">{c.eyebrow}</span>
+          <h2>{ui.productsHeading}</h2>
+          <p>{ui.productsSubheading}</p>
+        </div>
+
+        <div class="oils-product-grid">
+          {naturalOilSlugs.map((slug) => {
+            const item = products[slug];
+            const img = naturalOilVisualMap[slug];
+            const href = naturalOilProductPath(lang, slug);
+            return (
+              <a class="oils-product-card" href={href}>
+                <div class="oils-product-card__media">
+                  <img
+                    src={img}
+                    srcset={naturalOilImageSrcset(img)}
+                    sizes="(max-width: 720px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                    width="1200"
+                    height="900"
+                    alt={item.name}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="oils-product-card__badge">{item.botanicalName.split('·')[0].trim()}</span>
+                </div>
+                <div class="oils-product-card__body">
+                  <h3>{item.name}</h3>
+                  <p>{item.cardSummary}</p>
+                  <div class="oils-product-card__footer">
+                    <span>{ui.exploreProduct}</span>
+                    <i aria-hidden="true">{arrow}</i>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section class="oils-section oils-partner-section">
+      <div class="container oils-partner-grid">
+        <div class="oils-partner-copy">
+          <span class="eyebrow dark">{ui.partnerBannerKicker}</span>
+          <h2>{ui.partnerBannerTitle}</h2>
+          <p>{ui.partnerBannerText}</p>
+          <p class="oils-compliance-callout">{c.note}</p>
+          <div class="oils-partner-actions">
+            <a class="button dark-btn" href="#rfq">{c.cta}</a>
+          </div>
+        </div>
+        <div class="oils-partner-gallery">
+          <figure class="oils-gallery-card oils-gallery-card--large">
+            <img
+              src={naturalOilVisualMap['rose-essential-oil']}
+              srcset={naturalOilImageSrcset(naturalOilVisualMap['rose-essential-oil'])}
+              sizes="(max-width: 720px) 100vw, 32vw"
+              width="1200"
+              height="900"
+              alt={products['rose-essential-oil'].name}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <figure class="oils-gallery-card">
+            <img
+              src={naturalOilVisualMap['botanical-extracts']}
+              srcset={naturalOilImageSrcset(naturalOilVisualMap['botanical-extracts'])}
+              sizes="(max-width: 720px) 100vw, 20vw"
+              width="1200"
+              height="900"
+              alt={products['botanical-extracts'].name}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <figure class="oils-gallery-card">
+            <img
+              src={naturalOilVisualMap['other-essential-oils']}
+              srcset={naturalOilImageSrcset(naturalOilVisualMap['other-essential-oils'])}
+              sizes="(max-width: 720px) 100vw, 20vw"
+              width="1200"
+              height="900"
+              alt={products['other-essential-oils'].name}
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="oils-section oils-docs-section">
+      <div class="container">
+        <div class="oils-section-head">
+          <span class="eyebrow dark">{c.proof}</span>
+          <h2>{ui.documentationHeading}</h2>
+          <p>{c.note}</p>
+        </div>
+        <div class="oils-docs-grid">
+          {ui.documentationList.map(([docTitle, docDesc]) => (
+            <article class="oils-doc-card">
+              <h3>{docTitle}</h3>
+              <p>{docDesc}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="oils-section oils-commercial-section">
+      <div class="container oils-two-col">
+        <div class="oils-col-box">
+          <h2>{c.process}</h2>
+          <ol class="oils-step-list">
+            {c.steps.map((step, idx) => (
+              <li>
+                <span class="oils-step-num">0{idx + 1}</span>
+                <strong>{step}</strong>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div class="oils-col-box">
+          <h2>{ui.buyersHeading}</h2>
+          <ul class="oils-buyer-list">
+            {ui.buyersList.map((buyer) => (
+              <li>{buyer}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="oils-section oils-faq-section">
+      <div class="container">
+        <div class="oils-section-head">
+          <h2>{ui.faqHeading}</h2>
+        </div>
+        <div class="oils-faqs">
+          {ui.hubFaqs.map(([q, a], index) => (
+            <details open={index === 0}>
+              <summary>{q}</summary>
+              <p>{a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="oils-section oils-form-section" id="rfq">
+      <div class="container">
+        <CommercialRequestForm lang={lang as any} />
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
 <style>
-:global(html){scroll-behavior:smooth}
-:global(body){background:#f7f5f0;color:#1f2925;margin:0}
-:global(.container){max-width:1180px;margin-inline:auto;padding-inline:clamp(18px,4vw,48px)}
-.oils-header{background:#1c2925;color:#fff}.oils-header__inner{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:94px}.oils-header img{display:block;height:auto;filter:brightness(0) invert(1)}.oils-header nav{display:flex;flex-wrap:wrap;gap:4px}.oils-header nav a{color:#d3dbd5;text-decoration:none;font-size:12px;padding:10px 8px;min-width:28px;text-align:center}.oils-header nav a[aria-current]{background:#b69066;color:#17231e;border-radius:3px}
-.oils-hero{padding:clamp(70px,11vw,146px) 0;background:linear-gradient(135deg,#223b30 0%,#162620 63%,#586548 100%);color:#f7f4ed}.oils-eyebrow,.oils-number{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#c6a67c}.oils-hero h1{font-size:clamp(2.7rem,6.5vw,6rem);line-height:1.06;max-width:950px;letter-spacing:-.035em;margin:22px 0}.oils-lead{font-size:clamp(1.05rem,1.9vw,1.34rem);line-height:1.7;max-width:740px;color:#d9ded5}.oils-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:35px}.oils-button{display:inline-flex;padding:16px 24px;background:#c7a174;color:#1d2823;font-weight:700;text-decoration:none;border-radius:3px;min-height:48px;align-items:center}.oils-textlink{color:#fff;text-underline-offset:6px}.oils-section{padding:clamp(64px,9vw,110px) 0}.oils-heading{margin-bottom:40px}.oils-heading h2,.oils-proof h2{font-size:clamp(2rem,4vw,3.5rem);line-height:1.1;max-width:800px;margin:16px 0}.oils-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #d5d4ca;border-inline-start:1px solid #d5d4ca}.oils-card{border-inline-end:1px solid #d5d4ca;border-bottom:1px solid #d5d4ca;padding:32px;min-height:180px}.oils-card span,.oils-steps span{color:#97714a;font-size:12px}.oils-card h3{font-size:clamp(1.2rem,2vw,1.5rem);margin-top:32px;overflow-wrap:anywhere}.oils-dark{background:#1d2e28;color:#f6f1e7}.oils-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}.oils-steps li{border-top:1px solid #718077;padding-top:24px}.oils-steps p{font-size:1.16rem;line-height:1.5}.oils-proof{display:grid;grid-template-columns:1.5fr 1fr;gap:50px;align-items:center}.oils-proof p{font-size:1.06rem;line-height:1.7;max-width:630px}.oils-proof aside{background:#e8e5db;padding:36px}.oils-proof aside p{font-size:12px;letter-spacing:.1em}.oils-footer{background:#17241f;color:#eee;padding:28px 0}.oils-footer .container{display:flex;justify-content:space-between;gap:20px}.oils-footer a{color:#eee}
-@media(max-width:900px){.oils-header__inner{flex-direction:column;padding-block:20px}.oils-header nav{justify-content:center}.oils-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.oils-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.oils-proof{grid-template-columns:1fr}}
-@media(max-width:580px){.oils-grid,.oils-steps{grid-template-columns:1fr}.oils-card{min-height:120px;padding:24px}.oils-card h3{margin-top:14px}.oils-header nav a{padding:10px 7px}.oils-actions{align-items:stretch;flex-direction:column}.oils-button{text-align:center;justify-content:center}}
+  .oils-hub {
+    background: #f4f1e9;
+    color: #171914;
+  }
+  .oils-hero {
+    position: relative;
+    min-height: clamp(520px, calc(100svh - 110px), 640px);
+    background: #0d110e;
+    color: #f4f5ef;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+  }
+  .oils-hero__media {
+    position: absolute;
+    inset: 0 0 0 40%;
+    z-index: 0;
+    overflow: hidden;
+  }
+  [dir="rtl"] .oils-hero__media {
+    inset: 0 40% 0 0;
+  }
+  .oils-hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .oils-hero__shade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      90deg,
+      #0b0e0c 0%,
+      #0b0e0c 38%,
+      rgba(11, 14, 12, 0.92) 52%,
+      rgba(11, 14, 12, 0.34) 78%,
+      rgba(11, 14, 12, 0.14) 100%
+    );
+  }
+  [dir="rtl"] .oils-hero__shade {
+    background: linear-gradient(
+      270deg,
+      #0b0e0c 0%,
+      #0b0e0c 38%,
+      rgba(11, 14, 12, 0.92) 52%,
+      rgba(11, 14, 12, 0.34) 78%,
+      rgba(11, 14, 12, 0.14) 100%
+    );
+  }
+  .oils-hero__grid {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.56fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+    align-items: center;
+  }
+  .oils-hero__copy {
+    max-width: 760px;
+    min-width: 0;
+    text-align: start;
+  }
+  .oils-hero__copy h1 {
+    color: #f4f5ef !important;
+    font-size: clamp(2.1rem, 3.2vw, 3.6rem);
+    line-height: 1.02;
+    margin: 0.45rem 0 0.85rem;
+    letter-spacing: -0.035em;
+    max-width: 20ch;
+    text-wrap: balance;
+  }
+  .oils-hero__lead {
+    font-size: clamp(0.95rem, 1.05vw, 1.12rem);
+    line-height: 1.55;
+    color: #e8ece5 !important;
+    max-width: 64ch;
+    margin: 0 0 0.85rem;
+  }
+  .oils-hero__note {
+    font-size: 0.8rem;
+    line-height: 1.48;
+    color: #c2cbc3 !important;
+    border-inline-start: 2px solid #c7ff38;
+    padding-inline-start: 0.85rem;
+    max-width: 62ch;
+    margin: 0 0 1.25rem;
+  }
+  .oils-hero__actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .button.ghost {
+    background: rgba(244, 245, 239, 0.95) !important;
+    color: #101410 !important;
+    border-color: #f4f5ef !important;
+  }
+  .oils-trust-panel {
+    background: rgba(10, 22, 18, 0.88);
+    border: 1px solid rgba(199, 255, 56, 0.22);
+    backdrop-filter: blur(14px);
+    padding: 1.15rem 1.25rem;
+    border-radius: 18px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+  }
+  .oils-trust-panel__kicker {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c7ff38;
+    margin-bottom: 0.5rem;
+  }
+  .oils-trust-item {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    gap: 0.65rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .oils-trust-item:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+  .oils-trust-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #c7ff38;
+    box-shadow: 0 0 0 4px rgba(199, 255, 56, 0.12);
+    margin-top: 0.32rem;
+  }
+  .oils-trust-item strong {
+    display: block;
+    color: #fff;
+    font-size: 0.86rem;
+    line-height: 1.28;
+  }
+  .oils-trust-item p {
+    margin: 0.2rem 0 0;
+    color: #b7c2ba;
+    font-size: 0.74rem;
+    line-height: 1.38;
+  }
+  .oils-feature-strip {
+    background: #fff;
+    border-bottom: 1px solid #dddcd5;
+  }
+  .oils-feature-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .oils-feature-item {
+    padding: 1.1rem 1rem;
+    border-inline-end: 1px solid #e5e4df;
+  }
+  .oils-feature-item:last-child {
+    border-inline-end: 0;
+  }
+  .oils-feature-item strong {
+    display: block;
+    font-size: 0.84rem;
+    color: #141814;
+  }
+  .oils-feature-item span {
+    display: block;
+    margin-top: 0.28rem;
+    color: #586059;
+    font-size: 0.74rem;
+    line-height: 1.4;
+  }
+  .oils-section {
+    padding: clamp(3.5rem, 6vw, 5.8rem) 0;
+  }
+  .eyebrow.dark {
+    color: #4c564e !important;
+  }
+  .oils-section-head {
+    max-width: 820px;
+    margin: 0 auto 2.4rem;
+    text-align: center;
+  }
+  .oils-section-head h2 {
+    font-size: clamp(1.9rem, 2.9vw, 3.2rem);
+    line-height: 1.06;
+    margin: 0.45rem 0 0.75rem;
+    letter-spacing: -0.03em;
+    color: #141713;
+  }
+  .oils-section-head p {
+    color: #4f5751;
+    line-height: 1.65;
+    margin: 0;
+  }
+  .oils-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .oils-product-card {
+    display: flex;
+    flex-direction: column;
+    background: #131814;
+    color: #f3f4ef;
+    border: 1px solid rgba(20, 24, 20, 0.14);
+    border-radius: 18px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .oils-product-card:hover {
+    transform: translateY(-4px);
+    border-color: #c7ff38;
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.15);
+  }
+  .oils-product-card__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #0d110e;
+  }
+  .oils-product-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.38s ease;
+  }
+  .oils-product-card:hover .oils-product-card__media img {
+    transform: scale(1.04);
+  }
+  .oils-product-card__badge {
+    position: absolute;
+    inset-inline-start: 0.85rem;
+    bottom: 0.85rem;
+    padding: 0.32rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(11, 15, 12, 0.84);
+    border: 1px solid rgba(199, 255, 56, 0.35);
+    color: #e9f2e6;
+    font-size: 0.7rem;
+    font-weight: 700;
+    backdrop-filter: blur(6px);
+  }
+  .oils-product-card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.4rem 1.45rem 1.5rem;
+  }
+  .oils-product-card__body h3 {
+    margin: 0 0 0.65rem;
+    font-size: 1.24rem;
+    line-height: 1.22;
+    color: #fff !important;
+  }
+  .oils-product-card__body p {
+    margin: 0 0 1.25rem;
+    color: #cfd6cf !important;
+    font-size: 0.92rem;
+    line-height: 1.58;
+    flex: 1;
+  }
+  .oils-product-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #c7ff38;
+    font-size: 0.82rem;
+    font-weight: 750;
+  }
+  .oils-product-card__footer i {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(199, 255, 56, 0.45);
+    display: grid;
+    place-items: center;
+    font-style: normal;
+  }
+  .oils-partner-section {
+    background: #e7ede9;
+  }
+  .oils-partner-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+    gap: clamp(2rem, 4.5vw, 4.5rem);
+    align-items: center;
+  }
+  .oils-partner-copy h2 {
+    font-size: clamp(1.85rem, 2.7vw, 2.95rem);
+    line-height: 1.08;
+    margin: 0.45rem 0 1rem;
+    color: #121713;
+  }
+  .oils-partner-copy p {
+    color: #3e4741;
+    line-height: 1.68;
+    margin: 0 0 1rem;
+  }
+  .oils-compliance-callout {
+    padding: 0.9rem 1.1rem;
+    border-inline-start: 3px solid #162119;
+    background: rgba(255, 255, 255, 0.62);
+    border-radius: 8px;
+    font-size: 0.88rem;
+  }
+  .dark-btn {
+    background: #121814 !important;
+    color: #fff !important;
+  }
+  .oils-partner-gallery {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 12px;
+  }
+  .oils-gallery-card {
+    margin: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #111;
+  }
+  .oils-gallery-card--large {
+    grid-row: span 2;
+  }
+  .oils-gallery-card img {
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+  .oils-docs-section {
+    background: #f4f1e9;
+  }
+  .oils-docs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .oils-doc-card {
+    background: #fff;
+    border: 1px solid #dcd9d0;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.04);
+  }
+  .oils-doc-card h3 {
+    margin: 0 0 0.55rem;
+    font-size: 1.08rem;
+    color: #141814;
+  }
+  .oils-doc-card p {
+    margin: 0;
+    color: #505751;
+    font-size: 0.9rem;
+    line-height: 1.58;
+  }
+  .oils-commercial-section {
+    background: #e6e1d6;
+  }
+  .oils-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4.5rem);
+  }
+  .oils-col-box h2 {
+    font-size: clamp(1.65rem, 2.3vw, 2.4rem);
+    line-height: 1.1;
+    margin: 0 0 1.25rem;
+    color: #141713;
+  }
+  .oils-step-list,
+  .oils-buyer-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .oils-step-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    padding: 0.95rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .oils-step-num {
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: #2c382f;
+    background: #c7ff38;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+  .oils-buyer-list li {
+    padding: 0.95rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    font-weight: 600;
+    color: #232823;
+  }
+  .oils-faqs {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .oils-faqs details {
+    background: #fff;
+    border: 1px solid #dcd9d0;
+    border-radius: 14px;
+    padding: 1.1rem 1.35rem;
+    margin-bottom: 12px;
+  }
+  .oils-faqs summary {
+    cursor: pointer;
+    font-weight: 750;
+    font-size: 1.02rem;
+    color: #141814;
+  }
+  .oils-faqs p {
+    margin: 0.75rem 0 0;
+    color: #4c534d;
+    line-height: 1.65;
+  }
+  .oils-form-section {
+    background: #10120f;
+  }
+  @media (max-width: 1080px) {
+    .oils-hero__media {
+      inset: 0;
+    }
+    .oils-hero__shade {
+      background: linear-gradient(
+        180deg,
+        rgba(8, 11, 9, 0.92) 0%,
+        rgba(8, 11, 9, 0.82) 65%,
+        rgba(8, 11, 9, 0.94) 100%
+      );
+    }
+    .oils-hero__grid {
+      grid-template-columns: 1fr;
+    }
+    .oils-feature-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .oils-product-grid,
+    .oils-docs-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .oils-partner-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 720px) {
+    .oils-hero__actions {
+      flex-direction: column;
+    }
+    .oils-hero__actions .button {
+      width: 100%;
+      justify-content: center;
+    }
+    .oils-feature-grid,
+    .oils-product-grid,
+    .oils-docs-grid,
+    .oils-two-col,
+    .oils-partner-gallery {
+      grid-template-columns: 1fr;
+    }
+    .oils-feature-item {
+      border-inline-end: 0;
+      border-bottom: 1px solid #e5e4df;
+    }
+  }
 </style>
