@@ -1,0 +1,52 @@
+---
+import '../../../styles/site.css';
+import { oilLanguages, oilCopy, oilContact, oilPath, type OilLanguage } from '../../../data/natural-oils';
+import { localeDirection, localeOg, schemaLanguage } from '../../../data/locales';
+export function getStaticPaths(){return oilLanguages.filter(lang=>lang!=='tr').map(lang=>({params:{lang},props:{lang}}));}
+const {lang}=Astro.props as {lang:OilLanguage};
+const t=oilCopy[lang];
+const url='https://ctseg.com.tr'+oilPath(lang);
+const hreflangs=oilLanguages.map(code=>({code,href:'https://ctseg.com.tr'+oilPath(code)}));
+const schema=[
+ {'@context':'https://schema.org','@type':'WebPage','@id':url+'#webpage',url,name:t.title,description:t.description,inLanguage:schemaLanguage(lang)},
+ {'@context':'https://schema.org','@type':'Service','@id':url+'#service',name:t.title,description:t.description,serviceType:'B2B botanical ingredients sourcing and RFQ coordination',provider:{'@id':'https://ctseg.com.tr/#organization'},areaServed:'International',inLanguage:schemaLanguage(lang)},
+ {'@context':'https://schema.org','@type':'ItemList',name:t.scope,itemListElement:t.categories.map((name,i)=>({'@type':'ListItem',position:i+1,name}))},
+ {'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'CTSEG',item:'https://ctseg.com.tr/'+lang+'/'},{'@type':'ListItem',position:2,name:t.title,item:url}]}
+];
+---
+<!doctype html>
+<html lang={schemaLanguage(lang)} dir={localeDirection(lang)}>
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>{t.title} | CTSEG</title><meta name="description" content={t.description}/><meta name="robots" content="index,follow,max-image-preview:large"/><link rel="canonical" href={url}/>
+{hreflangs.map(x=><link rel="alternate" hreflang={x.code} href={x.href}/>)}<link rel="alternate" hreflang="x-default" href={hreflangs.find(x=>x.code==='en')?.href}/>
+<meta property="og:type" content="website"/><meta property="og:locale" content={localeOg(lang)}/><meta property="og:title" content={t.title}/><meta property="og:description" content={t.description}/><meta property="og:url" content={url}/>
+<meta name="twitter:card" content="summary"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+<script type="application/ld+json" set:html={JSON.stringify(schema)}></script>
+</head>
+<body>
+<a class="skip-link" href="#main">{lang==='tr'?'İçeriğe geç':'Skip to content'}</a>
+<header class="oils-header"><div class="container oils-header__inner">
+<a href={lang==='he'?'/he/':lang==='tr'?'/':'/'+lang+'/'} aria-label="CTSEG home"><img src="/images/ctseg-logo-transparent.png" width="145" height="47" alt="CTSEG"/></a>
+<nav aria-label="Languages">{oilLanguages.map(code=><a href={oilPath(code)} lang={code} aria-current={code===lang?'page':undefined}>{code.toUpperCase()}</a>)}</nav>
+</div></header>
+<main id="main">
+<section class="oils-hero"><div class="container">
+<p class="oils-eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p class="oils-lead">{t.lead}</p>
+<div class="oils-actions"><a class="oils-button" href={oilContact(lang)+'?intent=buyer_request#commercial-form'}>{t.cta} →</a><a class="oils-textlink" href="#scope">{t.scope} ↓</a></div>
+</div></section>
+<section id="scope" class="oils-section"><div class="container"><div class="oils-heading"><span class="oils-number">01 / 03</span><h2>{t.scope}</h2></div><div class="oils-grid">{t.categories.map((name,index)=><article class="oils-card"><span>{String(index+1).padStart(2,'0')}</span><h3>{name}</h3></article>)}</div></div></section>
+<section class="oils-section oils-dark"><div class="container"><div class="oils-heading"><span class="oils-number">02 / 03</span><h2>{t.process}</h2></div><ol class="oils-steps">{t.steps.map((s,i)=><li><span>{String(i+1).padStart(2,'0')}</span><p>{s}</p></li>)}</ol></div></section>
+<section class="oils-section"><div class="container oils-proof"><div><span class="oils-number">03 / 03</span><h2>{t.proof}</h2><p>{t.note}</p></div><aside><p>CTSEG · B2B RFQ</p><a class="oils-button" href={oilContact(lang)+'?intent=buyer_request#commercial-form'}>{t.cta} →</a></aside></div></section>
+</main>
+<footer class="oils-footer"><div class="container"><span>© 2026 CTSEG</span><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a></div></footer>
+</body></html>
+<style>
+:global(html){scroll-behavior:smooth}
+:global(body){background:#f7f5f0;color:#1f2925;margin:0}
+:global(.container){max-width:1180px;margin-inline:auto;padding-inline:clamp(18px,4vw,48px)}
+.oils-header{background:#1c2925;color:#fff}.oils-header__inner{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:94px}.oils-header img{display:block;height:auto;filter:brightness(0) invert(1)}.oils-header nav{display:flex;flex-wrap:wrap;gap:4px}.oils-header nav a{color:#d3dbd5;text-decoration:none;font-size:12px;padding:10px 8px;min-width:28px;text-align:center}.oils-header nav a[aria-current]{background:#b69066;color:#17231e;border-radius:3px}
+.oils-hero{padding:clamp(70px,11vw,146px) 0;background:linear-gradient(135deg,#223b30 0%,#162620 63%,#586548 100%);color:#f7f4ed}.oils-eyebrow,.oils-number{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#c6a67c}.oils-hero h1{font-size:clamp(2.7rem,6.5vw,6rem);line-height:1.06;max-width:950px;letter-spacing:-.035em;margin:22px 0}.oils-lead{font-size:clamp(1.05rem,1.9vw,1.34rem);line-height:1.7;max-width:740px;color:#d9ded5}.oils-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:35px}.oils-button{display:inline-flex;padding:16px 24px;background:#c7a174;color:#1d2823;font-weight:700;text-decoration:none;border-radius:3px;min-height:48px;align-items:center}.oils-textlink{color:#fff;text-underline-offset:6px}.oils-section{padding:clamp(64px,9vw,110px) 0}.oils-heading{margin-bottom:40px}.oils-heading h2,.oils-proof h2{font-size:clamp(2rem,4vw,3.5rem);line-height:1.1;max-width:800px;margin:16px 0}.oils-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid #d5d4ca;border-inline-start:1px solid #d5d4ca}.oils-card{border-inline-end:1px solid #d5d4ca;border-bottom:1px solid #d5d4ca;padding:32px;min-height:180px}.oils-card span,.oils-steps span{color:#97714a;font-size:12px}.oils-card h3{font-size:clamp(1.2rem,2vw,1.5rem);margin-top:32px;overflow-wrap:anywhere}.oils-dark{background:#1d2e28;color:#f6f1e7}.oils-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}.oils-steps li{border-top:1px solid #718077;padding-top:24px}.oils-steps p{font-size:1.16rem;line-height:1.5}.oils-proof{display:grid;grid-template-columns:1.5fr 1fr;gap:50px;align-items:center}.oils-proof p{font-size:1.06rem;line-height:1.7;max-width:630px}.oils-proof aside{background:#e8e5db;padding:36px}.oils-proof aside p{font-size:12px;letter-spacing:.1em}.oils-footer{background:#17241f;color:#eee;padding:28px 0}.oils-footer .container{display:flex;justify-content:space-between;gap:20px}.oils-footer a{color:#eee}
+@media(max-width:900px){.oils-header__inner{flex-direction:column;padding-block:20px}.oils-header nav{justify-content:center}.oils-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.oils-steps{grid-template-columns:repeat(2,minmax(0,1fr))}.oils-proof{grid-template-columns:1fr}}
+@media(max-width:580px){.oils-grid,.oils-steps{grid-template-columns:1fr}.oils-card{min-height:120px;padding:24px}.oils-card h3{margin-top:14px}.oils-header nav a{padding:10px 7px}.oils-actions{align-items:stretch;flex-direction:column}.oils-button{text-align:center;justify-content:center}}
+</style>
