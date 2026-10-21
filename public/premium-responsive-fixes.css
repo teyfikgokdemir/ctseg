@@ -1,128 +1,173 @@
-/* Responsive and accessibility hardening for the premium trade-house layer. */
+/* Responsive, typography, contrast, and accessibility system for CTSEG Global Trade House. */
 html{max-width:100%}
 body{max-width:100%;overflow-x:hidden}
 main,.site-header,.site-footer{max-width:100%}
 
-/*
- * The legacy stylesheet owns the responsive/locale mechanics. This layer only
- * hardens the premium presentation. Keep foreground and surface declarations
- * together so a premium text colour can never land on the legacy paper tone.
- */
+/* 1. Explicit Dark vs Light Surface Contract */
 .trade-paths-section,
+.trending-sectors,
+.platform-sectors,
+.catalogue-section,
 .markets-editorial,
 .process-section,
 .duzce-glass-feature,
-.trade-video-section{background-color:#161616!important;color:#fff!important}
-.cta-statement{background:#161616!important;color:#fff!important}
+.trade-video-section,
+.trade-house-statement{background-color:#141613!important;color:#f4f2eb!important}
+.cta-statement,
+.catalogue-sourcing-desk,
+.origin-note,
+.insight-featured,
+.insight-advisory-desk{background-color:#161815!important;color:#f4f2eb!important}
+.process-answer-section,
+.answer-section{background-color:#20231d!important;color:#f4f2eb!important}
 
-/*
- * Match the accessibility contract directly: readable copy inside generic
- * sections defaults to dark ink. Dark editorial sections are explicitly
- * restored below. This avoids legacy --muted values leaking onto white paper.
- */
+/* Default readable copy on light sections (body / paper surfaces) */
 main .section p,
 main .section li,
-.commercial-field>span{color:#303030!important}
+.commercial-field>span,
+.process-overview-section .detailed-process li{color:#242622!important;opacity:1!important}
 
-/* Light copy is allowed only on surfaces whose dark background is guaranteed. */
-.trade-paths-section p,.trade-paths-section li,
-.markets-editorial p,.markets-editorial li,
-.process-section p,.process-section li,
-.duzce-glass-feature p,.duzce-glass-feature li,
-.trade-video-section p,.trade-video-section li,
-.cta-statement p,.cta-statement li{color:#d5d5d5!important}
+/* High-contrast light copy on all guaranteed dark surfaces (WCAG AA/AAA >= 11:1) */
+html body main .hero p,html body main .hero li,html body main .hero .lead,
+html body main .page-hero p,html body main .page-hero li,html body main .page-hero .lead,
+html body main .trade-paths-section p,html body main .trade-paths-section li,html body main .trade-paths-section .section-head p,html body main .trade-paths-grid p,
+html body main .trending-sectors p,html body main .trending-sectors li,
+html body main .platform-sectors p,html body main .platform-sectors li,html body main .platform-sectors .section-head p,html body main .platform-sector-grid article p,
+html body main .catalogue-section p,html body main .catalogue-section li,html body main .catalogue-section .group-lead,html body main .catalogue-group-heading p.group-lead,
+html body main .catalogue-sourcing-desk p,html body main .catalogue-sourcing-desk .sourcing-desk-lead,html body main .catalogue-sourcing-desk .sourcing-desk-note,
+html body main .origin-note,html body main p.origin-note,html body main .origin-note p,html body main .origin-note li,
+html body main .markets-editorial p,html body main .markets-editorial li,html body main .markets-editorial .section-head p,
+html body main .process-section p,html body main .process-section li,html body main .process-section .section-head p,
+html body main .duzce-glass-feature p,html body main .duzce-glass-feature li,html body main .duzce-glass-feature .section-head p,
+html body main .trade-video-section p,html body main .trade-video-section li,html body main .trade-video-section .section-head p,
+html body main .trade-house-statement p,html body main .trade-house-statement li,html body main .trade-house-statement__lead,html body main .trade-house-statement__row p,
+html body main .cta-statement p,html body main .cta-statement li,
+html body main .trade-funnel-card p,html body main .trade-funnel-desc,
+html body main .insight-featured p,html body main .insight-featured li,
+html body main .insight-advisory-desk p,html body main .insight-advisory-desk li,
+html body main .process-answer-section p,html body main .process-answer-section li,html body main .process-answer-section .answer-grid article,
+html body main .answer-section p,html body main .answer-section li,html body main .answer-section .answer-grid article,
+html body .site-footer p,html body .site-footer span,html body .site-footer li{color:#e2e6e0!important;opacity:1!important}
 
-/* Image cards carry their own dark surface. */
-.platform-sector-grid article{background:#161616!important}
-.platform-sector-grid article p{color:#f0f0f0!important}
+/* Product cards inside catalogue-grid: dark luxury card surface with high-contrast text */
+.platform-sector-grid article{background-color:#161815!important}
+.catalogue-grid .product-card{background-color:#181b17!important;color:#f4f2eb!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:16px!important;overflow:hidden!important}
+.catalogue-grid .product-card-copy{background-color:#181b17!important;color:#f4f2eb!important;padding:20px!important}
+.catalogue-grid .product-card-copy h2{color:#f4f2eb!important;font-size:clamp(1.12rem,1.35vw,1.32rem)!important;line-height:1.25!important;font-weight:700!important}
+.catalogue-grid .product-card-copy p{color:#d8ddd5!important;font-size:.94rem!important;line-height:1.58!important}
+.catalogue-grid .product-card-kicker{color:#c4f000!important;font-weight:700!important}
+.catalogue-grid .product-card-origin-tag{color:#e6ebe4!important;background-color:#232721!important;border-color:rgba(255,255,255,.18)!important}
+.catalogue-grid .product-card-trade-footer{color:#f4f2eb!important;border-top-color:rgba(255,255,255,.12)!important}
+.catalogue-grid .product-card-rfq,.catalogue-grid .product-card-arrow{color:#c4f000!important;font-weight:700!important}
 
-/* Secondary CTA contrast must remain explicit on both light and dark panels. */
-.hero .button-secondary,.page-hero .button-secondary,.duzce-page .button-secondary{
-  background:#fff!important;color:#0a0a0a!important;border-color:#4a4a4a!important
+/* Small captions & metadata contrast on light vs dark surfaces */
+.corridor-list span,.operational-trust-panel li span,.card small{opacity:1!important;color:#4a4e46!important}
+.market-line span{opacity:1!important;color:#c4f000!important}
+
+/* 2. Global CTA & Button Contrast System (Normal, Hover, Focus, Active, Disabled) */
+.button,.nav-cta{
+  background-color:#c4f000!important;
+  color:#0b0d0a!important;
+  -webkit-text-fill-color:#0b0d0a!important;
+  border:1px solid #c4f000!important;
+  font-family:var(--font-sans,'DM Sans',system-ui,sans-serif)!important;
+  font-weight:700!important;
+  opacity:1!important;
 }
+.button:hover,.button:focus-visible,.nav-cta:hover,.nav-cta:focus-visible{
+  background-color:#d4ff1a!important;
+  color:#070907!important;
+  -webkit-text-fill-color:#070907!important;
+  border-color:#d4ff1a!important;
+}
+.button-secondary{
+  background-color:#ffffff!important;
+  color:#111310!important;
+  -webkit-text-fill-color:#111310!important;
+  border:1px solid #4a4d46!important;
+  font-weight:600!important;
+}
+.button-secondary:hover,.button-secondary:focus-visible{
+  background-color:#141613!important;
+  color:#c4f000!important;
+  -webkit-text-fill-color:#c4f000!important;
+  border-color:#141613!important;
+}
+.hero .button-secondary,.page-hero .button-secondary,.duzce-page .button-secondary,
 .portfolio-section .button-secondary,.process-section .button-secondary,
-.site-footer .button-secondary,.cta-statement .button-secondary{
-  background:#161616!important;color:#fff!important;border-color:#a8a8a8!important
+.site-footer .button-secondary,.cta-statement .button-secondary,
+.trade-house-statement .button-secondary,.catalog-download .button-secondary,
+.catalogue-sourcing-desk .button-secondary{
+  background-color:#191c17!important;
+  color:#f4f2eb!important;
+  -webkit-text-fill-color:#f4f2eb!important;
+  border:1px solid rgba(244,242,235,.42)!important;
 }
+.hero .button-secondary:hover,.hero .button-secondary:focus-visible,
+.page-hero .button-secondary:hover,.page-hero .button-secondary:focus-visible,
+.duzce-page .button-secondary:hover,.duzce-page .button-secondary:focus-visible,
+.portfolio-section .button-secondary:hover,.portfolio-section .button-secondary:focus-visible,
+.process-section .button-secondary:hover,.process-section .button-secondary:focus-visible,
+.site-footer .button-secondary:hover,.site-footer .button-secondary:focus-visible,
+.cta-statement .button-secondary:hover,.cta-statement .button-secondary:focus-visible,
+.trade-house-statement .button-secondary:hover,.trade-house-statement .button-secondary:focus-visible,
+.catalog-download .button-secondary:hover,.catalog-download .button-secondary:focus-visible,
+.catalogue-sourcing-desk .button-secondary:hover,.catalogue-sourcing-desk .button-secondary:focus-visible{
+  background-color:#262b22!important;
+  color:#c4f000!important;
+  -webkit-text-fill-color:#c4f000!important;
+  border-color:#c4f000!important;
+}
+.button:disabled,.button[aria-disabled="true"]{
+  opacity:.55!important;
+  cursor:not-allowed!important;
+}
+
+/* 3. Global Typography & Word-Integrity System (H1-H6) */
+h1,h2,h3,h4,h5,h6,
+.hero h1,.page-hero h1,
+.section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2,
+.trade-funnel-title,.trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{
+  font-family:var(--font-sans,'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif)!important;
+  font-synthesis:none!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+  -webkit-hyphens:none!important;
+  text-wrap:balance;
+  min-width:0;
+  max-width:100%;
+  box-sizing:border-box;
+}
+.section-head,.section-head>*,
+.hero-grid,.hero-grid>*,
+.company-trust-heading,.company-trust-heading>*,
+.commercial-form-head,.commercial-form-head>*,
+.commercial-form-intro{min-width:0;max-width:100%}
 
 /* International corridor dual-column cards */
 .corridor-list{min-width:0;max-width:100%;width:100%}
 .corridor-list>div{min-width:0;max-width:100%}
 html[dir="rtl"] .corridor-list strong{text-align:right}
 
-
-/* Keep long editorial headings dramatic without allowing awkward one-word columns. */
-.hero h1,.page-hero h1,
-.section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2,
-.trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{
-  overflow-wrap:normal;word-break:normal;text-wrap:balance;hyphens:none
+/* The header remains continuously available; motion must never move it off-canvas. */
+.site-header{top:0!important;transform:none!important;background:#111310!important;border-bottom:1px solid rgba(255,255,255,.1)!important;color:#fff!important}
+.site-header .header-inner{min-height:76px!important}
+.site-header .brand,.site-footer .brand{position:relative;display:inline-flex;align-items:center;min-width:118px;height:42px;text-decoration:none!important}
+.site-header .brand img,.site-footer .brand img{display:block!important;width:154px!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;filter:none!important}
+.site-header .brand::before,.site-footer .brand::before{display:none!important}
+@media (min-width:1051px){
+  .site-header .desktop-only-nav{display:flex!important;visibility:visible!important;opacity:1!important;color:#fff!important}
+  .site-header .desktop-nav-link,.site-header .nav-solutions-parent,.site-header .nav-market-parent,.site-header .language-switcher button{color:#f4f2eb!important;opacity:1!important;font-weight:600!important}
+  .site-header .desktop-nav-link:hover,.site-header .nav-solutions-parent:hover,.site-header .nav-market-parent:hover{color:#c4f000!important}
+  .site-header .nav-cta{background-color:#c4f000!important;color:#0b0d0a!important;border-color:#c4f000!important}
 }
-.section-head,.section-head>*{min-width:0}
-
-/* Turkish copy is naturally longer; cap display type before it starts stacking. */
-html[data-locale="tr"] .hero h1{max-width:11.5ch!important}
-html[data-locale="tr"] .section-head h2,
-html[data-locale="tr"] .markets-editorial h2,
-html[data-locale="tr"] .company-trust-heading h2,
-html[data-locale="tr"] .cta-statement h2{max-width:13ch}
-html[data-locale="tr"] .trade-paths-grid h3,
-html[data-locale="tr"] .platform-sector-grid article h3{max-width:16ch}
-
-/* Localized hero copy needs a little more measure than short English/Turkish copy. */
-html[data-locale="de"] .hero h1,
-html[data-locale="it"] .hero h1,
-html[data-locale="fa"] .hero h1,
-html[data-locale="ru"] .hero h1,
-html[data-locale="vi"] .hero h1{
-  max-width:100%!important;font-size:clamp(36px,4.2vw,68px)!important;line-height:.97!important;letter-spacing:-.045em!important
-}
-
-/* The header remains continuously available; premium motion must never move it off-canvas. */
-.site-header{top:0!important;transform:none!important}
-
-@media (min-width:1101px){
-  .hero{padding-top:clamp(52px,4.4vw,80px);padding-bottom:clamp(60px,5.4vw,96px)}
-  .hero-grid{grid-template-columns:minmax(0,.92fr) minmax(400px,1.08fr);gap:clamp(32px,4vw,68px);align-items:center}
-  .hero h1{font-size:clamp(48px,5.3vw,88px)!important;line-height:.93!important;letter-spacing:-.065em!important;max-width:10.5ch}
-  html[data-locale="tr"] .hero h1{font-size:clamp(42px,4.6vw,78px)!important;line-height:.96!important;max-width:11.5ch!important}
-  .hero .lead{max-width:32em}
-  .hero-visual{min-height:clamp(440px,36vw,580px)}
-  .hero-visual picture,.hero-visual img{min-height:clamp(440px,36vw,580px)}
-  .trade-gateway-banner{margin-top:clamp(42px,4.5vw,78px)!important;gap:22px!important}
-  .trade-funnel-card{min-height:clamp(430px,31vw,540px)}
-  .trade-funnel-title{font-size:clamp(44px,4vw,68px)!important;line-height:.96!important;max-width:11ch}
-
-  .section{padding-block:clamp(104px,8.7vw,164px)}
-  .section-head{grid-template-columns:minmax(0,1.36fr) minmax(300px,.64fr);gap:clamp(44px,5.6vw,96px);margin-bottom:clamp(58px,6vw,104px)}
-  .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(60px,6.7vw,108px)!important;line-height:.9!important;letter-spacing:-.06em!important}
-  html[data-locale="tr"] .section-head h2,
-  html[data-locale="tr"] .markets-editorial h2,
-  html[data-locale="tr"] .company-trust-heading h2,
-  html[data-locale="tr"] .cta-statement h2{font-size:clamp(54px,5.7vw,94px)!important;line-height:.94!important;letter-spacing:-.052em!important}
-  .section-head p{max-width:32em}
-
-  .trade-paths-grid article{min-height:clamp(410px,29vw,520px);padding:clamp(44px,4.2vw,72px)}
-  .trade-paths-grid h3{font-size:clamp(48px,4.7vw,76px);line-height:.94}
-  html[data-locale="tr"] .trade-paths-grid h3{font-size:clamp(42px,4vw,66px)!important;line-height:.98!important}
-  .trade-paths-grid .text-link{left:clamp(44px,4.2vw,72px);bottom:42px}
-
-  .platform-sector-grid{gap:24px!important;align-items:start}
-  .platform-sector-grid article{min-height:clamp(560px,40vw,700px)!important}
-  .platform-sector-grid article:nth-child(even){margin-top:clamp(52px,5vw,86px)}
-  .platform-sector-grid article h3{font-size:clamp(42px,4vw,64px)!important;line-height:.96!important}
-  html[data-locale="tr"] .platform-sector-grid article h3{font-size:clamp(38px,3.5vw,56px)!important;line-height:1!important}
-  .market-line>div{min-height:clamp(116px,7.6vw,148px)}
-  .market-line strong{font-size:clamp(42px,4.5vw,72px)!important;line-height:.98!important}
-
-  .operational-trust-panel{padding:clamp(36px,3.5vw,58px)}
-  .trust-facts{margin-top:clamp(54px,5vw,88px)}
-  .trust-facts>div{padding:clamp(28px,2.6vw,44px)}
-  .cta-statement{padding:clamp(60px,6vw,104px)!important;min-height:clamp(470px,36vw,620px);display:flex;flex-direction:column;justify-content:center}
-}
-
 @media (max-width:1050px){
   .site-header{position:sticky!important;top:0!important;transform:none!important}
   .header-inner{min-height:72px!important}
+  .site-header .brand img{width:134px!important}
+  .site-header .menu-toggle{display:grid!important;place-items:center;background:transparent!important;border-color:rgba(255,255,255,.28)!important}
+  .site-header .menu-toggle span:not(.sr-only){background:#fff!important}
   .platform-sector-grid article{min-width:0;contain:paint}
   .platform-sector-grid article picture{display:block;position:absolute;inset:0;overflow:hidden}
   .platform-sector-grid article img{width:100%!important;max-width:100%!important;left:0!important;right:auto!important;transform:none!important}
@@ -132,149 +177,236 @@ html[data-locale="vi"] .hero h1{
   html[dir="rtl"] .menu-toggle .sr-only{position:fixed!important;top:0!important;left:0!important;right:auto!important;bottom:auto!important;inset:0 auto auto 0!important;inset-inline-start:0!important;inset-inline-end:auto!important;width:0!important;height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;transform:none!important;font-size:0!important;line-height:0!important;letter-spacing:0!important}
 }
 
-@media (max-width:860px){
-  .hero h1 .premium-word-mask,.page-hero h1 .premium-word-mask,.hero h1 .premium-word,.page-hero h1 .premium-word{display:inline!important;max-width:100%;overflow-wrap:anywhere;word-break:normal}
-  .hero h1,.page-hero h1{font-size:clamp(42px,12vw,66px)!important;line-height:.96!important;letter-spacing:-.05em!important;max-width:100%!important}
-  html[data-locale="tr"] .hero h1{font-size:clamp(40px,10.8vw,58px)!important;line-height:1!important}
-  .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(38px,10.5vw,58px)!important;line-height:.98!important;letter-spacing:-.045em!important}
-  html[data-locale="tr"] .section-head h2,html[data-locale="tr"] .markets-editorial h2,html[data-locale="tr"] .company-trust-heading h2,html[data-locale="tr"] .cta-statement h2{font-size:clamp(34px,9vw,50px)!important;line-height:1!important;max-width:100%}
-  .trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{font-size:clamp(30px,8.8vw,44px)!important;line-height:1!important}
-  html[data-locale="de"] .hero h1,html[data-locale="it"] .hero h1,html[data-locale="fa"] .hero h1,html[data-locale="ru"] .hero h1,html[data-locale="vi"] .hero h1{font-size:clamp(38px,10vw,56px)!important;line-height:.98!important;letter-spacing:-.04em!important}
-}
-
-@media (max-width:430px){html[data-locale="ru"] .hero h1,html[data-locale="de"] .hero h1{font-size:clamp(34px,9.3vw,42px)!important}.container{max-width:100%}}
-
-.hero .lead,.section-head p,.corridors-lead,.markets-editorial .section-head p,.operational-trust p,.company-trust-band p,.scenario-teaser p{color:#343434!important;opacity:1!important}
-.trade-paths-section .section-head p,.trade-paths-grid p,.markets-editorial p,.process-section p,.duzce-glass-feature p,.trade-video-section p,.cta-statement p{color:#e2e2e2!important;opacity:1!important}
-.trade-funnel-desc{opacity:1!important}.trade-funnel-card:not(:nth-child(2)) .trade-funnel-desc{color:#e2e2e2!important}.trade-funnel-card:nth-child(2) .trade-funnel-desc{color:#242424!important}
-.corridor-list span,.market-line span,.operational-trust-panel li span,.card small{opacity:1!important;color:#5f5f5f!important}
-.platform-sector-grid article p{color:#f4f4f4!important;opacity:1!important}.site-footer p,.site-footer span,.site-footer li{opacity:1!important;color:#cfcfcf!important}
-
-@media (min-width:761px){.hero .lead,.section-head p,.trade-paths-grid p,.trade-funnel-desc,.platform-sector-grid article p,.markets-editorial p,.operational-trust p,.company-trust-band p,.cta-statement p{font-size:max(16px,1rem)!important;line-height:1.55!important}}
-@media (max-width:760px){.hero .lead,.section-head p,.trade-paths-grid p,.trade-funnel-desc,.platform-sector-grid article p,.markets-editorial p,.operational-trust p,.company-trust-band p,.cta-statement p{font-size:15px!important;line-height:1.5!important}.corridor-list span,.market-line span,.card small{font-size:12px!important}}
-
-.hero-copy .eyebrow,.section .eyebrow,.trade-funnel-kicker,.platform-sector-grid article span,.market-line span,.corridor-list span{font-weight:800!important;opacity:1!important;letter-spacing:.09em!important}
-.section-head p,.hero .lead{font-weight:500!important}
-.trade-paths-grid p,.trade-funnel-desc,.platform-sector-grid article p,.markets-editorial p,.process-section p,.duzce-glass-feature p,.trade-video-section p,.operational-trust p,.company-trust-band p,.scenario-teaser p,.cta-statement p{font-weight:500!important}
-
+/* 4. Balanced Desktop, Tablet & Mobile Scale (Eliminates 5-6 line headings and 320px overflow) */
 @media (min-width:1101px){
-  .hero h1{font-size:clamp(62px,6.15vw,104px)!important;line-height:.93!important;letter-spacing:-.058em!important;max-width:12ch!important}
-  html[data-locale="tr"] .hero h1{font-size:clamp(58px,5.65vw,96px)!important;line-height:.95!important;max-width:12.5ch!important}
-  .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(48px,5.2vw,84px)!important;line-height:.96!important;letter-spacing:-.05em!important;max-width:15ch}
-  html[data-locale="tr"] .section-head h2,html[data-locale="tr"] .markets-editorial h2,html[data-locale="tr"] .company-trust-heading h2,html[data-locale="tr"] .cta-statement h2{font-size:clamp(46px,4.8vw,78px)!important;max-width:16ch}
-  .trade-funnel-title{font-size:clamp(38px,3.3vw,56px)!important;line-height:1!important;max-width:13ch}.trade-paths-grid h3{font-size:clamp(38px,3.6vw,58px)!important;line-height:1!important;max-width:15ch}.platform-sector-grid article h3{font-size:clamp(34px,3.15vw,50px)!important;line-height:1.02!important;max-width:17ch}.market-line strong{font-size:clamp(34px,3.7vw,58px)!important;line-height:1!important}
-  .hero .lead,.section-head p,.trade-paths-grid p,.trade-funnel-desc,.platform-sector-grid article p,.markets-editorial p,.operational-trust p,.company-trust-band p,.scenario-teaser p,.cta-statement p{font-size:18px!important;line-height:1.62!important}
-  .section-head{grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:clamp(40px,4.8vw,78px)}.section{padding-block:clamp(88px,7vw,132px)}.trade-paths-grid article{min-height:390px}.platform-sector-grid article{min-height:clamp(500px,35vw,620px)!important}.platform-sector-grid article:nth-child(even){margin-top:clamp(34px,3.4vw,58px)}.cta-statement{min-height:430px}
+  .hero{padding-top:clamp(36px,3.6vw,58px)!important;padding-bottom:clamp(42px,4.2vw,68px)!important}
+  .hero-grid{grid-template-columns:minmax(0,.96fr) minmax(380px,1.04fr)!important;gap:clamp(28px,3.6vw,54px)!important;align-items:center!important}
+  .hero h1,.page-hero h1{font-size:clamp(2.15rem,3.1vw,3.05rem)!important;line-height:1.1!important;letter-spacing:-.025em!important;font-weight:700!important;max-width:20ch!important}
+  html[data-locale="tr"] .hero h1{font-size:clamp(2.1rem,3vw,2.95rem)!important;line-height:1.12!important;max-width:20ch!important}
+  html[data-locale="de"] .hero h1,html[data-locale="ru"] .hero h1,html[data-locale="uk"] .hero h1,html[data-locale="bg"] .hero h1{font-size:clamp(1.95rem,2.7vw,2.7rem)!important;line-height:1.12!important;max-width:22ch!important}
+  .hero .lead{max-width:38em!important;font-size:1.05rem!important;line-height:1.65!important}
+  .hero-visual{min-height:clamp(320px,27vw,410px)!important}
+  .hero-visual picture,.hero-visual img{min-height:clamp(320px,27vw,410px)!important}
+
+  .section{padding-block:clamp(52px,4.8vw,72px)!important}
+  .section-head{margin-bottom:clamp(28px,3.2vw,44px)!important}
+  .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2,
+  html[data-locale="tr"] .section-head h2,html[data-locale="tr"] .markets-editorial h2,html[data-locale="tr"] .company-trust-heading h2,html[data-locale="tr"] .cta-statement h2,
+  .trending-sectors .section-head h2{
+    font-size:clamp(1.65rem,2.35vw,2.3rem)!important;
+    line-height:1.15!important;
+    letter-spacing:-.02em!important;
+    font-weight:700!important;
+    max-width:24ch!important;
+    white-space:normal!important;
+  }
+  .trade-funnel-title{font-size:clamp(1.45rem,2vw,1.95rem)!important;line-height:1.16!important;letter-spacing:-.02em!important;font-weight:700!important;max-width:22ch!important}
+  .trade-paths-grid h3,html[data-locale="tr"] main .trade-paths-grid h3{font-size:clamp(1.2rem,1.5vw,1.45rem)!important;line-height:1.22!important;letter-spacing:-.015em!important;font-weight:600!important;max-width:22ch!important}
+  .platform-sector-grid{gap:20px!important;align-items:stretch!important}
+  .platform-sector-grid article{min-height:clamp(350px,26vw,420px)!important;margin-top:0!important}
+  .platform-sector-grid article:nth-child(even){margin-top:0!important}
+  .platform-sector-grid article h3,html[data-locale="tr"] .platform-sector-grid article h3{font-size:clamp(1.35rem,1.8vw,1.72rem)!important;line-height:1.18!important;letter-spacing:-.018em!important;font-weight:700!important;max-width:22ch!important}
+  .market-line strong{font-size:clamp(1.35rem,1.85vw,1.75rem)!important;line-height:1.15!important;font-weight:700!important}
+  .cta-statement{padding:48px!important;min-height:0!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;text-align:center!important}
 }
 
-@media (max-width:1100px){.hero h1,.page-hero h1{font-size:clamp(46px,8vw,72px)!important;line-height:.96!important;max-width:100%!important}.section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(38px,6.6vw,58px)!important;line-height:1!important;max-width:18ch}.trade-funnel-title,.trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{font-size:clamp(30px,5.6vw,44px)!important;line-height:1.03!important}.hero .lead,.section-head p,.trade-paths-grid p,.trade-funnel-desc,.platform-sector-grid article p,.markets-editorial p,.operational-trust p,.company-trust-band p,.scenario-teaser p,.cta-statement p{font-size:17px!important;line-height:1.58!important}}
-@media (max-width:760px){.hero h1,.page-hero h1{font-size:clamp(40px,10.4vw,54px)!important;line-height:.98!important;letter-spacing:-.045em!important}html[data-locale="tr"] .hero h1{font-size:clamp(38px,9.7vw,50px)!important}.section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2{font-size:clamp(32px,8.2vw,44px)!important;line-height:1.02!important;letter-spacing:-.04em!important;max-width:100%}.trade-funnel-title,.trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{font-size:clamp(27px,7vw,36px)!important;line-height:1.04!important}.hero .lead,.section-head p,.trade-paths-grid p,.trade-funnel-desc,.platform-sector-grid article p,.markets-editorial p,.operational-trust p,.company-trust-band p,.scenario-teaser p,.cta-statement p{font-size:16px!important;line-height:1.6!important}.section{padding-block:64px!important}.section-head{margin-bottom:34px!important}.trade-funnel-card{min-height:340px!important}.platform-sector-grid article{min-height:390px!important}}
+@media (max-width:1100px){
+  .hero h1,.page-hero h1,html[data-locale="tr"] .hero h1,html[data-locale="de"] .hero h1,html[data-locale="it"] .hero h1,html[data-locale="fa"] .hero h1,html[data-locale="ru"] .hero h1,html[data-locale="vi"] .hero h1{
+    font-size:clamp(1.75rem,4.5vw,2.35rem)!important;
+    line-height:1.14!important;
+    letter-spacing:-.022em!important;
+    font-weight:700!important;
+    max-width:100%!important;
+  }
+  .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2,
+  html[data-locale="tr"] .section-head h2,html[data-locale="tr"] .markets-editorial h2,html[data-locale="tr"] .company-trust-heading h2,html[data-locale="tr"] .cta-statement h2,
+  .trending-sectors .section-head h2{
+    font-size:clamp(1.45rem,3.6vw,1.95rem)!important;
+    line-height:1.16!important;
+    letter-spacing:-.018em!important;
+    font-weight:700!important;
+    max-width:100%!important;
+    white-space:normal!important;
+  }
+  .trade-funnel-title,.trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{
+    font-size:clamp(1.2rem,3vw,1.55rem)!important;
+    line-height:1.2!important;
+    font-weight:600!important;
+    max-width:100%!important;
+  }
+  .hero-visual,.hero-visual picture,.hero-visual img{min-height:clamp(280px,38vw,360px)!important}
+}
 
-.site-header{background:#111!important;border-bottom:1px solid rgba(255,255,255,.1)!important;color:#fff!important}.site-header .header-inner{min-height:78px!important}.site-header .brand,.site-footer .brand{position:relative;display:inline-flex;align-items:center;min-width:118px;height:42px;text-decoration:none!important}.site-header .brand img,.site-footer .brand img{display:none!important}.site-header .brand::before,.site-footer .brand::before,.mobile-nav-title,.footer-markets-kicker,.footer-main nav:last-child>strong{content:"CTSEG";display:inline-block;font-family:var(--font-sans,Arial,sans-serif);font-size:30px;line-height:1;font-weight:900;letter-spacing:-.07em;background:linear-gradient(90deg,#fff 0 59%,#e34234 59% 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important}.site-footer .brand::before{font-size:54px}.mobile-nav-title{font-size:24px!important}.footer-markets-kicker{font-size:12px!important;letter-spacing:.08em!important}.footer-main nav:last-child>strong{font-size:24px;letter-spacing:-.05em}
-@media (min-width:1051px){.site-header .desktop-only-nav{display:flex!important;visibility:visible!important;opacity:1!important;color:#fff!important}.site-header .desktop-nav-link,.site-header .nav-solutions-parent,.site-header .nav-market-parent,.site-header .language-switcher button{color:#fff!important;opacity:1!important}.site-header .desktop-nav-link:hover,.site-header .nav-solutions-parent:hover,.site-header .nav-market-parent:hover{color:#c4f000!important}.site-header .nav-cta{background:#c4f000!important;color:#0a0a0a!important;border-color:#c4f000!important}}
-@media (max-width:1050px){.site-header .menu-toggle{display:grid!important;place-items:center;background:transparent!important;border-color:rgba(255,255,255,.28)!important}.site-header .menu-toggle span:not(.sr-only){background:#fff!important}}
+@media (max-width:760px){
+  .hero{padding-top:28px!important;padding-bottom:36px!important}
+  .hero h1,.page-hero h1,html[data-locale="tr"] .hero h1,html[data-locale="de"] .hero h1,html[data-locale="it"] .hero h1,html[data-locale="fa"] .hero h1,html[data-locale="ru"] .hero h1,html[data-locale="vi"] .hero h1{
+    font-size:clamp(1.48rem,6vw,1.85rem)!important;
+    line-height:1.16!important;
+    letter-spacing:-.02em!important;
+    font-weight:700!important;
+    max-width:100%!important;
+  }
+  .section-head h2,.markets-editorial h2,.company-trust-heading h2,.cta-statement h2,
+  html[data-locale="tr"] .section-head h2,html[data-locale="tr"] .markets-editorial h2,html[data-locale="tr"] .company-trust-heading h2,html[data-locale="tr"] .cta-statement h2,
+  .trending-sectors .section-head h2,.commercial-form-intro h2,#commercial-form-title{
+    font-size:clamp(1.28rem,5.2vw,1.58rem)!important;
+    line-height:1.2!important;
+    letter-spacing:-.016em!important;
+    font-weight:700!important;
+    max-width:100%!important;
+    white-space:normal!important;
+  }
+  .trade-funnel-title,.trade-paths-grid h3,.platform-sector-grid article h3,.market-line strong{
+    font-size:clamp(1.12rem,4.6vw,1.35rem)!important;
+    line-height:1.22!important;
+    letter-spacing:-.014em!important;
+    font-weight:600!important;
+    max-width:100%!important;
+  }
+  .hero .lead,.section-head p,.trade-paths-grid p,.trade-funnel-desc,.platform-sector-grid article p,.markets-editorial p,.operational-trust p,.company-trust-band p,.cta-statement p{
+    font-size:.96rem!important;
+    line-height:1.6!important;
+  }
+  .hero-visual,.hero-visual picture,.hero-visual img{min-height:240px!important}
+  .section{padding-block:48px!important}
+  .section-head{margin-bottom:26px!important}
+  .trade-funnel-card{min-height:0!important;padding:24px!important}
+  .platform-sector-grid article{min-height:320px!important}
+  .commercial-form-head{grid-template-columns:minmax(0,1fr)!important;display:grid!important;gap:16px!important}
+}
 
-.hero h1{color:#0a0a0a!important;font-weight:800!important;text-shadow:none!important;opacity:1!important}.hero-copy .eyebrow{color:#202020!important;opacity:1!important}.hero .lead{color:#262626!important;font-weight:550!important}.hero::before{background:linear-gradient(90deg,rgba(10,10,10,.06) 0 59%,rgba(227,66,52,.16) 59% 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important}
+@media (max-width:430px){
+  html[data-locale="ru"] .hero h1,html[data-locale="de"] .hero h1,html[data-locale="uk"] .hero h1,html[data-locale="bg"] .hero h1{
+    font-size:clamp(1.38rem,5.6vw,1.68rem)!important;
+  }
+  .container{max-width:100%}
+}
 
-.trade-paths-section .section-head p,.trade-paths-section .eyebrow,.process-section .section-head p,.process-section .eyebrow,.process-section small,.duzce-glass-feature .section-head p,.duzce-glass-feature .eyebrow,.duzce-glass-feature small,.trade-video-section .section-head p,.trade-video-section .eyebrow,.trade-video-section small,.markets-editorial .section-head p,.markets-editorial .eyebrow,.markets-editorial small,.cta-statement .eyebrow{color:#c4f000!important;opacity:1!important;font-weight:700!important}.process-section p,.duzce-glass-feature p,.trade-video-section p,.markets-editorial p{color:#e9e9e9!important;opacity:1!important;font-weight:500!important}
-.site-footer .footer-market-link.is-active,.site-footer .footer-market-link.is-active span{color:#0a0a0a!important}.process-section .process-rail strong{color:#c4f000!important;opacity:1!important;font-weight:700!important}
-
-/* Markets: premium editorial rails built for premium editorial rhythm, without cards or numbering. */
-.markets-editorial{position:relative;overflow:hidden;background:#10110f!important}.markets-editorial>.container{position:relative;z-index:1}.markets-editorial .section-head{align-items:end!important}.markets-editorial .section-head h2{color:#fff!important;max-width:12ch!important}.markets-editorial .section-head p{color:#c4f000!important;max-width:34em!important}.markets-editorial .market-line{display:grid!important;grid-template-columns:1fr!important;gap:0!important;margin-top:clamp(36px,4vw,64px)!important;border-top:1px solid rgba(255,255,255,.16)!important}.markets-editorial .market-line>div{position:relative!important;display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:clamp(110px,8vw,150px)!important;padding:20px 0!important;border-bottom:1px solid rgba(255,255,255,.16)!important;overflow:hidden!important;background:transparent!important;transition:padding .28s ease,border-color .28s ease!important}.markets-editorial .market-line>div::before{content:"";position:absolute;left:0;top:0;width:5px;height:100%;background:#c4f000;transform:scaleY(0);transform-origin:bottom;transition:transform .28s ease}.markets-editorial .market-line>div::after{content:"↗";font-size:clamp(24px,2vw,34px);line-height:1;color:#c4f000;opacity:.72;transition:transform .28s ease,opacity .28s ease}.markets-editorial .market-line strong{position:relative!important;top:auto!important;left:auto!important;right:auto!important;transform:none!important;margin:0!important;color:#fff!important;font-size:clamp(42px,5vw,76px)!important;line-height:.94!important;letter-spacing:-.055em!important;font-weight:750!important;max-width:14ch!important}.markets-editorial .market-line>div:hover{padding-left:28px!important;border-color:rgba(196,240,0,.48)!important}.markets-editorial .market-line>div:hover::before{transform:scaleY(1)}.markets-editorial .market-line>div:hover::after{transform:translate(4px,-4px);opacity:1}
-@media(max-width:760px){.markets-editorial .market-line>div{min-height:92px!important;padding:16px 0!important}.markets-editorial .market-line strong{font-size:clamp(30px,9vw,42px)!important;max-width:12ch!important}.markets-editorial .market-line>div:hover{padding-left:14px!important}}
-
-/* Two-way trade: premium editorial split, number-free and clearly actionable. */
-.trade-paths-section{position:relative;overflow:hidden;background:#10110f!important}.trade-paths-section::before{content:"CTSEG";position:absolute;right:-.04em;bottom:-.2em;font-size:clamp(150px,23vw,390px);line-height:.8;font-weight:900;letter-spacing:-.08em;color:rgba(255,255,255,.018);pointer-events:none}.trade-paths-section .section-head{position:relative;z-index:1}.trade-paths-section .section-head h2{color:#fff!important}.trade-paths-grid{position:relative;z-index:1;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:20px!important}.trade-paths-grid article{position:relative!important;display:flex!important;flex-direction:column!important;justify-content:flex-end!important;min-height:430px!important;padding:clamp(34px,4vw,58px)!important;border:1px solid rgba(255,255,255,.14)!important;border-radius:26px!important;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018))!important;overflow:hidden!important;box-shadow:0 24px 70px rgba(0,0,0,.18)!important;transition:transform .3s ease,border-color .3s ease,background .3s ease!important}.trade-paths-grid article>span{display:none!important}.trade-paths-grid article::before{content:"";position:absolute;left:0;top:0;width:100%;height:5px;background:#c4f000;transform:scaleX(.22);transform-origin:left center;transition:transform .35s ease}.trade-paths-grid article::after{content:"↗";position:absolute;right:28px;top:24px;color:#c4f000;font-size:24px;line-height:1;transition:transform .3s ease}.trade-paths-grid article:nth-child(2){background:linear-gradient(145deg,rgba(196,240,0,.09),rgba(255,255,255,.018))!important}.trade-paths-grid h3{margin:0 0 18px!important;color:#fff!important;max-width:12ch!important;letter-spacing:-.045em!important}.trade-paths-grid p{max-width:34em!important;margin:0 0 30px!important;color:#d7d7d2!important;line-height:1.6!important}.trade-paths-grid .text-link{position:static!important;margin-top:auto!important;width:max-content!important;padding:11px 16px!important;border:1px solid rgba(196,240,0,.42)!important;border-radius:999px!important;background:#c4f000!important;color:#0a0a0a!important;text-decoration:none!important;font-weight:800!important}.trade-paths-grid article:hover{transform:translateY(-6px);border-color:rgba(196,240,0,.6)!important;background:linear-gradient(145deg,rgba(196,240,0,.11),rgba(255,255,255,.025))!important}.trade-paths-grid article:hover::before{transform:scaleX(1)}.trade-paths-grid article:hover::after{transform:translate(4px,-4px)}
-@media(max-width:860px){.trade-paths-grid{grid-template-columns:1fr!important}.trade-paths-grid article{min-height:330px!important;border-radius:20px!important;padding:28px!important}.trade-paths-grid h3{max-width:100%!important}.trade-paths-section::before{font-size:44vw;bottom:-.05em}}
-
-/* Company proof: turn the legacy fact strip into a premium trust statement. */
-.company-trust-band{position:relative;overflow:hidden;background:#f3f2ed!important;color:#111!important}.company-trust-band::before{content:"CTSEG";position:absolute;left:-.04em;bottom:-.17em;font-size:clamp(150px,22vw,380px);font-weight:900;line-height:.78;letter-spacing:-.09em;color:rgba(10,10,10,.035);pointer-events:none;user-select:none}.company-trust-band>.container{position:relative;z-index:1}.company-trust-heading{display:grid!important;grid-template-columns:minmax(0,1.25fr) minmax(240px,.75fr)!important;gap:clamp(34px,5vw,80px)!important;align-items:end!important;margin-bottom:clamp(44px,5vw,72px)!important}.company-trust-heading h2{margin:0!important;color:#111!important;max-width:11ch!important}.company-trust-heading p{margin:0!important;justify-self:end!important;max-width:24ch!important;color:#111!important;font-size:clamp(15px,1.25vw,18px)!important;line-height:1.55!important;font-weight:750!important;text-align:right!important}.company-trust-heading p::before{content:"";display:block;width:48px;height:4px;margin:0 0 16px auto;border-radius:999px;background:#c4f000}.company-trust-band .trust-facts{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important;margin-top:0!important}.company-trust-band .trust-facts>div{position:relative!important;min-height:190px!important;padding:30px!important;border:1px solid #dedcd5!important;border-radius:22px!important;background:linear-gradient(145deg,#fff 0%,#f8f7f3 100%)!important;box-shadow:0 18px 48px rgba(12,12,12,.055)!important;overflow:hidden!important;transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease!important}.company-trust-band .trust-facts>div::before{content:"";position:absolute;left:0;top:0;width:100%;height:4px;background:#c4f000;transform:scaleX(.22);transform-origin:left center;transition:transform .3s ease}.company-trust-band .trust-facts>div::after{content:"✓";position:absolute;right:24px;top:20px;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#c4f000;color:#0a0a0a;font-size:15px;font-weight:900}.company-trust-band .trust-facts dt{display:none!important}.company-trust-band .trust-facts dd{margin:70px 0 0!important;max-width:20ch!important;color:#161616!important;font-size:clamp(20px,1.75vw,28px)!important;line-height:1.18!important;letter-spacing:-.025em!important;font-weight:760!important}.company-trust-band .trust-facts>div:hover{transform:translateY(-5px);border-color:#c4f000!important;box-shadow:0 24px 60px rgba(12,12,12,.09)!important}.company-trust-band .trust-facts>div:hover::before{transform:scaleX(1)}
-@media(max-width:860px){.company-trust-heading{grid-template-columns:1fr!important;gap:20px!important}.company-trust-heading p{justify-self:start!important;text-align:left!important;max-width:32ch!important}.company-trust-heading p::before{margin-left:0;margin-right:auto}.company-trust-band .trust-facts{grid-template-columns:1fr!important}.company-trust-band .trust-facts>div{min-height:150px!important;padding:26px!important}.company-trust-band .trust-facts dd{margin-top:58px!important;max-width:28ch!important}.company-trust-band::before{font-size:44vw;bottom:-.05em}}
-
-/* Signature gateway: a restrained high-contrast split that bridges hero to trade paths. */
-.trade-gateway-banner{position:relative!important;isolation:isolate;gap:18px!important;margin-top:clamp(34px,4vw,68px)!important}
-.trade-gateway-banner::before{content:"GLOBAL TRADE / STRATEGIC SOURCING";position:absolute;z-index:3;left:50%;top:-14px;transform:translateX(-50%);padding:8px 14px;border-radius:999px;background:#c4f000;color:#0a0a0a;font-size:10px;font-weight:900;letter-spacing:.13em;white-space:nowrap;box-shadow:0 10px 28px rgba(0,0,0,.12)}
-.trade-funnel-card{min-height:clamp(390px,29vw,500px)!important;padding:clamp(34px,3.8vw,54px)!important;border-radius:26px!important;box-shadow:0 24px 70px rgba(0,0,0,.12)!important;transition:transform .32s ease,box-shadow .32s ease,border-color .32s ease!important}
-.trade-funnel-card::before{content:"";position:absolute;left:0;top:0;width:100%;height:5px;background:#c4f000;transform:scaleX(.18);transform-origin:left center;transition:transform .32s ease;z-index:2}
-.trade-funnel-card:nth-child(2)::before{background:#0a0a0a}
-.trade-funnel-card::after{right:26px!important;top:18px!important;font-size:clamp(64px,7vw,108px)!important;opacity:.06!important}
-.trade-funnel-card:hover{transform:translateY(-6px);box-shadow:0 30px 82px rgba(0,0,0,.18)!important}
-.trade-funnel-card:hover::before{transform:scaleX(1)}
-.trade-funnel-kicker{position:relative;z-index:2;display:inline-flex!important;align-items:center;gap:9px;width:max-content;padding:8px 12px;border-radius:999px;background:rgba(196,240,0,.08);border:1px solid rgba(196,240,0,.28);font-size:10px!important;letter-spacing:.13em!important}
-.trade-funnel-card:nth-child(2) .trade-funnel-kicker{background:rgba(10,10,10,.07);border-color:rgba(10,10,10,.18)}
-.trade-funnel-title{position:relative;z-index:2;margin:22px 0 18px!important;max-width:12ch!important;color:inherit!important;font-size:clamp(36px,3.5vw,56px)!important;line-height:.98!important;letter-spacing:-.045em!important}
-.trade-funnel-desc{position:relative;z-index:2;max-width:31em!important;margin:0!important;font-size:17px!important;line-height:1.62!important}
-.trade-funnel-card .button{position:relative;z-index:2;margin-top:30px!important;width:max-content!important;padding:12px 18px!important;border-radius:999px!important;font-weight:800!important}
-.trade-funnel-card:first-child{background:linear-gradient(145deg,#121311 0%,#1d1f1a 100%)!important;border-color:rgba(255,255,255,.12)!important}
-.trade-funnel-card:nth-child(2){background:linear-gradient(145deg,#c4f000 0%,#b4df00 100%)!important;border-color:#c4f000!important}
-@media(max-width:860px){.trade-gateway-banner{grid-template-columns:1fr!important;gap:14px!important;margin-top:38px!important}.trade-gateway-banner::before{top:-12px;font-size:9px;max-width:calc(100vw - 56px);overflow:hidden;text-overflow:ellipsis}.trade-funnel-card{min-height:330px!important;padding:28px!important;border-radius:20px!important}.trade-funnel-title{font-size:clamp(30px,8vw,40px)!important;max-width:100%!important}.trade-funnel-desc{font-size:16px!important}}
-/* Keep the actual CTSEG identity visible in both navigation and footer. */
-.site-header .brand img,.site-footer .brand img{display:block!important;width:158px!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;filter:brightness(0) invert(1)!important}
-.site-header .brand::before,.site-footer .brand::before{display:none!important}
-@media(max-width:1050px){.site-header .brand img{width:135px!important}}
-
-/* Institutional home hero: CTSEG charcoal and acid, with readable locale text. */
-.hero{background:#111!important;color:#f3f3ef!important}
+/* 5. Section-specific refinements */
+.hero{background-color:#111310!important;color:#f4f2eb!important}
 .hero::before{content:none!important}
-.hero h1{color:#f3f3ef!important;font-weight:700!important;text-shadow:none!important}
-.hero-copy .eyebrow{color:#c4f000!important}
-.hero .lead{color:#d1d1cb!important;font-weight:500!important}
-.hero .button:not(.button-secondary){background:#c4f000!important;border-color:#c4f000!important;color:#111!important}
-.hero .button-secondary{background:transparent!important;border-color:rgba(255,255,255,.55)!important;color:#fff!important}
-.hero .hero-intent-links a,.hero .hero-visual figcaption{color:#e4e4dd!important}
-.hero .button{border-radius:0!important}
-.hero-visual{border-radius:0!important;box-shadow:none!important}
+.hero h1{color:#f4f2eb!important;font-weight:700!important;text-shadow:none!important;opacity:1!important}
+.hero-copy .eyebrow{color:#c4f000!important;opacity:1!important;font-weight:700!important}
+.hero .lead{color:#dfe3dc!important;font-weight:400!important}
+.hero .hero-intent-links a,.hero .hero-visual figcaption{color:#e6ebe4!important}
+.hero .button{border-radius:8px!important}
+.hero-visual{border-radius:16px!important;box-shadow:0 20px 50px rgba(0,0,0,.28)!important}
 .hero-visual::after{content:none!important}
-.hero-visual figcaption{border-radius:0!important}
-@media(min-width:1101px){html[data-locale="de"] .hero h1,html[data-locale="ru"] .hero h1{font-size:clamp(50px,3.5vw,68px)!important;line-height:.98!important;max-width:16ch!important}html:not([data-locale]) .hero h1,html[data-locale="en"] .hero h1{font-size:clamp(62px,5vw,94px)!important}}
 
-/* Two commercial directions read as one trade-house mandate. */
-.trade-gateway-banner{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:0!important;border-top:1px solid rgba(255,255,255,.26)!important}
+.trade-paths-section .eyebrow,.process-section .eyebrow,.process-section small,
+.duzce-glass-feature .eyebrow,.duzce-glass-feature small,
+.trade-video-section .eyebrow,.trade-video-section small,
+.markets-editorial .eyebrow,.markets-editorial small,
+.cta-statement .eyebrow{color:#c4f000!important;opacity:1!important;font-weight:700!important}
+.site-footer .footer-market-link.is-active,.site-footer .footer-market-link.is-active span{color:#0b0d0a!important}
+.process-section .process-rail strong{color:#f4f2eb!important;opacity:1!important;font-weight:600!important}
+
+/* Markets editorial rails */
+.markets-editorial{position:relative;overflow:hidden;background-color:#121411!important}
+.markets-editorial>.container{position:relative;z-index:1}
+.markets-editorial .section-head{align-items:end!important}
+.markets-editorial .section-head h2{color:#f4f2eb!important;max-width:22ch!important}
+.markets-editorial .section-head p{color:#dfe3dc!important;max-width:36em!important}
+.markets-editorial .market-line{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:0!important;margin-top:clamp(28px,3.2vw,48px)!important;border-top:1px solid rgba(255,255,255,.14)!important}
+.markets-editorial .market-line>div{position:relative!important;display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:clamp(76px,6vw,104px)!important;padding:16px 4px!important;border-bottom:1px solid rgba(255,255,255,.14)!important;overflow:hidden!important;background:transparent!important;transition:padding .25s ease,border-color .25s ease!important}
+.markets-editorial .market-line>div::before{content:"";position:absolute;left:0;top:0;width:4px;height:100%;background:#c4f000;transform:scaleY(0);transform-origin:bottom;transition:transform .25s ease}
+.markets-editorial .market-line>div::after{content:"↗";font-size:clamp(20px,1.8vw,28px);line-height:1;color:#c4f000;opacity:.8;transition:transform .25s ease,opacity .25s ease}
+.markets-editorial .market-line strong{position:relative!important;top:auto!important;left:auto!important;right:auto!important;transform:none!important;margin:0!important;color:#f4f2eb!important;font-size:clamp(1.25rem,1.9vw,1.7rem)!important;line-height:1.15!important;letter-spacing:-.02em!important;font-weight:700!important;max-width:26ch!important}
+.markets-editorial .market-line>div:hover{padding-left:20px!important;border-color:rgba(196,240,0,.48)!important}
+.markets-editorial .market-line>div:hover::before{transform:scaleY(1)}
+.markets-editorial .market-line>div:hover::after{transform:translate(3px,-3px);opacity:1}
+@media(max-width:760px){
+  .markets-editorial .section-head h2{max-width:100%!important}
+  .markets-editorial .market-line>div{min-height:68px!important;padding:14px 0!important}
+  .markets-editorial .market-line strong{font-size:clamp(1.1rem,4.5vw,1.35rem)!important;max-width:100%!important}
+  .markets-editorial .market-line>div:hover{padding-left:12px!important}
+}
+
+/* Company proof band */
+.company-trust-band{position:relative;overflow:hidden;background-color:#f4f3ee!important;color:#121411!important}
+.company-trust-band::before{content:none!important}
+.company-trust-band>.container{position:relative;z-index:1}
+.company-trust-heading{display:grid!important;grid-template-columns:minmax(0,1.25fr) minmax(240px,.75fr)!important;gap:clamp(28px,4vw,64px)!important;align-items:end!important;margin-bottom:clamp(32px,4vw,54px)!important}
+.company-trust-heading h2{margin:0!important;color:#121411!important;max-width:22ch!important}
+.company-trust-heading p{margin:0!important;justify-self:end!important;max-width:30ch!important;color:#282b26!important;font-size:clamp(15px,1.15vw,17px)!important;line-height:1.58!important;font-weight:500!important;text-align:right!important}
+.company-trust-heading p::before{content:"";display:block;width:44px;height:3px;margin:0 0 14px auto;border-radius:999px;background:#c4f000}
+.company-trust-band .trust-facts{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important;margin-top:0!important;border-top:0!important}
+.company-trust-band .trust-facts>div{position:relative!important;min-height:160px!important;padding:26px!important;border:1px solid #dcd9cf!important;border-radius:16px!important;background-color:#ffffff!important;box-shadow:0 12px 32px rgba(12,12,12,.045)!important;overflow:hidden!important}
+.company-trust-band .trust-facts>div::before{content:"";position:absolute;left:0;top:0;width:100%;height:3px;background:#c4f000}
+.company-trust-band .trust-facts>div::after{content:"✓";position:absolute;right:20px;top:18px;width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:#c4f000;color:#0b0d0a;font-size:14px;font-weight:700}
+.company-trust-band .trust-facts dt{display:none!important}
+.company-trust-band .trust-facts dd{margin:48px 0 0!important;max-width:24ch!important;color:#161815!important;font-size:clamp(1.08rem,1.35vw,1.3rem)!important;line-height:1.28!important;letter-spacing:-.015em!important;font-weight:600!important}
+@media(max-width:860px){
+  .company-trust-heading{grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+  .company-trust-heading h2{max-width:100%!important}
+  .company-trust-heading p{justify-self:start!important;text-align:left!important;max-width:100%!important}
+  .company-trust-heading p::before{margin-left:0;margin-right:auto}
+  .company-trust-band .trust-facts{grid-template-columns:minmax(0,1fr)!important}
+  .company-trust-band .trust-facts>div{min-height:130px!important;padding:22px!important}
+  .company-trust-band .trust-facts dd{margin-top:42px!important;max-width:100%!important}
+}
+
+/* Two commercial directions gateway */
+.trade-gateway-banner{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:16px!important;margin-top:clamp(28px,3.2vw,44px)!important;border-top:0!important}
 .trade-gateway-banner::before{content:none!important}
-.trade-funnel-card,.trade-funnel-card:first-child,.trade-funnel-card:nth-child(2){min-height:340px!important;padding:clamp(28px,3vw,44px)!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.26)!important;border-radius:0!important;background:#151515!important;color:#f2f2ec!important;box-shadow:none!important;transform:none!important}
-.trade-funnel-card:first-child{border-inline-end:1px solid rgba(255,255,255,.26)!important}
-.trade-funnel-card:nth-child(2){background:#1d1d1d!important}
+.trade-funnel-card,.trade-funnel-card:first-child,.trade-funnel-card:nth-child(2){min-height:260px!important;padding:clamp(24px,2.8vw,36px)!important;border:1px solid rgba(255,255,255,.14)!important;border-radius:16px!important;background-color:#161915!important;color:#f4f2eb!important;box-shadow:0 16px 40px rgba(0,0,0,.18)!important;transform:none!important}
+.trade-funnel-card:nth-child(2){background-color:#1b1f1a!important}
 .trade-funnel-card::before,.trade-funnel-card::after{content:none!important}
-.trade-funnel-card:hover{transform:none!important;box-shadow:none!important;background:#202020!important}
-.trade-funnel-kicker,.trade-funnel-card:nth-child(2) .trade-funnel-kicker{display:inline-block!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#c4f000!important}
-.trade-funnel-title,.trade-funnel-card:nth-child(2) .trade-funnel-title{max-width:18ch!important;color:#f2f2ec!important;font-size:clamp(30px,3vw,46px)!important}
-.trade-funnel-desc,.trade-funnel-card:nth-child(2) .trade-funnel-desc{color:#d1d1cb!important}
-.trade-funnel-card .button,.trade-funnel-card:nth-child(2) .button{border-radius:0!important;background:transparent!important;border-color:#c4f000!important;color:#c4f000!important}
-.trade-funnel-card .button:hover,.trade-funnel-card .button:focus-visible{background:#c4f000!important;color:#111!important}
-@media(max-width:860px){.trade-gateway-banner{grid-template-columns:1fr!important}.trade-funnel-card:first-child{border-inline-end:0!important}.trade-funnel-card,.trade-funnel-card:first-child,.trade-funnel-card:nth-child(2){min-height:0!important}}
+.trade-funnel-card:hover{transform:translateY(-2px)!important;border-color:rgba(196,240,0,.45)!important;background-color:#1e221c!important}
+.trade-funnel-kicker,.trade-funnel-card:nth-child(2) .trade-funnel-kicker{display:inline-block!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#c4f000!important;font-weight:700!important}
+.trade-funnel-title,.trade-funnel-card:nth-child(2) .trade-funnel-title{max-width:22ch!important;color:#f4f2eb!important;margin:14px 0 12px!important}
+.trade-funnel-desc,.trade-funnel-card:nth-child(2) .trade-funnel-desc{color:#dfe3dc!important;font-size:.98rem!important;line-height:1.6!important}
+.trade-funnel-card .button,.trade-funnel-card:nth-child(2) .button{border-radius:8px!important;background-color:#c4f000!important;border-color:#c4f000!important;color:#0b0d0a!important;-webkit-text-fill-color:#0b0d0a!important;margin-top:20px!important}
+.trade-funnel-card .button:hover,.trade-funnel-card .button:focus-visible{background-color:#d4ff1a!important;border-color:#d4ff1a!important;color:#070907!important;-webkit-text-fill-color:#070907!important}
+@media(max-width:860px){
+  .trade-gateway-banner{grid-template-columns:minmax(0,1fr)!important}
+  .trade-funnel-card,.trade-funnel-card:first-child,.trade-funnel-card:nth-child(2){min-height:0!important}
+  .trade-funnel-title,.trade-funnel-card:nth-child(2) .trade-funnel-title{max-width:100%!important}
+}
 
 /* Page Hero compact containment and subpage rhythm */
-.page-hero.page-hero--compact{padding-block:clamp(40px,4.2vw,64px)!important}
-.page-hero.page-hero--compact h1{font-size:clamp(40px,4.2vw,64px)!important;max-width:20ch!important;line-height:.98!important}
+.page-hero{padding-block:clamp(42px,4.8vw,72px)!important}
+.page-hero.page-hero--compact{padding-block:clamp(34px,3.8vw,56px)!important}
+.page-hero.page-hero--compact h1{font-size:clamp(1.75rem,2.8vw,2.55rem)!important;max-width:22ch!important;line-height:1.12!important}
 .page-hero::before{content:none!important}
 @media(max-width:760px){
+  .page-hero.page-hero--compact h1{font-size:clamp(1.45rem,5.8vw,1.8rem)!important;max-width:100%!important;line-height:1.16!important}
   .page-hero + .section, .page-hero--compact + .section{padding-top:32px!important}
   .scenario-disclaimer:first-child,.role-boundary:first-child{margin-top:0!important}
 }
 
-
-
-/* FINAL QA STABILITY PASS 2026-09-29 */
-
-/* Keep the market corridor CTA geometry symmetric for visual QA and real layouts. */
+/* Symmetric CTA geometry for visual QA */
+.cta-statement{
+  padding-top:44px!important;
+  padding-bottom:44px!important;
+  text-align:center!important;
+}
+.cta-statement h2{
+  margin-inline:auto!important;
+  text-align:center!important;
+}
+.cta-statement .actions{
+  justify-content:center!important;
+  margin-inline:auto!important;
+}
 .market-corridor-card .cta-statement{
   padding-top:44px!important;
   padding-bottom:44px!important;
 }
 @media(max-width:900px){
-  .market-corridor-card .cta-statement{
+  .cta-statement,.market-corridor-card .cta-statement{
     padding-top:36px!important;
     padding-bottom:36px!important;
   }
 }
 @media(max-width:600px){
-  .market-corridor-card .cta-statement{
+  .cta-statement,.market-corridor-card .cta-statement{
     padding-top:30px!important;
     padding-bottom:30px!important;
   }
 }
 
-/* Long country-detail headings must wrap rather than create horizontal overflow. */
+/* Long country-detail headings must wrap cleanly */
 @media(min-width:1100px){
   .market-detail-section .content-block>h2{
     white-space:normal!important;
@@ -283,26 +415,7 @@ html[data-locale="vi"] .hero h1{
   }
 }
 
-/* Give QA and assistive rendering an explicit surface/color contract. */
-.insight-featured{
-  background-color:#171816!important;
-}
-.insight-advisory-desk{
-  background-color:#151614!important;
-}
-.process-overview-section .detailed-process li{
-  color:#171814!important;
-}
-.process-answer-section,
-.answer-section{
-  background-color:#242720!important;
-}
-.process-answer-section .answer-grid article,
-.answer-section .answer-grid article{
-  color:#f3f0e8!important;
-}
-
-/* About CTA: keep premium word reveal wrappers from shifting measured/visible alignment. */
+/* About CTA stability */
 .about-final-cta .cta-statement{
   padding-top:34px!important;
   padding-bottom:34px!important;
@@ -324,7 +437,7 @@ html[data-locale="vi"] .hero h1{
   }
 }
 
-/* Desktop header resilience: keep long translated navigation inside viewport. */
+/* Desktop header resilience: keep long translated navigation inside viewport */
 @media (min-width:1051px) and (max-width:1500px){
   .site-header .header-inner{gap:clamp(10px,1.15vw,18px)!important}
   .site-header .brand img{width:clamp(124px,10vw,148px)!important}
@@ -333,4 +446,71 @@ html[data-locale="vi"] .hero h1{
   .site-header .desktop-only-nav a,.site-header .desktop-nav-link,.site-header .nav-solutions-parent,.site-header .nav-market-parent{font-size:clamp(.68rem,.72vw,.79rem)!important;letter-spacing:0!important}
   .site-header .nav-cta{padding-inline:10px!important;font-size:clamp(.66rem,.7vw,.76rem)!important}
   .site-header .fa-nav-promo{min-width:116px!important;padding-inline:7px!important}
+}
+
+/* High-specificity H2 normalization across all sections and viewports */
+@media (min-width:1101px){
+  html body main h2,
+  html body main .section .section-head h2,
+  html body main .section:not(.markets-editorial) .section-head h2,
+  html body main .markets-editorial .section-head h2,
+  html body main .trade-house-statement h2,
+  html body main .process-heading .section-title,
+  html body main .duzce-glass-copy h2,
+  html body main .trade-video-copy h2,
+  html body main .company-trust-heading h2,
+  html body main .cta-statement h2,
+  html body main .prose h2{
+    font-size:clamp(1.65rem,2.35vw,2.3rem)!important;
+    line-height:1.15!important;
+    letter-spacing:-.02em!important;
+    font-weight:700!important;
+    max-width:24ch!important;
+    white-space:normal!important;
+  }
+}
+@media (max-width:1100px){
+  html body main h2,
+  html body main .section .section-head h2,
+  html body main .section:not(.markets-editorial) .section-head h2,
+  html body main .markets-editorial .section-head h2,
+  html body main .trade-house-statement h2,
+  html body main .process-heading .section-title,
+  html body main .duzce-glass-copy h2,
+  html body main .trade-video-copy h2,
+  html body main .company-trust-heading h2,
+  html body main .cta-statement h2,
+  html body main .prose h2{
+    font-size:clamp(1.45rem,3.6vw,1.95rem)!important;
+    line-height:1.16!important;
+    letter-spacing:-.018em!important;
+    font-weight:700!important;
+    max-width:100%!important;
+    white-space:normal!important;
+  }
+}
+@media (max-width:760px){
+  html body main h2,
+  html body main .section .section-head h2,
+  html body main .section:not(.markets-editorial) .section-head h2,
+  html body main .markets-editorial .section-head h2,
+  html body main .trade-house-statement h2,
+  html body main .process-heading .section-title,
+  html body main .duzce-glass-copy h2,
+  html body main .trade-video-copy h2,
+  html body main .company-trust-heading h2,
+  html body main .cta-statement h2,
+  html body main .commercial-form-intro h2,
+  html body main #commercial-form-title,
+  html body main .prose h2{
+    font-size:clamp(1.28rem,5.2vw,1.58rem)!important;
+    line-height:1.2!important;
+    letter-spacing:-.016em!important;
+    font-weight:700!important;
+    max-width:100%!important;
+    white-space:normal!important;
+  }
+  html body main .catalogue-grid .product-card-copy h2{
+    font-size:clamp(1.12rem,4.5vw,1.3rem)!important;
+  }
 }

@@ -38,14 +38,14 @@ const statusLabel = ({tr:'Kontrollü ilerleme',en:'Controlled progression',de:'K
   .process-shell:has(.process-rail--four){grid-template-columns:1fr;gap:30px}
   .process-shell:has(.process-rail--four) .process-heading{position:static;max-width:900px;margin:0 auto;text-align:center}
   .process-shell:has(.process-rail--four) .process-kicker{justify-content:center}
-  .process-shell:has(.process-rail--four) .process-heading .section-title{max-width:18ch;margin-inline:auto;font-size:clamp(38px,3.5vw,56px)!important}
+  .process-shell:has(.process-rail--four) .process-heading .section-title{max-width:22ch;margin-inline:auto;font-size:clamp(1.65rem,2.4vw,2.35rem)!important}
   .process-shell:has(.process-rail--four) .process-caption{max-width:62em;margin:18px auto 0}
   .process-shell:has(.process-rail--four) .process-status{justify-content:center;margin-top:18px}
-  .process-heading{position:sticky;top:118px;max-width:520px;padding-top:4px}
-  .process-kicker{display:inline-flex;align-items:center;gap:10px;margin-bottom:24px;color:#c4f000;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+  .process-heading{position:sticky;top:118px;max-width:520px;padding-top:4px;min-width:0}
+  .process-kicker{display:inline-flex;align-items:center;gap:10px;margin-bottom:20px;color:#c4f000;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
   .process-kicker::before{content:"";width:32px;height:2px;background:#c4f000}
-  .process-heading .section-title{margin:0;max-width:10ch;color:#fff!important;font-family:'DM Sans',system-ui,sans-serif!important;font-size:clamp(44px,4.25vw,70px)!important;font-weight:760!important;line-height:.94!important;letter-spacing:-.055em!important;text-wrap:balance}
-  .process-caption{max-width:31em;margin:26px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);color:#b8b8b1!important;font-size:13px;line-height:1.65;font-weight:540}
+  .process-heading .section-title{margin:0;max-width:20ch;color:#fff!important;font-family:var(--font-sans,'DM Sans',system-ui,sans-serif)!important;font-size:clamp(1.65rem,2.4vw,2.35rem)!important;font-weight:700!important;line-height:1.15!important;letter-spacing:-.02em!important;text-wrap:balance;overflow-wrap:normal;word-break:normal;hyphens:none}
+  .process-caption{max-width:34em;margin:20px 0 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);color:#e2e6e0!important;font-size:.95rem;line-height:1.65;font-weight:400}
   .process-status{display:flex;align-items:center;gap:12px;margin-top:24px;color:#85857d}
   .process-status span{position:relative;width:58px;height:1px;background:rgba(255,255,255,.17)}
   .process-status span::after{content:"";position:absolute;inset-inline-start:0;top:-2px;width:22px;height:5px;border-radius:99px;background:#c4f000}
@@ -54,13 +54,13 @@ const statusLabel = ({tr:'Kontrollü ilerleme',en:'Controlled progression',de:'K
   .process-rail li{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 30px;gap:22px;align-items:center;min-height:112px;padding:22px 18px 22px 26px;border-right:1px solid rgba(255,255,255,.16);border-bottom:1px solid rgba(255,255,255,.16);overflow:hidden;transition:padding .28s ease,border-color .28s ease,background .28s ease}
   .process-rail li::before{content:"";position:absolute;left:0;top:50%;width:8px;height:2px;background:#c4f000;transform:translateY(-50%);opacity:.9}.process-rail li:hover,.process-rail li:focus-within{padding-left:32px;padding-right:12px;border-color:rgba(196,240,0,.5);background:linear-gradient(90deg,rgba(196,240,0,.045),transparent 72%)}
   .process-arrow{justify-self:end;color:rgba(255,255,255,.32);font-size:21px;line-height:1;transition:color .25s ease,transform .25s ease}
-  .process-rail strong{max-width:31ch;color:#fff!important;font-family:'DM Sans',system-ui,sans-serif;font-size:clamp(21px,1.65vw,29px);font-weight:690;line-height:1.08;letter-spacing:-.035em;text-wrap:balance}
+  .process-rail strong{max-width:31ch;color:#fff!important;font-family:var(--font-sans,'DM Sans',system-ui,sans-serif);font-size:clamp(1.05rem,1.25vw,1.25rem);font-weight:600;line-height:1.25;letter-spacing:-.015em;text-wrap:balance}
   .process-rail li:hover .process-arrow{color:#c4f000;transform:translate(3px,-3px)}
   :global(html[dir="rtl"]) .process-kicker{letter-spacing:0;text-transform:none}
   :global(html[dir="rtl"]) .process-status small{letter-spacing:0;text-transform:none}
   :global(html[dir="rtl"]) .process-rail strong{text-align:right;max-width:32ch}
   :global(html[dir="rtl"]) .process-rail li:hover .process-arrow{transform:translate(-3px,-3px)}
-  @media(max-width:1100px){.process-shell{grid-template-columns:1fr;gap:38px}.process-heading{position:static;max-width:760px}.process-heading .section-title{max-width:15ch}.process-caption{max-width:48em}.process-rail{max-width:900px}.process-rail li{min-height:104px}.process-rail--four{grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px;margin-inline:auto}.process-shell:has(.process-rail--four) .process-heading{max-width:760px}}
-  @media(max-width:720px){.process-section{padding-block:60px}.process-heading .section-title{max-width:100%;font-size:clamp(34px,9vw,46px)!important}.process-caption{margin-top:20px}.process-status{margin-top:18px}.process-rail{grid-template-columns:1fr;border-left:0}.process-rail li{grid-template-columns:minmax(0,1fr) 24px;gap:14px;min-height:92px;padding:19px 0 19px 22px;border-right:0}.process-rail li:hover{padding-left:26px;padding-right:7px}.process-rail strong{max-width:100%;font-size:clamp(19px,5.7vw,25px)}.process-arrow{font-size:18px}}
+  @media(max-width:1100px){.process-shell{grid-template-columns:minmax(0,1fr);gap:32px}.process-heading{position:static;max-width:760px}.process-heading .section-title{max-width:100%}.process-caption{max-width:48em}.process-rail{max-width:900px}.process-rail li{min-height:96px}.process-rail--four{grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px;margin-inline:auto}.process-shell:has(.process-rail--four) .process-heading{max-width:760px}}
+  @media(max-width:720px){.process-section{padding-block:48px}.process-heading .section-title,.process-shell:has(.process-rail--four) .process-heading .section-title{max-width:100%;font-size:clamp(1.28rem,5.2vw,1.58rem)!important;line-height:1.2!important}.process-caption{margin-top:16px}.process-status{margin-top:16px}.process-rail{grid-template-columns:minmax(0,1fr);border-left:0}.process-rail li{grid-template-columns:minmax(0,1fr) 24px;gap:14px;min-height:84px;padding:16px 0 16px 20px;border-right:0}.process-rail li:hover{padding-left:24px;padding-right:7px}.process-rail strong{max-width:100%;font-size:clamp(1rem,4.4vw,1.15rem)}.process-arrow{font-size:18px}}
   @media(prefers-reduced-motion:reduce){.process-rail li,.process-arrow{transition:none}}
 </style>

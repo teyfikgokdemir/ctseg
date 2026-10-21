@@ -24,90 +24,91 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
 </section>
 
 <style is:global>
-  html body main .page-hero{position:relative;overflow:hidden;background:#f2efe7!important;color:#111!important;border-bottom:1px solid #d7d1c5!important;padding-block:clamp(72px,8vw,132px)!important}
+  html body main .page-hero{position:relative;overflow:hidden;background-color:#141613!important;color:#f4f2eb!important;border-bottom:1px solid rgba(255,255,255,.1)!important;padding-block:clamp(42px,4.6vw,68px)!important}
   html body main .page-hero::before{content:none!important;display:none!important}
-  html body main .page-hero::after{border-color:rgba(17,17,17,.12)!important}
+  html body main .page-hero::after{border-color:rgba(255,255,255,.1)!important}
   .page-hero>.container{position:relative;z-index:1}
-  .page-hero-grid{display:grid!important;grid-template-columns:minmax(0,.9fr) minmax(420px,1.1fr)!important;gap:clamp(44px,6vw,96px)!important;align-items:center!important}
-  .page-hero-copy{max-width:900px}
-  html body main .page-hero .breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 34px;font-size:12px;line-height:1.3;color:#74736e!important}
-  html body main .page-hero .breadcrumb a{color:#55554f!important;text-decoration:none;transition:color .2s ease}
-  html body main .page-hero .breadcrumb a:hover{color:#111!important}
-  html body main .page-hero .breadcrumb [aria-current="page"]{color:#777773!important;max-width:44ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  html body main .page-hero .eyebrow{margin:0 0 18px;color:#6d8200!important;font-size:12px!important;line-height:1.2;font-weight:800!important;letter-spacing:.15em!important;text-transform:uppercase}
-  html body main .page-hero h1{margin:0!important;max-width:13ch!important;color:#111!important;font-family:var(--font-sans,Arial,sans-serif)!important;font-size:clamp(52px,6.1vw,96px)!important;font-weight:800!important;line-height:.95!important;letter-spacing:-.06em!important;text-wrap:balance;opacity:1!important;text-shadow:none!important}
-  html body main .page-hero .lead{max-width:48rem!important;margin:30px 0 0!important;color:#4a4944!important;font-size:clamp(17px,1.35vw,20px)!important;line-height:1.65!important;font-weight:500!important;opacity:1!important}
-  .page-hero .actions{margin-top:32px}
-  html body main .page-hero .button{border-radius:999px!important;background:#c4f000!important;color:#0a0a0a!important;border-color:#a9cf00!important;padding:14px 22px!important;font-weight:800!important}
+  .page-hero-grid{display:grid!important;grid-template-columns:minmax(0,.95fr) minmax(380px,1.05fr)!important;gap:clamp(32px,4.5vw,68px)!important;align-items:center!important}
+  .page-hero-copy{max-width:900px;min-width:0}
+  html body main .page-hero .breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 20px;font-size:12px;line-height:1.35;color:#b8beb5!important}
+  html body main .page-hero .breadcrumb a{color:#dfe3dc!important;text-decoration:none;transition:color .2s ease}
+  html body main .page-hero .breadcrumb a:hover{color:#c4f000!important}
+  html body main .page-hero .breadcrumb [aria-current="page"]{color:#b8beb5!important;max-width:44ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  html body main .page-hero .eyebrow{margin:0 0 14px;color:#c4f000!important;font-size:12px!important;line-height:1.2;font-weight:700!important;letter-spacing:.14em!important;text-transform:uppercase}
+  html body main .page-hero h1{margin:0!important;max-width:22ch!important;color:#f4f2eb!important;font-family:var(--font-sans,'DM Sans',Arial,sans-serif)!important;font-size:clamp(1.85rem,2.8vw,2.65rem)!important;font-weight:700!important;line-height:1.12!important;letter-spacing:-.022em!important;text-wrap:balance;overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important;opacity:1!important;text-shadow:none!important}
+  html body main .page-hero .lead{max-width:48rem!important;margin:20px 0 0!important;color:#dfe3dc!important;font-size:clamp(1rem,1.15vw,1.12rem)!important;line-height:1.65!important;font-weight:400!important;opacity:1!important}
+  .page-hero .actions{margin-top:24px}
+  html body main .page-hero .button{border-radius:8px!important;background-color:#c4f000!important;color:#0b0d0a!important;-webkit-text-fill-color:#0b0d0a!important;border-color:#c4f000!important;padding:13px 22px!important;font-weight:700!important}
+  html body main .page-hero .button:hover,html body main .page-hero .button:focus-visible{background-color:#d4ff1a!important;border-color:#d4ff1a!important;color:#070907!important;-webkit-text-fill-color:#070907!important}
   .page-hero-media-wrap{position:relative;min-width:0}
-  html body main .page-hero .product-hero-media{border-radius:18px!important;overflow:hidden!important;border:1px solid #d0cabf!important;box-shadow:0 24px 58px rgba(40,35,25,.13)!important}
-  html body main .page-hero .media-note{margin:12px 0 0!important;color:#696862!important;font-size:12px!important}
-  html body main .page-hero.page-hero--compact{padding-block:clamp(40px,4.2vw,64px)!important}
-  html body main .page-hero--compact h1{font-size:clamp(46px,5vw,78px)!important;max-width:15ch!important}
+  html body main .page-hero .product-hero-media{border-radius:16px!important;overflow:hidden!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:0 20px 50px rgba(0,0,0,.28)!important}
+  html body main .page-hero .media-note{margin:12px 0 0!important;color:#c2c8be!important;font-size:12px!important}
+  html body main .page-hero.page-hero--compact{padding-block:clamp(32px,3.6vw,52px)!important}
+  html body main .page-hero--compact h1{font-size:clamp(1.7rem,2.5vw,2.35rem)!important;max-width:24ch!important}
 
   /* Header quote CTA must keep dark ink against the lime surface on inner pages. */
   html body .site-header .desktop-only-nav .nav-cta,
   html body .site-header .desktop-only-nav .nav-cta:hover,
   html body .site-header .desktop-only-nav .nav-cta:focus-visible,
-  html body .site-header .desktop-only-nav .nav-cta:active{background:#c4f000!important;border-color:#c4f000!important;color:#0a0a0a!important;opacity:1!important}
+  html body .site-header .desktop-only-nav .nav-cta:active{background-color:#c4f000!important;border-color:#c4f000!important;color:#0b0d0a!important;-webkit-text-fill-color:#0b0d0a!important;opacity:1!important}
   html body .site-header .desktop-only-nav .nav-cta:hover,
-  html body .site-header .desktop-only-nav .nav-cta:focus-visible{background:#d4ff28!important;border-color:#d4ff28!important}
+  html body .site-header .desktop-only-nav .nav-cta:focus-visible{background-color:#d4ff1a!important;border-color:#d4ff1a!important}
 
-  /* Inner-page footer statement: one controlled line on desktop, no watermark collision. */
-  html body .site-footer .footer-statement{gap:16px!important;padding-top:clamp(52px,5vw,76px)!important;padding-bottom:clamp(52px,5vw,76px)!important}
-  html body .site-footer .footer-statement>strong{max-width:none!important;width:min(100%,1180px)!important;font-size:clamp(38px,4.6vw,70px)!important;line-height:.96!important;letter-spacing:-.05em!important;text-wrap:nowrap!important;white-space:nowrap!important}
+  /* Inner-page footer statement */
+  html body .site-footer .footer-statement{gap:16px!important;padding-top:clamp(42px,4.2vw,64px)!important;padding-bottom:clamp(42px,4.2vw,64px)!important}
+  html body .site-footer .footer-statement>strong{max-width:none!important;width:min(100%,1180px)!important;font-size:clamp(1.75rem,3vw,2.65rem)!important;line-height:1.1!important;letter-spacing:-.025em!important;text-wrap:balance!important;white-space:normal!important}
   html body .site-footer .footer-statement::after{right:-.02em!important;bottom:-.08em!important;font-size:clamp(110px,15vw,230px)!important;color:rgba(255,255,255,.018)!important}
 
   /* How-we-work: editorial sequence first, direct answers second. */
   html body main .detailed-process{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;margin:0!important;padding:0!important;border-top:1px solid #aaa598!important;list-style:none!important;counter-reset:trade-step}
-  html body main .detailed-process li{position:relative!important;display:flex!important;min-height:250px!important;padding:30px 30px 34px!important;flex-direction:column!important;justify-content:space-between!important;border:0!important;border-right:1px solid #d3cec1!important;border-bottom:1px solid #d3cec1!important;background:transparent!important;counter-increment:trade-step}
+  html body main .detailed-process li{position:relative!important;display:flex!important;min-height:210px!important;padding:28px 26px 30px!important;flex-direction:column!important;justify-content:space-between!important;border:0!important;border-right:1px solid #d3cec1!important;border-bottom:1px solid #d3cec1!important;background:transparent!important;counter-increment:trade-step}
   html body main .detailed-process li:nth-child(3n){border-right:0!important}
-  html body main .detailed-process li span{color:#6d8200!important;font-size:11px!important;font-weight:800!important;letter-spacing:.16em!important}
-  html body main .detailed-process li h2{max-width:15ch!important;margin:70px 0 0!important;color:#171814!important;font-family:var(--font-sans,Arial,sans-serif)!important;font-size:clamp(24px,2.15vw,34px)!important;font-weight:750!important;line-height:1.02!important;letter-spacing:-.045em!important;text-wrap:balance}
-  html body main .detailed-process li::after{content:"";position:absolute;left:30px;right:30px;bottom:-1px;height:3px;background:#c4f000;transform:scaleX(.16);transform-origin:left center;transition:transform .32s ease}
+  html body main .detailed-process li span{color:#4d5c00!important;font-size:11px!important;font-weight:700!important;letter-spacing:.14em!important}
+  html body main .detailed-process li h2{max-width:20ch!important;margin:48px 0 0!important;color:#171814!important;font-family:var(--font-sans,'DM Sans',Arial,sans-serif)!important;font-size:clamp(1.25rem,1.65vw,1.55rem)!important;font-weight:700!important;line-height:1.18!important;letter-spacing:-.02em!important;text-wrap:balance}
+  html body main .detailed-process li::after{content:"";position:absolute;left:26px;right:26px;bottom:-1px;height:3px;background:#c4f000;transform:scaleX(.16);transform-origin:left center;transition:transform .32s ease}
   html body main .detailed-process li:hover::after{transform:scaleX(1)}
   html[dir="rtl"] body main .detailed-process li::after{transform-origin:right center}
-  html body main .role-boundary{display:grid!important;grid-template-columns:minmax(180px,.32fr) minmax(0,1fr)!important;gap:clamp(30px,5vw,80px)!important;margin-top:48px!important;padding:28px 0!important;border:0!important;border-top:1px solid #aaa598!important;border-bottom:1px solid #d3cec1!important;background:transparent!important}
+  html body main .role-boundary{display:grid!important;grid-template-columns:minmax(180px,.32fr) minmax(0,1fr)!important;gap:clamp(24px,4vw,64px)!important;margin-top:40px!important;padding:24px 0!important;border:0!important;border-top:1px solid #aaa598!important;border-bottom:1px solid #d3cec1!important;background:transparent!important}
   html body main .role-boundary strong{color:#171814!important;font-size:12px!important;letter-spacing:.11em!important;text-transform:uppercase}
-  html body main .role-boundary p{max-width:760px!important;margin:0!important;color:#555650!important;font-size:16px!important;line-height:1.65!important}
-  html body main .answer-section{background:#242720!important;color:#f3f0e8!important;border-top:0!important}
-  html body main .answer-section .section-head{border-bottom:1px solid rgba(243,240,232,.22)!important;padding-bottom:34px!important}
-  html body main .answer-section .section-head h2{color:#f3f0e8!important}
-  html body main .answer-section .section-head p{color:#bbbdb3!important}
+  html body main .role-boundary p{max-width:760px!important;margin:0!important;color:#282b26!important;font-size:16px!important;line-height:1.65!important}
+  html body main .answer-section{background-color:#20231d!important;color:#f4f2eb!important;border-top:0!important}
+  html body main .answer-section .section-head{border-bottom:1px solid rgba(243,240,232,.22)!important;padding-bottom:28px!important}
+  html body main .answer-section .section-head h2{color:#f4f2eb!important}
+  html body main .answer-section .section-head p{color:#dfe3dc!important}
   html body main .answer-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:0!important;border-top:1px solid rgba(243,240,232,.2)!important}
-  html body main .answer-grid article{position:relative!important;min-height:220px!important;padding:30px 34px 34px 0!important;border:0!important;border-bottom:1px solid rgba(243,240,232,.16)!important;background:transparent!important}
-  html[dir="ltr"] body main .answer-grid article:nth-child(odd){padding-right:42px!important;border-right:1px solid rgba(243,240,232,.16)!important}
-  html[dir="ltr"] body main .answer-grid article:nth-child(even){padding-left:42px!important}
-  html[dir="rtl"] body main .answer-grid article:nth-child(odd){padding-left:42px!important;border-left:1px solid rgba(243,240,232,.16)!important}
-  html[dir="rtl"] body main .answer-grid article:nth-child(even){padding-right:42px!important}
-  html body main .answer-grid article::before{content:"Q";display:block;margin-bottom:34px;color:#c4f000;font-size:11px;font-weight:900;letter-spacing:.14em}
-  html body main .answer-grid h3{max-width:25ch!important;margin:0 0 14px!important;color:#f3f0e8!important;font-family:var(--font-sans,Arial,sans-serif)!important;font-size:clamp(20px,1.8vw,28px)!important;font-weight:750!important;line-height:1.08!important;letter-spacing:-.035em!important}
-  html body main .answer-grid p{max-width:54ch!important;margin:0!important;color:#bbbdb3!important;font-size:15px!important;line-height:1.7!important}
-  html body main .answer-section .actions{margin-top:42px!important}
-  html body main .answer-section .button{background:#c4f000!important;border-color:#c4f000!important;color:#111!important;border-radius:999px!important}
+  html body main .answer-grid article{position:relative!important;min-height:190px!important;padding:26px 30px 28px 0!important;border:0!important;border-bottom:1px solid rgba(243,240,232,.16)!important;background:transparent!important}
+  html[dir="ltr"] body main .answer-grid article:nth-child(odd){padding-right:36px!important;border-right:1px solid rgba(243,240,232,.16)!important}
+  html[dir="ltr"] body main .answer-grid article:nth-child(even){padding-left:36px!important}
+  html[dir="rtl"] body main .answer-grid article:nth-child(odd){padding-left:36px!important;border-left:1px solid rgba(243,240,232,.16)!important}
+  html[dir="rtl"] body main .answer-grid article:nth-child(even){padding-right:36px!important}
+  html body main .answer-grid article::before{content:"Q";display:block;margin-bottom:22px;color:#c4f000;font-size:11px;font-weight:800;letter-spacing:.14em}
+  html body main .answer-grid h3{max-width:26ch!important;margin:0 0 12px!important;color:#f4f2eb!important;font-family:var(--font-sans,'DM Sans',Arial,sans-serif)!important;font-size:clamp(1.15rem,1.45vw,1.38rem)!important;font-weight:600!important;line-height:1.22!important;letter-spacing:-.015em!important}
+  html body main .answer-grid p{max-width:54ch!important;margin:0!important;color:#dfe3dc!important;font-size:.96rem!important;line-height:1.65!important}
+  html body main .answer-section .actions{margin-top:34px!important}
+  html body main .answer-section .button{background-color:#c4f000!important;border-color:#c4f000!important;color:#0b0d0a!important;border-radius:8px!important}
 
   /* Unified inner-page hero alignment across all locales. Product detail heroes keep their split layout. */
   html body main .page-hero:not(.product-page-hero)>.container{max-width:1280px!important;text-align:center!important}
   html body main .page-hero:not(.product-page-hero) .page-hero-copy{max-width:none!important;width:100%!important;margin-inline:auto!important}
   html body main .page-hero:not(.product-page-hero) .breadcrumb{justify-content:center!important}
   html body main .page-hero:not(.product-page-hero) .eyebrow{display:block!important;text-align:center!important}
-  html body main .page-hero:not(.product-page-hero) h1{max-width:none!important;margin-inline:auto!important;font-size:clamp(30px,2.8vw,46px)!important;line-height:1.06!important;letter-spacing:-.04em!important;text-align:center!important}
-  html body main .page-hero:not(.product-page-hero) .lead{max-width:76rem!important;margin:18px auto 0!important;text-align:center!important;font-size:clamp(16px,1.15vw,19px)!important;line-height:1.55!important}
+  html body main .page-hero:not(.product-page-hero) h1{max-width:24ch!important;margin-inline:auto!important;font-size:clamp(1.85rem,2.7vw,2.55rem)!important;line-height:1.12!important;letter-spacing:-.022em!important;text-align:center!important;white-space:normal!important}
+  html body main .page-hero:not(.product-page-hero) .lead{max-width:64rem!important;margin:18px auto 0!important;text-align:center!important;font-size:clamp(1rem,1.15vw,1.12rem)!important;line-height:1.62!important}
   html body main .page-hero:not(.product-page-hero) .actions{justify-content:center!important}
-  @media(min-width:1080px){html body main .page-hero:not(.product-page-hero) h1{white-space:nowrap!important}}
+
   @media(max-width:980px){
-    .page-hero-grid{grid-template-columns:1fr!important}
-    html body main .page-hero h1{font-size:clamp(46px,8vw,72px)!important;max-width:16ch!important}
-    .page-hero .breadcrumb{margin-bottom:26px}
+    .page-hero-grid{grid-template-columns:minmax(0,1fr)!important}
+    html body main .page-hero h1,html body main .page-hero:not(.product-page-hero) h1{font-size:clamp(1.65rem,4.2vw,2.2rem)!important;max-width:100%!important}
+    .page-hero .breadcrumb{margin-bottom:20px}
     html body main .detailed-process{grid-template-columns:repeat(2,minmax(0,1fr))!important}
     html body main .detailed-process li:nth-child(3n){border-right:1px solid #d3cec1!important}
     html body main .detailed-process li:nth-child(2n){border-right:0!important}
-    html body .site-footer .footer-statement>strong{font-size:clamp(34px,5.8vw,54px)!important;text-wrap:balance!important;white-space:normal!important;max-width:18ch!important}
+    html body .site-footer .footer-statement>strong{font-size:clamp(1.45rem,4vw,2rem)!important;text-wrap:balance!important;white-space:normal!important;max-width:22ch!important}
   }
-  /* Vietnamese: long natural headings must wrap; use stable static glyph rendering for diacritics. */
+
   html[data-locale="vi"] body main .page-hero:not(.product-page-hero) h1{
     width:min(100%,1120px)!important;
-    max-width:1120px!important;
+    max-width:24ch!important;
     margin-inline:auto!important;
     white-space:normal!important;
     text-wrap:balance!important;
@@ -115,78 +116,76 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
     word-break:normal!important;
     hyphens:none!important;
     font-family:"Segoe UI",Arial,sans-serif!important;
-    font-size:clamp(36px,3vw,52px)!important;
+    font-size:clamp(1.75rem,2.6vw,2.45rem)!important;
     font-weight:700!important;
     font-variation-settings:normal!important;
     font-synthesis:none!important;
-    letter-spacing:-.025em!important;
-    line-height:1.08!important;
-    text-rendering:auto!important;
-    -webkit-font-smoothing:antialiased;
+    letter-spacing:-.02em!important;
+    line-height:1.14!important;
   }
   html[data-locale="vi"] body main .page-hero :is(.eyebrow,.lead,.breadcrumb){
     font-family:"Segoe UI",Arial,sans-serif!important;
     font-variation-settings:normal!important;
     font-synthesis:none!important;
-    text-rendering:auto!important;
-    -webkit-font-smoothing:antialiased;
   }
-  html[data-locale="vi"] body main .page-hero .eyebrow{font-weight:700!important}
-  html[data-locale="vi"] body main .page-hero .lead{font-weight:500!important}
 
   @media(max-width:620px){
-    html body main .page-hero{padding-block:58px!important}
-    html body main .page-hero.page-hero--compact{padding-block:40px!important}
-    html body main .page-hero h1{font-size:clamp(38px,10.5vw,52px)!important;line-height:.98!important;letter-spacing:-.045em!important;max-width:100%!important}
-    html body main .page-hero .lead{margin-top:22px!important;font-size:16px!important;line-height:1.6!important}
+    html body main .page-hero{padding-block:36px!important}
+    html body main .page-hero.page-hero--compact{padding-block:30px!important}
+    html body main .page-hero h1,html body main .page-hero:not(.product-page-hero) h1,html[data-locale="vi"] body main .page-hero:not(.product-page-hero) h1{font-size:clamp(1.45rem,5.8vw,1.82rem)!important;line-height:1.16!important;letter-spacing:-.02em!important;max-width:100%!important}
+    html body main .page-hero .lead{margin-top:16px!important;font-size:.96rem!important;line-height:1.6!important}
     .page-hero .breadcrumb [aria-current="page"]{max-width:26ch}
     .page-hero .button{width:100%;justify-content:center}
-    html body main .detailed-process{grid-template-columns:1fr!important}
-    html body main .detailed-process li,html body main .detailed-process li:nth-child(2n),html body main .detailed-process li:nth-child(3n){min-height:190px!important;padding:24px 0 28px!important;border-right:0!important}
+    html body main .detailed-process{grid-template-columns:minmax(0,1fr)!important}
+    html body main .detailed-process li,html body main .detailed-process li:nth-child(2n),html body main .detailed-process li:nth-child(3n){min-height:160px!important;padding:22px 0 24px!important;border-right:0!important}
     html body main .detailed-process li::after{left:0;right:0}
-    html body main .detailed-process li h2{margin-top:48px!important;font-size:clamp(24px,7.4vw,30px)!important}
-    html body main .role-boundary{grid-template-columns:1fr!important;gap:14px!important;margin-top:34px!important;padding:24px 0!important}
-    html body main .answer-grid{grid-template-columns:1fr!important}
-    html body main .answer-grid article,html[dir="ltr"] body main .answer-grid article:nth-child(odd),html[dir="ltr"] body main .answer-grid article:nth-child(even),html[dir="rtl"] body main .answer-grid article:nth-child(odd),html[dir="rtl"] body main .answer-grid article:nth-child(even){min-height:0!important;padding:28px 0 30px!important;border-right:0!important;border-left:0!important}
-    html body main .answer-grid article::before{margin-bottom:24px}
-    html body .site-footer .footer-statement>strong{font-size:clamp(34px,10.5vw,48px)!important;line-height:1!important;max-width:12ch!important}
+    html body main .detailed-process li h2{margin-top:36px!important;font-size:clamp(1.18rem,5vw,1.42rem)!important;max-width:100%!important}
+    html body main .role-boundary{grid-template-columns:minmax(0,1fr)!important;gap:14px!important;margin-top:28px!important;padding:20px 0!important}
+    html body main .answer-grid{grid-template-columns:minmax(0,1fr)!important}
+    html body main .answer-grid article,html[dir="ltr"] body main .answer-grid article:nth-child(odd),html[dir="ltr"] body main .answer-grid article:nth-child(even),html[dir="rtl"] body main .answer-grid article:nth-child(odd),html[dir="rtl"] body main .answer-grid article:nth-child(even){min-height:0!important;padding:22px 0 24px!important;border-right:0!important;border-left:0!important}
+    html body main .answer-grid article::before{margin-bottom:18px}
+    html body .site-footer .footer-statement>strong{font-size:clamp(1.32rem,5.5vw,1.65rem)!important;line-height:1.18!important;max-width:100%!important}
     html body .site-footer .footer-statement::after{font-size:clamp(90px,30vw,150px)!important}
   }
 
-  /* Homepage-only locale typography. Inner-page hero rules intentionally remain unchanged. */
-  html body main .homepage-page-hero{padding-block:clamp(64px,7vw,104px)!important}
+  /* Homepage-only locale typography */
+  html body main .homepage-page-hero{padding-block:clamp(44px,5vw,72px)!important}
   html body main .homepage-page-hero:not(.product-page-hero) h1{
     width:min(100%,22ch)!important;
     max-width:22ch!important;
     white-space:normal!important;
     text-wrap:balance!important;
     overflow-wrap:normal!important;
-    font-size:clamp(2.25rem,3.15vw,3.5rem)!important;
-    line-height:1.06!important;
+    font-size:clamp(1.95rem,2.85vw,2.75rem)!important;
+    line-height:1.12!important;
   }
   html[data-locale="de"] body main .homepage-page-hero h1,
   html[data-locale="it"] body main .homepage-page-hero h1,
   html[data-locale="ru"] body main .homepage-page-hero h1,
   html[data-locale="fa"] body main .homepage-page-hero h1,
   html[data-locale="vi"] body main .homepage-page-hero h1{
-    width:min(100%,19ch)!important;
-    max-width:19ch!important;
-    font-size:clamp(2.1rem,2.8vw,3.15rem)!important;
-    line-height:1.08!important;
+    width:min(100%,22ch)!important;
+    max-width:22ch!important;
+    font-size:clamp(1.85rem,2.6vw,2.55rem)!important;
+    line-height:1.12!important;
   }
-  html[data-locale="zh"] body main .homepage-page-hero h1{max-width:16ch!important;font-size:clamp(2.3rem,3vw,3.35rem)!important}
+  html[data-locale="zh"] body main .homepage-page-hero h1{max-width:18ch!important;font-size:clamp(1.95rem,2.8vw,2.65rem)!important}
   html[dir="rtl"] body main .homepage-page-hero:not(.product-page-hero) .page-hero-copy,
   html[dir="rtl"] body main .homepage-page-hero:not(.product-page-hero) :is(.breadcrumb,.eyebrow,h1,.lead){text-align:right!important}
   html[dir="rtl"] body main .homepage-page-hero:not(.product-page-hero) .breadcrumb{justify-content:flex-start!important}
   @media(max-width:620px){
-    html body main .homepage-page-hero{padding-block:52px!important}
-    html body main .homepage-page-hero:not(.product-page-hero) h1{
-      width:min(100%,16ch)!important;
-      max-width:16ch!important;
-      font-size:clamp(2rem,8.7vw,2.75rem)!important;
-      line-height:1.08!important;
+    html body main .homepage-page-hero{padding-block:36px!important}
+    html body main .homepage-page-hero:not(.product-page-hero) h1,
+    html[data-locale="de"] body main .homepage-page-hero h1,
+    html[data-locale="it"] body main .homepage-page-hero h1,
+    html[data-locale="ru"] body main .homepage-page-hero h1,
+    html[data-locale="fa"] body main .homepage-page-hero h1,
+    html[data-locale="vi"] body main .homepage-page-hero:not(.product-page-hero) h1,
+    html[data-locale="zh"] body main .homepage-page-hero h1{
+      width:100%!important;
+      max-width:100%!important;
+      font-size:clamp(1.45rem,5.8vw,1.82rem)!important;
+      line-height:1.16!important;
     }
-    html[data-locale="vi"] body main .homepage-page-hero:not(.product-page-hero) h1{width:100%!important;max-width:21ch!important;font-size:clamp(1.9rem,7.8vw,2.45rem)!important}
-    html[data-locale="zh"] body main .homepage-page-hero h1{max-width:13ch!important}
   }
 </style>
