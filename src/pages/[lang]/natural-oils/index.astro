@@ -2,7 +2,7 @@
 import '../../../styles/site.css';
 import { oilLanguages, oilCopy, oilContact, oilPath, type OilLanguage } from '../../../data/natural-oils';
 import { localeDirection, localeOg, schemaLanguage } from '../../../data/locales';
-export function getStaticPaths(){return oilLanguages.filter(lang=>lang!=='tr').map(lang=>({params:{lang},props:{lang}}));}
+export function getStaticPaths(){return oilLanguages.map(lang=>({params:{lang},props:{lang}}));}
 const {lang}=Astro.props as {lang:OilLanguage};
 const t=oilCopy[lang];
 const url='https://ctseg.com.tr'+oilPath(lang);
@@ -33,7 +33,7 @@ const schema=[
 <main id="main">
 <section class="oils-hero"><div class="container">
 <p class="oils-eyebrow">{t.eyebrow}</p><h1>{t.title}</h1><p class="oils-lead">{t.lead}</p>
-<div class="oils-actions"><a class="oils-button" href={oilContact(lang)+'?intent=buyer_request#commercial-form'}>{t.cta} →</a><a class="oils-textlink" href="#scope">{t.scope} ↓</a></div>
+<div class="oils-actions"><a class="oils-button" href={oilContact(lang)+(lang==='he'?'':'?intent=buyer_request#commercial-form')}>{t.cta} →</a><a class="oils-textlink" href="#scope">{t.scope} ↓</a></div>
 </div></section>
 <section id="scope" class="oils-section"><div class="container"><div class="oils-heading"><span class="oils-number">01 / 03</span><h2>{t.scope}</h2></div><div class="oils-grid">{t.categories.map((name,index)=><article class="oils-card"><span>{String(index+1).padStart(2,'0')}</span><h3>{name}</h3></article>)}</div></div></section>
 <section class="oils-section oils-dark"><div class="container"><div class="oils-heading"><span class="oils-number">02 / 03</span><h2>{t.process}</h2></div><ol class="oils-steps">{t.steps.map((s,i)=><li><span>{String(i+1).padStart(2,'0')}</span><p>{s}</p></li>)}</ol></div></section>
