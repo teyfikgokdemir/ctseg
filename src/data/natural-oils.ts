@@ -2,7 +2,7 @@ import { activeLocaleRegistry, type ActiveLocale } from './locales';
 
 export const oilLanguages = activeLocaleRegistry.map(x => x.code);
 export type OilLanguage = ActiveLocale;
-export const oilPath = (lang: string) => lang === 'tr' ? '/natural-oils/' : `/${lang}/natural-oils/`;
+export const oilPath = (lang: string) => `/${lang}/natural-oils/`;
 export const oilContact = (lang: string) => ({
   tr:'/tr/iletisim/',en:'/en/contact/',de:'/de/kontakt/',it:'/it/contatti/',fa:'/fa/contact/',
   ru:'/ru/kontakty/',zh:'/zh/contact/',vi:'/vi/contact/',uk:'/uk/kontakty/',
