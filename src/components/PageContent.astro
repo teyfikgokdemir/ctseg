@@ -2052,6 +2052,7 @@ const verifiedLater = {
   const relatedIds = insightIds.filter((item) => item !== id).slice(0, 2);
   const currentCategory = (lang === 'ar' ? arabicInsightCategories[id] : insightCategories[id]?.[lang]) || (lang === 'ar' ? 'رؤى تجارية' : 'Trade Intelligence');
   const answerText = originalPost?.answer ?? insight.answers[lang];
+  const buyerGuideLabel = {"tr":"Sekiz sektör için teklif (RFQ) hazırlama bilgilerini incele","en":"See buyer RFQ requirements across eight sectors","de":"RFQ-Anforderungen für acht Branchen ansehen","it":"Consulta i requisiti RFQ per otto settori","fa":"اطلاعات لازم برای RFQ در هشت حوزه را ببینید","ru":"Изучить требования к RFQ для восьми отраслей","zh":"查看八大行业采购询价所需资料","vi":"Xem yêu cầu RFQ của tám ngành hàng","uk":"Переглянути вимоги RFQ для восьми галузей","ro":"Vezi cerințele RFQ pentru opt sectoare","bg":"Вижте изискванията за RFQ в осем сектора","he":"לצפייה בדרישות RFQ בשמונה ענפים","ar":"راجع متطلبات RFQ في ثمانية قطاعات"}[lang] || "See buyer RFQ requirements across eight sectors";
 
   return (
     <>
@@ -2117,6 +2118,12 @@ const verifiedLater = {
             <a class="button button-secondary" href={localizedPath(lang,'services',relatedServiceKey)}>
               {t.readMore} →
             </a>
+          </div>
+        )}
+
+        {['strategic-vs-procurement','supplier-selection','supplier-risk','rfq','origin-compliance'].includes(id) && (
+          <div class="content-block article-buyer-rfq-link">
+            <a class="text-link" href={`${localizedPath(lang, 'products')}#buyer-rfq-guide`} data-sector-buyer-link>{buyerGuideLabel} →</a>
           </div>
         )}
 
