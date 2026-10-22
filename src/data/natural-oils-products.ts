@@ -50,17 +50,17 @@ export const naturalOilVisualMap: Record<NaturalOilSlug | 'hero', string> = {
 export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, NaturalOilProductDetail>> = {
   tr: {
     'rose-essential-oil': {
-      name: 'Gül Uçucu Yağı (Rose Essential Oil) Tedariki',
-      metaTitle: 'Toptan Gül Yağı (Rosa damascena) B2B Tedariki | CTSEG',
+      name: 'Gül Uçucu Yağı (Rose Essential Oil) Tedariği',
+      metaTitle: 'Toptan Gül Yağı (Rosa damascena) B2B Tedariği | CTSEG',
       description: 'Türkiye çıkışlı Rosa damascena gül uçucu yağı için B2B tedarik, GC-MS analizi, numune doğrulama ve uluslararası RFQ koordinasyonu.',
-      eyebrow: 'CTSEG · UÇUCU YAĞ TEDARİKİ',
+      eyebrow: 'CTSEG · UÇUCU YAĞ TEDARİĞİ',
       botanicalName: 'INCI: Rosa Damascena Flower Oil · Buhar Distilasyonu',
       lead: 'CTSEG; parfümeri evleri, dermokozmetik üreticileri ve uluslararası hammadde distribütörleri için Türkiye’deki gül işleme sezonuna ve alıcı şartnamesine uygun Rosa damascena uçucu yağı tedarik seçeneklerini araştırır, numune ve teknik belge akışını koordine eder.',
-      cardSummary: 'Parfümeri ve üst segment cilt bakımı formülasyonları için buhar distilasyonu Rosa damascena uçucu yağı ve gül türevleri B2B tedariki.',
+      cardSummary: 'Parfümeri ve üst segment cilt bakımı formülasyonları için buhar distilasyonu Rosa damascena uçucu yağı ve gül türevleri B2B tedariği.',
       specs: [
         ['Üretim Yöntemi & Kalite', 'Geleneksel veya endüstriyel su/buhar distilasyonu (Otto of Rose) ve talep bazlı gül absolütü seçenekleri'],
         ['Analitik Doğrulama', 'Lot bazlı GC-MS kromatografi profili (citronellol, geraniol, nerol, stearopten oranları), COA ve SDS'],
-        ['Endüstriyel Ambalaj', 'B2B alıma uygun mühürlü alüminyumフlask, florinli kaplar veya özel koruyucu iç ambalaj'],
+        ['Endüstriyel Ambalaj', 'B2B alıma uygun mühürlü alüminyum flask, florinli kaplar veya özel koruyucu iç ambalaj'],
         ['Numune & MOQ Yaklaşımı', 'Formülasyon onayı için referans lot numunesi ve hedef hacme göre kademeli MOQ değerlendirmesi']
       ],
       applications: [
@@ -82,10 +82,10 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
       ]
     },
     'lavender-essential-oil': {
-      name: 'Lavanta Uçucu Yağı (Lavender Essential Oil) Tedariki',
-      metaTitle: 'Toptan Lavanta Uçucu Yağı B2B Tedariki | CTSEG',
-      description: 'Kozmetik, kişisel bakım ve aromaterapi üreticileri için Türkiye çıkışlı Lavandula angustifolia ve Lavandula intermedia uçucu yağı B2B tedariki.',
-      eyebrow: 'CTSEG · UÇUCU YAĞ TEDARİKİ',
+      name: 'Lavanta Uçucu Yağı (Lavender Essential Oil) Tedariği',
+      metaTitle: 'Toptan Lavanta Uçucu Yağı B2B Tedariği | CTSEG',
+      description: 'Kozmetik, kişisel bakım ve aromaterapi üreticileri için Türkiye çıkışlı Lavandula angustifolia ve Lavandula intermedia uçucu yağı B2B tedariği.',
+      eyebrow: 'CTSEG · UÇUCU YAĞ TEDARİĞİ',
       botanicalName: 'INCI: Lavandula Angustifolia Oil / Lavandula Hybrida Oil',
       lead: 'Cilt bakımı, kişisel bakım, ev kokulandırma ve aromaterapi üreticileri için linalool ve linalyl acetate profili tanımlı lavanta uçucu yağı alternatiflerini değerlendiriyor; numune, analiz ve ihracat sevkiyatını tek akışta koordine ediyoruz.',
       cardSummary: 'Kozmetik, kişisel bakım ve teknik koku uygulamaları için Lavandula angustifolia ve lavandin uçucu yağı B2B tedarik koordinasyonu.',
@@ -114,13 +114,13 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
       ]
     },
     'rose-water-hydrosol': {
-      name: 'Gül Suyu ve Gül Hidrosolü (Rose Hydrosol) Tedariki',
-      metaTitle: 'Toptan Gül Suyu ve Gül Hidrosolü B2B Tedariki | CTSEG',
-      description: 'Kozmetik formülasyonlar ve private label üretim için buhar distilasyonu Rosa damascena gül suyu ve hidrosolü uluslararası B2B tedariki.',
+      name: 'Gül Suyu ve Gül Hidrosolü (Rose Hydrosol) Tedariği',
+      metaTitle: 'Toptan Gül Suyu ve Gül Hidrosolü B2B Tedariği | CTSEG',
+      description: 'Kozmetik formülasyonlar ve private label üretim için buhar distilasyonu Rosa damascena gül suyu ve hidrosolü uluslararası B2B tedariği.',
       eyebrow: 'CTSEG · HİDROSOL & ÇİÇEK SULARI',
       botanicalName: 'INCI: Rosa Damascena Flower Water · Buhar Distilasyonu Hidrosolü',
       lead: 'Tonik, mist, misel su, emülsiyon ve nemlendirici kozmetik formülasyonlarında su fazı bileşeni olarak kullanılan doğal gül hidrosolü için koruyuculu/koruyucusuz B2B tedarik seçeneklerini, mikrobiyolojik analizleri ve dökme ambalaj lojistiğini koordine ediyoruz.',
-      cardSummary: 'Tonik, yüz spreyi ve emülsiyon bazları için buhar distilasyonundan elde edilen doğal Rosa damascena çiçek suyu ve hidrosol tedariki.',
+      cardSummary: 'Tonik, yüz spreyi ve emülsiyon bazları için buhar distilasyonundan elde edilen doğal Rosa damascena çiçek suyu ve hidrosol tedariği.',
       specs: [
         ['Ürün Tipi', '%100 buhar distilasyonu birinci/ikinci distilat gül hidrosolü (sentetik esans katkısız seçenekler)'],
         ['Kalite Parametreleri', 'pH aralığı, uçucu yağ oranı, mikrobiyolojik yük (TAMC/TYMC) ve koruyucu sistemi seçenekleri'],
@@ -146,13 +146,13 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
       ]
     },
     'lavender-water-hydrosol': {
-      name: 'Lavanta Suyu ve Hidrosolü (Lavender Hydrosol) Tedariki',
-      metaTitle: 'Toptan Lavanta Suyu ve Hidrosolü B2B Tedariki | CTSEG',
+      name: 'Lavanta Suyu ve Hidrosolü (Lavender Hydrosol) Tedariği',
+      metaTitle: 'Toptan Lavanta Suyu ve Hidrosolü B2B Tedariği | CTSEG',
       description: 'Cilt bakımı, bebek bakımı ve kozmetik üretimi için doğal buhar distilasyonu lavanta suyu (Lavandula hidrosolü) B2B tedarik koordinasyonu.',
       eyebrow: 'CTSEG · HİDROSOL & ÇİÇEK SULARI',
       botanicalName: 'INCI: Lavandula Angustifolia Flower Water / Lavandula Hybrida Flower Water',
-      lead: 'Yağlı/karma cilt tonikleri, güneş sonrası bakım ürünleri, saç bakım losyonları ve doğal kozmetik serileri için lavanta uçucu yağı distilasyonundan elde edilen bitkisel lavanta hidrosolü tedarikini teknik şartname ve numune onayıyla yönetiyoruz.',
-      cardSummary: 'Arındırıcı cilt bakımı, saç tonikleri ve doğal kozmetik üretimi için buhar distilasyonu lavanta çiçek suyu (hidrosol) B2B tedariki.',
+      lead: 'Yağlı/karma cilt tonikleri, güneş sonrası bakım ürünleri, saç bakım losyonları ve doğal kozmetik serileri için lavanta uçucu yağı distilasyonundan elde edilen bitkisel lavanta hidrosolü tedariğini teknik şartname ve numune onayıyla yönetiyoruz.',
+      cardSummary: 'Arındırıcı cilt bakımı, saç tonikleri ve doğal kozmetik üretimi için buhar distilasyonu lavanta çiçek suyu (hidrosol) B2B tedariği.',
       specs: [
         ['Üretim Kaynağı', 'Lavanta çiçeklerinin buhar distilasyonundan elde edilen saf bitkisel distilat (hidrosol)'],
         ['Analitik Kontrol', 'pH, berraklık, çözünmüş uçucu bileşen profili ve mikrobiyolojik uygunluk (COA)'],
@@ -178,13 +178,13 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
       ]
     },
     'botanical-carrier-oils': {
-      name: 'Bitkisel Sabit Yağlar (Botanical Carrier Oils) Tedariki',
-      metaTitle: 'Toptan Bitkisel Sabit Yağlar ve Baz Yağlar B2B Tedariki | CTSEG',
-      description: 'Kozmetik ve kişisel bakım üreticileri için soğuk sıkım ve rafine bitkisel sabit yağlar (tatlı badem, jojoba, kuşburnu, üzüm çekirdeği, kayısı çekirdeği) B2B tedariki.',
+      name: 'Bitkisel Sabit Yağlar (Botanical Carrier Oils) Tedariği',
+      metaTitle: 'Toptan Bitkisel Sabit Yağlar ve Baz Yağlar B2B Tedariği | CTSEG',
+      description: 'Kozmetik ve kişisel bakım üreticileri için soğuk sıkım ve rafine bitkisel sabit yağlar (tatlı badem, jojoba, kuşburnu, üzüm çekirdeği, kayısı çekirdeği) B2B tedariği.',
       eyebrow: 'CTSEG · SABİT & TAŞIYICI YAĞLAR',
       botanicalName: 'Soğuk Sıkım (Cold-Pressed) & Rafine Kozmetik Baz Yağlar',
-      lead: 'Cilt serumları, saç bakım yağları, masaj ürünleri ve emülsiyon formülasyonları için yağ asidi profili (FAME), peroksit değeri ve asitlik kriterleri doğrulanmış bitkisel sabit ve taşıyıcı yağların B2B tedarikini koordine ediyoruz.',
-      cardSummary: 'Tatlı badem, kayısı çekirdeği, üzüm çekirdeği, kuşburnu, nar çekirdeği ve jojoba gibi soğuk sıkım ve rafine kozmetik baz yağların B2B tedariki.',
+      lead: 'Cilt serumları, saç bakım yağları, masaj ürünleri ve emülsiyon formülasyonları için yağ asidi profili (FAME), peroksit değeri ve asitlik kriterleri doğrulanmış bitkisel sabit ve taşıyıcı yağların B2B tedariğini koordine ediyoruz.',
+      cardSummary: 'Tatlı badem, kayısı çekirdeği, üzüm çekirdeği, kuşburnu, nar çekirdeği ve jojoba gibi soğuk sıkım ve rafine kozmetik baz yağların B2B tedariği.',
       specs: [
         ['Başlıca Ürün Grupları', 'Tatlı badem, kayısı çekirdeği, üzüm çekirdeği, kuşburnu, nar çekirdeği, jojoba, argan, çörek otu ve susam yağları'],
         ['İşleme & Kalite', 'Soğuk sıkım (cold-pressed / virgin) veya kozmetik sınıfı rafine/deodorize seçenekler'],
@@ -211,12 +211,12 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
     },
     'botanical-extracts': {
       name: 'Bitkisel Özler ve Kozmetik Aktif Ham Maddeleri',
-      metaTitle: 'Toptan Bitkisel Özler (Botanical Extracts) B2B Tedariki | CTSEG',
-      description: 'Kozmetik üreticileri ve formülatörler için suda veya yağda çözünen bitkisel ekstraktlar, gliseritler ve bitkisel aktif ham maddeleri B2B tedariki.',
+      metaTitle: 'Toptan Bitkisel Özler (Botanical Extracts) B2B Tedariği | CTSEG',
+      description: 'Kozmetik üreticileri ve formülatörler için suda veya yağda çözünen bitkisel ekstraktlar, gliseritler ve bitkisel aktif ham maddeleri B2B tedariği.',
       eyebrow: 'CTSEG · BİTKİSEL ÖZLER & AKTİFLER',
       botanicalName: 'Gliserinli, Propilen/Butilen Glikollü, Yağ Bazlı (Maserat) & Toz Ekstraktlar',
-      lead: 'Dermokozmetik, cilt bakımı ve saç bakımı formülasyonlarında fonksiyonel etkinlik sağlayan sıvı ve toz bitkisel özlerin (botanical extracts), taşıyıcı çözücü sistemine ve teknik spesifikasyona uygun B2B tedarikini yönetiyoruz.',
-      cardSummary: 'Cilt ve saç bakımı formülasyonları için gliseritler, yağ bazlı maseratlar, glikolik ekstraktlar ve standardize bitkisel özlerin B2B tedariki.',
+      lead: 'Dermokozmetik, cilt bakımı ve saç bakımı formülasyonlarında fonksiyonel etkinlik sağlayan sıvı ve toz bitkisel özlerin (botanical extracts), taşıyıcı çözücü sistemine ve teknik spesifikasyona uygun B2B tedariğini yönetiyoruz.',
+      cardSummary: 'Cilt ve saç bakımı formülasyonları için gliseritler, yağ bazlı maseratlar, glikolik ekstraktlar ve standardize bitkisel özlerin B2B tedariği.',
       specs: [
         ['Çözücü & Form Seçenekleri', 'Su/gliserin (hydroglyceric), propanediol, yağda çözünen (liposoluble maserat) ve kuru/toz ekstraktlar'],
         ['Botanik Çeşitlilik', 'Centella, papatya, aynısefa (calendula), yeşil çay, meyan kökü, gül, lavanta, biberiye, sarmaşık ve Anadolu florası özleri'],
@@ -238,12 +238,12 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
       faq: [
         ['Kozmetik formülasyona göre çözücü sistemi seçilebilir mi?', 'Evet. Doğal/COSMOS uyumlu formüller için gliserin-su veya propanediol bazlı ekstraktlar, susuz (anhydrous) ürünler için ise yağda çözünen ekstraktlar RFQ kapsamında değerlendirilir.'],
         ['Ekstraktların INCI dağılımı ve koruyucu içeriği paylaşılıyor mu?', 'Evet, kozmetik ürün güvenlik değerlendirmesi (CPSR) ve etiketleme için tam INCI kırılımı, CAS/EINECS numaraları ve koruyucu oranları teknik dosyada (TDS/COA) sunulur.'],
-        ['Özel bitkisel karışım (blend) talepleri değerlendiriliyor mu?', 'Yeterli B2B hacmi olan projelerde birden fazla bitkisel özün tek bir kompleks halinde tedariki uygun üretici kanallarıyla görüşülebilir.']
+        ['Özel bitkisel karışım (blend) talepleri değerlendiriliyor mu?', 'Yeterli B2B hacmi olan projelerde birden fazla bitkisel özün tek bir kompleks halinde tedariği uygun üretici kanallarıyla görüşülebilir.']
       ]
     },
     'other-essential-oils': {
-      name: 'Diğer Uçucu Yağlar (Anadolu & Akdeniz Florası) Tedariki',
-      metaTitle: 'Toptan Kekik, Biberiye, Defne ve Uçucu Yağlar B2B Tedariki | CTSEG',
+      name: 'Diğer Uçucu Yağlar (Anadolu & Akdeniz Florası) Tedariği',
+      metaTitle: 'Toptan Kekik, Biberiye, Defne ve Uçucu Yağlar B2B Tedariği | CTSEG',
       description: 'Türkiye çıkışlı kekik (oregano/thyme), defne yaprağı, biberiye, adaçayı, nane, okaliptüs ve narenciye uçucu yağları için B2B tedarik ve RFQ koordinasyonu.',
       eyebrow: 'CTSEG · AROMATİK & UÇUCU YAĞLAR',
       botanicalName: 'Origanum, Thymus, Laurus nobilis, Rosmarinus, Salvia, Mentha, Citrus Oils',
@@ -1637,12 +1637,12 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
       description: 'Tìm nguồn hàng B2B quốc tế từ Türkiye cho tinh dầu hoa hồng Rosa damascena chưng cất hơi nước, kiểm định GC-MS, gửi mẫu và điều phối RFQ.',
       eyebrow: 'CTSEG · NGUỒN CUNG TINH DẦU B2B',
       botanicalName: 'INCI: Rosa Damascena Flower Oil · Chưng cất hơi nước (Otto of Rose)',
-      lead: 'CTSEG điều phối nguồn cung B2B tinh dầu hoa hồng Rosa damascena Anatolia và các dẫn xuất hoa hồng cho các nhà điều향, nhà sản xuất mỹ phẩm và nhà phân phối nguyên liệu — đối chiếu lô thu hoạch, hồ sơ sắc ký GC-MS, mẫu đối chứng và vận chuyển xuất khẩu.',
+      lead: 'CTSEG điều phối nguồn cung B2B tinh dầu hoa hồng Rosa damascena Anatolia và các dẫn xuất hoa hồng cho các nhà điều hương, nhà sản xuất mỹ phẩm và nhà phân phối nguyên liệu — đối chiếu lô thu hoạch, hồ sơ sắc ký GC-MS, mẫu đối chứng và vận chuyển xuất khẩu.',
       cardSummary: 'Tinh dầu Rosa damascena chưng cất hơi nước và dẫn xuất hoa hồng cho nước hoa cao cấp, mỹ phẩm dưỡng da và nhà phân phối B2B.',
       specs: [
         ['Phương pháp & Cấp độ', 'Tinh dầu hoa hồng Rosa damascena chưng cất hơi nước (Otto of Rose) và tinh dầu tuyệt đối (Rose Absolute) theo yêu cầu'],
         ['Kiểm định Phân tích', 'Sắc ký đồ GC-MS theo từng lô (tỷ lệ citronellol, geraniol, nerol, stearoptene), COA và SDS'],
-        ['Đóng gói Công nghiệp', 'Bình nhôm niêm phong và chai氟 hóa chuyên dụng (0,5 kg – 5 kg+) kèm thùng bảo vệ xuất khẩu'],
+        ['Đóng gói Công nghiệp', 'Bình nhôm niêm phong và chai fluor hóa chuyên dụng (0,5 kg – 5 kg+) kèm thùng bảo vệ xuất khẩu'],
         ['Mẫu thử & MOQ', 'Cung cấp mẫu lô tham chiếu để phòng lab đánh giá trước khi đặt hàng sỉ; MOQ linh hoạt theo lô vụ mùa']
       ],
       applications: [
@@ -1674,7 +1674,7 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
       specs: [
         ['Chủng loại Thực vật', 'Lavandula angustifolia (oải hương mịn) và Lavandula intermedia / hybrida (lavandin)'],
         ['Chất lượng & Sắc ký', 'Hồ sơ GC-MS theo lô xác nhận hàm lượng linalool, linalyl acetate và long não (camphor) cùng COA'],
-        ['Quy cách Đóng gói Sỉ', 'Bình nhôm 1 kg – 25 kg và phuy thép tráng эпоxy 180 kg'],
+        ['Quy cách Đóng gói Sỉ', 'Bình nhôm 1 kg – 25 kg và phuy thép tráng epoxy 180 kg'],
         ['Điều phối Thương mại', 'Đối chiếu lô sản xuất, gửi mẫu phòng lab và logistics xuất khẩu EXW / FOB / CIF / DAP']
       ],
       applications: [
@@ -1786,7 +1786,7 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
         'Sản lượng đặt hàng, quy cách thùng chứa và điều kiện giao hàng'
       ],
       faq: [
-        ['Nên chọn dầu nền ép lạnh hay tinh luyện cho công thức mỹ phẩm?', 'Dầu ép lạnh giữ nguyên tocopherol và phytosterol tự nhiên cho các dòng serum hoạt성, trong khi dầu tinh luyện có màu/mùi trung tính và độ bền oxy hóa cao cho nhũ tương sản xuất lớn. Chúng tôi đáp ứng cả hai tùy theo yêu cầu R&D của bạn.'],
+        ['Nên chọn dầu nền ép lạnh hay tinh luyện cho công thức mỹ phẩm?', 'Dầu ép lạnh giữ nguyên tocopherol và phytosterol tự nhiên cho các dòng serum hoạt tính, trong khi dầu tinh luyện có màu/mùi trung tính và độ bền oxy hóa cao cho nhũ tương sản xuất lớn. Chúng tôi đáp ứng cả hai tùy theo yêu cầu R&D của bạn.'],
         ['Có thể ghép nhiều loại dầu nền và tinh dầu trong cùng một lô hàng không?', 'Có. CTSEG hỗ trợ gom đơn hàng B2B đa danh mục gồm dầu nền, tinh dầu và hydrosol trong một chuyến xuất khẩu.'],
         ['Độ ổn định oxy hóa được kiểm soát như thế nào?', 'Trước khi giao hàng, chúng tôi kiểm tra ngày sản xuất, chỉ số peroxide và chỉ số axit trên COA của từng lô.']
       ]

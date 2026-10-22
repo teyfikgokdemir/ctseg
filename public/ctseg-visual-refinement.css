@@ -509,7 +509,7 @@ html body main .compact-link-section .cta-statement {
   min-height: 0 !important;
 }
 html body main .compact-link-section .cta-statement h2 {
-  max-width: none !important;
+  max-width: 960px !important;
   margin-inline: auto !important;
   text-align: center !important;
   line-height: 1.2 !important;

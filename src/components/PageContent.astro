@@ -1054,126 +1054,7 @@ const verifiedLater = {
   ar:['يتم التحقق وفق المصنّع وهيكل الطلب','يتم التأكيد في مرحلة عرض السعر','تتم مراجعة الوثائق على مستوى الدفعة','يتم التقييم عند الطلب','يتم التقييم وفق المصنّع والسوق المستهدف']
 }[lang];
 ---
-{key === 'home' && regionalIntentHome && (
-  <>
-    <PageHero lang={lang} eyebrow={regionalIntentHome.eyebrow} title={regionalIntentHome.title} lead={regionalIntentHome.description} homepage={true} />
-    <TradeMarquee lang={lang} />
-    <section class="section"><div class="container content-grid">
-      <div class="prose">
-        <div class="content-block direct-answer">
-          <h2>{regionalIntentHome.directAnswerTitle}</h2>
-          <p>{regionalIntentHome.directAnswer}</p>
-        </div>
-        <div class="content-block" id="sectors">
-          <h2>{regionalIntentHome.sectorsTitle}</h2>
-          <p>{regionalIntentHome.sectorsLead}</p>
-          <ol class="check-list">{regionalIntentHome.sectors.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}</ol>
-        </div>
-        <div class="content-block">
-          <h2>{regionalIntentHome.supportTitle}</h2>
-          <ul class="check-list">{regionalIntentHome.support.map((item)=><li>{item}</li>)}</ul>
-        </div>
-        <div class="content-block origin-note">
-          <h2>{regionalIntentHome.complianceTitle}</h2>
-          <p>{regionalIntentHome.complianceText}</p>
-        </div>
-        <div class="content-block">
-          <h2>{regionalIntentHome.processTitle}</h2>
-          <ol class="check-list">{regionalIntentHome.process.map((item)=><li>{item}</li>)}</ol>
-        </div>
-        <div class="content-block faq">
-          <h2>{t.faq}</h2>
-          {regionalIntentHome.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
-        </div>
-      </div>
-      <aside class="side-panel">
-        <p class="eyebrow">CTSEG · B2B corridor</p>
-        <h2>{regionalIntentHome.ctaTitle}</h2>
-        <p>{regionalIntentHome.ctaText}</p>
-        <a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{regionalIntentHome.ctaLabel}</a>
-        {regionalIntentHome.sellerTitle && regionalIntentHome.sellerText && regionalIntentHome.sellerLabel && (
-          <div class="content-block" style="margin-top:1.4rem">
-            <h3>{regionalIntentHome.sellerTitle}</h3>
-            <p>{regionalIntentHome.sellerText}</p>
-            <a class="button button-secondary" href={`${sectionHref('contact')}?intent=supplier_market_entry#commercial-form`} data-contact-intent="supplier_market_entry">{regionalIntentHome.sellerLabel}</a>
-          </div>
-        )}
-      </aside>
-    </div></section>
-  </>
-)}
-
-{key === 'home' && lang === 'fa' && (
-  <>
-    <PageHero lang={lang} eyebrow={iranTradeContent.fa.eyebrow} title={iranTradeContent.fa.title} lead={iranTradeContent.fa.description} homepage={true} />
-    <TradeMarquee lang={lang} />
-    <section class="section"><div class="container content-grid">
-      <div class="prose">
-        <div class="content-block direct-answer"><h2>{iranTradeContent.fa.directAnswerTitle}</h2><p>{iranTradeContent.fa.directAnswer}</p></div>
-        <div class="content-block" id="sectors"><h2>{iranTradeContent.fa.inboundTitle}</h2><p>{iranTradeContent.fa.inboundLead}</p><ol class="check-list">{iranTradeContent.fa.inboundItems.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}</ol></div>
-        <div class="content-block"><h2>{iranTradeContent.fa.outboundTitle}</h2><p>{iranTradeContent.fa.outboundLead}</p><ul class="check-list">{iranTradeContent.fa.outboundItems.map((item)=><li>{item}</li>)}</ul></div>
-        <div class="content-block origin-note"><h2>{iranTradeContent.fa.complianceTitle}</h2><p>{iranTradeContent.fa.complianceText}</p></div>
-        <div class="content-block"><h2>{iranTradeContent.fa.processTitle}</h2><ol class="check-list">{iranTradeContent.fa.process.map((item)=><li>{item}</li>)}</ol><a class="text-link" href={scenarioHref}>سناریوهای نمونه همکاری →</a></div>
-        <div class="content-block faq"><h2>{t.faq}</h2>{iranTradeContent.fa.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
-      </div>
-      <aside class="side-panel">
-        <p class="eyebrow">CTSEG · ایران ⇄ Türkiye</p>
-        <h2>{iranTradeContent.fa.ctaTitle}</h2>
-        <p>{iranTradeContent.fa.ctaText}</p>
-        <a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{iranTradeContent.fa.ctaLabel}</a>
-      </aside>
-    </div></section>
-    <NaturalOilsFeatureSection lang="fa" />
-  </>
-)}
-
-{key === 'home' && lang === 'zh' && chinaMarketEntry && (
-  <>
-    <PageHero lang={lang} eyebrow={chinaMarketEntry.eyebrow} title={chinaMarketEntry.title} lead={chinaMarketEntry.description} homepage={true} />
-    <TradeMarquee lang={lang} />
-    <section class="section"><div class="container content-grid">
-      <div class="prose">
-        <div class="content-block direct-answer"><h2>{chinaMarketEntry.directAnswerTitle}</h2><p>{chinaMarketEntry.directAnswer}</p></div>
-        <div class="content-block" id="sectors"><h2>{chinaMarketEntry.sectorsTitle}</h2><p>{chinaMarketEntry.sectorsLead}</p><ul class="check-list">{chinaMarketEntry.sectors.map((item)=><li>{item}</li>)}</ul></div>
-        <div class="content-block"><h2>{chinaMarketEntry.supportTitle}</h2><p>{chinaMarketEntry.supportLead}</p><ul class="check-list">{chinaMarketEntry.support.map((item)=><li>{item}</li>)}</ul></div>
-        <div class="content-block origin-note"><h2>{chinaMarketEntry.complianceTitle}</h2><p>{chinaMarketEntry.complianceText}</p></div>
-        <div class="content-block"><h2>{chinaMarketEntry.processTitle}</h2><ol class="check-list">{chinaMarketEntry.process.map((item)=><li>{item}</li>)}</ol></div>
-        <div class="content-block faq"><h2>{t.faq}</h2>{chinaMarketEntry.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
-      </div>
-      <aside class="side-panel">
-        <p class="eyebrow">CTSEG · 中国 → Türkiye & Europe</p>
-        <h2>{chinaMarketEntry.ctaTitle}</h2>
-        <p>{chinaMarketEntry.ctaText}</p>
-        <a class="button" href={`${sectionHref('contact')}?intent=supplier_market_entry#commercial-form`} data-contact-intent="supplier_market_entry">{chinaMarketEntry.ctaLabel}</a>
-      </aside>
-    </div></section>
-  </>
-)}
-
-{key === 'home' && lang === 'vi' && vietnamMarketEntry && (
-  <>
-    <PageHero lang={lang} eyebrow={vietnamMarketEntry.eyebrow} title={vietnamMarketEntry.title} lead={vietnamMarketEntry.description} homepage={true} />
-    <TradeMarquee lang={lang} />
-    <section class="section"><div class="container content-grid">
-      <div class="prose">
-        <div class="content-block direct-answer"><h2>{vietnamMarketEntry.directAnswerTitle}</h2><p>{vietnamMarketEntry.directAnswer}</p></div>
-        <div class="content-block" id="sectors"><h2>{vietnamMarketEntry.sectorsTitle}</h2><p>{vietnamMarketEntry.sectorsLead}</p><ul class="check-list">{vietnamMarketEntry.sectors.map((item)=><li>{item}</li>)}</ul></div>
-        <div class="content-block"><h2>{vietnamMarketEntry.supportTitle}</h2><p>{vietnamMarketEntry.supportLead}</p><ul class="check-list">{vietnamMarketEntry.support.map((item)=><li>{item}</li>)}</ul></div>
-        <div class="content-block origin-note"><h2>{vietnamMarketEntry.complianceTitle}</h2><p>{vietnamMarketEntry.complianceText}</p></div>
-        <div class="content-block"><h2>{vietnamMarketEntry.processTitle}</h2><ol class="check-list">{vietnamMarketEntry.process.map((item)=><li>{item}</li>)}</ol></div>
-        <div class="content-block faq"><h2>{t.faq}</h2>{vietnamMarketEntry.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}</div>
-      </div>
-      <aside class="side-panel">
-        <p class="eyebrow">CTSEG · Việt Nam → Türkiye & Europe</p>
-        <h2>{vietnamMarketEntry.ctaTitle}</h2>
-        <p>{vietnamMarketEntry.ctaText}</p>
-        <a class="button" href={`${sectionHref('contact')}?intent=supplier_market_entry#commercial-form`} data-contact-intent="supplier_market_entry">{vietnamMarketEntry.ctaLabel}</a>
-      </aside>
-    </div></section>
-  </>
-)}
-
-{key === 'home' && !['de','it','ru','fa','zh','vi'].includes(lang) && (
+{key === 'home' && (
   <>
     <section class="hero homepage-trade-hero">
       <div class="container hero-grid">
@@ -1251,7 +1132,179 @@ const verifiedLater = {
         ))}
       </div>
     </div></section>
-    {(lang !== 'zh' && lang !== 'vi') && <NaturalOilsFeatureSection lang={lang} />}
+    <NaturalOilsFeatureSection lang={lang} />
+
+    {regionalIntentHome && (
+      <section class="section regional-market-corridor" id="regional-corridor">
+        <div class="container content-grid">
+          <div class="prose">
+            <div class="content-block direct-answer">
+              <h2>{regionalIntentHome.directAnswerTitle}</h2>
+              <p>{regionalIntentHome.directAnswer}</p>
+            </div>
+            <div class="content-block" id="regional-sectors">
+              <h2>{regionalIntentHome.sectorsTitle}</h2>
+              <p>{regionalIntentHome.sectorsLead}</p>
+              <ol class="check-list">{regionalIntentHome.sectors.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}</ol>
+            </div>
+            <div class="content-block">
+              <h2>{regionalIntentHome.supportTitle}</h2>
+              <ul class="check-list">{regionalIntentHome.support.map((item)=><li>{item}</li>)}</ul>
+            </div>
+            <div class="content-block origin-note">
+              {lang === 'ru' && <p class="eyebrow">КОМПЛАЕНС</p>}
+              <h2>{regionalIntentHome.complianceTitle}</h2>
+              <p>{regionalIntentHome.complianceText}</p>
+            </div>
+            <div class="content-block" id="regional-process">
+              <h2>{regionalIntentHome.processTitle}</h2>
+              <ol class="check-list">{regionalIntentHome.process.map((item)=><li>{item}</li>)}</ol>
+            </div>
+            <div class="content-block faq">
+              <h2>{t.faq}</h2>
+              {regionalIntentHome.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+            </div>
+          </div>
+          <aside class="side-panel">
+            <p class="eyebrow">CTSEG · B2B corridor</p>
+            <h2>{regionalIntentHome.ctaTitle}</h2>
+            <p>{regionalIntentHome.ctaText}</p>
+            <a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{regionalIntentHome.ctaLabel}</a>
+            {regionalIntentHome.sellerTitle && regionalIntentHome.sellerText && regionalIntentHome.sellerLabel && (
+              <div class="content-block" style="margin-top:1.4rem">
+                <h3>{regionalIntentHome.sellerTitle}</h3>
+                <p>{regionalIntentHome.sellerText}</p>
+                <a class="button button-secondary" href={`${sectionHref('contact')}?intent=supplier_market_entry#commercial-form`} data-contact-intent="supplier_market_entry">{regionalIntentHome.sellerLabel}</a>
+              </div>
+            )}
+          </aside>
+        </div>
+      </section>
+    )}
+
+    {lang === 'fa' && (
+      <section class="section regional-market-corridor" id="regional-corridor">
+        <div class="container content-grid">
+          <div class="prose">
+            <div class="content-block direct-answer">
+              <h2>{iranTradeContent.fa.directAnswerTitle}</h2>
+              <p>{iranTradeContent.fa.directAnswer}</p>
+            </div>
+            <div class="content-block" id="regional-sectors">
+              <h2>{iranTradeContent.fa.inboundTitle}</h2>
+              <p>{iranTradeContent.fa.inboundLead}</p>
+              <ol class="check-list">{iranTradeContent.fa.inboundItems.map((item,index)=><li><strong>{String(index+1).padStart(2,'0')}</strong> · {item}</li>)}</ol>
+            </div>
+            <div class="content-block">
+              <h2>{iranTradeContent.fa.outboundTitle}</h2>
+              <p>{iranTradeContent.fa.outboundLead}</p>
+              <ul class="check-list">{iranTradeContent.fa.outboundItems.map((item)=><li>{item}</li>)}</ul>
+            </div>
+            <div class="content-block origin-note">
+              <h2>{iranTradeContent.fa.complianceTitle}</h2>
+              <p>{iranTradeContent.fa.complianceText}</p>
+            </div>
+            <div class="content-block" id="regional-process">
+              <h2>{iranTradeContent.fa.processTitle}</h2>
+              <ol class="check-list">{iranTradeContent.fa.process.map((item)=><li>{item}</li>)}</ol>
+              <a class="text-link" href={scenarioHref}>سناریوهای نمونه همکاری →</a>
+            </div>
+            <div class="content-block faq">
+              <h2>{t.faq}</h2>
+              {iranTradeContent.fa.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+            </div>
+          </div>
+          <aside class="side-panel">
+            <p class="eyebrow">CTSEG · ایران ⇄ Türkiye</p>
+            <h2>{iranTradeContent.fa.ctaTitle}</h2>
+            <p>{iranTradeContent.fa.ctaText}</p>
+            <a class="button" href={`${sectionHref('contact')}?intent=buyer_request#commercial-form`} data-contact-intent="buyer_request">{iranTradeContent.fa.ctaLabel}</a>
+          </aside>
+        </div>
+      </section>
+    )}
+
+    {lang === 'zh' && chinaMarketEntry && (
+      <section class="section regional-market-corridor" id="regional-corridor">
+        <div class="container content-grid">
+          <div class="prose">
+            <div class="content-block direct-answer">
+              <h2>{chinaMarketEntry.directAnswerTitle}</h2>
+              <p>{chinaMarketEntry.directAnswer}</p>
+            </div>
+            <div class="content-block" id="regional-sectors">
+              <h2>{chinaMarketEntry.sectorsTitle}</h2>
+              <p>{chinaMarketEntry.sectorsLead}</p>
+              <ul class="check-list">{chinaMarketEntry.sectors.map((item)=><li>{item}</li>)}</ul>
+            </div>
+            <div class="content-block">
+              <h2>{chinaMarketEntry.supportTitle}</h2>
+              <p>{chinaMarketEntry.supportLead}</p>
+              <ul class="check-list">{chinaMarketEntry.support.map((item)=><li>{item}</li>)}</ul>
+            </div>
+            <div class="content-block origin-note">
+              <h2>{chinaMarketEntry.complianceTitle}</h2>
+              <p>{chinaMarketEntry.complianceText}</p>
+            </div>
+            <div class="content-block" id="regional-process">
+              <h2>{chinaMarketEntry.processTitle}</h2>
+              <ol class="check-list">{chinaMarketEntry.process.map((item)=><li>{item}</li>)}</ol>
+            </div>
+            <div class="content-block faq">
+              <h2>{t.faq}</h2>
+              {chinaMarketEntry.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+            </div>
+          </div>
+          <aside class="side-panel">
+            <p class="eyebrow">CTSEG · 中国 → Türkiye & Europe</p>
+            <h2>{chinaMarketEntry.ctaTitle}</h2>
+            <p>{chinaMarketEntry.ctaText}</p>
+            <a class="button" href={`${sectionHref('contact')}?intent=supplier_market_entry#commercial-form`} data-contact-intent="supplier_market_entry">{chinaMarketEntry.ctaLabel}</a>
+          </aside>
+        </div>
+      </section>
+    )}
+
+    {lang === 'vi' && vietnamMarketEntry && (
+      <section class="section regional-market-corridor" id="regional-corridor">
+        <div class="container content-grid">
+          <div class="prose">
+            <div class="content-block direct-answer">
+              <h2>{vietnamMarketEntry.directAnswerTitle}</h2>
+              <p>{vietnamMarketEntry.directAnswer}</p>
+            </div>
+            <div class="content-block" id="regional-sectors">
+              <h2>{vietnamMarketEntry.sectorsTitle}</h2>
+              <p>{vietnamMarketEntry.sectorsLead}</p>
+              <ul class="check-list">{vietnamMarketEntry.sectors.map((item)=><li>{item}</li>)}</ul>
+            </div>
+            <div class="content-block">
+              <h2>{vietnamMarketEntry.supportTitle}</h2>
+              <p>{vietnamMarketEntry.supportLead}</p>
+              <ul class="check-list">{vietnamMarketEntry.support.map((item)=><li>{item}</li>)}</ul>
+            </div>
+            <div class="content-block origin-note">
+              <h2>{vietnamMarketEntry.complianceTitle}</h2>
+              <p>{vietnamMarketEntry.complianceText}</p>
+            </div>
+            <div class="content-block" id="regional-process">
+              <h2>{vietnamMarketEntry.processTitle}</h2>
+              <ol class="check-list">{vietnamMarketEntry.process.map((item)=><li>{item}</li>)}</ol>
+            </div>
+            <div class="content-block faq">
+              <h2>{t.faq}</h2>
+              {vietnamMarketEntry.faq.map((item,index)=><details open={index===0}><summary>{item.question}</summary><p>{item.answer}</p></details>)}
+            </div>
+          </div>
+          <aside class="side-panel">
+            <p class="eyebrow">CTSEG · Việt Nam → Türkiye & Europe</p>
+            <h2>{vietnamMarketEntry.ctaTitle}</h2>
+            <p>{vietnamMarketEntry.ctaText}</p>
+            <a class="button" href={`${sectionHref('contact')}?intent=supplier_market_entry#commercial-form`} data-contact-intent="supplier_market_entry">{vietnamMarketEntry.ctaLabel}</a>
+          </aside>
+        </div>
+      </section>
+    )}
     <ProcessRail title={platform.processTitle} steps={operationalTrust.steps} />
     {<div class="container process-detail-link"><a class="text-link" href={workHref} data-how-we-work-cta>{processPage?.title} →</a> · <a class="text-link" href={scenarioHref} data-case-scenario-cta>{completionHome.scenarioCta} →</a></div>}
     <section class="section trade-corridors"><div class="container">
