@@ -18,10 +18,10 @@ const statusLabel = ({tr:'Kontrollü ilerleme',en:'Controlled progression',de:'K
       </div>
     </div>
     <ol class:list={['process-rail', steps.length === 4 && 'process-rail--four']} aria-label={sequenceLabel}>
-      {steps.map((step) => (
+      {steps.map((step, index) => (
         <li>
           <strong>{step}</strong>
-          <span class="process-arrow" aria-hidden="true">↗</span>
+          <span class="process-step-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
         </li>
       ))}
     </ol>
