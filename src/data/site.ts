@@ -1158,7 +1158,7 @@ export const legal: Record<(typeof legalIds)[number], { slugs: Localized; titles
 export const pageCopy: Record<Locale, any> = {
   tr:{
     servicesTitle:'Tedarik kararının her aşaması için uzmanlık.', servicesLead:'Strateji, doğrulama, ticari analiz ve uygulamayı ortak bir karar disiplini içinde birleştiriyoruz.',
-    productsTitle:'Ticari ürün portföyü', productsLead:'Aynı ürün kataloğu her pazarda şeffaf menşe, parti bazlı kalite ve doğrulanabilir ticari şartlarla değerlendirilir.',
+    productsTitle:'Ticari ürün portföyü', productsLead:'Cam, doğal yağlar, gıda ve endüstriyel alanlarda talep odaklı uluslararası B2B tedarik.',
     marketsTitle:'Türkiye’den Avrupa ve uluslararası pazarlara.', marketsLead:'Yerel üretim gerçekliğini hedef pazar mevzuatı, alıcı beklentisi ve uygulanabilir teslim modelleriyle eşleştiriyoruz.',
     aboutTitle:'Ticaretin belirsizliğini azaltan bağımsız karar ortağı.', aboutLead:'CTSEG, stratejik tedarik ve uluslararası ticaret projelerinde kanıt, şeffaflık ve uygulanabilirlik ilkeleriyle çalışır.',
     contactTitle:'Ticari ihtiyacınızı net bir değerlendirmeyle başlatın.', insightsTitle:'Karar vericiler için uygulanabilir içgörüler.', insightsLead:'Tedarik, toplam maliyet, menşe, kalite ve ticari risk üzerine kısa, kanıta dayalı rehberler.',
@@ -1171,7 +1171,7 @@ export const pageCopy: Record<Locale, any> = {
   },
   en:{
     servicesTitle:'Expertise for every stage of the sourcing decision.',servicesLead:'We combine strategy, verification, commercial analysis and execution within one decision discipline.',
-    productsTitle:'Trade product portfolio',productsLead:'The same catalogue is assessed in every market through transparent origin, batch-level quality and verifiable commercial terms.',
+    productsTitle:'Trade product portfolio',productsLead:'Explore specification-led B2B sourcing across glass, natural oils, food and industrial sectors.',
     marketsTitle:'From Türkiye into Europe and international markets.',marketsLead:'We match local production realities with target-market regulation, buyer expectations and executable delivery models.',
     aboutTitle:'An independent decision partner reducing uncertainty in trade.',aboutLead:'CTSEG works through evidence, transparency and executability in strategic sourcing and international trade projects.',
     contactTitle:'Start your commercial requirement with a clear assessment.',insightsTitle:'Practical insight for decision-makers.',insightsLead:'Concise, evidence-led guidance on sourcing, total cost, origin, quality and commercial risk.',
@@ -1184,7 +1184,7 @@ export const pageCopy: Record<Locale, any> = {
   },
   de:{
     servicesTitle:'Kompetenz für jede Phase der Beschaffungsentscheidung.',servicesLead:'Wir verbinden Strategie, Prüfung, kaufmännische Analyse und Umsetzung in einer Entscheidungsdisziplin.',
-    productsTitle:'Handelsprodukt-Portfolio',productsLead:'Dasselbe Sortiment wird in jedem Markt anhand transparenter Herkunft, Chargenqualität und überprüfbarer Konditionen bewertet.',
+    productsTitle:'Handelsprodukt-Portfolio',productsLead:'Bedarfsorientierte B2B-Beschaffung für Glas, Naturöle, Lebensmittel und Industrieprodukte.',
     marketsTitle:'Von Türkiye nach Europa und in internationale Märkte.',marketsLead:'Wir verbinden lokale Produktionsrealität mit Zielmarktregeln, Käufererwartungen und umsetzbaren Liefermodellen.',
     aboutTitle:'Ein unabhängiger Entscheidungspartner, der Unsicherheit im Handel reduziert.',aboutLead:'CTSEG arbeitet bei strategischer Beschaffung und internationalem Handel nach den Prinzipien Evidenz, Transparenz und Umsetzbarkeit.',
     contactTitle:'Beginnen Sie Ihren Handelsbedarf mit einer klaren Bewertung.',insightsTitle:'Praktische Einblicke für Entscheider.',insightsLead:'Kompakte, evidenzbasierte Leitfäden zu Beschaffung, Gesamtkosten, Herkunft, Qualität und Handelsrisiko.',
@@ -1197,7 +1197,7 @@ export const pageCopy: Record<Locale, any> = {
   },
   it:{
     servicesTitle:'Competenze per ogni fase della decisione di approvvigionamento.',servicesLead:'Uniamo strategia, verifica, analisi commerciale ed esecuzione in un’unica disciplina decisionale.',
-    productsTitle:'Portafoglio prodotti commerciali',productsLead:'Lo stesso catalogo è valutato in ogni mercato con origine trasparente, qualità per lotto e condizioni verificabili.',
+    productsTitle:'Portafoglio prodotti commerciali',productsLead:'Approvvigionamento B2B su richiesta per vetro, oli naturali, alimenti e prodotti industriali.',
     marketsTitle:'Dalla Türkiye verso l’Europa e i mercati internazionali.',marketsLead:'Allineiamo la realtà produttiva locale con norme del mercato, aspettative dei buyer e modelli di consegna realizzabili.',
     aboutTitle:'Un partner decisionale indipendente che riduce l’incertezza nel commercio.',aboutLead:'CTSEG opera con evidenze, trasparenza e realizzabilità nei progetti di sourcing strategico e commercio internazionale.',
     contactTitle:'Avvia la tua esigenza commerciale con una valutazione chiara.',insightsTitle:'Approfondimenti pratici per decisori.',insightsLead:'Guide concise e basate su evidenze su sourcing, costo totale, origine, qualità e rischio commerciale.',
@@ -1210,7 +1210,7 @@ export const pageCopy: Record<Locale, any> = {
   },
   ru:{
     servicesTitle:'Экспертная поддержка на каждом этапе процесса сорсинга.',servicesLead:'Мы объединяем стратегию, верификацию, коммерческий анализ и исполнение в единую дисциплину принятия решений.',
-    productsTitle:'Портфель коммерческих продуктов',productsLead:'Тот же каталог оценивается в каждом рынке по происхождению, качеству по партиям и проверяемым коммерческим условиям.',
+    productsTitle:'Портфель коммерческих продуктов',productsLead:'B2B-поставки по запросу: стекло, натуральные масла, продукты питания и промышленные товары.',
     marketsTitle:'Из Турции в Европу и на международные рынки.',marketsLead:'Мы сопоставляем локальные производственные реалии с регуляциями целевого рынка, ожиданиями покупателей и выполнимыми моделями доставки.',
     aboutTitle:'Независимый партнёр для принятия решений, снижающий неопределённость в торговле.',aboutLead:'CTSEG действует на основе доказательств, прозрачности и выполнимости в стратегическом сорсинге и международной торговле.',
     contactTitle:'Начните коммерческий запрос с понятной оценки.',insightsTitle:'Практические материалы для лиц, принимающих решения.',insightsLead:'Краткие руководства на основе доказательств по сорсингу, совокупной стоимости, происхождению, качеству и коммерческим рискам.',
@@ -1223,7 +1223,7 @@ export const pageCopy: Record<Locale, any> = {
   },
   fa:{
     servicesTitle:'تخصص برای تمام مراحل تصمیم‌گیری تأمین.',servicesLead:'ما استراتژی، اعتبارسنجی، تحلیل تجاری و اجرا را در یک انضباط تصمیم‌گیری واحد ترکیب می‌کنیم.',
-    productsTitle:'سبد محصولات تجاری',productsLead:'یک کاتالوگ در تمام بازارها بر اساس مبدأ شفاف، کیفیت پارت‌محور و شرایط تجاری قابل‌بررسی ارزیابی می‌شود.',
+    productsTitle:'سبد محصولات تجاری',productsLead:'تأمین B2B بر اساس درخواست در حوزه شیشه، روغن‌های طبیعی، محصولات غذایی و کالاهای صنعتی.',
     marketsTitle:'از ترکیه به بازارهای اروپا و بین‌المللی.',marketsLead:'واقعیت‌های تولید محلی را با قوانین بازار هدف، انتظارات خریدار و مدل‌های تحویل قابل اجرا پیوند می‌دهیم.',
     aboutTitle:'شریک مستقل تصمیم‌گیری برای کاهش عدم قطعیت در تجارت.',aboutLead:'CTSEG در پروژه‌های تأمین استراتژیک و تجارت بین‌الملل بر پایه شواهد، شفافیت و قابلیت اجرا فعالیت می‌کند.',
     contactTitle:'نیاز تجاری خود را با یک ارزیابی شفاف آغاز کنید.',insightsTitle:'تحلیل‌های کاربردی برای تصمیم‌گیرندگان.',insightsLead:'راهنماهای مختصر و مبتنی بر شواهد در زمینه تأمین، هزینه کل، مبدأ، کیفیت و ریسک تجاری.',
@@ -1238,7 +1238,7 @@ export const pageCopy: Record<Locale, any> = {
     servicesTitle:'覆盖跨国采购决策全生命周期的专业护航。',
     servicesLead:'我们将战略规划、主体核验、总拥有成本商业测算与实际落地交付深度统筹于统一的决策框架中。',
     productsTitle:'真实可核验的大宗与特色商品矩阵',
-    productsLead:'同一套商品目录，在每个目标市场均基于透明产地、批次级质检报告与真实可靠的商业条款予以严格评估。',
+    productsLead:'覆盖玻璃、天然油脂、食品与工业产品的需求导向型 B2B 寻源与贸易协调。',
     marketsTitle:'立足土耳其枢纽，联通欧洲与全球大宗贸易市场。',
     marketsLead:'我们将本土制造优势与目标市场的准入法规、买家采购偏好及可落地的端到端物流交付模型精准匹配。',
     aboutTitle:'消除国际贸易不确定性的独立商业决策伙伴。',
@@ -1257,7 +1257,7 @@ export const pageCopy: Record<Locale, any> = {
     servicesTitle:'Năng lực chuyên môn cho mọi giai đoạn quyết định thu mua.',
     servicesLead:'Chúng tôi kết hợp chiến lược, thẩm định, phân tích thương mại và thực thi trong một kỷ luật quyết định thống nhất.',
     productsTitle:'Danh mục sản phẩm thương mại có thể xác minh',
-    productsLead:'Cùng một danh mục sản phẩm được đánh giá tại mọi thị trường thông qua nguồn gốc minh bạch, chất lượng theo lô và điều khoản thương mại xác thực.',
+    productsLead:'Tìm nguồn cung B2B theo yêu cầu trong các ngành kính, tinh dầu, thực phẩm và công nghiệp.',
     marketsTitle:'Từ Thổ Nhĩ Kỳ đến Châu Âu và thị trường quốc tế.',
     marketsLead:'Chúng tôi kết nối thực tế sản xuất tại địa phương với quy định của thị trường mục tiêu, kỳ vọng của người mua và mô hình giao hàng khả thi.',
     aboutTitle:'Đối tác quyết định độc lập giúp giảm thiểu bất định trong thương mại.',
@@ -1456,7 +1456,7 @@ Object.assign(homeCopy as any,{
     signal:'Centrul de analiză CTSEG',live:'Evaluare activă',signals:[['APROVIZIONARE','Producător și capacitate'],['CALITATE','COA și trasabilitate'],['PIAȚĂ','Conformitate și model de livrare']],
     trust:['Contrapărți verificate','Origine transparentă','Disciplină B2B în decizie','Türkiye · Europa · Internațional'],
     servicesTitle:'Mai mult decât o listă de furnizori.',servicesLead:'Structurăm întregul proces, de la cerință și verificare până la ofertă și execuție.',
-    productsTitle:'Portofoliu comercial verificabil.',productsLead:'Produse selectate evaluate transparent prin origine, lot, parametri de calitate și opțiuni de livrare.',
+    productsTitle:'Portofoliu comercial verificabil.',productsLead:'Sourcing B2B bazat pe cerere pentru sticlă, uleiuri naturale, alimente și produse industriale.',
     marketsTitle:'Conexiuni comerciale concrete între piețe.',marketsLead:'Aprovizionare și coordonare comercială din Türkiye către România, Europa și piețe internaționale.',
     processTitle:'Progres controlat în patru pași',process:['Definirea cerinței','Verificarea pieței și contrapărților','Compararea imaginii comerciale totale','Monitorizarea execuției și performanței'],
     ctaTitle:'Transformați următoarea decizie de sourcing într-una bazată pe dovezi.'
@@ -1467,7 +1467,7 @@ Object.assign(homeCopy as any,{
     signal:'CTSEG Signal Room',live:'Активна оценка',signals:[['СНАБДЯВАНЕ','Производител и капацитет'],['КАЧЕСТВО','COA и проследимост'],['ПАЗАР','Съответствие и модел на доставка']],
     trust:['Проверени контрагенти','Прозрачен произход','B2B дисциплина при решенията','Türkiye · Европа · Международно'],
     servicesTitle:'Повече от списък с доставчици.',servicesLead:'Структурираме целия процес – от изискването и проверката до офертата и изпълнението.',
-    productsTitle:'Проверим търговски продуктов портфейл.',productsLead:'Подбрани продукти, оценявани прозрачно по произход, партида, качество и варианти за доставка.',
+    productsTitle:'Проверим търговски продуктов портфейл.',productsLead:'B2B снабдяване по заявка за стъкло, натурални масла, храни и промишлени продукти.',
     marketsTitle:'Практични търговски връзки между пазари.',marketsLead:'Снабдяване и търговска координация от Türkiye към България, Европа и международни пазари.',
     processTitle:'Контролиран процес в четири стъпки',process:['Дефиниране на нуждата','Проверка на пазара и контрагентите','Сравнение на общата търговска картина','Проследяване на изпълнението и резултатите'],
     ctaTitle:'Вземете следващото решение за снабдяване на база проверими данни.'
@@ -1478,7 +1478,7 @@ Object.assign(homeCopy as any,{
     signal:'CTSEG centar za procenu',live:'Aktivna procena',signals:[['NABAVKA','Proizvođač i kapacitet'],['KVALITET','COA i sledljivost'],['TRŽIŠTE','Usklađenost i model isporuke']],
     trust:['Provereni poslovni partneri','Transparentno poreklo','B2B disciplina odlučivanja','Türkiye · Evropa · Međunarodno'],
     servicesTitle:'Više od liste dobavljača.',servicesLead:'Strukturišemo ceo proces – od zahteva i provere do ponude i realizacije.',
-    productsTitle:'Proverljiv trgovinski portfolio proizvoda.',productsLead:'Odabrani proizvodi procenjeni kroz transparentno poreklo, seriju, parametre kvaliteta i opcije isporuke.',
+    productsTitle:'Proverljiv trgovinski portfolio proizvoda.',productsLead:'B2B nabavka na zahtev za staklo, prirodna ulja, prehrambene i industrijske proizvode.',
     marketsTitle:'Konkretne trgovinske veze između tržišta.',marketsLead:'Nabavka i trgovinska koordinacija iz Türkiye prema Srbiji, Evropi i međunarodnim tržištima.',
     processTitle:'Kontrolisan napredak u četiri koraka',process:['Definisanje zahteva','Provera tržišta i partnera','Poređenje ukupne komercijalne slike','Praćenje realizacije i učinka'],
     ctaTitle:'Neka sledeća sourcing odluka bude zasnovana na dokazima.'
@@ -1614,7 +1614,7 @@ for(const id of legalIds){
 Object.assign(pageCopy as any,{
   ro:{
     servicesTitle:'Competență pentru fiecare etapă a deciziei de sourcing.',servicesLead:'Combinăm strategie, verificare, analiză comercială și execuție într-o singură disciplină de decizie.',
-    productsTitle:'Portofoliu de produse comerciale',productsLead:'Catalogul este evaluat prin origine transparentă, calitate la nivel de lot și condiții comerciale verificabile.',
+    productsTitle:'Portofoliu de produse comerciale',productsLead:'Sourcing B2B bazat pe cerere pentru sticlă, uleiuri naturale, alimente și produse industriale.',
     marketsTitle:'Din Türkiye către România, Europa și piețe internaționale.',marketsLead:'Corelăm realitatea producției cu reglementările pieței țintă, cerințele cumpărătorilor și modele de livrare aplicabile.',
     aboutTitle:'Partener independent pentru reducerea incertitudinii în comerț.',aboutLead:'CTSEG lucrează pe bază de dovezi, transparență și aplicabilitate în proiecte de aprovizionare strategică și comerț internațional.',
     contactTitle:'Porniți cerința comercială printr-o evaluare clară.',insightsTitle:'Analize practice pentru decidenți.',insightsLead:'Ghiduri concise, bazate pe dovezi, despre sourcing, cost total, origine, calitate și risc comercial.',
@@ -1627,7 +1627,7 @@ Object.assign(pageCopy as any,{
   },
   bg:{
     servicesTitle:'Експертиза за всеки етап от решението за снабдяване.',servicesLead:'Обединяваме стратегия, проверка, търговски анализ и изпълнение в единна дисциплина за вземане на решения.',
-    productsTitle:'Търговски продуктов портфейл',productsLead:'Каталогът се оценява чрез прозрачен произход, качество по партиди и проверими търговски условия.',
+    productsTitle:'Търговски продуктов портфейл',productsLead:'B2B снабдяване по заявка за стъкло, натурални масла, храни и промишлени продукти.',
     marketsTitle:'От Türkiye към България, Европа и международните пазари.',marketsLead:'Съчетаваме реалните производствени възможности с регулациите на целевия пазар, изискванията на купувачите и приложими модели за доставка.',
     aboutTitle:'Независим партньор за намаляване на несигурността в търговията.',aboutLead:'CTSEG работи с доказателства, прозрачност и практическа приложимост при стратегическо снабдяване и международна търговия.',
     contactTitle:'Започнете търговската си заявка с ясна оценка.',insightsTitle:'Практични анализи за вземащите решения.',insightsLead:'Кратки, основани на данни материали за снабдяване, общи разходи, произход, качество и търговски риск.',
@@ -1640,7 +1640,7 @@ Object.assign(pageCopy as any,{
   },
   sr:{
     servicesTitle:'Stručnost za svaku fazu odluke o nabavci.',servicesLead:'Povezujemo strategiju, proveru, komercijalnu analizu i realizaciju u jedinstvenu disciplinu odlučivanja.',
-    productsTitle:'Portfolio trgovinskih proizvoda',productsLead:'Katalog se procenjuje kroz transparentno poreklo, kvalitet po seriji i proverljive komercijalne uslove.',
+    productsTitle:'Portfolio trgovinskih proizvoda',productsLead:'B2B nabavka na zahtev za staklo, prirodna ulja, prehrambene i industrijske proizvode.',
     marketsTitle:'Iz Türkiye ka Srbiji, Evropi i međunarodnim tržištima.',marketsLead:'Povezujemo realne proizvodne mogućnosti sa pravilima ciljnog tržišta, očekivanjima kupaca i primenljivim modelima isporuke.',
     aboutTitle:'Nezavisni partner za smanjenje neizvesnosti u trgovini.',aboutLead:'CTSEG radi na osnovu dokaza, transparentnosti i primenljivosti u strateškoj nabavci i međunarodnoj trgovini.',
     contactTitle:'Pokrenite komercijalni zahtev jasnom procenom.',insightsTitle:'Praktični uvidi za donosioce odluka.',insightsLead:'Sažeti vodiči zasnovani na dokazima o nabavci, ukupnom trošku, poreklu, kvalitetu i komercijalnom riziku.',
