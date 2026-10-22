@@ -661,3 +661,223 @@ html body .site-header .mobile-oils-entry:focus-visible {
   outline: 2px solid #c4f000;
   outline-offset: -2px;
 }
+
+/* 2026-10-22 visual QA, round 3: make the Turkish hero exactly TWO
+   intentional desktop lines and never rely on adjacent inline spans. */
+@media (min-width: 901px) {
+  html[data-locale="tr"] body main .homepage-trade-hero .homepage-hero-stage > .hero-copy {
+    box-sizing: border-box !important;
+    width: min(54vw, 870px) !important;
+    min-width: min(54vw, 650px) !important;
+    max-width: 870px !important;
+  }
+  html[data-locale="tr"] body main .homepage-trade-hero .hero-copy h1.home-hero-title--tr {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    max-width: none !important;
+    font-size: clamp(24px, 2.32vw, 43px) !important;
+    line-height: 1.16 !important;
+    white-space: normal !important;
+    text-wrap: initial !important;
+    letter-spacing: -.028em !important;
+  }
+  html[data-locale="tr"] body main .homepage-trade-hero .hero-copy h1.home-hero-title--tr span {
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: max-content !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+    word-break: normal !important;
+  }
+  html[data-locale="tr"] body main .homepage-trade-hero .hero-copy h1.home-hero-title--tr br {
+    display: none !important;
+  }
+}
+@media (max-width: 900px) {
+  html[data-locale="tr"] body main .homepage-trade-hero h1.home-hero-title--tr {
+    display: block !important;
+    max-width: 100% !important;
+  }
+  html[data-locale="tr"] body main .homepage-trade-hero h1.home-hero-title--tr span {
+    display: block !important;
+    white-space: normal !important;
+  }
+  html[data-locale="tr"] body main .homepage-trade-hero h1.home-hero-title--tr br {
+    display: none !important;
+  }
+}
+
+/* P0 — every dark-background action must have readable foreground states. */
+html body main .trade-gateway-banner .trade-funnel-card .button,
+html body main .trade-gateway-banner .trade-funnel-card .button:visited {
+  color: #121812 !important;
+  -webkit-text-fill-color: #121812 !important;
+  background: #c4f000 !important;
+  border-color: #c4f000 !important;
+  opacity: 1 !important;
+}
+html body main .trade-gateway-banner .trade-funnel-card .button.button-secondary,
+html body main .trade-gateway-banner .trade-funnel-card .button.button-secondary:visited {
+  color: #f7faef !important;
+  -webkit-text-fill-color: #f7faef !important;
+  background: transparent !important;
+  border-color: rgba(247,250,239,.5) !important;
+}
+html body main .trade-gateway-banner .trade-funnel-card .button.button-secondary:hover,
+html body main .trade-gateway-banner .trade-funnel-card .button.button-secondary:focus-visible,
+html body main .platform-sectors .b2b-sector-card__rfq:hover,
+html body main .platform-sectors .b2b-sector-card__rfq:focus-visible {
+  color: #11180d !important;
+  -webkit-text-fill-color: #11180d !important;
+  background: #c4f000 !important;
+  border-color: #c4f000 !important;
+}
+html body main .platform-sectors .b2b-sector-card__rfq,
+html body main .platform-sectors .b2b-sector-card__rfq:visited {
+  color: #f5f8f0 !important;
+  -webkit-text-fill-color: #f5f8f0 !important;
+  border-color: rgba(245,248,240,.46) !important;
+  background: #252b24 !important;
+  opacity: 1 !important;
+}
+
+/* Markets showcase — image no longer dictates a giant blank text panel. */
+html body main .poultry-market-card {
+  background: #22271f !important;
+  padding-block: 22px !important;
+  color: #f7f8f3 !important;
+}
+html body main .poultry-market-card__grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .96fr) !important;
+  align-items: center !important;
+  gap: clamp(20px, 3vw, 48px) !important;
+}
+html body main .poultry-market-card__copy {
+  align-self: center !important;
+  width: 100% !important;
+  transform: none !important;
+  opacity: 1 !important;
+  padding-block: clamp(24px, 3vw, 48px) !important;
+}
+html body main .poultry-market-card__copy h2 {
+  max-width: 25ch !important;
+  font-size: clamp(29px, 2.7vw, 43px) !important;
+  line-height: 1.16 !important;
+  margin-bottom: 22px !important;
+  color: #f7f8f3 !important;
+}
+html body main .poultry-market-card__copy .eyebrow {
+  color: #c4f000 !important;
+  opacity: 1 !important;
+}
+html body main .poultry-market-card__copy p:not(.eyebrow) {
+  max-width: 62ch !important;
+  color: #e4e9de !important;
+  -webkit-text-fill-color: #e4e9de !important;
+  opacity: 1 !important;
+  font-size: 16px !important;
+  line-height: 1.56 !important;
+}
+html body main .poultry-market-card__grid > img {
+  width: 100% !important;
+  height: clamp(330px, 30vw, 470px) !important;
+  min-height: 0 !important;
+  max-height: 470px !important;
+  object-fit: cover !important;
+  object-position: center 55% !important;
+}
+@media (max-width: 780px) {
+  html body main .poultry-market-card__grid {grid-template-columns: minmax(0,1fr) !important;}
+  html body main .poultry-market-card__copy {padding-block: 30px 12px !important;}
+  html body main .poultry-market-card__copy h2 {font-size: clamp(25px, 5.8vw, 34px) !important;max-width: 100% !important;}
+  html body main .poultry-market-card__grid > img {height: 300px !important;}
+}
+
+/* Five corridor cards: center and widen the final two instead of leaving a
+   lopsided third column of empty space. Tablet/mobile still use 2/1 columns. */
+@media (min-width: 1100px) {
+  html body main .market-corridor-directory__grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: stretch !important;
+    gap: 22px !important;
+  }
+  html body main .market-corridor-directory__grid .market-corridor-teaser {
+    flex: 0 0 calc((100% - 44px) / 3) !important;
+    max-width: calc((100% - 44px) / 3) !important;
+  }
+  html body main .market-corridor-directory__grid .market-corridor-teaser:nth-child(n+4) {
+    flex: 0 0 min(43%, 540px) !important;
+    max-width: min(43%, 540px) !important;
+  }
+}
+html body main .market-corridor-teaser h2 {
+  font-size: clamp(20px, 1.5vw, 25px) !important;
+}
+
+/* The last three of seven natural oils cards become visibly wider and form
+   a deliberately centered second row beneath the first four. */
+@media (min-width: 1160px) {
+  html body main .oils-products-section .oils-product-grid .oils-product-card:nth-child(n+5) {
+    flex: 0 0 min(calc((100% - 40px) / 3), 475px) !important;
+    max-width: min(calc((100% - 40px) / 3), 475px) !important;
+  }
+  html body main .oils-products-section .oils-section-head {
+    max-width: 100% !important;
+  }
+}
+
+/* Same visual rules in long-language and RTL layouts: do not force Latin
+   single-line behavior onto translated copy. */
+html[dir="rtl"] body main .oils-products-section .oils-product-grid,
+html[dir="rtl"] body main .market-corridor-directory__grid {
+  direction: rtl !important;
+}
+
+/* Natural oils documents: visible centrally-aligned heading without an
+   arbitrary 820px maximum or ragged two-line layout on large monitors. */
+html body main .oils-docs-section .oils-section-head {
+  width: 100% !important;
+  max-width: 1340px !important;
+  margin-inline: auto !important;
+  text-align: center !important;
+}
+html body main .oils-docs-section .oils-section-head h2 {
+  max-width: 100% !important;
+  margin-inline: auto !important;
+  font-size: clamp(26px, 2.4vw, 39px) !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+  letter-spacing: -.02em !important;
+}
+@media (min-width: 1200px) {
+  html[data-locale="tr"] body main .oils-docs-section .oils-section-head h2 {
+    white-space: nowrap !important;
+  }
+}
+
+/* Native <details> remains keyboard accessible, but the expand icon is a
+   clear chevron rather than an unbalanced circled 'v' glyph. */
+html body main .catalogue-disclosure__icon {
+  border-radius: 8px !important;
+  border: 1px solid rgba(196,240,0,.48) !important;
+  color: #c4f000 !important;
+  background: rgba(196,240,0,.06) !important;
+  font-size: 0 !important;
+  line-height: 1 !important;
+}
+html body main .catalogue-disclosure__icon svg {
+  display: block !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+}
+
+/* No animation imposed on users who request reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  html body main .catalogue-disclosure__icon {transition: none !important;}
+}
