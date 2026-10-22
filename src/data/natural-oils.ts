@@ -54,8 +54,8 @@ export const oilCopy: Record<OilLanguage, Content> = {
     scope: 'Ürün ve B2B tedarik grupları',
     process: 'Ticari talebi ve numune sürecini nasıl değerlendiriyoruz?',
     proof: 'Teknik belgeler, kalite kontrol ve mevzuat uyumu',
-    note: 'COA, SDS/MSDS, GC-MS kromatografisi, IFRA uygunluk belgesi, alerjen beyanı ve ihracat belgeleri ürün ve hedef pazara göre değerlendirilir; stok, menşe, sertifika veya fiyat garantisi önceden verilmez.',
-    cta: 'Toptan ürün / RFQ talebi gönder',
+    note: 'Analiz ve uygunluk belgeleri ürün ve hedef pazara göre incelenir. Stok, sertifika ve fiyat bilgileri teklif aşamasında teyit edilir.',
+    cta: 'B2B teklif talebi oluştur',
     categories: [
       'Gül uçucu yağı (Rosa damascena) ve gül türevleri',
       'Lavanta uçucu yağı (Angustifolia & Lavandin)',
