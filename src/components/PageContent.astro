@@ -1396,6 +1396,9 @@ const verifiedLater = {
     </div></section>
     <section class="section catalogue-section" id="catalogue-nuts-dried-fruits"><div class="container">
       <div class="section-head catalogue-main-head"><p class="eyebrow">{portfolioCopy.nutsSectionKicker}</p><h2>{portfolioCopy.nutsSectionTitle}</h2><p>{portfolioCopy.nutsSectionLead}</p></div>
+      <details class="catalogue-disclosure">
+        <summary class="catalogue-disclosure__toggle"><span>{lang === 'tr' ? '18 kuruyemiş ve kuru meyve ürününü incele' : lang === 'en' ? 'Explore 18 nuts and dried-fruit products' : `${t.readMore} · 18`}</span><span aria-hidden="true" class="catalogue-disclosure__icon">⌄</span></summary>
+        <div class="catalogue-disclosure__body">
       {(lang === 'tr' || lang === 'en') && <div class="catalog-download">
         <div><p class="eyebrow">PDF · 18 {lang === 'tr' ? 'ürün' : 'products'}</p><h2>{lang === 'tr' ? 'CTSEG Ticari Ürünler Kataloğu' : 'CTSEG Trade Products Catalogue'}</h2></div>
         <a class="button button-secondary" href={lang === 'tr' ? '/downloads/ctseg-ticari-urunler-katalogu.pdf' : '/downloads/ctseg-trade-products-catalogue.pdf'} download data-catalog-download data-catalog-language={lang}>{lang === 'tr' ? 'Kataloğu indir' : 'Download catalogue'}</a>
@@ -1446,6 +1449,8 @@ const verifiedLater = {
           <a class="button button-secondary" href={`https://wa.me/${company.whatsapp}`} target="_blank" rel="noopener noreferrer">{lang === 'ar' ? 'مكتب WhatsApp السريع ↖' : 'WhatsApp Quick Desk ↗'}</a>
         </div>
       </div>
+        </div>
+      </details>
     </div></section>
   </>
 )}
