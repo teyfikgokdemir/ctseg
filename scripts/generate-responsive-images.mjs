@@ -34,7 +34,6 @@ const jobs = [
   { source:'ctseg-global-trade-hero-new.webp', widths:[640,768,960,1280,1400], quality },
   { source:'ctseg-vegetable-oils-food-editorial.webp', widths:featureWidths, quality },
   { source:'ctseg-mixed-nuts-premium.webp', widths:featureWidths, quality },
-  { source:'ctseg-iranian-carpets-editorial.webp', widths:featureWidths, quality },
   { source:'ctseg-wholesale-textiles-editorial.webp', widths:featureWidths, quality },
   { source:'ctseg-2026/supplier-rfq-comparison.webp', widths:featureWidths, quality },
   { source:'ctseg-2026/supplier-verification.webp', widths:featureWidths, quality },
