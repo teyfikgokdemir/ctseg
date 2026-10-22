@@ -389,6 +389,7 @@ const dynamicPlaceholders = {
   .commercial-form-next{width:100%!important;min-height:42px!important;margin-top:4px!important;border-radius:6px!important;background:#c4f000!important;color:#0a0d0a!important;font-weight:800!important;text-transform:none!important;letter-spacing:0!important;justify-content:space-between!important;padding-inline:14px!important}
   .commercial-contact-step{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)}
   .commercial-contact-step[hidden]{display:none!important}
+  .commercial-form-next[hidden]{display:none!important}
   .commercial-form-actions .button{border-radius:6px!important}
   @media(max-width:620px){.commercial-form-disclosure{max-width:100%}.commercial-intent-cards{grid-template-columns:repeat(3,1fr)!important}.intent-card{min-height:94px!important;padding:10px 6px!important}.intent-card strong{font-size:11.5px!important}}
 
@@ -413,6 +414,22 @@ const dynamicPlaceholders = {
       const message=form.elements.namedItem('message');
       const intentCards=form.querySelectorAll('[data-intent-toggle]');
       const disclosure=form.closest('.commercial-form-disclosure');
+      const revealButton=form.querySelector('[data-reveal-contact-step]');
+      const contactStep=form.querySelector('[data-contact-step]');
+      // The initial qualification step must actually unlock the contact fields.
+      // Do not reveal them when mandatory trade qualifiers are still missing.
+      revealButton?.addEventListener('click',()=>{
+        for(const field of [intent,supportNeed,tradeDirection,productFamily]){
+          if(field instanceof HTMLSelectElement&&!field.reportValidity()){
+            field.focus();
+            return;
+          }
+        }
+        if(!contactStep)return;
+        contactStep.hidden=false;
+        revealButton.hidden=true;
+        contactStep.querySelector('[name="name"]')?.focus({preventScroll:true});
+      });
 
       const updateIntentState=(selectedIntent)=>{
         if(intent instanceof HTMLSelectElement&&intent.value!==selectedIntent){
