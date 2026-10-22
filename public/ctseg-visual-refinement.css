@@ -881,3 +881,69 @@ html body main .catalogue-disclosure__icon svg {
 @media (prefers-reduced-motion: reduce) {
   html body main .catalogue-disclosure__icon {transition: none !important;}
 }
+
+/* 22 Oct release regression: text-only TR hero H1 uses an actual BR rather
+   than two inline spans whose styling could be overridden by legacy rules.
+   Keep BOTH sentences on separate, unbroken desktop lines. */
+@media (min-width: 901px) {
+  html[data-locale="tr"] body main .homepage-trade-hero .homepage-hero-stage .hero-copy {
+    width: min(66vw, 970px) !important;
+    max-width: min(66vw, 970px) !important;
+    min-width: 0 !important;
+  }
+  html[data-locale="tr"] body main .homepage-trade-hero .homepage-hero-stage .hero-copy h1.home-hero-title--tr {
+    display: block !important;
+    width: max-content !important;
+    max-width: 100% !important;
+    font-size: clamp(29px, 2.45vw, 43px) !important;
+    font-weight: 650 !important;
+    line-height: 1.15 !important;
+    letter-spacing: -.03em !important;
+    white-space: nowrap !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    hyphens: none !important;
+  }
+  html[data-locale="tr"] body main .homepage-trade-hero .hero-copy h1.home-hero-title--tr br {
+    display: inline !important;
+  }
+}
+@media (max-width: 900px) {
+  html[data-locale="tr"] body main .homepage-trade-hero .hero-copy h1.home-hero-title--tr {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    text-wrap: balance !important;
+    font-size: clamp(25px, 7vw, 41px) !important;
+  }
+  html[data-locale="tr"] body main .homepage-trade-hero .hero-copy h1.home-hero-title--tr br {
+    display: inline !important;
+  }
+}
+
+/* About-page conversion area: full-width, single-line at desktop; readable
+   wrapping on smaller devices and for translations with long text. */
+html body main .about-final-cta .cta-statement {
+  min-height: 0 !important;
+  padding-block: clamp(32px, 4vw, 58px) !important;
+}
+html body main .about-final-cta .cta-statement h2 {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin-inline: auto !important;
+  text-align: center !important;
+  font-size: clamp(25px, 2.2vw, 36px) !important;
+  line-height: 1.2 !important;
+  text-wrap: balance !important;
+  overflow-wrap: normal !important;
+}
+@media (min-width: 1240px) {
+  html[data-locale="tr"] body main .about-final-cta .cta-statement h2 {
+    white-space: nowrap !important;
+  }
+}
+html body main .about-final-cta .cta-statement::after {
+  content: none !important;
+  display: none !important;
+}
