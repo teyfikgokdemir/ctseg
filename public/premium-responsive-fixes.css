@@ -526,3 +526,278 @@ html[dir="rtl"] .corridor-list strong{text-align:right}
     font-size:clamp(1.12rem,4.5vw,1.3rem)!important;
   }
 }
+
+/* CTSEG visual QA 2026-10-22: headings need room, not fragmented words.
+   Keep the strict single-line treatment to short Turkish desktop headings. */
+@media (min-width:1180px) {
+  html[data-locale="tr"] body main .homepage-trade-hero .hero-copy{
+    width:min(57vw,920px)!important;
+    max-width:920px!important;
+  }
+  html[data-locale="tr"] body main .homepage-trade-hero h1.home-hero-title--tr{
+    width:100%!important;
+    max-width:100%!important;
+    font-size:clamp(2rem,2.25vw,2.75rem)!important;
+    line-height:1.13!important;
+    text-wrap:initial!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+  }
+  html[data-locale="tr"] body main .homepage-trade-hero h1.home-hero-title--tr>span{
+    display:block!important;
+    white-space:nowrap!important;
+  }
+  html[data-locale="tr"] body main .b2b-home-sectors .section-head h2,
+  html[data-locale="tr"] body main .platform-sectors .section-head h2{
+    width:100%!important;
+    max-width:none!important;
+    font-size:clamp(1.8rem,2.05vw,2.25rem)!important;
+    line-height:1.2!important;
+    white-space:nowrap!important;
+    text-wrap:initial!important;
+    overflow-wrap:normal!important;
+  }
+  html[data-locale="tr"] body main .page-hero:has(+ .section .market-role-grid) h1{
+    width:100%!important;
+    max-width:none!important;
+    white-space:nowrap!important;
+    font-size:clamp(1.8rem,2.1vw,2.25rem)!important;
+  }
+}
+@media (min-width:901px) and (max-width:1179px){
+  html[data-locale="tr"] body main .homepage-trade-hero .hero-copy{
+    width:min(64vw,760px)!important;
+    max-width:760px!important;
+  }
+  html[data-locale="tr"] body main .homepage-trade-hero h1.home-hero-title--tr{
+    width:100%!important;
+    max-width:100%!important;
+    font-size:clamp(1.65rem,2.45vw,2.1rem)!important;
+    line-height:1.12!important;
+    overflow-wrap:normal!important;
+  }
+  html[data-locale="tr"] body main .homepage-trade-hero h1.home-hero-title--tr>span{
+    white-space:nowrap!important;
+  }
+}
+@media (max-width:900px){
+  html[data-locale="tr"] body main .homepage-trade-hero h1.home-hero-title--tr{
+    max-width:100%!important;
+    font-size:clamp(1.55rem,5.5vw,2.45rem)!important;
+    line-height:1.13!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+  }
+  html[data-locale="tr"] body main .homepage-trade-hero h1.home-hero-title--tr>span{
+    display:block!important;
+    white-space:normal!important;
+  }
+}
+
+/* A centered, compact process band on both home and Services/Markets pages. */
+html body main .process-section{padding-block:clamp(44px,4.5vw,68px)!important}
+html body main .process-section .process-shell{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:clamp(22px,2.7vw,38px)!important;
+  align-items:start!important;
+}
+html body main .process-section .process-heading{
+  position:static!important;
+  grid-column:1/-1!important;
+  width:100%!important;
+  max-width:1200px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  text-align:center!important;
+}
+html body main .process-section .process-kicker{
+  display:flex!important;
+  justify-content:center!important;
+  margin-bottom:12px!important;
+}
+html body main .process-section .process-heading .section-title{
+  width:100%!important;
+  max-width:none!important;
+  margin-inline:auto!important;
+  text-align:center!important;
+  font-size:clamp(1.6rem,2.35vw,2.3rem)!important;
+  line-height:1.18!important;
+}
+html body main .process-section .process-caption{
+  max-width:100%!important;
+  width:100%!important;
+  margin:12px auto 0!important;
+  padding:0!important;
+  border-top:none!important;
+  text-align:center!important;
+  font-size:clamp(.9rem,1.1vw,1rem)!important;
+  line-height:1.45!important;
+}
+html body main .process-section .process-status{
+  justify-content:center!important;
+  margin-top:18px!important;
+}
+html body main .process-section .process-rail{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+}
+@media(min-width:1180px){
+  html[data-locale="tr"] body main .process-section .process-heading .section-title{
+    white-space:nowrap!important;
+  }
+  html[data-locale="tr"] body main .process-section .process-caption{
+    white-space:nowrap!important;
+  }
+  html body main .process-section .process-rail--four{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  }
+  html body main .process-section .process-rail--four li{
+    min-height:120px!important;
+    padding:20px 16px!important;
+  }
+  html body main .process-section .process-rail--four strong{
+    max-width:100%!important;
+    font-size:clamp(1rem,1.3vw,1.15rem)!important;
+    line-height:1.3!important;
+  }
+}
+@media(max-width:1179px){
+  html body main .process-section .process-rail--four{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:620px){
+  html body main .process-section .process-rail,
+  html body main .process-section .process-rail--four{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  html body main .process-section .process-caption{
+    white-space:normal!important;
+  }
+}
+
+/* Main trading portfolio is sector-first. The 18-product food catalogue stays
+   accessible and indexable, but no longer dominates the landing page. */
+html body main .catalogue-section{
+  padding-block:clamp(38px,4.3vw,64px)!important;
+}
+html body main .catalogue-section .catalogue-main-head{
+  margin-bottom:16px!important;
+}
+html body main .catalogue-detail-group{
+  border:1px solid rgba(244,241,234,.22);
+  border-radius:14px;
+  overflow:hidden;
+  background:#171a16;
+}
+html body main .catalogue-detail-trigger{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  min-height:66px;
+  padding:18px clamp(18px,2.5vw,30px);
+  color:#f4f1ea;
+  font-size:clamp(1rem,1.1vw,1.15rem);
+  font-weight:650;
+  cursor:pointer;
+  list-style:none;
+}
+html body main .catalogue-detail-trigger::-webkit-details-marker{display:none}
+html body main .catalogue-detail-trigger::marker{content:""}
+html body main .catalogue-detail-trigger:focus-visible{
+  outline:3px solid #c4f000;
+  outline-offset:-4px;
+}
+html body main .catalogue-detail-trigger:hover{
+  background:rgba(196,240,0,.07);
+  color:#c4f000;
+}
+html body main .catalogue-detail-trigger__arrow{
+  font-size:1.75rem;
+  line-height:1;
+  color:#c4f000;
+  transition:transform .2s ease;
+}
+html body main .catalogue-detail-group[open] .catalogue-detail-trigger__arrow{
+  transform:rotate(180deg);
+}
+html body main .catalogue-detail-group .catalog-download,
+html body main .catalogue-detail-group .origin-note,
+html body main .catalogue-detail-group .catalogue-category-nav,
+html body main .catalogue-detail-group .catalogue-directory{
+  margin-inline:clamp(14px,2vw,28px)!important;
+}
+html body main .catalogue-section .catalogue-sourcing-desk{
+  margin-top:clamp(20px,3vw,38px)!important;
+}
+
+/* Country corridor landing pages: replace oversized isolated cards with
+   a coherent scannable two-column cluster. Preserve every destination. */
+html body main .market-corridor-collection{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(16px,2vw,26px);
+  width:min(100% - 48px,1320px);
+  margin:clamp(26px,4vw,54px) auto;
+  align-items:stretch;
+}
+html body main .market-corridor-collection>section.market-corridor-card{
+  width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  background:transparent!important;
+}
+html body main .market-corridor-card .container.cta-statement{
+  display:flex!important;
+  width:100%!important;
+  max-width:100%!important;
+  height:100%!important;
+  min-height:240px!important;
+  margin:0!important;
+  padding:clamp(22px,2.4vw,34px)!important;
+  border:1px solid rgba(255,255,255,.16)!important;
+  border-radius:18px!important;
+  text-align:center!important;
+}
+html body main .market-corridor-card .cta-statement::after{
+  content:none!important;
+}
+html body main .market-corridor-card .cta-statement h2{
+  width:100%!important;
+  max-width:100%!important;
+  margin:12px auto!important;
+  font-size:clamp(1.25rem,1.7vw,1.6rem)!important;
+  line-height:1.2!important;
+}
+html body main .market-corridor-card .cta-statement p:not(.eyebrow){
+  max-width:60ch!important;
+  margin:0 auto!important;
+  font-size:clamp(.9rem,1.05vw,1rem)!important;
+  line-height:1.5!important;
+}
+html body main .market-corridor-card .cta-statement .button{
+  min-height:42px!important;
+  margin-top:22px!important;
+}
+@media(max-width:900px){
+  html body main .market-corridor-collection{
+    grid-template-columns:minmax(0,1fr);
+    width:min(100% - 32px,720px);
+  }
+  html body main .market-corridor-card .container.cta-statement{
+    min-height:0!important;
+    padding:26px 20px!important;
+  }
+  html body main .b2b-home-sectors .section-head h2,
+  html body main .platform-sectors .section-head h2{
+    white-space:normal!important;
+    max-width:100%!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html body main .catalogue-detail-trigger__arrow{transition:none}
+}
