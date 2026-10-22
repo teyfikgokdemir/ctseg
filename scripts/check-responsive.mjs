@@ -524,7 +524,30 @@ try {
             return Math.max(max,lineHeight?Math.round(box.height/lineHeight):0);
           },0),
           productCount:catalogueCards.length,
-          catalogueTextReadable
+          catalogueTextReadable,
+          visualRhythm:(()=>{
+            const trDesktop=document.documentElement.dataset.locale==='tr'&&window.innerWidth>=1180;
+            const lines=(el)=>{if(!el)return 0;const h=Number.parseFloat(getComputedStyle(el).lineHeight);return h>0?el.getBoundingClientRect().height/h:0};
+            const heroTitle=document.querySelector('.home-hero-title--tr');
+            const heroSpans=heroTitle?[...heroTitle.querySelectorAll(':scope > span')]:[];
+            const sectorTitle=document.querySelector('.platform-sectors .section-head h2,.b2b-home-sectors .section-head h2');
+            const process=document.querySelector('.process-section .process-heading');
+            const processTitle=process?.querySelector('.section-title');
+            const processCaption=process?.querySelector('.process-caption');
+            const processContainer=process?.closest('.process-shell');
+            const corridorCards=document.querySelector('.market-corridor-collection');
+            const catalogue=document.querySelector('.catalogue-detail-group');
+            const center=(rect)=>rect.left+rect.width/2;
+            return {
+              heroTwoLines:!trDesktop||!heroTitle||(heroSpans.length===2&&heroSpans.every((el)=>lines(el)<=1.15&&el.scrollWidth<=el.clientWidth+1)),
+              sectorHeadingOneLine:!trDesktop||!sectorTitle||lines(sectorTitle)<=1.15&&sectorTitle.scrollWidth<=sectorTitle.clientWidth+1,
+              processCentered:!process||!processContainer||Math.abs(center(process.getBoundingClientRect())-center(processContainer.getBoundingClientRect()))<=3,
+              processTitleOneLine:!trDesktop||!processTitle||lines(processTitle)<=1.15&&processTitle.scrollWidth<=processTitle.clientWidth+1,
+              processCaptionOneLine:!trDesktop||!processCaption||lines(processCaption)<=1.15&&processCaption.scrollWidth<=processCaption.clientWidth+1,
+              corridorColumns:!corridorCards||(window.innerWidth>900?getComputedStyle(corridorCards).gridTemplateColumns.split(' ').length===2:getComputedStyle(corridorCards).gridTemplateColumns.split(' ').length===1),
+              catalogueCollapsed:!catalogue||!catalogue.open
+            };
+          })()
         };
       })()
     }));
@@ -550,6 +573,8 @@ try {
       (testCase.width <= 620 && result.layout.headingLines > 6) ||
       (testCase.width >= 1100 && result.layout.maxCardHeight > 700) ||
       (result.layout.productCount > 0 && result.layout.productCount !== 18);
+    const badVisualRhythm=Object.entries(result.layout.visualRhythm||{}).filter(([,passed])=>!passed).map(([key])=>key);
+    if(badVisualRhythm.length)failures.push(`${testCase.name}: visual rhythm regression (${badVisualRhythm.join(', ')})`);
     const badContactEmail = result.contactEmail && (result.contactEmail.occurrences !== 1 || result.contactEmail.links !== 1 ||
       result.contactEmail.href !== 'mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry' ||
       result.contactEmail.buttons !== 0 || !result.contactEmail.focusVisible);
