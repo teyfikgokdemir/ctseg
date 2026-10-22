@@ -1180,7 +1180,7 @@ const verifiedLater = {
         <div class="homepage-hero-stage">
           <div class="hero-copy">
             <p class="eyebrow">{platform.eyebrow}</p>
-            {lang === 'tr' ? <h1 class="ctseg-home-claim"><span class="ctseg-home-claim__line">Türkiye’den dünyaya.</span>{' '}<span class="ctseg-home-claim__line">Dünyadan doğru üreticiye.</span></h1> : <h1>{platform.title}</h1>}
+            {lang === 'tr' ? <h1 class="ctseg-home-claim" style="display:block!important;width:max-content!important;max-width:none!important;margin:0 0 22px!important;padding:0!important;font-family:'DM Sans',sans-serif!important;font-weight:650!important;font-size:clamp(22px,2.3vw,42px)!important;line-height:1.14!important;letter-spacing:-.026em!important;text-wrap:nowrap!important;overflow-wrap:normal!important;word-break:normal!important;hyphens:none!important"><span class="ctseg-home-claim__line" style="display:block!important;white-space:nowrap!important;max-width:none!important;width:max-content!important;overflow-wrap:normal!important;word-break:normal!important">Türkiye’den dünyaya.</span><span class="ctseg-home-claim__line" style="display:block!important;white-space:nowrap!important;max-width:none!important;width:max-content!important;overflow-wrap:normal!important;word-break:normal!important">Dünyadan doğru üreticiye.</span></h1> : <h1>{platform.title}</h1>}
             <p class="lead">{platform.lead}</p>
             <div class="hero-proof-pills" aria-label="CTSEG trade capabilities">
               {h.trust.map((item:string) => <span>{item}</span>)}
