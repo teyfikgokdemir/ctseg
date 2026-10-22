@@ -265,7 +265,7 @@ const globalSwitchPath = (target: string): string => {
             <span class="mobile-accordion-chevron" aria-hidden="true">⌄</span>
           </summary>
           <div class="mobile-accordion-links">
-            {nav.filter(([key]) => key !== 'services' && key !== 'insights').map(([key, label, href]) => (
+            {nav.filter(([key]) => key !== 'services' && key !== 'insights' && key !== 'contact').map(([key, label, href]) => (
               <a href={href} class:list={{ active: pageKey === key }}>
                 <strong>{label}</strong><span aria-hidden="true">{['he','fa','ar'].includes(lang) ? '↖' : '↗'}</span>
               </a>
@@ -292,7 +292,7 @@ const globalSwitchPath = (target: string): string => {
           {naturalOilsMainLabel[lang] || naturalOilsMainLabel.en}
         </a>
 
-        {nav.filter(([key]) => key !== 'services' && key !== 'insights').map(([key, label, href]) => (
+        {nav.filter(([key]) => key !== 'services' && key !== 'insights' && key !== 'contact').map(([key, label, href]) => (
           <a class:list={['desktop-nav-link', { active: pageKey === key }]} href={href}>{label}</a>
         ))}
 
