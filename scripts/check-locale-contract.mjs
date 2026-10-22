@@ -37,7 +37,13 @@ if(!/[\u0600-\u06FF]/.test(arHome))errors.push('Arabic homepage has no Arabic co
 for(const englishMarker of ['Trade needs disciplined coordination','We turn international trade','Quick contact','Global Sourcing Capacity','Glass sourcing from Türkiye for global B2B markets','Glass product & processing groups','Commercial market coverage','CTSEG GLASS SOURCING NETWORK'])if(arHome.includes(englishMarker))errors.push('Arabic homepage contains English fallback marker: '+englishMarker);
 for(const requiredArabicHomeBlock of ['id="for-buyers"','id="for-producers"','id="external-trade-desk"','مكتب التجارة الخارجية'])if(!arHome.includes(requiredArabicHomeBlock))errors.push('Arabic homepage missing required trade path block: '+requiredArabicHomeBlock);
 for(const ArabicNavLabel of ['التوريد الاستراتيجي','البحث عن الموردين والتحقق منهم','استشارات التجارة الدولية','تحليل وتحسين التكلفة الكلية TCO','دخول الأسواق','طريقة العمل','سيناريوهات عمل تمثيلية'])if(!arHome.includes(ArabicNavLabel))errors.push('Arabic navigation missing required item: '+ArabicNavLabel);
-for(const ArabicGlassHref of ['/ar/glass/','/ar/glass/float-glass/','/ar/glass/tempered-glass/','/ar/glass/laminated-glass/','/ar/glass/low-e-coated-glass/','/ar/glass/insulated-glass-igu/','/ar/glass/architectural-project-glass/'])if(!arHome.includes(`href="${ArabicGlassHref}"`))errors.push('Arabic glass navigation missing item: '+ArabicGlassHref);
+// The Glass hub now lives under Global Trade. Validate the menu points to the hub,
+ // and ensure all deep product links remain available on that hub instead of requiring
+ // them to clutter the primary navigation on every route.
+if(!arHome.includes('href="/ar/glass/"'))errors.push('Arabic Global Trade menu missing Glass hub');
+const arGlassHubForNav=read('ar/glass/index.html');
+for(const ArabicGlassHref of ['/ar/glass/float-glass/','/ar/glass/tempered-glass/','/ar/glass/laminated-glass/','/ar/glass/low-e-coated-glass/','/ar/glass/insulated-glass-igu/','/ar/glass/architectural-project-glass/'])
+  if(!arGlassHubForNav.includes(`href="${ArabicGlassHref}"`))errors.push('Arabic Glass hub missing deep product link: '+ArabicGlassHref);
 for(const ArabicHubHref of ['/ar/services/','/ar/trade-products/','/ar/markets/','/ar/insights/','/ar/about/','/ar/contact/'])if(!arHome.includes(`href="${ArabicHubHref}"`))errors.push('Arabic navigation missing hub link: '+ArabicHubHref);
 
 
