@@ -5,9 +5,7 @@ import { duzceGlassPath, duzceGlassLocales, type DuzceGlassLocale } from '../dat
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 import { tradePlatformCopy } from '../data/trade-platform';
 import { searchLandingPath, type SearchLandingId } from '../data/search-landings';
-import { getGlassSeoPage } from '../data/glass-seo';
-import { localizedGlassProductCopy, localizedGlassSlugs, type LocalizedGlassLocale } from '../data/glass-product-locales';
-import { arGlassProductCopy } from '../data/glass-product-ar';
+import { localizedGlassSlugs } from '../data/glass-product-locales';
 import { poultryFeedPath, type PoultryFeedId, type PoultryFeedLocale } from '../data/poultry-feed';
 
 const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?: string; pageId?: string };
@@ -44,29 +42,9 @@ const navigationCopy = {
   ar:{globalTrade:'التجارة العالمية',industries:'القطاعات',portfolio:'المحفظة التجارية',intelligence:'الرؤى التجارية',company:'الشركة',main:'القائمة الرئيسية',quick:'تنقل سريع',trade:'التجارة',intro:'تجارة ثنائية الاتجاه، توريد استراتيجي ودخول الأسواق'}
 }[lang] || {globalTrade:'Global Trade',industries:'Industries',portfolio:'Trade Portfolio',intelligence:'Trade Intelligence',company:'Company',main:'MAIN MENU',quick:'NAVIGATION',trade:'TRADE',intro:'Two-way trade, strategic sourcing and market-entry paths'};
 
-const safeGlassLang = (['en','tr','de','it','ru','fa','zh','vi','uk','ro','bg','sr'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
 const glassUrl = lang === 'tr' ? '/glass/' : lang === 'he' ? '/en/glass/' : `/${lang}/glass/`;
 const glassLabel = glassNavLabels[lang] || 'Düzce Float Glass';
-const glassMenuCoreSlugs=['float-glass','tempered-glass','laminated-glass','low-e-coated-glass','insulated-glass-igu','architectural-project-glass'] as const;
-const glassMenuLinks = (lang === 'tr' || lang === 'en') ? [
-  [glassLabel, glassUrl],
-  ...['float-glass','tempered-glass','laminated-glass','low-e-coated-glass','insulated-glass-igu','architectural-project-glass']
-    .map((slug) => {
-      const page = getGlassSeoPage(slug);
-      if (!page) return null;
-      return [page[lang].title.replace(' Tedariki','').replace(' Sourcing',''), `${lang === 'tr' ? '/glass' : '/en/glass'}/${slug}/`];
-    })
-    .filter(Boolean)
-] as [string,string][] : lang === 'ar' ? [
-  [glassLabel, glassUrl],
-  ...glassMenuCoreSlugs.map((slug)=>[arGlassProductCopy.products[slug].name, `/ar/glass/${slug}/`] as [string,string])
-] : (lang !== 'sr' && localizedGlassProductCopy[lang as LocalizedGlassLocale]) ? [
-  [glassLabel, glassUrl],
-  ...glassMenuCoreSlugs.map((slug)=>[localizedGlassProductCopy[lang as LocalizedGlassLocale].products[slug].name, `/${lang}/glass/${slug}/`] as [string,string])
-] : [[glassLabel, glassUrl]] as [string,string][];
-
 const focusedCountryLp = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
-const naturalOilsNavLabel: Record<string, string> = {tr:'Doğal Yağlar & Kozmetik Ham Maddeleri',en:'Natural Oils & Cosmetic Raw Materials',de:'Natürliche Öle & Kosmetikrohstoffe',it:'Oli Naturali & Materie Prime Cosmetiche',fa:'روغن‌های طبیعی و مواد اولیه آرایشی',ru:'Натуральные масла и косметическое сырье',zh:'天然油脂与化妆品原料',vi:'Tinh dầu & Nguyên liệu Mỹ phẩm',uk:'Натуральні олії та косметична сировина',ro:'Uleiuri Naturale & Materii Prime Cosmetice',bg:'Натурални масла и козметични суровини',he:'שמנים טבעיים וחומרי גלם לקוסמטיקה',ar:'الزيوت الطبيعية ومواد التجميل الخام'};
 const naturalOilsMainLabel: Record<string,string> = {
   tr:'Doğal Yağlar',en:'Natural Oils',de:'Naturöle',it:'Oli Naturali',
   fa:'روغن‌های طبیعی',ru:'Натуральные масла',zh:'天然油脂',vi:'Tinh dầu',
