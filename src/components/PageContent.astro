@@ -56,6 +56,19 @@ const chinaMarketEntry = chinaMarketEntryContent.zh;
 const chinaTurkiye = chinaTurkiyeContent.tr;
 const ukraineTurkiye = ukraineTurkiyeContent;
 const syriaMarket = (lang === 'tr' || lang === 'en') ? syriaMarketContent[lang] : null;
+
+/* Group market-corridor entry points into a compact, responsive directory rather
+   than five consecutive full-width CTAs. Each destination keeps its existing URL. */
+const marketCorridorTeasers = ([
+  lang === 'zh' && chinaMarketEntry ? { eyebrow:chinaMarketEntry.eyebrow, title:chinaMarketEntry.title, description:chinaMarketEntry.description, href:'/zh/' } : null,
+  lang === 'tr' && ukraineTurkiye ? { eyebrow:ukraineTurkiye.eyebrow, title:ukraineTurkiye.title, description:ukraineTurkiye.description, href:`/tr/${ukraineTurkiye.slug}/` } : null,
+  lang === 'tr' && chinaTurkiye ? { eyebrow:chinaTurkiye.eyebrow, title:chinaTurkiye.title, description:chinaTurkiye.description, href:`/tr/${chinaTurkiye.slug}/` } : null,
+  lang === 'tr' && vietnamTurkiye ? { eyebrow:vietnamTurkiye.eyebrow, title:vietnamTurkiye.title, description:vietnamTurkiye.description, href:`/tr/${vietnamTurkiye.slug}/` } : null,
+  lang === 'vi' && vietnamMarketEntry ? { eyebrow:vietnamMarketEntry.eyebrow, title:vietnamMarketEntry.title, description:vietnamMarketEntry.description, href:'/vi/' } : null,
+  (lang === 'tr' || lang === 'en') && syriaMarket ? { eyebrow:syriaMarket.eyebrow, title:syriaMarket.title, description:syriaMarket.description, href:localizedPath(lang,'syria-market') } : null,
+  (lang === 'tr' || lang === 'en' || lang === 'fa') ? { eyebrow:iranTrade.eyebrow, title:iranTrade.title, description:iranTrade.description, href:iranTradeHref } : null
+] as Array<{eyebrow:string;title:string;description:string;href:string}|null>).filter((item):item is {eyebrow:string;title:string;description:string;href:string} => item !== null);
+
 const poultryFeed = (lang === 'tr' || lang === 'en' || lang === 'ar') ? poultryFeedContent[lang as PoultryFeedLocale]['turkiye-poultry-feed-sourcing'] : null;
 const regionalIntentHome = (['de','it','ru'].includes(lang) ? regionalIntentHomes[lang as 'de'|'it'|'ru'] : null);
 const tradeDesk = tradeDeskCopy[lang as keyof typeof tradeDeskCopy];
@@ -1160,7 +1173,7 @@ const verifiedLater = {
         <div class="homepage-hero-stage">
           <div class="hero-copy">
             <p class="eyebrow">{platform.eyebrow}</p>
-            {lang === 'tr' ? <h1 class="home-hero-title home-hero-title--tr" style="font-size:40px!important;line-height:1.06!important;max-width:700px!important;letter-spacing:-.03em!important;"><span>Türkiye’den dünyaya.</span>{' '}<span>Dünyadan doğru üreticiye.</span></h1> : <h1>{platform.title}</h1>}
+            {lang === 'tr' ? <h1 class="home-hero-title home-hero-title--tr"><span>Türkiye’den dünyaya.</span><span>Dünyadan doğru üreticiye.</span></h1> : <h1>{platform.title}</h1>}
             <p class="lead">{platform.lead}</p>
             <div class="hero-proof-pills" aria-label="CTSEG trade capabilities">
               {h.trust.map((item:string) => <span>{item}</span>)}
@@ -1835,75 +1848,21 @@ const verifiedLater = {
         <img src="/images/poultry-feed-sourcing-warehouse.png" width="1920" height="1080" loading="lazy" decoding="async" alt={lang === 'ar' ? 'توريد أعلاف الدواجن من تركيا' : lang === 'tr' ? 'Türkiye’den kanatlı yemi tedariki' : 'Poultry-feed sourcing from Türkiye'} />
       </div></section>
     )}
-    {lang === 'zh' && chinaMarketEntry && (
-      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
-        <div>
-          <p class="eyebrow">{chinaMarketEntry.eyebrow}</p>
-          <h2>{chinaMarketEntry.title}</h2>
-          <p>{chinaMarketEntry.description}</p>
+    {marketCorridorTeasers.length > 0 && (
+      <section class="section market-corridor-directory" aria-label={lang === 'tr' ? 'Uluslararası ticaret koridorları' : 'Trade corridors'}>
+        <div class="container">
+          <div class="market-corridor-directory__grid">
+            {marketCorridorTeasers.map((corridor) => (
+              <article class="market-corridor-teaser">
+                <p class="eyebrow">{corridor.eyebrow}</p>
+                <h2><a href={corridor.href}>{corridor.title}</a></h2>
+                <p class="market-corridor-teaser__lead">{corridor.description}</p>
+                <a class="text-link" href={corridor.href}>{t.readMore} <span aria-hidden="true">↗</span></a>
+              </article>
+            ))}
+          </div>
         </div>
-        <a class="button button-secondary" href="/zh/">{t.readMore} →</a>
-      </div></section>
-    )}
-    {lang === 'tr' && ukraineTurkiye && (
-      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
-        <div>
-          <p class="eyebrow">{ukraineTurkiye.eyebrow}</p>
-          <h2>{ukraineTurkiye.title}</h2>
-          <p>{ukraineTurkiye.description}</p>
-        </div>
-        <a class="button button-secondary" href={`/tr/${ukraineTurkiye.slug}/`}>{t.readMore} →</a>
-      </div></section>
-    )}
-    {lang === 'tr' && chinaTurkiye && (
-      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
-        <div>
-          <p class="eyebrow">{chinaTurkiye.eyebrow}</p>
-          <h2>{chinaTurkiye.title}</h2>
-          <p>{chinaTurkiye.description}</p>
-        </div>
-        <a class="button button-secondary" href={`/tr/${chinaTurkiye.slug}/`}>{t.readMore} →</a>
-      </div></section>
-    )}
-    {lang === 'tr' && vietnamTurkiye && (
-      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
-        <div>
-          <p class="eyebrow">{vietnamTurkiye.eyebrow}</p>
-          <h2>{vietnamTurkiye.title}</h2>
-          <p>{vietnamTurkiye.description}</p>
-        </div>
-        <a class="button button-secondary" href={`/tr/${vietnamTurkiye.slug}/`}>{t.readMore} →</a>
-      </div></section>
-    )}
-    {lang === 'vi' && vietnamMarketEntry && (
-      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
-        <div>
-          <p class="eyebrow">{vietnamMarketEntry.eyebrow}</p>
-          <h2>{vietnamMarketEntry.title}</h2>
-          <p>{vietnamMarketEntry.description}</p>
-        </div>
-        <a class="button button-secondary" href="/vi/">{t.readMore} →</a>
-      </div></section>
-    )}
-    {(lang === 'tr' || lang === 'en') && syriaMarket && (
-      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
-        <div>
-          <p class="eyebrow">{syriaMarket.eyebrow}</p>
-          <h2>{syriaMarket.title}</h2>
-          <p>{syriaMarket.description}</p>
-        </div>
-        <a class="button button-secondary" href={localizedPath(lang,'syria-market')}>{t.readMore} →</a>
-      </div></section>
-    )}
-    {(lang === 'tr' || lang === 'en' || lang === 'fa') && (
-      <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
-        <div>
-          <p class="eyebrow">{iranTrade.eyebrow}</p>
-          <h2>{iranTrade.title}</h2>
-          <p>{iranTrade.description}</p>
-        </div>
-        <a class="button button-secondary" href={iranTradeHref}>{t.readMore} →</a>
-      </div></section>
+      </section>
     )}
     {lang === 'en' && (
       <aside class="iran-sourcing-link container" aria-labelledby="iran-sourcing-title">
