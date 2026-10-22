@@ -135,6 +135,34 @@ try {
     ,{ name:'desktop1440-vi-home', path:'/vi/', width:1440, height:1000 }
     ,{ name:'mobile390-vi-home', path:'/vi/', width:390, height:844 }
   ];
+  // 2026-10-22: cover all 13 active Natural Oils locales at mobile width,
+  // including RTL (fa/he/ar), plus representative desktop and market home
+  // contexts. These are real viewport checks, not relaxed assertions.
+  const oilLocales = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','he','ar'];
+  for (const locale of oilLocales) {
+    cases.push({
+      name:`mobile390-${locale}-natural-oils`,
+      path:`/${locale}/natural-oils/`,
+      width:390,
+      height:844
+    });
+  }
+  for (const locale of ['tr','en','de','fa','he','ar']) {
+    cases.push({
+      name:`desktop1440-${locale}-natural-oils`,
+      path:`/${locale}/natural-oils/`,
+      width:1440,
+      height:1000
+    });
+  }
+  for (const locale of ['uk','ro','bg','he','ar']) {
+    cases.push({
+      name:`mobile390-${locale}-home`,
+      path:`/${locale}/`,
+      width:390,
+      height:844
+    });
+  }
   const sourcingLocales = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','ar'];
   const productionLocaleCount = sourcingLocales.length;
   const rootLocaleCount = productionLocaleCount + 1;
