@@ -1298,13 +1298,13 @@ const verifiedLater = {
       })}</div>
     </div></section>
     <div class="about-framework-section"><Framework lang={lang} /></div>
-    {<section class="section compact-link-section"><div class="container cta-statement"><h2>{processPage?.title}</h2><a class="button" href={workHref} data-how-we-work-cta>{processPage.title}</a></div></section>}
+    {<section class="section compact-link-section"><div class="container cta-statement"><h2>{lang === 'tr' ? 'Ticarette güven, doğru süreçle başlar.' : processPage?.title}</h2><a class="button" href={workHref} data-how-we-work-cta>{lang === 'tr' ? 'Çalışma yöntemimizi keşfedin' : t.readMore} →</a></div></section>}
   </>
 )}
 
 {service && (
   <>
-    <PageHero lang={lang} eyebrow={t.services} title={service.names[lang]} lead={service.descriptions[lang]} parentHref={sectionHref('services')} parentLabel={t.services} compact={true} />
+    <PageHero lang={lang} eyebrow={t.services} title={service.names[lang]} lead={service.descriptions[lang]} parentHref={sectionHref('services')} parentLabel={t.services} compact={true} minimalDetail={true} />
     {serviceVisual && (
       <section class="service-visual-band" data-service-visual-band>
         <div class="container">
