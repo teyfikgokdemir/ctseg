@@ -137,7 +137,7 @@ const copy = contactCopy[lang];
     portalMobileMenu();
     mobile.addEventListener?.('change',portalMobileMenu);
 
-    if(!document.querySelector('[data-fa-trade-video]')){
+    if(!document.querySelector('[data-fa-trade-video]') && !document.querySelector('[data-trade-video-section]')){
       const process=document.querySelector('#process');
       if(process){
         const section=document.createElement('section');
