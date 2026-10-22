@@ -47,7 +47,7 @@ export type Content = {
 
 export const oilCopy: Record<OilLanguage, Content> = {
   tr: {
-    title: 'Doğal Yağlar, Uçucu Yağlar ve Kozmetik Ham Maddeleri B2B Tedariki',
+    title: 'Doğal Yağlar, Uçucu Yağlar ve Kozmetik Ham Maddeleri B2B Tedariği',
     description: 'Türkiye çıkışlı B2B gül yağı, lavanta yağı, gül ve lavanta hidrosolleri, bitkisel sabit yağlar ve kozmetik özler için şartname, numune ve uluslararası RFQ koordinasyonu.',
     eyebrow: 'CTSEG · DOĞAL YAĞLAR & KOZMETİK HAM MADDELERİ',
     lead: 'Kozmetik üreticileri, parfümeri evleri, dermokozmetik markaları ve hammadde distribütörleri için Türkiye çıkışlı uçucu yağlar, hidrosoller, soğuk sıkım sabit yağlar ve bitkisel ekstraktlarda teknik şartnameye dayalı B2B tedarik ve RFQ sürecini koordine ediyoruz.',

@@ -28,6 +28,7 @@ jobs:
       - run: npm run check:form
       - run: npm run check:images
       - run: npm run check:locales
+      - run: npm run check:parity
 
   visual-qa:
     name: Responsive visual QA

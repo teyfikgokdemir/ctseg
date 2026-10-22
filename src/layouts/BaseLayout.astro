@@ -254,7 +254,7 @@ const heroSrcset = generatedImageSrcset(HOME_HERO_IMAGE,HOME_HERO_WIDTHS);
     <main id="main">
       <slot />
       {pageKey === 'home' && <TradeHouseStatement lang={lang as Locale} />}
-      {pageKey === 'home' && String(lang) !== 'fa' && <TradeVideo lang={lang} />}
+      {pageKey === 'home' && <TradeVideo lang={lang} />}
     </main>
     <SiteFooter lang={lang} pageKey={pageKey} />
     {pageKey === 'home' && <FloatingActions lang={lang} />}
