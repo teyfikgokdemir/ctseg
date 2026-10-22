@@ -1,9 +1,9 @@
 ---
 import { localizedPath, ui, type Locale } from '../data/site';
 import ProductMedia from './ProductMedia.astro';
-const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, ctaLabel, imageNote, compact=false, marketDetail=false, homepage=false, minimalDetail=false } = Astro.props as {
+const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, ctaLabel, imageNote, compact=false, marketDetail=false, homepage=false, minimalDetail=false, dedupeHeading=false } = Astro.props as {
   lang: Locale; eyebrow: string; title: string; lead: string; parentHref?: string; parentLabel?: string;
-  product?:any; ctaHref?:string; ctaLabel?:string; imageNote?:string; compact?:boolean; marketDetail?:boolean; homepage?:boolean; minimalDetail?:boolean;
+  product?:any; ctaHref?:string; ctaLabel?:string; imageNote?:string; compact?:boolean; marketDetail?:boolean; homepage?:boolean; minimalDetail?:boolean; dedupeHeading?:boolean;
 };
 ---
 <section class:list={['page-hero', { 'homepage-page-hero':homepage, 'product-page-hero':product, 'page-hero--compact':compact, 'page-hero--market-detail':marketDetail }]} data-page-hero>
@@ -12,9 +12,9 @@ const { lang, eyebrow, title, lead, parentHref, parentLabel, product, ctaHref, c
       <nav class="breadcrumb" aria-label={lang === 'uk' ? 'Навігаційний ланцюжок' : lang === 'ar' ? 'مسار التنقل' : 'Breadcrumb'}>
         <a href={localizedPath(lang,'home')}>{ui[lang].home}</a>
         {parentHref && <><span aria-hidden="true">/</span><a href={parentHref}>{parentLabel}</a></>}
-        {!minimalDetail && <><span aria-hidden="true">/</span><span aria-current="page">{title}</span></>}
+        {!minimalDetail && <><span aria-hidden="true">/</span><span aria-current="page">{dedupeHeading ? eyebrow : title}</span></>}
       </nav>
-      {!minimalDetail && <p class="eyebrow">{eyebrow}</p>}
+      {!minimalDetail && !dedupeHeading && <p class="eyebrow">{eyebrow}</p>}
       <h1>{title}</h1>
       <p class="lead">{lead}</p>
       {ctaHref && ctaLabel && <div class="actions"><a class="button" href={ctaHref}>{ctaLabel}</a></div>}
