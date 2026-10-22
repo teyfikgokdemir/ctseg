@@ -81,6 +81,7 @@
 
   const splitWords = (element) => {
     if (!element || element.dataset.premiumSplit === 'true' || window.innerWidth <= 860) return [];
+    if (element.classList.contains('ctseg-home-claim') || element.querySelector('.ctseg-home-claim__line') || element.dataset.noSplit === 'true') return [];
     const text = element.textContent.trim();
     if (!text) return [];
     const words = text.split(/\s+/);
@@ -137,6 +138,14 @@
           { y:50, yPercent:70, rotateX:-80, transformOrigin:'50% 100%', opacity:0 },
           { y:0, yPercent:0, rotateX:0, opacity:1, duration:1.8, stagger:.055, ease:'back.out(1.55)', delay:.08 }
         );
+      } else {
+        const lines = heroTitle.querySelectorAll('.ctseg-home-claim__line');
+        if (lines.length && gsap) {
+          gsap.fromTo(lines,
+            { y: 24, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2, stagger: 0.12, ease: 'power3.out', delay: 0.08 }
+          );
+        }
       }
     }
     gsap.fromTo('.hero-copy .eyebrow,.hero-copy .lead,.hero-copy .actions',

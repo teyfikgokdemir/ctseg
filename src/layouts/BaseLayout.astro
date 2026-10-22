@@ -257,7 +257,7 @@ const heroSrcset = generatedImageSrcset(HOME_HERO_IMAGE,HOME_HERO_WIDTHS);
       {pageKey === 'home' && !['de','it','ru','fa','zh','vi','he'].includes(String(lang)) && <TradeVideo lang={lang} />}
     </main>
     <SiteFooter lang={lang} pageKey={pageKey} />
-    {pageKey === 'home' && String(lang) !== 'he' && <FloatingActions lang={lang} />}
+    {pageKey === 'home' && <FloatingActions lang={lang} />}
     <aside class="cookie-consent" data-cookie-consent hidden aria-label={t.cookieTitle}>
       <div class="cookie-copy-inline"><strong>{t.cookieTitle}</strong><span>{t.cookieCopy}</span><a href={cookieHref}>{t.details}</a></div>
       <div class="cookie-actions"><button type="button" data-cookie-reject>{t.reject}</button><button type="button" class="accept" data-cookie-accept>{t.accept}</button></div>
