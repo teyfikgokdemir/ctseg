@@ -435,3 +435,229 @@ html body main .catalogue-grid .product-card .variety-panel strong {
   html body main .catalogue-disclosure__icon,
   html body main .catalogue-disclosure__toggle {transition:none !important;}
 }
+
+/* 22 October — second screenshot QA: typographic rhythm, primary navigation and natural oils. */
+@media (min-width: 1250px) {
+  html[data-locale="tr"] body main .trade-paths-section .section-head,
+  html[data-locale="tr"] body main .b2b-home-sectors .section-head {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  html[data-locale="tr"] body main .trade-paths-section .section-head > p:last-child,
+  html[data-locale="tr"] body main .b2b-home-sectors .section-head > p:last-child,
+  html[data-locale="tr"] body main .platform-sectors .section-head > p:last-child {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: auto !important;
+    font-size: clamp(15px, 1vw, 18px) !important;
+    line-height: 1.48 !important;
+    white-space: nowrap !important;
+    letter-spacing: -.012em !important;
+  }
+}
+html body main .trade-paths-section .section-head > p:last-child,
+html body main .b2b-home-sectors .section-head > p:last-child,
+html body main .platform-sectors .section-head > p:last-child {
+  color: #dce2d9 !important;
+  text-wrap: pretty !important;
+}
+@media (max-width: 1249px) {
+  html body main .trade-paths-section .section-head > p:last-child,
+  html body main .b2b-home-sectors .section-head > p:last-child,
+  html body main .platform-sectors .section-head > p:last-child {
+    white-space: normal !important;
+    max-width: 67ch !important;
+  }
+}
+
+/* All five operations stage indicators belong in one visual row on desktop. */
+@media (min-width: 1330px) {
+  html body main .trade-video-section .trade-video-grid {
+    grid-template-columns: minmax(0, .98fr) minmax(0, 1.02fr) !important;
+    gap: clamp(30px, 3.5vw, 64px) !important;
+  }
+  html body main .trade-video-section .trade-video-copy {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  html body main .trade-video-section .trade-video-stages {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: clamp(5px, .42vw, 8px) !important;
+  }
+  html body main .trade-video-section .trade-video-stages span {
+    flex: 0 0 auto !important;
+    min-width: 0 !important;
+    padding: 8px clamp(6px, .6vw, 10px) !important;
+    font-size: clamp(9px, .64vw, 10.5px) !important;
+    letter-spacing: .018em !important;
+    white-space: nowrap !important;
+  }
+  html body main .trade-video-section .trade-video-stages span::before {
+    width: 5px !important;
+    height: 5px !important;
+    margin-inline-end: 6px !important;
+  }
+}
+
+/* A premium process invitation should not echo identical text on CTA and
+   headline, nor have an oversized unrelated English ghost phrase. */
+html body main .compact-link-section .cta-statement::after {
+  display: none !important;
+}
+html body main .compact-link-section .cta-statement {
+  min-height: 0 !important;
+}
+html body main .compact-link-section .cta-statement h2 {
+  max-width: none !important;
+  margin-inline: auto !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+}
+html body main .compact-link-section .cta-statement .button {
+  -webkit-text-fill-color: #111 !important;
+  color: #111 !important;
+  background: #c4f000 !important;
+  border-color: #c4f000 !important;
+  letter-spacing: .025em !important;
+}
+
+/* Services: final breadcrumb retains Home / Services; the current service
+   appears once, as the actual H1, instead of repeating twice above it. */
+html body main .page-hero.page-hero--compact:not(.product-page-hero) .page-hero-copy {
+  margin-inline: auto;
+  text-align: center;
+}
+html body main .page-hero.page-hero--compact:not(.product-page-hero) .breadcrumb {
+  justify-content: center !important;
+}
+html body main .page-hero.page-hero--compact:not(.product-page-hero) h1 {
+  margin-inline: auto !important;
+}
+html body main .page-hero.page-hero--compact:not(.product-page-hero) .lead {
+  margin-inline: auto !important;
+  text-align: center !important;
+}
+
+/* Natural oils: elegant centered portfolio title and balanced 4+3 cards. */
+html body main .oils-products-section .oils-section-head {
+  max-width: 1360px !important;
+  width: 100% !important;
+  text-align: center !important;
+  margin-inline: auto !important;
+}
+html body main .oils-products-section .oils-section-head h2,
+html body main .oils-products-section .oils-section-head p {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-inline: auto !important;
+  text-align: center !important;
+}
+html body main .oils-products-section .oils-section-head h2 {
+  font-size: clamp(26px, 2.35vw, 40px) !important;
+  font-weight: 650 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -.025em !important;
+}
+html body main .oils-products-section .oils-product-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  gap: 20px !important;
+}
+html body main .oils-products-section .oils-product-card {
+  min-width: 0 !important;
+  flex: 0 0 calc((100% - 60px) / 4) !important;
+  max-width: calc((100% - 60px) / 4) !important;
+}
+@media (min-width: 1160px) {
+  html[data-locale="tr"] body main .oils-products-section .oils-section-head h2 {
+    white-space: nowrap !important;
+  }
+}
+@media (max-width: 1159px) {
+  html body main .oils-products-section .oils-product-card {
+    flex: 0 0 calc((100% - 20px) / 2) !important;
+    max-width: calc((100% - 20px) / 2) !important;
+  }
+}
+@media (max-width: 620px) {
+  html body main .oils-products-section .oils-section-head h2 {
+    white-space: normal !important;
+    font-size: clamp(23px, 6.2vw, 31px) !important;
+  }
+  html body main .oils-products-section .oils-product-card {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Natural oils partner: shorter, readable B2B promise and visible CTA. */
+html body main .oils-partner-section .oils-partner-copy h2 {
+  max-width: 22ch !important;
+  font-size: clamp(27px, 2.65vw, 43px) !important;
+  line-height: 1.13 !important;
+  letter-spacing: -.026em !important;
+}
+html body main .oils-partner-section .oils-partner-copy p {
+  color: #303d34 !important;
+  line-height: 1.6 !important;
+}
+html body main .oils-partner-section .oils-partner-copy .oils-compliance-callout {
+  font-size: 14px !important;
+  line-height: 1.56 !important;
+  color: #27352b !important;
+}
+html body main .oils-partner-section .oils-partner-actions .button.dark-btn,
+html body main .oils-partner-section .oils-partner-actions .button.dark-btn:visited {
+  background: #121814 !important;
+  border: 1px solid #121814 !important;
+  color: #f9fff4 !important;
+  -webkit-text-fill-color: #f9fff4 !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: .012em !important;
+  border-radius: 9px !important;
+  padding: 15px 24px !important;
+  opacity: 1 !important;
+}
+html body main .oils-partner-section .oils-partner-actions .button.dark-btn:hover,
+html body main .oils-partner-section .oils-partner-actions .button.dark-btn:focus-visible {
+  background: #c4f000 !important;
+  border-color: #a8cc00 !important;
+  color: #111814 !important;
+  -webkit-text-fill-color: #111814 !important;
+}
+
+/* Main menu: the oils section replaces the old glass dropdown; glass is now
+   a discoverable link inside the Global Trade solutions menu. */
+html body .site-header .desktop-nav-oils {
+  color: #c4f000 !important;
+  white-space: nowrap !important;
+  font-weight: 750 !important;
+}
+html body .site-header .desktop-nav-oils:hover,
+html body .site-header .desktop-nav-oils:focus-visible,
+html body .site-header .desktop-nav-oils.active {
+  color: #e0ff85 !important;
+}
+html body .site-header .mobile-oils-entry {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  padding: 16px 18px !important;
+  color: #f4f2eb !important;
+  text-decoration: none !important;
+  font-weight: 700 !important;
+}
+html body .site-header .mobile-oils-entry:hover,
+html body .site-header .mobile-oils-entry:focus-visible {
+  color: #c4f000 !important;
+  background: rgba(196,240,0,.06) !important;
+}
+html body .site-header .mobile-oils-entry:focus-visible {
+  outline: 2px solid #c4f000;
+  outline-offset: -2px;
+}
