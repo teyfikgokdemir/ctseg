@@ -127,6 +127,7 @@ const targetExists = (pathname) => {
 for (const file of htmlFiles) {
   const html = readFileSync(file, 'utf8');
   const label = relative(root, file).replaceAll('\\','/');
+  if (html.includes('[object Object]')) errors.push(`${label}: unrendered object leaked into page text/markup`);
   if (['index.html','en/index.html','de/index.html','it/index.html','fa/index.html','ru/index.html','zh/index.html','vi/index.html','uk/index.html','ro/index.html','bg/index.html','he/index.html'].includes(label)) {
     if (!html.includes('data-trade-marquee') || (html.match(/data-marquee-group/g)||[]).length !== 2) {
       errors.push(`${label}: localized infinite trade marquee contract missing`);

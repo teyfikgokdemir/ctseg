@@ -135,6 +135,34 @@ try {
     ,{ name:'desktop1440-vi-home', path:'/vi/', width:1440, height:1000 }
     ,{ name:'mobile390-vi-home', path:'/vi/', width:390, height:844 }
   ];
+  // 2026-10-22: cover all 13 active Natural Oils locales at mobile width,
+  // including RTL (fa/he/ar), plus representative desktop and market home
+  // contexts. These are real viewport checks, not relaxed assertions.
+  const oilLocales = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','he','ar'];
+  for (const locale of oilLocales) {
+    cases.push({
+      name:`mobile390-${locale}-natural-oils`,
+      path:`/${locale}/natural-oils/`,
+      width:390,
+      height:844
+    });
+  }
+  for (const locale of ['tr','en','de','fa','he','ar']) {
+    cases.push({
+      name:`desktop1440-${locale}-natural-oils`,
+      path:`/${locale}/natural-oils/`,
+      width:1440,
+      height:1000
+    });
+  }
+  for (const locale of ['uk','ro','bg','he','ar']) {
+    cases.push({
+      name:`mobile390-${locale}-home`,
+      path:`/${locale}/`,
+      width:390,
+      height:844
+    });
+  }
   const sourcingLocales = ['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','ar'];
   const productionLocaleCount = sourcingLocales.length;
   const rootLocaleCount = productionLocaleCount + 1;
@@ -179,6 +207,62 @@ try {
       throw new Error(`${testCase.name}: images failed to load: ${JSON.stringify(incomplete)}`, {cause:error});
     }
     await page.waitForTimeout(250);
+    // Across LTR/RTL locales, primary navigation must present one clear
+    // commercial CTA, without a duplicate Contact item beside that CTA.
+    // The standalone contact page and footer contact link are intentionally kept.
+    const navigationCheck = await page.evaluate(() => {
+      const header=document.querySelector('.site-header');
+      const quote=header?.querySelector('.nav-cta');
+      const quoteHref=quote?.getAttribute('href') ?? '';
+      const mainContactDuplicates=[...(header?.querySelectorAll('.desktop-nav-link,.mobile-accordion--quick a') || [])]
+        .filter((a)=>a.getAttribute('href') === quoteHref);
+      const breadcrumb=document.querySelector('main .page-hero .breadcrumb');
+      return {
+        quotePresent:Boolean(quote && quoteHref && quote.textContent?.trim()),
+        duplicates:mainContactDuplicates.map((a)=>a.textContent?.trim()),
+        malformedBreadcrumb:Boolean(breadcrumb?.textContent?.includes('[object Object]'))
+      };
+    });
+    if (!navigationCheck.quotePresent || navigationCheck.duplicates.length || navigationCheck.malformedBreadcrumb) {
+      failures.push(`${testCase.name}: navigation/breadcrumb regression ${JSON.stringify(navigationCheck)}`);
+    }
+    // On Turkish desktop the homepage editorial promise has exactly two
+    // natural text lines; check geometry rather than counting literal <br>s.
+    if (testCase.path === '/' && testCase.width >= 901) {
+      const trHero = await page.locator('.homepage-trade-hero .ctseg-home-claim').evaluate((h1) => {
+        const spans=[...h1.querySelectorAll('.ctseg-home-claim__line')];
+        const positions=spans.map((span)=>{
+          const range=document.createRange();
+          range.selectNodeContents(span);
+          const rectangles=[...range.getClientRects()];
+          return {
+            lineCount:rectangles.length,
+            top:rectangles[0]?.top,
+            right:Math.max(...rectangles.map((r)=>r.right)),
+            visibility:getComputedStyle(span).visibility
+          };
+        });
+        return {texts:spans.map((x)=>x.textContent.trim()),positions,viewport:innerWidth};
+      });
+      if (trHero.texts.join(' / ') !== 'Türkiye’den dünyaya. / Dünyadan doğru üreticiye.' ||
+          trHero.positions.length !== 2 || trHero.positions.some((x)=>x.lineCount !== 1 || x.right > trHero.viewport + 1) ||
+          trHero.positions[0].top === trHero.positions[1].top) {
+        failures.push(`${testCase.name}: Turkish hero is not two complete lines: ${JSON.stringify(trHero)}`);
+      }
+    }
+    // Seven natural-oils cards should read 4+3 on desktop; they may flow
+    // naturally to 2/1 on smaller screens and for long RTL localizations.
+    if (/\/natural-oils\/$/.test(testCase.path) && testCase.width >= 1160) {
+      const positions=await page.locator('.oils-products-section .oils-product-card').evaluateAll((cards)=>
+        cards.map((card)=>({top:Math.round(card.getBoundingClientRect().top),width:Math.round(card.getBoundingClientRect().width)}))
+      );
+      if (positions.length !== 7 ||
+          new Set(positions.slice(0,4).map((p)=>p.top)).size !== 1 ||
+          new Set(positions.slice(4).map((p)=>p.top)).size !== 1 ||
+          positions[4].top <= positions[0].top) {
+        failures.push(`${testCase.name}: natural oils cards do not form 4+3 grid: ${JSON.stringify(positions)}`);
+      }
+    }
     let mobileMenu = true;
     let bodyScrollLocked = true;
     let persianMobileMenu = null;

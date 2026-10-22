@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, fix/visual-headings-and-markets-20261022]
   pull_request:
     branches: [main]
 

@@ -1,0 +1,59 @@
+---
+import { oilCopy, oilPath, oilContact, naturalOilUi, naturalOilVisualMap, type OilLanguage } from '../data/natural-oils';
+import { activeLocaleRegistry } from '../data/locales';
+
+const { lang = 'en' } = Astro.props as { lang?: string };
+const supported = activeLocaleRegistry.some((entry) => entry.code === lang);
+const locale = (supported ? lang : 'en') as OilLanguage;
+const c = oilCopy[locale] || oilCopy.en;
+const ui = naturalOilUi[locale] || naturalOilUi.en;
+const rtl = ['ar','fa','he'].includes(locale);
+const title = locale === 'tr'
+  ? 'Doğal yağlarda doğru kaynak, güçlü ticari bağlantılar.'
+  : ui.productsHeading;
+const lead = locale === 'tr'
+  ? 'Gül, lavanta ve bitkisel hammaddeler için teknik şartname, numune ve ticari teklif süreçlerini birlikte değerlendiriyoruz.'
+  : c.lead;
+const path = oilPath(locale);
+const contact = `${oilContact(locale)}?intent=buyer_request#commercial-form`;
+---
+<section class="section ctseg-oils-home-feature" aria-labelledby="ctseg-oils-home-heading" dir={rtl ? 'rtl' : 'ltr'}>
+  <div class="container ctseg-oils-home-feature__grid">
+    <div class="ctseg-oils-home-feature__copy">
+      <p class="eyebrow">{c.eyebrow}</p>
+      <h2 id="ctseg-oils-home-heading">{title}</h2>
+      <p class="ctseg-oils-home-feature__lead">{lead}</p>
+      <div class="ctseg-oils-home-feature__actions">
+        <a class="button ctseg-oils-home-feature__primary" href={path}>{ui.allOilsCta}</a>
+        <a class="button ctseg-oils-home-feature__secondary" href={contact}>{ui.contactCta}</a>
+      </div>
+    </div>
+    <div class="ctseg-oils-home-feature__gallery" aria-hidden="true">
+      <img class="ctseg-oils-home-feature__main" src={naturalOilVisualMap['rose-essential-oil']} alt="" loading="lazy" decoding="async" width="1200" height="800" />
+      <div class="ctseg-oils-home-feature__side">
+        <img src={naturalOilVisualMap['lavender-essential-oil']} alt="" loading="lazy" decoding="async" width="1200" height="800" />
+        <img src={naturalOilVisualMap['botanical-extracts']} alt="" loading="lazy" decoding="async" width="1200" height="800" />
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .ctseg-oils-home-feature{position:relative;overflow:hidden;background:linear-gradient(110deg,#202b22,#131b16 62%,#0f1512);color:#f4f7ef;padding-block:clamp(48px,5vw,86px)}
+  .ctseg-oils-home-feature__grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);align-items:center;gap:clamp(32px,5vw,80px)}
+  .ctseg-oils-home-feature__copy{min-width:0}
+  .ctseg-oils-home-feature__copy .eyebrow{color:#c4f000!important;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-bottom:22px}
+  .ctseg-oils-home-feature__copy h2{max-width:19ch;color:#f8faf4!important;font-family:var(--font-sans,'DM Sans',sans-serif);font-size:clamp(29px,2.55vw,46px);font-weight:650;line-height:1.13;letter-spacing:-.027em;text-wrap:balance;overflow-wrap:normal;word-break:normal;margin:0 0 21px}
+  .ctseg-oils-home-feature__lead{max-width:58ch;color:#dae3d9!important;line-height:1.65;font-size:clamp(15px,1.08vw,18px);margin:0}
+  .ctseg-oils-home-feature__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+  .ctseg-oils-home-feature__actions .button{min-height:48px;padding:13px 20px;border-radius:10px;text-decoration:none;font-size:13px;font-weight:700;line-height:1.3;justify-content:center}
+  .ctseg-oils-home-feature__primary,.ctseg-oils-home-feature__primary:visited{background:#c4f000!important;border:1px solid #c4f000!important;color:#11170e!important;-webkit-text-fill-color:#11170e!important}
+  .ctseg-oils-home-feature__secondary,.ctseg-oils-home-feature__secondary:visited{background:transparent!important;border:1px solid rgba(238,245,235,.5)!important;color:#f8faf4!important;-webkit-text-fill-color:#f8faf4!important}
+  .ctseg-oils-home-feature__secondary:hover,.ctseg-oils-home-feature__secondary:focus-visible{background:#c4f000!important;border-color:#c4f000!important;color:#11170e!important;-webkit-text-fill-color:#11170e!important}
+  .ctseg-oils-home-feature__gallery{display:grid;grid-template-columns:1.2fr .8fr;gap:12px;height:clamp(350px,28vw,500px);min-width:0}
+  .ctseg-oils-home-feature__gallery img{display:block;width:100%;height:100%;object-fit:cover;border-radius:14px;min-width:0}
+  .ctseg-oils-home-feature__side{display:grid;grid-template-rows:1fr 1fr;gap:12px;min-height:0}
+  .ctseg-oils-home-feature__side img{min-height:0}
+  @media(max-width:1000px){.ctseg-oils-home-feature__grid{grid-template-columns:1fr;gap:32px}.ctseg-oils-home-feature__copy h2{max-width:28ch}.ctseg-oils-home-feature__gallery{height:360px}}
+  @media(max-width:620px){.ctseg-oils-home-feature{padding-block:38px}.ctseg-oils-home-feature__copy h2{font-size:clamp(25px,6.2vw,34px)}.ctseg-oils-home-feature__actions{display:grid;grid-template-columns:1fr}.ctseg-oils-home-feature__gallery{height:260px;grid-template-columns:1.3fr .7fr;gap:8px}.ctseg-oils-home-feature__side{gap:8px}}
+  @media(prefers-reduced-motion:reduce){.ctseg-oils-home-feature__actions .button{transition:none}}
+</style>
