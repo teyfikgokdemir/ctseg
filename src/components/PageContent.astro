@@ -1180,7 +1180,7 @@ const verifiedLater = {
         <div class="homepage-hero-stage">
           <div class="hero-copy">
             <p class="eyebrow">{platform.eyebrow}</p>
-            {lang === 'tr' ? <h1 class="home-hero-title home-hero-title--tr">Türkiye’den dünyaya.<br />Dünyadan doğru üreticiye.</h1> : <h1>{platform.title}</h1>}
+            {lang === 'tr' ? <h1 class="ctseg-home-claim"><span class="ctseg-home-claim__line">Türkiye’den dünyaya.</span>{' '}<span class="ctseg-home-claim__line">Dünyadan doğru üreticiye.</span></h1> : <h1>{platform.title}</h1>}
             <p class="lead">{platform.lead}</p>
             <div class="hero-proof-pills" aria-label="CTSEG trade capabilities">
               {h.trust.map((item:string) => <span>{item}</span>)}
