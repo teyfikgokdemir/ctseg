@@ -14,6 +14,12 @@
 
 **Not for link acquisition:** EEN should be measured in credible partner enquiries and introductions, not link count or domain authority. All profile approvals and public links depend on the external platform.
 
+## Existing names / identity collision — mandatory pre-onboarding review
+
+A search of TurkishExporter finds **“Ctseg Kozmetik San. Tic. Ltd. Şti.”** with a contact named “Teyfik”: https://www.turkishexporter.com.tr/en/who-is-and-address-book/company-authorized-names/t/ . This **may** be related to CTSEG; the match is not verified and the listing's business name and location cannot automatically be treated as the current legal identity of ctseg.com.tr. Before attempting any new registration, verify ownership, legal name and whether an existing profile should be claimed or corrected rather than duplicated.
+
+An unrelated Brazilian training company uses **CTSEG** on LinkedIn: https://www.linkedin.com/company/ctseg---centro-de-treinamento-em-seguranca-do-trabalho . Do not claim or contact it as if it belongs to the Türkiye sourcing brand. Use a distinctive descriptive display name such as **CTSEG | Strategic B2B Sourcing & International Trade** where permitted.
+
 ## Anti-spam and identity rules
 
 - Verify CTSEG's **exact registered legal entity/name, tax and address disclosure authority, operating role** before creating any directory identity. The website's corporate claim alone is not proof.
