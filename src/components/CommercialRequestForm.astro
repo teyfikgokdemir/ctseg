@@ -5,6 +5,7 @@ import { contactCopy, emailHref, whatsappHref, type ContactLocale } from '../dat
 import { contactQualification } from '../data/contact-qualification';
 
 const { lang } = Astro.props as { lang:ContactLocale };
+const turnstileSitekey = '0x4AAAAAAFhkvxouanUPhB6V';
 const copy = contactCopy[lang];
 const websiteLabel: Record<string,string> = {
   tr:'Web sitesi', en:'Website', de:'Website des Unternehmens', it:'Sito web aziendale',
@@ -252,11 +253,13 @@ const dynamicPlaceholders = {
     <label class="privacy-check"><input type="checkbox" name="privacy" value="accepted" required /><span>{copy.privacy} <a href={privacyHref}>{copy.privacyLink}</a></span></label>
     <div class="commercial-form-actions"><button class="button" type="submit">{copy.submit}</button></div>
     </div>
+    <div class="cf-turnstile" data-sitekey={turnstileSitekey} data-action="ctseg_contact" data-theme="light" data-appearance="interaction-only"></div>
     <p class="form-status" data-form-status role="status" aria-live="polite"></p>
     <div class="form-fallback" data-form-fallback hidden><p>{copy.fallback}</p><button type="button" class="button button-secondary" data-download-summary>{copy.download}</button></div>
   </form>
   </div>
 </section>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" is:inline async defer></script>
 
 <style is:global>
   .commercial-form-panel{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(28px,3.5vw,52px);overflow:hidden;padding:clamp(28px,3.2vw,46px);border:1px solid rgba(255,255,255,.1);border-radius:30px;background:#111;color:#fff;box-shadow:0 28px 80px rgba(0,0,0,.16)}
@@ -486,7 +489,7 @@ const dynamicPlaceholders = {
         track('contact_form_submit_attempt');const submit=form.querySelector('[type="submit"]');submit.disabled=true;
         try{const response=await fetch(form.action,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(form)))});const result=await response.json().catch(()=>({}));if(!response.ok)throw new Error(result.code||'request_failed');status.textContent=copy.success;track('contact_form_success');track('generate_lead');window.CansuEvents?.track(intent instanceof HTMLSelectElement&&intent.value==='buyer_request'&&supportNeed instanceof HTMLSelectElement&&supportNeed.value==='rfq_comparison'?'rfq_submit':'form_submit',{form_type:'qualified_commercial_request',trade_intent:intent instanceof HTMLSelectElement?intent.value:'',support_need:supportNeed instanceof HTMLSelectElement?supportNeed.value:''});window.dispatchEvent(new CustomEvent('ctseg:form-success'));if(document.documentElement.lang==='fa')window.dispatchEvent(new CustomEvent('ctseg:fa-form-success'));form.reset();started.value=String(Date.now())}
         catch{status.textContent=`${copy.error} ${copy.fallback}`;fallback.hidden=false;track('contact_form_error')}
-        finally{submit.disabled=false}
+        finally{submit.disabled=false;window.turnstile?.reset(form.querySelector('.cf-turnstile'))}
       });
     });
   })();
