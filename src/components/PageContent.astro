@@ -1849,7 +1849,7 @@ const verifiedLater = {
 
 {key === 'markets' && (
   <>
-    <PageHero lang={lang} eyebrow={t.markets} title={copy.marketsTitle} lead={copy.marketsLead} />
+    <PageHero lang={lang} eyebrow={t.markets} title={copy.marketsTitle} lead={copy.marketsLead} dedupeHeading={true} />
     <section class="section"><div class="container">
       <div class="market-role-grid">{completionMarkets.map((market) => <article><h2>{market.title}</h2><ul>{market.items.map((item)=><li>{item}</li>)}</ul></article>)}</div>
     </div></section>
@@ -2217,7 +2217,7 @@ const verifiedLater = {
 
 {key === 'how-we-work' && processPage && (
   <>
-    <PageHero lang={lang} eyebrow={processPageNavLabel} title={processPage.title} lead={processPage.description} dedupeHeading={true} />
+    <PageHero lang={lang} eyebrow={processPageNavLabel[lang] || processPageNavLabel.en} title={processPage.title} lead={processPage.description} dedupeHeading={true} />
     <section class="section process-overview-section"><div class="container">
       <ol class="detailed-process">{processPage.steps.map((step,index)=><li><span>{indexLabel(index)}</span><h2>{step}</h2></li>)}</ol>
       <div class="role-boundary"><strong>{processLabels.boundary}</strong><p>{processPage.role}</p></div>
