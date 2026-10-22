@@ -56,12 +56,12 @@ const sectorImages: Record<PortfolioSectorId, { src: string; width: number; heig
 export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
   tr: {
     kicker: 'SEKTÖREL B2B TEDARİK PORTFÖYÜ',
-    title: 'Sekiz ana ticari sektörde spesifikasyon bazlı B2B tedarik ve ihracat koordinasyonu.',
+    title: 'Sekiz Sektörde Stratejik B2B Tedarik',
     lead: 'CTSEG, sabit bir stok listesi yerine cam, doğal yağlar, gıda, kuruyemiş, yem, endüstriyel ekipman, ambalaj ve tekstil sektörlerinde doğrulanmış üretici araştırması, numune, belge kontrolü ve RFQ yönetimi yürütür.',
     exploreLabel: 'Kategoriyi İncele',
     rfqLabel: 'Teklif Talebi (RFQ)',
     nutsSectionKicker: 'KURUYEMİŞ, TOHUM VE KURU MEYVELER PORTFÖYÜ',
-    nutsSectionTitle: 'Kuruyemiş, tohum, hurma ve kuru meyve ürün grupları.',
+    nutsSectionTitle: 'Kuruyemiş ve Kuru Meyveler',
     nutsSectionLead: 'Antep fıstığı, hurma, kuru meyve, kuruyemiş, tohum ve safran ürünlerinde sınıf, kalibre, parti belgesi, paketleme ve MOQ bazlı B2B değerlendirme.',
     sectors: {
       glass: {
