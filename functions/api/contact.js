@@ -6,7 +6,7 @@ const allowedOrigins = [
   /^http:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?$/
 ];
 const limits = {
-  locale:5,intent:40,supportNeed:60,tradeDirection:40,productFamily:40,name:120,company:160,emailOrPhone:254,email:254,phone:80,originMarket:100,destinationMarket:100,
+  'cf-turnstile-response':2048,locale:5,intent:40,supportNeed:60,tradeDirection:40,productFamily:40,name:120,company:160,emailOrPhone:254,email:254,phone:80,originMarket:100,destinationMarket:100,
   product:240,quantity:120,packaging:160,incoterm:30,delivery:180,targetDate:40,requirements:500,message:2000,website:80,startedAt:30,privacy:20,
   pagePath:200,landingPath:200,referrerHost:160,utmSource:100,utmMedium:100,utmCampaign:120,utmContent:120,utmTerm:120,clickId:160
 };
@@ -59,6 +59,11 @@ const rateLimited = async (context) => {
 export async function onRequestPost(context){
   const origin=context.request.headers.get('origin')||'';
   if(!allowedOrigins.some((rule)=>rule.test(origin)))return json({code:'origin_rejected'},403);
+  // The request origin must match this deployment host; an attacker cannot sidestep
+  // the custom-domain WAF by sending a forged Origin to a pages.dev deployment.
+  let originHost;
+  try{originHost=new URL(origin).hostname}catch{return json({code:'origin_rejected'},403)}
+  if(originHost!==new URL(context.request.url).hostname)return json({code:'origin_host_mismatch'},403);
   if(await rateLimited(context))return json({code:'rate_limited'},429);
   let raw;
   try{raw=await context.request.json()}catch{return json({code:'invalid_json'},400)}
@@ -86,6 +91,21 @@ export async function onRequestPost(context){
   const to=context.env.CONTACT_TO_EMAIL||'info@ctseg.com.tr';
   const from=context.env.CONTACT_FROM_EMAIL;
   if(!apiKey||!from)return json({code:'email_unavailable'},503);
+  // Cloudflare Turnstile tokens are short-lived and single-use. Validate every
+  // real request before contacting Resend, including requests via pages.dev.
+  const secret=context.env.TURNSTILE_SECRET_KEY;
+  if(!secret)return json({code:'turnstile_unavailable'},503);
+  if(!data['cf-turnstile-response'])return json({code:'turnstile_missing'},403);
+  try{
+    const challenge=await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',{
+      method:'POST',headers:{'content-type':'application/json'},
+      body:JSON.stringify({secret,response:data['cf-turnstile-response'],remoteip:context.request.headers.get('cf-connecting-ip')||undefined})
+    });
+    if(!challenge.ok)return json({code:'turnstile_unavailable'},503);
+    const verdict=await challenge.json();
+    if(verdict.success!==true||verdict.action!=='ctseg_contact'||verdict.hostname!==originHost)
+      return json({code:'turnstile_failed'},403);
+  }catch{return json({code:'turnstile_unavailable'},503)}
   const lines=[
     'CTSEG commercial assessment request',
     `Intent: ${data.intent}`,
