@@ -1,0 +1,347 @@
+---
+import { getPortfolioSectors } from '../data/portfolio-sectors';
+import type { ActiveLocale } from '../data/locales';
+const {lang} = Astro.props as {lang:ActiveLocale};
+const ids = ["glass","natural-oils","food-agri","nuts-dried-fruits","animal-feed","industrial","packaging-inputs","textiles"] as const;
+const localized = {
+  "tr": {
+    "kicker": "ALICI ODAKLI TEKLİF HAZIRLIĞI",
+    "title": "Sekiz sektörde doğru teklif için hangi bilgiler gerekiyor?",
+    "lead": "Ürün ve teslimat ihtiyacınızı teknik şartnameye dönüştürün. Aşağıdaki sektör bazlı bilgiler, karşılaştırılabilir teklif istemek ve olası uygunluk risklerini erkenden görmek içindir; stok, üretim kapasitesi veya fiyat garantisi değildir.",
+    "fieldLabel": "Teklifinizde özellikle belirtin",
+    "common": [
+      "Tahmini miktar, MOQ esnekliği ve tekrar sipariş beklentisi",
+      "Teslim ülkesi, hedef tarih ve tercih edilen Incoterms",
+      "Gerekli analiz, sertifika, menşe ve parti belgeleri"
+    ],
+    "explore": "Sektör ve ürünleri incele",
+    "rfq": "Bu sektör için RFQ gönder",
+    "specs": [
+      "Cam türü ve kalınlığı (mm); levha ölçüsü; float, temperli, lamine, Low-E veya IGU; kesim ve işleme ihtiyacı.",
+      "Botanik tür/INCI adı; uçucu yağ, hidrosol veya sabit yağ; hedef saflık; GC-MS/COA/SDS; ambalaj ve lot.",
+      "Ürün ve menşe; sınıf/kalite; analiz ve mevzuat belgeleri; paketleme ve izlenebilirlik.",
+      "Çeşit ve kalibre; çiğ/kavrulmuş işleme; nem, aflatoksin ve kalıntı analizleri; ambalaj.",
+      "Kanatlı türü ve besleme dönemi (starter, grower, layer); formülasyon/besin değerleri; pelet veya kırma; teknik föy.",
+      "Parça kodu veya teknik çizim; malzeme, tolerans ve uyumluluk; adet, test ve yedek parça koşulları.",
+      "Cam/plastik/esnek ambalaj türü; hacim, kapak ve bariyer özellikleri; baskı, gıda teması ve numune.",
+      "Kumaş bileşimi ve GSM; ebat, renk, dikiş ve etiket; OEM/private label, numune ve test şartları."
+    ]
+  },
+  "en": {
+    "kicker": "BUYER-READY SOURCING",
+    "title": "What should a buyer include in an RFQ for each trade sector?",
+    "lead": "Turn a purchasing requirement into comparable supplier quotations. These sector-specific inputs guide an initial sourcing assessment; they do not imply confirmed stock, production capacity or prices.",
+    "fieldLabel": "Specify these product-level requirements",
+    "common": [
+      "Indicative volume, MOQ flexibility and repeat-order expectations",
+      "Destination country, target date and preferred Incoterms",
+      "Required tests, certifications, origin and batch documents"
+    ],
+    "explore": "Explore products and sector",
+    "rfq": "Send sector RFQ",
+    "specs": [
+      "Glass type, thickness (mm), sheet size, float/tempered/laminated/Low-E/IGU specification and processing needs.",
+      "Botanical species and INCI name; essential oil, hydrosol or carrier oil; purity target, GC-MS/COA/SDS and batch packaging.",
+      "Commodity and origin, grade, laboratory and regulatory documents, packing method and lot traceability.",
+      "Variety and caliber; raw or roasted processing; moisture, aflatoxin/residue testing and export packaging.",
+      "Poultry species and feeding stage (starter/grower/layer), nutrient specification, pellet/crumble form and technical sheet.",
+      "Part number or drawing, material/tolerances and compatibility, quantity, inspection and spare-part terms.",
+      "Glass/plastic/flexible packaging type, capacity, closure and barrier properties, print, food-contact suitability and sample.",
+      "Fabric composition and GSM, dimensions, color, stitching and labeling, OEM/private label, samples and test requirements."
+    ]
+  },
+  "de": {
+    "kicker": "EINKÄUFER-ORIENTIERTE ANFRAGE",
+    "title": "Welche Angaben braucht eine vergleichbare B2B-Anfrage je Branche?",
+    "lead": "Definieren Sie technische und kaufmännische Anforderungen, damit Angebote vergleichbar werden. Diese Prüfpunkte sind keine Zusage für Verfügbarkeit, Kapazität oder Preis.",
+    "fieldLabel": "Produktspezifikation",
+    "common": [
+      "Menge, MOQ-Spielraum und Wiederholbedarf",
+      "Zielland, Liefertermin und Incoterms",
+      "Prüfberichte, Zertifikate, Ursprung und Chargendokumente"
+    ],
+    "explore": "Sektor und Produkte ansehen",
+    "rfq": "Branchen-RFQ senden",
+    "specs": [
+      "Glasart, Dicke (mm), Plattenformat, Float/ESG/VSG/Low-E/Isolierglas sowie Bearbeitung.",
+      "Botanische Art/INCI, ätherisches Öl/Hydrolat/Trägeröl, Reinheit, GC-MS/COA/SDS und Chargenverpackung.",
+      "Rohstoff, Ursprung, Qualität/Sortierung, Labor- und Rechtsnachweise, Verpackung und Rückverfolgbarkeit.",
+      "Sorte, Kaliber, roh/geröstet, Feuchte- und Aflatoxintests, Verpackung.",
+      "Geflügelart, Fütterungsphase (Starter/Grower/Layer), Nährwerte, Pellet/Krümel und Datenblatt.",
+      "Teilenummer/Zeichnung, Werkstoff, Toleranz und Kompatibilität, Stückzahl und Prüfung.",
+      "Verpackungsmaterial, Volumen, Verschluss/Barriere, Druckbild, Lebensmittelkontakt und Muster.",
+      "Faserzusammensetzung, Grammatur (GSM), Maße, Farbe, Etikett, OEM/Private Label und Muster."
+    ]
+  },
+  "it": {
+    "kicker": "RFQ PER BUYER B2B",
+    "title": "Quali informazioni servono per richiedere offerte comparabili?",
+    "lead": "Una richiesta d'offerta precisa facilita il confronto tra fornitori. I dati indicati sono criteri di valutazione, non promesse di stock, capacità o prezzo.",
+    "fieldLabel": "Specifiche da indicare",
+    "common": [
+      "Quantità stimata, flessibilità MOQ e riordini",
+      "Paese di destinazione, data richiesta e Incoterms",
+      "Analisi, certificazioni, origine e documentazione di lotto"
+    ],
+    "explore": "Esplora il settore",
+    "rfq": "Invia RFQ di settore",
+    "specs": [
+      "Tipo di vetro, spessore (mm), dimensioni, float/temperato/stratificato/Low-E/IGU e lavorazioni.",
+      "Specie botanica/INCI, olio essenziale/idrolato/olio vettore, purezza, GC-MS/COA/SDS e lotto.",
+      "Materia prima e origine, grado, analisi/conformità, imballaggio e tracciabilità.",
+      "Varietà e calibro, crudo/tostato, umidità e aflatossine, confezione per export.",
+      "Specie avicola, fase alimentare (starter/grower/layer), valori nutrizionali, pellet/sbriciolato e scheda tecnica.",
+      "Codice parte/disegno, materiale, tolleranze e compatibilità, quantità e controlli.",
+      "Vetro/plastica/film, capacità, chiusura/barriera, stampa, contatto alimentare e campione.",
+      "Composizione/GSM, misure, colore, cuciture, etichetta, OEM/private label e campioni."
+    ]
+  },
+  "fa": {
+    "kicker": "آماده‌سازی درخواست خرید",
+    "title": "برای دریافت پیشنهاد قابل‌مقایسه در هر صنعت چه اطلاعاتی لازم است؟",
+    "lead": "نیاز فنی و تجاری خود را مشخص کنید تا بررسی تأمین‌کنندگان و RFQ شفاف باشد. این موارد به‌معنای تضمین موجودی، ظرفیت یا قیمت نیست.",
+    "fieldLabel": "مشخصات ویژه محصول",
+    "common": [
+      "مقدار تقریبی، حداقل سفارش (MOQ) و خرید تکراری",
+      "کشور مقصد، زمان تحویل و اینکوترمز",
+      "آزمایش‌ها، گواهی‌ها، مبدأ و اسناد هر محموله"
+    ],
+    "explore": "مشاهده محصولات و بخش",
+    "rfq": "ارسال درخواست قیمت",
+    "specs": [
+      "نوع و ضخامت شیشه (میلی‌متر)، ابعاد ورق، فلوت/سکوریت/لمینت/Low-E/IGU و فرآوری.",
+      "نام گیاه و INCI، اسانس/هیدروسول/روغن حامل، خلوص، GC-MS/COA/SDS و بسته‌بندی بچ.",
+      "محصول و مبدأ، درجه کیفی، مدارک آزمایشگاهی و مقرراتی، بسته‌بندی و رهگیری بچ.",
+      "نوع و سایز، خام یا بوداده، رطوبت و آفلاتوکسین، بسته‌بندی صادراتی.",
+      "نوع طیور، مرحله تغذیه (starter/grower/layer)، ترکیب مواد مغذی، پلت/کرامبل و برگه فنی.",
+      "کد قطعه یا نقشه فنی، جنس و تلرانس، سازگاری، تعداد و آزمون.",
+      "نوع بسته‌بندی شیشه‌ای/پلاستیکی/انعطاف‌پذیر، ظرفیت، درب و مانع، چاپ و تماس با غذا.",
+      "ترکیب پارچه و GSM، ابعاد، رنگ، دوخت و برچسب، OEM/برند خصوصی و نمونه."
+    ]
+  },
+  "ru": {
+    "kicker": "RFQ ДЛЯ ЗАКУПЩИКОВ",
+    "title": "Какие данные нужны для сравнимых предложений по каждой отрасли?",
+    "lead": "Укажите технические и коммерческие требования для сопоставимых RFQ. Это перечень критериев проверки, а не обещание цены, наличия или мощности.",
+    "fieldLabel": "Требования к товару",
+    "common": [
+      "Объём заказа, гибкость MOQ и повторные поставки",
+      "Страна назначения, срок и Incoterms",
+      "Анализы, сертификаты, происхождение и документы партии"
+    ],
+    "explore": "Изучить сектор",
+    "rfq": "Направить RFQ",
+    "specs": [
+      "Тип и толщина стекла (мм), размер листа, флоат/закалённое/триплекс/Low-E/IGU, обработка.",
+      "Ботанический вид/INCI, эфирное масло/гидролат/базовое масло, чистота, GC-MS/COA/SDS, партия.",
+      "Продукт и происхождение, сорт, лабораторные и нормативные документы, упаковка, прослеживаемость.",
+      "Сорт и калибр, сырое/обжаренное, влажность, афлатоксины, экспортная упаковка.",
+      "Вид птицы, фаза (starter/grower/layer), питательность, гранулы/крошка, спецификация.",
+      "Артикул/чертёж, материал, допуски, совместимость, количество и испытания.",
+      "Материал тары, объём, крышка/барьер, печать, контакт с пищей, образец.",
+      "Состав ткани/GSM, размер, цвет, пошив, маркировка, OEM/private label, образцы."
+    ]
+  },
+  "zh": {
+    "kicker": "面向采购方的询价准备",
+    "title": "八大行业如何准备可比较的采购询价（RFQ）？",
+    "lead": "明确技术、质量及交货要求，才能比较供应商报价。以下清单不构成现货、产能或价格保证。",
+    "fieldLabel": "产品关键参数",
+    "common": [
+      "预估数量、MOQ灵活性及复购计划",
+      "目的地国家、交期及国际贸易术语（Incoterms）",
+      "检测报告、认证、原产地和批次文件"
+    ],
+    "explore": "查看行业与产品",
+    "rfq": "提交本行业询价",
+    "specs": [
+      "玻璃类型、厚度（毫米）、板材尺寸；浮法/钢化/夹层/Low-E/中空玻璃及加工要求。",
+      "植物学名称/INCI，精油/纯露/基础油，纯度，GC-MS/COA/SDS及批次包装。",
+      "品种与原产地、等级、检验与合规文件、包装及批次追溯。",
+      "品种与规格、原味/烘焙、水分、黄曲霉毒素及出口包装。",
+      "禽类及饲养阶段（starter/grower/layer），营养指标、颗粒/碎粒与技术资料。",
+      "零件号/技术图纸、材质及公差、兼容性、数量与检测要求。",
+      "玻璃/塑料/软包装材质、容量、密封与阻隔要求、印刷、食品接触合规及样品。",
+      "面料成分、克重GSM、尺寸、颜色、缝制、标签、OEM/贴牌及打样要求。"
+    ]
+  },
+  "vi": {
+    "kicker": "CHUẨN BỊ RFQ CHO BÊN MUA",
+    "title": "Cần thông tin gì để so sánh báo giá theo từng ngành?",
+    "lead": "Làm rõ quy cách kỹ thuật, số lượng và điều kiện giao hàng để đối chiếu RFQ. Danh sách này không cam kết tồn kho, công suất hay giá.",
+    "fieldLabel": "Thông số sản phẩm cần cung cấp",
+    "common": [
+      "Sản lượng dự kiến, MOQ linh hoạt và nhu cầu mua định kỳ",
+      "Quốc gia giao hàng, thời hạn và điều kiện Incoterms",
+      "Kiểm nghiệm, chứng chỉ, xuất xứ và hồ sơ lô hàng"
+    ],
+    "explore": "Xem ngành hàng",
+    "rfq": "Gửi RFQ ngành hàng",
+    "specs": [
+      "Loại kính, độ dày (mm), kích thước tấm, kính nổi/cường lực/dán/Low-E/IGU và gia công.",
+      "Tên thực vật/INCI, tinh dầu/hydrosol/dầu nền, độ tinh khiết, GC-MS/COA/SDS và đóng gói theo lô.",
+      "Loại nguyên liệu và xuất xứ, phẩm cấp, xét nghiệm/tuân thủ, quy cách đóng gói và truy xuất lô.",
+      "Giống và kích cỡ, thô/rang, độ ẩm, aflatoxin và bao bì xuất khẩu.",
+      "Loài gia cầm và giai đoạn (starter/grower/layer), dinh dưỡng, dạng viên/vụn và phiếu kỹ thuật.",
+      "Mã linh kiện/bản vẽ, vật liệu và dung sai, tính tương thích, số lượng và kiểm thử.",
+      "Vật liệu bao bì thủy tinh/nhựa/màng, dung tích, nắp/rào cản, in ấn, tiếp xúc thực phẩm, mẫu.",
+      "Thành phần vải/GSM, kích thước, màu, đường may, nhãn, OEM/nhãn riêng và mẫu."
+    ]
+  },
+  "uk": {
+    "kicker": "RFQ ДЛЯ ПОКУПЦІВ",
+    "title": "Які дані потрібні для порівняння комерційних пропозицій?",
+    "lead": "Чіткі технічні та комерційні вимоги допомагають порівнювати RFQ. Це не гарантія ціни, наявності чи виробничих потужностей.",
+    "fieldLabel": "Характеристики товару",
+    "common": [
+      "Орієнтовний обсяг, гнучкість MOQ та повторні замовлення",
+      "Країна призначення, дата поставки та Incoterms",
+      "Аналізи, сертифікати, походження й документи партії"
+    ],
+    "explore": "Переглянути сектор",
+    "rfq": "Надіслати RFQ",
+    "specs": [
+      "Тип і товщина скла (мм), розміри, флоат/загартоване/триплекс/Low-E/IGU та обробка.",
+      "Ботанічна назва/INCI, ефірна олія/гідролат/базова олія, чистота, GC-MS/COA/SDS, тара.",
+      "Продукт і походження, сорт, лабораторні та регуляторні документи, пакування, простежуваність.",
+      "Сорт і калібр, сире/смажене, вологість, афлатоксини, експортна тара.",
+      "Вид птиці, фаза (starter/grower/layer), поживність, гранули/крихта та специфікація.",
+      "Номер деталі/креслення, матеріал, допуски, сумісність, кількість і перевірка.",
+      "Матеріал упаковки, об’єм, кришка/бар’єр, друк, харчовий контакт, зразок.",
+      "Склад тканини/GSM, розмір, колір, шви, етикетка, OEM/private label і зразки."
+    ]
+  },
+  "ro": {
+    "kicker": "RFQ PENTRU CUMPĂRĂTORI",
+    "title": "Ce date permit compararea ofertelor în fiecare sector?",
+    "lead": "Definiți specificațiile tehnice și condițiile comerciale pentru o cerere RFQ comparabilă. Lista nu garantează prețul, stocul sau capacitatea.",
+    "fieldLabel": "Cerințe de produs",
+    "common": [
+      "Volum estimat, flexibilitatea MOQ și comenzi recurente",
+      "Țara de destinație, termenul și Incoterms",
+      "Analize, certificate, origine și documentele lotului"
+    ],
+    "explore": "Explorează sectorul",
+    "rfq": "Trimite RFQ pentru sector",
+    "specs": [
+      "Tipul și grosimea sticlei (mm), dimensiune, float/securizată/laminată/Low-E/IGU și prelucrare.",
+      "Specie botanică/INCI, ulei esențial/hidrolat/ulei purtător, puritate, GC-MS/COA/SDS și lot.",
+      "Materie primă și origine, clasă, teste și conformitate, ambalaj, trasabilitate.",
+      "Soi și calibru, crud/prăjit, umiditate, aflatoxine și ambalaj de export.",
+      "Specie de pasăre, etapă (starter/grower/layer), nutrienți, pelete/granule și fișă tehnică.",
+      "Cod piesă/desen, material, toleranțe, compatibilitate, cantitate și testare.",
+      "Materialul ambalajului, capacitate, închidere/barieră, tipar, contact alimentar și mostră.",
+      "Compoziție/GSM, dimensiuni, culoare, cusături, etichete, OEM/private label și mostre."
+    ]
+  },
+  "bg": {
+    "kicker": "RFQ ЗА КУПУВАЧИ",
+    "title": "Каква информация е необходима за сравними оферти по сектори?",
+    "lead": "Ясните технически и търговски изисквания помагат за съпоставяне на предложения. Това не е гаранция за наличност, капацитет или цена.",
+    "fieldLabel": "Спецификация на продукта",
+    "common": [
+      "Ориентировъчен обем, гъвкавост на MOQ и повторни поръчки",
+      "Държава на доставка, срок и Incoterms",
+      "Анализи, сертификати, произход и документи на партидата"
+    ],
+    "explore": "Разгледайте сектора",
+    "rfq": "Изпратете RFQ",
+    "specs": [
+      "Вид и дебелина на стъклото (мм), размери, флоат/закалено/ламинирано/Low-E/IGU и обработка.",
+      "Ботанически вид/INCI, етерично масло/хидролат/базово масло, чистота, GC-MS/COA/SDS, партида.",
+      "Продукт и произход, клас, лабораторни/регулаторни документи, опаковка и проследимост.",
+      "Сорт и калибър, сурово/печено, влага, афлатоксини и експортна опаковка.",
+      "Вид птици, етап (starter/grower/layer), хранителни показатели, пелети/трохи и технически лист.",
+      "Номер на част/чертеж, материал, допуски, съвместимост, количество и тестове.",
+      "Материал на опаковката, обем, капачка/бариера, печат, контакт с храни и мостра.",
+      "Състав/GSM, размери, цвят, шев, етикет, OEM/private label и мостри."
+    ]
+  },
+  "he": {
+    "kicker": "הכנת בקשת הצעת מחיר",
+    "title": "אילו נתונים דרושים ל־RFQ שניתן להשוות בין ספקים?",
+    "lead": "הגדרת דרישות מוצר, איכות ומשלוח מאפשרת להשוות הצעות. הרשימה אינה הבטחה למלאי, למחיר או לכושר ייצור.",
+    "fieldLabel": "מפרט מוצר נדרש",
+    "common": [
+      "כמות משוערת, גמישות MOQ והזמנות חוזרות",
+      "מדינת יעד, מועד אספקה ותנאי Incoterms",
+      "בדיקות, תעודות, מקור ותיעוד אצווה"
+    ],
+    "explore": "עיון בענף ובמוצרים",
+    "rfq": "שליחת בקשת RFQ",
+    "specs": [
+      "סוג וזכוכית ועובי (מ״מ), מידות לוח, float/מחוסמת/רבודה/Low-E/IGU ועיבוד.",
+      "שם בוטני/INCI, שמן אתרי/הידרוסול/שמן נשא, טוהר, GC-MS/COA/SDS ואריזת אצווה.",
+      "סוג חומר גלם ומקור, דרגת איכות, בדיקות ועמידה בתקנות, אריזה ועקיבות.",
+      "זן וגודל, גולמי/קלוי, לחות, אפלטוקסינים ואריזת יצוא.",
+      "סוג עופות ושלב גידול (starter/grower/layer), ערכים תזונתיים, כופתיות/פירורים ומפרט.",
+      "מספר חלק/שרטוט, חומר וסבולות, תאימות, כמות ובדיקות.",
+      "חומר אריזה, נפח, סגירה ומחסום, הדפסה, התאמה למגע עם מזון ודוגמה.",
+      "הרכב בד/GSM, מידות, צבע, תפירה, תווית, OEM/מותג פרטי ודוגמאות."
+    ]
+  },
+  "ar": {
+    "kicker": "إعداد طلب الشراء",
+    "title": "ما المعلومات اللازمة لمقارنة عروض الأسعار في كل قطاع؟",
+    "lead": "يساعد تحديد المواصفات الفنية وشروط التسليم على مقارنة عروض RFQ. هذه المتطلبات ليست ضمانًا للمخزون أو الطاقة أو السعر.",
+    "fieldLabel": "مواصفات المنتج المطلوبة",
+    "common": [
+      "الكمية التقريبية ومرونة الحد الأدنى للطلب والطلبات المتكررة",
+      "بلد الوجهة والموعد وشروط Incoterms",
+      "التحاليل والشهادات والمنشأ ومستندات الدفعة"
+    ],
+    "explore": "استكشف القطاع والمنتجات",
+    "rfq": "إرسال RFQ للقطاع",
+    "specs": [
+      "نوع الزجاج وسماكته (مم) وأبعاد اللوح: عائم/مقسى/مصفح/Low-E/IGU والمعالجة.",
+      "النوع النباتي وINCI، زيت عطري/هيدروسول/زيت حامل، النقاوة وGC-MS/COA/SDS والتعبئة.",
+      "السلعة والمنشأ والدرجة وتحاليل المطابقة والتعبئة وتتبع الدفعات.",
+      "الصنف والعيار، خام/محمص، الرطوبة والأفلاتوكسين وتعبئة التصدير.",
+      "نوع الدواجن ومرحلة التغذية (starter/grower/layer) والقيم الغذائية وحبيبات/فتات والنشرة الفنية.",
+      "رقم القطعة/الرسم الهندسي والمادة والتفاوتات والتوافق والكمية والاختبارات.",
+      "مادة العبوة وحجمها والإغلاق والحاجز والطباعة وملاءمة ملامسة الأغذية والعينة.",
+      "تركيب القماش وGSM والمقاسات واللون والخياطة والملصقات وOEM/العلامة الخاصة والعينات."
+    ]
+  }
+};
+const entry = localized[lang] ?? localized.en;
+const sectors = getPortfolioSectors(lang);
+---
+<section class="section buyer-rfq-guide" id="buyer-rfq-guide" data-buyer-rfq-guide>
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">{entry.kicker}</p>
+      <h2>{entry.title}</h2>
+      <p>{entry.lead}</p>
+    </div>
+    <div class="buyer-rfq-grid">
+      {ids.map((id,index) => {
+        const sector=sectors.find((item)=>item.id===id);
+        if(!sector)return null;
+        return <article class="buyer-rfq-card" data-buyer-sector={id}>
+          <h3>{sector.title}</h3>
+          <p class="buyer-rfq-label">{entry.fieldLabel}</p>
+          <p class="buyer-rfq-spec">{entry.specs[index]}</p>
+          <ul class="buyer-rfq-common">{entry.common.map((item)=><li>{item}</li>)}</ul>
+          <div class="buyer-rfq-actions">
+            <a href={sector.href} class="text-link">{entry.explore} →</a>
+            <a href={sector.rfqHref} class="text-link">{entry.rfq} ↗</a>
+          </div>
+        </article>;
+      })}
+    </div>
+  </div>
+</section>
+<style>
+  .buyer-rfq-guide{background:#f5f6f2;color:#151915}
+  .buyer-rfq-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .buyer-rfq-card{display:flex;flex-direction:column;gap:12px;min-width:0;border:1px solid #dbe0d7;background:#fff;border-radius:18px;padding:clamp(18px,2vw,28px)}
+  .buyer-rfq-card h3{margin:0;color:#17221b;font-size:clamp(20px,2vw,25px);line-height:1.25}
+  .buyer-rfq-label{font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#475348;margin:0}
+  .buyer-rfq-spec{color:#28352b;line-height:1.6;margin:0}
+  .buyer-rfq-common{display:grid;gap:7px;padding-inline-start:20px;margin:0;color:#435046;line-height:1.5}
+  .buyer-rfq-actions{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:auto;padding-top:14px;border-top:1px solid #e3e8e0}
+  .buyer-rfq-actions a{color:#204c28;font-weight:700;text-decoration:underline;text-underline-offset:4px}
+  .buyer-rfq-actions a:focus-visible{outline:2px solid #17221b;outline-offset:4px}
+  @media(max-width:700px){.buyer-rfq-grid{grid-template-columns:1fr}.buyer-rfq-card{padding:20px}}
+</style>
