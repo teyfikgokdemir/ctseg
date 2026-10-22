@@ -19,7 +19,7 @@ export const tradePlatformCopy:Record<PlatformLocale,PlatformCopy> = {
     title:'Türkiye’den dünyaya. Dünyadan doğru üreticiye.',
     lead:'CTSEG, şirketlerin yeni pazarlara açılmasını ve doğru üretici, tedarikçi ve kurumsal alıcılarla buluşmasını; araştırma, doğrulama, RFQ ve ticari koordinasyon süreçleriyle yönetir.',
     buyerCta:'Tedarikçi arıyorum',producerCta:'Yeni pazara açılmak istiyorum',
-    pathsTitle:'Ticaret iki yönde çalışır',pathsLead:'Türkiye’den globale açılmak isteyen üreticiler ile Türkiye ve bölge pazarlarında doğru kaynağa ulaşmak isteyen alıcılar için iki yönlü bir ticaret modeli kuruyoruz.',
+    pathsTitle:'Ticaret iki yönde çalışır',pathsLead:'Türkiye’den yeni pazarlara açılan üreticilerle doğru tedarikçi arayan alıcıları buluşturuyoruz.',
     buyerTitle:'Stratejik tedarik',buyerText:'İhtiyacı tanımlar, üretici ve tedarikçi araştırır, doğrulama yapar, RFQ ve teklif karşılaştırmasını koordine ederiz.',
     producerTitle:'İhracat ve pazara giriş',producerText:'Ürünün ticari hazırlığını değerlendirir, hedef pazar ve uygun alıcı profillerini araştırır, ilk temas ve teklif sürecini koordine ederiz.',
     sectorsTitle:'Seçili sektörlerde doğrulanabilir tedarik',sectorsLead:'Sabit bir katalog sunmak yerine, seçili ticari kategorilerde ürün, taraf, belge ve uygulanabilirlik kriterlerini birlikte değerlendiririz.',
