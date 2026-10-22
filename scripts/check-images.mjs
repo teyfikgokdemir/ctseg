@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import manifest from '../public/images/generated/manifest.json' with { type:'json' };
-import { homeTradeVisualKeys, tradeVisuals } from '../src/data/trade-visuals.ts';
+import { tradeVisuals } from '../src/data/trade-visuals.ts';
 
 const root=fileURLToPath(new URL('..',import.meta.url));
 const dist=join(root,'dist');

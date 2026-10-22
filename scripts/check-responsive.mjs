@@ -139,8 +139,8 @@ try {
   const productionLocaleCount = sourcingLocales.length;
   const rootLocaleCount = productionLocaleCount + 1;
   const sourcingFamilies = {
-    carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/',uk:'/uk/sourcing/iranian-carpets/',ro:'/ro/sourcing/covoare-iraniene/',bg:'/bg/sourcing/iranski-kilimi/',ar:'/ar/sourcing/iranian-carpets/'},
-    silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/',uk:'/uk/sourcing/silk-carpets/',ro:'/ro/sourcing/covoare-matase-lucrate-manual/',bg:'/bg/sourcing/rachno-takani-koprineni-kilimi/',ar:'/ar/sourcing/hand-knotted-silk-carpets/'},
+    // retired: carpets (now 301 redirected in _redirects)
+    // retired: silk-carpets (now 301 redirected in _redirects)
     textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/',zh:'/zh/sourcing/textiles/',vi:'/vi/sourcing/textiles/',uk:'/uk/sourcing/wholesale-textiles/',ro:'/ro/sourcing/sourcing-textile-angro/',bg:'/bg/sourcing/sourcing-tekstili-na-edro/',ar:'/ar/sourcing/wholesale-textile-sourcing/'}
   };
   const sourcingAudiences = {
@@ -524,7 +524,30 @@ try {
             return Math.max(max,lineHeight?Math.round(box.height/lineHeight):0);
           },0),
           productCount:catalogueCards.length,
-          catalogueTextReadable
+          catalogueTextReadable,
+          visualRhythm:(()=>{
+            const trDesktop=document.documentElement.dataset.locale==='tr'&&window.innerWidth>=1180;
+            const lines=(el)=>{if(!el)return 0;const h=Number.parseFloat(getComputedStyle(el).lineHeight);return h>0?el.getBoundingClientRect().height/h:0};
+            const heroTitle=document.querySelector('.home-hero-title--tr');
+            const heroSpans=heroTitle?[...heroTitle.querySelectorAll(':scope > span')]:[];
+            const sectorTitle=document.querySelector('.platform-sectors .section-head h2,.b2b-home-sectors .section-head h2');
+            const process=document.querySelector('.process-section .process-heading');
+            const processTitle=process?.querySelector('.section-title');
+            const processCaption=process?.querySelector('.process-caption');
+            const processContainer=process?.closest('.process-shell');
+            const corridorCards=document.querySelector('.market-corridor-collection');
+            const catalogue=document.querySelector('.catalogue-detail-group');
+            const center=(rect)=>rect.left+rect.width/2;
+            return {
+              heroTwoLines:!trDesktop||!heroTitle||(heroSpans.length===2&&heroSpans.every((el)=>lines(el)<=1.15&&el.scrollWidth<=el.clientWidth+1)),
+              sectorHeadingOneLine:!trDesktop||!sectorTitle||lines(sectorTitle)<=1.15&&sectorTitle.scrollWidth<=sectorTitle.clientWidth+1,
+              processCentered:!process||!processContainer||Math.abs(center(process.getBoundingClientRect())-center(processContainer.getBoundingClientRect()))<=3,
+              processTitleOneLine:!trDesktop||!processTitle||lines(processTitle)<=1.15&&processTitle.scrollWidth<=processTitle.clientWidth+1,
+              processCaptionOneLine:!trDesktop||!processCaption||lines(processCaption)<=1.15&&processCaption.scrollWidth<=processCaption.clientWidth+1,
+              corridorColumns:!corridorCards||(window.innerWidth>900?getComputedStyle(corridorCards).gridTemplateColumns.split(' ').length===2:getComputedStyle(corridorCards).gridTemplateColumns.split(' ').length===1),
+              catalogueCollapsed:!catalogue||!catalogue.open
+            };
+          })()
         };
       })()
     }));
@@ -550,6 +573,8 @@ try {
       (testCase.width <= 620 && result.layout.headingLines > 6) ||
       (testCase.width >= 1100 && result.layout.maxCardHeight > 700) ||
       (result.layout.productCount > 0 && result.layout.productCount !== 18);
+    const badVisualRhythm=Object.entries(result.layout.visualRhythm||{}).filter(([,passed])=>!passed).map(([key])=>key);
+    if(badVisualRhythm.length)failures.push(`${testCase.name}: visual rhythm regression (${badVisualRhythm.join(', ')})`);
     const badContactEmail = result.contactEmail && (result.contactEmail.occurrences !== 1 || result.contactEmail.links !== 1 ||
       result.contactEmail.href !== 'mailto:info@ctseg.com.tr?subject=CTSEG%20Commercial%20Enquiry' ||
       result.contactEmail.buttons !== 0 || !result.contactEmail.focusVisible);
