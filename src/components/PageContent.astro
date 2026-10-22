@@ -275,6 +275,13 @@ const homepageHero = localizedTradeVisual('global-trade-hero',lang);
 const contactWithIntent = (intent:'buyer_request'|'supplier_market_entry'|'external_trade_desk') => `${sectionHref('contact')}?intent=${intent}${intent==='external_trade_desk'?'&direction=other&category=other':''}#commercial-form`;
 const portfolioSectors = getPortfolioSectors(lang);
 const portfolioCopy = portfolioLocaleCopy[lang] || portfolioLocaleCopy.en;
+const catalogueExpandCopy: Record<string,string> = {
+  tr:'18 ürünü ve teknik detayları incele',en:'Explore 18 products and specifications',de:'18 Produkte und technische Details ansehen',
+  it:'Esplora 18 prodotti e le specifiche',fa:'مشاهده ۱۸ محصول و مشخصات فنی',ru:'Посмотреть 18 товаров и характеристики',
+  zh:'查看 18 款产品及技术规格',vi:'Xem 18 sản phẩm và thông số kỹ thuật',uk:'Переглянути 18 товарів і характеристики',
+  ro:'Explorează 18 produse și specificații',bg:'Разгледайте 18 продукта и спецификации',sr:'Pogledajte 18 proizvoda i specifikacije',
+  ar:'استعرض ١٨ منتجًا ومواصفاتها'
+};
 
 const trendingSectorsData = {
   tr: { title: 'Küresel Tedarik Kapasitesi & Trendler', lead: 'Aktif olarak yönettiğimiz ticaret koridorlarında öne çıkan endüstriyel kapasiteler ve sektörel talepler.', tags: ['Endüstriyel Üretim & Hammadde ↗', 'Tüketici Ürünleri (FMCG) ↗', 'Tekstil & Teknik Kumaş ↗', 'Otomotiv Yan Sanayi ↗', 'İnşaat & Mimari Malzemeler ↗', 'Ambalaj & Polimer ↗', 'Tarım & Gıda Teknolojileri ↗', 'Medikal & Sağlık Ekipmanları ↗'] },
@@ -1160,7 +1167,7 @@ const verifiedLater = {
         <div class="homepage-hero-stage">
           <div class="hero-copy">
             <p class="eyebrow">{platform.eyebrow}</p>
-            {lang === 'tr' ? <h1 class="home-hero-title home-hero-title--tr" style="font-size:40px!important;line-height:1.06!important;max-width:700px!important;letter-spacing:-.03em!important;"><span>Türkiye’den dünyaya.</span>{' '}<span>Dünyadan doğru üreticiye.</span></h1> : <h1>{platform.title}</h1>}
+            {lang === 'tr' ? <h1 class="home-hero-title home-hero-title--tr"><span>Türkiye’den dünyaya.</span><span>Dünyadan doğru üreticiye.</span></h1> : <h1>{platform.title}</h1>}
             <p class="lead">{platform.lead}</p>
             <div class="hero-proof-pills" aria-label="CTSEG trade capabilities">
               {h.trust.map((item:string) => <span>{item}</span>)}
@@ -1383,6 +1390,8 @@ const verifiedLater = {
     </div></section>
     <section class="section catalogue-section" id="catalogue-nuts-dried-fruits"><div class="container">
       <div class="section-head catalogue-main-head"><p class="eyebrow">{portfolioCopy.nutsSectionKicker}</p><h2>{portfolioCopy.nutsSectionTitle}</h2><p>{portfolioCopy.nutsSectionLead}</p></div>
+      <details class="catalogue-detail-group">
+        <summary class="catalogue-detail-trigger"><span>{catalogueExpandCopy[lang] || catalogueExpandCopy.en}</span><span aria-hidden="true" class="catalogue-detail-trigger__arrow">⌄</span></summary>
       {(lang === 'tr' || lang === 'en') && <div class="catalog-download">
         <div><p class="eyebrow">PDF · 18 {lang === 'tr' ? 'ürün' : 'products'}</p><h2>{lang === 'tr' ? 'CTSEG Ticari Ürünler Kataloğu' : 'CTSEG Trade Products Catalogue'}</h2></div>
         <a class="button button-secondary" href={lang === 'tr' ? '/downloads/ctseg-ticari-urunler-katalogu.pdf' : '/downloads/ctseg-trade-products-catalogue.pdf'} download data-catalog-download data-catalog-language={lang}>{lang === 'tr' ? 'Kataloğu indir' : 'Download catalogue'}</a>
@@ -1421,6 +1430,7 @@ const verifiedLater = {
           />)}</div>
         </div>)}
       </div>
+      </details>
       <div class="catalogue-sourcing-desk">
         <div class="sourcing-desk-content">
           <span class="sourcing-desk-kicker">{sourcingDeskCopy[lang].kicker}</span>
@@ -1835,6 +1845,7 @@ const verifiedLater = {
         <img src="/images/poultry-feed-sourcing-warehouse.png" width="1920" height="1080" loading="lazy" decoding="async" alt={lang === 'ar' ? 'توريد أعلاف الدواجن من تركيا' : lang === 'tr' ? 'Türkiye’den kanatlı yemi tedariki' : 'Poultry-feed sourcing from Türkiye'} />
       </div></section>
     )}
+    <div class="market-corridor-collection">
     {lang === 'zh' && chinaMarketEntry && (
       <section class="section compact-link-section market-corridor-card"><div class="container cta-statement">
         <div>
@@ -1905,6 +1916,7 @@ const verifiedLater = {
         <a class="button button-secondary" href={iranTradeHref}>{t.readMore} →</a>
       </div></section>
     )}
+    </div>
     {lang === 'en' && (
       <aside class="iran-sourcing-link container" aria-labelledby="iran-sourcing-title">
         <p class="eyebrow">Persian resource</p>
