@@ -1011,6 +1011,13 @@ const representativeRfq = lang === 'tr' ? {
 const guide = key === 'guides' && id ? (guides[id as keyof typeof guides]?.[lang] || guides[id as keyof typeof guides]?.['en'] || null) : null;
 const searchLanding = key === 'search-landing' && id ? searchLandings[id as keyof typeof searchLandings]?.content[lang] : null;
 const workHref = localizedPath(lang,'how-we-work');
+const processPageNavLabel: Record<string,string> = {
+  tr:'Çalışma yöntemi',en:'Our process',de:'Arbeitsweise',it:'Metodo di lavoro',
+  fa:'روش کار',ru:'Наш подход',zh:'工作方式',vi:'Quy trình làm việc',
+  uk:'Наш підхід',ro:'Mod de lucru',bg:'Нашият подход',
+  he:'דרך העבודה',ar:'آلية العمل',sr:'Način rada'
+};
+
 const scenarioHref = localizedPath(lang,'scenarios');
 const productCommercialLabels = {
   tr:['Menşe','Ürün tipi / çeşit','Olası ambalaj','MOQ','Kalite ve analiz belgeleri','Numune','Private label','Teslim ve Incoterm','Termin','Depolama','Hedef kullanım','Teklif için gerekli bilgiler'],
@@ -2210,7 +2217,7 @@ const verifiedLater = {
 
 {key === 'how-we-work' && processPage && (
   <>
-    <PageHero lang={lang} eyebrow={lang === 'tr' ? 'Çalışma yöntemimiz' : processPage.title} title={processPage.title} lead={processPage.description} dedupeHeading={true} />
+    <PageHero lang={lang} eyebrow={processPageNavLabel} title={processPage.title} lead={processPage.description} dedupeHeading={true} />
     <section class="section process-overview-section"><div class="container">
       <ol class="detailed-process">{processPage.steps.map((step,index)=><li><span>{indexLabel(index)}</span><h2>{step}</h2></li>)}</ol>
       <div class="role-boundary"><strong>{processLabels.boundary}</strong><p>{processPage.role}</p></div>
