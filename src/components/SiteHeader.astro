@@ -66,10 +66,12 @@ const glassMenuLinks = (lang === 'tr' || lang === 'en') ? [
 ] : [[glassLabel, glassUrl]] as [string,string][];
 
 const focusedCountryLp = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
+const naturalOilsNavLabel: Record<string, string> = {tr:'Doğal Yağlar & Kozmetik Ham Maddeleri',en:'Natural Oils & Cosmetic Raw Materials',de:'Natürliche Öle & Kosmetikrohstoffe',it:'Oli Naturali & Materie Prime Cosmetiche',fa:'روغن‌های طبیعی و مواد اولیه آرایشی',ru:'Натуральные масла и косметическое сырье',zh:'天然油脂与化妆品原料',vi:'Tinh dầu & Nguyên liệu Mỹ phẩm',uk:'Натуральні олії та косметична сировина',ro:'Uleiuri Naturale & Materii Prime Cosmetice',bg:'Натурални масла и козметични суровини',he:'שמנים טבעיים וחומרי גלם לקוסמטיקה',ar:'الزيوت الطبيعية ومواد التجميل الخام'};
 const solutionLinks = lang === 'he' ? [
   ['איתור ואימות ספקים','/he/שירותים/איתור-ואימות-ספקים/'],
   ['רכש אסטרטגי','/he/שירותים/רכש-אסטרטגי/'],
   ['כניסה לשוק','/he/שירותים/כניסה-לשוק/'],
+  [naturalOilsNavLabel.he,'/he/natural-oils/'],
   [methodLabel,'/he/איך-אנחנו-עובדים/']
 ] : lang === 'ar' ? [
   [t.services, localizedPath(lang,'services')],
@@ -78,12 +80,14 @@ const solutionLinks = lang === 'he' ? [
   ['استشارات التجارة الدولية', localizedPath(lang,'services','trade-advisory')],
   ['تحليل وتحسين التكلفة الكلية TCO', localizedPath(lang,'services','tco')],
   ['دخول الأسواق', localizedPath(lang,'services','market-entry')],
+  [naturalOilsNavLabel.ar, '/ar/natural-oils/'],
   [methodLabel, localizedPath(lang,'how-we-work')],
   ['سيناريوهات عمل تمثيلية', localizedPath(lang,'scenarios')]
 ] : [
   [t.services, localizedPath(lang,'services')],
   [p.buyerTitle, localizedPath(lang,'services','strategic-sourcing')],
   [p.producerTitle, localizedPath(lang,'services','market-entry')],
+  [naturalOilsNavLabel[lang] || naturalOilsNavLabel.en, `/${lang}/natural-oils/`],
   [methodLabel, localizedPath(lang,'how-we-work')]
 ];
 
@@ -147,6 +151,12 @@ const globalSwitchPath = (target: string): string => {
   if (pageKey === 'glass-market' && pageId) {
     if (target === 'tr') return `/glass/markets/${pageId}/`;
     return `/${target}/glass/markets/${pageId}/`;
+  }
+  if (pageKey === 'natural-oils') {
+    return `/${target}/natural-oils/`;
+  }
+  if (pageKey === 'natural-oils-product' && pageId) {
+    return `/${target}/natural-oils/${pageId}/`;
   }
   if (target === 'he') {
     if (pageKey === 'services' && pageId && heServicePaths[pageId]) return heServicePaths[pageId];

@@ -67,6 +67,8 @@ const isIranTradePage = pageKey === 'iran-trade' || (pageKey === 'home' && Strin
 const alternates = alternatesProp ? { ...alternatesProp } : String(lang) === 'he' && pageKey === 'he-insight' ? { he: canonicalUrl } as Record<string,string> :
   pageKey === 'glass' ? duzceGlassAlternates() :
   pageKey === 'glass-industry' ? Object.fromEntries([['tr','https://ctseg.com.tr/glass/'], ...activeLocales.filter((code)=>code!=='tr').map((code)=>[code,`https://ctseg.com.tr/${code}/glass/`]), ['x-default','https://ctseg.com.tr/en/glass/']]) as Record<string,string> :
+  pageKey === 'natural-oils' ? Object.fromEntries([...activeLocales.map((code)=>[code,`https://ctseg.com.tr/${code}/natural-oils/`]), ['x-default','https://ctseg.com.tr/en/natural-oils/']]) as Record<string,string> :
+  pageKey === 'natural-oils-product' && pageId ? Object.fromEntries([...activeLocales.map((code)=>[code,`https://ctseg.com.tr/${code}/natural-oils/${pageId}/`]), ['x-default',`https://ctseg.com.tr/en/natural-oils/${pageId}/`]]) as Record<string,string> :
   pageKey === 'search-landing' && pageId ? searchLandingAlternates(pageId) :
   pageKey === 'vietnam-market-entry' && vietnamMarketEntryContent.vi ? {
     vi:`https://ctseg.com.tr/vi/${vietnamMarketEntryContent.vi.slug}/`
@@ -101,6 +103,10 @@ const alternateCodes = pageKey === 'glass-industry'
   : pageKey === 'glass-product'
   ? activeLocales
   : pageKey === 'glass-market'
+  ? activeLocales
+  : pageKey === 'natural-oils'
+  ? activeLocales
+  : pageKey === 'natural-oils-product'
   ? activeLocales
   : pageKey === 'glass'
   ? ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr']
@@ -170,7 +176,7 @@ const organization = {
     'Two-way global trade','Strategic sourcing','Supplier sourcing and verification','Factory and counterparty verification',
     'International RFQ management','Export market entry','B2B buyer research','Commercial coordination','Nearshoring from Türkiye',
     'Trade intelligence','Total cost of ownership analysis','Food and agricultural sourcing','Textiles and home textiles',
-    'Packaging and industrial inputs','Iranian carpets','Hand-knotted silk carpets','Türkiye-Iran trade corridor','Iran sourcing','Iranian food exports','Vietnam exporter market entry','Vietnam to Türkiye trade','Vietnam to Europe trade','Vietnam sourcing for Türkiye','Vietnam coffee sourcing','Vietnam food imports','China manufacturer market entry','China to Türkiye sourcing','China to Europe trade','Ukraine to Türkiye sourcing','Türkiye supplier sourcing for Ukraine','Ukraine reconstruction procurement'
+    'Packaging and industrial inputs','Natural oils and cosmetic raw materials','Float glass and architectural glass','Türkiye-Iran trade corridor','Iran sourcing','Iranian food exports','Vietnam exporter market entry','Vietnam to Türkiye trade','Vietnam to Europe trade','Vietnam sourcing for Türkiye','Vietnam coffee sourcing','Vietnam food imports','China manufacturer market entry','China to Türkiye sourcing','China to Europe trade','Ukraine to Türkiye sourcing','Türkiye supplier sourcing for Ukraine','Ukraine reconstruction procurement'
   ]
 };
 const website = {

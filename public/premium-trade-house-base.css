@@ -98,7 +98,7 @@ body{background:var(--premium-paper);color:var(--premium-ink);overflow-x:hidden}
 .corridor-list>div{display:flex!important;align-items:center!important;gap:18px!important;min-height:84px!important;padding:18px 26px!important;border:1px solid rgba(10,10,10,.1)!important;border-radius:16px!important;background:#fff!important;box-shadow:0 4px 20px rgba(0,0,0,.03)!important;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease!important}
 .corridor-list>div:hover{transform:translateY(-3px)!important;border-color:#111!important;box-shadow:0 12px 32px rgba(0,0,0,.08)!important}
 .corridor-list>div>span{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:34px!important;height:34px!important;border-radius:999px!important;background:#f4f4f0!important;color:#111!important;font-size:11px!important;font-weight:800!important;letter-spacing:.06em!important;flex-shrink:0!important;border:1px solid rgba(10,10,10,.08)!important}
-.corridor-list strong{font-family:'Source Serif 4',Georgia,serif!important;font-size:clamp(20px,1.75vw,26px)!important;font-weight:600!important;line-height:1.22!important;letter-spacing:-.02em!important;color:#181816!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:100%!important}
+.corridor-list strong{font-family:'Source Serif 4',Georgia,serif!important;font-size:clamp(20px,1.75vw,26px)!important;font-weight:600!important;line-height:1.22!important;letter-spacing:-.02em!important;color:#181816!important;white-space: normal !important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:100%!important}
 html[dir="rtl"] .corridor-list strong{text-align:right!important}
 @media (max-width:860px){
   .corridor-list{grid-template-columns:1fr!important;gap:12px!important}
@@ -222,7 +222,7 @@ main .process-detail-link {
   margin: 0 !important;
   font-size: clamp(32px, 4vw, 54px) !important;
   line-height: 1.1 !important;
-  white-space: nowrap !important;
+  white-space: normal !important;
 }
 @media (max-width: 860px) {
   .trending-sectors .section-head h2 {
