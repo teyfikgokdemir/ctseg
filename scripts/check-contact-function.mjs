@@ -39,6 +39,21 @@ const originalFetch=globalThis.fetch;
 const readyEnv={RESEND_API_KEY:'test-key',CONTACT_FROM_EMAIL:'CTSEG <forms@example.test>',CONTACT_TO_EMAIL:'info@example.test',TURNSTILE_SECRET_KEY:'test-turnstile-secret'};
 await expectStatus(await onRequestPost(makeContext({...valid,'cf-turnstile-response':''},undefined,readyEnv,'203.0.113.66')),403,'missing Turnstile token');
 await expectStatus(await onRequestPost(makeContext(valid,'https://ctseg.com.tr',readyEnv,'203.0.113.67')),403,'origin host mismatch');
+// Invalid Turnstile responses must be rejected without calling the email provider.
+for(const verdict of [
+  {success:false,hostname:'preview.ctseg.pages.dev',action:'ctseg_contact'},
+  {success:true,hostname:'attacker.example',action:'ctseg_contact'},
+  {success:true,hostname:'preview.ctseg.pages.dev',action:'wrong_action'}
+]){
+  let sentEmail=false;
+  globalThis.fetch=async(url)=>{
+    if(String(url).includes('/turnstile/v0/siteverify'))return new Response(JSON.stringify(verdict),{status:200});
+    sentEmail=true;return new Response(JSON.stringify({id:'unexpected'}),{status:200});
+  };
+  await expectStatus(await onRequestPost(makeContext(valid,undefined,readyEnv,'203.0.113.68')),403,'invalid Turnstile validation');
+  if(sentEmail)throw new Error('Resend was invoked for invalid Turnstile token');
+}
+globalThis.fetch=originalFetch;
 let outbound;
 globalThis.fetch=async (url,options) => {
   if(String(url).includes('/turnstile/v0/siteverify'))return new Response(JSON.stringify({success:true,hostname:'preview.ctseg.pages.dev',action:'ctseg_contact'}),{status:200});
