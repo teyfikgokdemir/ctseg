@@ -57,7 +57,7 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
   tr: {
     kicker: 'SEKTÖREL B2B TEDARİK PORTFÖYÜ',
     title: 'Sekiz sektörde stratejik B2B tedarik',
-    lead: 'Cam, doğal yağlar, gıda, kuruyemiş, yem, endüstriyel ekipman, ambalaj ve tekstil için üretici araştırması, belge değerlendirmesi ve teklif koordinasyonu.',
+    lead: 'Camdan doğal yağlara, gıdadan endüstriyel ürünlere sekiz sektörde B2B tedarik ve teklif koordinasyonu.',
     exploreLabel: 'Kategoriyi İncele',
     rfqLabel: 'Teklif Talebi (RFQ)',
     nutsSectionKicker: 'KURUYEMİŞ, TOHUM VE KURU MEYVELER PORTFÖYÜ',
