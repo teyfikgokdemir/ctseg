@@ -724,7 +724,7 @@ export const naturalOilUi: Record<OilLanguage, NaturalOilLocaleUi> = {
     buyersHeading: 'Khách hàng B2B Chúng tôi Phục vụ',
     buyersList: [
       'Nhà sản xuất mỹ phẩm, chăm sóc da và chăm sóc cá nhân',
-      'Công ty hương liệu, nhà điều향 và thương hiệu nước hoa',
+      'Công ty hương liệu, nhà điều hương và thương hiệu nước hoa',
       'Nhà máy gia công mỹ phẩm (OEM / ODM / Private Label)',
       'Nhà phân phối nguyên liệu mỹ phẩm và hóa chất quốc tế',
       'Thương hiệu dược mỹ phẩm, spa và trị liệu hương thơm (aromatherapy)',

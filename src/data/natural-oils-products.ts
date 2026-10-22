@@ -60,7 +60,7 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
       specs: [
         ['Üretim Yöntemi & Kalite', 'Geleneksel veya endüstriyel su/buhar distilasyonu (Otto of Rose) ve talep bazlı gül absolütü seçenekleri'],
         ['Analitik Doğrulama', 'Lot bazlı GC-MS kromatografi profili (citronellol, geraniol, nerol, stearopten oranları), COA ve SDS'],
-        ['Endüstriyel Ambalaj', 'B2B alıma uygun mühürlü alüminyumフlask, florinli kaplar veya özel koruyucu iç ambalaj'],
+        ['Endüstriyel Ambalaj', 'B2B alıma uygun mühürlü alüminyum flask, florinli kaplar veya özel koruyucu iç ambalaj'],
         ['Numune & MOQ Yaklaşımı', 'Formülasyon onayı için referans lot numunesi ve hedef hacme göre kademeli MOQ değerlendirmesi']
       ],
       applications: [
@@ -1637,12 +1637,12 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
       description: 'Tìm nguồn hàng B2B quốc tế từ Türkiye cho tinh dầu hoa hồng Rosa damascena chưng cất hơi nước, kiểm định GC-MS, gửi mẫu và điều phối RFQ.',
       eyebrow: 'CTSEG · NGUỒN CUNG TINH DẦU B2B',
       botanicalName: 'INCI: Rosa Damascena Flower Oil · Chưng cất hơi nước (Otto of Rose)',
-      lead: 'CTSEG điều phối nguồn cung B2B tinh dầu hoa hồng Rosa damascena Anatolia và các dẫn xuất hoa hồng cho các nhà điều향, nhà sản xuất mỹ phẩm và nhà phân phối nguyên liệu — đối chiếu lô thu hoạch, hồ sơ sắc ký GC-MS, mẫu đối chứng và vận chuyển xuất khẩu.',
+      lead: 'CTSEG điều phối nguồn cung B2B tinh dầu hoa hồng Rosa damascena Anatolia và các dẫn xuất hoa hồng cho các nhà điều hương, nhà sản xuất mỹ phẩm và nhà phân phối nguyên liệu — đối chiếu lô thu hoạch, hồ sơ sắc ký GC-MS, mẫu đối chứng và vận chuyển xuất khẩu.',
       cardSummary: 'Tinh dầu Rosa damascena chưng cất hơi nước và dẫn xuất hoa hồng cho nước hoa cao cấp, mỹ phẩm dưỡng da và nhà phân phối B2B.',
       specs: [
         ['Phương pháp & Cấp độ', 'Tinh dầu hoa hồng Rosa damascena chưng cất hơi nước (Otto of Rose) và tinh dầu tuyệt đối (Rose Absolute) theo yêu cầu'],
         ['Kiểm định Phân tích', 'Sắc ký đồ GC-MS theo từng lô (tỷ lệ citronellol, geraniol, nerol, stearoptene), COA và SDS'],
-        ['Đóng gói Công nghiệp', 'Bình nhôm niêm phong và chai氟 hóa chuyên dụng (0,5 kg – 5 kg+) kèm thùng bảo vệ xuất khẩu'],
+        ['Đóng gói Công nghiệp', 'Bình nhôm niêm phong và chai fluor hóa chuyên dụng (0,5 kg – 5 kg+) kèm thùng bảo vệ xuất khẩu'],
         ['Mẫu thử & MOQ', 'Cung cấp mẫu lô tham chiếu để phòng lab đánh giá trước khi đặt hàng sỉ; MOQ linh hoạt theo lô vụ mùa']
       ],
       applications: [
@@ -1674,7 +1674,7 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
       specs: [
         ['Chủng loại Thực vật', 'Lavandula angustifolia (oải hương mịn) và Lavandula intermedia / hybrida (lavandin)'],
         ['Chất lượng & Sắc ký', 'Hồ sơ GC-MS theo lô xác nhận hàm lượng linalool, linalyl acetate và long não (camphor) cùng COA'],
-        ['Quy cách Đóng gói Sỉ', 'Bình nhôm 1 kg – 25 kg và phuy thép tráng эпоxy 180 kg'],
+        ['Quy cách Đóng gói Sỉ', 'Bình nhôm 1 kg – 25 kg và phuy thép tráng epoxy 180 kg'],
         ['Điều phối Thương mại', 'Đối chiếu lô sản xuất, gửi mẫu phòng lab và logistics xuất khẩu EXW / FOB / CIF / DAP']
       ],
       applications: [
@@ -1786,7 +1786,7 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
         'Sản lượng đặt hàng, quy cách thùng chứa và điều kiện giao hàng'
       ],
       faq: [
-        ['Nên chọn dầu nền ép lạnh hay tinh luyện cho công thức mỹ phẩm?', 'Dầu ép lạnh giữ nguyên tocopherol và phytosterol tự nhiên cho các dòng serum hoạt성, trong khi dầu tinh luyện có màu/mùi trung tính và độ bền oxy hóa cao cho nhũ tương sản xuất lớn. Chúng tôi đáp ứng cả hai tùy theo yêu cầu R&D của bạn.'],
+        ['Nên chọn dầu nền ép lạnh hay tinh luyện cho công thức mỹ phẩm?', 'Dầu ép lạnh giữ nguyên tocopherol và phytosterol tự nhiên cho các dòng serum hoạt tính, trong khi dầu tinh luyện có màu/mùi trung tính và độ bền oxy hóa cao cho nhũ tương sản xuất lớn. Chúng tôi đáp ứng cả hai tùy theo yêu cầu R&D của bạn.'],
         ['Có thể ghép nhiều loại dầu nền và tinh dầu trong cùng một lô hàng không?', 'Có. CTSEG hỗ trợ gom đơn hàng B2B đa danh mục gồm dầu nền, tinh dầu và hydrosol trong một chuyến xuất khẩu.'],
         ['Độ ổn định oxy hóa được kiểm soát như thế nào?', 'Trước khi giao hàng, chúng tôi kiểm tra ngày sản xuất, chỉ số peroxide và chỉ số axit trên COA của từng lô.']
       ]
