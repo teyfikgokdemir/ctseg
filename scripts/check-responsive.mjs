@@ -229,15 +229,20 @@ try {
     // On Turkish desktop the homepage editorial promise has exactly two
     // natural text lines; check geometry rather than counting literal <br>s.
     if (testCase.path === '/' && testCase.width >= 901) {
-      const trHero = await page.locator('.homepage-trade-hero .home-hero-title--tr').evaluate((h1) => {
-        const texts=[...h1.childNodes].filter((node)=>node.nodeType === Node.TEXT_NODE && node.textContent.trim());
-        const positions=texts.map((node)=>{
+      const trHero = await page.locator('.homepage-trade-hero .ctseg-home-claim').evaluate((h1) => {
+        const spans=[...h1.querySelectorAll('.ctseg-home-claim__line')];
+        const positions=spans.map((span)=>{
           const range=document.createRange();
-          range.selectNodeContents(node);
+          range.selectNodeContents(span);
           const rectangles=[...range.getClientRects()];
-          return {lineCount:rectangles.length, top:rectangles[0]?.top, right:Math.max(...rectangles.map((r)=>r.right))};
+          return {
+            lineCount:rectangles.length,
+            top:rectangles[0]?.top,
+            right:Math.max(...rectangles.map((r)=>r.right)),
+            visibility:getComputedStyle(span).visibility
+          };
         });
-        return {texts:texts.map((x)=>x.textContent.trim()),positions,viewport:innerWidth};
+        return {texts:spans.map((x)=>x.textContent.trim()),positions,viewport:innerWidth};
       });
       if (trHero.texts.join(' / ') !== 'Türkiye’den dünyaya. / Dünyadan doğru üreticiye.' ||
           trHero.positions.length !== 2 || trHero.positions.some((x)=>x.lineCount !== 1 || x.right > trHero.viewport + 1) ||
