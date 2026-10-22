@@ -181,7 +181,8 @@ try {
   for (const testCase of cases) {
     testCase.persian = false;
     const page = await browser.newPage({ viewport:{ width:testCase.width, height:testCase.height } });
-    const navigationResponse = await page.goto(`http://127.0.0.1:4321${testCase.path}`, { waitUntil:'networkidle' });
+    // Turnstile may keep network connections open; readiness is verified below via images and layout assertions.
+    const navigationResponse = await page.goto(`http://127.0.0.1:4321${testCase.path}`, { waitUntil:'domcontentloaded' });
     if (!navigationResponse || navigationResponse.status() !== 200) {
       failures.push(`${testCase.name}: expected HTTP 200, received ${navigationResponse?.status() ?? 'no response'}`);
     }
@@ -787,7 +788,7 @@ try {
         sourcingChecks++;
         const path = routes[lang];
         const page = await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
-        const response = await page.goto(`http://127.0.0.1:4321${encodeURI(path)}`,{waitUntil:'networkidle'});
+        const response = await page.goto(`http://127.0.0.1:4321${encodeURI(path)}`,{waitUntil:'domcontentloaded'});
         if (response?.status() !== 200) failures.push(`sourcing ${family}/${lang}/${viewport.name}: HTTP ${response?.status() ?? 'none'}`);
         await page.addStyleTag({content:'*,*:before,*:after{animation:none!important;transition:none!important}'});
         await page.evaluate(async()=>{
