@@ -4,6 +4,7 @@ import ProductMedia from './ProductMedia.astro';
 const { product, productId, lang, index: _index, featured=false, displayRole='', family='' } = Astro.props as {
   product:any; productId:string; lang:Locale; index:number; featured?:boolean; displayRole?:string; family?:string;
 };
+const typographicVariety = ['kaleghouchi-pistachio','fandoghi-pistachio','ahmad-aghaei-pistachio'].includes(productId);
 const catalogueSizes = '(max-width:620px) calc(100vw - 26px), (max-width:1100px) calc(50vw - 28px), min(33vw,420px)';
 const showcaseSizes = {
   lead:'(max-width:860px) calc(100vw - 36px), min(67vw,850px)',
@@ -42,13 +43,15 @@ const originDisplay = {
 }[lang] || product.origin;
 ---
 <a
-  class:list={['product-card', displayRole && `product-card--${displayRole}`, { featured }]}
+  class:list={['product-card', displayRole && `product-card--${displayRole}`, { featured, 'typographic-card':typographicVariety }]}
   href={localizedPath(lang,'products',productId)}
   data-product-card
   data-product-id={productId}
   data-product-family={family || undefined}
 >
-  <ProductMedia product={product} lang={lang} sizes={imageSizes} />
+  {typographicVariety
+    ? <div class="variety-panel"><span>{portfolioLabel}</span><strong>{product.names[lang]}</strong></div>
+    : <ProductMedia product={product} lang={lang} sizes={imageSizes} />}
   <div class="product-card-copy">
     <div class="product-card-meta">
       <span class="product-card-kicker">{portfolioLabel}</span>
