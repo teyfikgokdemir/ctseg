@@ -14,7 +14,7 @@ import CommercialRequestForm from './CommercialRequestForm.astro';
 import HomepagePromoVideo from './HomepagePromoVideo.astro';
 import TradeMarquee from './TradeMarquee.astro';
 import { FEATURE_IMAGE_WIDTHS, HOME_HERO_IMAGE, HOME_HERO_WIDTHS, generatedImageSrcset } from '../lib/responsive-images';
-import { homeTradeVisualKeys, localizedTradeVisual, serviceTradeVisualKeys } from '../data/trade-visuals';
+import { localizedTradeVisual, serviceTradeVisualKeys } from '../data/trade-visuals';
 import {
   aboutEnhancement, guides, homeEnhancement, marketsDetail, processPages, scenarioPages
 } from '../data/completion';
@@ -272,7 +272,6 @@ const completionMarkets = marketsDetail[lang];
 const platform = tradePlatformCopy[lang];
 const contact = contactCopy[lang];
 const homepageHero = localizedTradeVisual('global-trade-hero',lang);
-const homepageSectorVisuals = homeTradeVisualKeys.map((visualKey)=>localizedTradeVisual(visualKey,lang));
 const contactWithIntent = (intent:'buyer_request'|'supplier_market_entry'|'external_trade_desk') => `${sectionHref('contact')}?intent=${intent}${intent==='external_trade_desk'?'&direction=other&category=other':''}#commercial-form`;
 const portfolioSectors = getPortfolioSectors(lang);
 const portfolioCopy = portfolioLocaleCopy[lang] || portfolioLocaleCopy.en;
