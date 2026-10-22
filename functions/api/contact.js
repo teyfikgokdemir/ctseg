@@ -90,7 +90,6 @@ export async function onRequestPost(context){
   const apiKey=context.env.RESEND_API_KEY;
   const to=context.env.CONTACT_TO_EMAIL||'info@ctseg.com.tr';
   const from=context.env.CONTACT_FROM_EMAIL;
-  if(!apiKey||!from)return json({code:'email_unavailable'},503);
   // Cloudflare Turnstile tokens are short-lived and single-use. Validate every
   // real request before contacting Resend, including requests via pages.dev.
   const secret=context.env.TURNSTILE_SECRET_KEY;
@@ -106,6 +105,7 @@ export async function onRequestPost(context){
     if(verdict.success!==true||verdict.action!=='ctseg_contact'||verdict.hostname!==originHost)
       return json({code:'turnstile_failed'},403);
   }catch{return json({code:'turnstile_unavailable'},503)}
+  if(!apiKey||!from)return json({code:'email_unavailable'},503);
   const lines=[
     'CTSEG commercial assessment request',
     `Intent: ${data.intent}`,
