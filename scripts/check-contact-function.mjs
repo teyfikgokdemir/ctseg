@@ -63,7 +63,7 @@ const atomicLimiter={limit:async()=>({success:++atomicCount<=8})};
 globalThis.fetch=async(url)=>new Response(String(url).includes('/turnstile/v0/siteverify')?JSON.stringify({success:true,hostname:'preview.ctseg.pages.dev',action:'ctseg_contact'}):JSON.stringify({id:'test'}),{status:200});
 try{
   const burst=await Promise.all(Array.from({length:12},(_,index)=>onRequestPost(makeContext({...valid,emailOrPhone:`burst${index}@example.test`},undefined,{
-    RESEND_API_KEY:'test-key',CONTACT_FROM_EMAIL:'CTSEG <forms@example.test>',CONTACT_TO_EMAIL:'info@example.test',CONTACT_RATE_LIMITER:atomicLimiter
+    RESEND_API_KEY:'test-key',CONTACT_FROM_EMAIL:'CTSEG <forms@example.test>',CONTACT_TO_EMAIL:'info@example.test',TURNSTILE_SECRET_KEY:'test-turnstile-secret',CONTACT_RATE_LIMITER:atomicLimiter
   },'203.0.113.42'))));
   if(burst.filter((response)=>response.status===200).length!==8||burst.filter((response)=>response.status===429).length!==4)throw new Error('atomic rate limiter burst contract failed');
 }finally{
