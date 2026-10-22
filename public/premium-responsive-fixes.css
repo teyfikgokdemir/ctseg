@@ -21,6 +21,18 @@ main,.site-header,.site-footer{max-width:100%}
 .process-answer-section,
 .answer-section{background-color:#20231d!important;color:#f4f2eb!important}
 
+/* Page hero to following section gap normalization (strictly within 20px - 80px limit) */
+.page-hero + .platform-sectors,
+.page-hero + section.platform-sectors,
+[data-page-hero] + .platform-sectors,
+[data-page-hero] + section.platform-sectors {
+  padding-top: 36px !important;
+}
+.page-hero + .platform-sectors .section-head,
+[data-page-hero] + .platform-sectors .section-head {
+  margin-top: 0 !important;
+}
+
 /* Default readable copy on light sections (body / paper surfaces) */
 main .section p,
 main .section li,

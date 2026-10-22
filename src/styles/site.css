@@ -5663,3 +5663,18 @@ html[data-locale=vi] :is(.section h2,.section-title,.content-block h2,.side-pane
   html[dir="rtl"] .homepage-trade-hero .hero-copy :is(.eyebrow,h1,.lead){text-align:right!important}
   html[dir="rtl"] .homepage-trade-hero .hero-copy .actions{justify-content:stretch!important}
 }
+
+
+/* 8-SECTOR B2B SUPPLY PORTFOLIO HUB */
+.b2b-sector-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:28px}
+.b2b-sector-card{display:flex;flex-direction:column;min-width:0;border-radius:16px;overflow:hidden;background:#151814!important;border:1px solid rgba(244,241,234,.12)!important}
+.b2b-sector-card__media{display:block;position:relative;aspect-ratio:16/10;overflow:hidden;background:#0e110d}
+.b2b-sector-card__media img{display:block;width:100%;height:100%;object-fit:cover;object-position:center center}
+.b2b-sector-card__body{display:flex;flex-direction:column;flex:1;gap:10px;padding:20px 20px 22px;background:#151814!important;color:#f4f1ea!important}
+.b2b-sector-card__body h3,.b2b-sector-card__body h3 a{margin:0;color:#f4f1ea!important;text-decoration:none}
+.b2b-sector-card__body p{margin:0;color:#dcd7cb!important;opacity:1!important}
+.b2b-sector-card__actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:14px;border-top:1px solid rgba(244,241,234,.1)}
+.b2b-sector-card__explore{color:#c4f000!important;font-weight:650;text-decoration:none}
+.b2b-sector-card__rfq-link{color:#f4f1ea!important;font-weight:600;text-decoration:none}
+@media(max-width:1179px){.b2b-sector-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
+@media(max-width:639px){.b2b-sector-grid{grid-template-columns:minmax(0,1fr);gap:14px}.b2b-sector-card__body{padding:16px 16px 18px}}

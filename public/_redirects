@@ -31,8 +31,8 @@
 /fa/tamin-beynolmelali-iran/ /fa/ 301
 /fr /en/ 301
 /fr/ /en/ 301
-/fr/sourcing/tapis-persans/ /en/sourcing/iranian-carpets/ 301
-/fr/sourcing/tapis-en-soie-noues-main/ /en/sourcing/hand-knotted-silk-carpets/ 301
+/fr/sourcing/tapis-persans/ /en/sourcing/wholesale-textile-sourcing/ 301
+/fr/sourcing/tapis-en-soie-noues-main/ /en/sourcing/wholesale-textile-sourcing/ 301
 /fr/sourcing/sourcing-textile-en-gros/ /en/sourcing/wholesale-textile-sourcing/ 301
 /fr/* /en/ 301
 
@@ -58,3 +58,29 @@
 /sr/o-nama/ /en/about/ 301
 /sr/kontakt/ /en/contact/ 301
 /sr/* /en/ 301
+
+# Retired Iranian & hand-knotted silk carpet sourcing routes -> preserved wholesale textiles routes
+/tr/sourcing/iran-halisi/ /tr/sourcing/toptan-tekstil-tedariki/ 301
+/tr/sourcing/el-dokumasi-ipek-hali/ /tr/sourcing/toptan-tekstil-tedariki/ 301
+/en/sourcing/iranian-carpets/ /en/sourcing/wholesale-textile-sourcing/ 301
+/en/sourcing/hand-knotted-silk-carpets/ /en/sourcing/wholesale-textile-sourcing/ 301
+/de/sourcing/persische-teppiche/ /de/sourcing/textil-grosshandel-beschaffung/ 301
+/de/sourcing/handgeknuepfte-seidenteppiche/ /de/sourcing/textil-grosshandel-beschaffung/ 301
+/it/sourcing/tappeti-persiani/ /it/sourcing/approvvigionamento-tessile-ingrosso/ 301
+/it/sourcing/tappeti-in-seta-annodati-a-mano/ /it/sourcing/approvvigionamento-tessile-ingrosso/ 301
+/fa/sourcing/فرش-ایرانی/ /fa/sourcing/تامین-عمده-منسوجات/ 301
+/fa/sourcing/فرش-ابریشم-دستباف/ /fa/sourcing/تامین-عمده-منسوجات/ 301
+/ru/sourcing/carpets/ /ru/sourcing/textiles/ 301
+/ru/sourcing/hand-knotted-silk-carpets/ /ru/sourcing/textiles/ 301
+/zh/sourcing/carpets/ /zh/sourcing/textiles/ 301
+/zh/sourcing/hand-knotted-silk-carpets/ /zh/sourcing/textiles/ 301
+/vi/sourcing/carpets/ /vi/sourcing/textiles/ 301
+/vi/sourcing/hand-knotted-silk-carpets/ /vi/sourcing/textiles/ 301
+/uk/sourcing/iranian-carpets/ /uk/sourcing/wholesale-textiles/ 301
+/uk/sourcing/silk-carpets/ /uk/sourcing/wholesale-textiles/ 301
+/ro/sourcing/covoare-iraniene/ /ro/sourcing/sourcing-textile-angro/ 301
+/ro/sourcing/covoare-matase-lucrate-manual/ /ro/sourcing/sourcing-textile-angro/ 301
+/bg/sourcing/iranski-kilimi/ /bg/sourcing/sourcing-tekstili-na-edro/ 301
+/bg/sourcing/rachno-takani-koprineni-kilimi/ /bg/sourcing/sourcing-tekstili-na-edro/ 301
+/ar/sourcing/iranian-carpets/ /ar/sourcing/wholesale-textile-sourcing/ 301
+/ar/sourcing/hand-knotted-silk-carpets/ /ar/sourcing/wholesale-textile-sourcing/ 301

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CommercialRequestForm from '../../components/CommercialRequestForm.astro';
+import { getPortfolioSectors, portfolioLocaleCopy } from '../../data/portfolio-sectors';
 import {
   serviceMap, productMap, productProfiles, productGroups, israelProductIds, legalMap, staticPages,
   marketCorridors, howWeWork, scenarios, aboutData, contactData, insightThemes
@@ -67,7 +68,8 @@ const legalSections = type === 'legal' ? legalMap[data.id].sections : [];
 {type === 'static' && data.key === 'products' && <>
   <section class="section he-section-dark"><div class="container">
     <div class="section-head"><p class="eyebrow">פורטפוליו מוצרים מסחריים</p><h2>פורטפוליו שנבחן לפי מפרט ועסקה — לא רק לפי שם מוצר.</h2><p>מקור, דרגת איכות, אריזה, MOQ, מסמכים, שימוש מיועד ותנאי Incoterms מאומתים מחדש בכל RFQ.</p></div>
-    <nav class="he-group-nav" aria-label="קטגוריות">{productGroups.map(g=><a href={`#${g.ids[0]}`}>{g.title}</a>)}</nav>
+    <div class="b2b-sector-grid" id="sectors">{getPortfolioSectors('he').map((sector)=><article class="b2b-sector-card" data-b2b-sector={sector.id}><a class="b2b-sector-card__media" href={sector.href}><img src={sector.image.src} width={sector.image.width} height={sector.image.height} alt={sector.image.alt} loading="lazy" decoding="async" /></a><div class="b2b-sector-card__body"><h3><a href={sector.href}>{sector.title}</a></h3><p>{sector.description}</p><div class="b2b-sector-card__actions"><a class="text-link b2b-sector-card__explore" href={sector.href}>{sector.exploreLabel} ←</a><a class="button button-secondary b2b-sector-card__rfq" href={sector.rfqHref}>{sector.rfqLabel}</a></div></div></article>)}</div>
+    <nav class="he-group-nav" id="catalogue-nuts-dried-fruits" aria-label="קטגוריות">{productGroups.map(g=><a href={`#${g.ids[0]}`}>{g.title}</a>)}</nav>
   </div></section>
   {productGroups.map(group=><section class="section he-section-light" id={group.ids[0]}><div class="container">
     <div class="section-head"><h2>{group.title}</h2><p>{group.lead}</p></div>

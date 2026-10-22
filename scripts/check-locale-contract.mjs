@@ -7,7 +7,7 @@ const active=['tr','en','de','it','fa','ru','zh','vi','uk','ro','bg','he','ar'];
 const switchLocales=[...active];
 const fullSiteLocales=active.filter((code)=>code!=='he');
 const homes={tr:'index.html',en:'en/index.html',de:'de/index.html',it:'it/index.html',fa:'fa/index.html',ru:'ru/index.html',zh:'zh/index.html',vi:'vi/index.html',uk:'uk/index.html',ro:'ro/index.html',bg:'bg/index.html',he:'he/index.html',ar:'ar/index.html'};
-const ruSourcing=['ru/sourcing/carpets/index.html','ru/sourcing/hand-knotted-silk-carpets/index.html','ru/sourcing/textiles/index.html'];
+const ruSourcing=['ru/sourcing/textiles/index.html'];
 const ruCore=[
   'ru/uslugi/index.html','ru/tovary/index.html','ru/rynki/index.html','ru/materialy/index.html','ru/o-kompanii/index.html','ru/kontakty/index.html',
   'ru/uslugi/strategicheskiy-sorsing/index.html','ru/uslugi/poisk-i-verifikatsiya-postavshchikov/index.html',
@@ -49,7 +49,7 @@ const arCore=[
   'ar/how-we-work/index.html','ar/representative-work-scenarios/index.html',
   'ar/trade-products/akbari-pistachio/index.html','ar/insights/strategic-sourcing-vs-procurement/index.html',
   'ar/glass/index.html','ar/glass/float-glass/index.html','ar/glass/markets/gulf-middle-east/index.html',
-  'ar/sourcing/iranian-carpets/index.html','ar/sourcing/hand-knotted-silk-carpets/index.html','ar/sourcing/wholesale-textile-sourcing/index.html'
+  'ar/sourcing/wholesale-textile-sourcing/index.html','ar/natural-oils/index.html'
 ];
 for(const path of arCore){
   if(!existsSync(join(dist,path))){errors.push(`${path}: Arabic parity route missing`);continue}
@@ -127,8 +127,8 @@ if(sitemap.includes('https://ctseg.com.tr/fr/'))errors.push('French URL remains 
 const redirects=readFileSync(join(dist,'_redirects'),'utf8');
 const requiredRedirects=[
   '/fr /en/ 301','/fr/ /en/ 301',
-  '/fr/sourcing/tapis-persans/ /en/sourcing/iranian-carpets/ 301',
-  '/fr/sourcing/tapis-en-soie-noues-main/ /en/sourcing/hand-knotted-silk-carpets/ 301',
+  '/fr/sourcing/tapis-persans/ /en/sourcing/wholesale-textile-sourcing/ 301',
+  '/fr/sourcing/tapis-en-soie-noues-main/ /en/sourcing/wholesale-textile-sourcing/ 301',
   '/fr/sourcing/sourcing-textile-en-gros/ /en/sourcing/wholesale-textile-sourcing/ 301',
   '/fr/* /en/ 301'
 ];

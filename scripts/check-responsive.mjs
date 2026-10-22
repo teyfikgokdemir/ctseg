@@ -139,8 +139,8 @@ try {
   const productionLocaleCount = sourcingLocales.length;
   const rootLocaleCount = productionLocaleCount + 1;
   const sourcingFamilies = {
-    carpets:{tr:'/tr/sourcing/iran-halisi/',en:'/en/sourcing/iranian-carpets/',de:'/de/sourcing/persische-teppiche/',it:'/it/sourcing/tappeti-persiani/',fa:'/fa/sourcing/فرش-ایرانی/',ru:'/ru/sourcing/carpets/',zh:'/zh/sourcing/carpets/',vi:'/vi/sourcing/carpets/',uk:'/uk/sourcing/iranian-carpets/',ro:'/ro/sourcing/covoare-iraniene/',bg:'/bg/sourcing/iranski-kilimi/',ar:'/ar/sourcing/iranian-carpets/'},
-    silk:{tr:'/tr/sourcing/el-dokumasi-ipek-hali/',en:'/en/sourcing/hand-knotted-silk-carpets/',de:'/de/sourcing/handgeknuepfte-seidenteppiche/',it:'/it/sourcing/tappeti-in-seta-annodati-a-mano/',fa:'/fa/sourcing/فرش-ابریشم-دستباف/',ru:'/ru/sourcing/hand-knotted-silk-carpets/',zh:'/zh/sourcing/hand-knotted-silk-carpets/',vi:'/vi/sourcing/hand-knotted-silk-carpets/',uk:'/uk/sourcing/silk-carpets/',ro:'/ro/sourcing/covoare-matase-lucrate-manual/',bg:'/bg/sourcing/rachno-takani-koprineni-kilimi/',ar:'/ar/sourcing/hand-knotted-silk-carpets/'},
+    // retired: carpets (now 301 redirected in _redirects)
+    // retired: silk-carpets (now 301 redirected in _redirects)
     textiles:{tr:'/tr/sourcing/toptan-tekstil-tedariki/',en:'/en/sourcing/wholesale-textile-sourcing/',de:'/de/sourcing/textil-grosshandel-beschaffung/',it:'/it/sourcing/approvvigionamento-tessile-ingrosso/',fa:'/fa/sourcing/تامین-عمده-منسوجات/',ru:'/ru/sourcing/textiles/',zh:'/zh/sourcing/textiles/',vi:'/vi/sourcing/textiles/',uk:'/uk/sourcing/wholesale-textiles/',ro:'/ro/sourcing/sourcing-textile-angro/',bg:'/bg/sourcing/sourcing-tekstili-na-edro/',ar:'/ar/sourcing/wholesale-textile-sourcing/'}
   };
   const sourcingAudiences = {
