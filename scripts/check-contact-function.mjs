@@ -10,7 +10,7 @@ const makeContext = (body, origin='https://preview.ctseg.pages.dev', env={}, ip=
 });
 const valid = {
   locale:'en',intent:'buyer_request',supportNeed:'supplier_sourcing',tradeDirection:'cross_border_sourcing',productFamily:'vegetable_oils',name:'Test Buyer',company:'Example Trade Ltd',emailOrPhone:'buyer@example.test',
-  message:'Please assess this sourcing request.',privacy:'accepted',startedAt:String(Date.now()-5000),website:'',
+  message:'Please assess this sourcing request.',privacy:'accepted',startedAt:String(Date.now()-5000),website:'','cf-turnstile-response':'test-turnstile-token',
   pagePath:'/en/contact/',landingPath:'/en/services/strategic-sourcing/',referrerHost:'www.google.com',
   utmSource:'google',utmMedium:'organic',utmCampaign:'supplier-search',utmContent:'',utmTerm:'',clickId:''
 };
@@ -36,19 +36,38 @@ await expectStatus(await onRequestPost(makeContext(valid,undefined,{},'203.0.113
 await expectStatus(await onRequestPost(makeContext({...valid,website:'bot.example'},undefined,{},'203.0.113.14')),200,'honeypot');
 
 const originalFetch=globalThis.fetch;
+const readyEnv={RESEND_API_KEY:'test-key',CONTACT_FROM_EMAIL:'CTSEG <forms@example.test>',CONTACT_TO_EMAIL:'info@example.test',TURNSTILE_SECRET_KEY:'test-turnstile-secret'};
+await expectStatus(await onRequestPost(makeContext({...valid,'cf-turnstile-response':''},undefined,readyEnv,'203.0.113.66')),403,'missing Turnstile token');
+await expectStatus(await onRequestPost(makeContext(valid,'https://ctseg.com.tr',readyEnv,'203.0.113.67')),403,'origin host mismatch');
+// Invalid Turnstile responses must be rejected without calling the email provider.
+for(const verdict of [
+  {success:false,hostname:'preview.ctseg.pages.dev',action:'ctseg_contact'},
+  {success:true,hostname:'attacker.example',action:'ctseg_contact'},
+  {success:true,hostname:'preview.ctseg.pages.dev',action:'wrong_action'}
+]){
+  let sentEmail=false;
+  globalThis.fetch=async(url)=>{
+    if(String(url).includes('/turnstile/v0/siteverify'))return new Response(JSON.stringify(verdict),{status:200});
+    sentEmail=true;return new Response(JSON.stringify({id:'unexpected'}),{status:200});
+  };
+  await expectStatus(await onRequestPost(makeContext(valid,undefined,readyEnv,'203.0.113.68')),403,'invalid Turnstile validation');
+  if(sentEmail)throw new Error('Resend was invoked for invalid Turnstile token');
+}
+globalThis.fetch=originalFetch;
 let outbound;
 globalThis.fetch=async (url,options) => {
+  if(String(url).includes('/turnstile/v0/siteverify'))return new Response(JSON.stringify({success:true,hostname:'preview.ctseg.pages.dev',action:'ctseg_contact'}),{status:200});
   outbound={url,options,body:JSON.parse(options.body)};
   return new Response(JSON.stringify({id:'test'}),{status:200});
 };
 try{
   await expectStatus(await onRequestPost(makeContext(valid,undefined,{
-    RESEND_API_KEY:'test-key',CONTACT_FROM_EMAIL:'CTSEG <forms@example.test>',CONTACT_TO_EMAIL:'info@example.test'
+    RESEND_API_KEY:'test-key',CONTACT_FROM_EMAIL:'CTSEG <forms@example.test>',CONTACT_TO_EMAIL:'info@example.test',TURNSTILE_SECRET_KEY:'test-turnstile-secret'
   },'203.0.113.15')),200,'configured email delivery');
   const emailOutbound=outbound;
   if(emailOutbound?.body?.reply_to!==valid.emailOrPhone)throw new Error('reply-to field mismatch');
   await expectStatus(await onRequestPost(makeContext({...valid,intent:'supplier_market_entry',emailOrPhone:'+90 555 000 00 00'},undefined,{
-    RESEND_API_KEY:'test-key',CONTACT_FROM_EMAIL:'CTSEG <forms@example.test>',CONTACT_TO_EMAIL:'info@example.test'
+    RESEND_API_KEY:'test-key',CONTACT_FROM_EMAIL:'CTSEG <forms@example.test>',CONTACT_TO_EMAIL:'info@example.test',TURNSTILE_SECRET_KEY:'test-turnstile-secret'
   },'203.0.113.20')),200,'configured phone-only producer delivery');
   if('reply_to' in outbound.body)throw new Error('phone-only request must not set reply-to');
 }finally{
@@ -56,10 +75,10 @@ try{
 }
 let atomicCount=0;
 const atomicLimiter={limit:async()=>({success:++atomicCount<=8})};
-globalThis.fetch=async()=>new Response(JSON.stringify({id:'test'}),{status:200});
+globalThis.fetch=async(url)=>new Response(String(url).includes('/turnstile/v0/siteverify')?JSON.stringify({success:true,hostname:'preview.ctseg.pages.dev',action:'ctseg_contact'}):JSON.stringify({id:'test'}),{status:200});
 try{
   const burst=await Promise.all(Array.from({length:12},(_,index)=>onRequestPost(makeContext({...valid,emailOrPhone:`burst${index}@example.test`},undefined,{
-    RESEND_API_KEY:'test-key',CONTACT_FROM_EMAIL:'CTSEG <forms@example.test>',CONTACT_TO_EMAIL:'info@example.test',CONTACT_RATE_LIMITER:atomicLimiter
+    RESEND_API_KEY:'test-key',CONTACT_FROM_EMAIL:'CTSEG <forms@example.test>',CONTACT_TO_EMAIL:'info@example.test',TURNSTILE_SECRET_KEY:'test-turnstile-secret',CONTACT_RATE_LIMITER:atomicLimiter
   },'203.0.113.42'))));
   if(burst.filter((response)=>response.status===200).length!==8||burst.filter((response)=>response.status===429).length!==4)throw new Error('atomic rate limiter burst contract failed');
 }finally{
