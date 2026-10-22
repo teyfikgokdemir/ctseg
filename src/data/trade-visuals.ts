@@ -5,7 +5,6 @@ export type TradeVisualKey =
   | 'global-trade-hero'
   | 'food-oils'
   | 'nuts-dates'
-  | 'carpets-textiles'
   | 'textiles-inputs'
   | 'strategic-sourcing'
   | 'supplier-verification'
@@ -84,24 +83,6 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
       ro:'Mostre de nuci și fructe uscate pentru evaluarea calității și clasificării',
       bg:'Мостри на ядки и сушени плодове за оценка на качеството и класа',
       sr:'Uzorci orašastih plodova i suvog voća za procenu kvaliteta i klase'}
-  },
-  'carpets-textiles':{
-    key:'carpets-textiles',source:'/images/ctseg-iranian-carpets-editorial.webp',sector:'carpets and textiles',
-    intendedUsage:['homepage sector card','Iranian carpet specialist hero','silk carpet specialist hero'],aspectRatio:'3 / 2',focalPosition:'center 54%',width:1536,height:1024,priority:'support',
-    reusePolicy:'single-sector-card-or-specialist-hero',
-    alt:{
-      tr:'Malzeme ve dokuma değerlendirmesini temsil eden el dokuması halılar',
-      en:'Hand-knotted carpets representing material and weave assessment',
-      de:'Handgeknüpfte Teppiche als Darstellung der Material- und Webartprüfung',
-      it:'Tappeti annodati a mano per rappresentare la valutazione di materiali e tessitura',
-      ru:'Ковры ручной работы для оценки материалов и качества плетения',
-      fa:'فرش‌های دستباف به‌عنوان تصویری از بررسی مواد و کیفیت بافت'
-    ,
-      zh:'波斯传统手工地毯纹样细节与精细打结工艺鉴别',
-      vi:'Chi tiết kết cấu hoa văn và tay nghề dệt thảm thủ công truyền thống',
-      ro:'Detalii de covoare înnodate manual pentru evaluarea materialului și a țesăturii',
-      bg:'Детайли от ръчно тъкани килими за оценка на материала и изработката',
-      sr:'Detalji ručno čvorovanih tepiha za procenu materijala i izrade'}
   },
   'strategic-sourcing':{
     key:'strategic-sourcing',source:'/images/ctseg-2026/supplier-rfq-comparison.webp',sector:'strategic sourcing and RFQ comparison',
@@ -213,8 +194,6 @@ export const tradeVisuals:Record<TradeVisualKey,TradeVisual> = {
   }
 };
 
-export const homeTradeVisualKeys = ['food-oils','nuts-dates','carpets-textiles','textiles-inputs'] as const;
-
 export const serviceTradeVisualKeys = {
   'strategic-sourcing':'strategic-sourcing',
   'supplier-verification':'supplier-verification',
@@ -224,8 +203,6 @@ export const serviceTradeVisualKeys = {
 } as const;
 
 export const sourcingTradeVisualKeys = {
-  'iranian-carpets':'carpets-textiles',
-  'silk-carpets':'carpets-textiles',
   'wholesale-textiles':'textiles-inputs'
 } as const;
 
@@ -233,7 +210,6 @@ const ukrainianTradeVisualAlt:Record<TradeVisualKey,string> = {
   'global-trade-hero':'Порт і зразки продукції, що представляють міжнародні торговельні потоки',
   'food-oils':'Немарковані зразки рослинної олії та харчової сировини для комерційного оцінювання',
   'nuts-dates':'Зразки горіхів і сухофруктів для оцінювання якості та сорту',
-  'carpets-textiles':'Килими ручної роботи для оцінювання матеріалів і якості плетіння',
   'textiles-inputs':'Зразки тканин, рушників і текстилю на столі комерційного оцінювання',
   'strategic-sourcing':'Зразки продукції та документи для порівняльного оцінювання постачальників',
   'supplier-verification':'Документи й виробничі дані для перевірки постачальника',
@@ -246,7 +222,6 @@ const arabicTradeVisualAlt:Record<TradeVisualKey,string> = {
   'global-trade-hero':'ميناء وعينات منتجات تمثل تدفقات التجارة الدولية',
   'food-oils':'عينات غير موسومة من الزيوت النباتية ومكونات غذائية للتقييم التجاري',
   'nuts-dates':'عينات من المكسرات والفواكه المجففة لتقييم الجودة والدرجة',
-  'carpets-textiles':'سجاد معقود يدوياً لتقييم المواد وجودة النسيج',
   'textiles-inputs':'عينات أقمشة ومناشف ومنسوجات على طاولة تقييم تجاري',
   'strategic-sourcing':'مختص مشتريات يقارن خيارات التوريد الصناعي وعروض RFQ',
   'supplier-verification':'مختص جودة وتوريد يجري التحقق من المنتج الصناعي والمورد',
