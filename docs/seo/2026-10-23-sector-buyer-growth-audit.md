@@ -15,9 +15,9 @@ Evidence samples:
 
 | Existing URL | Impr. | Clicks | Avg. pos. | Interpretation / action |
 |---|---:|---:|---:|---|
-| /en/insights/strategic-sourcing-vs-procurement/ | 182 | 0 | 62.04 | Broad informational intent; internal links to concrete RFQ solutions |
-| /de/glass/mirror-decorative-glass/ | 109 | 0 | 8.93 | Stronger topical visibility; inspect queries/snippet and add buyer specification guidance |
-| /glass/duzce-float-glass/ | 50 | 0 | 5.98 | High opportunity for buyer conversion; verify brand and technical claims before changes |
+| /en/insights/strategic-sourcing-vs-procurement/ | 182 | 0 | 62.04 | Page+query shows **178 impressions for `strategic procurement and logistics`** (0 clicks, avg. pos. 63.31); poor match, not a proven commercial keyword opportunity. |
+| /de/glass/mirror-decorative-glass/ | 109 | 0 | 8.93 | **107/109 impressions are for unrelated `herstellernetzwerk asien`**; do NOT infer mirror-buying demand from the page total. Fix intent alignment and verify indexing first. |
+| /glass/duzce-float-glass/ | 50 | 0 | 5.98 | Only one impression is visible for `duzce cam` in page+query breakout; remaining query volume is unreported/anonymized. Do not attribute all 50 to buyer-intent glass searches. |
 | /en/glass/architectural-project-glass/ | 50 | 0 | 39.14 | Add project specification and compliance selection guidance |
 | /en/glass/tempered-glass/ | 31 | 1 | 12.45 | Reinforce quote inputs: thickness, size, EN requirements and destination |
 | /ru/materialy/torgovyi-dom-ili-posrednik-komissioner/ | 32 | 0 | 9.75 | Non-transactional; internally link to RFQ and due-diligence |
@@ -27,7 +27,7 @@ Evidence samples:
 | /en/glass/laminated-glass/ | 16 | 0 | 24.06 | Technical quote/specification improvement |
 | /en/glass/low-e-coated-glass/ | 15 | 0 | 25.73 | Technical quote/specification improvement |
 
-**Rule:** Recheck Search Console by query + page for any specific rewrite; positions shown above are period averages and are *not* live ranking assertions.
+**Important query-level correction:** High page impressions are not proof of relevant buyer demand. GSC page+query samples above expose query mismatch and partially withheld queries. Prioritize intent alignment, not raw impression totals.\n\n**Rule:** Recheck Search Console by query + page for any specific rewrite; positions shown above are period averages and are *not* live ranking assertions.
 
 ## 2. Eight-sector buyer-intent keyword clusters (hypotheses, not verified search volume)
 
