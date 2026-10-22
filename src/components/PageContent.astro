@@ -1173,7 +1173,7 @@ const verifiedLater = {
         <div class="homepage-hero-stage">
           <div class="hero-copy">
             <p class="eyebrow">{platform.eyebrow}</p>
-            {lang === 'tr' ? <h1 class="home-hero-title home-hero-title--tr"><span>Türkiye’den dünyaya.</span><span>Dünyadan doğru üreticiye.</span></h1> : <h1>{platform.title}</h1>}
+            {lang === 'tr' ? <h1 class="home-hero-title home-hero-title--tr"><span>Türkiye’den dünyaya.</span><br /><span>Dünyadan doğru üreticiye.</span></h1> : <h1>{platform.title}</h1>}
             <p class="lead">{platform.lead}</p>
             <div class="hero-proof-pills" aria-label="CTSEG trade capabilities">
               {h.trust.map((item:string) => <span>{item}</span>)}
@@ -1375,7 +1375,7 @@ const verifiedLater = {
 
 {key === 'products' && !id && (
   <>
-    <PageHero lang={lang} eyebrow={t.products} title={copy.productsTitle} lead={copy.productsLead} />
+    <PageHero lang={lang} eyebrow={t.products} title={copy.productsTitle} lead={lang === 'tr' ? 'Camdan kozmetik hammaddelerine kadar B2B ticari tedarik alanlarını keşfedin.' : copy.productsLead} dedupeHeading={true} />
     <section class="section platform-sectors" id="sectors" data-platform-sectors><div class="container">
       <div class="section-head"><p class="eyebrow">{portfolioCopy.kicker}</p><h2>{portfolioCopy.title}</h2><p>{portfolioCopy.lead}</p></div>
       <div class="b2b-sector-grid">
@@ -1397,7 +1397,7 @@ const verifiedLater = {
     <section class="section catalogue-section" id="catalogue-nuts-dried-fruits"><div class="container">
       <div class="section-head catalogue-main-head"><p class="eyebrow">{portfolioCopy.nutsSectionKicker}</p><h2>{portfolioCopy.nutsSectionTitle}</h2><p>{portfolioCopy.nutsSectionLead}</p></div>
       <details class="catalogue-disclosure">
-        <summary class="catalogue-disclosure__toggle"><span>{lang === 'tr' ? '18 kuruyemiş ve kuru meyve ürününü incele' : lang === 'en' ? 'Explore 18 nuts and dried-fruit products' : `${t.readMore} · 18`}</span><span aria-hidden="true" class="catalogue-disclosure__icon">⌄</span></summary>
+        <summary class="catalogue-disclosure__toggle"><span>{lang === 'tr' ? '18 kuruyemiş ve kuru meyve ürününü incele' : lang === 'en' ? 'Explore 18 nuts and dried-fruit products' : `${t.readMore} · 18`}</span><span aria-hidden="true" class="catalogue-disclosure__icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 9 7 7 7-7" /></svg></span></summary>
         <div class="catalogue-disclosure__body">
       {(lang === 'tr' || lang === 'en') && <div class="catalog-download">
         <div><p class="eyebrow">PDF · 18 {lang === 'tr' ? 'ürün' : 'products'}</p><h2>{lang === 'tr' ? 'CTSEG Ticari Ürünler Kataloğu' : 'CTSEG Trade Products Catalogue'}</h2></div>
@@ -2099,7 +2099,7 @@ const verifiedLater = {
 
 {key === 'about' && (
   <>
-    <PageHero lang={lang} eyebrow={t.about} title={copy.aboutTitle} lead={copy.aboutLead} />
+    <PageHero lang={lang} eyebrow={t.about} title={copy.aboutTitle} lead={copy.aboutLead} dedupeHeading={true} />
     <section class="section company-profile-section"><div class="container content-grid">
       <div class="prose">
         <div class="content-block">
@@ -2210,7 +2210,7 @@ const verifiedLater = {
 
 {key === 'how-we-work' && processPage && (
   <>
-    <PageHero lang={lang} eyebrow="CTSEG" title={processPage.title} lead={processPage.description} />
+    <PageHero lang={lang} eyebrow={lang === 'tr' ? 'Çalışma yöntemimiz' : processPage.title} title={processPage.title} lead={processPage.description} dedupeHeading={true} />
     <section class="section process-overview-section"><div class="container">
       <ol class="detailed-process">{processPage.steps.map((step,index)=><li><span>{indexLabel(index)}</span><h2>{step}</h2></li>)}</ol>
       <div class="role-boundary"><strong>{processLabels.boundary}</strong><p>{processPage.role}</p></div>
