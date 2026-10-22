@@ -819,3 +819,50 @@ html body main .b2b-sector-card__actions a{
   align-items:center;
   min-height:40px;
 }
+
+/* Markets page: keep the poultry-feed feature proportional to its content. */
+html body main .poultry-market-card{
+  padding-block:clamp(32px,3.6vw,56px)!important;
+}
+html body main .poultry-market-card__grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:clamp(28px,4.5vw,66px)!important;
+  max-width:1320px!important;
+}
+html body main .poultry-market-card__copy{
+  padding:0!important;
+  min-width:0!important;
+}
+html body main .poultry-market-card__copy h2{
+  width:100%!important;
+  max-width:100%!important;
+  font-size:clamp(1.6rem,2.35vw,2.25rem)!important;
+  line-height:1.2!important;
+  letter-spacing:-.02em!important;
+}
+html body main .poultry-market-card__copy p:not(.eyebrow){
+  font-size:clamp(.96rem,1.08vw,1.07rem)!important;
+  line-height:1.55!important;
+}
+html body main .poultry-market-card__grid img{
+  display:block!important;
+  width:100%!important;
+  height:clamp(290px,27vw,410px)!important;
+  min-height:0!important;
+  max-height:410px!important;
+  border-radius:16px!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
+@media(max-width:760px){
+  html body main .poultry-market-card__grid{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:24px!important;
+  }
+  html body main .poultry-market-card__grid img{
+    height:clamp(210px,60vw,300px)!important;
+    max-height:300px!important;
+  }
+}
