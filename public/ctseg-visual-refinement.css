@@ -284,3 +284,58 @@ html body main .catalogue-grid .product-card .product-media img {
   html body main .market-corridor-teaser,
   html body main .b2b-sector-card { transition: none !important; }
 }
+
+/* Less artificial heading wrapping throughout the site: keep titles readable
+   while letting long languages wrap naturally instead of clipping. */
+@media (min-width: 1200px) {
+  html body main .section .section-head h2,
+  html body main .section:not(.markets-editorial) .section-head h2 {
+    width: 100% !important;
+    max-width: min(100%, 1180px) !important;
+    font-size: clamp(28px, 2.35vw, 39px) !important;
+    line-height: 1.16 !important;
+    text-wrap: balance !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+    hyphens: none !important;
+  }
+  html body main .page-hero:not(.product-page-hero) .page-hero-copy {
+    max-width: 1240px !important;
+  }
+  html body main .page-hero:not(.product-page-hero) h1 {
+    max-width: 100% !important;
+    font-size: clamp(29px, 2.4vw, 42px) !important;
+    line-height: 1.15 !important;
+  }
+  html body main .page-hero:not(.product-page-hero) .lead {
+    max-width: 1100px !important;
+  }
+}
+
+/* Process stages are informational, not links. Numbering is not a CTA. */
+html body main .process-section .process-rail li {
+  cursor: default !important;
+  transition: none !important;
+}
+html body main .process-section .process-rail li:hover {
+  padding-inline-start: 24px !important;
+  padding-inline-end: 22px !important;
+  background: transparent !important;
+}
+html body main .process-section .process-rail .process-step-number {
+  display: inline-flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  color: #c4f000 !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .06em;
+}
+@media (max-width: 719px) {
+  html body main .process-section .process-rail li:hover {
+    padding-inline-start: 18px !important;
+    padding-inline-end: 18px !important;
+  }
+}
