@@ -1,7 +1,7 @@
 ---
 import { company, companyCopy, legal, legalIds, localizedPath, ui, type Locale } from '../data/site';
 import { duzceGlassPath, type DuzceGlassLocale } from '../data/duzce-glass';
-import { generatedImageSrc, FOOTER_LOGO_IMAGE } from '../lib/responsive-images';
+import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 const { lang, pageKey } = Astro.props as { lang: Locale; pageKey?: string };
 const t = lang === 'he' ? {
   ...ui.en, home:'בית', services:'סחר גלובלי', products:'תחומי סחר', markets:'שווקים',
@@ -134,7 +134,7 @@ const footerOilsLabel = ({tr:'Doğal Yağlar & Kozmetik Ham Maddeleri',en:'Natur
     <i>{lang === 'uk' ? 'Türkiye ↔ Європа ↔ Близький Схід ↔ Азія' : lang === 'he' ? 'טורקיה ↔ אירופה ↔ המזרח התיכון ↔ אסיה' : lang === 'ar' ? 'Türkiye ↔ أوروبا ↔ الشرق الأوسط ↔ آسيا' : 'Türkiye ↔ Europe ↔ Middle East ↔ Asia'}</i>
   </div>
   <div class="container footer-main">
-    <div class="footer-brand"><a class="brand" href={footerPath('home')}><img src={generatedImageSrc(FOOTER_LOGO_IMAGE,320)} width="1460" height="440" alt="CTSEG Global Trade House" loading="lazy" decoding="async" /></a><p>{description}</p><div class="footer-company"><strong>{lang === 'he' ? 'CTSEG Sanayi ve Ticaret Limited Şirketi' : (company.name[lang] || company.name.en)}</strong><span>{company.foundingYear} · {corporate.footerLocation}</span></div></div>
+    <div class="footer-brand"><a class="brand footer-logo-lockup" href={footerPath('home')}><img src={generatedImageSrc(LOGO_IMAGE,320)} width="1250" height="270" alt="CTSEG" loading="lazy" decoding="async" /><span class="footer-logo-subtitle" aria-hidden="true">{lang === 'he' ? 'בית סחר בינלאומי' : lang === 'ar' ? 'بيت تجارة عالمي' : 'GLOBAL TRADE HOUSE'}</span></a><p>{description}</p><div class="footer-company"><strong>{lang === 'he' ? 'CTSEG Sanayi ve Ticaret Limited Şirketi' : (company.name[lang] || company.name.en)}</strong><span>{company.foundingYear} · {corporate.footerLocation}</span></div></div>
     <nav aria-label={footerNav.portfolio}><strong>{focusedCountryHome ? 'CTSEG' : footerNav.portfolio}</strong>{showGenericPortfolio && <a href={footerPath('products')}>{footerNav.overview}</a>}<a href={footerPath('services','strategic-sourcing')}>{footerNav.sourcing}</a><a href={footerPath('services','market-entry')}>{footerNav.marketEntry}</a>{showGlassLink && <a href={footerGlassHref}>{footerGlassLabel}</a>}<a href={footerOilsHref}>{footerOilsLabel}</a><a href={footerPath('markets')}>{t.markets}</a><a href={footerPath('insights')}>{footerNav.intelligence}</a></nav>
     <nav aria-label={t.contact}><strong>CTSEG</strong><a href={footerPath('about')}>{t.about}</a>{(lang === 'tr' || lang === 'en' || lang === 'fa' || lang === 'zh' || lang === 'vi' || lang === 'ro' || lang === 'bg' || lang === 'sr' || lang === 'he' || lang === 'ar') && <a href={footerPath('how-we-work')}>{lang === 'tr' ? 'Nasıl çalışıyoruz?' : lang === 'fa' ? 'چگونه کار می‌کنیم؟' : lang === 'zh' ? '运作模式' : lang === 'vi' ? 'Phương thức hoạt động' : lang === 'ro' ? 'Cum lucrăm' : lang === 'bg' ? 'Как работим' : lang === 'sr' ? 'Kako radimo' : lang === 'he' ? 'איך אנחנו עובדים' : lang === 'ar' ? 'كيف نعمل؟' : 'How we work'}</a>}<a href={footerPath('contact')}>{t.contact}</a><a href={`mailto:${company.email}`}>{company.email}</a><a href="https://t.me/teyfikgokdemir" target="_blank" rel="noopener noreferrer" aria-label="Telegram">Telegram</a></nav>
   </div>
@@ -157,5 +157,55 @@ const footerOilsLabel = ({tr:'Doğal Yağlar & Kozmetik Ham Maddeleri',en:'Natur
   html[data-locale="he"] .footer-statement>span{font-size:13px!important;letter-spacing:0!important;text-transform:none!important}
   html[data-locale="he"] .footer-statement>i{font-size:13px!important;letter-spacing:0!important;text-transform:none!important}
   html[data-locale="he"] .footer-main nav a,html[data-locale="he"] .footer-bottom{font-size:14px!important;line-height:1.5!important}
+
+  /* CTSEG footer logo: transparent lockup, same monogram/wordmark as header.
+     Keep the descriptor outside the vector so it remains legible on dark surfaces. */
+  .site-footer .footer-brand .footer-logo-lockup{
+    display:inline-flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    justify-content:center!important;
+    gap:3px!important;
+    width:fit-content!important;
+    max-width:100%!important;
+    min-width:0!important;
+    height:auto!important;
+    padding:0!important;
+    background:transparent!important;
+    border:0!important;
+    box-shadow:none!important;
+    text-decoration:none!important;
+  }
+  .site-footer .footer-brand .footer-logo-lockup>img{
+    display:block!important;
+    width:206px!important;
+    max-width:100%!important;
+    height:auto!important;
+    aspect-ratio:1250 / 270!important;
+    object-fit:contain!important;
+    filter:none!important;
+    -webkit-filter:none!important;
+  }
+  .site-footer .footer-brand .footer-logo-subtitle{
+    display:block!important;
+    align-self:flex-start;
+    margin-inline-start:53px;
+    color:#d4af7c!important;
+    font-size:9px!important;
+    font-weight:650!important;
+    line-height:1.35!important;
+    letter-spacing:.16em!important;
+    text-align:center;
+    white-space:nowrap;
+  }
+  html[lang^="he"] .site-footer .footer-logo-subtitle,
+  html[lang^="ar"] .site-footer .footer-logo-subtitle{
+    font-size:12px!important;
+    letter-spacing:0!important;
+  }
+  @media(max-width:700px){
+    .site-footer .footer-brand .footer-logo-lockup>img{width:184px!important}
+    .site-footer .footer-brand .footer-logo-subtitle{margin-inline-start:47px;font-size:8.5px!important}
+  }
 </style>
 <script src="/premium-motion.js" defer></script>
