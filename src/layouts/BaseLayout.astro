@@ -158,7 +158,7 @@ const organization = {
     addressRegion:company.addressRegion,
     addressCountry:company.addressCountry
   },
-  url:'https://ctseg.com.tr/',logo:'https://ctseg.com.tr/images/ctseg-logo-transparent.png',
+  url:'https://ctseg.com.tr/',logo:'https://ctseg.com.tr/images/ctseg-brand-light.svg',
   email:company.email,telephone:company.phone,
   areaServed:lang === 'he' ? ['Israel','Türkiye','International'] : lang === 'uk' ? ['Україна','Туреччина','Європа','Близький Схід','Азія','Міжнародні ринки'] : lang === 'ar' ? ['Türkiye','الخليج','الشرق الأوسط','أوروبا','آسيا','الأسواق الدولية'] : ['Türkiye','Europe','Middle East','Asia','International'],
   knowsLanguage:activeLocales,
@@ -218,7 +218,7 @@ const heroSrcset = generatedImageSrcset(HOME_HERO_IMAGE,HOME_HERO_WIDTHS);
     <link rel="canonical" href={canonicalUrl} />
     {alternateCodes.map((code) => alternates[code as Locale] && <link rel="alternate" hreflang={code} href={alternates[code as Locale]} />)}
     {alternateCodes.includes('en') && alternates.en && <link rel="alternate" hreflang="x-default" href={alternates.en} />}
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.svg?v=20261025" type="image/svg+xml" />
     <link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
     {pageKey === 'home' && ['tr','en'].includes(String(lang)) && !noindex && <link
