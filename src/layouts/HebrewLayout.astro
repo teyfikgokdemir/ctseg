@@ -32,17 +32,17 @@ const schema = article ? {
 <link rel="canonical" href={canonical} /><link rel="alternate" hreflang="he" href={canonical} />
 {!article && alternates.map(([code,,href]) => <link rel="alternate" hreflang={code} href={href} />)}
 {!article && <link rel="alternate" hreflang="x-default" href="https://ctseg.com.tr/en/" />}
-<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon.svg?v=20261025" type="image/svg+xml" />
 <link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
 <meta property="og:type" content={article?'article':'website'} /><meta property="og:title" content={title} />
 <meta property="og:description" content={description} /><meta property="og:url" content={canonical} />
-<meta property="og:locale" content="he_IL" /><meta property="og:image" content="https://ctseg.com.tr/images/ctseg-logo-transparent.png" />
+<meta property="og:locale" content="he_IL" /><meta property="og:image" content="https://ctseg.com.tr/images/ctseg-global-trade-hero-new.webp" />
 <script type="application/ld+json" set:html={JSON.stringify([organization,schema])}></script>
 </head>
 <body class="he-site">
 <header class="he-header">
-<a class="he-brand" href="/he/" aria-label="CTSEG"><img src="/images/ctseg-logo-transparent.png" alt="CTSEG" width="220" height="71" /></a>
+<a class="he-brand" href="/he/" aria-label="CTSEG"><img src="/images/ctseg-brand-header.svg" alt="CTSEG" width="1250" height="270" /></a>
 <nav class="he-nav" aria-label="ניווט ראשי"><a href="/he/#sourcing">איתור ספקים</a><a href="/he/#private-label">מותג פרטי</a><a href="/he/#market-entry">כניסה לשוק</a><a href="/he/#insights">תובנות</a><a class="he-nav-cta" href="/he/#contact">שליחת בקשה</a></nav>
 {article
   ? <a class="he-lang he-lang-home" href="/he/" aria-label="חזרה למרכז ישראל וטורקיה"><span>HE</span></a>
@@ -50,7 +50,7 @@ const schema = article ? {
 </header>
 <main><slot /></main>
 <footer class="he-footer">
-<div><img src="/images/ctseg-logo-transparent.png" alt="CTSEG" width="180" height="58" /><p>סחר B2B דו־כיווני, איתור ספקים, אימות יצרנים וכניסה לשווקים בין ישראל לטורקיה.</p><strong>CTSEG Sanayi ve Ticaret Limited Şirketi</strong><span>Tuzla, İstanbul, Türkiye · 2022</span></div>
+<div><img src="/images/ctseg-brand-footer.svg" alt="CTSEG Global Trade House" width="1460" height="440" /><p>סחר B2B דו־כיווני, איתור ספקים, אימות יצרנים וכניסה לשווקים בין ישראל לטורקיה.</p><strong>CTSEG Sanayi ve Ticaret Limited Şirketi</strong><span>Tuzla, İstanbul, Türkiye · 2022</span></div>
 <div><strong>CTSEG</strong><a href="mailto:info@ctseg.com.tr">info@ctseg.com.tr</a><a href="https://wa.me/905456782655" rel="noopener">WhatsApp</a></div>
 {!article && <div><strong>שפות</strong>{alternates.map(([code,label,href]) => <a href={href} lang={code} hreflang={code}>{label}</a>)}</div>}
 </footer>
