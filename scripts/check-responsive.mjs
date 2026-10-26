@@ -181,7 +181,8 @@ try {
   for (const testCase of cases) {
     testCase.persian = false;
     const page = await browser.newPage({ viewport:{ width:testCase.width, height:testCase.height } });
-    const navigationResponse = await page.goto(`http://127.0.0.1:4321${testCase.path}`, { waitUntil:'networkidle' });
+    // Turnstile may keep network connections open; readiness is verified below via images and layout assertions.
+    const navigationResponse = await page.goto(`http://127.0.0.1:4321${testCase.path}`, { waitUntil:'domcontentloaded' });
     if (!navigationResponse || navigationResponse.status() !== 200) {
       failures.push(`${testCase.name}: expected HTTP 200, received ${navigationResponse?.status() ?? 'no response'}`);
     }
@@ -614,6 +615,21 @@ try {
     }));
     const dynamicUx=await page.evaluate(async()=>{const maxScroll=document.documentElement.scrollHeight-window.innerHeight;document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,Math.min(700,maxScroll));await new Promise((r)=>setTimeout(r,120));window.dispatchEvent(new Event('scroll'));document.dispatchEvent(new Event('scroll'));const back=document.querySelector('[data-back-to-top]');if(back&&(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop)>180){back.setAttribute('aria-hidden','false');back.tabIndex=0;}const header=document.querySelector('.site-header,.fa-header');const box=header?.getBoundingClientRect();const state={backVisible:back?(maxScroll<200?true:back.getAttribute('aria-hidden')==='false'&&back.tabIndex===0):true,headerAtTop:header?Math.abs(box.top)<=1:true};window.scrollTo(0,0);document.documentElement.style.removeProperty('scroll-behavior');return state});
     await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:!testCase.openMenu });
+    // Regression: the RFQ qualification screen must actually reveal the contact step.
+    // This verifies live DOM behavior, not merely the presence of hidden form fields.
+    if (['desktop-tr-contact','mobile-en-contact'].includes(testCase.name)) {
+      const commercial=page.locator('[data-commercial-form]');
+      await commercial.locator('[name="intent"]').selectOption('buyer_request');
+      await commercial.locator('[name="supportNeed"]').selectOption('supplier_sourcing');
+      await commercial.locator('[name="tradeDirection"]').selectOption('cross_border_sourcing');
+      await commercial.locator('[name="productFamily"]').selectOption('vegetable_oils');
+      await commercial.locator('[data-reveal-contact-step]').click();
+      if (!(await commercial.locator('[data-contact-step]').isVisible()) ||
+          !(await commercial.locator('[name="name"]').isVisible()) ||
+          (await commercial.locator('[data-reveal-contact-step]').isVisible())) {
+        failures.push(`${testCase.name}: RFQ qualification did not unlock contact fields`);
+      }
+    }
     let persianNavWorks = true;
     if (testCase.verifyPersianNav) {
       const [targetResponse] = await Promise.all([
@@ -787,7 +803,7 @@ try {
         sourcingChecks++;
         const path = routes[lang];
         const page = await browser.newPage({viewport:{width:viewport.width,height:viewport.height}});
-        const response = await page.goto(`http://127.0.0.1:4321${encodeURI(path)}`,{waitUntil:'networkidle'});
+        const response = await page.goto(`http://127.0.0.1:4321${encodeURI(path)}`,{waitUntil:'domcontentloaded'});
         if (response?.status() !== 200) failures.push(`sourcing ${family}/${lang}/${viewport.name}: HTTP ${response?.status() ?? 'none'}`);
         await page.addStyleTag({content:'*,*:before,*:after{animation:none!important;transition:none!important}'});
         await page.evaluate(async()=>{
