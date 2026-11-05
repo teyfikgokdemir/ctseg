@@ -13,18 +13,19 @@
 ## What CTSEG does
 
 CTSEG operates as an independent two-way B2B global trade gateway and strategic sourcing house based in Istanbul, Türkiye.
-1. Outbound Export Expansion: CTSEG helps Turkish and regional manufacturers enter high-value European, Middle Eastern, Chinese, and Asian markets by qualifying buyers, structuring cross-border contracts, and managing commercial trade corridors.
-2. Inbound Strategic Sourcing & Nearshoring: CTSEG supports international industrial buyers and importers with on-site factory verification, specification-led RFQs, Technical Data Sheet (TDS) reviews, batch analysis (COA), total cost of ownership (TCO) calculation, and nearshoring coordination in Türkiye and regional trade routes.
+1. Outbound Export Expansion: CTSEG helps Turkish and regional manufacturers research target markets, qualify prospective buyers, align commercial requirements, and coordinate cross-border trade corridors.
+2. Inbound Strategic Sourcing & Nearshoring: CTSEG helps international industrial buyers and importers define requirements, research suppliers, compare quotations, and coordinate sourcing and nearshoring in Türkiye and regional trade routes. Depending on the agreed scope, supplier consent, and available records, work may also include factory visits, Technical Data Sheet (TDS) review, Certificate of Analysis (COA) review, and total cost of ownership (TCO) modeling.
 
 ## What CTSEG does not do
 
-CTSEG is not a speculative broker, transactional web shop, or seller of unverified spot inventory. Every commercial mandate is qualification-driven, backed by verified producer credentials, batch quality documentation, and bilateral trade compliance.
+CTSEG is an independent trade and sourcing coordinator, not a transactional web shop or seller of spot inventory. Each engagement is scoped to the buyer's or producer's needs and the evidence available. Supplier credentials, product documentation, and trade requirements can be reviewed or coordinated where agreed and available; their coverage varies by project. CTSEG does not guarantee suppliers, buyers, product quality, regulatory compliance, prices, savings, shipments, or commercial outcomes. Obtain independent legal, tax, and regulated financial advice where needed.
 
 ## Sourcing & Buyer services
 
 - Requirement definition and verified supplier discovery
-- On-site factory audits and supplier legitimacy verification
-- Technical Data Sheet (TDS) and batch Certificate of Analysis (COA) audit
+- Supplier due diligence and verification scoped to the engagement and available evidence
+- Coordination of factory visits where feasible and with supplier consent
+- Review of supplied Technical Data Sheets (TDS) and batch Certificates of Analysis (COA), with verification scope agreed per project
 - Structured RFQ preparation and multi-supplier bid comparison matrix
 - Total Cost of Ownership (TCO) modeling including freight, tariffs, and risk
 - Nearshoring advisory for European buyers shifting procurement to Türkiye
@@ -34,7 +35,7 @@ CTSEG is not a speculative broker, transactional web shop, or seller of unverifi
 - Export market-readiness and technical specification alignment
 - Target-market research (EU, UK, Middle East, China, Southeast Asia)
 - Vetted B2B buyer matching and commercial introduction
-- Contract drafting, letter of credit (L/C) structuring, and Incoterms delivery advisory
+- Coordination of commercial documents, letter-of-credit processes, and Incoterms with the relevant parties; independent legal and financial advice may be required
 - Bilateral trade corridor execution between Türkiye, Europe, and Asia
 
 ## Sectors & Portfolios
