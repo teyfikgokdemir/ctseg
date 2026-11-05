@@ -13,15 +13,14 @@ npm run check:seo
 npm run check:form
 npm run check:images
 npm run check:locales
+npm run check:performance
 npm run check:responsive
 npm run validate
 ```
 
 ## Locale and intent architecture
 
-Full-site locales: Turkish, English, German, Italian, Persian, Russian, Chinese and Vietnamese.
-
-A focused Ukrainian entry is published at `/uk/` without promoting Ukrainian into the full generic route matrix.
+The active locale registry contains 13 languages: Turkish, English, German, Italian, Persian, Russian, Chinese, Vietnamese, Ukrainian, Romanian, Bulgarian, Hebrew and Arabic. Hebrew is a focused `/he/` trade hub; the other 12 locales use the full route matrix. Ukrainian is part of the full site.
 
 Locale roots are intent-specific where appropriate. They must not be forced into one translation hreflang cluster when commercial search intent differs.
 

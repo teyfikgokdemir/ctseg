@@ -272,7 +272,8 @@ for (const file of htmlFiles) {
     errors.push(`${label}: premium homepage hero missing`);
   }
   const imagePreloadCount = (html.match(/rel="preload" as="image"/g) || []).length;
-  if (imagePreloadCount !== (isGenericHomepage ? 1 : 0)) errors.push(`${label}: unexpected responsive image preload count ${imagePreloadCount}`);
+  const expectsImagePreload = isHomepage && label !== 'fa/index.html';
+  if (imagePreloadCount !== (expectsImagePreload ? 1 : 0)) errors.push(`${label}: unexpected responsive image preload count ${imagePreloadCount}`);
   if (isGenericHomepage) {
     const intentHooks=(html.match(/data-(?:trade|fa)-intent=/g) || []).length;
     if (intentHooks < 3 || !html.includes('buyer_request') || !html.includes('supplier_market_entry') || !html.includes('external_trade_desk')) errors.push(`${label}: three stable commercial intent flows missing`);

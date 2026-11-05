@@ -4,11 +4,16 @@ import { extname, join, resolve } from 'node:path';
 import { chromium } from 'playwright-core';
 
 const executables = [
+  process.env.CHROME_BIN,
   'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
   'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
   'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
-  'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'
-];
+  'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+  '/usr/bin/chromium',
+  '/usr/bin/chromium-browser',
+  '/usr/bin/google-chrome',
+  '/opt/google/chrome/chrome'
+].filter(Boolean);
 const executablePath = executables.find(existsSync);
 if (!executablePath) throw new Error('Chrome or Edge executable was not found.');
 
