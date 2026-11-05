@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main, fix/visual-headings-and-markets-20261022, feat/multilingual-parity-release-qa-20261022]
+    branches: [main]
   pull_request:
-    branches: [main, fix/visual-headings-and-markets-20261022]
+    branches: [main]
 
 concurrency:
   group: ctseg-ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -21,6 +21,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npm audit --audit-level=high
       - run: npm run check:analytics
       - run: npm run build
       - run: npm run check:site
@@ -29,6 +30,7 @@ jobs:
       - run: npm run check:images
       - run: npm run check:locales
       - run: npm run check:parity
+      - run: npm run check:performance
 
   visual-qa:
     name: Responsive visual QA

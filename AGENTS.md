@@ -3,7 +3,7 @@
 ## Project-specific Codex guidance (2026-10-17)
 
 ### Scope and architecture
-Multilingual B2B sourcing Astro: full TR EN DE IT FA RU ZH VI locales; /uk/ is focused entry only. Protect intent-specific locale groups, lead endpoint and rate-limiter.
+Multilingual B2B sourcing Astro: 12 full-site locales (TR EN DE IT FA RU ZH VI UK RO BG AR) and a focused Hebrew trade hub. Protect intent-specific locale groups, lead endpoint and rate-limiter.
 Read the repository README, package scripts, CI workflows, existing project instructions and relevant source files before choosing commands or changes. Treat README claims as context, not as proof of current live behavior.
 
 ### Change safety
@@ -25,7 +25,7 @@ Read the repository README, package scripts, CI workflows, existing project inst
 ## Project-specific Codex instructions (2026-10-17)
 
 ### Project context
-Multilingual B2B Astro: TR EN DE IT FA RU ZH VI and focused /uk/ entry; protect intent-specific hreflang and lead functions.
+Multilingual B2B Astro: 12 full-site locales (TR EN DE IT FA RU ZH VI UK RO BG AR) and focused /he/ hub; protect intent-specific hreflang and lead functions.
 
 ### Read before acting
 Read README, package scripts, CI workflows, existing instructions and affected sources. Do not treat old documentation as proof of live state.
