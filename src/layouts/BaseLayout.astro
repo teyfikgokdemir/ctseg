@@ -221,7 +221,7 @@ const heroSrcset = generatedImageSrcset(HOME_HERO_IMAGE,HOME_HERO_WIDTHS);
     <link rel="icon" href="/favicon.svg?v=20261025" type="image/svg+xml" />
     <link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
-    {pageKey === 'home' && ['tr','en'].includes(String(lang)) && !noindex && <link
+    {pageKey === 'home' && String(lang) !== 'fa' && !noindex && <link
       rel="preload"
       as="image"
       imagesrcset={heroSrcset}
@@ -312,9 +312,13 @@ const heroSrcset = generatedImageSrcset(HOME_HERO_IMAGE,HOME_HERO_WIDTHS);
 
       })();
     </script>
-    <script src="https://teyfikgokdemir.com/cansu-source-beacon.js" data-site="ctseg" defer></script>
+    <script is:inline>
+      if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+        const s1 = document.createElement('script'); s1.src = 'https://teyfikgokdemir.com/cansu-source-beacon.js'; s1.dataset.site = 'ctseg'; s1.defer = true; document.head.appendChild(s1);
+        const s2 = document.createElement('script'); s2.src = 'https://teyfikgokdemir.com/cansu-umami-loader.js'; s2.dataset.site = 'ctseg'; s2.defer = true; document.head.appendChild(s2);
+      }
+    </script>
     <script src="/cansu-events.js" data-site="ctseg" defer></script>
-    <script src="https://teyfikgokdemir.com/cansu-umami-loader.js" data-site="ctseg" defer></script>
 </body>
 </html>
 

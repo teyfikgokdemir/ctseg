@@ -246,8 +246,13 @@
     if (header) gsap.set(header,{ yPercent:0, clearProps:'transform' });
   };
 
-  Promise.all([
-    loadScript('https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js'),
-    loadScript('https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js')
-  ]).then(init).catch(initFallback);
+  const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+  if (!isDesktop) {
+    initFallback();
+  } else {
+    Promise.all([
+      loadScript('https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js'),
+      loadScript('https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js')
+    ]).then(init).catch(initFallback);
+  }
 })();

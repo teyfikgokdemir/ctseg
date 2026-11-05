@@ -2,7 +2,7 @@
   const current = document.currentScript;
   const site = current?.dataset.site;
   const endpoint = current?.dataset.endpoint || 'https://teyfikgokdemir.com/api/conversions';
-  if (!site || !endpoint) return;
+  if (!site || !endpoint || location.hostname === 'localhost' || location.hostname === '127.0.0.1') return;
 
   const context = () => {
     const query = new URLSearchParams(location.search);

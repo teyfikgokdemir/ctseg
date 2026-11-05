@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, resolve } from 'node:path';
+import { gzipSync } from 'node:zlib';
 import lighthouse from 'lighthouse';
 import { launch } from 'chrome-launcher';
 
@@ -16,6 +17,20 @@ const dist = resolve('dist');
 if (!existsSync(dist)) throw new Error('dist/ not found. Run npm run build first.');
 const lighthouseUrl=process.env.LIGHTHOUSE_URL ?? 'http://127.0.0.1:4323/';
 
+const mimeTypes = {
+  '.html': 'text/html; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8',
+  '.mjs': 'text/javascript; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.svg': 'image/svg+xml',
+  '.webp': 'image/webp',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.woff2': 'font/woff2'
+};
+
 let server;
 if (!process.env.LIGHTHOUSE_URL) {
   server = createServer((request,response)=>{
@@ -24,10 +39,21 @@ if (!process.env.LIGHTHOUSE_URL) {
     if (!extname(file)) file=join(file,'index.html');
     if (!existsSync(file)) { response.writeHead(404); response.end('Not found'); return; }
     const extension=extname(file);
-    const type=extension==='.html'?'text/html; charset=utf-8':extension==='.css'?'text/css':
-      extension==='.webp'?'image/webp':extension==='.woff2'?'font/woff2':'application/octet-stream';
-    response.writeHead(200,{'content-type':type});
-    response.end(readFileSync(file));
+    const type=mimeTypes[extension] || 'application/octet-stream';
+    const isStatic = pathname.startsWith('/_astro/') || pathname.startsWith('/fonts/') || pathname.startsWith('/images/') || ['.css','.js','.webp','.woff2','.svg'].includes(extension);
+    const headers = {
+      'content-type': type,
+      ...(isStatic ? { 'cache-control': 'public, max-age=31536000, immutable' } : { 'cache-control': 'no-cache' })
+    };
+    let content = readFileSync(file);
+    const acceptEncoding = request.headers['accept-encoding'] || '';
+    if (acceptEncoding.includes('gzip') && !['.webp','.woff2','.png','.jpg','.jpeg'].includes(extension)) {
+      headers['content-encoding'] = 'gzip';
+      content = gzipSync(content);
+    }
+    headers['content-length'] = content.length;
+    response.writeHead(200, headers);
+    response.end(content);
   });
   await new Promise((resolvePromise)=>server.listen(4323,'127.0.0.1',resolvePromise));
 }
