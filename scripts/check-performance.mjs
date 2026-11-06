@@ -78,7 +78,9 @@ try {
           })).catch(()=>({url:new URL(response.url()).pathname,bytes:0})));
         }
       });
-      await page.goto(`http://127.0.0.1:4322${testCase.path}`,{waitUntil:'networkidle'});
+      // Third-party analytics can keep connections open indefinitely; the
+      // assets used by this audit are loaded by the page's load event.
+      await page.goto(`http://127.0.0.1:4322${testCase.path}`,{waitUntil:'load'});
       await page.waitForTimeout(350);
       const images = await Promise.all(imageResponses);
       const result = await page.evaluate(() => {
