@@ -82,7 +82,7 @@ const arGlass=read('ar/glass/index.html');
 if(!arGlass.includes('الزجاج')||!arGlass.includes('dir="rtl"'))errors.push('Arabic glass hub localization incomplete');
 const arPrivacy=read('ar/privacy/index.html');
 const arCookies=read('ar/cookies/index.html');
-for(const [path,html] of [['ar/privacy/index.html',arPrivacy],['ar/cookies/index.html',arCookies]])if(!html.includes('تعمل خدمات GA4 وClarity'))errors.push(`${path}: Arabic analytics disclosure missing`);
+for(const [path,html] of [['ar/privacy/index.html',arPrivacy],['ar/cookies/index.html',arCookies]])if(!html.includes('أدوات Cansu التحليلية')||!html.includes('الموافقة على التحليلات'))errors.push(`${path}: Arabic analytics disclosure missing`);
 
 const ruHome=read(homes.ru);
 if(!ruHome.includes('<html lang="ru" dir="ltr"'))errors.push('Russian homepage lang/direction incorrect');
