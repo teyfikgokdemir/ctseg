@@ -733,10 +733,8 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
 };
 
 export const portfolioSectorOrder: readonly PortfolioSectorId[] = [
-  'glass',
   'natural-oils',
   'food-agri',
-  'nuts-dried-fruits',
   'animal-feed',
   'industrial',
   'packaging-inputs',
@@ -754,15 +752,13 @@ export function getPortfolioSectors(lang: ActiveLocale): PortfolioSectorCard[] {
   const resolveHref = (id: PortfolioSectorId): string => {
     switch (id) {
       case 'glass':
-        return lang === 'tr' ? '/glass/' : isHe ? '/en/glass/' : `/${lang}/glass/`;
+        return `/${lang}/industries/construction/`;
       case 'natural-oils':
         return `/${lang}/natural-oils/`;
       case 'food-agri':
-        if (isHe) return '/he/insights/private-label-food-turkiye-israel/';
-        if (lang === 'fa') return `${productsBase}#catalogue-nuts-dried-fruits`;
-        return searchLandingPath(locale, 'food-origin-compliance') || `${productsBase}#catalogue-nuts-dried-fruits`;
+        return `/${lang}/industries/food/`;
       case 'nuts-dried-fruits':
-        return `${productsBase}#catalogue-nuts-dried-fruits`;
+        return `/${lang}/industries/food/`;
       case 'animal-feed':
         if (lang === 'tr' || lang === 'en' || lang === 'ar') {
           return poultryFeedPath(lang as PoultryFeedLocale, 'turkiye-poultry-feed-sourcing');

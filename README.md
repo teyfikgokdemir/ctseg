@@ -2,6 +2,17 @@
 
 Premium multilingual Astro website for CTSEG's international B2B sourcing, market-entry and trade coordination operations.
 
+The global sourcing architecture is service-led and demand-driven: manufacturing and buying countries may both be outside Türkiye. Seven industries and seven capabilities share localized editorial pages across all 13 active languages. Vietnam and South Korea are research markets, not claims of an established supplier network.
+
+- `src/data/global-sourcing-locales.ts`: explicit localized commercial copy.
+- `src/data/global-sourcing.ts` and `src/components/GlobalSourcing.astro`: shared global page model and editorial template.
+- `/{lang}/industries/`, `/{lang}/solutions/`, `/{lang}/global-markets/`: canonical global directories.
+- `docs/migrations/`: complete baseline URL decisions, 39 equivalent overview redirects and 349 retired glass URLs.
+- `functions/_middleware.js`: HTTP 410 for the retired glass namespace; contact API continues through the existing endpoint.
+- `docs/global-sourcing-assets.json`: generated-image provenance, prompts, variants and review record. Images illustrate categories and do not depict CTSEG inventory or facilities.
+
+Run `npm run check:global` and `npm run check:migration` in addition to existing validation. Generated high-resolution masters remain local and are delivered separately; only responsive web variants are versioned.
+
 ## Commands
 
 ```bash

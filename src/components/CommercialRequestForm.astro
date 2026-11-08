@@ -14,6 +14,8 @@ const websiteLabel: Record<string,string> = {
   sr:'Veb-sajt kompanije', he:'אתר החברה', ar:'موقع الشركة'
 };
 const qualification = contactQualification[lang];
+const qualificationLabels = {"en":["Budget / target price (currency and unit)","Manufacturing country","OEM / ODM capabilities","Minimum order quantity (MOQ)","Current / target export markets","Certifications (or none)","Production capacity (unit / period)"],"tr":["Bütçe / hedef fiyat (para birimi ve birim)","Üretim ülkesi","OEM / ODM yetkinlikleri","Minimum sipariş miktarı (MOQ)","Mevcut / hedef ihracat pazarları","Sertifikalar (veya yok)","Üretim kapasitesi (birim / dönem)"],"de":["Budget / Zielpreis (Währung und Einheit)","Herstellungsland","OEM / ODM","Mindestbestellmenge (MOQ)","Aktuelle / angestrebte Exportmärkte","Zertifizierungen (oder keine)","Produktionskapazität (Einheit / Zeitraum)"],"it":["Budget / prezzo obiettivo (valuta e unità)","Paese di produzione","Capacità OEM / ODM","Ordine minimo (MOQ)","Mercati export attuali / obiettivo","Certificazioni (o nessuna)","Capacità produttiva (unità / periodo)"],"ru":["Бюджет / целевая цена (валюта и единица)","Страна производства","Возможности OEM / ODM","Минимальный заказ (MOQ)","Текущие / целевые экспортные рынки","Сертификаты (или отсутствуют)","Производственная мощность (единица / период)"],"fa":["بودجه / قیمت هدف (ارز و واحد)","کشور تولید","توانمندی OEM / ODM","حداقل سفارش (MOQ)","بازارهای صادراتی فعلی / هدف","گواهینامه‌ها (یا ندارد)","ظرفیت تولید (واحد / دوره)"],"zh":["预算 / 目标价格（币种和单位）","生产国家","OEM / ODM 能力","最低订购量 (MOQ)","现有 / 目标出口市场","认证（或无）","产能（单位 / 周期）"],"vi":["Ngân sách / giá mục tiêu (tiền tệ và đơn vị)","Quốc gia sản xuất","Năng lực OEM / ODM","Đơn hàng tối thiểu (MOQ)","Thị trường xuất khẩu hiện tại / mục tiêu","Chứng nhận (hoặc không có)","Công suất sản xuất (đơn vị / kỳ)"],"uk":["Бюджет / цільова ціна (валюта й одиниця)","Країна виробництва","Можливості OEM / ODM","Мінімальне замовлення (MOQ)","Поточні / цільові експортні ринки","Сертифікати (або відсутні)","Виробнича потужність (одиниця / період)"],"ro":["Buget / preț țintă (monedă și unitate)","Țara de producție","Capacități OEM / ODM","Comanda minimă (MOQ)","Piețe de export actuale / țintă","Certificări (sau niciuna)","Capacitate de producție (unitate / perioadă)"],"bg":["Бюджет / целева цена (валута и единица)","Държава на производство","Възможности OEM / ODM","Минимална поръчка (MOQ)","Текущи / целеви експортни пазари","Сертификати (или няма)","Производствен капацитет (единица / период)"],"sr":["Budžet / ciljna cena (valuta i jedinica)","Zemlja proizvodnje","OEM / ODM mogućnosti","Minimalna porudžbina (MOQ)","Trenutna / ciljna izvozna tržišta","Sertifikati (ili nema)","Proizvodni kapacitet (jedinica / period)"],"he":["תקציב / מחיר יעד (מטבע ויחידה)","מדינת הייצור","יכולות OEM / ODM","כמות הזמנה מינימלית (MOQ)","שווקי יצוא קיימים / יעד","הסמכות (או ללא)","כושר ייצור (יחידה / תקופה)"],"ar":["الميزانية / السعر المستهدف (العملة والوحدة)","بلد التصنيع","قدرات OEM / ODM","الحد الأدنى للطلب (MOQ)","أسواق التصدير الحالية / المستهدفة","الشهادات (أو لا يوجد)","الطاقة الإنتاجية (الوحدة / الفترة)"]}[lang];
+const supplierKeys = ["manufacturingCountry", "oemOdm", "moq", "exportMarkets", "certifications", "capacity"];
 const privacyHref = lang === 'fa' ? '/fa/privacy/' : lang === 'he' ? '/he/מדיניות-פרטיות/' : localizedPath(lang,'legal','privacy');
 
 const supportNeedCopy = {
@@ -234,14 +236,20 @@ const dynamicPlaceholders = {
         <label class="commercial-field"><span>{copy.name}</span><input type="text" name="name" autocomplete="name" maxlength="120" required /></label>
         <label class="commercial-field"><span>{copy.company}</span><input type="text" name="company" autocomplete="organization" maxlength="160" required /></label>
         <label class="commercial-field commercial-field--wide"><span>{copy.contact}</span><input type="text" name="emailOrPhone" autocomplete="email" maxlength="254" required data-contact-field /></label>
-        <label class="commercial-field commercial-field--wide"><span>{copy.message}</span><textarea name="message" maxlength="2000" rows="4" placeholder={dynamicPlaceholders.default} required></textarea></label>
+        <label class="commercial-field commercial-field--wide"><span>{copy.message}</span><textarea name="message" maxlength="1000" rows="4" placeholder={dynamicPlaceholders.default} required></textarea></label>
       </div>
-    <details class="commercial-details">
+    <div class="commercial-form-grid" data-intent-fields="buyer_request" hidden>
+      <label class="commercial-field commercial-field--wide"><span>{qualificationLabels[0]}</span><input type="text" name="budget" maxlength="100" data-qualification-label="Budget / target price" disabled /></label>
+    </div>
+    <div class="commercial-form-grid" data-intent-fields="supplier_market_entry" hidden>
+      {supplierKeys.map((key,index)=><label class="commercial-field"><span>{qualificationLabels[index+1]}</span><input type="text" name={key} maxlength="100" data-qualification-label={['Manufacturing country','OEM / ODM capabilities','Minimum order quantity','Export markets','Certifications','Production capacity'][index]} disabled /></label>)}
+    </div>
+    <details class="commercial-details" open>
       <summary>{copy.details}</summary>
       <div class="commercial-form-grid">
         <label class="commercial-field"><span>{qualification.originMarket}</span><input type="text" name="originMarket" autocomplete="country-name" maxlength="100" /></label>
         <label class="commercial-field"><span>{qualification.destinationMarket}</span><input type="text" name="destinationMarket" maxlength="100" /></label>
-        <label class="commercial-field"><span>{copy.product}</span><input type="text" name="product" maxlength="240" /></label>
+        <label class="commercial-field"><span>{copy.product}</span><input type="text" name="product" maxlength="240" placeholder={dynamicPlaceholders.buyer_request} /></label>
         <label class="commercial-field"><span>{copy.quantity}</span><input type="text" name="quantity" maxlength="120" /></label>
         <label class="commercial-field"><span>{qualification.packaging}</span><input type="text" name="packaging" maxlength="160" /></label>
         <label class="commercial-field"><span>{qualification.incoterm}</span><input type="text" name="incoterm" maxlength="30" /></label>
@@ -388,6 +396,7 @@ const dynamicPlaceholders = {
   .commercial-field input,.commercial-field select,.commercial-field textarea{min-height:40px!important;border-radius:6px!important;background:#1b211d!important;border-color:#343c36!important;color:#f1f4f0!important;font-size:13px!important}
   .commercial-form-next{width:100%!important;min-height:42px!important;margin-top:4px!important;border-radius:6px!important;background:#c4f000!important;color:#0a0d0a!important;font-weight:800!important;text-transform:none!important;letter-spacing:0!important;justify-content:space-between!important;padding-inline:14px!important}
   .commercial-contact-step{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1)}
+  [data-intent-fields][hidden]{display:none!important}
   .commercial-contact-step[hidden]{display:none!important}
   .commercial-form-next[hidden]{display:none!important}
   .commercial-form-actions .button{border-radius:6px!important}
@@ -432,6 +441,15 @@ const dynamicPlaceholders = {
       });
 
       const updateIntentState=(selectedIntent)=>{
+        form.querySelectorAll('[data-intent-fields]').forEach((group)=>{
+          const active=group.dataset.intentFields===selectedIntent;
+          group.hidden=!active;
+          group.querySelectorAll('input').forEach((field)=>{field.disabled=!active;field.required=active});
+        });
+        for(const name of ['product','destinationMarket','quantity','incoterm','delivery','requirements']){
+          const field=form.elements.namedItem(name);
+          if(field instanceof HTMLInputElement)field.required=selectedIntent==='buyer_request'||(selectedIntent==='supplier_market_entry'&&name==='product');
+        }
         if(intent instanceof HTMLSelectElement&&intent.value!==selectedIntent){
           intent.value=selectedIntent;
         }
@@ -445,9 +463,11 @@ const dynamicPlaceholders = {
         }
         if(selectedIntent==='external_trade_desk'){
           if(tradeDirection instanceof HTMLSelectElement&&!tradeDirection.value)tradeDirection.value='other';
-          if(productFamily instanceof HTMLSelectElement&&!productFamily.value)productFamily.value='other';
+          if(productFamily instanceof HTMLSelectElement&&!productFamily.value)productFamily.value='industrial';
         }
       };
+
+      updateIntentState(intent instanceof HTMLSelectElement?intent.value:'');
 
       let startedTracked=false;
       const track=(event,parameters={})=>window.ctsegTrack?.(event,{form_type:'qualified_commercial_request',trade_intent:intent instanceof HTMLSelectElement?intent.value:'',support_need:supportNeed instanceof HTMLSelectElement?supportNeed.value:'',trade_direction:tradeDirection instanceof HTMLSelectElement?tradeDirection.value:'',product_family:productFamily instanceof HTMLSelectElement?productFamily.value:'',...parameters});
@@ -477,7 +497,7 @@ const dynamicPlaceholders = {
       const savedProduct=sessionStorage.getItem('ctseg-product-request');
       if(savedProduct&&product instanceof HTMLInputElement){product.value=savedProduct;sessionStorage.removeItem('ctseg-product-request')}
       const requestParams=new URLSearchParams(location.search);
-      const requestedIntent=requestParams.get('intent');
+      const requestedIntent=({buyer:'buyer_request',supplier:'supplier_market_entry'})[requestParams.get('intent')] || requestParams.get('intent');
       const requestedSupport=requestParams.get('support');
       const requestedDirection=requestParams.get('direction');
       const requestedFamily=requestParams.get('category');
@@ -488,7 +508,7 @@ const dynamicPlaceholders = {
       }
       if(supportNeed instanceof HTMLSelectElement&&['supplier_sourcing','rfq_comparison','private_label','market_entry','document_assessment','external_trade_desk','other'].includes(requestedSupport||''))supportNeed.value=requestedSupport;
       if(tradeDirection instanceof HTMLSelectElement&&['export_from_turkiye','import_to_turkiye','cross_border_sourcing','market_entry','other'].includes(requestedDirection||''))tradeDirection.value=requestedDirection;
-      if(productFamily instanceof HTMLSelectElement&&['vegetable_oils','nuts_dried_fruit','architectural_glass','biofuel_feedstock','other'].includes(requestedFamily||''))productFamily.value=requestedFamily;
+      if(productFamily instanceof HTMLSelectElement&&['industrial','textiles','beauty','agriculture','construction','packaging','food'].includes(requestedFamily||''))productFamily.value=requestedFamily;
       document.querySelectorAll('[data-fa-intent],[data-contact-intent],[data-trade-intent]').forEach((link)=>link.addEventListener('click',()=>{
         const value=link.getAttribute('data-fa-intent')||link.getAttribute('data-contact-intent')||link.getAttribute('data-trade-intent');
         if(value&&['buyer_request','supplier_market_entry','external_trade_desk'].includes(value)){
@@ -498,13 +518,25 @@ const dynamicPlaceholders = {
         }
       }));
       form.addEventListener('focusin',()=>{if(!startedTracked){startedTracked=true;track('contact_form_start')}},{once:true});
-      const summary=()=>Array.from(new FormData(form).entries()).filter(([key,value])=>!['website','startedAt','privacy','locale','pagePath','landingPath','referrerHost','utmSource','utmMedium','utmCampaign','utmContent','utmTerm','clickId'].includes(key)&&String(value).trim()).map(([key,value])=>`${key}: ${String(value).trim()}`).join('\n');
+      // Additional qualifiers travel in the existing delivered message schema.
+      // The 1000-character message plus six bounded qualifiers stays below 2000.
+      const buildPayload=()=>{
+        const payload=Object.fromEntries(new FormData(form));
+        const qualifiers=[];
+        form.querySelectorAll('[data-qualification-label]').forEach((field)=>{
+          delete payload[field.name];
+          if(!field.disabled&&field.value.trim())qualifiers.push(field.dataset.qualificationLabel+': '+field.value.trim());
+        });
+        if(qualifiers.length)payload.message=payload.message+'\n\n'+qualifiers.join('\n');
+        return payload;
+      };
+      const summary=()=>Object.entries(buildPayload()).filter(([key,value])=>!['website','startedAt','privacy','locale','pagePath','landingPath','referrerHost','utmSource','utmMedium','utmCampaign','utmContent','utmTerm','clickId'].includes(key)&&String(value).trim()).map(([key,value])=>`${key}: ${String(value).trim()}`).join('\n');
       download?.addEventListener('click',()=>{track('form_fallback_download');const blob=new Blob([`CTSEG short commercial request\n\n${summary()}\n`],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='ctseg-commercial-request.txt';link.click();URL.revokeObjectURL(url)});
       form.addEventListener('submit',async(event)=>{
         event.preventDefault();fallback.hidden=true;status.textContent='';if(!form.reportValidity())return;
         refreshAttribution();
         track('contact_form_submit_attempt');const submit=form.querySelector('[type="submit"]');submit.disabled=true;
-        try{const response=await fetch(form.action,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(form)))});const result=await response.json().catch(()=>({}));if(!response.ok)throw new Error(result.code||'request_failed');status.textContent=copy.success;track('contact_form_success');track('generate_lead');window.CansuEvents?.track(intent instanceof HTMLSelectElement&&intent.value==='buyer_request'&&supportNeed instanceof HTMLSelectElement&&supportNeed.value==='rfq_comparison'?'rfq_submit':'form_submit',{form_type:'qualified_commercial_request',trade_intent:intent instanceof HTMLSelectElement?intent.value:'',support_need:supportNeed instanceof HTMLSelectElement?supportNeed.value:''});window.dispatchEvent(new CustomEvent('ctseg:form-success'));if(document.documentElement.lang==='fa')window.dispatchEvent(new CustomEvent('ctseg:fa-form-success'));form.reset();started.value=String(Date.now())}
+        try{const response=await fetch(form.action,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(buildPayload())});const result=await response.json().catch(()=>({}));if(!response.ok)throw new Error(result.code||'request_failed');status.textContent=copy.success;track('contact_form_success');track('generate_lead');window.CansuEvents?.track(intent instanceof HTMLSelectElement&&intent.value==='buyer_request'&&supportNeed instanceof HTMLSelectElement&&supportNeed.value==='rfq_comparison'?'rfq_submit':'form_submit',{form_type:'qualified_commercial_request',trade_intent:intent instanceof HTMLSelectElement?intent.value:'',support_need:supportNeed instanceof HTMLSelectElement?supportNeed.value:''});window.dispatchEvent(new CustomEvent('ctseg:form-success'));if(document.documentElement.lang==='fa')window.dispatchEvent(new CustomEvent('ctseg:fa-form-success'));form.reset();updateIntentState('');started.value=String(Date.now())}
         catch{status.textContent=`${copy.error} ${copy.fallback}`;fallback.hidden=false;track('contact_form_error')}
         finally{submit.disabled=false;window.turnstile?.reset(form.querySelector('.cf-turnstile'))}
       });

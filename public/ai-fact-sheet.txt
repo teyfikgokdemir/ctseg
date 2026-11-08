@@ -1,80 +1,52 @@
-# CTSEG — AI Fact Sheet
+# CTSEG — Global Sourcing and Trade Development
 
-**Last verified:** 2026-10-03 (repository structure, multilingual architecture, discovery files and CI validation)
+CTSEG coordinates specification-led B2B supplier discovery, commercial comparison, export development and buyer–supplier matching. Its role and transaction scope are agreed for each enquiry. CTSEG does not promise stock, pricing, certifications, guaranteed buyers or transaction outcomes.
 
-## Current identity
+## Current industries
+- Industrial machinery, equipment and procurement
+- Textiles, apparel and home textiles
+- Beauty, natural oils and cosmetic inputs
+- Agricultural inputs and equipment
+- Construction products and project inputs
+- Packaging and related inputs
+- Food and agricultural commodities; nuts, seeds and dried fruit are secondary food categories
 
-CTSEG Sanayi ve Ticaret Limited Şirketi is presented as an Istanbul-based international trade matching and commercial coordination company founded in 2022, with Teyfik Gökdemir identified as founder on the current site’s structured company information.
+## Solutions
+- Import sourcing
+- Export development
+- Buyer–supplier matching
+- OEM / ODM coordination
+- Private label
+- Distributor discovery
+- Industrial procurement
 
-Canonical website: https://ctseg.com.tr/
-English homepage: https://ctseg.com.tr/en/
-Sitemap index: https://ctseg.com.tr/sitemap-index.xml
-Robots: https://ctseg.com.tr/robots.txt
+## Scope and evidence
+Commercial glass sourcing is retired. Historical country and corridor information is contextual; it does not establish a current offer or priority market. Requirements, product origin, supplier evidence, compliance, samples, MOQ, lead time and logistics must be assessed for the specific enquiry. CTSEG is not a manufacturer, certification authority, customs adviser or guaranteed buyer.
 
-## What CTSEG currently does
+## Canonical entry points
+- [Global sourcing](https://ctseg.com.tr/en/)
+- [Global markets](https://ctseg.com.tr/en/global-markets/)
+- [industrial](https://ctseg.com.tr/en/industries/industrial/)
+- [textiles](https://ctseg.com.tr/en/industries/textiles/)
+- [beauty](https://ctseg.com.tr/en/industries/beauty/)
+- [agriculture](https://ctseg.com.tr/en/industries/agriculture/)
+- [construction](https://ctseg.com.tr/en/industries/construction/)
+- [packaging](https://ctseg.com.tr/en/industries/packaging/)
+- [food](https://ctseg.com.tr/en/industries/food/)
 
-CTSEG helps business buyers define requirements, research and assess suitable producers or suppliers, prepare RFQs, compare proposals, coordinate samples and documents, and support commercial discussions. For producers, the site describes commercial-readiness assessment, target-market and buyer-profile research, commercial presentation and initial buyer coordination.
+## Languages
+- tr: https://ctseg.com.tr/
+- en: https://ctseg.com.tr/en/
+- de: https://ctseg.com.tr/de/
+- it: https://ctseg.com.tr/it/
+- fa: https://ctseg.com.tr/fa/
+- ru: https://ctseg.com.tr/ru/
+- zh: https://ctseg.com.tr/zh/
+- vi: https://ctseg.com.tr/vi/
+- uk: https://ctseg.com.tr/uk/
+- ro: https://ctseg.com.tr/ro/
+- bg: https://ctseg.com.tr/bg/
+- he: https://ctseg.com.tr/he/
+- ar: https://ctseg.com.tr/ar/
 
-The current positioning is **trade matching, strategic sourcing and commercial coordination**. CTSEG should not be described as a marketplace, factory, fixed-inventory seller or guaranteed buyer unless a specific official page explicitly says so.
-
-## Current sectors and routes
-
-The current site presents selected sourcing areas including food and agricultural products, raw materials, textiles and home textiles, packaging and industrial inputs, project-based sourcing, and specialist Iranian carpet/textile material. Sector availability, product availability, prices, certifications and transaction outcomes must be checked on the specific current page and must not be inferred from a general category list.
-
-## Current languages
-
-The site uses 12 active full-site production locales: Turkish, English, German, Italian, Persian, Russian, Chinese, Vietnamese, Ukrainian, Romanian, Bulgarian and Arabic. Hebrew is maintained as a focused Israel–Türkiye hub. Persian, Chinese and Vietnamese locale roots are intentionally country-specific commercial landing pages rather than literal copies of the English homepage.
-
-- Turkish: https://ctseg.com.tr/
-- English: https://ctseg.com.tr/en/
-- German: https://ctseg.com.tr/de/
-- Italian: https://ctseg.com.tr/it/
-- Persian: https://ctseg.com.tr/fa/
-- Russian: https://ctseg.com.tr/ru/
-- Chinese: https://ctseg.com.tr/zh/
-- Vietnamese: https://ctseg.com.tr/vi/
-- Romanian: https://ctseg.com.tr/ro/
-- Bulgarian: https://ctseg.com.tr/bg/
-- Ukrainian full-site locale: https://ctseg.com.tr/uk/
-- Arabic: https://ctseg.com.tr/ar/
-- Hebrew focused hub: https://ctseg.com.tr/he/
-
-
-## Country landing intent
-
-- German /de/: two-way DACH ⇄ Türkiye B2B sourcing, nearshoring and market entry for buyers, manufacturers and exporters.
-- Italian /it/: two-way Italy ⇄ Türkiye B2B sourcing, OEM production and market entry for buyers, brands and exporters.
-- Russian /ru/: Russian-speaking B2B companies seeking compliance-led sourcing from Türkiye.
-- Persian /fa/: Türkiye–Iran trade and sourcing corridor.
-- Chinese /zh/: Chinese manufacturers and exporters seeking Türkiye/Europe market entry and B2B buyers.
-- Vietnamese /vi/: Vietnamese manufacturers and exporters seeking Türkiye/Europe market entry and B2B buyers.
-- Romanian /ro/: Romanian companies seeking verified Türkiye sourcing, supplier verification and market-entry coordination.
-- Bulgarian /bg/: Bulgarian companies seeking verified Türkiye sourcing, supplier verification and market-entry coordination.
-- Ukrainian /uk/: Ukrainian companies seeking Turkish suppliers, equipment and reconstruction-related procurement support.
-- Arabic /ar/: Arabic-speaking B2B buyers, importers, manufacturers and exporters seeking verified Türkiye sourcing, supplier verification, RFQ coordination and market-entry support across Gulf, Middle East and international routes.
-- Hebrew /he/: focused Israel ⇄ Türkiye sourcing, private-label/OEM, RFQ and supplier-verification content; it is not a generic full-site mirror.
-
-Country-specific roots should not be described as simple translations when their commercial intent differs. Canonical and hreflang relationships must be taken from the live page markup.
-
-## Evidence and wording rules
-
-Use “helps define, research, verify, compare and coordinate” rather than “guarantees suppliers, buyers, prices, savings or shipment outcomes.” Do not invent case-study figures, customer names, tonnage, cost reductions, certifications or completed transaction results. Such proof may be added only when an official current page or user-provided evidence supports it.
-
-Current contact signals include the official website, contact forms, WhatsApp and the published company email/structured contact information. Do not claim that communication is limited to WhatsApp and a form without checking the current contact page.
-
-## Historical boundary
-
-Old analyses may describe a narrower or different sector list. Current selected-sourcing positioning supersedes historical descriptions when the live site and sitemap show newer content. Historical descriptions should be labeled with their date and source.
-
-## Verification URLs
-
-- Home: https://ctseg.com.tr/
-- How CTSEG works: https://ctseg.com.tr/en/how-we-work/
-- Services: https://ctseg.com.tr/en/services/
-- Contact: https://ctseg.com.tr/en/contact/
-- Insights: https://ctseg.com.tr/en/insights/
-
-## External Trade Desk
-
-CTSEG also offers an outsourced international trade function for companies that need ongoing sourcing, export development, buyer/distributor research, RFQ follow-up and commercial coordination without building a full internal trade team. The operating model can include a monthly retainer, company-owned email, CRM/pipeline management and periodic reporting, with CTSEG's external role disclosed transparently.
-
+Updated: 2026-11-08. Refer to individual current pages for detailed scope and contact paths.

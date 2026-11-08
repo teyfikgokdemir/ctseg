@@ -25,6 +25,8 @@ jobs:
       - run: npm run check:analytics
       - run: npm run build
       - run: npm run check:site
+      - run: npm run check:global
+      - run: npm run check:migration
       - run: npm run check:seo
       - run: npm run check:form
       - run: npm run check:images

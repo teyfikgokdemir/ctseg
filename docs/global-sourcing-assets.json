@@ -1,0 +1,599 @@
+{
+  "generatedAt": "2026-11-08",
+  "tool": "built-in image_gen",
+  "usage": "Illustrative category imagery only; no inventory, facility, supplier or ownership evidence.",
+  "assets": [
+    {
+      "category": "industrial",
+      "origin": "OpenAI built-in image_gen, AI-generated illustrative scene",
+      "prompt": "Use case: product-mockup. Premium photorealistic editorial category photo for global sourcing website. Simple mechanically plausible unbranded industrial components: steel hex bolts, matching nuts, washers and two plain machined bushings arranged sparsely on warm grey stone surface. No complex machinery or facility. Wide 16:10 composition with breathing room, soft daylight from left, restrained natural silver and charcoal palette, sharp realistic metal texture, quiet commercial editorial photography. No text, logos, labels, flags, watermarks, people. Illustrative product arrangement only, no suggestion of CTSEG ownership or inventory.",
+      "master": {
+        "path": "work/generated-assets/industrial.png",
+        "width": 1586,
+        "height": 992,
+        "bytes": 2685300
+      },
+      "variants": [
+        {
+          "path": "public/images/global-sourcing/industrial-640.webp",
+          "width": 640,
+          "height": 400,
+          "bytes": 33048
+        },
+        {
+          "path": "public/images/global-sourcing/industrial-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "bytes": 110738
+        }
+      ],
+      "status": "integrated; visually reviewed; illustrative category photography",
+      "referenceVerification": "General low-risk materials or scene; no sensitive equipment, facility, supplier, certification, stock or ownership represented. Not an engineering specification.",
+      "alt": {
+        "en": "Steel bolts, nuts, washers and machined bushings arranged on stone.",
+        "tr": "Taş yüzey üzerine dizilmiş çelik cıvatalar, somunlar, rondelalar ve işlenmiş burçlar.",
+        "de": "Stahlschrauben, Muttern, Unterlegscheiben und bearbeitete Buchsen auf Stein angeordnet.",
+        "it": "Bulloni, dadi, rondelle e boccole lavorate in acciaio disposti sulla pietra.",
+        "fa": "پیچ‌ها، مهره‌ها، واشرها و بوش‌های ماشین‌کاری‌شده فولادی چیده‌شده روی سنگ.",
+        "ru": "Стальные болты, гайки, шайбы и обработанные втулки, разложенные на камне.",
+        "zh": "石面上摆放的钢制螺栓、螺母、垫圈和机加工衬套。",
+        "vi": "Bu lông, đai ốc, vòng đệm và bạc lót thép đã gia công được xếp trên mặt đá.",
+        "uk": "Сталеві болти, гайки, шайби та оброблені втулки, розкладені на камені.",
+        "ro": "Șuruburi, piulițe, șaibe și bucșe prelucrate din oțel, așezate pe piatră.",
+        "bg": "Стоманени болтове, гайки, шайби и машинно обработени втулки, подредени върху камък.",
+        "he": "ברגי פלדה, אומים, דסקיות ותותבים מעובדים מסודרים על אבן.",
+        "ar": "مسامير وصواميل وحلقات تثبيت وجلب مشغولة من الفولاذ مرتبة على سطح حجري."
+      },
+      "review": {
+        "method": "All generated outputs and saved 640px WebP variants inspected visually with view_image",
+        "result": "No visible logos, text, certification marks, branded facilities or ownership signals; general category illustration suitable for contextual use",
+        "limitation": "AI-generated, not documentary evidence or a technical product drawing"
+      },
+      "pages": [
+        "/en/industries/industrial/",
+        "/tr/industries/industrial/",
+        "/de/industries/industrial/",
+        "/it/industries/industrial/",
+        "/fa/industries/industrial/",
+        "/ru/industries/industrial/",
+        "/zh/industries/industrial/",
+        "/vi/industries/industrial/",
+        "/uk/industries/industrial/",
+        "/ro/industries/industrial/",
+        "/bg/industries/industrial/",
+        "/he/industries/industrial/",
+        "/ar/industries/industrial/",
+        "/en/",
+        "/",
+        "/de/",
+        "/it/",
+        "/fa/",
+        "/ru/",
+        "/zh/",
+        "/vi/",
+        "/uk/",
+        "/ro/",
+        "/bg/",
+        "/he/",
+        "/ar/"
+      ]
+    },
+    {
+      "category": "textiles",
+      "origin": "OpenAI built-in image_gen, AI-generated illustrative scene",
+      "prompt": "Use case: product-mockup. Premium photorealistic editorial category photo for global sourcing website. Neatly arranged cream and slate cotton fabric rolls with a folded unbranded navy work jacket on warm grey stone table, visible woven textile texture, authentic seams and ordinary buttons. Wide 16:10 composition, generous breathing room, soft neutral daylight from left, restrained quiet commercial photography matching silver metal still life. No text, logos, labels, flags, watermarks, people, facility or inventory claims.",
+      "master": {
+        "path": "work/generated-assets/textiles.png",
+        "width": 1586,
+        "height": 992,
+        "bytes": 2967897
+      },
+      "variants": [
+        {
+          "path": "public/images/global-sourcing/textiles-640.webp",
+          "width": 640,
+          "height": 400,
+          "bytes": 19240
+        },
+        {
+          "path": "public/images/global-sourcing/textiles-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "bytes": 105854
+        }
+      ],
+      "status": "integrated; visually reviewed; illustrative category photography",
+      "referenceVerification": "General low-risk materials or scene; no sensitive equipment, facility, supplier, certification, stock or ownership represented. Not an engineering specification.",
+      "alt": {
+        "en": "Cream cotton fabric rolls beside a folded navy workwear jacket.",
+        "tr": "Katlanmış lacivert iş ceketi yanında krem renkli pamuklu kumaş ruloları.",
+        "de": "Cremefarbene Baumwollstoffrollen neben einer gefalteten dunkelblauen Arbeitsjacke.",
+        "it": "Rotoli di tessuto di cotone color crema accanto a una giacca da lavoro blu scuro piegata.",
+        "fa": "رول‌های پارچه نخی کرم‌رنگ کنار یک کت کار سرمه‌ای تاخورده.",
+        "ru": "Рулоны хлопковой ткани кремового цвета рядом со сложенной тёмно-синей рабочей курткой.",
+        "zh": "奶油色棉布卷旁放着折叠的藏蓝色工作夹克。",
+        "vi": "Các cuộn vải bông màu kem bên cạnh áo khoác bảo hộ màu xanh navy đã gấp.",
+        "uk": "Рулони бавовняної тканини кремового кольору поруч зі складеною темно-синьою робочою курткою.",
+        "ro": "Role de țesătură din bumbac crem lângă o jachetă de lucru bleumarin împăturită.",
+        "bg": "Ролки памучен плат в кремав цвят до сгънато тъмносиньо работно яке.",
+        "he": "גלילי בד כותנה בצבע שמנת לצד מעיל עבודה כחול כהה מקופל.",
+        "ar": "لفائف قماش قطني بلون كريمي بجوار سترة عمل كحلية مطوية."
+      },
+      "review": {
+        "method": "All generated outputs and saved 640px WebP variants inspected visually with view_image",
+        "result": "No visible logos, text, certification marks, branded facilities or ownership signals; general category illustration suitable for contextual use",
+        "limitation": "AI-generated, not documentary evidence or a technical product drawing"
+      },
+      "pages": [
+        "/en/industries/textiles/",
+        "/tr/industries/textiles/",
+        "/de/industries/textiles/",
+        "/it/industries/textiles/",
+        "/fa/industries/textiles/",
+        "/ru/industries/textiles/",
+        "/zh/industries/textiles/",
+        "/vi/industries/textiles/",
+        "/uk/industries/textiles/",
+        "/ro/industries/textiles/",
+        "/bg/industries/textiles/",
+        "/he/industries/textiles/",
+        "/ar/industries/textiles/",
+        "/en/",
+        "/",
+        "/de/",
+        "/it/",
+        "/fa/",
+        "/ru/",
+        "/zh/",
+        "/vi/",
+        "/uk/",
+        "/ro/",
+        "/bg/",
+        "/he/",
+        "/ar/"
+      ]
+    },
+    {
+      "category": "beauty",
+      "origin": "OpenAI built-in image_gen, AI-generated illustrative scene",
+      "prompt": "Use case: product-mockup. Premium photorealistic editorial category photo for global sourcing website. Three unbranded skincare cosmetic containers: opaque ivory lotion bottle with simple pump, amber glass serum bottle with closed dropper, small closed ivory cosmetic jar. Sparse arrangement on warm grey stone surface. No additional objects. Wide 16:10 composition with breathing room, soft neutral daylight from left, restrained quiet commercial editorial photography, realistic material details. No text, logos, labels, certification symbols, medical claims, flags, watermarks, people or facility. Illustrative arrangement only.",
+      "master": {
+        "path": "work/generated-assets/beauty.png",
+        "width": 1586,
+        "height": 992,
+        "bytes": 1832177
+      },
+      "variants": [
+        {
+          "path": "public/images/global-sourcing/beauty-640.webp",
+          "width": 640,
+          "height": 400,
+          "bytes": 11298
+        },
+        {
+          "path": "public/images/global-sourcing/beauty-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "bytes": 34746
+        }
+      ],
+      "status": "integrated; visually reviewed; illustrative category photography",
+      "referenceVerification": "General low-risk materials or scene; no sensitive equipment, facility, supplier, certification, stock or ownership represented. Not an engineering specification.",
+      "alt": {
+        "en": "Unbranded skincare pump bottle, amber dropper bottle and cream jar on a neutral background.",
+        "tr": "Nötr arka planda markasız pompalı cilt bakım şişesi, kehribar renkli damlalıklı şişe ve krem kavanozu.",
+        "de": "Unbeschriftete Hautpflege-Pumpflasche, braune Pipettenflasche und Cremetiegel vor neutralem Hintergrund.",
+        "it": "Flacone con pompa per la cura della pelle, flacone ambrato con contagocce e vasetto di crema senza marchio su sfondo neutro.",
+        "fa": "بطری پمپی مراقبت پوست، بطری قطره‌چکان کهربایی و ظرف کرم بدون برند با پس‌زمینه خنثی.",
+        "ru": "Флакон с помпой для ухода за кожей, янтарный флакон с пипеткой и баночка крема без бренда на нейтральном фоне.",
+        "zh": "中性背景上的无品牌护肤泵瓶、琥珀色滴管瓶和面霜罐。",
+        "vi": "Chai chăm sóc da có vòi bơm, chai nhỏ giọt màu hổ phách và hũ kem không nhãn hiệu trên nền trung tính.",
+        "uk": "Флакон із помпою для догляду за шкірою, бурштиновий флакон із піпеткою та баночка крему без бренду на нейтральному тлі.",
+        "ro": "Flacon cu pompă pentru îngrijirea pielii, flacon chihlimbariu cu pipetă și borcan de cremă fără marcă, pe fundal neutru.",
+        "bg": "Небрандирани флакон с помпа за грижа за кожата, кехлибарен флакон с пипета и бурканче крем на неутрален фон.",
+        "he": "בקבוק משאבה לטיפוח העור, בקבוק טפטפת בצבע ענבר וצנצנת קרם ללא מותג על רקע ניטרלי.",
+        "ar": "عبوة عناية بالبشرة بمضخة وزجاجة كهرمانية بقطّارة ومرطبان كريم بلا علامات تجارية على خلفية محايدة."
+      },
+      "review": {
+        "method": "All generated outputs and saved 640px WebP variants inspected visually with view_image",
+        "result": "No visible logos, text, certification marks, branded facilities or ownership signals; general category illustration suitable for contextual use",
+        "limitation": "AI-generated, not documentary evidence or a technical product drawing"
+      },
+      "pages": [
+        "/en/industries/beauty/",
+        "/tr/industries/beauty/",
+        "/de/industries/beauty/",
+        "/it/industries/beauty/",
+        "/fa/industries/beauty/",
+        "/ru/industries/beauty/",
+        "/zh/industries/beauty/",
+        "/vi/industries/beauty/",
+        "/uk/industries/beauty/",
+        "/ro/industries/beauty/",
+        "/bg/industries/beauty/",
+        "/he/industries/beauty/",
+        "/ar/industries/beauty/",
+        "/en/",
+        "/",
+        "/de/",
+        "/it/",
+        "/fa/",
+        "/ru/",
+        "/zh/",
+        "/vi/",
+        "/uk/",
+        "/ro/",
+        "/bg/",
+        "/he/",
+        "/ar/"
+      ]
+    },
+    {
+      "category": "agriculture",
+      "origin": "OpenAI built-in image_gen, AI-generated illustrative scene",
+      "prompt": "Use case: product-mockup. Premium photorealistic editorial category photograph of agricultural poultry watering equipment, generic unbranded illustrative sample, NOT an installed farm. A short straight horizontal ivory plastic square-section drinking water pipe supported a few centimeters above a warm grey stone tabletop by two simple neutral metal display stands. Two stainless steel downward nipple drinkers emerge from pipe underside. Directly beneath each nipple is one small orange plastic drip-catching cup suspended from a simple orange bracket clipped around pipe, cup vertically aligned under nipple. Mechanically plausible clean simple assembly like common poultry nipple drinking lines; no invented mechanisms, no extra tubes or animal parts. Wide 16:10 composition, breathing room, soft neutral daylight from left, restrained editorial palette matching warm grey product still lifes. No animals, facility, people, text, logos, labels, certification marks, flags or watermarks. No ownership or inventory claim.",
+      "master": {
+        "path": "work/generated-assets/agriculture.png",
+        "width": 1586,
+        "height": 992,
+        "bytes": 2048867
+      },
+      "variants": [
+        {
+          "path": "public/images/global-sourcing/agriculture-640.webp",
+          "width": 640,
+          "height": 400,
+          "bytes": 14716
+        },
+        {
+          "path": "public/images/global-sourcing/agriculture-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "bytes": 47234
+        }
+      ],
+      "status": "integrated; visually reviewed; illustrative category photography",
+      "referenceVerification": "General geometry compared visually against primary manufacturer photographs. Category illustration only; not supplier product, engineering validation, performance or compliance evidence.",
+      "alt": {
+        "en": "Poultry nipple drinking line with orange drip cups mounted on two sample supports.",
+        "tr": "İki örnek destek üzerine monte edilmiş, turuncu damlama kaplı kanatlı nipel suluk hattı.",
+        "de": "Geflügel-Nippeltränkeleitung mit orangefarbenen Tropfschalen auf zwei Musterstützen.",
+        "it": "Linea di abbeveraggio a nipple per pollame con vaschette arancioni raccogligoccia montata su due supporti dimostrativi.",
+        "fa": "خط آبخوری نیپل طیور با کاسه‌های چکه‌گیر نارنجی نصب‌شده روی دو پایه نمایشی.",
+        "ru": "Ниппельная линия поения птицы с оранжевыми каплеуловителями на двух демонстрационных опорах.",
+        "zh": "安装在两个展示支架上的家禽乳头式饮水管线，配有橙色接水杯。",
+        "vi": "Đường ống nước uống núm cho gia cầm với cốc hứng giọt màu cam đặt trên hai giá đỡ mẫu.",
+        "uk": "Ніпельна лінія напування птиці з помаранчевими краплевловлювачами на двох демонстраційних опорах.",
+        "ro": "Linie de adăpare cu niplu pentru păsări, cu cupe portocalii de colectare a picăturilor, montată pe două suporturi demonstrative.",
+        "bg": "Нипелна поилна линия за птици с оранжеви капкоуловители, монтирана върху две демонстрационни опори.",
+        "he": "קו שתייה עם פטמות לעופות וכוסיות טפטוף כתומות, מותקן על שני תומכי הדגמה.",
+        "ar": "خط شرب بحلمات للدواجن مع أكواب برتقالية لالتقاط القطرات مثبت على دعامتين للعرض."
+      },
+      "review": {
+        "method": "All generated outputs and saved 640px WebP variants inspected visually with view_image",
+        "result": "No visible logos, text, certification marks, branded facilities or ownership signals; general category illustration suitable for contextual use",
+        "limitation": "AI-generated, not documentary evidence or a technical product drawing"
+      },
+      "references": [
+        {
+          "title": "Big Dutchman nipple drinkers",
+          "url": "https://www.bigdutchman.asia/en/products/egg-production/starter-production/drinking-systems/nipple-drinkers",
+          "checked": "2026-11-08",
+          "verified": "Horizontal water line, downward metal nipple and aligned drip cup clipped to line",
+          "limitation": "Generic display stands and cropped sample pipe ends; not a working installed system"
+        }
+      ],
+      "pages": [
+        "/en/industries/agriculture/",
+        "/tr/industries/agriculture/",
+        "/de/industries/agriculture/",
+        "/it/industries/agriculture/",
+        "/fa/industries/agriculture/",
+        "/ru/industries/agriculture/",
+        "/zh/industries/agriculture/",
+        "/vi/industries/agriculture/",
+        "/uk/industries/agriculture/",
+        "/ro/industries/agriculture/",
+        "/bg/industries/agriculture/",
+        "/he/industries/agriculture/",
+        "/ar/industries/agriculture/",
+        "/en/",
+        "/",
+        "/de/",
+        "/it/",
+        "/fa/",
+        "/ru/",
+        "/zh/",
+        "/vi/",
+        "/uk/",
+        "/ro/",
+        "/bg/",
+        "/he/",
+        "/ar/"
+      ]
+    },
+    {
+      "category": "construction",
+      "origin": "OpenAI built-in image_gen, AI-generated illustrative scene",
+      "prompt": "Use case: product-mockup. Premium photorealistic editorial category photograph of generic unbranded water infrastructure pipe fittings. Sparse arrangement on warm grey stone tabletop of exactly four separate white opaque PVC parts: a standard 90-degree elbow with two open cylindrical female sockets and a smooth curved hollow body, one equal tee with three open female sockets on a straight through-bore and perpendicular branch, one short straight coupling socket, and one short length of plain straight white pipe. All geometry mechanically plausible, consistent approximate 32mm plumbing scale, sockets round with realistic wall thickness, each part physically separate and not fused, no exaggerated complex machinery. Based on ordinary white PVC pressure fitting geometry; no claims of rating or certification. Wide 16:10 composition with breathing room, neutral soft daylight from left, restrained quiet editorial photography matching warm grey metal still lifes, detailed realistic matte polymer. No text, logos, moulded markings, labels, flags, watermarks, people, facility, ownership or inventory claim.",
+      "master": {
+        "path": "work/generated-assets/construction.png",
+        "width": 1586,
+        "height": 992,
+        "bytes": 2277470
+      },
+      "variants": [
+        {
+          "path": "public/images/global-sourcing/construction-640.webp",
+          "width": 640,
+          "height": 400,
+          "bytes": 21972
+        },
+        {
+          "path": "public/images/global-sourcing/construction-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "bytes": 68534
+        }
+      ],
+      "status": "integrated; visually reviewed; illustrative category photography",
+      "referenceVerification": "General geometry compared visually against primary manufacturer photographs. Category illustration only; not supplier product, engineering validation, performance or compliance evidence.",
+      "alt": {
+        "en": "White PVC elbow, tee, coupling and short pipe arranged on stone.",
+        "tr": "Taş yüzey üzerine dizilmiş beyaz PVC dirsek, T bağlantı, manşon ve kısa boru.",
+        "de": "Weißer PVC-Rohrbogen, T-Stück, Muffe und kurzes Rohr auf Stein angeordnet.",
+        "it": "Gomito, raccordo a T, manicotto e tubo corto in PVC bianco disposti sulla pietra.",
+        "fa": "زانویی، سه‌راهی، رابط و لوله کوتاه سفید PVC چیده‌شده روی سنگ.",
+        "ru": "Белые отвод, тройник, муфта и короткая труба из ПВХ, разложенные на камне.",
+        "zh": "石面上摆放的白色PVC弯头、三通、接头和短管。",
+        "vi": "Co nối, tê nối, khớp nối và đoạn ống ngắn bằng PVC trắng được xếp trên mặt đá.",
+        "uk": "Білі коліно, трійник, муфта й коротка труба з ПВХ, розкладені на камені.",
+        "ro": "Cot, teu, mufă și țeavă scurtă din PVC alb, așezate pe piatră.",
+        "bg": "Бели PVC коляно, тройник, муфа и къса тръба, подредени върху камък.",
+        "he": "מרפק, מחבר T, מצמד וצינור קצר מ־PVC לבן מסודרים על אבן.",
+        "ar": "كوع ووصلة ثلاثية وجلبة وصل وقطعة أنبوب قصيرة من PVC الأبيض مرتبة على سطح حجري."
+      },
+      "review": {
+        "method": "All generated outputs and saved 640px WebP variants inspected visually with view_image",
+        "result": "No visible logos, text, certification marks, branded facilities or ownership signals; general category illustration suitable for contextual use",
+        "limitation": "AI-generated, not documentary evidence or a technical product drawing"
+      },
+      "references": [
+        {
+          "title": "Wavin PVC product catalog",
+          "url": "https://wavin.us/pvc",
+          "checked": "2026-11-08",
+          "verified": "Separate white socket elbow and equal tee geometry compared with official product photos 2912411 and 2911253",
+          "limitation": "No rating, dimensions, certification or installation suitability asserted"
+        }
+      ],
+      "pages": [
+        "/en/industries/construction/",
+        "/tr/industries/construction/",
+        "/de/industries/construction/",
+        "/it/industries/construction/",
+        "/fa/industries/construction/",
+        "/ru/industries/construction/",
+        "/zh/industries/construction/",
+        "/vi/industries/construction/",
+        "/uk/industries/construction/",
+        "/ro/industries/construction/",
+        "/bg/industries/construction/",
+        "/he/industries/construction/",
+        "/ar/industries/construction/",
+        "/en/",
+        "/",
+        "/de/",
+        "/it/",
+        "/fa/",
+        "/ru/",
+        "/zh/",
+        "/vi/",
+        "/uk/",
+        "/ro/",
+        "/bg/",
+        "/he/",
+        "/ar/"
+      ]
+    },
+    {
+      "category": "packaging",
+      "origin": "OpenAI built-in image_gen, AI-generated illustrative scene",
+      "prompt": "Use case: product-mockup. Premium photorealistic editorial packaging materials category photo for global sourcing website. Plain unprinted kraft corrugated cardboard box with flaps naturally open, a roll of brown packing paper and a small stack of flat corrugated sheets arranged sparsely on a warm grey stone table. Realistic folds and paper edge texture. Wide 16:10 composition with breathing room, neutral soft daylight from left, restrained tan grey palette, quiet commercial editorial photography. No plastic clutter, text, logos, labels, recycling or certification icons, flags, watermark, people, warehouse. Illustrative samples only, no inventory or ownership claim.",
+      "master": {
+        "path": "work/generated-assets/packaging.png",
+        "width": 1586,
+        "height": 992,
+        "bytes": 2419662
+      },
+      "variants": [
+        {
+          "path": "public/images/global-sourcing/packaging-640.webp",
+          "width": 640,
+          "height": 400,
+          "bytes": 20730
+        },
+        {
+          "path": "public/images/global-sourcing/packaging-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "bytes": 76254
+        }
+      ],
+      "status": "integrated; visually reviewed; illustrative category photography",
+      "referenceVerification": "General low-risk materials or scene; no sensitive equipment, facility, supplier, certification, stock or ownership represented. Not an engineering specification.",
+      "alt": {
+        "en": "Corrugated cardboard box, cardboard sheets and a roll of kraft paper.",
+        "tr": "Oluklu mukavva kutu, mukavva levhalar ve kraft kâğıt rulosu.",
+        "de": "Wellpappkarton, Kartonplatten und eine Rolle Kraftpapier.",
+        "it": "Scatola di cartone ondulato, fogli di cartone e un rotolo di carta kraft.",
+        "fa": "جعبه مقوای موج‌دار، ورق‌های مقوا و یک رول کاغذ کرافت.",
+        "ru": "Коробка из гофрокартона, картонные листы и рулон крафт-бумаги.",
+        "zh": "瓦楞纸箱、纸板和一卷牛皮纸。",
+        "vi": "Hộp carton sóng, các tấm bìa và một cuộn giấy kraft.",
+        "uk": "Коробка з гофрокартону, картонні листи й рулон крафт-паперу.",
+        "ro": "Cutie din carton ondulat, foi de carton și o rolă de hârtie kraft.",
+        "bg": "Кутия от велпапе, картонени листове и ролка крафт хартия.",
+        "he": "קופסת קרטון גלי, לוחות קרטון וגליל נייר קראפט.",
+        "ar": "صندوق من الورق المقوّى المموج وألواح كرتون ولفافة ورق كرافت."
+      },
+      "review": {
+        "method": "All generated outputs and saved 640px WebP variants inspected visually with view_image",
+        "result": "No visible logos, text, certification marks, branded facilities or ownership signals; general category illustration suitable for contextual use",
+        "limitation": "AI-generated, not documentary evidence or a technical product drawing"
+      },
+      "pages": [
+        "/en/industries/packaging/",
+        "/tr/industries/packaging/",
+        "/de/industries/packaging/",
+        "/it/industries/packaging/",
+        "/fa/industries/packaging/",
+        "/ru/industries/packaging/",
+        "/zh/industries/packaging/",
+        "/vi/industries/packaging/",
+        "/uk/industries/packaging/",
+        "/ro/industries/packaging/",
+        "/bg/industries/packaging/",
+        "/he/industries/packaging/",
+        "/ar/industries/packaging/",
+        "/en/",
+        "/",
+        "/de/",
+        "/it/",
+        "/fa/",
+        "/ru/",
+        "/zh/",
+        "/vi/",
+        "/uk/",
+        "/ro/",
+        "/bg/",
+        "/he/",
+        "/ar/"
+      ]
+    },
+    {
+      "category": "food",
+      "origin": "OpenAI built-in image_gen, AI-generated illustrative scene",
+      "prompt": "Use case: product-mockup. Premium photorealistic editorial photo for a secondary nuts and dried fruits sourcing category. Three modest unbranded shallow matte ceramic dishes with realistic hazelnuts, walnut halves and dried apricots, a few pieces nearby on warm grey stone surface. Clean food styling, natural irregular shapes, no exaggerated abundance. Wide 16:10 composition with breathing room, neutral soft daylight from left, restrained cream tan warm brown palette, quiet commercial editorial photography. No text, logos, labels, certifications, flags, watermarks, people, facility or inventory claims.",
+      "master": {
+        "path": "work/generated-assets/food.png",
+        "width": 1586,
+        "height": 992,
+        "bytes": 2750120
+      },
+      "variants": [
+        {
+          "path": "public/images/global-sourcing/food-640.webp",
+          "width": 640,
+          "height": 400,
+          "bytes": 39736
+        },
+        {
+          "path": "public/images/global-sourcing/food-1280.webp",
+          "width": 1280,
+          "height": 800,
+          "bytes": 125194
+        }
+      ],
+      "status": "integrated; visually reviewed; illustrative category photography",
+      "referenceVerification": "General low-risk materials or scene; no sensitive equipment, facility, supplier, certification, stock or ownership represented. Not an engineering specification.",
+      "alt": {
+        "en": "A small selection of nuts and dried fruit on a neutral surface.",
+        "tr": "Nötr yüzey üzerinde küçük bir kuruyemiş ve kuru meyve seçkisi.",
+        "de": "Eine kleine Auswahl an Nüssen und Trockenfrüchten auf neutraler Unterlage.",
+        "it": "Una piccola selezione di frutta a guscio e frutta essiccata su una superficie neutra.",
+        "fa": "مجموعه کوچکی از آجیل و میوه خشک روی سطحی خنثی.",
+        "ru": "Небольшая подборка орехов и сухофруктов на нейтральной поверхности.",
+        "zh": "中性台面上少量摆放的坚果和干果。",
+        "vi": "Một ít hạt và trái cây khô được bày trên bề mặt trung tính.",
+        "uk": "Невелика добірка горіхів і сухофруктів на нейтральній поверхні.",
+        "ro": "O mică selecție de nuci și fructe uscate pe o suprafață neutră.",
+        "bg": "Малка селекция от ядки и сушени плодове върху неутрална повърхност.",
+        "he": "מבחר קטן של אגוזים ופירות יבשים על משטח ניטרלי.",
+        "ar": "تشكيلة صغيرة من المكسرات والفواكه المجففة على سطح محايد."
+      },
+      "review": {
+        "method": "All generated outputs and saved 640px WebP variants inspected visually with view_image",
+        "result": "No visible logos, text, certification marks, branded facilities or ownership signals; general category illustration suitable for contextual use",
+        "limitation": "AI-generated, not documentary evidence or a technical product drawing"
+      },
+      "pages": [
+        "/en/industries/food/",
+        "/tr/industries/food/",
+        "/de/industries/food/",
+        "/it/industries/food/",
+        "/fa/industries/food/",
+        "/ru/industries/food/",
+        "/zh/industries/food/",
+        "/vi/industries/food/",
+        "/uk/industries/food/",
+        "/ro/industries/food/",
+        "/bg/industries/food/",
+        "/he/industries/food/",
+        "/ar/industries/food/"
+      ]
+    }
+  ],
+  "superseded": [
+    {
+      "category": "agriculture",
+      "origin": "OpenAI built-in image_gen, AI-generated illustrative scene",
+      "prompt": "Use case: photorealistic-natural. Premium photorealistic editorial agriculture and livestock category photo for global sourcing website. Quiet small group of healthy sheep at the edge of a wheat field, natural rural landscape, no buildings, no workers, no equipment. Anatomically correct sheep with ordinary wool and realistic legs. Wide 16:10 composition with breathing room, neutral soft overcast daylight, restrained cream olive and charcoal tones, believable candid editorial camera photo. No text, logos, labels, flags, watermark. Generic illustrative scene; no claim of ownership, location, inventory or farm affiliation.",
+      "master": {
+        "path": "work/generated-assets/agriculture-superseded.png",
+        "width": 1586,
+        "height": 992,
+        "bytes": 3082357
+      },
+      "variants": [],
+      "status": "superseded: brief mismatch; not used on website",
+      "referenceVerification": "General low-risk materials or scene; no sensitive equipment, facility, supplier, certification, stock or ownership represented. Not an engineering specification.",
+      "alt": {
+        "en": "Illustrative rural scene with sheep beside a wheat field",
+        "tr": "Buğday tarlası kenarında koyunların bulunduğu temsili kırsal sahne",
+        "az": "Buğda tarlası kənarında qoyunların olduğu nümunəvi kənd mənzərəsi"
+      },
+      "review": {
+        "method": "All generated outputs and saved 640px WebP variants inspected visually with view_image",
+        "result": "No visible logos, text, certification marks, branded facilities or ownership signals; general category illustration suitable for contextual use",
+        "limitation": "AI-generated, not documentary evidence or a technical product drawing"
+      },
+      "reason": "Live sheep did not illustrate requested equipment"
+    },
+    {
+      "category": "construction",
+      "origin": "OpenAI built-in image_gen, AI-generated illustrative scene",
+      "prompt": "Use case: product-mockup. Premium photorealistic editorial construction and infrastructure materials category photo for global sourcing website. A sparse sample arrangement of three short straight ribbed steel reinforcement bars, two plain rectangular concrete pavers and a neatly stacked small bundle of plain clay bricks on a warm grey stone surface. Believable material geometry and scale, no complex machinery, no construction site. Wide 16:10 composition with breathing room, neutral soft daylight from left, restrained silver grey and earthy terracotta palette, realistic texture, quiet commercial editorial photography. No text, logos, certification markings, labels, flags, watermarks, people. Illustrative samples only, no inventory or ownership claim.",
+      "master": {
+        "path": "work/generated-assets/construction-superseded.png",
+        "width": 1586,
+        "height": 992,
+        "bytes": 2985113
+      },
+      "variants": [],
+      "status": "superseded: brief mismatch; not used on website",
+      "referenceVerification": "General low-risk materials or scene; no sensitive equipment, facility, supplier, certification, stock or ownership represented. Not an engineering specification.",
+      "alt": {
+        "en": "Illustrative samples of steel reinforcement bars, concrete pavers and clay bricks",
+        "tr": "Çelik donatı çubukları, beton parke ve kil tuğlaların temsili örnekleri",
+        "az": "Polad armatur, beton döşəmə daşları və gil kərpiclərin nümunəvi düzülüşü"
+      },
+      "review": {
+        "method": "All generated outputs and saved 640px WebP variants inspected visually with view_image",
+        "result": "No visible logos, text, certification marks, branded facilities or ownership signals; general category illustration suitable for contextual use",
+        "limitation": "AI-generated, not documentary evidence or a technical product drawing"
+      },
+      "reason": "Brick and rebar did not illustrate pipe fittings"
+    }
+  ],
+  "counts": {
+    "generated": 9,
+    "accepted": 7,
+    "superseded": 2,
+    "webVariants": 14,
+    "webBytes": 729294,
+    "integrated": 7,
+    "rejected": 2,
+    "awaitingGeneration": 0
+  }
+}

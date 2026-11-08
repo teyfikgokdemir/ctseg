@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import GlobalSourcing from '../../../components/GlobalSourcing.astro';
+import {activeLocales} from '../../../data/locales';
+import {globalPath,globalAlternates,globalTitle,globalDescription} from '../../../data/global-sourcing';
+export function getStaticPaths(){return activeLocales.map(lang=>({params:{lang},props:{lang}}));}
+const {lang}=Astro.props;
+---
+<BaseLayout lang={lang} title={globalTitle(lang,'industries')+' | CTSEG'} description={globalDescription(lang,'industries')} pageKey="global-industries" canonical={'https://ctseg.com.tr'+globalPath(lang,'industries')} alternates={globalAlternates('industries')}><GlobalSourcing lang={lang} mode="industries" /></BaseLayout>

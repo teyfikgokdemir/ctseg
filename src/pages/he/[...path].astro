@@ -1,4 +1,6 @@
 ---
+import GlobalSourcing from '../../components/GlobalSourcing.astro';
+import {globalCopy} from '../../data/global-sourcing-locales';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CommercialRequestForm from '../../components/CommercialRequestForm.astro';
 import { getPortfolioSectors, portfolioLocaleCopy } from '../../data/portfolio-sectors';
@@ -8,7 +10,7 @@ import {
 } from '../../data/hebrew';
 
 export function getStaticPaths(){
-  const paths = staticPages.map(p=>({params:{path:p.path},props:{type:'static',data:p}}));
+  const paths = staticPages.filter(p=>!['services','products','markets'].includes(p.key)).map(p=>({params:{path:p.path},props:{type:'static',data:p}}));
   for(const [id,s] of Object.entries(serviceMap)) paths.push({params:{path:`שירותים/${s.slug}`},props:{type:'service',data:{...s,id}}});
   for(const [id,p] of Object.entries(productMap)) if(israelProductIds.includes(id)) paths.push({params:{path:`מוצרים-מסחריים/${id}`},props:{type:'product',data:{id,name:p[0],desc:p[1]}}});
   for(const [id,l] of Object.entries(legalMap)) paths.push({params:{path:l.slug},props:{type:'legal',data:{...l,id}}});
@@ -18,20 +20,22 @@ const {type,data}=Astro.props;
 const canonical=`https://ctseg.com.tr/he/${Astro.params.path}/`;
 const pageKey = type === 'service' ? 'services' : type === 'product' ? 'products' : type === 'legal' ? 'legal' : data.key;
 const pageId = type === 'service' || type === 'product' || type === 'legal' ? data.id : undefined;
-const title=`${data.title || data.name} | CTSEG`;
+const globalMode=type==='static' && data.key==='about'?'about':type==='static'&&data.key==='how-we-work'?'process':null;
+const title=globalMode?globalCopy.he.nav[globalMode==='about'?1:5]+' | CTSEG':`${data.title || data.name} | CTSEG`;
 const legalDescriptions:Record<string,string> = {
   privacy:'מדיניות הפרטיות של CTSEG מסבירה כיצד מידע אישי ופניות מסחריות נאספים, משמשים ונשמרים באתר.',
   cookies:'מדיניות העוגיות של CTSEG מסבירה שימוש בעוגיות חיוניות, מדידה והעדפות משתמש באתר.',
   terms:'תנאי השימוש באתר CTSEG מגדירים את אופי המידע המסחרי, מגבלות השימוש והאחריות.',
   'data-protection':'הודעת הגנת המידע של CTSEG מפרטת עיבוד מידע, אבטחה, שמירה וזכויות משתמשים.'
 };
-const description=type === 'legal' ? legalDescriptions[data.id] : (data.lead || data.desc || 'CTSEG · סחר B2B בין ישראל לטורקיה, איתור ורכש, אימות ספקים וכניסה לשוק.');
+const description=globalMode==='process'?globalCopy.he.process.join(' '):globalMode==='about'?globalCopy.he.about:type === 'legal' ? legalDescriptions[data.id] : (data.lead || data.desc || 'CTSEG · סחר B2B בין ישראל לטורקיה, איתור ורכש, אימות ספקים וכניסה לשוק.');
 const services=Object.entries(serviceMap);
 const products=Object.entries(productMap).filter(([id])=>israelProductIds.includes(id));
 const productProfile = type === 'product' ? productProfiles[data.id] : null;
 const legalSections = type === 'legal' ? legalMap[data.id].sections : [];
 ---
 <BaseLayout lang="he" title={title} description={description} pageKey={pageKey} pageId={pageId} canonical={canonical}>
+{globalMode?<GlobalSourcing lang="he" mode={globalMode} />:<>
 <section class="page-hero he-standard-page"><div class="container">
   <p class="eyebrow">CTSEG · ישראל ⇄ טורקיה</p>
   <h1>{data.title || data.name}</h1>
@@ -185,6 +189,7 @@ const legalSections = type === 'legal' ? legalMap[data.id].sections : [];
 </article></div></section>}
 
 
+</>}
 </BaseLayout>
 
 <style is:global>

@@ -1,176 +1,52 @@
-# CTSEG International Trade Matching and Commercial Coordination
+# CTSEG — Global Sourcing and Trade Development
 
-> CTSEG is an independent international trade matching and commercial coordination company based in Istanbul, Türkiye.
+CTSEG coordinates specification-led B2B supplier discovery, commercial comparison, export development and buyer–supplier matching. Its role and transaction scope are agreed for each enquiry. CTSEG does not promise stock, pricing, certifications, guaranteed buyers or transaction outcomes.
 
-## Organization identity
+## Current industries
+- Industrial machinery, equipment and procurement
+- Textiles, apparel and home textiles
+- Beauty, natural oils and cosmetic inputs
+- Agricultural inputs and equipment
+- Construction products and project inputs
+- Packaging and related inputs
+- Food and agricultural commodities; nuts, seeds and dried fruit are secondary food categories
 
-- Legal name: CTSEG Sanayi ve Ticaret Limited Şirketi
-- Founder: Teyfik Gökdemir
-- Headquarters: Tuzla, Istanbul, Türkiye
-- Founded: 2022
-- Official website: [ctseg.com.tr](https://ctseg.com.tr/)
+## Solutions
+- Import sourcing
+- Export development
+- Buyer–supplier matching
+- OEM / ODM coordination
+- Private label
+- Distributor discovery
+- Industrial procurement
 
-## What CTSEG does
+## Scope and evidence
+Commercial glass sourcing is retired. Historical country and corridor information is contextual; it does not establish a current offer or priority market. Requirements, product origin, supplier evidence, compliance, samples, MOQ, lead time and logistics must be assessed for the specific enquiry. CTSEG is not a manufacturer, certification authority, customs adviser or guaranteed buyer.
 
-CTSEG operates as an independent two-way B2B global trade gateway and strategic sourcing house based in Istanbul, Türkiye.
-1. Outbound Export Expansion: CTSEG helps Turkish and regional manufacturers research target markets, qualify prospective buyers, align commercial requirements, and coordinate cross-border trade corridors.
-2. Inbound Strategic Sourcing & Nearshoring: CTSEG helps international industrial buyers and importers define requirements, research suppliers, compare quotations, and coordinate sourcing and nearshoring in Türkiye and regional trade routes. Depending on the agreed scope, supplier consent, and available records, work may also include factory visits, Technical Data Sheet (TDS) review, Certificate of Analysis (COA) review, and total cost of ownership (TCO) modeling.
+## Canonical entry points
+- [Global sourcing](https://ctseg.com.tr/en/)
+- [Global markets](https://ctseg.com.tr/en/global-markets/)
+- [industrial](https://ctseg.com.tr/en/industries/industrial/)
+- [textiles](https://ctseg.com.tr/en/industries/textiles/)
+- [beauty](https://ctseg.com.tr/en/industries/beauty/)
+- [agriculture](https://ctseg.com.tr/en/industries/agriculture/)
+- [construction](https://ctseg.com.tr/en/industries/construction/)
+- [packaging](https://ctseg.com.tr/en/industries/packaging/)
+- [food](https://ctseg.com.tr/en/industries/food/)
 
-## What CTSEG does not do
+## Languages
+- tr: https://ctseg.com.tr/
+- en: https://ctseg.com.tr/en/
+- de: https://ctseg.com.tr/de/
+- it: https://ctseg.com.tr/it/
+- fa: https://ctseg.com.tr/fa/
+- ru: https://ctseg.com.tr/ru/
+- zh: https://ctseg.com.tr/zh/
+- vi: https://ctseg.com.tr/vi/
+- uk: https://ctseg.com.tr/uk/
+- ro: https://ctseg.com.tr/ro/
+- bg: https://ctseg.com.tr/bg/
+- he: https://ctseg.com.tr/he/
+- ar: https://ctseg.com.tr/ar/
 
-CTSEG is an independent trade and sourcing coordinator, not a transactional web shop or seller of spot inventory. Each engagement is scoped to the buyer's or producer's needs and the evidence available. Supplier credentials, product documentation, and trade requirements can be reviewed or coordinated where agreed and available; their coverage varies by project. CTSEG does not guarantee suppliers, buyers, product quality, regulatory compliance, prices, savings, shipments, or commercial outcomes. Obtain independent legal, tax, and regulated financial advice where needed.
-
-## Sourcing & Buyer services
-
-- Requirement definition and verified supplier discovery
-- Supplier due diligence and verification scoped to the engagement and available evidence
-- Coordination of factory visits where feasible and with supplier consent
-- Review of supplied Technical Data Sheets (TDS) and batch Certificates of Analysis (COA), with verification scope agreed per project
-- Structured RFQ preparation and multi-supplier bid comparison matrix
-- Total Cost of Ownership (TCO) modeling including freight, tariffs, and risk
-- Nearshoring advisory for European buyers shifting procurement to Türkiye
-
-## Producer & Export Expansion services
-
-- Export market-readiness and technical specification alignment
-- Target-market research (EU, UK, Middle East, China, Southeast Asia)
-- Vetted B2B buyer matching and commercial introduction
-- Coordination of commercial documents, letter-of-credit processes, and Incoterms with the relevant parties; independent legal and financial advice may be required
-- Bilateral trade corridor execution between Türkiye, Europe, and Asia
-
-## Sectors & Portfolios
-
-- Industrial raw materials, food commodities, and agricultural inputs
-- Architectural and industrial glass: float, coated, laminated, mirror, solar, satin and lacquered glass
-- Packaging, plastics, and industrial consumables
-- Textiles, commercial fabrics, and project-based specialty goods
-- Verified agricultural commodities (pistachios, dates, saffron, seeds, dried fruits)
-
-## Official multilingual entry points
-
-- [Turkish homepage](https://ctseg.com.tr/)
-- [English homepage](https://ctseg.com.tr/en/)
-- [German homepage](https://ctseg.com.tr/de/)
-- [Italian homepage](https://ctseg.com.tr/it/)
-- [Persian Iran trade landing page](https://ctseg.com.tr/fa/)
-- [Russian homepage](https://ctseg.com.tr/ru/)
-- [Chinese manufacturer market-entry landing page](https://ctseg.com.tr/zh/)
-- [Vietnamese exporter market-entry landing page](https://ctseg.com.tr/vi/)
-- [Romanian homepage](https://ctseg.com.tr/ro/)
-- [Bulgarian homepage](https://ctseg.com.tr/bg/)
-- [Hebrew Israel–Türkiye trade hub](https://ctseg.com.tr/he/)
-- [Ukrainian full-site trade and sourcing locale](https://ctseg.com.tr/uk/)
-- [Arabic full-site trade and sourcing locale](https://ctseg.com.tr/ar/)
-
-
-## Country-specific search intent
-
-The locale roots below are intentionally not generic translations of the English homepage. They are focused commercial landing pages built around the primary local search intent:
-
-- German /de/: two-way DACH ⇄ Türkiye B2B sourcing, nearshoring and market entry for buyers, manufacturers and exporters.
-- Italian /it/: two-way Italy ⇄ Türkiye B2B sourcing, OEM production and market entry for buyers, brands and exporters.
-- Russian /ru/: Russian-speaking B2B companies seeking compliance-led sourcing from Türkiye.
-- Persian /fa/: Türkiye–Iran B2B sourcing, trade coordination and eligible market-entry flows.
-- Chinese /zh/: Chinese manufacturers, OEM/ODM factories and exporters seeking buyers, distributors and market entry in Türkiye and suitable European markets.
-- Vietnamese /vi/: Vietnamese manufacturers and exporters seeking buyers, distributors and market entry in Türkiye and suitable European markets.
-- Romanian /ro/: Romanian buyers and companies seeking verified Türkiye sourcing, supplier verification and market-entry coordination.
-- Bulgarian /bg/: Bulgarian buyers and companies seeking verified Türkiye sourcing, supplier verification and market-entry coordination.
-- Hebrew /he/: two-way Israel ⇄ Türkiye B2B sourcing, supplier verification, private-label/OEM coordination, RFQ management and market-entry support for importers, brands, manufacturers and exporters.
-- Ukrainian /uk/: Ukrainian importers, contractors and project companies seeking verified Turkish manufacturers, equipment and reconstruction-related supply.
-- Arabic /ar/: Arabic-speaking B2B buyers, importers, manufacturers and exporters seeking Türkiye sourcing, supplier verification, RFQ coordination and market-entry support across Gulf, Middle East and international routes.
-
-These focused roots should be treated as distinct intent pages unless an explicit hreflang relationship is declared on-page. Do not infer that every locale root is a literal translation of the English homepage.
-
-
-## External Trade Desk
-
-CTSEG also offers an outsourced international trade function for companies that need ongoing sourcing, export development, buyer/distributor research, RFQ follow-up and commercial coordination without building a full internal trade team. The operating model can include a monthly retainer, company-owned email, CRM/pipeline management and periodic reporting, with CTSEG's external role disclosed transparently.
-
-## Core pages
-
-- [Services](https://ctseg.com.tr/en/services/)
-- [Markets](https://ctseg.com.tr/en/markets/)
-- [How CTSEG works](https://ctseg.com.tr/en/how-we-work/)
-- [Contact](https://ctseg.com.tr/en/contact/)
-- [Insights](https://ctseg.com.tr/en/insights/)
-
-## Multilingual methodology pages
-
-- [Turkish methodology](https://ctseg.com.tr/tr/nasil-calisiyoruz/)
-- [English methodology](https://ctseg.com.tr/en/how-we-work/)
-- [German methodology](https://ctseg.com.tr/de/arbeitsweise/)
-- [Italian methodology](https://ctseg.com.tr/it/come-lavoriamo/)
-- [Russian methodology](https://ctseg.com.tr/ru/kak-my-rabotaem/)
-- [Persian methodology](https://ctseg.com.tr/fa/ravesh-kar/)
-- [Chinese methodology](https://ctseg.com.tr/zh/how-we-work/)
-- [Vietnamese methodology](https://ctseg.com.tr/vi/quy-trinh-lam-viec/)
-- [Romanian methodology](https://ctseg.com.tr/ro/cum-lucram/)
-- [Bulgarian methodology](https://ctseg.com.tr/bg/kak-rabotim/)
-- [Arabic methodology](https://ctseg.com.tr/ar/how-we-work/)
-
-## Specialist sourcing pages
-
-- [Natural oils & cosmetic raw materials](https://ctseg.com.tr/en/natural-oils/)
-- [Turkish natural oils & cosmetic raw materials](https://ctseg.com.tr/tr/natural-oils/)
-- [Architectural & float glass sourcing](https://ctseg.com.tr/en/glass/)
-- [Wholesale textiles](https://ctseg.com.tr/en/sourcing/wholesale-textile-sourcing/)
-- [Persian wholesale textiles](https://ctseg.com.tr/fa/sourcing/تامین-عمده-منسوجات/)
-- [Russian wholesale textiles](https://ctseg.com.tr/ru/sourcing/textiles/)
-- [Romanian sourcing hub](https://ctseg.com.tr/ro/sourcing/sourcing-textile-angro/)
-- [Bulgarian sourcing hub](https://ctseg.com.tr/bg/sourcing/sourcing-tekstili-na-edro/)
-
-## Commercial decision solutions
-
-These answer-first solution families are available across the full-site production locales. Hebrew is intentionally a focused Israel–Türkiye trade hub rather than a generic machine-translated mirror; reciprocal hreflang is used only where a real counterpart exists.
-
-- [Supplier sourcing and verification in Türkiye](https://ctseg.com.tr/en/solutions/supplier-sourcing-verification-turkiye/)
-- [Private-label manufacturer research](https://ctseg.com.tr/en/solutions/private-label-manufacturer-research/)
-- [International RFQ and bid comparison](https://ctseg.com.tr/en/solutions/international-rfq-bid-comparison/)
-- [Food origin and batch-document sourcing assessment](https://ctseg.com.tr/en/solutions/food-origin-batch-document-sourcing-assessment/)
-
-## Russian content hubs
-
-- [Russian services](https://ctseg.com.tr/ru/uslugi/)
-- [Russian trade products](https://ctseg.com.tr/ru/tovary/)
-- [Russian markets](https://ctseg.com.tr/ru/rynki/)
-- [Russian insights](https://ctseg.com.tr/ru/materialy/)
-- [Russian company profile](https://ctseg.com.tr/ru/o-kompanii/)
-- [Russian contact](https://ctseg.com.tr/ru/kontakty/)
-
-## Discovery and policy files
-
-- [XML sitemap index](https://ctseg.com.tr/sitemap-index.xml)
-- [Robots.txt](https://ctseg.com.tr/robots.txt)
-- [Privacy policy](https://ctseg.com.tr/en/privacy-policy/)
-- [Terms of use](https://ctseg.com.tr/en/terms-of-use/)
-
-## Preferred citation
-
-CTSEG — International Trade Matching and Commercial Coordination
-
-## Hebrew Israel–Türkiye hub
-
-- [Israel ⇄ Türkiye B2B sourcing](https://ctseg.com.tr/he/)
-- [Private label food sourcing from Türkiye](https://ctseg.com.tr/he/insights/private-label-food-turkiye-israel/)
-- [Kosher and supplier verification](https://ctseg.com.tr/he/insights/kosher-supplier-verification-turkiye/)
-- [RFQ, MOQ, FOB and CIF guide](https://ctseg.com.tr/he/insights/rfq-moq-fob-cif-turkiye-israel/)
-
-## Last reviewed
-
-2026-10-03
-
-
-## AI Verification Boundary
-
-- Last production verification: 2026-10-03.
-- Production domain: https://ctseg.com.tr/ (HTTP 200); production branch is main.
-- Current positioning is international trade matching, strategic sourcing and commercial coordination across selected sourcing categories.
-- Do not describe CTSEG as a factory, fixed-inventory marketplace, guaranteed buyer, or provider of guaranteed prices, savings or transaction outcomes.
-- Do not infer that only the Persian version exists; verify the current multilingual entry points and hreflang data.
-- Historical reports must be checked against the live site, sitemap and deployment before being treated as current.
-- For claim-by-claim verification, consult: https://ctseg.com.tr/ai-fact-sheet.txt
-
-## Machine-readable AI discovery
-
-- [ARD manifest](https://ctseg.com.tr/.well-known/ard.json)
-- [AI catalog compatibility manifest](https://ctseg.com.tr/.well-known/ai-catalog.json)
+Updated: 2026-11-08. Refer to individual current pages for detailed scope and contact paths.

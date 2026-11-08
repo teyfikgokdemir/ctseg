@@ -3,6 +3,7 @@ import { analyticsDisclosure } from "../lib/analytics-disclosure";
 import { getPosts, getPostForInsight } from '../data/blog';
 import { serviceDetails } from '../data/service-details';
 import PageHero from './PageHero.astro';
+import GlobalSourcing from './GlobalSourcing.astro';
 import Framework from './Framework.astro';
 import PortfolioBanner from './PortfolioBanner.astro';
 import NaturalOilsFeatureSection from './NaturalOilsFeatureSection.astro';
@@ -45,6 +46,7 @@ import { poultryFeedContent, poultryFeedPath, type PoultryFeedLocale } from '../
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
+const globalMode = key === 'home' ? 'home' : !id && key === 'products' ? 'industries' : !id && key === 'services' ? 'solutions' : key === 'markets' ? 'markets' : key === 'about' ? 'about' : key === 'how-we-work' ? 'process' : null;
 const t = ui[lang];
 const h = homeCopy[lang];
 const gateway = tradeGateway[lang];
@@ -1055,6 +1057,7 @@ const verifiedLater = {
   ar:['يتم التحقق وفق المصنّع وهيكل الطلب','يتم التأكيد في مرحلة عرض السعر','تتم مراجعة الوثائق على مستوى الدفعة','يتم التقييم عند الطلب','يتم التقييم وفق المصنّع والسوق المستهدف']
 }[lang];
 ---
+{globalMode ? <GlobalSourcing lang={lang} mode={globalMode} /> : <>
 {key === 'home' && (
   <>
     <section class="hero homepage-trade-hero">
@@ -2340,3 +2343,5 @@ const verifiedLater = {
     </>
   );
 })()}
+
+</>}

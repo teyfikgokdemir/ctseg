@@ -9,3 +9,7 @@ dist/
 .env.local
 .vscode/
 .idea/
+
+# Local design research and high-resolution image-generation masters
+.taste-skill/
+work/generated-assets/

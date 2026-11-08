@@ -1,12 +1,10 @@
 ---
+import { globalCopy } from '../data/global-sourcing-locales';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageContent from '../components/PageContent.astro';
 import { breadcrumbSchema, tradeMatchingServiceSchema } from '../lib/routes';
 const record = { lang:'tr' as const, key:'home' };
-const meta = {
-  title: 'CTSEG | Stratejik Tedarik, B2B Ticaret ve Pazara Giriş',
-  description: 'CTSEG, Türkiye ve uluslararası pazarlarda üretici ve tedarikçi araştırması, ithalat-ihracat eşleştirmesi, B2B teklif (RFQ) ve teslim koordinasyonu sunar.',
-};
+const meta = {title:`${globalCopy.tr.title} | CTSEG`,description:globalCopy.tr.lead};
 const schema = [breadcrumbSchema(record,meta.title),tradeMatchingServiceSchema(record,meta.title,meta.description)];
 const socialImage = 'https://ctseg.com.tr/images/ctseg-og.jpg';
 const socialImageAlt = 'CTSEG — Küresel B2B Ticaret, Tedarik ve Doğrulama Ağı';

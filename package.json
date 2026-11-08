@@ -21,7 +21,9 @@
     "check:parity": "node scripts/check-homepage-parity.mjs",
     "lighthouse:mobile": "node scripts/run-lighthouse.mjs",
     "validate": "npm run build && npm run check:site && npm run check:seo && npm run check:form && npm run check:images && npm run check:locales && npm run check:responsive && npm run check:parity",
-    "check:analytics": "node scripts/check-analytics.mjs"
+    "check:analytics": "node scripts/check-analytics.mjs",
+    "check:global": "node scripts/check-global-sourcing.mjs",
+    "check:migration": "node scripts/check-portfolio-migration.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",

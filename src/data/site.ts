@@ -1339,6 +1339,9 @@ for (const id of legalIds) {
 }
 
 export function localizedPath(lang: Locale | string, key: string, id?: string): string {
+  if(!id && key === 'services') return `/${lang}/solutions/`;
+  if(!id && key === 'products') return `/${lang}/industries/`;
+  if(key === 'markets') return `/${lang}/global-markets/`;
   const safeLang = (locales as readonly string[]).includes(lang) ? (lang as Locale) : 'en';
   const pathLang = safeLang;
   if (key === 'home') return pathLang === 'tr' ? '/' : `/${pathLang}/`;
@@ -1652,3 +1655,6 @@ Object.assign(pageCopy as any,{
     legalSections:[['Obim i odgovornost','CTSEG nastoji da korporativne i komercijalne informacije budu tačne. Zahtevi se mogu poslati na info@ctseg.com.tr.'],['Podaci i svrha','Kada nas kontaktirate možemo obrađivati ime, kompaniju, e-mail, telefon i detalje komercijalnog zahteva, kao i ograničene tehničke zapise radi bezbednosti.'],['Deljenje, čuvanje i bezbednost','Podaci se dele samo sa neophodnim pružaocima usluga i nadležnim organima u skladu sa primenljivim pravom i brišu se ili anonimizuju po isteku svrhe i zakonskih rokova.'],['Prava i kontakt','Za pristup, ispravku, brisanje, prigovor i druga prava u vezi sa podacima pišite na info@ctseg.com.tr.']]
   }
 });
+
+// CTSEG is a brand identity; legal registration has not been established for this change.
+for(const lang of activeLocales) (company.name as any)[lang]='CTSEG';

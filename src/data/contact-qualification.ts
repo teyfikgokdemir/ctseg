@@ -1,3 +1,4 @@
+import {globalCopy} from './global-sourcing-locales';
 import type { ActiveLocale } from './locales';
 
 export type QualificationOption = { value: string; label: string };
@@ -203,3 +204,10 @@ Object.assign(contactQualification as any,{
 ,
   ar:{tradeDirection:'اتجاه التجارة',productFamily:'فئة المنتج',originMarket:'بلد المنشأ أو الشحن',destinationMarket:'الدولة أو السوق المستهدف',packaging:'التعبئة أو شكل العرض',incoterm:'شرط التسليم المفضل / Incoterm',tradeDirections:[{value:'export_from_turkiye',label:'تصدير من Türkiye'},{value:'import_to_turkiye',label:'استيراد إلى Türkiye'},{value:'cross_border_sourcing',label:'توريد عابر للحدود'},{value:'market_entry',label:'دخول السوق وتطوير المشترين'},{value:'other',label:'تقييم تجاري آخر'}],productFamilies:[{value:'vegetable_oils',label:'الزيوت النباتية والمواد الغذائية'},{value:'nuts_dried_fruit',label:'المكسرات والفواكه المجففة'},{value:'architectural_glass',label:'الزجاج المعماري والصناعي'},{value:'biofuel_feedstock',label:'الوقود الحيوي ومواد الطاقة الأولية'},{value:'other',label:'منتج أو خدمة أخرى'}]}
 });
+
+// Service-led sectors replace discontinued glass in every locale, including compact rollout entries.
+const sectorValues=['industrial','textiles','beauty','agriculture','construction','packaging','food'];
+for(const [lang,copy] of Object.entries(contactQualification)){
+  if(!globalCopy[lang]) continue; // Historical retired locale dictionaries are not emitted.
+  copy.productFamilies=sectorValues.map((value,index)=>({value,label:globalCopy[lang].industries[index]}));
+}

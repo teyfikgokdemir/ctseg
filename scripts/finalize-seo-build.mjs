@@ -11,6 +11,14 @@ const walk = (dir) => readdirSync(dir, { withFileTypes:true }).flatMap((entry) =
   entry.isDirectory() ? walk(join(dir, entry.name)) : [join(dir, entry.name)]
 );
 
+// A retired URL must never ship as a static 200 page (which could bypass the
+// edge retirement response on a preview/static host). Fail rather than editing
+// generated page content or silently deleting URLs from a generated sitemap.
+const retiredPortfolioRoutes = JSON.parse(readFileSync(resolve('docs/migrations/2026-11-08-retired-glass-routes.json'), 'utf8'));
+for (const route of retiredPortfolioRoutes) {
+  if (existsSync(join(dist, route, 'index.html'))) throw new Error(`Retired portfolio route emitted: ${route}`);
+}
+
 const original = readFileSync(redirectsFile, 'utf8').trimEnd();
 const configuredSources = new Set(
   original.split(/\r?\n/)
