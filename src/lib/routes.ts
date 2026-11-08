@@ -84,7 +84,7 @@ export function getRouteRecords(): RouteRecord[] {
   }
   // The generator consumes the same resolver as cards, menus and related links.
   const sharedKeys = new Set(['home','services','products','markets','insights','about','contact','how-we-work','scenarios','legal','guides','syria-market']);
-  return records.filter(record=>!(!record.id && ['services','products','markets'].includes(record.key))).map(record => sharedKeys.has(record.key) ? {
+  return records.filter(record=>!(!record.id && ['services','markets'].includes(record.key))).map(record => sharedKeys.has(record.key) ? {
     ...record,
     path: localizedPath(record.lang,record.key,record.id).replace(new RegExp(`^/${record.lang}/`),'').replace(/^\/+|\/+$/g,'') || undefined
   } : record);
@@ -92,7 +92,7 @@ export function getRouteRecords(): RouteRecord[] {
 
 export function getMeta(record: RouteRecord) {
   const { lang, key, id } = record;
-  const globalMode = key === 'home' ? 'home' : !id && key === 'products' ? 'industries' : !id && key === 'services' ? 'solutions' : key === 'markets' ? 'markets' : key === 'about' ? 'about' : key === 'how-we-work' ? 'process' : null;
+  const globalMode = key === 'home' ? 'home' : !id && key === 'services' ? 'solutions' : key === 'markets' ? 'markets' : key === 'about' ? 'about' : key === 'how-we-work' ? 'process' : null;
   if(globalMode) return {title:`${globalTitle(lang,globalMode)} | CTSEG`,description:globalDescription(lang,globalMode)};
   const copy = pageCopy[lang];
   const t = ui[lang];
@@ -124,6 +124,7 @@ export function getMeta(record: RouteRecord) {
       lang === 'ar' ? 'تربط CTSEG بين Türkiye والأسواق الدولية عبر التجارة الثنائية بين الشركات، والتوريد الاستراتيجي، والتحقق من الموردين، وإدارة RFQ، وتنسيق دخول الأسواق.' :
       'CTSEG connects Türkiye with international markets through two-way B2B trade, strategic sourcing, supplier verification, RFQ management and market-entry coordination.'
   };
+  if (key === 'products' && !id) return {title:`${ui[lang].products} | CTSEG`,description:pageCopy[lang].productsLead};
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — ${localizedMetaLabels[lang].service} | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
   if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} — ${localizedMetaLabels[lang].product} | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
   if (key === 'insights' && id) return { title:`${insights[id as keyof typeof insights].titles[lang]} | CTSEG`, description:insights[id as keyof typeof insights].descriptions[lang] };
