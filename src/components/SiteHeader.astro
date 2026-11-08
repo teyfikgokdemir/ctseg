@@ -4,6 +4,7 @@ import { activeLocaleRegistry } from '../data/locales';
 
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 import { tradePlatformCopy } from '../data/trade-platform';
+import { globalCopy } from '../data/global-sourcing-locales';
 import { searchLandingPath, type SearchLandingId } from '../data/search-landings';
 
 import { poultryFeedPath, type PoultryFeedId, type PoultryFeedLocale } from '../data/poultry-feed';
@@ -73,13 +74,16 @@ const naturalOilsMainLabel: Record<string,string> = {
 };
 const naturalOilsHref = `/${lang}/natural-oils/`;
 const oilsNavActive = pageKey === 'natural-oils' || pageKey === 'natural-oils-product';
+const newSolutionsLink: [string,string] = [globalCopy[lang]?.nav[2] || 'Solutions', `/${lang}/solutions/`];
 const solutionLinks = lang === 'he' ? [
+  newSolutionsLink,
   ['איתור ואימות ספקים','/he/שירותים/איתור-ואימות-ספקים/'],
   ['רכש אסטרטגי','/he/שירותים/רכש-אסטרטגי/'],
   ['כניסה לשוק','/he/שירותים/כניסה-לשוק/'],
   [industryNavLabel, industryNavHref],
   [methodLabel,'/he/איך-אנחנו-עובדים/']
 ] : lang === 'ar' ? [
+  newSolutionsLink,
   [t.services, localizedPath(lang,'services')],
   ['التوريد الاستراتيجي', localizedPath(lang,'services','strategic-sourcing')],
   ['البحث عن الموردين والتحقق منهم', localizedPath(lang,'services','supplier-verification')],
@@ -90,6 +94,7 @@ const solutionLinks = lang === 'he' ? [
   [methodLabel, localizedPath(lang,'how-we-work')],
   ['سيناريوهات عمل تمثيلية', localizedPath(lang,'scenarios')]
 ] : [
+  newSolutionsLink,
   [t.services, localizedPath(lang,'services')],
   [p.buyerTitle, localizedPath(lang,'services','strategic-sourcing')],
   [p.producerTitle, localizedPath(lang,'services','market-entry')],
