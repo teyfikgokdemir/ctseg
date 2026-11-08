@@ -28,7 +28,7 @@ const labels=lang==='tr'?
  <section class="ct-portfolio-main">
   <div class="ct-portfolio-wrap ct-portfolio-layout">
    <div>
-    <header class="ct-portfolio-section-title"><p class="ct-portfolio-kicker">{labels.scope}</p><h2>{labels.scope}</h2></header>
+    <div class="ct-portfolio-section-title"><p class="ct-portfolio-kicker">{labels.scope}</p><h2>{labels.scope}</h2></div>
     <div class="ct-portfolio-items">
     {items.map(item=><article class="ct-portfolio-item">
      <a href={item.href} class="ct-portfolio-item__image"><img src={item.image.src} width={item.image.width} height={item.image.height} alt={item.image.alt} loading="lazy" decoding="async"/></a>
