@@ -596,11 +596,10 @@
   {
     "path": "/ar/trade-products/",
     "locale": "ar",
-    "status": 301,
-    "action": "consolidate-equivalent-overview",
-    "target": "/ar/industries/",
-    "contentDecision": "CONSOLIDATE",
-    "urlDecision": "REDIRECT"
+    "status": 200,
+    "action": "restore-distinct-portfolio-index",
+    "contentDecision": "REWRITE",
+    "urlDecision": "KEEP"
   },
   {
     "path": "/ar/trade-products/ahmad-aghaei-pistachio/",
@@ -1198,11 +1197,10 @@
   {
     "path": "/bg/targovski-produkti/",
     "locale": "bg",
-    "status": 301,
-    "action": "consolidate-equivalent-overview",
-    "target": "/bg/industries/",
-    "contentDecision": "CONSOLIDATE",
-    "urlDecision": "REDIRECT"
+    "status": 200,
+    "action": "restore-distinct-portfolio-index",
+    "contentDecision": "REWRITE",
+    "urlDecision": "KEEP"
   },
   {
     "path": "/bg/targovski-produkti/ahmad-aghaei-pistachio/",
@@ -1865,11 +1863,10 @@
   {
     "path": "/de/handelsprodukte/",
     "locale": "de",
-    "status": 301,
-    "action": "consolidate-equivalent-overview",
-    "target": "/de/industries/",
-    "contentDecision": "CONSOLIDATE",
-    "urlDecision": "REDIRECT"
+    "status": 200,
+    "action": "restore-distinct-portfolio-index",
+    "contentDecision": "REWRITE",
+    "urlDecision": "KEEP"
   },
   {
     "path": "/de/handelsprodukte/ahmad-aghaei-pistachio/",
@@ -2861,11 +2858,10 @@
   {
     "path": "/en/trade-products/",
     "locale": "en",
-    "status": 301,
-    "action": "consolidate-equivalent-overview",
-    "target": "/en/industries/",
-    "contentDecision": "CONSOLIDATE",
-    "urlDecision": "REDIRECT"
+    "status": 200,
+    "action": "restore-distinct-portfolio-index",
+    "contentDecision": "REWRITE",
+    "urlDecision": "KEEP"
   },
   {
     "path": "/en/trade-products/ahmad-aghaei-pistachio/",
@@ -3616,11 +3612,10 @@
   {
     "path": "/fa/trade-products/",
     "locale": "fa",
-    "status": 301,
-    "action": "consolidate-equivalent-overview",
-    "target": "/fa/industries/",
-    "contentDecision": "CONSOLIDATE",
-    "urlDecision": "REDIRECT"
+    "status": 200,
+    "action": "restore-distinct-portfolio-index",
+    "contentDecision": "REWRITE",
+    "urlDecision": "KEEP"
   },
   {
     "path": "/fa/trade-products/ahmad-aghaei-pistachio/",
@@ -4337,11 +4332,10 @@
   {
     "path": "/he/מוצרים-מסחריים/",
     "locale": "he",
-    "status": 301,
-    "action": "consolidate-equivalent-overview",
-    "target": "/he/industries/",
-    "contentDecision": "CONSOLIDATE",
-    "urlDecision": "REDIRECT"
+    "status": 200,
+    "action": "restore-distinct-portfolio-index",
+    "contentDecision": "REWRITE",
+    "urlDecision": "KEEP"
   },
   {
     "path": "/he/מוצרים-מסחריים/almonds/",
@@ -4973,11 +4967,10 @@
   {
     "path": "/it/prodotti-commerciali/",
     "locale": "it",
-    "status": 301,
-    "action": "consolidate-equivalent-overview",
-    "target": "/it/industries/",
-    "contentDecision": "CONSOLIDATE",
-    "urlDecision": "REDIRECT"
+    "status": 200,
+    "action": "restore-distinct-portfolio-index",
+    "contentDecision": "REWRITE",
+    "urlDecision": "KEEP"
   },
   {
     "path": "/it/prodotti-commerciali/ahmad-aghaei-pistachio/",
@@ -5584,11 +5577,10 @@
   {
     "path": "/ro/produse-comerciale/",
     "locale": "ro",
-    "status": 301,
-    "action": "consolidate-equivalent-overview",
-    "target": "/ro/industries/",
-    "contentDecision": "CONSOLIDATE",
-    "urlDecision": "REDIRECT"
+    "status": 200,
+    "action": "restore-distinct-portfolio-index",
+    "contentDecision": "REWRITE",
+    "urlDecision": "KEEP"
   },
   {
     "path": "/ro/produse-comerciale/ahmad-aghaei-pistachio/",
@@ -6371,11 +6363,10 @@
   {
     "path": "/ru/tovary/",
     "locale": "ru",
-    "status": 301,
-    "action": "consolidate-equivalent-overview",
-    "target": "/ru/industries/",
-    "contentDecision": "CONSOLIDATE",
-    "urlDecision": "REDIRECT"
+    "status": 200,
+    "action": "restore-distinct-portfolio-index",
+    "contentDecision": "REWRITE",
+    "urlDecision": "KEEP"
   },
   {
     "path": "/ru/tovary/ahmad-aghaei-pistachio/",
@@ -7055,11 +7046,10 @@
   {
     "path": "/tr/ticari-urunler/",
     "locale": "tr",
-    "status": 301,
-    "action": "consolidate-equivalent-overview",
-    "target": "/tr/industries/",
-    "contentDecision": "CONSOLIDATE",
-    "urlDecision": "REDIRECT"
+    "status": 200,
+    "action": "restore-distinct-portfolio-index",
+    "contentDecision": "REWRITE",
+    "urlDecision": "KEEP"
   },
   {
     "path": "/tr/ticari-urunler/ahmad-aghaei-pistachio/",
@@ -7818,11 +7808,10 @@
   {
     "path": "/uk/torhovi-produkty/",
     "locale": "uk",
-    "status": 301,
-    "action": "consolidate-equivalent-overview",
-    "target": "/uk/industries/",
-    "contentDecision": "CONSOLIDATE",
-    "urlDecision": "REDIRECT"
+    "status": 200,
+    "action": "restore-distinct-portfolio-index",
+    "contentDecision": "REWRITE",
+    "urlDecision": "KEEP"
   },
   {
     "path": "/uk/torhovi-produkty/ahmad-aghaei-pistachio/",
@@ -8581,11 +8570,10 @@
   {
     "path": "/vi/trade-products/",
     "locale": "vi",
-    "status": 301,
-    "action": "consolidate-equivalent-overview",
-    "target": "/vi/industries/",
-    "contentDecision": "CONSOLIDATE",
-    "urlDecision": "REDIRECT"
+    "status": 200,
+    "action": "restore-distinct-portfolio-index",
+    "contentDecision": "REWRITE",
+    "urlDecision": "KEEP"
   },
   {
     "path": "/vi/trade-products/ahmad-aghaei-pistachio/",
@@ -9328,11 +9316,10 @@
   {
     "path": "/zh/trade-products/",
     "locale": "zh",
-    "status": 301,
-    "action": "consolidate-equivalent-overview",
-    "target": "/zh/industries/",
-    "contentDecision": "CONSOLIDATE",
-    "urlDecision": "REDIRECT"
+    "status": 200,
+    "action": "restore-distinct-portfolio-index",
+    "contentDecision": "REWRITE",
+    "urlDecision": "KEEP"
   },
   {
     "path": "/zh/trade-products/ahmad-aghaei-pistachio/",
