@@ -291,7 +291,7 @@ const globalSwitchPath = (target: string): string => {
 
       <div class="desktop-only-nav">
         <div class="nav-solutions-group" data-solutions-nav-group>
-          <button class:list={['nav-solutions-parent',{ active: pageKey === 'services' }]} type="button" aria-expanded="false" aria-controls="solutions-panel" data-solutions-toggle>
+          <button class:list={['nav-solutions-parent',{ active: ['services','global-solutions','global-solution'].includes(pageKey) }]} type="button" aria-expanded="false" aria-controls="solutions-panel" data-solutions-toggle>
             <span>{navigationCopy.globalTrade}</span>
             <span class="desktop-chevron" aria-hidden="true">▾</span>
           </button>
