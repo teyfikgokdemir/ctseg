@@ -51,7 +51,7 @@ for(const [lang,slug] of Object.entries(legacyServiceIndex)){
 }
 for(const [lang,slug] of [['tr','hizmetler'],['en','services']]){
   const home=readFileSync(lang==='tr'?'dist/index.html':`dist/${lang}/index.html`,'utf8');
-  const menuItems=[...home.matchAll(/<a\\b[^>]*class="desktop-solution-item"[^>]*>/g)].map(match=>match[0]);
+  const menuItems=[...home.matchAll(/<a\b[^>]*class="desktop-solution-item"[^>]*>/g)].map(match=>match[0]);
   const solutionLinks=menuItems.filter(tag=>tag.includes(`href="/${lang}/solutions/"`));
   assert(solutionLinks.length===1,`${lang}: global trade dropdown must contain one solutions index link`);
   assert(existsSync(`dist/${lang}/${slug}/${lang==='tr'?'stratejik-tedarik':'strategic-sourcing'}/index.html`),
