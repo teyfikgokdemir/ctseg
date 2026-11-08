@@ -1,0 +1,93 @@
+{
+  "tr": {
+    "KEEP": 76,
+    "REWRITE": 3,
+    "CONSOLIDATE": 3,
+    "REMOVE": 27,
+    "REDIRECT": 3
+  },
+  "ar": {
+    "KEEP": 68,
+    "REWRITE": 3,
+    "CONSOLIDATE": 3,
+    "REMOVE": 26,
+    "REDIRECT": 3
+  },
+  "bg": {
+    "KEEP": 43,
+    "REWRITE": 3,
+    "CONSOLIDATE": 3,
+    "REMOVE": 27,
+    "REDIRECT": 3
+  },
+  "de": {
+    "KEEP": 60,
+    "REWRITE": 3,
+    "CONSOLIDATE": 3,
+    "REMOVE": 27,
+    "REDIRECT": 3
+  },
+  "en": {
+    "KEEP": 73,
+    "REWRITE": 3,
+    "CONSOLIDATE": 3,
+    "REMOVE": 27,
+    "REDIRECT": 3
+  },
+  "fa": {
+    "KEEP": 60,
+    "REWRITE": 3,
+    "CONSOLIDATE": 3,
+    "REMOVE": 27,
+    "REDIRECT": 3
+  },
+  "he": {
+    "KEEP": 30,
+    "REWRITE": 3,
+    "CONSOLIDATE": 3,
+    "REMOVE": 26,
+    "REDIRECT": 3
+  },
+  "it": {
+    "KEEP": 60,
+    "REWRITE": 3,
+    "CONSOLIDATE": 3,
+    "REMOVE": 27,
+    "REDIRECT": 3
+  },
+  "ro": {
+    "KEEP": 43,
+    "REWRITE": 3,
+    "CONSOLIDATE": 3,
+    "REMOVE": 27,
+    "REDIRECT": 3
+  },
+  "ru": {
+    "KEEP": 60,
+    "REWRITE": 3,
+    "CONSOLIDATE": 3,
+    "REMOVE": 27,
+    "REDIRECT": 3
+  },
+  "uk": {
+    "KEEP": 60,
+    "REWRITE": 3,
+    "CONSOLIDATE": 3,
+    "REMOVE": 27,
+    "REDIRECT": 3
+  },
+  "vi": {
+    "KEEP": 60,
+    "REWRITE": 3,
+    "CONSOLIDATE": 3,
+    "REMOVE": 27,
+    "REDIRECT": 3
+  },
+  "zh": {
+    "KEEP": 60,
+    "REWRITE": 3,
+    "CONSOLIDATE": 3,
+    "REMOVE": 27,
+    "REDIRECT": 3
+  }
+}
