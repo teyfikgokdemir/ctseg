@@ -563,4 +563,69 @@ const relatedSpecs = industrySpecializations
     .spec-overview-card{padding-top:24px}
     .spec-hero{padding:44px 0 58px}
   }
+
+  /* Specialization heroes follow the same photographic narrative as the
+     established poultry-feed page. Scoped to these 24 subject routes only. */
+  .spec-page .spec-hero{
+    position:relative;isolation:isolate;overflow:hidden;
+    min-height:clamp(580px,72svh,730px);
+    display:flex;align-items:center;background:#0b1510;
+    padding:70px 0 84px;color:#f6f6ef;
+  }
+  .spec-page .spec-hero::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(90deg,rgba(7,13,10,.96) 0%,rgba(7,13,10,.85) 34%,rgba(7,13,10,.3) 76%,rgba(7,13,10,.13) 100%);
+    pointer-events:none;
+  }
+  html[dir="rtl"] .spec-page .spec-hero::before{
+    background:linear-gradient(270deg,rgba(7,13,10,.96) 0%,rgba(7,13,10,.85) 34%,rgba(7,13,10,.3) 76%,rgba(7,13,10,.13) 100%);
+  }
+  .spec-page .spec-hero__inner{position:static;width:min(1360px,calc(100% - 112px))}
+  .spec-page .spec-breadcrumb{position:relative;z-index:2;max-width:720px;margin-bottom:clamp(38px,5vw,80px);color:#e0e8d4}
+  .spec-page .spec-breadcrumb a{color:inherit;text-decoration:none}
+  .spec-page .spec-hero__grid{display:block}
+  .spec-page .spec-hero__content{
+    position:relative;z-index:2;max-width:710px;
+  }
+  .spec-page .spec-title{
+    font-size:clamp(42px,4.1vw,71px);line-height:1.06;
+    font-weight:500;letter-spacing:-.052em;color:#f6f6ef;
+    max-width:18ch;overflow-wrap:break-word;
+  }
+  .spec-page .spec-eyebrow{color:#d2ee7a;font-weight:700;letter-spacing:.11em}
+  .spec-page .spec-lead{color:#e5eae0;font-size:clamp(17px,1.3vw,21px);line-height:1.65;max-width:53ch}
+  .spec-page .spec-hero__media{
+    position:absolute;inset:0;z-index:0;width:100%;height:100%;
+    aspect-ratio:auto;margin:0;overflow:hidden;
+    border:0;border-radius:0;pointer-events:none;
+  }
+  .spec-page .spec-hero__media img{
+    display:block;width:100%;height:100%;object-fit:cover;
+    object-position:center;border-radius:0;
+  }
+  .spec-page .spec-hero__actions{position:relative;z-index:2;flex-wrap:wrap}
+  .spec-page .spec-hero__actions .button--primary{
+    background:#c4f000;color:#162019;min-height:50px;
+  }
+  .spec-page .spec-hero__actions .button--secondary{
+    border-color:rgba(245,247,239,.65);color:#f5f7ef;
+  }
+  @media(max-width:950px){
+    .spec-page .spec-hero__inner{width:calc(100% - 48px)}
+    .spec-page .spec-title{font-size:clamp(38px,5vw,58px)}
+  }
+  @media(max-width:760px){
+    .spec-page .spec-hero{min-height:clamp(590px,92svh,780px);align-items:end;padding:52px 0}
+    .spec-page .spec-hero__inner{width:calc(100% - 36px)}
+    .spec-page .spec-hero::before{
+      background:linear-gradient(180deg,rgba(7,13,10,.38) 0%,rgba(7,13,10,.79) 42%,rgba(7,13,10,.97) 83%);
+    }
+    html[dir="rtl"] .spec-page .spec-hero::before{
+      background:linear-gradient(180deg,rgba(7,13,10,.38) 0%,rgba(7,13,10,.79) 42%,rgba(7,13,10,.97) 83%);
+    }
+    .spec-page .spec-breadcrumb{margin-bottom:28px}
+    .spec-page .spec-title{font-size:clamp(36px,9vw,54px)}
+    .spec-page .spec-lead{font-size:17px}
+    .spec-page .spec-hero__media img{object-position:62% center}
+  }
 </style>
