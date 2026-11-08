@@ -154,7 +154,11 @@ for(const [source,target] of Object.entries(migratedHubs)){
 for(const url of ['/ar/trade-products/','/ru/tovary/']){
   if(!existsSync(join(dist,url,'index.html')))errors.push('restored portfolio page missing: '+url);
   if(!sitemap.includes('<loc>https://ctseg.com.tr'+url+'</loc>'))errors.push('restored portfolio sitemap URL missing: '+url);
-  if(redirects.split(/\r?\n/).some(line=>line.startsWith(url+' ')||line.startsWith(url.slice(0,-1)+' ')))errors.push('restored portfolio is still redirected: '+url);
+  // The slashless variant must 301 to its own canonical trailing-slash URL.
+  const matching=redirects.split(/\r?\n/).map(line=>line.trim().split(/\s+/))
+    .filter(([source])=>source===url||source===url.slice(0,-1));
+  if(matching.some(([source,target])=>source===url||(source===url.slice(0,-1)&&target!==url)))
+    errors.push('restored portfolio redirects to the wrong destination: '+url);
 }
 const requiredRedirects=[
   '/fr /en/ 301','/fr/ /en/ 301',
