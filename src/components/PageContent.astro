@@ -46,7 +46,7 @@ import { poultryFeedContent, poultryFeedPath, type PoultryFeedLocale } from '../
 
 const { record } = Astro.props as { record: RouteRecord };
 const { lang, key, id } = record;
-const globalMode = !id && key === 'products' ? 'industries' : !id && key === 'services' ? 'solutions' : key === 'markets' ? 'markets' : key === 'about' ? 'about' : key === 'how-we-work' ? 'process' : null;
+const globalMode = !id && key === 'products' ? 'industries' : key === 'markets' ? 'markets' : key === 'about' ? 'about' : key === 'how-we-work' ? 'process' : null;
 const t = ui[lang];
 const h = homeCopy[lang];
 const gateway = tradeGateway[lang];
@@ -1352,17 +1352,47 @@ const verifiedLater = {
 
 {key === 'services' && !id && (
   <>
-    <PageHero lang={lang} eyebrow={t.services} title={copy.servicesTitle} lead={copy.servicesLead} />
-    <section class="section services-directory"><div class="container card-grid">{serviceIds.map((serviceId) => <a class="card" href={localizedPath(lang,'services',serviceId)}><h2>{services[serviceId].names[lang]}</h2><p>{services[serviceId].descriptions[lang]}</p><strong>{t.readMore} →</strong></a>)}</div></section>
-    <section class="section solution-directory"><div class="container">
-      <div class="section-head"><h2>{searchLandingIndexCopy[lang].title}</h2><p>{searchLandingIndexCopy[lang].lead}</p></div>
-      <div class="card-grid">{searchLandingIds.map((landingId) => {
-        const landing=searchLandings[landingId].content[lang];
-        return <a class="card" href={searchLandingPath(lang,landingId)}><h3>{landing.title}</h3><p>{landing.description}</p><strong>{t.readMore} →</strong></a>;
-      })}</div>
-    </div></section>
-    <div class="about-framework-section"><Framework lang={lang} /></div>
-    {<section class="section compact-link-section"><div class="container cta-statement"><h2>{lang === 'tr' ? 'Ticarette güven, doğru süreçle başlar.' : processPage?.title}</h2><a class="button" href={workHref} data-how-we-work-cta>{lang === 'tr' ? 'Çalışma yöntemimizi keşfedin' : t.readMore} →</a></div></section>}
+    <section class="legacy-services-hero">
+      <div class="container legacy-services-hero__grid">
+        <div class="legacy-services-hero__copy">
+          <p class="legacy-services-kicker">CTSEG / {t.services}</p>
+          <h1>{copy.servicesTitle}</h1>
+          <p>{copy.servicesLead}</p>
+          <div class="legacy-services-hero__actions">
+            <a class="button" href={sectionHref('contact')}>{t.quote} ↗</a>
+            <a class="legacy-services-text-link" href={`/${lang}/solutions/`}>{t.allServices} ↗</a>
+          </div>
+        </div>
+        <figure class="legacy-services-hero__media">
+          <img src="/images/global-sourcing/industrial-1280.webp" srcset="/images/global-sourcing/industrial-640.webp 640w, /images/global-sourcing/industrial-1280.webp 1280w" sizes="(max-width:760px) 92vw, 46vw" width="1280" height="800" alt={copy.servicesTitle} loading="eager" fetchpriority="high" decoding="async" />
+        </figure>
+      </div>
+    </section>
+    <section class="legacy-services-directory">
+      <div class="container">
+        <div class="legacy-services-directory__heading">
+          <h2>{t.services}</h2>
+          <p>{copy.servicesLead}</p>
+        </div>
+        <div class="legacy-services-directory__grid">
+          {serviceIds.map((serviceId) =>
+            <a class="legacy-services-directory__item" href={localizedPath(lang,'services',serviceId)}>
+              <div><h3>{services[serviceId].names[lang]}</h3><p>{services[serviceId].descriptions[lang]}</p></div>
+              <span aria-hidden="true">↗</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </section>
+    <section class="legacy-services-linkout">
+      <div class="container legacy-services-linkout__grid">
+        <h2>{t.allServices}</h2>
+        <div>
+          <p>{copy.servicesLead}</p>
+          <a class="button" href={`/${lang}/solutions/`}>{t.readMore} ↗</a>
+        </div>
+      </div>
+    </section>
   </>
 )}
 
