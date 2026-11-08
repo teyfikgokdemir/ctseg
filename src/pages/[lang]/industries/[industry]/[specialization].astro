@@ -1,9 +1,10 @@
 ---
+import { specializationUi } from '../../../../data/specialization-ui';
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import { activeLocales, schemaLanguage } from '../../../../data/locales';
 import { industrySpecializations, type SpecializationRecord } from '../../../../data/industry-specializations';
 import { globalCopy } from '../../../../data/global-sourcing-locales';
-import { industryIds, globalPath } from '../../../../data/global-sourcing';
+import { industryIds, globalHome, globalPath } from '../../../../data/global-sourcing';
 import { localizedPath, type Locale } from '../../../../data/site';
 
 export function getStaticPaths() {
@@ -25,6 +26,7 @@ export function getStaticPaths() {
 const { spec, lang } = Astro.props as { spec: SpecializationRecord; lang: string };
 const content = spec.content[lang] || spec.content.en;
 const c = globalCopy[lang] || globalCopy.en;
+const labels = specializationUi[lang];
 const sectorIndex = industryIds.indexOf(spec.industryId as any);
 const industryName = sectorIndex >= 0 ? c.industries[sectorIndex] : spec.industryId;
 const industryHref = `/${lang}/industries/${spec.industryId}/`;
@@ -63,7 +65,23 @@ const faqSchema = content.faqs && content.faqs.length > 0 ? {
   }))
 } : null;
 
-const schemas = faqSchema ? [serviceSchema, faqSchema] : [serviceSchema];
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { name: c.nav[0], item: `https://ctseg.com.tr${globalHome(lang)}` },
+    { name: c.nav[3], item: `https://ctseg.com.tr/${lang}/industries/` },
+    { name: industryName, item: `https://ctseg.com.tr${industryHref}` },
+    { name: content.h1, item: canonical }
+  ].map((item, index) => ({ '@type': 'ListItem', position: index + 1, ...item }))
+};
+const schemas = [serviceSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])];
+const relatedSolutionIds = spec.id === 'korean-cosmetics' || spec.id === 'oem-odm-cosmetics'
+  ? ['oem-odm', 'private-label']
+  : spec.id === 'private-label-cosmetics' ? ['private-label']
+  : spec.industryId === 'industrial' ? ['industrial-procurement']
+  : spec.industryId === 'textiles' ? ['oem-odm'] : ['import-sourcing'];
+const solutionIds = ['import-sourcing','export-development','buyer-supplier-matching','oem-odm','private-label','distributor-discovery','industrial-procurement'];
 
 // Related specializations in same industry
 const relatedSpecs = industrySpecializations
@@ -73,7 +91,7 @@ const relatedSpecs = industrySpecializations
 
 <BaseLayout
   lang={lang as Locale}
-  title={`${content.title} | CTSEG`}
+  title={content.title}
   description={content.metaDescription}
   pageKey="global-industry-specialization"
   pageId={`${spec.industryId}-${spec.id}`}
@@ -85,8 +103,8 @@ const relatedSpecs = industrySpecializations
     {/* Hero Section */}
     <section class="spec-hero">
       <div class="container spec-hero__inner">
-        <nav class="spec-breadcrumb" aria-label="Breadcrumb">
-          <a href={`/${lang}/`}>{c.nav[0]}</a>
+        <nav class="spec-breadcrumb" aria-label={labels.breadcrumb}>
+          <a href={globalHome(lang)}>{c.nav[0]}</a>
           <span class="sep">/</span>
           <a href={`/${lang}/industries/`}>{c.nav[3]}</a>
           <span class="sep">/</span>
@@ -113,6 +131,8 @@ const relatedSpecs = industrySpecializations
           <figure class="spec-hero__media">
             <img
               src={spec.image.src}
+              srcset={spec.image.src.startsWith('/images/global-sourcing/') ? `${spec.image.src.replace('-1280.webp','-640.webp')} 640w, ${spec.image.src} 1280w` : undefined}
+              sizes={spec.image.src.startsWith('/images/global-sourcing/') ? '(max-width:900px) 92vw, 40vw' : undefined}
               width={spec.image.width}
               height={spec.image.height}
               alt={content.h1}
@@ -130,7 +150,7 @@ const relatedSpecs = industrySpecializations
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">{industryName}</p>
-          <h2>{lang === 'tr' ? 'Ticari Tedarik Genel Bakışı' : lang === 'de' ? 'Kommerzielle Beschaffungsübersicht' : lang === 'it' ? 'Panoramica Commerciale di Approvvigionamento' : lang === 'fa' ? 'نمای کلی تأمین تجاری' : lang === 'ru' ? 'Обзор коммерческих поставок' : lang === 'zh' ? '商业采购概述' : lang === 'vi' ? 'Tổng quan về nguồn cung ứng thương mại' : lang === 'he' ? 'סקירת רכש מסחרי' : lang === 'ar' ? 'نظرة عامة على التوريد التجاري' : 'Commercial Sourcing Overview'}</h2>
+          <h2>{labels.overview}</h2>
         </div>
         <div class="spec-overview-card">
           <p class="spec-overview-text">{content.overview}</p>
@@ -162,7 +182,7 @@ const relatedSpecs = industrySpecializations
         <div class="spec-two-col">
           <div class="spec-col-box">
             <div class="section-head">
-              <p class="eyebrow">RFQ & Standards</p>
+              <p class="eyebrow">{content.specsTitle}</p>
               <h2>{content.specsTitle}</h2>
             </div>
             <ul class="spec-list">
@@ -177,7 +197,7 @@ const relatedSpecs = industrySpecializations
 
           <div class="spec-col-box">
             <div class="section-head">
-              <p class="eyebrow">Verification</p>
+              <p class="eyebrow">{content.evaluationTitle}</p>
               <h2>{content.evaluationTitle}</h2>
             </div>
             <ul class="spec-list">
@@ -199,7 +219,7 @@ const relatedSpecs = industrySpecializations
         <div class="spec-two-col">
           <div class="spec-col-box">
             <div class="section-head">
-              <p class="eyebrow">Manufacturing & Volume</p>
+              <p class="eyebrow">{content.productionTitle}</p>
               <h2>{content.productionTitle}</h2>
             </div>
             <ul class="spec-list">
@@ -214,7 +234,7 @@ const relatedSpecs = industrySpecializations
 
           <div class="spec-col-box">
             <div class="section-head">
-              <p class="eyebrow">Incoterms & Compliance</p>
+              <p class="eyebrow">{content.logisticsTitle}</p>
               <h2>{content.logisticsTitle}</h2>
             </div>
             <ul class="spec-list">
@@ -234,10 +254,10 @@ const relatedSpecs = industrySpecializations
     <section class="section spec-process-section">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">Step-by-step</p>
+          <p class="eyebrow">{industryName}</p>
           <h2>{content.processTitle}</h2>
         </div>
-        <div class="detailed-process">
+        <ol class="detailed-process" style="list-style:none;margin:0;padding:0;">
           {content.process.map((step, idx) => (
             <li>
               <div>
@@ -246,7 +266,8 @@ const relatedSpecs = industrySpecializations
               </div>
             </li>
           ))}
-        </div>
+        </ol>
+        <p>{relatedSolutionIds.map((id, index) => <><span>{index ? ' · ' : ''}</span><a href={globalPath(lang, 'solutions', id)}>{c.solutions[solutionIds.indexOf(id)]}</a></>)}</p>
       </div>
     </section>
 
@@ -292,7 +313,7 @@ const relatedSpecs = industrySpecializations
         <div class="container">
           <div class="section-head">
             <p class="eyebrow">{industryName}</p>
-            <h2>{lang === 'tr' ? 'Diğer Sektörel Tedarik Alanları' : lang === 'de' ? 'Weitere Spezialisierungen' : lang === 'it' ? 'Altre Specializzazioni' : lang === 'ru' ? 'Другие специализации' : lang === 'zh' ? '相关采购细分领域' : lang === 'fa' ? 'سایر حوزه‌های تخصصی' : lang === 'he' ? 'ענפי התמחות נוספים' : lang === 'ar' ? 'مجالات التوريد المتخصصة الأخرى' : 'Related Sourcing Specializations'}</h2>
+            <h2>{labels.related}</h2>
           </div>
           <div class="card-grid">
             {relatedSpecs.map((rel) => {
@@ -301,7 +322,7 @@ const relatedSpecs = industrySpecializations
                 <a class="card" href={`/${lang}/industries/${rel.industryId}/${rel.id}/`}>
                   <h3>{relContent.h1}</h3>
                   <p>{relContent.lead}</p>
-                  <strong>{lang === 'tr' ? 'Detayları İncele →' : lang === 'he' ? 'לפרטים נוספים ←' : lang === 'ar' ? 'عرض التفاصيل ←' : 'Explore Specialization →'}</strong>
+                  <strong>{c.explore}</strong>
                 </a>
               );
             })}
@@ -317,6 +338,10 @@ const relatedSpecs = industrySpecializations
     background: #0f1210;
     color: #f5f3eb;
     padding-bottom: 80px;
+    overflow-wrap: anywhere;
+  }
+  .spec-page :is(h1, h2, h3, p, span, a, strong) {
+    overflow-wrap: anywhere;
   }
   .spec-hero {
     padding: clamp(40px, 5vw, 72px) 0 clamp(48px, 6vw, 84px);
@@ -426,6 +451,7 @@ const relatedSpecs = industrySpecializations
     gap: 32px;
   }
   .spec-col-box {
+    min-width: 0;
     background: rgba(255, 255, 255, 0.025);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;

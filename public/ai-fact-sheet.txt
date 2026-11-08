@@ -34,6 +34,15 @@ Commercial glass sourcing is retired. Historical country and corridor informatio
 - [packaging](https://ctseg.com.tr/en/industries/packaging/)
 - [food](https://ctseg.com.tr/en/industries/food/)
 
+
+## Specialization research
+- [Vietnam textiles](https://ctseg.com.tr/en/industries/textiles/vietnam-textiles/)
+- [South Korean cosmetics](https://ctseg.com.tr/en/industries/beauty/korean-cosmetics/)
+- [Poultry equipment](https://ctseg.com.tr/en/industries/agriculture/poultry-equipment/)
+- [Industrial pumps and valves](https://ctseg.com.tr/en/industries/industrial/pumps-valves/)
+
+These pages describe buyer requirements and supplier research, not confirmed stock, authorized distribution or certified supplier availability.
+
 ## Languages
 - tr: https://ctseg.com.tr/
 - en: https://ctseg.com.tr/en/

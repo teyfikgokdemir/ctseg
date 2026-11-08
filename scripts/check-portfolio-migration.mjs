@@ -21,9 +21,12 @@ for (const record of baseline.filter(record => record.status === 301)) {
 for (const route of retired) {
   assert(!existsSync(join('dist', route, 'index.html')), `Retired page still emitted: ${route}`);
   for (const path of [route, route.replace(/\/$/, '')]) {
-    const response = await onRequest({ request:new Request(`https://ctseg.com.tr${path}`), next:() => { throw Error(`Retired route reached assets: ${path}`); } });
-    assert.equal(response.status, 410, path);
-    assert.equal(response.headers.get('X-Robots-Tag'), 'noindex');
+    for (const method of ['GET','HEAD']) {
+      const response = await onRequest({ request:new Request(`https://ctseg.com.tr${path}`, {method}), next:() => { throw Error(`Retired route reached assets: ${path}`); } });
+      assert.equal(response.status, 410, `${method} ${path}`);
+      assert.equal(response.headers.get('X-Robots-Tag'), 'noindex');
+      if (method === 'HEAD') assert.equal(await response.text(), '', `HEAD body: ${path}`);
+    }
   }
 }
 const head = await onRequest({request:new Request('https://ctseg.com.tr/en/glass/', {method:'HEAD'}),next:()=>null});
