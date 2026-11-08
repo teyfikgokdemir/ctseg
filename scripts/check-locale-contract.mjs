@@ -142,13 +142,19 @@ if(sitemap.includes('https://ctseg.com.tr/fr/'))errors.push('French URL remains 
 
 const redirects=readFileSync(join(dist,'_redirects'),'utf8');
 const migratedHubs={
-  '/ar/services/':'/ar/solutions/','/ar/trade-products/':'/ar/industries/','/ar/markets/':'/ar/global-markets/',
-  '/ru/uslugi/':'/ru/solutions/','/ru/tovary/':'/ru/industries/','/ru/rynki/':'/ru/global-markets/'
+  '/ar/services/':'/ar/solutions/','/ar/markets/':'/ar/global-markets/',
+  '/ru/uslugi/':'/ru/solutions/','/ru/rynki/':'/ru/global-markets/'
 };
 for(const [source,target] of Object.entries(migratedHubs)){
   for(const from of [source,source.slice(0,-1)])if(!redirects.split(/\r?\n/).includes(from+' '+target+' 301'))errors.push('migrated hub redirect missing: '+from);
   if(!existsSync(join(dist,target,'index.html')))errors.push('migrated hub destination missing: '+target);
   if(sitemap.includes('<loc>https://ctseg.com.tr'+source+'</loc>'))errors.push('retired hub remains in sitemap: '+source);
+}
+// Restored product portfolios have distinct content and canonical 200 URLs.
+for(const url of ['/ar/trade-products/','/ru/tovary/']){
+  if(!existsSync(join(dist,url,'index.html')))errors.push('restored portfolio page missing: '+url);
+  if(!sitemap.includes('<loc>https://ctseg.com.tr'+url+'</loc>'))errors.push('restored portfolio sitemap URL missing: '+url);
+  if(redirects.split(/\r?\n/).some(line=>line.startsWith(url+' ')||line.startsWith(url.slice(0,-1)+' ')))errors.push('restored portfolio is still redirected: '+url);
 }
 const requiredRedirects=[
   '/fr /en/ 301','/fr/ /en/ 301',
