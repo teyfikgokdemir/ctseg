@@ -655,6 +655,27 @@ try {
       }
     }
 
+    if (testCase.verifyGlobalHero && /\\/(?:industries\\/(?:textiles|packaging)|solutions\\/oem-odm)\\//.test(testCase.path)) {
+      const editorial = await page.evaluate(() => {
+        const section=document.querySelector('.gs-editorial-detail');
+        const eyebrow=section?.querySelector('.gs-editorial-main .gs-eyebrow');
+        const heading=section?.querySelector('.gs-editorial-main h2');
+        const panel=section?.querySelector('.gs-editorial-aside');
+        if(!section||!eyebrow||!heading||!panel)return {missing:true};
+        const rgb=s=>s.match(/[\\d.]+/g)?.slice(0,3).map(Number)||[0,0,0];
+        const luminance=color=>rgb(color).map(v=>{v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)}).reduce((a,v,i)=>a+v*[.2126,.7152,.0722][i],0);
+        const contrast=(a,b)=>{const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
+        const labelRatio=contrast(getComputedStyle(eyebrow).color,getComputedStyle(section).backgroundColor);
+        const headingRatio=contrast(getComputedStyle(heading).color,getComputedStyle(section).backgroundColor);
+        const b=panel.getBoundingClientRect();
+        return {labelRatio,headingRatio,panelWidth:b.width,panelX:b.x,heading:heading.textContent?.trim()};
+      });
+      if(editorial.missing||editorial.labelRatio<4.5||editorial.headingRatio<4.5||editorial.panelWidth<220
+         ||editorial.panelX<0||editorial.panelX+editorial.panelWidth>testCase.width+2){
+        failures.push(`${testCase.name}: illegible or clipped editorial detail: ${JSON.stringify(editorial)}`);
+      }
+    }
+
     // Regression: the RFQ qualification screen must actually reveal the contact step.
     // This verifies live DOM behavior, not merely the presence of hidden form fields.
     if (['desktop-tr-contact','mobile-en-contact'].includes(testCase.name)) {
