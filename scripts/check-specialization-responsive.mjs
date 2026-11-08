@@ -38,8 +38,19 @@ try {
     if(['vi','ar','fa','he'].includes(lang) && width===320) await page.screenshot({path:`.artifacts/specializations/${lang}-${width}.png`,fullPage:true});
     count++;
   }
+  // A long translation must wrap even when fallback fonts have wider glyphs.
+  await page.setViewportSize({width:320,height:900});
+  await page.goto('http://127.0.0.1:4325/de/industries/beauty/korean-cosmetics/',{waitUntil:'load'});
+  await page.locator('.spec-hero__actions .button, .spec-cta-card .button').evaluateAll(elements=>elements.forEach(el=>{el.textContent='Beschaffungsanfrage '.repeat(5).trim();}));
+  const longCtaOverflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
+  if(longCtaOverflow>1)failures.push({case:'long-translated-CTA',width:320,overflow:longCtaOverflow});
+  count++;
+  await page.locator('.spec-col-box .section-head h2').first().evaluate(el=>{el.textContent='Lieferantenqualifikationsanforderungen'.repeat(3);});
+  const heading=await page.locator('.spec-col-box .section-head h2').first().evaluate(el=>({overflow:document.documentElement.scrollWidth-innerWidth,wrap:getComputedStyle(el).overflowWrap}));
+  if(heading.overflow>1)failures.push({case:'long-translated-heading',width:320,...heading});
+  count++;
   assert.equal(failures.length,0,JSON.stringify(failures,null,2));
-  console.log(`Specialization responsive passed: ${count} cases; all 24 topics, all 13 locales, 320/390/1440px, RTL, loaded images, semantic process and buyer paths. No external requests allowed.`);
+  console.log(`Specialization responsive passed: ${count} cases; all 24 topics, all 13 locales, 320/390/1440px, RTL, loaded images, semantic process, buyer paths and long translated CTAs. No external requests allowed.`);
 } finally {
   await browser?.close();
   await new Promise(resolve=>server.close(resolve));

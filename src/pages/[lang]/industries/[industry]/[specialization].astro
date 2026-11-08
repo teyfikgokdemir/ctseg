@@ -343,6 +343,10 @@ const relatedSpecs = industrySpecializations
   .spec-page :is(h1, h2, h3, p, span, a, strong) {
     overflow-wrap: anywhere;
   }
+  .spec-page .section-head h2 {
+    /* The shared visual stylesheet otherwise forces normal wrapping here. */
+    overflow-wrap: anywhere !important;
+  }
   .spec-hero {
     padding: clamp(40px, 5vw, 72px) 0 clamp(48px, 6vw, 84px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
