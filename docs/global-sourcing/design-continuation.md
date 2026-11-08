@@ -37,3 +37,11 @@ PR #88 kullanıcı görsel onayı, CI ve SEO/URL kontrolleri tamamlanmadan merge
 - Değişiklikler `PageContent.astro`, `SiteHeader.astro`, `GlobalSourcing.astro`, `site.css` üzerinde sınırlı tutuldu.
 - Bu devam çalışması görsel onay değildir: ekran görüntüsü ve gerçek Cloudflare preview taraması bağımsız doğrulanamadı.
 - Son seri CI Core validation başarıyla tamamlandı, responsive workflow durumu nihai raporda ayrıca kontrol edilmeli.
+
+## 9 Kasım rota denetimi düzeltmesi — önemli bulgu
+- Önceki kayıtta `/hizmetler/` ve `/solutions/` için iki ayrı aktif indeks olduğu belirtilmişti. Bu **yanlıştı**: `getRouteRecords()` eski hizmet indekslerini yayımlamıyor; `localizedPath(lang,'services')` yeni `/solutions/` yolunu döndürüyor ve `public/_redirects` eski indeksleri yeniye 301 yönlendiriyor.
+- Eski hizmet **detay** sayfaları (`/tr/hizmetler/stratejik-tedarik/` vb.) korunuyor. Bu içerikler yeni çözüm detaylarından farklı olabilir ve otomatik birleştirilmemelidir.
+- Bu nedenle daha önce eklenen **erişilemeyen** legacy indeks markup ve CSS'i `c6217c2` + `9387511` ile geri alındı. Yönlendirmeler değiştirilmedi.
+- Yeni Çözümler menüsündeki birbirinin aynısı iki indeks bağlantısı `2fc8ba4` ile tekilleştirildi.
+- `check:global` içerisine legacy indekslerin 301 sözleşmesi, eski detay sayfalarının korunması ve menü bağlantısının tekilliği için regresyon denetimi eklendi (`6502de3`).
+- Bu kayıt önceki hata tespitini açıklığa kavuşturur; kanıtlanmamış iki aktif indeks veya bağımsız legacy hub iddiası kullanılmamalıdır.
