@@ -655,14 +655,14 @@ try {
       }
     }
 
-    if (testCase.verifyGlobalHero && /\\/(?:industries\\/(?:textiles|packaging)|solutions\\/oem-odm)\\//.test(testCase.path)) {
+    if (testCase.verifyGlobalHero && ['/industries/textiles/','/industries/packaging/','/solutions/oem-odm/'].some(path=>testCase.path.includes(path))) {
       const editorial = await page.evaluate(() => {
         const section=document.querySelector('.gs-editorial-detail');
         const eyebrow=section?.querySelector('.gs-editorial-main .gs-eyebrow');
         const heading=section?.querySelector('.gs-editorial-main h2');
         const panel=section?.querySelector('.gs-editorial-aside');
         if(!section||!eyebrow||!heading||!panel)return {missing:true};
-        const rgb=s=>s.match(/[\\d.]+/g)?.slice(0,3).map(Number)||[0,0,0];
+        const rgb=s=>s.match(/[0-9.]+/g)?.slice(0,3).map(Number)||[0,0,0];
         const luminance=color=>rgb(color).map(v=>{v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)}).reduce((a,v,i)=>a+v*[.2126,.7152,.0722][i],0);
         const contrast=(a,b)=>{const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
         const labelRatio=contrast(getComputedStyle(eyebrow).color,getComputedStyle(section).backgroundColor);
