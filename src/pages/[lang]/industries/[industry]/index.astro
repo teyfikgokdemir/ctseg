@@ -46,7 +46,7 @@ const specs = industrySpecializations.filter((s) => s.industryId === id);
   alternates={globalAlternates('industries', id)}
   schema={[schema]}
 >
-  <GlobalSourcing lang={lang} mode="industry" id={id} />
+  <GlobalSourcing lang={lang} mode="industry" id={id}>
 
   {specs.length > 0 && (
     <section class="industry-specializations-section" aria-labelledby="industry-specializations-title">
@@ -75,6 +75,7 @@ const specs = industrySpecializations.filter((s) => s.industryId === id);
       </div>
     </section>
   )}
+</GlobalSourcing>
 </BaseLayout>
 <style>
   .industry-specializations-section{padding:clamp(72px,8vw,122px) 0;background:#15231b;color:#f2f4ed}
