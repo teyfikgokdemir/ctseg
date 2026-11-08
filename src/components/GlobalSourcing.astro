@@ -22,6 +22,10 @@ const solutionHeroIndustries: Record<string,string> = {
 };
 const industryImage=mode==='industry' ? id! : mode==='solution' ? (solutionHeroIndustries[id!] || 'industrial') : mode==='markets' ? 'packaging' : mode==='about' ? 'industrial' : mode==='process' ? 'textiles' : 'industrial';
 const heroImageAltIndex=industryIds.indexOf(industryImage as typeof industryIds[number]);
+const isEditorialOverview=mode==='industries'||mode==='solutions';
+const introImageSrc=mode==='industries'?'/images/ctseg-global-trade-hero-new.webp':mode==='solutions'?'/images/ctseg-global-trade-hero-premium.webp':`/images/global-sourcing/${industryImage}-1280.webp`;
+const introImageSrcset=isEditorialOverview?undefined:`/images/global-sourcing/${industryImage}-640.webp 640w, /images/global-sourcing/${industryImage}-1280.webp 1280w`;
+const introImageAlt=isEditorialOverview?'':globalImageAlt[lang][Math.max(0,heroImageAltIndex)];
 const heroVisual=['industries','solutions','solution','industry','markets','about','process'].includes(mode);
 const heroDescription=mode==='solutions'?c.lead:mode==='industries'?c.lead:description;
 const showIndustries=['home','industries'].includes(mode);
@@ -36,7 +40,7 @@ const showProcess=['home','process','about','industry'].includes(mode);
       <div class="gs-intro-heading"><span class="gs-eyebrow">CTSEG <span aria-hidden="true">/</span> {mode==='solution'?c.nav[2]:mode==='industry'?c.nav[3]:title}</span><h1>{title}</h1></div>
       <div class="gs-intro-bottom">
         <div><p class="gs-lead">{heroDescription}</p><div class="gs-actions"><a class="gs-button" href={`${contact}?intent=buyer`}>{c.buyer}<span aria-hidden="true">↗</span></a><a class="gs-link" href={`${contact}?intent=supplier`}>{c.supplier}<span aria-hidden="true">↗</span></a></div></div>
-        {(home || heroVisual) && <figure class="gs-intro-photo"><img src={`/images/global-sourcing/${industryImage}-1280.webp`} srcset={`/images/global-sourcing/${industryImage}-640.webp 640w, /images/global-sourcing/${industryImage}-1280.webp 1280w`} sizes="(max-width:760px) 92vw, 42vw" width="1280" height="800" alt={globalImageAlt[lang][Math.max(0,heroImageAltIndex)]} loading="eager" fetchpriority="high" decoding="async" /></figure>}
+        {(home || heroVisual) && <figure class="gs-intro-photo"><img src={introImageSrc} srcset={introImageSrcset} sizes={introImageSrcset?"(max-width:760px) 92vw, 100vw":undefined} width="1280" height="800" alt={introImageAlt} loading="eager" fetchpriority="high" decoding="async" /></figure>}
       </div>
     </div>
   </section>
