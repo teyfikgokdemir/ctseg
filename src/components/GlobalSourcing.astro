@@ -145,4 +145,56 @@ const showProcess=['home','process','about','industry','solution'].includes(mode
   .gs-focused-item h3 a{display:flex;justify-content:space-between;gap:18px}
   .gs-focused-item p{font-size:15px;line-height:1.65}
   @media(max-width:760px){.gs-focused-grid{grid-template-columns:1fr;gap:32px}.gs-focused-item .gs-industry-media{aspect-ratio:1.6}}
+
+  /* Non-home editorial hero alignment: headline and conversion text share the
+     left column; the contextual image occupies the entire right column.
+     Homepage markup and styles remain unchanged. */
+  @media (min-width: 761px) {
+    .gs:not([data-global-mode="home"]) .gs-intro .gs-wrap {
+      display:grid;
+      grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+      column-gap:clamp(30px,5vw,90px);
+      align-items:center;
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro-heading {
+      grid-column:1;
+      grid-row:1;
+      align-self:end;
+      min-width:0;
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro-heading h1 {
+      font-size:clamp(42px,4.1vw,69px);
+      max-width:17ch;
+      margin:18px 0 26px;
+      line-height:1.08;
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro-bottom { display:contents; }
+    .gs:not([data-global-mode="home"]) .gs-intro-bottom > div {
+      grid-column:1;
+      grid-row:2;
+      min-width:0;
+      align-self:start;
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro-photo {
+      grid-column:2;
+      grid-row:1 / span 2;
+      align-self:center;
+      width:100%;
+      aspect-ratio:1.13;
+    }
+    .gs:not([data-global-mode="home"]) .gs-lead {
+      max-width:45ch;
+      margin-bottom:clamp(24px,3vw,40px);
+    }
+  }
+  @media (min-width:761px) and (max-width:1024px) {
+    .gs:not([data-global-mode="home"]) .gs-intro .gs-wrap {
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+      column-gap:30px;
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro-heading h1 {
+      font-size:clamp(36px,4.3vw,52px);
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro-photo { aspect-ratio:1; }
+  }
 </style>
