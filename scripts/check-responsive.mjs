@@ -636,14 +636,20 @@ try {
           heading:shot(heading),lead:shot(lead),image:shot(image),
           loaded:Boolean(image?.complete&&image.naturalWidth>0),
           obsoleteNote:text.includes('Yapay zekâyla oluşturulmuş sektör görselleridir')||text.includes('AI-generated industry illustrations'),
-          imageName:image?.getAttribute('src')||null
+          imageName:image?.getAttribute('src')||null,
+          veil:getComputedStyle(root?.querySelector('.gs-intro'),'::after').content,
+          headingColor:getComputedStyle(heading).color
         };
       });
+      // The approved poultry-inspired design uses a full-bleed photographic
+      // background; the previous right-column-image assertion is obsolete.
       const boxOK=hero.heading&&hero.lead&&hero.image&&hero.loaded
-        &&hero.heading.width>200&&hero.heading.height>25&&hero.image.width>180&&hero.image.height>140
-        &&(testCase.width>760
-          ? hero.image.x>hero.heading.x+hero.heading.width-12 && hero.image.y < hero.lead.y+hero.lead.height
-          : hero.image.y>=hero.lead.y);
+        &&hero.heading.width>200&&hero.heading.height>25
+        &&hero.image.width>=testCase.width-4&&hero.image.height>=450
+        &&hero.image.x<=4&&hero.image.y<=hero.heading.y
+        &&hero.heading.y+hero.heading.height<=hero.image.y+hero.image.height+4
+        &&hero.lead.y+hero.lead.height<=hero.image.y+hero.image.height+4
+        &&hero.veil!=='none';
       if (!boxOK||hero.obsoleteNote) {
         failures.push(`${testCase.name}: global sourcing hero layout: ${JSON.stringify(hero)}`);
       }
