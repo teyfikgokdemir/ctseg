@@ -29,3 +29,11 @@
 
 ## Nihai yayın ilkesi
 PR #88 kullanıcı görsel onayı, CI ve SEO/URL kontrolleri tamamlanmadan merge/deploy edilmemeli.
+
+## 9 Kasım devam çalışması — PR aynı branch
+- `d172155`: Yedi yeni çözüm sayfasının hero fotoğrafı hizmetle daha ilişkili sektöre bağlandı; alt metin görüntü ile eşleştirildi.
+- `5e1a187`: Yeni global çözüm sayfalarında "Küresel Ticaret" menüsünün aktif durumu düzeltildi.
+- `3b500ca` + `45f46d7`: Gerçek bir mimari/SEO sorunu giderildi. Eski `/tr/hizmetler/` (ve yerelleştirilmiş karşılıkları) ile yeni `/tr/solutions/` önceden aynı `GlobalSourcing mode=solutions` bileşenini sunuyordu. Eski danışmanlık indeksinin özgün hizmet dizini premium bir yerleşimle geri getirildi; yeni global sourcing çözümlerinin ayrı indeks ve URL yapısı korundu. Eski hizmet detaylarının adresleri değiştirilmedi; riskli 301 oluşturulmadı. Bağlantılar iki dizine de erişim sağlar.
+- Değişiklikler `PageContent.astro`, `SiteHeader.astro`, `GlobalSourcing.astro`, `site.css` üzerinde sınırlı tutuldu.
+- Bu devam çalışması görsel onay değildir: ekran görüntüsü ve gerçek Cloudflare preview taraması bağımsız doğrulanamadı.
+- Son seri CI Core validation başarıyla tamamlandı, responsive workflow durumu nihai raporda ayrıca kontrol edilmeli.
