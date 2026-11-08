@@ -50,3 +50,7 @@ PR #88 kullanıcı görsel onayı, CI ve SEO/URL kontrolleri tamamlanmadan merge
 - `9d84dca`: `GlobalSourcing.astro` içinde Pazarlar, Hakkımızda ve Çalışma Süreci gibi yeni global iç sayfalara görselli hero desteği eklendi; 5 coğrafi araştırma bölgesinin sunumu çerçevesiz, dengeli editoryal ızgaraya dönüştürüldü. Yeni tedarikçi varlığı iddiası eklenmedi.
 - Genişletme yalnızca global sourcing bileşeninin iç sayfa modlarını etkiler; üretim ana sayfası kodu ve `PageContent` bileşeni değiştirilmedi.
 - Kod GitHub branch'ine gönderildi. Gerçek tarayıcı/Cloudflare preview görsel denetimi bu oturumda başarısız erişim nedeniyle **tamamlanamadı**. CI Core ve Responsive koşularının nihai sonucu ilgili GitHub Actions commit'inden kontrol edilmeli.
+
+## Son tasarım checkpoint — iç sayfa hero
+- `9586449`: Yeni global sourcing iç sayfalarında başlık/eyebrow, açıklama ve talep CTA'ları solda; sektöre özgü fotoğraf sağda olacak şekilde masaüstü editoryal hero yerleşimi CSS ile düzeltildi. 761px altında eski tek sütunlu mobil akış korunur. `data-global-mode="home"` açıkça kapsam dışında tutuldu; ana sayfa düzenine dokunulmadı.
+- Uygulama GitHub PR #88 branch'ine commit edildi. Gerçek tarayıcıda güncel Cloudflare önizlemesi henüz doğrulanamadı; en son GitHub CI ve Responsive Visual QA koşularının sonuçları kontrol edilmelidir. Başarılı geçmeden merge veya deploy yapılmaz.
