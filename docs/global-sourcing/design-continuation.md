@@ -45,3 +45,8 @@ PR #88 kullanıcı görsel onayı, CI ve SEO/URL kontrolleri tamamlanmadan merge
 - Yeni Çözümler menüsündeki birbirinin aynısı iki indeks bağlantısı `2fc8ba4` ile tekilleştirildi.
 - `check:global` içerisine legacy indekslerin 301 sözleşmesi, eski detay sayfalarının korunması ve menü bağlantısının tekilliği için regresyon denetimi eklendi (`6502de3`).
 - Bu kayıt önceki hata tespitini açıklığa kavuşturur; kanıtlanmamış iki aktif indeks veya bağımsız legacy hub iddiası kullanılmamalıdır.
+
+## 9 Kasım — yeni iç sayfaların eksik hero ve pazar düzeni
+- `9d84dca`: `GlobalSourcing.astro` içinde Pazarlar, Hakkımızda ve Çalışma Süreci gibi yeni global iç sayfalara görselli hero desteği eklendi; 5 coğrafi araştırma bölgesinin sunumu çerçevesiz, dengeli editoryal ızgaraya dönüştürüldü. Yeni tedarikçi varlığı iddiası eklenmedi.
+- Genişletme yalnızca global sourcing bileşeninin iç sayfa modlarını etkiler; üretim ana sayfası kodu ve `PageContent` bileşeni değiştirilmedi.
+- Kod GitHub branch'ine gönderildi. Gerçek tarayıcı/Cloudflare preview görsel denetimi bu oturumda başarısız erişim nedeniyle **tamamlanamadı**. CI Core ve Responsive koşularının nihai sonucu ilgili GitHub Actions commit'inden kontrol edilmeli.
