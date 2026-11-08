@@ -38,7 +38,11 @@ async function findKey() {
 }
 
 async function fetchXml(url) {
-  const response = await fetch(url, { headers: { accept: 'application/xml,text/xml' } });
+  const parsed = new URL(url);
+  if (parsed.origin !== SITE_ORIGIN || parsed.username || parsed.password) {
+    throw new Error(`Production sitemap required: ${url}`);
+  }
+  const response = await fetch(url, { headers: { accept: 'application/xml,text/xml' }, redirect: 'error' });
   if (!response.ok) throw new Error(`Sitemap request failed: HTTP ${response.status} (${url})`);
   return response.text();
 }
