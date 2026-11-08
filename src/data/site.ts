@@ -1340,7 +1340,9 @@ for (const id of legalIds) {
 
 export function localizedPath(lang: Locale | string, key: string, id?: string): string {
   if(!id && key === 'services') return `/${lang}/solutions/`;
-  if(!id && key === 'products') return `/${lang}/industries/`;
+  // The trade portfolio and sourcing-sector directory serve different buyer intents.
+  // Keep established localized commercial portfolio URLs for the separate index.
+
   if(key === 'markets') return `/${lang}/global-markets/`;
   const safeLang = (locales as readonly string[]).includes(lang) ? (lang as Locale) : 'en';
   const pathLang = safeLang;
