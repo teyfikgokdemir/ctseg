@@ -1,4 +1,5 @@
 import { globalTitle, globalDescription } from '../data/global-sourcing';
+import { globalCopy } from '../data/global-sourcing-locales';
 import { schemaLanguage } from '../data/locales';
 import {
   insightIds, insights, legal, legalIds, locales, localizedPath, pageCopy, productIds, products,
@@ -124,7 +125,7 @@ export function getMeta(record: RouteRecord) {
       lang === 'ar' ? 'تربط CTSEG بين Türkiye والأسواق الدولية عبر التجارة الثنائية بين الشركات، والتوريد الاستراتيجي، والتحقق من الموردين، وإدارة RFQ، وتنسيق دخول الأسواق.' :
       'CTSEG connects Türkiye with international markets through two-way B2B trade, strategic sourcing, supplier verification, RFQ management and market-entry coordination.'
   };
-  if (key === 'products' && !id) return {title:`${ui[lang].products} | CTSEG`,description:pageCopy[lang].productsLead};
+  if (key === 'products' && !id) return {title:`${ui[lang].products} | CTSEG`,description:`${globalCopy[lang].intro} ${globalCopy[lang].industriesTitle}.`};
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — ${localizedMetaLabels[lang].service} | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
   if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} — ${localizedMetaLabels[lang].product} | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
   if (key === 'insights' && id) return { title:`${insights[id as keyof typeof insights].titles[lang]} | CTSEG`, description:insights[id as keyof typeof insights].descriptions[lang] };
