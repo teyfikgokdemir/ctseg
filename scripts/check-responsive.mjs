@@ -68,6 +68,14 @@ try {
     { name:'desktop-tr-ukraine-corridor', path:'/tr/ukraynadan-turkiyeye-tedarik-ve-ticaret/', width:1440, height:1000 },
     { name:'desktop-tr-syria-corridor', path:'/tr/suriye-pazarina-ihracat-ve-tedarik/', width:1440, height:1000 },
     { name:'desktop-tr-iran-corridor', path:'/tr/iran-turkiye-ticaret/', width:1440, height:1000 },
+    { name:'desktop-tr-textiles-industry', path:'/tr/industries/textiles/', width:1440, height:1000, verifyGlobalHero:true },
+    { name:'mobile-tr-textiles-industry', path:'/tr/industries/textiles/', width:390, height:844, verifyGlobalHero:true },
+    { name:'desktop-tr-oem-solution', path:'/tr/solutions/oem-odm/', width:1440, height:1000, verifyGlobalHero:true },
+    { name:'mobile-tr-oem-solution', path:'/tr/solutions/oem-odm/', width:390, height:844, verifyGlobalHero:true },
+    { name:'desktop-de-oem-solution', path:'/de/solutions/oem-odm/', width:1440, height:1000, verifyGlobalHero:true },
+    { name:'mobile-ar-oem-solution', path:'/ar/solutions/oem-odm/', width:390, height:844, verifyGlobalHero:true },
+    { name:'desktop-tr-global-markets', path:'/tr/global-markets/', width:1440, height:1000, verifyGlobalHero:true },
+    { name:'mobile-tr-global-markets', path:'/tr/global-markets/', width:390, height:844, verifyGlobalHero:true },
     { name:'desktop-tr-industries', path:'/tr/industries/', width:1440, height:1000 },
     { name:'mobile-tr-industries', path:'/tr/industries/', width:390, height:844 },
     { name:'desktop-tr-solutions', path:'/tr/solutions/', width:1440, height:1000 },
@@ -616,6 +624,31 @@ try {
     }));
     const dynamicUx=await page.evaluate(async()=>{const maxScroll=document.documentElement.scrollHeight-window.innerHeight;document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,Math.min(700,maxScroll));await new Promise((r)=>setTimeout(r,120));window.dispatchEvent(new Event('scroll'));document.dispatchEvent(new Event('scroll'));const back=document.querySelector('[data-back-to-top]');if(back&&(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop)>180){back.setAttribute('aria-hidden','false');back.tabIndex=0;}const header=document.querySelector('.site-header,.fa-header');const box=header?.getBoundingClientRect();const state={backVisible:back?(maxScroll<200?true:back.getAttribute('aria-hidden')==='false'&&back.tabIndex===0):true,headerAtTop:header?Math.abs(box.top)<=1:true};window.scrollTo(0,0);document.documentElement.style.removeProperty('scroll-behavior');return state});
     await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:!testCase.openMenu });
+    if (testCase.verifyGlobalHero) {
+      const hero = await page.evaluate(() => {
+        const root=document.querySelector('.gs:not([data-global-mode="home"])');
+        const heading=root?.querySelector('.gs-intro-heading h1');
+        const lead=root?.querySelector('.gs-intro .gs-lead');
+        const image=root?.querySelector('.gs-intro-photo img');
+        const shot=(element)=>element?{x:element.getBoundingClientRect().x,y:element.getBoundingClientRect().y,width:element.getBoundingClientRect().width,height:element.getBoundingClientRect().height}:null;
+        const text=document.body.innerText;
+        return {
+          heading:shot(heading),lead:shot(lead),image:shot(image),
+          loaded:Boolean(image?.complete&&image.naturalWidth>0),
+          obsoleteNote:text.includes('Yapay zekâyla oluşturulmuş sektör görselleridir')||text.includes('AI-generated industry illustrations'),
+          imageName:image?.getAttribute('src')||null
+        };
+      });
+      const boxOK=hero.heading&&hero.lead&&hero.image&&hero.loaded
+        &&hero.heading.width>200&&hero.heading.height>25&&hero.image.width>180&&hero.image.height>140
+        &&(testCase.width>760
+          ? hero.image.x>hero.heading.x+hero.heading.width-12 && hero.image.y < hero.lead.y+hero.lead.height
+          : hero.image.y>=hero.lead.y);
+      if (!boxOK||hero.obsoleteNote) {
+        failures.push(`${testCase.name}: global sourcing hero layout: ${JSON.stringify(hero)}`);
+      }
+    }
+
     // Regression: the RFQ qualification screen must actually reveal the contact step.
     // This verifies live DOM behavior, not merely the presence of hidden form fields.
     if (['desktop-tr-contact','mobile-en-contact'].includes(testCase.name)) {
