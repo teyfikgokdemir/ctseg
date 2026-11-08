@@ -1,10 +1,11 @@
 ---
 import { getPortfolioSectors } from '../data/portfolio-sectors';
 import { globalCopy } from '../data/global-sourcing-locales';
-import { localizedPath, type Locale } from '../data/site';
+import { localizedPath, ui, type Locale } from '../data/site';
 import { globalImageAlt } from '../data/global-image-alt';
 const {lang}=Astro.props as {lang:Locale};
 const c=globalCopy[lang] || globalCopy.en;
+const portfolioLabel=ui[lang]?.products || ui.en.products;
 const items=getPortfolioSectors(lang).filter(x=>!['nuts-dried-fruits','glass'].includes(x.id));
 const secondary=getPortfolioSectors(lang).find(x=>x.id==='nuts-dried-fruits');
 const buyer=lang==='he'?'/he/יצירת-קשר/':localizedPath(lang,'contact');
@@ -12,7 +13,7 @@ const products=lang==='he'?'/he/מוצרים-מסחריים/':localizedPath(lang
 const labels=lang==='tr'?
  {kicker:'CTSEG / TİCARİ PORTFÖY',title:'Ticari tedarik portföyü',lead:'Ürün gruplarını, sektör odaklarımızı ve mevcut tedarik araştırması alanlarımızı inceleyin.',scope:'Ticari ürün grupları ve tedarik kanalları',sourcing:'Uluslararası tedarik sektörleri',request:'Ürün veya tedarik talebi oluştur',minor:'İkincil ürün kategorisi',cta:'Talebinizi birlikte değerlendirelim'}:
  lang==='ar'?{kicker:'CTSEG / المحفظة التجارية',title:'محفظة التوريد التجاري',lead:'استعرض مجموعات المنتجات وقطاعات التوريد التي نبحثها.',scope:'فئات المنتجات وخدمات التوريد',sourcing:'قطاعات التوريد الدولية',request:'إرسال طلب توريد',minor:'فئة منتجات إضافية',cta:'لنراجع متطلباتك التجارية'}:
- {kicker:'CTSEG / '+(c.nav[3]||'TRADE PORTFOLIO'),title:c.nav[3]||'Trade Portfolio',lead:c.intro,scope:c.industriesTitle,sourcing:c.industriesTitle,request:c.buyer,minor:c.secondary,cta:c.lead};
+ {kicker:'CTSEG / '+portfolioLabel,title:portfolioLabel,lead:c.intro,scope:c.industriesTitle,sourcing:c.industriesTitle,request:c.buyer,minor:c.secondary,cta:c.lead};
 ---
 <div class="ct-portfolio" data-trade-portfolio>
  <section class="ct-portfolio-hero">
