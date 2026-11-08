@@ -1,3 +1,5 @@
+import { globalTitle, globalDescription } from '../data/global-sourcing';
+import { globalCopy } from '../data/global-sourcing-locales';
 import { schemaLanguage } from '../data/locales';
 import {
   insightIds, insights, legal, legalIds, locales, localizedPath, pageCopy, productIds, products,
@@ -83,7 +85,7 @@ export function getRouteRecords(): RouteRecord[] {
   }
   // The generator consumes the same resolver as cards, menus and related links.
   const sharedKeys = new Set(['home','services','products','markets','insights','about','contact','how-we-work','scenarios','legal','guides','syria-market']);
-  return records.map(record => sharedKeys.has(record.key) ? {
+  return records.filter(record=>!(!record.id && ['services','markets'].includes(record.key))).map(record => sharedKeys.has(record.key) ? {
     ...record,
     path: localizedPath(record.lang,record.key,record.id).replace(new RegExp(`^/${record.lang}/`),'').replace(/^\/+|\/+$/g,'') || undefined
   } : record);
@@ -91,6 +93,8 @@ export function getRouteRecords(): RouteRecord[] {
 
 export function getMeta(record: RouteRecord) {
   const { lang, key, id } = record;
+  const globalMode = key === 'home' ? 'home' : !id && key === 'services' ? 'solutions' : key === 'markets' ? 'markets' : key === 'about' ? 'about' : key === 'how-we-work' ? 'process' : null;
+  if(globalMode) return {title:`${globalTitle(lang,globalMode)} | CTSEG`,description:globalDescription(lang,globalMode)};
   const copy = pageCopy[lang];
   const t = ui[lang];
   if (key === 'home') return {
@@ -121,6 +125,7 @@ export function getMeta(record: RouteRecord) {
       lang === 'ar' ? 'تربط CTSEG بين Türkiye والأسواق الدولية عبر التجارة الثنائية بين الشركات، والتوريد الاستراتيجي، والتحقق من الموردين، وإدارة RFQ، وتنسيق دخول الأسواق.' :
       'CTSEG connects Türkiye with international markets through two-way B2B trade, strategic sourcing, supplier verification, RFQ management and market-entry coordination.'
   };
+  if (key === 'products' && !id) return {title:`${ui[lang].products} | CTSEG`,description:`${globalCopy[lang].intro} ${globalCopy[lang].industriesTitle}.`};
   if (key === 'services' && id) return { title:`${services[id as keyof typeof services].names[lang]} — ${localizedMetaLabels[lang].service} | CTSEG`, description:services[id as keyof typeof services].descriptions[lang] };
   if (key === 'products' && id) return { title:`${products[id as keyof typeof products].names[lang]} — ${localizedMetaLabels[lang].product} | CTSEG`, description:products[id as keyof typeof products].descriptions[lang] };
   if (key === 'insights' && id) return { title:`${insights[id as keyof typeof insights].titles[lang]} | CTSEG`, description:insights[id as keyof typeof insights].descriptions[lang] };
@@ -204,7 +209,7 @@ export function tradeMatchingServiceSchema(record:RouteRecord, title:string, des
     name:title,description,url:canonicalFor(record),inLanguage:schemaLanguage(record.lang),
     serviceType:localizedMetaLabels[record.lang].serviceType,
     provider:{'@id':'https://ctseg.com.tr/#organization'},
-    areaServed:['Türkiye','Europe','Middle East','Asia','International'],
+    areaServed:['Asia-Pacific','Europe','Middle East','Africa','Americas'],
     audience:[
       {'@type':'BusinessAudience',name:localizedMetaLabels[record.lang].buyerAudience},
       {'@type':'BusinessAudience',name:localizedMetaLabels[record.lang].producerAudience}

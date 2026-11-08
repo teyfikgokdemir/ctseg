@@ -12,7 +12,6 @@ const alternatesFromHtml = (html) => Object.fromEntries(
   [...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)]
     .map((match) => [match[1], normalizeUrl(match[2])])
 );
-const coreLocales = ['tr','en','de','it','ru','zh','vi','ro','bg','ar'];
 const glassLocales = ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg'];
 
 if (!existsSync(dist)) {
@@ -107,9 +106,7 @@ for (const [canonical,page] of indexablePages) {
   const pathname = new URL(canonical).pathname;
   if (!internalLinkCounts.get(pathname)) errors.push(`${page.label}: orphaned canonical has no normal HTML internal link`);
   const alternates = alternatesFromHtml(page.html);
-  const reciprocalLocales = canonical.includes('/glass/duzce-float-glass/')
-    ? glassLocales
-    : (page.lang === 'fa' ? [] : coreLocales.filter((code) => alternates[code]));
+  const reciprocalLocales = Object.keys(alternates).filter(code => code !== 'x-default');
   for (const locale of reciprocalLocales.filter((code) => alternates[code])) {
     const target = indexablePages.get(alternates[locale]);
     if (!target) {
@@ -154,7 +151,7 @@ const requiredRedirects = {
   '/tr':'/',
   '/tr/':'/',
   '/sitemap.xml':'/sitemap-index.xml',
-  '/en/solutions/':'/en/services/',
+  '/en/services/':'/en/solutions/',
   '/en/services/supplier-sourcing-verification/':'/en/services/supplier-sourcing-and-verification/',
   '/en/blog/supply-chain-risk-management/':'/en/insights/supply-chain-risk-management/',
   '/en/blog/total-cost-of-ownership-procurement/':'/en/insights/total-cost-of-ownership/',
@@ -163,8 +160,8 @@ const requiredRedirects = {
   ,'/fa/tamin-beynolmelali-iran/':'/fa/'
   ,'/zh/zhongguo-qiye-jinru-tuerqi-he-ouzhou-shichang/':'/zh/'
   ,'/vi/xuat-khau-tu-viet-nam-sang-tho-nhi-ky-va-chau-au/':'/vi/'
-  ,'/medical/reflex-disposable-gloves/':'/tr/ticari-urunler/'
-  ,'/en/medical/reflex-disposable-gloves/':'/en/trade-products/'
+  ,'/medical/reflex-disposable-gloves/':'/tr/industries/'
+  ,'/en/medical/reflex-disposable-gloves/':'/en/industries/'
 };
 for (const [source,target] of Object.entries(requiredRedirects)) {
   const rule = redirectsBySource.get(source);

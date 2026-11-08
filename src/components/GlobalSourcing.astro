@@ -1,0 +1,406 @@
+---
+import {globalImageAlt} from '../data/global-image-alt';
+import { globalCopy } from '../data/global-sourcing-locales';
+import { industryIds,capabilityIds,globalPath,globalTitle,globalDescription,type GlobalMode } from '../data/global-sourcing';
+import { localizedPath,productIds,products } from '../data/site';
+import { productMap,israelProductIds } from '../data/hebrew';
+const {lang,mode='home',id} = Astro.props as {lang:string;mode?:GlobalMode;id?:string};
+const c=globalCopy[lang];
+const home=mode==='home';
+const sectorIndex=industryIds.indexOf(id as any);
+const title=globalTitle(lang,mode,id);
+const description=globalDescription(lang,mode,id);
+const contact=lang==='he'?'/he/יצירת-קשר/':localizedPath(lang,'contact');
+const solutionHeroIndustries: Record<string,string> = {
+  'import-sourcing':'industrial',
+  'export-development':'packaging',
+  'buyer-supplier-matching':'industrial',
+  'oem-odm':'textiles',
+  'private-label':'beauty',
+  'distributor-discovery':'beauty',
+  'industrial-procurement':'industrial'
+};
+const industryImage=mode==='industry' ? id! : mode==='solution' ? (solutionHeroIndustries[id!] || 'industrial') : mode==='markets' ? 'packaging' : mode==='about' ? 'industrial' : mode==='process' ? 'textiles' : 'industrial';
+const heroImageAltIndex=industryIds.indexOf(industryImage as typeof industryIds[number]);
+const isEditorialOverview=mode==='industries'||mode==='solutions';
+const introImageSrc=mode==='industries'?'/images/ctseg-global-trade-hero-new.webp':mode==='solutions'?'/images/ctseg-global-trade-hero-premium.webp':`/images/global-sourcing/${industryImage}-1280.webp`;
+const introImageSrcset=isEditorialOverview?undefined:`/images/global-sourcing/${industryImage}-640.webp 640w, /images/global-sourcing/${industryImage}-1280.webp 1280w`;
+const introImageAlt=isEditorialOverview?'':globalImageAlt[lang][Math.max(0,heroImageAltIndex)];
+const heroVisual=['industries','solutions','solution','industry','markets','about','process'].includes(mode);
+const heroDescription=mode==='solutions'?c.lead:mode==='industries'?c.lead:description;
+const showIndustries=['home','industries'].includes(mode);
+const showSolutions=['home','solutions'].includes(mode);
+const relatedIndustries = id === 'oem-odm' ? ['textiles','beauty','industrial'] : id === 'private-label' ? ['beauty','textiles','packaging'] : id === 'industrial-procurement' ? ['industrial','construction','agriculture'] : id === 'distributor-discovery' ? ['beauty','textiles','food'] : ['industrial','textiles','packaging'];
+const showMarkets=['home','markets'].includes(mode);
+const showProcess=['home','process','about','industry'].includes(mode);
+---
+<div class="gs" data-global-sourcing data-global-mode={mode}>
+  <section class:list={['gs-intro',{'gs-intro--home':home}]}>
+    <div class="gs-wrap">
+      <div class="gs-intro-heading"><span class="gs-eyebrow">CTSEG <span aria-hidden="true">/</span> {mode==='solution'?c.nav[2]:mode==='industry'?c.nav[3]:title}</span><h1>{title}</h1></div>
+      <div class="gs-intro-bottom">
+        <div><p class="gs-lead">{heroDescription}</p><div class="gs-actions"><a class="gs-button" href={`${contact}?intent=buyer`}>{c.buyer}<span aria-hidden="true">↗</span></a><a class="gs-link" href={`${contact}?intent=supplier`}>{c.supplier}<span aria-hidden="true">↗</span></a></div></div>
+        {(home || heroVisual) && <figure class="gs-intro-photo"><img src={introImageSrc} srcset={introImageSrcset} sizes={introImageSrcset?"(max-width:760px) 92vw, 100vw":undefined} width="1280" height="800" alt={introImageAlt} loading="eager" fetchpriority="high" decoding="async" /></figure>}
+      </div>
+    </div>
+  </section>
+  {(home || mode==='about') && <section class="gs-statement"><div class="gs-wrap gs-split"><h2>{c.nav[1]}</h2><div><p class="gs-large">{c.intro}</p><p>{c.about}</p></div></div></section>}
+  {showIndustries && <section class="gs-industries" id="sectors"><div class="gs-wrap"><div class="gs-section-heading"><h2>{c.industriesTitle}</h2><p>{c.lead}</p></div>
+    <div class="gs-industry-editorial">{industryIds.filter(i=>i!=='food').map((industry,index)=><article class="gs-industry" data-industry={industry}>
+      <a href={globalPath(lang,'industries',industry)} class="gs-industry-media"><img src={`/images/global-sourcing/${industry}-640.webp`} srcset={`/images/global-sourcing/${industry}-640.webp 640w, /images/global-sourcing/${industry}-1280.webp 1280w`} sizes="(max-width:760px) 92vw, 45vw" width="1280" height="800" alt={globalImageAlt[lang][index]} loading="lazy" decoding="async" /></a><div><h3><a href={globalPath(lang,'industries',industry)}>{c.industries[index]}<span aria-hidden="true">↗</span></a></h3><p>{c.sectors[index]}</p></div>
+    </article>)}</div>
+    <aside class="gs-food"><div><span>{c.secondary}</span><h3><a href={globalPath(lang,'industries','food')}>{c.industries[6]} ↗</a></h3></div><p>{c.sectors[6]}</p></aside>
+  </div></section>}
+  {mode==='industry' && <section class="gs-editorial-detail"><div class="gs-wrap gs-editorial-grid">
+    <div class="gs-editorial-main">
+      <p class="gs-eyebrow">CTSEG / {c.industries[sectorIndex]}</p>
+      <h2>{c.industries[sectorIndex]}</h2>
+      <p class="gs-editorial-lead">{c.sectors[sectorIndex]}</p>
+      <div class="gs-editorial-panel"><h3>{c.capabilitiesTitle}</h3><ul class="gs-editorial-links">{[0,2,3,4,6].map(index=><li><a href={globalPath(lang,'solutions',capabilityIds[index])}>{c.solutions[index]}<span aria-hidden="true">↗</span></a></li>)}</ul></div>
+    </div>
+    <aside class="gs-editorial-aside">
+      <figure><img src={`/images/global-sourcing/${industryImage}-1280.webp`} width="1280" height="800" alt={globalImageAlt[lang][Math.max(0,heroImageAltIndex)]} loading="lazy" decoding="async"/></figure>
+      <div class="gs-editorial-aside-copy"><p class="gs-eyebrow">CTSEG</p><h3>{c.buyer}</h3><p>{c.intro}</p><a class="gs-button" href={`${contact}?intent=buyer`}>{c.buyer} ↗</a></div>
+    </aside>
+  </div></section>}
+  {mode==='industry' && id==='food' && lang!=='he' && <section class="gs-food-details"><div class="gs-wrap"><h2>{c.industries[6]}</h2><ul class="gs-food-links">{productIds.map(product=><li><a href={localizedPath(lang,'products',product)}>{products[product].names[lang]}</a><p>{products[product].descriptions[lang]}</p></li>)}</ul></div></section>}
+  {mode==='industry' && id==='food' && lang==='he' && <section class="gs-food-details"><div class="gs-wrap"><h2>{c.industries[6]}</h2><ul class="gs-food-links">{israelProductIds.map(product=><li><a href={`/he/מוצרים-מסחריים/${product}/`}>{productMap[product][0]}</a><p>{productMap[product][1]}</p></li>)}</ul></div></section>}
+  {showSolutions && <section class="gs-solutions"><div class="gs-wrap"><div class="gs-section-heading gs-section-heading--dark"><h2>{c.capabilitiesTitle}</h2><p>{c.lead}</p></div><div class="gs-capability-list">{capabilityIds.map((capability,index)=><article data-capability={capability}><h3><a href={globalPath(lang,'solutions',capability)}>{c.solutions[index]}<span aria-hidden="true">↗</span></a></h3><p>{c.solutionDescriptions[index]}</p></article>)}</div></div></section>}
+
+  {mode==='solution' && <section class="gs-editorial-detail"><div class="gs-wrap gs-editorial-grid">
+    <div class="gs-editorial-main">
+      <p class="gs-eyebrow">CTSEG / {c.nav[2]}</p>
+      <h2>{c.processTitle}</h2>
+      <p class="gs-editorial-lead">{description}</p>
+      <div class="gs-editorial-panel"><h3>{c.processTitle}</h3><ol class="gs-editorial-steps">{c.process.map(step=><li>{step}</li>)}</ol></div>
+    </div>
+    <aside class="gs-editorial-aside">
+      <figure><img src={`/images/global-sourcing/${industryImage}-1280.webp`} width="1280" height="800" alt={globalImageAlt[lang][Math.max(0,heroImageAltIndex)]} loading="lazy" decoding="async"/></figure>
+      <div class="gs-editorial-aside-copy"><p class="gs-eyebrow">CTSEG</p><h3>{c.buyer}</h3><p>{c.intro}</p><a class="gs-button" href={`${contact}?intent=buyer`}>{c.buyer} ↗</a></div>
+    </aside>
+  </div></section>}
+  {mode==='solution' && <section class="gs-focused"><div class="gs-wrap"><div class="gs-section-heading"><h2>{c.nav[3]}</h2><p>{c.solutionDescriptions[capabilityIds.indexOf(id as any)]}</p></div><div class="gs-focused-grid">{relatedIndustries.map((industry) => {const index=industryIds.indexOf(industry as any);return <article class="gs-focused-item"><a class="gs-industry-media" href={globalPath(lang,'industries',industry)}><img src={`/images/global-sourcing/${industry}-640.webp`} srcset={`/images/global-sourcing/${industry}-640.webp 640w, /images/global-sourcing/${industry}-1280.webp 1280w`} sizes="(max-width:760px) 92vw, 30vw" width="1280" height="800" alt={globalImageAlt[lang][index]} loading="lazy" decoding="async" /></a><h3><a href={globalPath(lang,'industries',industry)}>{c.industries[index]} <span aria-hidden="true">↗</span></a></h3><p>{c.sectors[index]}</p></article>})}</div></div></section>}
+  {showMarkets && <section class="gs-markets"><div class="gs-wrap gs-split"><div><h2>{c.marketsTitle}</h2><p>{c.intro}</p></div><div><ul class="gs-regions">{c.regions.map(region=><li><span aria-hidden="true">↗</span>{region}</li>)}</ul><p>{c.research}</p></div></div></section>}
+  {showProcess && <section class="gs-process" id="process"><div class="gs-wrap gs-split"><h2>{c.processTitle}</h2><ol>{c.process.map(step=><li>{step}</li>)}</ol></div></section>}
+  <slot />
+  <section class="gs-contact" id="sourcing-request"><div class="gs-wrap gs-split"><h2>{c.buyer}</h2><div><p class="gs-large">{c.lead}</p><div class="gs-actions"><a class="gs-button" href={`${contact}?intent=buyer`}>{c.buyer} ↗</a><a class="gs-link" href={`${contact}?intent=supplier`}>{c.supplier} ↗</a></div></div></div></section>
+</div>
+<style is:global>
+  .gs{--gs-ink:#20251f;--gs-paper:#f5f3eb;--gs-accent:#c4f000;background:var(--gs-paper);color:var(--gs-ink);font-family:'DM Sans',sans-serif}
+  .gs *{box-sizing:border-box}.gs-wrap{width:min(1320px,calc(100% - 80px));margin-inline:auto}.gs p{color:inherit;line-height:1.7;font-size:17px;max-width:62ch}.gs h1,.gs h2,.gs h3{color:inherit;font-family:'DM Sans',sans-serif;font-weight:500;letter-spacing:-.045em;text-wrap:balance;overflow-wrap:anywhere}.gs h1{font-size:clamp(42px,6.7vw,100px);line-height:1.06;max-width:18ch;margin:28px 0 48px}.gs h2{font-size:clamp(32px,3.2vw,48px);line-height:1.13;margin:0 0 28px}.gs h3{font-size:clamp(24px,2.2vw,34px);line-height:1.2;margin:22px 0 14px}.gs a{color:inherit;text-decoration:none}.gs a:hover{text-decoration:underline;text-underline-offset:5px}.gs a:focus-visible{outline:3px solid #6b8000;outline-offset:6px}.gs-kicker{font-size:15px!important;letter-spacing:.08em;margin:0}.gs-intro{padding:74px 0 90px}.gs-intro-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:7%;align-items:center}.gs-lead{font-size:clamp(21px,2vw,28px)!important;line-height:1.5!important;margin:0 0 32px}.gs-intro-photo{margin:0;aspect-ratio:1.6}.gs img{display:block;width:100%;height:100%;object-fit:cover;border-radius:0}.gs-actions{display:flex;gap:24px;align-items:center;flex-wrap:wrap}.gs-button{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;background:var(--gs-accent);color:#182000!important;padding:17px 22px;font-size:15px;font-weight:650;min-height:52px;border:0;border-radius:0}.gs-link{font-size:15px;min-height:44px;display:inline-flex;gap:16px;align-items:center}.gs-split{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:10%}.gs-statement{padding:84px 0;background:#e7e8dc}.gs-large{font-size:clamp(23px,2.3vw,32px)!important;line-height:1.5!important;margin-top:0}.gs-industries{padding:110px 0}.gs-section-heading{display:flex;align-items:start;justify-content:space-between;gap:8%;margin-bottom:48px}.gs-section-heading p{max-width:42ch;margin:0}.gs-industry-editorial{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 40px}.gs-industry{min-width:0}.gs-industry-media{display:block;aspect-ratio:1.6;overflow:hidden}.gs-industry h3 a{display:flex;gap:20px;justify-content:space-between}.gs-industry p{margin:0;max-width:50ch}.gs-food{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:64px;padding-top:28px;border-top:0}.gs-food span{font-size:14px}.gs-food h3{font-size:25px;margin-top:10px}.gs-solutions{padding:100px 0;background:#202a23;color:#f5f3eb}.gs-capability-list article{padding-bottom:25px;margin-bottom:25px;border-bottom:0}.gs-capability-list h3{margin:0 0 12px;font-size:26px}.gs-capability-list h3 a{display:flex;justify-content:space-between;gap:24px}.gs-capability-list p{margin:0;color:#e3e8dd}.gs-markets{padding:100px 0;background:#e7e8dc}.gs-regions{list-style:none;padding:0;margin:0 0 36px;display:flex;gap:12px 28px;flex-wrap:wrap}.gs-regions li{font-size:clamp(25px,2.7vw,40px);font-family:'Source Serif 4',serif}.gs-process{padding:100px 0}.gs-process ol{margin:0;padding-inline-start:26px}.gs-process li{padding:0 0 24px 8px;font-size:21px;line-height:1.5}.gs-contact{padding:90px 0;background:#202a23;color:#f5f3eb}.gs-simple-list{padding-inline-start:20px;line-height:2}.gs-food-details{padding:70px 0}.gs-food-links{list-style:none;padding:0;columns:2;gap:48px}.gs-food-links li{break-inside:avoid;margin-bottom:30px}.gs-food-links a{font-size:22px}.gs-food-links p{font-size:15px}
+  .gs-intro h1,.gs-intro .gs-lead,.gs-intro-photo{animation:gs-enter .6s ease-out both}.gs-intro .gs-lead{animation-delay:.07s}.gs-intro-photo{animation-delay:.12s}.gs-button{transition:transform .18s ease-out}.gs-button:hover{transform:translateY(-2px)}@keyframes gs-enter{from{opacity:.7;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@media(prefers-reduced-motion:reduce){.gs-intro h1,.gs-intro .gs-lead,.gs-intro-photo{animation:none}.gs-button{transition:none}.gs-button:hover{transform:none}}
+  /* Regional directory: editorial grouping without implying a supplier presence. */
+  .gs:not([data-global-mode="home"]) .gs-markets{padding:clamp(72px,8vw,128px) 0;background:#e4e8dd}
+  .gs:not([data-global-mode="home"]) .gs-markets .gs-split{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(28px,7vw,110px)}
+  .gs:not([data-global-mode="home"]) .gs-regions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(20px,3vw,44px);margin:0 0 36px}
+  .gs:not([data-global-mode="home"]) .gs-regions li{display:flex;align-items:baseline;gap:13px;border-top:1px solid #a7b4a6;padding:21px 0;font-family:'DM Sans',sans-serif;font-size:clamp(20px,2vw,30px);line-height:1.25;overflow-wrap:anywhere}
+  .gs:not([data-global-mode="home"]) .gs-regions li span{font-size:15px;color:#647944}
+  .gs:not([data-global-mode="home"]) .gs-markets p{max-width:58ch}
+  @media(max-width:760px){.gs:not([data-global-mode="home"]) .gs-markets .gs-split,.gs:not([data-global-mode="home"]) .gs-regions{grid-template-columns:1fr}.gs:not([data-global-mode="home"]) .gs-regions li{padding:15px 0}}
+  @media(max-width:900px){.gs-wrap{width:calc(100% - 48px)}.gs-split{gap:6%}.gs-intro-bottom{gap:5%}.gs h1{font-size:clamp(40px,7vw,70px)}}
+  @media(max-width:760px){.gs-wrap{width:calc(100% - 36px)}.gs-intro{padding:42px 0 48px}.gs h1{font-size:clamp(38px,9.5vw,60px);margin:22px 0 30px;max-width:100%}.gs-intro-bottom,.gs-split,.gs-food{grid-template-columns:1fr;gap:30px}.gs-intro-photo{margin-top:6px}.gs-intro .gs-lead{font-size:21px!important}.gs-actions{gap:16px}.gs-button{width:100%;padding:16px}.gs-statement,.gs-solutions,.gs-markets,.gs-process,.gs-contact{padding:58px 0}.gs-industries{padding:64px 0}.gs-section-heading{display:block;margin-bottom:32px}.gs-industry-editorial{grid-template-columns:1fr;gap:36px}.gs-industry h3{margin-top:18px}.gs-food{gap:12px;margin-top:38px}.gs h2{font-size:32px;margin-bottom:16px}.gs-large{font-size:24px!important}.gs-food-links{columns:1}.gs-regions{gap:12px 22px}}
+
+  /* Global sourcing editorial system. Scoped to these routes; the production home is untouched. */
+  .gs:not([data-global-mode="home"]){--gs-paper:#f1f0e9;--gs-ink:#1c2620}
+  .gs:not([data-global-mode="home"]) .gs-intro{padding:clamp(54px,6vw,96px) 0 clamp(66px,7vw,108px);background:#f1f0e9}
+  .gs-intro-heading{max-width:1120px}
+  .gs-eyebrow{display:inline-flex;gap:12px;align-items:center;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#5c6b53}
+  .gs-eyebrow span{color:#8b9c77}
+  .gs:not([data-global-mode="home"]) h1{font-size:clamp(48px,5.1vw,82px);line-height:1.07;letter-spacing:-.055em;max-width:22ch;margin:20px 0 clamp(28px,4vw,54px);overflow-wrap:break-word}
+  .gs:not([data-global-mode="home"]) .gs-intro-bottom{grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr);gap:clamp(30px,5vw,78px);align-items:center}
+  .gs:not([data-global-mode="home"]) .gs-intro-photo{aspect-ratio:1.38;min-width:0;position:relative;background:#d8dcd1;overflow:hidden}
+  .gs:not([data-global-mode="home"]) .gs-intro-photo img{transition:transform .65s cubic-bezier(.2,.65,.2,1)}
+  .gs:not([data-global-mode="home"]) .gs-intro-photo:hover img{transform:scale(1.025)}
+  .gs:not([data-global-mode="home"]) .gs-lead{font-size:clamp(19px,1.65vw,25px)!important;line-height:1.5!important;max-width:42ch}
+  .gs:not([data-global-mode="home"]) .gs-actions{gap:16px 26px}
+  .gs:not([data-global-mode="home"]) .gs-button{min-height:54px;padding:17px 23px}
+  .gs:not([data-global-mode="home"]) .gs-section-heading{margin-bottom:clamp(30px,5vw,62px);align-items:end}
+  .gs:not([data-global-mode="home"]) .gs-section-heading p{max-width:41ch;font-size:16px;line-height:1.65}
+  .gs:not([data-global-mode="home"]) .gs-industries{padding:clamp(66px,7vw,116px) 0}
+  .gs:not([data-global-mode="home"]) .gs-industry-editorial{grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(35px,4.5vw,66px) clamp(20px,2.5vw,40px)}
+  .gs:not([data-global-mode="home"]) .gs-industry{grid-column:span 6}
+  .gs:not([data-global-mode="home"]) .gs-industry:nth-child(1),.gs:not([data-global-mode="home"]) .gs-industry:nth-child(4){grid-column:span 7}
+  .gs:not([data-global-mode="home"]) .gs-industry:nth-child(2),.gs:not([data-global-mode="home"]) .gs-industry:nth-child(3){grid-column:span 5}
+  .gs:not([data-global-mode="home"]) .gs-industry-media{aspect-ratio:1.6;background:#d7dbd3}
+  .gs:not([data-global-mode="home"]) .gs-industry:nth-child(1) .gs-industry-media,.gs:not([data-global-mode="home"]) .gs-industry:nth-child(4) .gs-industry-media{aspect-ratio:1.86}
+  .gs:not([data-global-mode="home"]) .gs-industry-media img{transition:transform .65s cubic-bezier(.2,.65,.2,1)}
+  .gs:not([data-global-mode="home"]) .gs-industry-media:hover img{transform:scale(1.045)}
+  .gs:not([data-global-mode="home"]) .gs-industry h3{font-size:clamp(22px,2vw,30px);margin:20px 0 9px}
+  .gs:not([data-global-mode="home"]) .gs-industry p{font-size:15px;line-height:1.65;max-width:62ch}
+  .gs:not([data-global-mode="home"]) .gs-food{border-top:1px solid #bec6b8;margin-top:64px}
+  .gs:not([data-global-mode="home"]) .gs-solutions{padding:clamp(70px,8vw,124px) 0;background:#19251e}
+  .gs:not([data-global-mode="home"]) .gs-section-heading--dark{color:#f4f2ea}
+  .gs:not([data-global-mode="home"]) .gs-capability-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(28px,5vw,84px)}
+  .gs:not([data-global-mode="home"]) .gs-capability-list article{position:relative;padding:28px 0 30px;margin:0;border-top:1px solid rgba(245,243,235,.27)}
+  .gs:not([data-global-mode="home"]) .gs-capability-list article:nth-child(-n+3){border-top-color:#bddc52}
+  .gs:not([data-global-mode="home"]) .gs-capability-list article:nth-child(3){grid-column:1 / -1}
+  .gs:not([data-global-mode="home"]) .gs-capability-list h3{font-size:clamp(22px,2.1vw,30px);line-height:1.2;margin:0 0 13px}
+  .gs:not([data-global-mode="home"]) .gs-capability-list p{font-size:15px;line-height:1.65;max-width:54ch;color:#cbd7ca}
+  .gs:not([data-global-mode="home"]) .gs-statement{padding:clamp(70px,8vw,112px) 0}
+  .gs:not([data-global-mode="home"]) .gs-simple-list{list-style:none;padding:18px 0 0;margin:28px 0 0;border-top:1px solid #b8c4b3;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 24px}
+  .gs:not([data-global-mode="home"]) .gs-simple-list li{border-bottom:1px solid #bec9b8;padding:12px 0}
+  .gs:not([data-global-mode="home"]) .gs-simple-list a{font-size:16px}
+  .gs:not([data-global-mode="home"]) .gs-process{padding:clamp(70px,8vw,112px) 0}
+  .gs:not([data-global-mode="home"]) .gs-process li{font-size:clamp(17px,1.6vw,21px);padding-bottom:20px}
+  .gs:not([data-global-mode="home"]) .gs-contact{padding:clamp(72px,8vw,112px) 0;background:#1b2921}
+  .gs:not([data-global-mode="home"]) .gs-contact .gs-large{max-width:40ch}
+  @media(max-width:900px){
+    .gs:not([data-global-mode="home"]) .gs-intro-bottom{gap:28px}
+    .gs:not([data-global-mode="home"]) .gs-capability-list{column-gap:30px}
+  }
+  @media(max-width:760px){
+    .gs:not([data-global-mode="home"]) .gs-intro{padding:42px 0 58px}
+    .gs:not([data-global-mode="home"]) h1{font-size:clamp(38px,10vw,58px);max-width:100%;margin:18px 0 28px}
+    .gs:not([data-global-mode="home"]) .gs-intro-bottom{grid-template-columns:1fr;gap:26px}
+    .gs:not([data-global-mode="home"]) .gs-intro-photo{aspect-ratio:1.6}
+    .gs:not([data-global-mode="home"]) .gs-lead{font-size:19px!important}
+    .gs:not([data-global-mode="home"]) .gs-section-heading{margin-bottom:30px}
+    .gs:not([data-global-mode="home"]) .gs-industry-editorial{grid-template-columns:1fr;gap:36px}
+    .gs:not([data-global-mode="home"]) .gs-industry,.gs:not([data-global-mode="home"]) .gs-industry:nth-child(1),.gs:not([data-global-mode="home"]) .gs-industry:nth-child(2),.gs:not([data-global-mode="home"]) .gs-industry:nth-child(3),.gs:not([data-global-mode="home"]) .gs-industry:nth-child(4){grid-column:auto}
+    .gs:not([data-global-mode="home"]) .gs-industry-media,.gs:not([data-global-mode="home"]) .gs-industry:nth-child(1) .gs-industry-media,.gs:not([data-global-mode="home"]) .gs-industry:nth-child(4) .gs-industry-media{aspect-ratio:1.6}
+    .gs:not([data-global-mode="home"]) .gs-capability-list{grid-template-columns:1fr}
+    .gs:not([data-global-mode="home"]) .gs-capability-list article:nth-child(3){grid-column:auto}
+    .gs:not([data-global-mode="home"]) .gs-simple-list{grid-template-columns:1fr}
+    .gs:not([data-global-mode="home"]) .gs-intro-photo:hover img,.gs:not([data-global-mode="home"]) .gs-industry-media:hover img{transform:none}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .gs:not([data-global-mode="home"]) .gs-intro-photo img,.gs:not([data-global-mode="home"]) .gs-industry-media img{transition:none}
+  }
+  .gs:not([data-global-mode="home"]) .gs-focused{padding:clamp(72px,8vw,116px) 0;background:#e5e8dd}
+  .gs-focused-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.7vw,40px)}
+  .gs-focused-item{min-width:0}
+  .gs-focused-item .gs-industry-media{display:block;aspect-ratio:1.47;overflow:hidden}
+  .gs-focused-item h3{font-size:clamp(20px,1.9vw,27px);margin:19px 0 10px}
+  .gs-focused-item h3 a{display:flex;justify-content:space-between;gap:18px}
+  .gs-focused-item p{font-size:15px;line-height:1.65}
+  @media(max-width:760px){.gs-focused-grid{grid-template-columns:1fr;gap:32px}.gs-focused-item .gs-industry-media{aspect-ratio:1.6}}
+
+  /* Non-home editorial hero alignment: headline and conversion text share the
+     left column; the contextual image occupies the entire right column.
+     Homepage markup and styles remain unchanged. */
+  @media (min-width: 761px) {
+    .gs:not([data-global-mode="home"]) .gs-intro .gs-wrap {
+      display:grid;
+      grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+      column-gap:clamp(30px,5vw,90px);
+      align-items:center;
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro-heading {
+      grid-column:1;
+      grid-row:1;
+      align-self:end;
+      min-width:0;
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro-heading h1 {
+      font-size:clamp(42px,4.1vw,69px);
+      max-width:17ch;
+      margin:18px 0 26px;
+      line-height:1.08;
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro-bottom { display:contents; }
+    .gs:not([data-global-mode="home"]) .gs-intro-bottom > div {
+      grid-column:1;
+      grid-row:2;
+      min-width:0;
+      align-self:start;
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro-photo {
+      grid-column:2;
+      grid-row:1 / span 2;
+      align-self:center;
+      width:100%;
+      aspect-ratio:1.13;
+    }
+    .gs:not([data-global-mode="home"]) .gs-lead {
+      max-width:45ch;
+      margin-bottom:clamp(24px,3vw,40px);
+    }
+  }
+  @media (min-width:761px) and (max-width:1024px) {
+    .gs:not([data-global-mode="home"]) .gs-intro .gs-wrap {
+      grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+      column-gap:30px;
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro-heading h1 {
+      font-size:clamp(36px,4.3vw,52px);
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro-photo { aspect-ratio:1; }
+  }
+
+  /* Poultry reference: immersive photographic hero + content-first sections.
+     Global sourcing interior routes only; do not modify home. */
+  .gs:not([data-global-mode="home"]) .gs-intro {
+    position:relative;isolation:isolate;overflow:hidden;
+    min-height:clamp(570px,69svh,710px);
+    padding:clamp(66px,7vw,108px) 0;
+    display:flex;align-items:center;
+    background:#0a130f!important;color:#f4f5ed;
+  }
+  .gs:not([data-global-mode="home"]) .gs-intro::after {
+    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(90deg,rgba(8,15,12,.97) 0%,rgba(8,15,12,.88) 32%,rgba(8,15,12,.36) 68%,rgba(8,15,12,.14) 100%);
+  }
+  html[dir="rtl"] .gs:not([data-global-mode="home"]) .gs-intro::after{
+    background:linear-gradient(270deg,rgba(8,15,12,.97) 0%,rgba(8,15,12,.88) 32%,rgba(8,15,12,.36) 68%,rgba(8,15,12,.14) 100%);
+  }
+  .gs:not([data-global-mode="home"]) .gs-intro .gs-wrap{
+    position:static;display:block;z-index:auto;align-items:initial;
+    width:min(1360px,calc(100% - 112px));
+  }
+  .gs:not([data-global-mode="home"]) .gs-intro-heading,
+  .gs:not([data-global-mode="home"]) .gs-intro-bottom>div{
+    position:relative;z-index:2;max-width:690px;min-width:0;
+  }
+  .gs:not([data-global-mode="home"]) .gs-intro-heading{margin:0 0 22px}
+  .gs:not([data-global-mode="home"]) .gs-intro-heading h1{
+    max-width:690px;margin:16px 0 0;font-size:clamp(45px,4.2vw,73px);
+    font-weight:500;line-height:1.07;letter-spacing:-.052em;
+    color:#f5f6ef;text-wrap:balance;
+  }
+  .gs:not([data-global-mode="home"]) .gs-intro .gs-eyebrow{color:#d2ee7a}
+  .gs:not([data-global-mode="home"]) .gs-intro .gs-eyebrow span{color:#9cba64}
+  .gs:not([data-global-mode="home"]) .gs-intro-bottom{display:block;grid-template-columns:none}
+  .gs:not([data-global-mode="home"]) .gs-lead{
+    max-width:55ch;font-size:clamp(17px,1.35vw,21px)!important;
+    line-height:1.62!important;color:#e7eae2;margin:0 0 30px;
+  }
+  .gs:not([data-global-mode="home"]) .gs-intro-photo{
+    position:absolute;inset:0;z-index:0;display:block;
+    width:100%;height:100%;aspect-ratio:auto;overflow:hidden;
+    margin:0;pointer-events:none;background:#18231c;
+  }
+  .gs:not([data-global-mode="home"]) .gs-intro-photo img{
+    width:100%;height:100%;object-fit:cover;
+    border-radius:0;transform:none!important;
+  }
+  .gs:not([data-global-mode="home"]) .gs-intro .gs-button{
+    min-height:52px;padding:15px 23px;color:#101a10!important;
+  }
+  .gs:not([data-global-mode="home"]) .gs-intro .gs-link{color:#f5f5ee}
+  .gs:not([data-global-mode="home"]) .gs-intro .gs-actions{gap:14px 27px}
+  /* Reference-page content rhythm: considered two-column detail blocks. */
+  .gs:not([data-global-mode="home"]) .gs-statement{
+    background:#f1f0e9;padding:clamp(68px,8vw,118px) 0;
+  }
+  .gs:not([data-global-mode="home"]) .gs-statement .gs-split{
+    grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
+    gap:clamp(26px,6vw,100px);align-items:start;
+  }
+  .gs:not([data-global-mode="home"]) .gs-statement .gs-large{
+    font-size:clamp(20px,1.9vw,28px)!important;line-height:1.6!important;
+  }
+  .gs:not([data-global-mode="home"]) .gs-process{
+    background:#e6e9df;padding:clamp(68px,8vw,116px) 0;
+  }
+  .gs:not([data-global-mode="home"]) .gs-process ol{
+    list-style:decimal;display:grid;gap:0;padding-inline-start:30px;
+  }
+  .gs:not([data-global-mode="home"]) .gs-process li{
+    padding:20px 14px;border-bottom:1px solid #b9c7b8;
+    font-size:clamp(17px,1.5vw,21px);line-height:1.6;
+  }
+  .gs:not([data-global-mode="home"]) .gs-contact{
+    background:#17251c;padding:clamp(70px,8vw,120px) 0;
+  }
+  .gs:not([data-global-mode="home"]) .gs-contact .gs-large{
+    font-size:clamp(20px,1.9vw,27px)!important;
+  }
+  @media(max-width:950px){
+    .gs:not([data-global-mode="home"]) .gs-intro .gs-wrap{
+      width:calc(100% - 48px);
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro-heading h1{
+      font-size:clamp(38px,5vw,62px);
+    }
+  }
+  @media(max-width:760px){
+    .gs:not([data-global-mode="home"]) .gs-intro{
+      min-height:clamp(550px,84svh,760px);
+      padding:62px 0 54px;align-items:end;
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro::after{
+      background:linear-gradient(180deg,rgba(8,15,12,.44) 0%,rgba(8,15,12,.78) 40%,rgba(8,15,12,.96) 78%);
+    }
+    html[dir="rtl"] .gs:not([data-global-mode="home"]) .gs-intro::after{
+      background:linear-gradient(180deg,rgba(8,15,12,.44) 0%,rgba(8,15,12,.78) 40%,rgba(8,15,12,.96) 78%);
+    }
+    .gs:not([data-global-mode="home"]) .gs-intro .gs-wrap{width:calc(100% - 36px)}
+    .gs:not([data-global-mode="home"]) .gs-intro-heading h1{
+      font-size:clamp(35px,9vw,53px);max-width:100%;
+    }
+    .gs:not([data-global-mode="home"]) .gs-lead{font-size:17px!important}
+    .gs:not([data-global-mode="home"]) .gs-intro-photo img{object-position:62% center}
+    .gs:not([data-global-mode="home"]) .gs-statement .gs-split{grid-template-columns:1fr}
+    .gs:not([data-global-mode="home"]) .gs-intro .gs-link{min-height:44px}
+  }
+
+  /* Service and industry body follows poultry reference: readable editorial
+     detail column with a contextual image and conversion side panel. */
+  .gs-editorial-detail{background:#f1f0e9;color:#17231b;padding:clamp(70px,8vw,122px) 0}
+  .gs-editorial-grid{display:grid;grid-template-columns:minmax(0,1.38fr) minmax(0,.77fr);gap:clamp(40px,6vw,98px);align-items:start}
+  .gs-editorial-main{min-width:0}
+  .gs-editorial-main h2{font-size:clamp(33px,3.4vw,52px);max-width:20ch;line-height:1.13;margin:25px 0}
+  .gs-editorial-lead{font-size:clamp(20px,1.8vw,27px)!important;line-height:1.6!important;color:#2d382d;max-width:60ch}
+  .gs-editorial-panel{padding:32px 0 0;margin-top:35px;border-top:1px solid #a6b3a0}
+  .gs-editorial-panel h3{font-size:clamp(22px,2vw,29px);margin:0 0 22px}
+  .gs-editorial-links{padding:0;margin:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 26px}
+  .gs-editorial-links li{border-top:1px solid #bdc8b8}
+  .gs-editorial-links a{display:flex;justify-content:space-between;gap:20px;padding:17px 0;min-height:54px;font-size:16px}
+  .gs-editorial-links span{color:#436320}
+  .gs-editorial-steps{padding-inline-start:24px;margin:0}
+  .gs-editorial-steps li{padding:14px 0;font-size:clamp(16px,1.4vw,20px);line-height:1.6;border-top:1px solid #b8c4b6}
+  .gs-editorial-aside{position:sticky;top:108px;background:#18271d;color:#f3f6ee;overflow:hidden}
+  .gs-editorial-aside figure{margin:0;aspect-ratio:1.34;overflow:hidden}
+  .gs-editorial-aside figure img{width:100%;height:100%;object-fit:cover}
+  .gs-editorial-aside-copy{padding:clamp(24px,3vw,44px)}
+  .gs-editorial-aside-copy .gs-eyebrow{color:#c9ec6b}
+  .gs-editorial-aside-copy h3{font-size:clamp(23px,2vw,33px);line-height:1.25;color:#f3f6ee;margin:18px 0}
+  .gs-editorial-aside-copy p{color:#d2dfd0;font-size:16px;line-height:1.65;margin-bottom:28px}
+  .gs-editorial-aside-copy .gs-button{font-size:14px;max-width:100%}
+  @media(max-width:950px){.gs-editorial-grid{grid-template-columns:1fr}.gs-editorial-aside{position:static;display:grid;grid-template-columns:1fr 1fr}.gs-editorial-aside figure{height:100%}}
+  @media(max-width:760px){.gs-editorial-detail{padding:65px 0}.gs-editorial-links{grid-template-columns:1fr}.gs-editorial-aside{display:block}.gs-editorial-aside figure{height:auto;aspect-ratio:1.5}}
+
+  /* Accessible editorial colors: lime reserved for dark surfaces only.
+     Keep the page label readable on light backgrounds, including all locales. */
+  .gs[data-global-mode="industry"] .gs-editorial-detail .gs-eyebrow,
+  .gs[data-global-mode="solution"] .gs-editorial-detail .gs-eyebrow {
+    color:#425734!important;opacity:1!important;font-size:13px!important;
+    font-weight:800!important;letter-spacing:.115em;line-height:1.6;
+  }
+  .gs[data-global-mode="industry"] .gs-editorial-aside .gs-eyebrow,
+  .gs[data-global-mode="solution"] .gs-editorial-aside .gs-eyebrow {
+    color:#d7f388!important;
+  }
+  .gs[data-global-mode="industry"] .gs-editorial-grid,
+  .gs[data-global-mode="solution"] .gs-editorial-grid {
+    grid-template-columns:minmax(0,1.14fr) minmax(320px,.86fr);
+    gap:clamp(32px,4vw,64px);
+  }
+  .gs[data-global-mode="industry"] .gs-editorial-main,
+  .gs[data-global-mode="solution"] .gs-editorial-main {min-width:0;max-width:100%}
+  .gs[data-global-mode="industry"] .gs-editorial-lead,
+  .gs[data-global-mode="solution"] .gs-editorial-lead {
+    font-size:clamp(18px,1.65vw,24px)!important;
+    line-height:1.58!important;max-width:56ch;
+  }
+  .gs[data-global-mode="industry"] .gs-editorial-main h2,
+  .gs[data-global-mode="solution"] .gs-editorial-main h2{
+    font-size:clamp(29px,2.8vw,43px)!important;
+    line-height:1.19!important;max-width:100%;margin:20px 0 25px;
+    overflow-wrap:normal;color:#202d22!important;
+  }
+  .gs[data-global-mode="industry"] .gs-editorial-aside,
+  .gs[data-global-mode="solution"] .gs-editorial-aside{
+    min-width:0;max-width:100%;width:100%;
+  }
+  .gs[data-global-mode="industry"] .gs-editorial-aside figure img,
+  .gs[data-global-mode="solution"] .gs-editorial-aside figure img{
+    width:100%;height:100%;object-fit:cover;
+  }
+  @media(max-width:1050px){
+    .gs[data-global-mode="industry"] .gs-editorial-grid,
+    .gs[data-global-mode="solution"] .gs-editorial-grid{grid-template-columns:1fr}
+    .gs[data-global-mode="industry"] .gs-editorial-aside,
+    .gs[data-global-mode="solution"] .gs-editorial-aside{position:static;max-width:750px}
+  }
+</style>

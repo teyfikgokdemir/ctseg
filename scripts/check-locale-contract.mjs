@@ -9,7 +9,7 @@ const fullSiteLocales=active.filter((code)=>code!=='he');
 const homes={tr:'index.html',en:'en/index.html',de:'de/index.html',it:'it/index.html',fa:'fa/index.html',ru:'ru/index.html',zh:'zh/index.html',vi:'vi/index.html',uk:'uk/index.html',ro:'ro/index.html',bg:'bg/index.html',he:'he/index.html',ar:'ar/index.html'};
 const ruSourcing=['ru/sourcing/textiles/index.html'];
 const ruCore=[
-  'ru/uslugi/index.html','ru/tovary/index.html','ru/rynki/index.html','ru/materialy/index.html','ru/o-kompanii/index.html','ru/kontakty/index.html',
+  'ru/materialy/index.html','ru/o-kompanii/index.html','ru/kontakty/index.html',
   'ru/uslugi/strategicheskiy-sorsing/index.html','ru/uslugi/poisk-i-verifikatsiya-postavshchikov/index.html',
   'ru/resheniya/poisk-proverka-postavshchikov-turciya/index.html','ru/resheniya/poisk-proizvoditelya-chastnoy-marki/index.html',
   'ru/resheniya/mezhdunarodnyi-rfq-sravnenie-predlozheniy/index.html','ru/resheniya/proiskhozhdenie-pishchevyh-produktov-dokumenty-partii/index.html',
@@ -22,6 +22,16 @@ if(existsSync(join(dist,'fr')))errors.push('French build directory still exists'
 
 for(const [locale,path] of Object.entries(homes)){
   const html=read(path);
+  const expectedLanguage=locale==='ar'?'ar-SA':locale==='he'?'he-IL':locale==='zh'?'zh-CN':locale==='vi'?'vi-VN':locale==='uk'?'uk-UA':locale==='ro'?'ro-RO':locale==='bg'?'bg-BG':locale;
+  const direction=['ar','fa','he'].includes(locale)?'rtl':'ltr';
+  if(!html.includes('<html lang="'+expectedLanguage+'" dir="'+direction+'"'))errors.push(path+': homepage language/direction incorrect');
+  const canonical='https://ctseg.com.tr/'+(locale==='tr'?'':locale+'/');
+  if(!html.includes('<link rel="canonical" href="'+canonical+'"'))errors.push(path+': homepage canonical incorrect');
+  for(const alternate of [...active,'x-default']){
+    const target='https://ctseg.com.tr/'+(alternate==='tr'?'':(alternate==='x-default'?'en':alternate)+'/');
+    if(!html.includes('<link rel="alternate" hreflang="'+alternate+'" href="'+target+'"'))errors.push(path+': homepage reciprocal alternate incorrect for '+alternate);
+  }
+  if(!html.includes('data-global-sourcing')||!html.includes('data-global-mode="home"'))errors.push(path+': global homepage missing');
   const links=[...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].map((match)=>match[0]);
   for(const code of switchLocales)if(!links.some((tag)=>tag.includes(`hreflang="${code}"`)))errors.push(`${path}: locale switcher missing ${code}`);
   if(links.some((tag)=>tag.includes('hreflang="fr"')))errors.push(`${path}: French remains in locale switcher`);
@@ -35,26 +45,14 @@ const arH1Text=([...arHome.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)][0]?.[1]??''
 if(!/[\u0600-\u06FF]/.test(arH1Text))errors.push('Arabic homepage H1 is not localized');
 if(!/[\u0600-\u06FF]/.test(arHome))errors.push('Arabic homepage has no Arabic content');
 for(const englishMarker of ['Trade needs disciplined coordination','We turn international trade','Quick contact','Global Sourcing Capacity','Glass sourcing from Türkiye for global B2B markets','Glass product & processing groups','Commercial market coverage','CTSEG GLASS SOURCING NETWORK'])if(arHome.includes(englishMarker))errors.push('Arabic homepage contains English fallback marker: '+englishMarker);
-for(const requiredArabicHomeBlock of ['id="for-buyers"','id="for-producers"','id="external-trade-desk"','مكتب التجارة الخارجية'])if(!arHome.includes(requiredArabicHomeBlock))errors.push('Arabic homepage missing required trade path block: '+requiredArabicHomeBlock);
-for(const ArabicNavLabel of ['التوريد الاستراتيجي','البحث عن الموردين والتحقق منهم','استشارات التجارة الدولية','تحليل وتحسين التكلفة الكلية TCO','دخول الأسواق','طريقة العمل','سيناريوهات عمل تمثيلية'])if(!arHome.includes(ArabicNavLabel))errors.push('Arabic navigation missing required item: '+ArabicNavLabel);
-// The Glass hub now lives under Global Trade. Validate the menu points to the hub,
- // and ensure all deep product links remain available on that hub instead of requiring
- // them to clutter the primary navigation on every route.
-if(!arHome.includes('href="/ar/glass/"'))errors.push('Arabic Global Trade menu missing Glass hub');
-const arGlassHubForNav=read('ar/glass/index.html');
-for(const ArabicGlassHref of ['/ar/glass/float-glass/','/ar/glass/tempered-glass/','/ar/glass/laminated-glass/','/ar/glass/low-e-coated-glass/','/ar/glass/insulated-glass-igu/','/ar/glass/architectural-project-glass/'])
-  if(!arGlassHubForNav.includes(`href="${ArabicGlassHref}"`))errors.push('Arabic Glass hub missing deep product link: '+ArabicGlassHref);
-for(const ArabicHubHref of ['/ar/services/','/ar/trade-products/','/ar/markets/','/ar/insights/','/ar/about/','/ar/contact/'])if(!arHome.includes(`href="${ArabicHubHref}"`))errors.push('Arabic navigation missing hub link: '+ArabicHubHref);
-
-
+// Global homepage contract is checked below; retained detail routes keep their locale assertions.
 const arCore=[
-  'ar/services/index.html','ar/trade-products/index.html','ar/markets/index.html','ar/insights/index.html','ar/about/index.html','ar/contact/index.html',
+  'ar/insights/index.html','ar/about/index.html','ar/contact/index.html',
   'ar/services/strategic-sourcing/index.html','ar/services/supplier-sourcing-and-verification/index.html','ar/services/international-trade-advisory/index.html','ar/services/cost-optimisation-tco/index.html','ar/services/market-entry/index.html',
   'ar/solutions/turkiye-supplier-sourcing/index.html','ar/solutions/private-label-manufacturer/index.html','ar/solutions/rfq-bid-comparison/index.html','ar/solutions/food-origin-batch-documents/index.html',
   'ar/privacy/index.html','ar/cookies/index.html','ar/terms/index.html','ar/data-protection/index.html',
   'ar/how-we-work/index.html','ar/representative-work-scenarios/index.html',
   'ar/trade-products/akbari-pistachio/index.html','ar/insights/strategic-sourcing-vs-procurement/index.html',
-  'ar/glass/index.html','ar/glass/float-glass/index.html','ar/glass/markets/gulf-middle-east/index.html',
   'ar/sourcing/wholesale-textile-sourcing/index.html','ar/natural-oils/index.html'
 ];
 for(const path of arCore){
@@ -78,8 +76,6 @@ for(const marker of ['I need CTSEG as an ongoing external trade function','Exter
 
 const arInsight=read('ar/insights/strategic-sourcing-vs-procurement/index.html');
 if((arInsight.match(/class="content-block article-block"/g)||[]).length<4||!arInsight.includes('التوريد الاستراتيجي'))errors.push('Arabic insight detail content/category incomplete');
-const arGlass=read('ar/glass/index.html');
-if(!arGlass.includes('الزجاج')||!arGlass.includes('dir="rtl"'))errors.push('Arabic glass hub localization incomplete');
 const arPrivacy=read('ar/privacy/index.html');
 const arCookies=read('ar/cookies/index.html');
 for(const [path,html] of [['ar/privacy/index.html',arPrivacy],['ar/cookies/index.html',arCookies]])if(!html.includes('أدوات Cansu التحليلية')||!html.includes('الموافقة على التحليلات'))errors.push(`${path}: Arabic analytics disclosure missing`);
@@ -88,10 +84,10 @@ const ruHome=read(homes.ru);
 if(!ruHome.includes('<html lang="ru" dir="ltr"'))errors.push('Russian homepage lang/direction incorrect');
 const ruH1Matches=[...ruHome.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/g)];
 const ruH1Text=(ruH1Matches[0]?.[1]??'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
-if(ruH1Matches.length!==1||!/[А-Яа-яЁё]/.test(ruH1Text)||!ruH1Text.includes('Турц'))errors.push('Russian homepage H1 missing, duplicated or not localized');
+if(ruH1Matches.length!==1||!/[А-Яа-яЁё]/.test(ruH1Text))errors.push('Russian homepage H1 missing, duplicated or not localized');
 if(!/[А-Яа-яЁё]/.test(ruHome))errors.push('Russian homepage has no Cyrillic content');
 for(const marker of ['Accueil','Français','Demander une offre','Tous droits réservés','Politique de confidentialité'])if(ruHome.includes(marker))errors.push(`Russian homepage contains French marker: ${marker}`);
-for(const text of ['direct-answer','id="sectors"','КОМПЛАЕНС','external_trade_desk'])if(!ruHome.includes(text))errors.push(`Russian focused landing contract missing: ${text}`);
+if(!ruHome.includes('data-global-sourcing'))errors.push('Russian global sourcing homepage missing');
 if(!ruHome.includes('property="og:locale" content="ru_RU"'))errors.push('Russian OG locale missing');
 
 for(const path of ruSourcing){
@@ -113,7 +109,21 @@ for(const path of ruCore){
 }
 const walk=(dir)=>readdirSync(dir,{withFileTypes:true}).flatMap((entry)=>entry.isDirectory()?walk(join(dir,entry.name)):[join(dir,entry.name)]);
 const ruHtml=walk(join(dist,'ru')).filter((path)=>path.endsWith('.html'));
-if(ruHtml.length<84)errors.push(`expected at least 84 Russian HTML pages, found ${ruHtml.length}`);
+// Route identity is more meaningful than the previous total, which included retired glass pages.
+const globalRoutes=['industries/','solutions/','global-markets/',...['industrial','textiles','beauty','agriculture','construction','packaging','food'].map(id=>'industries/'+id+'/'),...['import-sourcing','export-development','buyer-supplier-matching','oem-odm','private-label','distributor-discovery','industrial-procurement'].map(id=>'solutions/'+id+'/')];
+for(const locale of active)for(const route of globalRoutes){
+  const path=locale+'/'+route+'index.html';
+  if(!existsSync(join(dist,path))){errors.push(path+': global route missing');continue}
+  const html=read(path);
+  const canonical='https://ctseg.com.tr/'+locale+'/'+route;
+  if(!html.includes('<link rel="canonical" href="'+canonical+'"'))errors.push(path+': global route canonical incorrect');
+  for(const alternate of active){
+    const target='https://ctseg.com.tr/'+alternate+'/'+route;
+    if(!html.includes('<link rel="alternate" hreflang="'+alternate+'" href="'+target+'"'))errors.push(path+': global route reciprocal alternate missing '+alternate);
+  }
+  if((html.match(/<h1\b/g)||[]).length!==1)errors.push(path+': expected one H1');
+}
+
 const frenchLeak=/\b(?:Accueil|Français|fournisseurs?|produits?|marchés?|données|confidentialité|conditions|utilisation|recherche|approvisionnement|conformité|origine|demander|offre|politique|notre|votre|avec|pour|dans|sur|une|des|les)\b/i;
 for(const path of ruHtml){
   const visibleText=readFileSync(path,'utf8').replace(/<script[\s\S]*?<\/script>/gi,'').replace(/<style[\s\S]*?<\/style>/gi,'').replace(/<[^>]+>/g,' ');
@@ -131,6 +141,25 @@ for(const path of ruCore)if(!sitemap.includes(`https://ctseg.com.tr/${path.repla
 if(sitemap.includes('https://ctseg.com.tr/fr/'))errors.push('French URL remains in sitemap');
 
 const redirects=readFileSync(join(dist,'_redirects'),'utf8');
+const migratedHubs={
+  '/ar/services/':'/ar/solutions/','/ar/markets/':'/ar/global-markets/',
+  '/ru/uslugi/':'/ru/solutions/','/ru/rynki/':'/ru/global-markets/'
+};
+for(const [source,target] of Object.entries(migratedHubs)){
+  for(const from of [source,source.slice(0,-1)])if(!redirects.split(/\r?\n/).includes(from+' '+target+' 301'))errors.push('migrated hub redirect missing: '+from);
+  if(!existsSync(join(dist,target,'index.html')))errors.push('migrated hub destination missing: '+target);
+  if(sitemap.includes('<loc>https://ctseg.com.tr'+source+'</loc>'))errors.push('retired hub remains in sitemap: '+source);
+}
+// Restored product portfolios have distinct content and canonical 200 URLs.
+for(const url of ['/ar/trade-products/','/ru/tovary/']){
+  if(!existsSync(join(dist,url,'index.html')))errors.push('restored portfolio page missing: '+url);
+  if(!sitemap.includes('<loc>https://ctseg.com.tr'+url+'</loc>'))errors.push('restored portfolio sitemap URL missing: '+url);
+  // The slashless variant must 301 to its own canonical trailing-slash URL.
+  const matching=redirects.split(/\r?\n/).map(line=>line.trim().split(/\s+/))
+    .filter(([source])=>source===url||source===url.slice(0,-1));
+  if(matching.some(([source,target])=>source===url||(source===url.slice(0,-1)&&target!==url)))
+    errors.push('restored portfolio redirects to the wrong destination: '+url);
+}
 const requiredRedirects=[
   '/fr /en/ 301','/fr/ /en/ 301',
   '/fr/sourcing/tapis-persans/ /en/sourcing/wholesale-textile-sourcing/ 301',
@@ -145,5 +174,5 @@ for(const rule of requiredRedirects){
 }
 
 if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log('Locale contract passed: Arabic is enforced as a full-site RTL locale alongside the existing production locales, with Russian parity, localized solution landings, legacy cleanup and one-hop redirects.');
+console.log('Locale contract passed: 13 reciprocal global homepage locales, correct language/direction and canonical, retained Arabic/Russian detail and legal parity, legacy cleanup and one-hop redirects.');
 

@@ -1,6 +1,8 @@
 ---
 import { analyticsDisclosure } from "../lib/analytics-disclosure";
 import '../styles/site.css';
+import {globalCopy} from '../data/global-sourcing-locales';
+import {globalAlternates} from '../data/global-sourcing';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import FloatingActions from '../components/FloatingActions.astro';
@@ -46,7 +48,7 @@ const hebrewCounterpart = (() => {
     home:'/he/',
     services:'/he/שירותים/',
     products:'/he/מוצרים-מסחריים/',
-    markets:'/he/שווקים/',
+    markets:'/he/global-markets/',
     insights:'/he/תובנות/',
     about:'/he/אודות/',
     contact:'/he/יצירת-קשר/',
@@ -63,8 +65,8 @@ const hebrewCounterpart = (() => {
   return pageMap[pageKey] ? `https://ctseg.com.tr${pageMap[pageKey]}` : '';
 })();
 // The Persian home renders iranTradeContent.fa, not the generic trade-house home.
-const isIranTradePage = pageKey === 'iran-trade' || (pageKey === 'home' && String(lang) === 'fa');
-const alternates = alternatesProp ? { ...alternatesProp } : String(lang) === 'he' && pageKey === 'he-insight' ? { he: canonicalUrl } as Record<string,string> :
+const isIranTradePage = pageKey === 'iran-trade';
+let alternates = alternatesProp ? { ...alternatesProp } : String(lang) === 'he' && pageKey === 'he-insight' ? { he: canonicalUrl } as Record<string,string> :
   pageKey === 'glass' ? duzceGlassAlternates() :
   pageKey === 'glass-industry' ? Object.fromEntries([['tr','https://ctseg.com.tr/glass/'], ...activeLocales.filter((code)=>code!=='tr').map((code)=>[code,`https://ctseg.com.tr/${code}/glass/`]), ['x-default','https://ctseg.com.tr/en/glass/']]) as Record<string,string> :
   pageKey === 'natural-oils' ? Object.fromEntries([...activeLocales.map((code)=>[code,`https://ctseg.com.tr/${code}/natural-oils/`]), ['x-default','https://ctseg.com.tr/en/natural-oils/']]) as Record<string,string> :
@@ -88,8 +90,7 @@ const alternates = alternatesProp ? { ...alternatesProp } : String(lang) === 'he
   pageKey === 'poultry-feed' && pageId ? Object.fromEntries((['tr','en','ar'] as PoultryFeedLocale[]).map((code)=>[code,`https://ctseg.com.tr${poultryFeedPath(code,pageId as PoultryFeedId)}`])) as Record<string,string> :
   isIranTradePage ? {
     tr:`https://ctseg.com.tr/tr/${iranTradeContent.tr.slug}/`,
-    en:`https://ctseg.com.tr/en/${iranTradeContent.en.slug}/`,
-    fa:'https://ctseg.com.tr/fa/'
+    en:`https://ctseg.com.tr/en/${iranTradeContent.en.slug}/`
   } as Record<string,string> : routeAlternates(pageKey, pageId);
 if (pageKey === 'home') {
   if (!isIranTradePage) delete alternates.fa;
@@ -98,7 +99,8 @@ if (pageKey === 'home') {
 }
 if (String(lang) === 'he') alternates.he = canonicalUrl;
 else if (hebrewCounterpart) alternates.he = hebrewCounterpart;
-const alternateCodes = pageKey === 'glass-industry'
+if(pageKey === 'home') alternates=globalAlternates('home');
+const alternateCodes = pageKey.startsWith('global-') ? activeLocales : pageKey === 'glass-industry'
   ? activeLocales
   : pageKey === 'glass-product'
   ? activeLocales
@@ -112,7 +114,7 @@ const alternateCodes = pageKey === 'glass-industry'
   ? ['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg','sr']
   : (String(lang) === 'he' && pageKey === 'he-insight'
     ? ['he']
-    : isIranTradePage ? ['tr','en','fa']
+    : isIranTradePage ? ['tr','en']
     : pageKey === 'home'
     ? activeLocales
     : pageKey === 'insights' && pageId
@@ -147,37 +149,10 @@ const organizationDescription = ({
 } as Record<string,string>)[lang] || 'CTSEG is a Türkiye-based independent B2B trade house for two-way global trade, strategic sourcing, supplier verification and market entry.';
 const organization = {
   '@context':'https://schema.org','@type':'Organization','@id':'https://ctseg.com.tr/#organization',
-  name:String(lang) === 'he' ? 'CTSEG Sanayi ve Ticaret Limited Şirketi' : (company.name[lang as Locale] || company.name.en),alternateName:company.alternateName,foundingDate:company.foundingYear,
-  description:organizationDescription,
-  slogan:lang === 'uk' ? 'Двостороння міжнародна торгівля та стратегічне постачання' : lang === 'ar' ? 'بيت تجارة عالمي للتجارة الثنائية والتوريد الاستراتيجي' : 'Two-Way Global Trade & Strategic Sourcing House',
-  founder:{'@type':'Person',name:company.founder},
-  address:{
-    '@type':'PostalAddress',
-    ...(company.streetAddress ? {streetAddress:company.streetAddress} : {}),
-    addressLocality:company.addressLocality,
-    addressRegion:company.addressRegion,
-    addressCountry:company.addressCountry
-  },
+  name:'CTSEG',alternateName:'CTSEG',description:globalCopy[String(lang)]?.about,
   url:'https://ctseg.com.tr/',logo:'https://ctseg.com.tr/images/ctseg-brand-light.svg',
-  email:company.email,telephone:company.phone,
-  areaServed:lang === 'he' ? ['Israel','Türkiye','International'] : lang === 'uk' ? ['Україна','Туреччина','Європа','Близький Схід','Азія','Міжнародні ринки'] : lang === 'ar' ? ['Türkiye','الخليج','الشرق الأوسط','أوروبا','آسيا','الأسواق الدولية'] : ['Türkiye','Europe','Middle East','Asia','International'],
-  knowsLanguage:activeLocales,
-  knowsAbout:lang === 'he' ? ['סחר דו־כיווני ישראל–טורקיה','איתור ספקים','אימות ספקים','ניהול RFQ','מותג פרטי','כניסה לשוק','פיתוח קונים ומפיצים','תיאום מסחרי'] : lang === 'uk' ? [
-    'Двостороння міжнародна торгівля','Стратегічне постачання','Пошук і перевірка постачальників','Перевірка виробників і контрагентів',
-    'Управління міжнародними RFQ','Вихід на експортні ринки','Пошук B2B-покупців','Комерційна координація','Постачання з Туреччини',
-    'Торговельна аналітика','Аналіз сукупної вартості','Постачання харчової та аграрної продукції','Текстиль і домашній текстиль',
-    'Пакування та промислові матеріали','Україна — Туреччина: торговельний коридор','Постачання для відбудови України'
-  ] : lang === 'ar' ? [
-    'التجارة العالمية ثنائية الاتجاه','التوريد الاستراتيجي','البحث عن الموردين والتحقق منهم','التحقق من المصانع والأطراف المقابلة',
-    'إدارة طلبات RFQ الدولية','دخول أسواق التصدير','البحث عن المشترين بين الشركات','التنسيق التجاري','التوريد من Türkiye',
-    'الرؤى التجارية','تحليل التكلفة الكلية للملكية TCO','توريد المنتجات الغذائية والزراعية','المنسوجات والمنسوجات المنزلية',
-    'مواد التعبئة والمدخلات الصناعية','توريد الزجاج للمشاريع','التجارة بين Türkiye والخليج والشرق الأوسط'
-  ] : [
-    'Two-way global trade','Strategic sourcing','Supplier sourcing and verification','Factory and counterparty verification',
-    'International RFQ management','Export market entry','B2B buyer research','Commercial coordination','Nearshoring from Türkiye',
-    'Trade intelligence','Total cost of ownership analysis','Food and agricultural sourcing','Textiles and home textiles',
-    'Packaging and industrial inputs','Natural oils and cosmetic raw materials','Float glass and architectural glass','Türkiye-Iran trade corridor','Iran sourcing','Iranian food exports','Vietnam exporter market entry','Vietnam to Türkiye trade','Vietnam to Europe trade','Vietnam sourcing for Türkiye','Vietnam coffee sourcing','Vietnam food imports','China manufacturer market entry','China to Türkiye sourcing','China to Europe trade','Ukraine to Türkiye sourcing','Türkiye supplier sourcing for Ukraine','Ukraine reconstruction procurement'
-  ]
+  email:company.email,telephone:company.phone,areaServed:globalCopy[String(lang)]?.regions,knowsLanguage:activeLocales,
+  knowsAbout:globalCopy[String(lang)]?.industries
 };
 const website = {
   '@context':'https://schema.org','@type':'WebSite','@id':'https://ctseg.com.tr/#website',
@@ -221,7 +196,7 @@ const heroSrcset = generatedImageSrcset(HOME_HERO_IMAGE,HOME_HERO_WIDTHS);
     <link rel="icon" href="/favicon.svg?v=20261025" type="image/svg+xml" />
     <link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
-    {pageKey === 'home' && String(lang) !== 'fa' && !noindex && <link
+    {pageKey === 'home' && !noindex && <link
       rel="preload"
       as="image"
       imagesrcset={heroSrcset}
@@ -248,14 +223,15 @@ const heroSrcset = generatedImageSrcset(HOME_HERO_IMAGE,HOME_HERO_WIDTHS);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`https://ctseg.com.tr${socialImage}`} />
     <script type="application/ld+json" set:html={JSON.stringify(schemas)}></script>
   </head>
   <body>
     <a class="skip-link" href="#main">{lang === 'uk' ? 'Перейти до основного вмісту' : lang === 'ru' ? 'Перейти к содержанию' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : lang === 'ro' ? 'Sari la conținutul principal' : lang === 'bg' ? 'Към основното съдържание' : lang === 'sr' ? 'Pređi na glavni sadržaj' : lang === 'he' ? 'דלג לתוכן הראשי' : lang === 'ar' ? 'تجاوز إلى المحتوى الرئيسي' : 'Skip to content'}</a>
-    <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} />
-    <main id="main">
+    <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} alternates={Object.fromEntries(alternateCodes.filter(code=>alternates[code]).map(code=>[code,alternates[code]]))} />
+    <main id="main" data-global-sourcing={pageKey === 'home' ? '' : undefined} data-global-mode={pageKey === 'home' ? 'home' : undefined}>
       <slot />
-      {pageKey === 'home' && <TradeHouseStatement lang={lang as Locale} />}
+          {pageKey === 'home' && <TradeHouseStatement lang={lang as Locale} />}
       {pageKey === 'home' && <TradeVideo lang={lang} />}
     </main>
     <SiteFooter lang={lang} pageKey={pageKey} />

@@ -1,0 +1,631 @@
+---
+import { specializationUi } from '../../../../data/specialization-ui';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { activeLocales, schemaLanguage } from '../../../../data/locales';
+import { industrySpecializations, type SpecializationRecord } from '../../../../data/industry-specializations';
+import { globalCopy } from '../../../../data/global-sourcing-locales';
+import { industryIds, globalHome, globalPath } from '../../../../data/global-sourcing';
+import { localizedPath, type Locale } from '../../../../data/site';
+
+export function getStaticPaths() {
+  return activeLocales.flatMap((lang) =>
+    industrySpecializations.map((spec) => ({
+      params: {
+        lang,
+        industry: spec.industryId,
+        specialization: spec.id
+      },
+      props: {
+        spec,
+        lang
+      }
+    }))
+  );
+}
+
+const { spec, lang } = Astro.props as { spec: SpecializationRecord; lang: string };
+const content = spec.content[lang] || spec.content.en;
+const c = globalCopy[lang] || globalCopy.en;
+const labels = specializationUi[lang];
+const sectorIndex = industryIds.indexOf(spec.industryId as any);
+const industryName = sectorIndex >= 0 ? c.industries[sectorIndex] : spec.industryId;
+const industryHref = `/${lang}/industries/${spec.industryId}/`;
+const contactHref = (lang === 'he' ? '/he/יצירת-קשר/' : localizedPath(lang as Locale, 'contact')) + '?intent=buyer_request';
+
+const canonical = `https://ctseg.com.tr/${lang}/industries/${spec.industryId}/${spec.id}/`;
+const alternates = Object.fromEntries(
+  activeLocales.map((code) => [code, `https://ctseg.com.tr/${code}/industries/${spec.industryId}/${spec.id}/`])
+);
+alternates['x-default'] = `https://ctseg.com.tr/en/industries/${spec.industryId}/${spec.id}/`;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: content.title,
+  description: content.metaDescription,
+  url: canonical,
+  inLanguage: schemaLanguage(lang),
+  provider: {
+    '@id': 'https://ctseg.com.tr/#organization'
+  },
+  areaServed: c.regions,
+  serviceType: content.h1
+};
+
+const faqSchema = content.faqs && content.faqs.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: content.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer
+    }
+  }))
+} : null;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { name: c.nav[0], item: `https://ctseg.com.tr${globalHome(lang)}` },
+    { name: c.nav[3], item: `https://ctseg.com.tr/${lang}/industries/` },
+    { name: industryName, item: `https://ctseg.com.tr${industryHref}` },
+    { name: content.h1, item: canonical }
+  ].map((item, index) => ({ '@type': 'ListItem', position: index + 1, ...item }))
+};
+const schemas = [serviceSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : [])];
+const relatedSolutionIds = spec.id === 'korean-cosmetics' || spec.id === 'oem-odm-cosmetics'
+  ? ['oem-odm', 'private-label']
+  : spec.id === 'private-label-cosmetics' ? ['private-label']
+  : spec.industryId === 'industrial' ? ['industrial-procurement']
+  : spec.industryId === 'textiles' ? ['oem-odm'] : ['import-sourcing'];
+const solutionIds = ['import-sourcing','export-development','buyer-supplier-matching','oem-odm','private-label','distributor-discovery','industrial-procurement'];
+
+// Related specializations in same industry
+const relatedSpecs = industrySpecializations
+  .filter((s) => s.industryId === spec.industryId && s.id !== spec.id)
+  .slice(0, 3);
+---
+
+<BaseLayout
+  lang={lang as Locale}
+  title={content.title}
+  description={content.metaDescription}
+  pageKey="global-industry-specialization"
+  pageId={`${spec.industryId}-${spec.id}`}
+  canonical={canonical}
+  alternates={alternates}
+  schema={schemas}
+>
+  <article class="spec-page" data-global-sourcing data-specialization={spec.id}>
+    {/* Hero Section */}
+    <section class="spec-hero">
+      <div class="container spec-hero__inner">
+        <nav class="spec-breadcrumb" aria-label={labels.breadcrumb}>
+          <a href={globalHome(lang)}>{c.nav[0]}</a>
+          <span class="sep">/</span>
+          <a href={`/${lang}/industries/`}>{c.nav[3]}</a>
+          <span class="sep">/</span>
+          <a href={industryHref}>{industryName}</a>
+          <span class="sep">/</span>
+          <span aria-current="page">{content.h1}</span>
+        </nav>
+
+        <div class="spec-hero__grid">
+          <div class="spec-hero__content">
+            <p class="spec-eyebrow">{content.eyebrow}</p>
+            <h1 class="spec-title">{content.h1}</h1>
+            <p class="spec-lead">{content.lead}</p>
+            <div class="spec-hero__actions">
+              <a class="button button--primary" href={contactHref} data-trade-intent="buyer_request">
+                {content.ctaButton} ↗
+              </a>
+              <a class="button button--secondary" href="#specs-table">
+                {content.specsTitle} ↓
+              </a>
+            </div>
+          </div>
+
+          <figure class="spec-hero__media">
+            <img
+              src={spec.image.src}
+              srcset={spec.image.src.startsWith('/images/global-sourcing/') ? `${spec.image.src.replace('-1280.webp','-640.webp')} 640w, ${spec.image.src} 1280w` : undefined}
+              sizes={spec.image.src.startsWith('/images/global-sourcing/') ? '(max-width:900px) 92vw, 40vw' : undefined}
+              width={spec.image.width}
+              height={spec.image.height}
+              alt={content.h1}
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    {/* Sourcing Overview */}
+    <section class="section spec-overview-section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">{industryName}</p>
+          <h2>{labels.overview}</h2>
+        </div>
+        <div class="spec-overview-card">
+          <p class="spec-overview-text">{content.overview}</p>
+        </div>
+      </div>
+    </section>
+
+    {/* Product Categories */}
+    <section class="section spec-categories-section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">{content.h1}</p>
+          <h2>{content.categoriesTitle}</h2>
+        </div>
+        <div class="card-grid">
+          {content.categories.map((category) => (
+            <div class="card spec-card">
+              <h3>{category}</h3>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Technical Specifications & Checklist */}
+    <section class="section spec-details-section" id="specs-table">
+      <div class="container">
+        <div class="spec-two-col">
+          <div class="spec-col-box">
+            <div class="section-head">
+              <p class="eyebrow">{content.specsTitle}</p>
+              <h2>{content.specsTitle}</h2>
+            </div>
+            <ul class="spec-list">
+              {content.technicalSpecs.map((item) => (
+                <li>
+                  <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="spec-col-box">
+            <div class="section-head">
+              <p class="eyebrow">{content.evaluationTitle}</p>
+              <h2>{content.evaluationTitle}</h2>
+            </div>
+            <ul class="spec-list">
+              {content.evaluationCriteria.map((item) => (
+                <li>
+                  <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Production, MOQ & Logistics */}
+    <section class="section spec-operations-section">
+      <div class="container">
+        <div class="spec-two-col">
+          <div class="spec-col-box">
+            <div class="section-head">
+              <p class="eyebrow">{content.productionTitle}</p>
+              <h2>{content.productionTitle}</h2>
+            </div>
+            <ul class="spec-list">
+              {content.productionAndMoq.map((item) => (
+                <li>
+                  <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="spec-col-box">
+            <div class="section-head">
+              <p class="eyebrow">{content.logisticsTitle}</p>
+              <h2>{content.logisticsTitle}</h2>
+            </div>
+            <ul class="spec-list">
+              {content.logisticsAndCompliance.map((item) => (
+                <li>
+                  <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Step-by-Step Process */}
+    <section class="section spec-process-section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">{industryName}</p>
+          <h2>{content.processTitle}</h2>
+        </div>
+        <ol class="detailed-process" style="list-style:none;margin:0;padding:0;">
+          {content.process.map((step, idx) => (
+            <li>
+              <div>
+                <span class="process-step-num">0{idx + 1}</span>
+                <p>{step}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p>{relatedSolutionIds.map((id, index) => <><span>{index ? ' · ' : ''}</span><a href={globalPath(lang, 'solutions', id)}>{c.solutions[solutionIds.indexOf(id)]}</a></>)}</p>
+      </div>
+    </section>
+
+    {/* Frequently Asked Questions */}
+    {content.faqs && content.faqs.length > 0 && (
+      <section class="section spec-faq-section">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow">FAQ</p>
+            <h2>{content.faqTitle}</h2>
+          </div>
+          <div class="answer-grid">
+            {content.faqs.map((faq) => (
+              <article>
+                <h3>{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    {/* Sourcing Request CTA */}
+    <section class="section spec-cta-section">
+      <div class="container">
+        <div class="trade-funnel-card spec-cta-card">
+          <div>
+            <span class="trade-funnel-kicker">{industryName}</span>
+            <h2 class="trade-funnel-title">{content.ctaTitle}</h2>
+            <p class="trade-funnel-desc">{content.ctaText}</p>
+          </div>
+          <a class="button button--primary" href={contactHref} data-trade-intent="buyer_request">
+            {content.ctaButton} →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {/* Related Specializations */}
+    {relatedSpecs.length > 0 && (
+      <section class="section spec-related-section">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow">{industryName}</p>
+            <h2>{labels.related}</h2>
+          </div>
+          <div class="card-grid">
+            {relatedSpecs.map((rel) => {
+              const relContent = rel.content[lang] || rel.content.en;
+              return (
+                <a class="card" href={`/${lang}/industries/${rel.industryId}/${rel.id}/`}>
+                  <h3>{relContent.h1}</h3>
+                  <p>{relContent.lead}</p>
+                  <strong>{c.explore}</strong>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .spec-page {
+    background: #0f1210;
+    color: #f5f3eb;
+    padding-bottom: 80px;
+    overflow-wrap: anywhere;
+  }
+  .spec-page :is(h1, h2, h3, p, span, a, strong) {
+    overflow-wrap: anywhere;
+  }
+  .spec-page :is(h1, h2, h3) {
+    /* The shared visual stylesheet otherwise forces normal wrapping here. */
+    overflow-wrap: anywhere !important;
+  }
+  .spec-hero {
+    padding: clamp(40px, 5vw, 72px) 0 clamp(48px, 6vw, 84px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: radial-gradient(circle at top right, rgba(196, 240, 0, 0.08) 0%, transparent 60%);
+  }
+  .spec-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #9aa598;
+    margin-bottom: 32px;
+  }
+  .spec-breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .spec-breadcrumb a:hover {
+    color: #c4f000;
+  }
+  .spec-breadcrumb .sep {
+    color: rgba(255, 255, 255, 0.25);
+  }
+  .spec-breadcrumb span[aria-current="page"] {
+    color: #f5f3eb;
+    font-weight: 600;
+  }
+  .spec-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 48px;
+    align-items: center;
+  }
+  .spec-eyebrow {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #c4f000;
+    margin-bottom: 16px;
+  }
+  .spec-title {
+    font-size: clamp(34px, 4.2vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin: 0 0 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+  }
+  .spec-lead {
+    font-size: clamp(17px, 1.4vw, 21px);
+    line-height: 1.6;
+    color: #d1d9cb;
+    margin: 0 0 36px;
+    max-width: 58ch;
+  }
+  .spec-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .spec-hero__media {
+    margin: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    aspect-ratio: 16 / 10;
+  }
+  .spec-hero__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .spec-overview-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: clamp(28px, 4vw, 44px);
+  }
+  .spec-overview-text {
+    font-size: clamp(17px, 1.35vw, 20px);
+    line-height: 1.75;
+    color: #e2e8dc;
+    margin: 0;
+    max-width: 78ch;
+  }
+  .spec-card {
+    min-height: 180px !important;
+  }
+  .spec-card__number {
+    font-size: 13px;
+    font-weight: 800;
+    color: #c4f000;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .spec-two-col {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+  .spec-col-box {
+    min-width: 0;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: clamp(24px, 3.5vw, 40px);
+  }
+  .spec-col-box .section-head {
+    margin-bottom: 24px;
+  }
+  .spec-col-box .section-head h2 {
+    font-size: clamp(24px, 2.2vw, 34px);
+    color: #fff;
+  }
+  .spec-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 16px;
+  }
+  .spec-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: #d1d9cb;
+  }
+  .spec-icon {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: #c4f000;
+  }
+  .process-step-num {
+    display: inline-block;
+    color: #c4f000;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .spec-cta-card {
+    margin-top: 0;
+    background: linear-gradient(145deg, #182219 0%, #101611 100%) !important;
+    border: 1px solid rgba(196, 240, 0, 0.35) !important;
+  }
+  @media (max-width: 900px) {
+    .spec-hero__grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .spec-two-col {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  /* Sector-specific editorial composition; retain source data, schemas and RFQ behavior. */
+  .spec-page{background:#121c16;color:#f0f2eb;padding-bottom:0}
+  .spec-page .section{padding-block:clamp(58px,6.5vw,100px)}
+  .spec-page .section-head{margin-bottom:clamp(28px,4vw,52px)}
+  .spec-page .section-head h2{font-size:clamp(30px,3vw,46px);line-height:1.13;letter-spacing:-.04em;max-width:23ch}
+  .spec-page .section-head .eyebrow{font-size:12px;letter-spacing:.14em}
+  .spec-hero{padding:clamp(56px,7vw,108px) 0 clamp(68px,8vw,120px);background:#17241c;border-bottom:1px solid rgba(196,240,0,.13)}
+  .spec-hero__grid{grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr);gap:clamp(30px,5vw,84px);align-items:center}
+  .spec-title{font-size:clamp(38px,4.6vw,74px);line-height:1.08;letter-spacing:-.055em;max-width:18ch;font-weight:500}
+  .spec-lead{font-size:clamp(18px,1.6vw,24px);line-height:1.55;max-width:46ch}
+  .spec-hero__media{border:0;border-radius:0;box-shadow:none;aspect-ratio:1.34;background:#28372b}
+  .spec-overview-section{background:#e6e9df;color:#17231d}
+  .spec-overview-section .section-head h2,.spec-overview-section .spec-overview-text{color:#17231d}
+  .spec-overview-card{border:0;border-top:1px solid #a3b3a0;border-radius:0;background:transparent;padding:clamp(28px,3vw,44px) 0 0}
+  .spec-overview-text{max-width:75ch;font-size:clamp(19px,1.65vw,25px);line-height:1.65}
+  .spec-categories-section{background:#f1f0e9;color:#20281f}
+  .spec-categories-section .section-head h2{color:#20281f}
+  .spec-categories-section .card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(26px,4vw,68px)}
+  .spec-categories-section .spec-card{background:transparent!important;color:#20281f;border:0!important;border-top:1px solid #9ba899!important;border-radius:0!important;box-shadow:none!important;padding:25px 0!important;min-height:unset!important;display:flex;align-items:start}
+  .spec-categories-section .spec-card h3{font-size:clamp(20px,2vw,29px);font-weight:500;letter-spacing:-.035em;line-height:1.28;color:#20281f;margin:0}
+  .spec-details-section{background:#1c2b22}
+  .spec-operations-section{background:#152118}
+  .spec-details-section .spec-two-col,.spec-operations-section .spec-two-col{gap:clamp(35px,6vw,96px)}
+  .spec-col-box{border:0;border-top:1px solid rgba(196,240,0,.38);border-radius:0;background:transparent;padding:32px 0 0}
+  .spec-col-box .section-head h2{font-size:clamp(24px,2.4vw,36px);max-width:19ch}
+  .spec-list{gap:18px}
+  .spec-list li{font-size:clamp(15px,1.2vw,17px);line-height:1.68}
+  .spec-process-section{background:#e3e8dc;color:#1c2a20}
+  .spec-process-section .section-head h2{color:#1c2a20}
+  .spec-process-section .detailed-process{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(24px,5vw,72px)}
+  .spec-process-section .detailed-process li{border-top:1px solid #a8b4a4;padding:22px 0}
+  .spec-process-section .detailed-process li p{font-size:clamp(17px,1.4vw,21px);line-height:1.55;color:#1c2a20}
+  .spec-process-section .process-step-num{color:#566c36}
+  .spec-process-section a{color:#1c2a20;text-decoration-thickness:1px;text-underline-offset:4px}
+  .spec-faq-section{background:#18251e}
+  .spec-faq-section .answer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(32px,5vw,84px)}
+  .spec-faq-section .answer-grid article{border-top:1px solid rgba(242,245,236,.3);padding:25px 0;background:none;box-shadow:none;border-radius:0}
+  .spec-cta-section{background:#1e3024}
+  .spec-cta-card{border-radius:0!important;box-shadow:none!important}
+  .spec-related-section{background:#f1f0e9;color:#1b261e}
+  .spec-related-section .section-head h2{color:#1b261e}
+  .spec-related-section .card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(25px,4vw,68px)}
+  .spec-related-section .card-grid>a{background:none!important;box-shadow:none!important;border:0!important;border-top:1px solid #9eaf9e!important;border-radius:0!important;padding:26px 0!important;color:#1b261e}
+  .spec-related-section .card-grid>a :is(h3,p,strong){color:#1b261e}
+  @media(max-width:900px){.spec-hero__grid{grid-template-columns:1fr}.spec-hero__media{aspect-ratio:1.6}}
+  @media(max-width:760px){
+    .spec-page .section{padding-block:58px}
+    .spec-title{font-size:clamp(37px,9.4vw,58px)}
+    .spec-categories-section .card-grid,.spec-process-section .detailed-process,.spec-faq-section .answer-grid,.spec-related-section .card-grid{grid-template-columns:1fr}
+    .spec-overview-card{padding-top:24px}
+    .spec-hero{padding:44px 0 58px}
+  }
+
+  /* Specialization heroes follow the same photographic narrative as the
+     established poultry-feed page. Scoped to these 24 subject routes only. */
+  .spec-page .spec-hero{
+    position:relative;isolation:isolate;overflow:hidden;
+    min-height:clamp(580px,72svh,730px);
+    display:flex;align-items:center;background:#0b1510;
+    padding:70px 0 84px;color:#f6f6ef;
+  }
+  .spec-page .spec-hero::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(90deg,rgba(7,13,10,.96) 0%,rgba(7,13,10,.85) 34%,rgba(7,13,10,.3) 76%,rgba(7,13,10,.13) 100%);
+    pointer-events:none;
+  }
+  html[dir="rtl"] .spec-page .spec-hero::before{
+    background:linear-gradient(270deg,rgba(7,13,10,.96) 0%,rgba(7,13,10,.85) 34%,rgba(7,13,10,.3) 76%,rgba(7,13,10,.13) 100%);
+  }
+  .spec-page .spec-hero__inner{position:static;width:min(1360px,calc(100% - 112px))}
+  .spec-page .spec-breadcrumb{position:relative;z-index:2;max-width:720px;margin-bottom:clamp(38px,5vw,80px);color:#e0e8d4}
+  .spec-page .spec-breadcrumb a{color:inherit;text-decoration:none}
+  .spec-page .spec-hero__grid{display:block}
+  .spec-page .spec-hero__content{
+    position:relative;z-index:2;max-width:710px;
+  }
+  .spec-page .spec-title{
+    font-size:clamp(42px,4.1vw,71px);line-height:1.06;
+    font-weight:500;letter-spacing:-.052em;color:#f6f6ef;
+    max-width:18ch;overflow-wrap:break-word;
+  }
+  .spec-page .spec-eyebrow{color:#d2ee7a;font-weight:700;letter-spacing:.11em}
+  .spec-page .spec-lead{color:#e5eae0;font-size:clamp(17px,1.3vw,21px);line-height:1.65;max-width:53ch}
+  .spec-page .spec-hero__media{
+    position:absolute;inset:0;z-index:0;width:100%;height:100%;
+    aspect-ratio:auto;margin:0;overflow:hidden;
+    border:0;border-radius:0;pointer-events:none;
+  }
+  .spec-page .spec-hero__media img{
+    display:block;width:100%;height:100%;object-fit:cover;
+    object-position:center;border-radius:0;
+  }
+  .spec-page .spec-hero__actions{position:relative;z-index:2;flex-wrap:wrap}
+  .spec-page .spec-hero__actions .button--primary{
+    background:#c4f000;color:#162019;min-height:50px;
+  }
+  .spec-page .spec-hero__actions .button--secondary{
+    border-color:rgba(245,247,239,.65);color:#f5f7ef;
+  }
+  @media(max-width:950px){
+    .spec-page .spec-hero__inner{width:calc(100% - 48px)}
+    .spec-page .spec-title{font-size:clamp(38px,5vw,58px)}
+  }
+  @media(max-width:760px){
+    .spec-page .spec-hero{min-height:clamp(590px,92svh,780px);align-items:end;padding:52px 0}
+    .spec-page .spec-hero__inner{width:calc(100% - 36px)}
+    .spec-page .spec-hero::before{
+      background:linear-gradient(180deg,rgba(7,13,10,.38) 0%,rgba(7,13,10,.79) 42%,rgba(7,13,10,.97) 83%);
+    }
+    html[dir="rtl"] .spec-page .spec-hero::before{
+      background:linear-gradient(180deg,rgba(7,13,10,.38) 0%,rgba(7,13,10,.79) 42%,rgba(7,13,10,.97) 83%);
+    }
+    .spec-page .spec-breadcrumb{margin-bottom:28px}
+    .spec-page .spec-title{font-size:clamp(36px,9vw,54px)}
+    .spec-page .spec-lead{font-size:17px}
+    .spec-page .spec-hero__media img{object-position:62% center}
+  }
+</style>

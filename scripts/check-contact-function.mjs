@@ -27,6 +27,10 @@ await expectStatus(await onRequestPost(makeContext({...valid,intent:'unknown'},u
 await expectStatus(await onRequestPost(makeContext({...valid,supportNeed:'unknown'},undefined,{},'203.0.113.24')),400,'support need validation');
 await expectStatus(await onRequestPost(makeContext({...valid,tradeDirection:'unknown'},undefined,{},'203.0.113.21')),400,'trade direction validation');
 await expectStatus(await onRequestPost(makeContext({...valid,productFamily:'unknown'},undefined,{},'203.0.113.22')),400,'product family validation');
+await expectStatus(await onRequestPost(makeContext({...valid,productFamily:'architectural_glass'},undefined,{},'203.0.113.90')),400,'retired glass family rejected');
+for(const [index,productFamily] of ['industrial','textiles','beauty','agriculture','construction','packaging','food'].entries()){
+  await expectStatus(await onRequestPost(makeContext({...valid,productFamily},undefined,{},`203.0.113.${100+index}`)),503,`active ${productFamily} reaches configured-delivery gate`);
+}
 await expectStatus(await onRequestPost(makeContext({...valid,emailOrPhone:''},undefined,{},'203.0.113.17')),400,'contact validation');
 await expectStatus(await onRequestPost(makeContext({...valid,emailOrPhone:'123'},undefined,{},'203.0.113.19')),400,'phone validation');
 await expectStatus(await onRequestPost(makeContext({...valid,intent:'supplier_market_entry',emailOrPhone:'+90 555 000 00 00'},undefined,{},'203.0.113.18')),503,'producer phone-only short form');

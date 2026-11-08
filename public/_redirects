@@ -3,17 +3,16 @@
 /tr/ / 301
 /sitemap.xml /sitemap-index.xml 301
 /en/terms/ /en/terms-of-use/ 301
-/en/solutions/ /en/services/ 301
 /en/services/supplier-sourcing-verification/ /en/services/supplier-sourcing-and-verification/ 301
 /tr/kvkk/ /tr/kvkk-aydinlatma-metni/ 301
 /en/trade-products/iranian-green-peeled-pistachio-kernels/ /en/trade-products/green-peeled-pistachio-kernels/ 301
 /de/gruene-geschaelte-iranische-pistazien/ /de/handelsprodukte/gruene-geschaelte-pistazienkerne/ 301
 /de/iranische-pistazienkerne/ /de/handelsprodukte/pistazienbruch-granulat/ 301
 /de/mazafati-datteln-grosshandel/ /de/handelsprodukte/mazafati-datteln/ 301
-/de/lebensmittelbeschaffung-aus-dem-iran/ /de/handelsprodukte/ 301
+/de/lebensmittelbeschaffung-aus-dem-iran/ /de/industries/ 301
 /it/pistacchio-verde-sgusciato-iraniano/ /it/prodotti-commerciali/pistacchio-verde-sgusciato/ 301
 /it/granella-di-pistacchio-iraniano/ /it/prodotti-commerciali/granella-di-pistacchio/ 301
-/it/approvvigionamento-prodotti-alimentari-dall-iran/ /it/prodotti-commerciali/ 301
+/it/approvvigionamento-prodotti-alimentari-dall-iran/ /it/industries/ 301
 /tr/blog/ /tr/icgoruler/ 301
 /tr/blog/stratejik-tedarik-ve-satin-alma-arasindaki-fark/ /tr/icgoruler/stratejik-tedarik-ve-satin-alma-farki/ 301
 /tr/blog/tedarikci-secim-kriterleri/ /tr/icgoruler/tedarikci-secim-kriterleri/ 301
@@ -42,18 +41,18 @@
 /vi/xuat-khau-tu-viet-nam-sang-tho-nhi-ky-va-chau-au/ /vi/ 301
 
 # Retired REFLEX / disposable-glove routes
-/medical/reflex-disposable-gloves/ /tr/ticari-urunler/ 301
-/medical/reflex-disposable-gloves/* /tr/ticari-urunler/ 301
-/en/medical/reflex-disposable-gloves/ /en/trade-products/ 301
-/en/medical/reflex-disposable-gloves/* /en/trade-products/ 301
+/medical/reflex-disposable-gloves/ /tr/industries/ 301
+/medical/reflex-disposable-gloves/* /tr/industries/ 301
+/en/medical/reflex-disposable-gloves/ /en/industries/ 301
+/en/medical/reflex-disposable-gloves/* /en/industries/ 301
 
 
 # Serbian locale retirement -> nearest English equivalents
 /sr /en/ 301
 /sr/ /en/ 301
-/sr/usluge/ /en/services/ 301
-/sr/trgovinski-proizvodi/ /en/trade-products/ 301
-/sr/trzista/ /en/markets/ 301
+/sr/usluge/ /en/solutions/ 301
+/sr/trgovinski-proizvodi/ /en/industries/ 301
+/sr/trzista/ /en/global-markets/ 301
 /sr/uvidi/ /en/insights/ 301
 /sr/o-nama/ /en/about/ 301
 /sr/kontakt/ /en/contact/ 301
@@ -84,3 +83,31 @@
 /bg/sourcing/rachno-takani-koprineni-kilimi/ /bg/sourcing/sourcing-tekstili-na-edro/ 301
 /ar/sourcing/iranian-carpets/ /ar/sourcing/wholesale-textile-sourcing/ 301
 /ar/sourcing/hand-knotted-silk-carpets/ /ar/sourcing/wholesale-textile-sourcing/ 301
+
+# Global industry, solution and market overview consolidation (equivalent category destinations)
+/tr/hizmetler/ /tr/solutions/ 301
+/tr/pazarlar/ /tr/global-markets/ 301
+/en/services/ /en/solutions/ 301
+/en/markets/ /en/global-markets/ 301
+/de/dienstleistungen/ /de/solutions/ 301
+/de/maerkte/ /de/global-markets/ 301
+/it/servizi/ /it/solutions/ 301
+/it/mercati/ /it/global-markets/ 301
+/ru/uslugi/ /ru/solutions/ 301
+/ru/rynki/ /ru/global-markets/ 301
+/fa/services/ /fa/solutions/ 301
+/fa/markets/ /fa/global-markets/ 301
+/zh/services/ /zh/solutions/ 301
+/zh/markets/ /zh/global-markets/ 301
+/vi/services/ /vi/solutions/ 301
+/vi/markets/ /vi/global-markets/ 301
+/uk/posluhy/ /uk/solutions/ 301
+/uk/rynky/ /uk/global-markets/ 301
+/ro/servicii/ /ro/solutions/ 301
+/ro/piete/ /ro/global-markets/ 301
+/bg/uslugi/ /bg/solutions/ 301
+/bg/pazari/ /bg/global-markets/ 301
+/ar/services/ /ar/solutions/ 301
+/ar/markets/ /ar/global-markets/ 301
+/he/שירותים/ /he/solutions/ 301
+/he/שווקים/ /he/global-markets/ 301

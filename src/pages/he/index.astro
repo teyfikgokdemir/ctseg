@@ -4,10 +4,11 @@ import CommercialRequestForm from '../../components/CommercialRequestForm.astro'
 import TradeMarquee from '../../components/TradeMarquee.astro';
 import NaturalOilsFeatureSection from '../../components/NaturalOilsFeatureSection.astro';
 import { getPortfolioSectors, portfolioLocaleCopy } from '../../data/portfolio-sectors';
+import { tradePlatformCopy } from '../../data/trade-platform';
 const portfolioSectors = getPortfolioSectors('he');
 const portfolioCopy = portfolioLocaleCopy.he;
-const title='CTSEG | סחר B2B בין ישראל לטורקיה';
-const description='CTSEG מנהלת סחר B2B דו־כיווני בין ישראל לטורקיה: איתור ואימות ספקים, מותג פרטי/OEM, RFQ, MOQ, כשרות, FOB/CIF וכניסה לשוק.';
+const title=tradePlatformCopy.he.title + ' | CTSEG';
+const description=tradePlatformCopy.he.lead;
 const schemas=[
   {'@context':'https://schema.org','@type':'Service','@id':'https://ctseg.com.tr/he/#israel-turkiye-trade',name:'Israel ⇄ Türkiye B2B Sourcing & Market Entry',description,inLanguage:'he-IL',provider:{'@id':'https://ctseg.com.tr/#organization'},areaServed:['Israel','Türkiye'],serviceType:'Two-way B2B איתור ורכש, supplier verification, private label, RFQ and market entry'},
   {'@context':'https://schema.org','@type':'FAQPage',mainEntity:[
@@ -23,13 +24,13 @@ const schemas=[
         <div class="hero-copy">
           <p class="eyebrow">CTSEG · ישראל ⇄ טורקיה</p>
           <h1 class="he-home-title">סחר B2B בין ישראל לטורקיה.</h1>
-          <p class="lead">איתור ואימות ספקים, ניהול <bdi>RFQ</bdi>, מותג פרטי, <bdi>MOQ</bdi>, דרישות כשרות, תנאי <bdi>FOB / CIF</bdi> וכניסה לשוק — בשני כיווני המסחר.</p>
+          <p class="lead">{tradePlatformCopy.he.lead}</p>
           <div class="hero-proof-pills" aria-label="יכולות מסחריות">
             <span>אימות ספקים</span><span>מותג פרטי / OEM</span><span>RFQ ו-MOQ</span><span>דרישות כשרות</span>
           </div>
           <div class="actions trade-intent-actions">
-            <a class="button" href="#contact">שליחת בקשה מסחרית</a>
-            <a class="button button-secondary" href="#process">איך אנחנו עובדים</a>
+            <a class="button" href="/he/יצירת-קשר/?intent=buyer_request" data-trade-intent="buyer_request">{tradePlatformCopy.he.buyerCta}</a>
+            <a class="button button-secondary" href="/he/יצירת-קשר/?intent=supplier_market_entry" data-trade-intent="supplier_market_entry">{tradePlatformCopy.he.producerCta}</a>
           </div>
         </div>
         <figure class="hero-visual">

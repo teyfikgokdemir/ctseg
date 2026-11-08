@@ -5,6 +5,7 @@ import { pathForSector, type TradeLocale } from './trade-sectors';
 import { poultryFeedPath, type PoultryFeedLocale } from './poultry-feed';
 
 export type PortfolioSectorId =
+  | 'global-sourcing'
   | 'glass'
   | 'natural-oils'
   | 'food-agri'
@@ -43,6 +44,7 @@ export type PortfolioLocaleCopy = {
 };
 
 const sectorImages: Record<PortfolioSectorId, { src: string; width: number; height: number }> = {
+  'global-sourcing': { src: '/images/global-sourcing/industrial-1280.webp', width: 1280, height: 800 },
   glass: { src: '/images/glass/architectural-glass-facade-turkey.webp', width: 1600, height: 900 },
   'natural-oils': { src: '/images/natural-oils/natural-oils-hero.webp', width: 1280, height: 853 },
   'food-agri': { src: '/images/ctseg-vegetable-oils-food-editorial.webp', width: 1536, height: 1024 },
@@ -64,10 +66,10 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
     nutsSectionTitle: 'Kuruyemiş, tohum, hurma ve kuru meyve ürün grupları.',
     nutsSectionLead: 'Antep fıstığı, hurma, kuru meyve, kuruyemiş, tohum ve safran ürünlerinde sınıf, kalibre, parti belgesi, paketleme ve MOQ bazlı B2B değerlendirme.',
     sectors: {
-      glass: {
-        title: 'Cam ve Yapı Malzemeleri',
-        description: 'Float düz cam, temperli, lamine, Low-E kaplamalı, ısıcam (IGU) ve mimari proje camları için üretici ve işleme tesisi koordinasyonu.',
-        alt: 'Ticari bina cephesi ve mimari düz cam tedarik uygulaması'
+      'global-sourcing': {
+        title: "Küresel Tedarik Çözümleri",
+        description: "Dünya genelindeki üreticileri ve tedarikçileri, işletmelerin ihtiyaçlarına uygun uluslararası ticaret fırsatlarıyla buluşturuyoruz.",
+        alt: "Küresel tedarik ve uluslararası ticaret çözümleri"
       },
       'natural-oils': {
         title: 'Doğal Yağlar ve Kozmetik Ham Maddeleri',
@@ -116,10 +118,10 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
     nutsSectionTitle: 'Consolidated nuts, seeds, dates and dried fruit product lines.',
     nutsSectionLead: 'Specification-led B2B sourcing across pistachios, dates, dried fruits, tree nuts, seeds and saffron — evaluated by grade, caliber, batch COA, packaging and MOQ.',
     sectors: {
-      glass: {
-        title: 'Glass & Building Materials',
-        description: 'Float glass, tempered, laminated, Low-E coated, insulated glass units (IGU) and architectural project glass sourced from verified Turkish plants.',
-        alt: 'Architectural glass facade and commercial flat glass supply'
+      'global-sourcing': {
+        title: "Global Sourcing Solutions",
+        description: "Connecting manufacturers and suppliers worldwide with international trade opportunities tailored to business needs.",
+        alt: "Global sourcing and international trade solutions"
       },
       'natural-oils': {
         title: 'Natural Oils & Cosmetic Raw Materials',
@@ -168,10 +170,10 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
     nutsSectionTitle: 'Konsolidiertes Sortiment für Nüsse, Saaten, Datteln und Trockenfrüchte.',
     nutsSectionLead: 'Kaufmännische B2B-Bewertung für Pistazien, Datteln, Trockenfrüchte, Nüsse, Saaten und Safran nach Kaliber, Spezifikation, Chargen-COA, Verpackung und MOQ.',
     sectors: {
-      glass: {
-        title: 'Glas & Baustoffe',
-        description: 'Floatglas, ESG, VSG, Low-E-Glas, Isolierglas (IGU) und Architekturglas für Bauprojekte, Verarbeiter und Großhändler.',
-        alt: 'Architekturglas-Fassade und gewerbliche Flachglasbeschaffung'
+      'global-sourcing': {
+        title: "Globale Beschaffungslösungen",
+        description: "Wir verbinden Hersteller und Lieferanten weltweit mit internationalen Handelsmöglichkeiten, abgestimmt auf Ihre geschäftlichen Anforderungen.",
+        alt: "Globale Beschaffung und internationale Handelslösungen"
       },
       'natural-oils': {
         title: 'Natürliche Öle & Kosmetikrohstoffe',
@@ -220,10 +222,10 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
     nutsSectionTitle: 'Gamma consolidata di frutta a guscio, semi, datteri e frutta essiccata.',
     nutsSectionLead: 'Valutazione B2B su specifica per pistacchi, datteri, frutta essiccata, noci, semi e zafferano in base a calibro, grado, COA del lotto, imballaggio e MOQ.',
     sectors: {
-      glass: {
-        title: 'Vetro e Materiali da Costruzione',
-        description: 'Vetro float, temperato, stratificato, basso emissivo (Low-E), vetrocamera (IGU) e vetro architettonico per progetti e distributori.',
-        alt: 'Facciata in vetro architettonico e fornitura B2B di vetro piano'
+      'global-sourcing': {
+        title: "Soluzioni di Sourcing Globale",
+        description: "Colleghiamo produttori e fornitori in tutto il mondo con opportunità di commercio internazionale su misura per le esigenze aziendali.",
+        alt: "Sourcing globale e soluzioni di commercio internazionale"
       },
       'natural-oils': {
         title: 'Oli Naturali e Materie Prime Cosmetiche',
@@ -272,10 +274,10 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
     nutsSectionTitle: 'مجموعه یکپارچه خشکبار، دانه‌های روغنی، خرما و میوه‌های خشک.',
     nutsSectionLead: 'ارزیابی تجاری و تأمین B2B پسته، خرما، میوه خشک، بادام، گردو، تخمه و زعفران بر اساس سایز، گرید، گواهی آنالیز (COA)، بسته‌بندی و حداقل سفارش (MOQ).',
     sectors: {
-      glass: {
-        title: 'شیشه و مصالح ساختمانی',
-        description: 'شیشه فلوت، سکوریت، لمینت، شیشه Low-E، دوجداره (IGU) و شیشه‌های پروژه‌ای ساختمانی برای واردکنندگان و پیمانکاران.',
-        alt: 'نمای شیشه معماری و تأمین شیشه ساختمانی B2B'
+      'global-sourcing': {
+        title: "راه‌حل‌های تأمین جهانی",
+        description: "ارتباط تولیدکنندگان و تأمین‌کنندگان در سراسر جهان با فرصت‌های تجاری بین‌المللی متناسب با نیازهای کسب‌وکار شما.",
+        alt: "تأمین جهانی و راه‌حل‌های تجارت بین‌المللی"
       },
       'natural-oils': {
         title: 'روغن‌های طبیعی و مواد اولیه آرایشی',
@@ -324,10 +326,10 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
     nutsSectionTitle: 'Единый каталог орехов, семян, фиников и сухофруктов.',
     nutsSectionLead: 'Оптовый B2B-сорсинг фисташек, фиников, сухофруктов, миндаля, грецкого ореха, семян и шафрана с проверкой калибра, сорта, документов партии, упаковки и MOQ.',
     sectors: {
-      glass: {
-        title: 'Стекло и строительные материалы',
-        description: 'Флоат-стекло, закалённое, ламинированное, энергосберегающее Low-E стекло, стеклопакеты (IGU) и архитектурное стекло из Турции.',
-        alt: 'Архитектурный стеклянный фасад и поставки листового стекла'
+      'global-sourcing': {
+        title: "Решения глобального сорсинга",
+        description: "Объединяем производителей и поставщиков по всему миру с возможностями международной торговли в соответствии с потребностями бизнеса.",
+        alt: "Глобальный сорсинг и решения для международной торговли"
       },
       'natural-oils': {
         title: 'Натуральные масла и косметическое сырьё',
@@ -376,10 +378,10 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
     nutsSectionTitle: '坚果、籽仁、椰枣与脱水干果全系大宗名录。',
     nutsSectionLead: '针对开心果、椰枣、葡萄干、杏干、巴旦木、核桃、籽仁及藏红花提供按口径分级、批次 COA、包装形式与 MOQ 开展的 B2B 商业评估。',
     sectors: {
-      glass: {
-        title: '建筑玻璃与建材制品',
-        description: '浮法玻璃、钢化玻璃、夹层玻璃、Low-E 镀膜玻璃、中空玻璃 (IGU) 及工程幕墙玻璃的源头工厂匹配与集装箱出口协调。',
-        alt: '商业建筑幕墙与平板玻璃大宗出口供应'
+      'global-sourcing': {
+        title: "全球采购解决方案",
+        description: "连接全球优质制造商与供应商，为企业量身定制高效的国际贸易机遇与供应链解决方案。",
+        alt: "全球采购与国际贸易解决方案"
       },
       'natural-oils': {
         title: '天然油脂与化妆品原料',
@@ -428,10 +430,10 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
     nutsSectionTitle: 'Nhóm sản phẩm hạt dinh dưỡng, hạt giống, chà là và trái cây sấy khô.',
     nutsSectionLead: 'Đánh giá thương mại B2B cho hạt dẻ cười, chà là, nho khô, mơ khô, hạnh nhân, óc chó, hạt bí và nhụy hoa nghệ tây theo cỡ hạt, hạng chất lượng, COA, quy cách đóng gói và MOQ.',
     sectors: {
-      glass: {
-        title: 'Kính & Vật liệu Xây dựng',
-        description: 'Kính nổi (float glass), kính cường lực, kính dán an toàn, kính phủ Low-E, kính hộp (IGU) và kính dự án kiến trúc từ Thổ Nhĩ Kỳ.',
-        alt: 'Mặt dựng kính kiến trúc và cung ứng kính phẳng B2B'
+      'global-sourcing': {
+        title: "Giải pháp sourcing toàn cầu",
+        description: "Kết nối các nhà sản xuất và nhà cung ứng trên toàn thế giới với các cơ hội thương mại quốc tế phù hợp nhu cầu doanh nghiệp.",
+        alt: "Sourcing toàn cầu và giải pháp thương mại quốc tế"
       },
       'natural-oils': {
         title: 'Tinh dầu Tự nhiên & Nguyên liệu Mỹ phẩm',
@@ -480,10 +482,10 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
     nutsSectionTitle: 'Консолідована лінійка горіхів, насіння, фініків і сухофруктів.',
     nutsSectionLead: 'Комерційна B2B-оцінка фісташок, фініків, сухофруктів, мигдалю, волоського горіха, насіння та шафрану за калібром, сортом, сертифікатами партії, пакуванням і MOQ.',
     sectors: {
-      glass: {
-        title: 'Скло та будівельні матеріали',
-        description: 'Флоат-скло, загартоване, ламіноване, енергоефективне Low-E скло, склопакети (IGU) та архітектурне скло для будівництва й переробників.',
-        alt: 'Архітектурний скляний фасад і постачання листового скла'
+      'global-sourcing': {
+        title: "Рішення глобального постачання",
+        description: "Поєднуємо виробників та постачальників по всьому світу з можливостями міжнародної торгівлі відповідно до потреб бізнесу.",
+        alt: "Глобальне постачання та рішення для міжнародної торгівлі"
       },
       'natural-oils': {
         title: 'Натуральні олії та косметична сировина',
@@ -532,10 +534,10 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
     nutsSectionTitle: 'Gama consolidată de nuci, semințe, curmale și fructe uscate.',
     nutsSectionLead: 'Evaluare comercială B2B pentru fistic, curmale, fructe uscate, migdale, nuci, semințe și șofran în funcție de calibru, clasă, COA de lot, ambalare și MOQ.',
     sectors: {
-      glass: {
-        title: 'Sticlă și Materiale de Construcții',
-        description: 'Sticlă float, securizată, laminată, Low-E, unități termoizolante (IGU) și sticlă arhitecturală de proiect din fabrici verificate din Türkiye.',
-        alt: 'Fațadă din sticlă arhitecturală și aprovizionare B2B cu sticlă plană'
+      'global-sourcing': {
+        title: "Soluții globale de aprovizionare",
+        description: "Conectăm producători și furnizori din întreaga lume cu oportunități de comerț internațional adaptate nevoilor afacerii.",
+        alt: "Aprovizionare globală și soluții de comerț internațional"
       },
       'natural-oils': {
         title: 'Uleiuri Naturale și Materii Prime Cosmetice',
@@ -584,10 +586,10 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
     nutsSectionTitle: 'Консолидирана гама от ядки, семена, фурми и сушени плодове.',
     nutsSectionLead: 'Търговска B2B оценка за шамфъстък, фурми, сушени плодове, бадеми, орехи, семена и шафран по калибър, клас, партиден COA, опаковка и MOQ.',
     sectors: {
-      glass: {
-        title: 'Стъкло и Строителни Материали',
-        description: 'Флоатно, закалено, ламинирано, нискоемисионно Low-E стъкло, стъклопакети (IGU) и архитектурно проектно стъкло от проверени заводи в Türkiye.',
-        alt: 'Архитектурна стъклена фасада и B2B доставка на плоско стъкло'
+      'global-sourcing': {
+        title: "Глобални решения за доставки",
+        description: "Свързваме производители и доставчици по целия свят с възможности за международна търговия, съобразени с нуждите на бизнеса.",
+        alt: "Глобално снабдяване и решения за международна търговия"
       },
       'natural-oils': {
         title: 'Натурални Масла и Козметични Суровини',
@@ -636,10 +638,10 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
     nutsSectionTitle: 'קבוצת מוצרי אגוזים, זרעים, תמרים ופירות יבשים.',
     nutsSectionLead: 'הערכה מסחרית B2B לפיסטוקים, תמרים, פירות יבשים, שקדים, אגוזי מלך, זרעים וזעפרן לפי קליבר, דרגת איכות, COA, אריזה ו-MOQ.',
     sectors: {
-      glass: {
-        title: 'זכוכית וחומרי בנייה',
-        description: 'זכוכית פלואט, מחוסמת, רבודה, זכוכית Low-E, יחידות זיגוג (IGU) וזכוכית אדריכלית לפרויקטים, מעבדים ויבואנים.',
-        alt: 'חזית זכוכית אדריכלית ואספקת זכוכית שטוחה B2B'
+      'global-sourcing': {
+        title: "פתרונות רכש גלובליים",
+        description: "מחברים בין יצרנים וספקים ברחבי העולם להזדמנויות סחר בינלאומיות המותאמות לצורכי העסק.",
+        alt: "רכש גלובלי ופתרונות סחר בינלאומיים"
       },
       'natural-oils': {
         title: 'שמנים טבעיים וחומרי גלם לקוסמטיקה',
@@ -688,10 +690,10 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
     nutsSectionTitle: 'مجموعة موحدة للمكسرات والبذور والتمور والفواكه المجففة.',
     nutsSectionLead: 'تقييم وتوريد B2B للفستق والتمور والفواكه المجففة واللوز والجوز والبذور والزعفران وفق الحجم والدرجة وشهادة التحليل COA والتعبئة والحد الأدنى للطلب MOQ.',
     sectors: {
-      glass: {
-        title: 'الزجاج ومواد البناء',
-        description: 'الزجاج المسطح (Float) والمقسّى والرقائقي وزجاج Low-E ووحدات الزجاج العازل (IGU) وزجاج المشاريع المعمارية من مصانع موثقة في Türkiye.',
-        alt: 'واجهة زجاج معماري وتوريد الزجاج المسطح للمشاريع'
+      'global-sourcing': {
+        title: "حلول التوريد العالمي",
+        description: "نربط المصنعين والموردين حول العالم بفرص التجارة الدولية المصممة لتلبية احتياجات الأعمال بدقة.",
+        alt: "التوريد العالمي وحلول التجارة الدولية"
       },
       'natural-oils': {
         title: 'الزيوت الطبيعية والمواد الخام التجميلية',
@@ -733,7 +735,7 @@ export const portfolioLocaleCopy: Record<ActiveLocale, PortfolioLocaleCopy> = {
 };
 
 export const portfolioSectorOrder: readonly PortfolioSectorId[] = [
-  'glass',
+  'global-sourcing',
   'natural-oils',
   'food-agri',
   'nuts-dried-fruits',
@@ -753,30 +755,27 @@ export function getPortfolioSectors(lang: ActiveLocale): PortfolioSectorCard[] {
 
   const resolveHref = (id: PortfolioSectorId): string => {
     switch (id) {
+      case 'global-sourcing':
+        return `/${lang}/solutions/`;
       case 'glass':
-        return lang === 'tr' ? '/glass/' : isHe ? '/en/glass/' : `/${lang}/glass/`;
+        return `/${lang}/industries/construction/`;
       case 'natural-oils':
         return `/${lang}/natural-oils/`;
       case 'food-agri':
-        if (isHe) return '/he/insights/private-label-food-turkiye-israel/';
-        if (lang === 'fa') return `${productsBase}#catalogue-nuts-dried-fruits`;
-        return searchLandingPath(locale, 'food-origin-compliance') || `${productsBase}#catalogue-nuts-dried-fruits`;
+        return `/${lang}/industries/food/`;
       case 'nuts-dried-fruits':
-        return `${productsBase}#catalogue-nuts-dried-fruits`;
+        return `/${lang}/industries/food/nuts-dried-fruits/`;
       case 'animal-feed':
         if (lang === 'tr' || lang === 'en' || lang === 'ar') {
           return poultryFeedPath(lang as PoultryFeedLocale, 'turkiye-poultry-feed-sourcing');
         }
-        return isHe ? '/he/שירותים/' : localizedPath(locale, 'services');
+        return `/${lang}/industries/agriculture/`;
       case 'industrial':
-        return isHe ? '/he/שירותים/' : localizedPath(locale, 'services');
+        return `/${lang}/industries/industrial/`;
       case 'packaging-inputs':
-        if (isHe) return '/he/שירותים/';
-        if (lang === 'fa') return localizedPath(locale, 'services');
-        return searchLandingPath(locale, 'private-label-manufacturer') || localizedPath(locale, 'services');
+        return `/${lang}/industries/packaging/`;
       case 'textiles':
-        if (isHe) return '/he/שירותים/';
-        return pathForSector(lang as TradeLocale, 'wholesale-textiles');
+        return `/${lang}/industries/textiles/`;
     }
   };
 
@@ -794,7 +793,7 @@ export function getPortfolioSectors(lang: ActiveLocale): PortfolioSectorCard[] {
         alt: item.alt
       },
       href: resolveHref(id),
-      exploreLabel: copy.exploreLabel,
+      exploreLabel: id === 'global-sourcing' ? ({"tr":"Tedarik Çözümlerini Keşfet","en":"Explore Sourcing Solutions","de":"Beschaffungslösungen entdecken","it":"Scopri le soluzioni di sourcing","fa":"کشف راهکارهای تأمین","ru":"Узнать о решениях по сорсингу","zh":"探索采购解决方案","vi":"Khám phá giải pháp tìm nguồn cung","uk":"Дізнатися про рішення з постачання","ro":"Descoperă soluțiile de aprovizionare","bg":"Открийте решенията за снабдяване","sr":"Istražite sourcing rešenja","he":"גלה פתרונות איתור ורכש","ar":"استكشف حلول التوريد"} as Record<string,string>)[lang] || copy.exploreLabel : copy.exploreLabel,
       rfqHref,
       rfqLabel: copy.rfqLabel
     };

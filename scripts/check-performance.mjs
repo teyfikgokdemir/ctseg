@@ -38,7 +38,7 @@ await new Promise((resolvePromise)=>server.listen(4322,'127.0.0.1',resolvePromis
 
 const cases = [
   {name:'tr-home',path:'/tr/'},
-  {name:'tr-catalogue',path:'/tr/ticari-urunler/'},
+  {name:'tr-catalogue',path:'/tr/industries/'},
   {name:'tr-mazafati',path:'/tr/ticari-urunler/mazafati-hurmasi/'},
   {name:'en-home',path:'/en/'},
   {name:'de-home',path:'/de/'},
@@ -84,7 +84,7 @@ try {
       await page.waitForTimeout(350);
       const images = await Promise.all(imageResponses);
       const result = await page.evaluate(() => {
-        const hero=document.querySelector('.hero-visual img');
+        const hero=document.querySelector('.gs-intro-photo img, .hero-visual img');
         const productImages=[...document.querySelectorAll('[data-product-card] img')];
         const secondary=[...document.querySelectorAll('[data-product-media="secondary"] img')];
         return {

@@ -1,14 +1,15 @@
 ---
 import { localizedPath, ui, type Locale } from '../data/site';
 import { activeLocaleRegistry } from '../data/locales';
-import { duzceGlassPath, duzceGlassLocales, type DuzceGlassLocale } from '../data/duzce-glass';
+
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 import { tradePlatformCopy } from '../data/trade-platform';
+import { globalCopy } from '../data/global-sourcing-locales';
 import { searchLandingPath, type SearchLandingId } from '../data/search-landings';
-import { localizedGlassSlugs } from '../data/glass-product-locales';
+
 import { poultryFeedPath, type PoultryFeedId, type PoultryFeedLocale } from '../data/poultry-feed';
 
-const { lang, pageKey='home', pageId } = Astro.props as { lang: Locale; pageKey?: string; pageId?: string };
+const { lang, pageKey='home', pageId, alternates } = Astro.props as { lang: Locale; pageKey?: string; pageId?: string; alternates?: Record<string, string> };
 const t = lang === 'he' ? {
   ...ui.en, home:'בית', services:'סחר גלובלי', products:'תחומי סחר', markets:'שווקים',
   insights:'תובנות', about:'אודות', contact:'יצירת קשר', quote:'שליחת בקשה',
@@ -17,6 +18,26 @@ const t = lang === 'he' ? {
 const home = lang === 'he' ? '/he/' : localizedPath(lang, 'home');
 const p = tradePlatformCopy[lang] || tradePlatformCopy.en;
 const methodLabel = {tr:'Yöntem',en:'Method',de:'Arbeitsweise',it:'Metodo',fa:'روش کار',ru:'Метод',zh:'运作模式',vi:'Phương thức hoạt động',uk:'Метод роботи',ro:'Metodă',bg:'Метод',sr:'Metod',he:'שיטת עבודה',ar:'طريقة العمل'}[lang] || 'Method';
+
+const industryNavLabels: Record<string, string> = {
+  tr: 'Uluslararası Tedarik Sektörleri',
+  en: 'International Sourcing Sectors',
+  de: 'Internationale Beschaffungssektoren',
+  it: 'Settori di Sourcing Internazionale',
+  fa: 'بخش‌های تأمین بین‌المللی',
+  ru: 'Международные отрасли сорсинга',
+  zh: '国际采购行业',
+  vi: 'Các ngành Tìm nguồn cung Quốc tế',
+  uk: 'Міжнародні галузі постачання',
+  ro: 'Sectoare Internaționale de Aprovizionare',
+  bg: 'Международни сектори за снабдяване',
+  sr: 'Međunarodni sektori sourcinga',
+  he: 'תחומי איתור ורכש בינלאומיים',
+  ar: 'قطاعات التوريد الدولية'
+};
+const industryNavLabel = industryNavLabels[lang] || 'International Sourcing Sectors';
+const industryNavHref = `/${lang}/industries/`;
+
 const glassNavLabels: Record<string, string> = {
   tr:'Cam Tedariki', en:'Glass Sourcing', de:'Glasbeschaffung', it:'Sourcing Vetro',
   fa:'تأمین شیشه', ru:'Поставка стекла', zh:'玻璃采购', vi:'Tìm nguồn cung kính',
@@ -42,7 +63,7 @@ const navigationCopy = {
   ar:{globalTrade:'التجارة العالمية',industries:'القطاعات',portfolio:'المحفظة التجارية',intelligence:'الرؤى التجارية',company:'الشركة',main:'القائمة الرئيسية',quick:'تنقل سريع',trade:'التجارة',intro:'تجارة ثنائية الاتجاه، توريد استراتيجي ودخول الأسواق'}
 }[lang] || {globalTrade:'Global Trade',industries:'Industries',portfolio:'Trade Portfolio',intelligence:'Trade Intelligence',company:'Company',main:'MAIN MENU',quick:'NAVIGATION',trade:'TRADE',intro:'Two-way trade, strategic sourcing and market-entry paths'};
 
-const glassUrl = lang === 'tr' ? '/glass/' : lang === 'he' ? '/en/glass/' : `/${lang}/glass/`;
+const glassUrl = industryNavHref;
 const glassLabel = glassNavLabels[lang] || 'Düzce Float Glass';
 
 const naturalOilsMainLabel: Record<string,string> = {
@@ -53,27 +74,29 @@ const naturalOilsMainLabel: Record<string,string> = {
 };
 const naturalOilsHref = `/${lang}/natural-oils/`;
 const oilsNavActive = pageKey === 'natural-oils' || pageKey === 'natural-oils-product';
+const newSolutionsLink: [string,string] = [globalCopy[lang]?.nav[2] || 'Solutions', `/${lang}/solutions/`];
 const solutionLinks = lang === 'he' ? [
+  newSolutionsLink,
   ['איתור ואימות ספקים','/he/שירותים/איתור-ואימות-ספקים/'],
   ['רכש אסטרטגי','/he/שירותים/רכש-אסטרטגי/'],
   ['כניסה לשוק','/he/שירותים/כניסה-לשוק/'],
-  [glassLabel, glassUrl],
+  [industryNavLabel, industryNavHref],
   [methodLabel,'/he/איך-אנחנו-עובדים/']
 ] : lang === 'ar' ? [
-  [t.services, localizedPath(lang,'services')],
+  newSolutionsLink,
   ['التوريد الاستراتيجي', localizedPath(lang,'services','strategic-sourcing')],
   ['البحث عن الموردين والتحقق منهم', localizedPath(lang,'services','supplier-verification')],
   ['استشارات التجارة الدولية', localizedPath(lang,'services','trade-advisory')],
   ['تحليل وتحسين التكلفة الكلية TCO', localizedPath(lang,'services','tco')],
   ['دخول الأسواق', localizedPath(lang,'services','market-entry')],
-  [glassLabel, glassUrl],
+  [industryNavLabel, industryNavHref],
   [methodLabel, localizedPath(lang,'how-we-work')],
   ['سيناريوهات عمل تمثيلية', localizedPath(lang,'scenarios')]
 ] : [
-  [t.services, localizedPath(lang,'services')],
+  newSolutionsLink,
   [p.buyerTitle, localizedPath(lang,'services','strategic-sourcing')],
   [p.producerTitle, localizedPath(lang,'services','market-entry')],
-  [glassLabel, glassUrl],
+  [industryNavLabel, industryNavHref],
   [methodLabel, localizedPath(lang,'how-we-work')]
 ];
 
@@ -85,14 +108,14 @@ const poultryFeedNav = ({
 
 const nav = lang === 'he' ? [
   ['services', navigationCopy.globalTrade, '/he/שירותים/'],
-  ['sectors', navigationCopy.industries, '/he/שווקים/'],
+  ['industries', industryNavLabel, '/he/industries/'],
   ['products', navigationCopy.portfolio, '/he/מוצרים-מסחריים/'],
   ['insights', navigationCopy.intelligence, '/he/תובנות/'],
   ['about', navigationCopy.company, '/he/אודות/'],
   ['contact', t.contact, '/he/יצירת-קשר/']
 ] : [
   ['services', navigationCopy.globalTrade, localizedPath(lang,'services')],
-  ['sectors', navigationCopy.industries, localizedPath(lang,'markets')],
+  ['industries', industryNavLabel, industryNavHref],
   ['products', navigationCopy.portfolio, localizedPath(lang,'products')],
   ...(poultryFeedNav ? [['poultry-feed', poultryFeedNav.label, poultryFeedNav.href]] : []),
   ['insights', navigationCopy.intelligence, localizedPath(lang,'insights')],
@@ -113,31 +136,35 @@ const heServicePaths:Record<string,string> = {
   'market-entry':'/he/שירותים/כניסה-לשוק/'
 };
 const hePagePaths:Record<string,string> = {
-  home:'/he/',services:'/he/שירותים/',products:'/he/מוצרים-מסחריים/',markets:'/he/שווקים/',
+  home:'/he/',services:'/he/שירותים/',products:'/he/מוצרים-מסחריים/',markets:'/he/global-markets/',
   insights:'/he/תובנות/',about:'/he/אודות/',contact:'/he/יצירת-קשר/','how-we-work':'/he/איך-אנחנו-עובדים/',
   scenarios:'/he/תרחישים-מסחריים/',legal:'/he/'
 };
 const currentPath = Astro.url.pathname;
 const globalSwitchPath = (target: string): string => {
+  if (alternates && alternates[target]) {
+    try {
+      const u = new URL(alternates[target]);
+      return u.pathname;
+    } catch {
+      return alternates[target];
+    }
+  }
+  if (pageKey === 'global-industries') return `/${target}/industries/`;
+  if (pageKey === 'global-industry' && pageId) return `/${target}/industries/${pageId}/`;
+  if (pageKey === 'global-specialization' && pageId) return `/${target}/industries/${pageId}/`;
+  if (pageKey === 'global-solutions') return `/${target}/solutions/`;
+  if (pageKey === 'global-solution' && pageId) return `/${target}/solutions/${pageId}/`;
+  if (pageKey === 'global-markets') return `/${target}/global-markets/`;
+
   if (pageKey === 'he-insight') {
     if (target === 'he') return currentPath;
     return localizedPath(target as Locale,'insights');
   }
   if (pageKey === 'search-landing' && pageId) return searchLandingPath(target as Locale,pageId as SearchLandingId) || (target === 'he' ? '/he/' : localizedPath(target as Locale,'home'));
-  if (pageKey === 'glass-industry') {
-    if (target === 'tr') return '/glass/';
-    return `/${target}/glass/`;
-  }
-  if (pageKey === 'glass-product' && pageId) {
-    const hasLocalizedProduct=(localizedGlassSlugs as readonly string[]).includes(pageId);
-    if (target === 'tr') return `/glass/${pageId}/`;
-    if (target === 'en') return `/en/glass/${pageId}/`;
-    return hasLocalizedProduct ? `/${target}/glass/${pageId}/` : `/${target}/glass/`;
-  }
-  if (pageKey === 'glass-market' && pageId) {
-    if (target === 'tr') return `/glass/markets/${pageId}/`;
-    return `/${target}/glass/markets/${pageId}/`;
-  }
+  
+  
+  
   if (pageKey === 'natural-oils') {
     return `/${target}/natural-oils/`;
   }
@@ -165,25 +192,10 @@ const globalSwitchPath = (target: string): string => {
     return `/${target}/`;
   }
   if (['vietnam-turkiye','china-turkiye','ukraine-turkiye'].includes(pageKey)) return target === 'tr' ? '/' : `/${target}/`;
-  if (pageKey === 'glass-industry') {
-    if (target === 'tr') return '/glass/';
-    return `/${target}/glass/`;
-  }
-  if (pageKey === 'glass-product' && pageId) {
-    const hasLocalizedProduct=(localizedGlassSlugs as readonly string[]).includes(pageId);
-    if (target === 'tr') return `/glass/${pageId}/`;
-    if (target === 'en') return `/en/glass/${pageId}/`;
-    return hasLocalizedProduct ? `/${target}/glass/${pageId}/` : `/${target}/glass/`;
-  }
-  if (pageKey === 'glass-market' && pageId) {
-    if (target === 'tr') return `/glass/markets/${pageId}/`;
-    return `/${target}/glass/markets/${pageId}/`;
-  }
-  if (pageKey === 'glass') {
-    const glassLocales = duzceGlassLocales;
-    if ((glassLocales as readonly string[]).includes(target)) return duzceGlassPath(target as DuzceGlassLocale);
-    return `/${target}/`;
-  }
+  
+  
+  
+  
   const resolved = localizedPath(target as Locale, pageKey, pageId);
   return resolved?.includes('undefined') ? `/${target}/` : resolved;
 };
@@ -227,6 +239,7 @@ const globalSwitchPath = (target: string): string => {
                 class:list={['mobile-lang-item', { active: code === lang }]}
                 href={globalSwitchPath(code)}
                 aria-current={code === lang ? 'page' : undefined}
+                data-locale={code}
                 data-locale-option
               >
                 <img class="lang-flag" src={globalLocaleFlags[code]} width="28" height="19" alt="" aria-hidden="true" />
@@ -276,7 +289,7 @@ const globalSwitchPath = (target: string): string => {
 
       <div class="desktop-only-nav">
         <div class="nav-solutions-group" data-solutions-nav-group>
-          <button class:list={['nav-solutions-parent',{ active: pageKey === 'services' }]} type="button" aria-expanded="false" aria-controls="solutions-panel" data-solutions-toggle>
+          <button class:list={['nav-solutions-parent',{ active: ['services','global-solutions','global-solution'].includes(pageKey) }]} type="button" aria-expanded="false" aria-controls="solutions-panel" data-solutions-toggle>
             <span>{navigationCopy.globalTrade}</span>
             <span class="desktop-chevron" aria-hidden="true">▾</span>
           </button>
@@ -308,6 +321,7 @@ const globalSwitchPath = (target: string): string => {
               class:list={{ active: code === lang }}
               href={globalSwitchPath(code)}
               aria-current={code === lang ? 'page' : undefined}
+              data-locale={code}
               data-locale-option
             ><img class="language-menu-flag" src={globalLocaleFlags[code]} width="26" height="17" alt="" aria-hidden="true" /><strong>{globalLocaleNames[code]}</strong><i aria-hidden="true"></i></a>)}
           </div>
@@ -315,12 +329,7 @@ const globalSwitchPath = (target: string): string => {
 
         <a class="button button-small nav-cta" href={lang === 'he' ? '/he/יצירת-קשר/' : localizedPath(lang, 'contact')}>{t.quote}</a>
       </div>
-      {(lang === 'en' || lang === 'fa') && (
-        <a class="fa-market-nav-link fa-nav-promo" href="/fa/" data-fa-nav-link data-fa-landing-link>
-          <strong>{lang === 'fa' ? 'برای کسب‌وکارهای ایرانی' : 'For Iranian Businesses'}</strong>
-          <span>{lang === 'fa' ? 'پشتیبانی تجارت بین‌المللی' : 'Persian landing page'}</span>
-        </a>
-      )}
+      
     </nav>
   </div>
 </header>

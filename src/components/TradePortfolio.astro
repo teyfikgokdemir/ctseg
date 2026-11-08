@@ -1,0 +1,83 @@
+---
+import { getPortfolioSectors } from '../data/portfolio-sectors';
+import { globalCopy } from '../data/global-sourcing-locales';
+import { localizedPath, ui, type Locale } from '../data/site';
+import { globalImageAlt } from '../data/global-image-alt';
+const {lang}=Astro.props as {lang:Locale};
+const c=globalCopy[lang] || globalCopy.en;
+const portfolioLabel=ui[lang]?.products || ui.en.products;
+const items=getPortfolioSectors(lang).filter(x=>!['nuts-dried-fruits','glass'].includes(x.id));
+const secondary=getPortfolioSectors(lang).find(x=>x.id==='nuts-dried-fruits');
+const buyer=lang==='he'?'/he/יצירת-קשר/':localizedPath(lang,'contact');
+const products=lang==='he'?'/he/מוצרים-מסחריים/':localizedPath(lang,'products');
+const labels=lang==='tr'?
+ {kicker:'CTSEG / TİCARİ PORTFÖY',title:'Ticari tedarik portföyü',lead:'Ürün gruplarını, sektör odaklarımızı ve mevcut tedarik araştırması alanlarımızı inceleyin.',scope:'Ticari ürün grupları ve tedarik kanalları',sourcing:'Uluslararası tedarik sektörleri',request:'Ürün veya tedarik talebi oluştur',minor:'İkincil ürün kategorisi',cta:'Talebinizi birlikte değerlendirelim'}:
+ lang==='ar'?{kicker:'CTSEG / المحفظة التجارية',title:'محفظة التوريد التجاري',lead:'استعرض مجموعات المنتجات وقطاعات التوريد التي نبحثها.',scope:'فئات المنتجات وخدمات التوريد',sourcing:'قطاعات التوريد الدولية',request:'إرسال طلب توريد',minor:'فئة منتجات إضافية',cta:'لنراجع متطلباتك التجارية'}:
+ {kicker:'CTSEG / '+portfolioLabel,title:portfolioLabel,lead:c.intro,scope:c.industriesTitle,sourcing:c.industriesTitle,request:c.buyer,minor:c.secondary,cta:c.lead};
+---
+<div class="ct-portfolio" data-trade-portfolio>
+ <section class="ct-portfolio-hero">
+  <img src="/images/ctseg-global-trade-hero-new.webp" width="1920" height="1080" loading="eager" decoding="async" fetchpriority="high" alt="" class="ct-portfolio-hero__image"/>
+  <div class="ct-portfolio-wrap ct-portfolio-hero__content">
+   <p class="ct-portfolio-kicker">{labels.kicker}</p>
+   <h1>{labels.title}</h1>
+   <p class="ct-portfolio-lead">{labels.lead}</p>
+   <a href={`${buyer}?intent=buyer_request#commercial-form`} class="ct-portfolio-cta">{labels.request} <span aria-hidden="true">↗</span></a>
+  </div>
+ </section>
+ <section class="ct-portfolio-main">
+  <div class="ct-portfolio-wrap ct-portfolio-layout">
+   <div>
+    <div class="ct-portfolio-section-title"><p class="ct-portfolio-kicker">{labels.scope}</p><h2>{labels.scope}</h2></div>
+    <div class="ct-portfolio-items">
+    {items.map(item=><article class="ct-portfolio-item">
+     <a href={item.href} class="ct-portfolio-item__image"><img src={item.image.src} width={item.image.width} height={item.image.height} alt={item.image.alt} loading="lazy" decoding="async"/></a>
+     <div class="ct-portfolio-item__copy"><h3><a href={item.href}>{item.title} <span aria-hidden="true">↗</span></a></h3><p>{item.description}</p><a href={item.href} class="ct-portfolio-textlink">{item.exploreLabel} ↗</a></div>
+    </article>)}
+    </div>
+    {secondary && <div class="ct-portfolio-secondary"><p class="ct-portfolio-kicker">{labels.minor}</p><h3><a href={secondary.href}>{secondary.title} ↗</a></h3><p>{secondary.description}</p></div>}
+   </div>
+   <aside class="ct-portfolio-aside">
+     <img src="/images/global-sourcing/industrial-1280.webp" width="1280" height="800" alt={globalImageAlt[lang]?.[0]||globalImageAlt.en[0]} loading="lazy" decoding="async"/>
+     <div class="ct-portfolio-aside__body"><p class="ct-portfolio-kicker">CTSEG</p><h2>{labels.cta}</h2><p>{c.intro}</p><a class="ct-portfolio-cta" href={`${buyer}?intent=buyer_request#commercial-form`}>{labels.request} ↗</a></div>
+     <a class="ct-portfolio-related" href={`/${lang}/industries/`}>{labels.sourcing} ↗</a>
+     <img src="/images/global-sourcing/packaging-1280.webp" width="1280" height="800" alt={globalImageAlt[lang]?.[5]||globalImageAlt.en[5]} loading="lazy" decoding="async"/>
+   </aside>
+  </div>
+ </section>
+</div>
+<style is:global>
+.ct-portfolio{background:#f2f1e9;color:#1b251d}
+.ct-portfolio *{box-sizing:border-box}
+.ct-portfolio-wrap{width:min(1360px,calc(100% - 112px));margin-inline:auto}
+.ct-portfolio-hero{position:relative;isolation:isolate;min-height:clamp(580px,72vh,730px);display:flex;align-items:center;overflow:hidden;background:#111916;color:#f7f5ed}
+.ct-portfolio-hero__image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.ct-portfolio-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,13,11,.96),rgba(7,13,11,.84) 36%,rgba(7,13,11,.13) 100%);z-index:-1}
+html[dir="rtl"] .ct-portfolio-hero:after{background:linear-gradient(270deg,rgba(7,13,11,.96),rgba(7,13,11,.84) 36%,rgba(7,13,11,.13) 100%)}
+.ct-portfolio-hero__content{padding:74px 0}
+.ct-portfolio-kicker{font-size:12px;letter-spacing:.13em;text-transform:uppercase;font-weight:750;color:#a3c819;margin:0 0 22px}
+.ct-portfolio-hero h1{max-width:690px;color:#f7f5ed;font-size:clamp(45px,4.2vw,75px);line-height:1.06;font-weight:500;letter-spacing:-.05em;margin:0 0 23px}
+.ct-portfolio-lead{max-width:56ch;font-size:clamp(17px,1.3vw,21px);line-height:1.65;color:#e4e8dd;margin:0 0 34px}
+.ct-portfolio-cta{display:inline-flex;gap:24px;justify-content:space-between;align-items:center;min-height:50px;padding:14px 20px;background:#c4f000;color:#172016!important;text-decoration:none;font-weight:700}
+.ct-portfolio-main{padding:clamp(65px,8vw,120px) 0}
+.ct-portfolio-layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,.75fr);gap:clamp(35px,6vw,100px);align-items:start}
+.ct-portfolio-section-title{border-bottom:1px solid #aab9a8;padding-bottom:30px;margin-bottom:12px}
+.ct-portfolio-section-title h2{font-size:clamp(32px,3vw,49px);letter-spacing:-.04em;font-weight:500;margin:0;color:#1b251d}
+.ct-portfolio-item{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.15fr);gap:clamp(20px,3vw,48px);padding:32px 0;border-bottom:1px solid #b5c1b2}
+.ct-portfolio-item__image{display:block;aspect-ratio:1.5;overflow:hidden}
+.ct-portfolio-item__image img,.ct-portfolio-aside>img{display:block;width:100%;height:100%;object-fit:cover}
+.ct-portfolio-item h3{font-size:clamp(21px,2.05vw,29px);line-height:1.21;font-weight:550;margin:0 0 12px;letter-spacing:-.035em}
+.ct-portfolio-item h3 a{display:flex;gap:13px;justify-content:space-between;color:#1b251d;text-decoration:none}
+.ct-portfolio-item p,.ct-portfolio-secondary p{font-size:15px;line-height:1.7;color:#435347;margin:0 0 19px}
+.ct-portfolio-textlink{color:#203820;text-decoration:underline;text-underline-offset:5px;font-weight:600}
+.ct-portfolio-aside{position:sticky;top:110px;background:#1a291e;color:#f5f4ea}
+.ct-portfolio-aside>img{height:auto;aspect-ratio:1.5}
+.ct-portfolio-aside__body{padding:clamp(24px,3vw,43px)}
+.ct-portfolio-aside h2{font-size:clamp(24px,2vw,34px);color:#f5f4ea;font-weight:500;line-height:1.2;margin:0 0 15px}
+.ct-portfolio-aside p:not(.ct-portfolio-kicker){color:#cbd7c7;line-height:1.6;font-size:15px;margin:0 0 22px}
+.ct-portfolio-related{display:block;border-top:1px solid #57714c;padding:22px 35px;color:#eff4e7;text-decoration:none}
+.ct-portfolio-secondary{padding:36px 0 0}.ct-portfolio-secondary h3{font-size:25px;font-weight:500}.ct-portfolio-secondary h3 a{color:#1b251d}
+.ct-portfolio a:focus-visible{outline:3px solid #c4f000;outline-offset:4px}
+@media(max-width:950px){.ct-portfolio-wrap{width:calc(100% - 48px)}.ct-portfolio-layout{grid-template-columns:1fr}.ct-portfolio-aside{position:static;display:grid;grid-template-columns:1fr 1fr}.ct-portfolio-aside>img{aspect-ratio:1.5}.ct-portfolio-aside__body{grid-row:span 2}}
+@media(max-width:650px){.ct-portfolio-wrap{width:calc(100% - 36px)}.ct-portfolio-hero{min-height:clamp(560px,85svh,720px)}.ct-portfolio-hero:after{background:linear-gradient(180deg,rgba(7,13,11,.47),rgba(7,13,11,.92) 65%)}.ct-portfolio-hero__content{padding:58px 0}.ct-portfolio-hero h1{font-size:clamp(36px,10vw,54px)}.ct-portfolio-layout,.ct-portfolio-item,.ct-portfolio-aside{display:block}.ct-portfolio-item__image{margin-bottom:22px}.ct-portfolio-aside>img{aspect-ratio:1.65}.ct-portfolio-related{padding:22px 26px}}
+</style>

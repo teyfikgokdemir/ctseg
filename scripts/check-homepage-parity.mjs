@@ -6,7 +6,7 @@ const ACTIVE_LOCALES = [
 ];
 
 const SECTOR_IDS = [
-  'glass',
+  'global-sourcing',
   'natural-oils',
   'food-agri',
   'nuts-dried-fruits',
@@ -19,7 +19,7 @@ const SECTOR_IDS = [
 // Exact sector card titles as rendered from src/data/portfolio-sectors.ts
 const SECTOR_TITLES = {
   tr: {
-    glass: 'Cam ve Yapı Malzemeleri',
+    'global-sourcing': 'Küresel Tedarik Çözümleri',
     'natural-oils': 'Doğal Yağlar ve Kozmetik Ham Maddeleri',
     'food-agri': 'Gıda ve Tarımsal Ürünler',
     'nuts-dried-fruits': 'Kuruyemiş, Tohum ve Kuru Meyveler',
@@ -29,7 +29,7 @@ const SECTOR_TITLES = {
     textiles: 'Tekstil ve Hazır Giyim'
   },
   en: {
-    glass: 'Glass &amp; Building Materials',
+    'global-sourcing': 'Global Sourcing Solutions',
     'natural-oils': 'Natural Oils &amp; Cosmetic Raw Materials',
     'food-agri': 'Food &amp; Agricultural Products',
     'nuts-dried-fruits': 'Nuts, Seeds &amp; Dried Fruits',
@@ -39,7 +39,7 @@ const SECTOR_TITLES = {
     textiles: 'Textiles &amp; Apparel'
   },
   de: {
-    glass: 'Glas &amp; Baustoffe',
+    'global-sourcing': 'Globale Beschaffungslösungen',
     'natural-oils': 'Natürliche Öle &amp; Kosmetikrohstoffe',
     'food-agri': 'Lebensmittel &amp; Agrarprodukte',
     'nuts-dried-fruits': 'Nüsse, Saaten &amp; Trockenfrüchte',
@@ -49,7 +49,7 @@ const SECTOR_TITLES = {
     textiles: 'Textilien &amp; Bekleidung'
   },
   it: {
-    glass: 'Vetro e Materiali da Costruzione',
+    'global-sourcing': 'Soluzioni di Sourcing Globale',
     'natural-oils': 'Oli Naturali e Materie Prime Cosmetiche',
     'food-agri': 'Prodotti Alimentari e Agricoli',
     'nuts-dried-fruits': 'Frutta a Guscio, Semi e Frutta Essiccata',
@@ -59,7 +59,7 @@ const SECTOR_TITLES = {
     textiles: 'Tessile e Abbigliamento'
   },
   fa: {
-    glass: 'شیشه و مصالح ساختمانی',
+    'global-sourcing': 'راه‌حل‌های تأمین جهانی',
     'natural-oils': 'روغن‌های طبیعی و مواد اولیه آرایشی',
     'food-agri': 'مواد غذایی و محصولات کشاورزی',
     'nuts-dried-fruits': 'خشکبار، دانه‌ها و میوه‌های خشک',
@@ -69,7 +69,7 @@ const SECTOR_TITLES = {
     textiles: 'منسوجات و پوشاک آماده'
   },
   ru: {
-    glass: 'Стекло и строительные материалы',
+    'global-sourcing': 'Решения глобального сорсинга',
     'natural-oils': 'Натуральные масла и косметическое сырьё',
     'food-agri': 'Продукты питания и агропродукция',
     'nuts-dried-fruits': 'Орехи, семена и сухофрукты',
@@ -79,7 +79,7 @@ const SECTOR_TITLES = {
     textiles: 'Текстиль и готовая одежда'
   },
   zh: {
-    glass: '建筑玻璃与建材制品',
+    'global-sourcing': '全球采购解决方案',
     'natural-oils': '天然油脂与化妆品原料',
     'food-agri': '食品与大宗农产品',
     'nuts-dried-fruits': '坚果、籽仁与干果系列',
@@ -89,7 +89,7 @@ const SECTOR_TITLES = {
     textiles: '纺织品与成衣制造'
   },
   vi: {
-    glass: 'Kính &amp; Vật liệu Xây dựng',
+    'global-sourcing': 'Giải pháp sourcing toàn cầu',
     'natural-oils': 'Tinh dầu Tự nhiên &amp; Nguyên liệu Mỹ phẩm',
     'food-agri': 'Thực phẩm &amp; Nông sản',
     'nuts-dried-fruits': 'Hạt dinh dưỡng, Hạt &amp; Trái cây khô',
@@ -99,7 +99,7 @@ const SECTOR_TITLES = {
     textiles: 'Dệt may &amp; Hàng may mặc'
   },
   uk: {
-    glass: 'Скло та будівельні матеріали',
+    'global-sourcing': 'Рішення глобального постачання',
     'natural-oils': 'Натуральні олії та косметична сировина',
     'food-agri': 'Харчові та аграрні продукти',
     'nuts-dried-fruits': 'Горіхи, насіння та сухофрукти',
@@ -109,7 +109,7 @@ const SECTOR_TITLES = {
     textiles: 'Текстиль і готовий одяг'
   },
   ro: {
-    glass: 'Sticlă și Materiale de Construcții',
+    'global-sourcing': 'Soluții globale de aprovizionare',
     'natural-oils': 'Uleiuri Naturale și Materii Prime Cosmetice',
     'food-agri': 'Produse Alimentare și Agricole',
     'nuts-dried-fruits': 'Nuci, Semințe și Fructe Uscate',
@@ -119,7 +119,7 @@ const SECTOR_TITLES = {
     textiles: 'Textile și Îmbrăcăminte'
   },
   bg: {
-    glass: 'Стъкло и Строителни Материали',
+    'global-sourcing': 'Глобални решения за доставки',
     'natural-oils': 'Натурални Масла и Козметични Суровини',
     'food-agri': 'Храни и Селскостопански Продукти',
     'nuts-dried-fruits': 'Ядки, Семена и Сушени Плодове',
@@ -129,7 +129,7 @@ const SECTOR_TITLES = {
     textiles: 'Текстил и Готово Облекло'
   },
   he: {
-    glass: 'זכוכית וחומרי בנייה',
+    'global-sourcing': 'פתרונות רכש גלובליים',
     'natural-oils': 'שמנים טבעיים וחומרי גלם לקוסמטיקה',
     'food-agri': 'מזון ותוצרת חקלאית',
     'nuts-dried-fruits': 'אגוזים, זרעים ופירות יבשים',
@@ -139,7 +139,7 @@ const SECTOR_TITLES = {
     textiles: 'טקסטיל והלבשה'
   },
   ar: {
-    glass: 'الزجاج ومواد البناء',
+    'global-sourcing': 'حلول التوريد العالمي',
     'natural-oils': 'الزيوت الطبيعية والمواد الخام التجميلية',
     'food-agri': 'المنتجات الغذائية والزراعية',
     'nuts-dried-fruits': 'المكسرات والبذور والفواكه المجففة',
@@ -211,18 +211,19 @@ for (const locale of ACTIVE_LOCALES) {
     }
   }
 
-  // 2. Strict Turkish Hero Preservation
+  // 2. Turkish Hero & Strategic Messaging Verification
   if (locale === 'tr') {
     if (!html.includes('ctseg-home-claim')) {
       failures.push(`[tr] Missing .ctseg-home-claim class in hero title`);
     }
-    const line1Regex = /<span[^>]*class="[^"]*ctseg-home-claim__line[^"]*"[^>]*>Türkiye’den dünyaya\.<\/span>/;
-    const line2Regex = /<span[^>]*class="[^"]*ctseg-home-claim__line[^"]*"[^>]*>Dünyadan doğru üreticiye\.<\/span>/;
-    if (!line1Regex.test(html)) {
-      failures.push(`[tr] Missing or modified exact first line DOM element: '<span class="ctseg-home-claim__line">Türkiye’den dünyaya.</span>'`);
+    if (!html.includes("Küresel Ticarette Güvenilir Bağlantılar.")) {
+      failures.push(`[tr] Missing updated claim 'Küresel Ticarette Güvenilir Bağlantılar.'`);
     }
-    if (!line2Regex.test(html)) {
-      failures.push(`[tr] Missing or modified exact second line DOM element: '<span class="ctseg-home-claim__line">Dünyadan doğru üreticiye.</span>'`);
+    if (!html.includes("Türkiye&#39;den Asya&#39;ya, Avrupa&#39;dan Orta Doğu&#39;ya") && !html.includes("Türkiye'den Asya'ya, Avrupa'dan Orta Doğu'ya")) {
+      failures.push(`[tr] Missing updated supporting copy 'Türkiye\\'den Asya\\'ya, Avrupa\\'dan Orta Doğu\\'ya'`);
+    }
+    if (!html.includes('Tedarik Talebi Oluştur') || !html.includes('Üretici / Tedarikçi Olarak Başvur')) {
+      failures.push(`[tr] Missing prominent buyer/supplier conversion pathways in hero`);
     }
   }
 
@@ -244,14 +245,12 @@ for (const locale of ACTIVE_LOCALES) {
     }
   }
 
-  // Verify sector glass is NOT using the invalid label "Cam Ambalaj ve Züccaciye"
-  if (locale === 'tr') {
-    if (html.includes('Cam Ambalaj ve Züccaciye')) {
-      failures.push(`[tr] Regressed to invalid sector label 'Cam Ambalaj ve Züccaciye' instead of 'Cam ve Yapı Malzemeleri'`);
-    }
-    if (!html.includes('Cam ve Yapı Malzemeleri')) {
-      failures.push(`[tr] Missing true glass sector title 'Cam ve Yapı Malzemeleri'`);
-    }
+  // Verify no active glass sourcing links remain on the homepage
+  if (/href="[^"]*\/(?:glass|cam)[\/\"]/.test(html)) {
+    failures.push(`[${locale}] Retired glass link remains active on homepage`);
+  }
+  if (!html.includes('data-global-sourcing')) {
+    failures.push(`[${locale}] Missing data-global-sourcing attribute on main`);
   }
 
   // 4. Natural Oils Feature Section Check

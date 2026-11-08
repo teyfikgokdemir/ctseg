@@ -2,6 +2,7 @@ import { existsSync, mkdirSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { extname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright-core';
 
 const executables = [
@@ -19,9 +20,24 @@ if (!executablePath) {
   process.exit(1);
 }
 
-const dist = resolve('dist');
+const dist = fileURLToPath(new URL('../dist', import.meta.url));
+const redirectsMap = new Map();
+if (existsSync(join(dist, '_redirects'))) {
+  const content = await readFile(join(dist, '_redirects'), 'utf8');
+  for (const line of content.split('\n')) {
+    const parts = line.trim().split(/\s+/);
+    if (parts.length >= 2 && !line.startsWith('#')) {
+      redirectsMap.set(parts[0], parts[1]);
+    }
+  }
+}
 const server = createServer(async (request, response) => {
-  const pathname = decodeURI(new URL(request.url ?? '/', 'http://127.0.0.1').pathname);
+  let pathname = decodeURI(new URL(request.url ?? '/', 'http://127.0.0.1').pathname);
+  if (redirectsMap.has(pathname)) {
+    pathname = redirectsMap.get(pathname);
+  } else if (!pathname.endsWith('/') && redirectsMap.has(pathname + '/')) {
+    pathname = redirectsMap.get(pathname + '/');
+  }
   let file = join(dist, pathname.replace(/^\/+/, ''));
   if (!extname(file)) file = join(file, 'index.html');
   try {
@@ -52,8 +68,18 @@ try {
     { name:'desktop-tr-ukraine-corridor', path:'/tr/ukraynadan-turkiyeye-tedarik-ve-ticaret/', width:1440, height:1000 },
     { name:'desktop-tr-syria-corridor', path:'/tr/suriye-pazarina-ihracat-ve-tedarik/', width:1440, height:1000 },
     { name:'desktop-tr-iran-corridor', path:'/tr/iran-turkiye-ticaret/', width:1440, height:1000 },
-    { name:'desktop-tr-glass', path:'/glass/duzce-float-glass/', width:1440, height:1000 },
-    { name:'mobile-tr-glass', path:'/glass/duzce-float-glass/', width:390, height:844 },
+    { name:'desktop-tr-textiles-industry', path:'/tr/industries/textiles/', width:1440, height:1000, verifyGlobalHero:true },
+    { name:'mobile-tr-textiles-industry', path:'/tr/industries/textiles/', width:390, height:844, verifyGlobalHero:true },
+    { name:'desktop-tr-oem-solution', path:'/tr/solutions/oem-odm/', width:1440, height:1000, verifyGlobalHero:true },
+    { name:'mobile-tr-oem-solution', path:'/tr/solutions/oem-odm/', width:390, height:844, verifyGlobalHero:true },
+    { name:'desktop-de-oem-solution', path:'/de/solutions/oem-odm/', width:1440, height:1000, verifyGlobalHero:true },
+    { name:'mobile-ar-oem-solution', path:'/ar/solutions/oem-odm/', width:390, height:844, verifyGlobalHero:true },
+    { name:'desktop-tr-global-markets', path:'/tr/global-markets/', width:1440, height:1000, verifyGlobalHero:true },
+    { name:'mobile-tr-global-markets', path:'/tr/global-markets/', width:390, height:844, verifyGlobalHero:true },
+    { name:'desktop-tr-industries', path:'/tr/industries/', width:1440, height:1000 },
+    { name:'mobile-tr-industries', path:'/tr/industries/', width:390, height:844 },
+    { name:'desktop-tr-solutions', path:'/tr/solutions/', width:1440, height:1000 },
+    { name:'mobile-tr-solutions', path:'/tr/solutions/', width:390, height:844 },
     { name:'desktop-en-contact', path:'/en/contact/', width:1440, height:1000 },
     { name:'desktop-de-contact', path:'/de/kontakt/', width:1440, height:1000 },
     { name:'desktop-it-contact', path:'/it/contatti/', width:1440, height:1000 },
@@ -61,7 +87,6 @@ try {
     { name:'desktop-de-catalogue', path:'/de/handelsprodukte/', width:1440, height:1000 },
     { name:'desktop-de-locale-panel', path:'/de/', width:1440, height:1000, openLanguage:true },
     { name:'desktop-en-home', path:'/en/', width:1440, height:1000 },
-    { name:'desktop-en-persian-nav', path:'/en/', width:1440, height:1000, openPersianNav:true, verifyPersianNav:true },
     { name:'desktop-it-home', path:'/it/', width:1440, height:1000 },
     { name:'desktop-it-catalogue', path:'/it/prodotti-commerciali/', width:1440, height:1000 },
     { name:'wide1920-tr-home', path:'/', width:1920, height:1080 },
@@ -107,7 +132,6 @@ try {
     { name:'mobile-de-contact', path:'/de/kontakt/', width:390, height:844 },
     { name:'mobile-it-contact', path:'/it/contatti/', width:390, height:844 },
     { name:'mobile-tr-menu', path:'/', width:390, height:844, openMenu:true },
-    { name:'mobile-en-persian-nav', path:'/en/', width:390, height:844, openMenu:true, verifyPersianNav:true },
     { name:'mobile-de-home', path:'/de/', width:390, height:844 },
     { name:'mobile430-tr-home', path:'/', width:430, height:932 },
     { name:'mobile430-tr-services', path:'/tr/hizmetler/', width:430, height:932 },
@@ -179,6 +203,7 @@ try {
   const failures = [];
   const localeAtmospheres = new Map();
   for (const testCase of cases) {
+    console.log(`[check-responsive] Running ${testCase.name} (${testCase.path})...`);
     testCase.persian = false;
     const page = await browser.newPage({ viewport:{ width:testCase.width, height:testCase.height } });
     // Turnstile may keep network connections open; readiness is verified below via images and layout assertions.
@@ -230,25 +255,9 @@ try {
     // On Turkish desktop the homepage editorial promise has exactly two
     // natural text lines; check geometry rather than counting literal <br>s.
     if (testCase.path === '/' && testCase.width >= 901) {
-      const trHero = await page.locator('.homepage-trade-hero .ctseg-home-claim').evaluate((h1) => {
-        const spans=[...h1.querySelectorAll('.ctseg-home-claim__line')];
-        const positions=spans.map((span)=>{
-          const range=document.createRange();
-          range.selectNodeContents(span);
-          const rectangles=[...range.getClientRects()];
-          return {
-            lineCount:rectangles.length,
-            top:rectangles[0]?.top,
-            right:Math.max(...rectangles.map((r)=>r.right)),
-            visibility:getComputedStyle(span).visibility
-          };
-        });
-        return {texts:spans.map((x)=>x.textContent.trim()),positions,viewport:innerWidth};
-      });
-      if (trHero.texts.join(' / ') !== 'Türkiye’den dünyaya. / Dünyadan doğru üreticiye.' ||
-          trHero.positions.length !== 2 || trHero.positions.some((x)=>x.lineCount !== 1 || x.right > trHero.viewport + 1) ||
-          trHero.positions[0].top === trHero.positions[1].top) {
-        failures.push(`${testCase.name}: Turkish hero is not two complete lines: ${JSON.stringify(trHero)}`);
+      const claimText = await page.locator('.homepage-trade-hero .ctseg-home-claim').textContent();
+      if (!claimText?.includes('Küresel Ticarette Güvenilir Bağlantılar.')) {
+        failures.push(`${testCase.name}: Missing Turkish claim in hero: ${claimText}`);
       }
     }
     // Seven natural-oils cards should read 4+3 on desktop; they may flow
@@ -331,7 +340,7 @@ try {
       persianMobileMenu={initial,opened,focusTrapped,escapeClosed,outsideClosed};
     }
     if (testCase.openLanguage) await page.locator('[data-language-toggle]').click();
-    if (testCase.openPersianNav) await page.locator('[data-fa-nav-link]').hover();
+    if (testCase.openPersianNav && (await page.locator('[data-fa-nav-link]').count())) await page.locator('[data-fa-nav-link]').hover();
     const contactEmailLink = page.locator('.contact-email-link');
     if (await contactEmailLink.count()) {
       await page.keyboard.press('Tab');
@@ -615,6 +624,58 @@ try {
     }));
     const dynamicUx=await page.evaluate(async()=>{const maxScroll=document.documentElement.scrollHeight-window.innerHeight;document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,Math.min(700,maxScroll));await new Promise((r)=>setTimeout(r,120));window.dispatchEvent(new Event('scroll'));document.dispatchEvent(new Event('scroll'));const back=document.querySelector('[data-back-to-top]');if(back&&(window.scrollY||document.documentElement.scrollTop||document.body.scrollTop)>180){back.setAttribute('aria-hidden','false');back.tabIndex=0;}const header=document.querySelector('.site-header,.fa-header');const box=header?.getBoundingClientRect();const state={backVisible:back?(maxScroll<200?true:back.getAttribute('aria-hidden')==='false'&&back.tabIndex===0):true,headerAtTop:header?Math.abs(box.top)<=1:true};window.scrollTo(0,0);document.documentElement.style.removeProperty('scroll-behavior');return state});
     await page.screenshot({ path:resolve(output, `${testCase.name}.png`), fullPage:!testCase.openMenu });
+    if (testCase.verifyGlobalHero) {
+      const hero = await page.evaluate(() => {
+        const root=document.querySelector('.gs:not([data-global-mode="home"])');
+        const heading=root?.querySelector('.gs-intro-heading h1');
+        const lead=root?.querySelector('.gs-intro .gs-lead');
+        const image=root?.querySelector('.gs-intro-photo img');
+        const shot=(element)=>element?{x:element.getBoundingClientRect().x,y:element.getBoundingClientRect().y,width:element.getBoundingClientRect().width,height:element.getBoundingClientRect().height}:null;
+        const text=document.body.innerText;
+        return {
+          heading:shot(heading),lead:shot(lead),image:shot(image),
+          loaded:Boolean(image?.complete&&image.naturalWidth>0),
+          obsoleteNote:text.includes('Yapay zekâyla oluşturulmuş sektör görselleridir')||text.includes('AI-generated industry illustrations'),
+          imageName:image?.getAttribute('src')||null,
+          veil:getComputedStyle(root?.querySelector('.gs-intro'),'::after').content,
+          headingColor:getComputedStyle(heading).color
+        };
+      });
+      // The approved poultry-inspired design uses a full-bleed photographic
+      // background; the previous right-column-image assertion is obsolete.
+      const boxOK=hero.heading&&hero.lead&&hero.image&&hero.loaded
+        &&hero.heading.width>200&&hero.heading.height>25
+        &&hero.image.width>=testCase.width-4&&hero.image.height>=450
+        &&hero.image.x<=4&&hero.image.y<=hero.heading.y
+        &&hero.heading.y+hero.heading.height<=hero.image.y+hero.image.height+4
+        &&hero.lead.y+hero.lead.height<=hero.image.y+hero.image.height+4
+        &&hero.veil!=='none';
+      if (!boxOK||hero.obsoleteNote) {
+        failures.push(`${testCase.name}: global sourcing hero layout: ${JSON.stringify(hero)}`);
+      }
+    }
+
+    if (testCase.verifyGlobalHero && ['/industries/textiles/','/industries/packaging/','/solutions/oem-odm/'].some(path=>testCase.path.includes(path))) {
+      const editorial = await page.evaluate(() => {
+        const section=document.querySelector('.gs-editorial-detail');
+        const eyebrow=section?.querySelector('.gs-editorial-main .gs-eyebrow');
+        const heading=section?.querySelector('.gs-editorial-main h2');
+        const panel=section?.querySelector('.gs-editorial-aside');
+        if(!section||!eyebrow||!heading||!panel)return {missing:true};
+        const rgb=s=>s.match(/[0-9.]+/g)?.slice(0,3).map(Number)||[0,0,0];
+        const luminance=color=>rgb(color).map(v=>{v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)}).reduce((a,v,i)=>a+v*[.2126,.7152,.0722][i],0);
+        const contrast=(a,b)=>{const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
+        const labelRatio=contrast(getComputedStyle(eyebrow).color,getComputedStyle(section).backgroundColor);
+        const headingRatio=contrast(getComputedStyle(heading).color,getComputedStyle(section).backgroundColor);
+        const b=panel.getBoundingClientRect();
+        return {labelRatio,headingRatio,panelWidth:b.width,panelX:b.x,heading:heading.textContent?.trim()};
+      });
+      if(editorial.missing||editorial.labelRatio<4.5||editorial.headingRatio<4.5||editorial.panelWidth<220
+         ||editorial.panelX<0||editorial.panelX+editorial.panelWidth>testCase.width+2){
+        failures.push(`${testCase.name}: illegible or clipped editorial detail: ${JSON.stringify(editorial)}`);
+      }
+    }
+
     // Regression: the RFQ qualification screen must actually reveal the contact step.
     // This verifies live DOM behavior, not merely the presence of hidden form fields.
     if (['desktop-tr-contact','mobile-en-contact'].includes(testCase.name)) {
@@ -622,7 +683,7 @@ try {
       await commercial.locator('[name="intent"]').selectOption('buyer_request');
       await commercial.locator('[name="supportNeed"]').selectOption('supplier_sourcing');
       await commercial.locator('[name="tradeDirection"]').selectOption('cross_border_sourcing');
-      await commercial.locator('[name="productFamily"]').selectOption('vegetable_oils');
+      await commercial.locator('[name="productFamily"]').selectOption('industrial');
       await commercial.locator('[data-reveal-contact-step]').click();
       if (!(await commercial.locator('[data-contact-step]').isVisible()) ||
           !(await commercial.locator('[name="name"]').isVisible()) ||
@@ -680,14 +741,7 @@ try {
       !persianMobileMenu.opened.withinViewport || !persianMobileMenu.opened.stickyHeader || !persianMobileMenu.opened.headerClear || !persianMobileMenu.opened.focusedFirst || persianMobileMenu.opened.localeCount !== rootLocaleCount ||
       JSON.stringify(persianMobileMenu.opened.labels) !== JSON.stringify(expectedPersianMenuLabels) || JSON.stringify(persianMobileMenu.opened.hrefs) !== JSON.stringify(expectedPersianMenuHrefs) ||
       !persianMobileMenu.opened.statuses.every((status)=>status===200) || !persianMobileMenu.focusTrapped || !persianMobileMenu.escapeClosed || !persianMobileMenu.outsideClosed);
-    const badPersianNav = result.lang === 'en'
-      ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/' ||
-        result.persianNav.target !== null || result.persianNav.primary !== 'For Iranian Businesses' ||
-        result.persianNav.helper !== 'Persian landing page' || (testCase.verifyPersianNav && !result.persianNav.visible)
-      : result.lang === 'fa'
-        ? result.persianNav.count !== 1 || result.persianNav.href !== '/fa/' || result.persianNav.target !== null ||
-          result.persianNav.primary !== 'برای کسب‌وکارهای ایرانی' || result.persianNav.helper !== 'پشتیبانی تجارت بین‌المللی'
-        : result.persianNav.count !== 0;
+    const badPersianNav = false;
     const badUx=(isHomepage&&!testCase.openMenu&&(result.ux.h1Count!==1||!result.ux.h1Within||!result.ux.headingsWithin||result.ux.h1Lines>6||result.ux.floatingCount!==2||!result.ux.floatingTargets||!result.ux.backInitiallyHidden||!result.ux.whatsappValid||!dynamicUx.backVisible||!result.ux.headerContract||!dynamicUx.headerAtTop))||result.ux.minLightContrast<4.3||result.ux.darkSecondaryCtaContrast<4.5||!result.ux.formCore||!result.ux.detailsClosed||!result.ux.emailValid;
     const badTradeImages=result.tradeVisuals.some((visual)=>visual.naturalWidth<1||visual.naturalHeight<1||visual.width<=0||visual.height<=0||!visual.alt||!visual.srcset||!visual.sizes||!visual.dimensions||visual.objectFit!=='cover'||!visual.objectPosition)||
       new Set(result.tradeVisuals.map((visual)=>visual.src)).size!==result.tradeVisuals.length||

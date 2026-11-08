@@ -29,7 +29,8 @@ export function getStaticPaths() {
 const { record } = Astro.props as { record: RouteRecord };
 const meta = getMeta(record);
 const schemas:any[] = [breadcrumbSchema(record, meta.title)];
-if (record.key === 'home') {
+if(record.key === 'home') schemas.push(tradeMatchingServiceSchema(record,meta.title,meta.description));
+if (false && record.key === 'home') {
   if (record.lang === 'fa') {
     const page=iranTradeContent.fa;
     schemas.push({
@@ -112,7 +113,7 @@ if (record.key === 'home') {
     schemas.push(tradeMatchingServiceSchema(record,meta.title,meta.description));
   }
 }
-if (record.key === 'home' && tradeDeskCopy[record.lang as keyof typeof tradeDeskCopy]) {
+if (false && record.key === 'home' && tradeDeskCopy[record.lang as keyof typeof tradeDeskCopy]) {
   const desk=tradeDeskCopy[record.lang as keyof typeof tradeDeskCopy];
   schemas.push({
     '@context':'https://schema.org','@type':'Service','@id':`${canonicalFor(record)}#external-trade-desk`,

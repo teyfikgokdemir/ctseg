@@ -1,0 +1,106 @@
+[
+  {
+    "from": "/tr/hizmetler/",
+    "to": "/tr/solutions/"
+  },
+  {
+    "from": "/tr/pazarlar/",
+    "to": "/tr/global-markets/"
+  },
+  {
+    "from": "/en/services/",
+    "to": "/en/solutions/"
+  },
+  {
+    "from": "/en/markets/",
+    "to": "/en/global-markets/"
+  },
+  {
+    "from": "/de/dienstleistungen/",
+    "to": "/de/solutions/"
+  },
+  {
+    "from": "/de/maerkte/",
+    "to": "/de/global-markets/"
+  },
+  {
+    "from": "/it/servizi/",
+    "to": "/it/solutions/"
+  },
+  {
+    "from": "/it/mercati/",
+    "to": "/it/global-markets/"
+  },
+  {
+    "from": "/ru/uslugi/",
+    "to": "/ru/solutions/"
+  },
+  {
+    "from": "/ru/rynki/",
+    "to": "/ru/global-markets/"
+  },
+  {
+    "from": "/fa/services/",
+    "to": "/fa/solutions/"
+  },
+  {
+    "from": "/fa/markets/",
+    "to": "/fa/global-markets/"
+  },
+  {
+    "from": "/zh/services/",
+    "to": "/zh/solutions/"
+  },
+  {
+    "from": "/zh/markets/",
+    "to": "/zh/global-markets/"
+  },
+  {
+    "from": "/vi/services/",
+    "to": "/vi/solutions/"
+  },
+  {
+    "from": "/vi/markets/",
+    "to": "/vi/global-markets/"
+  },
+  {
+    "from": "/uk/posluhy/",
+    "to": "/uk/solutions/"
+  },
+  {
+    "from": "/uk/rynky/",
+    "to": "/uk/global-markets/"
+  },
+  {
+    "from": "/ro/servicii/",
+    "to": "/ro/solutions/"
+  },
+  {
+    "from": "/ro/piete/",
+    "to": "/ro/global-markets/"
+  },
+  {
+    "from": "/bg/uslugi/",
+    "to": "/bg/solutions/"
+  },
+  {
+    "from": "/bg/pazari/",
+    "to": "/bg/global-markets/"
+  },
+  {
+    "from": "/ar/services/",
+    "to": "/ar/solutions/"
+  },
+  {
+    "from": "/ar/markets/",
+    "to": "/ar/global-markets/"
+  },
+  {
+    "from": "/he/שירותים/",
+    "to": "/he/solutions/"
+  },
+  {
+    "from": "/he/שווקים/",
+    "to": "/he/global-markets/"
+  }
+]

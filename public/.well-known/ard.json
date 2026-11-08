@@ -11,7 +11,7 @@
       "displayName": "CTSEG AI Information",
       "type": "text/plain",
       "url": "https://ctseg.com.tr/llms.txt",
-      "description": "Verified overview of CTSEG international trade matching, sourcing, producer qualification and multilingual resources.",
+      "description": "CTSEG global B2B import sourcing, export development, supplier qualification, buyer–supplier matching and current industry resources.",
       "tags": [
         "international-trade",
         "strategic-sourcing",
@@ -26,10 +26,10 @@
       ],
       "representativeQueries": [
         "What does CTSEG do?",
-        "How can international buyers source verified suppliers in Türkiye?"
+        "How does CTSEG coordinate global sourcing and export development?"
       ],
-      "version": "1.0.0",
-      "updatedAt": "2026-10-09T00:00:00Z"
+      "version": "2.0.0",
+      "updatedAt": "2026-11-08T00:00:00Z"
     }
   ]
 }

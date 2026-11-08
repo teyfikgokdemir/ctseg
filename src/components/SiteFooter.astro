@@ -1,6 +1,5 @@
 ---
 import { company, companyCopy, legal, legalIds, localizedPath, ui, type Locale } from '../data/site';
-import { duzceGlassPath, type DuzceGlassLocale } from '../data/duzce-glass';
 import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 const { lang, pageKey } = Astro.props as { lang: Locale; pageKey?: string };
 const t = lang === 'he' ? {
@@ -112,17 +111,47 @@ const footerPath = (key:string,id?:string) => {
     if (serviceMap[id]) return serviceMap[id];
   }
   const map:Record<string,string> = {
-    home:'/he/', products:'/he/מוצרים-מסחריים/', services:'/he/שירותים/', markets:'/he/שווקים/',
+    home:'/he/', products:'/he/מוצרים-מסחריים/', services:'/he/שירותים/', markets:'/he/global-markets/',
     insights:'/he/תובנות/', about:'/he/אודות/', contact:'/he/יצירת-קשר/', 'how-we-work':'/he/איך-אנחנו-עובדים/'
   };
   return map[key] || '/he/';
 };
 const focusedCountryHome = pageKey === 'home' && ['de','it','ru','fa','zh','vi'].includes(lang);
 const showGenericPortfolio = !focusedCountryHome;
-const showGlassLink = !focusedCountryHome || lang === 'fa';
-const safeGlassLang = (['tr','en','de','it','ru','fa','zh','vi','uk','ro','bg'].includes(lang) ? lang : 'en') as DuzceGlassLocale;
-const footerGlassHref = lang === 'tr' ? '/glass/' : lang === 'en' ? '/en/glass/' : lang === 'ar' ? '/ar/glass/' : duzceGlassPath(safeGlassLang);
-const footerGlassLabel = lang === 'tr' ? 'Cam Tedariki ve İhracat' : lang === 'en' ? 'Glass Sourcing & Export' : ({de:'Düzce Float Glass Export',it:'Düzce Float Glass Export',fa:'صادرات شیشه Düzce',ru:'Экспорт Düzce Float Glass',zh:'Düzce 浮法玻璃出口',vi:'Xuất khẩu Düzce Float Glass',uk:'Експорт флоат-скла Düzce',ro:'Export Düzce Float Glass',bg:'Износ Düzce Float Glass',sr:'Izvoz Düzce Float Glass',sq:'Düzce Float Glass',mk:'Düzce Float Glass',he:'Düzce Float Glass (English)',ar:'توريد زجاج Düzce'}[lang] || 'Glass Sourcing');
+
+const footerIndustriesLabel = ({
+  tr: 'Uluslararası Tedarik Sektörleri',
+  en: 'International Sourcing Industries',
+  de: 'Internationale Beschaffungssektoren',
+  it: 'Settori di Approvvigionamento Internazionale',
+  fa: 'بخش‌های تأمین بین‌المللی',
+  ru: 'Секторы международных поставок',
+  zh: '国际采购行业',
+  vi: 'Các ngành cung ứng quốc tế',
+  uk: 'Сектори міжнародних поставок',
+  ro: 'Sectoare de aprovizionare internațională',
+  bg: 'Сектори за международни доставки',
+  sr: 'Međunarodni sektori nabavke',
+  he: 'ענפי רכש בינלאומיים',
+  ar: 'قطاعات التوريد الدولي'
+}[lang] || 'International Sourcing Industries');
+
+const footerSolutionsLabel = ({
+  tr: 'Küresel Tedarik Çözümleri',
+  en: 'Global Sourcing Solutions',
+  de: 'Globale Beschaffungslösungen',
+  it: 'Soluzioni di Sourcing Globale',
+  fa: 'راه‌حل‌های تأمین جهانی',
+  ru: 'Решения глобального сорсинга',
+  zh: '全球采购解决方案',
+  vi: 'Giải pháp sourcing toàn cầu',
+  uk: 'Рішення глобального постачання',
+  ro: 'Soluții globale de aprovizionare',
+  bg: 'Глобални решения за доставки',
+  sr: 'Globalna rešenja nabavke',
+  he: 'פתרונות רכש גلובליים',
+  ar: 'حلول التوريد العالمي'
+}[lang] || 'Global Sourcing Solutions');
 const footerOilsHref = `/${lang}/natural-oils/`;
 const footerOilsLabel = ({tr:'Doğal Yağlar & Kozmetik Ham Maddeleri',en:'Natural Oils & Cosmetic Raw Materials',de:'Natürliche Öle & Kosmetikrohstoffe',it:'Oli Naturali & Materie Prime Cosmetiche',fa:'روغن‌های طبیعی و مواد اولیه آرایشی',ru:'Натуральные масла и косметическое сырье',zh:'天然油脂与化妆品原料',vi:'Tinh dầu & Nguyên liệu Mỹ phẩm',uk:'Натуральні олії та косметична сировина',ro:'Uleiuri Naturale & Materii Prime Cosmetice',bg:'Натурални масла и козметични суровини',he:'שמנים טבעיים וחומרי גלם לקוסמטיקה',ar:'الزيوت الطبيعية ومواد التجميل الخام'} as Record<string,string>)[lang] || 'Natural Oils & Cosmetic Raw Materials';
 ---
@@ -135,7 +164,8 @@ const footerOilsLabel = ({tr:'Doğal Yağlar & Kozmetik Ham Maddeleri',en:'Natur
   </div>
   <div class="container footer-main">
     <div class="footer-brand"><a class="brand footer-logo-lockup" href={footerPath('home')}><img src={generatedImageSrc(LOGO_IMAGE,320)} width="1250" height="270" alt="CTSEG" loading="lazy" decoding="async" /><span class="footer-logo-subtitle" aria-hidden="true">{lang === 'he' ? 'בית סחר בינלאומי' : lang === 'ar' ? 'بيت تجارة عالمي' : 'GLOBAL TRADE HOUSE'}</span></a><p>{description}</p><div class="footer-company"><strong>{lang === 'he' ? 'CTSEG Sanayi ve Ticaret Limited Şirketi' : (company.name[lang] || company.name.en)}</strong><span>{company.foundingYear} · {corporate.footerLocation}</span></div></div>
-    <nav aria-label={footerNav.portfolio}><strong>{focusedCountryHome ? 'CTSEG' : footerNav.portfolio}</strong>{showGenericPortfolio && <a href={footerPath('products')}>{footerNav.overview}</a>}<a href={footerPath('services','strategic-sourcing')}>{footerNav.sourcing}</a><a href={footerPath('services','market-entry')}>{footerNav.marketEntry}</a>{showGlassLink && <a href={footerGlassHref}>{footerGlassLabel}</a>}<a href={footerOilsHref}>{footerOilsLabel}</a><a href={footerPath('markets')}>{t.markets}</a><a href={footerPath('insights')}>{footerNav.intelligence}</a></nav>
+    <nav aria-label={footerNav.portfolio}><strong>{focusedCountryHome ? 'CTSEG' : footerNav.portfolio}</strong>{showGenericPortfolio && <a href={footerPath('products')}>{footerNav.overview}</a>}<a href={footerPath('services','strategic-sourcing')}>{footerNav.sourcing}</a><a href={footerPath('services','market-entry')}>{footerNav.marketEntry}</a><a href={`/${lang}/industries/`}>{footerIndustriesLabel}</a>
+      <a href={`/${lang}/solutions/`}>{footerSolutionsLabel}</a><a href={footerOilsHref}>{footerOilsLabel}</a><a href={footerPath('markets')}>{t.markets}</a><a href={footerPath('insights')}>{footerNav.intelligence}</a></nav>
     <nav aria-label={t.contact}><strong>CTSEG</strong><a href={footerPath('about')}>{t.about}</a>{(lang === 'tr' || lang === 'en' || lang === 'fa' || lang === 'zh' || lang === 'vi' || lang === 'ro' || lang === 'bg' || lang === 'sr' || lang === 'he' || lang === 'ar') && <a href={footerPath('how-we-work')}>{lang === 'tr' ? 'Nasıl çalışıyoruz?' : lang === 'fa' ? 'چگونه کار می‌کنیم؟' : lang === 'zh' ? '运作模式' : lang === 'vi' ? 'Phương thức hoạt động' : lang === 'ro' ? 'Cum lucrăm' : lang === 'bg' ? 'Как работим' : lang === 'sr' ? 'Kako radimo' : lang === 'he' ? 'איך אנחנו עובדים' : lang === 'ar' ? 'كيف نعمل؟' : 'How we work'}</a>}<a href={footerPath('contact')}>{t.contact}</a><a href={`mailto:${company.email}`}>{company.email}</a><a href="https://t.me/teyfikgokdemir" target="_blank" rel="noopener noreferrer" aria-label="Telegram">Telegram</a></nav>
   </div>
   <div class="container footer-bottom">
