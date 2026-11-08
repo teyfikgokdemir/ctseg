@@ -28,3 +28,33 @@ for(const [file,expected] of [
   const german=[...html.matchAll(/<a\b[^>]*data-locale-option[^>]*>/g)].map(m=>m[0]).filter(tag=>tag.includes('data-locale="de"'));
   assert(german.length===2 && german.every(tag=>tag.includes(`href="${expected}"`)),`${file}: language switch must retain its counterpart`);
 }
+
+/* The legacy service indexes were intentionally consolidated into the global
+ * solutions index. Keep those redirects and the distinct legacy detail URLs.
+ * An earlier attempt to render a separate legacy hub was unreachable because
+ * getRouteRecords() excludes those indexes. Guard the actual URL contract. */
+const legacyServiceIndex = {
+  tr:'hizmetler',en:'services',de:'dienstleistungen',it:'servizi',
+  ru:'uslugi',fa:'services',zh:'services',vi:'services',
+  uk:'posluhy',ro:'servicii',bg:'uslugi',ar:'services',he:'שירותים'
+};
+const redirects=readFileSync('public/_redirects','utf8');
+for(const [lang,slug] of Object.entries(legacyServiceIndex)){
+  const legacy=`/${lang}/${slug}/`;
+  const destination=`/${lang}/solutions/`;
+  assert(redirects.split(/\r?\n/).some(line=>line.trim()===`${legacy} ${destination} 301`),
+    `${lang}: legacy index must 301 to the global solutions index`);
+  assert(existsSync(`dist/${lang}/solutions/index.html`),
+    `${lang}: global solutions index missing`);
+  assert(!existsSync(`dist/${lang}/${slug}/index.html`),
+    `${lang}: legacy index must not emit a conflicting static page`);
+}
+for(const [lang,slug] of [['tr','hizmetler'],['en','services']]){
+  const home=readFileSync(lang==='tr'?'dist/index.html':`dist/${lang}/index.html`,'utf8');
+  const panel=home.split('id="solutions-panel"')[1]?.split('data-solutions-menu')[1] || '';
+  const solutionLinks=panel.match(new RegExp(`href="/${lang}/solutions/"`,'g')) || [];
+  assert(solutionLinks.length===1,`${lang}: global trade dropdown must contain one solutions index link`);
+  assert(existsSync(`dist/${lang}/${slug}/${lang==='tr'?'stratejik-tedarik':'strategic-sourcing'}/index.html`),
+    `${lang}: established advisory detail route missing`);
+}
+console.log('Legacy advisory URLs and unified global solutions menu passed.');
