@@ -15,7 +15,8 @@ const industryImage=mode==='industry'?id:mode==='solution' && id==='private-labe
 const heroVisual=['industries','solutions','solution','industry'].includes(mode);
 const heroDescription=mode==='solutions'?c.lead:mode==='industries'?c.lead:description;
 const showIndustries=['home','industries'].includes(mode);
-const showSolutions=['home','solutions','solution'].includes(mode);
+const showSolutions=['home','solutions'].includes(mode);
+const relatedIndustries = id === 'oem-odm' ? ['textiles','beauty','industrial'] : id === 'private-label' ? ['beauty','textiles','packaging'] : id === 'industrial-procurement' ? ['industrial','construction','agriculture'] : id === 'distributor-discovery' ? ['beauty','textiles','food'] : ['industrial','textiles','packaging'];
 const showMarkets=['home','markets'].includes(mode);
 const showProcess=['home','process','about','industry','solution'].includes(mode);
 ---
@@ -40,6 +41,7 @@ const showProcess=['home','process','about','industry','solution'].includes(mode
   {mode==='industry' && id==='food' && lang!=='he' && <section class="gs-food-details"><div class="gs-wrap"><h2>{c.industries[6]}</h2><p>{c.availability}</p><ul class="gs-food-links">{productIds.map(product=><li><a href={localizedPath(lang,'products',product)}>{products[product].names[lang]}</a><p>{products[product].descriptions[lang]}</p></li>)}</ul></div></section>}
   {mode==='industry' && id==='food' && lang==='he' && <section class="gs-food-details"><div class="gs-wrap"><h2>{c.industries[6]}</h2><p>{c.availability}</p><ul class="gs-food-links">{israelProductIds.map(product=><li><a href={`/he/מוצרים-מסחריים/${product}/`}>{productMap[product][0]}</a><p>{productMap[product][1]}</p></li>)}</ul></div></section>}
   {showSolutions && <section class="gs-solutions"><div class="gs-wrap"><div class="gs-section-heading gs-section-heading--dark"><h2>{c.capabilitiesTitle}</h2><p>{c.lead}</p></div><div class="gs-capability-list">{capabilityIds.map((capability,index)=><article data-capability={capability}><h3><a href={globalPath(lang,'solutions',capability)}>{c.solutions[index]}<span aria-hidden="true">↗</span></a></h3><p>{c.solutionDescriptions[index]}</p></article>)}</div></div></section>}
+  {mode==='solution' && <section class="gs-focused"><div class="gs-wrap"><div class="gs-section-heading"><h2>{c.nav[3]}</h2><p>{c.solutionDescriptions[capabilityIds.indexOf(id as any)]}</p></div><div class="gs-focused-grid">{relatedIndustries.map((industry) => {const index=industryIds.indexOf(industry as any);return <article class="gs-focused-item"><a class="gs-industry-media" href={globalPath(lang,'industries',industry)}><img src={`/images/global-sourcing/${industry}-640.webp`} srcset={`/images/global-sourcing/${industry}-640.webp 640w, /images/global-sourcing/${industry}-1280.webp 1280w`} sizes="(max-width:760px) 92vw, 30vw" width="1280" height="800" alt={globalImageAlt[lang][index]} loading="lazy" decoding="async" /></a><h3><a href={globalPath(lang,'industries',industry)}>{c.industries[index]} <span aria-hidden="true">↗</span></a></h3><p>{c.sectors[index]}</p></article>})}</div></div></section>}
   {showMarkets && <section class="gs-markets"><div class="gs-wrap gs-split"><div><h2>{c.marketsTitle}</h2><p>{c.intro}</p></div><div><ul class="gs-regions">{c.regions.map(region=><li>{region}</li>)}</ul><p>{c.research}</p><p>{c.scope}</p></div></div></section>}
   {showProcess && <section class="gs-process" id="process"><div class="gs-wrap gs-split"><h2>{c.processTitle}</h2><ol>{c.process.map(step=><li>{step}</li>)}</ol></div></section>}
   <section class="gs-contact" id="sourcing-request"><div class="gs-wrap gs-split"><h2>{c.buyer}</h2><div><p class="gs-large">{c.lead}</p><div class="gs-actions"><a class="gs-button" href={`${contact}?intent=buyer`}>{c.buyer} ↗</a><a class="gs-link" href={`${contact}?intent=supplier`}>{c.supplier} ↗</a></div></div></div></section>
@@ -117,4 +119,12 @@ const showProcess=['home','process','about','industry','solution'].includes(mode
   @media(prefers-reduced-motion:reduce){
     .gs:not([data-global-mode="home"]) .gs-intro-photo img,.gs:not([data-global-mode="home"]) .gs-industry-media img{transition:none}
   }
+  .gs:not([data-global-mode="home"]) .gs-focused{padding:clamp(72px,8vw,116px) 0;background:#e5e8dd}
+  .gs-focused-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.7vw,40px)}
+  .gs-focused-item{min-width:0}
+  .gs-focused-item .gs-industry-media{display:block;aspect-ratio:1.47;overflow:hidden}
+  .gs-focused-item h3{font-size:clamp(20px,1.9vw,27px);margin:19px 0 10px}
+  .gs-focused-item h3 a{display:flex;justify-content:space-between;gap:18px}
+  .gs-focused-item p{font-size:15px;line-height:1.65}
+  @media(max-width:760px){.gs-focused-grid{grid-template-columns:1fr;gap:32px}.gs-focused-item .gs-industry-media{aspect-ratio:1.6}}
 </style>
