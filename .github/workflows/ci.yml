@@ -47,3 +47,21 @@ jobs:
       - run: npm run build
       - name: Run responsive audit
         run: npm run check:responsive
+      - name: Upload global sourcing layout screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ctseg-global-sourcing-visual-qa
+          if-no-files-found: warn
+          retention-days: 7
+          path: |
+            .artifacts/visual/desktop-tr-textiles-industry.png
+            .artifacts/visual/mobile-tr-textiles-industry.png
+            .artifacts/visual/desktop-tr-oem-solution.png
+            .artifacts/visual/mobile-tr-oem-solution.png
+            .artifacts/visual/desktop-de-oem-solution.png
+            .artifacts/visual/mobile-ar-oem-solution.png
+            .artifacts/visual/desktop-tr-global-markets.png
+            .artifacts/visual/mobile-tr-global-markets.png
+            .artifacts/visual/desktop-tr-solutions.png
+            .artifacts/visual/desktop-tr-industries.png
