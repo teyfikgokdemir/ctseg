@@ -1,5 +1,6 @@
 ---
 import GlobalSourcing from '../../components/GlobalSourcing.astro';
+import TradePortfolio from '../../components/TradePortfolio.astro';
 import {globalCopy} from '../../data/global-sourcing-locales';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CommercialRequestForm from '../../components/CommercialRequestForm.astro';
@@ -10,7 +11,7 @@ import {
 } from '../../data/hebrew';
 
 export function getStaticPaths(){
-  const paths = staticPages.filter(p=>!['services','products','markets'].includes(p.key)).map(p=>({params:{path:p.path},props:{type:'static',data:p}}));
+  const paths = staticPages.filter(p=>!['services','markets'].includes(p.key)).map(p=>({params:{path:p.path},props:{type:'static',data:p}}));
   for(const [id,s] of Object.entries(serviceMap)) paths.push({params:{path:`שירותים/${s.slug}`},props:{type:'service',data:{...s,id}}});
   for(const [id,p] of Object.entries(productMap)) if(israelProductIds.includes(id)) paths.push({params:{path:`מוצרים-מסחריים/${id}`},props:{type:'product',data:{id,name:p[0],desc:p[1]}}});
   for(const [id,l] of Object.entries(legalMap)) paths.push({params:{path:l.slug},props:{type:'legal',data:{...l,id}}});
@@ -35,7 +36,7 @@ const productProfile = type === 'product' ? productProfiles[data.id] : null;
 const legalSections = type === 'legal' ? legalMap[data.id].sections : [];
 ---
 <BaseLayout lang="he" title={title} description={description} pageKey={pageKey} pageId={pageId} canonical={canonical}>
-{globalMode?<GlobalSourcing lang="he" mode={globalMode} />:<>
+{type==='static' && data.key==='products'?<TradePortfolio lang="he" />:globalMode?<GlobalSourcing lang="he" mode={globalMode} />:<>
 <section class="page-hero he-standard-page"><div class="container">
   <p class="eyebrow">CTSEG · ישראל ⇄ טורקיה</p>
   <h1>{data.title || data.name}</h1>
