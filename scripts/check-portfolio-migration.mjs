@@ -17,6 +17,14 @@ for (const record of baseline.filter(record => record.status === 301)) {
     assert.deepEqual(redirects.get(source),{target:record.target,status:'301'},`Missing direct canonical redirect: ${source}`);
   }
   assert(!redirects.has(record.target),`Redirect chain at ${record.target}`);
+  for (const path of [record.path,record.path.replace(/\/$/,'')]) {
+    for (const method of ['GET','HEAD']) {
+      const response = await onRequest({request:new Request(`https://preview.ctseg.pages.dev${path}?source=audit`, {method}),next:()=>{throw Error(`Overview reached asset fallback: ${path}`);}});
+      assert.equal(response.status,301,`${method} ${path}`);
+      assert.equal(response.headers.get('location'),`${record.target}?source=audit`);
+      assert.equal(await response.text(),'');
+    }
+  }
 }
 for (const route of retired) {
   assert(!existsSync(join('dist', route, 'index.html')), `Retired page still emitted: ${route}`);
