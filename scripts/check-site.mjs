@@ -251,19 +251,17 @@ for (const file of htmlFiles) {
   if (['tr','en','de','it','fa','ru','zh','vi','ro','bg','he','uk','ar'].includes(expectedLang) && !html.includes(`<html lang="${expectedHtmlLang}"`)) {
     errors.push(`${label}: incorrect html lang`);
   }
-  if (!isGlobalSourcing && productCatalogs.has(label)) {
-    const descriptions = [...html.matchAll(/<a class="product-card[^"]*"[^>]*>[\s\S]*?<h2>[\s\S]*?<\/h2><p>(.*?)<\/p>/g)]
-      .map((match) => match[1].replace(/<[^>]+>/g, '').trim());
-    if (descriptions.length !== 18) errors.push(`${label}: expected 18 product-card descriptions, found ${descriptions.length}`);
-    if (new Set(descriptions).size !== descriptions.length) errors.push(`${label}: duplicate product-card description`);
-    if (!html.includes('Kalleh Ghouchi') && !html.includes('Kalleh-Ghouchi') && !html.includes('Калле-Гучі') && !html.includes('فستق كله غوتشي') && expectedLang !== 'zh' && expectedLang !== 'vi') errors.push(`${label}: corrected Kalleh Ghouchi name missing`);
-    const cardBlocks = [...html.matchAll(/<a class="product-card[^"]*"[^>]*>[\s\S]*?<\/a>/g)].map((match) => match[0]);
-    const catalogueImages = cardBlocks
-      .map((card) => card.match(/<img[^>]+src="([^"]+)"/)?.[1])
-      .filter(Boolean);
-    if (new Set(catalogueImages).size !== catalogueImages.length) errors.push(`${label}: repeated catalogue image source`);
-    const catalogueGroups = [...html.matchAll(/data-catalogue-group="([^"]+)"/g)].map((match) => match[1]);
-    if (catalogueGroups.length !== 6 || new Set(catalogueGroups).size !== 6) errors.push(`${label}: expected six unique catalogue groups`);
+  // Commercial portfolio indexes were restored as distinct buyer-facing hubs.
+  // The old 18-item food catalogue is intentionally no longer the homepage
+  // invariant; individual commercial product detail URLs remain separately tested.
+  if (productCatalogs.has(label)) {
+    if (!html.includes('data-trade-portfolio')) errors.push(`${label}: separate trade portfolio landing missing`);
+    const sectors=(html.match(/class="ct-portfolio-item"/g)||[]).length;
+    if (sectors < 6) errors.push(`${label}: expected at least six active portfolio sectors, found ${sectors}`);
+    if (!html.includes('ct-portfolio-secondary')) errors.push(`${label}: secondary food/commodity category missing`);
+    if (html.includes('data-b2b-sector="glass"')) errors.push(`${label}: inactive glass sector unexpectedly restored`);
+    if (!html.includes(`href="/${expectedLang}/industries/"`)) errors.push(`${label}: sectors directory link missing`);
+    if (!html.includes('ct-portfolio-hero__image')) errors.push(`${label}: photographic portfolio hero missing`);
   }
   const isHome = isHomepage;
   if (!isGlobalSourcing && isGenericHomepage && !/(?:class="hero-visual"|class="fa-hero-visual")[\s\S]*?(?:srcset="[^"]*\/images\/generated\/ctseg-global-trade-hero-premium-640\.webp|src="\/images\/ctseg-global-trade-hero-new\.webp")/.test(html)) {
