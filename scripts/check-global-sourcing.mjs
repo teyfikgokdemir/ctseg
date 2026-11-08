@@ -84,3 +84,24 @@ for(const [lang,slug] of [['tr','hizmetler'],['en','services']]){
     `${lang}: established advisory detail route missing`);
 }
 console.log('Legacy advisory URLs and unified global solutions menu passed.');
+
+/* Trade portfolio and international sectors have different commercial roles.
+ * Guard against accidental reuse of the industry directory on both menus. */
+for(const lang of ['tr','en','de','ar','he']){
+  const indexRoutes={
+    tr:'tr/ticari-urunler',en:'en/trade-products',
+    de:'de/handelsprodukte',ar:'ar/trade-products',he:'he/מוצרים-מסחריים'
+  };
+  const portfolioFile=`dist/${indexRoutes[lang]}/index.html`;
+  const industriesFile=`dist/${lang}/industries/index.html`;
+  assert(existsSync(portfolioFile), `${lang}: portfolio page missing`);
+  assert(existsSync(industriesFile), `${lang}: industry directory missing`);
+  const portfolio=readFileSync(portfolioFile,'utf8');
+  const industries=readFileSync(industriesFile,'utf8');
+  assert(portfolio.includes('data-trade-portfolio'), `${lang}: trade portfolio must have its distinct layout`);
+  assert(!portfolio.includes('data-global-mode="industries"'), `${lang}: portfolio accidentally renders industries directory`);
+  assert(industries.includes('data-global-mode="industries"'), `${lang}: industry directory layout missing`);
+  assert(portfolio.includes(`href="/${lang}/industries/"`),`${lang}: portfolio must link to the separate sector directory`);
+  assert(!portfolio.includes('data-b2b-sector="glass"'),`${lang}: inactive glass sourcing must not reappear`);
+}
+console.log('Trade portfolio and industry directory are distinct in representative locales.');
