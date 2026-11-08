@@ -54,3 +54,28 @@ PR #88 kullanıcı görsel onayı, CI ve SEO/URL kontrolleri tamamlanmadan merge
 ## Son tasarım checkpoint — iç sayfa hero
 - `9586449`: Yeni global sourcing iç sayfalarında başlık/eyebrow, açıklama ve talep CTA'ları solda; sektöre özgü fotoğraf sağda olacak şekilde masaüstü editoryal hero yerleşimi CSS ile düzeltildi. 761px altında eski tek sütunlu mobil akış korunur. `data-global-mode="home"` açıkça kapsam dışında tutuldu; ana sayfa düzenine dokunulmadı.
 - Uygulama GitHub PR #88 branch'ine commit edildi. Gerçek tarayıcıda güncel Cloudflare önizlemesi henüz doğrulanamadı; en son GitHub CI ve Responsive Visual QA koşularının sonuçları kontrol edilmelidir. Başarılı geçmeden merge veya deploy yapılmaz.
+
+## 9 Kasım: Kanatlı Yemi referanslı tasarım ve iki ayrı menü
+
+### Kullanıcı onaylı yeni kapsam
+- Kullanıcı, `/tr/turkiyeden-kanatli-yemi-tedariki/` sayfasının hero ve içerik yerleşimini tüm yeni global sourcing sektör / hizmet / uzmanlık sayfalarına örnek gösterdi.
+- Ana menüdeki `Uluslararası Tedarik Sektörleri` ile `Ticaret Portföyü` içerikleri aynı olmamalıdır. Birincisi 7 sektörlük uluslararası araştırma dizini; ikincisi gerçek ticari ürün grupları / tedarik portföyüdür.
+- Kullanıcı yeni sayfaları canlıya alma veya eski cam sourcing'i geri getirme talimatı vermedi. Merge/deploy yok.
+
+### Yapılanlar
+- `TradePortfolio.astro`: ticaret portföyüne ayrı, PoultryFeedPage örneğinden esinlenen fotoğraflı tam ekran hero, editoryal ürün/portföy alanları, sağ görsel paneli ve CTA hazırlandı. Kuruyemiş ikincil gösterilir; cam tedariki aktif olarak gösterilmez.
+- `PageContent.astro`, `src/data/site.ts`, `src/lib/routes.ts`: portföy gerçek ayrı, locale-temelli indexe bağlandı; sektörel dizin artık portföyü taklit etmiyor. Meta description yeni ticari kapsamla eşitlendi.
+- `public/_redirects`, `functions/_middleware.js`: yeni içerik eşdeğerliği artık mevcut olmadığı için 13 portföy→sektör yönlendirmesi kaldırıldı. Eski hizmet/market migrasyonları ve cam 410 kuralları korundu.
+- `src/pages/he/[...path].astro`: İbranice bağımsız portföy indexi eklendi.
+- `docs/migrations/2026-11-08-baseline-url-decisions.json` ve `docs/migrations/2026-11-08-overview-redirects.json`: önceki 13 birleşim kararı güncellendi (39 yerine 26 kalıcı overview 301; 792 yerine 805 eski indexlenebilir URL).
+- `GlobalSourcing.astro`: ana sayfa hariç yeni iç sayfa hero'ları PoultryFeedPage benzeri karanlık örtülü, fotoğraf odaklı tam ekran yerleşime geçirildi. Sektör/hizmet sayfası devamına detay, hizmet kapsamı, görsel aside ve CTA eklendi.
+- `src/pages/[lang]/industries/[industry]/[specialization].astro`: 24 uzmanlık sayfasının hero'su aynı görsel dile uyarlandı.
+- `src/pages/[lang]/industries/[industry]/index.astro`: uzmanlık alanları, final talep CTA'sından önce gösterilecek şekilde slot'a taşındı.
+- `check:site`, `check:global`, `check:locales`: portföyün eski 18 ürünlü geniş katalog yerine ayrıştırılmış sektör odaklı portföy olduğu gerçeğini, yeni 200 URL'leri ve 301/410 korumasını test edecek şekilde güncellendi. Testlerdeki eski beklentiler ancak gerçek ürün/URL davranışı değiştiğinde güncellendi.
+
+### Kanıt sınırları ve riskler
+- Son GitHub CI koşularının bütün sonuçları raporlama anında ayrıca kontrol edilmeli.
+- UI ekran görüntülerinin gerçek insan gözüyle görsel incelemesi henüz tamamlanmadı.
+- 13 portföy sayfasının yeni 200 statüsü eski SEO konsolidasyon kararının yeni kullanıcı talimatı ile değiştirilmesidir; sitemap/canonical/redirect regression kontrolleri zorunludur.
+- Cloudflare preview URL, commit SHA ve gerçek HTTP kodları ayrı doğrulanmalı; sadece GitHub push'u deploy olarak raporlanmamalı.
+- Ana sayfa hero'su ve üretim branch'i değiştirilmedi.
