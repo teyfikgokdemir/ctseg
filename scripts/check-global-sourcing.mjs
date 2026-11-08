@@ -87,10 +87,10 @@ console.log('Legacy advisory URLs and unified global solutions menu passed.');
 
 /* Trade portfolio and international sectors have different commercial roles.
  * Guard against accidental reuse of the industry directory on both menus. */
-for(const lang of ['tr','en','de','ar','he']){
+for(const lang of ['tr','en','de','ar']){
   const indexRoutes={
     tr:'tr/ticari-urunler',en:'en/trade-products',
-    de:'de/handelsprodukte',ar:'ar/trade-products',he:'he/מוצרים-מסחריים'
+    de:'de/handelsprodukte',ar:'ar/trade-products'
   };
   const portfolioFile=`dist/${indexRoutes[lang]}/index.html`;
   const industriesFile=`dist/${lang}/industries/index.html`;
