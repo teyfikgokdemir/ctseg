@@ -4,20 +4,12 @@
     "to": "/tr/solutions/"
   },
   {
-    "from": "/tr/ticari-urunler/",
-    "to": "/tr/industries/"
-  },
-  {
     "from": "/tr/pazarlar/",
     "to": "/tr/global-markets/"
   },
   {
     "from": "/en/services/",
     "to": "/en/solutions/"
-  },
-  {
-    "from": "/en/trade-products/",
-    "to": "/en/industries/"
   },
   {
     "from": "/en/markets/",
@@ -28,20 +20,12 @@
     "to": "/de/solutions/"
   },
   {
-    "from": "/de/handelsprodukte/",
-    "to": "/de/industries/"
-  },
-  {
     "from": "/de/maerkte/",
     "to": "/de/global-markets/"
   },
   {
     "from": "/it/servizi/",
     "to": "/it/solutions/"
-  },
-  {
-    "from": "/it/prodotti-commerciali/",
-    "to": "/it/industries/"
   },
   {
     "from": "/it/mercati/",
@@ -52,20 +36,12 @@
     "to": "/ru/solutions/"
   },
   {
-    "from": "/ru/tovary/",
-    "to": "/ru/industries/"
-  },
-  {
     "from": "/ru/rynki/",
     "to": "/ru/global-markets/"
   },
   {
     "from": "/fa/services/",
     "to": "/fa/solutions/"
-  },
-  {
-    "from": "/fa/trade-products/",
-    "to": "/fa/industries/"
   },
   {
     "from": "/fa/markets/",
@@ -76,20 +52,12 @@
     "to": "/zh/solutions/"
   },
   {
-    "from": "/zh/trade-products/",
-    "to": "/zh/industries/"
-  },
-  {
     "from": "/zh/markets/",
     "to": "/zh/global-markets/"
   },
   {
     "from": "/vi/services/",
     "to": "/vi/solutions/"
-  },
-  {
-    "from": "/vi/trade-products/",
-    "to": "/vi/industries/"
   },
   {
     "from": "/vi/markets/",
@@ -100,20 +68,12 @@
     "to": "/uk/solutions/"
   },
   {
-    "from": "/uk/torhovi-produkty/",
-    "to": "/uk/industries/"
-  },
-  {
     "from": "/uk/rynky/",
     "to": "/uk/global-markets/"
   },
   {
     "from": "/ro/servicii/",
     "to": "/ro/solutions/"
-  },
-  {
-    "from": "/ro/produse-comerciale/",
-    "to": "/ro/industries/"
   },
   {
     "from": "/ro/piete/",
@@ -124,10 +84,6 @@
     "to": "/bg/solutions/"
   },
   {
-    "from": "/bg/targovski-produkti/",
-    "to": "/bg/industries/"
-  },
-  {
     "from": "/bg/pazari/",
     "to": "/bg/global-markets/"
   },
@@ -136,20 +92,12 @@
     "to": "/ar/solutions/"
   },
   {
-    "from": "/ar/trade-products/",
-    "to": "/ar/industries/"
-  },
-  {
     "from": "/ar/markets/",
     "to": "/ar/global-markets/"
   },
   {
     "from": "/he/שירותים/",
     "to": "/he/solutions/"
-  },
-  {
-    "from": "/he/מוצרים-מסחריים/",
-    "to": "/he/industries/"
   },
   {
     "from": "/he/שווקים/",
