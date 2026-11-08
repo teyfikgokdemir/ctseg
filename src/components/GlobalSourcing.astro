@@ -54,7 +54,7 @@ const showProcess=['home','process','about','industry'].includes(mode);
   {mode==='industry' && <section class="gs-editorial-detail"><div class="gs-wrap gs-editorial-grid">
     <div class="gs-editorial-main">
       <p class="gs-eyebrow">CTSEG / {c.industries[sectorIndex]}</p>
-      <h2>{c.capabilitiesTitle}</h2>
+      <h2>{c.industries[sectorIndex]}</h2>
       <p class="gs-editorial-lead">{c.sectors[sectorIndex]}</p>
       <div class="gs-editorial-panel"><h3>{c.capabilitiesTitle}</h3><ul class="gs-editorial-links">{[0,2,3,4,6].map(index=><li><a href={globalPath(lang,'solutions',capabilityIds[index])}>{c.solutions[index]}<span aria-hidden="true">↗</span></a></li>)}</ul></div>
     </div>
@@ -70,7 +70,7 @@ const showProcess=['home','process','about','industry'].includes(mode);
   {mode==='solution' && <section class="gs-editorial-detail"><div class="gs-wrap gs-editorial-grid">
     <div class="gs-editorial-main">
       <p class="gs-eyebrow">CTSEG / {c.nav[2]}</p>
-      <h2>{title}</h2>
+      <h2>{c.processTitle}</h2>
       <p class="gs-editorial-lead">{description}</p>
       <div class="gs-editorial-panel"><h3>{c.processTitle}</h3><ol class="gs-editorial-steps">{c.process.map(step=><li>{step}</li>)}</ol></div>
     </div>
@@ -359,4 +359,48 @@ const showProcess=['home','process','about','industry'].includes(mode);
   .gs-editorial-aside-copy .gs-button{font-size:14px;max-width:100%}
   @media(max-width:950px){.gs-editorial-grid{grid-template-columns:1fr}.gs-editorial-aside{position:static;display:grid;grid-template-columns:1fr 1fr}.gs-editorial-aside figure{height:100%}}
   @media(max-width:760px){.gs-editorial-detail{padding:65px 0}.gs-editorial-links{grid-template-columns:1fr}.gs-editorial-aside{display:block}.gs-editorial-aside figure{height:auto;aspect-ratio:1.5}}
+
+  /* Accessible editorial colors: lime reserved for dark surfaces only.
+     Keep the page label readable on light backgrounds, including all locales. */
+  .gs[data-global-mode="industry"] .gs-editorial-detail .gs-eyebrow,
+  .gs[data-global-mode="solution"] .gs-editorial-detail .gs-eyebrow {
+    color:#425734!important;opacity:1!important;font-size:13px!important;
+    font-weight:800!important;letter-spacing:.115em;line-height:1.6;
+  }
+  .gs[data-global-mode="industry"] .gs-editorial-aside .gs-eyebrow,
+  .gs[data-global-mode="solution"] .gs-editorial-aside .gs-eyebrow {
+    color:#d7f388!important;
+  }
+  .gs[data-global-mode="industry"] .gs-editorial-grid,
+  .gs[data-global-mode="solution"] .gs-editorial-grid {
+    grid-template-columns:minmax(0,1.14fr) minmax(320px,.86fr);
+    gap:clamp(32px,4vw,64px);
+  }
+  .gs[data-global-mode="industry"] .gs-editorial-main,
+  .gs[data-global-mode="solution"] .gs-editorial-main {min-width:0;max-width:100%}
+  .gs[data-global-mode="industry"] .gs-editorial-lead,
+  .gs[data-global-mode="solution"] .gs-editorial-lead {
+    font-size:clamp(18px,1.65vw,24px)!important;
+    line-height:1.58!important;max-width:56ch;
+  }
+  .gs[data-global-mode="industry"] .gs-editorial-main h2,
+  .gs[data-global-mode="solution"] .gs-editorial-main h2{
+    font-size:clamp(29px,2.8vw,43px)!important;
+    line-height:1.19!important;max-width:100%;margin:20px 0 25px;
+    overflow-wrap:normal;color:#202d22!important;
+  }
+  .gs[data-global-mode="industry"] .gs-editorial-aside,
+  .gs[data-global-mode="solution"] .gs-editorial-aside{
+    min-width:0;max-width:100%;width:100%;
+  }
+  .gs[data-global-mode="industry"] .gs-editorial-aside figure img,
+  .gs[data-global-mode="solution"] .gs-editorial-aside figure img{
+    width:100%;height:100%;object-fit:cover;
+  }
+  @media(max-width:1050px){
+    .gs[data-global-mode="industry"] .gs-editorial-grid,
+    .gs[data-global-mode="solution"] .gs-editorial-grid{grid-template-columns:1fr}
+    .gs[data-global-mode="industry"] .gs-editorial-aside,
+    .gs[data-global-mode="solution"] .gs-editorial-aside{position:static;max-width:750px}
+  }
 </style>
