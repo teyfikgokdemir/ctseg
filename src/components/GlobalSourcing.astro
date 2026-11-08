@@ -28,7 +28,7 @@ const showIndustries=['home','industries'].includes(mode);
 const showSolutions=['home','solutions'].includes(mode);
 const relatedIndustries = id === 'oem-odm' ? ['textiles','beauty','industrial'] : id === 'private-label' ? ['beauty','textiles','packaging'] : id === 'industrial-procurement' ? ['industrial','construction','agriculture'] : id === 'distributor-discovery' ? ['beauty','textiles','food'] : ['industrial','textiles','packaging'];
 const showMarkets=['home','markets'].includes(mode);
-const showProcess=['home','process','about','industry','solution'].includes(mode);
+const showProcess=['home','process','about','industry'].includes(mode);
 ---
 <div class="gs" data-global-sourcing data-global-mode={mode}>
   <section class:list={['gs-intro',{'gs-intro--home':home}]}>
@@ -47,10 +47,34 @@ const showProcess=['home','process','about','industry','solution'].includes(mode
     </article>)}</div>
     <aside class="gs-food"><div><span>{c.secondary}</span><h3><a href={globalPath(lang,'industries','food')}>{c.industries[6]} ↗</a></h3></div><p>{c.sectors[6]}</p></aside>
   </div></section>}
-  {mode==='industry' && <section class="gs-statement"><div class="gs-wrap gs-split"><h2>{c.capabilitiesTitle}</h2><div><p class="gs-large">{c.sectors[sectorIndex]}</p><ul class="gs-simple-list">{[0,2,3,4,6].map(index=><li><a href={globalPath(lang,'solutions',capabilityIds[index])}>{c.solutions[index]} ↗</a></li>)}</ul></div></div></section>}
+  {mode==='industry' && <section class="gs-editorial-detail"><div class="gs-wrap gs-editorial-grid">
+    <div class="gs-editorial-main">
+      <p class="gs-eyebrow">CTSEG / {c.industries[sectorIndex]}</p>
+      <h2>{c.capabilitiesTitle}</h2>
+      <p class="gs-editorial-lead">{c.sectors[sectorIndex]}</p>
+      <div class="gs-editorial-panel"><h3>{c.capabilitiesTitle}</h3><ul class="gs-editorial-links">{[0,2,3,4,6].map(index=><li><a href={globalPath(lang,'solutions',capabilityIds[index])}>{c.solutions[index]}<span aria-hidden="true">↗</span></a></li>)}</ul></div>
+    </div>
+    <aside class="gs-editorial-aside">
+      <figure><img src={`/images/global-sourcing/${industryImage}-1280.webp`} width="1280" height="800" alt={globalImageAlt[lang][Math.max(0,heroImageAltIndex)]} loading="lazy" decoding="async"/></figure>
+      <div class="gs-editorial-aside-copy"><p class="gs-eyebrow">CTSEG</p><h3>{c.buyer}</h3><p>{c.intro}</p><a class="gs-button" href={`${contact}?intent=buyer`}>{c.buyer} ↗</a></div>
+    </aside>
+  </div></section>}
   {mode==='industry' && id==='food' && lang!=='he' && <section class="gs-food-details"><div class="gs-wrap"><h2>{c.industries[6]}</h2><ul class="gs-food-links">{productIds.map(product=><li><a href={localizedPath(lang,'products',product)}>{products[product].names[lang]}</a><p>{products[product].descriptions[lang]}</p></li>)}</ul></div></section>}
   {mode==='industry' && id==='food' && lang==='he' && <section class="gs-food-details"><div class="gs-wrap"><h2>{c.industries[6]}</h2><ul class="gs-food-links">{israelProductIds.map(product=><li><a href={`/he/מוצרים-מסחריים/${product}/`}>{productMap[product][0]}</a><p>{productMap[product][1]}</p></li>)}</ul></div></section>}
   {showSolutions && <section class="gs-solutions"><div class="gs-wrap"><div class="gs-section-heading gs-section-heading--dark"><h2>{c.capabilitiesTitle}</h2><p>{c.lead}</p></div><div class="gs-capability-list">{capabilityIds.map((capability,index)=><article data-capability={capability}><h3><a href={globalPath(lang,'solutions',capability)}>{c.solutions[index]}<span aria-hidden="true">↗</span></a></h3><p>{c.solutionDescriptions[index]}</p></article>)}</div></div></section>}
+
+  {mode==='solution' && <section class="gs-editorial-detail"><div class="gs-wrap gs-editorial-grid">
+    <div class="gs-editorial-main">
+      <p class="gs-eyebrow">CTSEG / {c.nav[2]}</p>
+      <h2>{title}</h2>
+      <p class="gs-editorial-lead">{description}</p>
+      <div class="gs-editorial-panel"><h3>{c.processTitle}</h3><ol class="gs-editorial-steps">{c.process.map(step=><li>{step}</li>)}</ol></div>
+    </div>
+    <aside class="gs-editorial-aside">
+      <figure><img src={`/images/global-sourcing/${industryImage}-1280.webp`} width="1280" height="800" alt={globalImageAlt[lang][Math.max(0,heroImageAltIndex)]} loading="lazy" decoding="async"/></figure>
+      <div class="gs-editorial-aside-copy"><p class="gs-eyebrow">CTSEG</p><h3>{c.buyer}</h3><p>{c.intro}</p><a class="gs-button" href={`${contact}?intent=buyer`}>{c.buyer} ↗</a></div>
+    </aside>
+  </div></section>}
   {mode==='solution' && <section class="gs-focused"><div class="gs-wrap"><div class="gs-section-heading"><h2>{c.nav[3]}</h2><p>{c.solutionDescriptions[capabilityIds.indexOf(id as any)]}</p></div><div class="gs-focused-grid">{relatedIndustries.map((industry) => {const index=industryIds.indexOf(industry as any);return <article class="gs-focused-item"><a class="gs-industry-media" href={globalPath(lang,'industries',industry)}><img src={`/images/global-sourcing/${industry}-640.webp`} srcset={`/images/global-sourcing/${industry}-640.webp 640w, /images/global-sourcing/${industry}-1280.webp 1280w`} sizes="(max-width:760px) 92vw, 30vw" width="1280" height="800" alt={globalImageAlt[lang][index]} loading="lazy" decoding="async" /></a><h3><a href={globalPath(lang,'industries',industry)}>{c.industries[index]} <span aria-hidden="true">↗</span></a></h3><p>{c.sectors[index]}</p></article>})}</div></div></section>}
   {showMarkets && <section class="gs-markets"><div class="gs-wrap gs-split"><div><h2>{c.marketsTitle}</h2><p>{c.intro}</p></div><div><ul class="gs-regions">{c.regions.map(region=><li><span aria-hidden="true">↗</span>{region}</li>)}</ul><p>{c.research}</p></div></div></section>}
   {showProcess && <section class="gs-process" id="process"><div class="gs-wrap gs-split"><h2>{c.processTitle}</h2><ol>{c.process.map(step=><li>{step}</li>)}</ol></div></section>}
@@ -305,4 +329,30 @@ const showProcess=['home','process','about','industry','solution'].includes(mode
     .gs:not([data-global-mode="home"]) .gs-statement .gs-split{grid-template-columns:1fr}
     .gs:not([data-global-mode="home"]) .gs-intro .gs-link{min-height:44px}
   }
+
+  /* Service and industry body follows poultry reference: readable editorial
+     detail column with a contextual image and conversion side panel. */
+  .gs-editorial-detail{background:#f1f0e9;color:#17231b;padding:clamp(70px,8vw,122px) 0}
+  .gs-editorial-grid{display:grid;grid-template-columns:minmax(0,1.38fr) minmax(0,.77fr);gap:clamp(40px,6vw,98px);align-items:start}
+  .gs-editorial-main{min-width:0}
+  .gs-editorial-main h2{font-size:clamp(33px,3.4vw,52px);max-width:20ch;line-height:1.13;margin:25px 0}
+  .gs-editorial-lead{font-size:clamp(20px,1.8vw,27px)!important;line-height:1.6!important;color:#2d382d;max-width:60ch}
+  .gs-editorial-panel{padding:32px 0 0;margin-top:35px;border-top:1px solid #a6b3a0}
+  .gs-editorial-panel h3{font-size:clamp(22px,2vw,29px);margin:0 0 22px}
+  .gs-editorial-links{padding:0;margin:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 26px}
+  .gs-editorial-links li{border-top:1px solid #bdc8b8}
+  .gs-editorial-links a{display:flex;justify-content:space-between;gap:20px;padding:17px 0;min-height:54px;font-size:16px}
+  .gs-editorial-links span{color:#436320}
+  .gs-editorial-steps{padding-inline-start:24px;margin:0}
+  .gs-editorial-steps li{padding:14px 0;font-size:clamp(16px,1.4vw,20px);line-height:1.6;border-top:1px solid #b8c4b6}
+  .gs-editorial-aside{position:sticky;top:108px;background:#18271d;color:#f3f6ee;overflow:hidden}
+  .gs-editorial-aside figure{margin:0;aspect-ratio:1.34;overflow:hidden}
+  .gs-editorial-aside figure img{width:100%;height:100%;object-fit:cover}
+  .gs-editorial-aside-copy{padding:clamp(24px,3vw,44px)}
+  .gs-editorial-aside-copy .gs-eyebrow{color:#c9ec6b}
+  .gs-editorial-aside-copy h3{font-size:clamp(23px,2vw,33px);line-height:1.25;color:#f3f6ee;margin:18px 0}
+  .gs-editorial-aside-copy p{color:#d2dfd0;font-size:16px;line-height:1.65;margin-bottom:28px}
+  .gs-editorial-aside-copy .gs-button{font-size:14px;max-width:100%}
+  @media(max-width:950px){.gs-editorial-grid{grid-template-columns:1fr}.gs-editorial-aside{position:static;display:grid;grid-template-columns:1fr 1fr}.gs-editorial-aside figure{height:100%}}
+  @media(max-width:760px){.gs-editorial-detail{padding:65px 0}.gs-editorial-links{grid-template-columns:1fr}.gs-editorial-aside{display:block}.gs-editorial-aside figure{height:auto;aspect-ratio:1.5}}
 </style>
