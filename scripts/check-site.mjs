@@ -415,7 +415,7 @@ for (const [sourceLabel, sourceRecord] of builtTradeRecords) {
 if (productSchemaPages !== 216) errors.push(`expected 216 Product schemas with verifiable specification semantics, found ${productSchemaPages}`);
 if (productAssessmentServicePages !== 216) errors.push(`expected 216 specification-led product sourcing Service schemas across twelve full catalogue locales, found ${productAssessmentServicePages}`);
 if (searchLandingPages !== 48) errors.push(`expected 48 localized high-intent search landings, found ${searchLandingPages}`);
-if (contactEmailPanels !== 12) errors.push(`expected 12 localized contact email panels across twelve full contact pages, found ${contactEmailPanels}`);
+if (contactEmailPanels !== 14) errors.push(`expected 14 localized contact email panels across two generic homepages and twelve full contact pages, found ${contactEmailPanels}`);
 if (!existsSync(join(root, persianLandingLabel))) errors.push('standalone Persian landing page build output missing');
 const sitemapXml = files.filter((file) => /sitemap-\d+\.xml$/.test(file)).map((file) => readFileSync(file,'utf8')).join('\n');
 if (!sitemapXml.includes(`<loc>${persianLandingCanonical}</loc>`)) errors.push('Persian landing canonical missing from sitemap');

@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import GlobalSourcing from '../../../../components/GlobalSourcing.astro';
+import { activeLocales, schemaLanguage } from '../../../../data/locales';
+import { industryIds, globalPath, globalAlternates, globalTitle, globalDescription } from '../../../../data/global-sourcing';
+import { industrySpecializations } from '../../../../data/industry-specializations';
+import { globalCopy } from '../../../../data/global-sourcing-locales';
+import { localizedPath, type Locale } from '../../../../data/site';
+
+export function getStaticPaths() {
+  return activeLocales.flatMap((lang) =>
+    industryIds.map((id) => ({
+      params: { lang, industry: id },
+      props: { lang, id }
+    }))
+  );
+}
+
+const { lang, id } = Astro.props as { lang: Locale; id: string };
+const title = globalTitle(lang, 'industry', id) + ' | CTSEG';
+const description = globalDescription(lang, 'industry', id);
+const canonical = 'https://ctseg.com.tr' + globalPath(lang, 'industries', id);
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: title,
+  description,
+  url: canonical,
+  inLanguage: schemaLanguage(lang),
+  provider: { '@id': 'https://ctseg.com.tr/#organization' }
+};
+
+const c = globalCopy[lang] || globalCopy.en;
+const specs = industrySpecializations.filter((s) => s.industryId === id);
+---
+
+<BaseLayout
+  lang={lang}
+  title={title}
+  description={description}
+  pageKey="global-industry"
+  pageId={id}
+  canonical={canonical}
+  alternates={globalAlternates('industries', id)}
+  schema={[schema]}
+>
+  <GlobalSourcing lang={lang} mode="industry" id={id} />
+
+  {specs.length > 0 && (
+    <section class="section industry-specializations-section" style="background:#131a14; padding:70px 0; border-top:1px solid rgba(255,255,255,0.08);">
+      <div class="container">
+        <div class="section-head" style="margin-bottom:36px;">
+          <p class="eyebrow" style="color:#c4f000; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; font-size:12px; margin-bottom:12px;">{lang === 'tr' ? 'Uzmanlık Alanları' : lang === 'de' ? 'Spezialisierungen' : lang === 'it' ? 'Aree di Specializzazione' : lang === 'fa' ? 'حوزه‌های تخصصی' : lang === 'ru' ? 'Направления специализации' : lang === 'zh' ? '细分采购专业领域' : lang === 'vi' ? 'Lĩnh vực chuyên môn' : lang === 'he' ? 'תחומי התמחות' : lang === 'ar' ? 'مجالات التخصص' : 'Specialization Areas'}</p>
+          <h2 style="color:#fff; font-size:clamp(28px, 2.8vw, 42px); line-height:1.15; letter-spacing:-0.03em; margin:0;">{lang === 'tr' ? 'Sektörel Tedarik ve Üretim Başlıkları' : lang === 'de' ? 'Sektorale Beschaffungs- und Fertigungsthemen' : lang === 'it' ? 'Ambiti Settoriali di Approvvigionamento e Produzione' : lang === 'fa' ? 'سرفصل‌های تأمین و تولید بخشی' : lang === 'ru' ? 'Секторальные направления поставок и производства' : lang === 'zh' ? '行业采购与制造重点分类' : lang === 'vi' ? 'Các danh mục sản xuất và cung ứng chuyên ngành' : lang === 'he' ? 'נושאי רכש וייצור ענפיים' : lang === 'ar' ? 'مسارات التوريد والإنتاج القطاعية' : 'Sector Sourcing & Manufacturing Categories'}</h2>
+        </div>
+        <div class="card-grid">
+          {specs.map((spec) => {
+            const specContent = spec.content[lang] || spec.content.en;
+            return (
+              <a class="card" href={`/${lang}/industries/${id}/${spec.id}/`} style="background:linear-gradient(145deg, #182219 0%, #121913 100%); border-color:rgba(255,255,255,0.12);">
+                <h3 style="color:#fff; font-size:clamp(20px, 1.8vw, 26px); line-height:1.2; margin-bottom:12px;">{specContent.h1}</h3>
+                <p style="color:#ccd4c6; line-height:1.6; font-size:15px; margin-bottom:20px;">{specContent.lead}</p>
+                <strong style="margin-top:auto; color:#c4f000; font-size:12px; letter-spacing:0.06em; text-transform:uppercase;">{lang === 'tr' ? 'Kapsamı İncele →' : lang === 'he' ? 'לפרטים ←' : lang === 'ar' ? 'استعراض النطاق ←' : 'View Specialization →'}</strong>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>

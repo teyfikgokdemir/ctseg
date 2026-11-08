@@ -48,7 +48,7 @@ const hebrewCounterpart = (() => {
     home:'/he/',
     services:'/he/שירותים/',
     products:'/he/מוצרים-מסחריים/',
-    markets:'/he/שווקים/',
+    markets:'/he/global-markets/',
     insights:'/he/תובנות/',
     about:'/he/אודות/',
     contact:'/he/יצירת-קשר/',
@@ -196,7 +196,13 @@ const heroSrcset = generatedImageSrcset(HOME_HERO_IMAGE,HOME_HERO_WIDTHS);
     <link rel="icon" href="/favicon.svg?v=20261025" type="image/svg+xml" />
     <link rel="preload" href="/fonts/dm-sans-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/source-serif-4-latin-ext-variable.woff2" as="font" type="font/woff2" crossorigin />
-    {pageKey === 'home' && !noindex && <link rel="preload" as="image" href="/images/global-sourcing/industrial-1280.webp" imagesrcset="/images/global-sourcing/industrial-640.webp 640w, /images/global-sourcing/industrial-1280.webp 1280w" imagesizes="(max-width:760px) 92vw, 42vw" fetchpriority="high" />}
+    {pageKey === 'home' && !noindex && <link
+      rel="preload"
+      as="image"
+      imagesrcset={heroSrcset}
+      imagesizes={heroSizes}
+      fetchpriority="high"
+    />}
     <link rel="stylesheet" href="/premium-trade-house-base.css" />
     <link rel="stylesheet" href="/premium-trade-house.css" />
     <link rel="stylesheet" href="/premium-responsive-fixes.css" />
@@ -222,8 +228,10 @@ const heroSrcset = generatedImageSrcset(HOME_HERO_IMAGE,HOME_HERO_WIDTHS);
   <body>
     <a class="skip-link" href="#main">{lang === 'uk' ? 'Перейти до основного вмісту' : lang === 'ru' ? 'Перейти к содержанию' : lang === 'tr' ? 'Ana içeriğe geç' : lang === 'de' ? 'Zum Hauptinhalt' : lang === 'it' ? 'Vai al contenuto principale' : lang === 'ro' ? 'Sari la conținutul principal' : lang === 'bg' ? 'Към основното съдържание' : lang === 'sr' ? 'Pređi na glavni sadržaj' : lang === 'he' ? 'דלג לתוכן הראשי' : lang === 'ar' ? 'تجاوز إلى المحتوى الرئيسي' : 'Skip to content'}</a>
     <SiteHeader lang={lang} pageKey={pageKey} pageId={pageId} alternates={Object.fromEntries(alternateCodes.filter(code=>alternates[code]).map(code=>[code,alternates[code]]))} />
-    <main id="main">
+    <main id="main" data-global-sourcing={pageKey === 'home' ? '' : undefined} data-global-mode={pageKey === 'home' ? 'home' : undefined}>
       <slot />
+          {pageKey === 'home' && <TradeHouseStatement lang={lang as Locale} />}
+      {pageKey === 'home' && <TradeVideo lang={lang} />}
     </main>
     <SiteFooter lang={lang} pageKey={pageKey} />
     {pageKey === 'home' && <FloatingActions lang={lang} />}

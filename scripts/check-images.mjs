@@ -57,7 +57,7 @@ for(const file of htmlFiles){
 for(const file of homeFiles){
   const html=readFileSync(join(dist,file),'utf8');
   const keys=[...html.matchAll(/data-trade-visual="([^"]+)"/g)].map((match)=>match[1]);
-  const expected=html.includes('data-global-sourcing')?[]:['global-trade-hero'];
+  const expected=['global-trade-hero'];
   if(JSON.stringify(keys)!==JSON.stringify(expected))failures.push(`${file}: expected ${expected.join(', ')}, got ${keys.join(', ')}`);
   const imagePreloads=[...html.matchAll(/<link\b[^>]*rel="preload"[^>]*as="image"[^>]*>/gi)];
   if(imagePreloads.length!==1)failures.push(`${file}: expected one hero image preload, got ${imagePreloads.length}`);

@@ -1,0 +1,484 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { activeLocales, schemaLanguage } from '../../../../data/locales';
+import { industrySpecializations, type SpecializationRecord } from '../../../../data/industry-specializations';
+import { globalCopy } from '../../../../data/global-sourcing-locales';
+import { industryIds, globalPath } from '../../../../data/global-sourcing';
+import { localizedPath, type Locale } from '../../../../data/site';
+
+export function getStaticPaths() {
+  return activeLocales.flatMap((lang) =>
+    industrySpecializations.map((spec) => ({
+      params: {
+        lang,
+        industry: spec.industryId,
+        specialization: spec.id
+      },
+      props: {
+        spec,
+        lang
+      }
+    }))
+  );
+}
+
+const { spec, lang } = Astro.props as { spec: SpecializationRecord; lang: string };
+const content = spec.content[lang] || spec.content.en;
+const c = globalCopy[lang] || globalCopy.en;
+const sectorIndex = industryIds.indexOf(spec.industryId as any);
+const industryName = sectorIndex >= 0 ? c.industries[sectorIndex] : spec.industryId;
+const industryHref = `/${lang}/industries/${spec.industryId}/`;
+const contactHref = (lang === 'he' ? '/he/יצירת-קשר/' : localizedPath(lang as Locale, 'contact')) + '?intent=buyer_request';
+
+const canonical = `https://ctseg.com.tr/${lang}/industries/${spec.industryId}/${spec.id}/`;
+const alternates = Object.fromEntries(
+  activeLocales.map((code) => [code, `https://ctseg.com.tr/${code}/industries/${spec.industryId}/${spec.id}/`])
+);
+alternates['x-default'] = `https://ctseg.com.tr/en/industries/${spec.industryId}/${spec.id}/`;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: content.title,
+  description: content.metaDescription,
+  url: canonical,
+  inLanguage: schemaLanguage(lang),
+  provider: {
+    '@id': 'https://ctseg.com.tr/#organization'
+  },
+  areaServed: c.regions,
+  serviceType: content.h1
+};
+
+const faqSchema = content.faqs && content.faqs.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: content.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer
+    }
+  }))
+} : null;
+
+const schemas = faqSchema ? [serviceSchema, faqSchema] : [serviceSchema];
+
+// Related specializations in same industry
+const relatedSpecs = industrySpecializations
+  .filter((s) => s.industryId === spec.industryId && s.id !== spec.id)
+  .slice(0, 3);
+---
+
+<BaseLayout
+  lang={lang as Locale}
+  title={`${content.title} | CTSEG`}
+  description={content.metaDescription}
+  pageKey="global-industry-specialization"
+  pageId={`${spec.industryId}-${spec.id}`}
+  canonical={canonical}
+  alternates={alternates}
+  schema={schemas}
+>
+  <article class="spec-page" data-global-sourcing data-specialization={spec.id}>
+    {/* Hero Section */}
+    <section class="spec-hero">
+      <div class="container spec-hero__inner">
+        <nav class="spec-breadcrumb" aria-label="Breadcrumb">
+          <a href={`/${lang}/`}>{c.nav[0]}</a>
+          <span class="sep">/</span>
+          <a href={`/${lang}/industries/`}>{c.nav[3]}</a>
+          <span class="sep">/</span>
+          <a href={industryHref}>{industryName}</a>
+          <span class="sep">/</span>
+          <span aria-current="page">{content.h1}</span>
+        </nav>
+
+        <div class="spec-hero__grid">
+          <div class="spec-hero__content">
+            <p class="spec-eyebrow">{content.eyebrow}</p>
+            <h1 class="spec-title">{content.h1}</h1>
+            <p class="spec-lead">{content.lead}</p>
+            <div class="spec-hero__actions">
+              <a class="button button--primary" href={contactHref} data-trade-intent="buyer_request">
+                {content.ctaButton} ↗
+              </a>
+              <a class="button button--secondary" href="#specs-table">
+                {content.specsTitle} ↓
+              </a>
+            </div>
+          </div>
+
+          <figure class="spec-hero__media">
+            <img
+              src={spec.image.src}
+              width={spec.image.width}
+              height={spec.image.height}
+              alt={content.h1}
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    {/* Sourcing Overview */}
+    <section class="section spec-overview-section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">{industryName}</p>
+          <h2>{lang === 'tr' ? 'Ticari Tedarik Genel Bakışı' : lang === 'de' ? 'Kommerzielle Beschaffungsübersicht' : lang === 'it' ? 'Panoramica Commerciale di Approvvigionamento' : lang === 'fa' ? 'نمای کلی تأمین تجاری' : lang === 'ru' ? 'Обзор коммерческих поставок' : lang === 'zh' ? '商业采购概述' : lang === 'vi' ? 'Tổng quan về nguồn cung ứng thương mại' : lang === 'he' ? 'סקירת רכש מסחרי' : lang === 'ar' ? 'نظرة عامة على التوريد التجاري' : 'Commercial Sourcing Overview'}</h2>
+        </div>
+        <div class="spec-overview-card">
+          <p class="spec-overview-text">{content.overview}</p>
+        </div>
+      </div>
+    </section>
+
+    {/* Product Categories */}
+    <section class="section spec-categories-section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">{content.h1}</p>
+          <h2>{content.categoriesTitle}</h2>
+        </div>
+        <div class="card-grid">
+          {content.categories.map((category, idx) => (
+            <div class="card spec-card">
+              <span class="spec-card__number">0{idx + 1}</span>
+              <h3>{category}</h3>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Technical Specifications & Checklist */}
+    <section class="section spec-details-section" id="specs-table">
+      <div class="container">
+        <div class="spec-two-col">
+          <div class="spec-col-box">
+            <div class="section-head">
+              <p class="eyebrow">RFQ & Standards</p>
+              <h2>{content.specsTitle}</h2>
+            </div>
+            <ul class="spec-list">
+              {content.technicalSpecs.map((item) => (
+                <li>
+                  <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="spec-col-box">
+            <div class="section-head">
+              <p class="eyebrow">Verification</p>
+              <h2>{content.evaluationTitle}</h2>
+            </div>
+            <ul class="spec-list">
+              {content.evaluationCriteria.map((item) => (
+                <li>
+                  <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Production, MOQ & Logistics */}
+    <section class="section spec-operations-section">
+      <div class="container">
+        <div class="spec-two-col">
+          <div class="spec-col-box">
+            <div class="section-head">
+              <p class="eyebrow">Manufacturing & Volume</p>
+              <h2>{content.productionTitle}</h2>
+            </div>
+            <ul class="spec-list">
+              {content.productionAndMoq.map((item) => (
+                <li>
+                  <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="spec-col-box">
+            <div class="section-head">
+              <p class="eyebrow">Incoterms & Compliance</p>
+              <h2>{content.logisticsTitle}</h2>
+            </div>
+            <ul class="spec-list">
+              {content.logisticsAndCompliance.map((item) => (
+                <li>
+                  <svg class="spec-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Step-by-Step Process */}
+    <section class="section spec-process-section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Step-by-step</p>
+          <h2>{content.processTitle}</h2>
+        </div>
+        <div class="detailed-process">
+          {content.process.map((step, idx) => (
+            <li>
+              <div>
+                <span class="process-step-num">0{idx + 1}</span>
+                <p>{step}</p>
+              </div>
+            </li>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* Frequently Asked Questions */}
+    {content.faqs && content.faqs.length > 0 && (
+      <section class="section spec-faq-section">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow">FAQ</p>
+            <h2>{content.faqTitle}</h2>
+          </div>
+          <div class="answer-grid">
+            {content.faqs.map((faq) => (
+              <article>
+                <h3>{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    {/* Sourcing Request CTA */}
+    <section class="section spec-cta-section">
+      <div class="container">
+        <div class="trade-funnel-card spec-cta-card">
+          <div>
+            <span class="trade-funnel-kicker">{industryName}</span>
+            <h2 class="trade-funnel-title">{content.ctaTitle}</h2>
+            <p class="trade-funnel-desc">{content.ctaText}</p>
+          </div>
+          <a class="button button--primary" href={contactHref} data-trade-intent="buyer_request">
+            {content.ctaButton} →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {/* Related Specializations */}
+    {relatedSpecs.length > 0 && (
+      <section class="section spec-related-section">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow">{industryName}</p>
+            <h2>{lang === 'tr' ? 'Diğer Sektörel Tedarik Alanları' : lang === 'de' ? 'Weitere Spezialisierungen' : lang === 'it' ? 'Altre Specializzazioni' : lang === 'ru' ? 'Другие специализации' : lang === 'zh' ? '相关采购细分领域' : lang === 'fa' ? 'سایر حوزه‌های تخصصی' : lang === 'he' ? 'ענפי התמחות נוספים' : lang === 'ar' ? 'مجالات التوريد المتخصصة الأخرى' : 'Related Sourcing Specializations'}</h2>
+          </div>
+          <div class="card-grid">
+            {relatedSpecs.map((rel) => {
+              const relContent = rel.content[lang] || rel.content.en;
+              return (
+                <a class="card" href={`/${lang}/industries/${rel.industryId}/${rel.id}/`}>
+                  <h3>{relContent.h1}</h3>
+                  <p>{relContent.lead}</p>
+                  <strong>{lang === 'tr' ? 'Detayları İncele →' : lang === 'he' ? 'לפרטים נוספים ←' : lang === 'ar' ? 'عرض التفاصيل ←' : 'Explore Specialization →'}</strong>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .spec-page {
+    background: #0f1210;
+    color: #f5f3eb;
+    padding-bottom: 80px;
+  }
+  .spec-hero {
+    padding: clamp(40px, 5vw, 72px) 0 clamp(48px, 6vw, 84px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: radial-gradient(circle at top right, rgba(196, 240, 0, 0.08) 0%, transparent 60%);
+  }
+  .spec-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #9aa598;
+    margin-bottom: 32px;
+  }
+  .spec-breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .spec-breadcrumb a:hover {
+    color: #c4f000;
+  }
+  .spec-breadcrumb .sep {
+    color: rgba(255, 255, 255, 0.25);
+  }
+  .spec-breadcrumb span[aria-current="page"] {
+    color: #f5f3eb;
+    font-weight: 600;
+  }
+  .spec-hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 48px;
+    align-items: center;
+  }
+  .spec-eyebrow {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #c4f000;
+    margin-bottom: 16px;
+  }
+  .spec-title {
+    font-size: clamp(34px, 4.2vw, 56px);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin: 0 0 24px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+  }
+  .spec-lead {
+    font-size: clamp(17px, 1.4vw, 21px);
+    line-height: 1.6;
+    color: #d1d9cb;
+    margin: 0 0 36px;
+    max-width: 58ch;
+  }
+  .spec-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .spec-hero__media {
+    margin: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    aspect-ratio: 16 / 10;
+  }
+  .spec-hero__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .spec-overview-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: clamp(28px, 4vw, 44px);
+  }
+  .spec-overview-text {
+    font-size: clamp(17px, 1.35vw, 20px);
+    line-height: 1.75;
+    color: #e2e8dc;
+    margin: 0;
+    max-width: 78ch;
+  }
+  .spec-card {
+    min-height: 180px !important;
+  }
+  .spec-card__number {
+    font-size: 13px;
+    font-weight: 800;
+    color: #c4f000;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .spec-two-col {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
+  }
+  .spec-col-box {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: clamp(24px, 3.5vw, 40px);
+  }
+  .spec-col-box .section-head {
+    margin-bottom: 24px;
+  }
+  .spec-col-box .section-head h2 {
+    font-size: clamp(24px, 2.2vw, 34px);
+    color: #fff;
+  }
+  .spec-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 16px;
+  }
+  .spec-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: #d1d9cb;
+  }
+  .spec-icon {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: #c4f000;
+  }
+  .process-step-num {
+    display: inline-block;
+    color: #c4f000;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .spec-cta-card {
+    margin-top: 0;
+    background: linear-gradient(145deg, #182219 0%, #101611 100%) !important;
+    border: 1px solid rgba(196, 240, 0, 0.35) !important;
+  }
+  @media (max-width: 900px) {
+    .spec-hero__grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .spec-two-col {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+</style>

@@ -4,7 +4,7 @@ import { company } from '../data/site';
 import { contactCopy, emailHref, whatsappHref, type ContactLocale } from '../data/contact-experience';
 import { contactQualification } from '../data/contact-qualification';
 
-const { lang } = Astro.props as { lang:ContactLocale };
+const { lang, showDirectCards = true } = Astro.props as { lang:ContactLocale; showDirectCards?: boolean };
 const turnstileSitekey = '0x4AAAAAAFhkvxouanUPhB6V';
 const copy = contactCopy[lang];
 const websiteLabel: Record<string,string> = {
@@ -167,6 +167,7 @@ const dynamicPlaceholders = {
     <p class="eyebrow">{copy.eyebrow}</p>
     <h2 id="commercial-form-title">{copy.title}</h2>
     <p>{copy.intro}</p>
+    {showDirectCards && (
     <div class="direct-contact-cards" aria-label={copy.floatingLabel}>
       <a class="direct-contact-card" href={whatsappHref(lang)} target="_blank" rel="noopener noreferrer" data-contact-whatsapp>
         <span aria-hidden="true">
@@ -194,6 +195,7 @@ const dynamicPlaceholders = {
         <strong>Telegram</strong><small>@teyfikgokdemir</small>
       </a>
     </div>
+    )}
   </div>
   <div class="commercial-form-disclosure commercial-form-disclosure--open">
     <div class="commercial-form-disclosure-title">{copy.formDisclosure}</div>
@@ -244,7 +246,7 @@ const dynamicPlaceholders = {
     <div class="commercial-form-grid" data-intent-fields="supplier_market_entry" hidden>
       {supplierKeys.map((key,index)=><label class="commercial-field"><span>{qualificationLabels[index+1]}</span><input type="text" name={key} maxlength="100" data-qualification-label={['Manufacturing country','OEM / ODM capabilities','Minimum order quantity','Export markets','Certifications','Production capacity'][index]} disabled /></label>)}
     </div>
-    <details class="commercial-details" open>
+    <details class="commercial-details">
       <summary>{copy.details}</summary>
       <div class="commercial-form-grid">
         <label class="commercial-field"><span>{qualification.originMarket}</span><input type="text" name="originMarket" autocomplete="country-name" maxlength="100" /></label>
