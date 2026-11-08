@@ -343,7 +343,7 @@ const relatedSpecs = industrySpecializations
   .spec-page :is(h1, h2, h3, p, span, a, strong) {
     overflow-wrap: anywhere;
   }
-  .spec-page .section-head h2 {
+  .spec-page :is(h1, h2, h3) {
     /* The shared visual stylesheet otherwise forces normal wrapping here. */
     overflow-wrap: anywhere !important;
   }

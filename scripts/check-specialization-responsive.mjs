@@ -49,6 +49,10 @@ try {
   const heading=await page.locator('.spec-col-box .section-head h2').first().evaluate(el=>({overflow:document.documentElement.scrollWidth-innerWidth,wrap:getComputedStyle(el).overflowWrap}));
   if(heading.overflow>1)failures.push({case:'long-translated-heading',width:320,...heading});
   count++;
+  await page.locator('.spec-title').evaluate(el=>{el.textContent='Approvvigionamento'.repeat(5);});
+  const heroHeading=await page.locator('.spec-title').evaluate(el=>({overflow:document.documentElement.scrollWidth-innerWidth,wrap:getComputedStyle(el).overflowWrap}));
+  if(heroHeading.overflow>1)failures.push({case:'long-translated-hero-heading',width:320,...heroHeading});
+  count++;
   assert.equal(failures.length,0,JSON.stringify(failures,null,2));
   console.log(`Specialization responsive passed: ${count} cases; all 24 topics, all 13 locales, 320/390/1440px, RTL, loaded images, semantic process, buyer paths and long translated CTAs. No external requests allowed.`);
 } finally {
