@@ -54,12 +54,10 @@ const showProcess=['home','process','about','industry'].includes(mode);
   {mode==='industry' && <section class="gs-editorial-detail"><div class="gs-wrap gs-editorial-grid">
     <div class="gs-editorial-main">
       <p class="gs-eyebrow">CTSEG / {c.industries[sectorIndex]}</p>
-      <h2>{c.industries[sectorIndex]}</h2>
-      <p class="gs-editorial-lead">{c.sectors[sectorIndex]}</p>
-      <div class="gs-editorial-panel"><h3>{c.capabilitiesTitle}</h3><ul class="gs-editorial-links">{[0,2,3,4,6].map(index=><li><a href={globalPath(lang,'solutions',capabilityIds[index])}>{c.solutions[index]}<span aria-hidden="true">↗</span></a></li>)}</ul></div>
+      <h2>{c.capabilitiesTitle}</h2>
+      <div class="gs-editorial-panel"><ul class="gs-editorial-links">{[0,2,3,4,6].map(index=><li><a href={globalPath(lang,'solutions',capabilityIds[index])}>{c.solutions[index]}<span aria-hidden="true">↗</span></a></li>)}</ul></div>
     </div>
     <aside class="gs-editorial-aside">
-      <figure><img src={`/images/global-sourcing/${industryImage}-1280.webp`} width="1280" height="800" alt={globalImageAlt[lang][Math.max(0,heroImageAltIndex)]} loading="lazy" decoding="async"/></figure>
       <div class="gs-editorial-aside-copy"><p class="gs-eyebrow">CTSEG</p><h3>{c.buyer}</h3><p>{c.intro}</p><a class="gs-button" href={`${contact}?intent=buyer`}>{c.buyer} ↗</a></div>
     </aside>
   </div></section>}
@@ -71,11 +69,10 @@ const showProcess=['home','process','about','industry'].includes(mode);
     <div class="gs-editorial-main">
       <p class="gs-eyebrow">CTSEG / {c.nav[2]}</p>
       <h2>{c.processTitle}</h2>
-      <p class="gs-editorial-lead">{description}</p>
-      <div class="gs-editorial-panel"><h3>{c.processTitle}</h3><ol class="gs-editorial-steps">{c.process.map(step=><li>{step}</li>)}</ol></div>
+      <p class="gs-editorial-lead">{c.solutionDescriptions[capabilityIds.indexOf(id as any)]}</p>
+      <div class="gs-editorial-panel"><ol class="gs-editorial-steps">{c.process.map(step=><li>{step}</li>)}</ol></div>
     </div>
     <aside class="gs-editorial-aside">
-      <figure><img src={`/images/global-sourcing/${industryImage}-1280.webp`} width="1280" height="800" alt={globalImageAlt[lang][Math.max(0,heroImageAltIndex)]} loading="lazy" decoding="async"/></figure>
       <div class="gs-editorial-aside-copy"><p class="gs-eyebrow">CTSEG</p><h3>{c.buyer}</h3><p>{c.intro}</p><a class="gs-button" href={`${contact}?intent=buyer`}>{c.buyer} ↗</a></div>
     </aside>
   </div></section>}
@@ -403,4 +400,24 @@ const showProcess=['home','process','about','industry'].includes(mode);
     .gs[data-global-mode="industry"] .gs-editorial-aside,
     .gs[data-global-mode="solution"] .gs-editorial-aside{position:static;max-width:750px}
   }
+
+  /* Post-launch: avoid repeating the same photograph and introductory text
+     directly below the immersive hero. Related sector cards retain photography. */
+  .gs[data-global-mode="industry"] .gs-editorial-detail,
+  .gs[data-global-mode="solution"] .gs-editorial-detail{padding-block:clamp(65px,7vw,105px)}
+  .gs[data-global-mode="industry"] .gs-editorial-panel,
+  .gs[data-global-mode="solution"] .gs-editorial-panel{margin-top:24px;padding-top:24px}
+  .gs[data-global-mode="industry"] .gs-editorial-main h2,
+  .gs[data-global-mode="solution"] .gs-editorial-main h2{margin-block:16px 24px;max-width:26ch}
+  .gs[data-global-mode="industry"] .gs-editorial-aside,
+  .gs[data-global-mode="solution"] .gs-editorial-aside{
+    position:static;align-self:start;min-height:0;
+    background:#18271d;border-top:3px solid #c4f000;
+  }
+  .gs[data-global-mode="industry"] .gs-editorial-aside-copy,
+  .gs[data-global-mode="solution"] .gs-editorial-aside-copy{padding:clamp(28px,3.5vw,48px)}
+  .gs[data-global-mode="industry"] .gs-editorial-aside-copy h3,
+  .gs[data-global-mode="solution"] .gs-editorial-aside-copy h3{max-width:23ch}
+  .gs[data-global-mode="industry"] .gs-editorial-links,
+  .gs[data-global-mode="solution"] .gs-editorial-steps{margin-top:0}
 </style>
