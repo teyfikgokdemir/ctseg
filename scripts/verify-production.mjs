@@ -1,12 +1,12 @@
 const redirectChecks = [
   {
     url: 'https://ctseg.com.tr/medical/reflex-disposable-gloves/',
-    expected: 'https://ctseg.com.tr/tr/ticari-urunler/',
+    expected: 'https://ctseg.com.tr/tr/industries/',
     label: 'retired REFLEX redirect',
   },
   {
     url: 'https://ctseg.com.tr/en/medical/reflex-disposable-gloves/',
-    expected: 'https://ctseg.com.tr/en/trade-products/',
+    expected: 'https://ctseg.com.tr/en/industries/',
     label: 'retired English REFLEX redirect',
   },
   {
