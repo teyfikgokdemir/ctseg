@@ -668,10 +668,16 @@ try {
         const labelRatio=contrast(getComputedStyle(eyebrow).color,getComputedStyle(section).backgroundColor);
         const headingRatio=contrast(getComputedStyle(heading).color,getComputedStyle(section).backgroundColor);
         const b=panel.getBoundingClientRect();
-        return {labelRatio,headingRatio,panelWidth:b.width,panelX:b.x,heading:heading.textContent?.trim()};
+        const heroTitle=document.querySelector('.gs-intro-heading h1')?.textContent?.trim();
+        const editorTitle=heading.textContent?.trim();
+        const repeatedPhoto=Boolean(panel.querySelector('img') &&
+          panel.querySelector('img')?.getAttribute('src') === document.querySelector('.gs-intro-photo img')?.getAttribute('src'));
+        return {labelRatio,headingRatio,panelWidth:b.width,panelX:b.x,heading:editorTitle,
+          duplicateHeading:Boolean(heroTitle&&editorTitle&&heroTitle===editorTitle),repeatedPhoto};
       });
       if(editorial.missing||editorial.labelRatio<4.5||editorial.headingRatio<4.5||editorial.panelWidth<220
-         ||editorial.panelX<0||editorial.panelX+editorial.panelWidth>testCase.width+2){
+         ||editorial.panelX<0||editorial.panelX+editorial.panelWidth>testCase.width+2
+         ||editorial.duplicateHeading||editorial.repeatedPhoto){
         failures.push(`${testCase.name}: illegible or clipped editorial detail: ${JSON.stringify(editorial)}`);
       }
     }
