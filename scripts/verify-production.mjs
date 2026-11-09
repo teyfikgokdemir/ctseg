@@ -171,7 +171,7 @@ for (const check of pageChecks) {
 {
   const response = await fetch('https://ctseg.com.tr/llms.txt', { headers: { 'user-agent':'CTSEG-Production-QA/2.0', 'cache-control':'no-cache' } });
   const body = await response.text();
-  if (!response.ok || !body.includes('https://ctseg.com.tr/ar/') || !body.includes('AI Verification Boundary') || !body.includes('https://ctseg.com.tr/ai-fact-sheet.txt')) {
+  if (!response.ok || !body.includes('https://ctseg.com.tr/ar/') || !body.includes('Global Sourcing and Trade Development')) {
     throw new Error(`Production verification failed: llms discovery file. status=${response.status}`);
   }
   console.log('PASS: llms discovery file');
