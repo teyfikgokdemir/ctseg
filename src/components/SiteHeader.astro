@@ -2,7 +2,6 @@
 import { localizedPath, ui, type Locale } from '../data/site';
 import { activeLocaleRegistry } from '../data/locales';
 
-import { generatedImageSrc, LOGO_IMAGE } from '../lib/responsive-images';
 import { tradePlatformCopy } from '../data/trade-platform';
 import { globalCopy } from '../data/global-sourcing-locales';
 import { searchLandingPath, type SearchLandingId } from '../data/search-landings';
@@ -202,9 +201,8 @@ const globalSwitchPath = (target: string): string => {
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand brand-stack" href={home} aria-label={`CTSEG · ${t.home}`}>
-      <img src={generatedImageSrc(LOGO_IMAGE,320)} width="1250" height="270" alt="CTSEG" decoding="async" />
-      <span class="header-house-label" aria-hidden="true">{lang === 'he' ? 'בית סחר בינלאומי' : lang === 'ar' ? 'بيت تجارة عالمي' : 'GLOBAL TRADE HOUSE'}</span>
+    <a class="brand brand-stack brand-premium" href={home} aria-label={`CTSEG · ${t.home}`}>
+      <img src="/images/ctseg-premium-lockup.svg" width="335" height="100" alt="CTSEG Global Trade House" decoding="async" />
     </a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label={t.menu || 'Menu'} data-menu-toggle>
       <span class="sr-only">{t.menu}</span><span></span><span></span>
@@ -495,10 +493,12 @@ const globalSwitchPath = (target: string): string => {
 </script>
 
 <style is:global>
-  .brand-stack{display:flex!important;flex-direction:column!important;align-items:center!important;gap:3px!important}
-  .brand-stack img{display:block!important}
-  .header-house-label{display:block;color:#9f9f9a;font-size:8px;font-weight:850;line-height:1;letter-spacing:.18em;white-space:nowrap;text-align:center}
-  @media (max-width:1050px){.header-house-label{font-size:7px}}
+  /* Premium CTSEG lockup: one responsive vector instead of a doubled tagline. */
+  .site-header .brand-stack.brand-premium{display:inline-flex!important;flex-direction:row!important;align-items:center!important;flex:0 0 auto!important;gap:0!important;width:auto!important;min-width:0!important}
+  .site-header .brand-stack.brand-premium>img{display:block!important;width:clamp(200px,16vw,270px)!important;max-width:100%!important;height:auto!important;aspect-ratio:335/100!important;object-fit:contain!important;filter:none!important}
+  @media(max-width:1050px){.site-header .brand-stack.brand-premium>img{width:180px!important}}
+  @media(max-width:500px){.site-header .brand-stack.brand-premium>img{width:158px!important}}
+
 
   @media (min-width: 1051px) {
     .mobile-only-panel,.mobile-nav-head,.mobile-myth-card,.mobile-cta-btn{display:none!important}

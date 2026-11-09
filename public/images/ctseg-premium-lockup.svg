@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 335 100" width="335" height="100" role="img" aria-labelledby="title desc">
+<title id="title">CTSEG Global Trade House</title>
+<desc id="desc">Altın renkli CT monogramı ve küresel ağ sembolü ile CTSEG yazısı</desc>
+<defs>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7e4b7"/><stop offset=".35" stop-color="#d5a65a"/><stop offset=".65" stop-color="#a97936"/><stop offset="1" stop-color="#eed5a1"/></linearGradient>
+ <linearGradient id="soft" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#dec691"/><stop offset="1" stop-color="#99703b"/></linearGradient>
+</defs>
+<g transform="translate(1 5)" fill="none" stroke="url(#soft)" stroke-width="1.3" opacity=".83">
+ <circle cx="43" cy="45" r="38.5"/>
+ <ellipse cx="43" cy="45" rx="16" ry="38.5"/>
+ <path d="M4.5 45h77M10 23h66M10 67h66M43 6.5v77"/>
+ <path d="M12 18C26 29 58 29 74 18M12 72C29 59 58 60 74 72" stroke-width=".8"/>
+</g>
+<g fill="url(#gold)" stroke="#110f0c" stroke-width=".5" stroke-linejoin="round">
+ <path d="M65 17H34C14 17 8 31 8 45c0 16 11 30 28 30h14l9-10H36c-10 0-17-8-17-20 0-11 6-18 17-18h19z"/>
+ <path d="M34 29h43l-8 10H53v40H41V39H28z"/>
+ <path d="M28 39h50l-9 11H51v28H40V50H18z" opacity=".92"/>
+</g>
+<path d="M95 15v69" stroke="url(#gold)" stroke-width="1.5"/>
+<text x="111" y="56" fill="#f6f5ee" font-family="Arial, Helvetica Neue, sans-serif" font-size="46" font-weight="400" letter-spacing="6">CTSEG</text>
+<text x="114" y="77" fill="#ddc59b" font-family="Arial, sans-serif" font-size="10.8" font-weight="600" letter-spacing="4.1">GLOBAL TRADE HOUSE</text>
+</svg>
