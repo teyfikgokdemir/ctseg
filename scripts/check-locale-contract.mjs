@@ -78,7 +78,7 @@ const arInsight=read('ar/insights/strategic-sourcing-vs-procurement/index.html')
 if((arInsight.match(/class="content-block article-block"/g)||[]).length<4||!arInsight.includes('التوريد الاستراتيجي'))errors.push('Arabic insight detail content/category incomplete');
 const arPrivacy=read('ar/privacy/index.html');
 const arCookies=read('ar/cookies/index.html');
-for(const [path,html] of [['ar/privacy/index.html',arPrivacy],['ar/cookies/index.html',arCookies]])if(!html.includes('أدوات Cansu التحليلية')||!html.includes('الموافقة على التحليلات'))errors.push(`${path}: Arabic analytics disclosure missing`);
+for(const [path,html] of [['ar/privacy/index.html',arPrivacy],['ar/cookies/index.html',arCookies]])if(!html.includes('Umami')||!html.includes('العدّ الإجمالي المجهول')||!html.includes('إلا بعد الموافقة'))errors.push(`${path}: Arabic analytics disclosure missing`);
 
 const ruHome=read(homes.ru);
 if(!ruHome.includes('<html lang="ru" dir="ltr"'))errors.push('Russian homepage lang/direction incorrect');

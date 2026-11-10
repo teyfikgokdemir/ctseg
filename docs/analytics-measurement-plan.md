@@ -8,7 +8,7 @@ Measure which language, landing page, channel, commercial intent, trade directio
 
 ## Consent boundary
 
-- GA4 loads only after the visitor accepts analytics cookies.
+- GA4 loads in Advanced Consent Mode with storage denied; analytics cookies and full measurement begin only after consent.
 - Form delivery remains available without analytics consent.
 - No name, company, email, phone, product free text, message or other personal data is sent to GA4.
 - First-touch attribution is stored in `sessionStorage`, not a persistent advertising cookie.
@@ -61,7 +61,7 @@ Every event also receives these bounded global parameters when available:
 
 ## Acceptance checks
 
-- Rejecting analytics consent produces no GA4 request.
+- Rejecting analytics consent keeps storage denied and permits only limited cookieless GA4 signals.
 - Accepting analytics consent loads GA4 once and preserves navigation events.
 - A successful form submission emits one `generate_lead` event.
 - The contact email shows landing and UTM context when present.
