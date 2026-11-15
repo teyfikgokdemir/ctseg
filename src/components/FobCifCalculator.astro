@@ -1,0 +1,367 @@
+---
+import { company, localizedPath, type Locale } from '../data/site';
+
+interface Props {
+  lang: Locale | string;
+}
+
+const { lang } = Astro.props;
+const isTr = lang === 'tr';
+
+const copy = isTr
+  ? {
+      kicker: 'B2B DIŞ TİCARET ARACI',
+      title: 'FOB / CIF Konteyner & Birim Maliyet Hesaplayıcı',
+      lead: '20ft / 40ft konteyner yüklemelerinde fabrika çıkış fiyatı, liman masrafı, deniz navlunu, sigorta ve gümrük vergisi kalemlerini birleştirerek kilogram ve ton başına gerçek teslim (landed) maliyeti anında hesaplayın.',
+      containerLabel: 'Konteyner Tipi',
+      weightLabel: 'Net Yük Miktarı (kg)',
+      unitPriceLabel: 'FOB / Fabrika Birim Fiyatı (USD / kg)',
+      portHandlingLabel: 'İç Nakliye & Liman Masrafı (USD)',
+      freightLabel: 'Deniz Navlunu (USD / Konteyner)',
+      insuranceLabel: 'Nakliyat Sigortası (%)',
+      dutyLabel: 'Varış Ülkesi Gümrük Vergisi (%)',
+      fobTotal: 'Toplam FOB Bedeli',
+      cifTotal: 'Toplam CIF Bedeli',
+      landedTotal: 'Vergi Dahil Toplam Maliyet',
+      perKg: 'Birim Teslim Maliyeti (USD / kg)',
+      perMt: 'Ton Başına Maliyet (USD / MT)',
+      logisticsShare: 'Navlun + Sigorta Payı',
+      ctaText: 'Doğrulanmış FOB / CIF Teklifi Alın',
+      disclaimer: 'Gösterge amaçlıdır. Kesin navlun, gözetim (SGS/Intertek) ve menşe (EUR.1/ATR) avantajları için sevkiyat rotasına göre yazılı teklif talep edin.',
+      presets: [
+        { id: '20ft', label: '20ft FCL (19.000 kg — Kuru Meyve / Kuruyemiş)', weight: 19000 },
+        { id: '40ft', label: '40ft FCL (25.000 kg — Standart Konteyner)', weight: 25000 },
+        { id: '40hc', label: '40ft High Cube (26.000 kg — Hacimli Yük)', weight: 26000 },
+        { id: 'custom', label: 'Özel Miktar (Manuel Girin)', weight: 10000 },
+      ],
+    }
+  : {
+      kicker: 'B2B TRADE UTILITY',
+      title: 'FOB / CIF Container & Landed Cost Calculator',
+      lead: 'Combine unit FOB price, port handling, ocean freight, marine insurance, and destination import duty to calculate real landed cost per kilogram and metric ton for 20ft and 40ft FCL shipments.',
+      containerLabel: 'Container Type',
+      weightLabel: 'Net Cargo Weight (kg)',
+      unitPriceLabel: 'FOB Unit Price (USD / kg)',
+      portHandlingLabel: 'Inland & Port Handling (USD)',
+      freightLabel: 'Ocean Freight (USD / Container)',
+      insuranceLabel: 'Marine Insurance (%)',
+      dutyLabel: 'Destination Import Duty (%)',
+      fobTotal: 'Total FOB Value',
+      cifTotal: 'Total CIF Value',
+      landedTotal: 'Total Landed Cost (Incl. Duty)',
+      perKg: 'Landed Cost per kg (USD)',
+      perMt: 'Landed Cost per Metric Ton (USD)',
+      logisticsShare: 'Freight & Insurance Share',
+      ctaText: 'Request Verified FOB / CIF Quote',
+      disclaimer: 'Indicative calculation only. Request a formal RFQ for port-specific freight, SGS/Intertek inspection, and EUR.1 / ATR duty exemptions.',
+      presets: [
+        { id: '20ft', label: '20ft FCL (19,000 kg — Dried Fruit / Nuts)', weight: 19000 },
+        { id: '40ft', label: '40ft FCL (25,000 kg — Standard Container)', weight: 25000 },
+        { id: '40hc', label: '40ft High Cube (26,000 kg — High Volume)', weight: 26000 },
+        { id: 'custom', label: 'Custom Net Weight (Manual)', weight: 10000 },
+      ],
+    };
+
+const contactHref = localizedPath(lang, 'contact');
+---
+
+<section class="calc-hero">
+  <div class="container">
+    <span class="calc-kicker">{copy.kicker}</span>
+    <h1>{copy.title}</h1>
+    <p class="calc-lead">{copy.lead}</p>
+  </div>
+</section>
+
+<section class="calc-section">
+  <div class="container calc-grid">
+    <div class="calc-card calc-inputs">
+      <div class="calc-field">
+        <label for="calc-preset">{copy.containerLabel}</label>
+        <select id="calc-preset">
+          {copy.presets.map((p) => (
+            <option value={p.id} data-weight={p.weight}>{p.label}</option>
+          ))}
+        </select>
+      </div>
+
+      <div class="calc-row">
+        <div class="calc-field">
+          <label for="calc-weight">{copy.weightLabel}</label>
+          <input id="calc-weight" type="number" min="100" step="100" value="19000" />
+        </div>
+        <div class="calc-field">
+          <label for="calc-price">{copy.unitPriceLabel}</label>
+          <input id="calc-price" type="number" min="0.1" step="0.05" value="4.20" />
+        </div>
+      </div>
+
+      <div class="calc-row">
+        <div class="calc-field">
+          <label for="calc-port">{copy.portHandlingLabel}</label>
+          <input id="calc-port" type="number" min="0" step="50" value="650" />
+        </div>
+        <div class="calc-field">
+          <label for="calc-freight">{copy.freightLabel}</label>
+          <input id="calc-freight" type="number" min="0" step="50" value="2400" />
+        </div>
+      </div>
+
+      <div class="calc-row">
+        <div class="calc-field">
+          <label for="calc-ins">{copy.insuranceLabel}</label>
+          <input id="calc-ins" type="number" min="0" max="10" step="0.05" value="0.35" />
+        </div>
+        <div class="calc-field">
+          <label for="calc-duty">{copy.dutyLabel}</label>
+          <input id="calc-duty" type="number" min="0" max="100" step="0.5" value="0" />
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-card calc-results" aria-live="polite">
+      <div class="calc-metric-primary">
+        <span>{copy.perKg}</span>
+        <strong id="out-per-kg">$4.36</strong>
+        <small id="out-per-mt">{copy.perMt}: $4,363</small>
+      </div>
+
+      <dl class="calc-breakdown">
+        <div>
+          <dt>{copy.fobTotal}</dt>
+          <dd id="out-fob">$80,450</dd>
+        </div>
+        <div>
+          <dt>{copy.cifTotal}</dt>
+          <dd id="out-cif">$83,140</dd>
+        </div>
+        <div>
+          <dt>{copy.landedTotal}</dt>
+          <dd id="out-landed">$83,140</dd>
+        </div>
+        <div>
+          <dt>{copy.logisticsShare}</dt>
+          <dd id="out-share">3.2%</dd>
+        </div>
+      </dl>
+
+      <a class="calc-cta" href={contactHref}>{copy.ctaText} &rarr;</a>
+      <p class="calc-disclaimer">{copy.disclaimer}</p>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const preset = document.getElementById('calc-preset');
+    const weight = document.getElementById('calc-weight');
+    const price = document.getElementById('calc-price');
+    const port = document.getElementById('calc-port');
+    const freight = document.getElementById('calc-freight');
+    const ins = document.getElementById('calc-ins');
+    const duty = document.getElementById('calc-duty');
+
+    const outKg = document.getElementById('out-per-kg');
+    const outMt = document.getElementById('out-per-mt');
+    const outFob = document.getElementById('out-fob');
+    const outCif = document.getElementById('out-cif');
+    const outLanded = document.getElementById('out-landed');
+    const outShare = document.getElementById('out-share');
+
+    const fmtUsd = (n, decimals = 0) =>
+      '$' + Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+
+    const compute = () => {
+      const w = Math.max(1, Number(weight.value) || 0);
+      const p = Math.max(0, Number(price.value) || 0);
+      const ph = Math.max(0, Number(port.value) || 0);
+      const fr = Math.max(0, Number(freight.value) || 0);
+      const insPct = Math.max(0, Number(ins.value) || 0) / 100;
+      const dutyPct = Math.max(0, Number(duty.value) || 0) / 100;
+
+      const fob = w * p + ph;
+      const insuranceCost = (fob + fr) * insPct;
+      const cif = fob + fr + insuranceCost;
+      const landed = cif * (1 + dutyPct);
+      const perKg = landed / w;
+      const perMt = perKg * 1000;
+      const logisticsPct = landed > 0 ? ((fr + insuranceCost + ph) / landed) * 100 : 0;
+
+      outKg.textContent = fmtUsd(perKg, 2);
+      outMt.textContent = outMt.textContent.split(':')[0] + ': ' + fmtUsd(perMt, 0);
+      outFob.textContent = fmtUsd(fob, 0);
+      outCif.textContent = fmtUsd(cif, 0);
+      outLanded.textContent = fmtUsd(landed, 0);
+      outShare.textContent = logisticsPct.toFixed(1) + '%';
+    };
+
+    preset?.addEventListener('change', () => {
+      const opt = preset.options[preset.selectedIndex];
+      const w = opt?.getAttribute('data-weight');
+      if (w && opt.value !== 'custom') {
+        weight.value = w;
+      }
+      compute();
+    });
+
+    [weight, price, port, freight, ins, duty].forEach((el) => el?.addEventListener('input', compute));
+    compute();
+  })();
+</script>
+
+<style>
+  .calc-hero {
+    padding: clamp(48px, 6vw, 84px) 0 28px;
+  }
+  .calc-kicker {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #111;
+    color: #c4f000;
+    margin-bottom: 16px;
+  }
+  .calc-hero h1 {
+    font-size: clamp(30px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    max-width: 18ch;
+    margin: 0 0 16px;
+  }
+  .calc-lead {
+    max-width: 64ch;
+    color: #4c4c49;
+    line-height: 1.65;
+    margin: 0;
+  }
+  .calc-section {
+    padding: 16px 0 clamp(60px, 7vw, 96px);
+  }
+  .calc-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 24px;
+    align-items: start;
+  }
+  .calc-card {
+    border: 1px solid #dedcd5;
+    border-radius: 22px;
+    padding: clamp(24px, 3vw, 34px);
+    background: linear-gradient(145deg, #fff 0%, #f8f7f3 100%);
+    box-shadow: 0 18px 48px rgba(12, 12, 12, 0.055);
+  }
+  .calc-inputs {
+    display: grid;
+    gap: 18px;
+  }
+  .calc-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .calc-field {
+    display: grid;
+    gap: 8px;
+  }
+  .calc-field label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1c1c1a;
+  }
+  .calc-field input,
+  .calc-field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d5d3cb;
+    border-radius: 12px;
+    font: inherit;
+    font-size: 15px;
+    background: #fff;
+    color: #111;
+  }
+  .calc-results {
+    background: #111;
+    color: #fff;
+    border-color: #242422;
+  }
+  .calc-metric-primary {
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    margin-bottom: 20px;
+  }
+  .calc-metric-primary span {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #a8a8a1;
+    margin-bottom: 8px;
+  }
+  .calc-metric-primary strong {
+    display: block;
+    font-size: clamp(36px, 4vw, 48px);
+    line-height: 1;
+    color: #c4f000;
+    margin-bottom: 8px;
+  }
+  .calc-metric-primary small {
+    color: #d8d8d2;
+    font-size: 14px;
+  }
+  .calc-breakdown {
+    display: grid;
+    gap: 12px;
+    margin: 0 0 24px;
+  }
+  .calc-breakdown > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    font-size: 15px;
+  }
+  .calc-breakdown dt {
+    color: #b4b4ad;
+  }
+  .calc-breakdown dd {
+    margin: 0;
+    font-weight: 700;
+    color: #fff;
+  }
+  .calc-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 999px;
+    background: #c4f000;
+    color: #0a0a0a;
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+  .calc-cta:hover {
+    transform: translateY(-1px);
+  }
+  .calc-disclaimer {
+    margin: 14px 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #9e9e97;
+  }
+  @media (max-width: 860px) {
+    .calc-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .calc-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import FobCifCalculator from '../../../../components/FobCifCalculator.astro';
+import { activeLocales } from '../../../../data/locales';
+
+export function getStaticPaths() {
+  return activeLocales
+    .filter((l) => l !== 'he')
+    .map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+const toolLocales = activeLocales.filter((l) => l !== 'he');
+
+const { lang } = Astro.props;
+const isTr = lang === 'tr';
+
+const title = isTr
+  ? 'FOB / CIF Konteyner ve Birim Maliyet Hesaplayıcı | CTSEG'
+  : 'FOB / CIF Container & Landed Cost Calculator | CTSEG';
+const description = isTr
+  ? '20ft ve 40ft konteyner yüklemelerinde FOB birim fiyat, liman masrafı, deniz navlunu, sigorta ve gümrük vergisiyle kg ve ton başına teslim maliyeti hesaplayın.'
+  : 'Calculate landed cost per kg and metric ton for 20ft and 40ft container shipments including FOB price, port handling, ocean freight, marine insurance, and duty.';
+
+const origin = 'https://ctseg.com.tr';
+const canonical = `${origin}/${lang}/tools/fob-cif-calculator/`;
+const alternates = Object.fromEntries(
+  toolLocales.map((l) => [l, `${origin}/${l}/tools/fob-cif-calculator/`])
+);
+alternates['x-default'] = `${origin}/en/tools/fob-cif-calculator/`;
+
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: title,
+  description,
+  url: canonical,
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'All',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+};
+---
+<BaseLayout
+  lang={lang}
+  title={title}
+  description={description}
+  pageKey="fob-cif-calculator"
+  canonical={canonical}
+  alternates={alternates}
+>
+  <script slot="schema" type="application/ld+json" set:html={JSON.stringify(appSchema)} />
+  <FobCifCalculator lang={lang} />
+</BaseLayout>
