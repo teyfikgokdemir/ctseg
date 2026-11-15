@@ -1,5 +1,5 @@
 ---
-import { company, localizedPath, type Locale } from '../data/site';
+import { localizedPath, type Locale } from '../data/site';
 
 interface Props {
   lang: Locale | string;
@@ -10,10 +10,12 @@ const isTr = lang === 'tr';
 
 const copy = isTr
   ? {
-      kicker: 'B2B DIŞ TİCARET ARACI',
+      kicker: 'B2B DIŞ TİCARET ARACI · CANLI ECB DÖVİZ',
       title: 'FOB / CIF Konteyner & Birim Maliyet Hesaplayıcı',
-      lead: '20ft / 40ft konteyner yüklemelerinde fabrika çıkış fiyatı, liman masrafı, deniz navlunu, sigorta ve gümrük vergisi kalemlerini birleştirerek kilogram ve ton başına gerçek teslim (landed) maliyeti anında hesaplayın.',
+      lead: 'Liman rotası, 20ft/40ft konteyner yükü, fabrika çıkış fiyatı, deniz navlunu, sigorta ve gümrük vergisini birleştirerek kilogram ve ton başına gerçek teslim (landed) maliyeti canlı ECB döviz kurlarıyla hesaplayın.',
+      corridorLabel: 'Referans Ticaret Koridoru (Liman Rotası)',
       containerLabel: 'Konteyner Tipi',
+      currencyLabel: 'Sonuç Para Birimi',
       weightLabel: 'Net Yük Miktarı (kg)',
       unitPriceLabel: 'FOB / Fabrika Birim Fiyatı (USD / kg)',
       portHandlingLabel: 'İç Nakliye & Liman Masrafı (USD)',
@@ -23,11 +25,22 @@ const copy = isTr
       fobTotal: 'Toplam FOB Bedeli',
       cifTotal: 'Toplam CIF Bedeli',
       landedTotal: 'Vergi Dahil Toplam Maliyet',
-      perKg: 'Birim Teslim Maliyeti (USD / kg)',
-      perMt: 'Ton Başına Maliyet (USD / MT)',
+      perKg: 'Birim Teslim Maliyeti (/ kg)',
+      perMt: 'Ton Başına Maliyet (/ MT)',
       logisticsShare: 'Navlun + Sigorta Payı',
+      fxLoading: 'Canlı ECB döviz kuru yükleniyor...',
+      fxLivePrefix: 'Canlı ECB Kuru',
+      fxFallback: 'Referans kur (çevrimdışı yedek)',
       ctaText: 'Doğrulanmış FOB / CIF Teklifi Alın',
-      disclaimer: 'Gösterge amaçlıdır. Kesin navlun, gözetim (SGS/Intertek) ve menşe (EUR.1/ATR) avantajları için sevkiyat rotasına göre yazılı teklif talep edin.',
+      disclaimer: 'Döviz kurları Avrupa Merkez Bankası (ECB / Frankfurter) üzerinden canlı alınır. Navlun ve liman kalemleri referans koridor değerleridir; kesin teklif için rota bazlı RFQ talep edin.',
+      corridors: [
+        { id: 'mersin-rtm', label: 'Mersin (TR) → Rotterdam (NL) · AB EUR.1 (%0 Vergi)', port: 650, freight: 2400, duty: 0 },
+        { id: 'izmir-ham', label: 'İzmir (TR) → Hamburg (DE) · AB EUR.1 (%0 Vergi)', port: 600, freight: 2350, duty: 0 },
+        { id: 'mersin-jea', label: 'Mersin (TR) → Jebel Ali (AE) · Körfez (%5 Vergi)', port: 650, freight: 1850, duty: 5 },
+        { id: 'bnd-mersin', label: 'Bandar Abbas (IR) → Mersin (TR) · Transit Koridor', port: 700, freight: 1900, duty: 0 },
+        { id: 'mersin-nyc', label: 'Mersin (TR) → Newark / NY (US) · Transatlantik', port: 700, freight: 3400, duty: 3.5 },
+        { id: 'custom', label: 'Özel Rota (Manuel Girin)', port: 650, freight: 2400, duty: 0 },
+      ],
       presets: [
         { id: '20ft', label: '20ft FCL (19.000 kg — Kuru Meyve / Kuruyemiş)', weight: 19000 },
         { id: '40ft', label: '40ft FCL (25.000 kg — Standart Konteyner)', weight: 25000 },
@@ -36,10 +49,12 @@ const copy = isTr
       ],
     }
   : {
-      kicker: 'B2B TRADE UTILITY',
+      kicker: 'B2B TRADE UTILITY · LIVE ECB FX',
       title: 'FOB / CIF Container & Landed Cost Calculator',
-      lead: 'Combine unit FOB price, port handling, ocean freight, marine insurance, and destination import duty to calculate real landed cost per kilogram and metric ton for 20ft and 40ft FCL shipments.',
+      lead: 'Select a trade corridor and combine unit FOB price, port handling, ocean freight, marine insurance, and destination import duty with live ECB exchange rates to calculate real landed cost per kg and metric ton.',
+      corridorLabel: 'Reference Trade Corridor (Port-to-Port)',
       containerLabel: 'Container Type',
+      currencyLabel: 'Display Currency',
       weightLabel: 'Net Cargo Weight (kg)',
       unitPriceLabel: 'FOB Unit Price (USD / kg)',
       portHandlingLabel: 'Inland & Port Handling (USD)',
@@ -49,11 +64,22 @@ const copy = isTr
       fobTotal: 'Total FOB Value',
       cifTotal: 'Total CIF Value',
       landedTotal: 'Total Landed Cost (Incl. Duty)',
-      perKg: 'Landed Cost per kg (USD)',
-      perMt: 'Landed Cost per Metric Ton (USD)',
+      perKg: 'Landed Cost per kg',
+      perMt: 'Landed Cost per Metric Ton',
       logisticsShare: 'Freight & Insurance Share',
+      fxLoading: 'Loading live ECB exchange rates...',
+      fxLivePrefix: 'Live ECB FX',
+      fxFallback: 'Reference FX (offline fallback)',
       ctaText: 'Request Verified FOB / CIF Quote',
-      disclaimer: 'Indicative calculation only. Request a formal RFQ for port-specific freight, SGS/Intertek inspection, and EUR.1 / ATR duty exemptions.',
+      disclaimer: 'Exchange rates are fetched live from the European Central Bank (Frankfurter API). Ocean freight and port figures are corridor benchmarks; request a formal RFQ for firm vessel quotes.',
+      corridors: [
+        { id: 'mersin-rtm', label: 'Mersin (TR) → Rotterdam (NL) · EU EUR.1 (0% Duty)', port: 650, freight: 2400, duty: 0 },
+        { id: 'izmir-ham', label: 'Izmir (TR) → Hamburg (DE) · EU EUR.1 (0% Duty)', port: 600, freight: 2350, duty: 0 },
+        { id: 'mersin-jea', label: 'Mersin (TR) → Jebel Ali (AE) · GCC (5% Duty)', port: 650, freight: 1850, duty: 5 },
+        { id: 'bnd-mersin', label: 'Bandar Abbas (IR) → Mersin (TR) · Transit Corridor', port: 700, freight: 1900, duty: 0 },
+        { id: 'mersin-nyc', label: 'Mersin (TR) → Newark / NY (US) · Transatlantic', port: 700, freight: 3400, duty: 3.5 },
+        { id: 'custom', label: 'Custom Corridor (Manual)', port: 650, freight: 2400, duty: 0 },
+      ],
       presets: [
         { id: '20ft', label: '20ft FCL (19,000 kg — Dried Fruit / Nuts)', weight: 19000 },
         { id: '40ft', label: '40ft FCL (25,000 kg — Standard Container)', weight: 25000 },
@@ -70,6 +96,10 @@ const contactHref = localizedPath(lang, 'contact');
     <span class="calc-kicker">{copy.kicker}</span>
     <h1>{copy.title}</h1>
     <p class="calc-lead">{copy.lead}</p>
+    <div class="calc-fx-pill" id="fx-status" data-live={copy.fxLivePrefix} data-fallback={copy.fxFallback}>
+      <span class="fx-dot"></span>
+      <span id="fx-text">{copy.fxLoading}</span>
+    </div>
   </div>
 </section>
 
@@ -77,12 +107,32 @@ const contactHref = localizedPath(lang, 'contact');
   <div class="container calc-grid">
     <div class="calc-card calc-inputs">
       <div class="calc-field">
-        <label for="calc-preset">{copy.containerLabel}</label>
-        <select id="calc-preset">
-          {copy.presets.map((p) => (
-            <option value={p.id} data-weight={p.weight}>{p.label}</option>
+        <label for="calc-corridor">{copy.corridorLabel}</label>
+        <select id="calc-corridor">
+          {copy.corridors.map((c) => (
+            <option value={c.id} data-port={c.port} data-freight={c.freight} data-duty={c.duty}>{c.label}</option>
           ))}
         </select>
+      </div>
+
+      <div class="calc-row">
+        <div class="calc-field">
+          <label for="calc-preset">{copy.containerLabel}</label>
+          <select id="calc-preset">
+            {copy.presets.map((p) => (
+              <option value={p.id} data-weight={p.weight}>{p.label}</option>
+            ))}
+          </select>
+        </div>
+        <div class="calc-field">
+          <label for="calc-currency">{copy.currencyLabel}</label>
+          <select id="calc-currency">
+            <option value="USD" selected>USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="TRY">TRY (₺)</option>
+            <option value="GBP">GBP (£)</option>
+          </select>
+        </div>
       </div>
 
       <div class="calc-row">
@@ -153,7 +203,9 @@ const contactHref = localizedPath(lang, 'contact');
 
 <script is:inline>
   (() => {
+    const corridor = document.getElementById('calc-corridor');
     const preset = document.getElementById('calc-preset');
+    const currency = document.getElementById('calc-currency');
     const weight = document.getElementById('calc-weight');
     const price = document.getElementById('calc-price');
     const port = document.getElementById('calc-port');
@@ -167,9 +219,17 @@ const contactHref = localizedPath(lang, 'contact');
     const outCif = document.getElementById('out-cif');
     const outLanded = document.getElementById('out-landed');
     const outShare = document.getElementById('out-share');
+    const fxStatus = document.getElementById('fx-status');
+    const fxText = document.getElementById('fx-text');
 
-    const fmtUsd = (n, decimals = 0) =>
-      '$' + Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    const rates = { USD: 1, EUR: 0.92, TRY: 34.5, GBP: 0.79 };
+    const symbols = { USD: '$', EUR: '€', TRY: '₺', GBP: '£' };
+
+    const fmt = (usdAmount, decimals = 0) => {
+      const code = currency?.value || 'USD';
+      const val = (Number(usdAmount) || 0) * (rates[code] || 1);
+      return (symbols[code] || '$') + val.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    };
 
     const compute = () => {
       const w = Math.max(1, Number(weight.value) || 0);
@@ -187,13 +247,23 @@ const contactHref = localizedPath(lang, 'contact');
       const perMt = perKg * 1000;
       const logisticsPct = landed > 0 ? ((fr + insuranceCost + ph) / landed) * 100 : 0;
 
-      outKg.textContent = fmtUsd(perKg, 2);
-      outMt.textContent = outMt.textContent.split(':')[0] + ': ' + fmtUsd(perMt, 0);
-      outFob.textContent = fmtUsd(fob, 0);
-      outCif.textContent = fmtUsd(cif, 0);
-      outLanded.textContent = fmtUsd(landed, 0);
+      outKg.textContent = fmt(perKg, 2);
+      outMt.textContent = outMt.textContent.split(':')[0] + ': ' + fmt(perMt, 0);
+      outFob.textContent = fmt(fob, 0);
+      outCif.textContent = fmt(cif, 0);
+      outLanded.textContent = fmt(landed, 0);
       outShare.textContent = logisticsPct.toFixed(1) + '%';
     };
+
+    corridor?.addEventListener('change', () => {
+      const opt = corridor.options[corridor.selectedIndex];
+      if (opt && opt.value !== 'custom') {
+        port.value = opt.getAttribute('data-port') || port.value;
+        freight.value = opt.getAttribute('data-freight') || freight.value;
+        duty.value = opt.getAttribute('data-duty') || duty.value;
+      }
+      compute();
+    });
 
     preset?.addEventListener('change', () => {
       const opt = preset.options[preset.selectedIndex];
@@ -204,8 +274,30 @@ const contactHref = localizedPath(lang, 'contact');
       compute();
     });
 
+    currency?.addEventListener('change', compute);
     [weight, price, port, freight, ins, duty].forEach((el) => el?.addEventListener('input', compute));
     compute();
+
+    fetch('https://api.frankfurter.dev/v1/latest?base=USD&symbols=EUR,TRY,GBP')
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error('FX fetch failed'))))
+      .then((data) => {
+        if (data && data.rates) {
+          if (data.rates.EUR) rates.EUR = data.rates.EUR;
+          if (data.rates.TRY) rates.TRY = data.rates.TRY;
+          if (data.rates.GBP) rates.GBP = data.rates.GBP;
+          const label = fxStatus?.getAttribute('data-live') || 'Live ECB FX';
+          if (fxText) {
+            fxText.textContent = `${label} (${data.date || 'ECB'}): 1 USD = ${rates.EUR.toFixed(3)} EUR · ${rates.TRY.toFixed(2)} TRY · ${rates.GBP.toFixed(3)} GBP`;
+          }
+          compute();
+        }
+      })
+      .catch(() => {
+        const label = fxStatus?.getAttribute('data-fallback') || 'Reference FX';
+        if (fxText) {
+          fxText.textContent = `${label}: 1 USD = ${rates.EUR.toFixed(3)} EUR · ${rates.TRY.toFixed(2)} TRY · ${rates.GBP.toFixed(3)} GBP`;
+        }
+      });
   })();
 </script>
 
@@ -236,7 +328,26 @@ const contactHref = localizedPath(lang, 'contact');
     max-width: 64ch;
     color: #4c4c49;
     line-height: 1.65;
-    margin: 0;
+    margin: 0 0 18px;
+  }
+  .calc-fx-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid #dedcd5;
+    background: #f8f7f3;
+    font-size: 13px;
+    font-weight: 600;
+    color: #222;
+  }
+  .fx-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #16a34a;
+    box-shadow: 0 0 8px rgba(22, 163, 74, 0.6);
   }
   .calc-section {
     padding: 16px 0 clamp(60px, 7vw, 96px);
