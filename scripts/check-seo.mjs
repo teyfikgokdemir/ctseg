@@ -186,7 +186,7 @@ const blogSchemaPages = [...indexablePages.values()].filter((page) => page.html.
 const blogPostingPages = [...indexablePages.values()].filter((page) => page.html.includes('"@type":"BlogPosting"'));
 if (serviceSchemaPages.length < 245) errors.push(`expected at least 245 Service schema pages across core services, sourcing, country LPs, catalogue assessments and solution landings, found ${serviceSchemaPages.length}`);
 if (blogSchemaPages.length !== 12) errors.push(`expected 12 Blog schema pages across the full-site locales, found ${blogSchemaPages.length}`);
-if (blogPostingPages.length !== 170) errors.push(`expected 170 BlogPosting pages across the ten translated article locales, found ${blogPostingPages.length}`);
+if (blogPostingPages.length !== 190) errors.push(`expected 190 BlogPosting pages across the ten translated article locales, found ${blogPostingPages.length}`);
 
 const deploymentHeaders = readFileSync(join(dist,'_headers'),'utf8');
 if (/X-Robots-Tag\s*:\s*(?:noindex|none)/i.test(deploymentHeaders)) errors.push('deployment headers contain a blocking X-Robots-Tag');

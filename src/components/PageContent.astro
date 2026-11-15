@@ -763,11 +763,21 @@ const insightCategories: Record<string, Record<Locale, string>> = {
     tr: 'Ticaret Yönetimi', en: 'Trade Governance', de: 'Handels-Governance',
     it: 'Governance del Commercio', ru: 'Управление торговлей', fa: 'مدیریت و شفافیت تجارت',
     zh: '国际贸易治理模式', vi: 'Quản trị thương mại'
+  },
+  'dried-apricots-fob-mersin-specs': {
+    tr: 'Teknik Şartname', en: 'Export Specs', de: 'Exportspezifikation',
+    it: 'Specifiche Export', ru: 'Спецификация', fa: 'مشخصات فنی صادرات',
+    zh: '出口技术规格', vi: 'Thông số xuất khẩu'
+  },
+  'pistachio-saffron-wholesale-hs-incoterms': {
+    tr: 'GTİP & Kalite', en: 'HS & Compliance', de: 'HS & Qualität',
+    it: 'HS & Conformità', ru: 'ТН ВЭД и Качество', fa: 'کد تعرفه و کیفیت',
+    zh: '海关编码与合规', vi: 'Mã HS & Chất lượng'
   }
 };
 /* Arabic insight category localization */
 const arabicInsightCategories:Record<string,string>={
-  'strategic-vs-procurement':'التوريد الاستراتيجي','supplier-selection':'اختيار الموردين','supplier-risk':'المخاطر والتحقق','total-cost':'التكلفة وTCO','rfq':'هيكلة RFQ','supply-chain-risk':'مخاطر سلسلة التوريد','origin-compliance':'المنشأ والامتثال','nearshoring-europe-turkey':'القرب الجغرافي والخدمات اللوجستية','turkey-manufacturer-sourcing':'المصانع والتحقق','china-vs-turkey-sourcing':'مقارنة أسواق التوريد','vietnam-turkey-trade-routes':'ممرات التجارة','iran-turkey-commodity-corridors':'السلع والمواد الخام','private-label-contract-manufacturing':'العلامة الخاصة وOEM','supplier-due-diligence':'العناية الواجبة بالمورد','turkey-export-market-entry':'دخول الأسواق وتطوير الصادرات','landed-cost-moq-optimization':'التكلفة الواصلة وتحسين MOQ','trade-house-vs-broker':'نموذج بيت التجارة'
+  'strategic-vs-procurement':'التوريد الاستراتيجي','supplier-selection':'اختيار الموردين','supplier-risk':'المخاطر والتحقق','total-cost':'التكلفة وTCO','rfq':'هيكلة RFQ','supply-chain-risk':'مخاطر سلسلة التوريد','origin-compliance':'المنشأ والامتثال','nearshoring-europe-turkey':'القرب الجغرافي والخدمات اللوجستية','turkey-manufacturer-sourcing':'المصانع والتحقق','china-vs-turkey-sourcing':'مقارنة أسواق التوريد','vietnam-turkey-trade-routes':'ممرات التجارة','iran-turkey-commodity-corridors':'السلع والمواد الخام','private-label-contract-manufacturing':'العلامة الخاصة وOEM','supplier-due-diligence':'العناية الواجبة بالمورد','turkey-export-market-entry':'دخول الأسواق وتطوير الصادرات','landed-cost-moq-optimization':'التكلفة الواصلة وتحسين MOQ','trade-house-vs-broker':'نموذج بيت التجارة','dried-apricots-fob-mersin-specs':'مواصفات التصدير','pistachio-saffron-wholesale-hs-incoterms':'رموز HS والجودة'
 };
 for(const [id,label] of Object.entries(arabicInsightCategories)) if(insightCategories[id]) (insightCategories[id] as any).ar=label;
 

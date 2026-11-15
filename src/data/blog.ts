@@ -8353,6 +8353,142 @@ export const posts: BlogPost[] = [
         ]
       }
     ]
+  },
+  {
+    lang: "tr",
+    slug: "malatya-kuru-kayisi-ihracat-fob-mersin-teknik-sartname",
+    title: "Malatya Kuru Kayısı İhracatı: GTİP 0813.10, Kalibre, SO2 ve FOB Mersin",
+    description: "Toptan Malatya kuru kayısı tedarikinde GTİP 0813.10, Jumbo/No.1-No.8 kalibreleri, kükürt (SO2) limitleri, nem oranı, 20ft/40ft konteyner yüklemesi ve FOB Mersin şartnamesi.",
+    date: "2026-11-15",
+    updated: "2026-11-15",
+    readingTime: "8 dk",
+    answer: "Malatya kuru kayısı ihracatında GTİP 0813.10.00 kodu kullanılır; AB için SO2 limiti 2000 ppm, nem oranı %20–24 aralığındadır ve 20ft konteynerde yaklaşık 18–20 metrik ton FOB Mersin yüklenir.",
+    faq: [
+      {
+        question: "Kuru kayısı ihracatında GTİP / HS kodu nedir?",
+        answer: "Türk Gümrük Tarife Cetvelinde kuru kayısı GTİP 0813.10.00 (HS Code 0813.10) altında sınıflandırılır."
+      },
+      {
+        question: "AB ve ABD pazarları için SO2 (kükürt dioksit) limiti kaç ppm'dir?",
+        answer: "Avrupa Birliği mevzuatı sarı kuru kayısıda maksimum 2000 ppm SO2 limitini esas alırken, günkurusu (organik/doğal) ürünlerde SO2 sıfırdır."
+      },
+      {
+        question: "20ft ve 40ft konteynere kaç ton kuru kayısı yüklenir?",
+        answer: "Standart 12.5 kg veya 5 kg karton kolilerle 20ft konteynere yaklaşık 18–20 MT, 40ft konteynere ise brüt ağırlık limitine göre 24–26 MT yükleme yapılır."
+      }
+    ],
+    sections: [
+      {
+        heading: "1. Teknik Şartname ve Kalibre Sınıflandırması (GTİP 0813.10)",
+        body: [
+          "Uluslararası kuru kayısı alımlarında fiyat teklifinin (RFQ) sağlıklı karşılaştırılabilmesi için kalibre, kükürt oranı, nem yüzdesi ve ambalaj tipinin sözleşmede net yazılması gerekir. Türkiye menşeli Malatya kayısısı dünya kuru kayısı ticaretinin ana referans kaynağıdır.",
+          "<div class=\"guide-table-wrap\">\n<table>\n<thead>\n<tr>\n<th>Parametre</th>\n<th>Sarı (Kükürtlü) Kuru Kayısı</th>\n<th>Günkurusu (Doğal / Kükürtsüz)</th>\n</tr>\n</thead>\n<tbody>\n<tr><td><strong>GTİP / HS Kodu</strong></td><td>0813.10.00</td><td>0813.10.00</td></tr>\n<tr><td><strong>Kalibre (Adet / kg)</strong></td><td>Jumbo (≤80), No.1 (81–100) – No.8</td><td>Jumbo – No.6 ve Endüstriyel (Diced)</td></tr>\n<tr><td><strong>SO2 Limiti</strong></td><td>AB: ≤2000 ppm · Diğer: 2000–2500 ppm</td><td>0 ppm (Katkısız)</td></tr>\n<tr><td><strong>Nem Oranı</strong></td><td>%20 – %24 (Sözleşmeye bağlı)</td><td>%18 – %22</td></tr>\n<tr><td><strong>Standart Ambalaj</strong></td><td>5 kg / 12.5 kg Karton (Gıda uyumlu iç poşet)</td><td>5 kg / 12.5 kg Vakumlu veya Karton</td></tr>\n<tr><td><strong>20ft / 40ft Yükleme</strong></td><td>18–20 MT (20ft) · 24–26 MT (40ft)</td><td>18–20 MT (20ft) · 24–26 MT (40ft)</td></tr>\n</tbody>\n</table>\n</div>"
+        ]
+      },
+      {
+        heading: "2. FOB Mersin / İzmir ve Zorunlu İhracat Belgeleri",
+        body: [
+          "CTSEG koordinasyonunda sevkiyat öncesi SGS / Intertek yükleme gözetimi, Bitki Sağlık Sertifikası (Phytosanitary Certificate), Menşe Şahadetnamesi (EUR.1 / ATR / Certificate of Origin) ve akredite laboratuvar SO2 + aflatoksin + pestisit analiz raporları sözleşme ekinde sunulur."
+        ]
+      }
+    ]
+  },
+  {
+    lang: "en",
+    slug: "dried-apricots-wholesale-turkey-fob-mersin-specifications",
+    title: "Turkish Dried Apricots Wholesale: HS 0813.10, SO2 Limits & FOB Mersin",
+    description: "B2B procurement guide for Turkish dried apricots: HS Code 0813.10, Jumbo to No.8 sizing, EU/US SO2 ppm limits, moisture specs, container load capacity, and FOB Mersin terms.",
+    date: "2026-11-15",
+    updated: "2026-11-15",
+    readingTime: "8 min",
+    answer: "Turkish dried apricots export under HS Code 0813.10 with EU SO2 capped at 2000 ppm, 20–24% moisture, and ~18–20 MT per 20ft container shipped FOB Mersin or Izmir.",
+    faq: [
+      {
+        question: "What is the HS Code for Turkish dried apricots?",
+        answer: "Bulk and retail-packed dried apricots are classified under HS Code 0813.10."
+      },
+      {
+        question: "What are the EU SO2 limits for dried apricots?",
+        answer: "European Union food regulations cap sulfur dioxide (SO2) at 2000 ppm for sulfured yellow apricots, whereas sun-dried natural apricots contain 0 ppm."
+      },
+      {
+        question: "How much volume fits in a 20ft container FOB Mersin?",
+        answer: "A standard 20ft FCL holds 18 to 20 metric tons packed in 12.5 kg or 5 kg food-grade cartons."
+      }
+    ],
+    sections: [
+      {
+        heading: "1. Commercial Specification Matrix (HS 0813.10)",
+        body: [
+          "Comparing wholesale quotes from Malatya packers requires locking exact calibration, moisture ceiling, SO2 ppm tolerance, and carton net weight inside the RFQ.",
+          "<div class=\"guide-table-wrap\">\n<table>\n<thead>\n<tr>\n<th>Specification</th>\n<th>Sulfured (Golden) Apricots</th>\n<th>Sun-Dried (Natural) Apricots</th>\n</tr>\n</thead>\n<tbody>\n<tr><td><strong>HS Code</strong></td><td>0813.10</td><td>0813.10</td></tr>\n<tr><td><strong>Sizing (Count/kg)</strong></td><td>Jumbo (≤80), No.1 (81–100) through No.8</td><td>Jumbo through No.6 &amp; Industrial Diced</td></tr>\n<tr><td><strong>SO2 Limit</strong></td><td>EU: ≤2000 ppm · Non-EU: 2000–2500 ppm</td><td>0 ppm (Unsulfured)</td></tr>\n<tr><td><strong>Moisture</strong></td><td>20% – 24%</td><td>18% – 22%</td></tr>\n<tr><td><strong>Carton Packing</strong></td><td>5 kg / 12.5 kg food-grade lined cartons</td><td>5 kg / 12.5 kg cartons or vacuum packs</td></tr>\n<tr><td><strong>Container Load</strong></td><td>18–20 MT (20ft FCL) · 24–26 MT (40ft)</td><td>18–20 MT (20ft FCL) · 24–26 MT (40ft)</td></tr>\n</tbody>\n</table>\n</div>"
+        ]
+      },
+      {
+        heading: "2. Pre-Shipment Inspection & FOB Mersin Documentation",
+        body: [
+          "Every commercial lot coordinated through CTSEG is structured with Phytosanitary Certificate, EUR.1 / Certificate of Origin, third-party SGS or Intertek pre-shipment inspection, and accredited lab analysis for SO2, pesticide residues, and microbiology."
+        ]
+      }
+    ]
+  },
+  {
+    lang: "tr",
+    slug: "antep-fistigi-safran-toptan-ithalat-gtip-iso-3632-incoterms",
+    title: "Toptan Antep Fıstığı & Safran İthalatı: GTİP, ISO 3632, Aflatoksin ve Incoterms",
+    description: "Toptan fıstık (GTİP 0802.51 / 0802.52) ve safran (GTİP 0910.20) alımlarında ISO 3632 Grade I laboratuvar analizi, AB aflatoksin limitleri ve FOB/CIF gümrük prosedürleri.",
+    date: "2026-11-15",
+    updated: "2026-11-15",
+    readingTime: "8 dk",
+    answer: "Kabuklu fıstık GTİP 0802.51, iç fıstık 0802.52 ve safran 0910.20 koduyla işlem görür; safranda ISO 3632 Grade I (Crocin > 200) ve fıstıkta AB aflatoksin B1 ≤ 8 ppb raporu zorunludur.",
+    faq: [
+      {
+        question: "Fıstık ve safran için doğru GTİP / HS kodları nelerdir?",
+        answer: "Kabuklu fıstık GTİP 0802.51, kabuksuz iç fıstık 0802.52, safran ise 0910.20 koduyla beyan edilir."
+      },
+      {
+        question: "Safran alımında ISO 3632 Grade I neyi ifade eder?",
+        answer: "ISO 3632 standardı safranın renk gücü (Crocin ≥ 200), aroma (Safranal 20–50) ve tat (Picrocrocin ≥ 70) değerlerini laboratuvar spektrofotometrisiyle doğrular."
+      }
+    ],
+    sections: [
+      {
+        heading: "1. Fıstık & Safran Teknik Kalite Parametreleri",
+        body: [
+          "Yüksek katma değerli kuru yemiş ve baharat ticaretinde parti bazlı laboratuvar sertifikası olmadan yapılan sevkiyatlar gümrük reddi riskini taşır.",
+          "<div class=\"guide-table-wrap\">\n<table>\n<thead>\n<tr>\n<th>Ürün</th>\n<th>GTİP / HS</th>\n<th>Kritik Kalite Standardı</th>\n<th>Incoterms &amp; Lojistik</th>\n</tr>\n</thead>\n<tbody>\n<tr><td><strong>Kabuklu Fıstık</strong></td><td>0802.51</td><td>AB Aflatoksin B1 ≤ 8 ppb · Toplam ≤ 10 ppb</td><td>FOB / CIF · 10 kg vakum/çuval</td></tr>\n<tr><td><strong>İç Fıstık (Kernel)</strong></td><td>0802.52</td><td>Nem ≤ %5 · Yeşil iç renk sınıflandırması</td><td>FOB / CIF · 10 kg vakumlu koli</td></tr>\n<tr><td><strong>Safran (Sargol / Super Negin)</strong></td><td>0910.20</td><td>ISO 3632 Grade I · Crocin ≥ 200 · Nem ≤ %10</td><td>CIP / DAP Hava Kargo · Mührü korumalı</td></tr>\n</tbody>\n</table>\n</div>"
+        ]
+      }
+    ]
+  },
+  {
+    lang: "en",
+    slug: "iranian-pistachios-saffron-wholesale-hs-codes-incoterms",
+    title: "Bulk Pistachios & Saffron Sourcing: HS Codes, ISO 3632, Aflatoxin & Incoterms",
+    description: "Technical B2B sourcing guide for bulk pistachios (HS 0802.51/0802.52) and saffron (HS 0910.20): ISO 3632 Grade I metrics, EU aflatoxin compliance, and FOB/CIF trade terms.",
+    date: "2026-11-15",
+    updated: "2026-11-15",
+    readingTime: "8 min",
+    answer: "Pistachios trade under HS 0802.51 (in-shell) and 0802.52 (shelled), while saffron uses HS 0910.20—requiring ISO 3632 Grade I lab testing and EU aflatoxin B1 ≤ 8 ppb certificates.",
+    faq: [
+      {
+        question: "What are the HS codes for wholesale pistachios and saffron?",
+        answer: "In-shell pistachios use HS 0802.51, shelled pistachio kernels use HS 0802.52, and saffron trades under HS 0910.20."
+      },
+      {
+        question: "What does ISO 3632 Grade I verify for bulk saffron?",
+        answer: "ISO 3632 Grade I spectrophotometry confirms coloring strength (Crocin ≥ 200), aroma (Safranal 20–50), and flavor bitterness (Picrocrocin ≥ 70)."
+      }
+    ],
+    sections: [
+      {
+        heading: "1. Laboratory & Customs Compliance Matrix",
+        body: [
+          "High-value specialty commodities require lot-specific laboratory verification before vessel loading or airfreight dispatch.",
+          "<div class=\"guide-table-wrap\">\n<table>\n<thead>\n<tr>\n<th>Commodity</th>\n<th>HS Code</th>\n<th>Mandatory Lab &amp; Quality Threshold</th>\n<th>Incoterms &amp; Packing</th>\n</tr>\n</thead>\n<tbody>\n<tr><td><strong>In-Shell Pistachios</strong></td><td>0802.51</td><td>EU Aflatoxin B1 ≤ 8 ppb · Total ≤ 10 ppb</td><td>FOB / CIF · 10 kg vacuum or 25/50 kg bags</td></tr>\n<tr><td><strong>Green Pistachio Kernels</strong></td><td>0802.52</td><td>Moisture ≤ 5% · Grade S / A color sorting</td><td>FOB / CIF · 10 kg vacuum cartons</td></tr>\n<tr><td><strong>Saffron (Super Negin / Sargol)</strong></td><td>0910.20</td><td>ISO 3632 Grade I · Crocin ≥ 200 · Moisture ≤ 10%</td><td>CIP / DAP Airfreight · Tamper-sealed tins</td></tr>\n</tbody>\n</table>\n</div>"
+        ]
+      }
+    ]
   }
 ];
 

@@ -743,7 +743,9 @@ export const insightIds = [
   'supplier-due-diligence',
   'turkey-export-market-entry',
   'landed-cost-moq-optimization',
-  'trade-house-vs-broker'
+  'trade-house-vs-broker',
+  'dried-apricots-fob-mersin-specs',
+  'pistachio-saffron-wholesale-hs-incoterms'
 ] as const;
 export const insights: Record<(typeof insightIds)[number], { slugs: Localized; titles: Localized; descriptions: Localized; answers: Localized }> = {
   'strategic-vs-procurement': {
@@ -1143,6 +1145,90 @@ export const insights: Record<(typeof insightIds)[number], { slugs: Localized; t
       fa:'یک خانه تجارت استراتژیک از اضافه کردن حاشیه سود پنهان خودداری کرده و با ساختار شفاف، خریدار و تولیدکننده را تحت قراردادی روشن متصل نموده و مسئولیت کیفیت و انطباق را به عهده می‌گیرد.',
       zh:'现代战略贸易机构坚决摒弃传统倒手掮客的隐蔽高额加价模式；立足于经书面约定的透明服务费体系，协同买卖双方在法定契约下直接签署交易，并全程统筹质量检验、单证流转与违约风控。',
       vi:'Một nhà thương mại chiến lược hoạt động dựa trên các điều khoản dịch vụ minh bạch, kết nối người mua và nhà sản xuất trực tiếp qua hợp đồng chuẩn, loại bỏ biên lợi nhuận ẩn và kiểm soát chất lượng.'
+    }
+  },
+  'dried-apricots-fob-mersin-specs': {
+    slugs: {
+      tr: 'malatya-kuru-kayisi-ihracat-fob-mersin-teknik-sartname',
+      en: 'dried-apricots-wholesale-turkey-fob-mersin-specifications',
+      de: 'tuerkische-getrocknete-aprikosen-grosshandel-fob-mersin',
+      it: 'albicocche-secche-turchia-ingrosso-fob-mersin',
+      ru: 'kuraga-turtsiya-optom-fob-mersin-spetsifikatsiya',
+      fa: 'dried-apricots-wholesale-turkey-fob-mersin-specifications',
+      zh: 'dried-apricots-wholesale-turkey-fob-mersin-specifications',
+      vi: 'dried-apricots-wholesale-turkey-fob-mersin-specifications'
+    },
+    titles: {
+      tr: 'Malatya Kuru Kayısı İhracatı: GTİP 0813.10, Kalibre, SO2 ve FOB Mersin',
+      en: 'Turkish Dried Apricots Wholesale: HS 0813.10, SO2 Limits & FOB Mersin',
+      de: 'Türkische getrocknete Aprikosen Großhandel: HS 0813.10 & FOB Mersin',
+      it: 'Albicocche secche turche all’ingrosso: HS 0813.10 e FOB Mersin',
+      ru: 'Турецкая курага оптом: ТН ВЭД 0813.10, калибры и FOB Мерсин',
+      fa: 'Turkish Dried Apricots Wholesale: HS 0813.10, SO2 Limits & FOB Mersin',
+      zh: 'Turkish Dried Apricots Wholesale: HS 0813.10, SO2 Limits & FOB Mersin',
+      vi: 'Turkish Dried Apricots Wholesale: HS 0813.10, SO2 Limits & FOB Mersin'
+    },
+    descriptions: {
+      tr: 'Toptan Malatya kuru kayısı tedarikinde GTİP 0813.10, Jumbo/No.1-No.8 kalibreleri, kükürt (SO2) limitleri, nem oranı, 20ft/40ft konteyner yüklemesi ve FOB Mersin şartnamesi.',
+      en: 'B2B procurement guide for Turkish dried apricots: HS Code 0813.10, Jumbo to No.8 sizing, EU/US SO2 ppm limits, moisture specs, container load capacity, and FOB Mersin terms.',
+      de: 'B2B-Einkaufsleitfaden für türkische getrocknete Aprikosen: HS-Code 0813.10, Kaliber Jumbo–Nr.8, SO2-Grenzwerte, Containerladung und FOB Mersin.',
+      it: 'Guida B2B per albicocche secche turche: codice HS 0813.10, calibri Jumbo–No.8, limiti SO2, capacità container e condizioni FOB Mersin.',
+      ru: 'B2B-руководство по закупке турецкой кураги: код ТН ВЭД 0813.10, калибры, нормы SO2, загрузка контейнера и условия FOB Мерсин.',
+      fa: 'B2B procurement guide for Turkish dried apricots: HS Code 0813.10, Jumbo to No.8 sizing, EU/US SO2 ppm limits, moisture specs, container load capacity, and FOB Mersin terms.',
+      zh: 'B2B procurement guide for Turkish dried apricots: HS Code 0813.10, Jumbo to No.8 sizing, EU/US SO2 ppm limits, moisture specs, container load capacity, and FOB Mersin terms.',
+      vi: 'B2B procurement guide for Turkish dried apricots: HS Code 0813.10, Jumbo to No.8 sizing, EU/US SO2 ppm limits, moisture specs, container load capacity, and FOB Mersin terms.'
+    },
+    answers: {
+      tr: 'Malatya kuru kayısı ihracatında GTİP 0813.10.00 kodu kullanılır; AB için SO2 limiti 2000 ppm, nem oranı %20–24 aralığındadır ve 20ft konteynerde yaklaşık 18–20 metrik ton FOB Mersin yüklenir.',
+      en: 'Turkish dried apricots export under HS Code 0813.10 with EU SO2 capped at 2000 ppm, 20–24% moisture, and ~18–20 MT per 20ft container shipped FOB Mersin or Izmir.',
+      de: 'Türkische getrocknete Aprikosen werden unter HS 0813.10 exportiert (EU-SO2-Limit 2000 ppm, 20–24 % Feuchtigkeit, ca. 18–20 MT pro 20ft-Container FOB Mersin).',
+      it: 'Le albicocche secche turche vengono esportate con codice HS 0813.10, limite UE SO2 di 2000 ppm, umidità 20–24% e circa 18–20 MT per container 20ft FOB Mersin.',
+      ru: 'Турецкая курага экспортируется по коду ТН ВЭД 0813.10, лимит SO2 для ЕС до 2000 ppm, влажность 20–24%, около 18–20 тонн в 20-футовом контейнере FOB Мерсин.',
+      fa: 'Turkish dried apricots export under HS Code 0813.10 with EU SO2 capped at 2000 ppm, 20–24% moisture, and ~18–20 MT per 20ft container shipped FOB Mersin or Izmir.',
+      zh: 'Turkish dried apricots export under HS Code 0813.10 with EU SO2 capped at 2000 ppm, 20–24% moisture, and ~18–20 MT per 20ft container shipped FOB Mersin or Izmir.',
+      vi: 'Turkish dried apricots export under HS Code 0813.10 with EU SO2 capped at 2000 ppm, 20–24% moisture, and ~18–20 MT per 20ft container shipped FOB Mersin or Izmir.'
+    }
+  },
+  'pistachio-saffron-wholesale-hs-incoterms': {
+    slugs: {
+      tr: 'antep-fistigi-safran-toptan-ithalat-gtip-iso-3632-incoterms',
+      en: 'iranian-pistachios-saffron-wholesale-hs-codes-incoterms',
+      de: 'pistazien-safran-grosshandel-hs-codes-iso-3632-incoterms',
+      it: 'pistacchi-zafferano-ingrosso-codici-hs-iso-3632-incoterms',
+      ru: 'fistashki-shafran-optom-tn-ved-iso-3632-incoterms',
+      fa: 'iranian-pistachios-saffron-wholesale-hs-codes-incoterms',
+      zh: 'iranian-pistachios-saffron-wholesale-hs-codes-incoterms',
+      vi: 'iranian-pistachios-saffron-wholesale-hs-codes-incoterms'
+    },
+    titles: {
+      tr: 'Toptan Antep Fıstığı & Safran İthalatı: GTİP, ISO 3632, Aflatoksin ve Incoterms',
+      en: 'Bulk Pistachios & Saffron Sourcing: HS Codes, ISO 3632, Aflatoxin & Incoterms',
+      de: 'Pistazien & Safran Großhandel: HS-Codes, ISO 3632, Aflatoxin & Incoterms',
+      it: 'Pistacchi e Zafferano all’ingrosso: Codici HS, ISO 3632, Aflatossine e Incoterms',
+      ru: 'Фисташки и шафран оптом: ТН ВЭД, ISO 3632, афлатоксин и Инкотермс',
+      fa: 'Bulk Pistachios & Saffron Sourcing: HS Codes, ISO 3632, Aflatoxin & Incoterms',
+      zh: 'Bulk Pistachios & Saffron Sourcing: HS Codes, ISO 3632, Aflatoxin & Incoterms',
+      vi: 'Bulk Pistachios & Saffron Sourcing: HS Codes, ISO 3632, Aflatoxin & Incoterms'
+    },
+    descriptions: {
+      tr: 'Toptan fıstık (GTİP 0802.51 / 0802.52) ve safran (GTİP 0910.20) alımlarında ISO 3632 Grade I laboratuvar analizi, AB aflatoksin limitleri ve FOB/CIF gümrük prosedürleri.',
+      en: 'Technical B2B sourcing guide for bulk pistachios (HS 0802.51/0802.52) and saffron (HS 0910.20): ISO 3632 Grade I metrics, EU aflatoxin compliance, and FOB/CIF trade terms.',
+      de: 'Technischer B2B-Leitfaden für Pistazien (HS 0802.51/0802.52) und Safran (HS 0910.20): ISO 3632 Klasse I, EU-Aflatoxin-Grenzwerte und FOB/CIF.',
+      it: 'Guida tecnica B2B per pistacchi (HS 0802.51/0802.52) e zafferano (HS 0910.20): ISO 3632 Grado I, conformità aflatossine UE e termini FOB/CIF.',
+      ru: 'Техническое руководство B2B по фисташкам (0802.51/0802.52) и шафрану (0910.20): ISO 3632 Grade I, нормы афлатоксина ЕС и FOB/CIF.',
+      fa: 'Technical B2B sourcing guide for bulk pistachios (HS 0802.51/0802.52) and saffron (HS 0910.20): ISO 3632 Grade I metrics, EU aflatoxin compliance, and FOB/CIF trade terms.',
+      zh: 'Technical B2B sourcing guide for bulk pistachios (HS 0802.51/0802.52) and saffron (HS 0910.20): ISO 3632 Grade I metrics, EU aflatoxin compliance, and FOB/CIF trade terms.',
+      vi: 'Technical B2B sourcing guide for bulk pistachios (HS 0802.51/0802.52) and saffron (HS 0910.20): ISO 3632 Grade I metrics, EU aflatoxin compliance, and FOB/CIF trade terms.'
+    },
+    answers: {
+      tr: 'Kabuklu fıstık GTİP 0802.51, iç fıstık 0802.52 ve safran 0910.20 koduyla işlem görür; safranda ISO 3632 Grade I (Crocin > 200) ve fıstıkta AB aflatoksin B1 ≤ 8 ppb raporu zorunludur.',
+      en: 'Pistachios trade under HS 0802.51 (in-shell) and 0802.52 (shelled), while saffron uses HS 0910.20—requiring ISO 3632 Grade I lab testing and EU aflatoxin B1 ≤ 8 ppb certificates.',
+      de: 'Pistazien laufen unter HS 0802.51/0802.52 und Safran unter HS 0910.20; erforderlich sind ISO 3632 Klasse I sowie EU-Aflatoxin-B1-Zertifikate (≤ 8 ppb).',
+      it: 'I pistacchi usano i codici HS 0802.51/0802.52 e lo zafferano HS 0910.20, con test ISO 3632 Grado I e certificazione aflatossine UE B1 ≤ 8 ppb.',
+      ru: 'Фисташки оформляются по кодам 0802.51/0802.52, шафран — 0910.20; обязательны сертификаты ISO 3632 Grade I и контроль афлатоксина ЕС (B1 ≤ 8 ppb).',
+      fa: 'Pistachios trade under HS 0802.51 (in-shell) and 0802.52 (shelled), while saffron uses HS 0910.20—requiring ISO 3632 Grade I lab testing and EU aflatoxin B1 ≤ 8 ppb certificates.',
+      zh: 'Pistachios trade under HS 0802.51 (in-shell) and 0802.52 (shelled), while saffron uses HS 0910.20—requiring ISO 3632 Grade I lab testing and EU aflatoxin B1 ≤ 8 ppb certificates.',
+      vi: 'Pistachios trade under HS 0802.51 (in-shell) and 0802.52 (shelled), while saffron uses HS 0910.20—requiring ISO 3632 Grade I lab testing and EU aflatoxin B1 ≤ 8 ppb certificates.'
     }
   }
 };
