@@ -41,6 +41,11 @@ Commercial glass sourcing is retired. Historical country and corridor informatio
 - [Poultry equipment](https://ctseg.com.tr/en/industries/agriculture/poultry-equipment/)
 - [Industrial pumps and valves](https://ctseg.com.tr/en/industries/industrial/pumps-valves/)
 
+## Trade tools and export specification guides
+- [FOB / CIF Container & Landed Cost Calculator](https://ctseg.com.tr/en/tools/fob-cif-calculator/) (available across 12 locales with live ECB/Frankfurter FX reference rates)
+- [Turkish Dried Apricots Wholesale: HS 0813.10, SO2 Limits & FOB Mersin](https://ctseg.com.tr/en/insights/dried-apricots-wholesale-turkey-fob-mersin-specifications/)
+- [Bulk Pistachios & Saffron Sourcing: HS 0802.51 / 0910.20, ISO 3632, Aflatoxin & Incoterms](https://ctseg.com.tr/en/insights/iranian-pistachios-saffron-wholesale-hs-codes-incoterms/)
+
 These pages describe buyer requirements and supplier research, not confirmed stock, authorized distribution or certified supplier availability.
 
 ## Languages
@@ -58,4 +63,4 @@ These pages describe buyer requirements and supplier research, not confirmed sto
 - he: https://ctseg.com.tr/he/
 - ar: https://ctseg.com.tr/ar/
 
-Updated: 2026-11-08. Refer to individual current pages for detailed scope and contact paths.
+Updated: 2026-11-19. Refer to individual current pages for detailed scope and contact paths.
