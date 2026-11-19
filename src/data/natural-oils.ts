@@ -47,10 +47,10 @@ export type Content = {
 
 export const oilCopy: Record<OilLanguage, Content> = {
   tr: {
-    title: 'Doğal Yağlar, Uçucu Yağlar ve Kozmetik Ham Maddeleri B2B Tedariği',
-    description: 'Türkiye çıkışlı B2B gül yağı, lavanta yağı, gül ve lavanta hidrosolleri, bitkisel sabit yağlar ve kozmetik özler için şartname, numune ve uluslararası RFQ koordinasyonu.',
+    title: 'Toptan Doğal Yağlar, Uçucu Yağlar ve Bitkisel Ekstreler (B2B)',
+    description: 'Türkiye çıkışlı toptan gül yağı, lavanta yağı, hidrosoller, soğuk sıkım sabit yağlar ve bitkisel ekstreler için GC-MS/COA doğrulamalı B2B tedarik ve RFQ.',
     eyebrow: 'CTSEG · DOĞAL YAĞLAR & KOZMETİK HAM MADDELERİ',
-    lead: 'Kozmetik üreticileri, parfümeri evleri, dermokozmetik markaları ve hammadde distribütörleri için Türkiye çıkışlı uçucu yağlar, hidrosoller, soğuk sıkım sabit yağlar ve bitkisel ekstraktlarda teknik şartnameye dayalı B2B tedarik ve RFQ sürecini koordine ediyoruz.',
+    lead: 'Kozmetik üreticileri, parfümeri evleri, dermokozmetik markaları ve hammadde distribütörleri için Türkiye çıkışlı uçucu yağlar, hidrosoller, soğuk sıkım sabit yağlar ve toptan bitkisel ekstrelerde teknik şartnameye dayalı B2B tedarik ve RFQ sürecini koordine ediyoruz.',
     scope: 'Ürün ve B2B tedarik grupları',
     process: 'Ticari talebi ve numune sürecini nasıl değerlendiriyoruz?',
     proof: 'Teknik belgeler, kalite kontrol ve mevzuat uyumu',
@@ -62,7 +62,7 @@ export const oilCopy: Record<OilLanguage, Content> = {
       'Gül suyu ve doğal gül hidrosolü',
       'Lavanta suyu ve bitkisel hidrosoller',
       'Soğuk sıkım ve rafine bitkisel sabit yağlar',
-      'Bitkisel özler (ekstraktlar) ve Anadolu uçucu yağları'
+      'Toptan bitkisel ekstreler (bitkisel özler) ve Anadolu uçucu yağları'
     ],
     steps: [
       'Botanik tür, INCI, kullanım alanı ve hedef kaliteyi tanımlama',

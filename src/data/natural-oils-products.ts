@@ -210,13 +210,13 @@ export const naturalOilProducts: Record<OilLanguage, Record<NaturalOilSlug, Natu
       ]
     },
     'botanical-extracts': {
-      name: 'Bitkisel Özler ve Kozmetik Aktif Ham Maddeleri',
-      metaTitle: 'Toptan Bitkisel Özler (Botanical Extracts) B2B Tedariği | CTSEG',
-      description: 'Kozmetik üreticileri ve formülatörler için suda veya yağda çözünen bitkisel ekstraktlar, gliseritler ve bitkisel aktif ham maddeleri B2B tedariği.',
-      eyebrow: 'CTSEG · BİTKİSEL ÖZLER & AKTİFLER',
-      botanicalName: 'Gliserinli, Propilen/Butilen Glikollü, Yağ Bazlı (Maserat) & Toz Ekstraktlar',
-      lead: 'Dermokozmetik, cilt bakımı ve saç bakımı formülasyonlarında fonksiyonel etkinlik sağlayan sıvı ve toz bitkisel özlerin (botanical extracts), taşıyıcı çözücü sistemine ve teknik spesifikasyona uygun B2B tedariğini yönetiyoruz.',
-      cardSummary: 'Cilt ve saç bakımı formülasyonları için gliseritler, yağ bazlı maseratlar, glikolik ekstraktlar ve standardize bitkisel özlerin B2B tedariği.',
+      name: 'Toptan Bitkisel Ekstreler, Bitkisel Özler ve Kozmetik Aktifleri',
+      metaTitle: 'Toptan Bitkisel Ekstreler & Bitkisel Özler (B2B) | CTSEG',
+      description: 'Kozmetik üreticileri için toptan bitkisel ekstreler, bitkisel özler, gliseritler ve suda/yağda çözünen aktif ham maddeler (TDS, COA, INCI) B2B tedariği.',
+      eyebrow: 'CTSEG · BİTKİSEL EKSTRELER & AKTİFLER',
+      botanicalName: 'Gliserinli, Propilen/Butilen Glikollü, Yağ Bazlı (Maserat) & Toz Bitkisel Ekstreler',
+      lead: 'Dermokozmetik, cilt bakımı ve saç bakımı formülasyonlarında fonksiyonel etkinlik sağlayan toptan bitkisel ekstreler, sıvı ve toz bitkisel özlerin (botanical extracts), taşıyıcı çözücü sistemine ve teknik spesifikasyona uygun B2B tedariğini yönetiyoruz.',
+      cardSummary: 'Cilt ve saç bakımı formülasyonları için toptan bitkisel ekstreler, gliseritler, yağ bazlı maseratlar ve standardize bitkisel özlerin B2B tedariği.',
       specs: [
         ['Çözücü & Form Seçenekleri', 'Su/gliserin (hydroglyceric), propanediol, yağda çözünen (liposoluble maserat) ve kuru/toz ekstraktlar'],
         ['Botanik Çeşitlilik', 'Centella, papatya, aynısefa (calendula), yeşil çay, meyan kökü, gül, lavanta, biberiye, sarmaşık ve Anadolu florası özleri'],
