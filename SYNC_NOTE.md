@@ -1,1 +1,0 @@
-Temporary synchronization branch for carrying image assets into codex/full-multilingual-rebuild.
