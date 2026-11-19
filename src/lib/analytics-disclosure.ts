@@ -13,5 +13,7 @@ export const analyticsDisclosure: Record<string, string> = {
   "ro": "Cookie-urile esențiale sunt utilizate pentru funcționalitatea de bază și securitatea site-ului. Cookie-urile opționale de analiză și performanță sunt activate doar cu consimțământul dvs. explicit.",
   "bg": "Необходимите бисквитки се използват за основната функционалност и сигурността на сайта. Незадължителните аналитични бисквитки се активират само с вашето изрично съгласие.",
   "ka": "აუცილებელი ქუქი-ფაილები გამოიყენება საიტის ძირითადი ფუნქციონირებისა და უსაფრთხოებისთვის. არასავალდებულო ანალიტიკური ქუქი-ფაილები ირთვება მხოლოდ თქვენი თანხმობით.",
-  "az": "Zəruri kukilər saytın əsas funksionallığı və təhlükəsizliyi üçün istifadə olunur. İstəyə bağlı analitik və performans kukiləri isə yalnız sizin açıq razılığınızla aktivləşdirilir."
+  "az": "Zəruri kukilər saytın əsas funksionallığı və təhlükəsizliyi üçün istifadə olunur. İstəyə bağlı analitik və performans kukiləri isə yalnız sizin açıq razılığınızla aktivləşdirilir.",
+  "he": "עוגיות חיוניות משמשות לתפקוד הבסיסי ולאבטחת האתר. עוגיות אנליטיות וביצועים אופציונליות מופעלות רק בהסכמתכם המפורשת.",
+  "ar": "تُستخدم ملفات تعريف الارتباط الضرورية للوظائف الأساسية وأمان الموقع. ولا يتم تفعيل ملفات تعريف الارتباط التحليلية الاختيارية إلا بعد الموافقة الصريحة لتحسين تجربتك وتحليل حركة المرور."
 };
